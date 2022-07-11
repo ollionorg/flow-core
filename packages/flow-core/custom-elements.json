@@ -1,0 +1,163 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./f-complex/f-complex\""
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./../custom-elements.vue\""
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/f-complex/f-complex.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "to test attributes of all types.",
+          "name": "FComplex",
+          "members": [
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "\"high\" | \"low\" | \"medium\""
+              },
+              "description": "This is a description of a property with an attribute with exactly the same name: \"type\".",
+              "attribute": "type",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "priority",
+              "type": {
+                "text": "FComplexPriorityProp | undefined"
+              },
+              "default": "\"low\"",
+              "attribute": "priority",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "assignee",
+              "type": {
+                "text": "null | FComplexAssignee | undefined"
+              },
+              "attribute": "assignee",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "language",
+              "type": {
+                "text": "FComplexLanguageProp | undefined"
+              },
+              "attribute": "language",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "array"
+              },
+              "default": "[\"type\"]"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "type",
+              "type": {
+                "text": "\"high\" | \"low\" | \"medium\""
+              },
+              "description": "This is a description of a property with an attribute with exactly the same name: \"type\".",
+              "fieldName": "type",
+              "attribute": "type"
+            },
+            {
+              "name": "priority",
+              "type": {
+                "text": "FComplexPriorityProp | undefined"
+              },
+              "default": "\"low\"",
+              "fieldName": "priority"
+            },
+            {
+              "name": "assignee",
+              "type": {
+                "text": "null | FComplexAssignee | undefined"
+              },
+              "fieldName": "assignee"
+            },
+            {
+              "name": "language",
+              "type": {
+                "text": "FComplexLanguageProp | undefined"
+              },
+              "fieldName": "language"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "active"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "f-complex",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FComplex",
+          "declaration": {
+            "name": "FComplex",
+            "module": "src/f-complex/f-complex.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-complex",
+          "declaration": {
+            "name": "FComplex",
+            "module": "src/f-complex/f-complex.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

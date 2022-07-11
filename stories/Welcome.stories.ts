@@ -1,6 +1,6 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import "flow-core/src/f-complex/f-complex";
+import "@cldcvr/flow-core/src/f-complex/f-complex";
 
 export default {
   title: "Flow Core",

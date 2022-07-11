@@ -1,5 +1,13 @@
 
 # Change Log
+
+## [1.0.0] - 2022-11-07
+### Added
+- Following files updated with their respective contents.
+  - `.gitignore`
+  - `PULL_REQUEST_TEMPLATE.md`
+
+<!--- 
 All notable changes to this project will be documented in this file.
  
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
@@ -49,3 +57,5 @@ Here we would have the update steps for 1.2.4 for people to follow.
   MINOR Fix module foo tests
 - [PROJECTNAME-RRRR](http://tickets.projectname.com/browse/PROJECTNAME-RRRR)
   MAJOR Module foo's timeline uses the browser timezone for date resolution 
+
+  -->

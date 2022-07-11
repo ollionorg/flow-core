@@ -1,5 +1,7 @@
 ### Checklist for raising a PR
-- [ ] Is this step done?
+- [ ] Gone through UX documnetation for adding new features.
+- [ ] All necessary unit tests covered.
+- [ ] Required comments added for generating component manifest file? you can find details [here](https://custom-elements-manifest.open-wc.org/analyzer/getting-started/)
 - [ ] Did you check the contributing doc?
 - [ ] Did you check the existing issues for similar queries?
 

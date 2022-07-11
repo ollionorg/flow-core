@@ -1,10 +1,6 @@
 /* eslint-disable */
 import { VueConstructor } from 'vue';
-import {
-    FComplexPriorityProp,
-    FComplexAssignee,
-    FComplexLanguageProp,
-} from './src/f-complex/f-complex';
+import { FComplexPriorityProp, FComplexAssignee, FComplexLanguageProp } from './src';
 declare module 'vue' {
     export interface GlobalComponents {
         'f-complex': VueConstructor<

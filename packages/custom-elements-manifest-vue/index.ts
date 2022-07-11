@@ -76,7 +76,7 @@ function getComponentPropTypeImports(schema: Package): string[] {
 	const builtInTypes = ["null", "undefined", "boolean", "|", "string", "number", "any", "{}", "unknown", "void"];
 	const moduleTypeImports: string[] = [];
 	schema.modules.forEach((module) => {
-		const modulePath = module.path.slice(0, -3);
+		const modulePath = "src"; //module.path.slice(0, -3);
 		module.declarations?.forEach((declaration) => {
 			if (!("customElement" in declaration) || !declaration.customElement) {
 				return null;
@@ -96,7 +96,7 @@ function getComponentPropTypeImports(schema: Package): string[] {
 				});
 
 				if (extractedTypes.length > 0) {
-					let importStatement = `import { `;
+					let importStatement = `import type { `;
 					extractedTypes.forEach((et, idx) => {
 						importStatement += `${et}${idx < extractedTypes.length - 1 ? "," : ""}`;
 					});

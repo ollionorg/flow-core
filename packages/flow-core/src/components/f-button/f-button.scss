@@ -1,0 +1,56 @@
+@use "sass:map";
+@use "sass:math";
+
+$states: (
+  "primary": var(--color-primary-default),
+  "subtle": var(--color-success-default),
+  "success": var(--color-success-default),
+  "warning": var(--color-warning-default),
+  "danger": var(--color-danger-default),
+);
+
+$states-hover-colors: (
+  "primary": var(--color-primary-default-hover),
+  "subtle": var(--color-success-default-hover),
+  "success": var(--color-success-default-hover),
+  "warning": var(--color-warning-default-hover),
+  "danger": var(--color-danger-default-hover),
+);
+
+$sizes: (
+  "x-small": 20px,
+  "small": 28px,
+  "medium": 36px,
+  "large": 44px,
+);
+f-button {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: var(--color-surface-default);
+
+  @each $state, $color in $states {
+    &[state="#{$state}"][variant="fill"] {
+      background-color: $color;
+
+      &:hover {
+        background-color: map.get($states-hover-colors, $state);
+      }
+    }
+  }
+
+  @each $size, $value in $sizes {
+    &[size="#{$size}"] {
+      height: $value;
+
+      &[shape="round"] {
+        border-radius: math.div($value, 2);
+      }
+    }
+  }
+}

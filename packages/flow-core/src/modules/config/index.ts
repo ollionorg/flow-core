@@ -6,12 +6,12 @@ import { getThemeStyle } from "./../../utils";
  */
 export type FlowCoreConfig = {
   theme: "f-dark" | "f-light";
-  iconPack: string;
+  iconPack: Record<string, string> | null;
 };
 
 let config: FlowCoreConfig = {
   theme: "f-dark",
-  iconPack: "@cldcvr/flow-icon-free",
+  iconPack: null,
 };
 
 export const CONFIG_SUBJECT = new Subject<FlowCoreConfig>();

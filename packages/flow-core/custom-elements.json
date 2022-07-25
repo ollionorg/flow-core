@@ -12,7 +12,7 @@
           "name": "*",
           "declaration": {
             "name": "*",
-            "package": "\"./f-complex/f-complex\""
+            "package": "\"./../custom-elements.vue\""
           }
         },
         {
@@ -20,66 +20,237 @@
           "name": "*",
           "declaration": {
             "name": "*",
-            "package": "\"./../custom-elements.vue\""
+            "package": "\"./modules/config\""
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-button/f-button\""
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-icon/f-icon\""
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/f-complex/f-complex.ts",
+      "path": "src/shared/f-element.ts",
       "declarations": [
         {
           "kind": "class",
-          "description": "to test attributes of all types.",
-          "name": "FComplex",
+          "description": "",
+          "name": "FElement",
           "members": [
             {
               "kind": "field",
-              "name": "type",
+              "name": "flowElement",
               "type": {
-                "text": "\"high\" | \"low\" | \"medium\""
+                "text": "boolean"
               },
-              "description": "This is a description of a property with an attribute with exactly the same name: \"type\".",
-              "attribute": "type",
+              "default": "true",
+              "description": "for css selector to select only flow elements",
+              "attribute": "flow-element",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "createRenderRoot"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "flow-element",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "for css selector to select only flow elements",
+              "fieldName": "flowElement"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "summary": "Every component must extent this class to consume gbobal styles , such as css reset, font family,...",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FElement",
+          "declaration": {
+            "name": "FElement",
+            "module": "src/shared/f-element.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/utils/getThemeStyle.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "getThemeStyle",
+          "parameters": [
+            {
+              "name": "selector",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "getThemeStyle",
+          "declaration": {
+            "name": "getThemeStyle",
+            "module": "src/utils/getThemeStyle.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/utils/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "getThemeStyle",
+          "declaration": {
+            "name": "getThemeStyle",
+            "module": "src/utils/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-button/f-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FButton",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
+              },
+              "default": "\"fill\"",
+              "attribute": "variant",
               "reflects": true
             },
             {
               "kind": "field",
-              "name": "priority",
+              "name": "size",
               "type": {
-                "text": "FComplexPriorityProp | undefined"
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
               },
-              "default": "\"low\"",
-              "attribute": "priority",
+              "default": "\"medium\"",
+              "attribute": "size",
               "reflects": true
             },
             {
               "kind": "field",
-              "name": "assignee",
+              "name": "state",
               "type": {
-                "text": "null | FComplexAssignee | undefined"
+                "text": "\"primary\" | \"subtle\" | \"success\" | \"warning\" | \"danger\" | undefined"
               },
-              "attribute": "assignee",
+              "default": "\"primary\"",
+              "attribute": "state",
               "reflects": true
             },
             {
               "kind": "field",
-              "name": "language",
+              "name": "shape",
               "type": {
-                "text": "FComplexLanguageProp | undefined"
+                "text": "\"round\" | \"curved\" | \"block\" | undefined"
               },
-              "attribute": "language",
+              "default": "\"round\"",
+              "attribute": "shape",
               "reflects": true
             },
             {
               "kind": "field",
-              "name": "active",
+              "name": "iconLeft",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "icon-left",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconRight",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "icon-right",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "counter",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "counter",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
               "type": {
                 "text": "boolean | undefined"
               },
               "default": "false",
-              "attribute": "active",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "labelWrap",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "label-wrap",
               "reflects": true
             },
             {
@@ -88,73 +259,465 @@
               "type": {
                 "text": "array"
               },
-              "default": "[\"type\"]"
+              "default": "[\"label\"]"
+            },
+            {
+              "kind": "method",
+              "name": "validateProperties"
+            },
+            {
+              "kind": "field",
+              "name": "flowElement",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "for css selector to select only flow elements",
+              "attribute": "flow-element",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FElement",
+                "module": "src/shared/f-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "createRenderRoot",
+              "inheritedFrom": {
+                "name": "FElement",
+                "module": "src/shared/f-element.ts"
+              }
             }
           ],
           "attributes": [
             {
-              "name": "type",
+              "name": "label",
               "type": {
-                "text": "\"high\" | \"low\" | \"medium\""
+                "text": "string"
               },
-              "description": "This is a description of a property with an attribute with exactly the same name: \"type\".",
-              "fieldName": "type",
-              "attribute": "type"
+              "fieldName": "label"
             },
             {
-              "name": "priority",
+              "name": "variant",
               "type": {
-                "text": "FComplexPriorityProp | undefined"
+                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
               },
-              "default": "\"low\"",
-              "fieldName": "priority"
+              "default": "\"fill\"",
+              "fieldName": "variant"
             },
             {
-              "name": "assignee",
+              "name": "size",
               "type": {
-                "text": "null | FComplexAssignee | undefined"
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
               },
-              "fieldName": "assignee"
+              "default": "\"medium\"",
+              "fieldName": "size"
             },
             {
-              "name": "language",
+              "name": "state",
               "type": {
-                "text": "FComplexLanguageProp | undefined"
+                "text": "\"primary\" | \"subtle\" | \"success\" | \"warning\" | \"danger\" | undefined"
               },
-              "fieldName": "language"
+              "default": "\"primary\"",
+              "fieldName": "state"
             },
             {
-              "name": "active",
+              "name": "shape",
+              "type": {
+                "text": "\"round\" | \"curved\" | \"block\" | undefined"
+              },
+              "default": "\"round\"",
+              "fieldName": "shape"
+            },
+            {
+              "name": "icon-left",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "iconLeft"
+            },
+            {
+              "name": "icon-right",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "iconRight"
+            },
+            {
+              "name": "counter",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "counter"
+            },
+            {
+              "name": "loading",
               "type": {
                 "text": "boolean | undefined"
               },
               "default": "false",
-              "fieldName": "active"
+              "fieldName": "loading"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "label-wrap",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "labelWrap"
+            },
+            {
+              "name": "flow-element",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "for css selector to select only flow elements",
+              "fieldName": "flowElement",
+              "inheritedFrom": {
+                "name": "FElement",
+                "module": "src/shared/f-element.ts"
+              }
             }
           ],
           "superclass": {
-            "name": "LitElement",
-            "package": "lit"
+            "name": "FElement",
+            "module": "/src/shared/f-element"
           },
-          "tagName": "f-complex",
+          "summary": "Buttons allow users to perform an action or to initiate a new function.",
+          "tagName": "f-button",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "FComplex",
+          "name": "FButton",
           "declaration": {
-            "name": "FComplex",
-            "module": "src/f-complex/f-complex.ts"
+            "name": "FButton",
+            "module": "src/components/f-button/f-button.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "f-complex",
+          "name": "f-button",
           "declaration": {
-            "name": "FComplex",
-            "module": "src/f-complex/f-complex.ts"
+            "name": "FButton",
+            "module": "src/components/f-button/f-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-counter/f-counter.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FCounter",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"subtle\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | undefined"
+              },
+              "default": "\"subtle\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "flowElement",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "for css selector to select only flow elements",
+              "attribute": "flow-element",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FElement",
+                "module": "src/shared/f-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "createRenderRoot",
+              "inheritedFrom": {
+                "name": "FElement",
+                "module": "src/shared/f-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "label"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"subtle\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | undefined"
+              },
+              "default": "\"subtle\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "flow-element",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "for css selector to select only flow elements",
+              "fieldName": "flowElement",
+              "inheritedFrom": {
+                "name": "FElement",
+                "module": "src/shared/f-element.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FElement",
+            "module": "/src/shared/f-element"
+          },
+          "tagName": "f-counter",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FCounter",
+          "declaration": {
+            "name": "FCounter",
+            "module": "src/components/f-counter/f-counter.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-counter",
+          "declaration": {
+            "name": "FCounter",
+            "module": "src/components/f-counter/f-counter.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-icon/f-icon.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FIcon",
+          "members": [
+            {
+              "kind": "field",
+              "name": "_source",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "source",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "source",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "array"
+              },
+              "default": "[\"source\"]"
+            },
+            {
+              "kind": "field",
+              "name": "flowElement",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "for css selector to select only flow elements",
+              "attribute": "flow-element",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FElement",
+                "module": "src/shared/f-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "createRenderRoot",
+              "inheritedFrom": {
+                "name": "FElement",
+                "module": "src/shared/f-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "source",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "source"
+            },
+            {
+              "name": "flow-element",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "for css selector to select only flow elements",
+              "fieldName": "flowElement",
+              "inheritedFrom": {
+                "name": "FElement",
+                "module": "src/shared/f-element.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FElement",
+            "module": "/src/shared/f-element"
+          },
+          "tagName": "f-icon",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FIcon",
+          "declaration": {
+            "name": "FIcon",
+            "module": "src/components/f-icon/f-icon.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-icon",
+          "declaration": {
+            "name": "FIcon",
+            "module": "src/components/f-icon/f-icon.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/modules/config/index.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "CONFIG_SUBJECT",
+          "default": "new Subject<FlowCoreConfig>()"
+        },
+        {
+          "kind": "variable",
+          "name": "ConfigUtil",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    CONFIG_SUBJECT.next(config);\n  },\n  getThemeStyles() {\n    return getThemeStyle(`[flow-element][theme=\"${config.theme}\"]`);\n  },\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CONFIG_SUBJECT",
+          "declaration": {
+            "name": "CONFIG_SUBJECT",
+            "module": "src/modules/config/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ConfigUtil",
+          "declaration": {
+            "name": "ConfigUtil",
+            "module": "src/modules/config/index.ts"
           }
         }
       ]

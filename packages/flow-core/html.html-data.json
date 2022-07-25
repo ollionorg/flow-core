@@ -2,53 +2,195 @@
   "version": 1,
   "tags": [
     {
-      "name": "f-complex",
-      "description": "to test attributes of all types.\n\nAttributes:\n\n  * `type` { \"high\" | \"low\" | \"medium\"} - This is a description of a property with an attribute with exactly the same name: \"type\".\n\n  * `priority` {`FComplexPriorityProp | undefined`} - \n\n  * `assignee` {`FComplexAssignee | null | undefined`} - \n\n  * `language` {`FComplexLanguageProp | undefined`} - \n\n  * `active` {`boolean | undefined`} - \n\nProperties:\n\n  * `styles` {`CSSResult[]`} - \n\n  * `type` { \"high\" | \"low\" | \"medium\"} - This is a description of a property with an attribute with exactly the same name: \"type\".\n\n  * `priority` {`FComplexPriorityProp | undefined`} - \n\n  * `assignee` {`FComplexAssignee | null | undefined`} - \n\n  * `language` {`FComplexLanguageProp | undefined`} - \n\n  * `active` {`boolean | undefined`} - \n\n  * `required` {`string[]`} - ",
+      "name": "f-button",
+      "description": "Attributes:\n\n  * `label` {`string`} - \n\n  * `variant` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"subtle\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `shape` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `icon-right` {`string | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `label-wrap` {`boolean | undefined`} - \n\n  * `flow-element` {`boolean`} - for css selector to select only flow elements\n\nProperties:\n\n  * `label` {`string`} - \n\n  * `variant` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"subtle\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `shape` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `iconRight` {`string | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `labelWrap` {`boolean | undefined`} - \n\n  * `required` {`string[]`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `flowElement` {`boolean`} - for css selector to select only flow elements",
       "attributes": [
         {
-          "name": "type",
-          "description": "`type` { \"high\" | \"low\" | \"medium\"} - This is a description of a property with an attribute with exactly the same name: \"type\".\n\nProperty: type",
+          "name": "label",
+          "description": "`label` {`string`} - \n\nProperty: label"
+        },
+        {
+          "name": "variant",
+          "description": "`variant` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\nProperty: variant\n\nDefault: fill",
           "values": [
             {
-              "name": "high"
+              "name": "fill"
             },
             {
-              "name": "low"
+              "name": "outline"
             },
             {
-              "name": "medium"
+              "name": "transparent"
             }
           ]
         },
         {
-          "name": "priority",
-          "description": "`priority` {`FComplexPriorityProp | undefined`} - \n\nProperty: priority\n\nDefault: low",
+          "name": "size",
+          "description": "`size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\nProperty: size\n\nDefault: medium",
           "values": [
             {
-              "name": "high"
-            },
-            {
-              "name": "low"
+              "name": "large"
             },
             {
               "name": "medium"
+            },
+            {
+              "name": "small"
+            },
+            {
+              "name": "x-small"
             }
           ]
         },
         {
-          "name": "assignee",
-          "description": "`assignee` {`FComplexAssignee | null | undefined`} - \n\nProperty: assignee",
+          "name": "state",
+          "description": "`state` {`\"primary\" | \"subtle\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\nProperty: state\n\nDefault: primary",
+          "values": [
+            {
+              "name": "primary"
+            },
+            {
+              "name": "subtle"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            }
+          ]
+        },
+        {
+          "name": "shape",
+          "description": "`shape` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\nProperty: shape\n\nDefault: round",
+          "values": [
+            {
+              "name": "round"
+            },
+            {
+              "name": "curved"
+            },
+            {
+              "name": "block"
+            }
+          ]
+        },
+        {
+          "name": "icon-left",
+          "description": "`icon-left` {`string | undefined`} - \n\nProperty: iconLeft",
           "values": []
         },
         {
-          "name": "language",
-          "description": "`language` {`FComplexLanguageProp | undefined`} - \n\nProperty: language",
+          "name": "icon-right",
+          "description": "`icon-right` {`string | undefined`} - \n\nProperty: iconRight",
           "values": []
         },
         {
-          "name": "active",
-          "description": "`active` {`boolean | undefined`} - \n\nProperty: active\n\nDefault: false",
+          "name": "counter",
+          "description": "`counter` {`string | undefined`} - \n\nProperty: counter",
           "values": []
+        },
+        {
+          "name": "loading",
+          "description": "`loading` {`boolean | undefined`} - \n\nProperty: loading\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "label-wrap",
+          "description": "`label-wrap` {`boolean | undefined`} - \n\nProperty: labelWrap\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "flow-element",
+          "description": "`flow-element` {`boolean`} - for css selector to select only flow elements\n\nProperty: flowElement\n\nDefault: true",
+          "valueSet": "v"
+        }
+      ]
+    },
+    {
+      "name": "f-counter",
+      "description": "Attributes:\n\n  * `label` {`string`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"subtle\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `flow-element` {`boolean`} - for css selector to select only flow elements\n\nProperties:\n\n  * `label` {`string`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"subtle\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `flowElement` {`boolean`} - for css selector to select only flow elements",
+      "attributes": [
+        {
+          "name": "label",
+          "description": "`label` {`string`} - \n\nProperty: label"
+        },
+        {
+          "name": "size",
+          "description": "`size` {`\"large\" | \"medium\" | \"small\" | undefined`} - \n\nProperty: size\n\nDefault: medium",
+          "values": [
+            {
+              "name": "large"
+            },
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            }
+          ]
+        },
+        {
+          "name": "state",
+          "description": "`state` {`\"primary\" | \"subtle\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | undefined`} - \n\nProperty: state\n\nDefault: subtle",
+          "values": [
+            {
+              "name": "primary"
+            },
+            {
+              "name": "subtle"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
+              "name": "neutral"
+            }
+          ]
+        },
+        {
+          "name": "loading",
+          "description": "`loading` {`boolean | undefined`} - \n\nProperty: loading\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "flow-element",
+          "description": "`flow-element` {`boolean`} - for css selector to select only flow elements\n\nProperty: flowElement\n\nDefault: true",
+          "valueSet": "v"
+        }
+      ]
+    },
+    {
+      "name": "f-icon",
+      "description": "Attributes:\n\n  * `source` {`string`} - \n\n  * `flow-element` {`boolean`} - for css selector to select only flow elements\n\nProperties:\n\n  * `_source` {`string`} - \n\n  * `source` {`string`} - \n\n  * `required` {`string[]`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `flowElement` {`boolean`} - for css selector to select only flow elements",
+      "attributes": [
+        {
+          "name": "source",
+          "description": "`source` {`string`} - \n\nProperty: source"
+        },
+        {
+          "name": "flow-element",
+          "description": "`flow-element` {`boolean`} - for css selector to select only flow elements\n\nProperty: flowElement\n\nDefault: true",
+          "valueSet": "v"
         }
       ]
     }

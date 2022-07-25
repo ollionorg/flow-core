@@ -3,7 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-icon.scss";
 import { FElement } from "./../../shared/f-element";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import iconPack from "./../../../../flow-icon-free/dist/types";
+import { ConfigUtil } from "./../../modules/config";
 
 @customElement("f-icon")
 export class FIcon extends FElement {
@@ -19,13 +19,26 @@ export class FIcon extends FElement {
    */
   @property({
     type: String,
+    reflect: true,
   })
-  get source() {
+  get source(): string {
     return this._source;
   }
   set source(value) {
-    this._source = iconPack[value];
+    const IconPack = ConfigUtil.getConfig().iconPack;
+    if (IconPack) {
+      this._source = IconPack[value];
+    } else {
+      throw new Error(
+        `Icon pack not configured! \n please install \`yarn add @cldcvr/flow-icon-free\` \n Set config as below \n 	
+		\`import IconPack from "@cldcvr/flow-icon-free" \n;
+		import { ConfigUtil } from "@cldcvr/flow-core" \n;
+	   ConfigUtil.setConfig({ iconPack: IconPack });\``
+      );
+    }
   }
+
+  readonly required = ["source"];
 
   render() {
     return html`${unsafeSVG(this.source)}`;

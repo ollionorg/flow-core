@@ -1,6 +1,9 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 import "@cldcvr/flow-core/src/components/f-icon/f-icon";
+import IconPack from "@cldcvr/flow-icon-free";
+import { ConfigUtil } from "@cldcvr/flow-core/src/modules/config";
+ConfigUtil.setConfig({ iconPack: IconPack });
 
 export default {
   title: "f-icon",

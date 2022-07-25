@@ -119,7 +119,9 @@ getDocument()
 
           const indexFile = `${Array.from(indexFileImports).join(
             "\n"
-          )} \n export default { ${Array.from(indexFileExports).join(",")} };`;
+          )} \n export default { ${Array.from(indexFileExports).join(
+            ","
+          )} } as Record<string,string>;`;
 
           /**
            * Writing index file for package

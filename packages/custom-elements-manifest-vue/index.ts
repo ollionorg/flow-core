@@ -57,7 +57,9 @@ function getComponentCodeFromDeclaration(declaration: Declaration) {
 		declaration.attributes.forEach((attribute) => {
 			componentDeclaration = `
                 ${componentDeclaration}
-                ${attribute.name}${requiredAttributes.includes(attribute.name) ? "" : "?"}: ${attribute.type?.text};
+                ${attribute.name.includes("-") ? attribute.fieldName : attribute.name}${
+				requiredAttributes.includes(attribute.name) ? "" : "?"
+			}: ${attribute.type?.text};
             `;
 		});
 	}

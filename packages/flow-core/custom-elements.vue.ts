@@ -1,20 +1,77 @@
 /* eslint-disable */
 import { VueConstructor } from 'vue';
-import { FComplexPriorityProp, FComplexAssignee, FComplexLanguageProp } from './src';
+
 declare module 'vue' {
     export interface GlobalComponents {
-        'f-complex': VueConstructor<
+        undefined: VueConstructor<
             {
                 $props: {
-                    type: 'high' | 'low' | 'medium';
+                    flowElement?: boolean;
+                };
+            } & Vue
+        >;
 
-                    priority?: FComplexPriorityProp | undefined;
+        'f-button': VueConstructor<
+            {
+                $props: {
+                    label: string;
 
-                    assignee?: null | FComplexAssignee | undefined;
+                    variant?: 'fill' | 'outline' | 'transparent' | undefined;
 
-                    language?: FComplexLanguageProp | undefined;
+                    size?: 'large' | 'medium' | 'small' | 'x-small' | undefined;
 
-                    active?: boolean | undefined;
+                    state?: 'primary' | 'subtle' | 'success' | 'warning' | 'danger' | undefined;
+
+                    shape?: 'round' | 'curved' | 'block' | undefined;
+
+                    iconLeft?: string | undefined;
+
+                    iconRight?: string | undefined;
+
+                    counter?: string | undefined;
+
+                    loading?: boolean | undefined;
+
+                    disabled?: boolean | undefined;
+
+                    labelWrap?: boolean | undefined;
+
+                    flowElement?: boolean;
+                };
+            } & Vue
+        >;
+
+        'f-counter': VueConstructor<
+            {
+                $props: {
+                    label?: string;
+
+                    size?: 'large' | 'medium' | 'small' | undefined;
+
+                    state?:
+                        | 'primary'
+                        | 'subtle'
+                        | 'success'
+                        | 'warning'
+                        | 'danger'
+                        | 'neutral'
+                        | undefined;
+
+                    loading?: boolean | undefined;
+
+                    disabled?: boolean | undefined;
+
+                    flowElement?: boolean;
+                };
+            } & Vue
+        >;
+
+        'f-icon': VueConstructor<
+            {
+                $props: {
+                    source: string;
+
+                    flowElement?: boolean;
                 };
             } & Vue
         >;

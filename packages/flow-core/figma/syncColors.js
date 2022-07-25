@@ -9,9 +9,13 @@ const fs = require("fs");
 const rgbToHex = (r, g, b) =>
   "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 
+/**
+ * This will generate /src/shared/_color-tokens.scss file and it is consumed in `f-element.scss`
+ * @param {*} colorTokens Json object of theme and color variables
+ */
 function generateTokenScss(colorTokens) {
-  const tokenFileName = `${__dirname}/../src/shared/_tokens.scss`;
-
+  const tokenFileName = `${__dirname}/../src/shared/_color-tokens.scss`;
+  const defaultSelector = `,:root`;
   //   let scss = `@layer default,custom;
   // @layer default { `;
   let scss = `
@@ -27,7 +31,7 @@ function generateTokenScss(colorTokens) {
     const tokenEntries = Object.entries(tokens);
 
     scss += `
-	[flow-element][theme="${theme}"]{ `;
+	[flow-element][theme="${theme}"]${theme === "f-dark" ? defaultSelector : ""}{ `;
 
     for (let [variable, value] of tokenEntries) {
       variable = `color-${variable}`;

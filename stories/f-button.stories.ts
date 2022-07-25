@@ -6,11 +6,92 @@ export default {
   title: "f-button",
 } as Meta;
 
-const Template: Story<any> = () => {
-  return html` <f-button label="label"></f-button>
-    <f-button label="label" state="success"></f-button
-    ><f-button label="label" state="danger"></f-button
-    ><f-button label="label" state="warning"></f-button>`;
+const Template: Story<unknown> = () => {
+  const states = ["primary", "subtle", "success", "warning", "danger"];
+  const sizes = ["large", "medium", "small", "x-small"];
+  return html`
+    ${states.map(
+      (state) =>
+        html`<f-button label="label" .state=${state}></f-button> &nbsp;`
+    )}
+    <br />
+    <br />
+    ${states.map(
+      (state) =>
+        html`<f-button
+            label="label"
+            variant="outline"
+            .state=${state}
+          ></f-button>
+          &nbsp;`
+    )}
+    <br />
+    <br />
+    ${states.map(
+      (state) =>
+        html`<f-button label="label" shape="curved" .state=${state}></f-button>
+          &nbsp;`
+    )}
+    <br />
+    <br />
+    ${states.map(
+      (state) =>
+        html`<f-button
+            label="label"
+            variant="outline"
+            shape="curved"
+            .state=${state}
+          ></f-button>
+          &nbsp;`
+    )}
+
+    <br />
+    <br />
+    ${states.map(
+      (state) =>
+        html`<f-button
+            label="label"
+            variant="transparent"
+            shape="curved"
+            .state=${state}
+          ></f-button>
+          &nbsp;`
+    )}
+
+    <br />
+    <br />
+    ${sizes.map(
+      (size) => html`<f-button label="label" .size=${size}></f-button> &nbsp;`
+    )}
+    <br />
+    <br />
+    ${sizes.map(
+      (size) =>
+        html`<f-button label="label" variant="outline" .size=${size}></f-button>
+          &nbsp;`
+    )}
+
+    <br />
+    <br />
+    ${states.map(
+      (state) =>
+        html`<f-button label="label" shape="block" .state=${state}></f-button>
+          &nbsp;`
+    )}
+
+    <br />
+    <br />
+    ${states.map(
+      (state) =>
+        html`<f-button
+            label="label"
+            variant="outline"
+            shape="block"
+            .state=${state}
+          ></f-button>
+          &nbsp;`
+    )}
+  `;
 };
 
 export const basic = Template.bind({});

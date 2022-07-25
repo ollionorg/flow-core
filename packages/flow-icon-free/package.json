@@ -1,0 +1,27 @@
+{
+  "name": "@cldcvr/flow-icon-free",
+  "version": "0.0.1",
+  "description": "This package contains free set icons to use with `@cldcvr/flow-core`",
+  "main": "./dist/types/index.js",
+  "module": "./dist/types/index.js",
+  "types": "./dist/types/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": " tsc",
+    "download-icons": "node ./figma/downloadIcons.js",
+    "prepublishOnly": "yarn download-icons && yarn build"
+  },
+  "keywords": [
+    "icons"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "lit-html": "^2.2.7",
+    "prettier": "^2.7.1"
+  }
+}

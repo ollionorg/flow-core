@@ -23,34 +23,80 @@ $sizes: (
   "medium": 36px,
   "large": 44px,
 );
+$horizontal-padding: (
+  "x-small": 0px 8px,
+  "small": 0px 12px,
+  "medium": 0px 16px,
+  "large": 0px 20px,
+);
+
+$font-sizes: (
+  "x-small": 10px,
+  "small": 12px,
+  "medium": 14px,
+  "large": 16px,
+);
 f-button {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0px 20px;
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 14px;
   color: var(--color-surface-default);
 
+  /**
+  * Iterating over states with variants
+  **/
   @each $state, $color in $states {
     &[state="#{$state}"][variant="fill"] {
       background-color: $color;
-
+      border: 1px solid $color; // added to match width of outline variant
       &:hover {
         background-color: map.get($states-hover-colors, $state);
       }
     }
+
+    &[state="#{$state}"][variant="outline"] {
+      background-color: transparent;
+      border: 1px solid $color;
+      color: $color;
+      &:hover {
+        border: 1px solid map.get($states-hover-colors, $state);
+        color: $color;
+      }
+    }
+
+    &[state="#{$state}"][variant="transparent"] {
+      background-color: transparent;
+      border: 1px solid transparent;
+      color: $color;
+      &:hover {
+        border: 1px solid transparent;
+        color: $color;
+      }
+    }
   }
 
+  /**
+  * Iterating over sizes with padding, fontsize, height
+  **/
   @each $size, $value in $sizes {
     &[size="#{$size}"] {
       height: $value;
-
+      padding: map.get($horizontal-padding, $size);
+      font-size: map.get($font-sizes, $size);
       &[shape="round"] {
         border-radius: math.div($value, 2);
       }
     }
+  }
+
+  &[shape="curved"] {
+    border-radius: 4px;
+  }
+
+  &[shape="block"] {
+    display: flex;
   }
 }

@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
-
 const { getDocument, getAllSvgImageUrl, getIconContent } = require("./api");
 const fs = require("fs");
+const prettier = require("prettier");
 
 function sliceIntoChunks(arr, chunkSize) {
   const res = [];
@@ -12,6 +12,9 @@ function sliceIntoChunks(arr, chunkSize) {
   }
   return res;
 }
+
+const indexFileImports = new Set();
+const indexFileExports = new Set();
 /**
  * Get document of specified file Id
  */
@@ -78,12 +81,23 @@ getDocument()
                 promises.push(
                   getIconContent(url[1]).then(
                     (icon) => {
+                      const svgToJS = `import { html } from "lit-html"; \n export default html\`${icon.data}\`.strings.join("");`;
+                      const iconNameAsVariable = iconNameMapping[id].replaceAll(
+                        "-",
+                        "_"
+                      );
+                      indexFileImports.add(
+                        `import ${iconNameAsVariable} from "./svg/${iconNameMapping[id]}";`
+                      );
+                      indexFileExports.add(
+                        `"${iconNameMapping[id]}": ${iconNameAsVariable}`
+                      );
                       /**
                        * Writing file in svg folder
                        */
                       fs.writeFileSync(
-                        `${__dirname}/../lib/Icon/svg/${iconNameMapping[id]}.svg`,
-                        icon.data
+                        `${__dirname}/../svg/${iconNameMapping[id]}.ts`,
+                        svgToJS
                       );
                     },
                     (error) => {
@@ -99,6 +113,27 @@ getDocument()
             await Promise.all(promises);
           }
           process.stdout.clearLine();
+          process.stdout.write(
+            `\x1b[36m \rCreating index.ts for packaging... \n \n `
+          );
+
+          const indexFile = `${Array.from(indexFileImports).join(
+            "\n"
+          )} \n export default { ${Array.from(indexFileExports).join(",")} };`;
+
+          /**
+           * Writing index file for package
+           */
+          fs.writeFileSync(
+            `${__dirname}/../index.ts`,
+            prettier.format(indexFile, {
+              printWidth: 100,
+              singleQuote: true,
+              tabWidth: 4,
+              parser: "typescript",
+            })
+          );
+
           process.stdout.write(
             `\x1b[36m \r${componetKeys.length} Icons downloaded! \n \n `
           );

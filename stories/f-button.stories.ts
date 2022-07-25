@@ -1,6 +1,5 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import "@cldcvr/flow-core/src/components/f-button/f-button";
 
 export default {
   title: "f-button",

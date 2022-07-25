@@ -1,4 +1,3 @@
-import { Subject } from "rxjs";
 import { getThemeStyle } from "./../../utils";
 
 /**
@@ -14,7 +13,20 @@ let config: FlowCoreConfig = {
   iconPack: null,
 };
 
-export const CONFIG_SUBJECT = new Subject<FlowCoreConfig>();
+const initThemeTag = function () {
+  let themeElement = document.querySelector(`style[id^="flow-theme-"]`);
+  if (themeElement) {
+    themeElement.remove();
+  }
+  const head = document.head || document.getElementsByTagName("head")[0];
+  themeElement = document.createElement("style");
+
+  head.appendChild(themeElement);
+
+  themeElement.id = "flow-theme-" + config.theme;
+
+  return themeElement;
+};
 
 export const ConfigUtil = {
   getConfig() {
@@ -22,9 +34,21 @@ export const ConfigUtil = {
   },
   setConfig(cfg: Partial<FlowCoreConfig>) {
     config = { ...config, ...cfg };
-    CONFIG_SUBJECT.next(config);
+    if (cfg.theme) {
+      this.initTheme();
+    }
   },
-  getThemeStyles() {
-    return getThemeStyle(`[flow-element][theme="${config.theme}"]`);
+  initTheme() {
+    const themeElement = initThemeTag();
+
+    if (themeElement) {
+      const themeCSS = getThemeStyle(`[flow-element][theme="${config.theme}"]`);
+
+      if (themeCSS) {
+        themeElement.appendChild(document.createTextNode(themeCSS));
+      } else {
+        console.error(`Theme ${config.theme} CSS file/selector not fount!`);
+      }
+    }
   },
 };

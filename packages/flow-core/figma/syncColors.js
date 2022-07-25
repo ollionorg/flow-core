@@ -15,7 +15,7 @@ const rgbToHex = (r, g, b) =>
  */
 function generateTokenScss(colorTokens) {
   const tokenFileName = `${__dirname}/../src/shared/_color-tokens.scss`;
-  const defaultSelector = `,:root`;
+
   //   let scss = `@layer default,custom;
   // @layer default { `;
   let scss = `
@@ -31,7 +31,7 @@ function generateTokenScss(colorTokens) {
     const tokenEntries = Object.entries(tokens);
 
     scss += `
-	[flow-element][theme="${theme}"]${theme === "f-dark" ? defaultSelector : ""}{ `;
+	[flow-element][theme="${theme}"]{ `;
 
     for (let [variable, value] of tokenEntries) {
       variable = `color-${variable}`;

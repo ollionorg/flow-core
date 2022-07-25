@@ -1,5 +1,6 @@
 @use "sass:map";
 @use "sass:math";
+@import "./../../shared/mixins";
 
 $states: (
   "primary": var(--color-primary-default),
@@ -37,6 +38,7 @@ $font-sizes: (
   "large": 16px,
 );
 f-button {
+  @include base();
   cursor: pointer;
   display: inline-flex;
   align-items: center;

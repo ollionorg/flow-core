@@ -1,5 +1,5 @@
 import { html } from "lit-html";
-import IconPack from "@cldcvr/flow-icon-free";
+import IconPack from "@cldcvr/flow-icon";
 import { ConfigUtil } from "@cldcvr/flow-core/src/modules/config";
 import "@cldcvr/flow-core/src";
 

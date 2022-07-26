@@ -10,25 +10,38 @@ $sizes: (
 );
 
 $states: (
-  "default": var(--color-icon-default),
-  "secondary": var(--color-icon-secondary),
-  "subtle": var(--color-icon-subtle),
-  "primary": var(--color-primary-default),
-  "success": var(--color-success-default),
-  "danger": var(--color-danger-default),
-  "warning": var(--color-warning-default),
-  "neutral": var(--color-neutral-default),
-);
-
-$states-hover: (
-  "default": var(--color-icon-default-hover),
-  "secondary": var(--color-icon-secondary-hover),
-  "subtle": var(--color-icon-subtle-hover),
-  "primary": var(--color-primary-default-hover),
-  "success": var(--color-success-default-hover),
-  "danger": var(--color-danger-default-hover),
-  "warning": var(--color-warning-default-hover),
-  "neutral": var(--color-neutral-default-hover),
+  "default": (
+    "fill": var(--color-icon-default),
+    "hover-fill": var(--color-icon-default-hover),
+  ),
+  "secondary": (
+    "fill": var(--color-icon-secondary),
+    "hover-fill": var(--color-icon-secondary-hover),
+  ),
+  "subtle": (
+    "fill": var(--color-icon-subtle),
+    "hover-fill": var(--color-icon-subtle-hover),
+  ),
+  "primary": (
+    "fill": var(--color-primary-default),
+    "hover-fill": var(--color-primary-default-hover),
+  ),
+  "success": (
+    "fill": var(--color-success-default),
+    "hover-fill": var(--color-success-default-hover),
+  ),
+  "danger": (
+    "fill": var(--color-danger-default),
+    "hover-fill": var(--color-danger-default-hover),
+  ),
+  "warning": (
+    "fill": var(--color-warning-default),
+    "hover-fill": var(--color-warning-default-hover),
+  ),
+  "neutral": (
+    "fill": var(--color-neutral-default),
+    "hover-fill": var(--color-neutral-default-hover),
+  ),
 );
 
 f-icon {
@@ -40,10 +53,10 @@ f-icon {
   @each $state, $value in $states {
     &[state="#{$state}"] {
       svg {
-        fill: $value;
+        fill: map.get($value, "fill");
         stroke: none;
         *[fill^="white"] {
-          fill: $value;
+          fill: map.get($value, "fill");
         }
       }
 
@@ -51,10 +64,10 @@ f-icon {
         cursor: pointer;
         &:hover {
           svg {
-            fill: map.get($states-hover, $state);
+            fill: map.get($value, "hover-fill");
             stroke: none;
             *[fill^="white"] {
-              fill: map.get($states-hover, $state);
+              fill: map.get($value, "hover-fill");
             }
           }
         }

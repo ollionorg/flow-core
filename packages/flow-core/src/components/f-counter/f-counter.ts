@@ -40,7 +40,13 @@ export class FCounter extends FElement {
   @property({ reflect: true, type: Boolean })
   disabled?: boolean = false;
 
+  validateProperties() {
+    if (!this.label) {
+      throw new Error("f-counter : label is mandatory field");
+    }
+  }
   render() {
+    this.validateProperties();
     return html`${this.label}`;
   }
 }

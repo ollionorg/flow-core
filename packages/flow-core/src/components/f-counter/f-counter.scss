@@ -1,6 +1,76 @@
+@use "sass:math";
+@use "sass:map";
 @import "./../../mixins/scss/mixins";
+
+$sizes: (
+  "small": (
+    "height": 12px,
+    "fontSize": 8px,
+    "lineHeight": 10px,
+    "padding": 0px 4px,
+  ),
+  "medium": (
+    "height": 16px,
+    "fontSize": 10px,
+    "lineHeight": 12px,
+    "padding": 0px 6px,
+  ),
+  "large": (
+    "height": 20px,
+    "fontSize": 12px,
+    "lineHeight": 14px,
+    "padding": 0px 8px,
+  ),
+);
+
+$states: (
+  "subtle": (
+    "label": var(--color-text-default),
+    "background": var(--color-surface-tertiary),
+  ),
+  "primary": (
+    "label": var(--color-surface-default),
+    "background": var(--color-primary-default),
+  ),
+  "success": (
+    "label": var(--color-surface-default),
+    "background": var(--color-success-default),
+  ),
+  "danger": (
+    "label": var(--color-surface-default),
+    "background": var(--color-danger-default),
+  ),
+  "warning": (
+    "label": var(--color-surface-default),
+    "background": var(--color-warning-default),
+  ),
+  "neutral": (
+    "label": var(--color-text-default),
+    "background": var(--color-surface-default),
+  ),
+);
 
 f-counter {
   @include base();
   display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+
+  @each $size, $value in $sizes {
+    &[size="#{$size}"] {
+      height: map.get($value, "height");
+      border-radius: math.div(map.get($value, "height"), 2);
+      font-size: map.get($value, "fontSize");
+      line-height: map.get($value, "lineHeight");
+      padding: map.get($value, "padding");
+    }
+  }
+
+  @each $state, $value in $states {
+    &[state="#{$state}"] {
+      color: map.get($value, "label");
+      background-color: map.get($value, "background");
+    }
+  }
 }

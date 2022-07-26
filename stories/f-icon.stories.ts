@@ -17,6 +17,8 @@ const Template: Story<unknown> = () => {
     "neutral",
   ];
   const sizes = ["x-large", "large", "medium", "small", "x-small"];
+  const chromeIconUrl =
+    "https://lh3.googleusercontent.com/0cDOOJjp8pUGDDFLqHFITEi35uMGZ5wHpZ9KTKridxk71kpR9MfeydpQqG5n8Mvetvkg5iVuZGeL2xMvxgBY_UL-T9p0x_Eo4EAh";
   return html`
     Emojis
     <br />
@@ -64,6 +66,13 @@ const Template: Story<unknown> = () => {
     <br />
 
     <f-icon size="x-large" source="i-alarm" clickable></f-icon>
+    <br />
+    <br />
+    url as source
+    <br />
+    <br />
+
+    <f-icon size="x-large" .source=${chromeIconUrl} tabindex="-1"></f-icon>
   `;
 };
 

@@ -31,7 +31,7 @@ function getStyleWithSelector(selector: string) {
   return;
 }
 
-export function getThemeStyle(selector: string) {
+export default function getThemeStyle(selector: string) {
   const styleWithSelector = getStyleWithSelector(selector);
   if (styleWithSelector) {
     const found = []; // an array to collect the strings that are found

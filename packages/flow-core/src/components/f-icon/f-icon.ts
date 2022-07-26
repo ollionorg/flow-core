@@ -5,6 +5,8 @@ import { FElement } from "../../mixins/components/f-element/f-element";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { ConfigUtil } from "./../../modules/config";
 import loader from "../../mixins/svg/loader";
+import { isValidHttpUrl } from "./../../utils";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 @customElement("f-icon")
 export class FIcon extends FElement {
@@ -14,6 +16,12 @@ export class FIcon extends FElement {
   static styles = [unsafeCSS(eleStyle)];
 
   private _source!: string;
+
+  /**
+   * @internal
+   * @property set it to true if source value is url
+   */
+  private isURLSource = false;
 
   /**
    * @attribute The small size is the default.
@@ -46,7 +54,10 @@ export class FIcon extends FElement {
   }
   set source(value) {
     const emojiRegex = /\p{Emoji}/u;
-    if (emojiRegex.test(value)) {
+    if (isValidHttpUrl(value)) {
+      this.isURLSource = true;
+      this._source = `<img src="${value}"/>`;
+    } else if (emojiRegex.test(value)) {
       this._source = value;
     } else {
       const IconPack = ConfigUtil.getConfig().iconPack;
@@ -86,6 +97,8 @@ export class FIcon extends FElement {
   render() {
     return html`${this.loading
       ? html`${unsafeSVG(loader)}`
-      : html`${unsafeSVG(this.source)}`}`;
+      : html`${this.isURLSource
+          ? unsafeHTML(this.source)
+          : unsafeSVG(this.source)}`}`;
   }
 }

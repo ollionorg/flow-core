@@ -71,7 +71,8 @@ f-icon {
       line-height: $value;
       width: $value;
       height: $value;
-      svg {
+      svg,
+      img {
         width: $value;
         height: $value;
       }
@@ -84,5 +85,9 @@ f-icon {
 
   &[loading] {
     @include rotate("svg");
+  }
+
+  &:focus {
+    outline: var(--color-highlight-default) solid 2px;
   }
 }

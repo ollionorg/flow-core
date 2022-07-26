@@ -1,4 +1,35 @@
-@import "./../../shared/mixins";
+@use "sass:map";
+@import "./../../mixins/scss/mixins";
+
+$sizes: (
+  "x-small": 12px,
+  "small": 16px,
+  "medium": 20px,
+  "large": 24px,
+  "x-large": 36px,
+);
+
+$states: (
+  "default": var(--color-icon-default),
+  "secondary": var(--color-icon-secondary),
+  "subtle": var(--color-icon-subtle),
+  "primary": var(--color-primary-default),
+  "success": var(--color-success-default),
+  "danger": var(--color-danger-default),
+  "warning": var(--color-warning-default),
+  "neutral": var(--color-neutral-default),
+);
+
+$states-hover: (
+  "default": var(--color-icon-default-hover),
+  "secondary": var(--color-icon-secondary-hover),
+  "subtle": var(--color-icon-subtle-hover),
+  "primary": var(--color-primary-default-hover),
+  "success": var(--color-success-default-hover),
+  "danger": var(--color-danger-default-hover),
+  "warning": var(--color-warning-default-hover),
+  "neutral": var(--color-neutral-default-hover),
+);
 
 f-icon {
   @include base();
@@ -6,11 +37,52 @@ f-icon {
   align-items: center;
   justify-content: center;
 
-  svg {
-    fill: var(--color-icon-default);
-    stroke: none;
-    *[fill^="white"] {
-      fill: var(--color-icon-default);
+  @each $state, $value in $states {
+    &[state="#{$state}"] {
+      svg {
+        fill: $value;
+        stroke: none;
+        *[fill^="white"] {
+          fill: $value;
+        }
+      }
+
+      &[clickable] {
+        cursor: pointer;
+        &:hover {
+          svg {
+            fill: map.get($states-hover, $state);
+            stroke: none;
+            *[fill^="white"] {
+              fill: map.get($states-hover, $state);
+            }
+          }
+        }
+      }
     }
+  }
+
+  /**
+  * Iterating over sizes with padding, fontsize, height
+  **/
+  @each $size, $value in $sizes {
+    &[size="#{$size}"] {
+      font-size: $value;
+      line-height: $value;
+      width: $value;
+      height: $value;
+      svg {
+        width: $value;
+        height: $value;
+      }
+    }
+  }
+
+  &[disabled] {
+    @include disabled();
+  }
+
+  &[loading] {
+    @include rotate("svg");
   }
 }

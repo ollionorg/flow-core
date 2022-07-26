@@ -3,14 +3,6 @@ import { VueConstructor } from 'vue';
 
 declare module 'vue' {
     export interface GlobalComponents {
-        undefined: VueConstructor<
-            {
-                $props: {
-                    flowElement?: boolean;
-                };
-            } & Vue
-        >;
-
         'f-button': VueConstructor<
             {
                 $props: {
@@ -35,9 +27,13 @@ declare module 'vue' {
                     disabled?: boolean | undefined;
 
                     labelWrap?: boolean | undefined;
-
-                    flowElement?: boolean;
                 };
+            } & Vue
+        >;
+
+        undefined: VueConstructor<
+            {
+                $props: {};
             } & Vue
         >;
 
@@ -60,8 +56,6 @@ declare module 'vue' {
                     loading?: boolean | undefined;
 
                     disabled?: boolean | undefined;
-
-                    flowElement?: boolean;
                 };
             } & Vue
         >;
@@ -70,8 +64,6 @@ declare module 'vue' {
             {
                 $props: {
                     source: string;
-
-                    flowElement?: boolean;
                 };
             } & Vue
         >;

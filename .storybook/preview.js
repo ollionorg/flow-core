@@ -38,7 +38,9 @@ export const decorators = [
           background-color: var(--color-surface-default);
         }
       </style>
-      <div style="background-color:var(--color-surface-default);">
+      <div
+        style="background-color:var(--color-surface-default);color:var(--color-text-default);font-family:var(--flow-font);"
+      >
         ${story()}
       </div>
     `;

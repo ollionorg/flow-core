@@ -43,104 +43,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/shared/f-element.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FElement",
-          "members": [
-            {
-              "kind": "field",
-              "name": "flowElement",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true",
-              "description": "for css selector to select only flow elements",
-              "attribute": "flow-element",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "createRenderRoot"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "flow-element",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true",
-              "description": "for css selector to select only flow elements",
-              "fieldName": "flowElement"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "summary": "Every component must extent this class to consume gbobal styles , such as css reset, font family,...",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FElement",
-          "declaration": {
-            "name": "FElement",
-            "module": "src/shared/f-element.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/utils/getThemeStyle.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "getThemeStyle",
-          "parameters": [
-            {
-              "name": "selector",
-              "type": {
-                "text": "string"
-              }
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "getThemeStyle",
-          "declaration": {
-            "name": "getThemeStyle",
-            "module": "src/utils/getThemeStyle.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/utils/index.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "getThemeStyle",
-          "declaration": {
-            "name": "getThemeStyle",
-            "module": "src/utils/index.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-button/f-button.ts",
       "declarations": [
         {
@@ -266,21 +168,6 @@
               "name": "validateProperties"
             },
             {
-              "kind": "field",
-              "name": "flowElement",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true",
-              "description": "for css selector to select only flow elements",
-              "attribute": "flow-element",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FElement",
-                "module": "src/shared/f-element.ts"
-              }
-            },
-            {
               "kind": "method",
               "name": "createRenderRoot",
               "inheritedFrom": {
@@ -373,19 +260,6 @@
               },
               "default": "false",
               "fieldName": "labelWrap"
-            },
-            {
-              "name": "flow-element",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true",
-              "description": "for css selector to select only flow elements",
-              "fieldName": "flowElement",
-              "inheritedFrom": {
-                "name": "FElement",
-                "module": "src/shared/f-element.ts"
-              }
             }
           ],
           "superclass": {
@@ -412,6 +286,39 @@
           "declaration": {
             "name": "FButton",
             "module": "src/components/f-button/f-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shared/f-element.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FElement",
+          "members": [
+            {
+              "kind": "method",
+              "name": "createRenderRoot"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "summary": "Every component must extent this class to consume gbobal styles , such as css reset, font family,...",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FElement",
+          "declaration": {
+            "name": "FElement",
+            "module": "src/shared/f-element.ts"
           }
         }
       ]
@@ -474,21 +381,6 @@
               "reflects": true
             },
             {
-              "kind": "field",
-              "name": "flowElement",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true",
-              "description": "for css selector to select only flow elements",
-              "attribute": "flow-element",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FElement",
-                "module": "src/shared/f-element.ts"
-              }
-            },
-            {
               "kind": "method",
               "name": "createRenderRoot",
               "inheritedFrom": {
@@ -536,19 +428,6 @@
               },
               "default": "false",
               "fieldName": "disabled"
-            },
-            {
-              "name": "flow-element",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true",
-              "description": "for css selector to select only flow elements",
-              "fieldName": "flowElement",
-              "inheritedFrom": {
-                "name": "FElement",
-                "module": "src/shared/f-element.ts"
-              }
             }
           ],
           "superclass": {
@@ -574,6 +453,49 @@
           "declaration": {
             "name": "FCounter",
             "module": "src/components/f-counter/f-counter.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/utils/getThemeStyle.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "getThemeStyle",
+          "parameters": [
+            {
+              "name": "selector",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "getThemeStyle",
+          "declaration": {
+            "name": "getThemeStyle",
+            "module": "src/utils/getThemeStyle.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/utils/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "getThemeStyle",
+          "declaration": {
+            "name": "getThemeStyle",
+            "module": "src/utils/index.ts"
           }
         }
       ]
@@ -613,21 +535,6 @@
               "default": "[\"source\"]"
             },
             {
-              "kind": "field",
-              "name": "flowElement",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true",
-              "description": "for css selector to select only flow elements",
-              "attribute": "flow-element",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FElement",
-                "module": "src/shared/f-element.ts"
-              }
-            },
-            {
               "kind": "method",
               "name": "createRenderRoot",
               "inheritedFrom": {
@@ -643,19 +550,6 @@
                 "text": "string"
               },
               "fieldName": "source"
-            },
-            {
-              "name": "flow-element",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true",
-              "description": "for css selector to select only flow elements",
-              "fieldName": "flowElement",
-              "inheritedFrom": {
-                "name": "FElement",
-                "module": "src/shared/f-element.ts"
-              }
             }
           ],
           "superclass": {
@@ -691,27 +585,14 @@
       "declarations": [
         {
           "kind": "variable",
-          "name": "CONFIG_SUBJECT",
-          "default": "new Subject<FlowCoreConfig>()"
-        },
-        {
-          "kind": "variable",
           "name": "ConfigUtil",
           "type": {
             "text": "object"
           },
-          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    CONFIG_SUBJECT.next(config);\n  },\n  getThemeStyles() {\n    return getThemeStyle(`[flow-element][theme=\"${config.theme}\"]`);\n  },\n}"
+          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    if (cfg.theme) {\n      this.initTheme();\n    }\n  },\n  initTheme() {\n    const themeElement = initThemeTag();\n\n    if (themeElement) {\n      const themeCSS = getThemeStyle(`[flow-element][theme=\"${config.theme}\"]`);\n\n      if (themeCSS) {\n        themeElement.appendChild(document.createTextNode(themeCSS));\n      } else {\n        console.error(`Theme ${config.theme} CSS file/selector not fount!`);\n      }\n    }\n  },\n}"
         }
       ],
       "exports": [
-        {
-          "kind": "js",
-          "name": "CONFIG_SUBJECT",
-          "declaration": {
-            "name": "CONFIG_SUBJECT",
-            "module": "src/modules/config/index.ts"
-          }
-        },
         {
           "kind": "js",
           "name": "ConfigUtil",

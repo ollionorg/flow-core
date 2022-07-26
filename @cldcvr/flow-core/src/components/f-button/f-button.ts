@@ -1,6 +1,6 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { FElement } from "./../../shared/f-element";
+import { FElement } from "../../mixins/components/f-element/f-element";
 import eleStyle from "./f-button.scss";
 /**
  * @summary Buttons allow users to perform an action or to initiate a new function.
@@ -34,7 +34,7 @@ export class FButton extends FElement {
    * @attribute The states on buttons are to indicate various degrees of emphasis of the action.
    */
   @property({ reflect: true, type: String })
-  state?: "primary" | "subtle" | "success" | "warning" | "danger" = "primary";
+  state?: "primary" | "neutral" | "success" | "warning" | "danger" = "primary";
 
   /**
    * @attribute shape of button.

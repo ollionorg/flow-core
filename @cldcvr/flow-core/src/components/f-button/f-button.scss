@@ -1,18 +1,18 @@
 @use "sass:map";
 @use "sass:math";
-@import "./../../shared/mixins";
+@import "./../../mixins/scss/mixins";
 
 $states: (
   "primary": var(--color-primary-default),
-  "subtle": var(--color-success-default),
+  "neutral": var(--color-neutral-default),
   "success": var(--color-success-default),
   "warning": var(--color-warning-default),
   "danger": var(--color-danger-default),
 );
 
-$states-hover-colors: (
+$states-hover: (
   "primary": var(--color-primary-default-hover),
-  "subtle": var(--color-success-default-hover),
+  "neutral": var(--color-neutral-default-hover),
   "success": var(--color-success-default-hover),
   "warning": var(--color-warning-default-hover),
   "danger": var(--color-danger-default-hover),
@@ -55,7 +55,7 @@ f-button {
       background-color: $color;
       border: 1px solid $color; // added to match width of outline variant
       &:hover {
-        background-color: map.get($states-hover-colors, $state);
+        background-color: map.get($states-hover, $state);
       }
     }
 
@@ -64,7 +64,7 @@ f-button {
       border: 1px solid $color;
       color: $color;
       &:hover {
-        border: 1px solid map.get($states-hover-colors, $state);
+        border: 1px solid map.get($states-hover, $state);
         color: $color;
       }
     }

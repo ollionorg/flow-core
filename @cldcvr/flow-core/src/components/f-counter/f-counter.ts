@@ -1,7 +1,7 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-counter.scss";
-import { FElement } from "./../../shared/f-element";
+import { FElement } from "../../mixins/components/f-element/f-element";
 
 @customElement("f-counter")
 export class FCounter extends FElement {

@@ -6,7 +6,7 @@ export default {
 } as Meta;
 
 const Template: Story<unknown> = () => {
-  const states = ["primary", "subtle", "success", "warning", "danger"];
+  const states = ["primary", "neutral", "success", "warning", "danger"];
   const sizes = ["large", "medium", "small", "x-small"];
   return html`
     ${states.map(

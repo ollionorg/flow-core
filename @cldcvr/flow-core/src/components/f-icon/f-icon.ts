@@ -1,9 +1,10 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-icon.scss";
-import { FElement } from "./../../shared/f-element";
+import { FElement } from "../../mixins/components/f-element/f-element";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { ConfigUtil } from "./../../modules/config";
+import loader from "../../mixins/svg/loader";
 
 @customElement("f-icon")
 export class FIcon extends FElement {
@@ -13,6 +14,25 @@ export class FIcon extends FElement {
   static styles = [unsafeCSS(eleStyle)];
 
   private _source!: string;
+
+  /**
+   * @attribute The small size is the default.
+   */
+  @property({ reflect: true, type: String })
+  size?: "x-large" | "large" | "medium" | "small" | "x-small" = "small";
+
+  /**
+   * @attribute The state of an Icon helps in indicating the degree of emphasis. The Icon component inherits the state from the parent component. By default it is subtle.
+   */
+  @property({ reflect: true, type: String })
+  state?:
+    | "default"
+    | "secondary"
+    | "subtle"
+    | "primary"
+    | "success"
+    | "danger"
+    | "warning" = "default";
 
   /**
    * @attribute Source property defines what will be displayed on the icon. For icon variant It can take the icon name from a library , any inline SVG or any URL for the image. For emoji, it takes emoji as inline text.
@@ -25,22 +45,47 @@ export class FIcon extends FElement {
     return this._source;
   }
   set source(value) {
-    const IconPack = ConfigUtil.getConfig().iconPack;
-    if (IconPack) {
-      this._source = IconPack[value];
+    const emojiRegex = /\p{Emoji}/u;
+    if (emojiRegex.test(value)) {
+      this._source = value;
     } else {
-      throw new Error(
-        `Icon pack not configured! \n please install \`yarn add @cldcvr/flow-icon\` \n Set config as below \n 	
+      const IconPack = ConfigUtil.getConfig().iconPack;
+      if (IconPack) {
+        this._source = IconPack[value];
+      } else {
+        throw new Error(
+          `Icon pack not configured! \n please install \`yarn add @cldcvr/flow-icon\` \n Set config as below \n 	
 		\`import IconPack from "@cldcvr/flow-icon" \n;
 		import { ConfigUtil } from "@cldcvr/flow-core" \n;
 	   ConfigUtil.setConfig({ iconPack: IconPack });\``
-      );
+        );
+      }
     }
   }
+
+  /**
+   * @attribute The disabled attribute can be set to keep a user from clicking on the f-icon.
+   */
+  @property({ reflect: true, type: Boolean })
+  disabled?: boolean = false;
+
+  /**
+   * @attribute display loader
+   */
+  @property({ reflect: true, type: Boolean })
+  loading?: boolean = false;
+
+  /**
+   * @attribute is clickable
+   */
+  @property({ reflect: true, type: Boolean })
+  clickable?: boolean = false;
 
   readonly required = ["source"];
 
   render() {
-    return html`${unsafeSVG(this.source)}`;
+    return html`${this.loading
+      ? html`${unsafeSVG(loader)}`
+      : html`${unsafeSVG(this.source)}`}`;
   }
 }

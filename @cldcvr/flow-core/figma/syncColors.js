@@ -14,7 +14,7 @@ const rgbToHex = (r, g, b) =>
  * @param {*} colorTokens Json object of theme and color variables
  */
 function generateTokenScss(colorTokens) {
-  const tokenFileName = `${__dirname}/../src/shared/_color-tokens.scss`;
+  const tokenFileName = `${__dirname}/../src/mixins/scss/_color-tokens.scss`;
 
   //   let scss = `@layer default,custom;
   // @layer default { `;

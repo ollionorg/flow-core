@@ -2,6 +2,10 @@ import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { FElement } from "../../mixins/components/f-element/f-element";
 import eleStyle from "./f-button.scss";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import loader from "../../mixins/svg/loader";
+import "./../f-counter/f-counter";
+import "./../f-icon/f-icon";
 /**
  * @summary Buttons allow users to perform an action or to initiate a new function.
  */
@@ -78,8 +82,26 @@ export class FButton extends FElement {
   @property({ reflect: true, type: Boolean, attribute: "label-wrap" })
   labelWrap?: boolean = false;
 
+  /**
+   * compute counter size based on button size
+   */
+  get counterSize() {
+    if (this.size === "small") {
+      return "medium";
+    }
+    if (this.size === "x-small") {
+      return "small";
+    }
+    return this.size;
+  }
+  /**
+   * mention required fields here
+   */
   readonly required = ["label"];
 
+  /**
+   * validation for all atrributes
+   */
   validateProperties() {
     if (!this.label) {
       throw new Error("f-button : label is mandatory field");
@@ -88,6 +110,52 @@ export class FButton extends FElement {
 
   render() {
     this.validateProperties();
-    return html`${this.label}`;
+
+    /**
+     * create iconLeft if available
+     */
+    const iconLeft = this.iconLeft
+      ? html`<f-icon
+          .source=${this.iconLeft}
+          class="left-icon"
+          .size=${this.size}
+        ></f-icon>`
+      : "";
+    /**
+     * create iconRight if available
+     */
+    const iconRight = this.iconRight
+      ? html`<f-icon
+          .source=${this.iconRight}
+          class="right-icon"
+          .size=${this.size}
+        ></f-icon>`
+      : "";
+
+    /**
+     * create counter if available
+     */
+    const counter = this.counter
+      ? html`<f-counter
+          .size=${this.counterSize}
+          .label=${this.counter}
+        ></f-counter>`
+      : "";
+    /**
+     * render loading if required
+     */
+    if (this.loading) {
+      return html`${unsafeSVG(loader)}${this.label}`;
+    }
+    return html`${iconLeft}${this.label}${iconRight}${counter}`;
+  }
+}
+
+/**
+ * ts to know and define element
+ */
+declare global {
+  interface HTMLElementTagNameMap {
+    "f-button": FButton;
   }
 }

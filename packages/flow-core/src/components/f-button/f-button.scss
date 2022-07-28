@@ -3,40 +3,59 @@
 @import "./../../mixins/scss/mixins";
 
 $states: (
-  "primary": var(--color-primary-default),
-  "neutral": var(--color-neutral-default),
-  "success": var(--color-success-default),
-  "warning": var(--color-warning-default),
-  "danger": var(--color-danger-default),
-);
-
-$states-hover: (
-  "primary": var(--color-primary-default-hover),
-  "neutral": var(--color-neutral-default-hover),
-  "success": var(--color-success-default-hover),
-  "warning": var(--color-warning-default-hover),
-  "danger": var(--color-danger-default-hover),
+  "primary": (
+    "background": var(--color-primary-default),
+    "hover": var(--color-primary-default-hover),
+  ),
+  "neutral": (
+    "background": var(--color-neutral-default),
+    "hover": var(--color-neutral-default-hover),
+  ),
+  "success": (
+    "background": var(--color-success-default),
+    "hover": var(--color-success-default-hover),
+  ),
+  "warning": (
+    "background": var(--color-warning-default),
+    "hover": var(--color-warning-default-hover),
+  ),
+  "danger": (
+    "background": var(--color-danger-default),
+    "hover": var(--color-danger-default-hover),
+  ),
 );
 
 $sizes: (
-  "x-small": 20px,
-  "small": 28px,
-  "medium": 36px,
-  "large": 44px,
-);
-$horizontal-padding: (
-  "x-small": 0px 8px,
-  "small": 0px 12px,
-  "medium": 0px 16px,
-  "large": 0px 20px,
+  "x-small": (
+    "height": 20px,
+    "padding": 0px 8px,
+    "fontSize": 10px,
+    "gap": 4px,
+    "loaderSize": 12px,
+  ),
+  "small": (
+    "height": 28px,
+    "padding": 0px 12px,
+    "fontSize": 12px,
+    "gap": 8px,
+    "loaderSize": 16px,
+  ),
+  "medium": (
+    "height": 36px,
+    "padding": 0px 16px,
+    "fontSize": 14px,
+    "gap": 12px,
+    "loaderSize": 20px,
+  ),
+  "large": (
+    "height": 44px,
+    "padding": 0px 20px,
+    "fontSize": 16px,
+    "gap": 16px,
+    "loaderSize": 24px,
+  ),
 );
 
-$font-sizes: (
-  "x-small": 10px,
-  "small": 12px,
-  "medium": 14px,
-  "large": 16px,
-);
 f-button {
   @include base();
   cursor: pointer;
@@ -50,32 +69,113 @@ f-button {
   /**
   * Iterating over states with variants
   **/
+  &[variant="fill"] {
+    f-counter {
+      background-color: var(--color-surface-default);
+      color: var(--color-text-default);
+    }
+    f-icon {
+      svg {
+        fill: var(--color-surface-default);
+        stroke: none;
+        *[fill^="white"] {
+          fill: var(--color-surface-default);
+        }
+      }
+    }
+  }
   @each $state, $color in $states {
     &[state="#{$state}"][variant="fill"] {
-      background-color: $color;
-      border: 1px solid $color; // added to match width of outline variant
+      background-color: map.get($color, "background");
+      border: 1px
+        solid
+        map.get(
+          $color,
+          "background"
+        ); // added to match width of outline variant
       &:hover {
-        background-color: map.get($states-hover, $state);
+        background-color: map.get($color, "hover");
+      }
+      &[loading] {
+        background-color: var(--color-primary-surface);
+        border: 1px solid var(--color-primary-surface);
+        color: transparent;
       }
     }
 
     &[state="#{$state}"][variant="outline"] {
       background-color: transparent;
-      border: 1px solid $color;
-      color: $color;
+      border: 1px solid map.get($color, "background");
+      color: map.get($color, "background");
       &:hover {
-        border: 1px solid map.get($states-hover, $state);
-        color: $color;
+        border: 1px solid map.get($color, "hover");
+        color: map.get($color, "hover");
+        f-counter {
+          background-color: map.get($color, "hover");
+        }
+
+        f-icon {
+          svg {
+            fill: map.get($color, "hover");
+            stroke: none;
+            *[fill^="white"] {
+              fill: map.get($color, "hover");
+            }
+          }
+        }
+      }
+      f-counter {
+        background-color: map.get($color, "background");
+      }
+      f-icon {
+        svg {
+          fill: map.get($color, "background");
+          stroke: none;
+          *[fill^="white"] {
+            fill: map.get($color, "background");
+          }
+        }
+      }
+      &[loading] {
+        border: 1px solid var(--color-primary-surface);
+        color: transparent;
       }
     }
 
     &[state="#{$state}"][variant="transparent"] {
       background-color: transparent;
       border: 1px solid transparent;
-      color: $color;
+      color: map.get($color, "background");
       &:hover {
         border: 1px solid transparent;
-        color: $color;
+        color: map.get($color, "hover");
+        f-counter {
+          background-color: map.get($color, "hover");
+        }
+        f-icon {
+          svg {
+            fill: map.get($color, "hover");
+            stroke: none;
+            *[fill^="white"] {
+              fill: map.get($color, "hover");
+            }
+          }
+        }
+      }
+      f-counter {
+        background-color: map.get($color, "background");
+      }
+      f-icon {
+        svg {
+          fill: map.get($color, "background");
+          stroke: none;
+          *[fill^="white"] {
+            fill: map.get($color, "background");
+          }
+        }
+      }
+      &[loading] {
+        color: transparent;
       }
     }
   }
@@ -85,11 +185,28 @@ f-button {
   **/
   @each $size, $value in $sizes {
     &[size="#{$size}"] {
-      height: $value;
-      padding: map.get($horizontal-padding, $size);
-      font-size: map.get($font-sizes, $size);
+      height: map.get($value, "height");
+      padding: map.get($value, "padding");
+      font-size: map.get($value, "fontSize");
       &[shape="round"] {
-        border-radius: math.div($value, 2);
+        border-radius: math.div(map.get($value, "height"), 2);
+      }
+
+      f-counter {
+        margin-left: map.get($value, "gap");
+      }
+
+      .left-icon {
+        margin-right: map.get($value, "gap");
+      }
+      .right-icon {
+        margin-left: map.get($value, "gap");
+      }
+
+      &[loading] {
+        svg {
+          height: map.get($value, "loaderSize");
+        }
       }
     }
   }
@@ -100,5 +217,18 @@ f-button {
 
   &[shape="block"] {
     display: flex;
+  }
+
+  &[disabled] {
+    @include disabled();
+  }
+
+  &[loading] {
+    @include rotate("svg");
+    pointer-events: none;
+
+    svg {
+      position: absolute;
+    }
   }
 }

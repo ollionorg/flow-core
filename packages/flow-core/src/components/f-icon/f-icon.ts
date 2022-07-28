@@ -40,7 +40,8 @@ export class FIcon extends FElement {
     | "primary"
     | "success"
     | "danger"
-    | "warning" = "default";
+    | "warning"
+    | "neutral" = "default";
 
   /**
    * @attribute Source property defines what will be displayed on the icon. For icon variant It can take the icon name from a library , any inline SVG or any URL for the image. For emoji, it takes emoji as inline text.
@@ -100,5 +101,11 @@ export class FIcon extends FElement {
       : html`${this.isURLSource
           ? unsafeHTML(this.source)
           : unsafeSVG(this.source)}`}`;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "f-icon": FIcon;
   }
 }

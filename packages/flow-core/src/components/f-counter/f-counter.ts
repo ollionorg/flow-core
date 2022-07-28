@@ -2,6 +2,8 @@ import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-counter.scss";
 import { FElement } from "../../mixins/components/f-element/f-element";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import loader from "../../mixins/svg/loader";
 
 @customElement("f-counter")
 export class FCounter extends FElement {
@@ -25,8 +27,7 @@ export class FCounter extends FElement {
    * @attribute The state of a counter helps in indicating the degree of emphasis of the parent component. The counter component inherits the state from the parent component. By default it is subtle.
    */
   @property({ reflect: true, type: String })
-  state?: "primary" | "subtle" | "success" | "warning" | "danger" | "neutral" =
-    "subtle";
+  state?: "primary" | "success" | "warning" | "danger" | "neutral" = "neutral";
 
   /**
    * @attribute Loader icon replaces the content of the counter .
@@ -47,6 +48,13 @@ export class FCounter extends FElement {
   }
   render() {
     this.validateProperties();
-    return html`${this.label}`;
+    return html`${this.loading
+      ? html`${unsafeSVG(loader)}`
+      : html`${this.label}`}`;
+  }
+}
+declare global {
+  interface HTMLElementTagNameMap {
+    "f-counter": FCounter;
   }
 }

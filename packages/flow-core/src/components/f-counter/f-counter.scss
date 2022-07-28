@@ -24,10 +24,6 @@ $sizes: (
 );
 
 $states: (
-  "subtle": (
-    "label": var(--color-text-default),
-    "background": var(--color-surface-tertiary),
-  ),
   "primary": (
     "label": var(--color-surface-default),
     "background": var(--color-primary-default),
@@ -45,8 +41,8 @@ $states: (
     "background": var(--color-warning-default),
   ),
   "neutral": (
-    "label": var(--color-text-default),
-    "background": var(--color-surface-default),
+    "label": var(--color-surface-default),
+    "background": var(--color-neutral-default),
   ),
 );
 
@@ -64,6 +60,9 @@ f-counter {
       font-size: map.get($value, "fontSize");
       line-height: map.get($value, "lineHeight");
       padding: map.get($value, "padding");
+      svg {
+        height: map.get($value, "height") - 8px;
+      }
     }
   }
 
@@ -71,6 +70,18 @@ f-counter {
     &[state="#{$state}"] {
       color: map.get($value, "label");
       background-color: map.get($value, "background");
+
+      &[loading] {
+        background-color: var(--color-primary-surface);
+      }
     }
+  }
+
+  &[disabled] {
+    @include disabled();
+  }
+
+  &[loading] {
+    @include rotate("svg");
   }
 }

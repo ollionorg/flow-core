@@ -1,25 +1,27 @@
-import { Story, Meta } from "@storybook/web-components";
+import { Story } from "@storybook/web-components";
 import { html } from "lit-html";
 
-export default {
-  title: "f-button",
-} as Meta;
-
-const Template: Story<unknown> = () => {
+const Icon_Left_Template: Story<unknown> = () => {
   const states = ["primary", "neutral", "success", "warning", "danger"];
   const sizes = ["large", "medium", "small", "x-small"];
   return html`
     ${states.map(
       (state) =>
-        html`<f-button label="label" .state=${state}></f-button> &nbsp;`
+        html`<f-button
+            label="add"
+            .state=${state}
+            icon-left="i-plus"
+          ></f-button>
+          &nbsp;`
     )}
     <br />
     <br />
     ${states.map(
       (state) =>
         html`<f-button
-            label="label"
+            label="add"
             variant="outline"
+            icon-left="i-plus"
             .state=${state}
           ></f-button>
           &nbsp;`
@@ -28,7 +30,12 @@ const Template: Story<unknown> = () => {
     <br />
     ${states.map(
       (state) =>
-        html`<f-button label="label" shape="curved" .state=${state}></f-button>
+        html`<f-button
+            label="add"
+            shape="curved"
+            icon-left="i-plus"
+            .state=${state}
+          ></f-button>
           &nbsp;`
     )}
     <br />
@@ -36,9 +43,10 @@ const Template: Story<unknown> = () => {
     ${states.map(
       (state) =>
         html`<f-button
-            label="label"
+            label="add"
             variant="outline"
             shape="curved"
+            icon-left="i-plus"
             .state=${state}
           ></f-button>
           &nbsp;`
@@ -49,9 +57,10 @@ const Template: Story<unknown> = () => {
     ${states.map(
       (state) =>
         html`<f-button
-            label="label"
+            label="add"
             variant="transparent"
             shape="curved"
+            icon-left="i-plus"
             .state=${state}
           ></f-button>
           &nbsp;`
@@ -60,21 +69,20 @@ const Template: Story<unknown> = () => {
     <br />
     <br />
     ${sizes.map(
-      (size) => html`<f-button label="label" .size=${size}></f-button> &nbsp;`
+      (size) =>
+        html`<f-button label="add" icon-left="i-plus" .size=${size}></f-button>
+          &nbsp;`
     )}
     <br />
     <br />
     ${sizes.map(
       (size) =>
-        html`<f-button label="label" variant="outline" .size=${size}></f-button>
-          &nbsp;`
-    )}
-
-    <br />
-    <br />
-    ${states.map(
-      (state) =>
-        html`<f-button label="label" shape="block" .state=${state}></f-button>
+        html`<f-button
+            label="add"
+            variant="outline"
+            icon-left="i-plus"
+            .size=${size}
+          ></f-button>
           &nbsp;`
     )}
 
@@ -83,9 +91,23 @@ const Template: Story<unknown> = () => {
     ${states.map(
       (state) =>
         html`<f-button
-            label="label"
+            label="add"
+            shape="block"
+            icon-left="i-plus"
+            .state=${state}
+          ></f-button>
+          &nbsp;`
+    )}
+
+    <br />
+    <br />
+    ${states.map(
+      (state) =>
+        html`<f-button
+            label="add"
             variant="outline"
             shape="block"
+            icon-left="i-plus"
             .state=${state}
           ></f-button>
           &nbsp;`
@@ -93,4 +115,4 @@ const Template: Story<unknown> = () => {
   `;
 };
 
-export const basic = Template.bind({});
+export default Icon_Left_Template;

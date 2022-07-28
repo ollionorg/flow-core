@@ -95,7 +95,17 @@ export class FIcon extends FElement {
 
   readonly required = ["source"];
 
+  /**
+   * validation for all atrributes
+   */
+  validateProperties() {
+    if (!this.source) {
+      throw new Error("f-icon : source is mandatory field");
+    }
+  }
+
   render() {
+    this.validateProperties();
     return html`${this.loading
       ? html`${unsafeSVG(loader)}`
       : html`${this.isURLSource
@@ -104,8 +114,8 @@ export class FIcon extends FElement {
   }
 }
 
-declare global {
-  interface HTMLElementTagNameMap {
-    "f-icon": FIcon;
-  }
-}
+// declare global {
+//   interface HTMLElementTagNameMap {
+//     "f-icon": FIcon;
+//   }
+// }

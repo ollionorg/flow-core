@@ -114,8 +114,8 @@ export class FIcon extends FElement {
   }
 }
 
-// declare global {
-//   interface HTMLElementTagNameMap {
-//     "f-icon": FIcon;
-//   }
-// }
+declare global {
+  interface HTMLElementTagNameMap {
+    "f-icon": FIcon;
+  }
+}

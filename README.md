@@ -15,6 +15,7 @@ A design system for enterprise-level products. Create an efficient and enjoyable
 
     ```typescript
     import '@cldcvr/flow-core';
+	import "@cldcvr/flow-core/dist/style.css";
     ```
 ## Usage
 

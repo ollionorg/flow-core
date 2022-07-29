@@ -12,7 +12,7 @@ declare module 'vue' {
 
                     size?: 'large' | 'medium' | 'small' | 'x-small' | undefined;
 
-                    state?: 'primary' | 'subtle' | 'success' | 'warning' | 'danger' | undefined;
+                    state?: 'primary' | 'neutral' | 'success' | 'warning' | 'danger' | undefined;
 
                     shape?: 'round' | 'curved' | 'block' | undefined;
 
@@ -31,27 +31,14 @@ declare module 'vue' {
             } & Vue
         >;
 
-        undefined: VueConstructor<
-            {
-                $props: {};
-            } & Vue
-        >;
-
         'f-counter': VueConstructor<
             {
                 $props: {
-                    label?: string;
+                    label: string;
 
                     size?: 'large' | 'medium' | 'small' | undefined;
 
-                    state?:
-                        | 'primary'
-                        | 'subtle'
-                        | 'success'
-                        | 'warning'
-                        | 'danger'
-                        | 'neutral'
-                        | undefined;
+                    state?: 'primary' | 'success' | 'warning' | 'danger' | 'neutral' | undefined;
 
                     loading?: boolean | undefined;
 
@@ -63,8 +50,33 @@ declare module 'vue' {
         'f-icon': VueConstructor<
             {
                 $props: {
+                    size?: 'x-large' | 'large' | 'medium' | 'small' | 'x-small' | undefined;
+
+                    state?:
+                        | 'default'
+                        | 'secondary'
+                        | 'subtle'
+                        | 'primary'
+                        | 'success'
+                        | 'danger'
+                        | 'warning'
+                        | 'neutral'
+                        | undefined;
+
                     source: string;
+
+                    disabled?: boolean | undefined;
+
+                    loading?: boolean | undefined;
+
+                    clickable?: boolean | undefined;
                 };
+            } & Vue
+        >;
+
+        undefined: VueConstructor<
+            {
+                $props: {};
             } & Vue
         >;
     }

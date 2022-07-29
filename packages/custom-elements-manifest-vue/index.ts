@@ -90,7 +90,7 @@ function getComponentPropTypeImports(schema: Package): string[] {
 					if (attribute.type?.text) {
 						const typesToImport: string[] = attribute.type.text.split(" ");
 						typesToImport.forEach((t) => {
-							if (!builtInTypes.includes(t) && t.charAt(0) !== "'" && t.charAt(0) !== '"') {
+							if (!builtInTypes.includes(t) && t.charAt(0) !== "'" && t.charAt(0) !== '"' && t) {
 								extractedTypes.push(t);
 							}
 						});

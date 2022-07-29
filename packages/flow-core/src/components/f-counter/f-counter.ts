@@ -41,6 +41,11 @@ export class FCounter extends FElement {
   @property({ reflect: true, type: Boolean })
   disabled?: boolean = false;
 
+  /**
+   * mention required fields here
+   */
+  readonly required = ["label"];
+
   validateProperties() {
     if (!this.label) {
       throw new Error("f-counter : label is mandatory field");

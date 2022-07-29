@@ -59,4 +59,4 @@ A design system for enterprise-level products. Create an efficient and enjoyable
 
 ## VSCode plugin
 
-### Install [Flow intellisense](https://marketplace.visualstudio.com/items?itemName=dev-vikas.flow-intellisense-vscode) for best editing experience.
+ Install [Flow intellisense](https://marketplace.visualstudio.com/items?itemName=dev-vikas.flow-intellisense-vscode) for best editing experience.

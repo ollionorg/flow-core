@@ -57,7 +57,20 @@ A design system for enterprise-level products. Create an efficient and enjoyable
 <f-button label="submit" :loading="booleanValue" @click="log($event.detail)">
 </f-button>
 ```
+## Icon package
+Icons are packaged separately . you can find more info [here](https://github.com/cldcvr/flow-icon)  
+### Install 
+```
+yarn add @cldcvr/flow-icon
+```
 
+### Usage 
+Register icon pack in your applilcation startup file like below.
+```JavaScript
+	import IconPack from "@cldcvr/flow-icon" ;
+	import { ConfigUtil } from "@cldcvr/flow-core" ;
+	ConfigUtil.setConfig({ iconPack: IconPack });
+```
 ## VSCode plugin
 
  Install [Flow intellisense](https://marketplace.visualstudio.com/items?itemName=dev-vikas.flow-intellisense-vscode) for best editing experience.

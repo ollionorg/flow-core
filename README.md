@@ -5,13 +5,13 @@ A design system for enterprise-level products. Create an efficient and enjoyable
 
 ## Quick Start Install
 
-1.  First, install the Clarity Core package from npm.
+1.  First, install the Flow Core package from npm.
 
     ```bash
     yarn add @cldcvr/flow-core
     ```
 
-2.  Import Web Componentsr into your JavaScript or TypeScript
+2.  Import Web Components into your JavaScript or TypeScript
 
     ```typescript
     import '@cldcvr/flow-core';

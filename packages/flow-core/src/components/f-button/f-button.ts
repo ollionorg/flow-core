@@ -95,7 +95,7 @@ export class FButton extends FElement {
     return this.size;
   }
   /**
-   * mention required fields here
+   * mention required fields here for generating vue types
    */
   readonly required = ["label"];
 

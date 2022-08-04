@@ -3,6 +3,7 @@ import { html } from "lit-html";
 
 export default {
   title: "f-counter",
+  component: "f-counter",
 } as Meta;
 
 const Template: Story<unknown> = () => {

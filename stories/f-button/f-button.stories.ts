@@ -9,6 +9,7 @@ import LoadingTemplate from "./f-button-loading.template";
 
 export default {
   title: "f-button",
+  component: "f-button",
 } as Meta;
 
 export const with_states_and_sizes = StatesAndSizesTemplate.bind({});

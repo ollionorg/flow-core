@@ -19,7 +19,6 @@ It serves as a shared language for all involved in design and product.
 * Figma for designers
 * Releases
 
-
 ## Pre-requisites
 
 ##### 1) A Javascript front-end language
@@ -83,3 +82,4 @@ Note: after importing, re-run your application.
 * Icon [documentation](https://docs.google.com/document/d/1kLruoml15fZCo8XUoo48xsNDVgzaDe9freI6XeP7HOs/edit#heading=h.b81ibd1zmiy)
 * Tooltip [documentation](https://docs.google.com/document/d/15k1dfr1wU3xaOj7tuxIQQcGFM5jz1SuX2_x6-91PSZo/edit?usp=sharing)
 * Colors [documentation]()
+

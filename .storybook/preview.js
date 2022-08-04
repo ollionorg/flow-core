@@ -2,6 +2,10 @@ import { html } from "lit-html";
 import IconPack from "@cldcvr/flow-icon";
 import { ConfigUtil } from "@cldcvr/flow-core/src/modules/config";
 import "@cldcvr/flow-core/src";
+import {
+  setCustomElementsManifest,
+  setCustomElements,
+} from "@storybook/web-components";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -46,3 +50,16 @@ export const decorators = [
     `;
   },
 ];
+
+async function run() {
+  const customElements = await (
+    await fetch(
+      new URL("../packages/flow-core/custom-elements.json", import.meta.url)
+    )
+  ).json();
+
+  setCustomElementsManifest(customElements);
+  setCustomElements(customElements);
+}
+
+run();

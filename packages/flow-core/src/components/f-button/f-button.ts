@@ -23,7 +23,7 @@ export class FButton extends FElement {
   label!: string;
 
   /**
-   * @attribute Use the visual style (type) in combination with the properties to identify the type of action performed and its importance compared to other actions in the same context. Default variant for a button is filled.
+   * @attribute type of button
    */
   @property({ reflect: true, type: String })
   type?: "fill" | "outline" | "transparent" = "fill";

@@ -29,10 +29,10 @@ describe("f-button", () => {
   it("should render with all default properties", async () => {
     const el = await fixture(html` <f-button label="abc"></f-button> `);
 
-    expect(el.getAttribute("variant")).to.equal("fill");
+    expect(el.getAttribute("variant")).to.equal("round");
     expect(el.getAttribute("size")).to.equal("medium");
     expect(el.getAttribute("state")).to.equal("primary");
-    expect(el.getAttribute("shape")).to.equal("round");
+    expect(el.getAttribute("type")).to.equal("fill");
   });
 
   it("should render icon left", async () => {

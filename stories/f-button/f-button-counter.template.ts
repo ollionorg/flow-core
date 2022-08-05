@@ -16,7 +16,7 @@ const Counter_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="label"
-            variant="outline"
+            type="outline"
             counter="88"
             .state=${state}
           ></f-button>
@@ -28,7 +28,7 @@ const Counter_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="label"
-            shape="curved"
+            variant="curved"
             counter="88"
             .state=${state}
           ></f-button>
@@ -40,8 +40,8 @@ const Counter_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="label"
-            variant="outline"
-            shape="curved"
+            type="outline"
+            variant="curved"
             counter="88"
             .state=${state}
           ></f-button>
@@ -54,8 +54,8 @@ const Counter_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="label"
-            variant="transparent"
-            shape="curved"
+            type="transparent"
+            variant="curved"
             counter="88"
             .state=${state}
           ></f-button>
@@ -75,7 +75,7 @@ const Counter_Template: Story<unknown> = () => {
       (size) =>
         html`<f-button
             label="label"
-            variant="outline"
+            type="outline"
             counter="88"
             .size=${size}
           ></f-button>
@@ -88,7 +88,7 @@ const Counter_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="label"
-            shape="block"
+            variant="block"
             counter="88"
             .state=${state}
           ></f-button>
@@ -101,8 +101,8 @@ const Counter_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="label"
-            variant="outline"
-            shape="block"
+            type="outline"
+            variant="block"
             counter="88"
             .state=${state}
           ></f-button>

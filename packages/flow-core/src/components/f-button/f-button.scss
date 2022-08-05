@@ -69,7 +69,7 @@ f-button {
   /**
   * Iterating over states with variants
   **/
-  &[variant="fill"] {
+  &[type="fill"] {
     f-counter {
       background-color: var(--color-surface-default);
       color: var(--color-text-default);
@@ -85,14 +85,11 @@ f-button {
     }
   }
   @each $state, $color in $states {
-    &[state="#{$state}"][variant="fill"] {
+    &[state="#{$state}"][type="fill"] {
       background-color: map.get($color, "background");
       border: 1px
         solid
-        map.get(
-          $color,
-          "background"
-        ); // added to match width of outline variant
+        map.get($color, "background"); // added to match width of outline type
       &:hover {
         background-color: map.get($color, "hover");
       }
@@ -103,7 +100,7 @@ f-button {
       }
     }
 
-    &[state="#{$state}"][variant="outline"] {
+    &[state="#{$state}"][type="outline"] {
       background-color: transparent;
       border: 1px solid map.get($color, "background");
       color: map.get($color, "background");
@@ -142,7 +139,7 @@ f-button {
       }
     }
 
-    &[state="#{$state}"][variant="transparent"] {
+    &[state="#{$state}"][type="transparent"] {
       background-color: transparent;
       border: 1px solid transparent;
       color: map.get($color, "background");
@@ -188,7 +185,7 @@ f-button {
       height: map.get($value, "height");
       padding: map.get($value, "padding");
       font-size: map.get($value, "fontSize");
-      &[shape="round"] {
+      &[variant="round"] {
         border-radius: math.div(map.get($value, "height"), 2);
       }
 
@@ -211,11 +208,11 @@ f-button {
     }
   }
 
-  &[shape="curved"] {
+  &[variant="curved"] {
     border-radius: 4px;
   }
 
-  &[shape="block"] {
+  &[variant="block"] {
     display: flex;
   }
 

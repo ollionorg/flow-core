@@ -23,10 +23,10 @@ export class FButton extends FElement {
   label!: string;
 
   /**
-   * @attribute Use the visual style (variant) in combination with the properties to identify the type of action performed and its importance compared to other actions in the same context. Default variant for a button is filled.
+   * @attribute Use the visual style (type) in combination with the properties to identify the type of action performed and its importance compared to other actions in the same context. Default variant for a button is filled.
    */
   @property({ reflect: true, type: String })
-  variant?: "fill" | "outline" | "transparent" = "fill";
+  type?: "fill" | "outline" | "transparent" = "fill";
 
   /**
    * @attribute The medium size is the default and recommended option.
@@ -41,10 +41,10 @@ export class FButton extends FElement {
   state?: "primary" | "neutral" | "success" | "warning" | "danger" = "primary";
 
   /**
-   * @attribute shape of button.
+   * @attribute variant of button.
    */
   @property({ reflect: true, type: String })
-  shape?: "round" | "curved" | "block" = "round";
+  variant?: "round" | "curved" | "block" = "round";
 
   /**
    * @attribute Icon-left enables an icon on the left of the label of a button.

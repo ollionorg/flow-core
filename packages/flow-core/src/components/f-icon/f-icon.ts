@@ -73,6 +73,7 @@ export class FIcon extends FElement {
         );
       }
     }
+    this.requestUpdate();
   }
 
   /**

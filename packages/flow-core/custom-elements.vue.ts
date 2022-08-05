@@ -8,13 +8,13 @@ declare module 'vue' {
                 $props: {
                     label: string;
 
-                    variant?: 'fill' | 'outline' | 'transparent' | undefined;
+                    type?: 'fill' | 'outline' | 'transparent' | undefined;
 
                     size?: 'large' | 'medium' | 'small' | 'x-small' | undefined;
 
                     state?: 'primary' | 'neutral' | 'success' | 'warning' | 'danger' | undefined;
 
-                    shape?: 'round' | 'curved' | 'block' | undefined;
+                    variant?: 'round' | 'curved' | 'block' | undefined;
 
                     iconLeft?: string | undefined;
 
@@ -43,6 +43,14 @@ declare module 'vue' {
                     loading?: boolean | undefined;
 
                     disabled?: boolean | undefined;
+                };
+            } & Vue
+        >;
+
+        'f-div': VueConstructor<
+            {
+                $props: {
+                    variant?: 'row' | 'column' | undefined;
                 };
             } & Vue
         >;

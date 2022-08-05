@@ -19,7 +19,17 @@
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": false,
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "plugins": [
+      {
+        "name": "ts-lit-plugin",
+        "strict": true,
+        "rules": {
+          "no-unknown-tag-name": "off",
+          "no-unknown-event": "warn"
+        }
+      }
+    ]
   },
   "references": [{ "path": "./packages/flow-core/tsconfig.node.json" }]
 }

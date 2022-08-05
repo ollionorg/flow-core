@@ -17,7 +17,7 @@ const LoadingTemplate: Story<unknown> = () => {
         html`<f-button
             label="longloading"
             loading
-            variant="outline"
+            type="outline"
             .state=${state}
           ></f-button>
           &nbsp;`
@@ -29,7 +29,7 @@ const LoadingTemplate: Story<unknown> = () => {
         html`<f-button
             label="longloading"
             loading
-            shape="curved"
+            variant="curved"
             .state=${state}
           ></f-button>
           &nbsp;`
@@ -41,8 +41,8 @@ const LoadingTemplate: Story<unknown> = () => {
         html`<f-button
             label="longloading"
             loading
-            variant="outline"
-            shape="curved"
+            type="outline"
+            variant="curved"
             .state=${state}
           ></f-button>
           &nbsp;`
@@ -55,8 +55,8 @@ const LoadingTemplate: Story<unknown> = () => {
         html`<f-button
             label="longloading"
             loading
-            variant="transparent"
-            shape="curved"
+            type="transparent"
+            variant="curved"
             .state=${state}
           ></f-button>
           &nbsp;`
@@ -76,7 +76,7 @@ const LoadingTemplate: Story<unknown> = () => {
         html`<f-button
             label="longloading"
             loading
-            variant="outline"
+            type="outline"
             .size=${size}
           ></f-button>
           &nbsp;`
@@ -89,7 +89,7 @@ const LoadingTemplate: Story<unknown> = () => {
         html`<f-button
             label="longloading"
             loading
-            shape="block"
+            variant="block"
             .state=${state}
           ></f-button>
           &nbsp;`
@@ -102,8 +102,8 @@ const LoadingTemplate: Story<unknown> = () => {
         html`<f-button
             label="longloading"
             loading
-            variant="outline"
-            shape="block"
+            type="outline"
+            variant="block"
             .state=${state}
           ></f-button>
           &nbsp;`

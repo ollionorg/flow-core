@@ -147,12 +147,12 @@
             },
             {
               "kind": "field",
-              "name": "variant",
+              "name": "type",
               "type": {
                 "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
               },
               "default": "\"fill\"",
-              "attribute": "variant",
+              "attribute": "type",
               "reflects": true
             },
             {
@@ -177,12 +177,12 @@
             },
             {
               "kind": "field",
-              "name": "shape",
+              "name": "variant",
               "type": {
                 "text": "\"round\" | \"curved\" | \"block\" | undefined"
               },
               "default": "\"round\"",
-              "attribute": "shape",
+              "attribute": "variant",
               "reflects": true
             },
             {
@@ -254,7 +254,7 @@
                 "text": "array"
               },
               "default": "[\"label\"]",
-              "description": "mention required fields here"
+              "description": "mention required fields here for generating vue types"
             },
             {
               "kind": "method",
@@ -279,12 +279,12 @@
               "fieldName": "label"
             },
             {
-              "name": "variant",
+              "name": "type",
               "type": {
                 "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
               },
               "default": "\"fill\"",
-              "fieldName": "variant"
+              "fieldName": "type"
             },
             {
               "name": "size",
@@ -303,12 +303,12 @@
               "fieldName": "state"
             },
             {
-              "name": "shape",
+              "name": "variant",
               "type": {
                 "text": "\"round\" | \"curved\" | \"block\" | undefined"
               },
               "default": "\"round\"",
-              "fieldName": "shape"
+              "fieldName": "variant"
             },
             {
               "name": "icon-left",
@@ -527,6 +527,70 @@
           "declaration": {
             "name": "FCounter",
             "module": "src/components/f-counter/f-counter.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-div/f-div.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FDiv",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"row\" | \"column\" | undefined"
+              },
+              "default": "\"row\"",
+              "attribute": "variant"
+            },
+            {
+              "kind": "method",
+              "name": "createRenderRoot",
+              "inheritedFrom": {
+                "name": "FElement",
+                "module": "src/mixins/components/f-element/f-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"row\" | \"column\" | undefined"
+              },
+              "default": "\"row\"",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "FElement",
+            "module": "/src/mixins/components/f-element/f-element"
+          },
+          "tagName": "f-div",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FDiv",
+          "declaration": {
+            "name": "FDiv",
+            "module": "src/components/f-div/f-div.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-div",
+          "declaration": {
+            "name": "FDiv",
+            "module": "src/components/f-div/f-div.ts"
           }
         }
       ]

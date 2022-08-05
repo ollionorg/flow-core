@@ -20,7 +20,7 @@ const Icon_Left_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="add"
-            variant="outline"
+            type="outline"
             icon-left="i-plus"
             .state=${state}
           ></f-button>
@@ -32,7 +32,7 @@ const Icon_Left_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="add"
-            shape="curved"
+            variant="curved"
             icon-left="i-plus"
             .state=${state}
           ></f-button>
@@ -44,8 +44,8 @@ const Icon_Left_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="add"
-            variant="outline"
-            shape="curved"
+            type="outline"
+            variant="curved"
             icon-left="i-plus"
             .state=${state}
           ></f-button>
@@ -58,8 +58,8 @@ const Icon_Left_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="add"
-            variant="transparent"
-            shape="curved"
+            type="transparent"
+            variant="curved"
             icon-left="i-plus"
             .state=${state}
           ></f-button>
@@ -79,7 +79,7 @@ const Icon_Left_Template: Story<unknown> = () => {
       (size) =>
         html`<f-button
             label="add"
-            variant="outline"
+            type="outline"
             icon-left="i-plus"
             .size=${size}
           ></f-button>
@@ -92,7 +92,7 @@ const Icon_Left_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="add"
-            shape="block"
+            variant="block"
             icon-left="i-plus"
             .state=${state}
           ></f-button>
@@ -105,8 +105,8 @@ const Icon_Left_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="add"
-            variant="outline"
-            shape="block"
+            type="outline"
+            variant="block"
             icon-left="i-plus"
             .state=${state}
           ></f-button>

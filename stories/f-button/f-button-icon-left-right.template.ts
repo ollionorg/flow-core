@@ -22,7 +22,7 @@ const Icon_Left_Right_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="done"
-            variant="outline"
+            type="outline"
             icon-right="i-generic"
             icon-left="i-generic"
             counter="88"
@@ -36,7 +36,7 @@ const Icon_Left_Right_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="done"
-            shape="curved"
+            variant="curved"
             icon-right="i-generic"
             icon-left="i-generic"
             counter="88"
@@ -50,8 +50,8 @@ const Icon_Left_Right_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="done"
-            variant="outline"
-            shape="curved"
+            type="outline"
+            variant="curved"
             icon-right="i-generic"
             icon-left="i-generic"
             counter="88"
@@ -66,8 +66,8 @@ const Icon_Left_Right_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="done"
-            variant="transparent"
-            shape="curved"
+            type="transparent"
+            variant="curved"
             icon-right="i-generic"
             icon-left="i-generic"
             counter="88"
@@ -95,7 +95,7 @@ const Icon_Left_Right_Template: Story<unknown> = () => {
       (size) =>
         html`<f-button
             label="done"
-            variant="outline"
+            type="outline"
             icon-right="i-generic"
             icon-left="i-generic"
             counter="88"
@@ -110,7 +110,7 @@ const Icon_Left_Right_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="done"
-            shape="block"
+            variant="block"
             icon-right="i-generic"
             icon-left="i-generic"
             counter="88"
@@ -125,8 +125,8 @@ const Icon_Left_Right_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="done"
-            variant="outline"
-            shape="block"
+            type="outline"
+            variant="block"
             icon-right="i-generic"
             icon-left="i-generic"
             counter="88"

@@ -70,9 +70,7 @@ import "@cldcvr/flow-core/dist/style.css";
 
 ##### For flow-icon
 ```
-import IconPack from "@cldcvr/flow-icon" ;
-import { ConfigUtil } from "@cldcvr/flow-core" ;
-ConfigUtil.setConfig({ iconPack: IconPack });
+import "@cldcvr/flow-icon";
 ```
 
 Note: after importing, re-run your application.

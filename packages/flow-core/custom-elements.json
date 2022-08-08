@@ -46,6 +46,14 @@
             "name": "*",
             "package": "\"./components/f-counter/f-counter\""
           }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-div/f-div\""
+          }
         }
       ]
     },
@@ -547,7 +555,54 @@
                 "text": "\"row\" | \"column\" | undefined"
               },
               "default": "\"row\"",
-              "attribute": "variant"
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "\"subtle\" | \"default\" | \"secondary\" | \"tertiary\" | undefined"
+              },
+              "attribute": "fill",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "border",
+              "type": {
+                "text": "| FDivBorderWidth\n    | `${FDivBorderWidth} ${FDivBorderStyle}`\n    | `${FDivBorderWidth} ${FDivBorderStyle} ${FDivBorderColor}`\n    | `${FDivBorderWidth} ${FDivBorderStyle} ${FDivBorderColor} ${FDivBorderPosition}` | undefined"
+              },
+              "attribute": "border",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "padding",
+              "type": {
+                "text": "| FDivPadding\n    | `${FDivPadding} ${FDivPadding}`\n    | `${FDivPadding} ${FDivPadding}`\n    | `${FDivPadding} ${FDivPadding} ${FDivPadding} ${FDivPadding}` | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "padding",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "applyBorder"
+            },
+            {
+              "kind": "method",
+              "name": "applyPadding"
             },
             {
               "kind": "method",
@@ -566,6 +621,36 @@
               },
               "default": "\"row\"",
               "fieldName": "variant"
+            },
+            {
+              "name": "fill",
+              "type": {
+                "text": "\"subtle\" | \"default\" | \"secondary\" | \"tertiary\" | undefined"
+              },
+              "fieldName": "fill"
+            },
+            {
+              "name": "border",
+              "type": {
+                "text": "| FDivBorderWidth\n    | `${FDivBorderWidth} ${FDivBorderStyle}`\n    | `${FDivBorderWidth} ${FDivBorderStyle} ${FDivBorderColor}`\n    | `${FDivBorderWidth} ${FDivBorderStyle} ${FDivBorderColor} ${FDivBorderPosition}` | undefined"
+              },
+              "fieldName": "border"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "gap"
+            },
+            {
+              "name": "padding",
+              "type": {
+                "text": "| FDivPadding\n    | `${FDivPadding} ${FDivPadding}`\n    | `${FDivPadding} ${FDivPadding}`\n    | `${FDivPadding} ${FDivPadding} ${FDivPadding} ${FDivPadding}` | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "padding"
             }
           ],
           "superclass": {

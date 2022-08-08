@@ -29,10 +29,12 @@ export const parameters = {
 export const decorators = [
   (story) => {
     window.onmessage = function (e) {
-      const message = JSON.parse(e.data);
+      if (e.data && typeof e.data === "string") {
+        const message = JSON.parse(e.data);
 
-      if (message.event.type === "storybook-addon-themes/change") {
-        ConfigUtil.setConfig({ theme: message.event.args[0] });
+        if (message.event.type === "storybook-addon-themes/change") {
+          ConfigUtil.setConfig({ theme: message.event.args[0] });
+        }
       }
     };
     ConfigUtil.setConfig({ iconPack: IconPack });

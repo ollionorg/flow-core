@@ -16,7 +16,7 @@ export function transformSchema(schema: Package) {
 			}
 		});
 	});
-	const allImports = getComponentPropTypeImports(schema);
+	const allImports = [`import type * from './src';`];
 	const output = prettier.format(
 		`
         /* eslint-disable */

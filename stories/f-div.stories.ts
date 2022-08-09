@@ -26,6 +26,26 @@ export default {
       options: ["wrap", "scroll", "hidden"],
       control: { type: "select" },
     },
+    state: {
+      options: [
+        "subtle",
+        "default",
+        "secondary",
+        "tertiary",
+        "success",
+        "warning",
+        "danger",
+      ],
+      control: { type: "select" },
+    },
+    selected: {
+      options: ["none", "background", "border", "notch-right", "notch-left"],
+      control: { type: "select" },
+    },
+    sticky: {
+      options: ["none", "top", "bottom", "left", "right"],
+      control: { type: "select" },
+    },
   },
 } as Meta;
 
@@ -168,4 +188,88 @@ export const overflow = OTemplate.bind({});
 
 overflow.args = {
   overflow: "wrap",
+};
+
+const STemplate: Story<Record<string, string>> = (
+  args: Record<string, string>
+) => {
+  return html`
+    <f-div width="100%" height="100%" variant="column" gap="small">
+      <f-div
+        width="fill-container"
+        height="hug-content"
+        gap="small"
+        padding="small"
+        .state=${args.state}
+        .selected=${args.selected}
+      >
+        <f-icon source="i-flag" size="large"></f-icon>
+      </f-div>
+    </f-div>
+  `;
+};
+
+export const state = STemplate.bind({});
+
+state.args = {
+  state: "default",
+  selected: "none",
+};
+
+const STTemplate: Story<Record<string, string>> = (
+  args: Record<string, string>
+) => {
+  return html`
+    <f-div
+      width="100%"
+      height="100%"
+      .variant=${args.variant}
+      gap="small"
+      overflow="scroll"
+    >
+      ${[...Array(3).keys()].map(
+        () =>
+          html` <f-div border="small solid default" gap="small" padding="small"
+            ><f-button label="normal" icon-left="i-plus"></f-button>
+          </f-div>`
+      )}
+
+      <f-div
+        gap="small"
+        state="danger"
+        padding="small"
+        selected="notch-right"
+        .sticky=${args.sticky}
+        ><f-button label="normal" icon-left="i-plus"></f-button>
+      </f-div>
+      <f-div gap="small" disabled padding="small"
+        ><f-button label="disabled" icon-left="i-plus"></f-button>
+      </f-div>
+      <f-div gap="small" clickable padding="small"
+        ><f-button label="clickable" icon-left="i-plus"></f-button>
+      </f-div>
+      ${[...Array(100).keys()].map(
+        () =>
+          html` <f-div border="small solid default" gap="small" padding="small"
+            ><f-button label="normal" icon-left="i-plus"></f-button>
+          </f-div>`
+      )}
+
+      <f-div
+        gap="small"
+        state="danger"
+        padding="small"
+        selected="notch-right"
+        .sticky=${args.sticky}
+        ><f-button label="normal" icon-left="i-plus"></f-button>
+      </f-div>
+    </f-div>
+  `;
+};
+
+export const sticky = STTemplate.bind({});
+
+sticky.args = {
+  variant: "column",
+  sticky: "none",
 };

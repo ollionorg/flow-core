@@ -14,36 +14,51 @@ $states: (
   "subtle": (
     "background": var(--color-surface-subtle),
     "hover": var(--color-surface-subtle-hover),
+    "selected": var(--color-surface-subtle-selected),
+    "border": var(--color-primary-default),
   ),
   "default": (
     "background": var(--color-surface-default),
     "hover": var(--color-surface-default-hover),
+    "selected": var(--color-surface-default-selected),
+    "border": var(--color-primary-default),
   ),
   "secondary": (
     "background": var(--color-surface-secondary),
     "hover": var(--color-surface-secondary-hover),
+    "selected": var(--color-surface-secondary-selected),
+    "border": var(--color-primary-default),
   ),
   "tertiary": (
     "background": var(--color-surface-tertiary),
     "hover": var(--color-surface-tertiary-hover),
+    "selected": var(--color-surface-tertiary-selected),
+    "border": var(--color-primary-default),
   ),
   "success": (
     "background": var(--color-success-surface),
     "hover": var(--color-success-surface-hover),
+    "selected": var(--color-success-surface-selected),
+    "border": var(--color-success-default),
   ),
   "warning": (
     "background": var(--color-warning-surface),
     "hover": var(--color-warning-surface-hover),
+    "selected": var(--color-warning-surface-selected),
+    "border": var(--color-warning-default),
   ),
   "danger": (
     "background": var(--color-danger-surface),
     "hover": var(--color-danger-surface-hover),
+    "selected": var(--color-danger-surface-selected),
+    "border": var(--color-danger-default),
   ),
 );
 
 f-div {
   @include base();
   display: flex;
+  position: relative;
 
   @each $gap, $value in $gaps {
     &[gap="#{$gap}"] {
@@ -56,6 +71,40 @@ f-div {
       &[clickable] {
         &:hover {
           background-color: map.get($value, "hover");
+        }
+      }
+      &[selected="background"] {
+        background-color: map.get($value, "selected");
+      }
+      &[selected="border"] {
+        background-color: var(--color-surface-default);
+        border: 1px solid map.get($value, "border") !important;
+      }
+      &[selected="notch-right"] {
+        &::after {
+          position: absolute;
+          right: 0;
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+          top: 4px;
+          bottom: 4px;
+          max-height: 48px;
+          border-left: 4px solid map.get($value, "border");
+          content: "";
+        }
+      }
+      &[selected="notch-left"] {
+        position: relative;
+        &::after {
+          border-right: 4px solid map.get($value, "border");
+          content: "";
+          position: absolute;
+          left: 0;
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+          top: 4px;
+          bottom: 4px;
+          max-height: 48px;
         }
       }
     }
@@ -235,5 +284,22 @@ f-div {
   }
   &[overflow="hidden"] {
     overflow: hidden;
+  }
+
+  &[sticky="top"] {
+    position: sticky;
+    top: 0px;
+  }
+  &[sticky="bottom"] {
+    position: sticky;
+    bottom: 0px;
+  }
+  &[sticky="left"] {
+    position: sticky;
+    left: 0px;
+  }
+  &[sticky="right"] {
+    position: sticky;
+    right: 0px;
   }
 }

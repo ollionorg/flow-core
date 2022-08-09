@@ -99,6 +99,16 @@ declare module 'vue' {
                     clickable?: boolean | undefined;
 
                     overflow?: 'wrap' | 'scroll' | 'hidden' | undefined;
+
+                    selected?:
+                        | 'none'
+                        | 'background'
+                        | 'border'
+                        | 'notch-right'
+                        | 'notch-left'
+                        | undefined;
+
+                    sticky?: 'none' | 'top' | 'bottom' | 'left' | 'right' | undefined;
                 };
             } & Vue
         >;

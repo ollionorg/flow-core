@@ -92,7 +92,7 @@ export class FDiv extends FElement {
     | "tertiary"
     | "success"
     | "warning"
-    | "danger";
+    | "danger" = "default";
 
   /**
    * @attribute Border property enables a border for f-div.  You can combine border properties to achieve a desired result.
@@ -168,6 +168,20 @@ export class FDiv extends FElement {
    */
   @property({ reflect: true, type: String })
   overflow?: "wrap" | "scroll" | "hidden" = "wrap";
+
+  /**
+   * @attribute Sets the f-div to a selected state. Select between border, background, or notch based on your use case.
+   */
+  @property({ reflect: true, type: String })
+  selected?: "none" | "background" | "border" | "notch-right" | "notch-left" =
+    "none";
+
+  /**
+   * @attribute Sticky property defines a f-div’s position based on the scroll position of the container
+   */
+  @property({ reflect: true, type: String })
+  sticky?: "none" | "top" | "bottom" | "left" | "right" = "none";
+
   applyBorder() {
     if (this.border) {
       const [borderWidth, borderStyle, borderColor, borderPosition] =

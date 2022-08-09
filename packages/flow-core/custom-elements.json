@@ -394,6 +394,259 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-div/f-div.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FDiv",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"row\" | \"column\" | undefined"
+              },
+              "default": "\"row\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "| \"subtle\"\n    | \"default\"\n    | \"secondary\"\n    | \"tertiary\"\n    | \"success\"\n    | \"warning\"\n    | \"danger\" | undefined"
+              },
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "border",
+              "type": {
+                "text": "FDivBorderProp | undefined"
+              },
+              "attribute": "border",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "padding",
+              "type": {
+                "text": "FDivPaddingProp | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "padding",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "| \"top-left\"\n    | \"top-center\"\n    | \"top-right\"\n    | \"left\"\n    | \"center\"\n    | \"right\"\n    | \"bottom-left\"\n    | \"bottom-center\"\n    | \"bottom-right\" | undefined"
+              },
+              "default": "\"top-left\"",
+              "attribute": "align",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "FDivWidthProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "attribute": "width",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "FDivHeightProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "attribute": "height",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "clickable",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "applyBorder"
+            },
+            {
+              "kind": "method",
+              "name": "applyPadding"
+            },
+            {
+              "kind": "method",
+              "name": "applySize"
+            },
+            {
+              "kind": "method",
+              "name": "createRenderRoot",
+              "inheritedFrom": {
+                "name": "FElement",
+                "module": "src/mixins/components/f-element/f-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"row\" | \"column\" | undefined"
+              },
+              "default": "\"row\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "| \"subtle\"\n    | \"default\"\n    | \"secondary\"\n    | \"tertiary\"\n    | \"success\"\n    | \"warning\"\n    | \"danger\" | undefined"
+              },
+              "fieldName": "state"
+            },
+            {
+              "name": "border",
+              "type": {
+                "text": "FDivBorderProp | undefined"
+              },
+              "fieldName": "border"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "gap"
+            },
+            {
+              "name": "padding",
+              "type": {
+                "text": "FDivPaddingProp | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "padding"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "| \"top-left\"\n    | \"top-center\"\n    | \"top-right\"\n    | \"left\"\n    | \"center\"\n    | \"right\"\n    | \"bottom-left\"\n    | \"bottom-center\"\n    | \"bottom-right\" | undefined"
+              },
+              "default": "\"top-left\"",
+              "fieldName": "align"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "FDivWidthProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "FDivHeightProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "fieldName": "height"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "clickable"
+            }
+          ],
+          "superclass": {
+            "name": "FElement",
+            "module": "/src/mixins/components/f-element/f-element"
+          },
+          "tagName": "f-div",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FDiv",
+          "declaration": {
+            "name": "FDiv",
+            "module": "src/components/f-div/f-div.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-div",
+          "declaration": {
+            "name": "FDiv",
+            "module": "src/components/f-div/f-div.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-counter/f-counter.ts",
       "declarations": [
         {
@@ -535,241 +788,6 @@
           "declaration": {
             "name": "FCounter",
             "module": "src/components/f-counter/f-counter.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-div/f-div.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FDiv",
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "\"row\" | \"column\" | undefined"
-              },
-              "default": "\"row\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "| \"subtle\"\n    | \"default\"\n    | \"secondary\"\n    | \"tertiary\"\n    | \"success\"\n    | \"warning\"\n    | \"danger\" | undefined"
-              },
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "border",
-              "type": {
-                "text": "FDivBorderProp | undefined"
-              },
-              "attribute": "border",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "gap",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "padding",
-              "type": {
-                "text": "FDivPaddingProp | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "padding",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "width",
-              "type": {
-                "text": "FDivWidthProp | undefined"
-              },
-              "default": "\"fill-container\"",
-              "attribute": "width",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "height",
-              "type": {
-                "text": "FDivHeightProp | undefined"
-              },
-              "default": "\"fill-container\"",
-              "attribute": "height",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "loading",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "clickable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "clickable",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "applyBorder"
-            },
-            {
-              "kind": "method",
-              "name": "applyPadding"
-            },
-            {
-              "kind": "method",
-              "name": "applySize"
-            },
-            {
-              "kind": "method",
-              "name": "createRenderRoot",
-              "inheritedFrom": {
-                "name": "FElement",
-                "module": "src/mixins/components/f-element/f-element.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "\"row\" | \"column\" | undefined"
-              },
-              "default": "\"row\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "| \"subtle\"\n    | \"default\"\n    | \"secondary\"\n    | \"tertiary\"\n    | \"success\"\n    | \"warning\"\n    | \"danger\" | undefined"
-              },
-              "fieldName": "state"
-            },
-            {
-              "name": "border",
-              "type": {
-                "text": "FDivBorderProp | undefined"
-              },
-              "fieldName": "border"
-            },
-            {
-              "name": "gap",
-              "type": {
-                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "gap"
-            },
-            {
-              "name": "padding",
-              "type": {
-                "text": "FDivPaddingProp | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "padding"
-            },
-            {
-              "name": "width",
-              "type": {
-                "text": "FDivWidthProp | undefined"
-              },
-              "default": "\"fill-container\"",
-              "fieldName": "width"
-            },
-            {
-              "name": "height",
-              "type": {
-                "text": "FDivHeightProp | undefined"
-              },
-              "default": "\"fill-container\"",
-              "fieldName": "height"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "loading"
-            },
-            {
-              "name": "clickable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "clickable"
-            }
-          ],
-          "superclass": {
-            "name": "FElement",
-            "module": "/src/mixins/components/f-element/f-element"
-          },
-          "tagName": "f-div",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FDiv",
-          "declaration": {
-            "name": "FDiv",
-            "module": "src/components/f-div/f-div.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-div",
-          "declaration": {
-            "name": "FDiv",
-            "module": "src/components/f-div/f-div.ts"
           }
         }
       ]

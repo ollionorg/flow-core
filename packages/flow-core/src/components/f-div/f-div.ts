@@ -120,6 +120,21 @@ export class FDiv extends FElement {
   padding?: FDivPaddingProp = "none";
 
   /**
+   * @attribute Align property places the elements of a layout in particular positions with respect to the f-div.
+   */
+  @property({ type: String, reflect: true })
+  align?:
+    | "top-left"
+    | "top-center"
+    | "top-right"
+    | "left"
+    | "center"
+    | "right"
+    | "bottom-left"
+    | "bottom-center"
+    | "bottom-right" = "top-left";
+
+  /**
    * @attribute width of `f-div`
    */
   @property({ type: String, reflect: true })

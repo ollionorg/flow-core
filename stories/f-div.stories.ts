@@ -46,6 +46,10 @@ export default {
       options: ["none", "top", "bottom", "left", "right"],
       control: { type: "select" },
     },
+    loading: {
+      options: ["skeleton", "loader"],
+      control: { type: "select" },
+    },
   },
 } as Meta;
 
@@ -272,4 +276,32 @@ export const sticky = STTemplate.bind({});
 sticky.args = {
   variant: "column",
   sticky: "none",
+};
+
+const LTemplate: Story<Record<string, string>> = (
+  args: Record<string, string>
+) => {
+  return html`
+    <f-div width="100%" height="100%" gap="small" overflow="scroll">
+      <f-div
+        gap="small"
+        height="hug-content"
+        .loading=${args.loading}
+        padding="small"
+        variant="column"
+      >
+        <f-button label="loading" icon-left="i-plus"></f-button>
+        <f-div gap="small" padding="small">
+          <f-button label="loading" icon-left="i-plus"></f-button>
+        </f-div>
+        <f-div gap="small" padding="large"> Test text</f-div>
+      </f-div>
+    </f-div>
+  `;
+};
+
+export const loading = LTemplate.bind({});
+
+sticky.args = {
+  loading: "skeleton",
 };

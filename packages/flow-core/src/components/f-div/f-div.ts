@@ -2,6 +2,8 @@ import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { FElement } from "./../../mixins/components/f-element/f-element";
 import eleStyle from "./f-div.scss";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import loader from "../../mixins/svg/loader";
 
 export type FDivBorderWidth = "small" | "medium" | "large";
 export type FDivBorderStyle = "solid" | "dashed" | "dotted";
@@ -154,8 +156,8 @@ export class FDiv extends FElement {
   /**
    * @attribute display loader
    */
-  @property({ reflect: true, type: Boolean })
-  loading?: boolean = false;
+  @property({ reflect: true, type: String })
+  loading?: "skeleton" | "loader";
 
   /**
    * @attribute is clickable
@@ -235,7 +237,7 @@ export class FDiv extends FElement {
     this.applyBorder();
     this.applyPadding();
     this.applySize();
-    return html`<slot></slot>`;
+    return html`${this.loading === "loader" ? html`${unsafeSVG(loader)}` : ""}`;
   }
 }
 

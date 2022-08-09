@@ -94,7 +94,7 @@ declare module 'vue' {
 
                     disabled?: boolean | undefined;
 
-                    loading?: boolean | undefined;
+                    loading?: 'skeleton' | 'loader' | undefined;
 
                     clickable?: boolean | undefined;
 

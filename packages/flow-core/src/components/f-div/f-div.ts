@@ -9,6 +9,18 @@ export type FDivBorderColor = "default" | "secondary" | "subtle";
 export type FDivBorderPosition = "bottom" | "top" | "left" | "right" | "around";
 export type FDivPadding = "large" | "medium" | "small" | "x-small" | "none";
 
+export type FDivBorderProp =
+  | FDivBorderWidth
+  | `${FDivBorderWidth} ${FDivBorderStyle}`
+  | `${FDivBorderWidth} ${FDivBorderStyle} ${FDivBorderColor}`
+  | `${FDivBorderWidth} ${FDivBorderStyle} ${FDivBorderColor} ${FDivBorderPosition}`;
+
+export type FDivPaddingProp =
+  | FDivPadding
+  | `${FDivPadding} ${FDivPadding}`
+  | `${FDivPadding} ${FDivPadding}`
+  | `${FDivPadding} ${FDivPadding} ${FDivPadding} ${FDivPadding}`;
+
 const BORDER_WIDTH_VALUES = {
   small: "1px",
   medium: "2px",
@@ -61,11 +73,7 @@ export class FDiv extends FElement {
     type: String,
     reflect: true,
   })
-  border?:
-    | FDivBorderWidth
-    | `${FDivBorderWidth} ${FDivBorderStyle}`
-    | `${FDivBorderWidth} ${FDivBorderStyle} ${FDivBorderColor}`
-    | `${FDivBorderWidth} ${FDivBorderStyle} ${FDivBorderColor} ${FDivBorderPosition}`;
+  border?: FDivBorderProp;
 
   /**
    * @attribute Gap defines the space between the items of a f-div
@@ -81,11 +89,7 @@ export class FDiv extends FElement {
     type: String,
     reflect: true,
   })
-  padding?:
-    | FDivPadding
-    | `${FDivPadding} ${FDivPadding}`
-    | `${FDivPadding} ${FDivPadding}`
-    | `${FDivPadding} ${FDivPadding} ${FDivPadding} ${FDivPadding}` = "none";
+  padding?: FDivPaddingProp = "none";
 
   applyBorder() {
     if (this.border) {
@@ -135,7 +139,7 @@ export class FDiv extends FElement {
  * ts to know and define element
  */
 declare global {
-  interface HTMLElementTagNameMap {
+  export interface HTMLElementTagNameMap {
     "f-div": FDiv;
   }
 }

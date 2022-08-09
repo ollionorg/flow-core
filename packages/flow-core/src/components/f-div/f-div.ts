@@ -163,6 +163,11 @@ export class FDiv extends FElement {
   @property({ reflect: true, type: Boolean })
   clickable?: boolean = false;
 
+  /**
+   * @attribute Overflow property defines the behavior of the overflowing elements inside a f-div
+   */
+  @property({ reflect: true, type: String })
+  overflow?: "wrap" | "scroll" | "hidden" = "wrap";
   applyBorder() {
     if (this.border) {
       const [borderWidth, borderStyle, borderColor, borderPosition] =

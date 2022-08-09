@@ -22,6 +22,10 @@ export default {
       ],
       control: { type: "select" },
     },
+    overflow: {
+      options: ["wrap", "scroll", "hidden"],
+      control: { type: "select" },
+    },
   },
 } as Meta;
 
@@ -31,7 +35,7 @@ const Template: Story<unknown> = () => {
       <f-div
         border="small solid default"
         variant="column"
-        gap="auto"
+        gap="small"
         padding="small"
       >
         <f-button label="Add" icon-left="i-plus"></f-button>
@@ -65,6 +69,7 @@ const Template: Story<unknown> = () => {
         variant="row"
         gap="auto"
         height="hug-content"
+        overflow="hidden"
       >
         <f-button
           label="height hug content"
@@ -134,4 +139,33 @@ export const align = ATemplate.bind({});
 align.args = {
   variant: "row",
   align: "top-left",
+};
+
+const OTemplate: Story<Record<string, string>> = (
+  args: Record<string, string>
+) => {
+  return html`
+    <f-div width="100%" height="100%" variant="column" gap="small">
+      <f-div
+        border="small solid default"
+        gap="small"
+        padding="small"
+        .overflow=${args.overflow}
+      >
+        ${[...Array(1000).keys()].map(
+          () =>
+            html`<f-button
+              .label=${args.overflow}
+              icon-left="i-plus"
+            ></f-button>`
+        )}
+      </f-div>
+    </f-div>
+  `;
+};
+
+export const overflow = OTemplate.bind({});
+
+overflow.args = {
+  overflow: "wrap",
 };

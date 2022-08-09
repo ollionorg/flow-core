@@ -31,6 +31,22 @@ declare module 'vue' {
             } & Vue
         >;
 
+        'f-counter': VueConstructor<
+            {
+                $props: {
+                    label: string;
+
+                    size?: 'large' | 'medium' | 'small' | undefined;
+
+                    state?: 'primary' | 'success' | 'warning' | 'danger' | 'neutral' | undefined;
+
+                    loading?: boolean | undefined;
+
+                    disabled?: boolean | undefined;
+                };
+            } & Vue
+        >;
+
         'f-div': VueConstructor<
             {
                 $props: {
@@ -81,22 +97,8 @@ declare module 'vue' {
                     loading?: boolean | undefined;
 
                     clickable?: boolean | undefined;
-                };
-            } & Vue
-        >;
 
-        'f-counter': VueConstructor<
-            {
-                $props: {
-                    label: string;
-
-                    size?: 'large' | 'medium' | 'small' | undefined;
-
-                    state?: 'primary' | 'success' | 'warning' | 'danger' | 'neutral' | undefined;
-
-                    loading?: boolean | undefined;
-
-                    disabled?: boolean | undefined;
+                    overflow?: 'wrap' | 'scroll' | 'hidden' | undefined;
                 };
             } & Vue
         >;

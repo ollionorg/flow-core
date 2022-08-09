@@ -61,10 +61,6 @@ f-div {
     }
   }
 
-  &[gap="auto"] {
-    justify-content: space-between;
-  }
-
   &[disabled] {
     @include disabled();
   }
@@ -84,8 +80,11 @@ f-div {
 
   &[variant="column"] {
     flex-direction: column;
-    > [height="fill-container"] {
+    > f-div[height="fill-container"] {
       flex: 1 0 auto;
+    }
+    > f-div[width="fill-container"] {
+      width: 100%;
     }
   }
 
@@ -94,55 +93,91 @@ f-div {
     > [width="fill-container"] {
       flex: 1 0 auto;
     }
+    > f-div[height="fill-container"] {
+      height: 100%;
+    }
   }
 
   &[variant="row"] {
     &[align="top-left"] {
       align-items: flex-start;
       justify-content: flex-start;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
     &[align="top-center"] {
       align-items: flex-start;
       justify-content: center;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
     &[align="top-right"] {
       align-items: flex-start;
       justify-content: flex-end;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
     &[align="left"] {
       align-items: center;
       justify-content: flex-start;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
     &[align="center"] {
       align-items: center;
       justify-content: center;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
     &[align="right"] {
       align-items: center;
       justify-content: flex-end;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
     &[align="bottom-left"] {
       align-items: flex-end;
       justify-content: flex-start;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
     &[align="bottom-center"] {
       align-items: flex-end;
       justify-content: center;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
     &[align="bottom-right"] {
       align-items: flex-end;
       justify-content: flex-end;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
   }
 
   &[variant="column"] {
     &[align="top-left"] {
-      align-content: flex-start;
+      align-items: flex-start;
       justify-content: flex-start;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
     &[align="top-center"] {
       align-items: center;
       justify-content: flex-start;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
     &[align="top-right"] {
       align-items: flex-end;
@@ -151,26 +186,54 @@ f-div {
     &[align="left"] {
       align-items: flex-start;
       justify-content: center;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
     &[align="center"] {
       align-items: center;
       justify-content: center;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
     &[align="right"] {
       align-items: flex-end;
       justify-content: center;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
     &[align="bottom-left"] {
       align-items: flex-start;
       justify-content: flex-end;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
     &[align="bottom-center"] {
       align-items: center;
       justify-content: flex-end;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
     &[align="bottom-right"] {
       align-items: flex-end;
       justify-content: flex-end;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
     }
+  }
+  &[overflow="wrap"] {
+    flex-wrap: wrap;
+    overflow-y: auto;
+  }
+  &[overflow="scroll"] {
+    overflow: auto;
+  }
+  &[overflow="hidden"] {
+    overflow: hidden;
   }
 }

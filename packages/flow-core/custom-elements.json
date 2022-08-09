@@ -560,11 +560,11 @@
             },
             {
               "kind": "field",
-              "name": "fill",
+              "name": "state",
               "type": {
-                "text": "\"subtle\" | \"default\" | \"secondary\" | \"tertiary\" | undefined"
+                "text": "| \"subtle\"\n    | \"default\"\n    | \"secondary\"\n    | \"tertiary\"\n    | \"success\"\n    | \"warning\"\n    | \"danger\" | undefined"
               },
-              "attribute": "fill",
+              "attribute": "state",
               "reflects": true
             },
             {
@@ -597,12 +597,66 @@
               "reflects": true
             },
             {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "FDivWidthProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "attribute": "width",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "FDivHeightProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "attribute": "height",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "clickable",
+              "reflects": true
+            },
+            {
               "kind": "method",
               "name": "applyBorder"
             },
             {
               "kind": "method",
               "name": "applyPadding"
+            },
+            {
+              "kind": "method",
+              "name": "applySize"
             },
             {
               "kind": "method",
@@ -623,11 +677,11 @@
               "fieldName": "variant"
             },
             {
-              "name": "fill",
+              "name": "state",
               "type": {
-                "text": "\"subtle\" | \"default\" | \"secondary\" | \"tertiary\" | undefined"
+                "text": "| \"subtle\"\n    | \"default\"\n    | \"secondary\"\n    | \"tertiary\"\n    | \"success\"\n    | \"warning\"\n    | \"danger\" | undefined"
               },
-              "fieldName": "fill"
+              "fieldName": "state"
             },
             {
               "name": "border",
@@ -651,6 +705,46 @@
               },
               "default": "\"none\"",
               "fieldName": "padding"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "FDivWidthProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "FDivHeightProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "fieldName": "height"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "clickable"
             }
           ],
           "superclass": {

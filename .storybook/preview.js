@@ -43,9 +43,16 @@ export const decorators = [
         .sb-show-main.sb-main-padded {
           background-color: var(--color-surface-default);
         }
+        #root,
+        #root-inner {
+          height: 100%;
+        }
+        body {
+          overflow: auto;
+        }
       </style>
       <div
-        style="background-color:var(--color-surface-default);color:var(--color-text-default);font-family:var(--flow-font);"
+        style="background-color:var(--color-surface-default);color:var(--color-text-default);font-family:var(--flow-font);height:inherit;"
       >
         ${story()}
       </div>

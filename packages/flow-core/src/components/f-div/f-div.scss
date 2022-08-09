@@ -1,7 +1,98 @@
+@use "sass:map";
 @import "./../../mixins/scss/mixins";
+
+$gaps: (
+  "none": 0px,
+  "x-large": 32px,
+  "large": 24px,
+  "medium": 16px,
+  "small": 12px,
+  "x-small": 8px,
+);
+
+$states: (
+  "subtle": (
+    "background": var(--color-surface-subtle),
+    "hover": var(--color-surface-subtle-hover),
+  ),
+  "default": (
+    "background": var(--color-surface-default),
+    "hover": var(--color-surface-default-hover),
+  ),
+  "secondary": (
+    "background": var(--color-surface-secondary),
+    "hover": var(--color-surface-secondary-hover),
+  ),
+  "tertiary": (
+    "background": var(--color-surface-tertiary),
+    "hover": var(--color-surface-tertiary-hover),
+  ),
+  "success": (
+    "background": var(--color-success-surface),
+    "hover": var(--color-success-surface-hover),
+  ),
+  "warning": (
+    "background": var(--color-warning-surface),
+    "hover": var(--color-warning-surface-hover),
+  ),
+  "danger": (
+    "background": var(--color-danger-surface),
+    "hover": var(--color-danger-surface-hover),
+  ),
+);
 
 f-div {
   @include base();
   display: flex;
-  flex: 1 0 auto;
+
+  @each $gap, $value in $gaps {
+    &[gap="#{$gap}"] {
+      gap: $value;
+    }
+  }
+  @each $state, $value in $states {
+    &[state="#{$state}"] {
+      background-color: map.get($value, "background");
+      &[clickable] {
+        &:hover {
+          background-color: map.get($value, "hover");
+        }
+      }
+    }
+  }
+
+  &[gap="auto"] {
+    justify-content: space-between;
+  }
+
+  &[disabled] {
+    @include disabled();
+  }
+  &[clickable] {
+    cursor: pointer;
+  }
+
+  &[width="hug-content"] {
+    flex: 0 0 auto;
+    display: inline-flex;
+    width: fit-content;
+  }
+
+  &[height="hug-content"] {
+    height: fit-content;
+  }
+
+  &[variant="column"] {
+    flex-direction: column;
+    > [height="fill-container"] {
+      flex: 1 0 auto;
+    }
+  }
+
+  &[variant="row"] {
+    flex-direction: row;
+    > [width="fill-container"] {
+      flex: 1 0 auto;
+    }
+  }
 }

@@ -21,6 +21,20 @@ export type FDivPaddingProp =
   | `${FDivPadding} ${FDivPadding}`
   | `${FDivPadding} ${FDivPadding} ${FDivPadding} ${FDivPadding}`;
 
+export type FDivWidthProp =
+  | "fill-container"
+  | "hug-content"
+  | `${number}px`
+  | `${number}%`
+  | `${number}vw`;
+
+export type FDivHeightProp =
+  | "fill-container"
+  | "hug-content"
+  | `${number}px`
+  | `${number}%`
+  | `${number}vh`;
+
 const BORDER_WIDTH_VALUES = {
   small: "1px",
   medium: "2px",
@@ -45,8 +59,15 @@ const DEFAULT_BORDER = {
   borderWidth: "small",
   borderStyle: "solid",
   borderColor: "default",
-  borderPosition: "bottom",
+  borderPosition: "around",
 };
+const BORDER_POSITION_CSS = {
+  bottom: "border-bottom",
+  top: "border-top",
+  left: "border-left",
+  right: "border-right",
+  around: "border",
+} as Record<string, string>;
 @customElement("f-div")
 export class FDiv extends FElement {
   /**
@@ -61,10 +82,17 @@ export class FDiv extends FElement {
   variant?: "row" | "column" = "row";
 
   /**
-   * @attribute Fill property defines the background color of a f-div. It can take only surface colors defined in the library.
+   * @attribute state property defines the background color of a f-div. It can take only surface colors defined in the library.
    */
   @property({ type: String, reflect: true })
-  fill?: "subtle" | "default" | "secondary" | "tertiary";
+  state?:
+    | "subtle"
+    | "default"
+    | "secondary"
+    | "tertiary"
+    | "success"
+    | "warning"
+    | "danger";
 
   /**
    * @attribute Border property enables a border for f-div.  You can combine border properties to achieve a desired result.
@@ -91,6 +119,35 @@ export class FDiv extends FElement {
   })
   padding?: FDivPaddingProp = "none";
 
+  /**
+   * @attribute width of `f-div`
+   */
+  @property({ type: String, reflect: true })
+  width?: FDivWidthProp = "fill-container";
+  /**
+   * @attribute height of `f-div`
+   */
+  @property({ type: String, reflect: true })
+  height?: FDivHeightProp = "fill-container";
+
+  /**
+   * @attribute The disabled attribute can be set to keep a user from clicking on the f-icon.
+   */
+  @property({ reflect: true, type: Boolean })
+  disabled?: boolean = false;
+
+  /**
+   * @attribute display loader
+   */
+  @property({ reflect: true, type: Boolean })
+  loading?: boolean = false;
+
+  /**
+   * @attribute is clickable
+   */
+  @property({ reflect: true, type: Boolean })
+  clickable?: boolean = false;
+
   applyBorder() {
     if (this.border) {
       const [borderWidth, borderStyle, borderColor, borderPosition] =
@@ -108,7 +165,10 @@ export class FDiv extends FElement {
         position: borderPosition || DEFAULT_BORDER.borderPosition,
       };
 
-      this.style.border = `${meta.width} ${meta.style} ${meta.color}`;
+      this.style.setProperty(
+        BORDER_POSITION_CSS[meta.position],
+        `${meta.width} ${meta.style} ${meta.color}`
+      );
     }
   }
 
@@ -128,9 +188,19 @@ export class FDiv extends FElement {
       this.style.padding = paddingCSS;
     }
   }
+  applySize() {
+    const fixedValues = ["fill-container", "hug-content"];
+    if (this.width && !fixedValues.includes(this.width)) {
+      this.style.width = this.width;
+    }
+    if (this.height && !fixedValues.includes(this.height)) {
+      this.style.height = this.height;
+    }
+  }
   render() {
     this.applyBorder();
     this.applyPadding();
+    this.applySize();
     return html`<slot></slot>`;
   }
 }

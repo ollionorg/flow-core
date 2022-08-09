@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { VueConstructor } from 'vue';
-import type { FDivBorderProp, FDivPaddingProp } from './src';
+import type { FDivBorderProp, FDivPaddingProp, FDivWidthProp, FDivHeightProp } from './src';
 declare module 'vue' {
     export interface GlobalComponents {
         'f-button': VueConstructor<
@@ -52,7 +52,15 @@ declare module 'vue' {
                 $props: {
                     variant?: 'row' | 'column' | undefined;
 
-                    fill?: 'subtle' | 'default' | 'secondary' | 'tertiary' | undefined;
+                    state?:
+                        | 'subtle'
+                        | 'default'
+                        | 'secondary'
+                        | 'tertiary'
+                        | 'success'
+                        | 'warning'
+                        | 'danger'
+                        | undefined;
 
                     border?: FDivBorderProp | undefined;
 
@@ -67,6 +75,16 @@ declare module 'vue' {
                         | undefined;
 
                     padding?: FDivPaddingProp | undefined;
+
+                    width?: FDivWidthProp | undefined;
+
+                    height?: FDivHeightProp | undefined;
+
+                    disabled?: boolean | undefined;
+
+                    loading?: boolean | undefined;
+
+                    clickable?: boolean | undefined;
                 };
             } & Vue
         >;

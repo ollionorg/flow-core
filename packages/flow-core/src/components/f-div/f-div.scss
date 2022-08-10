@@ -308,43 +308,7 @@ f-div {
   }
 
   &[loading="skeleton"] {
-    @keyframes shimmer {
-      0% {
-        background-position: -1500pxx 0;
-      }
-      100% {
-        background-position: 1500px 0;
-      }
-    }
-    > * {
-      position: relative;
-      overflow: hidden;
-      border: none !important;
-      background: var(--color-surface-default) !important;
-      &::before {
-        content: "";
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
-        animation-duration: 1s;
-        animation-fill-mode: forwards;
-        animation-iteration-count: infinite;
-        animation-name: shimmer;
-        animation-timing-function: linear;
-        background-image: linear-gradient(
-          to right,
-          var(--color-surface-default-hover) 0%,
-          var(--color-surface-secondary) 20%,
-          var(--color-surface-subtle) 50%,
-          var(--color-surface-secondary) 60%,
-          var(--color-surface-default-hover) 100%
-        );
-        background-repeat: repeat-x;
-        background-size: 1500px 104px;
-      }
-    }
+    @include shimmer-child();
   }
   &[loading="loader"] {
     @include rotate("svg");

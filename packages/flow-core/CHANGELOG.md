@@ -1,6 +1,9 @@
 
 # Change Log
 
+## [0.1.0] - 2022-08-10
+### Features
+- `f-text` element added
 
 ## [0.0.9] - 2022-08-09
 ### Features

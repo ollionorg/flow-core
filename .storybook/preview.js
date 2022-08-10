@@ -29,10 +29,12 @@ export const parameters = {
 export const decorators = [
   (story) => {
     window.onmessage = function (e) {
-      const message = JSON.parse(e.data);
+      if (e.data && typeof e.data === "string") {
+        const message = JSON.parse(e.data);
 
-      if (message.event.type === "storybook-addon-themes/change") {
-        ConfigUtil.setConfig({ theme: message.event.args[0] });
+        if (message.event.type === "storybook-addon-themes/change") {
+          ConfigUtil.setConfig({ theme: message.event.args[0] });
+        }
       }
     };
     ConfigUtil.setConfig({ iconPack: IconPack });
@@ -41,9 +43,16 @@ export const decorators = [
         .sb-show-main.sb-main-padded {
           background-color: var(--color-surface-default);
         }
+        #root,
+        #root-inner {
+          height: 100%;
+        }
+        body {
+          overflow: auto;
+        }
       </style>
       <div
-        style="background-color:var(--color-surface-default);color:var(--color-text-default);font-family:var(--flow-font);"
+        style="background-color:var(--color-surface-default);color:var(--color-text-default);font-family:var(--flow-font);height:inherit;"
       >
         ${story()}
       </div>

@@ -1,5 +1,357 @@
+@use "sass:map";
 @import "./../../mixins/scss/mixins";
+
+$gaps: (
+  "none": 0px,
+  "x-large": 32px,
+  "large": 24px,
+  "medium": 16px,
+  "small": 12px,
+  "x-small": 8px,
+);
+
+$states: (
+  "subtle": (
+    "background": var(--color-surface-subtle),
+    "hover": var(--color-surface-subtle-hover),
+    "selected": var(--color-surface-subtle-selected),
+    "border": var(--color-primary-default),
+  ),
+  "default": (
+    "background": var(--color-surface-default),
+    "hover": var(--color-surface-default-hover),
+    "selected": var(--color-surface-default-selected),
+    "border": var(--color-primary-default),
+  ),
+  "secondary": (
+    "background": var(--color-surface-secondary),
+    "hover": var(--color-surface-secondary-hover),
+    "selected": var(--color-surface-secondary-selected),
+    "border": var(--color-primary-default),
+  ),
+  "tertiary": (
+    "background": var(--color-surface-tertiary),
+    "hover": var(--color-surface-tertiary-hover),
+    "selected": var(--color-surface-tertiary-selected),
+    "border": var(--color-primary-default),
+  ),
+  "success": (
+    "background": var(--color-success-surface),
+    "hover": var(--color-success-surface-hover),
+    "selected": var(--color-success-surface-selected),
+    "border": var(--color-success-default),
+  ),
+  "warning": (
+    "background": var(--color-warning-surface),
+    "hover": var(--color-warning-surface-hover),
+    "selected": var(--color-warning-surface-selected),
+    "border": var(--color-warning-default),
+  ),
+  "danger": (
+    "background": var(--color-danger-surface),
+    "hover": var(--color-danger-surface-hover),
+    "selected": var(--color-danger-surface-selected),
+    "border": var(--color-danger-default),
+  ),
+);
 
 f-div {
   @include base();
+  display: flex;
+  position: relative;
+
+  @each $gap, $value in $gaps {
+    &[gap="#{$gap}"] {
+      gap: $value;
+    }
+  }
+  @each $state, $value in $states {
+    &[state="#{$state}"] {
+      background-color: map.get($value, "background");
+      &[clickable] {
+        &:hover {
+          background-color: map.get($value, "hover");
+        }
+      }
+      &[selected="background"] {
+        background-color: map.get($value, "selected");
+      }
+      &[selected="border"] {
+        background-color: var(--color-surface-default);
+        border: 1px solid map.get($value, "border") !important;
+      }
+      &[selected="notch-right"] {
+        &::after {
+          position: absolute;
+          right: 0;
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+          top: 4px;
+          bottom: 4px;
+          max-height: 48px;
+          border-left: 4px solid map.get($value, "border");
+          content: "";
+        }
+      }
+      &[selected="notch-left"] {
+        position: relative;
+        &::after {
+          border-right: 4px solid map.get($value, "border");
+          content: "";
+          position: absolute;
+          left: 0;
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+          top: 4px;
+          bottom: 4px;
+          max-height: 48px;
+        }
+      }
+    }
+  }
+
+  &[disabled] {
+    @include disabled();
+  }
+  &[clickable] {
+    cursor: pointer;
+  }
+
+  &[width="hug-content"] {
+    flex: 0 0 auto;
+    display: inline-flex;
+    width: fit-content;
+  }
+
+  &[height="hug-content"] {
+    height: fit-content;
+  }
+
+  &[variant="column"] {
+    flex-direction: column;
+    > f-div[height="fill-container"] {
+      flex: 1 0 auto;
+    }
+    > f-div[width="fill-container"] {
+      width: 100%;
+    }
+  }
+
+  &[variant="row"] {
+    flex-direction: row;
+    > [width="fill-container"] {
+      flex: 1 0 auto;
+    }
+    > f-div[height="fill-container"] {
+      height: 100%;
+    }
+  }
+
+  &[variant="row"] {
+    &[align="top-left"] {
+      align-items: flex-start;
+      justify-content: flex-start;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+    &[align="top-center"] {
+      align-items: flex-start;
+      justify-content: center;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+    &[align="top-right"] {
+      align-items: flex-start;
+      justify-content: flex-end;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+    &[align="left"] {
+      align-items: center;
+      justify-content: flex-start;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+    &[align="center"] {
+      align-items: center;
+      justify-content: center;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+    &[align="right"] {
+      align-items: center;
+      justify-content: flex-end;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+    &[align="bottom-left"] {
+      align-items: flex-end;
+      justify-content: flex-start;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+    &[align="bottom-center"] {
+      align-items: flex-end;
+      justify-content: center;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+    &[align="bottom-right"] {
+      align-items: flex-end;
+      justify-content: flex-end;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+  }
+
+  &[variant="column"] {
+    &[align="top-left"] {
+      align-items: flex-start;
+      justify-content: flex-start;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+    &[align="top-center"] {
+      align-items: center;
+      justify-content: flex-start;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+    &[align="top-right"] {
+      align-items: flex-end;
+      justify-content: flex-start;
+    }
+    &[align="left"] {
+      align-items: flex-start;
+      justify-content: center;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+    &[align="center"] {
+      align-items: center;
+      justify-content: center;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+    &[align="right"] {
+      align-items: flex-end;
+      justify-content: center;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+    &[align="bottom-left"] {
+      align-items: flex-start;
+      justify-content: flex-end;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+    &[align="bottom-center"] {
+      align-items: center;
+      justify-content: flex-end;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+    &[align="bottom-right"] {
+      align-items: flex-end;
+      justify-content: flex-end;
+      &[gap="auto"] {
+        justify-content: space-between;
+      }
+    }
+  }
+  &[overflow="wrap"] {
+    flex-wrap: wrap;
+    overflow-y: auto;
+  }
+  &[overflow="scroll"] {
+    overflow: auto;
+  }
+  &[overflow="hidden"] {
+    overflow: hidden;
+  }
+
+  &[sticky="top"] {
+    position: sticky;
+    top: 0px;
+  }
+  &[sticky="bottom"] {
+    position: sticky;
+    bottom: 0px;
+  }
+  &[sticky="left"] {
+    position: sticky;
+    left: 0px;
+  }
+  &[sticky="right"] {
+    position: sticky;
+    right: 0px;
+  }
+
+  &[loading="skeleton"] {
+    @keyframes shimmer {
+      0% {
+        background-position: -800px 0;
+      }
+      100% {
+        background-position: 800px 0;
+      }
+    }
+    > * {
+      position: relative;
+      overflow: hidden;
+      border: none !important;
+      background: var(--color-surface-default) !important;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        animation-duration: 1.5s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: shimmer;
+        animation-timing-function: linear;
+        background-image: linear-gradient(
+          to right,
+          var(--color-surface-default-hover) 0%,
+          var(--color-surface-secondary) 20%,
+          var(--color-surface-subtle) 50%,
+          var(--color-surface-secondary) 60%,
+          var(--color-surface-default-hover) 100%
+        );
+        background-repeat: repeat-x;
+        background-size: 800px 104px;
+      }
+    }
+  }
+  &[loading="loader"] {
+    @include rotate("svg");
+    pointer-events: none;
+    > *:not(svg) {
+      display: none;
+    }
+    > svg {
+      height: 24px;
+      width: 24px;
+      align-self: center;
+    }
+  }
 }

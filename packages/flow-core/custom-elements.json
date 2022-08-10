@@ -46,6 +46,14 @@
             "name": "*",
             "package": "\"./components/f-counter/f-counter\""
           }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-div/f-div\""
+          }
         }
       ]
     },
@@ -547,7 +555,148 @@
                 "text": "\"row\" | \"column\" | undefined"
               },
               "default": "\"row\"",
-              "attribute": "variant"
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "| \"subtle\"\n    | \"default\"\n    | \"secondary\"\n    | \"tertiary\"\n    | \"success\"\n    | \"warning\"\n    | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "border",
+              "type": {
+                "text": "FDivBorderProp | undefined"
+              },
+              "attribute": "border",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "padding",
+              "type": {
+                "text": "FDivPaddingProp | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "padding",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "| \"top-left\"\n    | \"top-center\"\n    | \"top-right\"\n    | \"left\"\n    | \"center\"\n    | \"right\"\n    | \"bottom-left\"\n    | \"bottom-center\"\n    | \"bottom-right\" | undefined"
+              },
+              "default": "\"top-left\"",
+              "attribute": "align",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "FDivWidthProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "attribute": "width",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "FDivHeightProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "attribute": "height",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "\"skeleton\" | \"loader\" | undefined"
+              },
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "clickable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "overflow",
+              "type": {
+                "text": "\"wrap\" | \"scroll\" | \"hidden\" | undefined"
+              },
+              "default": "\"wrap\"",
+              "attribute": "overflow",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "sticky",
+              "type": {
+                "text": "\"none\" | \"top\" | \"bottom\" | \"left\" | \"right\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "sticky",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "applyBorder"
+            },
+            {
+              "kind": "method",
+              "name": "applyPadding"
+            },
+            {
+              "kind": "method",
+              "name": "applySize"
             },
             {
               "kind": "method",
@@ -566,6 +715,108 @@
               },
               "default": "\"row\"",
               "fieldName": "variant"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "| \"subtle\"\n    | \"default\"\n    | \"secondary\"\n    | \"tertiary\"\n    | \"success\"\n    | \"warning\"\n    | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "border",
+              "type": {
+                "text": "FDivBorderProp | undefined"
+              },
+              "fieldName": "border"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "gap"
+            },
+            {
+              "name": "padding",
+              "type": {
+                "text": "FDivPaddingProp | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "padding"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "| \"top-left\"\n    | \"top-center\"\n    | \"top-right\"\n    | \"left\"\n    | \"center\"\n    | \"right\"\n    | \"bottom-left\"\n    | \"bottom-center\"\n    | \"bottom-right\" | undefined"
+              },
+              "default": "\"top-left\"",
+              "fieldName": "align"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "FDivWidthProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "FDivHeightProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "fieldName": "height"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "\"skeleton\" | \"loader\" | undefined"
+              },
+              "fieldName": "loading"
+            },
+            {
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "clickable"
+            },
+            {
+              "name": "overflow",
+              "type": {
+                "text": "\"wrap\" | \"scroll\" | \"hidden\" | undefined"
+              },
+              "default": "\"wrap\"",
+              "fieldName": "overflow"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "selected"
+            },
+            {
+              "name": "sticky",
+              "type": {
+                "text": "\"none\" | \"top\" | \"bottom\" | \"left\" | \"right\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "sticky"
             }
           ],
           "superclass": {

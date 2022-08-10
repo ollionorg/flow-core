@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { VueConstructor } from 'vue';
-
+import type { FDivBorderProp, FDivPaddingProp, FDivWidthProp, FDivHeightProp } from './src';
 declare module 'vue' {
     export interface GlobalComponents {
         'f-button': VueConstructor<
@@ -51,6 +51,64 @@ declare module 'vue' {
             {
                 $props: {
                     variant?: 'row' | 'column' | undefined;
+
+                    state?:
+                        | 'subtle'
+                        | 'default'
+                        | 'secondary'
+                        | 'tertiary'
+                        | 'success'
+                        | 'warning'
+                        | 'danger'
+                        | undefined;
+
+                    border?: FDivBorderProp | undefined;
+
+                    gap?:
+                        | 'auto'
+                        | 'x-large'
+                        | 'large'
+                        | 'medium'
+                        | 'small'
+                        | 'x-small'
+                        | 'none'
+                        | undefined;
+
+                    padding?: FDivPaddingProp | undefined;
+
+                    align?:
+                        | 'top-left'
+                        | 'top-center'
+                        | 'top-right'
+                        | 'left'
+                        | 'center'
+                        | 'right'
+                        | 'bottom-left'
+                        | 'bottom-center'
+                        | 'bottom-right'
+                        | undefined;
+
+                    width?: FDivWidthProp | undefined;
+
+                    height?: FDivHeightProp | undefined;
+
+                    disabled?: boolean | undefined;
+
+                    loading?: 'skeleton' | 'loader' | undefined;
+
+                    clickable?: boolean | undefined;
+
+                    overflow?: 'wrap' | 'scroll' | 'hidden' | undefined;
+
+                    selected?:
+                        | 'none'
+                        | 'background'
+                        | 'border'
+                        | 'notch-right'
+                        | 'notch-left'
+                        | undefined;
+
+                    sticky?: 'none' | 'top' | 'bottom' | 'left' | 'right' | undefined;
                 };
             } & Vue
         >;

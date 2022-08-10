@@ -26,6 +26,13 @@ function generateTokenScss(colorTokens) {
 	}
 	@return $hover-color;
   } 
+  @function getSelected($value) {
+    $hover-color: lighten($value, 30%);
+    @if lightness($value) > 50 {
+        $hover-color: darken($value, 30%);
+    }
+    @return $hover-color;
+}
   `;
   for (const [theme, tokens] of Object.entries(colorTokens)) {
     const tokenEntries = Object.entries(tokens);
@@ -38,6 +45,7 @@ function generateTokenScss(colorTokens) {
       scss += `$${variable} : ${value} ;\n`;
       scss += `--${variable} : #{$${variable}} ;\n`;
       scss += `--${variable}-hover : #{getHover($${variable})};\n`;
+      scss += `--${variable}-selected : #{getSelected($${variable})};\n`;
     }
     scss += `
 };\n`;

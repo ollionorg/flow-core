@@ -14,11 +14,6 @@ It serves as a shared language for all involved in design and product.
 * Flow dependencies - you can pick and choose what packages are specifically required for your build. 
 * Flow bundles (coming soon)
 
-## Resources
-* [Documentation](https://drive.google.com/drive/u/0/folders/1K4TLqpqrY0BNjQZ4fwZK_ZF-9M69Q4is)
-* Figma for designers
-* Releases
-
 ## Pre-requisites
 
 ##### 1) A Javascript front-end language
@@ -38,9 +33,13 @@ Flow's VScode plugin allows you to quickly access components' properties, its va
 
 ## Getting started - developers
 
-#### Step 1: Install the flow core + icons dependency
-* flow-core: ```yarn add @cldcvr/flow-core```
-* f-icon ```yarn add @cldcvr/flow-icon``` | [documentation](https://github.com/cldcvr/flow-icon)
+Copy paste the below snippets in **VueJS:** (src/main.ts or main.js), **Angular:** ?, **React:** ?
+
+Note: after adding the snippets; re-start your application.
+
+#### Step 1: Install the flow core + flow icons dependency
+1. **flow-core**  ```yarn add @cldcvr/flow-core```
+2. **f-icon** ```yarn add @cldcvr/flow-icon``` | [Github](https://github.com/cldcvr/flow-icon)
 
 
 #### Step 2: Import flow-core and it's dependecies into your project
@@ -50,14 +49,6 @@ import '@cldcvr/flow-core';
 import "@cldcvr/flow-core/dist/style.css";
 import "@cldcvr/flow-icon";
 ```
-
-Copy paste the above snippets in the respective files. 
-Note: after importing, re-run your application.
-
-1. **VueJS:** into the **main.ts** / **main.js**
-2. **Angular:** ?
-3. **React:** ?
-
 
 
 #### Step 3 (optional): Install dependencies 
@@ -73,7 +64,16 @@ Note: after importing, re-run your application.
 
 
 ## Components
-* Button [documentation](https://docs.google.com/document/d/1jwpo28kx61ybL3AOVzD2XaJ-aogZSThCTHtFWeqqMp8/edit?usp=sharing)
-* Icon [documentation](https://docs.google.com/document/d/1kLruoml15fZCo8XUoo48xsNDVgzaDe9freI6XeP7HOs/edit#heading=h.b81ibd1zmiy)
-* Tooltip [documentation](https://docs.google.com/document/d/15k1dfr1wU3xaOj7tuxIQQcGFM5jz1SuX2_x6-91PSZo/edit?usp=sharing)
-* Colors [documentation]()
+* Button - [documentation](https://docs.google.com/document/d/1jwpo28kx61ybL3AOVzD2XaJ-aogZSThCTHtFWeqqMp8/edit?usp=sharing) |  Storybook
+* Icon - [documentation](https://docs.google.com/document/d/1kLruoml15fZCo8XUoo48xsNDVgzaDe9freI6XeP7HOs/edit#heading=h.b81ibd1zmiy) |  Storybook
+* Layout (f-div) - [documentation](https://docs.google.com/document/d/1X2i89A34pOnnTarzDDbEfP_GdK7sUBshr4gvX5ZEcPY/edit?usp=sharing) |  Storybook
+* Icon-button - [documentation](https://docs.google.com/document/d/1kLruoml15fZCo8XUoo48xsNDVgzaDe9freI6XeP7HOs/edit#heading=h.b81ibd1zmiy) |  Storybook
+* Typography (f-text) - [documentation](https://docs.google.com/document/d/1gc2pg9aZd1NsYvTXjAREsJkVYUsuin0-BiRa9vX9QNY/edit?usp=sharing)  |  Storybook
+* Tooltip - [documentation](https://docs.google.com/document/d/15k1dfr1wU3xaOj7tuxIQQcGFM5jz1SuX2_x6-91PSZo/edit?usp=sharing) |  Storybook
+* Colors - [documentation](https://docs.google.com/document/d/18EwptEUyenxyj1kC_kfdYsDfETZnWQF8EqEHLdwRQv0/edit?usp=sharing) |  Storybook
+
+
+## Resources
+* [Documentation](https://drive.google.com/drive/u/0/folders/1K4TLqpqrY0BNjQZ4fwZK_ZF-9M69Q4is)
+* Figma for designers
+* Releases

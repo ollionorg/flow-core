@@ -140,6 +140,40 @@ declare module 'vue' {
             } & Vue
         >;
 
+        'f-text': VueConstructor<
+            {
+                $props: {
+                    variant?: 'heading' | 'para' | 'code' | undefined;
+
+                    size?: 'x-large' | 'large' | 'medium' | 'small' | 'x-small' | undefined;
+
+                    weight?: 'bold' | 'medium' | 'regular' | undefined;
+
+                    state?:
+                        | 'default'
+                        | 'secondary'
+                        | 'subtle'
+                        | 'primary'
+                        | 'success'
+                        | 'danger'
+                        | 'warning'
+                        | undefined;
+
+                    align?: 'left' | 'center' | 'right' | undefined;
+
+                    loading?: boolean | undefined;
+
+                    disabled?: boolean | undefined;
+
+                    editable?: boolean | undefined;
+
+                    ellipsis?: boolean | undefined;
+
+                    expandable?: boolean | undefined;
+                };
+            } & Vue
+        >;
+
         undefined: VueConstructor<
             {
                 $props: {};

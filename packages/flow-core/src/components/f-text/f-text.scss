@@ -1,0 +1,139 @@
+@import "./../../mixins/scss/mixins";
+
+$variants: (
+  "heading": (
+    "x-large": (
+      "fontSize": 24pt,
+      "lineHeight": 30pt,
+    ),
+    "large": (
+      "fontSize": 20pt,
+      "lineHeight": 26pt,
+    ),
+    "medium": (
+      "fontSize": 16pt,
+      "lineHeight": 20pt,
+    ),
+    "small": (
+      "fontSize": 14pt,
+      "lineHeight": 18pt,
+    ),
+    "x-small": (
+      "fontSize": 12pt,
+      "lineHeight": 16pt,
+    ),
+  ),
+  "para": (
+    "large": (
+      "fontSize": 16pt,
+      "lineHeight": 20pt,
+    ),
+    "medium": (
+      "fontSize": 14pt,
+      "lineHeight": 18pt,
+    ),
+    "small": (
+      "fontSize": 12pt,
+      "lineHeight": 16pt,
+    ),
+    "x-small": (
+      "fontSize": 10pt,
+      "lineHeight": 14pt,
+    ),
+  ),
+  "code": (
+    "large": (
+      "fontSize": 16pt,
+      "lineHeight": 26pt,
+    ),
+    "medium": (
+      "fontSize": 14pt,
+      "lineHeight": 22pt,
+    ),
+    "small": (
+      "fontSize": 12pt,
+      "lineHeight": 18pt,
+    ),
+    "x-small": (
+      "fontSize": 10pt,
+      "lineHeight": 16pt,
+    ),
+  ),
+);
+
+$weights: (
+  "bold": bold,
+  "medium": 500,
+  "regular": 400,
+);
+
+$states: (
+  "default": (
+    "default": var(--color-text-default),
+    "text": var(--color-text-default),
+  ),
+  "secondary": (
+    "default": var(--color-text-secondary),
+    "text": var(--color-text-secondary),
+  ),
+  "subtle": (
+    "default": var(--color-text-subtle),
+    "text": var(--color-text-subtle),
+  ),
+  "primary": (
+    "default": var(--color-primary-default),
+    "text": var(--color-primary-text),
+  ),
+  "success": (
+    "default": var(--color-success-default),
+    "text": var(--color-success-text),
+  ),
+  "danger": (
+    "default": var(--color-danger-default),
+    "text": var(--color-danger-text),
+  ),
+  "warning": (
+    "default": var(--color-warning-default),
+    "text": var(--color-warning-text),
+  ),
+);
+f-text {
+  @include base();
+  display: flex;
+  justify-content: flex-start;
+  flex: 1 0 auto;
+  align-self: stretch;
+
+  @each $variant, $valmap in $variants {
+    &[variant="#{$variant}"] {
+      @each $size, $sizemap in $valmap {
+        &[size="#{$size}"] {
+          font-size: map-get($sizemap, "fontSize");
+          line-height: map-get($sizemap, "lineHeight");
+        }
+      }
+    }
+  }
+
+  @each $weight, $value in $weights {
+    &[weight="#{$weight}"] {
+      font-weight: $value;
+    }
+  }
+
+  &[variant="code"] {
+    font-family: var(--flow-code-font);
+  }
+  @each $state, $color in $states {
+    &[state="#{$state}"] {
+      color: map-get($color, "default");
+    }
+  }
+}
+@each $state, $color in $states {
+  f-div[state="#{$state}"] {
+    > f-text[state="#{$state}"] {
+      color: map-get($color, "text");
+    }
+  }
+}

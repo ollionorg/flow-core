@@ -5,6 +5,7 @@ export default {
   title: "f-div",
   argTypes: {
     variant: {
+      defaultValue: "row",
       options: ["row", "column"],
       control: { type: "select" },
     },
@@ -47,7 +48,7 @@ export default {
       control: { type: "select" },
     },
     loading: {
-      options: ["skeleton", "loader"],
+      options: ["skeleton", "loader", undefined],
       control: { type: "select" },
     },
   },
@@ -56,11 +57,16 @@ export default {
 const Template: Story<unknown> = () => {
   return html`
     <f-div width="fill-container" height="100%" variant="column" gap="small">
+      <f-div height="48px" padding="small" border="small solid default bottom">
+        <f-icon source="i-plus" size="large"></f-icon>
+      </f-div>
       <f-div
         border="small solid default"
         variant="column"
         gap="small"
         padding="small"
+        width="fill-container"
+        height="fill-container"
       >
         <f-button label="Add" icon-left="i-plus"></f-button>
         <f-button
@@ -76,6 +82,7 @@ const Template: Story<unknown> = () => {
         border="small solid default"
         variant="row"
         gap="auto"
+        width="fill-container"
         height="hug-content"
         padding="small"
       >
@@ -92,6 +99,7 @@ const Template: Story<unknown> = () => {
         border="small solid default"
         variant="row"
         gap="auto"
+        width="fill-container"
         height="hug-content"
         overflow="hidden"
       >
@@ -143,6 +151,8 @@ const ATemplate: Story<Record<string, string>> = (
         border="small solid default"
         gap="small"
         padding="small"
+        width="fill-container"
+        height="fill-container"
         .variant=${args.variant}
         .align=${args.align}
       >
@@ -202,6 +212,7 @@ const STemplate: Story<Record<string, string>> = (
       <f-div
         width="fill-container"
         height="hug-content"
+        border="small solid subtle around"
         gap="small"
         padding="small"
         .state=${args.state}
@@ -233,7 +244,12 @@ const STTemplate: Story<Record<string, string>> = (
     >
       ${[...Array(3).keys()].map(
         () =>
-          html` <f-div border="small solid default" gap="small" padding="small"
+          html` <f-div
+            border="small solid default"
+            width="fill-container"
+            height="fill-container"
+            gap="small"
+            padding="small"
             ><f-button label="normal" icon-left="i-plus"></f-button>
           </f-div>`
       )}
@@ -242,19 +258,36 @@ const STTemplate: Story<Record<string, string>> = (
         gap="small"
         state="danger"
         padding="small"
+        width="fill-container"
+        height="fill-container"
         selected="notch-right"
         .sticky=${args.sticky}
         ><f-button label="normal" icon-left="i-plus"></f-button>
       </f-div>
-      <f-div gap="small" disabled padding="small"
+      <f-div
+        gap="small"
+        width="fill-container"
+        height="fill-container"
+        disabled
+        padding="small"
         ><f-button label="disabled" icon-left="i-plus"></f-button>
       </f-div>
-      <f-div gap="small" clickable padding="small"
+      <f-div
+        gap="small"
+        width="fill-container"
+        height="fill-container"
+        clickable
+        padding="small"
         ><f-button label="clickable" icon-left="i-plus"></f-button>
       </f-div>
       ${[...Array(100).keys()].map(
         () =>
-          html` <f-div border="small solid default" gap="small" padding="small"
+          html` <f-div
+            border="small solid default"
+            width="fill-container"
+            height="fill-container"
+            gap="small"
+            padding="small"
             ><f-button label="normal" icon-left="i-plus"></f-button>
           </f-div>`
       )}
@@ -264,6 +297,8 @@ const STTemplate: Story<Record<string, string>> = (
         state="danger"
         padding="small"
         selected="notch-right"
+        width="fill-container"
+        height="fill-container"
         .sticky=${args.sticky}
         ><f-button label="normal" icon-left="i-plus"></f-button>
       </f-div>
@@ -285,13 +320,15 @@ const LTemplate: Story<Record<string, string>> = (
     <f-div width="100%" height="100%" gap="small" overflow="scroll">
       <f-div
         gap="small"
-        height="hug-content"
         .loading=${args.loading}
         padding="small"
         variant="column"
+        width="fill-container"
+        height="hug-content"
+        border="small solid default around"
       >
         <f-button label="loading" icon-left="i-plus"></f-button>
-        <f-div gap="small" padding="small">
+        <f-div gap="small" padding="small" height="hug-content">
           <f-button label="loading" icon-left="i-plus"></f-button>
         </f-div>
         <f-div gap="small" padding="large"> Test text</f-div>

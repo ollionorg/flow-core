@@ -70,6 +70,10 @@ const BORDER_POSITION_CSS = {
   right: "border-right",
   around: "border",
 } as Record<string, string>;
+
+/**
+ * @summary F-div is used as a container for HTML elements.
+ */
 @customElement("f-div")
 export class FDiv extends FElement {
   /**

@@ -139,7 +139,7 @@ f-div {
 
   &[variant="row"] {
     flex-direction: row;
-    > [width="fill-container"] {
+    > f-div[width="fill-container"] {
       flex: 1 0 auto;
     }
     > f-div[height="fill-container"] {
@@ -289,27 +289,31 @@ f-div {
   &[sticky="top"] {
     position: sticky;
     top: 0px;
+    z-index: 1;
   }
   &[sticky="bottom"] {
     position: sticky;
     bottom: 0px;
+    z-index: 1;
   }
   &[sticky="left"] {
     position: sticky;
     left: 0px;
+    z-index: 1;
   }
   &[sticky="right"] {
     position: sticky;
     right: 0px;
+    z-index: 1;
   }
 
   &[loading="skeleton"] {
     @keyframes shimmer {
       0% {
-        background-position: -800px 0;
+        background-position: -1500pxx 0;
       }
       100% {
-        background-position: 800px 0;
+        background-position: 1500px 0;
       }
     }
     > * {
@@ -324,7 +328,7 @@ f-div {
         right: 0px;
         bottom: 0px;
         left: 0px;
-        animation-duration: 1.5s;
+        animation-duration: 1s;
         animation-fill-mode: forwards;
         animation-iteration-count: infinite;
         animation-name: shimmer;
@@ -338,7 +342,7 @@ f-div {
           var(--color-surface-default-hover) 100%
         );
         background-repeat: repeat-x;
-        background-size: 800px 104px;
+        background-size: 1500px 104px;
       }
     }
   }
@@ -346,12 +350,14 @@ f-div {
     @include rotate("svg");
     pointer-events: none;
     > *:not(svg) {
-      display: none;
+      visibility: hidden;
     }
     > svg {
       height: 24px;
       width: 24px;
-      align-self: center;
+      position: absolute;
+      top: calc(50% - 12px);
+      left: calc(50% - 12px);
     }
   }
 }

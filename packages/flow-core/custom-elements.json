@@ -54,6 +54,14 @@
             "name": "*",
             "package": "\"./components/f-div/f-div\""
           }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-text/f-text\""
+          }
         }
       ]
     },
@@ -823,6 +831,7 @@
             "name": "FElement",
             "module": "/src/mixins/components/f-element/f-element"
           },
+          "summary": "F-div is used as a container for HTML elements.",
           "tagName": "f-div",
           "customElement": true
         }
@@ -1022,14 +1031,226 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/mixins/svg/loader.ts",
-      "declarations": [],
+      "path": "src/components/f-text/f-text.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FText",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"heading\" | \"para\" | \"code\" | undefined"
+              },
+              "default": "\"para\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "weight",
+              "type": {
+                "text": "\"bold\" | \"medium\" | \"regular\" | undefined"
+              },
+              "attribute": "weight",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "| \"default\"\n    | \"secondary\"\n    | \"subtle\"\n    | \"primary\"\n    | \"success\"\n    | \"danger\"\n    | \"warning\" | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "\"left\" | \"center\" | \"right\" | undefined"
+              },
+              "default": "\"left\"",
+              "attribute": "align",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "editable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "editable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "ellipsis",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "ellipsis",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "expandable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "expandable",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "createRenderRoot",
+              "inheritedFrom": {
+                "name": "FElement",
+                "module": "src/mixins/components/f-element/f-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"heading\" | \"para\" | \"code\" | undefined"
+              },
+              "default": "\"para\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "weight",
+              "type": {
+                "text": "\"bold\" | \"medium\" | \"regular\" | undefined"
+              },
+              "fieldName": "weight"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "| \"default\"\n    | \"secondary\"\n    | \"subtle\"\n    | \"primary\"\n    | \"success\"\n    | \"danger\"\n    | \"warning\" | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "\"left\" | \"center\" | \"right\" | undefined"
+              },
+              "default": "\"left\"",
+              "fieldName": "align"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "editable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "editable"
+            },
+            {
+              "name": "ellipsis",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "ellipsis"
+            },
+            {
+              "name": "expandable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "expandable"
+            }
+          ],
+          "superclass": {
+            "name": "FElement",
+            "module": "/src/mixins/components/f-element/f-element"
+          },
+          "summary": "Text component includes Headings, titles, body texts and links.",
+          "tagName": "f-text",
+          "customElement": true
+        }
+      ],
       "exports": [
         {
           "kind": "js",
-          "name": "default",
+          "name": "FText",
           "declaration": {
-            "module": "src/mixins/svg/loader.ts"
+            "name": "FText",
+            "module": "src/components/f-text/f-text.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-text",
+          "declaration": {
+            "name": "FText",
+            "module": "src/components/f-text/f-text.ts"
           }
         }
       ]
@@ -1054,6 +1275,20 @@
           "declaration": {
             "name": "ConfigUtil",
             "module": "src/modules/config/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/mixins/svg/loader.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/mixins/svg/loader.ts"
           }
         }
       ]

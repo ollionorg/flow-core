@@ -5,6 +5,7 @@ import { FElement } from "../../mixins/components/f-element/f-element";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { ConfigUtil } from "./../../modules/config";
 import loader from "../../mixins/svg/loader";
+import notFound from "../../mixins/svg/notFound";
 import { isValidHttpUrl } from "./../../utils";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
@@ -54,7 +55,7 @@ export class FIcon extends FElement {
     return this._source;
   }
   set source(value) {
-    const emojiRegex = /\p{Emoji}/u;
+    const emojiRegex = /\p{Extended_Pictographic}/u;
     if (isValidHttpUrl(value)) {
       this.isURLSource = true;
       this._source = `<img src="${value}"/>`;
@@ -63,8 +64,14 @@ export class FIcon extends FElement {
     } else {
       const IconPack = ConfigUtil.getConfig().iconPack;
       if (IconPack) {
-        this._source = IconPack[value];
+        const svg = IconPack[value];
+        if (svg) {
+          this._source = IconPack[value];
+        } else {
+          this._source = notFound;
+        }
       } else {
+        this._source = notFound;
         throw new Error(
           `Icon pack not configured! \n please install \`yarn add @cldcvr/flow-icon\` \n Set config as below \n 	
 		\`import IconPack from "@cldcvr/flow-icon" \n;

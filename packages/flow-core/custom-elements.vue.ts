@@ -3,34 +3,6 @@ import { VueConstructor } from 'vue';
 import type { FDivBorderProp, FDivPaddingProp, FDivWidthProp, FDivHeightProp } from './src';
 declare module 'vue' {
     export interface GlobalComponents {
-        'f-button': VueConstructor<
-            {
-                $props: {
-                    label: string;
-
-                    type?: 'fill' | 'outline' | 'transparent' | undefined;
-
-                    size?: 'large' | 'medium' | 'small' | 'x-small' | undefined;
-
-                    state?: 'primary' | 'neutral' | 'success' | 'warning' | 'danger' | undefined;
-
-                    variant?: 'round' | 'curved' | 'block' | undefined;
-
-                    iconLeft?: string | undefined;
-
-                    iconRight?: string | undefined;
-
-                    counter?: string | undefined;
-
-                    loading?: boolean | undefined;
-
-                    disabled?: boolean | undefined;
-
-                    labelWrap?: boolean | undefined;
-                };
-            } & Vue
-        >;
-
         'f-counter': VueConstructor<
             {
                 $props: {
@@ -50,7 +22,9 @@ declare module 'vue' {
         'f-div': VueConstructor<
             {
                 $props: {
-                    variant?: 'row' | 'column' | undefined;
+                    variant?: 'block' | 'curved' | undefined;
+
+                    direction?: 'row' | 'column' | undefined;
 
                     state?:
                         | 'subtle'
@@ -80,9 +54,9 @@ declare module 'vue' {
                         | 'top-left'
                         | 'top-center'
                         | 'top-right'
-                        | 'left'
-                        | 'center'
-                        | 'right'
+                        | 'middle-left'
+                        | 'middle-center'
+                        | 'middle-right'
                         | 'bottom-left'
                         | 'bottom-center'
                         | 'bottom-right'
@@ -109,6 +83,34 @@ declare module 'vue' {
                         | undefined;
 
                     sticky?: 'none' | 'top' | 'bottom' | 'left' | 'right' | undefined;
+                };
+            } & Vue
+        >;
+
+        'f-button': VueConstructor<
+            {
+                $props: {
+                    label: string;
+
+                    type?: 'fill' | 'outline' | 'transparent' | undefined;
+
+                    size?: 'large' | 'medium' | 'small' | 'x-small' | undefined;
+
+                    state?: 'primary' | 'neutral' | 'success' | 'warning' | 'danger' | undefined;
+
+                    variant?: 'round' | 'curved' | 'block' | undefined;
+
+                    iconLeft?: string | undefined;
+
+                    iconRight?: string | undefined;
+
+                    counter?: string | undefined;
+
+                    loading?: boolean | undefined;
+
+                    disabled?: boolean | undefined;
+
+                    labelWrap?: boolean | undefined;
                 };
             } & Vue
         >;
@@ -140,6 +142,16 @@ declare module 'vue' {
             } & Vue
         >;
 
+        'f-text-backup': VueConstructor<
+            {
+                $props: {
+                    editable?: boolean | undefined;
+
+                    expandable?: boolean | undefined;
+                };
+            } & Vue
+        >;
+
         'f-text': VueConstructor<
             {
                 $props: {
@@ -165,11 +177,7 @@ declare module 'vue' {
 
                     disabled?: boolean | undefined;
 
-                    editable?: boolean | undefined;
-
                     ellipsis?: boolean | undefined;
-
-                    expandable?: boolean | undefined;
                 };
             } & Vue
         >;

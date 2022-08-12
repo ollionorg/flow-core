@@ -4,9 +4,14 @@ import { html } from "lit-html";
 export default {
   title: "f-div",
   argTypes: {
-    variant: {
+    direction: {
       defaultValue: "row",
       options: ["row", "column"],
+      control: { type: "select" },
+    },
+    variant: {
+      defaultValue: "block",
+      options: ["block", "curved"],
       control: { type: "select" },
     },
     align: {
@@ -14,9 +19,9 @@ export default {
         "top-left",
         "top-center",
         "top-right",
-        "left",
-        "center",
-        "right",
+        "middle-left",
+        "middle-center",
+        "middle-right",
         "bottom-left",
         "bottom-center",
         "bottom-right",
@@ -56,13 +61,13 @@ export default {
 
 const Template: Story<unknown> = () => {
   return html`
-    <f-div width="fill-container" height="100%" variant="column" gap="small">
+    <f-div width="fill-container" height="100%" direction="column" gap="small">
       <f-div height="48px" padding="small" border="small solid default bottom">
         <f-icon source="i-plus" size="large"></f-icon>
       </f-div>
       <f-div
         border="small solid default"
-        variant="column"
+        direction="column"
         gap="small"
         padding="small"
         width="fill-container"
@@ -80,7 +85,7 @@ const Template: Story<unknown> = () => {
 
       <f-div
         border="small solid default"
-        variant="row"
+        direction="row"
         gap="auto"
         width="fill-container"
         height="hug-content"
@@ -97,7 +102,7 @@ const Template: Story<unknown> = () => {
       </f-div>
       <f-div
         border="small solid default"
-        variant="row"
+        direction="row"
         gap="auto"
         width="fill-container"
         height="hug-content"
@@ -106,13 +111,13 @@ const Template: Story<unknown> = () => {
         <f-button
           label="height hug content"
           icon-left="i-plus"
-          variant="block"
+          direction="block"
         ></f-button>
         <f-button
           label="height hug content"
           icon-right="i-alarm"
           state="warning"
-          variant="block"
+          direction="block"
         ></f-button>
       </f-div>
 
@@ -129,7 +134,7 @@ const Template: Story<unknown> = () => {
         border="small solid default around"
         padding="small"
         gap="large"
-        variant="column"
+        direction="column"
         width="hug-content"
         height="fill-container"
       >
@@ -146,14 +151,14 @@ const ATemplate: Story<Record<string, string>> = (
   args: Record<string, string>
 ) => {
   return html`
-    <f-div width="100%" height="100%" variant="column" gap="small">
+    <f-div width="100%" height="100%" direction="column" gap="small">
       <f-div
         border="small solid default"
         gap="small"
         padding="small"
         width="fill-container"
         height="fill-container"
-        .variant=${args.variant}
+        .direction=${args.direction}
         .align=${args.align}
       >
         <f-button .label=${args.align} icon-left="i-plus"></f-button>
@@ -171,7 +176,7 @@ const ATemplate: Story<Record<string, string>> = (
 export const align = ATemplate.bind({});
 
 align.args = {
-  variant: "row",
+  direction: "row",
   align: "top-left",
 };
 
@@ -179,7 +184,7 @@ const OTemplate: Story<Record<string, string>> = (
   args: Record<string, string>
 ) => {
   return html`
-    <f-div width="100%" height="100%" variant="column" gap="small">
+    <f-div width="100%" height="100%" direction="column" gap="small">
       <f-div
         border="small solid default"
         gap="small"
@@ -208,7 +213,7 @@ const STemplate: Story<Record<string, string>> = (
   args: Record<string, string>
 ) => {
   return html`
-    <f-div width="100%" height="100%" variant="column" gap="small">
+    <f-div width="100%" height="100%" direction="column" gap="small">
       <f-div
         width="fill-container"
         height="hug-content"
@@ -238,7 +243,7 @@ const STTemplate: Story<Record<string, string>> = (
     <f-div
       width="100%"
       height="100%"
-      .variant=${args.variant}
+      .direction=${args.direction}
       gap="small"
       overflow="scroll"
     >
@@ -309,7 +314,7 @@ const STTemplate: Story<Record<string, string>> = (
 export const sticky = STTemplate.bind({});
 
 sticky.args = {
-  variant: "column",
+  direction: "column",
   sticky: "none",
 };
 
@@ -322,7 +327,7 @@ const LTemplate: Story<Record<string, string>> = (
         gap="small"
         .loading=${args.loading}
         padding="small"
-        variant="column"
+        direction="column"
         width="fill-container"
         height="hug-content"
         border="small solid default around"
@@ -341,4 +346,30 @@ export const loading = LTemplate.bind({});
 
 sticky.args = {
   loading: "skeleton",
+};
+
+const VTemplate: Story<Record<string, string>> = (
+  args: Record<string, string>
+) => {
+  return html`
+    <f-div width="100%" gap="small" direction="row">
+      <f-div padding="small" .variant=${args.variant} state="secondary">
+        <f-text
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+          malesuada fringilla eleifend. Sed pulvinar neque eu nisl tristique
+          bibendum. Morbi non facilisis neque. Ut fermentum ligula vitae commodo
+          volutpat. Vivamus vestibulum vitae metus vel venenatis. Phasellus ut
+          nunc nunc. Cras rutrum tellus ligula, vel accumsan lectus luctus vel.
+          Vestibulum vel nisi tellus. Donec dictum nisi at semper ultrices. Sed
+          sit amet fringilla lorem, non semper quam. Pellentesque finibus
+          convallis mauris ac tempor.</f-text
+        >
+      </f-div>
+    </f-div>
+  `;
+};
+
+export const variant = VTemplate.bind({});
+variant.args = {
+  variant: "curved",
 };

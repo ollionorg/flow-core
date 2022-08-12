@@ -82,10 +82,15 @@ export class FDiv extends FElement {
   static styles = [unsafeCSS(eleStyle)];
 
   /**
-   * @attribute Variant will decide whether these elements needs to be displayed in vertical or horizontal manner.
+   * @attribute Variants are various representations of a f-div.
    */
   @property({ type: String, reflect: true })
-  variant?: "row" | "column" = "row";
+  variant?: "block" | "curved" = "block";
+  /**
+   * @attribute Direction will decide whether these elements needs to be displayed in vertical or horizontal manner.
+   */
+  @property({ type: String, reflect: true })
+  direction?: "row" | "column" = "row";
 
   /**
    * @attribute state property defines the background color of a f-div. It can take only surface colors defined in the library.
@@ -133,9 +138,9 @@ export class FDiv extends FElement {
     | "top-left"
     | "top-center"
     | "top-right"
-    | "left"
-    | "center"
-    | "right"
+    | "middle-left"
+    | "middle-center"
+    | "middle-right"
     | "bottom-left"
     | "bottom-center"
     | "bottom-right" = "top-left";

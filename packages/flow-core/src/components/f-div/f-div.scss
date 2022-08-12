@@ -127,27 +127,29 @@ f-div {
     height: fit-content;
   }
 
-  &[variant="column"] {
+  &[direction="column"] {
     flex-direction: column;
     > f-div[height="fill-container"] {
       flex: 1 0 auto;
+      max-height: 100%;
     }
     > f-div[width="fill-container"] {
       width: 100%;
     }
   }
 
-  &[variant="row"] {
+  &[direction="row"] {
     flex-direction: row;
     > f-div[width="fill-container"] {
       flex: 1 0 auto;
+      max-width: 100%;
     }
     > f-div[height="fill-container"] {
       height: 100%;
     }
   }
 
-  &[variant="row"] {
+  &[direction="row"] {
     &[align="top-left"] {
       align-items: flex-start;
       justify-content: flex-start;
@@ -169,21 +171,21 @@ f-div {
         justify-content: space-between;
       }
     }
-    &[align="left"] {
+    &[align="middle-left"] {
       align-items: center;
       justify-content: flex-start;
       &[gap="auto"] {
         justify-content: space-between;
       }
     }
-    &[align="center"] {
+    &[align="middle-center"] {
       align-items: center;
       justify-content: center;
       &[gap="auto"] {
         justify-content: space-between;
       }
     }
-    &[align="right"] {
+    &[align="middle-right"] {
       align-items: center;
       justify-content: flex-end;
       &[gap="auto"] {
@@ -213,7 +215,7 @@ f-div {
     }
   }
 
-  &[variant="column"] {
+  &[direction="column"] {
     &[align="top-left"] {
       align-items: flex-start;
       justify-content: flex-start;
@@ -232,21 +234,21 @@ f-div {
       align-items: flex-end;
       justify-content: flex-start;
     }
-    &[align="left"] {
+    &[align="middle-left"] {
       align-items: flex-start;
       justify-content: center;
       &[gap="auto"] {
         justify-content: space-between;
       }
     }
-    &[align="center"] {
+    &[align="middle-center"] {
       align-items: center;
       justify-content: center;
       &[gap="auto"] {
         justify-content: space-between;
       }
     }
-    &[align="right"] {
+    &[align="middle-right"] {
       align-items: flex-end;
       justify-content: center;
       &[gap="auto"] {
@@ -323,5 +325,9 @@ f-div {
       top: calc(50% - 12px);
       left: calc(50% - 12px);
     }
+  }
+
+  &[variant="curved"] {
+    border-radius: 4px;
   }
 }

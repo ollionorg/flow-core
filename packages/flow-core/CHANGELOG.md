@@ -1,6 +1,11 @@
 
 # Change Log
 
+## [0.1.1] - 2022-08-12
+### Improvements
+- `f-text` : remove `expandable`, `editable` property.
+- `f-div`: `variant` property updated with `curved` and `block` values.
+- `f-div` : `direction` property added with `row`, `column` values.
 ## [0.1.0] - 2022-08-10
 ### Features
 - `f-text` element added

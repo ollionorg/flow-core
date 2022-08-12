@@ -146,6 +146,479 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-counter/f-counter.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FCounter",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | undefined"
+              },
+              "default": "\"neutral\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "array"
+              },
+              "default": "[\"label\"]",
+              "description": "mention required fields here"
+            },
+            {
+              "kind": "method",
+              "name": "validateProperties"
+            },
+            {
+              "kind": "method",
+              "name": "createRenderRoot",
+              "inheritedFrom": {
+                "name": "FElement",
+                "module": "src/mixins/components/f-element/f-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "label"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | undefined"
+              },
+              "default": "\"neutral\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "FElement",
+            "module": "/src/mixins/components/f-element/f-element"
+          },
+          "tagName": "f-counter",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FCounter",
+          "declaration": {
+            "name": "FCounter",
+            "module": "src/components/f-counter/f-counter.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-counter",
+          "declaration": {
+            "name": "FCounter",
+            "module": "src/components/f-counter/f-counter.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-div/f-div.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FDiv",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"block\" | \"curved\" | undefined"
+              },
+              "default": "\"block\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "\"row\" | \"column\" | undefined"
+              },
+              "default": "\"row\"",
+              "attribute": "direction",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "| \"subtle\"\n    | \"default\"\n    | \"secondary\"\n    | \"tertiary\"\n    | \"success\"\n    | \"warning\"\n    | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "border",
+              "type": {
+                "text": "FDivBorderProp | undefined"
+              },
+              "attribute": "border",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "padding",
+              "type": {
+                "text": "FDivPaddingProp | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "padding",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "| \"top-left\"\n    | \"top-center\"\n    | \"top-right\"\n    | \"middle-left\"\n    | \"middle-center\"\n    | \"middle-right\"\n    | \"bottom-left\"\n    | \"bottom-center\"\n    | \"bottom-right\" | undefined"
+              },
+              "default": "\"top-left\"",
+              "attribute": "align",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "FDivWidthProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "attribute": "width",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "FDivHeightProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "attribute": "height",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "\"skeleton\" | \"loader\" | undefined"
+              },
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "clickable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "overflow",
+              "type": {
+                "text": "\"wrap\" | \"scroll\" | \"hidden\" | undefined"
+              },
+              "default": "\"wrap\"",
+              "attribute": "overflow",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "sticky",
+              "type": {
+                "text": "\"none\" | \"top\" | \"bottom\" | \"left\" | \"right\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "sticky",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "applyBorder"
+            },
+            {
+              "kind": "method",
+              "name": "applyPadding"
+            },
+            {
+              "kind": "method",
+              "name": "applySize"
+            },
+            {
+              "kind": "method",
+              "name": "createRenderRoot",
+              "inheritedFrom": {
+                "name": "FElement",
+                "module": "src/mixins/components/f-element/f-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"block\" | \"curved\" | undefined"
+              },
+              "default": "\"block\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "direction",
+              "type": {
+                "text": "\"row\" | \"column\" | undefined"
+              },
+              "default": "\"row\"",
+              "fieldName": "direction"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "| \"subtle\"\n    | \"default\"\n    | \"secondary\"\n    | \"tertiary\"\n    | \"success\"\n    | \"warning\"\n    | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "border",
+              "type": {
+                "text": "FDivBorderProp | undefined"
+              },
+              "fieldName": "border"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "gap"
+            },
+            {
+              "name": "padding",
+              "type": {
+                "text": "FDivPaddingProp | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "padding"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "| \"top-left\"\n    | \"top-center\"\n    | \"top-right\"\n    | \"middle-left\"\n    | \"middle-center\"\n    | \"middle-right\"\n    | \"bottom-left\"\n    | \"bottom-center\"\n    | \"bottom-right\" | undefined"
+              },
+              "default": "\"top-left\"",
+              "fieldName": "align"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "FDivWidthProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "FDivHeightProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "fieldName": "height"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "\"skeleton\" | \"loader\" | undefined"
+              },
+              "fieldName": "loading"
+            },
+            {
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "clickable"
+            },
+            {
+              "name": "overflow",
+              "type": {
+                "text": "\"wrap\" | \"scroll\" | \"hidden\" | undefined"
+              },
+              "default": "\"wrap\"",
+              "fieldName": "overflow"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "selected"
+            },
+            {
+              "name": "sticky",
+              "type": {
+                "text": "\"none\" | \"top\" | \"bottom\" | \"left\" | \"right\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "sticky"
+            }
+          ],
+          "superclass": {
+            "name": "FElement",
+            "module": "/src/mixins/components/f-element/f-element"
+          },
+          "summary": "F-div is used as a container for HTML elements.",
+          "tagName": "f-div",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FDiv",
+          "declaration": {
+            "name": "FDiv",
+            "module": "src/components/f-div/f-div.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-div",
+          "declaration": {
+            "name": "FDiv",
+            "module": "src/components/f-div/f-div.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-button/f-button.ts",
       "declarations": [
         {
@@ -402,461 +875,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-counter/f-counter.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FCounter",
-          "members": [
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | undefined"
-              },
-              "default": "\"neutral\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "loading",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "required",
-              "type": {
-                "text": "array"
-              },
-              "default": "[\"label\"]",
-              "description": "mention required fields here"
-            },
-            {
-              "kind": "method",
-              "name": "validateProperties"
-            },
-            {
-              "kind": "method",
-              "name": "createRenderRoot",
-              "inheritedFrom": {
-                "name": "FElement",
-                "module": "src/mixins/components/f-element/f-element.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "label"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | undefined"
-              },
-              "default": "\"neutral\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "loading"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            }
-          ],
-          "superclass": {
-            "name": "FElement",
-            "module": "/src/mixins/components/f-element/f-element"
-          },
-          "tagName": "f-counter",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FCounter",
-          "declaration": {
-            "name": "FCounter",
-            "module": "src/components/f-counter/f-counter.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-counter",
-          "declaration": {
-            "name": "FCounter",
-            "module": "src/components/f-counter/f-counter.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-div/f-div.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FDiv",
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "\"row\" | \"column\" | undefined"
-              },
-              "default": "\"row\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "| \"subtle\"\n    | \"default\"\n    | \"secondary\"\n    | \"tertiary\"\n    | \"success\"\n    | \"warning\"\n    | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "border",
-              "type": {
-                "text": "FDivBorderProp | undefined"
-              },
-              "attribute": "border",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "gap",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "padding",
-              "type": {
-                "text": "FDivPaddingProp | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "padding",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "align",
-              "type": {
-                "text": "| \"top-left\"\n    | \"top-center\"\n    | \"top-right\"\n    | \"left\"\n    | \"center\"\n    | \"right\"\n    | \"bottom-left\"\n    | \"bottom-center\"\n    | \"bottom-right\" | undefined"
-              },
-              "default": "\"top-left\"",
-              "attribute": "align",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "width",
-              "type": {
-                "text": "FDivWidthProp | undefined"
-              },
-              "default": "\"fill-container\"",
-              "attribute": "width",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "height",
-              "type": {
-                "text": "FDivHeightProp | undefined"
-              },
-              "default": "\"fill-container\"",
-              "attribute": "height",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "loading",
-              "type": {
-                "text": "\"skeleton\" | \"loader\" | undefined"
-              },
-              "attribute": "loading",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "clickable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "clickable",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "overflow",
-              "type": {
-                "text": "\"wrap\" | \"scroll\" | \"hidden\" | undefined"
-              },
-              "default": "\"wrap\"",
-              "attribute": "overflow",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "selected",
-              "type": {
-                "text": "\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "selected",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "sticky",
-              "type": {
-                "text": "\"none\" | \"top\" | \"bottom\" | \"left\" | \"right\" | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "sticky",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "applyBorder"
-            },
-            {
-              "kind": "method",
-              "name": "applyPadding"
-            },
-            {
-              "kind": "method",
-              "name": "applySize"
-            },
-            {
-              "kind": "method",
-              "name": "createRenderRoot",
-              "inheritedFrom": {
-                "name": "FElement",
-                "module": "src/mixins/components/f-element/f-element.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "\"row\" | \"column\" | undefined"
-              },
-              "default": "\"row\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "| \"subtle\"\n    | \"default\"\n    | \"secondary\"\n    | \"tertiary\"\n    | \"success\"\n    | \"warning\"\n    | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "border",
-              "type": {
-                "text": "FDivBorderProp | undefined"
-              },
-              "fieldName": "border"
-            },
-            {
-              "name": "gap",
-              "type": {
-                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "gap"
-            },
-            {
-              "name": "padding",
-              "type": {
-                "text": "FDivPaddingProp | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "padding"
-            },
-            {
-              "name": "align",
-              "type": {
-                "text": "| \"top-left\"\n    | \"top-center\"\n    | \"top-right\"\n    | \"left\"\n    | \"center\"\n    | \"right\"\n    | \"bottom-left\"\n    | \"bottom-center\"\n    | \"bottom-right\" | undefined"
-              },
-              "default": "\"top-left\"",
-              "fieldName": "align"
-            },
-            {
-              "name": "width",
-              "type": {
-                "text": "FDivWidthProp | undefined"
-              },
-              "default": "\"fill-container\"",
-              "fieldName": "width"
-            },
-            {
-              "name": "height",
-              "type": {
-                "text": "FDivHeightProp | undefined"
-              },
-              "default": "\"fill-container\"",
-              "fieldName": "height"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "loading",
-              "type": {
-                "text": "\"skeleton\" | \"loader\" | undefined"
-              },
-              "fieldName": "loading"
-            },
-            {
-              "name": "clickable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "clickable"
-            },
-            {
-              "name": "overflow",
-              "type": {
-                "text": "\"wrap\" | \"scroll\" | \"hidden\" | undefined"
-              },
-              "default": "\"wrap\"",
-              "fieldName": "overflow"
-            },
-            {
-              "name": "selected",
-              "type": {
-                "text": "\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "selected"
-            },
-            {
-              "name": "sticky",
-              "type": {
-                "text": "\"none\" | \"top\" | \"bottom\" | \"left\" | \"right\" | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "sticky"
-            }
-          ],
-          "superclass": {
-            "name": "FElement",
-            "module": "/src/mixins/components/f-element/f-element"
-          },
-          "summary": "F-div is used as a container for HTML elements.",
-          "tagName": "f-div",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FDiv",
-          "declaration": {
-            "name": "FDiv",
-            "module": "src/components/f-div/f-div.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-div",
-          "declaration": {
-            "name": "FDiv",
-            "module": "src/components/f-div/f-div.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-icon/f-icon.ts",
       "declarations": [
         {
@@ -1031,6 +1049,136 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-text/_f-text_editable.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTextBackup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "editable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "editable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "expandable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "expandable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "_contentBeforeFocus",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "protected",
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "protected",
+              "default": "\"\""
+            },
+            {
+              "kind": "method",
+              "name": "_handleFocusIn"
+            },
+            {
+              "kind": "method",
+              "name": "_handleKeyUp",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "isTextClamped"
+            },
+            {
+              "kind": "method",
+              "name": "createRenderRoot",
+              "inheritedFrom": {
+                "name": "FElement",
+                "module": "src/mixins/components/f-element/f-element.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "type": {
+                "text": "Event"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "editable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "editable"
+            },
+            {
+              "name": "expandable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "expandable"
+            }
+          ],
+          "superclass": {
+            "name": "FElement",
+            "module": "/src/mixins/components/f-element/f-element"
+          },
+          "summary": "Text component includes Headings, titles, body texts and links.",
+          "tagName": "f-text-backup",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTextBackup",
+          "declaration": {
+            "name": "FTextBackup",
+            "module": "src/components/f-text/_f-text_editable.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-text-backup",
+          "declaration": {
+            "name": "FTextBackup",
+            "module": "src/components/f-text/_f-text_editable.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-text/f-text.ts",
       "declarations": [
         {
@@ -1109,16 +1257,6 @@
             },
             {
               "kind": "field",
-              "name": "editable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "editable",
-              "reflects": true
-            },
-            {
-              "kind": "field",
               "name": "ellipsis",
               "type": {
                 "text": "boolean | undefined"
@@ -1128,67 +1266,11 @@
               "reflects": true
             },
             {
-              "kind": "field",
-              "name": "expandable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "expandable",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "_contentBeforeFocus",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "protected",
-              "default": "\"\""
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "protected",
-              "default": "\"\""
-            },
-            {
-              "kind": "method",
-              "name": "_handleFocusIn"
-            },
-            {
-              "kind": "method",
-              "name": "_handleKeyUp",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "KeyboardEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "isTextClamped"
-            },
-            {
               "kind": "method",
               "name": "createRenderRoot",
               "inheritedFrom": {
                 "name": "FElement",
                 "module": "src/mixins/components/f-element/f-element.ts"
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "input",
-              "type": {
-                "text": "Event"
               }
             }
           ],
@@ -1249,28 +1331,12 @@
               "fieldName": "disabled"
             },
             {
-              "name": "editable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "editable"
-            },
-            {
               "name": "ellipsis",
               "type": {
                 "text": "boolean | undefined"
               },
               "default": "false",
               "fieldName": "ellipsis"
-            },
-            {
-              "name": "expandable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "expandable"
             }
           ],
           "superclass": {

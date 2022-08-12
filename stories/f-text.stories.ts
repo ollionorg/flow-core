@@ -9,9 +9,9 @@ const Template: Story<unknown> = () => {
   const textSizes = ["x-small", "small", "medium", "large", "x-large"];
   const variants = ["heading", "para", "code"];
   const weights = ["regular", "medium", "bold"];
-  return html`<f-div variant="column" gap="large"
+  return html`<f-div direction="column" gap="large"
     >${variants.map(
-      (v) => html` <f-div variant="column" gap="small">
+      (v) => html` <f-div direction="column" gap="small">
         ${textSizes.map(
           (size) =>
             html`${weights.map(
@@ -37,7 +37,7 @@ const STemplate: Story<unknown> = () => {
     "warning",
   ];
 
-  return html`<f-div variant="column" gap="large"
+  return html`<f-div direction="column" gap="large"
     >${states.map(
       (s) =>
         html`<f-div .state=${s} padding="x-small">
@@ -53,7 +53,7 @@ export const states = STemplate.bind({});
 const ATemplate: Story<unknown> = () => {
   const aligns = ["left", "center", "right"];
 
-  return html`<f-div variant="column" gap="large" width="100%">
+  return html`<f-div direction="column" gap="large" width="100%">
     ${aligns.map(
       (a) =>
         html` <f-text .align=${a}
@@ -69,7 +69,7 @@ const ATemplate: Story<unknown> = () => {
 export const align = ATemplate.bind({});
 
 const LTemplate: Story<unknown> = () => {
-  return html`<f-div variant="column" gap="large" width="100%">
+  return html`<f-div direction="column" gap="large" width="100%">
     <f-text loading>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper diam
       at erat pulvinar.
@@ -80,7 +80,7 @@ const LTemplate: Story<unknown> = () => {
 export const loading = LTemplate.bind({});
 
 const DTemplate: Story<unknown> = () => {
-  return html`<f-div variant="column" gap="large" width="100%">
+  return html`<f-div direction="column" gap="large" width="100%">
     <f-text disabled>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper diam
       at erat pulvinar.
@@ -90,22 +90,8 @@ const DTemplate: Story<unknown> = () => {
 
 export const disabled = DTemplate.bind({});
 
-const ETemplate: Story<unknown> = () => {
-  const handleInput = (event: InputEvent) => {
-    console.log((event.target as HTMLInputElement)?.value);
-  };
-  return html`<f-div variant="column" gap="large" width="100%">
-    <f-text editable @input=${handleInput}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper diam
-      at erat pulvinar.
-    </f-text>
-  </f-div>`;
-};
-
-export const editable = ETemplate.bind({});
-
 const ELTemplate: Story<unknown> = () => {
-  return html`<f-div variant="column" gap="large" width="100%">
+  return html`<f-div direction="column" gap="large" width="100%">
     <f-text ellipsis>
       <b> Lorem<sup>2</sup> ipsum dolor </b>sit amet,
       <a href="#">here</a> consectetur adipiscing elit. <i>Etiam</i> semper diam

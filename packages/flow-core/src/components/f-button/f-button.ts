@@ -4,8 +4,7 @@ import { FElement } from "../../mixins/components/f-element/f-element";
 import eleStyle from "./f-button.scss";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
-import "./../f-counter/f-counter";
-import "./../f-icon/f-icon";
+
 /**
  * @summary Buttons allow users to perform an action or to initiate a new function.
  */

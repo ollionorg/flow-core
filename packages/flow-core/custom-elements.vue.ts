@@ -3,6 +3,34 @@ import { VueConstructor } from 'vue';
 import type { FDivBorderProp, FDivPaddingProp, FDivWidthProp, FDivHeightProp } from './src';
 declare module 'vue' {
     export interface GlobalComponents {
+        'f-button': VueConstructor<
+            {
+                $props: {
+                    label: string;
+
+                    type?: 'fill' | 'outline' | 'transparent' | undefined;
+
+                    size?: 'large' | 'medium' | 'small' | 'x-small' | undefined;
+
+                    state?: 'primary' | 'neutral' | 'success' | 'warning' | 'danger' | undefined;
+
+                    variant?: 'round' | 'curved' | 'block' | undefined;
+
+                    iconLeft?: string | undefined;
+
+                    iconRight?: string | undefined;
+
+                    counter?: string | undefined;
+
+                    loading?: boolean | undefined;
+
+                    disabled?: boolean | undefined;
+
+                    labelWrap?: boolean | undefined;
+                };
+            } & Vue
+        >;
+
         'f-counter': VueConstructor<
             {
                 $props: {
@@ -83,34 +111,6 @@ declare module 'vue' {
                         | undefined;
 
                     sticky?: 'none' | 'top' | 'bottom' | 'left' | 'right' | undefined;
-                };
-            } & Vue
-        >;
-
-        'f-button': VueConstructor<
-            {
-                $props: {
-                    label: string;
-
-                    type?: 'fill' | 'outline' | 'transparent' | undefined;
-
-                    size?: 'large' | 'medium' | 'small' | 'x-small' | undefined;
-
-                    state?: 'primary' | 'neutral' | 'success' | 'warning' | 'danger' | undefined;
-
-                    variant?: 'round' | 'curved' | 'block' | undefined;
-
-                    iconLeft?: string | undefined;
-
-                    iconRight?: string | undefined;
-
-                    counter?: string | undefined;
-
-                    loading?: boolean | undefined;
-
-                    disabled?: boolean | undefined;
-
-                    labelWrap?: boolean | undefined;
                 };
             } & Vue
         >;

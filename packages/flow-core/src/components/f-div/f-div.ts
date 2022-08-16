@@ -103,7 +103,8 @@ export class FDiv extends FElement {
     | "tertiary"
     | "success"
     | "warning"
-    | "danger" = "default";
+    | "danger"
+    | "primary" = "default";
 
   /**
    * @attribute Border property enables a border for f-div.  You can combine border properties to achieve a desired result.

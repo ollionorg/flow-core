@@ -62,6 +62,7 @@ declare module 'vue' {
                         | 'success'
                         | 'warning'
                         | 'danger'
+                        | 'primary'
                         | undefined;
 
                     border?: FDivBorderProp | undefined;

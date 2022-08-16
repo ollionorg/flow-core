@@ -11,4 +11,22 @@ export * from "./components/f-counter/f-counter";
 export * from "./components/f-div/f-div";
 export * from "./components/f-text/f-text";
 
-document.addEventListener("DOMContentLoaded", ConfigUtil.initTheme);
+if (document.readyState !== "loading") {
+  ConfigUtil.initTheme();
+} else {
+  document.addEventListener("DOMContentLoaded", function () {
+    ConfigUtil.initTheme();
+  });
+}
+
+document.addEventListener("keyup", (event: KeyboardEvent) => {
+  event.preventDefault();
+  if (event.key === "T" && event.shiftKey && event.ctrlKey) {
+    console.log("Changing theme");
+    const currentTheme = ConfigUtil.getConfig().theme;
+
+    ConfigUtil.setConfig({
+      theme: currentTheme === "f-dark" ? "f-light" : "f-dark",
+    });
+  }
+});

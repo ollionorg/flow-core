@@ -41,6 +41,7 @@ export default {
         "success",
         "warning",
         "danger",
+        "primary",
       ],
       control: { type: "select" },
     },
@@ -62,8 +63,18 @@ export default {
 const Template: Story<unknown> = () => {
   return html`
     <f-div width="fill-container" height="100%" direction="column" gap="small">
-      <f-div height="48px" padding="small" border="small solid default bottom">
-        <f-icon source="i-plus" size="large"></f-icon>
+      <f-div
+        height="hug-content"
+        selected="notch-right"
+        gap="small"
+        padding="small"
+        variant="curved"
+        border="small solid default around"
+      >
+        <f-icon source="i-plus" size="large" state="primary"></f-icon>
+        <f-text variant="para" size="medium" weight="medium"
+          ><a href="#">Option 1</a></f-text
+        >
       </f-div>
       <f-div
         border="small solid default"
@@ -217,13 +228,13 @@ const STemplate: Story<Record<string, string>> = (
       <f-div
         width="fill-container"
         height="hug-content"
-        border="small solid subtle around"
         gap="small"
         padding="small"
         .state=${args.state}
         .selected=${args.selected}
       >
         <f-icon source="i-flag" size="large"></f-icon>
+        <f-text>Select state from controls to change</f-text>
       </f-div>
     </f-div>
   `;

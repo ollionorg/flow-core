@@ -109,7 +109,6 @@ export class FButton extends FElement {
 
   render() {
     this.validateProperties();
-    this.innerHTML = "";
 
     /**
      * create iconLeft if available

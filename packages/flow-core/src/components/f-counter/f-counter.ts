@@ -52,7 +52,6 @@ export class FCounter extends FElement {
     }
   }
   render() {
-    this.innerHTML = "";
     this.validateProperties();
     return html`${this.loading
       ? html`${unsafeSVG(loader)}`

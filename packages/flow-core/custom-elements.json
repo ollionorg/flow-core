@@ -1405,7 +1405,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    if (cfg.theme) {\n      this.initTheme();\n    }\n  },\n  initTheme() {\n    const themeElement = initThemeTag();\n\n    if (themeElement) {\n      const themeCSS = getThemeStyle(`[flow-element][theme=\"${config.theme}\"]`);\n\n      if (themeCSS) {\n        themeElement.appendChild(document.createTextNode(themeCSS));\n      } else {\n        console.error(`Theme ${config.theme} CSS file/selector not fount!`);\n      }\n    }\n  },\n}"
+          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    if (cfg.theme) {\n      this.initTheme();\n    }\n  },\n  initTheme() {\n    const themeElement = initThemeTag();\n\n    if (themeElement) {\n      const themeCSS = getThemeStyle(`[flow-element][theme=\"${config.theme}\"]`);\n\n      if (themeCSS) {\n        themeElement.appendChild(document.createTextNode(themeCSS));\n      } else {\n        console.error(`Theme ${config.theme} CSS file/selector not found!`);\n      }\n    }\n  },\n}"
         }
       ],
       "exports": [

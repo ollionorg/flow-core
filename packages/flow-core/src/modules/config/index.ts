@@ -47,7 +47,7 @@ export const ConfigUtil = {
       if (themeCSS) {
         themeElement.appendChild(document.createTextNode(themeCSS));
       } else {
-        console.error(`Theme ${config.theme} CSS file/selector not fount!`);
+        console.error(`Theme ${config.theme} CSS file/selector not found!`);
       }
     }
   },

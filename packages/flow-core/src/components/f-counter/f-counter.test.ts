@@ -2,6 +2,7 @@ import { html, fixture, expect } from "@open-wc/testing";
 import loadingSVG from "./../../mixins/svg/loader";
 
 import "@cldcvr/flow-core";
+
 import { FCounter } from "@cldcvr/flow-core";
 
 describe("f-counter", () => {

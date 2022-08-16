@@ -8,7 +8,7 @@ export default defineConfig({
       entry: "src/index.ts",
       name: "flow-elements",
       fileName: (format) => `flow-core.${format}.js`,
-      formats: ["es"],
+      formats: ["es", "cjs"],
     },
     // outDir: "dist",
     rollupOptions: {

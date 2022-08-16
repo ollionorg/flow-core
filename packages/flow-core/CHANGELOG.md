@@ -1,6 +1,10 @@
 
 # Change Log
 
+## [0.1.9] - 2022-08-16
+### RND
+- Trying bundling options
+
 ## [0.1.3] - 2022-08-16
 ### Improvements
 - `f-icon` : placeholder svg added when icon is not present in package.

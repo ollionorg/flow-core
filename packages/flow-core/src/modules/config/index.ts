@@ -47,7 +47,9 @@ export const ConfigUtil = {
       if (themeCSS) {
         themeElement.appendChild(document.createTextNode(themeCSS));
       } else {
-        console.error(`Theme ${config.theme} CSS file/selector not found!`);
+        console.error(
+          `Theme ${config.theme} CSS file/selector not found! \n Please check if css is imported 'import "@cldcvr/flow-core/dist/style.css"'`
+        );
       }
     }
   },

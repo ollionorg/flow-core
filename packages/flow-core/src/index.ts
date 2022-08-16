@@ -21,8 +21,9 @@ if (document.readyState !== "loading") {
 
 document.addEventListener("keyup", (event: KeyboardEvent) => {
   event.preventDefault();
-  if (event.key === "T" && event.shiftKey && event.ctrlKey) {
-    console.log("Changing theme");
+
+  if (event.key.toLowerCase() === "x" && event.shiftKey && event.ctrlKey) {
+    // console.log("Changing theme");
     const currentTheme = ConfigUtil.getConfig().theme;
 
     ConfigUtil.setConfig({

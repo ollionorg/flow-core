@@ -10,7 +10,7 @@ It serves as a shared language for all involved in design and product.
   * Flow Figma and Flow front-end framework speak the same language. 
   * VScode intellisense plugin
   * Slack community
-  * Create easy layouts with f-layout
+  * Create easy layouts with f-div
 * Flow dependencies - you can pick and choose what packages are specifically required for your build. 
 * Flow bundles (coming soon)
 

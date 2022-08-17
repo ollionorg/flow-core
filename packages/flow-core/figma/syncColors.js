@@ -20,16 +20,16 @@ function generateTokenScss(colorTokens) {
   // @layer default { `;
   let scss = `
   @function getHover($value) {
-	$hover-color: lighten($value, 10%);
+	$hover-color: lighten($value, 5%);
 	@if lightness($value) > 50 {
 	  $hover-color: darken($value, 10%);
 	}
 	@return $hover-color;
   } 
   @function getSelected($value) {
-    $hover-color: lighten($value, 30%);
+    $hover-color: lighten($value, 10%);
     @if lightness($value) > 50 {
-        $hover-color: darken($value, 30%);
+        $hover-color: darken($value, 20%);
     }
     @return $hover-color;
 }

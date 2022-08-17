@@ -49,7 +49,12 @@ import '@cldcvr/flow-core';
 import "@cldcvr/flow-core/dist/style.css";
 import "@cldcvr/flow-icon";
 ```
-
+Note : If you are using Vue 3, please copy paste the below snippet after the closing `<template>` in your `App.vue` 
+```
+<style>
+@import "@cldcvr/flow-core/dist/style.css";
+</style> 
+```
 
 #### Step 3 (optional): Install dependencies 
 * Form builder (coming soon)

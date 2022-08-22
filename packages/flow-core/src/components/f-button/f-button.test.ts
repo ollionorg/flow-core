@@ -14,8 +14,8 @@ describe("f-button", () => {
   });
   it("should render label in default slot", async () => {
     const el = await fixture(html` <f-button label="abc"></f-button> `);
-
-    expect(el.textContent).to.equal("abc");
+    const descendant = el.shadowRoot!.querySelector(".f-button")!;
+    expect(descendant.textContent?.trim()).to.equal("abc");
   });
   it("should throw error", async () => {
     try {
@@ -29,38 +29,43 @@ describe("f-button", () => {
 
   it("should render with all default properties", async () => {
     const el = await fixture(html` <f-button label="abc"></f-button> `);
-
-    expect(el.getAttribute("variant")).to.equal("round");
-    expect(el.getAttribute("size")).to.equal("medium");
-    expect(el.getAttribute("state")).to.equal("primary");
-    expect(el.getAttribute("type")).to.equal("fill");
+    const descendant = el.shadowRoot!.querySelector(".f-button")!;
+    expect(descendant.getAttribute("variant")).to.equal("round");
+    expect(descendant.getAttribute("size")).to.equal("medium");
+    expect(descendant.getAttribute("state")).to.equal("primary");
+    expect(descendant.getAttribute("category")).to.equal("fill");
   });
 
   it("should render icon left", async () => {
     const el = await fixture(
       html` <f-button label="abc" icon-left="i-plus"></f-button> `
     );
-    const icon = el.children[0];
+    const descendant = el.shadowRoot!.querySelector(".f-button")!;
+    const icon = descendant.children[0];
     expect(icon).instanceOf(FIcon);
   });
   it("should render icon right", async () => {
     const el = await fixture(
       html` <f-button label="abc" icon-right="i-plus"></f-button> `
     );
-    const icon = el.children[0];
+    const descendant = el.shadowRoot!.querySelector(".f-button")!;
+    const icon = descendant.children[0];
     expect(icon).instanceOf(FIcon);
   });
   it("should render counter", async () => {
     const el = await fixture(
       html` <f-button label="abc" counter="88"></f-button> `
     );
-    const counter = el.children[el.children.length - 1];
+    const descendant = el.shadowRoot!.querySelector(".f-button")!;
+    const counter = descendant.children[descendant.children.length - 1];
     expect(counter).instanceOf(FCounter);
-    expect(counter.textContent).equal("88");
+    const descCounter = counter.shadowRoot!.querySelector(".f-counter")!;
+    expect(descCounter.textContent?.trim()).equal("88");
   });
   it("should render loader", async () => {
     const el = await fixture(html` <f-button label="abc" loading></f-button> `);
-    const loading = el.children[0];
+    const descendant = el.shadowRoot!.querySelector(".f-button")!;
+    const loading = descendant.children[0];
     const svg = await fixture(loadingSVG);
     expect(loading.outerHTML).equal(svg.outerHTML);
   });

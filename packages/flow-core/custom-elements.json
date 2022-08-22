@@ -62,6 +62,14 @@
             "name": "*",
             "package": "\"./components/f-text/f-text\""
           }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-icon-button/f-icon-button\""
+          }
         }
       ]
     },
@@ -163,12 +171,12 @@
             },
             {
               "kind": "field",
-              "name": "type",
+              "name": "category",
               "type": {
                 "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
               },
               "default": "\"fill\"",
-              "attribute": "type",
+              "attribute": "category",
               "reflects": true
             },
             {
@@ -276,14 +284,6 @@
               "kind": "method",
               "name": "validateProperties",
               "description": "validation for all atrributes"
-            },
-            {
-              "kind": "method",
-              "name": "createRenderRoot",
-              "inheritedFrom": {
-                "name": "FElement",
-                "module": "src/mixins/components/f-element/f-element.ts"
-              }
             }
           ],
           "attributes": [
@@ -295,12 +295,12 @@
               "fieldName": "label"
             },
             {
-              "name": "type",
+              "name": "category",
               "type": {
                 "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
               },
               "default": "\"fill\"",
-              "fieldName": "type"
+              "fieldName": "category"
             },
             {
               "name": "size",
@@ -424,8 +424,7 @@
                 "text": "\"large\" | \"medium\" | \"small\" | undefined"
               },
               "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
+              "attribute": "size"
             },
             {
               "kind": "field",
@@ -434,8 +433,7 @@
                 "text": "\"primary\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | undefined"
               },
               "default": "\"neutral\"",
-              "attribute": "state",
-              "reflects": true
+              "attribute": "state"
             },
             {
               "kind": "field",
@@ -444,8 +442,7 @@
                 "text": "boolean | undefined"
               },
               "default": "false",
-              "attribute": "loading",
-              "reflects": true
+              "attribute": "loading"
             },
             {
               "kind": "field",
@@ -454,8 +451,7 @@
                 "text": "boolean | undefined"
               },
               "default": "false",
-              "attribute": "disabled",
-              "reflects": true
+              "attribute": "disabled"
             },
             {
               "kind": "field",
@@ -469,14 +465,6 @@
             {
               "kind": "method",
               "name": "validateProperties"
-            },
-            {
-              "kind": "method",
-              "name": "createRenderRoot",
-              "inheritedFrom": {
-                "name": "FElement",
-                "module": "src/mixins/components/f-element/f-element.ts"
-              }
             }
           ],
           "attributes": [
@@ -715,14 +703,6 @@
             {
               "kind": "method",
               "name": "applySize"
-            },
-            {
-              "kind": "method",
-              "name": "createRenderRoot",
-              "inheritedFrom": {
-                "name": "FElement",
-                "module": "src/mixins/components/f-element/f-element.ts"
-              }
             }
           ],
           "attributes": [
@@ -897,8 +877,7 @@
                 "text": "\"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
               },
               "default": "\"small\"",
-              "attribute": "size",
-              "reflects": true
+              "attribute": "size"
             },
             {
               "kind": "field",
@@ -907,8 +886,7 @@
                 "text": "| \"default\"\n    | \"secondary\"\n    | \"subtle\"\n    | \"primary\"\n    | \"success\"\n    | \"danger\"\n    | \"warning\"\n    | \"neutral\" | undefined"
               },
               "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
+              "attribute": "state"
             },
             {
               "kind": "field",
@@ -916,8 +894,7 @@
               "type": {
                 "text": "string"
               },
-              "attribute": "source",
-              "reflects": true
+              "attribute": "source"
             },
             {
               "kind": "field",
@@ -926,8 +903,7 @@
                 "text": "boolean | undefined"
               },
               "default": "false",
-              "attribute": "disabled",
-              "reflects": true
+              "attribute": "disabled"
             },
             {
               "kind": "field",
@@ -936,8 +912,7 @@
                 "text": "boolean | undefined"
               },
               "default": "false",
-              "attribute": "loading",
-              "reflects": true
+              "attribute": "loading"
             },
             {
               "kind": "field",
@@ -946,8 +921,7 @@
                 "text": "boolean | undefined"
               },
               "default": "false",
-              "attribute": "clickable",
-              "reflects": true
+              "attribute": "clickable"
             },
             {
               "kind": "field",
@@ -961,14 +935,6 @@
               "kind": "method",
               "name": "validateProperties",
               "description": "validation for all atrributes"
-            },
-            {
-              "kind": "method",
-              "name": "createRenderRoot",
-              "inheritedFrom": {
-                "name": "FElement",
-                "module": "src/mixins/components/f-element/f-element.ts"
-              }
             }
           ],
           "attributes": [
@@ -1049,182 +1015,179 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/mixins/svg/loader.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "src/mixins/svg/loader.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/mixins/svg/notFound.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "src/mixins/svg/notFound.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/modules/config/index.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "ConfigUtil",
-          "type": {
-            "text": "object"
-          },
-          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    if (cfg.theme) {\n      this.initTheme();\n    }\n  },\n  initTheme() {\n    const themeElement = initThemeTag();\n\n    if (themeElement) {\n      const themeCSS = getThemeStyle(`[flow-element][theme=\"${config.theme}\"]`);\n\n      if (themeCSS) {\n        themeElement.appendChild(document.createTextNode(themeCSS));\n      } else {\n        console.error(\n          `Theme ${config.theme} CSS file/selector not found! \\n Please check if css is imported 'import \"@cldcvr/flow-core/dist/style.css\"'`\n        );\n      }\n    }\n  },\n}"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "ConfigUtil",
-          "declaration": {
-            "name": "ConfigUtil",
-            "module": "src/modules/config/index.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-text/_f-text_editable.ts",
+      "path": "src/components/f-icon-button/f-icon-button.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "FTextBackup",
+          "name": "FIconButton",
           "members": [
             {
               "kind": "field",
-              "name": "editable",
+              "name": "icon",
               "type": {
-                "text": "boolean | undefined"
+                "text": "string"
               },
-              "default": "false",
-              "attribute": "editable",
+              "attribute": "icon"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "FIconButtonVariant | undefined"
+              },
+              "default": "\"round\"",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "FIconButtonType | undefined"
+              },
+              "default": "\"fill\"",
+              "attribute": "type"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "FIconButtonSize | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FIconButtonState | undefined"
+              },
+              "default": "\"primary\"",
+              "attribute": "state"
+            },
+            {
+              "kind": "field",
+              "name": "counter",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "counter",
               "reflects": true
             },
             {
               "kind": "field",
-              "name": "expandable",
+              "name": "loading",
               "type": {
                 "text": "boolean | undefined"
               },
               "default": "false",
-              "attribute": "expandable",
+              "attribute": "loading",
               "reflects": true
             },
             {
               "kind": "field",
-              "name": "_contentBeforeFocus",
+              "name": "disabled",
               "type": {
-                "text": "string"
+                "text": "boolean | undefined"
               },
-              "privacy": "protected",
-              "default": "\"\""
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
             },
             {
               "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "protected",
-              "default": "\"\""
-            },
-            {
-              "kind": "method",
-              "name": "_handleFocusIn"
-            },
-            {
-              "kind": "method",
-              "name": "_handleKeyUp",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "KeyboardEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "isTextClamped"
-            },
-            {
-              "kind": "method",
-              "name": "createRenderRoot",
-              "inheritedFrom": {
-                "name": "FElement",
-                "module": "src/mixins/components/f-element/f-element.ts"
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "input",
-              "type": {
-                "text": "Event"
-              }
+              "name": "counterSize",
+              "description": "compute counter size based on button size"
             }
           ],
           "attributes": [
             {
-              "name": "editable",
+              "name": "icon",
               "type": {
-                "text": "boolean | undefined"
+                "text": "string"
               },
-              "default": "false",
-              "fieldName": "editable"
+              "fieldName": "icon"
             },
             {
-              "name": "expandable",
+              "name": "variant",
+              "type": {
+                "text": "FIconButtonVariant | undefined"
+              },
+              "default": "\"round\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "FIconButtonType | undefined"
+              },
+              "default": "\"fill\"",
+              "fieldName": "type"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "FIconButtonSize | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FIconButtonState | undefined"
+              },
+              "default": "\"primary\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "counter",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "counter"
+            },
+            {
+              "name": "loading",
               "type": {
                 "text": "boolean | undefined"
               },
               "default": "false",
-              "fieldName": "expandable"
+              "fieldName": "loading"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
             }
           ],
           "superclass": {
             "name": "FElement",
             "module": "/src/mixins/components/f-element/f-element"
           },
-          "summary": "Text component includes Headings, titles, body texts and links.",
-          "tagName": "f-text-backup",
+          "tagName": "f-icon-button",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "FTextBackup",
+          "name": "FIconButton",
           "declaration": {
-            "name": "FTextBackup",
-            "module": "src/components/f-text/_f-text_editable.ts"
+            "name": "FIconButton",
+            "module": "src/components/f-icon-button/f-icon-button.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "f-text-backup",
+          "name": "f-icon-button",
           "declaration": {
-            "name": "FTextBackup",
-            "module": "src/components/f-text/_f-text_editable.ts"
+            "name": "FIconButton",
+            "module": "src/components/f-icon-button/f-icon-button.ts"
           }
         }
       ]
@@ -1316,14 +1279,6 @@
               "default": "false",
               "attribute": "ellipsis",
               "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "createRenderRoot",
-              "inheritedFrom": {
-                "name": "FElement",
-                "module": "src/mixins/components/f-element/f-element.ts"
-              }
             }
           ],
           "attributes": [
@@ -1421,18 +1376,65 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/mixins/svg/loader.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/mixins/svg/loader.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/mixins/svg/notFound.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/mixins/svg/notFound.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/modules/config/index.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "ConfigUtil",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    if (cfg.theme) {\n      this.initTheme();\n    }\n  },\n  initTheme() {\n    const themeElement = initThemeTag();\n\n    if (themeElement) {\n      const themeCSS = getThemeStyle(`[flow-element][theme=\"${config.theme}\"]`);\n\n      if (themeCSS) {\n        themeElement.appendChild(document.createTextNode(themeCSS));\n      } else {\n        console.error(\n          `Theme ${config.theme} CSS file/selector not found! \\n Please check if css is imported 'import \"@cldcvr/flow-core/dist/style.css\"'`\n        );\n      }\n    }\n  },\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ConfigUtil",
+          "declaration": {
+            "name": "ConfigUtil",
+            "module": "src/modules/config/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/mixins/components/f-element/f-element.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
           "name": "FElement",
-          "members": [
-            {
-              "kind": "method",
-              "name": "createRenderRoot"
-            }
-          ],
+          "members": [],
           "superclass": {
             "name": "LitElement",
             "package": "lit"

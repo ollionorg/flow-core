@@ -20,7 +20,7 @@ const Icon_Left_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="add"
-            type="outline"
+            category="outline"
             icon-left="i-plus"
             .state=${state}
           ></f-button>
@@ -44,7 +44,7 @@ const Icon_Left_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="add"
-            type="outline"
+            category="outline"
             variant="curved"
             icon-left="i-plus"
             .state=${state}
@@ -58,7 +58,7 @@ const Icon_Left_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="add"
-            type="transparent"
+            category="transparent"
             variant="curved"
             icon-left="i-plus"
             .state=${state}
@@ -79,7 +79,7 @@ const Icon_Left_Template: Story<unknown> = () => {
       (size) =>
         html`<f-button
             label="add"
-            type="outline"
+            category="outline"
             icon-left="i-plus"
             .size=${size}
           ></f-button>
@@ -105,7 +105,7 @@ const Icon_Left_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="add"
-            type="outline"
+            category="outline"
             variant="block"
             icon-left="i-plus"
             .state=${state}

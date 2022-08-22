@@ -16,48 +16,56 @@ $states: (
     "hover": var(--color-surface-subtle-hover),
     "selected": var(--color-surface-subtle-selected),
     "border": var(--color-primary-default),
+    "color": var(--color-text-subtle),
   ),
   "default": (
     "background": var(--color-surface-default),
     "hover": var(--color-surface-default-hover),
     "selected": var(--color-surface-default-selected),
     "border": var(--color-primary-default),
+    "color": var(--color-text-default),
   ),
   "secondary": (
     "background": var(--color-surface-secondary),
     "hover": var(--color-surface-secondary-hover),
     "selected": var(--color-surface-secondary-selected),
     "border": var(--color-primary-default),
+    "color": var(--color-text-secondary),
   ),
   "tertiary": (
     "background": var(--color-surface-tertiary),
     "hover": var(--color-surface-tertiary-hover),
     "selected": var(--color-surface-tertiary-selected),
     "border": var(--color-primary-default),
+    "color": var(--color-text-default),
   ),
   "success": (
     "background": var(--color-success-surface),
     "hover": var(--color-success-surface-hover),
     "selected": var(--color-success-surface-selected),
     "border": var(--color-success-default),
+    "color": var(--color-success-text),
   ),
   "primary": (
     "background": var(--color-primary-surface),
     "hover": var(--color-primary-surface-hover),
     "selected": var(--color-primary-surface-selected),
     "border": var(--color-primary-default),
+    "color": var(--color-primary-text),
   ),
   "warning": (
     "background": var(--color-warning-surface),
     "hover": var(--color-warning-surface-hover),
     "selected": var(--color-warning-surface-selected),
     "border": var(--color-warning-default),
+    "color": var(--color-warning-text),
   ),
   "danger": (
     "background": var(--color-danger-surface),
     "hover": var(--color-danger-surface-hover),
     "selected": var(--color-danger-surface-selected),
     "border": var(--color-danger-default),
+    "color": var(--color-danger-text),
   ),
 );
 
@@ -65,6 +73,9 @@ f-div {
   @include base();
   display: flex;
   position: relative;
+  font-weight: 400;
+  font-size: 14pt;
+  color: var(--color-text-default);
 
   @each $gap, $value in $gaps {
     &[gap="#{$gap}"] {
@@ -74,6 +85,7 @@ f-div {
   @each $state, $value in $states {
     &[state="#{$state}"] {
       background-color: map.get($value, "background");
+      color: map.get($value, "color");
       &[clickable] {
         &:hover {
           background-color: map.get($value, "hover");
@@ -335,5 +347,26 @@ f-div {
 
   &[variant="curved"] {
     border-radius: 4px;
+  }
+}
+
+:host {
+  @include rotate("svg");
+  .loader-svg {
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    top: calc(50% - 12px);
+    left: calc(50% - 12px);
+  }
+}
+
+f-div {
+  f-icon-button {
+    &[variant="block"] {
+      display: flex;
+      flex: 1 1 auto;
+      width: auto;
+    }
   }
 }

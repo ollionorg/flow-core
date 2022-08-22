@@ -247,7 +247,9 @@ export class FDiv extends FElement {
     this.applyBorder();
     this.applyPadding();
     this.applySize();
-    return html`${this.loading === "loader" ? html`${unsafeSVG(loader)}` : ""}`;
+    return html`<slot></slot>${this.loading === "loader"
+        ? html`${unsafeSVG(loader)}`
+        : ""}`;
   }
 }
 

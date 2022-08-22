@@ -22,13 +22,15 @@ describe("f-icon", () => {
 
   it("should render with all default properties", async () => {
     const el = await fixture(html` <f-icon source="😋"></f-counter> `);
-    expect(el.getAttribute("size")).to.equal("small");
-    expect(el.getAttribute("state")).to.equal("default");
+    const descendant = el.shadowRoot!.querySelector(".f-icon")!;
+    expect(descendant.getAttribute("size")).to.equal("small");
+    expect(descendant.getAttribute("state")).to.equal("default");
   });
 
   it("should render loader", async () => {
-    const el = await fixture(html` <f-counter label="12" loading></f-counter>`);
-    const loading = el.children[0];
+    const el = await fixture(html` <f-icon source="😋" loading></f-icon>`);
+    const descendant = el.shadowRoot!.querySelector(".f-icon")!;
+    const loading = descendant.children[0];
     const svg = await fixture(loadingSVG);
     expect(loading.outerHTML).equal(svg.outerHTML);
   });

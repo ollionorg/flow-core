@@ -27,13 +27,13 @@ export class FIcon extends FElement {
   /**
    * @attribute The small size is the default.
    */
-  @property({ reflect: true, type: String })
+  @property({ type: String })
   size?: "x-large" | "large" | "medium" | "small" | "x-small" = "small";
 
   /**
    * @attribute The state of an Icon helps in indicating the degree of emphasis. The Icon component inherits the state from the parent component. By default it is subtle.
    */
-  @property({ reflect: true, type: String })
+  @property({ type: String })
   state?:
     | "default"
     | "secondary"
@@ -49,7 +49,6 @@ export class FIcon extends FElement {
    */
   @property({
     type: String,
-    reflect: true,
   })
   get source(): string {
     return this._source;
@@ -86,19 +85,19 @@ export class FIcon extends FElement {
   /**
    * @attribute The disabled attribute can be set to keep a user from clicking on the f-icon.
    */
-  @property({ reflect: true, type: Boolean })
+  @property({ type: Boolean })
   disabled?: boolean = false;
 
   /**
    * @attribute display loader
    */
-  @property({ reflect: true, type: Boolean })
+  @property({ type: Boolean })
   loading?: boolean = false;
 
   /**
    * @attribute is clickable
    */
-  @property({ reflect: true, type: Boolean })
+  @property({ type: Boolean })
   clickable?: boolean = false;
 
   readonly required = ["source"];
@@ -114,11 +113,21 @@ export class FIcon extends FElement {
 
   render() {
     this.validateProperties();
-    return html`${this.loading
-      ? html`${unsafeSVG(loader)}`
-      : html`${this.isURLSource
-          ? unsafeHTML(this.source)
-          : unsafeSVG(this.source)}`}`;
+
+    return html`<div
+      class="f-icon ${this.classList.toString()}"
+      state=${this.state}
+      size=${this.size}
+      ?disabled=${this.disabled}
+      ?loading=${this.loading}
+      ?clickable=${this.clickable}
+    >
+      ${this.loading
+        ? html`${unsafeSVG(loader)}`
+        : html`${this.isURLSource
+            ? unsafeHTML(this.source)
+            : unsafeSVG(this.source)}`}
+    </div>`;
   }
 }
 

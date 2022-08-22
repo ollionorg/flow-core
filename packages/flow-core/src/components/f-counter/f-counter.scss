@@ -46,42 +46,52 @@ $states: (
   ),
 );
 
-f-counter {
-  @include base();
+:host {
   display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 400;
+  vertical-align: top;
 
-  @each $size, $value in $sizes {
-    &[size="#{$size}"] {
-      height: map.get($value, "height");
-      border-radius: math.div(map.get($value, "height"), 2);
-      font-size: map.get($value, "fontSize");
-      line-height: map.get($value, "lineHeight");
-      padding: map.get($value, "padding");
-      svg {
-        height: map.get($value, "height") - 8px;
+  div.f-counter {
+    &.fill-button-surface[state] {
+      background-color: var(--color-surface-default);
+      color: var(--color-text-default);
+    }
+    @include base();
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+
+    @each $size, $value in $sizes {
+      &[size="#{$size}"] {
+        height: map.get($value, "height");
+        border-radius: math.div(map.get($value, "height"), 2);
+        font-size: map.get($value, "fontSize");
+        line-height: map.get($value, "lineHeight");
+        padding: map.get($value, "padding");
+        svg {
+          height: map.get($value, "height") - 8px;
+        }
       }
     }
-  }
 
-  @each $state, $value in $states {
-    &[state="#{$state}"] {
-      color: map.get($value, "label");
-      background-color: map.get($value, "background");
-
-      &[loading] {
-        background-color: var(--color-primary-surface);
+    @each $state, $value in $states {
+      &[state="#{$state}"] {
+        --color: #{map.get($value, "label")};
+        --background-color: #{map.get($value, "background")};
+        color: var(--color);
+        background-color: var(--background-color);
+        &[loading] {
+          background-color: var(--color-primary-surface);
+        }
       }
     }
-  }
 
-  &[disabled] {
-    @include disabled();
-  }
+    &[disabled] {
+      @include disabled();
+    }
 
-  &[loading] {
-    @include rotate("svg");
+    &[loading] {
+      @include rotate("svg");
+    }
   }
 }

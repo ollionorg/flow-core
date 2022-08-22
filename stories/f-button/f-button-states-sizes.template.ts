@@ -35,7 +35,11 @@ const StatesAndSizesTemplate: Story<unknown> = () => {
     <br />
     ${states.map(
       (state) =>
-        html`<f-button label="label" type="outline" .state=${state}></f-button>
+        html`<f-button
+            label="label"
+            category="outline"
+            .state=${state}
+          ></f-button>
           &nbsp;`
     )}
     <br />
@@ -55,7 +59,7 @@ const StatesAndSizesTemplate: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="label"
-            type="outline"
+            category="outline"
             variant="curved"
             .state=${state}
           ></f-button>
@@ -68,7 +72,7 @@ const StatesAndSizesTemplate: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="label"
-            type="transparent"
+            category="transparent"
             variant="curved"
             .state=${state}
           ></f-button>
@@ -84,7 +88,11 @@ const StatesAndSizesTemplate: Story<unknown> = () => {
     <br />
     ${sizes.map(
       (size) =>
-        html`<f-button label="label" type="outline" .size=${size}></f-button>
+        html`<f-button
+            label="label"
+            category="outline"
+            .size=${size}
+          ></f-button>
           &nbsp;`
     )}
 
@@ -102,7 +110,7 @@ const StatesAndSizesTemplate: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="label"
-            type="outline"
+            category="outline"
             variant="block"
             .state=${state}
           ></f-button>

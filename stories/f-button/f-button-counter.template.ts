@@ -16,7 +16,7 @@ const Counter_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="label"
-            type="outline"
+            category="outline"
             counter="88"
             .state=${state}
           ></f-button>
@@ -40,7 +40,7 @@ const Counter_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="label"
-            type="outline"
+            category="outline"
             variant="curved"
             counter="88"
             .state=${state}
@@ -54,7 +54,7 @@ const Counter_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="label"
-            type="transparent"
+            category="transparent"
             variant="curved"
             counter="88"
             .state=${state}
@@ -75,7 +75,7 @@ const Counter_Template: Story<unknown> = () => {
       (size) =>
         html`<f-button
             label="label"
-            type="outline"
+            category="outline"
             counter="88"
             .size=${size}
           ></f-button>
@@ -101,7 +101,7 @@ const Counter_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="label"
-            type="outline"
+            category="outline"
             variant="block"
             counter="88"
             .state=${state}

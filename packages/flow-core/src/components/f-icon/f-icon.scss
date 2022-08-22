@@ -44,63 +44,86 @@ $states: (
   ),
 );
 
-f-icon {
-  @include base();
+:host {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  vertical-align: top;
+  div.f-icon {
+    @include base();
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-  @each $state, $value in $states {
-    &[state="#{$state}"] {
-      svg {
-        fill: map.get($value, "fill");
-        stroke: none;
-        *[fill^="white"] {
+    @each $state, $value in $states {
+      &[state="#{$state}"] {
+        svg {
           fill: map.get($value, "fill");
+          stroke: none;
+          *[fill^="white"] {
+            fill: map.get($value, "fill");
+          }
         }
-      }
 
-      &[clickable] {
-        cursor: pointer;
-        &:hover {
-          svg {
-            fill: map.get($value, "hover-fill");
-            stroke: none;
-            *[fill^="white"] {
+        &[clickable] {
+          cursor: pointer;
+          &:hover {
+            svg {
               fill: map.get($value, "hover-fill");
+              stroke: none;
+              *[fill^="white"] {
+                fill: map.get($value, "hover-fill");
+              }
             }
           }
         }
       }
     }
-  }
+    &.fill-button-surface {
+      svg {
+        fill: var(--color-surface-default) !important;
+        stroke: none;
+        *[fill^="white"] {
+          fill: var(--color-surface-default) !important;
+        }
+      }
 
-  /**
-  * Iterating over sizes with padding, fontsize, height
-  **/
-  @each $size, $value in $sizes {
-    &[size="#{$size}"] {
-      font-size: $value;
-      line-height: $value;
-      width: $value;
-      height: $value;
-      svg,
-      img {
-        width: $value;
-        height: $value;
+      &:hover {
+        svg {
+          fill: var(--color-surface-default-hover);
+          stroke: none;
+          *[fill^="white"] {
+            fill: var(--color-surface-default-hover);
+          }
+        }
       }
     }
-  }
 
-  &[disabled] {
-    @include disabled();
-  }
+    /**
+  * Iterating over sizes with padding, fontsize, height
+  **/
+    @each $size, $value in $sizes {
+      &[size="#{$size}"] {
+        font-size: $value;
+        line-height: $value;
+        width: $value;
+        height: $value;
+        svg,
+        img {
+          width: $value;
+          height: $value;
+        }
+      }
+    }
 
-  &[loading] {
-    @include rotate("svg");
-  }
+    &[disabled] {
+      @include disabled();
+    }
 
-  &:focus {
-    outline: var(--color-highlight-default) solid 2px;
+    &[loading] {
+      @include rotate("svg");
+    }
+
+    &:focus {
+      outline: var(--color-highlight-default) solid 2px;
+    }
   }
 }

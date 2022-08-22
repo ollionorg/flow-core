@@ -20,7 +20,7 @@ const Icon_Right_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="done"
-            type="outline"
+            category="outline"
             icon-right="i-tick"
             .state=${state}
           ></f-button>
@@ -44,7 +44,7 @@ const Icon_Right_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="done"
-            type="outline"
+            category="outline"
             variant="curved"
             icon-right="i-tick"
             .state=${state}
@@ -58,7 +58,7 @@ const Icon_Right_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="done"
-            type="transparent"
+            category="transparent"
             variant="curved"
             icon-right="i-tick"
             .state=${state}
@@ -83,7 +83,7 @@ const Icon_Right_Template: Story<unknown> = () => {
       (size) =>
         html`<f-button
             label="done"
-            type="outline"
+            category="outline"
             icon-right="i-tick"
             .size=${size}
           ></f-button>
@@ -109,7 +109,7 @@ const Icon_Right_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="done"
-            type="outline"
+            category="outline"
             variant="block"
             icon-right="i-tick"
             .state=${state}

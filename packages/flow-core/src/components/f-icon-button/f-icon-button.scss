@@ -2,6 +2,33 @@
 @use "sass:math";
 @import "./../../mixins/scss/mixins";
 
+$sizes: (
+  "x-small": (
+    "size": 20px,
+    "padding": 0px 8px,
+    "gap": 4px,
+    "loaderSize": 12px,
+  ),
+  "small": (
+    "size": 28px,
+    "padding": 0px 12px,
+    "gap": 8px,
+    "loaderSize": 16px,
+  ),
+  "medium": (
+    "size": 36px,
+    "padding": 0px 16px,
+    "gap": 12px,
+    "loaderSize": 20px,
+  ),
+  "large": (
+    "size": 44px,
+    "padding": 0px 20px,
+    "gap": 16px,
+    "loaderSize": 24px,
+  ),
+);
+
 $states: (
   "primary": (
     "background": var(--color-primary-default),
@@ -30,53 +57,51 @@ $states: (
   ),
 );
 
-$sizes: (
-  "x-small": (
-    "height": 20px,
-    "padding": 0px 8px,
-    "fontSize": 10px,
-    "gap": 4px,
-    "loaderSize": 12px,
-  ),
-  "small": (
-    "height": 28px,
-    "padding": 0px 12px,
-    "fontSize": 12px,
-    "gap": 8px,
-    "loaderSize": 16px,
-  ),
-  "medium": (
-    "height": 36px,
-    "padding": 0px 16px,
-    "fontSize": 14px,
-    "gap": 12px,
-    "loaderSize": 20px,
-  ),
-  "large": (
-    "height": 44px,
-    "padding": 0px 20px,
-    "fontSize": 16px,
-    "gap": 16px,
-    "loaderSize": 24px,
-  ),
-);
-
 :host {
-  .f-button {
-    @include base();
+  @include base();
+  display: inline-flex;
+  vertical-align: top;
+  align-items: center;
+  height: fit-content;
+  width: fit-content;
+  .f-icon-button {
     cursor: pointer;
     display: inline-flex;
-    align-items: center;
     justify-content: center;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: var(--color-surface-default);
-    flex: 0 0 auto;
-    vertical-align: top;
-    width: fit-content;
-
+    align-items: center;
+    padding: 0px;
+    @each $size, $value in $sizes {
+      &[size="#{$size}"] {
+        height: map-get($value, "size");
+        min-width: map-get($value, "size");
+        &[counter] {
+          padding: map-get($value, "padding");
+          gap: map-get($value, "gap");
+        }
+        &[variant="round"] {
+          border-radius: math.div(map-get($value, "size"), 2);
+        }
+        &[variant="curved"] {
+          border-radius: 4px;
+        }
+        &[type="packed"] {
+          height: fit-content;
+          min-width: fit-content;
+        }
+        &[variant="block"] {
+          display: flex;
+          flex: 1 1 auto;
+          width: 100%;
+        }
+        &[loading] {
+          svg {
+            height: map.get($value, "loaderSize");
+          }
+        }
+      }
+    }
     @each $state, $color in $states {
-      &[state="#{$state}"][category="fill"] {
+      &[state="#{$state}"][type="fill"] {
         background-color: map.get($color, "background");
         border: 1px
           solid
@@ -88,108 +113,70 @@ $sizes: (
           background-color: map.get($color, "hover");
           border: 1px solid map.get($color, "hover");
         }
+
         &[loading] {
           background-color: map.get($color, "loading");
           border: 1px solid map.get($color, "loading");
-          color: transparent;
+
           svg path.loader-fill {
             fill: map.get($color, "background");
           }
         }
       }
-
-      &[state="#{$state}"][category="outline"] {
+      &[state="#{$state}"][type="outline"] {
         background-color: transparent;
-        border: 1px solid map.get($color, "background");
-        color: map.get($color, "background");
+        border: 1px
+          solid
+          map.get(
+            $color,
+            "background"
+          ); // added to match width of outline category
         &:hover {
+          background-color: transparent;
           border: 1px solid map.get($color, "hover");
-          color: map.get($color, "hover");
         }
-
         &[loading] {
           border: 1px solid map.get($color, "background");
-          color: transparent;
+
           svg path.loader-fill {
             fill: map.get($color, "background");
           }
         }
       }
-
-      &[state="#{$state}"][category="transparent"] {
+      &[state="#{$state}"][type="transparent"],
+      &[state="#{$state}"][type="packed"],
+      &[state="#{$state}"][variant="block"] {
         background-color: transparent;
-        border: 1px solid transparent;
-        color: map.get($color, "background");
+        border: 1px
+          solid
+          transparent; // added to match width of outline category
         &:hover {
+          background-color: transparent;
           border: 1px solid transparent;
-          color: map.get($color, "hover");
         }
         &[loading] {
-          color: transparent;
           svg path.loader-fill {
             fill: map.get($color, "background");
           }
         }
       }
     }
-
-    /**
-  * Iterating over sizes with padding, fontsize, height
-  **/
-    @each $size, $value in $sizes {
-      &[size="#{$size}"] {
-        height: map.get($value, "height");
-        padding: map.get($value, "padding");
-        font-size: map.get($value, "fontSize");
-        &[variant="round"] {
-          border-radius: math.div(map.get($value, "height"), 2);
-        }
-
-        f-counter {
-          margin-left: map.get($value, "gap");
-        }
-
-        > .left-icon {
-          margin-right: map.get($value, "gap");
-        }
-        > .right-icon {
-          margin-left: map.get($value, "gap");
-        }
-
-        &[loading] {
-          svg {
-            height: map.get($value, "loaderSize");
-          }
-        }
-      }
-    }
-
-    &[variant="curved"] {
-      border-radius: 4px;
-    }
-
-    &[variant="block"] {
-      display: flex;
-      flex: 1 1 auto;
-      width: 100%;
-    }
-
     &[disabled] {
       @include disabled();
     }
-
     &[loading] {
       @include rotate("svg");
       pointer-events: none;
-
+      > *:not(.loader-svg) {
+        visibility: hidden;
+      }
       svg {
         position: absolute;
       }
     }
   }
 }
-
-f-button {
+f-icon-button {
   &[variant="block"] {
     display: flex;
     flex: 1 1 auto;

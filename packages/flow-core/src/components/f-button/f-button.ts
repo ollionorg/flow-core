@@ -4,6 +4,7 @@ import { FElement } from "../../mixins/components/f-element/f-element";
 import eleStyle from "./f-button.scss";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
+import { classMap } from "lit-html/directives/class-map.js";
 
 /**
  * @summary Buttons allow users to perform an action or to initiate a new function.
@@ -22,10 +23,10 @@ export class FButton extends FElement {
   label!: string;
 
   /**
-   * @attribute type of button
+   * @attribute category of button
    */
   @property({ reflect: true, type: String })
-  type?: "fill" | "outline" | "transparent" = "fill";
+  category?: "fill" | "outline" | "transparent" = "fill";
 
   /**
    * @attribute The medium size is the default and recommended option.
@@ -109,15 +110,19 @@ export class FButton extends FElement {
 
   render() {
     this.validateProperties();
-
+    const iconClasses = {
+      "fill-button-surface": this.category === "fill",
+    };
     /**
      * create iconLeft if available
      */
     const iconLeft = this.iconLeft
       ? html`<f-icon
           .source=${this.iconLeft}
-          class="left-icon"
+          .state=${this.state}
+          class=${classMap({ "left-icon": true, ...iconClasses })}
           .size=${this.size}
+          clickable
         ></f-icon>`
       : "";
     /**
@@ -126,27 +131,54 @@ export class FButton extends FElement {
     const iconRight = this.iconRight
       ? html`<f-icon
           .source=${this.iconRight}
-          class="right-icon"
+          .state=${this.state}
+          class=${classMap({ "right-icon": true, ...iconClasses })}
           .size=${this.size}
+          clickable
         ></f-icon>`
       : "";
 
     /**
      * create counter if available
      */
+    const counterClasses = {
+      "fill-button-surface": this.category === "fill",
+    };
     const counter = this.counter
       ? html`<f-counter
+          .state=${this.category === "fill" ? "neutral" : this.state}
           .size=${this.counterSize}
           .label=${this.counter}
+          class=${classMap(counterClasses)}
         ></f-counter>`
       : "";
     /**
      * render loading if required
      */
     if (this.loading) {
-      return html`${unsafeSVG(loader)}${this.label}`;
+      return html`<button
+        category=${this.category}
+        size=${this.size}
+        state=${this.state}
+        variant=${this.variant}
+        ?loading=${this.loading}
+        ?disabled=${this.disabled}
+        class="f-button"
+      >
+        ${unsafeSVG(loader)}${this.label}
+      </button>`;
     }
-    return html`${iconLeft}${this.label}${iconRight}${counter}`;
+    return html`<button
+      category=${this.category}
+      size=${this.size}
+      state=${this.state}
+      variant=${this.variant}
+      ?loading=${this.loading}
+      ?disabled=${this.disabled}
+      class="f-button"
+    >
+      ${iconLeft}${this.label}${iconRight}${counter}
+    </button>`;
   }
 }
 

@@ -122,13 +122,13 @@ const Template: Story<unknown> = () => {
         <f-button
           label="height hug content"
           icon-left="i-plus"
-          direction="block"
+          variant="block"
         ></f-button>
         <f-button
           label="height hug content"
           icon-right="i-alarm"
           state="warning"
-          direction="block"
+          variant="block"
         ></f-button>
       </f-div>
 
@@ -234,7 +234,7 @@ const STemplate: Story<Record<string, string>> = (
         .selected=${args.selected}
       >
         <f-icon source="i-flag" size="large"></f-icon>
-        <f-text>Select state from controls to change</f-text>
+        Select state from controls to change
       </f-div>
     </f-div>
   `;
@@ -363,7 +363,7 @@ const VTemplate: Story<Record<string, string>> = (
   args: Record<string, string>
 ) => {
   return html`
-    <f-div width="100%" gap="small" direction="row">
+    <f-div width="100%" gap="small" direction="column">
       <f-div padding="small" .variant=${args.variant} state="secondary">
         <f-text
           >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
@@ -375,6 +375,16 @@ const VTemplate: Story<Record<string, string>> = (
           sit amet fringilla lorem, non semper quam. Pellentesque finibus
           convallis mauris ac tempor.</f-text
         >
+      </f-div>
+      <f-div padding="small" .variant=${args.variant} state="secondary">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam malesuada
+        fringilla eleifend. Sed pulvinar neque eu nisl tristique bibendum. Morbi
+        non facilisis neque. Ut fermentum ligula vitae commodo volutpat. Vivamus
+        vestibulum vitae metus vel venenatis. Phasellus ut nunc nunc. Cras
+        rutrum tellus ligula, vel accumsan lectus luctus vel. Vestibulum vel
+        nisi tellus. Donec dictum nisi at semper ultrices. Sed sit amet
+        fringilla lorem, non semper quam. Pellentesque finibus convallis mauris
+        ac tempor.
       </f-div>
     </f-div>
   `;

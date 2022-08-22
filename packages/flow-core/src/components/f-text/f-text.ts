@@ -77,6 +77,6 @@ export class FText extends FElement {
       }
     }
 
-    return html``;
+    return html`<slot></slot>`;
   }
 }

@@ -17,7 +17,7 @@ const LoadingTemplate: Story<unknown> = () => {
         html`<f-button
             label="longloading"
             loading
-            type="outline"
+            category="outline"
             .state=${state}
           ></f-button>
           &nbsp;`
@@ -41,7 +41,7 @@ const LoadingTemplate: Story<unknown> = () => {
         html`<f-button
             label="longloading"
             loading
-            type="outline"
+            category="outline"
             variant="curved"
             .state=${state}
           ></f-button>
@@ -55,7 +55,7 @@ const LoadingTemplate: Story<unknown> = () => {
         html`<f-button
             label="longloading"
             loading
-            type="transparent"
+            category="transparent"
             variant="curved"
             .state=${state}
           ></f-button>
@@ -76,7 +76,7 @@ const LoadingTemplate: Story<unknown> = () => {
         html`<f-button
             label="longloading"
             loading
-            type="outline"
+            category="outline"
             .size=${size}
           ></f-button>
           &nbsp;`
@@ -102,7 +102,7 @@ const LoadingTemplate: Story<unknown> = () => {
         html`<f-button
             label="longloading"
             loading
-            type="outline"
+            category="outline"
             variant="block"
             .state=${state}
           ></f-button>

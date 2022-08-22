@@ -22,7 +22,7 @@ const Icon_Left_Right_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="done"
-            type="outline"
+            category="outline"
             icon-right="i-generic"
             icon-left="i-generic"
             counter="88"
@@ -50,7 +50,7 @@ const Icon_Left_Right_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="done"
-            type="outline"
+            category="outline"
             variant="curved"
             icon-right="i-generic"
             icon-left="i-generic"
@@ -66,7 +66,7 @@ const Icon_Left_Right_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="done"
-            type="transparent"
+            category="transparent"
             variant="curved"
             icon-right="i-generic"
             icon-left="i-generic"
@@ -95,7 +95,7 @@ const Icon_Left_Right_Template: Story<unknown> = () => {
       (size) =>
         html`<f-button
             label="done"
-            type="outline"
+            category="outline"
             icon-right="i-generic"
             icon-left="i-generic"
             counter="88"
@@ -125,7 +125,7 @@ const Icon_Left_Right_Template: Story<unknown> = () => {
       (state) =>
         html`<f-button
             label="done"
-            type="outline"
+            category="outline"
             variant="block"
             icon-right="i-generic"
             icon-left="i-generic"

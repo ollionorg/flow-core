@@ -7,8 +7,4 @@ import eleStyle from "./f-element.scss";
  */
 export class FElement extends LitElement {
   static styles = [unsafeCSS(eleStyle)];
-
-  createRenderRoot() {
-    return this;
-  }
 }

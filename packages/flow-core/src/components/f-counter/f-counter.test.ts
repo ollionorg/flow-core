@@ -13,19 +13,21 @@ describe("f-counter", () => {
 
   it("should render label in default slot", async () => {
     const el = await fixture(html` <f-counter label="888"></f-counter> `);
-
-    expect(el.textContent).to.equal("888");
+    const descendant = el.shadowRoot!.querySelector(".f-counter")!;
+    expect(descendant.textContent?.trim()).to.equal("888");
   });
 
   it("should render with all default properties", async () => {
     const el = await fixture(html` <f-counter label="78"></f-counter> `);
-    expect(el.getAttribute("size")).to.equal("medium");
-    expect(el.getAttribute("state")).to.equal("neutral");
+    const descendant = el.shadowRoot!.querySelector(".f-counter")!;
+    expect(descendant.getAttribute("size")).to.equal("medium");
+    expect(descendant.getAttribute("state")).to.equal("neutral");
   });
 
   it("should render loader", async () => {
     const el = await fixture(html` <f-counter label="12" loading></f-counter>`);
-    const loading = el.children[0];
+    const descendant = el.shadowRoot!.querySelector(".f-counter")!;
+    const loading = descendant.children[0];
     const svg = await fixture(loadingSVG);
     expect(loading.outerHTML).equal(svg.outerHTML);
   });

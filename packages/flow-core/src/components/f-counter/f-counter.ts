@@ -4,6 +4,7 @@ import eleStyle from "./f-counter.scss";
 import { FElement } from "../../mixins/components/f-element/f-element";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
+import { classMap } from "lit-html/directives/class-map.js";
 
 @customElement("f-counter")
 export class FCounter extends FElement {
@@ -20,25 +21,25 @@ export class FCounter extends FElement {
   /**
    * @attribute The medium size is the default.
    */
-  @property({ reflect: true, type: String })
+  @property({ type: String })
   size?: "large" | "medium" | "small" = "medium";
 
   /**
    * @attribute The state of a counter helps in indicating the degree of emphasis of the parent component. The counter component inherits the state from the parent component. By default it is subtle.
    */
-  @property({ reflect: true, type: String })
+  @property({ type: String })
   state?: "primary" | "success" | "warning" | "danger" | "neutral" = "neutral";
 
   /**
    * @attribute Loader icon replaces the content of the counter .
    */
-  @property({ reflect: true, type: Boolean })
+  @property({ type: Boolean })
   loading?: boolean = false;
 
   /**
    * @attribute The disabled attribute can be set to keep a user from clicking on the counter.
    */
-  @property({ reflect: true, type: Boolean })
+  @property({ type: Boolean })
   disabled?: boolean = false;
 
   /**
@@ -53,9 +54,19 @@ export class FCounter extends FElement {
   }
   render() {
     this.validateProperties();
-    return html`${this.loading
-      ? html`${unsafeSVG(loader)}`
-      : html`${this.label}`}`;
+    const classes = {
+      "f-counter": true,
+      [this.classList[0]]: true,
+    };
+    return html`<div
+      class=${classMap(classes)}
+      size=${this.size}
+      state=${this.state}
+      ?loading=${this.loading}
+      ?disabled=${this.disabled}
+    >
+      ${this.loading ? html`${unsafeSVG(loader)}` : html`${this.label}`}
+    </div>`;
   }
 }
 declare global {

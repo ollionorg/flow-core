@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { VueConstructor } from 'vue';
 import type { FDivBorderProp, FDivPaddingProp, FDivWidthProp, FDivHeightProp } from './src';
+import type { FIconButtonVariant, FIconButtonType, FIconButtonSize, FIconButtonState } from './src';
 declare module 'vue' {
     export interface GlobalComponents {
         'f-button': VueConstructor<
@@ -8,7 +9,7 @@ declare module 'vue' {
                 $props: {
                     label: string;
 
-                    type?: 'fill' | 'outline' | 'transparent' | undefined;
+                    category?: 'fill' | 'outline' | 'transparent' | undefined;
 
                     size?: 'large' | 'medium' | 'small' | 'x-small' | undefined;
 
@@ -143,12 +144,24 @@ declare module 'vue' {
             } & Vue
         >;
 
-        'f-text-backup': VueConstructor<
+        'f-icon-button': VueConstructor<
             {
                 $props: {
-                    editable?: boolean | undefined;
+                    icon?: string;
 
-                    expandable?: boolean | undefined;
+                    variant?: FIconButtonVariant | undefined;
+
+                    type?: FIconButtonType | undefined;
+
+                    size?: FIconButtonSize | undefined;
+
+                    state?: FIconButtonState | undefined;
+
+                    counter?: string | undefined;
+
+                    loading?: boolean | undefined;
+
+                    disabled?: boolean | undefined;
                 };
             } & Vue
         >;

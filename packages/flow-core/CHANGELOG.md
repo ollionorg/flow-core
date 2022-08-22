@@ -1,6 +1,12 @@
 
 # Change Log
 
+## [0.2.2] - 2022-08-22
+### Improvements
+- All elements converted to shadow DOM
+### Features
+- `f-icon-button` element added
+
 ## [0.1.9] - 2022-08-16
 ### RND
 - Trying bundling options

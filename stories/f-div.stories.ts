@@ -112,7 +112,6 @@ const Template: Story<unknown> = () => {
         <f-button label="Something went wrong" state="danger"></f-button>
       </f-div>
       <f-div
-        border="small solid default"
         direction="row"
         gap="auto"
         width="fill-container"

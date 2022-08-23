@@ -2,7 +2,6 @@
 
 import { ConfigUtil } from "./modules/config";
 
-export * from "./../custom-elements.vue";
 export * from "./modules/config";
 
 export * from "./components/f-button/f-button";

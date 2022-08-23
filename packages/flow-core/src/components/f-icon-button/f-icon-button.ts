@@ -123,3 +123,9 @@ export class FIconButton extends FElement {
     </button>`;
   }
 }
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "f-icon-button": FIconButton;
+  }
+}

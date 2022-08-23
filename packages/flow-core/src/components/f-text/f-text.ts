@@ -80,3 +80,9 @@ export class FText extends FElement {
     return html`<slot></slot>`;
   }
 }
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "f-text": FText;
+  }
+}

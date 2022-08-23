@@ -3,9 +3,11 @@ import { vaidateOptions } from "./options";
 import prettier from "prettier";
 
 const options = vaidateOptions({});
-export function transformSchema(schema: Package, framework: "vue" | "react", modulePath?: string) {
-	if (framework === "vue") {
-		return transformSchemaVue(schema, modulePath);
+export function transformSchema(schema: Package, framework: "vue2" | "react" | "vue3", modulePath?: string) {
+	if (framework === "vue2") {
+		return transformSchemaVue2(schema, modulePath);
+	} else if (framework === "vue3") {
+		return transformSchemaVue3(schema, modulePath);
 	} else if (framework === "react") {
 		return transformSchemaReact(schema, modulePath);
 	}
@@ -45,12 +47,12 @@ declare global {
 
 	return output;
 }
-function transformSchemaVue(schema: Package, modulePath?: string) {
+function transformSchemaVue2(schema: Package, modulePath?: string) {
 	const components: string[] = [];
 
 	schema.modules.forEach((module) => {
 		module.declarations?.forEach((declaration) => {
-			const component = getComponentCodeFromDeclarationVue(declaration);
+			const component = getComponentCodeFromDeclarationVue2(declaration);
 
 			if (component) {
 				components.push(component);
@@ -65,6 +67,37 @@ function transformSchemaVue(schema: Package, modulePath?: string) {
 		${allImports.join("\n")}
         declare module "vue" {
             export interface GlobalComponents {
+                ${components.join("\n")}
+            }
+        }
+    `,
+		{ ...options.prettierConfig, parser: "typescript" }
+	);
+
+	//console.log(output);
+
+	return output;
+}
+function transformSchemaVue3(schema: Package, modulePath?: string) {
+	const components: string[] = [];
+
+	schema.modules.forEach((module) => {
+		module.declarations?.forEach((declaration) => {
+			const component = getComponentCodeFromDeclarationVue3(declaration);
+
+			if (component) {
+				components.push(component);
+			}
+		});
+	});
+	const allImports = getComponentPropTypeImports(schema, modulePath);
+	const output = prettier.format(
+		`
+        /* eslint-disable */
+        import { DefineComponent } from "@vue/runtime-core";
+		${allImports.join("\n")}
+		declare module "@vue/runtime-core" {
+			export interface GlobalComponents {
                 ${components.join("\n")}
             }
         }
@@ -109,8 +142,41 @@ function getComponentCodeFromDeclarationReact(declaration: Declaration) {
 
 	return componentDeclaration;
 }
+function getComponentCodeFromDeclarationVue3(declaration: Declaration) {
+	if (!("customElement" in declaration) || !declaration.customElement) {
+		return null;
+	}
 
-function getComponentCodeFromDeclarationVue(declaration: Declaration) {
+	let componentDeclaration = `
+        ["${declaration.tagName}"]: DefineComponent<
+            {
+				
+    `;
+	let requiredAttributes: string[] = [];
+	if (declaration.members) {
+		const requiredDeclaration = declaration.members.find((d) => d.name === "required") as PropertyLike;
+		if (requiredDeclaration && requiredDeclaration.default) {
+			requiredAttributes = JSON.parse(requiredDeclaration.default);
+		}
+	}
+	if (declaration.attributes) {
+		declaration.attributes.forEach((attribute) => {
+			componentDeclaration = `
+                ${componentDeclaration}
+                ${attribute.name.includes("-") ? attribute.fieldName : attribute.name}${
+				requiredAttributes.includes(attribute.name) ? "" : "?"
+			}: ${attribute.type?.text};
+            `;
+		});
+	}
+
+	componentDeclaration = `${componentDeclaration}
+	
+ } >;`;
+
+	return componentDeclaration;
+}
+function getComponentCodeFromDeclarationVue2(declaration: Declaration) {
 	if (!("customElement" in declaration) || !declaration.customElement) {
 		return null;
 	}

@@ -1,6 +1,10 @@
 
 # Change Log
 
+## [0.2.6] - 2022-08-24
+### Improvements
+- `vue3` types added.
+
 ## [0.2.3] - 2022-08-23
 ### Improvements
 - `vue` & `react` types excluded from bundle and vailable for manual import based on consumer application.

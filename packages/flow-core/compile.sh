@@ -8,6 +8,7 @@ yarn analyze
 cd "../custom-elements-manifest-vue"
 yarn build
 cd .. && cd "./flow-core"
+
 echo "synchronizing colors from figma..."
 yarn sync-colors
 echo "building library..."

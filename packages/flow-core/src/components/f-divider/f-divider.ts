@@ -3,7 +3,6 @@ import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-divider.scss";
 import { FElement } from "../../mixins/components/f-element/f-element";
 
-
 @customElement("f-divider")
 export class FDivider extends FElement {
   /**
@@ -14,8 +13,8 @@ export class FDivider extends FElement {
   /**
    * @attribute The solid variant is the default.
    */
-   @property({ type: String })
-   variant?: "solid" | "dashed" | "dotted" = "solid";
+  @property({ type: String })
+  variant?: "solid" | "dashed" | "dotted" = "solid";
 
   /**
    * @attribute The medium size is the default.
@@ -27,15 +26,7 @@ export class FDivider extends FElement {
    * @attribute The state of Divider helps in indicating the degree of emphasis. By default it is default state.
    */
   @property({ type: String })
-  state?:
-    | "default"
-    | "secondary"
-    | "subtle"
-     = "default";
-
-  
-  readonly required = ["source"];
-
+  state?: "default" | "secondary" | "subtle" = "default";
 
   render() {
     return html``;

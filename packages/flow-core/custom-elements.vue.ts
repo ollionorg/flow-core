@@ -117,6 +117,18 @@ declare module 'vue' {
             } & Vue
         >;
 
+        'f-divider': VueConstructor<
+            {
+                $props: {
+                    variant?: 'solid' | 'dashed' | 'dotted' | undefined;
+
+                    size?: 'large' | 'medium' | undefined;
+
+                    state?: 'default' | 'secondary' | 'subtle' | undefined;
+                };
+            } & Vue
+        >;
+
         'f-icon': VueConstructor<
             {
                 $props: {

@@ -1,0 +1,51 @@
+@use "sass:map";
+@import "./../../mixins/scss/mixins";
+
+$sizes: (
+  "medium": 0px,
+  "large": 1px,
+);
+
+f-divider {
+  @include base();
+
+  @each $variant, $value in $variants {
+    &[variant="#{$variant}"] {
+      border-style: $value;
+    }
+  }
+
+  @each $state, $color in $states {
+    &[state="#{$state}"] {
+      border-color: $color;
+    }
+  }
+}
+
+//styling divider vertically or horizontally according to the immediate parent f-div
+f-div {
+  &[direction="row"] {
+    > f-divider {
+      height: 100%;
+    }
+    f-divider {
+      @each $size, $value in $sizes {
+        &[size="#{$size}"] {
+          border-left-width: $value;
+        }
+      }
+    }
+  }
+  &[direction="column"] {
+    > f-divider {
+      width: 100%;
+    }
+    f-divider {
+      @each $size, $value in $sizes {
+        &[size="#{$size}"] {
+          border-top-width: $value;
+        }
+      }
+    }
+  }
+}

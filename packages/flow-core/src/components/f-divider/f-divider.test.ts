@@ -1,7 +1,7 @@
 import { html, fixture, expect } from "@open-wc/testing";
 import "@cldcvr/flow-core";
 
-import { ConfigUtil, FDivider } from "@cldcvr/flow-core";
+import { FDivider } from "@cldcvr/flow-core";
 
 describe("f-divider", () => {
   it("is defined", () => {

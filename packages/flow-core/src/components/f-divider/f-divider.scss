@@ -8,14 +8,14 @@ $variants: (
 );
 
 $sizes: (
-  "medium": 0px,
-  "large": 1px,
+  "medium": 1px,
+  "large": 2px,
 );
 
 $states: (
-  "default": var(--color-icon-default),
-  "secondary": var(--color-icon-secondary),
-  "subtle": var(--color-icon-subtle),
+  "default": var(--color-border-default),
+  "secondary": var(--color-border-secondary),
+  "subtle": var(--color-border-subtle),
 );
 
 f-divider {
@@ -40,10 +40,13 @@ f-div {
     > f-divider {
       height: 100%;
     }
-    f-divider {
+    > f-divider {
       @each $size, $value in $sizes {
         &[size="#{$size}"] {
           border-left-width: $value;
+          border-top-width: 0px;
+          border-right-width: 0px;
+          border-bottom-width: 0px;
         }
       }
     }
@@ -52,10 +55,13 @@ f-div {
     > f-divider {
       width: 100%;
     }
-    f-divider {
+    > f-divider {
       @each $size, $value in $sizes {
         &[size="#{$size}"] {
           border-top-width: $value;
+          border-left-width: 0px;
+          border-right-width: 0px;
+          border-bottom-width: 0px;
         }
       }
     }

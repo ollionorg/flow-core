@@ -1,11 +1,8 @@
 import { html, fixture, expect } from "@open-wc/testing";
-import IconPack from "@cldcvr/flow-icon";
-
 import "@cldcvr/flow-core";
 
 import { ConfigUtil, FDivider } from "@cldcvr/flow-core";
 
-ConfigUtil.setConfig({ iconPack: IconPack });
 describe("f-divider", () => {
   it("is defined", () => {
     const el = document.createElement("f-divider");

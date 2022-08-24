@@ -18,7 +18,6 @@ const Template: Story<unknown> = () => {
       <f-divider variant="dashed" size="medium" state="secondary"></f-divider>
       <f-text type="para" size="small">Size: Medium, Variant: Dashed, State: subtle</f-text>
       <f-divider variant="dashed" size="medium" state="subtle"></f-divider>
-
       <f-text type="para" size="small">Vertical Dividers</f-text>
       <f-div direction="row" height="200px" padding="large" gap="large">
         <f-divider variant="dashed" size="medium" state="secondary"></f-divider>
@@ -39,6 +38,7 @@ const DividerUsageTemplate: Story<unknown> = () => {
         </f-div>
         <f-div gap="large" width="hug-content">
           <f-icon .clickable=${true} source="i-bug" size="large" state="default"></f-icon>
+          <f-divider variant="solid" size="medium" state="subtle"></f-divider>
           <f-icon .clickable=${true} source="i-file" size="large" state="default"></f-icon>
           <f-icon .clickable=${true} source="i-fire" size="large" state="default"></f-icon>
           <f-icon .clickable=${true} source="i-alarm" size="large" state="default"></f-icon>
@@ -46,7 +46,7 @@ const DividerUsageTemplate: Story<unknown> = () => {
           <f-icon .clickable=${true} source="i-user" size="large" state="default"></f-icon>
         </f-div>
       </f-div>
-      <f-divider variant="solid" size="medium" state="subtle"></f-divider>
+      <f-divider variant="solid" size="medium" state="secondary"></f-divider>
       <f-div height="300px">
         <f-div align="middle-center" width="49%" padding="large">
           <f-text type="para" size="small"
@@ -58,7 +58,7 @@ const DividerUsageTemplate: Story<unknown> = () => {
             mollit anim id est laborum.</f-text
           >
         </f-div>
-        <f-divider variant="solid" size="medium" state="subtle"></f-divider>
+        <f-divider variant="solid" size="large" state="default"></f-divider>
         <f-div align="middle-center" width="49%" padding="large">
           <f-text type="para" size="small"
             >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor

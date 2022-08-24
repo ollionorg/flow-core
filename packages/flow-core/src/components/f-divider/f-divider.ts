@@ -13,19 +13,19 @@ export class FDivider extends FElement {
   /**
    * @attribute The solid variant is the default.
    */
-  @property({ type: String })
+  @property({ reflect: true, type: String })
   variant?: "solid" | "dashed" | "dotted" = "solid";
 
   /**
    * @attribute The medium size is the default.
    */
-  @property({ type: String })
+  @property({ reflect: true, type: String })
   size?: "large" | "medium" = "medium";
 
   /**
    * @attribute The state of Divider helps in indicating the degree of emphasis. By default it is default state.
    */
-  @property({ type: String })
+  @property({ reflect: true, type: String })
   state?: "default" | "secondary" | "subtle" = "default";
 
   render() {

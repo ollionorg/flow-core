@@ -31,12 +31,12 @@ export class FSpacer extends FElement {
     const fixedValues = ["fill-container", "x-large", "large", "medium", "small", "x-small"];
     const parentDiv = document?.querySelector("f-spacer")?.closest("f-div");
     if (this.size && !fixedValues.includes(this.size)) {
-      if (parentDiv?.direction === "column") {
-        this.style.height = this.size;
-        this.style.width = "100%";
-      } else {
+      if (parentDiv?.direction === "row") {
         this.style.width = this.size;
         this.style.height = "100%";
+      } else {
+        this.style.height = this.size;
+        this.style.width = "100%";
       }
     }
   }

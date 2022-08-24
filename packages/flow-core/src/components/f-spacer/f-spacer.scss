@@ -11,6 +11,18 @@ $sizes: (
 
 f-spacer {
   @include base();
+  display: flex;
+  flex: 0 0 auto;
+  @each $size, $value in $sizes {
+    &[size="#{$size}"] {
+      height: $value;
+      width: 100%
+    }
+  }
+  &[size="fill-container"]{
+    width: 100%;
+    max-height: 100%
+  }
 }
 
 f-div {

@@ -2,49 +2,43 @@
 @import "./../../mixins/scss/mixins";
 
 $sizes: (
-  "medium": 0px,
-  "large": 1px,
+  "x-large": 44px,
+  "large": 36px,
+  "medium": 24px,
+  "small": 16px,
+  "x-small": 8px
 );
 
-f-divider {
+f-spacer {
   @include base();
-
-  @each $variant, $value in $variants {
-    &[variant="#{$variant}"] {
-      border-style: $value;
-    }
-  }
-
-  @each $state, $color in $states {
-    &[state="#{$state}"] {
-      border-color: $color;
-    }
-  }
 }
 
-//styling divider vertically or horizontally according to the immediate parent f-div
 f-div {
   &[direction="row"] {
-    > f-divider {
-      height: 100%;
-    }
-    f-divider {
+    > f-spacer {
       @each $size, $value in $sizes {
         &[size="#{$size}"] {
-          border-left-width: $value;
+          width: $value;
+          height: 100%
         }
+      }
+      &[size="fill-container"]{
+        max-width: 100%;
+        height: 100%
       }
     }
   }
   &[direction="column"] {
-    > f-divider {
-      width: 100%;
-    }
-    f-divider {
+    > f-spacer {
       @each $size, $value in $sizes {
         &[size="#{$size}"] {
-          border-top-width: $value;
+          height: $value;
+          width: 100%
         }
+      }
+      &[size="fill-container"]{
+        width: 100%;
+        max-height: 100%
       }
     }
   }

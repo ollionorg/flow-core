@@ -60,6 +60,14 @@
           "name": "*",
           "declaration": {
             "name": "*",
+            "package": "\"./components/f-spacer/f-spacer\""
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
             "package": "\"./components/f-icon-button/f-icon-button\""
           }
         }
@@ -1197,19 +1205,24 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "\"fill-container\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | string | undefined"
+                "text": "FSpacerWidthProp | undefined"
               },
-              "default": "\"medium\"",
-              "attribute": "size"
+              "default": "\"fill-container\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "applySize"
             }
           ],
           "attributes": [
             {
               "name": "size",
               "type": {
-                "text": "\"fill-container\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | string | undefined"
+                "text": "FSpacerWidthProp | undefined"
               },
-              "default": "\"medium\"",
+              "default": "\"fill-container\"",
               "fieldName": "size"
             }
           ],

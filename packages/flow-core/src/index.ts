@@ -9,6 +9,7 @@ export * from "./components/f-icon/f-icon";
 export * from "./components/f-counter/f-counter";
 export * from "./components/f-div/f-div";
 export * from "./components/f-text/f-text";
+export * from "./components/f-spacer/f-spacer";
 export * from "./components/f-icon-button/f-icon-button";
 
 if (document.readyState !== "loading") {

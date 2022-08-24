@@ -25,11 +25,11 @@ export class FSpacer extends FElement {
    * @attribute width of `f-spacer`
    */
   @property({ type: String, reflect: true })
-  size?: FSpacerWidthProp = "fill-container";
+  size?: FSpacerWidthProp = "medium";
 
   applySize() {
     const fixedValues = ["fill-container", "x-large", "large", "medium", "small", "x-small"];
-    const parentDiv = document?.querySelector("f-spacer")?.closest("f-div");
+    const parentDiv = this?.closest("f-div");
     if (this.size && !fixedValues.includes(this.size)) {
       if (parentDiv?.direction === "row") {
         this.style.width = this.size;

@@ -1,6 +1,11 @@
 
 # Change Log
 
+## [0.2.7] - 2022-08-24
+### Bug Fixes
+- FLOW-389 : `f-text` not aligned in center bnug fixed.
+- FLOW-386 : `f-counter` font-weight updated.
+
 ## [0.2.6] - 2022-08-24
 ### Improvements
 - `vue3` types added.

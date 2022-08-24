@@ -9,6 +9,8 @@ export default {
 const Template: Story<unknown> = () => {
   return html`
     <br />
+    <f-divider variant="solid" size="medium" state="default"></f-divider>
+    <br />
     <f-div width="500px" direction="column" padding="large" gap="large">
       <f-text type="para" size="small">Size: Medium, Variant: Dotted</f-text>
       <f-divider variant="dotted" size="medium" state="default"></f-divider>
@@ -24,7 +26,8 @@ const Template: Story<unknown> = () => {
         <f-divider variant="solid" size="large" state="secondary"></f-divider>
       </f-div>
     </f-div>
-    <br />
+    <br/>
+   
   `;
 };
 

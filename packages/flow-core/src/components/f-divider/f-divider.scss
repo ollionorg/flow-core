@@ -20,7 +20,18 @@ $states: (
 
 f-divider {
   @include base();
-
+  display: flex;
+  flex: 0 0 auto;
+  width:100%;
+  height: 0px;
+  @each $size, $value in $sizes {
+    &[size="#{$size}"] {
+      border-top-width: $value;
+      border-left-width: 0px;
+      border-right-width: 0px;
+      border-bottom-width: 0px;
+    }
+  }
   @each $variant, $value in $variants {
     &[variant="#{$variant}"] {
       border-style: $value;
@@ -39,6 +50,7 @@ f-div {
   &[direction="row"] {
     > f-divider {
       height: 100%;
+      width:0px;
     }
     > f-divider {
       @each $size, $value in $sizes {

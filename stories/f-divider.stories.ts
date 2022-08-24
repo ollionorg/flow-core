@@ -47,7 +47,7 @@ const DividerUsageTemplate: Story<unknown> = () => {
         </f-div>
       </f-div>
       <f-divider variant="solid" size="medium" state="subtle"></f-divider>
-      <f-div gap="auto">
+      <f-div height="300px">
         <f-div align="middle-center" width="49%" padding="large">
           <f-text type="para" size="small"
             >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -71,8 +71,8 @@ const DividerUsageTemplate: Story<unknown> = () => {
         </f-div>
       </f-div>
       <f-divider variant="dashed" size="medium" state="subtle"></f-divider>
-      <f-div gap="auto">
-        <f-div align="middle-center" width="49%" padding="large">
+      <f-div height="300px">
+        <f-div align="middle-center" width="51%" padding="large">
           <f-text type="para" size="small"
             >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -83,7 +83,7 @@ const DividerUsageTemplate: Story<unknown> = () => {
           >
         </f-div>
         <f-divider variant="dashed" size="medium" state="subtle"></f-divider>
-        <f-div align="middle-center" width="49%" padding="large">
+        <f-div align="middle-center" width="47%" padding="large">
           <f-text type="para" size="small"
             >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -94,6 +94,8 @@ const DividerUsageTemplate: Story<unknown> = () => {
           >
         </f-div>
       </f-div>
+      <f-divider variant="dotted" size="medium" state="subtle"></f-divider>
+
     </f-div>
   `;
 };

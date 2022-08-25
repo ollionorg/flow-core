@@ -16,6 +16,9 @@ module.exports = {
   },
   async viteFinal(config, { configType }) {
     // customize the Vite config here
+    if (!config.optimizeDeps) {
+      config.optimizeDeps = {};
+    }
     config.optimizeDeps.include = [
       ...(config.optimizeDeps?.include ?? []),
       "@storybook/web-components",

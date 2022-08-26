@@ -55,7 +55,7 @@ Note : If you are using Vue 3, please copy paste the below snippet after the clo
 @import "@cldcvr/flow-core/dist/style.css";
 </style> 
 ```
-### Step 3 : Import types if project is typescript enabled.
+#### Step 3 : Import types if project is typescript enabled.
 * Vue 2
 Copy paste below line in your `main.ts` file.
 ```

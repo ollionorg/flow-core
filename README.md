@@ -57,16 +57,19 @@ Note : If you are using Vue 3, please copy paste the below snippet after the clo
 ```
 #### Step 3 : Import types if project is typescript enabled.
 * Vue 2
+
 Copy paste below line in your `main.ts` file.
 ```
 import "@cldcvr/flow-core/dist/types/vue2";
 ```
 * Vue 3
+
 Copy paste below line in your `main.ts` file.
 ```
 import "@cldcvr/flow-core/dist/types/vue3";
 ```
 * React
+
 Include react type in `tsconfig.json` like below
 ```
 "include": ["src", "./node_modules/@cldcvr/flow-core/dist/types/react.ts"]

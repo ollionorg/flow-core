@@ -1,7 +1,7 @@
 
 # Change Log
 
-## [0.3.0] - 2022-08-26
+## [0.3.1] - 2022-08-26
 ### Features
 - `f-div` padding values updated.
 

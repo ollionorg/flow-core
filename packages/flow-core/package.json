@@ -16,6 +16,7 @@
     "lint:eslint": "eslint 'src/**/*.ts' './custom-elements.vue.ts'",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
     "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
+    "test-build": "web-test-runner ./src/**/*.test.ts --node-resolve",
     "test": "yarn build && web-test-runner ./src/**/*.test.ts --node-resolve",
     "test:watch": "yarn build && web-test-runner ./src/**/*.test.ts --node-resolve --watch"
   },

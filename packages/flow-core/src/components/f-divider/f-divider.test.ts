@@ -11,11 +11,9 @@ describe("f-divider", () => {
 
   it("should render with all default properties", async () => {
     const el = await fixture(html` <f-divider></f-divider> `);
-    const descendant = el.shadowRoot!.querySelectorAll("f-divider")!;
-    descendant.forEach((item) => {
-      expect(item.getAttribute("variant")).to.equal("solid");
-      expect(item.getAttribute("size")).to.equal("medium");
-      expect(item.getAttribute("state")).to.equal("default");
-    });
+
+    expect(el.getAttribute("variant")).to.equal("solid");
+    expect(el.getAttribute("size")).to.equal("medium");
+    expect(el.getAttribute("state")).to.equal("default");
   });
 });

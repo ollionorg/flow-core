@@ -11,9 +11,7 @@ describe("f-spacer", () => {
 
   it("should render with all default properties", async () => {
     const el = await fixture(html` <f-spacer></f-spacer> `);
-    const descendant = el.shadowRoot!.querySelectorAll("f-spacer")!;
-    descendant.forEach((item) => {
-      expect(item.getAttribute("size")).to.equal("x-large");
-    });
+
+    expect(el.getAttribute("size")).to.equal("medium");
   });
 });

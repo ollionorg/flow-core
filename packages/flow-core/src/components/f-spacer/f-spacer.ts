@@ -3,7 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-spacer.scss";
 import { FElement } from "../../mixins/components/f-element/f-element";
 
-export type FSpacerWidthProp =
+export type FSpacerSizeProp =
   | "fill-container"
   | "x-large"
   | "large"
@@ -25,10 +25,17 @@ export class FSpacer extends FElement {
    * @attribute width of `f-spacer`
    */
   @property({ type: String, reflect: true })
-  size?: FSpacerWidthProp = "medium";
+  size?: FSpacerSizeProp = "medium";
 
   applySize() {
-    const fixedValues = ["fill-container", "x-large", "large", "medium", "small", "x-small"];
+    const fixedValues = [
+      "fill-container",
+      "x-large",
+      "large",
+      "medium",
+      "small",
+      "x-small",
+    ];
     const parentDiv = this?.closest("f-div");
     if (this.size && !fixedValues.includes(this.size)) {
       if (parentDiv?.direction === "row") {

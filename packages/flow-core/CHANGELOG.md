@@ -1,6 +1,10 @@
 
 # Change Log
 
+## [0.3.2] - 2022-08-26
+### Features
+- `f-spacer` component added.
+
 ## [0.3.1] - 2022-08-26
 ### Features
 - `f-div` padding values updated.

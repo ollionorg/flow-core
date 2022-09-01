@@ -55,8 +55,27 @@ Note : If you are using Vue 3, please copy paste the below snippet after the clo
 @import "@cldcvr/flow-core/dist/style.css";
 </style> 
 ```
+#### Step 3 : Import types if project is typescript enabled.
+* Vue 2
 
-#### Step 3 (optional): Install dependencies 
+Copy paste below line in your `main.ts` file.
+```
+import "@cldcvr/flow-core/dist/types/vue2";
+```
+* Vue 3
+
+Copy paste below line in your `main.ts` file.
+```
+import "@cldcvr/flow-core/dist/types/vue3";
+```
+* React
+
+Include react type in `tsconfig.json` like below
+```
+"include": ["src", "./node_modules/@cldcvr/flow-core/dist/types/react.ts"]
+```
+
+#### Step 4 (optional): Install dependencies 
 * Form builder (coming soon)
 * Pipelines (coming soon)
 * Logs (coming soon)

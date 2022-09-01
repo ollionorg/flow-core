@@ -9,7 +9,13 @@ export type FDivBorderWidth = "small" | "medium" | "large";
 export type FDivBorderStyle = "solid" | "dashed" | "dotted";
 export type FDivBorderColor = "default" | "secondary" | "subtle";
 export type FDivBorderPosition = "bottom" | "top" | "left" | "right" | "around";
-export type FDivPadding = "large" | "medium" | "small" | "x-small" | "none";
+export type FDivPadding =
+  | "x-large"
+  | "large"
+  | "medium"
+  | "small"
+  | "x-small"
+  | "none";
 
 export type FDivBorderProp =
   | FDivBorderWidth
@@ -50,10 +56,11 @@ const BORDER_COLOR_VALUES = {
 };
 
 const PADDING_VALUES = {
-  large: "24px",
-  medium: "16px",
-  small: "12px",
-  "x-small": "8px",
+  "x-large": "24px",
+  large: "16px",
+  medium: "12px",
+  small: "8px",
+  "x-small": "4px",
   none: "0px",
 };
 

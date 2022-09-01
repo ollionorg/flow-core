@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
 
 import { ConfigUtil } from "./modules/config";
+import { version } from "./../package.json";
 
 export * from "./modules/config";
 
@@ -24,7 +25,12 @@ if (document.readyState !== "loading") {
 document.addEventListener("keyup", (event: KeyboardEvent) => {
   event.preventDefault();
 
-  if (event.key.toLowerCase() === "x" && event.shiftKey && event.ctrlKey) {
+  if (
+    event.key &&
+    event.key.toLowerCase() === "x" &&
+    event.shiftKey &&
+    event.ctrlKey
+  ) {
     // console.log("Changing theme");
     const currentTheme = ConfigUtil.getConfig().theme;
 
@@ -33,3 +39,9 @@ document.addEventListener("keyup", (event: KeyboardEvent) => {
     });
   }
 });
+
+console.log(
+  `%c@cldcvr/flow-core%cv${version}`,
+  "background:#161616;color:white;padding:4px 6px 4px 6px;border-radius:4px 0px 0px 4px",
+  "background:#695bf4;color:white;padding:4px 6px 4px 6px;border-radius:0px 4px 4px 0px;"
+);

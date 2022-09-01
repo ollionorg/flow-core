@@ -1,6 +1,16 @@
 
 # Change Log
 
+## [0.3.1] - 2022-08-26
+### Features
+- `f-div` padding values updated.
+
+## [0.2.8] - 2022-08-24
+### Features
+- `f-divider`element added.
+### Improvements
+- Unit testcases for f-div, f-text, f-icon-button
+
 ## [0.2.7] - 2022-08-24
 ### Bug Fixes
 - FLOW-389 : `f-text` not aligned in center bnug fixed.

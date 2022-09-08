@@ -1,6 +1,10 @@
 
 # Change Log
 
+## [0.3.3] - 2022-09-08
+### Bug Fixes
+- `f-button` : disable button executing action bug fixed.
+- `f-text` : text size unit updated
 ## [0.3.2] - 2022-08-26
 ### Features
 - `f-spacer` component added.

@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 
 export default {
-  title: "f-counter",
+  title: "components/f-counter",
   component: "f-counter",
 } as Meta;
 

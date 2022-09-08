@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 
 export default {
-  title: "f-icon",
+  title: "components/f-icon",
   component: "f-icon",
 } as Meta;
 

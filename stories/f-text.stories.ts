@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 
 export default {
-  title: "f-text",
+  title: "components/f-text",
 } as Meta;
 
 const Template: Story<unknown> = () => {

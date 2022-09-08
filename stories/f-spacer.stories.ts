@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 
 export default {
-  title: "f-spacer",
+  title: "components/f-spacer",
   component: "f-spacer",
 } as Meta;
 

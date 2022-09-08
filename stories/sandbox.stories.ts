@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 
 export default {
-  title: "sandbox",
+  title: "Sandbox",
 } as Meta;
 
 const Template: Story<unknown> = () => {

@@ -1,5 +1,9 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
+import SystemIconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
+import ProductIconPack from "@cldcvr/flow-product-icon/dist/types/icon-pack";
+import GcpIconPack from "@cldcvr/flow-gcp-icon/dist/types/icon-pack";
+import AwsIconPack from "@cldcvr/flow-aws-icon/dist/types/icon-pack";
 
 export default {
   title: "components/f-icon",
@@ -78,3 +82,87 @@ const Template: Story<unknown> = () => {
 };
 
 export const basic = Template.bind({});
+
+const SystemIconTemplate: Story<unknown> = () => {
+  return html`
+    <f-div gap="small">
+      ${Object.keys(SystemIconPack).map(
+        (src) =>
+          html` <f-div
+            direction="column"
+            width="120px"
+            gap="small"
+            align="middle-center"
+          >
+            <f-icon .source=${src} size="large"> </f-icon>
+            <f-text>${src}</f-text>
+          </f-div>`
+      )}
+    </f-div>
+  `;
+};
+
+export const flow_system_icon = SystemIconTemplate.bind({});
+
+const ProductIconTemplate: Story<unknown> = () => {
+  return html`
+    <f-div gap="small">
+      ${Object.keys(ProductIconPack).map(
+        (src) =>
+          html` <f-div
+            direction="column"
+            width="120px"
+            gap="small"
+            align="middle-center"
+          >
+            <f-icon .source=${src} size="large"> </f-icon>
+            <f-text>${src}</f-text>
+          </f-div>`
+      )}
+    </f-div>
+  `;
+};
+
+export const flow_product_icon = ProductIconTemplate.bind({});
+
+const GcpIconTemplate: Story<unknown> = () => {
+  return html`
+    <f-div gap="small">
+      ${Object.keys(GcpIconPack).map(
+        (src) =>
+          html` <f-div
+            direction="column"
+            width="120px"
+            gap="small"
+            align="middle-center"
+          >
+            <f-icon .source=${src} size="large"> </f-icon>
+            <f-text>${src}</f-text>
+          </f-div>`
+      )}
+    </f-div>
+  `;
+};
+
+export const flow_gcp_icon = GcpIconTemplate.bind({});
+
+const AwsIconTemplate: Story<unknown> = () => {
+  return html`
+    <f-div gap="small">
+      ${Object.keys(AwsIconPack).map(
+        (src) =>
+          html` <f-div
+            direction="column"
+            width="120px"
+            gap="small"
+            align="middle-center"
+          >
+            <f-icon .source=${src} size="large"> </f-icon>
+            <f-text>${src}</f-text>
+          </f-div>`
+      )}
+    </f-div>
+  `;
+};
+
+export const flow_aws_icon = AwsIconTemplate.bind({});

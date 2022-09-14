@@ -1,5 +1,5 @@
 import { html, fixture, expect } from "@open-wc/testing";
-import IconPack from "@cldcvr/flow-icon";
+import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 
 import "@cldcvr/flow-core";
 

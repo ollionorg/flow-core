@@ -31,7 +31,7 @@ const Template: Story<unknown> = () => {
     )}
     <br />
     <br />
-    Icons from '@cldcvr/flow-icon' pack
+    Icons from '@cldcvr/flow-system-icon' pack
     <br />
     <br />
     ${states.map(

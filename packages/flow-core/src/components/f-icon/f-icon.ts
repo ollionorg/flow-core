@@ -72,8 +72,8 @@ export class FIcon extends FElement {
       } else {
         this._source = notFound;
         throw new Error(
-          `Icon pack not configured! \n please install \`yarn add @cldcvr/flow-icon\` \n Set config as below \n 	
-		\`import IconPack from "@cldcvr/flow-icon" \n;
+          `Icon pack not configured! \n please install \`yarn add @cldcvr/flow-system-icon\` \n Set config as below \n 	
+		\`import IconPack from "@cldcvr/flow-system-icon" \n;
 		import { ConfigUtil } from "@cldcvr/flow-core" \n;
 	   ConfigUtil.setConfig({ iconPack: IconPack });\``
         );

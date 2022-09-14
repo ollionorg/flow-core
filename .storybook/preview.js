@@ -1,5 +1,9 @@
 import { html } from "lit-html";
-import IconPack from "@cldcvr/flow-icon";
+import SystemIconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
+import ProductIconPack from "@cldcvr/flow-product-icon/dist/types/icon-pack";
+import GcpIconPack from "@cldcvr/flow-gcp-icon/dist/types/icon-pack";
+import AwsIconPack from "@cldcvr/flow-aws-icon/dist/types/icon-pack";
+
 import { ConfigUtil } from "@cldcvr/flow-core/src/modules/config";
 import "@cldcvr/flow-core/src";
 import {
@@ -37,7 +41,14 @@ export const decorators = [
         }
       }
     };
-    ConfigUtil.setConfig({ iconPack: IconPack });
+    ConfigUtil.setConfig({
+      iconPack: {
+        ...SystemIconPack,
+        ...ProductIconPack,
+        ...GcpIconPack,
+        ...AwsIconPack,
+      },
+    });
     return html`
       <style>
         .sb-show-main.sb-main-padded {

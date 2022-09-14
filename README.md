@@ -39,7 +39,7 @@ Note: after adding the snippets; re-start your application.
 
 #### Step 1: Install the flow core + flow icons dependency
 1. **flow-core**  ```yarn add @cldcvr/flow-core```
-2. **f-icon** ```yarn add @cldcvr/flow-icon``` | [Github](https://github.com/cldcvr/flow-icon)
+2. **f-icon** ```yarn add @cldcvr/flow-system-icon``` | [Github](https://github.com/cldcvr/flow-icon)
 
 
 #### Step 2: Import flow-core and it's dependecies into your project
@@ -47,7 +47,7 @@ Note: after adding the snippets; re-start your application.
 ```
 import '@cldcvr/flow-core';
 import "@cldcvr/flow-core/dist/style.css";
-import "@cldcvr/flow-icon";
+import "@cldcvr/flow-system-icon";
 ```
 Note : If you are using Vue 3, please copy paste the below snippet after the closing `<template>` in your `App.vue` 
 ```

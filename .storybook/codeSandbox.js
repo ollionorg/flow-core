@@ -5,7 +5,7 @@ export function getCodeSandBoxUrl(story) {
     files: {
       "index.js": {
         content: `import "@cldcvr/flow-core";
-		  import "@cldcvr/flow-icon";
+		  import "@cldcvr/flow-system-icon";
 		  document.getElementById("app").innerHTML =\`${story}\`
 		  `,
         isBinary: false,
@@ -32,7 +32,7 @@ export function getCodeSandBoxUrl(story) {
       "package.json": {
         content: {
           dependencies: {
-            "@cldcvr/flow-icon": "latest",
+            "@cldcvr/flow-system-icon": "latest",
             "@cldcvr/flow-core": "latest",
           },
         },

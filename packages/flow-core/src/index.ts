@@ -13,6 +13,8 @@ export * from "./components/f-div/f-div";
 export * from "./components/f-text/f-text";
 export * from "./components/f-spacer/f-spacer";
 export * from "./components/f-icon-button/f-icon-button";
+export * from "./components/f-pictogram/f-pictogram";
+
 
 if (document.readyState !== "loading") {
   ConfigUtil.initTheme();

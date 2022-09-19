@@ -1312,20 +1312,21 @@
           "members": [
             {
               "kind": "field",
-              "name": "_source",
-              "type": {
-                "text": "string"
-              },
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
               "name": "variant",
               "type": {
                 "text": "FPictogramVariant | undefined"
               },
               "default": "\"squircle\"",
               "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "source",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "source",
               "reflects": true
             },
             {
@@ -1380,14 +1381,6 @@
             },
             {
               "kind": "field",
-              "name": "source",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "source"
-            },
-            {
-              "kind": "field",
               "name": "renderedHtml"
             },
             {
@@ -1403,6 +1396,13 @@
               },
               "default": "\"squircle\"",
               "fieldName": "variant"
+            },
+            {
+              "name": "source",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "source"
             },
             {
               "name": "size",
@@ -1443,13 +1443,6 @@
               },
               "default": "false",
               "fieldName": "clickable"
-            },
-            {
-              "name": "source",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "source"
             }
           ],
           "superclass": {

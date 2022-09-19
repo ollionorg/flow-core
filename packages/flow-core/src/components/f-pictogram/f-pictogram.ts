@@ -21,13 +21,17 @@ export class FPictogram extends FElement {
    */
   static styles = [unsafeCSS(eleStyle)];
 
-  private _source!: string;
-
   /**
    * @attribute Variants are various representations of Pictogram. For example Pictogram can be round, curved, square, or hexagon.
    */
   @property({ type: String, reflect: true })
   variant?: FPictogramVariant = "squircle";
+
+  /**
+   * @attribute source for f-pictogram, source could be icon name, url, raw SVG, text, emoji etc.
+   */
+  @property({ type: String, reflect: true })
+  source!: string;
 
   /**
    * @attribute Size of f-pictogram
@@ -59,37 +63,22 @@ export class FPictogram extends FElement {
   @property({ reflect: true, type: Boolean })
   clickable?: boolean = false;
 
-  /**
-   * @attribute source for f-pictogram, source could be icon name, url, raw SVG, text, emoji etc.
-   */
-  @property({
-    type: String,
-  })
-  get source(): string {
-    return this._source;
-  }
-
-  set source(value) {
-    this._source = value
-    this.requestUpdate();
-  }
-
-  get renderedHtml(){
+  get renderedHtml() {
     const emojiRegex = /\p{Extended_Pictographic}/u;
     if (isValidHttpUrl(this.source)) {
-      return`<img src="${this.source}" />`;
+      return `<img src="${this.source}" />`;
     } else if (emojiRegex.test(this.source)) {
-      return`<f-icon source="${this.source}" size="${this.sourceSize()}"></f-icon>`;
+      return `<f-icon source="${this.source}" size="${this.sourceSize()}"></f-icon>`;
     } else {
       const IconPack = ConfigUtil.getConfig().iconPack;
       if (IconPack) {
         const svg = IconPack[this.source];
         if (svg) {
-          return`<f-icon source="${this.source}" size="${this.sourceSize()}"></f-icon>`;
-        } 
+          return `<f-icon source="${this.source}" size="${this.sourceSize()}"></f-icon>`;
+        }
       }
     }
-    return`<p class="text-styling">${this.source?.slice(0, 2)}</p>`;
+    return `<p class="text-styling">${this.source?.slice(0, 2)}</p>`;
   }
   sourceSize() {
     if (this.size === "x-large") {

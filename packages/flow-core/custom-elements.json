@@ -1312,6 +1312,14 @@
           "members": [
             {
               "kind": "field",
+              "name": "_source",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
               "name": "variant",
               "type": {
                 "text": "FPictogramVariant | undefined"
@@ -1319,14 +1327,6 @@
               "default": "\"squircle\"",
               "attribute": "variant",
               "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "source",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "source"
             },
             {
               "kind": "field",
@@ -1370,21 +1370,29 @@
             },
             {
               "kind": "field",
-              "name": "hover",
+              "name": "clickable",
               "type": {
                 "text": "boolean | undefined"
               },
               "default": "false",
-              "attribute": "hover",
+              "attribute": "clickable",
               "reflects": true
             },
             {
               "kind": "field",
-              "name": "sourceSize"
+              "name": "source",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "source"
             },
             {
               "kind": "field",
-              "name": "sourceValue"
+              "name": "renderedHtml"
+            },
+            {
+              "kind": "method",
+              "name": "sourceSize"
             }
           ],
           "attributes": [
@@ -1395,13 +1403,6 @@
               },
               "default": "\"squircle\"",
               "fieldName": "variant"
-            },
-            {
-              "name": "source",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "source"
             },
             {
               "name": "size",
@@ -1436,12 +1437,19 @@
               "fieldName": "disabled"
             },
             {
-              "name": "hover",
+              "name": "clickable",
               "type": {
                 "text": "boolean | undefined"
               },
               "default": "false",
-              "fieldName": "hover"
+              "fieldName": "clickable"
+            },
+            {
+              "name": "source",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "source"
             }
           ],
           "superclass": {

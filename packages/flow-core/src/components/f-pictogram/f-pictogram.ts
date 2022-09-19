@@ -20,17 +20,14 @@ export class FPictogram extends FElement {
    * css loaded from scss file
    */
   static styles = [unsafeCSS(eleStyle)];
+
+  private _source!: string;
+
   /**
    * @attribute Variants are various representations of Pictogram. For example Pictogram can be round, curved, square, or hexagon.
    */
   @property({ type: String, reflect: true })
   variant?: FPictogramVariant = "squircle";
-
-  /**
-   * @attribute source for f-pictogram, source could be icon name, url, raw SVG, text, emoji etc.
-   */
-  @property({ type: String })
-  source!: string;
 
   /**
    * @attribute Size of f-pictogram
@@ -60,9 +57,41 @@ export class FPictogram extends FElement {
    * @attribute The hover attribute to change background on hovering on pictogram.
    */
   @property({ reflect: true, type: Boolean })
-  hover?: boolean = false;
+  clickable?: boolean = false;
 
-  get sourceSize() {
+  /**
+   * @attribute source for f-pictogram, source could be icon name, url, raw SVG, text, emoji etc.
+   */
+  @property({
+    type: String,
+  })
+  get source(): string {
+    return this._source;
+  }
+
+  set source(value) {
+    this._source = value
+    this.requestUpdate();
+  }
+
+  get renderedHtml(){
+    const emojiRegex = /\p{Extended_Pictographic}/u;
+    if (isValidHttpUrl(this.source)) {
+      return`<img src="${this.source}" />`;
+    } else if (emojiRegex.test(this.source)) {
+      return`<f-icon source="${this.source}" size="${this.sourceSize()}"></f-icon>`;
+    } else {
+      const IconPack = ConfigUtil.getConfig().iconPack;
+      if (IconPack) {
+        const svg = IconPack[this.source];
+        if (svg) {
+          return`<f-icon source="${this.source}" size="${this.sourceSize()}"></f-icon>`;
+        } 
+      }
+    }
+    return`<p class="text-styling">${this.source?.slice(0, 2)}</p>`;
+  }
+  sourceSize() {
     if (this.size === "x-large") {
       return "large";
     } else if (this.size === "large") {
@@ -74,32 +103,6 @@ export class FPictogram extends FElement {
     }
   }
 
-  get sourceValue() {
-    const emojiRegex = /\p{Extended_Pictographic}/u;
-    const textRegex = /^([a-zA-Z0-9\u0600-\u06FF\u0660-\u0669\u06F0-\u06F9 _.-]+)$/;
-    let _source;
-    if (isValidHttpUrl(this.source)) {
-      _source = `<img src="${this.source}" />`;
-    } else if (emojiRegex.test(this.source)) {
-      _source = `<f-icon source=${this.source} size=${this.sourceSize}></f-icon>`;
-    } else {
-      const IconPack = ConfigUtil.getConfig().iconPack;
-      if (IconPack) {
-        const svg = IconPack[this.source];
-        if (svg) {
-          _source = `<f-icon source="${this.source}" size=${this.sourceSize}></f-icon>`;
-        } else {
-          if (textRegex.test(this.source)) {
-            _source = `<p class="text-styling">${this.source?.slice(0, 2)}</p>`;
-          } else {
-            _source = `<div class="svg-styling">${this.source}</div>`;
-          }
-        }
-      }
-    }
-    return _source;
-  }
-
   render() {
     return html`
       <div
@@ -109,9 +112,9 @@ export class FPictogram extends FElement {
         size=${this.size}
         ?disabled=${this.disabled}
         ?loading=${this.loading}
-        ?hover=${this.hover}
+        ?clickable=${this.clickable}
       >
-        ${unsafeHTML(this.sourceValue)}
+        ${unsafeHTML(this.renderedHtml)}
         ${this.variant === "squircle"
           ? html`<svg width="0" height="0">
               <defs>

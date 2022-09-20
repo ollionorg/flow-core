@@ -55,6 +55,9 @@ $states: (
       background-color: var(--color-surface-default);
       color: var(--color-text-default);
     }
+    &.absolute-counter {
+      position: absolute;
+    }
     @include base();
     display: inline-flex;
     justify-content: center;
@@ -71,6 +74,17 @@ $states: (
         svg {
           height: map.get($value, "height") - 8px;
         }
+
+        &.absolute-counter {
+          top: calc(100% - math.div(map.get($value, "height"), 2));
+          left: calc(
+            100% -
+              math.div(
+                map.get($value, "height") + map.get($value, "fontSize"),
+                2
+              )
+          );
+        }
       }
     }
 
@@ -82,6 +96,12 @@ $states: (
         background-color: var(--background-color);
         &[loading] {
           background-color: var(--color-primary-surface);
+        }
+
+        &.outline-counter {
+          background-color: var(--color-surface-default);
+          color: var(--color-text-default);
+          border: 1px solid var(--background-color);
         }
       }
     }

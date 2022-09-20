@@ -91,11 +91,12 @@ export class FIconButton extends FElement {
      * create counter if available
      */
     const counterClasses = {
-      "fill-button-surface": this.type === "fill",
+      "absolute-counter": true,
+      "outline-counter": this.type === "fill",
     };
     const counter = this.counter
       ? html`<f-counter
-          .state=${this.type === "fill" ? "neutral" : this.state}
+          .state=${this.state}
           .size=${this.counterSize}
           .label=${this.counter}
           class=${classMap(counterClasses)}

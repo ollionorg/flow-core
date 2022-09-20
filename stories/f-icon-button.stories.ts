@@ -242,3 +242,38 @@ const Template: Story<unknown> = () => {
 };
 
 export const basic = Template.bind({});
+
+const CounterTemplate: Story<unknown> = () => {
+  const variants = ["round", "curved", "block"];
+  const types = ["fill", "outline", "transparent", "packed"];
+  const sizes = ["large", "medium", "small", "x-small"];
+  const states = ["primary", "danger", "warning", "success", "neutral"];
+  return html`
+    <f-div direction="column" gap="medium">
+      ${sizes.map((size) =>
+        types.map((type) =>
+          variants.map(
+            (variant) =>
+              html` <f-div direction="column" gap="medium"
+                >${`${size} ${type} ${variant}`}<f-div gap="x-large">
+                  ${states.map(
+                    (state) =>
+                      html` <f-icon-button
+                        icon="i-icon"
+                        .size=${size}
+                        .state=${state}
+                        .type=${type}
+                        .variant=${variant}
+                        counter="88"
+                      ></f-icon-button>`
+                  )}
+                </f-div>
+              </f-div>`
+          )
+        )
+      )}
+    </f-div>
+  `;
+};
+
+export const WithCounter = CounterTemplate.bind({});

@@ -54,10 +54,12 @@ export class FCounter extends FElement {
   }
   render() {
     this.validateProperties();
-    const classes = {
+    const classes: Record<string, boolean> = {
       "f-counter": true,
-      [this.classList[0]]: true,
     };
+    this.classList.forEach((cl) => {
+      classes[cl] = true;
+    });
     return html`<div
       class=${classMap(classes)}
       size=${this.size}

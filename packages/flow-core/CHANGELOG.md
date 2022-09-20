@@ -1,9 +1,14 @@
 
 # Change Log
 
+## [0.3.5] - 2022-09-20
+### Features
+- `f-icon-button` component updated to display counter position.
+
 ## [0.3.4] - 2022-09-19
 ### Features
 - `f-pictogram` component added.
+
 ## [0.3.3] - 2022-09-08
 ### Bug Fixes
 - `f-button` : disable button executing action bug fixed.

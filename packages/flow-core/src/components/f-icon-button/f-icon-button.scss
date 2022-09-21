@@ -8,28 +8,24 @@ $sizes: (
     "padding": 0px 8px,
     "gap": 4px,
     "loaderSize": 12px,
-    "marginBottom": 12px,
   ),
   "small": (
     "size": 28px,
     "padding": 0px 12px,
     "gap": 8px,
     "loaderSize": 16px,
-    "marginBottom": 16px,
   ),
   "medium": (
     "size": 36px,
     "padding": 0px 16px,
     "gap": 12px,
     "loaderSize": 20px,
-    "marginBottom": 16px,
   ),
   "large": (
     "size": 44px,
     "padding": 0px 20px,
     "gap": 16px,
     "loaderSize": 24px,
-    "marginBottom": 20px,
   ),
 );
 
@@ -78,7 +74,6 @@ $states: (
     position: relative;
 
     &[counter] {
-      margin-bottom: 20px;
       overflow: visible;
     }
 
@@ -86,9 +81,7 @@ $states: (
       &[size="#{$size}"] {
         height: map-get($value, "size");
         min-width: map-get($value, "size");
-        &[counter] {
-          margin-bottom: map-get($value, "marginBottom");
-        }
+
         &[variant="round"] {
           border-radius: math.div(map-get($value, "size"), 2);
         }

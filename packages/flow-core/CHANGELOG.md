@@ -1,6 +1,12 @@
 
 # Change Log
 
+## [0.3.6] - 2022-09-21
+### Bug Fixes
+- import module path updated for vue3, vue2, react component types.
+### Improvements
+- FLOW-404 : `f-icon` large size updated
+
 ## [0.3.5] - 2022-09-20
 ### Features
 - `f-icon-button` component updated to display counter position.

@@ -1,6 +1,9 @@
 
 # Change Log
 
+## [0.3.7] - 2022-09-21
+### Improvements
+- `f-icon-button` counter size and positions updated.
 ## [0.3.6] - 2022-09-21
 ### Bug Fixes
 - import module path updated for vue3, vue2, react component types.

@@ -74,9 +74,15 @@ export class FIconButton extends FElement {
    */
   get counterSize() {
     if (this.size === "small") {
-      return "medium";
+      return this.type === "packed" ? "small" : "medium";
     }
     if (this.size === "x-small") {
+      return "small";
+    }
+    if (this.size === "large" && this.type === "packed") {
+      return "medium";
+    }
+    if (this.size === "medium" && this.type === "packed") {
       return "small";
     }
     return this.size;
@@ -93,15 +99,18 @@ export class FIconButton extends FElement {
     const counterClasses = {
       "absolute-counter": true,
       "outline-counter": this.type === "fill",
+      [`packed-${this.size}`]: this.type === "packed",
+      [`size-${this.size}`]: true,
     };
-    const counter = this.counter
-      ? html`<f-counter
-          .state=${this.state}
-          .size=${this.counterSize}
-          .label=${this.counter}
-          class=${classMap(counterClasses)}
-        ></f-counter>`
-      : "";
+    const counter =
+      this.counter && !(this.type === "packed" && this.size === "x-small")
+        ? html`<f-counter
+            .state=${this.state}
+            .size=${this.counterSize}
+            .label=${this.counter}
+            class=${classMap(counterClasses)}
+          ></f-counter>`
+        : "";
 
     return html`<button
       class="f-icon-button"

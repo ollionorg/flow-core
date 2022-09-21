@@ -27,22 +27,27 @@ $states: (
   "primary": (
     "label": var(--color-surface-default),
     "background": var(--color-primary-default),
+    "border": var(--color-primary-subtle),
   ),
   "success": (
     "label": var(--color-surface-default),
     "background": var(--color-success-default),
+    "border": var(--color-success-subtle),
   ),
   "danger": (
     "label": var(--color-surface-default),
     "background": var(--color-danger-default),
+    "border": var(--color-danger-subtle),
   ),
   "warning": (
     "label": var(--color-surface-default),
     "background": var(--color-warning-default),
+    "border": var(--color-warning-subtle),
   ),
   "neutral": (
     "label": var(--color-surface-default),
     "background": var(--color-neutral-default),
+    "border": var(--color-neutral-subtle),
   ),
 );
 
@@ -77,6 +82,25 @@ $states: (
 
         &.absolute-counter {
           transform: translateX(-50%) translateY(10%);
+          &.packed-large {
+            transform: translateX(-50%) translateY(-18%);
+          }
+
+          &.size-small {
+            transform: translateX(-50%) translateY(-13%);
+            &.packed-small {
+              transform: translateX(-50%) translateY(-26%);
+            }
+          }
+          &.size-medium {
+            transform: translateX(-50%) translateY(13%);
+            &.packed-medium {
+              transform: translateX(-50%) translateY(-18%);
+            }
+          }
+          &.size-x-small {
+            transform: translateX(-50%) translateY(-16%);
+          }
         }
       }
     }
@@ -94,7 +118,7 @@ $states: (
         &.outline-counter {
           background-color: var(--color-surface-default);
           color: var(--color-text-default);
-          border: 1px solid var(--background-color);
+          border: 1px solid map.get($value, "border");
         }
       }
     }

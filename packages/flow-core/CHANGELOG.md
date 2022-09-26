@@ -1,6 +1,13 @@
 
 # Change Log
 
+## [0.3.8] - 2022-09-26
+
+### Features
+- `f-popover` component added.
+### Bug Fixes
+- `f-text` `f-div` grow and wrap issue fixed.
+
 ## [0.3.7] - 2022-09-21
 ### Improvements
 - `f-icon-button` counter size and positions updated.

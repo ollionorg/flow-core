@@ -7,6 +7,53 @@ export default {
 
 const Template: Story<unknown> = () => {
   return html`
+    <style>
+      #main-navbar .not-responsive-icon-group {
+        width: inherit;
+      }
+      @media (max-width: 768px) {
+        #main-navbar .responsive-icon-group {
+          width: inherit;
+        }
+        #main-navbar .not-responsive-icon-group {
+          display: none;
+        }
+      }
+      @media (min-width: 768px) {
+        #main-navbar .responsive-icon-group {
+          display: none;
+        }
+        #main-navbar .not-responsive-icon-group {
+          width: inherit;
+        }
+      }
+      @media (max-width: 992px) {
+        #main-navbar .show-search-icon {
+          width: inherit;
+        }
+      }
+      @media (min-width: 992px) {
+        #main-navbar .show-search-icon {
+          display: none;
+        }
+      }
+      @media (min-width: 600px) {
+        #main-navbar .not-responsive-header {
+          width: inherit;
+        }
+        #main-navbar .responsive-header {
+          display: none;
+        }
+      }
+      @media (max-width: 600px) {
+        #main-navbar .not-responsive-header {
+          display: none;
+        }
+        #main-navbar .responsive-header {
+          width: inherit;
+        }
+      }
+    </style>
     <f-template>
       <f-div
         align="middle-left"
@@ -15,6 +62,7 @@ const Template: Story<unknown> = () => {
         padding="medium"
         variant="curved"
         state="default"
+        id="main-navbar"
       >
         <f-div align="middle-left" gap="small" width="hug-content">
           <f-icon source="i-hamburger" size="large" class="responsive-header"></f-icon>
@@ -64,6 +112,53 @@ export const TopNav = Template.bind({});
 
 const ActionButtonGroupTemplate: Story<unknown> = () => {
   return html`
+    <style>
+      #action-button-navbar .not-responsive-icon-group {
+        width: inherit;
+      }
+      @media (max-width: 768px) {
+        #action-button-navbar .responsive-icon-group {
+          width: inherit;
+        }
+        #action-button-navbar .not-responsive-icon-group {
+          display: none;
+        }
+      }
+      @media (min-width: 768px) {
+        #action-button-navbar .responsive-icon-group {
+          display: none;
+        }
+        #action-button-navbar .not-responsive-icon-group {
+          width: inherit;
+        }
+      }
+      @media (max-width: 992px) {
+        #action-button-navbar .show-search-icon {
+          width: inherit;
+        }
+      }
+      @media (min-width: 992px) {
+        #action-button-navbar .show-search-icon {
+          display: none;
+        }
+      }
+      @media (min-width: 600px) {
+        #action-button-navbar .not-responsive-header {
+          width: inherit;
+        }
+        #action-button-navbar .responsive-header {
+          display: none;
+        }
+      }
+      @media (max-width: 600px) {
+        #action-button-navbar .not-responsive-header {
+          display: none;
+        }
+        #action-button-navbar .responsive-header {
+          width: inherit;
+        }
+      }
+    </style>
     <f-template>
       <f-div
         align="middle-left"
@@ -72,6 +167,7 @@ const ActionButtonGroupTemplate: Story<unknown> = () => {
         padding="medium"
         variant="curved"
         state="default"
+        id="action-button-navbar"
       >
         <f-div align="middle-left" gap="small" width="hug-content">
           <f-icon source="i-hamburger" size="large" class="responsive-header"></f-icon>

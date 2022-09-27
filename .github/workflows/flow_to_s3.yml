@@ -1,0 +1,59 @@
+name: CldCvr Flow to S3
+on:
+  push:
+    branches:
+      - master
+defaults:
+  run:
+    shell: bash
+    working-directory: .
+env:
+  DISTRIBUTION_ID: E1JYXHU7GFQMKF
+  BUCKET_NAME: <tbd>
+  AWS_REGION: us-east-1
+  ROLE_NAME: flow.cldcvr.com-role
+  ACCOUNT_ID: 679519065279
+jobs:
+  build:
+    name: Upload to Amazon S3
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Checkout files
+        id: write_file
+        uses: timheuer/base64-to-file@v1.1
+        with:
+          fileName: '.npmrc'
+          fileDir: .
+          encodedString: ${{ secrets.NPMRC }}
+
+      - name: Install Yarn
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install
+
+      - name: Build storybook
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: build-storybook
+
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::${{env.ACCOUNT_ID}}:role/${{env.ROLE_NAME}}
+          aws-region: ${{env.AWS_REGION}}
+
+      - name: Check Access
+        run: |
+          aws sts get-caller-identity
+      - name: Copy files to the website with the AWS CLI
+        run: |
+          aws s3 sync storybook/storybook-static/ s3://${{env.BUCKET_NAME}}/
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{env.DISTRIBUTION_ID}} --paths "/*"

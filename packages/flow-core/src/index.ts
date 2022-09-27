@@ -14,7 +14,7 @@ export * from "./components/f-text/f-text";
 export * from "./components/f-spacer/f-spacer";
 export * from "./components/f-icon-button/f-icon-button";
 export * from "./components/f-pictogram/f-pictogram";
-
+export * from "./components/f-template/f-template";
 
 if (document.readyState !== "loading") {
   ConfigUtil.initTheme();
@@ -27,12 +27,7 @@ if (document.readyState !== "loading") {
 document.addEventListener("keyup", (event: KeyboardEvent) => {
   event.preventDefault();
 
-  if (
-    event.key &&
-    event.key.toLowerCase() === "x" &&
-    event.shiftKey &&
-    event.ctrlKey
-  ) {
+  if (event.key && event.key.toLowerCase() === "x" && event.shiftKey && event.ctrlKey) {
     // console.log("Changing theme");
     const currentTheme = ConfigUtil.getConfig().theme;
 

@@ -54,7 +54,7 @@ jobs:
 
       - name: Copy files to the website with the AWS CLI
         run: |
-          aws s3 sync storybook/storybook-static/ s3://${{env.BUCKET_NAME}}/v2/
+          aws s3 sync storybook-static/ s3://${{env.BUCKET_NAME}}/v2/
 
       - name: Invalidate CloudFront
         run: |

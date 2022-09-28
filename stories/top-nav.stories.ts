@@ -68,14 +68,13 @@ const Template: Story<unknown> = () => {
           <f-icon source="i-hamburger" size="large" class="responsive-header"></f-icon>
           <f-icon source="p-cloudcover-dark" size="large"></f-icon>
         </f-div>
-        <f-div align="middle-left" gap="small" width="hug-content" class="not-responsive-header">
+        <f-div align="middle-left" gap="small" width="fill-container" class="not-responsive-header">
           <f-icon source="i-arrow-left" size="small"></f-icon>
           <f-text variant="heading" size="x-small" weight="regular"
             >Home / Project / Environment / Application / Logs
           </f-text>
         </f-div>
-        <f-spacer size="fill-container"></f-spacer>
-        <f-div align="middle-left" gap="medium" width="hug-content">
+        <f-div align="middle-right" gap="medium" width="fill-container">
           <f-icon-button
             icon="i-search"
             size="small"
@@ -84,7 +83,13 @@ const Template: Story<unknown> = () => {
             state="neutral"
             class="show-search-icon"
           ></f-icon-button>
-          <f-div padding="none" gap="small" class="not-responsive-icon-group">
+          <f-div
+            padding="none"
+            gap="small"
+            class="not-responsive-icon-group"
+            align="middle-right"
+            width="hug-content"
+          >
             <f-icon source="i-icon" size="medium" state="secondary"></f-icon>
             <f-icon source="i-icon" size="medium" state="secondary"></f-icon>
             <f-icon source="i-icon" size="medium" state="secondary"></f-icon>
@@ -173,14 +178,13 @@ const ActionButtonGroupTemplate: Story<unknown> = () => {
           <f-icon source="i-hamburger" size="large" class="responsive-header"></f-icon>
           <f-icon source="p-cloudcover-dark" size="large"></f-icon>
         </f-div>
-        <f-div align="middle-left" gap="small" width="hug-content" class="not-responsive-header">
+        <f-div align="middle-left" gap="small" width="fill-container" class="not-responsive-header">
           <f-button label="LABEL" size="small" category="transparent" state="neutral"></f-button>
           <f-button label="LABEL" size="small" category="transparent" state="neutral"></f-button>
           <f-button label="LABEL" size="small" category="transparent" state="neutral"></f-button>
           <f-button label="LABEL" size="small" category="transparent" state="neutral"></f-button>
         </f-div>
-        <f-spacer size="fill-container"></f-spacer>
-        <f-div align="middle-left" gap="medium" width="hug-content">
+        <f-div align="middle-right" gap="medium" width="fill-container">
           <f-icon-button
             icon="i-search"
             size="small"
@@ -189,7 +193,13 @@ const ActionButtonGroupTemplate: Story<unknown> = () => {
             state="neutral"
             class="show-search-icon"
           ></f-icon-button>
-          <f-div padding="none" gap="small" class="not-responsive-icon-group">
+          <f-div
+            padding="none"
+            gap="small"
+            class="not-responsive-icon-group"
+            align="middle-right"
+            width="hug-content"
+          >
             <f-icon source="i-icon" size="medium" state="secondary"></f-icon>
             <f-icon source="i-icon" size="medium" state="secondary"></f-icon>
             <f-icon source="i-icon" size="medium" state="secondary"></f-icon>

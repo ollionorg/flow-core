@@ -3,6 +3,7 @@ import { html } from "lit-html";
 
 export default {
   title: "components/f-icon-button",
+  component: "f-icon-button",
 } as Meta;
 
 const Template: Story<unknown> = () => {

@@ -9,6 +9,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "storybook-addon-themes",
+    "@storybook/addon-storysource",
   ],
   framework: "@storybook/web-components",
   core: {
@@ -20,7 +21,6 @@ module.exports = {
     if (!config.optimizeDeps) {
       config.optimizeDeps = {};
     }
-    console.log(configType);
     if (configType === "PRODUCTION") {
       config.base = "/v2/";
       config.resolve.alias = [

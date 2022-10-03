@@ -3,6 +3,7 @@ import { html } from "lit-html";
 
 export default {
   title: "components/f-text",
+  component: "f-text",
 } as Meta;
 
 const Template: Story<unknown> = () => {

@@ -3,6 +3,7 @@ import { html } from "lit-html";
 
 export default {
   title: "components/f-div",
+  component: "f-div",
   argTypes: {
     direction: {
       defaultValue: "row",

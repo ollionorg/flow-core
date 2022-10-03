@@ -15,8 +15,8 @@ export class FCounter extends FElement {
   /**
    * @attribute A counter label denotes the numeric count of the entity associated with it
    */
-  @property({ type: String })
-  label!: string;
+  @property({ type: Number })
+  label!: number;
 
   /**
    * @attribute The medium size is the default.
@@ -52,6 +52,43 @@ export class FCounter extends FElement {
       throw new Error("f-counter : label is mandatory field");
     }
   }
+  get labelRules() {
+    if (this.label < 10) {
+      return `0${this.label}`;
+    } else if (this.label >= 10 && this.label < 1000) {
+      return this.label;
+    } else if (this.label >= 1000 && this.label < 10000) {
+      console.log(this.abbrNum(this.label, 1));
+      return this.abbrNum(this.label, 1);
+    } else if (this.label >= 10000 && this.label < 1000000) {
+      return this.abbrNum(this.label, 0);
+    } else if (this.label >= 1000000 && this.label < 10000000) {
+      return this.abbrNum(this.label, 1);
+    } else {
+      return this.abbrNum(this.label, 0);
+    }
+  }
+
+  abbrNum(number: number, decPlaces: number) {
+    decPlaces = Math.pow(10, decPlaces);
+    let fixedNumber = "";
+    const abbrev = ["k", "M", "b", "t"];
+    for (let i = abbrev.length - 1; i >= 0; i--) {
+      const size = Math.pow(10, (i + 1) * 3);
+      if (size <= number) {
+        number = Math.round((number * decPlaces) / size) / decPlaces;
+        if (number == 1000 && i < abbrev.length - 1) {
+          number = 1;
+          i++;
+        }
+        fixedNumber = String(number);
+        fixedNumber += abbrev[i];
+        break;
+      }
+    }
+
+    return fixedNumber;
+  }
   render() {
     this.validateProperties();
     const classes: Record<string, boolean> = {
@@ -60,6 +97,7 @@ export class FCounter extends FElement {
     this.classList.forEach((cl) => {
       classes[cl] = true;
     });
+
     return html`<div
       class=${classMap(classes)}
       size=${this.size}
@@ -67,7 +105,7 @@ export class FCounter extends FElement {
       ?loading=${this.loading}
       ?disabled=${this.disabled}
     >
-      ${this.loading ? html`${unsafeSVG(loader)}` : html`${this.label}`}
+      ${this.loading ? html`${unsafeSVG(loader)}` : html`${this.labelRules}`}
     </div>`;
   }
 }

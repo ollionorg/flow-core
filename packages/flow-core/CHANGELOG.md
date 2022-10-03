@@ -1,6 +1,12 @@
 # Change Log
 
-## [0.3.9] - 2022-09-26
+## [0.4.0] - 2022-10-03
+
+### Improvements
+
+- `f-counter` label rules added for rounding off 1000s and more to k and M.
+
+## [0.3.9] - 2022-09-03
 
 ### Features
 

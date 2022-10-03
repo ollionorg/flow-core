@@ -17,6 +17,48 @@ describe("f-counter", () => {
     expect(descendant.textContent?.trim()).to.equal("888");
   });
 
+  it("label in single digit", async () => {
+    const el = await fixture(html` <f-counter label="4"></f-counter> `);
+    const descendant = el.shadowRoot!.querySelector(".f-counter")!;
+    expect(descendant.textContent?.trim()).to.equal("04");
+  });
+
+  it("label between 999 and 10,000", async () => {
+    const el = await fixture(html` <f-counter label="8760"></f-counter> `);
+    const descendant = el.shadowRoot!.querySelector(".f-counter")!;
+    expect(descendant.textContent?.trim()).to.equal("8.8K");
+  });
+
+  it("label Between 10,000 and 1 million", async () => {
+    const el = await fixture(html` <f-counter label="887650"></f-counter> `);
+    const descendant = el.shadowRoot!.querySelector(".f-counter")!;
+    expect(descendant.textContent?.trim()).to.equal("888K");
+  });
+
+  it("label Between 1 million and 10 million", async () => {
+    const el = await fixture(html` <f-counter label="2560000"></f-counter> `);
+    const descendant = el.shadowRoot!.querySelector(".f-counter")!;
+    expect(descendant.textContent?.trim()).to.equal("2.6M");
+  });
+
+  it("label for 10 million and above", async () => {
+    const el = await fixture(html` <f-counter label="678000000"></f-counter> `);
+    const descendant = el.shadowRoot!.querySelector(".f-counter")!;
+    expect(descendant.textContent?.trim()).to.equal("678M");
+  });
+
+  it("label for Billions", async () => {
+    const el = await fixture(html` <f-counter label="13404000000"></f-counter> `);
+    const descendant = el.shadowRoot!.querySelector(".f-counter")!;
+    expect(descendant.textContent?.trim()).to.equal("13B");
+  });
+
+  it("label for Trillions", async () => {
+    const el = await fixture(html` <f-counter label="16500040000000"></f-counter> `);
+    const descendant = el.shadowRoot!.querySelector(".f-counter")!;
+    expect(descendant.textContent?.trim()).to.equal("17T");
+  });
+
   it("should render with all default properties", async () => {
     const el = await fixture(html` <f-counter label="78"></f-counter> `);
     const descendant = el.shadowRoot!.querySelector(".f-counter")!;
@@ -35,9 +77,7 @@ describe("f-counter", () => {
     try {
       await fixture(html` <f-counter></f-counter>`);
     } catch (e) {
-      expect((e as Error).message).to.equal(
-        "f-counter : label is mandatory field"
-      );
+      expect((e as Error).message).to.equal("f-counter : label is mandatory field");
     }
   });
 });

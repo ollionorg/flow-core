@@ -85,7 +85,7 @@ export class FPopover extends FElement {
   computePosition() {
     let target = document.body;
     if (this.targetElement && this.open) {
-      this.targetElement.style.zIndex = "2";
+      this.targetElement.style.zIndex = "200";
       target = this.targetElement;
     }
     if (this.open) {
@@ -129,15 +129,32 @@ export class FPopover extends FElement {
     }
   }
   disconnectedCallback() {
+    if (this.cleanup) {
+      this.cleanup();
+    }
+
     super.disconnectedCallback();
-    this.cleanup();
+  }
+  overlayClick() {
+    const event = new CustomEvent("overlay-click", {
+      detail: {
+        message: "Popover overlay clicked",
+      },
+    });
+    this.dispatchEvent(event);
   }
 
   render() {
     if (this.open) {
-      const overlay = this.overlay ? html`<div class="f-overlay"></div>` : "";
+      const overlay = this.overlay
+        ? html`<div class="f-overlay" @click=${this.overlayClick}></div>`
+        : "";
       this.computePosition();
       return html`<slot></slot>${overlay} `;
+    } else {
+      if (this.targetElement) {
+        this.targetElement.style.zIndex = "unset";
+      }
     }
     return ``;
   }

@@ -12,46 +12,9 @@ describe("f-counter", () => {
   });
 
   it("should render label in default slot", async () => {
-    function computedLabel(label: number) {
-      if (label < 10) {
-        return `0${label}`;
-      } else if (label >= 10 && label < 1000) {
-        return label;
-      } else if (label >= 1000 && label < 10000) {
-        return abbrNum(label, 1);
-      } else if (label >= 10000 && label < 1000000) {
-        return abbrNum(label, 0);
-      } else if (label >= 1000000 && label < 10000000) {
-        return abbrNum(label, 1);
-      } else {
-        return abbrNum(label, 0);
-      }
-    }
-
-    function abbrNum(number: number, decPlaces: number) {
-      decPlaces = Math.pow(10, decPlaces);
-      let fixedNumber = "";
-      const abbrev = ["K", "M", "B", "T"];
-      for (let i = abbrev.length - 1; i >= 0; i--) {
-        const size = Math.pow(10, (i + 1) * 3);
-        if (size <= number) {
-          number = Math.round((number * decPlaces) / size) / decPlaces;
-          if (number == 1000 && i < abbrev.length - 1) {
-            number = 1;
-            i++;
-          }
-          fixedNumber = String(number);
-          fixedNumber += abbrev[i];
-          break;
-        }
-      }
-
-      return fixedNumber;
-    }
-    const label = 8888;
-    const el = await fixture(html` <f-counter label=${label}></f-counter> `);
+    const el = await fixture(html` <f-counter label="8888"></f-counter> `);
     const descendant = el.shadowRoot!.querySelector(".f-counter")!;
-    expect(descendant.textContent?.trim()).to.equal(computedLabel(label));
+    expect(descendant.textContent?.trim()).to.equal("8.9K");
   });
 
   it("should render with all default properties", async () => {

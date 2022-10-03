@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.4.2] - 2022-10-03
+
+### Improvements
+
+- react types updated to support native attributes.
+
 ## [0.4.1] - 2022-10-03
 
 ### Improvements

@@ -94,6 +94,14 @@
             "name": "*",
             "package": "\"./components/f-template/f-template\""
           }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-popover/f-popover\""
+          }
         }
       ]
     },
@@ -426,141 +434,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-counter/f-counter.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FCounter",
-          "members": [
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size"
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | undefined"
-              },
-              "default": "\"neutral\"",
-              "attribute": "state"
-            },
-            {
-              "kind": "field",
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "loading"
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled"
-            },
-            {
-              "kind": "field",
-              "name": "required",
-              "type": {
-                "text": "array"
-              },
-              "default": "[\"label\"]",
-              "description": "mention required fields here"
-            },
-            {
-              "kind": "method",
-              "name": "validateProperties"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "label"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | undefined"
-              },
-              "default": "\"neutral\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "loading"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            }
-          ],
-          "superclass": {
-            "name": "FElement",
-            "module": "/src/mixins/components/f-element/f-element"
-          },
-          "tagName": "f-counter",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FCounter",
-          "declaration": {
-            "name": "FCounter",
-            "module": "src/components/f-counter/f-counter.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-counter",
-          "declaration": {
-            "name": "FCounter",
-            "module": "src/components/f-counter/f-counter.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-div/f-div.ts",
       "declarations": [
         {
@@ -873,6 +746,141 @@
           "declaration": {
             "name": "FDiv",
             "module": "src/components/f-div/f-div.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-counter/f-counter.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FCounter",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | undefined"
+              },
+              "default": "\"neutral\"",
+              "attribute": "state"
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "array"
+              },
+              "default": "[\"label\"]",
+              "description": "mention required fields here"
+            },
+            {
+              "kind": "method",
+              "name": "validateProperties"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "label"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | undefined"
+              },
+              "default": "\"neutral\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "FElement",
+            "module": "/src/mixins/components/f-element/f-element"
+          },
+          "tagName": "f-counter",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FCounter",
+          "declaration": {
+            "name": "FCounter",
+            "module": "src/components/f-counter/f-counter.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-counter",
+          "declaration": {
+            "name": "FCounter",
+            "module": "src/components/f-counter/f-counter.ts"
           }
         }
       ]
@@ -1476,6 +1484,152 @@
           "declaration": {
             "name": "FPictogram",
             "module": "src/components/f-pictogram/f-pictogram.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-popover/f-popover.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FPopover",
+          "members": [
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "FPopoverPlacement | undefined"
+              },
+              "default": "\"auto\"",
+              "attribute": "placement",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "FPopoverSize | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "overlay",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "attribute": "overlay",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "target",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "cleanup",
+              "type": {
+                "text": "() => void"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "targetElement"
+            },
+            {
+              "kind": "method",
+              "name": "computePlacement"
+            },
+            {
+              "kind": "method",
+              "name": "computePosition"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "placement",
+              "type": {
+                "text": "FPopoverPlacement | undefined"
+              },
+              "default": "\"auto\"",
+              "fieldName": "placement"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "FPopoverSize | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "overlay",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "fieldName": "overlay"
+            },
+            {
+              "name": "target",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "target"
+            }
+          ],
+          "superclass": {
+            "name": "FElement",
+            "module": "/src/mixins/components/f-element/f-element"
+          },
+          "tagName": "f-popover",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FPopover",
+          "declaration": {
+            "name": "FPopover",
+            "module": "src/components/f-popover/f-popover.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-popover",
+          "declaration": {
+            "name": "FPopover",
+            "module": "src/components/f-popover/f-popover.ts"
           }
         }
       ]

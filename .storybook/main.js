@@ -1,5 +1,5 @@
 const litcss = require("rollup-plugin-postcss-lit");
-
+const path = require("path");
 module.exports = {
   stories: [
     "../stories/**/*.stories.mdx",
@@ -15,10 +15,22 @@ module.exports = {
     builder: "@storybook/builder-vite",
   },
   async viteFinal(config, { configType }) {
+    //  config.build.assetsDir = "v2/assets/";
     // customize the Vite config here
     if (!config.optimizeDeps) {
       config.optimizeDeps = {};
     }
+    console.log(configType);
+    if (configType === "PRODUCTION") {
+      config.base = "/v2/";
+      config.resolve.alias = [
+        {
+          find: "@cldcvr/flow-core/src",
+          replacement: path.resolve(__dirname, "../packages/flow-core/src"),
+        },
+      ];
+    }
+
     config.optimizeDeps.include = [
       ...(config.optimizeDeps?.include ?? []),
       "@storybook/web-components",

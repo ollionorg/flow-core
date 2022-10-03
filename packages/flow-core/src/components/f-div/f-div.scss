@@ -81,7 +81,7 @@ f-div {
   display: flex;
   position: relative;
   font-weight: 400;
-  font-size: 14pt;
+  font-size: 14px;
   color: var(--color-text-default);
 
   @each $gap, $value in $gaps {
@@ -155,7 +155,7 @@ f-div {
   &[direction="column"] {
     flex-direction: column;
     > f-div[height="fill-container"] {
-      flex: 1 0 auto;
+      flex: 1 1;
       max-height: 100%;
     }
     > f-div[width="fill-container"] {
@@ -166,7 +166,7 @@ f-div {
   &[direction="row"] {
     flex-direction: row;
     > f-div[width="fill-container"] {
-      flex: 1 0 auto;
+      flex: 1 1;
       max-width: 100%;
     }
     > f-div[height="fill-container"] {

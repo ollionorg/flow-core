@@ -261,8 +261,12 @@ const STTemplate: Story<Record<string, string>> = (
         () =>
           html` <f-div
             border="small solid default"
-            width="fill-container"
-            height="fill-container"
+            .width=${args.direction === "row"
+              ? "hug-content"
+              : "fill-container"}
+            .height=${args.direction === "column"
+              ? "hug-content"
+              : "fill-container"}
             gap="small"
             padding="small"
             ><f-button label="normal" icon-left="i-plus"></f-button>
@@ -273,24 +277,30 @@ const STTemplate: Story<Record<string, string>> = (
         gap="small"
         state="danger"
         padding="small"
-        width="fill-container"
-        height="fill-container"
+        .width=${args.direction === "row" ? "hug-content" : "fill-container"}
+        .height=${args.direction === "column"
+          ? "hug-content"
+          : "fill-container"}
         selected="notch-right"
         .sticky=${args.sticky}
         ><f-button label="normal" icon-left="i-plus"></f-button>
       </f-div>
       <f-div
         gap="small"
-        width="fill-container"
-        height="fill-container"
+        .width=${args.direction === "row" ? "hug-content" : "fill-container"}
+        .height=${args.direction === "column"
+          ? "hug-content"
+          : "fill-container"}
         disabled
         padding="small"
         ><f-button label="disabled" icon-left="i-plus"></f-button>
       </f-div>
       <f-div
         gap="small"
-        width="fill-container"
-        height="fill-container"
+        .width=${args.direction === "row" ? "hug-content" : "fill-container"}
+        .height=${args.direction === "column"
+          ? "hug-content"
+          : "fill-container"}
         clickable
         padding="small"
         ><f-button label="clickable" icon-left="i-plus"></f-button>
@@ -299,8 +309,12 @@ const STTemplate: Story<Record<string, string>> = (
         () =>
           html` <f-div
             border="small solid default"
-            width="fill-container"
-            height="fill-container"
+            .width=${args.direction === "row"
+              ? "hug-content"
+              : "fill-container"}
+            .height=${args.direction === "column"
+              ? "hug-content"
+              : "fill-container"}
             gap="small"
             padding="small"
             ><f-button label="normal" icon-left="i-plus"></f-button>
@@ -312,8 +326,10 @@ const STTemplate: Story<Record<string, string>> = (
         state="danger"
         padding="small"
         selected="notch-right"
-        width="fill-container"
-        height="fill-container"
+        .width=${args.direction === "row" ? "hug-content" : "fill-container"}
+        .height=${args.direction === "column"
+          ? "hug-content"
+          : "fill-container"}
         .sticky=${args.sticky}
         ><f-button label="normal" icon-left="i-plus"></f-button>
       </f-div>

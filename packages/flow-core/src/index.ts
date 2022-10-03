@@ -15,6 +15,7 @@ export * from "./components/f-spacer/f-spacer";
 export * from "./components/f-icon-button/f-icon-button";
 export * from "./components/f-pictogram/f-pictogram";
 export * from "./components/f-template/f-template";
+export * from "./components/f-popover/f-popover";
 
 if (document.readyState !== "loading") {
   ConfigUtil.initTheme();

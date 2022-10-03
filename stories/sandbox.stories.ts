@@ -7,9 +7,30 @@ export default {
 
 const Template: Story<unknown> = () => {
   return html`
-    <f-button label="left"></f-button>
-    <f-spacer size="fill-container"></f-spacer>
-    <f-button label="right"></f-button>
+    <f-div width="500px" border="small" padding="medium" gap="small">
+      <f-div width="hug-content"> <f-icon source="i-info-fill"></f-icon></f-div>
+      <f-div>
+        <f-text variant="para" size="small"
+          >Automa. Automa. Automa. Automa.Automa. Automa. Automa. Automa.
+          Automa. Automa. Automa. Automa.Automa. Automa. Automa.Automa.Automa.
+          Automa. Automa.
+        </f-text>
+      </f-div>
+
+      <f-div width="hug-content">
+        <f-icon source="i-close" size="x-small"></f-icon>
+      </f-div>
+    </f-div>
+
+    <br /><br /><br /><br />
+
+    <f-div direction="row" width="500px" border="small" padding="small">
+      <f-icon source="i-info-fill"></f-icon>
+
+      <f-text variant="para" size="small">Automa. </f-text>
+
+      <f-icon source="i-close" size="x-small"></f-icon>
+    </f-div>
   `;
 };
 

@@ -52,13 +52,12 @@ export class FCounter extends FElement {
       throw new Error("f-counter : label is mandatory field");
     }
   }
-  get labelRules() {
+  get computedLabel() {
     if (this.label < 10) {
       return `0${this.label}`;
     } else if (this.label >= 10 && this.label < 1000) {
       return this.label;
     } else if (this.label >= 1000 && this.label < 10000) {
-      console.log(this.abbrNum(this.label, 1));
       return this.abbrNum(this.label, 1);
     } else if (this.label >= 10000 && this.label < 1000000) {
       return this.abbrNum(this.label, 0);
@@ -72,7 +71,7 @@ export class FCounter extends FElement {
   abbrNum(number: number, decPlaces: number) {
     decPlaces = Math.pow(10, decPlaces);
     let fixedNumber = "";
-    const abbrev = ["k", "M", "b", "t"];
+    const abbrev = ["K", "M", "B", "T"];
     for (let i = abbrev.length - 1; i >= 0; i--) {
       const size = Math.pow(10, (i + 1) * 3);
       if (size <= number) {
@@ -105,7 +104,7 @@ export class FCounter extends FElement {
       ?loading=${this.loading}
       ?disabled=${this.disabled}
     >
-      ${this.loading ? html`${unsafeSVG(loader)}` : html`${this.labelRules}`}
+      ${this.loading ? html`${unsafeSVG(loader)}` : html`${this.computedLabel}`}
     </div>`;
   }
 }

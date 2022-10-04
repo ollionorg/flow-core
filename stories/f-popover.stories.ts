@@ -35,17 +35,15 @@ class BasicStoryElement extends LitElement {
           target="#popoverTarget"
         >
           <f-text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            imperdiet enim ut mi egestas, non efficitur odio varius. Phasellus
-            accumsan pellentesque ex vehicula tristique. Etiam id tempor velit.
-            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-            posuere cubilia curae; Donec sodales mi vitae felis ornare
-            facilisis. Suspendisse et ante sit amet lectus ullamcorper gravida.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut mi
+            egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+            tristique. Etiam id tempor velit. Vestibulum ante ipsum primis in faucibus orci luctus
+            et ultrices posuere cubilia curae; Donec sodales mi vitae felis ornare facilisis.
+            Suspendisse et ante sit amet lectus ullamcorper gravida.
           </f-text>
         </f-popover>
 
-        <f-button id="popoverTarget" label="Open" @click=${this.togglePopOver}>
-        </f-button>
+        <f-button id="popoverTarget" label="Open" @click=${this.togglePopOver}> </f-button>
       </f-div>
     `;
   }

@@ -1,5 +1,20 @@
 # Change Log
 
+## [0.4.2] - 2022-10-03
+
+### Improvements
+
+- react types updated to support native attributes.
+
+## [0.4.1] - 2022-10-03
+
+### Improvements
+
+- `f-popover` test cases updated.
+
+### Bug Fixes
+- `f-popover` z-index bug fixed
+
 ## [0.4.0] - 2022-10-03
 
 ### Improvements

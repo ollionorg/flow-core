@@ -138,7 +138,7 @@ function getComponentCodeFromDeclarationReact(declaration: Declaration) {
                 ${componentDeclaration}
 				children?:any`;
 	componentDeclaration = `${componentDeclaration}
-        };`;
+        }&React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;`;
 
 	return componentDeclaration;
 }

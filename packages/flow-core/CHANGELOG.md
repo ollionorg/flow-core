@@ -1,4 +1,9 @@
 # Change Log
+## [0.4.6] - 2022-10-06
+
+### Improvements
+
+- `src` folder included while publishing, since it is required for creating dependencies.
 ## [0.4.5] - 2022-10-06
 
 ### Testing

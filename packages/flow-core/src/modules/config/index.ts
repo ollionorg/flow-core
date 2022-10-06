@@ -39,17 +39,24 @@ export const ConfigUtil = {
     }
   },
   initTheme() {
-    const themeElement = initThemeTag();
+    const themeStyleElement = document.querySelector(
+      `style[id^="flow-theme-${config.theme}"]`
+    );
+    if (!themeStyleElement) {
+      const themeElement = initThemeTag();
 
-    if (themeElement) {
-      const themeCSS = getThemeStyle(`[flow-element][theme="${config.theme}"]`);
-
-      if (themeCSS) {
-        themeElement.appendChild(document.createTextNode(themeCSS));
-      } else {
-        console.error(
-          `Theme ${config.theme} CSS file/selector not found! \n Please check if css is imported 'import "@cldcvr/flow-core/dist/style.css"'`
+      if (themeElement) {
+        const themeCSS = getThemeStyle(
+          `[flow-element][theme="${config.theme}"]`
         );
+
+        if (themeCSS) {
+          themeElement.appendChild(document.createTextNode(themeCSS));
+        } else {
+          console.error(
+            `Theme ${config.theme} CSS file/selector not found! \n Please check if css is imported 'import "@cldcvr/flow-core/dist/style.css"'`
+          );
+        }
       }
     }
   },

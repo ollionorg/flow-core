@@ -1,5 +1,14 @@
 # Change Log
+## [0.4.4] - 2022-10-06
 
+### Improvements
+
+- Contribution doc updated.
+## [0.4.3] - 2022-10-06
+
+### Improvements
+
+- react types updated to support `class` attributes.
 ## [0.4.2] - 2022-10-03
 
 ### Improvements

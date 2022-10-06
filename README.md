@@ -33,7 +33,7 @@ Flow is aimed at being framework agnostic, but we need help getting there. So fa
 
 ## Getting started
 
-Copy paste the below snippets in **VueJS:** (src/main.ts or main.js), **Angular:** @vikas?, **React:** @vikas?
+Copy paste the below snippets in **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
 
 #### Step 1: Install flow core + flow icons dependency
 1. **flow-core**  ```yarn add @cldcvr/flow-core```
@@ -41,26 +41,42 @@ Copy paste the below snippets in **VueJS:** (src/main.ts or main.js), **Angular:
 
 *Note:* after adding the snippets, re-start your application.
 
-#### Step 2: Import flow-core and it's dependecies into your project
+#### Step 2 : Import CSS 
+**Vue:** 
 
-Copy and important the below snippet into your configuration file. In **VueJS:** (src/main.ts or main.js), **Angular:** @vikas?, **React:** @vikas?
-```
-import '@cldcvr/flow-core';
-import "@cldcvr/flow-core/dist/style.css";
-import "@cldcvr/flow-system-icon";
-```
-
-*Note:* If you are *using Vue 3*, please copy paste the below snippet *after the closing `<template>`* in your `App.vue` 
+Please copy paste the below snippet *after the closing `<template>`* in your `App.vue` 
 
 ```
 <style>
 @import "@cldcvr/flow-core/dist/style.css";
 </style> 
 ```
+**React:** 
 
-#### If you typescript enabled please include import types to
+Please copy paste the below snippet in `src/index.tsx` or `index.jsx`
 
-**Vue Js:** 
+```
+import "@cldcvr/flow-core/dist/style.css";
+```
+**Angular:**
+
+Please add css file path in `angular.json` in `styles` property array.
+
+```
+"styles": ["@cldcvr/flow-core/dist/style.css"],
+```
+#### Step 3: Import flow-core and it's dependecies into your project
+
+Copy and important the below snippet into your configuration file. In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
+```
+import '@cldcvr/flow-core';
+import "@cldcvr/flow-system-icon";
+```
+
+
+#### Step 4 : If your project is typescript enabled please include import types to
+
+**Vue:** 
 Copy paste below line in your `main.ts` file.
 ```
 import "@cldcvr/flow-core/dist/types/vue2";

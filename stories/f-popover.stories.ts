@@ -8,8 +8,10 @@ import { customElement } from "lit/decorators.js";
 export default {
   title: "components/f-popover",
   component: "f-popover",
-  docs: {
-    inlineStories: false,
+  parameters: {
+    docs: {
+      inlineStories: false,
+    },
   },
 } as Meta;
 @customElement("story-basic")

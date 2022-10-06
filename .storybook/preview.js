@@ -6,7 +6,11 @@ import AwsIconPack from "@cldcvr/flow-aws-icon/dist/types/icon-pack";
 
 import { ConfigUtil } from "@cldcvr/flow-core/src/modules/config";
 import "@cldcvr/flow-core/src";
-import { setCustomElementsManifest, setCustomElements } from "@storybook/web-components";
+import {
+  setCustomElementsManifest,
+  setCustomElements,
+} from "@storybook/web-components";
+import "./storybook.css";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -134,7 +138,9 @@ export const decorators = [
 
 async function run() {
   const customElements = await (
-    await fetch(new URL("../packages/flow-core/custom-elements.json", import.meta.url))
+    await fetch(
+      new URL("../packages/flow-core/custom-elements.json", import.meta.url)
+    )
   ).json();
 
   setCustomElementsManifest(customElements);

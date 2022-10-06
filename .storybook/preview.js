@@ -10,6 +10,7 @@ import {
   setCustomElementsManifest,
   setCustomElements,
 } from "@storybook/web-components";
+import "./storybook.css";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

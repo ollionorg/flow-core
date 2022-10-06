@@ -1,4 +1,9 @@
 # Change Log
+## [0.4.4] - 2022-10-06
+
+### Improvements
+
+- Contribution doc updated.
 ## [0.4.3] - 2022-10-06
 
 ### Improvements

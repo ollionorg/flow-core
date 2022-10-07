@@ -51,8 +51,13 @@ import "@cldcvr/flow-core/dist/style.css";
 "styles": ["@cldcvr/flow-core/dist/style.css"],
 
 ```
+#### Step 3: Import flow-core into your project
 
-#### Step 3 : If your project is typescript enabled please include import types to
+Copy and import the below snippet into your startup file. In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
+```
+import '@cldcvr/flow-core';
+```
+#### Step 4 : If your project is typescript enabled please include import types to
 
 **Vue:** 
 Copy paste below line in your `main.ts` file.

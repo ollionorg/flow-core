@@ -10,18 +10,13 @@ jobs:
       contents: read
       packages: write
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: '14.x'
-        registry-url: 'https://registry.npmjs.org'
-    - run: yarn install
-    - run: yarn publish ./packages/flow-core --access public
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.YARN_TOKEN }}
-    - uses: actions/setup-node@v3
-      with:
-        registry-url: 'https://npm.pkg.github.com'
-    - run: yarn publish ./packages/flow-core --access public
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      # Setup original .npmrc file to download packages
+      - uses: timheuer/base64-to-file@v1.1
+        with:
+          fileName: '.npmrc'
+          fileDir: .
+          encodedString: ${{ secrets.NPMRC }}
+      - uses: actions/setup-node@v2
+      - run: yarn install
+      - run: yarn publish ./packages/flow-core --access public

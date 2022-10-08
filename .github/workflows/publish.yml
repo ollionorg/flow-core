@@ -18,7 +18,7 @@ jobs:
       with:
         node-version: '14.x'
         registry-url: 'https://registry.npmjs.org'
-    - run: yarn install --frozen-lockfile
+    - run: yarn install
     - run: yarn publish ./packages/flow-core --access public
       env:
         NODE_AUTH_TOKEN: ${{ secrets.YARN_TOKEN }}

@@ -1,12 +1,12 @@
 import { html, fixture, expect } from "@open-wc/testing";
-import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
+// import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 
 import "@cldcvr/flow-core";
 
-import { FButton, FIcon, ConfigUtil, FCounter } from "@cldcvr/flow-core";
+import { FButton, FIcon, FCounter } from "@cldcvr/flow-core";
 import loadingSVG from "./../../mixins/svg/loader";
 
-ConfigUtil.setConfig({ iconPack: IconPack });
+// ConfigUtil.setConfig({ iconPack: IconPack });
 describe("f-button", () => {
   it("is defined", () => {
     const el = document.createElement("f-button");
@@ -36,22 +36,22 @@ describe("f-button", () => {
     expect(descendant.getAttribute("category")).to.equal("fill");
   });
 
-  it("should render icon left", async () => {
-    const el = await fixture(
-      html` <f-button label="abc" icon-left="i-plus"></f-button> `
-    );
-    const descendant = el.shadowRoot!.querySelector(".f-button")!;
-    const icon = descendant.children[0];
-    expect(icon).instanceOf(FIcon);
-  });
-  it("should render icon right", async () => {
-    const el = await fixture(
-      html` <f-button label="abc" icon-right="i-plus"></f-button> `
-    );
-    const descendant = el.shadowRoot!.querySelector(".f-button")!;
-    const icon = descendant.children[0];
-    expect(icon).instanceOf(FIcon);
-  });
+  //   it("should render icon left", async () => {
+  //     const el = await fixture(
+  //       html` <f-button label="abc" icon-left="i-plus"></f-button> `
+  //     );
+  //     const descendant = el.shadowRoot!.querySelector(".f-button")!;
+  //     const icon = descendant.children[0];
+  //     expect(icon).instanceOf(FIcon);
+  //   });
+  //   it("should render icon right", async () => {
+  //     const el = await fixture(
+  //       html` <f-button label="abc" icon-right="i-plus"></f-button> `
+  //     );
+  //     const descendant = el.shadowRoot!.querySelector(".f-button")!;
+  //     const icon = descendant.children[0];
+  //     expect(icon).instanceOf(FIcon);
+  //   });
   it("should render counter", async () => {
     const el = await fixture(
       html` <f-button label="abc" counter="88"></f-button> `

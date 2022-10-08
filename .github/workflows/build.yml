@@ -24,14 +24,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Checkout files
-        id: write_file
-        uses: timheuer/base64-to-file@v1.1
-        with:
-          fileName: '.npmrc'
-          fileDir: .
-          encodedString: ${{ secrets.NPMRC }}
-
       - name: Install Yarn
         uses: borales/actions-yarn@v3.0.0
         with:

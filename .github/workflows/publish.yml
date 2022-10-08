@@ -2,24 +2,29 @@ name: Publish
 on:
   push:
     branches:
-      - main
+      - vikas/public-package
     paths:
       - '**/package.json'
 jobs:
   # publishing azure artifacts
-  azure:
+  npm:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v2
-      # Setup original .npmrc file to download packages
-      - uses: timheuer/base64-to-file@v1.1
-        with:
-          fileName: '.npmrc'
-          fileDir: .
-          encodedString: ${{ secrets.NPMRC }}
-      - uses: actions/setup-node@v2
-      - run: yarn install
-      - run: yarn publish ./packages/flow-core
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '14.x'
+        registry-url: 'https://registry.npmjs.org'
+    - run: npm ci
+    - run: npm publish ./packages/flow-core --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - uses: actions/setup-node@v3
+      with:
+        registry-url: 'https://npm.pkg.github.com'
+    - run: npm publish ./packages/flow-core --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

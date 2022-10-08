@@ -1,4 +1,10 @@
 # Change Log
+
+## [1.0.0] - 2022-10-07
+
+### Improvements
+
+- Open source version 
 ## [0.4.6] - 2022-10-06
 
 ### Improvements

@@ -12,9 +12,11 @@
     "storybook": "start-storybook -p 6007",
     "start": "yarn storybook",
     "build-storybook": "build-storybook",
-    "prebuild-flow-core": "cd packages/custom-elements-manifest-vue && yarn build",
+    "prebuild-flow-core": "cd packages/custom-elements-manifest-to-types && yarn build",
     "build-flow-core": "cd packages/flow-core && yarn compile",
-    "build-lib": "yarn build-flow-core",
+    "build-types-generator": "cd packages/custom-elements-manifest-to-types && yarn build",
+    "build-packages": "yarn build-types-generator && yarn build-flow-core",
+    "release": "yarn build-packages && yarn changeset publish",
     "prepare": "husky install",
     "test": "yarn loki test"
   },
@@ -59,5 +61,8 @@
         "mobile": false
       }
     }
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.25.0"
   }
 }

@@ -1,9 +1,9 @@
 import { html, fixture, expect } from "@open-wc/testing";
-// import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
+import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 import "@cldcvr/flow-core";
-import { FPictogram } from "@cldcvr/flow-core";
+import { FPictogram, ConfigUtil } from "@cldcvr/flow-core";
 
-// ConfigUtil.setConfig({ iconPack: IconPack });
+ConfigUtil.setConfig({ iconPack: IconPack });
 
 describe("f-pictogram", () => {
   it("is defined", () => {

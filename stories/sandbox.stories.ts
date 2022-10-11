@@ -1,9 +1,9 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 
-export default {
-  title: "Sandbox",
-} as Meta;
+// export default {
+//   title: "Sandbox",
+// } as Meta;
 
 const Template: Story<unknown> = () => {
   return html`
@@ -11,9 +11,8 @@ const Template: Story<unknown> = () => {
       <f-div width="hug-content"> <f-icon source="i-info-fill"></f-icon></f-div>
       <f-div>
         <f-text variant="para" size="small"
-          >Automa. Automa. Automa. Automa.Automa. Automa. Automa. Automa.
-          Automa. Automa. Automa. Automa.Automa. Automa. Automa.Automa.Automa.
-          Automa. Automa.
+          >Automa. Automa. Automa. Automa.Automa. Automa. Automa. Automa. Automa. Automa. Automa.
+          Automa.Automa. Automa. Automa.Automa.Automa. Automa. Automa.
         </f-text>
       </f-div>
 

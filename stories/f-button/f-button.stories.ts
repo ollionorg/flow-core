@@ -8,7 +8,7 @@ import StatesAndSizesTemplate from "./f-button-states-sizes.template";
 import LoadingTemplate from "./f-button-loading.template";
 
 export default {
-  title: "components/f-button",
+  title: "components/f-button-12",
   component: "f-button",
 } as Meta;
 

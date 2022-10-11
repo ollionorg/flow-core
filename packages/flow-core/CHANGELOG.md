@@ -1,14 +1,19 @@
-# Change Log
+<h4 class="margin-btm-8">Release Notes</h4>
+<hr class="margin-btm-32" />
+<p class="margin-btm-24">All notable changes to this project will be documented in this file. See <a>Conventional Commits</a> for commit guidelines. </p>
+
 ## [0.4.4] - 2022-10-06
 
 ### Improvements
 
 - Contribution doc updated.
+
 ## [0.4.3] - 2022-10-06
 
 ### Improvements
 
 - react types updated to support `class` attributes.
+
 ## [0.4.2] - 2022-10-03
 
 ### Improvements
@@ -22,6 +27,7 @@
 - `f-popover` test cases updated.
 
 ### Bug Fixes
+
 - `f-popover` z-index bug fixed
 
 ## [0.4.0] - 2022-10-03

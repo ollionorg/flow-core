@@ -203,7 +203,9 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
     <tr>
       <td>transparent</td>
       <td>Sets the background-color of f-div to transparent</td>
-      <code>default</code>
+      <td>
+        <code>default</code>
+      </td>
     </tr>
     <tr>
       <td>default</td>
@@ -769,17 +771,23 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 <h4 class="margin-tp-36 margin-btm-16">width</h4>
 <hr class="margin-btm-24" />
-<p class="margin-btm-24">
+<div class="margin-btm-24">
   Width of a layout can be defined in 3 ways:
   <ul>
-    <li>Fill container: width is set to the parent container’s width.</li>
     <li>
-      Hug contents: width is a sum of the width of all elements inside it and left and right
-      padding.
+      <p>Fill container: width is set to the parent container’s width.</p>
     </li>
-    <li>Fixed: width is set to the numerical value passed to the width property.</li>
+    <li>
+      <p>
+        Hug contents: width is a sum of the width of all elements inside it and left and right
+        padding.
+      </p>
+    </li>
+    <li>
+      <p>Fixed: width is set to the numerical value passed to the width property.</p>
+    </li>
   </ul>
-</p>
+</div>
 <p class="note-section margin-btm-24">Note: Column variant always has width set to hug content.</p>
 
 <Canvas>
@@ -856,17 +864,23 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 <h4 class="margin-tp-36 margin-btm-16">height</h4>
 <hr class="margin-btm-24" />
-<p class="margin-btm-24">
+<div class="margin-btm-24">
   Height of a layout can be defined in 3 ways:
   <ul>
-    <li>Fill container: height is set to the parent container’s height.</li>
     <li>
-      Hug content: height is a sum of the height of all elements inside it and left and right
-      padding.
+      <p>Fill container: height is set to the parent container’s height.</p>
     </li>
-    <li>Fixed: width is set to the numerical value passed to the height property.</li>
+    <li>
+      <p>
+        Hug content: height is a sum of the height of all elements inside it and left and right
+        padding.
+      </p>
+    </li>
+    <li>
+      <p>Fixed: width is set to the numerical value passed to the height property.</p>
+    </li>
   </ul>
-</p>
+</div>
 <p class="note-section margin-btm-24">Note: Row variant always has height set to Hug content.</p>
 
 <Canvas>
@@ -998,19 +1012,25 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
   either if layout is overflowing from the parent container or layout has fixed width/height and the
   elements are overflowing.
 </p>
-<p class="margin-btm-24">
+<div class="margin-btm-24">
   Elements can behave in 3 ways in this situation:
   <ul>
     <li>
-      Wrap: Overflowing elements are wrapped to the next row/column. This is the default behavior.
+      <p>
+        Wrap: Overflowing elements are wrapped to the next row/column. This is the default behavior.
+      </p>
     </li>
     <li>
-      Scroll: Layout becomes a scrollable component and the overflowing elements are accessible on
-      scroll.
+      <p>
+        Scroll: Layout becomes a scrollable component and the overflowing elements are accessible on
+        scroll.
+      </p>
     </li>
-    <li>Hidden: Overflowing elements are clipped and remain hidden.</li>
+    <li>
+      <p>Hidden: Overflowing elements are clipped and remain hidden.</p>
+    </li>
   </ul>
-</p>
+</div>
 
 <Canvas>
   <Story name="overflow">

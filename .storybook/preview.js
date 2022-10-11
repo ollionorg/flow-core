@@ -6,10 +6,7 @@ import AwsIconPack from "@cldcvr/flow-aws-icon/dist/types/icon-pack";
 
 import { ConfigUtil } from "@cldcvr/flow-core/src/modules/config";
 import "@cldcvr/flow-core/src";
-import {
-  setCustomElementsManifest,
-  setCustomElements,
-} from "@storybook/web-components";
+import { setCustomElementsManifest, setCustomElements } from "@storybook/web-components";
 import "./storybook.css";
 
 export const parameters = {
@@ -33,13 +30,9 @@ export const parameters = {
     storySort: {
       order: [
         "Foundation",
-        [
-          "Introduction",
-          "Design tokens",
-          ["Overview", "Color", "Font", "Icon"],
-        ],
+        ["Introduction", "Design tokens", ["Overview", "Color", "Font", "Icon"]],
         "Components",
-        ["f-div", "f-divider", "f-spacer", "f-button"],
+        ["f-div", "f-divider", "f-spacer", "f-button", "f-icon", "f-text", "f-pictogram"],
       ],
     },
   },
@@ -79,9 +72,7 @@ export const decorators = [
 
 async function run() {
   const customElements = await (
-    await fetch(
-      new URL("../packages/flow-core/custom-elements.json", import.meta.url)
-    )
+    await fetch(new URL("../packages/flow-core/custom-elements.json", import.meta.url))
   ).json();
 
   setCustomElementsManifest(customElements);

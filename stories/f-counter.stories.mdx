@@ -1,0 +1,308 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import fCounterAnatomy from "./svg/f-counter-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+
+<Meta title="Components/f-counter" />
+
+<h1 class="margin-btm-36">f-counter</h1>
+<h4 class="margin-btm-8">Overview</h4>
+<hr class="margin-btm-24" />
+<p class="margin-btm-24">A counter is a visual indicator for numeric values.</p>
+<h6 class="margin-btm-4">Anatomy</h6>
+<hr class="margin-btm-16" />
+
+<Story name="Anatomy">
+  {() => html`<div class="align-center">${unsafeSVG(fCounterAnatomy)}</div>`}
+</Story>
+
+<h4 class="margin-btm-8 margin-tp-36">label</h4>
+<hr class="margin-btm-24" />
+<p class="margin-btm-24">
+  Label property defines the numeric count on the counter. For larger numeric values label truncates
+  according to the rules mentioned below.
+</p>
+
+<table class="custom-color-table">
+  <tbody>
+    <tr>
+      <th>Number</th>
+      <th>Rule</th>
+      <th>Examples</th>
+    </tr>
+    <tr>
+      <td>Less than 10</td>
+      <td>zero gets appended before number.</td>
+      <td>01, 05, 09</td>
+    </tr>
+    <tr>
+      <td>Between 10 and 999</td>
+      <td>actual number gets displayed</td>
+      <td>12, 467, 899</td>
+    </tr>
+    <tr>
+      <td>Between 999 and 10,000</td>
+      <td>
+        Use of K to annotate Thousand
+        <br />
+        Note: Round of the number upto one place of decimal.
+      </td>
+      <td>
+        1732 -> 1.7K
+        <br />
+        8760 -> 8.8K
+      </td>
+    </tr>
+    <tr>
+      <td>Between 10,000 and 1 million</td>
+      <td>
+        Annotate with K and round off the number to the nearest thousand.
+        <br />
+        Note: Do not use decimals
+      </td>
+      <td>
+        34657 -> 35k
+        <br />
+        887650 -> 888K
+      </td>
+    </tr>
+    <tr>
+      <td>Between 1 million and 10 million</td>
+      <td>
+        Use M to annotate Million
+        <br />
+        Note: Round of the number upto one place of decimal.
+      </td>
+      <td>
+        1100000 -> 1.1M
+        <br />
+        2560000 -> 2.6M
+      </td>
+    </tr>
+    <tr>
+      <td>10 million and above</td>
+      <td>
+        Annotate with M and round off the number to the nearest thousand.
+        <br />
+        Note: Do not use decimals
+      </td>
+      <td>
+        5500000 -> 55M
+        <br />
+        1280000 -> 13M
+        <br /> 678000000 -> 678M
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Canvas>
+  <Story name="label">
+    {(args) => html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
+      <f-counter label="8" size="large"></f-counter>
+      <f-counter label="88" size="large"></f-counter>
+      <f-counter label="8888" size="large"></f-counter>
+      <f-counter label="88888" size="large"></f-counter>
+      <f-counter label="888888" size="large"></f-counter>
+      <f-counter label="8888888" size="large"></f-counter>
+      <f-counter label="88888888" size="large"></f-counter>
+    </f-div> `}
+  </Story>
+</Canvas>
+
+<h4 class="margin-btm-8 margin-tp-36">size</h4>
+<hr class="margin-btm-24" />
+<p class="margin-btm-24">The medium size is the default and recommended option.</p>
+
+<Canvas>
+  <Story name="size">
+    {(args) => html`<f-div gap="medium" padding="x-large" align="middle-center">
+      <f-div padding="large" gap="medium" direction="column" width="hug-content">
+        <f-div height="hug-content" padding="none" align="middle-center">
+          <f-text variant="para" size="large" weight="medium">large<f-text>
+        </f-div>
+        <f-div height="hug-content" padding="none" align="middle-center">
+      <f-counter label="888888" size="large"></f-counter>
+        </f-div>
+      </f-div>
+      <f-div padding="large" gap="medium" direction="column" width="hug-content">
+        <f-div height="hug-content" padding="none" align="middle-center">
+          <f-text variant="para" size="large" weight="medium">medium</f-text>
+        </f-div>
+        <f-div height="hug-content" padding="none" align="middle-center">
+      <f-counter label="888888" size="medium"></f-counter>
+        </f-div>
+      </f-div>
+      <f-div padding="large" gap="medium" direction="column" width="hug-content">
+        <f-div height="hug-content" padding="none" align="middle-center">
+          <f-text variant="para" size="large" weight="medium">small<f-text>
+        </f-div>
+        <f-div height="hug-content" padding="none" align="middle-center">
+      <f-counter label="888888" size="small"></f-counter>
+        </f-div>
+      </f-div>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>large</td>
+      <td>Large size - 20px</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>medium</td>
+      <td>Medium size - 16px</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>small</td>
+      <td>Small size - 12px</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 class="margin-btm-8 margin-tp-36">state</h4>
+<hr class="margin-btm-24" />
+<p class="margin-btm-24">
+  States on counters are used to communicate purpose and it’s connotation. For example, a red color
+  connotes danger, whereas a green color connotes success and so on.
+</p>
+
+<Canvas>
+  <Story name="state">
+    {(args) => html`<f-div gap="medium" padding="x-large" align="middle-center">
+      <f-div padding="large" gap="medium" direction="column" width="hug-content">
+        <f-div height="hug-content" padding="none" align="middle-center">
+          <f-text variant="para" size="large" weight="medium">neutral</f-text>
+        </f-div>
+        <f-div height="hug-content" padding="none" align="middle-center">
+      <f-counter label="888888" size="large" state="neutral"></f-counter>
+        </f-div>
+      </f-div>
+      <f-div padding="large" gap="medium" direction="column" width="hug-content">
+        <f-div height="hug-content" padding="none" align="middle-center">
+          <f-text variant="para" size="large" weight="medium">primary<f-text>
+        </f-div>
+        <f-div height="hug-content" padding="none" align="middle-center">
+      <f-counter label="888888" size="large" state="primary"></f-counter>
+        </f-div>
+      </f-div>
+      <f-div padding="large" gap="medium" direction="column" width="hug-content">
+        <f-div height="hug-content" padding="none" align="middle-center">
+          <f-text variant="para" size="large" weight="medium">success</f-text>
+        </f-div>
+        <f-div height="hug-content" padding="none" align="middle-center">
+      <f-counter label="888888" size="large" state="success"></f-counter>
+        </f-div>
+      </f-div>
+            <f-div padding="large" gap="medium" direction="column" width="hug-content">
+        <f-div height="hug-content" padding="none" align="middle-center">
+          <f-text variant="para" size="large" weight="medium">danger</f-text>
+        </f-div>
+        <f-div height="hug-content" padding="none" align="middle-center">
+      <f-counter label="888888" size="large" state="danger"></f-counter>
+        </f-div>
+      </f-div>
+            <f-div padding="large" gap="medium" direction="column" width="hug-content">
+        <f-div height="hug-content" padding="none" align="middle-center">
+          <f-text variant="para" size="large" weight="medium">warning</f-text>
+        </f-div>
+        <f-div height="hug-content" padding="none" align="middle-center">
+      <f-counter label="888888" size="large" state="warning"></f-counter>
+        </f-div>
+      </f-div>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>neutral</td>
+      <td></td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>primary</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>success</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>danger</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>warning</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 class="margin-btm-8 margin-tp-36">Flags</h4>
+<hr class="margin-btm-24" />
+
+<Canvas>
+  <Story name="Flags">
+    {(args) => html`<f-div gap="large" padding="x-large" direction="column">
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">Loading</f-text>
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large" overflow="hidden">
+        <f-counter label="888888" size="large" state="neutral"></f-counter>
+        <f-counter label="888888" size="large" state="neutral" loading=${true}></f-counter>
+      </f-div>
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">Disabled</f-text>
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large">
+        <f-counter label="888888" size="large" state="neutral"></f-counter>
+        <f-counter label="888888" size="large" state="neutral" disabled=${true}></f-counter>
+      </f-div>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+      <td>Default</td>
+    </tr>
+    <tr>
+      <td>loading</td>
+      <td>Loading flag makes a loader rotate inside counter</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>disabled</td>
+      <td>Opacity of pictogram is set to 50% in disabled state.</td>
+      <td>false </td>
+    </tr>
+  </tbody>
+</table>

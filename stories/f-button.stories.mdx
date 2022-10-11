@@ -9,19 +9,27 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 <h4 class="margin-btm-8">Overview</h4>
 <hr class="margin-btm-24" />
 <h6 class="margin-btm-16">Do</h6>
-<p class="margin-btm-16">
+<div class="margin-btm-16">
   <ul>
-    <li>To enable a user action</li>
+    <li>
+      <p>To enable a user action</p>
+    </li>
   </ul>
-</p>
+</div>
 <h6 class="margin-btm-16">Don't</h6>
-<p class="margin-btm-24">
+<div class="margin-btm-24">
   <ul>
-    <li>To navigate to another page, use text as link </li>
-    <li>If you need an icon only button use the Icon button</li>
-    <li>To show a hybrid of an action and a dropdown, use Split button</li>
+    <li>
+      <p>To navigate to another page, use text as link</p>
+    </li>
+    <li>
+      <p>If you need an icon only button use the Icon button</p>
+    </li>
+    <li>
+      <p>To show a hybrid of an action and a dropdown, use Split button</p>
+    </li>
   </ul>
-</p>
+</div>
 
 <h6 class="margin-btm-4">Anatomy</h6>
 <hr class="margin-btm-16" />
@@ -29,17 +37,6 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 <Story name="Anatomy">
   {() => html`<div class="align-center">${unsafeSVG(fButtonAnatomy)}</div>`}
 </Story>
-
-<h6 class="margin-btm-4 margin-tp-36">Specifications</h6>
-<hr class="margin-btm-24" />
-<p calss="margin-btm-24">
-  A spacer can grow horizontally or vertically depending on its parent’s layout.
-
-In a row layout a spacer grows vertically and takes the height of the parent component.
-
-In a column layout a spacer grows horizontally and takes the width of the parent component.
-
-</p>
 
 <h4 class="margin-btm-8 margin-tp-36">variant</h4>
 <hr class="margin-btm-24" />
@@ -269,10 +266,9 @@ In a column layout a spacer grows horizontally and takes the width of the parent
 <hr class="margin-btm-24" />
 <p class="margin-btm-24">
   Icon-left enables an icon on the left of the label.
-
-If you require just an icon button, refer to
-f-icon-button
-
+  <br />
+  <br />
+  If you require just an icon button, refer to f-icon-button
 </p>
 
 <Canvas>
@@ -305,14 +301,13 @@ f-icon-button
 <h4 class="margin-btm-8 margin-tp-36">counter</h4>
 <hr class="margin-btm-24" />
 <p class="margin-btm-24">
-Counter property enables a numerical counter on the button.
-
-The counter component by default abbreviates the value (1000 = 1k). You can learn more about the counter <a>here</a>.
-
+  Counter property enables a numerical counter on the button.
+  <br />
+  <br />
+  The counter component by default abbreviates the value (1000 = 1k). You can learn more about the counter{" "}
+  <a>here</a>.
 </p>
-<p class="note-section margin-btm-24">
-  Note: Counter is always on the right end of the button.
-</p>
+<p class="note-section margin-btm-24">Note: Counter is always on the right end of the button.</p>
 
 <Canvas>
   <Story name="counter">
@@ -431,3 +426,57 @@ The counter component by default abbreviates the value (1000 = 1k). You can lear
     </tr>
   </tbody>
 </table>
+
+<h4 class="margin-btm-8 margin-tp-36">Native Framework Directives</h4>
+<hr class="margin-btm-24" />
+<h6 class="margin-btm-8">Tooltip</h6>
+<hr class="margin-btm-24" />
+
+<Canvas>
+  <Story name="tooltip">
+    {(args) => html`<f-div gap="large" padding="x-large" align="middle-center">
+      <f-button label="INHERIT LABEL to tooltip" tooltip="inherit"></f-button>
+      <f-button label="overridden content in tooltip" tooltip="This is a tooltip"></f-button>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>inherit</td>
+      <td>inherits the label to tooltip.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>any string</td>
+      <td>over-rides the tooltip with a string.</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 class="margin-btm-8 margin-tp-36">Modifiers</h4>
+<hr class="margin-btm-24" />
+<p class="margin-btm-24">
+  Modifiers allow you to change the CSS properties for this component. Replace the
+  modifier=“#identifier” with your values and add the corresponding CSS block to your component
+</p>
+
+<Canvas>
+  <Story name="Modifiers">
+    {(args) => html` <style>
+        #custom-button {
+          background-color: green;
+        }
+      </style>
+      <f-div gap="large" padding="x-large" align="middle-center">
+        <f-button label="modifiers" modifier="”_identifier”"></f-button>
+      </f-div>`}
+  </Story>
+</Canvas>

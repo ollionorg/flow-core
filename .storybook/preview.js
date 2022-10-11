@@ -43,6 +43,9 @@ export const parameters = {
       ],
     },
   },
+  previewTabs: {
+    "storybook/docs/panel": { index: -1 },
+  },
 };
 
 export const decorators = [

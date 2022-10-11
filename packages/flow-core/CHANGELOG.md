@@ -2,7 +2,6 @@
 <hr class="margin-btm-32" />
 <p class="margin-btm-24">All notable changes to this project will be documented in this file. See <a>Conventional Commits</a> for commit guidelines. </p>
 
-<<<<<<< HEAD
 # Change Log
 
 ## 1.0.0
@@ -29,8 +28,6 @@
 
 - Testing publish workflow
 
-=======
->>>>>>> d0e0665108c18e50b9f71188357504b558079ce5
 ## [0.4.4] - 2022-10-06
 
 ### Improvements

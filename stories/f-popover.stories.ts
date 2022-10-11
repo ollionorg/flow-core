@@ -45,15 +45,14 @@ class BasicStoryElement extends LitElement {
         >
           <f-div state="tertiary" padding="medium">
             <f-text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              imperdiet enim ut mi egestas, non efficitur odio varius. Phasellus
-              accumsan pellentesque ex vehicula tristique.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+              mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+              tristique.
             </f-text>
           </f-div>
         </f-popover>
 
-        <f-button id="popoverTarget" label="Open" @click=${this.togglePopOver}>
-        </f-button>
+        <f-button id="popoverTarget" label="Open" @click=${this.togglePopOver}> </f-button>
       </f-div>
       <!--END: story markup-->
     `;

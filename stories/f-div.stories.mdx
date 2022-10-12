@@ -5,23 +5,35 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 <Meta title="Components/f-div" />
 
-<h1 class="margin-btm-36">f-div</h1>
-<h4 class="margin-btm-8">Overview</h4>
-<hr class="margin-btm-24" />
-<p class="margin-btm-24">f-div is used as a container for HTML elements.</p>
-<h6 class="margin-btm-4">Anatomy</h6>
-<hr class="margin-btm-16" />
+# f-div
+
+<br />
+<br />
+
+## Overview
+
+<hr />
+
+f-div is used as a container for HTML elements.
+
+<br />
+
+### Anatomy
+
+<hr />
+
+<br />
 
 <Story name="Anatomy">
   {() => html`<div class="align-center">${unsafeSVG(FDivAnatomy)}</div>`}
 </Story>
 
-<h4 class="margin-tp-36 margin-btm-8">variant</h4>
-<hr class="margin-btm-24" />
-<p class="margin-btm-24">
-  <code>variant</code> are representations of a f-div with different corner radius. A f-div can be
-  curved or block.
-</p>
+## variant
+
+<hr />
+
+variant are representations of a f-div with different corner radius. A f-div can be
+curved or block.
 
 <Canvas>
   <Story name="variant">
@@ -86,9 +98,13 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
   </tbody>
 </table>
 
-<h4 class="margin-tp-36 margin-btm-8">direction</h4>
-<hr class="margin-btm-24" />
-<p class="margin-btm-24">Defines the orientation of f-div as either row or column.</p>
+<br />
+
+## direction
+
+<hr />
+
+Defines the orientation of f-div as either row or column.
 
 <Canvas>
   <Story name="direction">
@@ -148,13 +164,16 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
   </tbody>
 </table>
 
-<h4 class="margin-tp-36 margin-btm-8">state</h4>
-<hr class="margin-btm-24" />
-<p class="margin-btm-16">
-  States on f-div are used to communicate purpose and its connotation. For example, a red color
-  connotes danger, whereas a green color connotes success and so on.
-</p>
-<p class="note-section margin-btm-24">
+<br />
+
+## state
+
+<hr />
+
+States on f-div are used to communicate purpose and its connotation. For example, a red color
+connotes danger, whereas a green color connotes success and so on.
+
+<p class="note-section">
   Note: In case of nested f-div, all children f-div inherit the state from parent f-div until
   specified.
 </p>
@@ -250,12 +269,14 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
   </tbody>
 </table>
 
-<h4 class="margin-tp-36 margin-btm-8">border</h4>
-<hr class="margin-btm-24" />
-<p class="margin-btm-24">
-  Border property enables a border for f-div. You can combine border properties to achieve a desired
-  result.
-</p>
+<br />
+
+## border
+
+<hr />
+
+Border property enables a border for f-div. You can combine border properties to achieve a desired
+result.
 
 <Canvas>
   <Story name="border">
@@ -349,7 +370,8 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
   </Story>
 </Canvas>
 
-<h6 class="margin-btm-16">border width</h6>
+### border width
+
 <table class="custom-table">
   <tbody>
     <tr>
@@ -377,7 +399,8 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
   </tbody>
 </table>
 
-<h6 class="margin-btm-16">border style</h6>
+### border style
+
 <table class="custom-table">
   <tbody>
     <tr>
@@ -406,7 +429,8 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
   </tbody>
 </table>
 
-<h6 class="margin-btm-16">border color</h6>
+### border color
+
 <table class="custom-table">
   <tbody>
     <tr>
@@ -435,7 +459,8 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
   </tbody>
 </table>
 
-<h6 class="margin-btm-16">border position</h6>
+### border position
+
 <table class="custom-table">
   <tbody>
     <tr>
@@ -473,9 +498,13 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
   </tbody>
 </table>
 
-<h4 class="margin-tp-36 margin-btm-8">gap</h4>
-<hr class="margin-btm-24" />
-<p class="margin-btm-24">Gap defines the space between the items of a layout</p>
+<br />
+
+## gap
+
+<hr />
+
+Gap defines the space between the items of a layout
 
 <Canvas>
   <Story name="gap">
@@ -629,12 +658,14 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
   </tbody>
 </table>
 
-<h4 class="margin-tp-36 margin-btm-8">padding</h4>
-<hr class="margin-btm-24" />
-<p class="margin-btm-24">
-  Padding defines extra space between the elements and the container. Gap is used for spacing
-  between elements.
-</p>
+<br />
+
+## padding
+
+<hr />
+
+Padding defines extra space between the elements and the container. Gap is used for spacing
+between elements.
 
 <Canvas>
   <Story name="padding">
@@ -769,26 +800,20 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
   </tbody>
 </table>
 
-<h4 class="margin-tp-36 margin-btm-16">width</h4>
-<hr class="margin-btm-24" />
-<div class="margin-btm-24">
-  Width of a layout can be defined in 3 ways:
-  <ul>
-    <li>
-      <p>Fill container: width is set to the parent container’s width.</p>
-    </li>
-    <li>
-      <p>
-        Hug contents: width is a sum of the width of all elements inside it and left and right
-        padding.
-      </p>
-    </li>
-    <li>
-      <p>Fixed: width is set to the numerical value passed to the width property.</p>
-    </li>
-  </ul>
-</div>
-<p class="note-section margin-btm-24">Note: Column variant always has width set to hug content.</p>
+<br />
+
+## width
+
+<hr />
+
+Width of a layout can be defined in 3 ways:
+
+- Fill container: width is set to the parent container’s width.
+- Hug contents: width is a sum of the width of all elements inside it and left and right
+  padding.
+- Fixed: width is set to the numerical value passed to the width property.
+
+<p class="note-section">Note: Column variant always has width set to hug content.</p>
 
 <Canvas>
   <Story name="width">
@@ -862,25 +887,18 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
   </tbody>
 </table>
 
-<h4 class="margin-tp-36 margin-btm-16">height</h4>
-<hr class="margin-btm-24" />
-<div class="margin-btm-24">
-  Height of a layout can be defined in 3 ways:
-  <ul>
-    <li>
-      <p>Fill container: height is set to the parent container’s height.</p>
-    </li>
-    <li>
-      <p>
-        Hug content: height is a sum of the height of all elements inside it and left and right
-        padding.
-      </p>
-    </li>
-    <li>
-      <p>Fixed: width is set to the numerical value passed to the height property.</p>
-    </li>
-  </ul>
-</div>
+<br />
+
+## height
+
+<hr />
+
+Height of a layout can be defined in 3 ways:
+
+- Fill container: height is set to the parent container’s height.
+- Hug content: height is a sum of the height of all elements inside it and left and right padding.
+- Fixed: width is set to the numerical value passed to the height property.
+
 <p class="note-section margin-btm-24">Note: Row variant always has height set to Hug content.</p>
 
 <Canvas>
@@ -946,12 +964,14 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
   </tbody>
 </table>
 
-<h4 class="margin-tp-36 margin-btm-16">tooltip</h4>
-<hr class="margin-btm-24" />
-<p class="margin-btm-24">
-  A tooltip property enables a tooltip on the f-div. A tooltip can be a native directive or a rich
-  tooltip.
-</p>
+<br />
+
+## tooltip
+
+<hr />
+
+A tooltip property enables a tooltip on the f-div. A tooltip can be a native directive or a rich
+tooltip.
 
 <Canvas>
   <Story name="tooltip">
@@ -1005,32 +1025,23 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
   </Story>
 </Canvas>
 
-<h4 class="margin-tp-36 margin-btm-16">overflow</h4>
-<hr class="margin-btm-24" />
-<p class="margin-btm-16">
-  Overflow property defines the behavior of the overflowing elements inside a f-div. It can happen
-  either if layout is overflowing from the parent container or layout has fixed width/height and the
-  elements are overflowing.
-</p>
-<div class="margin-btm-24">
-  Elements can behave in 3 ways in this situation:
-  <ul>
-    <li>
-      <p>
-        Wrap: Overflowing elements are wrapped to the next row/column. This is the default behavior.
-      </p>
-    </li>
-    <li>
-      <p>
-        Scroll: Layout becomes a scrollable component and the overflowing elements are accessible on
-        scroll.
-      </p>
-    </li>
-    <li>
-      <p>Hidden: Overflowing elements are clipped and remain hidden.</p>
-    </li>
-  </ul>
-</div>
+<br />
+
+## overflow
+
+<hr />
+
+Overflow property defines the behavior of the overflowing elements inside a f-div. It can happen
+either if layout is overflowing from the parent container or layout has fixed width/height and the
+elements are overflowing.
+
+<br />
+
+Elements can behave in 3 ways in this situation:
+
+- Wrap: Overflowing elements are wrapped to the next row/column. This is the default behavior.
+- Scroll: Layout becomes a scrollable component and the overflowing elements are accessible on scroll.
+- Hidden: Overflowing elements are clipped and remain hidden.
 
 <Canvas>
   <Story name="overflow">
@@ -1149,11 +1160,13 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
   </tbody>
 </table>
 
-<h4 class="margin-tp-36 margin-btm-16">align</h4>
-<hr class="margin-btm-24" />
-<p class="margin-btm-24">
-  Align property places the elements of a layout in particular positions with respect to the f-div.
-</p>
+<br />
+
+## align
+
+<hr />
+
+Align property places the elements of a layout in particular positions with respect to the f-div.
 
 <Canvas>
   <Story name="align">

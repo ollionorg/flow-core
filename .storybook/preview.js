@@ -30,7 +30,8 @@ export const parameters = {
     storySort: {
       order: [
         "Foundation",
-        ["Introduction", "Design tokens", ["Overview", "Color", "Font", "Icon"]],
+        ["Introduction", "Design tokens", ["Overview"]],
+        ["Overview", "Color", "Font", "Icon"],
         "Components",
         ["f-div", "f-divider", "f-spacer", "f-button", "f-icon", "f-text", "f-pictogram"],
       ],

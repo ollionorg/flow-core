@@ -17,9 +17,9 @@ export class SystemIconStoryElement extends LitElement {
       <f-div gap="x-large" padding="large">
         ${Object.keys(SystemIconPack).map(
           (src) =>
-            html` <f-div direction="column" width="hug-content" gap="medium" align="middle-center">
+            html` <f-div direction="column" width="90px" gap="medium" align="middle-center">
               <f-icon .source=${src} size="large"> </f-icon>
-              <f-text variant="para" size="small" weight="medium">${src}</f-text>
+              <f-text variant="para" size="small" weight="medium" align="center">${src}</f-text>
             </f-div>`
         )}
       </f-div>
@@ -37,9 +37,9 @@ export class ProductIconStoryElement extends LitElement {
       <f-div gap="x-large" padding="large">
         ${Object.keys(ProductIconPack).map(
           (src) =>
-            html` <f-div direction="column" width="hug-content" gap="medium" align="middle-center">
+            html` <f-div direction="column" width="90px" gap="medium" align="middle-center">
               <f-icon .source=${src} size="large"> </f-icon>
-              <f-text variant="para" size="small" weight="medium">${src}</f-text>
+              <f-text variant="para" size="small" weight="medium" align="center">${src}</f-text>
             </f-div>`
         )}
       </f-div>
@@ -57,9 +57,9 @@ export class GCPIconStoryElement extends LitElement {
       <f-div gap="x-large" padding="large">
         ${Object.keys(GcpIconPack).map(
           (src) =>
-            html` <f-div direction="column" width="hug-content" gap="medium" align="middle-center">
+            html` <f-div direction="column" width="90px" gap="medium" align="middle-center">
               <f-icon .source=${src} size="large"> </f-icon>
-              <f-text variant="para" size="small" weight="medium">${src}</f-text>
+              <f-text variant="para" size="small" weight="medium" align="center">${src}</f-text>
             </f-div>`
         )}
       </f-div>
@@ -77,9 +77,9 @@ export class AWSIconStoryElement extends LitElement {
       <f-div gap="x-large" padding="large">
         ${Object.keys(AwsIconPack).map(
           (src) =>
-            html` <f-div direction="column" width="hug-content" gap="medium" align="middle-center">
+            html` <f-div direction="column" width="90px" gap="medium" align="middle-center">
               <f-icon .source=${src} size="large"> </f-icon>
-              <f-text variant="para" size="small" weight="medium">${src}</f-text>
+              <f-text variant="para" size="small" weight="medium" align="center">${src}</f-text>
             </f-div>`
         )}
       </f-div>

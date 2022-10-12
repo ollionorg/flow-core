@@ -1,0 +1,244 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import fDividerAnatomy from "./svg/f-divier-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+
+<Meta title="Components/f-divider" />
+
+<h1 class="margin-btm-36">f-divider</h1>
+<h4 class="margin-btm-8">Overview</h4>
+<hr class="margin-btm-24" />
+<p class="margin-btm-24">f-divider is a line used to separate the content of a layout.</p>
+<h6 class="margin-btm-4">Anatomy</h6>
+<hr class="margin-btm-16" />
+
+<Story name="Anatomy">
+  {() => html`<div class="align-center">${unsafeSVG(fDividerAnatomy)}</div>`}
+</Story>
+
+<h6 class="margin-btm-4 margin-tp-36">Specifications</h6>
+<hr class="margin-btm-24" />
+<p calss="margin-btm-24">
+  A divider can be horizontal or vertical depending on its parent’s layout. In a row layout a
+  divider is vertical. In a column layout it is horizontal.
+</p>
+
+<Story name="Specifications">
+  {() =>
+    html` <f-div direction="row" gap="auto" padding="large none none none">
+        <f-div padding="none x-large" height="hug-content">Row layout</f-div>
+        <f-div padding="none x-large" height="hug-content">Column layout</f-div>
+      </f-div>
+      <f-div padding="x-large" gap="x-large" direction="row">
+        <f-div
+          padding="large"
+          gap="x-large"
+          border="medium solid default around"
+          direction="row"
+          height="486px"
+        >
+          <f-div
+            padding="large"
+            gap="large"
+            border="medium dashed secondary around"
+            height="100%"
+            direction="column"
+          >
+            <f-div height="80px" padding="none" state="secondary" variant="curved"></f-div>
+            <f-div height="80px" padding="none" state="secondary" variant="curved"></f-div>
+            <f-div height="200px" padding="none" state="secondary" variant="curved"></f-div>
+          </f-div>
+          <f-divider></f-divider>
+          <f-div
+            padding="none"
+            gap="large"
+            state="secondary"
+            height="444px"
+            variant="curved"
+          ></f-div>
+        </f-div>
+        <f-div
+          padding="large"
+          gap="x-large"
+          border="medium solid default around"
+          height="486px"
+          direction="column"
+        >
+          <f-div
+            padding="large"
+            gap="large"
+            border="medium dashed secondary around"
+            height="hug-content"
+            direction="column"
+          >
+            <f-div height="80px" padding="none" state="secondary" variant="curved"></f-div>
+            <f-div height="80px" padding="none" state="secondary" variant="curved"></f-div>
+          </f-div>
+          <f-divider></f-divider>
+          <f-div
+            padding="none"
+            state="secondary"
+            height="164px"
+            variant="curved"
+            width="100%"
+          ></f-div>
+        </f-div>
+      </f-div>`
+  }
+</Story>
+
+<h4 class="margin-btm-8 margin-tp-36">variant</h4>
+<hr class="margin-btm-24" />
+<p class="margin-btm-24">
+  f-divider can have 3 variants which are visual styles: solid, dashed, dotted
+</p>
+
+<Canvas>
+  <Story name="variant">
+    {(args) => html`<f-div gap="medium" padding="x-large" direction="column">
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">Solid</f-text>
+      </f-div>
+      <f-divider variant="solid"></f-divider>
+      <br />
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">Dotted</f-text>
+      </f-div>
+      <f-divider variant="dotted"></f-divider>
+      <br />
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">Dashed</f-text>
+      </f-div>
+      <f-divider variant="dashed"></f-divider>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>solid</td>
+      <td>solid visual style</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>dotted</td>
+      <td>dotted visual style</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>dashed</td>
+      <td>dashed visual style</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 class="margin-btm-8 margin-tp-36">size</h4>
+<hr class="margin-btm-24" />
+<p class="margin-btm-24">Size property defines the thickness of the divider.</p>
+
+<Canvas>
+  <Story name="size">
+    {(args) => html`<f-div gap="medium" padding="x-large" direction="column">
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">large</f-text>
+      </f-div>
+      <f-divider size="large"></f-divider>
+      <br />
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">medium</f-text>
+      </f-div>
+      <f-divider size="medium"></f-divider>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>large</td>
+      <td>size is set to be 2px</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>medium</td>
+      <td>size is set to be 1px</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 class="margin-btm-8 margin-tp-36">state</h4>
+<hr class="margin-btm-24" />
+<p class="margin-btm-24">States on buttons are used to communicate purpose and it’s connotation.</p>
+
+<Canvas>
+  <Story name="state">
+    {(args) => html`<f-div gap="medium" padding="x-large" direction="column">
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">state="default"</f-text>
+      </f-div>
+      <f-divider size="large" state="default"></f-divider>
+      <br />
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">state="secondary"</f-text>
+      </f-div>
+      <f-divider size="large" state="secondary"></f-divider>
+      <br />
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">state="subtle"</f-text>
+      </f-div>
+      <f-divider size="large" state="subtle"></f-divider>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>default</td>
+      <td>
+        <a>$color-border-default</a>
+      </td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>secondary</td>
+      <td>
+        <a>$color-border-secondary</a>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>subtle</td>
+      <td>
+        <a>$color-border-subtle</a>
+      </td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

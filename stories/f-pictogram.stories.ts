@@ -1,10 +1,10 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 
-export default {
-  title: "components/f-pictogram",
-  component: "f-pictogram",
-} as Meta;
+// export default {
+//   title: "components/f-pictogram12",
+//   component: "f-pictogram",
+// } as Meta;
 
 const Template: Story<unknown> = () => {
   const sizes = ["small", "medium", "large", "x-large"];

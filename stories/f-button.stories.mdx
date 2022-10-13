@@ -3,7 +3,12 @@ import { html } from "lit-html";
 import fButtonAnatomy from "./svg/f-button-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
-<Meta title="Components/f-button" />
+<Meta
+  title="Components/f-button"
+  parameters={{
+    controls: { hideNoControlsWarning: true },
+  }}
+/>
 
 # f-button
 
@@ -30,6 +35,82 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 <f-divider></f-divider>
 
 <br />
+### [Playground](/story/components-f-button--playground)
+
+<Canvas>
+  <Story
+    name="Playground"
+    argTypes={{
+      label: { control: "text" },
+      category: {
+        control: "select",
+        options: ["fill", "outline", "transparent"],
+      },
+      size: {
+        control: "select",
+        options: ["large", "medium", "small", "x-small"],
+      },
+      state: {
+        control: "select",
+        options: ["primary", "neutral", "success", "warning", "danger"],
+      },
+      variant: {
+        control: "select",
+        options: ["round", "curved", "block"],
+      },
+      ["icon-left"]: {
+        control: "text",
+      },
+      ["icon-right"]: {
+        control: "text",
+      },
+      counter: {
+        control: "text",
+      },
+      loading: {
+        control: "boolean",
+      },
+      disabled: {
+        control: "boolean",
+      },
+      ["label-wrap"]: {
+        control: "boolean",
+      },
+    }}
+    args={{
+      label: "label",
+      category: "fill",
+      size: "medium",
+      state: "primary",
+      variant: "round",
+      ["icon-left"]: undefined,
+      ["icon-right"]: undefined,
+      counter: undefined,
+      loading: false,
+      disabled: false,
+      ["label-wrap"]: false,
+    }}
+  >
+    {(args) =>
+      html`<f-button
+        .label=${args.label}
+        .category=${args.category}
+        .size=${args.size}
+        .state=${args.state}
+        .variant=${args.variant}
+        icon-left=${args["icon-left"]}
+        icon-right=${args["icon-right"]}
+        .counter=${args.counter}
+        .loading=${args.loading}
+        .disabled=${args.disabled}
+        .label-wrap=${args["label-wrap"]}
+      ></f-button>`
+    }
+  </Story>
+</Canvas>
+
+<h6 class="margin-btm-4">Anatomy</h6>
+<hr class="margin-btm-16" />
 
 <Story name="Anatomy">
   {() => html`<div class="align-center">${unsafeSVG(fButtonAnatomy)}</div>`}
@@ -534,3 +615,5 @@ modifier=“#identifier” with your values and add the corresponding CSS block 
       </f-div>`}
   </Story>
 </Canvas>
+
+<ArgsTable of={"f-button"} />

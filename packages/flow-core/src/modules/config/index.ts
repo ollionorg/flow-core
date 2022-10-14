@@ -1,4 +1,5 @@
 import { getThemeStyle } from "./../../utils";
+import { Subject } from "rxjs";
 
 /**
  * TODO :include font-family, icons
@@ -7,6 +8,8 @@ export type FlowCoreConfig = {
   theme: "f-dark" | "f-light";
   iconPack: Record<string, string> | null;
 };
+
+export const themeSubject = new Subject<string>();
 
 let config: FlowCoreConfig = {
   theme: "f-dark",
@@ -52,6 +55,7 @@ export const ConfigUtil = {
 
         if (themeCSS) {
           themeElement.appendChild(document.createTextNode(themeCSS));
+          themeSubject.next(config.theme);
         } else {
           console.error(
             `Theme ${config.theme} CSS file/selector not found! \n Please check if css is imported 'import "@cldcvr/flow-core/dist/style.css"'`

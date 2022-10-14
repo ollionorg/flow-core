@@ -8,6 +8,7 @@ import loader from "../../mixins/svg/loader";
 import notFound from "../../mixins/svg/notFound";
 import { isValidHttpUrl } from "./../../utils";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import { themeSubject } from "./../../modules/config";
 
 @customElement("f-icon")
 export class FIcon extends FElement {
@@ -63,9 +64,16 @@ export class FIcon extends FElement {
     } else {
       const IconPack = ConfigUtil.getConfig().iconPack;
       if (IconPack) {
-        const svg = IconPack[value];
+        let svg = IconPack[value];
+        const theme = ConfigUtil.getConfig().theme;
+        if (!svg && theme === "f-dark") {
+          svg = IconPack[value + "-dark"];
+        }
+        if (!svg && theme === "f-light") {
+          svg = IconPack[value + "-light"];
+        }
         if (svg) {
-          this._source = IconPack[value];
+          this._source = svg;
         } else {
           this._source = notFound;
         }
@@ -109,6 +117,13 @@ export class FIcon extends FElement {
     if (!this.source) {
       throw new Error("f-icon : source is mandatory field");
     }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    themeSubject.subscribe(() => {
+      this.requestUpdate();
+    });
   }
 
   render() {

@@ -76,6 +76,9 @@ export class FPopover extends FElement {
   @state()
   cleanup!: () => void;
 
+  @state()
+  isEscapeClicked = false;
+
   get targetElement() {
     return document.querySelector<HTMLElement>(this.target);
   }
@@ -132,14 +135,45 @@ export class FPopover extends FElement {
     if (this.cleanup) {
       this.cleanup();
     }
-
+    document.removeEventListener("keydown", (e) =>
+      this.escapekeyHandle(e, this)
+    );
+    this.removeEventListener("click", this.dispatchEsc);
     super.disconnectedCallback();
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    document.addEventListener("keydown", (e) => this.escapekeyHandle(e, this));
+    this.addEventListener("click", this.dispatchEsc);
+  }
+  dispatchEsc() {
+    if (this.isEscapeClicked) {
+      const event = new CustomEvent("esc", {
+        detail: {
+          message: "Popover close on escape key",
+        },
+        bubbles: true,
+        composed: true,
+      });
+      this.isEscapeClicked = false;
+      this.open = false;
+      this.dispatchEvent(event);
+    }
+  }
+  escapekeyHandle(e: KeyboardEvent, el: HTMLElement) {
+    if (e.key === "Escape") {
+      this.isEscapeClicked = true;
+      el.click();
+    }
   }
   overlayClick() {
     const event = new CustomEvent("overlay-click", {
       detail: {
         message: "Popover overlay clicked",
       },
+      bubbles: true,
+      composed: true,
     });
     this.dispatchEvent(event);
   }

@@ -3,7 +3,12 @@ import { html } from "lit-html";
 import fDividerAnatomy from "./svg/f-divier-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
-<Meta title="Components/f-divider" />
+<Meta
+  title="Components/f-divider"
+  parameters={{
+    controls: { hideNoControlsWarning: true },
+  }}
+/>
 
 # f-divider
 
@@ -15,6 +20,41 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 <f-divider></f-divider>
 
 f-divider is a line used to separate the content of a layout.
+
+<br />
+
+### [Playground](/story/components-f-divider--playground)
+
+<Canvas>
+  <Story
+    name="Playground"
+    argTypes={{
+      variant: {
+        control: "select",
+        options: ["solid", "dashed", "dotted"],
+      },
+      size: {
+        control: "select",
+        options: ["large", "medium"],
+      },
+      state: {
+        control: "select",
+        options: ["default", "secondary", "subtle"],
+      },
+    }}
+    args={{
+      variant: "solid",
+      size: "medium",
+      state: "default",
+    }}
+  >
+    {(args) =>
+      html`<f-div direction="column" padding="x-large"
+        ><f-divider variant=${args.variant} size=${args.size} state=${args.state}></f-divider
+      ></f-div>`
+    }
+  </Story>
+</Canvas>
 
 <br />
 
@@ -270,3 +310,5 @@ States on buttons are used to communicate purpose and it’s connotation.
     </tr>
   </tbody>
 </table>
+
+<ArgsTable of={"f-divider"} />

@@ -18,6 +18,213 @@ f-div is used as a container for HTML elements.
 
 <br />
 
+### [Playground](/story/components-f-div--playground)
+
+<Canvas>
+  <Story
+    name="Playground"
+    argTypes={{
+      variant: {
+        control: "radio",
+        options: ["curved", "block"],
+      },
+      direction: {
+        control: "radio",
+        options: ["row", "column"],
+      },
+      state: {
+        control: "select",
+        options: [
+          "transparent",
+          "default",
+          "subtle",
+          "secondary",
+          "tertiary",
+          "primary",
+          "success",
+          "warning",
+          "danger",
+        ],
+      },
+      border: {
+        control: "select",
+        options: [
+          "large",
+          "medium",
+          "small",
+          "medium solid",
+          "medium dotted",
+          "medium dashed",
+          "medium solid default",
+          "medium solid secondary",
+          "medium solid subtle",
+          "medium solid default top",
+          "medium solid default bottom",
+          "medium solid default left",
+          "medium solid default right",
+          "medium solid default around",
+        ],
+      },
+      gap: {
+        control: "select",
+        options: ["auto", "x-large", "large", "medium", "small", "x-small", "none"],
+      },
+      padding: {
+        control: "select",
+        options: ["x-large", "large", "medium", "small", "x-small", "none"],
+      },
+      width: {
+        control: "select",
+        options: ["hug-content", "fill-container"],
+      },
+      height: {
+        control: "select",
+        options: ["hug-content", "fill-container"],
+      },
+      overflow: {
+        control: "radio",
+        options: ["wrap", "scroll", "hidden"],
+      },
+      align: {
+        control: "select",
+        options: [
+          "top-left",
+          "top-center",
+          "top-right",
+          "bottom-left",
+          "bottom-center",
+          "bottom-right",
+          "middle-left",
+          "middle-center",
+          "middle-right",
+        ],
+      },
+      sticky: {
+        control: "select",
+        options: ["none", "top", "bottom", "right", "left"],
+      },
+      selected: {
+        control: "select",
+        options: ["background", "border", "notch-right", "notch-left", "None"],
+      },
+      loading: {
+        control: "radio",
+        options: ["loader", "skeleton", "None"],
+      },
+      clickable: {
+        control: { type: "boolean" },
+        if: { arg: "disabled", eq: false },
+      },
+      disabled: {
+        control: { type: "boolean" },
+        if: { arg: "clickable", eq: false },
+      },
+    }}
+    args={{
+      variant: "block",
+      direction: "row",
+      state: "default",
+      border: "medium solid default around",
+      gap: "x-large",
+      padding: "medium",
+      width: "hug-content",
+      height: "hug-content",
+      overflow: "wrap",
+      align: "top-left",
+      sticky: "none",
+      selected: "",
+      loading: "",
+      disabled: false,
+      clickable: false,
+    }}
+  >
+    {(args) => html`
+      <f-div
+        padding="large"
+        gap="x-large"
+        direction="row"
+        height="hug-content"
+        align="middle-center"
+      >
+        <f-div
+          width="100%"
+          height="400px"
+          .padding=${args.padding}
+          direction="row"
+          .gap=${args.gap}
+          state="subtle"
+          .overflow=${args.overflow}
+          .variant=${args.variant}
+          .direction=${args.direction}
+          .state=${args.state}
+          .border=${args.border}
+          .align=${args.align}
+          .disabled=${args.disabled}
+          .clickable=${args.clickable}
+        >
+          <f-div
+            .variant=${args.variant}
+            .width=${args.width}
+            .height=${args.height}
+            padding="none"
+            state="secondary"
+            .sticky=${args.sticky}
+            .selected=${args.selected}
+            .loading=${args.loading}
+          >
+            <f-div padding="large">
+              <f-text variant="para" size="large" weight="regular"
+                >Child f-div with
+                <br />
+                <br />
+                height: ${args.height} width: ${args.width}
+              </f-text>
+            </f-div>
+          </f-div>
+          <f-div
+            .variant=${args.variant}
+            width="300px"
+            height="hug-content"
+            padding="x-large"
+            state="secondary"
+          >
+            <f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+          </f-div>
+          <f-div
+            .variant=${args.variant}
+            width="300px"
+            height="hug-content"
+            padding="x-large"
+            state="secondary"
+          >
+            <f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+          </f-div>
+          <f-div
+            .variant=${args.variant}
+            width="300px"
+            height="hug-content"
+            padding="x-large"
+            state="secondary"
+          >
+            <f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+          </f-div>
+          <f-div
+            .variant=${args.variant}
+            width="300px"
+            height="hug-content"
+            padding="x-large"
+            state="secondary"
+          >
+            <f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+          </f-div>
+        </f-div></f-div
+      >
+    `}
+  </Story>
+</Canvas>
+
+<br />
+
 ### Anatomy
 
 <hr />

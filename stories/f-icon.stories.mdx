@@ -3,7 +3,12 @@ import { html } from "lit-html";
 import fIconAnatomy from "./svg/f-icon-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
-<Meta title="Components/f-icon" />
+<Meta
+  title="Components/f-icon"
+  parameters={{
+    controls: { hideNoControlsWarning: true },
+  }}
+/>
 
 # f-icon
 
@@ -15,6 +20,57 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 <f-divider></f-divider>
 
 Icons are used to provide visual context where written text is not required and enhance usability.
+
+<br />
+
+### [Playground](/story/components-f-icon--playground)
+
+<Canvas>
+  <Story
+    name="Playground"
+    argTypes={{
+      size: {
+        control: "select",
+        options: ["x-large", "large", "medium", "small", "x-small"],
+      },
+      state: {
+        control: "select",
+        options: ["default", "secondary", "subtle", "primary", "danger", "warning"],
+      },
+      loading: {
+        control: { type: "boolean" },
+        if: { arg: "disabled", eq: false },
+      },
+      disabled: {
+        control: { type: "boolean" },
+        if: { arg: "loading", eq: false },
+      },
+      clickable: {
+        control: { type: "boolean" },
+        if: { arg: "disabled", eq: false },
+      },
+    }}
+    args={{
+      source: "i-plus",
+      size: "medium",
+      state: "primary",
+      loading: false,
+      disabled: false,
+      clickable: false,
+    }}
+  >
+    {(args) => html`<f-div direction="column" padding="x-large">
+      <f-icon
+        source=${args.source}
+        .size=${args.size}
+        .state=${args.state}
+        .loading=${args.loading}
+        .disabled=${args.disabled}
+        .clickable=${args.clickable}
+      ></f-icon>
+    </f-div>`}
+  </Story>
+</Canvas>
 
 <br />
 
@@ -379,3 +435,5 @@ States on buttons are used to communicate purpose and it’s connotation.
     </tr>
   </tbody>
 </table>
+
+<ArgsTable of={"f-icon"} />

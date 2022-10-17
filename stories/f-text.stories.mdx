@@ -3,7 +3,12 @@ import { html } from "lit-html";
 import fDividerAnatomy from "./svg/f-divier-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
-<Meta title="Components/f-text" />
+<Meta
+  title="Components/f-text"
+  parameters={{
+    controls: { hideNoControlsWarning: true },
+  }}
+/>
 
 # f-text
 
@@ -15,6 +20,68 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 <f-divider></f-divider>
 
 Text component includes Headings, titles, body texts and links.
+
+<br />
+
+### [Playground](/story/components-f-text--playground)
+
+<Canvas>
+  <Story
+    name="Playground"
+    argTypes={{
+      variant: {
+        control: "radio",
+        options: ["para", "heading", "code"],
+      },
+      size: {
+        control: "select",
+        options: ["x-large", "large", "medium", "small", "x-small"],
+      },
+      state: {
+        control: "select",
+        options: ["default", "secondary", "subtle", "primary", "success", "warning", "danger"],
+      },
+      align: {
+        control: "radio",
+        options: ["left", "right", "center"],
+      },
+      loading: {
+        control: { type: "boolean" },
+        if: { arg: "disabled", eq: false },
+      },
+      disabled: {
+        control: { type: "boolean" },
+        if: { arg: "loading", eq: false },
+      },
+      ellipsis: {
+        control: { type: "boolean" },
+        if: { arg: "loading", eq: false },
+      },
+    }}
+    args={{
+      variant: "para",
+      size: "medium",
+      state: "default",
+      align: "left",
+      loading: false,
+      disabled: false,
+      ellipsis: false,
+    }}
+  >
+    {(args) => html`
+      <f-text
+        .variant=${args.variant}
+        .size=${args.size}
+        .state=${args.state}
+        .align=${args.align}
+        .loading=${args.loading}
+        .disabled=${args.disabled}
+        .ellipsis=${args.ellipsis}
+        >This is ${args.variant} with ${args.size} and ${args.state} state. Alignment is ${args.align}</f-text
+      >
+    `}
+  </Story>
+</Canvas>
 
 <br />
 
@@ -393,3 +460,5 @@ predetermined state.
     </tr>
   </tbody>
 </table>
+
+<ArgsTable of={"f-text"} />

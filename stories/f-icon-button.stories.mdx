@@ -3,7 +3,12 @@ import { html } from "lit-html";
 import fIconButtonAnatomy from "./svg/f-icon-button-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
-<Meta title="Components/f-icon-button" />
+<Meta
+  title="Components/f-icon-button"
+  parameters={{
+    controls: { hideNoControlsWarning: true },
+  }}
+/>
 
 # f-icon-button
 
@@ -22,6 +27,65 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 ### Not for this
 
 - Do not use the Icon button for primary actions. Use button instead
+
+<br />
+
+### [Playground](/story/components-f-icon-button--playground)
+
+<Canvas>
+  <Story
+    name="Playground"
+    argTypes={{
+      variant: {
+        control: "select",
+        options: ["round", "curved", "block"],
+      },
+      type: {
+        control: "select",
+        options: ["fill", "outline", "transparent", "packed"],
+      },
+      size: {
+        control: "select",
+        options: ["large", "medium", "small", "x-small"],
+      },
+      state: {
+        control: "select",
+        options: ["primary", "success", "danger", "warning", "neutral"],
+      },
+      loading: {
+        control: { type: "boolean" },
+        if: { arg: "disabled", eq: false },
+      },
+      disabled: {
+        control: { type: "boolean" },
+        if: { arg: "loading", eq: false },
+      },
+    }}
+    args={{
+      variant: "round",
+      type: "fill",
+      size: "medium",
+      icon: "i-plus",
+      state: "primary",
+      counter: "",
+      loading: false,
+      disabled: false,
+    }}
+  >
+    {(args) => html`<f-div direction="column" padding="x-large">
+      <f-icon-button
+        icon=${args.icon}
+        .variant=${args.variant}
+        .type=${args.type}
+        .size=${args.size}
+        .state=${args.state}
+        counter=${args.counter}
+        .loading=${args.loading}
+        .disabled=${args.disabled}
+      ></f-icon-button>
+    </f-div>`}
+  </Story>
+</Canvas>
 
 <br />
 
@@ -391,3 +455,5 @@ Always use the tooltip directive on the button component.
     </f-div>`}
   </Story>
 </Canvas>
+
+<ArgsTable of={"f-icon-button"} />

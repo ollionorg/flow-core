@@ -270,20 +270,23 @@ $hexagon-clip-path: polygon(
       position: absolute;
       width: 100%;
       height: 100%;
-      &[loading] {
-        transform-origin: 50% 50%;
-        transform: rotate(0deg) scale(1.4);
-        animation: 3s rotate linear infinite;
-      }
     }
     &:after {
       position: absolute;
       width: 100%;
       height: 100%;
-      &[loading] {
+    }
+
+    &[loading] {
+      &:after {
         transform: scale(0.9);
         transform-origin: 50% 50%;
         pointer-events: none;
+      }
+      &::before {
+        transform-origin: 50% 50%;
+        transform: rotate(0deg) scale(1.4);
+        animation: 3s rotate linear infinite;
       }
     }
 

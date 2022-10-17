@@ -4,17 +4,24 @@
 
 # Change Log
 
+## [1.0.6] - 2022-10-17
+
+### Bug Fixes
+
+- `f-pictogram` icons and emoji size fixed.
+
 ## 1.0.5
 
-### Bug Fixes 
+### Bug Fixes
 
 - `f-pictogram` state not updating fixed.
 
 ## 1.0.4
 
-### Improvments 
+### Improvments
 
-- `f-div` `loading="skeleton"` updated. 
+- `f-div` `loading="skeleton"` updated.
+
 ## 1.0.0
 
 ### Major Changes

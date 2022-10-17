@@ -69,7 +69,7 @@ export class FPictogram extends FElement {
     if (isValidHttpUrl(this.source)) {
       return `<img src="${this.source}" />`;
     } else if (emojiRegex.test(this.source)) {
-      return `<f-icon source="${
+      return `<f-icon class="${"f-pictogram-" + this.size + "-emoji"}" source="${
         this.source
       }" size="${this.sourceSize()}"></f-icon>`;
     } else {
@@ -77,7 +77,7 @@ export class FPictogram extends FElement {
       if (IconPack) {
         const svg = IconPack[this.source];
         if (svg) {
-          return `<f-icon source="${
+          return `<f-icon  class="${"f-pictogram-" + this.size}" source="${
             this.source
           }" size="${this.sourceSize()}"></f-icon>`;
         }
@@ -87,27 +87,24 @@ export class FPictogram extends FElement {
   }
   sourceSize() {
     if (this.size === "x-large") {
-      return "large";
-    } else if (this.size === "large") {
       return "medium";
-    } else if (this.size === "medium") {
+    } else if (this.size === "large") {
       return "small";
+    } else if (this.size === "medium") {
+      return "x-small";
     } else {
       return "x-small";
     }
   }
 
   render() {
-    const hasShimmer =
-      (getComputedStyle(this, "::before") as any)["animation-name"] ===
-      "shimmer";
+    const hasShimmer = (getComputedStyle(this, "::before") as any)["animation-name"] === "shimmer";
 
     if (hasShimmer) {
       this.classList.add("hasShimmer");
     }
     return html`
       <div
-        class="f-pictogram"
         class=${classMap({ "f-pictogram": true, hasShimmer })}
         variant=${this.variant}
         state=${this.state}

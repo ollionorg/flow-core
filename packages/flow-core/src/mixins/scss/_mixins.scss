@@ -61,8 +61,10 @@
   @include shimmer-keyframe();
   position: relative;
   overflow: hidden;
-  border: none !important;
   background: var(--color-surface-default) !important;
+  > * {
+    visibility: hidden;
+  }
   &::before {
     content: "";
     position: absolute;
@@ -84,11 +86,17 @@
       var(--color-surface-default-hover) 100%
     );
     background-repeat: repeat-x;
-    background-size: 1500px 104px;
+    background-size: 1500px 100%;
   }
 }
 @mixin shimmer-child() {
   > * {
     @include shimmer-self();
+  }
+}
+
+@mixin hasShimmer {
+  &.hasShimmer {
+    visibility: hidden;
   }
 }

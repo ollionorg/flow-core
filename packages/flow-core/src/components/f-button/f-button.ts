@@ -109,6 +109,12 @@ export class FButton extends FElement {
   }
 
   render() {
+    const hasShimmer =
+      (getComputedStyle(this, "::before") as any)["animation-name"] ===
+      "shimmer";
+    if (hasShimmer) {
+      this.classList.add("hasShimmer");
+    }
     this.validateProperties();
     const iconClasses = {
       "fill-button-surface": this.category === "fill",
@@ -157,25 +163,25 @@ export class FButton extends FElement {
      */
     if (this.loading) {
       return html`<button
+        class=${classMap({ "f-button": true, hasShimmer })}
         category=${this.category}
         size=${this.size}
         state=${this.state}
         variant=${this.variant}
         ?loading=${this.loading}
         ?disabled=${this.disabled}
-        class="f-button"
       >
         ${unsafeSVG(loader)}${this.label}
       </button>`;
     }
     return html`<button
+      class=${classMap({ "f-button": true, hasShimmer })}
       category=${this.category}
       size=${this.size}
       state=${this.state}
       variant=${this.variant}
       ?loading=${this.loading}
       ?disabled=${this.disabled}
-      class="f-button"
     >
       ${iconLeft}${this.label}${iconRight}${counter}
     </button>`;

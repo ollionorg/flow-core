@@ -76,6 +76,9 @@ $states: (
     &[counter] {
       overflow: visible;
     }
+    &.hasShimmer {
+      @include shimmer-self();
+    }
 
     @each $size, $value in $sizes {
       &[size="#{$size}"] {
@@ -185,5 +188,12 @@ f-icon-button {
     display: flex;
     flex: 1 1 auto;
     width: 100%;
+  }
+
+  &.hasShimmer {
+    &::before {
+      content: unset;
+    }
+    background: transparent !important;
   }
 }

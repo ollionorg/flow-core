@@ -3,6 +3,7 @@ import { html } from "lit-html";
 import fPopoverAnatomy from "./svg/f-popover-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useState } from "@storybook/client-api";
+import { ConfigUtil } from "@cldcvr/flow-core/src/modules/config";
 
 <Meta
   title="Components/f-popover"
@@ -143,12 +144,16 @@ Target property specifies a name or a keyword that indicates where to display th
       const handlePopover = (e, f) => {
         updateArgs({ open: !args.open });
       };
+      const escapePopover = (e, f) => {
+        updateArgs({ open: !args.open });
+      };
       return html`
         <f-div height="hug-content" align="middle-center">
           <f-popover
             ?open=${args.open}
             ?overlay=${true}
             @overlay-click=${handlePopover}
+            @esc=${escapePopover}
             size="small"
             target="#popoverTarget"
           >

@@ -150,6 +150,10 @@ $hexagon-clip-path: polygon(
       @include disabled();
     }
 
+    &.hasShimmer {
+      @include shimmer-self();
+    }
+
     img {
       height: 90%;
       width: 90%;
@@ -180,7 +184,7 @@ $hexagon-clip-path: polygon(
     }
 
     @each $state, $color in $states {
-      &[state="#{$state}"]:not([loading]) {
+      &[state="#{$state}"]:not([loading]):not(.hasShimmer) {
         &:before {
           content: "";
           background: map-get($color, "background");
@@ -192,7 +196,7 @@ $hexagon-clip-path: polygon(
     }
 
     @each $state, $color in $loadingStates {
-      &[state="#{$state}"][loading] {
+      &[state="#{$state}"][loading]:not(.hasShimmer) {
         &:before {
           content: "";
           background: $color;
@@ -218,7 +222,9 @@ $hexagon-clip-path: polygon(
     }
 
     &[variant="hexagon"] {
-      clip-path: $hexagon-clip-path;
+      &:not(.hasShimmer) {
+        clip-path: $hexagon-clip-path;
+      }
       &:after {
         clip-path: $hexagon-clip-path;
       }
@@ -227,7 +233,9 @@ $hexagon-clip-path: polygon(
       }
     }
     &[variant="squircle"] {
-      clip-path: url(#squircle);
+      &:not(.hasShimmer) {
+        clip-path: url(#squircle);
+      }
       &:after {
         clip-path: url(#squircle);
       }
@@ -236,7 +244,9 @@ $hexagon-clip-path: polygon(
       }
     }
     &[variant="circle"] {
-      clip-path: circle(50%);
+      &:not(.hasShimmer) {
+        clip-path: circle(50%);
+      }
       &:after {
         clip-path: circle(50%);
       }
@@ -245,7 +255,9 @@ $hexagon-clip-path: polygon(
       }
     }
     &[variant="square"] {
-      clip-path: inset(0px 0px 0px round 4px);
+      &:not(.hasShimmer) {
+        clip-path: inset(0px 0px 0px round 4px);
+      }
       &:after {
         clip-path: inset(0px 0px 0px round 4px);
       }
@@ -260,7 +272,6 @@ $hexagon-clip-path: polygon(
       height: 100%;
       transform-origin: 50% 50%;
       transform: rotate(0deg) scale(1.4);
-      animation: 3s rotate linear infinite;
     }
     &:after {
       position: absolute;
@@ -271,10 +282,25 @@ $hexagon-clip-path: polygon(
       pointer-events: none;
     }
 
+    &[loading] {
+      &::before {
+        animation: 3s rotate linear infinite;
+      }
+    }
+
     @keyframes rotate {
       to {
         transform: rotate(360deg) scale(1.4);
       }
     }
+  }
+}
+
+f-pictogram {
+  &.hasShimmer {
+    &::before {
+      content: unset;
+    }
+    background: transparent !important;
   }
 }

@@ -4,6 +4,17 @@
 
 # Change Log
 
+## 1.0.5
+
+### Bug Fixes 
+
+- `f-pictogram` state not updating fixed.
+
+## 1.0.4
+
+### Improvments 
+
+- `f-div` `loading="skeleton"` updated. 
 ## 1.0.0
 
 ### Major Changes

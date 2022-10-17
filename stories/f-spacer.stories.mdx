@@ -3,7 +3,12 @@ import { html } from "lit-html";
 import fSpacerAnatomy from "./svg/f-spacer-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
-<Meta title="Components/f-spacer" />
+<Meta
+  title="Components/f-spacer"
+  parameters={{
+    controls: { hideNoControlsWarning: true },
+  }}
+/>
 
 # f-spacer
 
@@ -15,6 +20,53 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 <f-divider></f-divider>
 
 f-spacer is used to create a pseudo space in the layout.
+
+<br />
+
+### [Playground](/story/components-f-spacer--playground)
+
+<Canvas>
+  <Story
+    name="Playground"
+    argTypes={{
+      size: {
+        control: "select",
+        options: ["fill-container", "x-large", "large", "medium", "small", "x-small"],
+      },
+    }}
+    args={{
+      size: "medium",
+    }}
+  >
+    {(args) => html` <f-div
+      padding="large"
+      gap="x-large"
+      border="medium solid default around"
+      direction="row"
+      height="hug-content"
+    >
+      <f-div
+        padding="large"
+        gap="large"
+        border="medium dashed secondary around"
+        height="100%"
+        direction="column"
+        width="100px"
+      >
+        <f-div height="80px" padding="none" state="secondary" variant="curved"></f-div>
+      </f-div>
+      <f-spacer .size=${args.size}></f-spacer>
+      <f-div
+        width="100px"
+        padding="none"
+        gap="large"
+        state="secondary"
+        height="120px"
+        variant="curved"
+      ></f-div>
+    </f-div>`}
+  </Story>
+</Canvas>
 
 <br />
 
@@ -375,3 +427,5 @@ Spacer is used to create a pseudo space in the layout.
     </tr>
   </tbody>
 </table>
+
+<ArgsTable of={"f-spacer"} />

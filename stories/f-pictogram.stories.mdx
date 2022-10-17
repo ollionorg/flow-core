@@ -3,7 +3,12 @@ import { html } from "lit-html";
 import fPictogramAnatomy from "./svg/f-pictogram-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
-<Meta title="Components/f-pictogram" />
+<Meta
+  title="Components/f-pictogram"
+  parameters={{
+    controls: { hideNoControlsWarning: true },
+  }}
+/>
 
 # f-pictogram
 
@@ -17,6 +22,63 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 f-pictogram is a visual representation of a content like label, header or objects. Pictograms are
 illustrative and expressive. They simplify complex ideas and aid to clearly communicate the
 content.
+
+<br />
+
+### [Playground](/story/components-f-pictogram--playground)
+
+<Canvas>
+  <Story
+    name="Playground"
+    argTypes={{
+      variant: {
+        control: "select",
+        options: ["squircle", "sqaure", "circle", "hexagon"],
+      },
+      size: {
+        control: "select",
+        options: ["x-large", "large", "medium", "small"],
+      },
+      state: {
+        control: "select",
+        options: ["default", "primary", "success", "danger", "warning"],
+      },
+      loading: {
+        control: { type: "boolean" },
+        if: { arg: "disabled", eq: false },
+      },
+      disabled: {
+        control: { type: "boolean" },
+        if: { arg: "loading", eq: false },
+      },
+      clickable: {
+        control: { type: "boolean" },
+        if: { arg: "disabled", eq: false },
+      },
+    }}
+    args={{
+      variant: "squircle",
+      source: "i-app",
+      size: "medium",
+      state: "default",
+      loading: false,
+      disabled: false,
+      clickable: false,
+    }}
+  >
+    {(args) => html`<f-div direction="column" padding="x-large">
+      <f-pictogram
+        .variant=${args.variant}
+        source=${args.source}
+        .size=${args.size}
+        .state=${args.state}
+        .loading=${args.loading}
+        .disabled=${args.disabled}
+        .clickable=${args.clickable}
+      ></f-pictogram>
+    </f-div>`}
+  </Story>
+</Canvas>
 
 <br />
 
@@ -478,3 +540,5 @@ color connotes danger, whereas a green color connotes success and so on.
     </tr>
   </tbody>
 </table>
+
+<ArgsTable of={"f-pictogram"} />

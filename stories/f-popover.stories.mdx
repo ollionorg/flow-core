@@ -5,7 +5,12 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useState } from "@storybook/client-api";
 import { ConfigUtil } from "@cldcvr/flow-core/src/modules/config";
 
-<Meta title="Components/f-popover" />
+<Meta
+  title="Components/f-popover"
+  parameters={{
+    controls: { hideNoControlsWarning: true },
+  }}
+/>
 
 <br />
 
@@ -22,6 +27,83 @@ Popovers are containers that float on top of the interface with an overlay behin
 be used to show short-lived information such as menus, options, additional actions.
 
 <br />
+
+### [Playground](/story/components-f-popover--playground)
+
+<Canvas>
+  <Story
+    name="Playground"
+    parameters={{
+      docs: {
+        inlineStories: false,
+        iframeHeight: 200,
+      },
+    }}
+    argTypes={{
+      size: {
+        control: "select",
+        options: ["stretch", "large", "medium", "small"],
+      },
+      placement: {
+        control: "select",
+        options: [
+          "auto",
+          "top-start",
+          "top",
+          "top-end",
+          "bottom-start",
+          "bottom",
+          "bottom-end",
+          "right-start",
+          "right",
+          "right-end",
+          "left-start",
+          "left",
+          "left-end",
+        ],
+      },
+      open: {
+        control: "boolean",
+      },
+      overlay: {
+        control: "boolean",
+      },
+    }}
+    args={{
+      open: false,
+      overlay: true,
+      size: "small",
+      placement: "auto",
+    }}
+  >
+    {(args) => {
+      const [_, updateArgs] = useArgs();
+      const handlePopover = (e, f) => {
+        updateArgs({ open: !args.open });
+      };
+      return html` <f-div height="100px" align="middle-center">
+        <f-popover
+          .open=${args.open}
+          .overlay=${args.overlay}
+          .size=${args.size}
+          .placement=${args.placement}
+          @overlay-click=${handlePopover}
+          target="#popoverTarget"
+        >
+          <f-div state="tertiary" padding="medium">
+            <f-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+              mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+              tristique.
+            </f-text>
+          </f-div>
+        </f-popover>
+        <f-button id="popoverTarget" label="Open" @click=${handlePopover}></f-button>
+      </f-div>`;
+    }}
+  </Story>
+</Canvas>
+
 <br />
 
 ### Anatomy
@@ -77,14 +159,13 @@ Target property specifies a name or a keyword that indicates where to display th
           >
             <f-div state="tertiary" padding="medium">
               <f-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus imperdiet enim ut mi egestas, non efficitur odio
-                varius. Phasellus accumsan pellentesque ex vehicula tristique.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+                mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+                tristique.
               </f-text>
             </f-div>
           </f-popover>
-          <f-button id="popoverTarget" label="Open" @click=${handlePopover}>
-          </f-button>
+          <f-button id="popoverTarget" label="Open" @click=${handlePopover}> </f-button>
         </f-div>
       `;
     }}
@@ -140,8 +221,7 @@ By default the popover is auto aligned to the center of the viewport.
       ]);
       const handlePopover = (main_index, index) => {
         const array = [...dummyPlacementArray];
-        array[index][main_index].open =
-          !dummyPlacementArray[index][main_index].open;
+        array[index][main_index].open = !dummyPlacementArray[index][main_index].open;
         setDummyPlacementArray(array);
       };
       return html`
@@ -159,10 +239,9 @@ By default the popover is auto aligned to the center of the viewport.
                     >
                       <f-div state="tertiary" padding="medium">
                         <f-text>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Phasellus imperdiet enim ut mi egestas, non
-                          efficitur odio varius. Phasellus accumsan pellentesque
-                          ex vehicula tristique.
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+                          imperdiet enim ut mi egestas, non efficitur odio varius. Phasellus
+                          accumsan pellentesque ex vehicula tristique.
                         </f-text>
                       </f-div>
                     </f-popover>
@@ -191,9 +270,7 @@ By default the popover is auto aligned to the center of the viewport.
     </tr>
     <tr>
       <td>auto</td>
-      <td>
-        Sets the placement of popover automatically according to the screen size
-      </td>
+      <td>Sets the placement of popover automatically according to the screen size</td>
       <td>
         <code>default</code>
       </td>
@@ -235,18 +312,12 @@ By default the popover is auto aligned to the center of the viewport.
     </tr>
     <tr>
       <td>right-start</td>
-      <td>
-        starting from top to downwards on right side wrt to the button opening
-        popup
-      </td>
+      <td>starting from top to downwards on right side wrt to the button opening popup</td>
       <td></td>
     </tr>
     <tr>
       <td>right-end</td>
-      <td>
-        starting from bottom to upwards on right side wrt to the button opening
-        popup
-      </td>
+      <td>starting from bottom to upwards on right side wrt to the button opening popup</td>
       <td></td>
     </tr>
     <tr>
@@ -256,18 +327,12 @@ By default the popover is auto aligned to the center of the viewport.
     </tr>
     <tr>
       <td>left-start</td>
-      <td>
-        starting from top to downwards on left side wrt to the button opening
-        popup
-      </td>
+      <td>starting from top to downwards on left side wrt to the button opening popup</td>
       <td></td>
     </tr>
     <tr>
       <td>left-end</td>
-      <td>
-        starting from bottom to upwards on left side wrt to the button opening
-        popup
-      </td>
+      <td>starting from bottom to upwards on left side wrt to the button opening popup</td>
       <td></td>
     </tr>
   </tbody>
@@ -282,9 +347,8 @@ By default the popover is auto aligned to the center of the viewport.
 A popover can have different sizes depending on the use case from the range: small, medium, large, stretch.
 
 <br />
-Each size defines a width and a maximum height. By default the height will adjust
-to the content of the popover and if the max height is attained, the body contents
-will scroll.
+Each size defines a width and a maximum height. By default the height will adjust to the content of the
+popover and if the max height is attained, the body contents will scroll.
 
 <br />
 <p class="note-section">
@@ -337,9 +401,9 @@ will scroll.
             >
               <f-div state="tertiary" padding="medium">
                 <f-text>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Phasellus imperdiet enim ut mi egestas, non efficitur odio
-                  varius. Phasellus accumsan pellentesque ex vehicula tristique.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim
+                  ut mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex
+                  vehicula tristique.
                 </f-text>
               </f-div>
             </f-popover>
@@ -366,8 +430,7 @@ will scroll.
     <tr>
       <td>stretch</td>
       <td>
-        Viewport width with a 16px gutter/padding and Viewport height with a
-        16px gutter/padding
+        Viewport width with a 16px gutter/padding and Viewport height with a 16px gutter/padding
       </td>
       <td></td>
     </tr>
@@ -424,29 +487,20 @@ will scroll.
           >
             <f-div state="tertiary" padding="medium">
               <f-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus imperdiet enim ut mi egestas, non efficitur odio
-                varius. Phasellus accumsan pellentesque ex vehicula tristique.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+                mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+                tristique.
               </f-text>
             </f-div>
           </f-popover>
-          <f-button
-            id="openFlag"
-            label="open='true'"
-            @click=${() => setOpenFlag(!openFlag)}
-          >
+          <f-button id="openFlag" label="open='true'" @click=${() => setOpenFlag(!openFlag)}>
           </f-button>
-          <f-popover
-            ?open=${false}
-            ?overlay=${true}
-            size="small"
-            target="#openFlag2"
-          >
+          <f-popover ?open=${false} ?overlay=${true} size="small" target="#openFlag2">
             <f-div state="tertiary" padding="medium">
               <f-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus imperdiet enim ut mi egestas, non efficitur odio
-                varius. Phasellus accumsan pellentesque ex vehicula tristique.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+                mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+                tristique.
               </f-text>
             </f-div>
           </f-popover>
@@ -462,9 +516,9 @@ will scroll.
           >
             <f-div state="tertiary" padding="medium">
               <f-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus imperdiet enim ut mi egestas, non efficitur odio
-                varius. Phasellus accumsan pellentesque ex vehicula tristique.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+                mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+                tristique.
               </f-text>
             </f-div>
           </f-popover>
@@ -479,14 +533,13 @@ will scroll.
             .overlay=${false}
             size="small"
             target="#openFlagForNoOverlay2"
-            @overlay-click=${() =>
-              setOpenFlagForNoOverlay(!openFlagForNoOverlay)}
+            @overlay-click=${() => setOpenFlagForNoOverlay(!openFlagForNoOverlay)}
           >
             <f-div state="tertiary" padding="medium">
               <f-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus imperdiet enim ut mi egestas, non efficitur odio
-                varius. Phasellus accumsan pellentesque ex vehicula tristique.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+                mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+                tristique.
               </f-text>
             </f-div>
           </f-popover>
@@ -511,10 +564,7 @@ will scroll.
     </tr>
     <tr>
       <td>overlay</td>
-      <td>
-        If we need black with 50% opacity background ot not when open the
-        popover
-      </td>
+      <td>If we need black with 50% opacity background ot not when open the popover</td>
       <td>
         <code>true</code>
       </td>
@@ -528,3 +578,5 @@ will scroll.
     </tr>
   </tbody>
 </table>
+
+<ArgsTable of={"f-popover"} />

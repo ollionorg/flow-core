@@ -3,7 +3,12 @@ import { html } from "lit-html";
 import fCounterAnatomy from "./svg/f-counter-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
-<Meta title="Components/f-counter" />
+<Meta
+  title="Components/f-counter"
+  parameters={{
+    controls: { hideNoControlsWarning: true },
+  }}
+/>
 
 # f-counter
 
@@ -14,6 +19,54 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 <f-divider></f-divider>
 
 A counter is a visual indicator for numeric values.
+
+<br />
+
+### [Playground](/story/components-f-counter--playground)
+
+<Canvas>
+  <Story
+    name="Playground"
+    argTypes={{
+      label: {
+        control: "number",
+      },
+      size: {
+        control: "select",
+        options: ["large", "medium", "small"],
+      },
+      state: {
+        control: "select",
+        options: ["neutral", "primary", "success", "warning", "danger"],
+      },
+      loading: {
+        control: { type: "boolean" },
+        if: { arg: "disabled", eq: false },
+      },
+      disabled: {
+        control: { type: "boolean" },
+        if: { arg: "loading", eq: false },
+      },
+    }}
+    args={{
+      label: 88,
+      size: "medium",
+      state: "neutral",
+      loading: false,
+      disabled: false,
+    }}
+  >
+    {(args) => html`
+      <f-counter
+        .label=${args.label}
+        .size=${args.size}
+        .state=${args.state}
+        .loading=${args.loading}
+        .disabled=${args.disabled}
+      ></f-counter>
+    `}
+  </Story>
+</Canvas>
 
 <br />
 
@@ -332,3 +385,5 @@ connotes danger, whereas a green color connotes success and so on.
     </tr>
   </tbody>
 </table>
+
+<ArgsTable of={"f-counter"} />

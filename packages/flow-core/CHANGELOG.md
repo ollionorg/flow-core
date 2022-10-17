@@ -4,6 +4,11 @@
 
 # Change Log
 
+## 1.0.4
+
+### Improvments 
+
+- `f-div` `loading="skeleton"` updated. 
 ## 1.0.0
 
 ### Major Changes

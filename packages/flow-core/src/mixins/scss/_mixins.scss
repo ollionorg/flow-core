@@ -61,7 +61,6 @@
   @include shimmer-keyframe();
   position: relative;
   overflow: hidden;
-  border: none !important;
   background: var(--color-surface-default) !important;
   > * {
     visibility: hidden;
@@ -93,5 +92,11 @@
 @mixin shimmer-child() {
   > * {
     @include shimmer-self();
+  }
+}
+
+@mixin hasShimmer {
+  &.hasShimmer {
+    visibility: hidden;
   }
 }

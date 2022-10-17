@@ -79,6 +79,10 @@ $sizes: (
     vertical-align: top;
     width: fit-content;
 
+    &.hasShimmer {
+      @include shimmer-self();
+    }
+
     @each $state, $color in $states {
       &[state="#{$state}"][category="fill"] {
         background-color: map.get($color, "background");
@@ -207,5 +211,12 @@ f-button {
   }
   &[disabled] {
     @include disabled();
+  }
+
+  &.hasShimmer[state] {
+    &::before {
+      content: unset;
+    }
+    background: transparent !important;
   }
 }

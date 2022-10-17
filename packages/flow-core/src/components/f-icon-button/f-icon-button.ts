@@ -89,10 +89,15 @@ export class FIconButton extends FElement {
   }
 
   render() {
+    const hasShimmer =
+      (getComputedStyle(this, "::before") as any)["animation-name"] ===
+      "shimmer";
     const iconClasses = {
       "fill-button-surface": this.type === "fill" && this.variant !== "block",
     };
-
+    if (hasShimmer) {
+      this.classList.add("hasShimmer");
+    }
     /**
      * create counter if available
      */
@@ -113,7 +118,7 @@ export class FIconButton extends FElement {
         : "";
 
     return html`<button
-      class="f-icon-button"
+      class=${classMap({ "f-icon-button": true, hasShimmer })}
       variant=${this.variant}
       type=${this.type}
       size=${this.size}

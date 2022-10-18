@@ -18,7 +18,8 @@
     "build-packages": "yarn build-types-generator && yarn build-flow-core",
     "release": "yarn build-packages && yarn changeset publish",
     "prepare": "husky install",
-    "test": "yarn loki test"
+    "test": "rm -rf .loki/difference .loki/current && yarn loki test --chromeFlags='--headless --disable-gpu --hide-scrollbars --deterministic-mode --force-color-profile=srgb --font-render-hinting=none'",
+    "loki:update": "rm -rf .loki/difference .loki/current && yarn loki update --chromeFlags='--headless --disable-gpu --hide-scrollbars --deterministic-mode --force-color-profile=srgb --font-render-hinting=none'"
   },
   "keywords": [
     "web-components",
@@ -59,6 +60,10 @@
     "@cldcvr/flow-system-icon": "1.0.0"
   },
   "loki": {
+    "pixelmatch": {
+      "threshold": 0.1,
+      "includeAA": true
+    },
     "configurations": {
       "chrome.laptop": {
         "target": "chrome.app",
@@ -67,6 +72,7 @@
         "deviceScaleFactor": 1,
         "mobile": false
       }
-    }
+    },
+    "storiesFilter": "^((?!Components/f-icon).)*$"
   }
 }

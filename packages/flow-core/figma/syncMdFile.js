@@ -12,7 +12,7 @@ const rgbToHex = (r, g, b) => "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toStr
  * @param {*} colorTokens Json object of theme and color variables
  */
 function generateBaseColorMdx(colorTokens) {
-  const tokenFileName = `${__dirname}/../figma/base_colors.mdx`;
+  const tokenFileName = `${__dirname}/../figma/base-colors.mdx`;
 
   let surfaceColors = [];
   let textColors = [];
@@ -140,7 +140,7 @@ function generateBaseColorMdx(colorTokens) {
 }
 
 function generateSystemColorMdx(colorTokens) {
-  const tokenFileName = `${__dirname}/../figma/system_colors.mdx`;
+  const tokenFileName = `${__dirname}/../figma/system-colors.mdx`;
 
   let primaryColors = [];
   let highlightColors = [];

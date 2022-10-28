@@ -24,7 +24,7 @@ function generateBaseColorMdx(colorTokens) {
   compareAndFindTokens(colorTokens, "icon", iconColors);
   compareAndFindTokens(colorTokens, "border", borderColors);
 
-  scss = `## Base colors
+  mdxFile = `## Base colors
 
 <f-divider></f-divider>
 
@@ -43,7 +43,7 @@ function generateBaseColorMdx(colorTokens) {
 
 `;
 
-  scss += `<Preview>
+  mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -52,9 +52,9 @@ function generateBaseColorMdx(colorTokens) {
       <th>Value(dark mode)</th>
     </tr>`;
   for (let i = 0; i < surfaceColors.length; i++) {
-    scss += getPreviewColorTable(surfaceColors[i]);
+    mdxFile += getPreviewColorTable(surfaceColors[i]);
   }
-  scss += `
+  mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -65,7 +65,7 @@ function generateBaseColorMdx(colorTokens) {
 
 `;
 
-  scss += `<Preview>
+  mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -74,9 +74,9 @@ function generateBaseColorMdx(colorTokens) {
       <th>Value(dark mode)</th>
     </tr>`;
   for (let i = 0; i < textColors.length; i++) {
-    scss += getPreviewColorTable(textColors[i]);
+    mdxFile += getPreviewColorTable(textColors[i]);
   }
-  scss += `
+  mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -87,7 +87,7 @@ function generateBaseColorMdx(colorTokens) {
 
 `;
 
-  scss += `<Preview>
+  mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -96,9 +96,9 @@ function generateBaseColorMdx(colorTokens) {
       <th>Value(dark mode)</th>
     </tr>`;
   for (let i = 0; i < iconColors.length; i++) {
-    scss += getPreviewColorTable(iconColors[i]);
+    mdxFile += getPreviewColorTable(iconColors[i]);
   }
-  scss += `
+  mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -109,7 +109,7 @@ function generateBaseColorMdx(colorTokens) {
 
 `;
 
-  scss += `<Preview>
+  mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -118,15 +118,15 @@ function generateBaseColorMdx(colorTokens) {
       <th>Value(dark mode)</th>
     </tr>`;
   for (let i = 0; i < borderColors.length; i++) {
-    scss += getPreviewColorTable(borderColors[i]);
+    mdxFile += getPreviewColorTable(borderColors[i]);
   }
-  scss += `
+  mdxFile += `
 </tbody></table></Preview>`;
 
   try {
     fs.writeFileSync(
       tokenFileName,
-      prettier.format(scss, {
+      prettier.format(mdxFile, {
         printWidth: 100,
         singleQuote: true,
         tabWidth: 4,
@@ -156,7 +156,7 @@ function generateSystemColorMdx(colorTokens) {
   compareAndStructureTokens(colorTokens, "color-warning", warningColors);
   compareAndStructureTokens(colorTokens, "color-danger", dangerColors);
 
-  scss = `## System colors
+  mdxFile = `## System colors
 
 <f-divider></f-divider>
 
@@ -180,7 +180,7 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-  scss += `<Preview>
+  mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -189,9 +189,9 @@ function generateSystemColorMdx(colorTokens) {
       <th>Value(dark mode)</th>
     </tr>`;
   for (let i = 0; i < primaryColors.length; i++) {
-    scss += getPreviewColorTable(primaryColors[i]);
+    mdxFile += getPreviewColorTable(primaryColors[i]);
   }
-  scss += `
+  mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -207,7 +207,7 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-  scss += `<Preview>
+  mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -216,9 +216,9 @@ function generateSystemColorMdx(colorTokens) {
       <th>Value(dark mode)</th>
     </tr>`;
   for (let i = 0; i < highlightColors.length; i++) {
-    scss += getPreviewColorTable(highlightColors[i]);
+    mdxFile += getPreviewColorTable(highlightColors[i]);
   }
-  scss += `
+  mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -231,7 +231,7 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-  scss += `<Preview>
+  mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -240,9 +240,9 @@ function generateSystemColorMdx(colorTokens) {
       <th>Value(dark mode)</th>
     </tr>`;
   for (let i = 0; i < neutralColors.length; i++) {
-    scss += getPreviewColorTable(neutralColors[i]);
+    mdxFile += getPreviewColorTable(neutralColors[i]);
   }
-  scss += `
+  mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -258,7 +258,7 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-  scss += `<Preview>
+  mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -267,9 +267,9 @@ function generateSystemColorMdx(colorTokens) {
       <th>Value(dark mode)</th>
     </tr>`;
   for (let i = 0; i < successColors.length; i++) {
-    scss += getPreviewColorTable(successColors[i]);
+    mdxFile += getPreviewColorTable(successColors[i]);
   }
-  scss += `
+  mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -286,7 +286,7 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-  scss += `<Preview>
+  mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -295,9 +295,9 @@ function generateSystemColorMdx(colorTokens) {
       <th>Value(dark mode)</th>
     </tr>`;
   for (let i = 0; i < warningColors.length; i++) {
-    scss += getPreviewColorTable(warningColors[i]);
+    mdxFile += getPreviewColorTable(warningColors[i]);
   }
-  scss += `
+  mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -314,7 +314,7 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-  scss += `<Preview>
+  mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -323,14 +323,14 @@ function generateSystemColorMdx(colorTokens) {
       <th>Value(dark mode)</th>
     </tr>`;
   for (let i = 0; i < dangerColors.length; i++) {
-    scss += getPreviewColorTable(dangerColors[i]);
+    mdxFile += getPreviewColorTable(dangerColors[i]);
   }
-  scss += `
+  mdxFile += `
 </tbody></table></Preview>`;
   try {
     fs.writeFileSync(
       tokenFileName,
-      prettier.format(scss, {
+      prettier.format(mdxFile, {
         printWidth: 100,
         singleQuote: true,
         tabWidth: 4,

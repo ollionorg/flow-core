@@ -49,8 +49,8 @@ function generateBaseColorMdx(colorTokens) {
   <tbody>
             <tr>
       <th>Token</th>
-      <th>Value(light mode)</th>
-      <th>Value(dark mode)</th>
+      <th>Value (light mode)</th>
+      <th>Value (dark mode)</th>
     </tr>`;
   for (let i = 0; i < surfaceColors.length; i++) {
     mdxFile += getPreviewColorTable(surfaceColors[i]);
@@ -71,8 +71,8 @@ function generateBaseColorMdx(colorTokens) {
   <tbody>
             <tr>
       <th>Token</th>
-      <th>Value(light mode)</th>
-      <th>Value(dark mode)</th>
+      <th>Value (light mode)</th>
+      <th>Value (dark mode)</th>
     </tr>`;
   for (let i = 0; i < textColors.length; i++) {
     mdxFile += getPreviewColorTable(textColors[i]);
@@ -93,8 +93,8 @@ function generateBaseColorMdx(colorTokens) {
   <tbody>
             <tr>
       <th>Token</th>
-      <th>Value(light mode)</th>
-      <th>Value(dark mode)</th>
+      <th>Value (light mode)</th>
+      <th>Value (dark mode)</th>
     </tr>`;
   for (let i = 0; i < iconColors.length; i++) {
     mdxFile += getPreviewColorTable(iconColors[i]);
@@ -115,8 +115,8 @@ function generateBaseColorMdx(colorTokens) {
   <tbody>
             <tr>
       <th>Token</th>
-      <th>Value(light mode)</th>
-      <th>Value(dark mode)</th>
+      <th>Value (light mode)</th>
+      <th>Value (dark mode)</th>
     </tr>`;
   for (let i = 0; i < borderColors.length; i++) {
     mdxFile += getPreviewColorTable(borderColors[i]);
@@ -190,8 +190,8 @@ function generateSystemColorMdx(colorTokens) {
   <tbody>
             <tr>
       <th>Token</th>
-      <th>Value(light mode)</th>
-      <th>Value(dark mode)</th>
+      <th>Value (light mode)</th>
+      <th>Value (dark mode)</th>
     </tr>`;
   for (let i = 0; i < primaryColors.length; i++) {
     mdxFile += getPreviewColorTable(primaryColors[i]);
@@ -217,8 +217,8 @@ function generateSystemColorMdx(colorTokens) {
   <tbody>
             <tr>
       <th>Token</th>
-      <th>Value(light mode)</th>
-      <th>Value(dark mode)</th>
+      <th>Value (light mode)</th>
+      <th>Value (dark mode)</th>
     </tr>`;
   for (let i = 0; i < highlightColors.length; i++) {
     mdxFile += getPreviewColorTable(highlightColors[i]);
@@ -241,8 +241,8 @@ function generateSystemColorMdx(colorTokens) {
   <tbody>
             <tr>
       <th>Token</th>
-      <th>Value(light mode)</th>
-      <th>Value(dark mode)</th>
+      <th>Value (light mode)</th>
+      <th>Value (dark mode)</th>
     </tr>`;
   for (let i = 0; i < neutralColors.length; i++) {
     mdxFile += getPreviewColorTable(neutralColors[i]);
@@ -268,8 +268,8 @@ function generateSystemColorMdx(colorTokens) {
   <tbody>
             <tr>
       <th>Token</th>
-      <th>Value(light mode)</th>
-      <th>Value(dark mode)</th>
+      <th>Value (light mode)</th>
+      <th>Value (dark mode)</th>
     </tr>`;
   for (let i = 0; i < successColors.length; i++) {
     mdxFile += getPreviewColorTable(successColors[i]);
@@ -296,8 +296,8 @@ function generateSystemColorMdx(colorTokens) {
   <tbody>
             <tr>
       <th>Token</th>
-      <th>Value(light mode)</th>
-      <th>Value(dark mode)</th>
+      <th>Value (light mode)</th>
+      <th>Value (dark mode)</th>
     </tr>`;
   for (let i = 0; i < warningColors.length; i++) {
     mdxFile += getPreviewColorTable(warningColors[i]);
@@ -324,8 +324,8 @@ function generateSystemColorMdx(colorTokens) {
   <tbody>
             <tr>
       <th>Token</th>
-      <th>Value(light mode)</th>
-      <th>Value(dark mode)</th>
+      <th>Value (light mode)</th>
+      <th>Value (dark mode)</th>
     </tr>`;
   for (let i = 0; i < dangerColors.length; i++) {
     mdxFile += getPreviewColorTable(dangerColors[i]);

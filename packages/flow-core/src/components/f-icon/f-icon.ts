@@ -8,6 +8,7 @@ import loader from "../../mixins/svg/loader";
 import notFound from "../../mixins/svg/notFound";
 import { isValidHttpUrl } from "./../../utils";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+// themeSubject will used to listen theme update
 import { themeSubject } from "./../../modules/config";
 
 @customElement("f-icon")
@@ -54,6 +55,7 @@ export class FIcon extends FElement {
   get source(): string {
     return this._source;
   }
+  // source computed based on value given by user
   set source(value) {
     const emojiRegex = /\p{Extended_Pictographic}/u;
     if (isValidHttpUrl(value)) {
@@ -121,14 +123,20 @@ export class FIcon extends FElement {
 
   connectedCallback() {
     super.connectedCallback();
+
+    // whenever theme changes this subscription runs
     themeSubject.subscribe(() => {
       this.requestUpdate();
     });
   }
 
   render() {
+    // validating properties
     this.validateProperties();
 
+    /**
+     * Final html to render
+     */
     return html`<div
       class="f-icon ${this.classList.toString()}"
       state=${this.state}
@@ -146,6 +154,9 @@ export class FIcon extends FElement {
   }
 }
 
+/**
+ * Required for typescript
+ */
 declare global {
   interface HTMLElementTagNameMap {
     "f-icon": FIcon;

@@ -52,6 +52,7 @@ export class FCounter extends FElement {
       throw new Error("f-counter : label is mandatory field");
     }
   }
+  // this will abbreviate long labels to short
   get computedLabel() {
     if (this.label < 10) {
       return `0${this.label}`;
@@ -89,14 +90,20 @@ export class FCounter extends FElement {
     return fixedNumber;
   }
   render() {
+    // validate props/attributes and throws errors if required
     this.validateProperties();
+    // classes to apply on inner element
     const classes: Record<string, boolean> = {
       "f-counter": true,
     };
+    // merging host classes
     this.classList.forEach((cl) => {
       classes[cl] = true;
     });
 
+    /**
+     * Final html to render
+     */
     return html`<div
       class=${classMap(classes)}
       size=${this.size}
@@ -108,6 +115,9 @@ export class FCounter extends FElement {
     </div>`;
   }
 }
+/**
+ * Required for typescript
+ */
 declare global {
   interface HTMLElementTagNameMap {
     "f-counter": FCounter;

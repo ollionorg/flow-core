@@ -2,7 +2,10 @@ const litcss = require("rollup-plugin-postcss-lit");
 const path = require("path");
 
 module.exports = {
-  stories: ["../stories/**/*.stories.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: [
+    "../stories/**/*.stories.mdx",
+    "../stories/**/*.stories.@(js|jsx|ts|tsx)",
+  ],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
@@ -33,7 +36,11 @@ module.exports = {
       ...(config.optimizeDeps?.include ?? []),
       "@storybook/web-components",
     ];
-    config.optimizeDeps.exclude = [...(config.optimizeDeps?.exclude ?? []), "lit", "lit-html"];
+    config.optimizeDeps.exclude = [
+      ...(config.optimizeDeps?.exclude ?? []),
+      "lit",
+      "lit-html",
+    ];
     config.plugins = [
       ...config.plugins,
       {

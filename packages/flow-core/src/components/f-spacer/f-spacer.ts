@@ -27,15 +27,11 @@ export class FSpacer extends FElement {
   @property({ type: String, reflect: true })
   size?: FSpacerSizeProp = "medium";
 
+  /**
+   * Applying height,width related style, based on size property
+   */
   applySize() {
-    const fixedValues = [
-      "fill-container",
-      "x-large",
-      "large",
-      "medium",
-      "small",
-      "x-small",
-    ];
+    const fixedValues = ["fill-container", "x-large", "large", "medium", "small", "x-small"];
     const parentDiv = this?.closest("f-div");
     if (this.size && !fixedValues.includes(this.size)) {
       if (parentDiv?.direction === "row") {
@@ -49,11 +45,24 @@ export class FSpacer extends FElement {
   }
 
   render() {
+    /**
+     * START :  apply inline styles based on attribute values
+     */
     this.applySize();
+    /**
+     * END :  apply inline styles based on attribute values
+     */
+
+    /**
+     * Final html to render
+     */
     return html``;
   }
 }
 
+/**
+ * Required for typescript
+ */
 declare global {
   interface HTMLElementTagNameMap {
     "f-spacer": FSpacer;

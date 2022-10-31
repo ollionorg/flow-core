@@ -433,16 +433,16 @@ function compareAndFindTokens(colorTokens, comparisionString, colorCategory) {
 
     for (let [variable, value] of tokenEntries) {
       variable = `color-${variable}`;
-      comparision = false;
+      hasComparision = false;
       if (colorCategory === "base-color") {
-        comparision = variable.includes(comparisionString);
+        hasComparision = variable.includes(comparisionString);
       } else {
-        comparision =
+        hasComparision =
           variable.includes(comparisionString) &&
           !variable.includes("surface") &&
           !variable.includes("text");
       }
-      if (comparision) {
+      if (hasComparision) {
         if (resultingArr.length > 0 && resultingArr.some((item) => item.variable === variable)) {
           let index = resultingArr.findIndex((item) => item.variable === variable);
           if (theme === "f-light") {

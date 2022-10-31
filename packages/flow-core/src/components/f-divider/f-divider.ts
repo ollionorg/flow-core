@@ -29,10 +29,14 @@ export class FDivider extends FElement {
   state?: "default" | "secondary" | "subtle" = "default";
 
   render() {
+    // render empty string, since there no need of any child element
     return html``;
   }
 }
 
+/**
+ * Required for typescript
+ */
 declare global {
   interface HTMLElementTagNameMap {
     "f-divider": FDivider;

@@ -1,6 +1,7 @@
 import { html, fixture, expect } from "@open-wc/testing";
 import loadingSVG from "./../../mixins/svg/loader";
 
+// import all flow -core components
 import "@cldcvr/flow-core";
 
 import { FIcon } from "@cldcvr/flow-core";

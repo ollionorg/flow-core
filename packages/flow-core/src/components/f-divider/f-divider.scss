@@ -1,6 +1,10 @@
 @use "sass:map";
-@import "./../../mixins/scss/mixins";
 
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+/**
+START : scss maps to hold repsective attribute values
+**/
 $variants: (
   "dotted": dotted,
   "dashed": dashed,
@@ -17,13 +21,18 @@ $states: (
   "secondary": var(--color-border-secondary),
   "subtle": var(--color-border-subtle),
 );
+/**
+END : scss maps to hold repsective attribute values
+**/
 
 f-divider {
+  // Important :  always include base mixins
   @include base();
   display: flex;
   flex: 0 0 auto;
-  width:100%;
+  width: 100%;
   height: 0px;
+  // iterating over sizes and creating css
   @each $size, $value in $sizes {
     &[size="#{$size}"] {
       border-top-width: $value;
@@ -32,12 +41,15 @@ f-divider {
       border-bottom-width: 0px;
     }
   }
+
+  // iterating over variants and creating css
   @each $variant, $value in $variants {
     &[variant="#{$variant}"] {
       border-style: $value;
     }
   }
 
+  // iterating over states and creating css
   @each $state, $color in $states {
     &[state="#{$state}"] {
       border-color: $color;
@@ -50,7 +62,7 @@ f-div {
   &[direction="row"] {
     > f-divider {
       height: 100%;
-      width:0px;
+      width: 0px;
     }
     > f-divider {
       @each $size, $value in $sizes {

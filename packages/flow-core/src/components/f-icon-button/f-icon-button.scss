@@ -1,7 +1,11 @@
 @use "sass:map";
 @use "sass:math";
+// common mixins imported from this file
 @import "./../../mixins/scss/mixins";
 
+/**
+START : scss maps to hold repsective attribute values
+**/
 $sizes: (
   "x-small": (
     "size": 20px,
@@ -56,7 +60,14 @@ $states: (
     "loading": var(--color-danger-surface),
   ),
 );
+/**
+END : scss maps to hold repsective attribute values
+**/
 
+/**
+:host selects the host element. 
+in this case it is `f-icon-button`
+**/
 :host {
   @include base();
   display: inline-flex;
@@ -73,13 +84,16 @@ $states: (
     padding: 0px;
     position: relative;
 
+    // if counter is specified then overflow has to be visible
     &[counter] {
       overflow: visible;
     }
+    // this class applied though javascript when host has shimmer animation
     &.hasShimmer {
       @include shimmer-self();
     }
 
+    // iterating over sizes and appying respective css
     @each $size, $value in $sizes {
       &[size="#{$size}"] {
         height: map-get($value, "size");
@@ -107,6 +121,8 @@ $states: (
         }
       }
     }
+
+    // iterating over states and appying respective css
     @each $state, $color in $states {
       &[state="#{$state}"][type="fill"] {
         background-color: map.get($color, "background");

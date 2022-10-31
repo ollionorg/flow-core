@@ -43,6 +43,9 @@ export type FDivHeightProp =
   | `${number}%`
   | `${number}vh`;
 
+/**
+ * START :  constant values required for `f-div`
+ */
 const BORDER_WIDTH_VALUES = {
   small: "1px",
   medium: "2px",
@@ -77,6 +80,10 @@ const BORDER_POSITION_CSS = {
   right: "border-right",
   around: "border",
 } as Record<string, string>;
+
+/**
+ * END :  constant values required for `f-div`
+ */
 
 /**
  * @summary F-div is used as a container for HTML elements.
@@ -202,6 +209,9 @@ export class FDiv extends FElement {
   @property({ reflect: true, type: String })
   sticky?: "none" | "top" | "bottom" | "left" | "right" = "none";
 
+  /**
+   * Applying border related style, based on value
+   */
   applyBorder() {
     if (this.border) {
       const [borderWidth, borderStyle, borderColor, borderPosition] =
@@ -226,6 +236,9 @@ export class FDiv extends FElement {
     }
   }
 
+  /**
+   * Applying padding related style, based on value
+   */
   applyPadding() {
     if (this.padding) {
       const paddingValues = (this.padding.split(" ") || []) as FDivPadding[];
@@ -242,6 +255,10 @@ export class FDiv extends FElement {
       this.style.padding = paddingCSS;
     }
   }
+
+  /**
+   * Applying height,width related style, based on value
+   */
   applySize() {
     const fixedValues = ["fill-container", "hug-content"];
     if (this.width && !fixedValues.includes(this.width)) {
@@ -252,9 +269,19 @@ export class FDiv extends FElement {
     }
   }
   render() {
+    /**
+     * START :  apply inline styles based on attribute values
+     */
     this.applyBorder();
     this.applyPadding();
     this.applySize();
+    /**
+     * END :  apply inline styles based on attribute values
+     */
+
+    /**
+     * Final html to render
+     */
     return html`<slot></slot>${this.loading === "loader"
         ? html`${unsafeSVG(loader)}`
         : ""}`;
@@ -262,7 +289,7 @@ export class FDiv extends FElement {
 }
 
 /**
- * ts to know and define element
+ * Required for typescript
  */
 declare global {
   export interface HTMLElementTagNameMap {

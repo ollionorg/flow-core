@@ -1,6 +1,10 @@
 @use "sass:map";
+// common mixins imported from this file
 @import "./../../mixins/scss/mixins";
 
+/**
+$gaps map hold gap attribute related values
+**/
 $gaps: (
   "none": 0px,
   "x-large": 32px,
@@ -10,6 +14,9 @@ $gaps: (
   "x-small": 8px,
 );
 
+/**
+$states map will have state specific inner maps.
+**/
 $states: (
   "transparent": (
     "background": transparent,
@@ -76,19 +83,24 @@ $states: (
   ),
 );
 
+/**
+applies styles on f-div
+**/
 f-div {
+  // Important :  always include base mixins
   @include base();
   display: flex;
   position: relative;
   font-weight: 400;
   font-size: 14px;
   color: var(--color-text-default);
-
+  // iterating over gaps and appying respective css
   @each $gap, $value in $gaps {
     &[gap="#{$gap}"] {
       gap: $value;
     }
   }
+  // iterating over states and appyling respective css
   @each $state, $value in $states {
     &[state="#{$state}"] {
       background-color: map.get($value, "background");
@@ -98,13 +110,16 @@ f-div {
           background-color: map.get($value, "hover");
         }
       }
+      // if selected state is background
       &[selected="background"] {
         background-color: map.get($value, "selected");
       }
+      // if selected state is border
       &[selected="border"] {
         background-color: var(--color-surface-default);
         border: 1px solid map.get($value, "border") !important;
       }
+      // if selected state is notch-right, creating pseudo element to create notch
       &[selected="notch-right"] {
         &::after {
           position: absolute;
@@ -118,6 +133,7 @@ f-div {
           content: "";
         }
       }
+      // if selected state is notch-left, creating pseudo element to create notch
       &[selected="notch-left"] {
         position: relative;
         &::after {
@@ -134,10 +150,11 @@ f-div {
       }
     }
   }
-
+  // including disabled mixins to apply disabled css
   &[disabled] {
     @include disabled();
   }
+  // applying cursor pointer on clickable attribute
   &[clickable] {
     cursor: pointer;
   }

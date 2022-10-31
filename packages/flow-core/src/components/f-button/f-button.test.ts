@@ -1,12 +1,16 @@
 import { html, fixture, expect } from "@open-wc/testing";
 import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 
+// import flow-core elements
 import "@cldcvr/flow-core";
 
 import { FButton, FIcon, ConfigUtil, FCounter } from "@cldcvr/flow-core";
+// importing `loadingSVG` to cross check
 import loadingSVG from "./../../mixins/svg/loader";
 
+// setting icon pack for testing icon related test cases
 ConfigUtil.setConfig({ iconPack: IconPack });
+
 describe("f-button", () => {
   it("is defined", () => {
     const el = document.createElement("f-button");

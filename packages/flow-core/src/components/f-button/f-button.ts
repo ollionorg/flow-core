@@ -109,13 +109,26 @@ export class FButton extends FElement {
   }
 
   render() {
+    /**
+     * checks if host element's `:before` has shimmer by accessing  computedstyles
+     */
     const hasShimmer =
       (getComputedStyle(this, "::before") as any)["animation-name"] ===
       "shimmer";
+
+    /**
+     * if hasShimmer true then add class
+     */
     if (hasShimmer) {
       this.classList.add("hasShimmer");
     }
+    /**
+     * validate properties before render
+     */
     this.validateProperties();
+    /**
+     * classes to apply on icon , based on category
+     */
     const iconClasses = {
       "fill-button-surface": this.category === "fill",
     };
@@ -174,6 +187,10 @@ export class FButton extends FElement {
         ${unsafeSVG(loader)}${this.label}
       </button>`;
     }
+
+    /**
+     * Final html to render
+     */
     return html`<button
       class=${classMap({ "f-button": true, hasShimmer })}
       category=${this.category}
@@ -189,7 +206,7 @@ export class FButton extends FElement {
 }
 
 /**
- * ts to know and define element
+ * Required for typescript
  */
 declare global {
   interface HTMLElementTagNameMap {

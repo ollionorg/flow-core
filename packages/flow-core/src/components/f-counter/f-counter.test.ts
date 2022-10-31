@@ -1,11 +1,13 @@
 import { html, fixture, expect } from "@open-wc/testing";
+// importing `loadingSVG` to cross check
 import loadingSVG from "./../../mixins/svg/loader";
-
+// import flow-core elements
 import "@cldcvr/flow-core";
 
 import { FCounter } from "@cldcvr/flow-core";
 
 describe("f-counter", () => {
+  // check if component is defined
   it("is defined", () => {
     const el = document.createElement("f-counter");
     expect(el).instanceOf(FCounter);
@@ -48,13 +50,17 @@ describe("f-counter", () => {
   });
 
   it("label for Billions", async () => {
-    const el = await fixture(html` <f-counter label="13404000000"></f-counter> `);
+    const el = await fixture(
+      html` <f-counter label="13404000000"></f-counter> `
+    );
     const descendant = el.shadowRoot!.querySelector(".f-counter")!;
     expect(descendant.textContent?.trim()).to.equal("13B");
   });
 
   it("label for Trillions", async () => {
-    const el = await fixture(html` <f-counter label="16500040000000"></f-counter> `);
+    const el = await fixture(
+      html` <f-counter label="16500040000000"></f-counter> `
+    );
     const descendant = el.shadowRoot!.querySelector(".f-counter")!;
     expect(descendant.textContent?.trim()).to.equal("17T");
   });
@@ -77,7 +83,9 @@ describe("f-counter", () => {
     try {
       await fixture(html` <f-counter></f-counter>`);
     } catch (e) {
-      expect((e as Error).message).to.equal("f-counter : label is mandatory field");
+      expect((e as Error).message).to.equal(
+        "f-counter : label is mandatory field"
+      );
     }
   });
 });

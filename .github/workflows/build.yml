@@ -1,4 +1,4 @@
-name: CldCvr Flow to S3
+name: Deploy storybook to amazon s3
 on:
   push:
     branches:
@@ -15,7 +15,7 @@ env:
   ACCOUNT_ID: 679519065279
 jobs:
   build:
-    name: Upload to Amazon S3
+    name: Build and upload to amazon s3
     runs-on: ubuntu-latest
     permissions:
       id-token: write

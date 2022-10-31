@@ -6,7 +6,8 @@ const prettier = require("prettier");
 
 const fs = require("fs");
 
-const rgbToHex = (r, g, b) => "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+const rgbToHex = (r, g, b) =>
+  "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 
 /**
  * generate MDX File for Base Colors. base-colors.mdx would be generated.
@@ -154,12 +155,36 @@ function generateSystemColorMdx(colorTokens) {
   let warningColors = [];
   let dangerColors = [];
 
-  primaryColors = compareAndFindTokens(colorTokens, "color-primary", "system-color");
-  highlightColors = compareAndFindTokens(colorTokens, "color-highlight", "system-color");
-  neutralColors = compareAndFindTokens(colorTokens, "color-neutral", "system-color");
-  successColors = compareAndFindTokens(colorTokens, "color-success", "system-color");
-  warningColors = compareAndFindTokens(colorTokens, "color-warning", "system-color");
-  dangerColors = compareAndFindTokens(colorTokens, "color-danger", "system-color");
+  primaryColors = compareAndFindTokens(
+    colorTokens,
+    "color-primary",
+    "system-color"
+  );
+  highlightColors = compareAndFindTokens(
+    colorTokens,
+    "color-highlight",
+    "system-color"
+  );
+  neutralColors = compareAndFindTokens(
+    colorTokens,
+    "color-neutral",
+    "system-color"
+  );
+  successColors = compareAndFindTokens(
+    colorTokens,
+    "color-success",
+    "system-color"
+  );
+  warningColors = compareAndFindTokens(
+    colorTokens,
+    "color-warning",
+    "system-color"
+  );
+  dangerColors = compareAndFindTokens(
+    colorTokens,
+    "color-danger",
+    "system-color"
+  );
 
   mdxFile = `## System colors
 
@@ -361,18 +386,20 @@ getStyles()
       const colorTokens = {};
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       for (const [_id, obj] of Object.entries(response.data.nodes)) {
-        const { r, g, b } = obj.document.fills[0].color;
+        if (obj.document.fills[0].color) {
+          const { r, g, b } = obj.document.fills[0].color;
 
-        const [theme, token] = obj.document.name.split("/");
-        if (!colorTokens[theme]) {
-          colorTokens[theme] = {};
+          const [theme, token] = obj.document.name.split("/");
+          if (!colorTokens[theme]) {
+            colorTokens[theme] = {};
+          }
+
+          colorTokens[theme][token] = rgbToHex(
+            +(r * 255).toFixed(0),
+            +(g * 255).toFixed(0),
+            +(b * 255).toFixed(0)
+          );
         }
-
-        colorTokens[theme][token] = rgbToHex(
-          +(r * 255).toFixed(0),
-          +(g * 255).toFixed(0),
-          +(b * 255).toFixed(0)
-        );
       }
       // generate mdx for base colors
       generateBaseColorMdx(colorTokens);
@@ -393,7 +420,7 @@ function getPreviewColorTable(colorObject) {
   mdx = `
     <tr>
       <td>
-        <p class="color-table-token">$${colorObject.variable}</p>
+        <p class="color-table-token">--${colorObject.variable}</p>
       </td>
       <td>
         <div class="custom-table-flex">
@@ -443,8 +470,13 @@ function compareAndFindTokens(colorTokens, comparisionString, colorCategory) {
           !variable.includes("text");
       }
       if (hasComparision) {
-        if (resultingArr.length > 0 && resultingArr.some((item) => item.variable === variable)) {
-          let index = resultingArr.findIndex((item) => item.variable === variable);
+        if (
+          resultingArr.length > 0 &&
+          resultingArr.some((item) => item.variable === variable)
+        ) {
+          let index = resultingArr.findIndex(
+            (item) => item.variable === variable
+          );
           if (theme === "f-light") {
             resultingArr[index].fLightValue = value;
           } else {

@@ -35,20 +35,22 @@ function generateTokenScss(colorTokens) {
 }
   `;
   for (const [theme, tokens] of Object.entries(colorTokens)) {
-    const tokenEntries = Object.entries(tokens);
+    if (theme === "f-dark" || theme === "f-light") {
+      const tokenEntries = Object.entries(tokens);
 
-    scss += `
+      scss += `
 	[flow-element][theme="${theme}"]{ `;
 
-    for (let [variable, value] of tokenEntries) {
-      variable = `color-${variable}`;
-      scss += `$${variable} : ${value} ;\n`;
-      scss += `--${variable} : #{$${variable}} ;\n`;
-      scss += `--${variable}-hover : #{getHover($${variable})};\n`;
-      scss += `--${variable}-selected : #{getSelected($${variable})};\n`;
-    }
-    scss += `
+      for (let [variable, value] of tokenEntries) {
+        variable = `color-${variable}`;
+        scss += `$${variable} : ${value} ;\n`;
+        scss += `--${variable} : #{$${variable}} ;\n`;
+        scss += `--${variable}-hover : #{getHover($${variable})};\n`;
+        scss += `--${variable}-selected : #{getSelected($${variable})};\n`;
+      }
+      scss += `
 };\n`;
+    }
   }
   //   scss += `}`;
   try {
@@ -79,18 +81,20 @@ getStyles()
       const colorTokens = {};
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       for (const [_id, obj] of Object.entries(response.data.nodes)) {
-        const { r, g, b } = obj.document.fills[0].color;
+        if (obj.document.fills[0].color) {
+          const { r, g, b } = obj.document.fills[0].color;
 
-        const [theme, token] = obj.document.name.split("/");
-        if (!colorTokens[theme]) {
-          colorTokens[theme] = {};
+          const [theme, token] = obj.document.name.split("/");
+          if (!colorTokens[theme]) {
+            colorTokens[theme] = {};
+          }
+
+          colorTokens[theme][token] = rgbToHex(
+            +(r * 255).toFixed(0),
+            +(g * 255).toFixed(0),
+            +(b * 255).toFixed(0)
+          );
         }
-
-        colorTokens[theme][token] = rgbToHex(
-          +(r * 255).toFixed(0),
-          +(g * 255).toFixed(0),
-          +(b * 255).toFixed(0)
-        );
       }
       generateTokenScss(colorTokens);
     });

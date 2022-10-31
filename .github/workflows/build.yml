@@ -24,15 +24,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Install Yarn
-        uses: borales/actions-yarn@v3.0.0
+      - name: Setup Node.js 16.x
+        uses: actions/setup-node@v2
         with:
-          cmd: install
+          node-version: 16.x
 
-      - name: Build storybook
-        uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: build-storybook
+      - name: Install Dependencies and Build
+        run: yarn && yarn build-storybook
 
       - name: Configure AWS credentials from Test account
         uses: aws-actions/configure-aws-credentials@v1

@@ -4,6 +4,15 @@
 
 # Change Log
 
+## [1.0.7] - 2022-10-31
+
+
+### Improvements
+
+- color token file key updated.
+- tokens moved to `.env` file.
+- md file automated for colors stories
+
 ## [1.0.6] - 2022-10-17
 
 ### Bug Fixes

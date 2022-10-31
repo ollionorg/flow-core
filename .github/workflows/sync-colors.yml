@@ -8,7 +8,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
-    name: Sync and Push
+    name: Sync and PR
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -67,3 +67,4 @@ jobs:
             maintainers
           milestone: 1
           draft: false
+          base: main

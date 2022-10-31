@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches: [ "main" ]
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -21,13 +19,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
-
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1
-        with:
-          envkey_FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
-          envkey_FILE_KEY: ${{ secrets.FIGMA_FILE_KEY }}
-          file_name: packages/flow-core/.env
 
       - name: Install Dependencies
         run: yarn

@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+          envkey_FILE_KEY: ${{ secrets.FIGMA_FILE_KEY }}
+          file_name: packages/flow-core/.env
+
+      - name: Install Dependencies
+        run: yarn workspace @cldcvr/flow-core sync-colors && yarn workspace @cldcvr/flow-core sync-md-file
+
+      - name: "Committing Changes" 
+        env:
+          GH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "vikas@cldcvr.com"
+          git add -A
+          git commit -m "Colors synced by GithubActions"

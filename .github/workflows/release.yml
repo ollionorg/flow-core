@@ -22,11 +22,12 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: create env file
-        run: |
-          touch .env
-          echo FIGMA_TOKEN=${{ secrets.FIGMA_TOKEN }} >> .env
-          echo FILE_KEY=${{ secrets.FIGMA_FILE_KEY }} >> .env
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+          FILE_KEY: ${{ secrets.FIGMA_FILE_KEY }}
+          file_name: .env
 
       - name: Install Dependencies
         run: yarn

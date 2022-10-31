@@ -443,16 +443,7 @@ function compareAndFindTokens(colorTokens, comparisionString, colorCategory) {
           !variable.includes("text");
       }
       if (comparision) {
-        if (resultingArr.length === 0) {
-          if (theme === "f-light") {
-            resultingArr.push({ variable: variable, fLightValue: value });
-          } else {
-            resultingArr.push({ variable: variable, fDarkValue: value });
-          }
-        } else if (
-          resultingArr.length > 0 &&
-          resultingArr.some((item) => item.variable === variable)
-        ) {
+        if (resultingArr.length > 0 && resultingArr.some((item) => item.variable === variable)) {
           let index = resultingArr.findIndex((item) => item.variable === variable);
           if (theme === "f-light") {
             resultingArr[index].fLightValue = value;

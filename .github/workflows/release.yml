@@ -22,13 +22,12 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: create env file
-        run: |
-          pwd
-          touch packages/flow-core/.env
-          echo FIGMA_TOKEN=${{ secrets.FIGMA_TOKEN }} >> .env
-          echo FILE_KEY=${{ secrets.FIGMA_FILE_KEY }} >> .env
-          cat packages/flow-core/.env
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+          envkey_FILE_KEY: ${{ secrets.FIGMA_FILE_KEY }}
+          file_name: packages/flow-core/.env
 
       - name: Install Dependencies
         run: yarn

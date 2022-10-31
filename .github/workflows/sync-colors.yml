@@ -8,7 +8,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
-    name: Release
+    name: Sync and Push
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -32,12 +32,19 @@ jobs:
       - name: Syncing colors...
         run: yarn workspace @cldcvr/flow-core sync-colors && yarn workspace @cldcvr/flow-core sync-md-file
 
-      - name: "Committing Changes" 
+      - name: Check for modified files
+        id: git-check
+        run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
+        
+      - name: "Pushing Changes" 
         env:
           GH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        if: steps.git-check.outputs.modified == 'true'
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "vikas@cldcvr.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git add -A
           git commit -m "Colors synced by GithubActions"
+          git push

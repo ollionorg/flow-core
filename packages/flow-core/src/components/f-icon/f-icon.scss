@@ -1,6 +1,10 @@
 @use "sass:map";
+// common mixins imported from this file
 @import "./../../mixins/scss/mixins";
 
+/**
+START : scss maps to hold repsective attribute values
+**/
 $sizes: (
   "x-small": 12px,
   "small": 16px,
@@ -43,17 +47,27 @@ $states: (
     "hover-fill": var(--color-neutral-default-hover),
   ),
 );
+/**
+END : scss maps to hold repsective attribute values
+**/
 
+/**
+:host selects the host element. 
+in this case it is `f-icon`
+**/
 :host {
   display: inline-flex;
   vertical-align: top;
 
+  // applying styles on inner elements
   div.f-icon {
+    // Important :  always include base mixins
     @include base();
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
+    // iterating over states and applying css
     @each $state, $value in $states {
       &[state="#{$state}"] {
         svg {
@@ -63,7 +77,7 @@ $states: (
             fill: map.get($value, "fill");
           }
         }
-
+        // adding clickable behavior
         &[clickable] {
           cursor: pointer;
           &:hover {
@@ -78,6 +92,7 @@ $states: (
         }
       }
     }
+    // Edge case : extend styles if `f-icon` is used on `f-button`
     &.fill-button-surface {
       svg {
         fill: var(--color-surface-default) !important;
@@ -147,11 +162,12 @@ $states: (
         }
       }
     }
-
+    // applying disabled mixins
     &[disabled] {
       @include disabled();
     }
 
+    // applying loading mixins
     &[loading] {
       @include rotate("svg");
     }

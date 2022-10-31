@@ -64,6 +64,7 @@ export class FPictogram extends FElement {
   @property({ reflect: true, type: Boolean })
   clickable?: boolean = false;
 
+  // returns html where source is being as input
   get renderedHtml() {
     const emojiRegex = /\p{Extended_Pictographic}/u;
     if (isValidHttpUrl(this.source)) {
@@ -85,6 +86,7 @@ export class FPictogram extends FElement {
     }
     return `<p class="text-styling">${this.source?.slice(0, 2)}</p>`;
   }
+  // calculating computed source size according to the user input size
   sourceSize() {
     if (this.size === "x-large") {
       return "medium";
@@ -103,6 +105,10 @@ export class FPictogram extends FElement {
     if (hasShimmer) {
       this.classList.add("hasShimmer");
     }
+
+    /**
+     * Final html to render
+     */
     return html`
       <div
         class=${classMap({ "f-pictogram": true, hasShimmer })}
@@ -130,6 +136,9 @@ export class FPictogram extends FElement {
   }
 }
 
+/**
+ * Required for typescript
+ */
 declare global {
   interface HTMLElementTagNameMap {
     "f-pictogram": FPictogram;

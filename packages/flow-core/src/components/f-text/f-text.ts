@@ -35,14 +35,8 @@ export class FText extends FElement {
    * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
    */
   @property({ type: String, reflect: true })
-  state?:
-    | "default"
-    | "secondary"
-    | "subtle"
-    | "primary"
-    | "success"
-    | "danger"
-    | "warning" = "default";
+  state?: "default" | "secondary" | "subtle" | "primary" | "success" | "danger" | "warning" =
+    "default";
 
   /**
    * @attribute Sets the alignment of the text. Can take 3 values: left, center, and right.
@@ -69,6 +63,9 @@ export class FText extends FElement {
   ellipsis?: boolean = false;
 
   render() {
+    /**
+     * set default weight according to variant
+     */
     if (!this.weight) {
       if (this.variant === "heading") {
         this.weight = "bold";
@@ -77,10 +74,16 @@ export class FText extends FElement {
       }
     }
 
+    /**
+     * Final html to render
+     */
     return html`<slot></slot>`;
   }
 }
 
+/**
+ * Required for typescript
+ */
 declare global {
   interface HTMLElementTagNameMap {
     "f-text": FText;

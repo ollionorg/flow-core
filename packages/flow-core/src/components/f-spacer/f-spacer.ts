@@ -1,7 +1,7 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-spacer.scss";
-import { FElement } from "../../mixins/components/f-element/f-element";
+import { FRoot } from "../../mixins/components/f-root/f-root";
 
 export type FSpacerSizeProp =
   | "fill-container"
@@ -15,7 +15,7 @@ export type FSpacerSizeProp =
   | `${number}vw`;
 
 @customElement("f-spacer")
-export class FSpacer extends FElement {
+export class FSpacer extends FRoot {
   /**
    * css loaded from scss file
    */
@@ -31,7 +31,14 @@ export class FSpacer extends FElement {
    * Applying height,width related style, based on size property
    */
   applySize() {
-    const fixedValues = ["fill-container", "x-large", "large", "medium", "small", "x-small"];
+    const fixedValues = [
+      "fill-container",
+      "x-large",
+      "large",
+      "medium",
+      "small",
+      "x-small",
+    ];
     const parentDiv = this?.closest("f-div");
     if (this.size && !fixedValues.includes(this.size)) {
       if (parentDiv?.direction === "row") {

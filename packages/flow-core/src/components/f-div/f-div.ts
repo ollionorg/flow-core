@@ -1,6 +1,6 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { FElement } from "./../../mixins/components/f-element/f-element";
+import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-div.scss";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
@@ -89,7 +89,7 @@ const BORDER_POSITION_CSS = {
  * @summary F-div is used as a container for HTML elements.
  */
 @customElement("f-div")
-export class FDiv extends FElement {
+export class FDiv extends FRoot {
   /**
    * css loaded from scss file
    */

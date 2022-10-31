@@ -10,7 +10,7 @@ const rgbToHex = (r, g, b) =>
   "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 
 /**
- * This will generate /src/shared/_color-tokens.scss file and it is consumed in `f-element.scss`
+ * This will generate /src/shared/_color-tokens.scss file and it is consumed in `f-root.scss`
  * @param {*} colorTokens Json object of theme and color variables
  */
 function generateTokenScss(colorTokens) {

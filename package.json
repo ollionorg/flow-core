@@ -16,7 +16,7 @@
     "build-flow-core": "cd packages/flow-core && yarn compile",
     "build-types-generator": "cd packages/custom-elements-manifest-to-types && yarn build",
     "build-packages": "yarn build-types-generator && yarn build-flow-core",
-    "release": "yarn build-packages && yarn changeset publish",
+    "release": "cp README.md packages/flow-core && yarn build-packages && yarn changeset publish",
     "prepare": "husky install",
     "test": "yarn loki test"
   },

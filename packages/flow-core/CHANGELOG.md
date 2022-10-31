@@ -4,6 +4,13 @@
 
 # Change Log
 
+## [1.0.8] - 2022-10-31
+
+
+### Improvements
+
+- `README.md` added in npm package.
+
 ## [1.0.7] - 2022-10-31
 
 

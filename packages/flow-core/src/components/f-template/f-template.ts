@@ -1,10 +1,10 @@
 import { html, unsafeCSS } from "lit";
 import { customElement } from "lit/decorators.js";
 import eleStyle from "./f-template.scss";
-import { FElement } from "../../mixins/components/f-element/f-element";
+import { FRoot } from "../../mixins/components/f-root/f-root";
 
 @customElement("f-template")
-export class FTemplate extends FElement {
+export class FTemplate extends FRoot {
   /**
    * css loaded from scss file
    */

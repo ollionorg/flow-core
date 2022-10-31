@@ -1,13 +1,13 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-counter.scss";
-import { FElement } from "../../mixins/components/f-element/f-element";
+import { FRoot } from "../../mixins/components/f-root/f-root";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { classMap } from "lit-html/directives/class-map.js";
 
 @customElement("f-counter")
-export class FCounter extends FElement {
+export class FCounter extends FRoot {
   /**
    * css loaded from scss file
    */

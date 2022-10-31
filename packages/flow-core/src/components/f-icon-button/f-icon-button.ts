@@ -1,7 +1,7 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-icon-button.scss";
-import { FElement } from "../../mixins/components/f-element/f-element";
+import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
@@ -17,7 +17,7 @@ export type FIconButtonSize = typeof sizes[number];
 export type FIconButtonState = typeof states[number];
 
 @customElement("f-icon-button")
-export class FIconButton extends FElement {
+export class FIconButton extends FRoot {
   /**
    * css loaded from scss file
    */

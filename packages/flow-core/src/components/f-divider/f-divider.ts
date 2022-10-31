@@ -1,10 +1,10 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-divider.scss";
-import { FElement } from "../../mixins/components/f-element/f-element";
+import { FRoot } from "../../mixins/components/f-root/f-root";
 
 @customElement("f-divider")
-export class FDivider extends FElement {
+export class FDivider extends FRoot {
   /**
    * css loaded from scss file
    */

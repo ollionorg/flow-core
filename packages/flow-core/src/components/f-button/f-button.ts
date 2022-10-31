@@ -1,6 +1,6 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { FElement } from "../../mixins/components/f-element/f-element";
+import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-button.scss";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
@@ -10,7 +10,7 @@ import { classMap } from "lit-html/directives/class-map.js";
  * @summary Buttons allow users to perform an action or to initiate a new function.
  */
 @customElement("f-button")
-export class FButton extends FElement {
+export class FButton extends FRoot {
   /**
    * css loaded from scss file
    */

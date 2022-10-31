@@ -1,13 +1,13 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { FElement } from "./../../mixins/components/f-element/f-element";
+import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-text.scss";
 
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
 @customElement("f-text")
-export class FText extends FElement {
+export class FText extends FRoot {
   /**
    * css loaded from scss file
    */
@@ -35,8 +35,14 @@ export class FText extends FElement {
    * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
    */
   @property({ type: String, reflect: true })
-  state?: "default" | "secondary" | "subtle" | "primary" | "success" | "danger" | "warning" =
-    "default";
+  state?:
+    | "default"
+    | "secondary"
+    | "subtle"
+    | "primary"
+    | "success"
+    | "danger"
+    | "warning" = "default";
 
   /**
    * @attribute Sets the alignment of the text. Can take 3 values: left, center, and right.

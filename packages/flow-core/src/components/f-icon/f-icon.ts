@@ -1,18 +1,18 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-icon.scss";
-import { FElement } from "../../mixins/components/f-element/f-element";
+import { FRoot } from "../../mixins/components/f-root/f-root";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { ConfigUtil } from "./../../modules/config";
 import loader from "../../mixins/svg/loader";
-import notFound from "../../mixins/svg/notFound";
+import notFound from "../../mixins/svg/not-found";
 import { isValidHttpUrl } from "./../../utils";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 // themeSubject will used to listen theme update
 import { themeSubject } from "./../../modules/config";
 
 @customElement("f-icon")
-export class FIcon extends FElement {
+export class FIcon extends FRoot {
   /**
    * css loaded from scss file
    */

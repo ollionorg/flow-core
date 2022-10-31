@@ -1,6 +1,6 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import { FElement } from "./../../mixins/components/f-element/f-element";
+import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-popover.scss";
 import {
   computePosition,
@@ -30,7 +30,7 @@ export type FPopoverPlacement =
 export type FPopoverSize = "stretch" | "large" | "medium" | "small";
 
 @customElement("f-popover")
-export class FPopover extends FElement {
+export class FPopover extends FRoot {
   /**
    * css loaded from scss file
    */

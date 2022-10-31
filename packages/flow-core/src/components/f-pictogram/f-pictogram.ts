@@ -1,7 +1,7 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-pictogram.scss";
-import { FElement } from "../../mixins/components/f-element/f-element";
+import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ConfigUtil } from "./../../modules/config";
 import { isValidHttpUrl } from "./../../utils";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
@@ -16,7 +16,7 @@ export type FPictogramSize = typeof sizes[number];
 export type FPictogramState = typeof states[number];
 
 @customElement("f-pictogram")
-export class FPictogram extends FElement {
+export class FPictogram extends FRoot {
   /**
    * css loaded from scss file
    */
@@ -70,9 +70,9 @@ export class FPictogram extends FElement {
     if (isValidHttpUrl(this.source)) {
       return `<img src="${this.source}" />`;
     } else if (emojiRegex.test(this.source)) {
-      return `<f-icon class="${"f-pictogram-" + this.size + "-emoji"}" source="${
-        this.source
-      }" size="${this.sourceSize()}"></f-icon>`;
+      return `<f-icon class="${
+        "f-pictogram-" + this.size + "-emoji"
+      }" source="${this.source}" size="${this.sourceSize()}"></f-icon>`;
     } else {
       const IconPack = ConfigUtil.getConfig().iconPack;
       if (IconPack) {
@@ -100,7 +100,9 @@ export class FPictogram extends FElement {
   }
 
   render() {
-    const hasShimmer = (getComputedStyle(this, "::before") as any)["animation-name"] === "shimmer";
+    const hasShimmer =
+      (getComputedStyle(this, "::before") as any)["animation-name"] ===
+      "shimmer";
 
     if (hasShimmer) {
       this.classList.add("hasShimmer");

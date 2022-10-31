@@ -9,6 +9,7 @@ const fs = require("fs");
 const rgbToHex = (r, g, b) => "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 
 /**
+ * generate MDX File for Base Colors. base-colors.mdx would be generated.
  * @param {*} colorTokens Json object of theme and color variables
  */
 function generateBaseColorMdx(colorTokens) {
@@ -19,10 +20,10 @@ function generateBaseColorMdx(colorTokens) {
   let iconColors = [];
   let borderColors = [];
 
-  compareAndFindTokens(colorTokens, "surface", surfaceColors);
-  compareAndFindTokens(colorTokens, "text", textColors);
-  compareAndFindTokens(colorTokens, "icon", iconColors);
-  compareAndFindTokens(colorTokens, "border", borderColors);
+  surfaceColors = compareAndFindTokens(colorTokens, "surface", "base-color");
+  textColors = compareAndFindTokens(colorTokens, "text", "base-color");
+  iconColors = compareAndFindTokens(colorTokens, "icon", "base-color");
+  borderColors = compareAndFindTokens(colorTokens, "border", "base-color");
 
   mdxFile = `## Base colors
 
@@ -139,6 +140,10 @@ function generateBaseColorMdx(colorTokens) {
   }
 }
 
+/**
+ * generate MDX File for System Colors. system-colors.mdx would be generated.
+ * @param {*} colorTokens Json object of theme and color variables
+ */
 function generateSystemColorMdx(colorTokens) {
   const tokenFileName = `${__dirname}/../figma/system-colors.mdx`;
 
@@ -149,12 +154,12 @@ function generateSystemColorMdx(colorTokens) {
   let warningColors = [];
   let dangerColors = [];
 
-  compareAndStructureTokens(colorTokens, "color-primary", primaryColors);
-  compareAndStructureTokens(colorTokens, "color-highlight", highlightColors);
-  compareAndStructureTokens(colorTokens, "color-neutral", neutralColors);
-  compareAndStructureTokens(colorTokens, "color-success", successColors);
-  compareAndStructureTokens(colorTokens, "color-warning", warningColors);
-  compareAndStructureTokens(colorTokens, "color-danger", dangerColors);
+  primaryColors = compareAndFindTokens(colorTokens, "color-primary", "system-color");
+  highlightColors = compareAndFindTokens(colorTokens, "color-highlight", "system-color");
+  neutralColors = compareAndFindTokens(colorTokens, "color-neutral", "system-color");
+  successColors = compareAndFindTokens(colorTokens, "color-success", "system-color");
+  warningColors = compareAndFindTokens(colorTokens, "color-warning", "system-color");
+  dangerColors = compareAndFindTokens(colorTokens, "color-danger", "system-color");
 
   mdxFile = `## System colors
 
@@ -369,7 +374,9 @@ getStyles()
           +(b * 255).toFixed(0)
         );
       }
+      // generate mdx for base colors
       generateBaseColorMdx(colorTokens);
+      //genrating mdx for system colors
       generateSystemColorMdx(colorTokens);
     });
     console.log("\n");
@@ -378,30 +385,33 @@ getStyles()
     console.error(error);
   });
 
-// generate table according to colors
-function getPreviewColorTable(item) {
+/**
+ * get structurized Table according to colors.
+ * @param {*} colorObject Json object of color variable name and its values for light and dark theme.
+ */
+function getPreviewColorTable(colorObject) {
   mdx = `
     <tr>
       <td>
-        <p class="color-table-token">$${item.variable}</p>
+        <p class="color-table-token">$${colorObject.variable}</p>
       </td>
       <td>
         <div class="custom-table-flex">
           <div class="width-set">
-            <p>${item.fLightValue ? item.fLightValue : ""}</p>
+            <p>${colorObject.fLightValue ? colorObject.fLightValue : ""}</p>
           </div>
           <div style={{background: "${
-            item.fLightValue
+            colorObject.fLightValue
           }", height: 16, width: 60, borderRadius: 0, marginLeft: 50}}></div>
         </div>
       </td>
       <td>
         <div class="custom-table-flex">
           <div class="width-set">
-            <p>${item.fDarkValue ? item.fDarkValue : ""}</p>
+            <p>${colorObject.fDarkValue ? colorObject.fDarkValue : ""}</p>
           </div>
           <div style={{background: "${
-            item.fDarkValue
+            colorObject.fDarkValue
           }", height: 16, width: 60, borderRadius: 0, marginLeft: 50}}></div>
         </div>
       </td>
@@ -409,54 +419,30 @@ function getPreviewColorTable(item) {
   return mdx;
 }
 
-// structurizatrion for base_colors.mdx
-function compareAndFindTokens(colorTokens, comparisionString, resultingArr) {
-  for (const [theme, tokens] of Object.entries(colorTokens)) {
-    const tokenEntries = Object.entries(tokens);
-
-    for (let [variable, value] of tokenEntries) {
-      if (variable.includes(comparisionString)) {
-        variable = `color-${variable}`;
-        if (resultingArr.length === 0) {
-          if (theme === "f-light") {
-            resultingArr.push({ variable: variable, fLightValue: value });
-          } else {
-            resultingArr.push({ variable: variable, fDarkValue: value });
-          }
-        } else if (
-          resultingArr.length > 0 &&
-          resultingArr.some((item) => item.variable === variable)
-        ) {
-          let index = resultingArr.findIndex((item) => item.variable === variable);
-          if (theme === "f-light") {
-            resultingArr[index].fLightValue = value;
-          } else {
-            resultingArr[index].fDarkValue = value;
-          }
-        } else {
-          if (theme === "f-light") {
-            resultingArr.push({ variable: variable, fLightValue: value });
-          } else {
-            resultingArr.push({ variable: variable, fDarkValue: value });
-          }
-        }
-      }
-    }
-  }
-}
-
-// structurizatrion for system_colors.mdx
-function compareAndStructureTokens(colorTokens, comparisionString, resultingArr) {
+/**
+ * get categorized and structurized array of colorTokens.
+ * @param {*} colorTokens Json object of theme and color variables
+ * @param {*} comparisionString string by which categorization needs to happen
+ * @param {*} colorCategory string to identify whether categorization is for base-color or system-color
+ * @return {Array<[Object]>} the resulting structurized array would be returned
+ */
+function compareAndFindTokens(colorTokens, comparisionString, colorCategory) {
+  let resultingArr = [];
   for (const [theme, tokens] of Object.entries(colorTokens)) {
     const tokenEntries = Object.entries(tokens);
 
     for (let [variable, value] of tokenEntries) {
       variable = `color-${variable}`;
-      if (
-        variable.includes(comparisionString) &&
-        !variable.includes("surface") &&
-        !variable.includes("text")
-      ) {
+      comparision = false;
+      if (colorCategory === "base-color") {
+        comparision = variable.includes(comparisionString);
+      } else {
+        comparision =
+          variable.includes(comparisionString) &&
+          !variable.includes("surface") &&
+          !variable.includes("text");
+      }
+      if (comparision) {
         if (resultingArr.length === 0) {
           if (theme === "f-light") {
             resultingArr.push({ variable: variable, fLightValue: value });
@@ -483,4 +469,5 @@ function compareAndStructureTokens(colorTokens, comparisionString, resultingArr)
       }
     }
   }
+  return resultingArr;
 }

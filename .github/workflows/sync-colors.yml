@@ -1,4 +1,4 @@
-name: Release
+name: Sync colors
 
 on:
   pull_request:
@@ -27,6 +27,9 @@ jobs:
           file_name: packages/flow-core/.env
 
       - name: Install Dependencies
+        run: yarn
+
+      - name: Syncing colors...
         run: yarn workspace @cldcvr/flow-core sync-colors && yarn workspace @cldcvr/flow-core sync-md-file
 
       - name: "Committing Changes" 

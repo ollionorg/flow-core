@@ -1,7 +1,11 @@
 @use "sass:math";
 @use "sass:map";
+// common mixins imported from this file
 @import "./../../mixins/scss/mixins";
 
+/**
+$sizes map will hold all possible values
+**/
 $sizes: (
   "small": (
     "height": 12px,
@@ -22,7 +26,9 @@ $sizes: (
     "padding": 0px 8px,
   ),
 );
-
+/**
+$states map will hold all possible values of different states
+**/
 $states: (
   "primary": (
     "label": var(--color-surface-default),
@@ -50,25 +56,32 @@ $states: (
     "border": var(--color-neutral-subtle),
   ),
 );
-
+/**
+:host selects the host element. 
+in this case it is `f-counter`
+**/
 :host {
   display: inline-flex;
   vertical-align: top;
-
+  // inner element to apply styles on
   div.f-counter {
+    // edge if it is used in `f-button` component
     &.fill-button-surface[state] {
       background-color: var(--color-surface-default);
       color: var(--color-text-default);
     }
+    // used in `f-icon-button` for special case
     &.absolute-counter {
       position: absolute;
     }
+    // Important :  always include base mixins
     @include base();
     display: inline-flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
 
+    // iterating over sizes and creating size specific css
     @each $size, $value in $sizes {
       &[size="#{$size}"] {
         height: map.get($value, "height");
@@ -79,7 +92,7 @@ $states: (
         svg {
           height: map.get($value, "height") - 8px;
         }
-
+        // used in `f-icon-button` for special case
         &.absolute-counter {
           transform: translateX(-50%) translateY(10%);
           &.packed-large {
@@ -104,7 +117,7 @@ $states: (
         }
       }
     }
-
+    // iterating over states and creating state specific css
     @each $state, $value in $states {
       &[state="#{$state}"] {
         --color: #{map.get($value, "label")};
@@ -122,11 +135,11 @@ $states: (
         }
       }
     }
-
+    // including disabled mixins
     &[disabled] {
       @include disabled();
     }
-
+    // including ratate mixins
     &[loading] {
       @include rotate("svg");
     }

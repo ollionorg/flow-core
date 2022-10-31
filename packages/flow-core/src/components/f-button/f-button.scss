@@ -2,6 +2,9 @@
 @use "sass:math";
 @import "./../../mixins/scss/mixins";
 
+/**
+$states map created to hold values of different states
+**/
 $states: (
   "primary": (
     "background": var(--color-primary-default),
@@ -30,6 +33,7 @@ $states: (
   ),
 );
 
+// $sizes will all values related to different sizes
 $sizes: (
   "x-small": (
     "height": 20px,
@@ -60,12 +64,16 @@ $sizes: (
     "loaderSize": 24px,
   ),
 );
-
+/**
+:host selects the host element. 
+in this case it is `f-button`
+**/
 :host {
   height: fit-content;
   display: inline-flex;
   flex: 0 0 auto;
   vertical-align: top;
+  // inner element used to apply all styles
   .f-button {
     @include base();
     cursor: pointer;
@@ -79,6 +87,7 @@ $sizes: (
     vertical-align: top;
     width: fit-content;
 
+    // class to appply shimmer . This class is applied through javascript please check f-button.ts
     &.hasShimmer {
       @include shimmer-self();
     }
@@ -92,10 +101,12 @@ $sizes: (
             $color,
             "background"
           ); // added to match width of outline category
+        // hover changes background
         &:hover {
           background-color: map.get($color, "hover");
           border: 1px solid map.get($color, "hover");
         }
+        // if loading attribute specified then change background, border, color and svg
         &[loading] {
           background-color: map.get($color, "loading");
           border: 1px solid map.get($color, "loading");
@@ -106,6 +117,7 @@ $sizes: (
         }
       }
 
+      // outline category states styles, where backgrounds are transparent
       &[state="#{$state}"][category="outline"] {
         background-color: transparent;
         border: 1px solid map.get($color, "background");
@@ -123,7 +135,7 @@ $sizes: (
           }
         }
       }
-
+      //transparent category with transparent background and border
       &[state="#{$state}"][category="transparent"] {
         background-color: transparent;
         border: 1px solid transparent;
@@ -172,6 +184,7 @@ $sizes: (
       }
     }
 
+    // if variant is curved then apply 4px border radius
     &[variant="curved"] {
       border-radius: 4px;
     }
@@ -181,11 +194,11 @@ $sizes: (
       flex: 1 1 auto;
       width: 100%;
     }
-
+    // disabled button will use `disabled()` mixins
     &[disabled] {
       @include disabled();
     }
-
+    // loading use `rotate` mixins
     &[loading] {
       @include rotate("svg");
       pointer-events: none;
@@ -203,6 +216,7 @@ $sizes: (
   }
 }
 
+// applies styles to only f-button element.
 f-button {
   &[variant="block"] {
     display: flex;

@@ -67,6 +67,106 @@ in this case it is `f-icon`
     align-items: center;
     justify-content: center;
 
+    //fill-color different due to inherit state of the component to inherit color according to parent div state
+    // For Success state
+    &.inherit-success {
+      svg {
+        fill: var(--color-success-text);
+        stroke: none;
+        *[fill^="white"] {
+          fill: var(--color-success-text);
+        }
+      }
+      // adding clickable behavior
+      &[clickable] {
+        cursor: pointer;
+        &:hover {
+          svg {
+            fill: var(--color-success-text-hover);
+            stroke: none;
+            *[fill^="white"] {
+              fill: var(--color-success-text-hover);
+            }
+          }
+        }
+      }
+    }
+
+    //fill-color different due to inherit state of the component to inherit color according to parent div state
+    // For warning state
+    &.inherit-warning {
+      svg {
+        fill: var(--color-warning-text);
+        stroke: none;
+        *[fill^="white"] {
+          fill: var(--color-warning-text);
+        }
+      }
+      // adding clickable behavior
+      &[clickable] {
+        cursor: pointer;
+        &:hover {
+          svg {
+            fill: var(--color-warning-text-hover);
+            stroke: none;
+            *[fill^="white"] {
+              fill: var(--color-warning-text-hover);
+            }
+          }
+        }
+      }
+    }
+
+    //fill-color different due to inherit state of the component to inherit color according to parent div state
+    // For danger state
+    &.inherit-danger {
+      svg {
+        fill: var(--color-danger-text);
+        stroke: none;
+        *[fill^="white"] {
+          fill: var(--color-danger-text);
+        }
+      }
+      // adding clickable behavior
+      &[clickable] {
+        cursor: pointer;
+        &:hover {
+          svg {
+            fill: var(--color-danger-text-hover);
+            stroke: none;
+            *[fill^="white"] {
+              fill: var(--color-danger-text-hover);
+            }
+          }
+        }
+      }
+    }
+
+    //fill-color different due to inherit state of the component to inherit color according to parent div state
+    // For primary state
+    &.inherit-primary {
+      svg {
+        fill: var(--color-primary-text);
+        stroke: none;
+        *[fill^="white"] {
+          fill: var(--color-primary-text);
+        }
+      }
+      // adding clickable behavior
+      &[clickable] {
+        cursor: pointer;
+        &:hover {
+          svg {
+            fill: var(--color-primary-text-hover);
+            stroke: none;
+            *[fill^="white"] {
+              fill: var(--color-primary-text-hover);
+            }
+          }
+        }
+      }
+    }
+
     // iterating over states and applying css
     @each $state, $value in $states {
       &[state="#{$state}"] {

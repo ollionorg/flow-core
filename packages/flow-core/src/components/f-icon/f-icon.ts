@@ -10,6 +10,7 @@ import { isValidHttpUrl } from "./../../utils";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 // themeSubject will used to listen theme update
 import { themeSubject } from "./../../modules/config";
+import { FDiv } from "../f-div/f-div";
 
 @customElement("f-icon")
 export class FIcon extends FRoot {
@@ -131,28 +132,10 @@ export class FIcon extends FRoot {
     });
   }
 
-  /**
-   * styling and applying class according to inherit state
-   */
-  inheritState() {
-    const parentDiv = this?.closest("f-div");
-    const stateList = ["success", "warning", "danger", "primary"];
-    if (this.state === "inherit") {
-      if (parentDiv?.state && stateList.includes(parentDiv?.state)) {
-        this.className = `inherit-${parentDiv?.state}`;
-      } else {
-        this.state = "default";
-      }
-    } else {
-      this.className = "";
-    }
-  }
-
   render() {
     // validating properties
     this.validateProperties();
     // if state prop is inherit, this would inherit color properties of its latest parent f-div.
-    this.inheritState();
 
     /**
      * Final html to render

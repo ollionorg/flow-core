@@ -47,7 +47,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
       },
       state: {
         control: "select",
-        options: ["primary", "neutral", "success", "warning", "danger"],
+        options: ["primary", "neutral", "success", "warning", "danger", "inherit"],
       },
       variant: {
         control: "select",
@@ -87,19 +87,21 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
     }}
   >
     {(args) =>
-      html`<f-button
-        .label=${args.label}
-        .category=${args.category}
-        .size=${args.size}
-        .state=${args.state}
-        .variant=${args.variant}
-        icon-left=${args["icon-left"]}
-        icon-right=${args["icon-right"]}
-        .counter=${args.counter}
-        .loading=${args.loading}
-        .disabled=${args.disabled}
-        .label-wrap=${args["label-wrap"]}
-      ></f-button>`
+      html` <f-div padding="none">
+        <f-button
+          .label=${args.label}
+          .category=${args.category}
+          .size=${args.size}
+          .state=${args.state}
+          .variant=${args.variant}
+          icon-left=${args["icon-left"]}
+          icon-right=${args["icon-right"]}
+          .counter=${args.counter}
+          .loading=${args.loading}
+          .disabled=${args.disabled}
+          .label-wrap=${args["label-wrap"]}
+        ></f-button
+      ></f-div>`
     }
   </Story>
 </Canvas>

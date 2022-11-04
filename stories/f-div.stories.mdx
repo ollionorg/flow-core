@@ -158,7 +158,6 @@ f-div is used as a container for HTML elements.
           .padding=${args.padding}
           direction="row"
           .gap=${args.gap}
-          state="subtle"
           .overflow=${args.overflow}
           .variant=${args.variant}
           .direction=${args.direction}
@@ -178,13 +177,23 @@ f-div is used as a container for HTML elements.
             .selected=${args.selected}
             padding="large"
           >
-            <f-div state="inherit" padding="large" height="hug-content">
-              <f-text variant="para" size="large" weight="regular"
-                >Child f-div with
-                <br />
-                <br />
-                height: ${args.height} width: ${args.width}
-              </f-text>
+            <f-div padding="large" height="hug-content" .border=${args.border} .state=${args.state}>
+              <f-div
+                padding="large"
+                height="hug-content"
+                .border=${args.border}
+                state="inherit"
+                gap="medium"
+              >
+                <f-text variant="para" size="large" weight="regular" state="inherit"
+                  >Child f-div with
+                  <br />
+                  <br />
+                  height: ${args.height} width: ${args.width}
+                </f-text>
+                <f-counter label="888" size="medium" state="inherit"></f-counter>
+                <f-icon state="inherit" source="i-plus"></f-icon>
+              </f-div>
             </f-div>
           </f-div>
           <f-div

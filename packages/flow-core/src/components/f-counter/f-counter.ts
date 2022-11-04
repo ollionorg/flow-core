@@ -28,7 +28,7 @@ export class FCounter extends FRoot {
    * @attribute The state of a counter helps in indicating the degree of emphasis of the parent component. The counter component inherits the state from the parent component. By default it is subtle.
    */
   @property({ type: String })
-  state?: "primary" | "success" | "warning" | "danger" | "neutral" = "neutral";
+  state?: "primary" | "success" | "warning" | "danger" | "neutral" | "inherit" = "neutral";
 
   /**
    * @attribute Loader icon replaces the content of the counter .

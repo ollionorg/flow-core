@@ -103,7 +103,7 @@ export class FDiv extends FRoot {
   /**
    * @attribute state property defines the background color of a f-div. It can take only surface colors defined in the library.
    */
-  @property({ type: String, reflect: true })
+  @property({ reflect: true, type: String })
   state?:
     | "subtle"
     | "default"
@@ -258,19 +258,27 @@ export class FDiv extends FRoot {
   /**
    * styling and applying class according to inherit state
    */
-  inheritState() {
-    const parentDiv = this?.closest("f-div");
-    const stateList = ["success", "warning", "danger", "primary"];
-    if (this.state === "inherit") {
-      if (parentDiv?.state && stateList.includes(parentDiv?.state)) {
-        this.className = `inherit-${parentDiv?.state}`;
-      } else {
-        this.state = "transparent";
-      }
-    } else {
-      this.className = "";
-    }
-  }
+  // inheritState() {
+  //   const parentDiv = this.parentElement as FDiv;
+  //   const stateList = ["success", "warning", "danger", "primary"];
+  //   console.log(this);
+  //   if (parentDiv) {
+  //     if (this.state === "inherit") {
+  //       if (!stateList.includes(parentDiv?.dataset.stateInherit ?? "")) {
+  //         if (parentDiv?.state && stateList.includes(parentDiv?.state)) {
+  //           this.dataset.stateInherit = parentDiv?.state;
+  //         } else {
+  //           this.state = "transparent";
+  //         }
+  //       } else {
+  //         this.dataset.stateInherit = parentDiv.dataset.stateInherit;
+  //       }
+  //     } else {
+  //       this.removeAttribute("data-state-inherit");
+  //     }
+  //   }
+  // }
+
   render() {
     /**
      * START :  apply inline styles based on attribute values
@@ -278,7 +286,7 @@ export class FDiv extends FRoot {
     this.applyBorder();
     this.applyPadding();
     this.applySize();
-    this.inheritState();
+    // this.inheritState();
     /**
      * END :  apply inline styles based on attribute values
      */

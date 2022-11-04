@@ -69,23 +69,6 @@ export class FText extends FRoot {
   @property({ reflect: true, type: Boolean })
   ellipsis?: boolean = false;
 
-  /**
-   * styling and applying class according to inherit state
-   */
-  inheritState() {
-    const parentDiv = this?.closest("f-div");
-    const stateList = ["success", "warning", "danger", "primary"];
-    if (this.state === "inherit") {
-      if (parentDiv?.state && stateList.includes(parentDiv?.state)) {
-        this.className = `inherit-${parentDiv?.state}`;
-      } else {
-        this.state = "default";
-      }
-    } else {
-      this.className = "";
-    }
-  }
-
   render() {
     /**
      * set default weight according to variant
@@ -97,8 +80,6 @@ export class FText extends FRoot {
         this.weight = "regular";
       }
     }
-
-    this.inheritState();
 
     /**
      * Final html to render

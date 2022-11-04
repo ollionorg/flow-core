@@ -3,7 +3,7 @@
   "tags": [
     {
       "name": "f-button",
-      "description": "Attributes:\n\n  * `label` {`string`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `icon-right` {`string | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `label-wrap` {`boolean | undefined`} - \n\nProperties:\n\n  * `label` {`string`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `iconRight` {`string | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `labelWrap` {`boolean | undefined`} - \n\n  * `counterSize` {`\"large\" | \"medium\" | \"small\" | undefined`} - compute counter size based on button size\n\n  * `required` {`string[]`} - mention required fields here for generating vue types\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Attributes:\n\n  * `label` {`string`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `icon-right` {`string | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `label-wrap` {`boolean | undefined`} - \n\nProperties:\n\n  * `label` {`string`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `iconRight` {`string | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `labelWrap` {`boolean | undefined`} - \n\n  * `counterSize` {`\"large\" | \"medium\" | \"small\" | undefined`} - compute counter size based on button size\n\n  * `required` {`string[]`} - mention required fields here for generating vue types\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "label",
@@ -44,7 +44,7 @@
         },
         {
           "name": "state",
-          "description": "`state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\nProperty: state\n\nDefault: primary",
+          "description": "`state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | undefined`} - \n\nProperty: state\n\nDefault: primary",
           "values": [
             {
               "name": "primary"
@@ -60,6 +60,9 @@
             },
             {
               "name": "danger"
+            },
+            {
+              "name": "inherit"
             }
           ]
         },
@@ -112,7 +115,7 @@
     },
     {
       "name": "f-counter",
-      "description": "Attributes:\n\n  * `label` {`number`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `label` {`number`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `required` {`string[]`} - mention required fields here\n\n  * `computedLabel` {`string | number`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Attributes:\n\n  * `label` {`number`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `label` {`number`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `required` {`string[]`} - mention required fields here\n\n  * `computedLabel` {`string | number`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "label",
@@ -135,7 +138,7 @@
         },
         {
           "name": "state",
-          "description": "`state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\nProperty: state\n\nDefault: neutral",
+          "description": "`state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | undefined`} - \n\nProperty: state\n\nDefault: neutral",
           "values": [
             {
               "name": "primary"
@@ -151,6 +154,9 @@
             },
             {
               "name": "danger"
+            },
+            {
+              "name": "inherit"
             }
           ]
         },
@@ -168,7 +174,7 @@
     },
     {
       "name": "f-div",
-      "description": "Attributes:\n\n  * `variant` {`\"curved\" | \"block\" | undefined`} - \n\n  * `direction` {`\"row\" | \"column\" | undefined`} - \n\n  * `state` {`\"transparent\" | \"primary\" | \"success\" | \"warning\" | \"danger\" | \"subtle\" | \"default\" | \"secondary\" | \"tertiary\" | \"inherit\" | undefined`} - \n\n  * `border` {`FDivBorderProp | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | \"auto\" | \"x-large\" | \"none\" | undefined`} - \n\n  * `padding` {`FDivPaddingProp | undefined`} - \n\n  * `align` {`\"top-left\" | \"top-center\" | \"top-right\" | \"middle-left\" | \"middle-center\" | \"middle-right\" | \"bottom-left\" | \"bottom-center\" | \"bottom-right\" | undefined`} - \n\n  * `width` {`FDivWidthProp | undefined`} - \n\n  * `height` {`FDivHeightProp | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`\"skeleton\" | \"loader\" | undefined`} - \n\n  * `clickable` {`boolean | undefined`} - \n\n  * `overflow` {`\"wrap\" | \"scroll\" | \"hidden\" | undefined`} - \n\n  * `selected` {`\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined`} - \n\n  * `sticky` {`\"bottom\" | \"top\" | \"left\" | \"right\" | \"none\" | undefined`} - \n\nProperties:\n\n  * `variant` {`\"curved\" | \"block\" | undefined`} - \n\n  * `direction` {`\"row\" | \"column\" | undefined`} - \n\n  * `state` {`\"transparent\" | \"primary\" | \"success\" | \"warning\" | \"danger\" | \"subtle\" | \"default\" | \"secondary\" | \"tertiary\" | \"inherit\" | undefined`} - \n\n  * `border` {`FDivBorderProp | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | \"auto\" | \"x-large\" | \"none\" | undefined`} - \n\n  * `padding` {`FDivPaddingProp | undefined`} - \n\n  * `align` {`\"top-left\" | \"top-center\" | \"top-right\" | \"middle-left\" | \"middle-center\" | \"middle-right\" | \"bottom-left\" | \"bottom-center\" | \"bottom-right\" | undefined`} - \n\n  * `width` {`FDivWidthProp | undefined`} - \n\n  * `height` {`FDivHeightProp | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`\"skeleton\" | \"loader\" | undefined`} - \n\n  * `clickable` {`boolean | undefined`} - \n\n  * `overflow` {`\"wrap\" | \"scroll\" | \"hidden\" | undefined`} - \n\n  * `selected` {`\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined`} - \n\n  * `sticky` {`\"bottom\" | \"top\" | \"left\" | \"right\" | \"none\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Attributes:\n\n  * `variant` {`\"curved\" | \"block\" | undefined`} - \n\n  * `direction` {`\"row\" | \"column\" | undefined`} - \n\n  * `state` {`\"transparent\" | \"primary\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | \"subtle\" | \"default\" | \"secondary\" | \"tertiary\" | undefined`} - \n\n  * `border` {`FDivBorderProp | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | \"auto\" | \"x-large\" | \"none\" | undefined`} - \n\n  * `padding` {`FDivPaddingProp | undefined`} - \n\n  * `align` {`\"top-left\" | \"top-center\" | \"top-right\" | \"middle-left\" | \"middle-center\" | \"middle-right\" | \"bottom-left\" | \"bottom-center\" | \"bottom-right\" | undefined`} - \n\n  * `width` {`FDivWidthProp | undefined`} - \n\n  * `height` {`FDivHeightProp | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`\"skeleton\" | \"loader\" | undefined`} - \n\n  * `clickable` {`boolean | undefined`} - \n\n  * `overflow` {`\"wrap\" | \"scroll\" | \"hidden\" | undefined`} - \n\n  * `selected` {`\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined`} - \n\n  * `sticky` {`\"bottom\" | \"top\" | \"left\" | \"right\" | \"none\" | undefined`} - \n\nProperties:\n\n  * `variant` {`\"curved\" | \"block\" | undefined`} - \n\n  * `direction` {`\"row\" | \"column\" | undefined`} - \n\n  * `state` {`\"transparent\" | \"primary\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | \"subtle\" | \"default\" | \"secondary\" | \"tertiary\" | undefined`} - \n\n  * `border` {`FDivBorderProp | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | \"auto\" | \"x-large\" | \"none\" | undefined`} - \n\n  * `padding` {`FDivPaddingProp | undefined`} - \n\n  * `align` {`\"top-left\" | \"top-center\" | \"top-right\" | \"middle-left\" | \"middle-center\" | \"middle-right\" | \"bottom-left\" | \"bottom-center\" | \"bottom-right\" | undefined`} - \n\n  * `width` {`FDivWidthProp | undefined`} - \n\n  * `height` {`FDivHeightProp | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`\"skeleton\" | \"loader\" | undefined`} - \n\n  * `clickable` {`boolean | undefined`} - \n\n  * `overflow` {`\"wrap\" | \"scroll\" | \"hidden\" | undefined`} - \n\n  * `selected` {`\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined`} - \n\n  * `sticky` {`\"bottom\" | \"top\" | \"left\" | \"right\" | \"none\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "variant",
@@ -196,7 +202,7 @@
         },
         {
           "name": "state",
-          "description": "`state` {`\"transparent\" | \"primary\" | \"success\" | \"warning\" | \"danger\" | \"subtle\" | \"default\" | \"secondary\" | \"tertiary\" | \"inherit\" | undefined`} - \n\nProperty: state\n\nDefault: transparent",
+          "description": "`state` {`\"transparent\" | \"primary\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | \"subtle\" | \"default\" | \"secondary\" | \"tertiary\" | undefined`} - \n\nProperty: state\n\nDefault: transparent",
           "values": [
             {
               "name": "transparent"
@@ -214,6 +220,9 @@
               "name": "danger"
             },
             {
+              "name": "inherit"
+            },
+            {
               "name": "subtle"
             },
             {
@@ -224,9 +233,6 @@
             },
             {
               "name": "tertiary"
-            },
-            {
-              "name": "inherit"
             }
           ]
         },
@@ -4993,7 +4999,7 @@
     },
     {
       "name": "f-icon-button",
-      "description": "Attributes:\n\n  * `icon` {`string`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `type` {`\"fill\" | \"outline\" | \"transparent\" | \"packed\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `icon` {`string`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `type` {`\"fill\" | \"outline\" | \"transparent\" | \"packed\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `counterSize` {`\"large\" | \"medium\" | \"small\" | undefined`} - compute counter size based on button size\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Attributes:\n\n  * `icon` {`string`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `type` {`\"fill\" | \"outline\" | \"transparent\" | \"packed\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `icon` {`string`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `type` {`\"fill\" | \"outline\" | \"transparent\" | \"packed\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `counterSize` {`\"large\" | \"medium\" | \"small\" | undefined`} - compute counter size based on button size\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "icon",
@@ -5052,7 +5058,7 @@
         },
         {
           "name": "state",
-          "description": "`state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\nProperty: state\n\nDefault: primary",
+          "description": "`state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | undefined`} - \n\nProperty: state\n\nDefault: primary",
           "values": [
             {
               "name": "primary"
@@ -5068,6 +5074,9 @@
             },
             {
               "name": "danger"
+            },
+            {
+              "name": "inherit"
             }
           ]
         },
@@ -5090,7 +5099,7 @@
     },
     {
       "name": "f-icon",
-      "description": "Attributes:\n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | \"x-large\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"subtle\" | \"default\" | \"secondary\" | \"inherit\" | undefined`} - \n\n  * `source` {`string`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `clickable` {`boolean | undefined`} - \n\nProperties:\n\n  * `_source` {`string`} - \n\n  * `isURLSource` {`boolean`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | \"x-large\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"subtle\" | \"default\" | \"secondary\" | \"inherit\" | undefined`} - \n\n  * `source` {`string`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `clickable` {`boolean | undefined`} - \n\n  * `required` {`string[]`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Attributes:\n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | \"x-large\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | \"subtle\" | \"default\" | \"secondary\" | undefined`} - \n\n  * `source` {`string`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `clickable` {`boolean | undefined`} - \n\nProperties:\n\n  * `_source` {`string`} - \n\n  * `isURLSource` {`boolean`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | \"x-large\" | undefined`} - \n\n  * `state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | \"subtle\" | \"default\" | \"secondary\" | undefined`} - \n\n  * `source` {`string`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `clickable` {`boolean | undefined`} - \n\n  * `required` {`string[]`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "size",
@@ -5115,7 +5124,7 @@
         },
         {
           "name": "state",
-          "description": "`state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"subtle\" | \"default\" | \"secondary\" | \"inherit\" | undefined`} - \n\nProperty: state\n\nDefault: default",
+          "description": "`state` {`\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | \"subtle\" | \"default\" | \"secondary\" | undefined`} - \n\nProperty: state\n\nDefault: default",
           "values": [
             {
               "name": "primary"
@@ -5133,6 +5142,9 @@
               "name": "danger"
             },
             {
+              "name": "inherit"
+            },
+            {
               "name": "subtle"
             },
             {
@@ -5140,9 +5152,6 @@
             },
             {
               "name": "secondary"
-            },
-            {
-              "name": "inherit"
             }
           ]
         },
@@ -5169,7 +5178,7 @@
     },
     {
       "name": "f-pictogram",
-      "description": "Attributes:\n\n  * `variant` {`\"circle\" | \"square\" | \"hexagon\" | \"squircle\" | undefined`} - \n\n  * `source` {`string`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-large\" | undefined`} - \n\n  * `state` {`\"primary\" | \"success\" | \"warning\" | \"danger\" | \"default\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `clickable` {`boolean | undefined`} - \n\nProperties:\n\n  * `variant` {`\"circle\" | \"square\" | \"hexagon\" | \"squircle\" | undefined`} - \n\n  * `source` {`string`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-large\" | undefined`} - \n\n  * `state` {`\"primary\" | \"success\" | \"warning\" | \"danger\" | \"default\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `clickable` {`boolean | undefined`} - \n\n  * `renderedHtml` {`string`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Attributes:\n\n  * `variant` {`\"circle\" | \"square\" | \"hexagon\" | \"squircle\" | undefined`} - \n\n  * `source` {`string`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-large\" | undefined`} - \n\n  * `state` {`\"primary\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | \"default\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `clickable` {`boolean | undefined`} - \n\nProperties:\n\n  * `variant` {`\"circle\" | \"square\" | \"hexagon\" | \"squircle\" | undefined`} - \n\n  * `source` {`string`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-large\" | undefined`} - \n\n  * `state` {`\"primary\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | \"default\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `clickable` {`boolean | undefined`} - \n\n  * `renderedHtml` {`string`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "variant",
@@ -5213,7 +5222,7 @@
         },
         {
           "name": "state",
-          "description": "`state` {`\"primary\" | \"success\" | \"warning\" | \"danger\" | \"default\" | undefined`} - \n\nProperty: state\n\nDefault: default",
+          "description": "`state` {`\"primary\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | \"default\" | undefined`} - \n\nProperty: state\n\nDefault: default",
           "values": [
             {
               "name": "primary"
@@ -5226,6 +5235,9 @@
             },
             {
               "name": "danger"
+            },
+            {
+              "name": "inherit"
             },
             {
               "name": "default"
@@ -5377,7 +5389,7 @@
     },
     {
       "name": "f-text",
-      "description": "Attributes:\n\n  * `variant` {`\"code\" | \"heading\" | \"para\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | \"x-large\" | undefined`} - \n\n  * `weight` {`\"medium\" | \"bold\" | \"regular\" | undefined`} - \n\n  * `state` {`\"primary\" | \"success\" | \"warning\" | \"danger\" | \"subtle\" | \"default\" | \"secondary\" | \"inherit\" | undefined`} - \n\n  * `align` {`\"left\" | \"right\" | \"center\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `ellipsis` {`boolean | undefined`} - \n\nProperties:\n\n  * `variant` {`\"code\" | \"heading\" | \"para\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | \"x-large\" | undefined`} - \n\n  * `weight` {`\"medium\" | \"bold\" | \"regular\" | undefined`} - \n\n  * `state` {`\"primary\" | \"success\" | \"warning\" | \"danger\" | \"subtle\" | \"default\" | \"secondary\" | \"inherit\" | undefined`} - \n\n  * `align` {`\"left\" | \"right\" | \"center\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `ellipsis` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Attributes:\n\n  * `variant` {`\"code\" | \"heading\" | \"para\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | \"x-large\" | undefined`} - \n\n  * `weight` {`\"medium\" | \"bold\" | \"regular\" | undefined`} - \n\n  * `state` {`\"primary\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | \"subtle\" | \"default\" | \"secondary\" | undefined`} - \n\n  * `align` {`\"left\" | \"right\" | \"center\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `ellipsis` {`boolean | undefined`} - \n\nProperties:\n\n  * `variant` {`\"code\" | \"heading\" | \"para\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | \"x-large\" | undefined`} - \n\n  * `weight` {`\"medium\" | \"bold\" | \"regular\" | undefined`} - \n\n  * `state` {`\"primary\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | \"subtle\" | \"default\" | \"secondary\" | undefined`} - \n\n  * `align` {`\"left\" | \"right\" | \"center\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `ellipsis` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "variant",
@@ -5432,7 +5444,7 @@
         },
         {
           "name": "state",
-          "description": "`state` {`\"primary\" | \"success\" | \"warning\" | \"danger\" | \"subtle\" | \"default\" | \"secondary\" | \"inherit\" | undefined`} - \n\nProperty: state\n\nDefault: default",
+          "description": "`state` {`\"primary\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | \"subtle\" | \"default\" | \"secondary\" | undefined`} - \n\nProperty: state\n\nDefault: default",
           "values": [
             {
               "name": "primary"
@@ -5447,6 +5459,9 @@
               "name": "danger"
             },
             {
+              "name": "inherit"
+            },
+            {
               "name": "subtle"
             },
             {
@@ -5454,9 +5469,6 @@
             },
             {
               "name": "secondary"
-            },
-            {
-              "name": "inherit"
             }
           ]
         },

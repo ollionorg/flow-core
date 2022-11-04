@@ -100,3 +100,72 @@
     visibility: hidden;
   }
 }
+
+@mixin inheirt-parent($state) {
+  @if $state== "danger" {
+    --color-inherit-background: var(--color-danger-surface);
+    --color-inherit-text: var(--color-danger-text);
+    --color-inherit-counter-background: var(--color-danger-text);
+    --color-inherit-background-hover: var(--color-danger-surface-hover);
+    --color-inherit-background-selected: var(--color-danger-surface-selected);
+    --color-inherit-background-border: var(--color-danger-text);
+    --color-inherit-icon: var(--color-danger-text);
+    --color-inherit-icon-hover: var(--color-danger-text-hover);
+    --color-inherit-pictogram: var(--color-danger-default);
+    --color-inherit-button: var(--color-danger-text);
+    --color-inherit-button-hover: var(--color-danger-text-hover);
+    --color-primary-button-loader: var(--color-danger-surface);
+  } @else if $state== "success" {
+    --color-inherit-background: var(--color-success-surface);
+    --color-inherit-text: var(--color-success-text);
+    --color-inherit-counter-background: var(--color-success-text);
+    --color-inherit-background-hover: var(--color-success-surface-hover);
+    --color-inherit-background-selected: var(--color-success-surface-selected);
+    --color-inherit-background-border: var(--color-success-text);
+    --color-inherit-icon: var(--color-success-text);
+    --color-inherit-icon-hover: var(--color-success-text-hover);
+    --color-inherit-pictogram: var(--color-success-default);
+    --color-inherit-button: var(--color-success-text);
+    --color-inherit-button-hover: var(--color-success-text-hover);
+    --color-primary-button-loader: var(--color-success-surface);
+  } @else if $state== "warning" {
+    --color-inherit-background: var(--color-warning-surface);
+    --color-inherit-text: var(--color-warning-text);
+    --color-inherit-counter-background: var(--color-warning-text);
+    --color-inherit-background-hover: var(--color-warning-surface-hover);
+    --color-inherit-background-selected: var(--color-warning-surface-selected);
+    --color-inherit-background-border: var(--color-warning-text);
+    --color-inherit-icon: var(--color-warning-text);
+    --color-inherit-icon-hover: var(--color-warning-text-hover);
+    --color-inherit-pictogram: var(--color-warning-default);
+    --color-inherit-button: var(--color-warning-text);
+    --color-inherit-button-hover: var(--color-warning-text-hover);
+    --color-primary-button-loader: var(--color-warning-surface);
+  } @else if $state== "primary" {
+    --color-inherit-background: var(--color-primary-surface);
+    --color-inherit-text: var(--color-primary-text);
+    --color-inherit-counter-background: var(--color-primary-text);
+    --color-inherit-icon: var(--color-primary-text);
+    --color-inherit-icon-hover: var(--color-primary-text-hover);
+    --color-inherit-background-hover: var(--color-primary-surface-hover);
+    --color-inherit-background-selected: var(--color-primary-surface-selected);
+    --color-inherit-background-border: var(--color-primary-text);
+    --color-inherit-pictogram: var(--color-primary-default);
+    --color-inherit-button: var(--color-primary-text);
+    --color-inherit-button-hover: var(--color-primary-text-hover);
+    --color-primary-button-loader: var(--color-primary-surface);
+  } @else {
+    --color-inherit-background: "transparent";
+    --color-inherit-text: var(--color-text-default);
+    --color-inherit-counter-background: var(--color-neutral-default);
+    --color-inherit-icon: var(--color-icon-default);
+    --color-inherit-icon-hover: var(--color-icon-default-hover);
+    --color-inherit-background-hover: var(--color-surface-subtle-hover);
+    --color-inherit-background-selected: var(--color-surface-subtle-selected);
+    --color-inherit-background-border: var(--color-primary-default);
+    --color-inherit-pictogram: var(--color-neutral-subtle);
+    --color-inherit-button: var(--color-primary-default);
+    --color-inherit-button-hover: var(--color-primary-default-hover);
+    --color-primary-button-loader: var(--color-primary-surface);
+  }
+}

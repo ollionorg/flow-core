@@ -10,7 +10,6 @@ import { isValidHttpUrl } from "./../../utils";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 // themeSubject will used to listen theme update
 import { themeSubject } from "./../../modules/config";
-import { FDiv } from "../f-div/f-div";
 
 @customElement("f-icon")
 export class FIcon extends FRoot {

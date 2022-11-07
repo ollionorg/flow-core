@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.1.0] - 2022-11-07
+
+### Bug Fixes
+- `f-icon-button` inner icon were not updating when state change.
 ## [1.0.9] - 2022-11-04
 
 ### Features

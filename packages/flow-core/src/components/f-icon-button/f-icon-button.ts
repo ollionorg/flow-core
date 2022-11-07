@@ -1,15 +1,24 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, query } from "lit/decorators.js";
 import eleStyle from "./f-icon-button.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
+import { FIcon } from "../f-icon/f-icon";
+import { FCounter } from "../f-counter/f-counter";
 
 const variants = ["round", "curved", "block"] as const;
 const types = ["fill", "outline", "transparent", "packed"] as const;
 const sizes = ["large", "medium", "small", "x-small"] as const;
-const states = ["primary", "danger", "warning", "success", "neutral", "inherit"] as const;
+const states = [
+  "primary",
+  "danger",
+  "warning",
+  "success",
+  "neutral",
+  "inherit",
+] as const;
 
 export type FIconButtonVariant = typeof variants[number];
 export type FIconButtonType = typeof types[number];
@@ -69,6 +78,19 @@ export class FIconButton extends FRoot {
    */
   @property({ reflect: true, type: Boolean })
   disabled?: boolean = false;
+
+  /**
+   * icon element reference
+   */
+  @query("f-icon")
+  iconElement!: FIcon;
+
+  /**
+   * icon element reference
+   */
+  @query("f-counter")
+  counterElement?: FCounter;
+
   /**
    * compute counter size based on button size
    */
@@ -89,7 +111,9 @@ export class FIconButton extends FRoot {
   }
 
   render() {
-    const hasShimmer = (getComputedStyle(this, "::before") as any)["animation-name"] === "shimmer";
+    const hasShimmer =
+      (getComputedStyle(this, "::before") as any)["animation-name"] ===
+      "shimmer";
     const iconClasses = {
       "fill-button-surface": this.type === "fill" && this.variant !== "block",
     };
@@ -134,6 +158,14 @@ export class FIconButton extends FRoot {
       ></f-icon>
       ${counter}
     </button>`;
+  }
+
+  updated() {
+    /**
+     * Force update child element
+     */
+    this.iconElement.requestUpdate();
+    this.counterElement?.requestUpdate();
   }
 }
 

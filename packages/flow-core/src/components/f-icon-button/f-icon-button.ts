@@ -9,7 +9,7 @@ import loader from "../../mixins/svg/loader";
 const variants = ["round", "curved", "block"] as const;
 const types = ["fill", "outline", "transparent", "packed"] as const;
 const sizes = ["large", "medium", "small", "x-small"] as const;
-const states = ["primary", "danger", "warning", "success", "neutral"] as const;
+const states = ["primary", "danger", "warning", "success", "neutral", "inherit"] as const;
 
 export type FIconButtonVariant = typeof variants[number];
 export type FIconButtonType = typeof types[number];
@@ -89,9 +89,7 @@ export class FIconButton extends FRoot {
   }
 
   render() {
-    const hasShimmer =
-      (getComputedStyle(this, "::before") as any)["animation-name"] ===
-      "shimmer";
+    const hasShimmer = (getComputedStyle(this, "::before") as any)["animation-name"] === "shimmer";
     const iconClasses = {
       "fill-button-surface": this.type === "fill" && this.variant !== "block",
     };

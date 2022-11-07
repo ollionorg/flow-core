@@ -59,6 +59,11 @@ $states: (
     "hover": var(--color-danger-default-hover),
     "loading": var(--color-danger-surface),
   ),
+  "inherit": (
+    "background": var(--color-inherit-button),
+    "hover": var(--color-inherit-button-hover),
+    "loading": var(--color-inherit-button-loader),
+  ),
 );
 /**
 END : scss maps to hold repsective attribute values
@@ -126,12 +131,7 @@ in this case it is `f-icon-button`
     @each $state, $color in $states {
       &[state="#{$state}"][type="fill"] {
         background-color: map.get($color, "background");
-        border: 1px
-          solid
-          map.get(
-            $color,
-            "background"
-          ); // added to match width of outline category
+        border: 1px solid map.get($color, "background"); // added to match width of outline category
         &:hover {
           background-color: map.get($color, "hover");
           border: 1px solid map.get($color, "hover");
@@ -148,12 +148,7 @@ in this case it is `f-icon-button`
       }
       &[state="#{$state}"][type="outline"] {
         background-color: transparent;
-        border: 1px
-          solid
-          map.get(
-            $color,
-            "background"
-          ); // added to match width of outline category
+        border: 1px solid map.get($color, "background"); // added to match width of outline category
         &:hover {
           background-color: transparent;
           border: 1px solid map.get($color, "hover");
@@ -170,9 +165,7 @@ in this case it is `f-icon-button`
       &[state="#{$state}"][type="packed"],
       &[state="#{$state}"][variant="block"] {
         background-color: transparent;
-        border: 1px
-          solid
-          transparent; // added to match width of outline category
+        border: 1px solid transparent; // added to match width of outline category
         &:hover {
           background-color: transparent;
           border: 1px solid transparent;

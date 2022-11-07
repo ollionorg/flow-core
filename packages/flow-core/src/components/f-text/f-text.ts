@@ -42,7 +42,8 @@ export class FText extends FRoot {
     | "primary"
     | "success"
     | "danger"
-    | "warning" = "default";
+    | "warning"
+    | "inherit" = "default";
 
   /**
    * @attribute Sets the alignment of the text. Can take 3 values: left, center, and right.

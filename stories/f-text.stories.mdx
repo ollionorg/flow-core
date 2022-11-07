@@ -38,7 +38,16 @@ Text component includes Headings, titles, body texts and links.
       },
       state: {
         control: "select",
-        options: ["default", "secondary", "subtle", "primary", "success", "warning", "danger"],
+        options: [
+          "default",
+          "secondary",
+          "subtle",
+          "primary",
+          "success",
+          "warning",
+          "danger",
+          "inherit",
+        ],
       },
       align: {
         control: "radio",
@@ -68,15 +77,17 @@ Text component includes Headings, titles, body texts and links.
     }}
   >
     {(args) => html`
-      <f-text
-        .variant=${args.variant}
-        .size=${args.size}
-        .state=${args.state}
-        .align=${args.align}
-        .loading=${args.loading}
-        .disabled=${args.disabled}
-        .ellipsis=${args.ellipsis}
-        >This is ${args.variant} with ${args.size} and ${args.state} state. Alignment is ${args.align}</f-text
+      <f-div padding="none">
+        <f-text
+          .variant=${args.variant}
+          .size=${args.size}
+          .state=${args.state}
+          .align=${args.align}
+          .loading=${args.loading}
+          .disabled=${args.disabled}
+          .ellipsis=${args.ellipsis}
+          >This is ${args.variant} with ${args.size} and ${args.state} state. Alignment is ${args.align}</f-text
+        ></f-div
       >
     `}
   </Story>

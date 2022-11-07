@@ -49,6 +49,7 @@ f-div is used as a container for HTML elements.
           "success",
           "warning",
           "danger",
+          "inherit",
         ],
       },
       border: {
@@ -157,7 +158,6 @@ f-div is used as a container for HTML elements.
           .padding=${args.padding}
           direction="row"
           .gap=${args.gap}
-          state="subtle"
           .overflow=${args.overflow}
           .variant=${args.variant}
           .direction=${args.direction}
@@ -172,18 +172,47 @@ f-div is used as a container for HTML elements.
             .variant=${args.variant}
             .width=${args.width}
             .height=${args.height}
-            padding="none"
-            state="secondary"
+            state="success"
             .sticky=${args.sticky}
             .selected=${args.selected}
+            padding="large"
           >
-            <f-div padding="large" height="hug-content">
-              <f-text variant="para" size="large" weight="regular"
-                >Child f-div with
-                <br />
-                <br />
-                height: ${args.height} width: ${args.width}
+            <f-div
+              padding="large"
+              height="hug-content"
+              .border=${args.border}
+              .state=${args.state}
+              direction="column"
+              gap="medium"
+            >
+              <f-text variant="para" size="large" weight="regular" state="inherit"
+                >Dynamic state f-div -> ${args.state} state
               </f-text>
+              ${args.state === "inherit"
+                ? html` <f-text variant="para" size="large" weight="regular" state="inherit"
+                    >Inherited "success" state from its parent f-div
+                  </f-text>`
+                : null}
+              <f-div
+                padding="large"
+                height="hug-content"
+                .border=${args.border}
+                state="inherit"
+                gap="medium"
+              >
+                <f-text variant="para" size="small" weight="regular" state="inherit">
+                  This f-div even have state="inherit" so <br /><br />its state is even derived from
+                  its parent f-div ${args.state} state. <br /><br />
+                  <br />
+                  <br />
+                  Child f-div with
+                  <br />
+                  <br />
+                  height: ${args.height} width: ${args.width}
+                </f-text>
+                <f-counter label="888" size="medium" state="inherit"></f-counter>
+                <f-icon state="inherit" source="i-plus"></f-icon>
+              </f-div>
             </f-div>
           </f-div>
           <f-div

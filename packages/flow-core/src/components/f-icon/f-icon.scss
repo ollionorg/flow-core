@@ -46,7 +46,12 @@ $states: (
     "fill": var(--color-neutral-default),
     "hover-fill": var(--color-neutral-default-hover),
   ),
+  "inherit": (
+    "fill": var(--color-inherit-icon),
+    "hover-fill": var(--color-inherit-icon-hover),
+  ),
 );
+
 /**
 END : scss maps to hold repsective attribute values
 **/
@@ -92,6 +97,7 @@ in this case it is `f-icon`
         }
       }
     }
+
     // Edge case : extend styles if `f-icon` is used on `f-button`
     &.fill-button-surface {
       svg {

@@ -9,7 +9,7 @@ import { classMap } from "lit-html/directives/class-map.js";
 
 const variants = ["circle", "square", "hexagon", "squircle"] as const;
 const sizes = ["x-large", "large", "medium", "small"] as const;
-const states = ["primary", "danger", "warning", "success", "default"] as const;
+const states = ["primary", "danger", "warning", "success", "default", "inherit"] as const;
 
 export type FPictogramVariant = typeof variants[number];
 export type FPictogramSize = typeof sizes[number];
@@ -70,9 +70,9 @@ export class FPictogram extends FRoot {
     if (isValidHttpUrl(this.source)) {
       return `<img src="${this.source}" />`;
     } else if (emojiRegex.test(this.source)) {
-      return `<f-icon class="${
-        "f-pictogram-" + this.size + "-emoji"
-      }" source="${this.source}" size="${this.sourceSize()}"></f-icon>`;
+      return `<f-icon class="${"f-pictogram-" + this.size + "-emoji"}" source="${
+        this.source
+      }" size="${this.sourceSize()}"></f-icon>`;
     } else {
       const IconPack = ConfigUtil.getConfig().iconPack;
       if (IconPack) {
@@ -100,9 +100,7 @@ export class FPictogram extends FRoot {
   }
 
   render() {
-    const hasShimmer =
-      (getComputedStyle(this, "::before") as any)["animation-name"] ===
-      "shimmer";
+    const hasShimmer = (getComputedStyle(this, "::before") as any)["animation-name"] === "shimmer";
 
     if (hasShimmer) {
       this.classList.add("hasShimmer");

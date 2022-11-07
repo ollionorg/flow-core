@@ -38,7 +38,7 @@ export class FButton extends FRoot {
    * @attribute The states on buttons are to indicate various degrees of emphasis of the action.
    */
   @property({ reflect: true, type: String })
-  state?: "primary" | "neutral" | "success" | "warning" | "danger" = "primary";
+  state?: "primary" | "neutral" | "success" | "warning" | "danger" | "inherit" = "primary";
 
   /**
    * @attribute variant of button.
@@ -112,9 +112,7 @@ export class FButton extends FRoot {
     /**
      * checks if host element's `:before` has shimmer by accessing  computedstyles
      */
-    const hasShimmer =
-      (getComputedStyle(this, "::before") as any)["animation-name"] ===
-      "shimmer";
+    const hasShimmer = (getComputedStyle(this, "::before") as any)["animation-name"] === "shimmer";
 
     /**
      * if hasShimmer true then add class

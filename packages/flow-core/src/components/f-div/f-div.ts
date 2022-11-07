@@ -9,13 +9,7 @@ export type FDivBorderWidth = "small" | "medium" | "large";
 export type FDivBorderStyle = "solid" | "dashed" | "dotted";
 export type FDivBorderColor = "default" | "secondary" | "subtle";
 export type FDivBorderPosition = "bottom" | "top" | "left" | "right" | "around";
-export type FDivPadding =
-  | "x-large"
-  | "large"
-  | "medium"
-  | "small"
-  | "x-small"
-  | "none";
+export type FDivPadding = "x-large" | "large" | "medium" | "small" | "x-small" | "none";
 
 export type FDivBorderProp =
   | FDivBorderWidth
@@ -109,7 +103,7 @@ export class FDiv extends FRoot {
   /**
    * @attribute state property defines the background color of a f-div. It can take only surface colors defined in the library.
    */
-  @property({ type: String, reflect: true })
+  @property({ reflect: true, type: String })
   state?:
     | "subtle"
     | "default"
@@ -119,7 +113,8 @@ export class FDiv extends FRoot {
     | "warning"
     | "danger"
     | "primary"
-    | "transparent" = "transparent";
+    | "transparent"
+    | "inherit" = "transparent";
 
   /**
    * @attribute Border property enables a border for f-div.  You can combine border properties to achieve a desired result.
@@ -134,8 +129,7 @@ export class FDiv extends FRoot {
    * @attribute Gap defines the space between the items of a f-div
    */
   @property({ type: String, reflect: true })
-  gap?: "auto" | "x-large" | "large" | "medium" | "small" | "x-small" | "none" =
-    "none";
+  gap?: "auto" | "x-large" | "large" | "medium" | "small" | "x-small" | "none" = "none";
 
   /**
    * @attribute Padding defines extra space across the elements inside a f-div.
@@ -200,8 +194,7 @@ export class FDiv extends FRoot {
    * @attribute Sets the f-div to a selected state. Select between border, background, or notch based on your use case.
    */
   @property({ reflect: true, type: String })
-  selected?: "none" | "background" | "border" | "notch-right" | "notch-left" =
-    "none";
+  selected?: "none" | "background" | "border" | "notch-right" | "notch-left" = "none";
 
   /**
    * @attribute Sticky property defines a f-div’s position based on the scroll position of the container
@@ -214,18 +207,11 @@ export class FDiv extends FRoot {
    */
   applyBorder() {
     if (this.border) {
-      const [borderWidth, borderStyle, borderColor, borderPosition] =
-        this.border.split(" ") || [];
+      const [borderWidth, borderStyle, borderColor, borderPosition] = this.border.split(" ") || [];
       const meta = {
-        width:
-          BORDER_WIDTH_VALUES[
-            (borderWidth || DEFAULT_BORDER.borderWidth) as FDivBorderWidth
-          ],
+        width: BORDER_WIDTH_VALUES[(borderWidth || DEFAULT_BORDER.borderWidth) as FDivBorderWidth],
         style: borderStyle || DEFAULT_BORDER.borderStyle,
-        color:
-          BORDER_COLOR_VALUES[
-            (borderColor || DEFAULT_BORDER.borderColor) as FDivBorderColor
-          ],
+        color: BORDER_COLOR_VALUES[(borderColor || DEFAULT_BORDER.borderColor) as FDivBorderColor],
         position: borderPosition || DEFAULT_BORDER.borderPosition,
       };
 
@@ -268,6 +254,7 @@ export class FDiv extends FRoot {
       this.style.height = this.height;
     }
   }
+
   render() {
     /**
      * START :  apply inline styles based on attribute values
@@ -282,9 +269,7 @@ export class FDiv extends FRoot {
     /**
      * Final html to render
      */
-    return html`<slot></slot>${this.loading === "loader"
-        ? html`${unsafeSVG(loader)}`
-        : ""}`;
+    return html`<slot></slot>${this.loading === "loader" ? html`${unsafeSVG(loader)}` : ""}`;
   }
 }
 

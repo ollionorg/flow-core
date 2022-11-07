@@ -102,7 +102,9 @@ f-div {
   // iterating over states and appyling respective css
   @each $state, $value in $states {
     &[state="#{$state}"] {
+      // include mixin for inheritance rules
       @include inheirt-parent($state);
+
       background-color: map.get($value, "background");
       color: map.get($value, "color");
       &[clickable] {

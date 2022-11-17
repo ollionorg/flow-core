@@ -102,6 +102,14 @@
             "name": "*",
             "package": "\"./components/f-popover/f-popover\""
           }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-tag/f-tag\""
+          }
         }
       ]
     },
@@ -1165,201 +1173,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-icon-button/f-icon-button.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FIconButton",
-          "members": [
-            {
-              "kind": "field",
-              "name": "icon",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "icon"
-            },
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "FIconButtonVariant | undefined"
-              },
-              "default": "\"round\"",
-              "attribute": "variant"
-            },
-            {
-              "kind": "field",
-              "name": "type",
-              "type": {
-                "text": "FIconButtonType | undefined"
-              },
-              "default": "\"fill\"",
-              "attribute": "type"
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "FIconButtonSize | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size"
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FIconButtonState | undefined"
-              },
-              "default": "\"primary\"",
-              "attribute": "state"
-            },
-            {
-              "kind": "field",
-              "name": "counter",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "counter",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "loading",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "iconElement",
-              "type": {
-                "text": "FIcon"
-              },
-              "description": "icon element reference"
-            },
-            {
-              "kind": "field",
-              "name": "counterElement",
-              "type": {
-                "text": "FCounter | undefined"
-              },
-              "description": "icon element reference"
-            },
-            {
-              "kind": "field",
-              "name": "counterSize",
-              "description": "compute counter size based on button size"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "icon",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "icon"
-            },
-            {
-              "name": "variant",
-              "type": {
-                "text": "FIconButtonVariant | undefined"
-              },
-              "default": "\"round\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "type",
-              "type": {
-                "text": "FIconButtonType | undefined"
-              },
-              "default": "\"fill\"",
-              "fieldName": "type"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "FIconButtonSize | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FIconButtonState | undefined"
-              },
-              "default": "\"primary\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "counter",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "counter"
-            },
-            {
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "loading"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-icon-button",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FIconButton",
-          "declaration": {
-            "name": "FIconButton",
-            "module": "src/components/f-icon-button/f-icon-button.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-icon-button",
-          "declaration": {
-            "name": "FIconButton",
-            "module": "src/components/f-icon-button/f-icon-button.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-pictogram/f-pictogram.ts",
       "declarations": [
         {
@@ -1767,6 +1580,422 @@
           "declaration": {
             "name": "FSpacer",
             "module": "src/components/f-spacer/f-spacer.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-icon-button/f-icon-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FIconButton",
+          "members": [
+            {
+              "kind": "field",
+              "name": "icon",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "icon"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "FIconButtonVariant | undefined"
+              },
+              "default": "\"round\"",
+              "attribute": "variant"
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "FIconButtonType | undefined"
+              },
+              "default": "\"fill\"",
+              "attribute": "type"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "FIconButtonSize | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FIconButtonState | undefined"
+              },
+              "default": "\"primary\"",
+              "attribute": "state"
+            },
+            {
+              "kind": "field",
+              "name": "counter",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "counter",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconElement",
+              "type": {
+                "text": "FIcon"
+              },
+              "description": "icon element reference"
+            },
+            {
+              "kind": "field",
+              "name": "counterElement",
+              "type": {
+                "text": "FCounter | undefined"
+              },
+              "description": "icon element reference"
+            },
+            {
+              "kind": "field",
+              "name": "counterSize",
+              "description": "compute counter size based on button size"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "icon",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "icon"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "FIconButtonVariant | undefined"
+              },
+              "default": "\"round\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "FIconButtonType | undefined"
+              },
+              "default": "\"fill\"",
+              "fieldName": "type"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "FIconButtonSize | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FIconButtonState | undefined"
+              },
+              "default": "\"primary\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "counter",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "counter"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-icon-button",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FIconButton",
+          "declaration": {
+            "name": "FIconButton",
+            "module": "src/components/f-icon-button/f-icon-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-icon-button",
+          "declaration": {
+            "name": "FIconButton",
+            "module": "src/components/f-icon-button/f-icon-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-tag/f-tag.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTag",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "fill",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | undefined"
+              },
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconLeft",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "icon-left",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconRight",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "icon-right",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "counter",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "counter",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconSize",
+              "description": "compute icon size based on tag size"
+            },
+            {
+              "kind": "method",
+              "name": "applyStyles"
+            },
+            {
+              "kind": "method",
+              "name": "validateProperties",
+              "description": "validation for all atrributes"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "label"
+            },
+            {
+              "name": "fill",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "fill"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | undefined"
+              },
+              "fieldName": "state"
+            },
+            {
+              "name": "icon-left",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "iconLeft"
+            },
+            {
+              "name": "icon-right",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "iconRight"
+            },
+            {
+              "name": "counter",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "counter"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "selected"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "summary": "Buttons allow users to perform an action or to initiate a new function.",
+          "tagName": "f-tag",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTag",
+          "declaration": {
+            "name": "FTag",
+            "module": "src/components/f-tag/f-tag.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-tag",
+          "declaration": {
+            "name": "FTag",
+            "module": "src/components/f-tag/f-tag.ts"
           }
         }
       ]

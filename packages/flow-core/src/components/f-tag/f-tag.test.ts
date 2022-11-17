@@ -35,9 +35,7 @@ describe("f-tag", () => {
   });
   it("should render with custom fill prop", async () => {
     const el = await fixture(html` <f-tag label="abc" fill="#fff"></f-tag> `);
-    const descendant = el.shadowRoot!.querySelector(".f-tag")!;
-    console.log(descendant.getAttribute("fill"));
-    // expect(descendant.getAttribute("fill")).to.equal("#fff");
+    expect(el.getAttribute("fill")).to.equal("#fff");
   });
   it("should throw error", async () => {
     try {

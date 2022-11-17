@@ -33,6 +33,12 @@ describe("f-tag", () => {
     const descendant = el.shadowRoot!.querySelector(".f-tag")!;
     expect(descendant.getAttribute("state")).to.equal("neutral");
   });
+  it("should render with custom fill prop", async () => {
+    const el = await fixture(html` <f-tag label="abc" fill="#fff"></f-tag> `);
+    const descendant = el.shadowRoot!.querySelector(".f-tag")!;
+    console.log(descendant.getAttribute("fill"));
+    // expect(descendant.getAttribute("fill")).to.equal("#fff");
+  });
   it("should throw error", async () => {
     try {
       await fixture(html` <f-tag label="label"></f-tag>`);

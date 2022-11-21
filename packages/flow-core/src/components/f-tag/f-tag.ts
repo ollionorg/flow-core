@@ -108,7 +108,7 @@ export class FTag extends FRoot {
    * validation for all atrributes
    */
   validateProperties() {
-    console.log(typeof validateColor);
+    // console.log(typeof !validateColor(this.fill));
     const stateList = ["primary", "neutral", "success", "warning", "danger", "inherit"];
     if (!this.label && !this.iconLeft) {
       throw new Error("f-tag : label OR icon-left is mandatory field");
@@ -116,7 +116,7 @@ export class FTag extends FRoot {
     if (!stateList.includes(this.state ?? "") && !this.fill) {
       throw new Error("f-tag : state OR fill prop is mandatory field");
     }
-    if (!stateList.includes(this.state ?? "") && this.fill && (!validateColor as boolean)) {
+    if (!stateList.includes(this.state ?? "") && this.fill && !validateColor) {
       throw new Error("f-tag : enter correct color-name or hex-color-code");
     }
   }

@@ -41,7 +41,7 @@ describe("f-tag", () => {
     try {
       await fixture(html` <f-tag label="label" fill="greyyy"></f-tag>`);
     } catch (e) {
-      expect((e as Error).message).to.equal("f-tag : enter correct color-name or hex-color-code");
+      expect((e as Error).message).to.equal("f-tag : enter correct color-name or color-code");
     }
   });
   it("should throw error", async () => {

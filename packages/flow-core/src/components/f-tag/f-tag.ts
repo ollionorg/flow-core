@@ -5,7 +5,7 @@ import eleStyle from "./f-tag.scss";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { classMap } from "lit-html/directives/class-map.js";
-import validateColor from "validate-color";
+import { validateHTMLColor } from "validate-color";
 
 /**
  * @summary Buttons allow users to perform an action or to initiate a new function.
@@ -116,7 +116,7 @@ export class FTag extends FRoot {
     if (!stateList.includes(this.state ?? "") && !this.fill) {
       throw new Error("f-tag : state OR fill prop is mandatory field");
     }
-    if (!stateList.includes(this.state ?? "") && this.fill && !validateColor) {
+    if (!stateList.includes(this.state ?? "") && this.fill && !validateHTMLColor(this.fill)) {
       throw new Error("f-tag : enter correct color-name or hex-color-code");
     }
   }

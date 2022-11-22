@@ -35,9 +35,21 @@ Tags allow users to categorize the content. They can be used to add metadata to 
       },
       state: {
         control: "select",
-        options: ["primary", "neutral", "success", "warning", "danger", "inherit", "none"],
+        options: [
+          "primary",
+          "neutral",
+          "success",
+          "warning",
+          "danger",
+          "inherit",
+          "custom, #0000FF",
+          "custom, gray",
+          "custom, #fff",
+          "custom, white",
+          "custom, black",
+          "custom, #607B9F",
+        ],
       },
-      fill: { control: "text" },
       ["icon-left"]: {
         control: "text",
       },
@@ -63,7 +75,6 @@ Tags allow users to categorize the content. They can be used to add metadata to 
       label: "label",
       size: "medium",
       state: "neutral",
-      fill: undefined,
       ["icon-left"]: undefined,
       ["icon-right"]: undefined,
       counter: undefined,
@@ -78,7 +89,6 @@ Tags allow users to categorize the content. They can be used to add metadata to 
           .label=${args.label}
           .size=${args.size}
           .state=${args.state}
-          .fill=${args.fill}
           icon-left=${args["icon-left"]}
           icon-right=${args["icon-right"]}
           .counter=${args.counter}
@@ -176,6 +186,7 @@ whereas a green color connotes success and so on.
       <f-tag size="medium" label="Warning" state="warning"></f-tag>
       <f-tag size="medium" label="Danger" state="danger"></f-tag>
       <f-tag size="medium" label="Inherit from Parent" state="inherit"></f-tag>
+      <f-tag size="medium" label="Custom" state="custom, pink"></f-tag>
     </f-div>`}
   </Story>
 </Canvas>
@@ -217,39 +228,13 @@ whereas a green color connotes success and so on.
       <td>background inherited according to the parent element</td>
       <td></td>
     </tr>
+    <tr>
+      <td>custom</td>
+      <td>user can specify custom color for tag</td>
+      <td></td>
+    </tr>
   </tbody>
 </table>
-
-<br />
-
-## fill
-
-<f-divider></f-divider>
-
-Tag component can have a custom background fill using fill property. It can take a hex value or a theme defined color name.
-
-<br />
-
-<p class="note-section">
-  Note: If state is also defined for a tag then state property is respected first and it will
-  override the fill property.
-</p>
-
-<br />
-
-<Canvas>
-  <Story name="fill">
-    {(args) => html`<f-div gap="large" padding="x-large" direction="column" align="middle-center">
-      <f-tag size="medium" label="Fill Color (pink)" fill="pink"></f-tag>
-      <f-tag
-        size="medium"
-        label="Fill Color (pink) - overridden by state success"
-        fill="pink"
-        state="success"
-      ></f-tag>
-    </f-div>`}
-  </Story>
-</Canvas>
 
 <br />
 

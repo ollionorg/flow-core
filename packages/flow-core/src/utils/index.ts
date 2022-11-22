@@ -1,3 +1,5 @@
 import getThemeStyle from "./get-theme-style";
 import isValidHttpUrl from "./is-valid-http-url";
-export { getThemeStyle, isValidHttpUrl };
+import getTextContrast from "./get-text-contrast";
+import getColourNameToHex from "./get-hex-color";
+export { getThemeStyle, isValidHttpUrl, getTextContrast, getColourNameToHex };

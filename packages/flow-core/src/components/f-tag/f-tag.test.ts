@@ -17,63 +17,49 @@ describe("f-tag", () => {
     expect(el).instanceOf(FTag);
   });
   it("should render label in default slot", async () => {
-    const el = await fixture(html` <f-tag label="abc" state="neutral"></f-tag> `);
+    const el = await fixture(html` <f-tag label="abc"></f-tag> `);
     const descendant = el.shadowRoot!.querySelector(".f-tag")!;
     expect(descendant.textContent?.trim()).to.equal("abc");
   });
   it("should throw error", async () => {
     try {
-      await fixture(html` <f-tag state="neutral"></f-tag>`);
+      await fixture(html` <f-tag></f-tag>`);
     } catch (e) {
       expect((e as Error).message).to.equal("f-tag : label OR icon-left is mandatory field");
     }
   });
-  it("should render neutral state", async () => {
-    const el = await fixture(html` <f-tag label="abc" state="neutral"></f-tag> `);
+  it("should render custom state prop with black color label", async () => {
+    const el = await fixture(html` <f-tag label="abc" state="custom, #fff"></f-tag> `);
     const descendant = el.shadowRoot!.querySelector(".f-tag")!;
-    expect(descendant.getAttribute("state")).to.equal("neutral");
+    const compStyles = window.getComputedStyle(descendant);
+    expect(compStyles.getPropertyValue("color")).to.equal("rgb(0, 0, 0)");
   });
-  it("should render with custom fill prop", async () => {
-    const el = await fixture(html` <f-tag label="abc" fill="#fff"></f-tag> `);
-    expect(el.getAttribute("fill")).to.equal("#fff");
-  });
-  it("should throw error", async () => {
-    try {
-      await fixture(html` <f-tag label="label" fill="greyyy"></f-tag>`);
-    } catch (e) {
-      expect((e as Error).message).to.equal("f-tag : enter correct color-name or color-code");
-    }
-  });
-  it("should throw error", async () => {
-    try {
-      await fixture(html` <f-tag label="label"></f-tag>`);
-    } catch (e) {
-      expect((e as Error).message).to.equal("f-tag : state OR fill prop is mandatory field");
-    }
+  it("should render custom state prop with white color label text", async () => {
+    const el = await fixture(html` <f-tag label="abc" state="custom, #000"></f-tag> `);
+    const descendant = el.shadowRoot!.querySelector(".f-tag")!;
+    const compStyles = window.getComputedStyle(descendant);
+    expect(compStyles.getPropertyValue("color")).to.equal("rgb(255, 255, 255)");
   });
   it("should render with all default properties", async () => {
-    const el = await fixture(html` <f-tag label="abc" state="neutral"></f-tag> `);
+    const el = await fixture(html` <f-tag label="abc"></f-tag> `);
     const descendant = el.shadowRoot!.querySelector(".f-tag")!;
     expect(descendant.getAttribute("size")).to.equal("medium");
+    expect(descendant.getAttribute("state")).to.equal("neutral");
   });
   it("should render icon left", async () => {
-    const el = await fixture(
-      html` <f-tag label="abc" state="neutral" icon-left="i-plus"></f-tag> `
-    );
+    const el = await fixture(html` <f-tag label="abc" icon-left="i-plus"></f-tag> `);
     const descendant = el.shadowRoot!.querySelector(".f-tag")!;
     const icon = descendant.children[0];
     expect(icon).instanceOf(FIcon);
   });
   it("should render icon right", async () => {
-    const el = await fixture(
-      html` <f-tag label="abc" state="neutral" icon-right="i-plus"></f-tag> `
-    );
+    const el = await fixture(html` <f-tag label="abc" icon-right="i-plus"></f-tag> `);
     const descendant = el.shadowRoot!.querySelector(".f-tag")!;
     const icon = descendant.children[0];
     expect(icon).instanceOf(FIcon);
   });
   it("should render counter", async () => {
-    const el = await fixture(html` <f-tag label="abc" state="neutral" counter="88"></f-tag> `);
+    const el = await fixture(html` <f-tag label="abc" counter="88"></f-tag> `);
     const descendant = el.shadowRoot!.querySelector(".f-tag")!;
     const counter = descendant.children[descendant.children.length - 1];
     expect(counter).instanceOf(FCounter);
@@ -81,7 +67,7 @@ describe("f-tag", () => {
     expect(descCounter.textContent?.trim()).equal("88");
   });
   it("should render loader", async () => {
-    const el = await fixture(html` <f-tag label="abc" state="neutral" loading></f-tag> `);
+    const el = await fixture(html` <f-tag label="abc" loading></f-tag> `);
     const descendant = el.shadowRoot!.querySelector(".f-tag")!;
     const loading = descendant.children[0];
     const svg = await fixture(loadingSVG);

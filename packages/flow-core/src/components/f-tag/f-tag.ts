@@ -1,11 +1,13 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-tag.scss";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { classMap } from "lit-html/directives/class-map.js";
 import { validateHTMLColor, validateHTMLColorName } from "validate-color";
+import getTextContrast from "../../utils/get-text-contrast";
+import getColourNameToHex from "../../utils/get-hex-color";
 
 /**
  * @summary Buttons allow users to perform an action or to initiate a new function.
@@ -18,6 +20,12 @@ export class FTag extends FRoot {
   static styles = [unsafeCSS(eleStyle)];
 
   /**
+   * @attribute local state for managing custom fill.
+   */
+  @state()
+  fill = "";
+
+  /**
    * @attribute label property defines the text label on a tag. Label of a tag is always uppercase.
    */
   @property({ type: String })
@@ -26,8 +34,8 @@ export class FTag extends FRoot {
   /**
    * @attribute category of tag
    */
-  @property({ reflect: true, type: String })
-  fill?: string;
+  // @property({ reflect: true, type: String })
+  // fill?: string;
 
   /**
    * @attribute The medium size is the default and recommended option.
@@ -39,7 +47,7 @@ export class FTag extends FRoot {
    * @attribute The states on tags are to indicate various degrees of emphasis of the action.
    */
   @property({ reflect: true, type: String })
-  state?: "primary" | "neutral" | "success" | "warning" | "danger" | "inherit";
+  state?: "primary" | "neutral" | "success" | "warning" | "danger" | "inherit" | string = "neutral";
 
   /**
    * @attribute Icon-left enables an icon on the left of the label of a tag.
@@ -90,7 +98,22 @@ export class FTag extends FRoot {
     }
   }
 
-  // apply inline styles to shadow-dom for custom fill prop
+  /**
+   * compute textColor when custom color of tag is defined.
+   */
+  get textColor() {
+    if (validateHTMLColor(this.fill)) {
+      return getTextContrast(this.fill);
+    }
+    if (validateHTMLColorName(this.fill)) {
+      return getTextContrast(getColourNameToHex(this.fill));
+    }
+    return "inherit";
+  }
+
+  /**
+   * apply inline styles to shadow-dom for custom fill.
+   */
   applyStyles() {
     if (this.fill) {
       if (this.selected) {
@@ -98,7 +121,7 @@ export class FTag extends FRoot {
       } else if (this.loading) {
         return `background-color: ${this.fill}; border: 1px solid ${this.fill}; color: transparent;`;
       } else {
-        return `background: ${this.fill}; border: 1px solid ${this.fill}`;
+        return `background: ${this.fill}; border: 1px solid ${this.fill}; color: ${this.textColor}`;
       }
     }
     return "";
@@ -108,15 +131,11 @@ export class FTag extends FRoot {
    * validation for all atrributes
    */
   validateProperties() {
-    const stateList = ["primary", "neutral", "success", "warning", "danger", "inherit"];
     if (!this.label && !this.iconLeft) {
       throw new Error("f-tag : label OR icon-left is mandatory field");
     }
-    if (!stateList.includes(this.state ?? "") && !this.fill) {
-      throw new Error("f-tag : state OR fill prop is mandatory field");
-    }
     if (
-      !stateList.includes(this.state ?? "") &&
+      this.state?.includes("custom") &&
       this.fill &&
       !validateHTMLColor(this.fill) &&
       !validateHTMLColorName(this.fill)
@@ -125,8 +144,29 @@ export class FTag extends FRoot {
     }
   }
 
+  /**
+   * cropping color name from custom filled state prop.
+   */
+  applyCustomFill() {
+    if (this.state && this.state.includes("custom")) {
+      const croppedValues = this.state.split(",").map(function (value) {
+        return value.trim();
+      });
+      this.fill = croppedValues[1];
+    }
+  }
+
   render() {
+    /**
+     * creating local fill variable out of state prop.
+     */
+    this.applyCustomFill();
+
+    /**
+     * validate
+     */
     this.validateProperties();
+
     /**
      * checks if host element's `:before` has shimmer by accessing  computedstyles
      */

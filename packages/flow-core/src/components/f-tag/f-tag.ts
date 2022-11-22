@@ -10,7 +10,7 @@ import getTextContrast from "../../utils/get-text-contrast";
 import getColourNameToHex from "../../utils/get-hex-color";
 
 /**
- * @summary Buttons allow users to perform an action or to initiate a new function.
+ * @summary Tags allow users to categorize the content. They can be used to add metadata to an element such as category, or property or show a status.
  */
 @customElement("f-tag")
 export class FTag extends FRoot {
@@ -30,12 +30,6 @@ export class FTag extends FRoot {
    */
   @property({ type: String })
   label!: string;
-
-  /**
-   * @attribute category of tag
-   */
-  // @property({ reflect: true, type: String })
-  // fill?: string;
 
   /**
    * @attribute The medium size is the default and recommended option.

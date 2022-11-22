@@ -102,6 +102,70 @@
             "name": "*",
             "package": "\"./components/f-popover/f-popover\""
           }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-tag/f-tag\""
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/utils/get-hex-color.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "getColourNameToHex",
+          "parameters": [
+            {
+              "name": "colour",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "getColourNameToHex",
+            "module": "src/utils/get-hex-color.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/utils/get-text-contrast.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "getTextContrast",
+          "parameters": [
+            {
+              "name": "hexcolor",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "getTextContrast",
+            "module": "src/utils/get-text-contrast.ts"
+          }
         }
       ]
     },
@@ -151,6 +215,22 @@
           "name": "isValidHttpUrl",
           "declaration": {
             "name": "isValidHttpUrl",
+            "module": "src/utils/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getTextContrast",
+          "declaration": {
+            "name": "getTextContrast",
+            "module": "src/utils/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getColourNameToHex",
+          "declaration": {
+            "name": "getColourNameToHex",
             "module": "src/utils/index.ts"
           }
         }
@@ -1767,6 +1847,232 @@
           "declaration": {
             "name": "FSpacer",
             "module": "src/components/f-spacer/f-spacer.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-tag/f-tag.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTag",
+          "members": [
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | string | undefined"
+              },
+              "default": "\"neutral\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconLeft",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "icon-left",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconRight",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "icon-right",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "counter",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "counter",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconSize",
+              "description": "compute icon size based on tag size"
+            },
+            {
+              "kind": "field",
+              "name": "textColor",
+              "description": "compute textColor when custom color of tag is defined."
+            },
+            {
+              "kind": "method",
+              "name": "applyStyles",
+              "description": "apply inline styles to shadow-dom for custom fill."
+            },
+            {
+              "kind": "method",
+              "name": "validateProperties",
+              "description": "validation for all atrributes"
+            },
+            {
+              "kind": "method",
+              "name": "applyCustomFill",
+              "description": "cropping color name from custom filled state prop."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "label"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | string | undefined"
+              },
+              "default": "\"neutral\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "icon-left",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "iconLeft"
+            },
+            {
+              "name": "icon-right",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "iconRight"
+            },
+            {
+              "name": "counter",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "counter"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "selected"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "summary": "Tags allow users to categorize the content. They can be used to add metadata to an element such as category, or property or show a status.",
+          "tagName": "f-tag",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTag",
+          "declaration": {
+            "name": "FTag",
+            "module": "src/components/f-tag/f-tag.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-tag",
+          "declaration": {
+            "name": "FTag",
+            "module": "src/components/f-tag/f-tag.ts"
           }
         }
       ]

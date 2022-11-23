@@ -671,6 +671,99 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-divider/f-divider.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FDivider",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
+              },
+              "default": "\"solid\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "\"default\" | \"secondary\" | \"subtle\" | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
+              },
+              "default": "\"solid\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"default\" | \"secondary\" | \"subtle\" | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-divider",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FDivider",
+          "declaration": {
+            "name": "FDivider",
+            "module": "src/components/f-divider/f-divider.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-divider",
+          "declaration": {
+            "name": "FDivider",
+            "module": "src/components/f-divider/f-divider.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-div/f-div.ts",
       "declarations": [
         {
@@ -986,99 +1079,6 @@
           "declaration": {
             "name": "FDiv",
             "module": "src/components/f-div/f-div.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-divider/f-divider.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FDivider",
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
-              },
-              "default": "\"solid\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "\"default\" | \"secondary\" | \"subtle\" | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
-              },
-              "default": "\"solid\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "\"default\" | \"secondary\" | \"subtle\" | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-divider",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FDivider",
-          "declaration": {
-            "name": "FDivider",
-            "module": "src/components/f-divider/f-divider.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-divider",
-          "declaration": {
-            "name": "FDivider",
-            "module": "src/components/f-divider/f-divider.ts"
           }
         }
       ]
@@ -1890,7 +1890,7 @@
               "kind": "field",
               "name": "state",
               "type": {
-                "text": "\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | string | undefined"
+                "text": "FTagStateProp | undefined"
               },
               "default": "\"neutral\"",
               "attribute": "state",
@@ -1964,6 +1964,11 @@
               "description": "compute textColor when custom color of tag is defined."
             },
             {
+              "kind": "field",
+              "name": "loaderColor",
+              "description": "compute loaderColor when custom color of tag is defined."
+            },
+            {
               "kind": "method",
               "name": "applyStyles",
               "description": "apply inline styles to shadow-dom for custom fill."
@@ -1998,7 +2003,7 @@
             {
               "name": "state",
               "type": {
-                "text": "\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | string | undefined"
+                "text": "FTagStateProp | undefined"
               },
               "default": "\"neutral\"",
               "fieldName": "state"

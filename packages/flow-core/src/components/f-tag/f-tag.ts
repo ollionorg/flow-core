@@ -9,6 +9,15 @@ import { validateHTMLColor, validateHTMLColorName } from "validate-color";
 import getTextContrast from "../../utils/get-text-contrast";
 import getColourNameToHex from "../../utils/get-hex-color";
 
+export type FTagStateProp =
+  | "primary"
+  | "neutral"
+  | "success"
+  | "warning"
+  | "danger"
+  | "inherit"
+  | `custom, ${string}`;
+
 /**
  * @summary Tags allow users to categorize the content. They can be used to add metadata to an element such as category, or property or show a status.
  */
@@ -41,7 +50,7 @@ export class FTag extends FRoot {
    * @attribute The states on tags are to indicate various degrees of emphasis of the action.
    */
   @property({ reflect: true, type: String })
-  state?: "primary" | "neutral" | "success" | "warning" | "danger" | "inherit" | string = "neutral";
+  state?: FTagStateProp = "neutral";
 
   /**
    * @attribute Icon-left enables an icon on the left of the label of a tag.
@@ -96,13 +105,14 @@ export class FTag extends FRoot {
    * compute textColor when custom color of tag is defined.
    */
   get textColor() {
-    if (validateHTMLColor(this.fill)) {
-      return getTextContrast(this.fill);
-    }
-    if (validateHTMLColorName(this.fill)) {
-      return getTextContrast(getColourNameToHex(this.fill));
-    }
-    return "inherit";
+    return getTextContrast(this.fill) === "dark-text" ? "#202a36" : "#fcfcfd";
+  }
+
+  /**
+   * compute loaderColor when custom color of tag is defined.
+   */
+  get loaderColor() {
+    return getTextContrast(this.fill) === "dark-text" ? "#202a36" : "#808080";
   }
 
   /**
@@ -147,6 +157,9 @@ export class FTag extends FRoot {
         return value.trim();
       });
       this.fill = croppedValues[1];
+      if (validateHTMLColorName(this.fill)) {
+        this.fill = getColourNameToHex(this.fill);
+      }
     }
   }
 
@@ -245,7 +258,7 @@ export class FTag extends FRoot {
                 <path
                   class="loader-fill"
                   d="M19.7392 2.82916C18.0239 1.38162 15.937 0.444167 13.7156 0.123279C11.4942 -0.197609 9.22734 0.110935 7.17251 1.01386C5.11768 1.91679 3.35726 3.3779 2.09124 5.23122C0.825214 7.08454 0.104336 9.25577 0.0104934 11.4983L3.28474 11.6353C3.35296 10.0052 3.87697 8.42692 4.79725 7.07973C5.71753 5.73254 6.99719 4.67044 8.49086 4.0141C9.98453 3.35776 11.6323 3.13347 13.2471 3.36673C14.8619 3.59998 16.3788 4.28143 17.6257 5.33365L19.7392 2.82916Z"
-                  fill="${this.textColor === "white" ? "gray" : "black"}"
+                  fill="${this.loaderColor}"
                 ></path>
               </svg>`
             : loader

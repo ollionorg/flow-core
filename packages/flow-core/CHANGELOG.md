@@ -4,6 +4,13 @@
 
 # Change Log
 
+## [1.1.2] - 2022-11-25
+
+### Features
+
+- `f-tag` added proper loader with custom fill prop.
+- `f-icon-button`, `f-icon`, `f-button`, `f-icon-button`, `f-divider`, `f-text`, `f-counter` : added custom fill state prop
+
 ## [1.1.1] - 2022-11-17
 
 ### Features

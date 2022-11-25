@@ -1,10 +1,9 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-div.scss";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
-import getCustomFillColor from "../../utils/get-custom-fill-color";
 
 export type FDivBorderWidth = "small" | "medium" | "large";
 export type FDivBorderStyle = "solid" | "dashed" | "dotted";
@@ -89,12 +88,6 @@ export class FDiv extends FRoot {
    * css loaded from scss file
    */
   static styles = [unsafeCSS(eleStyle)];
-
-  /**
-   * @attribute local state for managing custom fill.
-   */
-  @state()
-  fill = "";
 
   /**
    * @attribute Variants are various representations of a f-div.
@@ -264,15 +257,8 @@ export class FDiv extends FRoot {
 
   render() {
     /**
-     * creating local fill variable out of state prop.
-     */
-    this.fill = getCustomFillColor(this.state ?? "");
-    /**
      * START :  apply inline styles based on attribute values
      */
-    if (this.fill) {
-      this.style.backgroundColor = this.fill;
-    }
     this.applyBorder();
     this.applyPadding();
     this.applySize();

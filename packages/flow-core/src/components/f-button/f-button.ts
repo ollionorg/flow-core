@@ -321,8 +321,8 @@ export class FButton extends FRoot {
     /**
      * Force update child element
      */
-    // this.iconElement.requestUpdate();
-    // this.counterElement?.requestUpdate();
+    this.iconElement?.requestUpdate();
+    this.counterElement?.requestUpdate();
   }
 }
 

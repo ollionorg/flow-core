@@ -127,52 +127,72 @@ in this case it is `f-icon-button`
       }
     }
 
+    &.custom-loader {
+      &[loading] {
+        svg {
+          fill: inherit !important;
+          stroke: none;
+          *[fill^="var(--color-primary-default)"] {
+            fill: inherit !important;
+          }
+        }
+      }
+    }
+    &.custom-hover {
+      &:hover {
+        opacity: 0.9;
+      }
+    }
     // iterating over states and appying respective css
     @each $state, $color in $states {
       &[state="#{$state}"][type="fill"] {
-        background-color: map.get($color, "background");
-        border: 1px solid map.get($color, "background"); // added to match width of outline category
+        background-color: map.get($color, "background") !important;
+        border: 1px
+          solid
+          map.get($color, "background") !important; // added to match width of outline category
         &:hover {
-          background-color: map.get($color, "hover");
-          border: 1px solid map.get($color, "hover");
+          background-color: map.get($color, "hover") !important;
+          border: 1px solid map.get($color, "hover") !important;
         }
 
         &[loading] {
-          background-color: map.get($color, "loading");
-          border: 1px solid map.get($color, "loading");
+          background-color: map.get($color, "loading") !important;
+          border: 1px solid map.get($color, "loading") !important;
 
           svg path.loader-fill {
-            fill: map.get($color, "background");
+            fill: map.get($color, "background") !important;
           }
         }
       }
       &[state="#{$state}"][type="outline"] {
-        background-color: transparent;
-        border: 1px solid map.get($color, "background"); // added to match width of outline category
+        background-color: transparent !important;
+        border: 1px
+          solid
+          map.get($color, "background") !important; // added to match width of outline category
         &:hover {
-          background-color: transparent;
-          border: 1px solid map.get($color, "hover");
+          background-color: transparent !important;
+          border: 1px solid map.get($color, "hover") !important;
         }
         &[loading] {
-          border: 1px solid map.get($color, "background");
+          border: 1px solid map.get($color, "background") !important;
 
           svg path.loader-fill {
-            fill: map.get($color, "background");
+            fill: map.get($color, "background") !important;
           }
         }
       }
       &[state="#{$state}"][type="transparent"],
       &[state="#{$state}"][type="packed"],
       &[state="#{$state}"][variant="block"] {
-        background-color: transparent;
-        border: 1px solid transparent; // added to match width of outline category
+        background-color: transparent !important;
+        border: 1px solid transparent !important; // added to match width of outline category
         &:hover {
-          background-color: transparent;
-          border: 1px solid transparent;
+          background-color: transparent !important;
+          border: 1px solid transparent !important;
         }
         &[loading] {
           svg path.loader-fill {
-            fill: map.get($color, "background");
+            fill: map.get($color, "background") !important;
           }
         }
       }

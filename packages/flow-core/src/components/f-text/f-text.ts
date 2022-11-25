@@ -1,7 +1,21 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-text.scss";
+import getCustomFillColor from "../../utils/get-custom-fill-color";
+import { validateHTMLColor } from "validate-color";
+import { validateHTMLColorName } from "validate-color";
+
+export type FTextStateProp =
+  | "default"
+  | "secondary"
+  | "subtle"
+  | "primary"
+  | "success"
+  | "danger"
+  | "warning"
+  | "inherit"
+  | `custom, ${string}`;
 
 /**
  * @summary Text component includes Headings, titles, body texts and links.
@@ -12,6 +26,12 @@ export class FText extends FRoot {
    * css loaded from scss file
    */
   static styles = [unsafeCSS(eleStyle)];
+
+  /**
+   * @attribute local state for managing custom fill.
+   */
+  @state()
+  fill = "";
 
   /**
    * @attribute Variants of text component are use cases such as Heading, paragraph, and code.
@@ -35,15 +55,7 @@ export class FText extends FRoot {
    * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
    */
   @property({ type: String, reflect: true })
-  state?:
-    | "default"
-    | "secondary"
-    | "subtle"
-    | "primary"
-    | "success"
-    | "danger"
-    | "warning"
-    | "inherit" = "default";
+  state?: FTextStateProp = "default";
 
   /**
    * @attribute Sets the alignment of the text. Can take 3 values: left, center, and right.
@@ -69,10 +81,37 @@ export class FText extends FRoot {
   @property({ reflect: true, type: Boolean })
   ellipsis?: boolean = false;
 
+  /**
+   * validation for all atrributes
+   */
+  validateProperties() {
+    if (
+      this.state?.includes("custom") &&
+      this.fill &&
+      !validateHTMLColor(this.fill) &&
+      !validateHTMLColorName(this.fill)
+    ) {
+      throw new Error("f-text : enter correct color-name or color-code");
+    }
+  }
+
   render() {
+    /**
+     * creating local fill variable out of state prop.
+     */
+    this.fill = getCustomFillColor(this.state ?? "");
+
+    /**
+     * validate
+     */
+    this.validateProperties();
+
     /**
      * set default weight according to variant
      */
+    if (this.fill) {
+      this.style.color = this.fill;
+    }
     if (!this.weight) {
       if (this.variant === "heading") {
         this.weight = "bold";

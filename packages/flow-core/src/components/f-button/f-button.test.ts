@@ -25,9 +25,7 @@ describe("f-button", () => {
     try {
       await fixture(html` <f-button></f-button>`);
     } catch (e) {
-      expect((e as Error).message).to.equal(
-        "f-button : label is mandatory field"
-      );
+      expect((e as Error).message).to.equal("f-button : label is mandatory field");
     }
   });
 
@@ -40,26 +38,33 @@ describe("f-button", () => {
     expect(descendant.getAttribute("category")).to.equal("fill");
   });
 
+  it("should render custom state prop with black color label", async () => {
+    const el = await fixture(html` <f-button label="abc" state="custom, #fff"></f-button> `);
+    const descendant = el.shadowRoot!.querySelector(".f-button")!;
+    const compStyles = window.getComputedStyle(descendant);
+    expect(compStyles.getPropertyValue("color")).to.equal("rgb(32, 42, 54)");
+  });
+  it("should render custom state prop with white color label text", async () => {
+    const el = await fixture(html` <f-button label="abc" state="custom, #000"></f-button> `);
+    const descendant = el.shadowRoot!.querySelector(".f-button")!;
+    const compStyles = window.getComputedStyle(descendant);
+    expect(compStyles.getPropertyValue("color")).to.equal("rgb(252, 252, 253)");
+  });
+
   it("should render icon left", async () => {
-    const el = await fixture(
-      html` <f-button label="abc" icon-left="i-plus"></f-button> `
-    );
+    const el = await fixture(html` <f-button label="abc" icon-left="i-plus"></f-button> `);
     const descendant = el.shadowRoot!.querySelector(".f-button")!;
     const icon = descendant.children[0];
     expect(icon).instanceOf(FIcon);
   });
   it("should render icon right", async () => {
-    const el = await fixture(
-      html` <f-button label="abc" icon-right="i-plus"></f-button> `
-    );
+    const el = await fixture(html` <f-button label="abc" icon-right="i-plus"></f-button> `);
     const descendant = el.shadowRoot!.querySelector(".f-button")!;
     const icon = descendant.children[0];
     expect(icon).instanceOf(FIcon);
   });
   it("should render counter", async () => {
-    const el = await fixture(
-      html` <f-button label="abc" counter="88"></f-button> `
-    );
+    const el = await fixture(html` <f-button label="abc" counter="88"></f-button> `);
     const descendant = el.shadowRoot!.querySelector(".f-button")!;
     const counter = descendant.children[descendant.children.length - 1];
     expect(counter).instanceOf(FCounter);

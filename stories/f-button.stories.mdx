@@ -47,7 +47,20 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
       },
       state: {
         control: "select",
-        options: ["primary", "neutral", "success", "warning", "danger", "inherit"],
+        options: [
+          "primary",
+          "neutral",
+          "success",
+          "warning",
+          "danger",
+          "inherit",
+          "custom, #0000FF",
+          "custom, gray",
+          "custom, #fff",
+          "custom, white",
+          "custom, black",
+          "custom, #607B9F",
+        ],
       },
       variant: {
         control: "select",
@@ -307,6 +320,16 @@ connotes danger, whereas a green color connotes success and so on.
         <f-button category="outline" label="Danger" state="danger"></f-button>
         <f-button category="transparent" label="Danger" state="danger"></f-button>
       </f-div>
+      <f-div padding="none" gap="x-large" state="warning">
+        <f-button category="fill" label="inherit" state="inherit"></f-button>
+        <f-button category="outline" label="inherit" state="inherit"></f-button>
+        <f-button category="transparent" label="inherit" state="inherit"></f-button>
+      </f-div>
+      <f-div padding="none" gap="x-large">
+        <f-button category="fill" label="custom" state="custom, pink"></f-button>
+        <f-button category="outline" label="custom" state="custom, pink"></f-button>
+        <f-button category="transparent" label="custom" state="custom, pink"></f-button>
+      </f-div>
     </f-div>`}
   </Story>
 </Canvas>
@@ -343,6 +366,16 @@ connotes danger, whereas a green color connotes success and so on.
     <tr>
       <td>danger</td>
       <td>Destructive actions, Negative consequences</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>inherit</td>
+      <td>inherit color according to parent f-div</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>custom</td>
+      <td>custom color can be given to the f-button</td>
       <td></td>
     </tr>
   </tbody>

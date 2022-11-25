@@ -1,15 +1,30 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import eleStyle from "./f-icon.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { ConfigUtil } from "./../../modules/config";
+import { classMap } from "lit-html/directives/class-map.js";
 import loader from "../../mixins/svg/loader";
 import notFound from "../../mixins/svg/not-found";
 import { isValidHttpUrl } from "./../../utils";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 // themeSubject will used to listen theme update
 import { themeSubject } from "./../../modules/config";
+import getCustomFillColor from "../../utils/get-custom-fill-color";
+import { validateHTMLColor, validateHTMLColorName } from "validate-color";
+
+export type FIconState =
+  | "default"
+  | "secondary"
+  | "subtle"
+  | "primary"
+  | "success"
+  | "danger"
+  | "warning"
+  | "neutral"
+  | "inherit"
+  | `custom, ${string}`;
 
 @customElement("f-icon")
 export class FIcon extends FRoot {
@@ -17,6 +32,12 @@ export class FIcon extends FRoot {
    * css loaded from scss file
    */
   static styles = [unsafeCSS(eleStyle)];
+
+  /**
+   * @attribute local state for managing custom fill.
+   */
+  @state()
+  fill = "";
 
   private _source!: string;
 
@@ -36,16 +57,7 @@ export class FIcon extends FRoot {
    * @attribute The state of an Icon helps in indicating the degree of emphasis. The Icon component inherits the state from the parent component. By default it is subtle.
    */
   @property({ type: String })
-  state?:
-    | "default"
-    | "secondary"
-    | "subtle"
-    | "primary"
-    | "success"
-    | "danger"
-    | "warning"
-    | "neutral"
-    | "inherit" = "default";
+  state?: FIconState = "default";
 
   /**
    * @attribute Source property defines what will be displayed on the icon. For icon variant It can take the icon name from a library , any inline SVG or any URL for the image. For emoji, it takes emoji as inline text.
@@ -86,7 +98,8 @@ export class FIcon extends FRoot {
           `Icon pack not configured! \n please install \`yarn add @cldcvr/flow-system-icon\` \n Set config as below \n 	
 		\`import IconPack from "@cldcvr/flow-system-icon" \n;
 		import { ConfigUtil } from "@cldcvr/flow-core" \n;
-	   ConfigUtil.setConfig({ iconPack: IconPack });\``
+	 import { getCustomFillColor } from 'src/utils/get-custom-fill-color';
+  ConfigUtil.setConfig({ iconPack: IconPack });\``
         );
       }
     }
@@ -120,6 +133,14 @@ export class FIcon extends FRoot {
     if (!this.source) {
       throw new Error("f-icon : source is mandatory field");
     }
+    if (
+      this.state?.includes("custom") &&
+      this.fill &&
+      !validateHTMLColor(this.fill) &&
+      !validateHTMLColorName(this.fill)
+    ) {
+      throw new Error("f-icon : enter correct color-name or hex-color-code");
+    }
   }
 
   connectedCallback() {
@@ -131,16 +152,45 @@ export class FIcon extends FRoot {
     });
   }
 
+  /**
+   * apply inline styles to shadow-dom for custom fill.
+   */
+  applyStyles() {
+    if (this.fill) {
+      if (this.loading) {
+        return ``;
+      } else {
+        return `fill: ${this.fill}`;
+      }
+    }
+    return "";
+  }
+
   render() {
+    /**
+     * creating local fill variable out of state prop.
+     */
+    this.fill = getCustomFillColor(this.state ?? "");
     // validating properties
     this.validateProperties();
     // if state prop is inherit, this would inherit color properties of its latest parent f-div.
+
+    // classes to apply on inner element
+    const classes: Record<string, boolean> = {
+      "f-icon": true,
+      "custom-state": this.fill ? true : false,
+    };
+    // merging host classes
+    this.classList.forEach((cl) => {
+      classes[cl] = true;
+    });
 
     /**
      * Final html to render
      */
     return html`<div
-      class="f-icon ${this.classList.toString()}"
+      class=${classMap(classes)}
+      style=${this.applyStyles()}
       state=${this.state}
       size=${this.size}
       ?disabled=${this.disabled}

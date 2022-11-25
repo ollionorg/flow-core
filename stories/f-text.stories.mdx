@@ -47,6 +47,12 @@ Text component includes Headings, titles, body texts and links.
           "warning",
           "danger",
           "inherit",
+          "custom, #0000FF",
+          "custom, gray",
+          "custom, #fff",
+          "custom, white",
+          "custom, black",
+          "custom, #607B9F",
         ],
       },
       align: {
@@ -86,7 +92,7 @@ Text component includes Headings, titles, body texts and links.
           .loading=${args.loading}
           .disabled=${args.disabled}
           .ellipsis=${args.ellipsis}
-          >This is ${args.variant} with ${args.size} and ${args.state} state. Alignment is ${args.align}</f-text
+          >This is ${args.variant} with ${args.size} and "${args.state}" state. Alignment is ${args.align}</f-text
         ></f-div
       >
     `}
@@ -322,7 +328,7 @@ connotes danger, whereas a green color connotes success and so on.
 
 <Canvas>
   <Story name="state">
-    {(args) => html`<f-div gap="medium" padding="x-large" direction="column">
+    {(args) => html`<f-div gap="medium" padding="x-large" direction="column" state="primary">
       <f-text variant="para" size="large" weight="medium" state="default"
         >This is a default state. This is a default state.</f-text
       >
@@ -343,6 +349,12 @@ connotes danger, whereas a green color connotes success and so on.
       >
       <f-text variant="para" size="large" weight="medium" state="warning"
         >This is a warning state. This is a warning state.</f-text
+      >
+      <f-text variant="para" size="large" weight="medium" state="inherit"
+        >This is a inherit state. Inherit color from parent f-div.</f-text
+      >
+      <f-text variant="para" size="large" weight="medium" state="custom,pink"
+        >This is a "custom, pink" state. This is a "custom, pink" state.</f-text
       >
     </f-div>`}
   </Story>

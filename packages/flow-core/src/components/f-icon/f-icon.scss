@@ -98,6 +98,48 @@ in this case it is `f-icon`
       }
     }
 
+    &.custom-state {
+      svg {
+        fill: inherit !important;
+        stroke: none;
+        *[fill^="white"] {
+          fill: inherit !important;
+        }
+      }
+      // adding clickable behavior
+      &[clickable] {
+        cursor: pointer;
+        &:hover {
+          svg {
+            opacity: 0.9;
+            *[fill^="white"] {
+              opacity: 0.9;
+            }
+          }
+        }
+      }
+    }
+
+    &.fill-button-surface-dark {
+      svg {
+        fill: #202a36 !important;
+        stroke: none;
+        *[fill^="white"] {
+          fill: #202a36 !important;
+        }
+      }
+    }
+
+    &.fill-button-surface-light {
+      svg {
+        fill: #fcfcfd !important;
+        stroke: none;
+        *[fill^="white"] {
+          fill: #fcfcfd !important;
+        }
+      }
+    }
+
     // Edge case : extend styles if `f-icon` is used on `f-button`
     &.fill-button-surface {
       svg {

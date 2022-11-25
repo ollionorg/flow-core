@@ -90,6 +90,18 @@ in this case it is `f-tag`
       @include shimmer-self();
     }
 
+    &.custom-loader {
+      &[loading] {
+        svg {
+          fill: inherit !important;
+          stroke: none;
+          *[fill^="var(--color-primary-default)"] {
+            fill: inherit !important;
+          }
+        }
+      }
+    }
+
     @each $state, $color in $states {
       &[state="#{$state}"] {
         background-color: map.get($color, "background") !important;

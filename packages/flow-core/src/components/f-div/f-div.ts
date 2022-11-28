@@ -1,9 +1,10 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-div.scss";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
+import getCustomFillColor from "../../utils/get-custom-fill-color";
 
 export type FDivBorderWidth = "small" | "medium" | "large";
 export type FDivBorderStyle = "solid" | "dashed" | "dotted";
@@ -36,6 +37,19 @@ export type FDivHeightProp =
   | `${number}px`
   | `${number}%`
   | `${number}vh`;
+
+export type FDivStateProp =
+  | "subtle"
+  | "default"
+  | "secondary"
+  | "tertiary"
+  | "success"
+  | "warning"
+  | "danger"
+  | "primary"
+  | "transparent"
+  | "inherit"
+  | `custom, ${string}`;
 
 /**
  * START :  constant values required for `f-div`
@@ -90,6 +104,12 @@ export class FDiv extends FRoot {
   static styles = [unsafeCSS(eleStyle)];
 
   /**
+   * @attribute local state for managing custom fill.
+   */
+  @state()
+  fill = "";
+
+  /**
    * @attribute Variants are various representations of a f-div.
    */
   @property({ type: String, reflect: true })
@@ -104,17 +124,7 @@ export class FDiv extends FRoot {
    * @attribute state property defines the background color of a f-div. It can take only surface colors defined in the library.
    */
   @property({ reflect: true, type: String })
-  state?:
-    | "subtle"
-    | "default"
-    | "secondary"
-    | "tertiary"
-    | "success"
-    | "warning"
-    | "danger"
-    | "primary"
-    | "transparent"
-    | "inherit" = "transparent";
+  state?: FDivStateProp = "transparent";
 
   /**
    * @attribute Border property enables a border for f-div.  You can combine border properties to achieve a desired result.
@@ -257,8 +267,19 @@ export class FDiv extends FRoot {
 
   render() {
     /**
+     * creating local fill variable out of state prop.
+     */
+    this.fill = getCustomFillColor(this.state ?? "");
+
+    /**
      * START :  apply inline styles based on attribute values
      */
+
+    if (this.state?.includes("custom") && this.fill) {
+      this.style.backgroundColor = this.fill;
+    } else {
+      this.style.backgroundColor = "";
+    }
     this.applyBorder();
     this.applyPadding();
     this.applySize();

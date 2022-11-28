@@ -81,6 +81,13 @@ $states: (
     "border": var(--color-danger-default),
     "color": var(--color-danger-text),
   ),
+  "custom": (
+    "background": transparent,
+    "hover": var(--color-surface-subtle-hover),
+    "selected": var(--color-surface-subtle-selected),
+    "border": var(--color-primary-default),
+    "color": var(--color-text-default),
+  ),
 );
 /**
 applies styles on f-div
@@ -101,7 +108,7 @@ f-div {
   }
   // iterating over states and appyling respective css
   @each $state, $value in $states {
-    &[state="#{$state}"] {
+    &[state^="#{$state}"] {
       // include mixin for inheritance rules
       @include inheirt-parent($state);
 

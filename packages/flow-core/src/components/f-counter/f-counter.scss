@@ -71,9 +71,17 @@ in this case it is `f-counter`
   // inner element to apply styles on
   div.f-counter {
     // edge if it is used in `f-button` component
+    &.fill-button-surface-dark {
+      background-color: #202a36 !important;
+      color: #fcfcfd !important;
+    }
+    &.fill-button-surface-light {
+      background-color: #fcfcfd !important;
+      color: #202a36 !important;
+    }
     &.fill-button-surface[state] {
-      background-color: var(--color-surface-default);
-      color: var(--color-text-default);
+      background-color: var(--color-surface-default) !important;
+      color: var(--color-text-default) !important;
     }
     // used in `f-icon-button` for special case
     &.absolute-counter {
@@ -122,21 +130,26 @@ in this case it is `f-counter`
         }
       }
     }
+    &.fill-outline-counter {
+      background-color: var(--color-surface-default) !important;
+      color: var(--color-text-default) !important;
+      border: 1px solid var(--color-surface-tertiary) !important;
+    }
     // iterating over states and creating state specific css
     @each $state, $value in $states {
       &[state="#{$state}"] {
         --color: #{map.get($value, "label")};
         --background-color: #{map.get($value, "background")};
-        color: var(--color);
-        background-color: var(--background-color);
+        color: var(--color) !important;
+        background-color: var(--background-color) !important;
         &[loading] {
-          background-color: var(--color-primary-surface);
+          background-color: var(--color-primary-surface) !important;
         }
 
         &.outline-counter {
-          background-color: var(--color-surface-default);
-          color: var(--color-text-default);
-          border: 1px solid map.get($value, "border");
+          background-color: var(--color-surface-default) !important;
+          color: var(--color-text-default) !important;
+          border: 1px solid map.get($value, "border") !important;
         }
       }
     }

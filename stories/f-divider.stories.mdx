@@ -39,7 +39,17 @@ f-divider is a line used to separate the content of a layout.
       },
       state: {
         control: "select",
-        options: ["default", "secondary", "subtle"],
+        options: [
+          "default",
+          "secondary",
+          "subtle",
+          "custom, #0000FF",
+          "custom, gray",
+          "custom, #fff",
+          "custom, white",
+          "custom, black",
+          "custom, #607B9F",
+        ],
       },
     }}
     args={{
@@ -274,6 +284,11 @@ States on buttons are used to communicate purpose and it’s connotation.
         <f-text variant="para" size="large" weight="medium">state="subtle"</f-text>
       </f-div>
       <f-divider size="large" state="subtle"></f-divider>
+      <br />
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">state="custom,black"</f-text>
+      </f-div>
+      <f-divider size="large" state="custom,black"></f-divider>
     </f-div>`}
   </Story>
 </Canvas>
@@ -306,6 +321,11 @@ States on buttons are used to communicate purpose and it’s connotation.
       <td>
         <a>$color-border-subtle</a>
       </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>custom</td>
+      <td>custom color can be given to the f-divider</td>
       <td></td>
     </tr>
   </tbody>

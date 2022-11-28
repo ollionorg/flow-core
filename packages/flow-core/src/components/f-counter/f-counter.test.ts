@@ -50,19 +50,28 @@ describe("f-counter", () => {
   });
 
   it("label for Billions", async () => {
-    const el = await fixture(
-      html` <f-counter label="13404000000"></f-counter> `
-    );
+    const el = await fixture(html` <f-counter label="13404000000"></f-counter> `);
     const descendant = el.shadowRoot!.querySelector(".f-counter")!;
     expect(descendant.textContent?.trim()).to.equal("13B");
   });
 
   it("label for Trillions", async () => {
-    const el = await fixture(
-      html` <f-counter label="16500040000000"></f-counter> `
-    );
+    const el = await fixture(html` <f-counter label="16500040000000"></f-counter> `);
     const descendant = el.shadowRoot!.querySelector(".f-counter")!;
     expect(descendant.textContent?.trim()).to.equal("17T");
+  });
+
+  it("should render custom state prop with black color label", async () => {
+    const el = await fixture(html` <f-counter label="888" state="custom, #fff"></f-counter> `);
+    const descendant = el.shadowRoot!.querySelector(".f-counter")!;
+    const compStyles = window.getComputedStyle(descendant);
+    expect(compStyles.getPropertyValue("color")).to.equal("rgb(32, 42, 54)");
+  });
+  it("should render custom state prop with white color label text", async () => {
+    const el = await fixture(html` <f-counter label="888" state="custom, #000"></f-counter> `);
+    const descendant = el.shadowRoot!.querySelector(".f-counter")!;
+    const compStyles = window.getComputedStyle(descendant);
+    expect(compStyles.getPropertyValue("color")).to.equal("rgb(252, 252, 253)");
   });
 
   it("should render with all default properties", async () => {
@@ -83,9 +92,7 @@ describe("f-counter", () => {
     try {
       await fixture(html` <f-counter></f-counter>`);
     } catch (e) {
-      expect((e as Error).message).to.equal(
-        "f-counter : label is mandatory field"
-      );
+      expect((e as Error).message).to.equal("f-counter : label is mandatory field");
     }
   });
 });

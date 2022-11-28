@@ -35,7 +35,21 @@ Icons are used to provide visual context where written text is not required and 
       },
       state: {
         control: "select",
-        options: ["default", "secondary", "subtle", "primary", "danger", "warning", "inherit"],
+        options: [
+          "default",
+          "secondary",
+          "subtle",
+          "primary",
+          "danger",
+          "warning",
+          "inherit",
+          "custom, #0000FF",
+          "custom, gray",
+          "custom, #fff",
+          "custom, white",
+          "custom, black",
+          "custom, #607B9F",
+        ],
       },
       loading: {
         control: { type: "boolean" },
@@ -308,6 +322,22 @@ States on buttons are used to communicate purpose and it’s connotation.
           <f-icon source="i-plus" size="x-large" state="warning"></f-icon>
         </f-div>
       </f-div>
+                  <f-div padding="large" gap="medium" direction="column" width="hug-content">
+        <f-div height="hug-content" padding="none" align="middle-center">
+          <f-text variant="para" size="large" weight="medium">inherit</f-text>
+        </f-div>
+        <f-div height="hug-content" padding="none" align="middle-center" state="success">
+          <f-icon source="i-plus" size="x-large" state="inhherit"></f-icon>
+        </f-div>
+      </f-div>
+                  <f-div padding="large" gap="medium" direction="column" width="hug-content">
+        <f-div height="hug-content" padding="none" align="middle-center">
+          <f-text variant="para" size="large" weight="medium">custom, pink</f-text>
+        </f-div>
+        <f-div height="hug-content" padding="none" align="middle-center">
+          <f-icon source="i-plus" size="x-large" state="custom,pink"></f-icon>
+        </f-div>
+      </f-div>
     </f-div>`}
   </Story>
 </Canvas>
@@ -361,6 +391,16 @@ States on buttons are used to communicate purpose and it’s connotation.
       <td>
         <a>$color-warning-default</a>
       </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>inherit</td>
+      <td>inherit color according to parent f-div</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>custom</td>
+      <td>custom color can be given to the f-icon</td>
       <td></td>
     </tr>
   </tbody>

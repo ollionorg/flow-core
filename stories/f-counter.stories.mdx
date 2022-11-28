@@ -37,7 +37,20 @@ A counter is a visual indicator for numeric values.
       },
       state: {
         control: "select",
-        options: ["neutral", "primary", "success", "warning", "danger", "inherit"],
+        options: [
+          "neutral",
+          "primary",
+          "success",
+          "warning",
+          "danger",
+          "inherit",
+          "custom, #0000FF",
+          "custom, gray",
+          "custom, #fff",
+          "custom, white",
+          "custom, black",
+          "custom, #607B9F",
+        ],
       },
       loading: {
         control: { type: "boolean" },
@@ -298,6 +311,22 @@ connotes danger, whereas a green color connotes success and so on.
       <f-counter label="888888" size="large" state="warning"></f-counter>
         </f-div>
       </f-div>
+       <f-div padding="large" gap="medium" direction="column" width="hug-content">
+        <f-div height="hug-content" padding="none" align="middle-center">
+          <f-text variant="para" size="large" weight="medium">inherit</f-text>
+        </f-div>
+                      <f-div height="hug-content" padding="none" align="middle-center" state="warning">
+      <f-counter label="888888" size="large" state="inherit"></f-counter>
+        </f-div>
+        </f-div>
+                  <f-div padding="large" gap="medium" direction="column" width="hug-content">
+        <f-div height="hug-content" padding="none" align="middle-center">
+          <f-text variant="para" size="large" weight="medium">custom</f-text>
+        </f-div>
+        <f-div height="hug-content" padding="none" align="middle-center">
+      <f-counter label="888888" size="large" state="custom,pink"></f-counter>
+        </f-div>
+      </f-div>
     </f-div>`}
   </Story>
 </Canvas>
@@ -336,6 +365,16 @@ connotes danger, whereas a green color connotes success and so on.
       <td></td>
       <td></td>
     </tr>
+    <tr>
+      <td>inherit</td>
+      <td>inherit the color according to parent f-div state</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>custom</td>
+      <td>For adding custom color to counter</td>
+      <td></td>
+    </tr>
   </tbody>
 </table>
 
@@ -354,6 +393,15 @@ connotes danger, whereas a green color connotes success and so on.
       <f-div padding="none" direction="row" gap="x-large" overflow="hidden">
         <f-counter label="888888" size="large" state="neutral"></f-counter>
         <f-counter label="888888" size="large" state="neutral" loading=${true}></f-counter>
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large" overflow="hidden">
+        <f-counter label="888888" size="large" state="custom,deepskyblue"></f-counter>
+        <f-counter
+          label="888888"
+          size="large"
+          state="custom,deepskyblue"
+          loading=${true}
+        ></f-counter>
       </f-div>
       <f-div height="hug-content" padding="none">
         <f-text variant="para" size="large" weight="medium">Disabled</f-text>

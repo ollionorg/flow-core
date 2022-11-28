@@ -115,6 +115,34 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/utils/get-custom-fill-color.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "getCustomFillColor",
+          "parameters": [
+            {
+              "name": "state",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "getCustomFillColor",
+            "module": "src/utils/get-custom-fill-color.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/utils/get-hex-color.ts",
       "declarations": [
         {
@@ -137,6 +165,40 @@
           "declaration": {
             "name": "getColourNameToHex",
             "module": "src/utils/get-hex-color.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/utils/get-lighten-darken-color.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "LightenDarkenColor",
+          "parameters": [
+            {
+              "name": "col",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "amt",
+              "type": {
+                "text": "number"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "LightenDarkenColor",
+            "module": "src/utils/get-lighten-darken-color.ts"
           }
         }
       ]
@@ -275,6 +337,14 @@
           "members": [
             {
               "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
               "name": "label",
               "type": {
                 "text": "string"
@@ -305,7 +375,7 @@
               "kind": "field",
               "name": "state",
               "type": {
-                "text": "\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | undefined"
+                "text": "FButtonState | undefined"
               },
               "default": "\"primary\"",
               "attribute": "state",
@@ -380,8 +450,29 @@
             },
             {
               "kind": "field",
+              "name": "iconElement",
+              "type": {
+                "text": "FIcon"
+              },
+              "description": "icon element reference"
+            },
+            {
+              "kind": "field",
+              "name": "counterElement",
+              "type": {
+                "text": "FCounter | undefined"
+              },
+              "description": "counter element reference"
+            },
+            {
+              "kind": "field",
               "name": "counterSize",
               "description": "compute counter size based on button size"
+            },
+            {
+              "kind": "field",
+              "name": "textColor",
+              "description": "compute textColor when custom color of tag is defined."
             },
             {
               "kind": "field",
@@ -396,6 +487,11 @@
               "kind": "method",
               "name": "validateProperties",
               "description": "validation for all atrributes"
+            },
+            {
+              "kind": "method",
+              "name": "applyStyles",
+              "description": "apply inline styles to shadow-dom for custom fill."
             }
           ],
           "attributes": [
@@ -425,7 +521,7 @@
             {
               "name": "state",
               "type": {
-                "text": "\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | undefined"
+                "text": "FButtonState | undefined"
               },
               "default": "\"primary\"",
               "fieldName": "state"
@@ -523,6 +619,14 @@
           "members": [
             {
               "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
               "name": "label",
               "type": {
                 "text": "number"
@@ -542,7 +646,7 @@
               "kind": "field",
               "name": "state",
               "type": {
-                "text": "\"primary\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | \"inherit\" | undefined"
+                "text": "FCounterStateProp | undefined"
               },
               "default": "\"neutral\"",
               "attribute": "state"
@@ -599,6 +703,21 @@
                   }
                 }
               ]
+            },
+            {
+              "kind": "field",
+              "name": "textColor",
+              "description": "compute textColor when custom color of tag is defined."
+            },
+            {
+              "kind": "field",
+              "name": "loaderColor",
+              "description": "compute loaderColor when custom color of tag is defined."
+            },
+            {
+              "kind": "method",
+              "name": "applyStyles",
+              "description": "apply inline styles to shadow-dom for custom fill."
             }
           ],
           "attributes": [
@@ -620,7 +739,7 @@
             {
               "name": "state",
               "type": {
-                "text": "\"primary\" | \"success\" | \"warning\" | \"danger\" | \"neutral\" | \"inherit\" | undefined"
+                "text": "FCounterStateProp | undefined"
               },
               "default": "\"neutral\"",
               "fieldName": "state"
@@ -1001,6 +1120,14 @@
           "members": [
             {
               "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
               "name": "variant",
               "type": {
                 "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
@@ -1023,7 +1150,7 @@
               "kind": "field",
               "name": "state",
               "type": {
-                "text": "\"default\" | \"secondary\" | \"subtle\" | undefined"
+                "text": "FDividerState | undefined"
               },
               "default": "\"default\"",
               "attribute": "state",
@@ -1050,7 +1177,7 @@
             {
               "name": "state",
               "type": {
-                "text": "\"default\" | \"secondary\" | \"subtle\" | undefined"
+                "text": "FDividerState | undefined"
               },
               "default": "\"default\"",
               "fieldName": "state"
@@ -1094,6 +1221,14 @@
           "members": [
             {
               "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
               "name": "_source",
               "type": {
                 "text": "string"
@@ -1113,7 +1248,7 @@
               "kind": "field",
               "name": "state",
               "type": {
-                "text": "| \"default\"\n    | \"secondary\"\n    | \"subtle\"\n    | \"primary\"\n    | \"success\"\n    | \"danger\"\n    | \"warning\"\n    | \"neutral\"\n    | \"inherit\" | undefined"
+                "text": "FIconState | undefined"
               },
               "default": "\"default\"",
               "attribute": "state"
@@ -1165,6 +1300,11 @@
               "kind": "method",
               "name": "validateProperties",
               "description": "validation for all atrributes"
+            },
+            {
+              "kind": "method",
+              "name": "applyStyles",
+              "description": "apply inline styles to shadow-dom for custom fill."
             }
           ],
           "attributes": [
@@ -1179,7 +1319,7 @@
             {
               "name": "state",
               "type": {
-                "text": "| \"default\"\n    | \"secondary\"\n    | \"subtle\"\n    | \"primary\"\n    | \"success\"\n    | \"danger\"\n    | \"warning\"\n    | \"neutral\"\n    | \"inherit\" | undefined"
+                "text": "FIconState | undefined"
               },
               "default": "\"default\"",
               "fieldName": "state"
@@ -1252,6 +1392,14 @@
           "description": "",
           "name": "FIconButton",
           "members": [
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
             {
               "kind": "field",
               "name": "icon",
@@ -1345,6 +1493,16 @@
               "kind": "field",
               "name": "counterSize",
               "description": "compute counter size based on button size"
+            },
+            {
+              "kind": "method",
+              "name": "applyStyles",
+              "description": "apply inline styles to shadow-dom for custom fill."
+            },
+            {
+              "kind": "method",
+              "name": "validateProperties",
+              "description": "validation for all atrributes"
             }
           ],
           "attributes": [
@@ -1890,7 +2048,7 @@
               "kind": "field",
               "name": "state",
               "type": {
-                "text": "\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | string | undefined"
+                "text": "FTagStateProp | undefined"
               },
               "default": "\"neutral\"",
               "attribute": "state",
@@ -1964,6 +2122,11 @@
               "description": "compute textColor when custom color of tag is defined."
             },
             {
+              "kind": "field",
+              "name": "loaderColor",
+              "description": "compute loaderColor when custom color of tag is defined."
+            },
+            {
               "kind": "method",
               "name": "applyStyles",
               "description": "apply inline styles to shadow-dom for custom fill."
@@ -1972,11 +2135,6 @@
               "kind": "method",
               "name": "validateProperties",
               "description": "validation for all atrributes"
-            },
-            {
-              "kind": "method",
-              "name": "applyCustomFill",
-              "description": "cropping color name from custom filled state prop."
             }
           ],
           "attributes": [
@@ -1998,7 +2156,7 @@
             {
               "name": "state",
               "type": {
-                "text": "\"primary\" | \"neutral\" | \"success\" | \"warning\" | \"danger\" | \"inherit\" | string | undefined"
+                "text": "FTagStateProp | undefined"
               },
               "default": "\"neutral\"",
               "fieldName": "state"
@@ -2124,6 +2282,14 @@
           "members": [
             {
               "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
               "name": "variant",
               "type": {
                 "text": "\"heading\" | \"para\" | \"code\" | undefined"
@@ -2155,7 +2321,7 @@
               "kind": "field",
               "name": "state",
               "type": {
-                "text": "| \"default\"\n    | \"secondary\"\n    | \"subtle\"\n    | \"primary\"\n    | \"success\"\n    | \"danger\"\n    | \"warning\"\n    | \"inherit\" | undefined"
+                "text": "FTextStateProp | undefined"
               },
               "default": "\"default\"",
               "attribute": "state",
@@ -2200,6 +2366,11 @@
               "default": "false",
               "attribute": "ellipsis",
               "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "validateProperties",
+              "description": "validation for all atrributes"
             }
           ],
           "attributes": [
@@ -2229,7 +2400,7 @@
             {
               "name": "state",
               "type": {
-                "text": "| \"default\"\n    | \"secondary\"\n    | \"subtle\"\n    | \"primary\"\n    | \"success\"\n    | \"danger\"\n    | \"warning\"\n    | \"inherit\" | undefined"
+                "text": "FTextStateProp | undefined"
               },
               "default": "\"default\"",
               "fieldName": "state"

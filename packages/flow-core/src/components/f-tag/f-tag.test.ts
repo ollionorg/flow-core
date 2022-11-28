@@ -32,13 +32,13 @@ describe("f-tag", () => {
     const el = await fixture(html` <f-tag label="abc" state="custom, #fff"></f-tag> `);
     const descendant = el.shadowRoot!.querySelector(".f-tag")!;
     const compStyles = window.getComputedStyle(descendant);
-    expect(compStyles.getPropertyValue("color")).to.equal("rgb(0, 0, 0)");
+    expect(compStyles.getPropertyValue("color")).to.equal("rgb(32, 42, 54)");
   });
   it("should render custom state prop with white color label text", async () => {
     const el = await fixture(html` <f-tag label="abc" state="custom, #000"></f-tag> `);
     const descendant = el.shadowRoot!.querySelector(".f-tag")!;
     const compStyles = window.getComputedStyle(descendant);
-    expect(compStyles.getPropertyValue("color")).to.equal("rgb(255, 255, 255)");
+    expect(compStyles.getPropertyValue("color")).to.equal("rgb(252, 252, 253)");
   });
   it("should render with all default properties", async () => {
     const el = await fixture(html` <f-tag label="abc"></f-tag> `);

@@ -97,6 +97,24 @@ in this case it is `f-button`
       @include shimmer-self();
     }
 
+    &.custom-loader {
+      &[loading] {
+        svg {
+          fill: inherit !important;
+          stroke: none;
+          *[fill^="var(--color-primary-default)"] {
+            fill: inherit !important;
+          }
+        }
+      }
+    }
+
+    &.custom-hover {
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
     @each $state, $color in $states {
       &[state="#{$state}"][category="fill"] {
         background-color: map.get($color, "background");

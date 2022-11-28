@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.1.3] - 2022-11-28
+
+### Features
+
+- `f-div` added custom fill prop.
+
 ## [1.1.2] - 2022-11-25
 
 ### Features

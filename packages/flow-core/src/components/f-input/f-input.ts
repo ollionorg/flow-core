@@ -82,7 +82,7 @@ export class FInput extends FRoot {
   }
 
   get isReadOnly() {
-    return this.closest("f-form-element")?.hasAttribute("read-only") ?? false;
+    return this.closest("f-form-element")?.hasAttribute("read-only-value") ?? false;
   }
 
   validateValue() {

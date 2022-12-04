@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-form-element.scss";
 
@@ -13,6 +13,24 @@ export class FFormElement extends FRoot {
    * css loaded from scss file
    */
   static styles = [unsafeCSS(eleStyle)];
+
+  /**
+   * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
+   */
+  @property({ type: String, reflect: true })
+  state?: FFormElementStateProp = "default";
+
+  /**
+   * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
+   */
+  // @property({ type: Boolean, reflect: true })
+  // required?: boolean = false;
+
+  /**
+   * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
+   */
+  // @property({ type: Boolean, reflect: true, attribute: "read-only-value" })
+  // readOnlyValue?: boolean = false;
 
   render() {
     /**

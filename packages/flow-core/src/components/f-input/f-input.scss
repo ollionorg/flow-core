@@ -1,0 +1,181 @@
+@use "sass:map";
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+
+/**
+$variants map will have state specific inner maps.
+**/
+$variants: (
+  "curved-fill": (
+    "background": var(--color-surface-tertiary),
+  ),
+  "round-fill": (
+    "background": var(--color-surface-tertiary),
+  ),
+  "transparent": (
+    "background": transparent,
+  ),
+  "outline": (
+    "background": transparent,
+  ),
+);
+
+/**
+applies styles on f-div
+**/
+
+:host {
+  .input-icons {
+    // Important :  always include base mixins
+    @include base();
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 36px;
+
+    .word-break {
+      word-break: normal !important;
+    }
+    // including disabled mixins to apply disabled css
+    &[disabled] {
+      @include disabled();
+    }
+    @each $variant, $value in $variants {
+      &[variant^="#{$variant}"] {
+        background-color: map.get($value, "background");
+      }
+    }
+
+    &[variant="transparent"] {
+      border-bottom: 1px solid var(--color-input-border-default);
+      border-top: none;
+      border-right: none;
+      border-left: none;
+      &:focus-within {
+        border-bottom: 1px solid var(--color-primary-default);
+        outline: none;
+      }
+    }
+    &[variant="outline"] {
+      border: 1px solid var(--color-input-border-default);
+      border-radius: 4px;
+      &:focus-within {
+        border: 1px solid var(--color-primary-default);
+        outline: none;
+      }
+    }
+    &[variant="round-fill"] {
+      border-radius: 22px;
+      border: 1px solid var(--color-input-default);
+      &:focus-within {
+        border: 1px solid var(--color-primary-default);
+        outline: none;
+      }
+    }
+    &[variant="curved-fill"] {
+      border-radius: 4px;
+      border: 1px solid var(--color-input-default);
+      &:focus-within {
+        border: 1px solid var(--color-primary-default);
+        outline: none;
+      }
+    }
+
+    .prefix {
+      position: relative;
+      display: flex;
+      padding: 9px 0px 9px 12px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .suffix {
+      position: relative;
+      padding: 9px 12px 9px 0px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .loader-suffix {
+      position: relative;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      @include rotate("svg");
+      pointer-events: none;
+      padding: 0px 12px 0px 0px;
+
+      svg {
+        position: relative;
+      }
+    }
+
+    .f-input {
+      display: flex;
+      flex: 1 1 auto;
+      width: 100%;
+      padding: 0px 12px;
+      height: 34px;
+      font-style: normal;
+      font-weight: 325;
+      font-size: 12px;
+      line-height: 18px;
+      color: var(--color-text-default);
+      color-scheme: dark;
+
+      @each $variant, $value in $variants {
+        &[variant^="#{$variant}"] {
+          background-color: map.get($value, "background");
+          border: none;
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      &[variant="outline"] {
+        border-radius: 4px;
+      }
+      &[variant="round-fill"] {
+        border-radius: 22px;
+      }
+      &[variant="curved-fill"] {
+        border-radius: 4px;
+      }
+      &[type="password"] {
+        font-size: 15px;
+        letter-spacing: 2px;
+      }
+      &::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        font-style: normal;
+        font-weight: 325;
+        font-size: 12px;
+        line-height: 18px;
+        color: var(--color-text-subtle);
+      }
+      /* Chrome, Safari, Edge, Opera */
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      /* Firefox */
+      &[type="number"] {
+        -moz-appearance: textfield;
+      }
+      &[type="date"]::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+        border-radius: 4px;
+        margin-right: 2px;
+        opacity: 0.6;
+        font-size: 15px;
+      }
+
+      &[type="date"]::-webkit-calendar-picker-indicator:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

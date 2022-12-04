@@ -170,3 +170,48 @@
     --color-primary-button-loader: var(--color-primary-surface);
   }
 }
+
+@mixin subtext-color($state) {
+  @if $state== "danger" {
+    --color-subtext-default: var(--color-danger-default);
+  } @else if $state== "success" {
+    --color-subtext-default: var(--color-success-default);
+  } @else if $state== "warning" {
+    --color-subtext-default: var(--color-warning-default);
+  } @else if $state== "primary" {
+    --color-subtext-default: var(--color-primary-default);
+  } @else {
+    --color-subtext-default: var(--color-text-default);
+  }
+}
+
+@mixin input-color($state) {
+  @if $state== "danger" {
+    --color-input-default: var(--color-danger-default);
+    --color-input-border-default: var(--color-danger-default);
+  } @else if $state== "success" {
+    --color-input-default: var(--color-success-default);
+    --color-input-border-default: var(--color-success-default);
+  } @else if $state== "warning" {
+    --color-input-default: var(--color-warning-default);
+    --color-input-border-default: var(--color-warning-default);
+  } @else if $state== "primary" {
+    --color-input-default: var(--color-primary-default);
+    --color-input-border-default: var(--color-primary-default);
+  } @else {
+    --color-input-default: var(--color-surface-tertiary);
+    --color-input-border-default: var(--color-border-default);
+  }
+}
+
+@mixin inherit-gap($gap) {
+  @if $gap== "large" {
+    --form-element-gap-size: 24px;
+  } @else if $gap== "medium" {
+    --form-element-gap-size: 16px;
+  } @else if $gap== "small" {
+    --form-element-gap-size: 12px;
+  } @else {
+    --form-element-gap-size: 8px;
+  }
+}

@@ -1,0 +1,331 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import fSpacerAnatomy from "./svg/i-fspacer-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
+
+<Meta
+  title="Components/f-input"
+  parameters={{
+    controls: { hideNoControlsWarning: true },
+  }}
+/>
+
+# f-spacer
+
+<br />
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+f-spacer is used to create a pseudo space in the layout.
+
+<br />
+
+### [Playground](/story/components-f-input--playground)
+
+<Canvas>
+  <Story
+    name="Playground"
+    argTypes={{
+      value: { control: "text" },
+      placeholder: { control: "text" },
+      variant: {
+        control: "select",
+        options: ["round-fill", "curved-fill", "outline", "transparent"],
+      },
+      category: {
+        control: "select",
+        options: ["text", "number", "email", "password", "url", "tel", "date", "time"],
+      },
+      ["icon-left"]: {
+        control: "text",
+      },
+      ["icon-right"]: {
+        control: "text",
+      },
+      ["prefix-value"]: {
+        control: "text",
+      },
+      ["suffix-value"]: {
+        control: "text",
+      },
+      loading: {
+        control: "boolean",
+      },
+      disabled: {
+        control: "boolean",
+      },
+      ["group-orientation"]: {
+        control: "radio",
+        options: ["vertical", "horizontal"],
+      },
+      ["group-gap"]: {
+        control: "select",
+        options: ["large", "medium", "small", "x-small"],
+      },
+      ["element-state"]: {
+        control: "select",
+        options: ["default", "success", "primary", "warning", "danger"],
+      },
+    }}
+    args={{
+      value: "",
+      placeholder: "Enter your text here",
+      variant: "round-fill",
+      category: "text",
+      ["icon-left"]: undefined,
+      ["icon-right"]: undefined,
+      ["prefix-value"]: undefined,
+      ["suffix-value"]: undefined,
+      loading: false,
+      disabled: false,
+      ["group-orientation"]: "vertical",
+      ["group-gap"]: "large",
+      ["element-state"]: "default",
+    }}
+  >
+    {(args) => {
+      const [_, updateArgs] = useArgs();
+      useEffect(() => {
+        updateArgs({ value: args.value });
+      }, [args.value]);
+      const handleInput = (e, f) => {
+        console.log(e);
+        updateArgs({ value: args.value });
+      };
+      return html`
+        <f-div padding="medium">
+          <f-form-element-group orientation=${args["group-orientation"]} gap=${args["group-gap"]}>
+            <f-form-element state=${args["element-state"]} required=${true}>
+              <f-label>
+                <f-text variant="para" size="small">Label *</f-text>
+              </f-label>
+              <f-input
+                .value=${args.value}
+                .placeholder=${args.placeholder}
+                .variant=${args.variant}
+                .category=${args.category}
+                icon-left=${args["icon-left"]}
+                icon-right=${args["icon-right"]}
+                prefix-value=${args["prefix-value"]}
+                suffix-value=${args["suffix-value"]}
+                .disabled=${args.disabled}
+                .loading=${args.loading}
+                @input=${handleInput}
+              ></f-input>
+              <f-subtext>This is a required field</f-subtext>
+            </f-form-element>
+            <f-form-element state=${args["element-state"]}>
+              <f-label>
+                <f-text variant="para" size="small">Label *</f-text>
+              </f-label>
+              <f-input
+                value=${args.value}
+                .placeholder=${args.placeholder}
+                .variant=${args.variant}
+                .category=${args.category}
+                icon-left=${args["icon-left"]}
+                icon-right=${args["icon-right"]}
+                prefix=${args["prefix"]}
+                suffix=${args["suffix"]}
+                .disabled=${args.disabled}
+                .loading=${args.loading}
+              ></f-input>
+              <f-subtext>This is a required field</f-subtext>
+            </f-form-element>
+            <f-form-element state=${args["element-state"]}>
+              <f-label>
+                <f-text variant="para" size="small">Label *</f-text>
+              </f-label>
+              <f-input
+                value=${args.value}
+                .placeholder=${args.placeholder}
+                .variant=${args.variant}
+                .category=${args.category}
+                icon-left=${args["icon-left"]}
+                icon-right=${args["icon-right"]}
+                prefix=${args["prefix"]}
+                suffix=${args["suffix"]}
+                .disabled=${args.disabled}
+                .loading=${args.loading}
+              ></f-input>
+              <f-subtext>This is a required field</f-subtext>
+            </f-form-element>
+          </f-form-element-group>
+        </f-div>
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<Story name="Anatomy">
+  {() => html`<div class="align-center">${unsafeSVG(fSpacerAnatomy)}</div>`}
+</Story>
+
+<br />
+
+### Specifications
+
+<f-divider></f-divider>
+
+A spacer can grow horizontally or vertically depending on its parent’s layout.
+
+In a row layout a spacer grows vertically and takes the height of the parent component.
+
+In a column layout a spacer grows horizontally and takes the width of the parent component.
+
+<br />
+
+<Story name="Specifications">
+  {() =>
+    html` <f-div direction="row" gap="auto" padding="large none none none">
+        <f-div padding="none x-large" height="hug-content">Row layout</f-div>
+        <f-div padding="none x-large" height="hug-content">Column layout</f-div>
+      </f-div>
+      <f-div padding="x-large" gap="x-large" direction="row">
+        <f-div
+          padding="large"
+          gap="x-large"
+          border="medium solid default around"
+          direction="row"
+          height="486px"
+        >
+          <f-div
+            padding="large"
+            gap="large"
+            border="medium dashed secondary around"
+            height="100%"
+            direction="column"
+            width="100px"
+          >
+            <f-div height="80px" padding="none" state="secondary" variant="curved"></f-div>
+            <f-div height="80px" padding="none" state="secondary" variant="curved"></f-div>
+            <f-div height="200px" padding="none" state="secondary" variant="curved"></f-div>
+          </f-div>
+          <f-spacer size="fill-container"></f-spacer>
+          <f-div
+            width="100px"
+            padding="none"
+            gap="large"
+            state="secondary"
+            height="444px"
+            variant="curved"
+          ></f-div>
+        </f-div>
+        <f-div
+          padding="large"
+          gap="x-large"
+          border="medium solid default around"
+          height="486px"
+          direction="column"
+        >
+          <f-div
+            padding="large"
+            gap="large"
+            border="medium dashed secondary around"
+            height="hug-content"
+            direction="column"
+          >
+            <f-div height="50px" padding="none" state="secondary" variant="curved"></f-div>
+            <f-div height="50px" padding="none" state="secondary" variant="curved"></f-div>
+          </f-div>
+          <f-spacer size="fill-container"></f-spacer>
+          <f-div
+            padding="none"
+            state="secondary"
+            height="124px"
+            variant="curved"
+            width="100%"
+          ></f-div>
+        </f-div>
+      </f-div>`
+  }
+</Story>
+
+<br />
+
+## size
+
+<f-divider></f-divider>
+
+Spacer is used to create a pseudo space in the layout.
+
+<Canvas>
+  <Story name="size">
+    {(args) => {
+      const [value, setValue] = useState("");
+      return html` <f-form-element required=${true}>
+        <f-label>
+          <f-text variant="para" size="small">Label *</f-text>
+        </f-label>
+        <f-input
+          value=${value}
+          placeholder="Enter your text here"
+          variant="round-fill"
+          category="text"
+          icon-left="i-app"
+          icon-right="i-close"
+          prefix="123"
+          suffix="123"
+        ></f-input>
+        <f-subtext>This is a required field</f-subtext>
+      </f-form-element>`;
+    }}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>fill-container</td>
+      <td>spacer fills the remaining height/width of the container</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>x-large</td>
+      <td>spacer fills the remaining height/width of 44px the container</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>large</td>
+      <td>spacer fills the remaining height/width of 36px the container</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>medium</td>
+      <td>spacer fills the remaining height/width of 24px the container</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>small</td>
+      <td>spacer fills the remaining height/width of 16px the container</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>x-small</td>
+      <td>spacer fills the remaining height/width of 8px the container</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>any-num-value</td>
+      <td>spacer fills the remaining height/width of any num value given</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<ArgsTable of={"f-spacer"} />

@@ -1,0 +1,28 @@
+@import "./../../mixins/scss/mixins";
+
+$gaps: (
+  "large": 24px,
+  "medium": 16px,
+  "small": 12px,
+  "x-small": 8px,
+);
+
+f-form-element-group {
+  @include base();
+  display: flex;
+  flex: 1 1;
+
+  &[orientation="vertical"] {
+    flex-direction: column;
+  }
+  &[orientation="horizontal"] {
+    flex-direction: row;
+  }
+
+  @each $gap, $value in $gaps {
+    &[gap="#{$gap}"] {
+      @include inherit-gap($gap);
+      gap: $value;
+    }
+  }
+}

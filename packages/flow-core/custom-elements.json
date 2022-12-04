@@ -110,6 +110,46 @@
             "name": "*",
             "package": "\"./components/f-tag/f-tag\""
           }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-input/f-input\""
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-form-element/f-form-element\""
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-label/f-label\""
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-subtext/f-subtext\""
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-form-element-group/f-form-element-group\""
+          }
         }
       ]
     },
@@ -294,6 +334,58 @@
           "declaration": {
             "name": "getColourNameToHex",
             "module": "src/utils/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "isValidEmail",
+          "declaration": {
+            "name": "isValidEmail",
+            "module": "src/utils/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getCustomFillColor",
+          "declaration": {
+            "name": "getCustomFillColor",
+            "module": "src/utils/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LightenDarkenColor",
+          "declaration": {
+            "name": "LightenDarkenColor",
+            "module": "src/utils/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/utils/is-valid-email.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "isValidEmail",
+          "parameters": [
+            {
+              "name": "email",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "isValidEmail",
+            "module": "src/utils/is-valid-email.ts"
           }
         }
       ]
@@ -1220,6 +1312,82 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-form-element-group/f-form-element-group.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FFormElementGroup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "attribute": "orientation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "attribute": "gap",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "orientation",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "fieldName": "orientation"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "fieldName": "gap"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "summary": "Text component includes Headings, titles, body texts and links.",
+          "tagName": "f-form-element-group",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FFormElementGroup",
+          "declaration": {
+            "name": "FFormElementGroup",
+            "module": "src/components/f-form-element-group/f-form-element-group.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-form-element-group",
+          "declaration": {
+            "name": "FFormElementGroup",
+            "module": "src/components/f-form-element-group/f-form-element-group.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-icon/f-icon.ts",
       "declarations": [
         {
@@ -1387,6 +1555,43 @@
           "declaration": {
             "name": "FIcon",
             "module": "src/components/f-icon/f-icon.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-element/f-form-element.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FFormElement",
+          "members": [],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "summary": "Text component includes Headings, titles, body texts and links.",
+          "tagName": "f-form-element",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FFormElement",
+          "declaration": {
+            "name": "FFormElement",
+            "module": "src/components/f-form-element/f-form-element.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-form-element",
+          "declaration": {
+            "name": "FFormElement",
+            "module": "src/components/f-form-element/f-form-element.ts"
           }
         }
       ]
@@ -1600,6 +1805,270 @@
           "declaration": {
             "name": "FIconButton",
             "module": "src/components/f-icon-button/f-icon-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-input/f-input.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FInput",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"curved-fill\" | \"round-fill\" | \"transparent\" | \"outline\" | undefined"
+              },
+              "default": "\"curved-fill\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "category",
+              "type": {
+                "text": "\"text\" | \"number\" | \"email\" | \"password\" | \"url\" | \"tel\" | \"date\" | \"time\" | undefined"
+              },
+              "default": "\"text\"",
+              "attribute": "category",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "placeholder",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconLeft",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "icon-left",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconRight",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "icon-right",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "prefixValue",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "prefix-value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "suffixValue",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "suffix-value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "isRequired"
+            },
+            {
+              "kind": "field",
+              "name": "isReadOnly"
+            },
+            {
+              "kind": "method",
+              "name": "validateValue"
+            },
+            {
+              "kind": "method",
+              "name": "onBlur"
+            },
+            {
+              "kind": "method",
+              "name": "keyPress"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"curved-fill\" | \"round-fill\" | \"transparent\" | \"outline\" | undefined"
+              },
+              "default": "\"curved-fill\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "category",
+              "type": {
+                "text": "\"text\" | \"number\" | \"email\" | \"password\" | \"url\" | \"tel\" | \"date\" | \"time\" | undefined"
+              },
+              "default": "\"text\"",
+              "fieldName": "category"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "icon-left",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "iconLeft"
+            },
+            {
+              "name": "icon-right",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "iconRight"
+            },
+            {
+              "name": "prefix-value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "prefixValue"
+            },
+            {
+              "name": "suffix-value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "suffixValue"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-input",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FInput",
+          "declaration": {
+            "name": "FInput",
+            "module": "src/components/f-input/f-input.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-input",
+          "declaration": {
+            "name": "FInput",
+            "module": "src/components/f-input/f-input.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-label/f-label.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FLabel",
+          "members": [],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "summary": "Text component includes Headings, titles, body texts and links.",
+          "tagName": "f-label",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FLabel",
+          "declaration": {
+            "name": "FLabel",
+            "module": "src/components/f-label/f-label.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-label",
+          "declaration": {
+            "name": "FLabel",
+            "module": "src/components/f-label/f-label.ts"
           }
         }
       ]
@@ -2239,6 +2708,43 @@
           "declaration": {
             "name": "FTag",
             "module": "src/components/f-tag/f-tag.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-subtext/f-subtext.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FSubtext",
+          "members": [],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "summary": "Text component includes Headings, titles, body texts and links.",
+          "tagName": "f-subtext",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FSubtext",
+          "declaration": {
+            "name": "FSubtext",
+            "module": "src/components/f-subtext/f-subtext.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-subtext",
+          "declaration": {
+            "name": "FSubtext",
+            "module": "src/components/f-subtext/f-subtext.ts"
           }
         }
       ]

@@ -56,14 +56,14 @@ export class FInput extends FRoot {
   /**
    * @attribute Icon-left enables an icon on the left of the label of a button.
    */
-  @property({ reflect: true, type: String, attribute: "prefix-value" })
-  prefixValue?: string;
+  @property({ reflect: true, type: String, attribute: "prefix" })
+  prefixString?: string;
 
   /**
    * @attribute Icon-left enables an icon on the left of the label of a button.
    */
-  @property({ reflect: true, type: String, attribute: "suffix-value" })
-  suffixValue?: string;
+  @property({ reflect: true, type: String, attribute: "suffix" })
+  suffixString?: string;
 
   /**
    * @attribute Loader icon replaces the content of the button .
@@ -154,9 +154,9 @@ export class FInput extends FRoot {
       : "";
 
     const prefixAppend =
-      this.prefixValue || this.iconLeft
+      this.prefixString || this.iconLeft
         ? html` <div class="prefix">
-            ${this.prefixValue
+            ${this.prefixString
               ? html`
                   <f-div
                     height="hug-content"
@@ -166,7 +166,7 @@ export class FInput extends FRoot {
                     border="small solid default right"
                   >
                     <f-text variant="para" size="small" weight="regular" class="word-break"
-                      >${this.prefixValue}</f-text
+                      >${this.prefixString}</f-text
                     >
                   </f-div>
                 `
@@ -175,13 +175,13 @@ export class FInput extends FRoot {
           </div>`
         : "";
     const suffixAppend = !this.loading
-      ? this.suffixValue || this.iconRight
+      ? this.suffixString || this.iconRight
         ? html` <div class="suffix">
-            ${this.suffixValue
+            ${this.suffixString
               ? html`
                   <f-div height="hug-content" width="hug-content" padding="none" direction="row">
                     <f-text variant="para" size="small" weight="regular" class="word-break"
-                      >${this.suffixValue}</f-text
+                      >${this.suffixString}</f-text
                     >
                   </f-div>
                 `

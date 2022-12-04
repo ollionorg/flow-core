@@ -1933,20 +1933,20 @@
             },
             {
               "kind": "field",
-              "name": "prefixValue",
+              "name": "prefixString",
               "type": {
                 "text": "string | undefined"
               },
-              "attribute": "prefix-value",
+              "attribute": "prefix",
               "reflects": true
             },
             {
               "kind": "field",
-              "name": "suffixValue",
+              "name": "suffixString",
               "type": {
                 "text": "string | undefined"
               },
-              "attribute": "suffix-value",
+              "attribute": "suffix",
               "reflects": true
             },
             {
@@ -2036,18 +2036,18 @@
               "fieldName": "iconRight"
             },
             {
-              "name": "prefix-value",
+              "name": "prefix",
               "type": {
                 "text": "string | undefined"
               },
-              "fieldName": "prefixValue"
+              "fieldName": "prefixString"
             },
             {
-              "name": "suffix-value",
+              "name": "suffix",
               "type": {
                 "text": "string | undefined"
               },
-              "fieldName": "suffixValue"
+              "fieldName": "suffixString"
             },
             {
               "name": "loading",
@@ -2483,105 +2483,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-spacer/f-spacer.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FSpacer",
-          "members": [
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "FSpacerSizeProp | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "applySize",
-              "description": "Applying height,width related style, based on size property"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "size",
-              "type": {
-                "text": "FSpacerSizeProp | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-spacer",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FSpacer",
-          "declaration": {
-            "name": "FSpacer",
-            "module": "src/components/f-spacer/f-spacer.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-spacer",
-          "declaration": {
-            "name": "FSpacer",
-            "module": "src/components/f-spacer/f-spacer.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-subtext/f-subtext.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FSubtext",
-          "members": [],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "summary": "Text component includes Headings, titles, body texts and links.",
-          "tagName": "f-subtext",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FSubtext",
-          "declaration": {
-            "name": "FSubtext",
-            "module": "src/components/f-subtext/f-subtext.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-subtext",
-          "declaration": {
-            "name": "FSubtext",
-            "module": "src/components/f-subtext/f-subtext.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-tag/f-tag.ts",
       "declarations": [
         {
@@ -2808,36 +2709,99 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-template/f-template.ts",
+      "path": "src/components/f-spacer/f-spacer.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "FTemplate",
-          "members": [],
+          "name": "FSpacer",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "FSpacerSizeProp | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "applySize",
+              "description": "Applying height,width related style, based on size property"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "FSpacerSizeProp | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            }
+          ],
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
           },
-          "tagName": "f-template",
+          "tagName": "f-spacer",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "FTemplate",
+          "name": "FSpacer",
           "declaration": {
-            "name": "FTemplate",
-            "module": "src/components/f-template/f-template.ts"
+            "name": "FSpacer",
+            "module": "src/components/f-spacer/f-spacer.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "f-template",
+          "name": "f-spacer",
           "declaration": {
-            "name": "FTemplate",
-            "module": "src/components/f-template/f-template.ts"
+            "name": "FSpacer",
+            "module": "src/components/f-spacer/f-spacer.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-subtext/f-subtext.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FSubtext",
+          "members": [],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "summary": "Text component includes Headings, titles, body texts and links.",
+          "tagName": "f-subtext",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FSubtext",
+          "declaration": {
+            "name": "FSubtext",
+            "module": "src/components/f-subtext/f-subtext.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-subtext",
+          "declaration": {
+            "name": "FSubtext",
+            "module": "src/components/f-subtext/f-subtext.ts"
           }
         }
       ]
@@ -3033,6 +2997,42 @@
           "declaration": {
             "name": "FText",
             "module": "src/components/f-text/f-text.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-template/f-template.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTemplate",
+          "members": [],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-template",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTemplate",
+          "declaration": {
+            "name": "FTemplate",
+            "module": "src/components/f-template/f-template.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-template",
+          "declaration": {
+            "name": "FTemplate",
+            "module": "src/components/f-template/f-template.ts"
           }
         }
       ]

@@ -23,14 +23,14 @@ export class FFormElement extends FRoot {
   /**
    * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
    */
-  // @property({ type: Boolean, reflect: true })
-  // required?: boolean = false;
+  @property({ type: Boolean, reflect: true, attribute: "required" })
+  requiredValue?: boolean = false;
 
   /**
    * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
    */
-  // @property({ type: Boolean, reflect: true, attribute: "read-only-value" })
-  // readOnlyValue?: boolean = false;
+  @property({ type: Boolean, reflect: true, attribute: "read-only" })
+  readOnlyValue?: boolean = false;
 
   render() {
     /**

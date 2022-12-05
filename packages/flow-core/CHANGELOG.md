@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.1.4] - 2022-11-28
+
+### Bug fixes
+- theme setting mechanism changed to remove jest or test library error.
 ## [1.1.3] - 2022-11-28
 
 ### Features

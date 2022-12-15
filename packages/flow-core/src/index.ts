@@ -22,6 +22,7 @@ export * from "./components/f-form-element/f-form-element";
 export * from "./components/f-label/f-label";
 export * from "./components/f-subtext/f-subtext";
 export * from "./components/f-form-element-group/f-form-element-group";
+export * from "./components/f-form/f-form";
 
 if (document.readyState !== "loading") {
   ConfigUtil.initTheme();

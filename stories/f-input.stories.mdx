@@ -162,6 +162,133 @@ f-spacer is used to create a pseudo space in the layout.
 </Canvas>
 
 <br />
+<br />
+
+<Canvas>
+  <Story
+    name="Playground2"
+    argTypes={{
+      fields: { control: "object" },
+    }}
+    args={{
+      fields: {
+        gap: "small",
+        variant: "fill",
+        label: {
+          title: "f-form is the best",
+          description: "f-form description",
+        },
+        group: [
+          {
+            direction: "vertical",
+            collapseType: "text",
+            collapseGroup: true,
+            duplicateGroup: true,
+            state: "success",
+            fields: [
+              {
+                type: "text",
+                id: "id-for-devs",
+                state: "default",
+                value: "",
+                customStyle: "in-line custom css as string",
+                dataQA: "auto",
+                label: {
+                  title: "username",
+                },
+                validationRules: [
+                  {
+                    name: "required",
+                    when: ["blur", "focusout"],
+                    message: "Please Enter this field",
+                  },
+                  {
+                    name: "email",
+                    when: ["blur", "focusout"],
+                    message: "Please Enter an email field correctly",
+                  },
+                  {
+                    name: "customFunction",
+                    when: ["blur", "focusout"],
+                    message: "Please Validate correctly",
+                    validate: (value) => {
+                      if (value.length === 5) return true;
+                      else return false;
+                    },
+                  },
+                ],
+              },
+              {
+                type: "text",
+                id: "id-for-devs",
+                state: "default",
+                value: "this shows",
+                customStyle: "in-line custom css as string",
+                dataQA: "auto",
+                label: {
+                  title: "username",
+                },
+                validationRules: [
+                  {
+                    name: "required",
+                    when: ["focusout"],
+                    message: "Please Enter this field",
+                  },
+                ],
+              },
+              {
+                type: "checkbox",
+                variant: "${inherit(default)}",
+                helperText: "This will show and be replaced if validated",
+                customStyle: "in-line custom css as string",
+                dataQA: "auto",
+                sectionLabel: {
+                  label: "username",
+                  iconLeft: "i-help",
+                  iconTooltip: "string goes here",
+                },
+                sectionOptions: [
+                  {
+                    id: "id-for-devs",
+                    label: "Apple",
+                    value: true,
+                    defaultValue: false,
+                    state: "default",
+                    iconLeft: "i-lock",
+                    iconTooltip: "string goes here",
+                  },
+                  {
+                    id: "id-for-devs2",
+                    label: "Orange",
+                    value: true,
+                    defaultValue: false,
+                    state: "default",
+                    iconLeft: "i-lock",
+                    iconTooltip: "string goes here",
+                  },
+                ],
+                sectionValidations: [
+                  {
+                    type: "if-required,",
+                    trigger: ["typeFinish"],
+                    triggerTime: 300,
+                    helperText: "this is required",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    }}
+  >
+    {(args) => {
+      return html`<f-form .fields=${args.fields}></f-form> `;
+    }}
+  </Story>
+</Canvas>
+
+<br />
 
 ### Anatomy
 

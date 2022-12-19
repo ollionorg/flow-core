@@ -1,0 +1,124 @@
+@use "sass:map";
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+
+$states: (
+  "primary": (
+    "background": var(--color-primary-default),
+  ),
+  "default": (
+    "background": var(--color-primary-default),
+  ),
+  "success": (
+    "background": var(--color-success-default),
+  ),
+  "warning": (
+    "background": var(--color-warning-default),
+  ),
+  "danger": (
+    "background": var(--color-danger-default),
+  ),
+  "inherit": (
+    "background": var(--color-checkbox-default),
+  ),
+);
+
+$sizes: (
+  "small": (
+    "height": 12px,
+    "top": -4px,
+    "left": -13.5px,
+    "width": 12px,
+  ),
+  "medium": (
+    "height": 16px,
+    "top": -2.5px,
+    "left": -16.5px,
+    "width": 14px,
+  ),
+);
+
+:host {
+  .f-checkbox {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .promoted-checkbox {
+    input[checked="true"] + label > svg {
+      height: 24px;
+      animation: draw-checkbox ease-in-out 0.4s forwards;
+      -webkit-animation: draw-checkbox ease-in-out 0.4s forwards;
+    }
+
+    label:active::after {
+      // background-color: var(--color-checkbox-default);
+      // outline: 2px solid var(--color-checkbox-default);
+      outline-offset: 4px;
+    }
+
+    label {
+      color: var(--color-text-default);
+      line-height: 40px;
+      cursor: pointer;
+      position: relative;
+      @each $size, $value in $sizes {
+        &[size="#{$size}"] {
+          &:after {
+            content: "";
+            height: map.get($value, "height");
+            width: map.get($value, "height");
+            float: left;
+            border: 1.5px solid var(--color-text-default);
+            border-radius: 2px;
+          }
+        }
+      }
+      @each $state, $color in $states {
+        &[state="#{$state}"][value="checked"] {
+          &:after {
+            border: 1.5px solid map.get($color, "background");
+            transition: 0.15s all ease-out;
+            background-color: map.get($color, "background");
+          }
+        }
+        &[state="#{$state}"][value="indeterminate"] {
+          &:after {
+            border: 1.5px solid map.get($color, "background");
+            transition: 0.15s all ease-out;
+            background-color: map.get($color, "background");
+          }
+        }
+      }
+    }
+    @each $size, $value in $sizes {
+      &[size="#{$size}"] {
+        svg {
+          stroke: var(--color-surface-default);
+          stroke-width: 3px;
+          height: 0px;
+          width: map.get($value, "width");
+          position: absolute;
+          left: map.get($value, "left");
+          top: map.get($value, "top");
+          stroke-dasharray: 33;
+        }
+      }
+    }
+  }
+
+  @keyframes draw-checkbox {
+    0% {
+      stroke-dashoffset: 33;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+}

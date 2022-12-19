@@ -98,11 +98,9 @@ f-spacer is used to create a pseudo space in the layout.
       };
       return html`
         <f-div padding="medium">
-          <f-form-element-group orientation=${args["group-orientation"]} gap=${args["group-gap"]}>
-            <f-form-element state=${args["element-state"]} required=${true}>
-              <f-label>
-                <f-text variant="para" size="small">Label *</f-text>
-              </f-label>
+          <f-group orientation=${args["group-orientation"]} gap=${args["group-gap"]}>
+            <f-field state=${args["element-state"]} required=${true}>
+              <f-text variant="para" size="small">Label *</f-text>
               <f-input
                 .value=${args.value}
                 .placeholder=${args.placeholder}
@@ -116,12 +114,9 @@ f-spacer is used to create a pseudo space in the layout.
                 .loading=${args.loading}
                 @input=${handleInput}
               ></f-input>
-              <f-subtext>This is a required field</f-subtext>
-            </f-form-element>
-            <f-form-element state=${args["element-state"]}>
-              <f-label>
-                <f-text variant="para" size="small">Label *</f-text>
-              </f-label>
+            </f-field>
+            <f-field state=${args["element-state"]}>
+              <f-text variant="para" size="small">Label *</f-text>
               <f-input
                 value=${args.value}
                 .placeholder=${args.placeholder}
@@ -134,12 +129,9 @@ f-spacer is used to create a pseudo space in the layout.
                 .disabled=${args.disabled}
                 .loading=${args.loading}
               ></f-input>
-              <f-subtext>This is a required field</f-subtext>
-            </f-form-element>
-            <f-form-element state=${args["element-state"]}>
-              <f-label>
-                <f-text variant="para" size="small">Label *</f-text>
-              </f-label>
+            </f-field>
+            <f-field state=${args["element-state"]}>
+              <f-text variant="para" size="small">Label *</f-text>
               <f-input
                 value=${args.value}
                 .placeholder=${args.placeholder}
@@ -152,9 +144,20 @@ f-spacer is used to create a pseudo space in the layout.
                 .disabled=${args.disabled}
                 .loading=${args.loading}
               ></f-input>
-              <f-subtext>This is a required field</f-subtext>
-            </f-form-element>
-          </f-form-element-group>
+            </f-field>
+            <f-field type="checkbox" state=${args["element-state"]}>
+              <f-checkbox></f-checkbox>
+              <f-text variant="para" size="small">Label *</f-text>
+            </f-field>
+            <f-field type="checkbox" state=${args["element-state"]}>
+              <f-checkbox size="small" value="indeterminate"></f-checkbox>
+              <f-text variant="para" size="small">Label *</f-text>
+            </f-field>
+            <f-field type="checkbox" state=${args["element-state"]}>
+              <f-radio></f-radio>
+              <f-text variant="para" size="small">Label *</f-text>
+            </f-field>
+          </f-group>
         </f-div>
       `;
     }}
@@ -388,10 +391,8 @@ Spacer is used to create a pseudo space in the layout.
   <Story name="size">
     {(args) => {
       const [value, setValue] = useState("");
-      return html` <f-form-element required=${true}>
-        <f-label>
-          <f-text variant="para" size="small">Label *</f-text>
-        </f-label>
+      return html` <f-field required=${true}>
+        <f-text variant="para" size="small">Label *</f-text>
         <f-input
           value=${value}
           placeholder="Enter your text here"
@@ -402,8 +403,7 @@ Spacer is used to create a pseudo space in the layout.
           prefix="123"
           suffix="123"
         ></f-input>
-        <f-subtext>This is a required field</f-subtext>
-      </f-form-element>`;
+      </f-field>`;
     }}
   </Story>
 </Canvas>

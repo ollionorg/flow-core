@@ -78,11 +78,11 @@ export class FInput extends FRoot {
   disabled?: boolean = false;
 
   get isRequired() {
-    return this.closest("f-form-element")?.hasAttribute("required") ?? false;
+    return this.closest("f-field")?.hasAttribute("required") ?? false;
   }
 
   get isReadOnly() {
-    return this.closest("f-form-element")?.hasAttribute("read-only") ?? false;
+    return this.closest("f-field")?.hasAttribute("read-only") ?? false;
   }
 
   validateValue() {

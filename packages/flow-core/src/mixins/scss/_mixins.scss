@@ -116,6 +116,8 @@
     --color-inherit-button: var(--color-danger-text);
     --color-inherit-button-hover: var(--color-danger-text-hover);
     --color-primary-button-loader: var(--color-danger-surface);
+    --color-checkbox-default: var(--color-danger-default);
+    --color-radio-outline-default: var(--color-danger-default);
   } @else if $state== "success" {
     --color-inherit-background: var(--color-success-surface);
     --color-inherit-text: var(--color-success-text);
@@ -129,6 +131,8 @@
     --color-inherit-button: var(--color-success-text);
     --color-inherit-button-hover: var(--color-success-text-hover);
     --color-primary-button-loader: var(--color-success-surface);
+    --color-checkbox-default: var(--color-success-default);
+    --color-radio-outline-default: var(--color-success-default);
   } @else if $state== "warning" {
     --color-inherit-background: var(--color-warning-surface);
     --color-inherit-text: var(--color-warning-text);
@@ -142,6 +146,8 @@
     --color-inherit-button: var(--color-warning-text);
     --color-inherit-button-hover: var(--color-warning-text-hover);
     --color-primary-button-loader: var(--color-warning-surface);
+    --color-checkbox-default: var(--color-warning-default);
+    --color-radio-outline-default: var(--color-warning-default);
   } @else if $state== "primary" {
     --color-inherit-background: var(--color-primary-surface);
     --color-inherit-text: var(--color-primary-text);
@@ -155,6 +161,8 @@
     --color-inherit-button: var(--color-primary-text);
     --color-inherit-button-hover: var(--color-primary-text-hover);
     --color-primary-button-loader: var(--color-primary-surface);
+    --color-checkbox-default: var(--color-primary-default);
+    --color-radio-outline-default: var(--color-primary-default);
   } @else {
     --color-inherit-background: "transparent";
     --color-inherit-text: var(--color-text-default);
@@ -168,6 +176,8 @@
     --color-inherit-button: var(--color-primary-default);
     --color-inherit-button-hover: var(--color-primary-default-hover);
     --color-primary-button-loader: var(--color-primary-surface);
+    --color-checkbox-default: var(--color-primary-default);
+    --color-radio-outline-default: var(--color-text-default);
   }
 }
 
@@ -189,29 +199,39 @@
   @if $state== "danger" {
     --color-input-default: var(--color-danger-default);
     --color-input-border-default: var(--color-danger-default);
+    --color-checkbox-default: var(--color-danger-default);
+    --color-radio-outline-default: var(--color-danger-default);
   } @else if $state== "success" {
     --color-input-default: var(--color-success-default);
     --color-input-border-default: var(--color-success-default);
+    --color-checkbox-default: var(--color-success-default);
+    --color-radio-outline-default: var(--color-success-default);
   } @else if $state== "warning" {
     --color-input-default: var(--color-warning-default);
     --color-input-border-default: var(--color-warning-default);
+    --color-checkbox-default: var(--color-warning-default);
+    --color-radio-outline-default: var(--color-warning-default);
   } @else if $state== "primary" {
     --color-input-default: var(--color-primary-default);
     --color-input-border-default: var(--color-primary-default);
+    --color-checkbox-default: var(--color-primary-default);
+    --color-radio-outline-default: var(--color-primary-default);
   } @else {
     --color-input-default: var(--color-surface-tertiary);
     --color-input-border-default: var(--color-border-default);
+    --color-checkbox-default: var(--color-primary-default);
+    --color-radio-outline-default: var(--color-text-default);
   }
 }
 
 @mixin inherit-gap($gap) {
   @if $gap== "large" {
-    --form-element-gap-size: 24px;
+    --field-gap-size: 24px;
   } @else if $gap== "medium" {
-    --form-element-gap-size: 16px;
+    --field-gap-size: 16px;
   } @else if $gap== "small" {
-    --form-element-gap-size: 12px;
+    --field-gap-size: 12px;
   } @else {
-    --form-element-gap-size: 8px;
+    --field-gap-size: 8px;
   }
 }

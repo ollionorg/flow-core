@@ -118,6 +118,63 @@
       ]
     },
     {
+      "name": "f-checkbox",
+      "description": "Attributes:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\nProperties:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "attributes": [
+        {
+          "name": "value",
+          "description": "`value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\nProperty: value\n\nDefault: unchecked",
+          "values": [
+            {
+              "name": "checked"
+            },
+            {
+              "name": "unchecked"
+            },
+            {
+              "name": "indeterminate"
+            }
+          ]
+        },
+        {
+          "name": "state",
+          "description": "`state` {`FCheckboxState | undefined`} - \n\nProperty: state\n\nDefault: inherit",
+          "values": [
+            {
+              "name": "primary"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
+              "name": "inherit"
+            },
+            {
+              "name": "default"
+            }
+          ]
+        },
+        {
+          "name": "size",
+          "description": "`size` {`\"medium\" | \"small\" | undefined`} - \n\nProperty: size\n\nDefault: medium",
+          "values": [
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "f-counter",
       "description": "Attributes:\n\n  * `fill` {`string`} - \n\n  * `label` {`number`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | undefined`} - \n\n  * `state` {`FCounterStateProp | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `fill` {`string`} - \n\n  * `label` {`number`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | undefined`} - \n\n  * `state` {`FCounterStateProp | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `required` {`string[]`} - mention required fields here\n\n  * `computedLabel` {`string | number`} - \n\n  * `textColor` {`\"#202a36\" | \"#fcfcfd\"`} - compute textColor when custom color of tag is defined.\n\n  * `loaderColor` {`\"#202a36\" | \"#808080\"`} - compute loaderColor when custom color of tag is defined.\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
@@ -235,10 +292,10 @@
               "name": "inherit"
             },
             {
-              "name": "subtle"
+              "name": "default"
             },
             {
-              "name": "default"
+              "name": "subtle"
             },
             {
               "name": "secondary"
@@ -289,100 +346,85 @@
               "name": "small dotted"
             },
             {
-              "name": "large solid subtle"
+              "name": "large solid default"
             },
             {
-              "name": "large solid default"
+              "name": "large solid subtle"
             },
             {
               "name": "large solid secondary"
             },
             {
-              "name": "large dashed subtle"
+              "name": "large dashed default"
             },
             {
-              "name": "large dashed default"
+              "name": "large dashed subtle"
             },
             {
               "name": "large dashed secondary"
             },
             {
-              "name": "large dotted subtle"
+              "name": "large dotted default"
             },
             {
-              "name": "large dotted default"
+              "name": "large dotted subtle"
             },
             {
               "name": "large dotted secondary"
             },
             {
-              "name": "medium solid subtle"
+              "name": "medium solid default"
             },
             {
-              "name": "medium solid default"
+              "name": "medium solid subtle"
             },
             {
               "name": "medium solid secondary"
             },
             {
-              "name": "medium dashed subtle"
+              "name": "medium dashed default"
             },
             {
-              "name": "medium dashed default"
+              "name": "medium dashed subtle"
             },
             {
               "name": "medium dashed secondary"
             },
             {
-              "name": "medium dotted subtle"
+              "name": "medium dotted default"
             },
             {
-              "name": "medium dotted default"
+              "name": "medium dotted subtle"
             },
             {
               "name": "medium dotted secondary"
             },
             {
-              "name": "small solid subtle"
+              "name": "small solid default"
             },
             {
-              "name": "small solid default"
+              "name": "small solid subtle"
             },
             {
               "name": "small solid secondary"
             },
             {
-              "name": "small dashed subtle"
+              "name": "small dashed default"
             },
             {
-              "name": "small dashed default"
+              "name": "small dashed subtle"
             },
             {
               "name": "small dashed secondary"
             },
             {
-              "name": "small dotted subtle"
-            },
-            {
               "name": "small dotted default"
             },
             {
+              "name": "small dotted subtle"
+            },
+            {
               "name": "small dotted secondary"
-            },
-            {
-              "name": "large solid subtle bottom"
-            },
-            {
-              "name": "large solid subtle top"
-            },
-            {
-              "name": "large solid subtle left"
-            },
-            {
-              "name": "large solid subtle right"
-            },
-            {
-              "name": "large solid subtle around"
             },
             {
               "name": "large solid default bottom"
@@ -400,6 +442,21 @@
               "name": "large solid default around"
             },
             {
+              "name": "large solid subtle bottom"
+            },
+            {
+              "name": "large solid subtle top"
+            },
+            {
+              "name": "large solid subtle left"
+            },
+            {
+              "name": "large solid subtle right"
+            },
+            {
+              "name": "large solid subtle around"
+            },
+            {
               "name": "large solid secondary bottom"
             },
             {
@@ -413,21 +470,6 @@
             },
             {
               "name": "large solid secondary around"
-            },
-            {
-              "name": "large dashed subtle bottom"
-            },
-            {
-              "name": "large dashed subtle top"
-            },
-            {
-              "name": "large dashed subtle left"
-            },
-            {
-              "name": "large dashed subtle right"
-            },
-            {
-              "name": "large dashed subtle around"
             },
             {
               "name": "large dashed default bottom"
@@ -445,6 +487,21 @@
               "name": "large dashed default around"
             },
             {
+              "name": "large dashed subtle bottom"
+            },
+            {
+              "name": "large dashed subtle top"
+            },
+            {
+              "name": "large dashed subtle left"
+            },
+            {
+              "name": "large dashed subtle right"
+            },
+            {
+              "name": "large dashed subtle around"
+            },
+            {
               "name": "large dashed secondary bottom"
             },
             {
@@ -458,21 +515,6 @@
             },
             {
               "name": "large dashed secondary around"
-            },
-            {
-              "name": "large dotted subtle bottom"
-            },
-            {
-              "name": "large dotted subtle top"
-            },
-            {
-              "name": "large dotted subtle left"
-            },
-            {
-              "name": "large dotted subtle right"
-            },
-            {
-              "name": "large dotted subtle around"
             },
             {
               "name": "large dotted default bottom"
@@ -490,6 +532,21 @@
               "name": "large dotted default around"
             },
             {
+              "name": "large dotted subtle bottom"
+            },
+            {
+              "name": "large dotted subtle top"
+            },
+            {
+              "name": "large dotted subtle left"
+            },
+            {
+              "name": "large dotted subtle right"
+            },
+            {
+              "name": "large dotted subtle around"
+            },
+            {
               "name": "large dotted secondary bottom"
             },
             {
@@ -503,21 +560,6 @@
             },
             {
               "name": "large dotted secondary around"
-            },
-            {
-              "name": "medium solid subtle bottom"
-            },
-            {
-              "name": "medium solid subtle top"
-            },
-            {
-              "name": "medium solid subtle left"
-            },
-            {
-              "name": "medium solid subtle right"
-            },
-            {
-              "name": "medium solid subtle around"
             },
             {
               "name": "medium solid default bottom"
@@ -535,6 +577,21 @@
               "name": "medium solid default around"
             },
             {
+              "name": "medium solid subtle bottom"
+            },
+            {
+              "name": "medium solid subtle top"
+            },
+            {
+              "name": "medium solid subtle left"
+            },
+            {
+              "name": "medium solid subtle right"
+            },
+            {
+              "name": "medium solid subtle around"
+            },
+            {
               "name": "medium solid secondary bottom"
             },
             {
@@ -548,21 +605,6 @@
             },
             {
               "name": "medium solid secondary around"
-            },
-            {
-              "name": "medium dashed subtle bottom"
-            },
-            {
-              "name": "medium dashed subtle top"
-            },
-            {
-              "name": "medium dashed subtle left"
-            },
-            {
-              "name": "medium dashed subtle right"
-            },
-            {
-              "name": "medium dashed subtle around"
             },
             {
               "name": "medium dashed default bottom"
@@ -580,6 +622,21 @@
               "name": "medium dashed default around"
             },
             {
+              "name": "medium dashed subtle bottom"
+            },
+            {
+              "name": "medium dashed subtle top"
+            },
+            {
+              "name": "medium dashed subtle left"
+            },
+            {
+              "name": "medium dashed subtle right"
+            },
+            {
+              "name": "medium dashed subtle around"
+            },
+            {
               "name": "medium dashed secondary bottom"
             },
             {
@@ -593,21 +650,6 @@
             },
             {
               "name": "medium dashed secondary around"
-            },
-            {
-              "name": "medium dotted subtle bottom"
-            },
-            {
-              "name": "medium dotted subtle top"
-            },
-            {
-              "name": "medium dotted subtle left"
-            },
-            {
-              "name": "medium dotted subtle right"
-            },
-            {
-              "name": "medium dotted subtle around"
             },
             {
               "name": "medium dotted default bottom"
@@ -625,6 +667,21 @@
               "name": "medium dotted default around"
             },
             {
+              "name": "medium dotted subtle bottom"
+            },
+            {
+              "name": "medium dotted subtle top"
+            },
+            {
+              "name": "medium dotted subtle left"
+            },
+            {
+              "name": "medium dotted subtle right"
+            },
+            {
+              "name": "medium dotted subtle around"
+            },
+            {
               "name": "medium dotted secondary bottom"
             },
             {
@@ -638,21 +695,6 @@
             },
             {
               "name": "medium dotted secondary around"
-            },
-            {
-              "name": "small solid subtle bottom"
-            },
-            {
-              "name": "small solid subtle top"
-            },
-            {
-              "name": "small solid subtle left"
-            },
-            {
-              "name": "small solid subtle right"
-            },
-            {
-              "name": "small solid subtle around"
             },
             {
               "name": "small solid default bottom"
@@ -670,6 +712,21 @@
               "name": "small solid default around"
             },
             {
+              "name": "small solid subtle bottom"
+            },
+            {
+              "name": "small solid subtle top"
+            },
+            {
+              "name": "small solid subtle left"
+            },
+            {
+              "name": "small solid subtle right"
+            },
+            {
+              "name": "small solid subtle around"
+            },
+            {
               "name": "small solid secondary bottom"
             },
             {
@@ -683,21 +740,6 @@
             },
             {
               "name": "small solid secondary around"
-            },
-            {
-              "name": "small dashed subtle bottom"
-            },
-            {
-              "name": "small dashed subtle top"
-            },
-            {
-              "name": "small dashed subtle left"
-            },
-            {
-              "name": "small dashed subtle right"
-            },
-            {
-              "name": "small dashed subtle around"
             },
             {
               "name": "small dashed default bottom"
@@ -715,6 +757,21 @@
               "name": "small dashed default around"
             },
             {
+              "name": "small dashed subtle bottom"
+            },
+            {
+              "name": "small dashed subtle top"
+            },
+            {
+              "name": "small dashed subtle left"
+            },
+            {
+              "name": "small dashed subtle right"
+            },
+            {
+              "name": "small dashed subtle around"
+            },
+            {
               "name": "small dashed secondary bottom"
             },
             {
@@ -730,21 +787,6 @@
               "name": "small dashed secondary around"
             },
             {
-              "name": "small dotted subtle bottom"
-            },
-            {
-              "name": "small dotted subtle top"
-            },
-            {
-              "name": "small dotted subtle left"
-            },
-            {
-              "name": "small dotted subtle right"
-            },
-            {
-              "name": "small dotted subtle around"
-            },
-            {
               "name": "small dotted default bottom"
             },
             {
@@ -758,6 +800,21 @@
             },
             {
               "name": "small dotted default around"
+            },
+            {
+              "name": "small dotted subtle bottom"
+            },
+            {
+              "name": "small dotted subtle top"
+            },
+            {
+              "name": "small dotted subtle left"
+            },
+            {
+              "name": "small dotted subtle right"
+            },
+            {
+              "name": "small dotted subtle around"
             },
             {
               "name": "small dotted secondary bottom"
@@ -5001,10 +5058,10 @@
           "description": "`state` {`FDividerState | undefined`} - \n\nProperty: state\n\nDefault: default",
           "values": [
             {
-              "name": "subtle"
+              "name": "default"
             },
             {
-              "name": "default"
+              "name": "subtle"
             },
             {
               "name": "secondary"
@@ -5014,7 +5071,59 @@
       ]
     },
     {
-      "name": "f-form-element-group",
+      "name": "f-field",
+      "description": "Attributes:\n\n  * `state` {`FFieldStateProp | undefined`} - \n\n  * `type` {`\"input\" | \"checkbox\" | \"radio\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `read-only` {`boolean | undefined`} - \n\nProperties:\n\n  * `state` {`FFieldStateProp | undefined`} - \n\n  * `type` {`\"input\" | \"checkbox\" | \"radio\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `readOnlyValue` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "attributes": [
+        {
+          "name": "state",
+          "description": "`state` {`FFieldStateProp | undefined`} - \n\nProperty: state\n\nDefault: default",
+          "values": [
+            {
+              "name": "primary"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
+              "name": "default"
+            }
+          ]
+        },
+        {
+          "name": "type",
+          "description": "`type` {`\"input\" | \"checkbox\" | \"radio\" | undefined`} - \n\nProperty: type\n\nDefault: input",
+          "values": [
+            {
+              "name": "input"
+            },
+            {
+              "name": "checkbox"
+            },
+            {
+              "name": "radio"
+            }
+          ]
+        },
+        {
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "read-only",
+          "description": "`read-only` {`boolean | undefined`} - \n\nProperty: readOnlyValue\n\nDefault: false",
+          "values": []
+        }
+      ]
+    },
+    {
+      "name": "f-group",
       "description": "Attributes:\n\n  * `orientation` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\nProperties:\n\n  * `orientation` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
@@ -5046,43 +5155,6 @@
               "name": "x-small"
             }
           ]
-        }
-      ]
-    },
-    {
-      "name": "f-form-element",
-      "description": "Attributes:\n\n  * `state` {`FFormElementStateProp | undefined`} - \n\n  * `required` {`boolean | undefined`} - \n\n  * `read-only` {`boolean | undefined`} - \n\nProperties:\n\n  * `state` {`FFormElementStateProp | undefined`} - \n\n  * `requiredValue` {`boolean | undefined`} - \n\n  * `readOnlyValue` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
-      "attributes": [
-        {
-          "name": "state",
-          "description": "`state` {`FFormElementStateProp | undefined`} - \n\nProperty: state\n\nDefault: default",
-          "values": [
-            {
-              "name": "primary"
-            },
-            {
-              "name": "success"
-            },
-            {
-              "name": "warning"
-            },
-            {
-              "name": "danger"
-            },
-            {
-              "name": "default"
-            }
-          ]
-        },
-        {
-          "name": "required",
-          "description": "`required` {`boolean | undefined`} - \n\nProperty: requiredValue\n\nDefault: false",
-          "values": []
-        },
-        {
-          "name": "read-only",
-          "description": "`read-only` {`boolean | undefined`} - \n\nProperty: readOnlyValue\n\nDefault: false",
-          "values": []
         }
       ]
     },
@@ -5242,10 +5314,10 @@
               "name": "inherit"
             },
             {
-              "name": "subtle"
+              "name": "default"
             },
             {
-              "name": "default"
+              "name": "subtle"
             },
             {
               "name": "secondary"
@@ -5366,11 +5438,6 @@
           "values": []
         }
       ]
-    },
-    {
-      "name": "f-label",
-      "description": "Properties:\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
-      "attributes": []
     },
     {
       "name": "f-pictogram",
@@ -5549,6 +5616,60 @@
       ]
     },
     {
+      "name": "f-radio",
+      "description": "Attributes:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\nProperties:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "attributes": [
+        {
+          "name": "value",
+          "description": "`value` {`\"selected\" | \"unselected\" | undefined`} - \n\nProperty: value\n\nDefault: unselected",
+          "values": [
+            {
+              "name": "selected"
+            },
+            {
+              "name": "unselected"
+            }
+          ]
+        },
+        {
+          "name": "state",
+          "description": "`state` {`FRadioState | undefined`} - \n\nProperty: state\n\nDefault: inherit",
+          "values": [
+            {
+              "name": "primary"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
+              "name": "inherit"
+            },
+            {
+              "name": "default"
+            }
+          ]
+        },
+        {
+          "name": "size",
+          "description": "`size` {`\"medium\" | \"small\" | undefined`} - \n\nProperty: size\n\nDefault: medium",
+          "values": [
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "f-spacer",
       "description": "Attributes:\n\n  * `size` {`FSpacerSizeProp | undefined`} - \n\nProperties:\n\n  * `size` {`FSpacerSizeProp | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
@@ -5577,11 +5698,6 @@
           ]
         }
       ]
-    },
-    {
-      "name": "f-subtext",
-      "description": "Properties:\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
-      "attributes": []
     },
     {
       "name": "f-tag",
@@ -5750,10 +5866,10 @@
               "name": "inherit"
             },
             {
-              "name": "subtle"
+              "name": "default"
             },
             {
-              "name": "default"
+              "name": "subtle"
             },
             {
               "name": "secondary"

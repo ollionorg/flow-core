@@ -1,0 +1,90 @@
+@use "sass:map";
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+
+$states: (
+  "primary": (
+    "background": var(--color-primary-default),
+    "border": var(--color-primary-default),
+  ),
+  "default": (
+    "background": var(--color-primary-default),
+    "border": var(--color-text-default),
+  ),
+  "success": (
+    "background": var(--color-success-default),
+    "border": var(--color-success-default),
+  ),
+  "warning": (
+    "background": var(--color-warning-default),
+    "border": var(--color-warning-default),
+  ),
+  "danger": (
+    "background": var(--color-danger-default),
+    "border": var(--color-danger-default),
+  ),
+  "inherit": (
+    "background": var(--color-checkbox-default),
+    "border": var(--color-radio-outline-default),
+  ),
+);
+
+$sizes: (
+  "small": (
+    "height": 12px,
+    "inner-height": 6px,
+  ),
+  "medium": (
+    "height": 16px,
+    "inner-height": 8px,
+  ),
+);
+
+:host {
+  .f-radio {
+    &[type="radio"] {
+      appearance: none;
+      margin: 0;
+      font: inherit;
+      color: currentColor;
+      border-radius: 50%;
+      transform: translateY(-0.075em);
+      display: grid;
+      place-content: center;
+      cursor: pointer;
+      @each $size, $value in $sizes {
+        &[size="#{$size}"] {
+          width: map.get($value, "height");
+          height: map.get($value, "height");
+        }
+      }
+    }
+
+    @each $state, $color in $states {
+      &[state="#{$state}"] {
+        border: 1px solid map.get($color, "border");
+        &[type="radio"]::before {
+          content: "";
+          border-radius: 50%;
+          transform: scale(0);
+          transition: 120ms transform ease-in-out;
+          box-shadow: inset 1em 1em map.get($color, "background");
+          background-color: map.get($color, "background");
+        }
+      }
+    }
+
+    @each $size, $value in $sizes {
+      &[size="#{$size}"] {
+        &[type="radio"]::before {
+          width: map.get($value, "inner-height");
+          height: map.get($value, "inner-height");
+        }
+      }
+    }
+
+    &[type="radio"][checked="true"]::before {
+      transform: scale(1);
+    }
+  }
+}

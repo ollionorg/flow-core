@@ -124,7 +124,7 @@
           "name": "*",
           "declaration": {
             "name": "*",
-            "package": "\"./components/f-form-element/f-form-element\""
+            "package": "\"./components/f-group/f-group\""
           }
         },
         {
@@ -132,7 +132,7 @@
           "name": "*",
           "declaration": {
             "name": "*",
-            "package": "\"./components/f-label/f-label\""
+            "package": "\"./components/f-checkbox/f-checkbox\""
           }
         },
         {
@@ -140,7 +140,7 @@
           "name": "*",
           "declaration": {
             "name": "*",
-            "package": "\"./components/f-subtext/f-subtext\""
+            "package": "\"./components/f-field/f-field\""
           }
         },
         {
@@ -148,7 +148,7 @@
           "name": "*",
           "declaration": {
             "name": "*",
-            "package": "\"./components/f-form-element-group/f-form-element-group\""
+            "package": "\"./components/f-radio/f-radio\""
           }
         }
       ]
@@ -1211,6 +1211,291 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-checkbox/f-checkbox.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FCheckbox",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "\"checked\" | \"unchecked\" | \"indeterminate\" | undefined"
+              },
+              "default": "\"unchecked\"",
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FCheckboxState | undefined"
+              },
+              "default": "\"inherit\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "handleClick"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "\"checked\" | \"unchecked\" | \"indeterminate\" | undefined"
+              },
+              "default": "\"unchecked\"",
+              "fieldName": "value"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FCheckboxState | undefined"
+              },
+              "default": "\"inherit\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-checkbox",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FCheckbox",
+          "declaration": {
+            "name": "FCheckbox",
+            "module": "src/components/f-checkbox/f-checkbox.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-checkbox",
+          "declaration": {
+            "name": "FCheckbox",
+            "module": "src/components/f-checkbox/f-checkbox.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-field/f-field.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FField",
+          "members": [
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FFieldStateProp | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "\"input\" | \"checkbox\" | \"radio\" | undefined"
+              },
+              "default": "\"input\"",
+              "attribute": "type",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "readOnlyValue",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "read-only",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "FFieldStateProp | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "\"input\" | \"checkbox\" | \"radio\" | undefined"
+              },
+              "default": "\"input\"",
+              "fieldName": "type"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "read-only",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "readOnlyValue"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "summary": "Text component includes Headings, titles, body texts and links.",
+          "tagName": "f-field",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FField",
+          "declaration": {
+            "name": "FField",
+            "module": "src/components/f-field/f-field.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-field",
+          "declaration": {
+            "name": "FField",
+            "module": "src/components/f-field/f-field.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-group/f-group.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FGroup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "attribute": "orientation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "attribute": "gap",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "orientation",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "fieldName": "orientation"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "fieldName": "gap"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "summary": "Text component includes Headings, titles, body texts and links.",
+          "tagName": "f-group",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FGroup",
+          "declaration": {
+            "name": "FGroup",
+            "module": "src/components/f-group/f-group.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-group",
+          "declaration": {
+            "name": "FGroup",
+            "module": "src/components/f-group/f-group.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-divider/f-divider.ts",
       "declarations": [
         {
@@ -1306,176 +1591,6 @@
           "declaration": {
             "name": "FDivider",
             "module": "src/components/f-divider/f-divider.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-element/f-form-element.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FFormElement",
-          "members": [
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FFormElementStateProp | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "requiredValue",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "required",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "readOnlyValue",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "read-only",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "state",
-              "type": {
-                "text": "FFormElementStateProp | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "required",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "requiredValue"
-            },
-            {
-              "name": "read-only",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "readOnlyValue"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "summary": "Text component includes Headings, titles, body texts and links.",
-          "tagName": "f-form-element",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FFormElement",
-          "declaration": {
-            "name": "FFormElement",
-            "module": "src/components/f-form-element/f-form-element.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-form-element",
-          "declaration": {
-            "name": "FFormElement",
-            "module": "src/components/f-form-element/f-form-element.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-element-group/f-form-element-group.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FFormElementGroup",
-          "members": [
-            {
-              "kind": "field",
-              "name": "orientation",
-              "type": {
-                "text": "\"vertical\" | \"horizontal\" | undefined"
-              },
-              "default": "\"vertical\"",
-              "attribute": "orientation",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"small\"",
-              "attribute": "gap",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "orientation",
-              "type": {
-                "text": "\"vertical\" | \"horizontal\" | undefined"
-              },
-              "default": "\"vertical\"",
-              "fieldName": "orientation"
-            },
-            {
-              "name": "gap",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"small\"",
-              "fieldName": "gap"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "summary": "Text component includes Headings, titles, body texts and links.",
-          "tagName": "f-form-element-group",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FFormElementGroup",
-          "declaration": {
-            "name": "FFormElementGroup",
-            "module": "src/components/f-form-element-group/f-form-element-group.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-form-element-group",
-          "declaration": {
-            "name": "FFormElementGroup",
-            "module": "src/components/f-form-element-group/f-form-element-group.ts"
           }
         }
       ]
@@ -2095,43 +2210,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-label/f-label.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FLabel",
-          "members": [],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "summary": "Text component includes Headings, titles, body texts and links.",
-          "tagName": "f-label",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FLabel",
-          "declaration": {
-            "name": "FLabel",
-            "module": "src/components/f-label/f-label.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-label",
-          "declaration": {
-            "name": "FLabel",
-            "module": "src/components/f-label/f-label.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-pictogram/f-pictogram.ts",
       "declarations": [
         {
@@ -2483,6 +2561,111 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-radio/f-radio.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FRadio",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "\"selected\" | \"unselected\" | undefined"
+              },
+              "default": "\"unselected\"",
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FRadioState | undefined"
+              },
+              "default": "\"inherit\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "handleClick",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "\"selected\" | \"unselected\" | undefined"
+              },
+              "default": "\"unselected\"",
+              "fieldName": "value"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FRadioState | undefined"
+              },
+              "default": "\"inherit\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-radio",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FRadio",
+          "declaration": {
+            "name": "FRadio",
+            "module": "src/components/f-radio/f-radio.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-radio",
+          "declaration": {
+            "name": "FRadio",
+            "module": "src/components/f-radio/f-radio.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-tag/f-tag.ts",
       "declarations": [
         {
@@ -2709,6 +2892,42 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-template/f-template.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTemplate",
+          "members": [],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-template",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTemplate",
+          "declaration": {
+            "name": "FTemplate",
+            "module": "src/components/f-template/f-template.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-template",
+          "declaration": {
+            "name": "FTemplate",
+            "module": "src/components/f-template/f-template.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-spacer/f-spacer.ts",
       "declarations": [
         {
@@ -2765,43 +2984,6 @@
           "declaration": {
             "name": "FSpacer",
             "module": "src/components/f-spacer/f-spacer.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-subtext/f-subtext.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FSubtext",
-          "members": [],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "summary": "Text component includes Headings, titles, body texts and links.",
-          "tagName": "f-subtext",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FSubtext",
-          "declaration": {
-            "name": "FSubtext",
-            "module": "src/components/f-subtext/f-subtext.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-subtext",
-          "declaration": {
-            "name": "FSubtext",
-            "module": "src/components/f-subtext/f-subtext.ts"
           }
         }
       ]
@@ -3003,70 +3185,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-template/f-template.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTemplate",
-          "members": [],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-template",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTemplate",
-          "declaration": {
-            "name": "FTemplate",
-            "module": "src/components/f-template/f-template.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-template",
-          "declaration": {
-            "name": "FTemplate",
-            "module": "src/components/f-template/f-template.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/mixins/svg/loader.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "src/mixins/svg/loader.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/mixins/svg/not-found.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "src/mixins/svg/not-found.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/modules/config/index.ts",
       "declarations": [
         {
@@ -3098,6 +3216,34 @@
           "declaration": {
             "name": "ConfigUtil",
             "module": "src/modules/config/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/mixins/svg/loader.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/mixins/svg/loader.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/mixins/svg/not-found.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/mixins/svg/not-found.ts"
           }
         }
       ]

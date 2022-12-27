@@ -66,7 +66,7 @@ $sizes: (
   }
 
   .f-switch {
-    .slider {
+    .f-switch-slider {
       position: absolute;
       cursor: pointer;
       top: 0;
@@ -76,12 +76,13 @@ $sizes: (
       background-color: var(--color-neutral-secondary);
       -webkit-transition: 0.4s;
       transition: 0.4s;
+      border-radius: 34px;
       &:hover {
         background-color: var(--color-neutral-secondary-hover);
       }
     }
 
-    .slider:before {
+    .f-switch-slider:before {
       position: absolute;
       content: "";
       height: var(--form-switch-slider-size);
@@ -91,10 +92,11 @@ $sizes: (
       background-color: var(--color-neutral-surface);
       -webkit-transition: 0.4s;
       transition: 0.4s;
+      border-radius: 50%;
     }
     @each $size, $value in $sizes {
       &[size="#{$size}"] {
-        .slider:before {
+        .f-switch-slider:before {
           height: map.get($value, "slider");
           width: map.get($value, "slider");
         }
@@ -103,20 +105,20 @@ $sizes: (
 
     @each $state, $color in $states {
       &[state="#{$state}"] {
-        input[checked="true"] + .slider {
+        input[checked="true"] + .f-switch-slider {
           background-color: map.get($color, "background");
           &:hover {
             background-color: map.get($color, "background-hover");
           }
         }
-        input:focus + .slider {
+        input:focus + .f-switch-slider {
           outline: 1px solid map.get($color, "background");
-          outline-offset: 2px;
+          outline-offset: 1px;
         }
       }
     }
 
-    input[checked="true"] + .slider:before {
+    input[checked="true"] + .f-switch-slider:before {
       -webkit-transform: translateX(var(--form-switch-slider-translate));
       -ms-transform: translateX(var(--form-switch-slider-translate));
       transform: translateX(var(--form-switch-slider-translate));
@@ -124,21 +126,12 @@ $sizes: (
 
     @each $size, $value in $sizes {
       &[size="#{$size}"] {
-        input[checked="true"] + .slider:before {
+        input[checked="true"] + .f-switch-slider:before {
           -webkit-transform: translateX(map.get($value, "translate-slider"));
           -ms-transform: translateX(map.get($value, "translate-slider"));
           transform: translateX(map.get($value, "translate-slider"));
         }
       }
-    }
-
-    /* Rounded sliders */
-    .slider.round {
-      border-radius: 34px;
-    }
-
-    .slider.round:before {
-      border-radius: 50%;
     }
   }
 }

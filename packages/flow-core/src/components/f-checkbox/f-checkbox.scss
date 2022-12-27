@@ -2,27 +2,39 @@
 // common mixins imported from this file
 @import "./../../mixins/scss/mixins";
 
+/**
+$states map created to hold values of different states
+**/
 $states: (
   "primary": (
     "background": var(--color-primary-default),
+    "hover": var(--color-primary-default-hover),
   ),
   "default": (
     "background": var(--color-primary-default),
+    "hover": var(--color-primary-default-hover),
   ),
   "success": (
     "background": var(--color-success-default),
+    "hover": var(--color-success-default-hover),
   ),
   "warning": (
     "background": var(--color-warning-default),
+    "hover": var(--color-warning-default-hover),
   ),
   "danger": (
     "background": var(--color-danger-default),
+    "hover": var(--color-danger-default-hover),
   ),
   "inherit": (
     "background": var(--color-checkbox-default),
+    "hover": var(--color-switch-default-hover),
   ),
 );
 
+/**
+$sizes map created to hold values of different sizes
+**/
 $sizes: (
   "small": (
     "height": 10px,
@@ -38,7 +50,6 @@ $sizes: (
   height: fit-content;
   .f-checkbox {
     border: 0px;
-    /* clip: rect(0px, 0px, 0px, 0px); */
     height: 0px;
     width: 0px;
     overflow: hidden;
@@ -63,12 +74,6 @@ $sizes: (
       }
     }
 
-    label:active::after {
-      // background-color: var(--color-checkbox-default);
-      // outline: 2px solid var(--color-checkbox-default);
-      outline-offset: 4px;
-    }
-
     label {
       color: var(--color-text-default);
       line-height: 40px;
@@ -85,6 +90,10 @@ $sizes: (
         border: 1px solid var(--color-text-default);
         border-radius: 2px;
       }
+      &:hover::after {
+        border: 1px solid var(--color-text-default-hover);
+      }
+
       @each $size, $value in $sizes {
         &[size="#{$size}"] {
           &:after {
@@ -101,6 +110,10 @@ $sizes: (
             transition: 0.15s all ease-out;
             background-color: map.get($color, "background");
           }
+          &:hover::after {
+            border: 1px solid map.get($color, "hover");
+            background-color: map.get($color, "hover");
+          }
         }
         &[state="#{$state}"][value="indeterminate"] {
           &:after {
@@ -108,9 +121,14 @@ $sizes: (
             transition: 0.15s all ease-out;
             background-color: map.get($color, "background");
           }
+          &:hover::after {
+            border: 1px solid map.get($color, "hover");
+            background-color: map.get($color, "hover");
+          }
         }
       }
     }
+
     svg {
       stroke: var(--color-surface-default);
       stroke-width: 3px;
@@ -137,6 +155,18 @@ $sizes: (
     }
     100% {
       stroke-dashoffset: 0;
+    }
+  }
+}
+
+f-checkbox {
+  @each $state, $color in $states {
+    &[state="#{$state}"] {
+      &:focus {
+        outline: map.get($color, "background") solid 1px;
+        outline-offset: 1px;
+        border-radius: 2px;
+      }
     }
   }
 }

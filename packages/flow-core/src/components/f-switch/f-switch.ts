@@ -2,8 +2,6 @@ import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-switch.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import { FText } from "../f-text/f-text";
-import { FDiv } from "../f-div/f-div";
 
 export type FSwitchState = "primary" | "default" | "success" | "warning" | "danger" | "inherit";
 
@@ -12,26 +10,29 @@ export class FSwitch extends FRoot {
   /**
    * css loaded from scss file
    */
-  static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles];
+  static styles = [unsafeCSS(eleStyle)];
 
   /**
-   * @attribute variant of button.
+   * @attribute Value of a switch defines if it is on or off.
    */
   @property({ reflect: true, type: String })
   value?: "on" | "off" = "off";
 
   /**
-   * @attribute The states on buttons are to indicate various degrees of emphasis of the action.
+   * @attribute States are used to communicate purpose and connotations.
    */
   @property({ reflect: true, type: String })
   state?: FSwitchState = "inherit";
 
   /**
-   * @attribute The states on buttons are to indicate various degrees of emphasis of the action.
+   * @attribute f-switch can have 2 sizes.
    */
   @property({ reflect: true, type: String })
   size?: "small" | "medium";
 
+  /**
+   * emit event.
+   */
   handleInput(e: React.ChangeEvent<HTMLInputElement>) {
     const event = new CustomEvent("update", {
       detail: {
@@ -52,7 +53,7 @@ export class FSwitch extends FRoot {
         checked=${this.value === "on" ? true : false}
         @input=${this.handleInput}
       />
-      <span class="slider round"></span>
+      <span class="f-switch-slider"></span>
     </label>`;
   }
 }

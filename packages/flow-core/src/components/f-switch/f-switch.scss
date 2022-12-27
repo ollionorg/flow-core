@@ -1,0 +1,144 @@
+@use "sass:map";
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+
+$states: (
+  "primary": (
+    "background": var(--color-primary-default),
+    "background-hover": var(--color-primary-default-hover),
+  ),
+  "default": (
+    "background": var(--color-primary-default),
+    "background-hover": var(--color-primary-default-hover),
+  ),
+  "success": (
+    "background": var(--color-success-default),
+    "background-hover": var(--color-success-default-hover),
+  ),
+  "warning": (
+    "background": var(--color-warning-default),
+    "background-hover": var(--color-warning-default-hover),
+  ),
+  "danger": (
+    "background": var(--color-danger-default),
+    "background-hover": var(--color-danger-default-hover),
+  ),
+  "inherit": (
+    "background": var(--color-switch-default),
+    "background-hover": var(--color-switch-default-hover),
+  ),
+);
+
+$sizes: (
+  "small": (
+    "height": 16px,
+    "width": 28px,
+    "slider": 12px,
+    "translate-slider": 12px,
+  ),
+  "medium": (
+    "height": 20px,
+    "width": 36px,
+    "slider": 16px,
+    "translate-slider": 16px,
+  ),
+);
+
+:host {
+  .f-switch {
+    @include base();
+    position: relative;
+    display: inline-block;
+    width: var(--form-switch-width);
+    height: var(--form-switch-height);
+    @each $size, $value in $sizes {
+      &[size="#{$size}"] {
+        width: map.get($value, "width");
+        height: map.get($value, "height");
+      }
+    }
+  }
+
+  .f-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .f-switch {
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--color-neutral-secondary);
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+      &:hover {
+        background-color: var(--color-neutral-secondary-hover);
+      }
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: var(--form-switch-slider-size);
+      width: var(--form-switch-slider-size);
+      left: 2px;
+      top: 2px;
+      background-color: var(--color-neutral-surface);
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+    }
+    @each $size, $value in $sizes {
+      &[size="#{$size}"] {
+        .slider:before {
+          height: map.get($value, "slider");
+          width: map.get($value, "slider");
+        }
+      }
+    }
+
+    @each $state, $color in $states {
+      &[state="#{$state}"] {
+        input[checked="true"] + .slider {
+          background-color: map.get($color, "background");
+          &:hover {
+            background-color: map.get($color, "background-hover");
+          }
+        }
+        input:focus + .slider {
+          outline: 1px solid map.get($color, "background");
+          outline-offset: 2px;
+        }
+      }
+    }
+
+    input[checked="true"] + .slider:before {
+      -webkit-transform: translateX(var(--form-switch-slider-translate));
+      -ms-transform: translateX(var(--form-switch-slider-translate));
+      transform: translateX(var(--form-switch-slider-translate));
+    }
+
+    @each $size, $value in $sizes {
+      &[size="#{$size}"] {
+        input[checked="true"] + .slider:before {
+          -webkit-transform: translateX(map.get($value, "translate-slider"));
+          -ms-transform: translateX(map.get($value, "translate-slider"));
+          transform: translateX(map.get($value, "translate-slider"));
+        }
+      }
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+  }
+}

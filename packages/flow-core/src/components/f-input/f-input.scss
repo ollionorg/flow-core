@@ -8,15 +8,65 @@ $variants map will have state specific inner maps.
 $variants: (
   "curved-fill": (
     "background": var(--color-surface-tertiary),
+    "hover": var(--color-surface-tertiary-hover),
   ),
   "round-fill": (
     "background": var(--color-surface-tertiary),
+    "hover": var(--color-surface-tertiary-hover),
   ),
   "transparent": (
     "background": transparent,
+    "hover": var(--color-surface-default-hover),
   ),
   "outline": (
     "background": transparent,
+    "hover": var(--color-surface-default-hover),
+  ),
+);
+
+$sizes: (
+  "medium": (
+    "main-height": 36px,
+    "height": 34px,
+    "loader": 24px,
+  ),
+  "small": (
+    "main-height": 26px,
+    "height": 26px,
+    "loader": 16px,
+  ),
+);
+
+$states: (
+  "primary": (
+    "input": var(--color-primary-default),
+    "border": var(--color-primary-default),
+    "focus": var(--color-primary-default),
+  ),
+  "default": (
+    "input": var(--color-surface-tertiary),
+    "border": var(--color-border-default),
+    "focus": var(--color-primary-default),
+  ),
+  "success": (
+    "input": var(--color-success-default),
+    "border": var(--color-success-default),
+    "focus": var(--color-success-default),
+  ),
+  "warning": (
+    "input": var(--color-warning-default),
+    "border": var(--color-warning-default),
+    "focus": var(--color-warning-default),
+  ),
+  "danger": (
+    "input": var(--color-danger-default),
+    "border": var(--color-danger-default),
+    "focus": var(--color-danger-default),
+  ),
+  "inherit": (
+    "input": var(--color-input-default),
+    "border": var(--color-input-border-default),
+    "focus": var(--color-input-focus),
   ),
 );
 
@@ -32,56 +82,64 @@ applies styles on f-div
     display: flex;
     align-items: center;
     position: relative;
-    height: 36px;
+    height: var(--form-input-div-size);
+
+    @each $size, $value in $sizes {
+      &[size="#{$size}"] {
+        height: map.get($value, "main-height");
+      }
+    }
 
     .word-break {
       word-break: normal !important;
     }
-    // including disabled mixins to apply disabled css
-    &[disabled] {
-      @include disabled();
-    }
+
     @each $variant, $value in $variants {
       &[variant^="#{$variant}"] {
         background-color: map.get($value, "background");
+        &:hover {
+          background-color: map.get($value, "hover") !important;
+        }
       }
     }
-
-    &[variant="transparent"] {
-      border-bottom: 1px solid var(--color-input-border-default);
-      border-top: none;
-      border-right: none;
-      border-left: none;
-      &:focus-within {
-        border-bottom: 1px solid var(--color-primary-default);
-        outline: none;
+    @each $state, $color in $states {
+      &[state="#{$state}"] {
+        &[variant="transparent"] {
+          border-bottom: 1px solid map.get($color, "border");
+          border-top: none;
+          border-right: none;
+          border-left: none;
+          &:focus-within {
+            border-bottom: 1px solid map.get($color, "focus");
+            outline: none;
+          }
+        }
+        &[variant="outline"] {
+          border: 1px solid map.get($color, "border");
+          border-radius: 4px;
+          &:focus-within {
+            border: 1px solid map.get($color, "focus");
+            outline: none;
+          }
+        }
+        &[variant="round-fill"] {
+          border-radius: 22px;
+          border: 1px solid map.get($color, "input");
+          &:focus-within {
+            border: 1px solid map.get($color, "focus");
+            outline: none;
+          }
+        }
+        &[variant="curved-fill"] {
+          border-radius: 4px;
+          border: 1px solid map.get($color, "input");
+          &:focus-within {
+            border: 1px solid map.get($color, "focus");
+            outline: none;
+          }
+        }
       }
     }
-    &[variant="outline"] {
-      border: 1px solid var(--color-input-border-default);
-      border-radius: 4px;
-      &:focus-within {
-        border: 1px solid var(--color-primary-default);
-        outline: none;
-      }
-    }
-    &[variant="round-fill"] {
-      border-radius: 22px;
-      border: 1px solid var(--color-input-default);
-      &:focus-within {
-        border: 1px solid var(--color-primary-default);
-        outline: none;
-      }
-    }
-    &[variant="curved-fill"] {
-      border-radius: 4px;
-      border: 1px solid var(--color-input-default);
-      &:focus-within {
-        border: 1px solid var(--color-primary-default);
-        outline: none;
-      }
-    }
-
     .prefix {
       position: relative;
       display: flex;
@@ -109,6 +167,19 @@ applies styles on f-div
 
       svg {
         position: relative;
+        height: var(--form-input-loader);
+        width: var(--form-input-loader);
+      }
+    }
+
+    @each $size, $value in $sizes {
+      &[size="#{$size}"] {
+        .loader-suffix {
+          svg {
+            height: map.get($value, "loader");
+            width: map.get($value, "loader");
+          }
+        }
       }
     }
 
@@ -117,7 +188,12 @@ applies styles on f-div
       flex: 1 1 auto;
       width: 100%;
       padding: 0px 12px;
-      height: 34px;
+      height: var(--form-input-size);
+      @each $size, $value in $sizes {
+        &[size="#{$size}"] {
+          height: map.get($value, "height");
+        }
+      }
       font-style: normal;
       font-weight: 325;
       font-size: 12px;
@@ -128,6 +204,9 @@ applies styles on f-div
       @each $variant, $value in $variants {
         &[variant^="#{$variant}"] {
           background-color: map.get($value, "background");
+          &:hover {
+            background-color: map.get($value, "hover") !important;
+          }
           border: none;
           &:focus {
             outline: none;

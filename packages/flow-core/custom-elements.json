@@ -124,7 +124,7 @@
           "name": "*",
           "declaration": {
             "name": "*",
-            "package": "\"./components/f-group/f-group\""
+            "package": "\"./components/f-form-group/f-form-group\""
           }
         },
         {
@@ -157,6 +157,22 @@
           "declaration": {
             "name": "*",
             "package": "\"./components/f-form/f-form\""
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-switch/f-switch\""
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-textarea/f-textarea\""
           }
         }
       ]
@@ -743,13 +759,20 @@
               "type": {
                 "text": "\"small\" | \"medium\" | undefined"
               },
-              "default": "\"medium\"",
               "attribute": "size",
               "reflects": true
             },
             {
               "kind": "method",
-              "name": "handleClick"
+              "name": "handleClick",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
             }
           ],
           "attributes": [
@@ -774,7 +797,6 @@
               "type": {
                 "text": "\"small\" | \"medium\" | undefined"
               },
-              "default": "\"medium\"",
               "fieldName": "size"
             }
           ],
@@ -1456,6 +1478,16 @@
             },
             {
               "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "readOnlyValue",
               "type": {
                 "text": "boolean | undefined"
@@ -1489,6 +1521,14 @@
               },
               "default": "false",
               "fieldName": "disabled"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
             },
             {
               "name": "read-only",
@@ -1582,52 +1622,14 @@
               "reflects": true
             },
             {
-              "kind": "method",
-              "name": "onFocusOut",
-              "parameters": [
-                {
-                  "name": "field",
-                  "type": {
-                    "text": "{\n      value: string;\n      validationRules: [\n        {\n          name: string;\n          when: [];\n          errorPresent: boolean;\n          validate: (value: string | unknown[]) => boolean;\n        }\n      ];\n      errorPresent: boolean;\n    }"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "checkForValidation",
-              "parameters": [
-                {
-                  "name": "validation",
-                  "type": {
-                    "text": "{ when: [] }"
-                  }
-                },
-                {
-                  "name": "trigger",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "updateValue",
-              "parameters": [
-                {
-                  "name": "validation",
-                  "type": {
-                    "text": "{ when: []; errorPresent: boolean }"
-                  }
-                },
-                {
-                  "name": "value",
-                  "type": {
-                    "text": "boolean"
-                  }
-                }
-              ]
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
             }
           ],
           "attributes": [
@@ -1637,6 +1639,14 @@
                 "text": "FormBuilder | undefined"
               },
               "fieldName": "fields"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
             }
           ],
           "superclass": {
@@ -1669,21 +1679,21 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-group/f-group.ts",
+      "path": "src/components/f-form-group/f-form-group.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "FGroup",
+          "name": "FFormGroup",
           "members": [
             {
               "kind": "field",
-              "name": "orientation",
+              "name": "direction",
               "type": {
                 "text": "\"vertical\" | \"horizontal\" | undefined"
               },
               "default": "\"vertical\"",
-              "attribute": "orientation",
+              "attribute": "direction",
               "reflects": true
             },
             {
@@ -1699,12 +1709,12 @@
           ],
           "attributes": [
             {
-              "name": "orientation",
+              "name": "direction",
               "type": {
                 "text": "\"vertical\" | \"horizontal\" | undefined"
               },
               "default": "\"vertical\"",
-              "fieldName": "orientation"
+              "fieldName": "direction"
             },
             {
               "name": "gap",
@@ -1720,25 +1730,25 @@
             "module": "/src/mixins/components/f-root/f-root"
           },
           "summary": "Text component includes Headings, titles, body texts and links.",
-          "tagName": "f-group",
+          "tagName": "f-form-group",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "FGroup",
+          "name": "FFormGroup",
           "declaration": {
-            "name": "FGroup",
-            "module": "src/components/f-group/f-group.ts"
+            "name": "FFormGroup",
+            "module": "src/components/f-form-group/f-form-group.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "f-group",
+          "name": "f-form-group",
           "declaration": {
-            "name": "FGroup",
-            "module": "src/components/f-group/f-group.ts"
+            "name": "FFormGroup",
+            "module": "src/components/f-form-group/f-form-group.ts"
           }
         }
       ]
@@ -2150,6 +2160,25 @@
             },
             {
               "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FInputState | undefined"
+              },
+              "default": "\"inherit\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "category",
               "type": {
                 "text": "\"text\" | \"number\" | \"email\" | \"password\" | \"url\" | \"tel\" | \"date\" | \"time\" | undefined"
@@ -2224,33 +2253,19 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "isRequired"
-            },
-            {
-              "kind": "field",
               "name": "isReadOnly"
             },
             {
               "kind": "method",
-              "name": "validateValue"
-            },
-            {
-              "kind": "method",
-              "name": "onBlur"
-            },
-            {
-              "kind": "method",
-              "name": "keyPress"
+              "name": "inputHandler",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
             }
           ],
           "attributes": [
@@ -2261,6 +2276,21 @@
               },
               "default": "\"curved-fill\"",
               "fieldName": "variant"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FInputState | undefined"
+              },
+              "default": "\"inherit\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "fieldName": "size"
             },
             {
               "name": "category",
@@ -2319,14 +2349,6 @@
               },
               "default": "false",
               "fieldName": "loading"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
             }
           ],
           "superclass": {
@@ -2742,7 +2764,6 @@
               "type": {
                 "text": "\"small\" | \"medium\" | undefined"
               },
-              "default": "\"medium\"",
               "attribute": "size",
               "reflects": true
             },
@@ -2781,7 +2802,6 @@
               "type": {
                 "text": "\"small\" | \"medium\" | undefined"
               },
-              "default": "\"medium\"",
               "fieldName": "size"
             }
           ],
@@ -2870,6 +2890,109 @@
           "declaration": {
             "name": "FSpacer",
             "module": "src/components/f-spacer/f-spacer.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-switch/f-switch.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FSwitch",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "\"on\" | \"off\" | undefined"
+              },
+              "default": "\"off\"",
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FSwitchState | undefined"
+              },
+              "default": "\"inherit\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "handleClick",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "\"on\" | \"off\" | undefined"
+              },
+              "default": "\"off\"",
+              "fieldName": "value"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FSwitchState | undefined"
+              },
+              "default": "\"inherit\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "fieldName": "size"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-switch",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FSwitch",
+          "declaration": {
+            "name": "FSwitch",
+            "module": "src/components/f-switch/f-switch.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-switch",
+          "declaration": {
+            "name": "FSwitch",
+            "module": "src/components/f-switch/f-switch.ts"
           }
         }
       ]
@@ -3327,6 +3450,237 @@
           "declaration": {
             "name": "FText",
             "module": "src/components/f-text/f-text.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-textarea/f-textarea.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTextArea",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "category",
+              "type": {
+                "text": "\"fill\" | \"transparent\" | \"outline\" | undefined"
+              },
+              "default": "\"fill\"",
+              "attribute": "category",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FTextAreaState | undefined"
+              },
+              "default": "\"inherit\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "row",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "row",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "placeholder",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "maxLength",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "max-length",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "resizable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "resizable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clear",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "clear",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "handleClick",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "inputHandler",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "clearValue"
+            },
+            {
+              "kind": "method",
+              "name": "applyStyles",
+              "parameters": [
+                {
+                  "name": "parent",
+                  "type": {
+                    "text": "HTMLElement | \"\""
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "category",
+              "type": {
+                "text": "\"fill\" | \"transparent\" | \"outline\" | undefined"
+              },
+              "default": "\"fill\"",
+              "fieldName": "category"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FTextAreaState | undefined"
+              },
+              "default": "\"inherit\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "fieldName": "size"
+            },
+            {
+              "name": "row",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "row"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "max-length",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "maxLength"
+            },
+            {
+              "name": "resizable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "resizable"
+            },
+            {
+              "name": "clear",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "clear"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-textarea",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTextArea",
+          "declaration": {
+            "name": "FTextArea",
+            "module": "src/components/f-textarea/f-textarea.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-textarea",
+          "declaration": {
+            "name": "FTextArea",
+            "module": "src/components/f-textarea/f-textarea.ts"
           }
         }
       ]

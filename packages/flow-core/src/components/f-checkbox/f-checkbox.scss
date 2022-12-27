@@ -29,16 +29,19 @@ $sizes: (
     "top": -4px,
     "left": -13.5px,
     "width": 12px,
+    "padding": 2px,
   ),
   "medium": (
     "height": 16px,
     "top": -2.5px,
     "left": -16.5px,
     "width": 14px,
+    "padding": 3px,
   ),
 );
 
 :host {
+  height: fit-content;
   .f-checkbox {
     border: 0;
     clip: rect(0 0 0 0);
@@ -51,6 +54,8 @@ $sizes: (
   }
 
   .promoted-checkbox {
+    @include base();
+
     input[checked="true"] + label > svg {
       height: 24px;
       animation: draw-checkbox ease-in-out 0.4s forwards;
@@ -68,18 +73,23 @@ $sizes: (
       line-height: 40px;
       cursor: pointer;
       position: relative;
+      &:after {
+        content: "";
+        height: var(--form-checkbox-size);
+        width: var(--form-checkbox-size);
+        float: left;
+        border: 1.5px solid var(--color-text-default);
+        border-radius: 2px;
+      }
       @each $size, $value in $sizes {
         &[size="#{$size}"] {
           &:after {
-            content: "";
             height: map.get($value, "height");
             width: map.get($value, "height");
-            float: left;
-            border: 1.5px solid var(--color-text-default);
-            border-radius: 2px;
           }
         }
       }
+
       @each $state, $color in $states {
         &[state="#{$state}"][value="checked"] {
           &:after {
@@ -97,17 +107,22 @@ $sizes: (
         }
       }
     }
+    svg {
+      stroke: var(--color-surface-default);
+      stroke-width: 3px;
+      height: 0px;
+      width: var(--form-checkbox-width);
+      position: absolute;
+      left: var(--form-checkbox-left);
+      top: var(--form-checkbox-top);
+      stroke-dasharray: 33;
+    }
     @each $size, $value in $sizes {
       &[size="#{$size}"] {
         svg {
-          stroke: var(--color-surface-default);
-          stroke-width: 3px;
-          height: 0px;
           width: map.get($value, "width");
-          position: absolute;
           left: map.get($value, "left");
           top: map.get($value, "top");
-          stroke-dasharray: 33;
         }
       }
     }
@@ -121,4 +136,16 @@ $sizes: (
       stroke-dashoffset: 0;
     }
   }
+}
+
+f-checkbox {
+  // display: flex;
+  // align-items: center;
+  // padding-top: var(--form-checkbox-padding-top);
+  // @each $size, $value in $sizes {
+  //   &[size="#{$size}"] {
+  //     padding-top: map.get($value, "padding");
+  //   }
+  // }
+  padding-top: 0.16em;
 }

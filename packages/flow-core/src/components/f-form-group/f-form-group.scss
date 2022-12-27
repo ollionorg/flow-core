@@ -1,22 +1,22 @@
 @import "./../../mixins/scss/mixins";
 
 $gaps: (
-  "large": 24px,
-  "medium": 16px,
-  "small": 12px,
-  "x-small": 8px,
+  "large": 16px,
+  "medium": 12px,
+  "small": 8px,
+  "x-small": 4px,
 );
 
-f-group {
+f-form-group {
   @include base();
   display: flex;
   flex: 1 1;
-  width: 100%;
+  // width: 100%;
 
-  &[orientation="vertical"] {
+  &[direction="vertical"] {
     flex-direction: column;
   }
-  &[orientation="horizontal"] {
+  &[direction="horizontal"] {
     flex-direction: row;
   }
 
@@ -27,3 +27,7 @@ f-group {
     }
   }
 }
+
+// f-form-group:has(f-field[type="checkbox"]) {
+//   width: fit-content;
+// }

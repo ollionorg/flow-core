@@ -21,7 +21,7 @@ $states: (
 f-field {
   @include base();
   display: flex;
-  gap: var(--field-gap-size);
+  gap: 12px;
   flex: 1 1;
   flex-direction: column;
 
@@ -40,6 +40,20 @@ f-field {
   }
 
   &[type="checkbox"] {
+    display: inline-flex;
+    flex-direction: row;
+    width: fit-content;
+    gap: 12px;
+  }
+
+  &[type="radio"] {
+    display: inline-flex;
+    flex-direction: row;
+    width: fit-content;
+    gap: 12px;
+  }
+
+  &[type="switch"] {
     display: inline-flex;
     flex-direction: row;
     width: fit-content;

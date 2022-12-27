@@ -1,13 +1,13 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import eleStyle from "./f-group.scss";
+import eleStyle from "./f-form-group.scss";
 
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
-@customElement("f-group")
-export class FGroup extends FRoot {
+@customElement("f-form-group")
+export class FFormGroup extends FRoot {
   /**
    * css loaded from scss file
    */
@@ -17,7 +17,7 @@ export class FGroup extends FRoot {
    * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
    */
   @property({ type: String, reflect: true })
-  orientation?: "vertical" | "horizontal" = "vertical";
+  direction?: "vertical" | "horizontal" = "vertical";
 
   /**
    * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
@@ -38,6 +38,6 @@ export class FGroup extends FRoot {
  */
 declare global {
   interface HTMLElementTagNameMap {
-    "f-group": FGroup;
+    "f-form-group": FFormGroup;
   }
 }

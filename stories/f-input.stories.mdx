@@ -58,7 +58,7 @@ f-spacer is used to create a pseudo space in the layout.
       disabled: {
         control: "boolean",
       },
-      ["group-orientation"]: {
+      ["group-direction"]: {
         control: "radio",
         options: ["vertical", "horizontal"],
       },
@@ -69,6 +69,13 @@ f-spacer is used to create a pseudo space in the layout.
       ["element-state"]: {
         control: "select",
         options: ["default", "success", "primary", "warning", "danger"],
+      },
+      ["form-size"]: {
+        control: "radio",
+        options: ["small", "medium"],
+      },
+      ["textarea-value"]: {
+        control: "text",
       },
     }}
     args={{
@@ -82,9 +89,11 @@ f-spacer is used to create a pseudo space in the layout.
       ["suffix"]: undefined,
       loading: false,
       disabled: false,
-      ["group-orientation"]: "vertical",
+      ["group-direction"]: "vertical",
       ["group-gap"]: "large",
       ["element-state"]: "default",
+      ["form-size"]: "small",
+      ["textarea-value"]: "",
     }}
   >
     {(args) => {
@@ -96,10 +105,19 @@ f-spacer is used to create a pseudo space in the layout.
         console.log(e);
         updateArgs({ value: args.value });
       };
+      const handleInputTextArea = (e, f) => {
+        console.log(e.target.value);
+        updateArgs({ ["textarea-value"]: e.target.value });
+      };
       return html`
-        <f-div padding="medium">
-          <f-group orientation=${args["group-orientation"]} gap=${args["group-gap"]}>
-            <f-field state=${args["element-state"]} required=${true}>
+        <f-form size=${args["form-size"]}>
+          <f-form-group direction=${args["group-direction"]} gap=${args["group-gap"]}>
+            <f-field
+              state=${args["element-state"]}
+              required=${true}
+              .disabled=${args.disabled}
+              .loading=${args.loading}
+            >
               <f-text variant="para" size="small">Label *</f-text>
               <f-input
                 .value=${args.value}
@@ -110,8 +128,6 @@ f-spacer is used to create a pseudo space in the layout.
                 icon-right=${args["icon-right"]}
                 prefix=${args["prefix"]}
                 suffix=${args["suffix"]}
-                .disabled=${args.disabled}
-                .loading=${args.loading}
                 @input=${handleInput}
               ></f-input>
             </f-field>
@@ -126,8 +142,6 @@ f-spacer is used to create a pseudo space in the layout.
                 icon-right=${args["icon-right"]}
                 prefix=${args["prefix"]}
                 suffix=${args["suffix"]}
-                .disabled=${args.disabled}
-                .loading=${args.loading}
               ></f-input>
             </f-field>
             <f-field state=${args["element-state"]}>
@@ -141,318 +155,84 @@ f-spacer is used to create a pseudo space in the layout.
                 icon-right=${args["icon-right"]}
                 prefix=${args["prefix"]}
                 suffix=${args["suffix"]}
-                .disabled=${args.disabled}
-                .loading=${args.loading}
               ></f-input>
+            </f-field>
+            <f-div padding="small" state="tertiary" clickable variant="curved">
+              <f-field type="checkbox" state=${args["element-state"]}>
+                <f-checkbox value="checked"></f-checkbox>
+                <f-div padding="none" gap="x-small" direction="column" align="middle-left">
+                  <f-text variant="para" size="small">Label *</f-text>
+                  <f-text variant="para" size="small" state="secondary"
+                    >States are used to communicate purpose and connotations. For example, a red
+                    color connotes danger, whereas a green color connotes success and so on.
+                  </f-text>
+                </f-div>
+              </f-field>
+            </f-div>
+            <f-div padding="small" state="tertiary" clickable variant="curved">
+              <f-field type="radio" state=${args["element-state"]}>
+                <f-radio></f-radio>
+                <f-div padding="none" gap="x-small" direction="column" align="middle-left">
+                  <f-text variant="para" size="small">Label *</f-text>
+                  <f-text variant="para" size="small" state="secondary"
+                    >States are used to communicate purpose and connotations. For example, a red
+                    color connotes danger, whereas a green color connotes success and so on.
+                  </f-text>
+                </f-div>
+              </f-field>
+            </f-div>
+            <f-field type="checkbox" state=${args["element-state"]}>
+              <f-checkbox size="small" value="indeterminate"></f-checkbox>
+              <f-div padding="none" align="middle-center">
+                <f-text variant="para" size="small">Banana</f-text>
+              </f-div>
+            </f-field>
+            <f-field type="radio" state=${args["element-state"]}>
+              <f-radio></f-radio>
+              <f-div padding="none" align="middle-center">
+                <f-text variant="para" size="large">Banana</f-text>
+              </f-div>
+            </f-field>
+            <f-field type="switch" state=${args["element-state"]} .disabled=${args.disabled}>
+              <f-switch></f-switch>
+            </f-field>
+            <f-field state=${args["element-state"]}>
+              <f-div height="200px" width="500px" padding="none" overflow="hidden">
+                <f-textarea
+                  variant="curved-fill"
+                  placeholder="This is a Text Area"
+                  resizable=${true}
+                  clear=${true}
+                  state=${args["element-state"]}
+                  value=${args["textarea-value"]}
+                  @input=${handleInputTextArea}
+                ></f-textarea>
+              </f-div>
+            </f-field>
+          </f-form-group>
+          <f-form-group direction="vertical" gap=${args["group-gap"]}>
+            <f-text variant="heading" size="small">Favourite Fruit</f-text>
+            <f-field type="checkbox" state=${args["element-state"]}>
+              <f-checkbox></f-checkbox>
+              <f-div padding="none" align="middle-center">
+                <f-text variant="para" size="small">Apple</f-text>
+              </f-div>
             </f-field>
             <f-field type="checkbox" state=${args["element-state"]}>
               <f-checkbox></f-checkbox>
-              <f-text variant="para" size="small">Label *</f-text>
+              <f-div padding="none" align="middle-center">
+                <f-text variant="para" size="small">Banana</f-text>
+              </f-div>
             </f-field>
             <f-field type="checkbox" state=${args["element-state"]}>
-              <f-checkbox size="small" value="indeterminate"></f-checkbox>
-              <f-text variant="para" size="small">Label *</f-text>
+              <f-checkbox></f-checkbox>
+              <f-div padding="none" align="middle-center">
+                <f-text variant="para" size="small">Orange</f-text>
+              </f-div>
             </f-field>
-            <f-field type="checkbox" state=${args["element-state"]}>
-              <f-radio></f-radio>
-              <f-text variant="para" size="small">Label *</f-text>
-            </f-field>
-          </f-group>
-        </f-div>
+          </f-form-group>
+        </f-form>
       `;
     }}
   </Story>
 </Canvas>
-
-<br />
-<br />
-
-<Canvas>
-  <Story
-    name="Playground2"
-    argTypes={{
-      fields: { control: "object" },
-    }}
-    args={{
-      fields: {
-        gap: "small",
-        variant: "fill",
-        label: {
-          title: "f-form is the best",
-          description: "f-form description",
-        },
-        group: [
-          {
-            direction: "vertical",
-            collapseType: "text",
-            collapseGroup: true,
-            duplicateGroup: true,
-            state: "success",
-            fields: [
-              {
-                type: "text",
-                id: "id-for-devs",
-                state: "default",
-                value: "",
-                customStyle: "in-line custom css as string",
-                dataQA: "auto",
-                label: {
-                  title: "username",
-                },
-                validationRules: [
-                  {
-                    name: "required",
-                    when: ["blur", "focusout"],
-                    message: "Please Enter this field",
-                  },
-                  {
-                    name: "email",
-                    when: ["blur", "focusout"],
-                    message: "Please Enter an email field correctly",
-                  },
-                  {
-                    name: "customFunction",
-                    when: ["blur", "focusout"],
-                    message: "Please Validate correctly",
-                    validate: (value) => {
-                      if (value.length === 5) return true;
-                      else return false;
-                    },
-                  },
-                ],
-              },
-              {
-                type: "text",
-                id: "id-for-devs",
-                state: "default",
-                value: "this shows",
-                customStyle: "in-line custom css as string",
-                dataQA: "auto",
-                label: {
-                  title: "username",
-                },
-                validationRules: [
-                  {
-                    name: "required",
-                    when: ["focusout"],
-                    message: "Please Enter this field",
-                  },
-                ],
-              },
-              {
-                type: "checkbox",
-                variant: "${inherit(default)}",
-                helperText: "This will show and be replaced if validated",
-                customStyle: "in-line custom css as string",
-                dataQA: "auto",
-                sectionLabel: {
-                  label: "username",
-                  iconLeft: "i-help",
-                  iconTooltip: "string goes here",
-                },
-                sectionOptions: [
-                  {
-                    id: "id-for-devs",
-                    label: "Apple",
-                    value: true,
-                    defaultValue: false,
-                    state: "default",
-                    iconLeft: "i-lock",
-                    iconTooltip: "string goes here",
-                  },
-                  {
-                    id: "id-for-devs2",
-                    label: "Orange",
-                    value: true,
-                    defaultValue: false,
-                    state: "default",
-                    iconLeft: "i-lock",
-                    iconTooltip: "string goes here",
-                  },
-                ],
-                sectionValidations: [
-                  {
-                    type: "if-required,",
-                    trigger: ["typeFinish"],
-                    triggerTime: 300,
-                    helperText: "this is required",
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    }}
-  >
-    {(args) => {
-      return html`<f-form .fields=${args.fields}></f-form> `;
-    }}
-  </Story>
-</Canvas>
-
-<br />
-
-### Anatomy
-
-<Story name="Anatomy">
-  {() => html`<div class="align-center">${unsafeSVG(fSpacerAnatomy)}</div>`}
-</Story>
-
-<br />
-
-### Specifications
-
-<f-divider></f-divider>
-
-A spacer can grow horizontally or vertically depending on its parent’s layout.
-
-In a row layout a spacer grows vertically and takes the height of the parent component.
-
-In a column layout a spacer grows horizontally and takes the width of the parent component.
-
-<br />
-
-<Story name="Specifications">
-  {() =>
-    html` <f-div direction="row" gap="auto" padding="large none none none">
-        <f-div padding="none x-large" height="hug-content">Row layout</f-div>
-        <f-div padding="none x-large" height="hug-content">Column layout</f-div>
-      </f-div>
-      <f-div padding="x-large" gap="x-large" direction="row">
-        <f-div
-          padding="large"
-          gap="x-large"
-          border="medium solid default around"
-          direction="row"
-          height="486px"
-        >
-          <f-div
-            padding="large"
-            gap="large"
-            border="medium dashed secondary around"
-            height="100%"
-            direction="column"
-            width="100px"
-          >
-            <f-div height="80px" padding="none" state="secondary" variant="curved"></f-div>
-            <f-div height="80px" padding="none" state="secondary" variant="curved"></f-div>
-            <f-div height="200px" padding="none" state="secondary" variant="curved"></f-div>
-          </f-div>
-          <f-spacer size="fill-container"></f-spacer>
-          <f-div
-            width="100px"
-            padding="none"
-            gap="large"
-            state="secondary"
-            height="444px"
-            variant="curved"
-          ></f-div>
-        </f-div>
-        <f-div
-          padding="large"
-          gap="x-large"
-          border="medium solid default around"
-          height="486px"
-          direction="column"
-        >
-          <f-div
-            padding="large"
-            gap="large"
-            border="medium dashed secondary around"
-            height="hug-content"
-            direction="column"
-          >
-            <f-div height="50px" padding="none" state="secondary" variant="curved"></f-div>
-            <f-div height="50px" padding="none" state="secondary" variant="curved"></f-div>
-          </f-div>
-          <f-spacer size="fill-container"></f-spacer>
-          <f-div
-            padding="none"
-            state="secondary"
-            height="124px"
-            variant="curved"
-            width="100%"
-          ></f-div>
-        </f-div>
-      </f-div>`
-  }
-</Story>
-
-<br />
-
-## size
-
-<f-divider></f-divider>
-
-Spacer is used to create a pseudo space in the layout.
-
-<Canvas>
-  <Story name="size">
-    {(args) => {
-      const [value, setValue] = useState("");
-      return html` <f-field required=${true}>
-        <f-text variant="para" size="small">Label *</f-text>
-        <f-input
-          value=${value}
-          placeholder="Enter your text here"
-          variant="round-fill"
-          category="text"
-          icon-left="i-app"
-          icon-right="i-close"
-          prefix="123"
-          suffix="123"
-        ></f-input>
-      </f-field>`;
-    }}
-  </Story>
-</Canvas>
-
-<table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>fill-container</td>
-      <td>spacer fills the remaining height/width of the container</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>x-large</td>
-      <td>spacer fills the remaining height/width of 44px the container</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>large</td>
-      <td>spacer fills the remaining height/width of 36px the container</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>medium</td>
-      <td>spacer fills the remaining height/width of 24px the container</td>
-      <td>
-        <code>default</code>
-      </td>
-    </tr>
-    <tr>
-      <td>small</td>
-      <td>spacer fills the remaining height/width of 16px the container</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>x-small</td>
-      <td>spacer fills the remaining height/width of 8px the container</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>any-num-value</td>
-      <td>spacer fills the remaining height/width of any num value given</td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-
-<ArgsTable of={"f-spacer"} />

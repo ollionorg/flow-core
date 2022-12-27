@@ -18,11 +18,13 @@ export * from "./components/f-template/f-template";
 export * from "./components/f-popover/f-popover";
 export * from "./components/f-tag/f-tag";
 export * from "./components/f-input/f-input";
-export * from "./components/f-group/f-group";
+export * from "./components/f-form-group/f-form-group";
 export * from "./components/f-checkbox/f-checkbox";
 export * from "./components/f-field/f-field";
 export * from "./components/f-radio/f-radio";
 export * from "./components/f-form/f-form";
+export * from "./components/f-switch/f-switch";
+export * from "./components/f-textarea/f-textarea";
 
 if (document.readyState !== "loading") {
   ConfigUtil.initTheme();

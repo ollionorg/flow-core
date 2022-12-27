@@ -30,20 +30,25 @@ export class FCheckbox extends FRoot {
    * @attribute The states on buttons are to indicate various degrees of emphasis of the action.
    */
   @property({ reflect: true, type: String })
-  size?: "small" | "medium" = "medium";
+  size?: "small" | "medium";
 
-  handleClick() {
+  handleClick(e: any) {
+    console.log(e);
     if (this.value === "unchecked") {
       this.value = "checked";
     } else {
       this.value = "unchecked";
     }
+    e.preventDefault();
+    e.stopPropagation();
+    this.requestUpdate();
   }
 
   render() {
     /**
      * Final html to render
      */
+    console.log(this.value);
 
     return html`
       <!-- <input class="f-checkbox" /> -->
@@ -55,7 +60,7 @@ export class FCheckbox extends FRoot {
           checked=${this.value === "unchecked" ? false : true}
           state=${this.state}
           class="f-checkbox"
-          @click=${() => this.handleClick()}
+          @input=${(e: any) => this.handleClick(e)}
         />
         <label for="tmp" value=${this.value} state=${this.state} size=${this.size}>
           ${this.value === "checked"

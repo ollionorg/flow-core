@@ -33,15 +33,18 @@ $sizes: (
   "small": (
     "height": 12px,
     "inner-height": 6px,
+    "padding": 2.5px,
   ),
   "medium": (
     "height": 16px,
     "inner-height": 8px,
+    "padding": 0px,
   ),
 );
 
 :host {
   .f-radio {
+    @include base();
     &[type="radio"] {
       appearance: none;
       margin: 0;
@@ -52,6 +55,8 @@ $sizes: (
       display: grid;
       place-content: center;
       cursor: pointer;
+      width: var(--form-radio-size);
+      height: var(--form-radio-size);
       @each $size, $value in $sizes {
         &[size="#{$size}"] {
           width: map.get($value, "height");
@@ -63,6 +68,9 @@ $sizes: (
     @each $state, $color in $states {
       &[state="#{$state}"] {
         border: 1px solid map.get($color, "border");
+        // &:hover {
+        //   border: 1px solid map.get($color, "border");
+        // }
         &[type="radio"]::before {
           content: "";
           border-radius: 50%;
@@ -83,8 +91,23 @@ $sizes: (
       }
     }
 
+    &[type="radio"]::before {
+      width: var(--form-radio-mark-size);
+      height: var(--form-radio-mark-size);
+    }
+
     &[type="radio"][checked="true"]::before {
       transform: scale(1);
+    }
+  }
+}
+
+f-radio {
+  display: flex;
+  padding-top: var(--form-radio-padding-top);
+  @each $size, $value in $sizes {
+    &[size="#{$size}"] {
+      padding-top: map.get($value, "padding");
     }
   }
 }

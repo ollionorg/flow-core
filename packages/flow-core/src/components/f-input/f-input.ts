@@ -7,8 +7,8 @@ import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
-import isValidHttpUrl from "../../utils/is-valid-http-url";
-import isValidEmail from "../../utils/is-valid-email";
+
+export type FInputState = "primary" | "default" | "success" | "warning" | "danger" | "inherit";
 
 @customElement("f-input")
 export class FInput extends FRoot {
@@ -22,6 +22,18 @@ export class FInput extends FRoot {
    */
   @property({ reflect: true, type: String })
   variant?: "curved-fill" | "round-fill" | "transparent" | "outline" = "curved-fill";
+
+  /**
+   * @attribute The states on buttons are to indicate various degrees of emphasis of the action.
+   */
+  @property({ reflect: true, type: String })
+  state?: FInputState = "inherit";
+
+  /**
+   * @attribute The states on buttons are to indicate various degrees of emphasis of the action.
+   */
+  @property({ reflect: true, type: String })
+  size?: "medium" | "small";
 
   /**
    * @attribute variant of button.
@@ -71,63 +83,16 @@ export class FInput extends FRoot {
   @property({ reflect: true, type: Boolean })
   loading?: boolean = false;
 
-  /**
-   * @attribute The disabled attribute can be set to keep a user from clicking on the button.
-   */
-  @property({ reflect: true, type: Boolean })
-  disabled?: boolean = false;
-
-  get isRequired() {
-    return this.closest("f-field")?.hasAttribute("required") ?? false;
-  }
-
   get isReadOnly() {
     return this.closest("f-field")?.hasAttribute("read-only") ?? false;
   }
 
-  validateValue() {
-    if (this.value) {
-      if (this.category === "url" && this.value) {
-        if (!isValidHttpUrl(this.value)) {
-          this.parentElement?.setAttribute("validation-state", "danger");
-        } else {
-          this.parentElement?.setAttribute("validation-state", "");
-        }
-      }
-      if (this.category === "email" && this.value) {
-        if (!isValidEmail(this.value)) {
-          this.parentElement?.setAttribute("validation-state", "danger");
-        } else {
-          this.parentElement?.setAttribute("validation-state", "");
-        }
-      }
-    } else {
-      this.parentElement?.setAttribute("validation-state", "");
-    }
-  }
-
-  onBlur() {
-    if (this.isRequired) {
-      if (!this.value) {
-        this.parentElement?.setAttribute("validation-state", "danger");
-      } else {
-        if (this.category !== "url" && this.category !== "email")
-          this.parentElement?.setAttribute("validation-state", "");
-      }
-    }
-  }
-
-  keyPress() {
-    if (this.isRequired && this.value) {
-      this.parentElement?.setAttribute("validation-state", "");
-    }
+  inputHandler(e: any) {
+    console.log(e.target.value);
+    this.value = e.target.value;
   }
 
   render() {
-    if (!this.isRequired || this.value) {
-      this.validateValue();
-    }
-
     /**
      * START :  apply inline styles based on attribute values
      */
@@ -192,20 +157,17 @@ export class FInput extends FRoot {
       : html`<div class="loader-suffix">${unsafeSVG(loader)}</div>`;
 
     return html`
-      <div
-        class="input-icons"
-        variant=${this.variant}
-        ?disabled=${this.disabled}
-        @focusout=${this.onBlur}
-      >
+      <div class="input-icons" variant=${this.variant} state=${this.state}>
         ${prefixAppend}
         <input
           class=${classMap({ "f-input": true })}
           variant=${this.variant}
           type=${this.category}
           placeholder=${this.placeholder}
-          .value=${this.value}
+          .value="${this.value || ""}"
+          size=${this.size}
           ?readonly=${this.isReadOnly}
+          @input="${this.inputHandler}"
         />
         ${suffixAppend}
       </div>

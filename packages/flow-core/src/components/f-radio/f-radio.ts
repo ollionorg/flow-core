@@ -2,8 +2,6 @@ import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-radio.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import { FText } from "../f-text/f-text";
-import { FDiv } from "../f-div/f-div";
 
 export type FRadioState = "primary" | "default" | "success" | "warning" | "danger" | "inherit";
 
@@ -12,26 +10,29 @@ export class FRadio extends FRoot {
   /**
    * css loaded from scss file
    */
-  static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles];
+  static styles = [unsafeCSS(eleStyle)];
 
   /**
-   * @attribute variant of button.
+   * @attribute Value of a radio defines if it is selected or not
    */
   @property({ reflect: true, type: String })
   value?: "selected" | "unselected" = "unselected";
 
   /**
-   * @attribute The states on buttons are to indicate various degrees of emphasis of the action.
+   * @attribute States are used to communicate purpose and connotations.
    */
   @property({ reflect: true, type: String })
   state?: FRadioState = "inherit";
 
   /**
-   * @attribute The states on buttons are to indicate various degrees of emphasis of the action.
+   * @attribute f-radio can have 2 sizes.
    */
   @property({ reflect: true, type: String })
   size?: "small" | "medium";
 
+  /**
+   * emit event on click
+   */
   handleClick() {
     const event = new CustomEvent("update", {
       detail: {

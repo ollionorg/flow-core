@@ -164,6 +164,7 @@ in this case it is `f-icon`
     /**
   * Iterating over sizes with padding, fontsize, height
   **/
+
     @each $size, $value in $sizes {
       &[size="#{$size}"] {
         font-size: $value;
@@ -184,6 +185,7 @@ in this case it is `f-icon`
             height: 8px;
           }
         }
+
         &.f-pictogram-x-large-emoji {
           font-size: 18px;
           line-height: 18px;
@@ -208,6 +210,17 @@ in this case it is `f-icon`
           width: 10px;
           height: 10px;
         }
+      }
+    }
+    &.f-input-icons-size {
+      font-size: var(--form-input-icons-size);
+      line-height: var(--form-input-icons-size);
+      width: var(--form-input-icons-size);
+      height: var(--form-input-icons-size);
+      svg,
+      img {
+        width: var(--form-input-icons-size);
+        height: var(--form-input-icons-size);
       }
     }
     // applying disabled mixins

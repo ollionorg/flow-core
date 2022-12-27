@@ -119,7 +119,7 @@
     },
     {
       "name": "f-checkbox",
-      "description": "Attributes:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\nProperties:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `update` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\nProperties:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "value",
@@ -171,6 +171,10 @@
               "name": "small"
             }
           ]
+        },
+        {
+          "name": "onupdate",
+          "description": "`update` {`CustomEvent<{ value: string; }>`} - "
         }
       ]
     },
@@ -5072,7 +5076,7 @@
     },
     {
       "name": "f-field",
-      "description": "Attributes:\n\n  * `state` {`FFieldStateProp | undefined`} - \n\n  * `type` {`\"input\" | \"checkbox\" | \"radio\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `read-only` {`boolean | undefined`} - \n\nProperties:\n\n  * `state` {`FFieldStateProp | undefined`} - \n\n  * `type` {`\"input\" | \"checkbox\" | \"radio\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `readOnlyValue` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Attributes:\n\n  * `state` {`FFieldStateProp | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `read-only` {`boolean | undefined`} - \n\nProperties:\n\n  * `state` {`FFieldStateProp | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `readOnlyValue` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "state",
@@ -5092,21 +5096,6 @@
             },
             {
               "name": "default"
-            }
-          ]
-        },
-        {
-          "name": "type",
-          "description": "`type` {`\"input\" | \"checkbox\" | \"radio\" | undefined`} - \n\nProperty: type\n\nDefault: input",
-          "values": [
-            {
-              "name": "input"
-            },
-            {
-              "name": "checkbox"
-            },
-            {
-              "name": "radio"
             }
           ]
         },
@@ -5375,23 +5364,35 @@
     },
     {
       "name": "f-input",
-      "description": "Attributes:\n\n  * `variant` {`\"outline\" | \"transparent\" | \"curved-fill\" | \"round-fill\" | undefined`} - \n\n  * `state` {`FInputState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `category` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | \"date\" | \"time\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `icon-right` {`string | undefined`} - \n\n  * `prefix` {`string | undefined`} - \n\n  * `suffix` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\nProperties:\n\n  * `variant` {`\"outline\" | \"transparent\" | \"curved-fill\" | \"round-fill\" | undefined`} - \n\n  * `state` {`FInputState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `category` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | \"date\" | \"time\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `iconRight` {`string | undefined`} - \n\n  * `prefixString` {`string | undefined`} - \n\n  * `suffixString` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `isReadOnly` {`boolean`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `update` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FInputState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `type` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `icon-right` {`string | undefined`} - \n\n  * `prefix` {`string | undefined`} - \n\n  * `suffix` {`string | undefined`} - \n\n  * `max-length` {`number | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\nProperties:\n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FInputState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `type` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `iconRight` {`string | undefined`} - \n\n  * `fInputPrefix` {`string | undefined`} - \n\n  * `fInputSuffix` {`string | undefined`} - \n\n  * `maxLength` {`number | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `isReadOnly` {`boolean`} - fetch read-only value from nearest parent f-field element\n\n  * `iconSize` {`\"small\" | \"x-small\" | undefined`} - icon size\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "variant",
-          "description": "`variant` {`\"outline\" | \"transparent\" | \"curved-fill\" | \"round-fill\" | undefined`} - \n\nProperty: variant\n\nDefault: curved-fill",
+          "description": "`variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\nProperty: variant\n\nDefault: curved",
           "values": [
+            {
+              "name": "round"
+            },
+            {
+              "name": "curved"
+            },
+            {
+              "name": "block"
+            }
+          ]
+        },
+        {
+          "name": "category",
+          "description": "`category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\nProperty: category\n\nDefault: fill",
+          "values": [
+            {
+              "name": "fill"
+            },
             {
               "name": "outline"
             },
             {
               "name": "transparent"
-            },
-            {
-              "name": "curved-fill"
-            },
-            {
-              "name": "round-fill"
             }
           ]
         },
@@ -5432,8 +5433,8 @@
           ]
         },
         {
-          "name": "category",
-          "description": "`category` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | \"date\" | \"time\" | undefined`} - \n\nProperty: category\n\nDefault: text",
+          "name": "type",
+          "description": "`type` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined`} - \n\nProperty: type\n\nDefault: text",
           "values": [
             {
               "name": "number"
@@ -5452,12 +5453,6 @@
             },
             {
               "name": "tel"
-            },
-            {
-              "name": "date"
-            },
-            {
-              "name": "time"
             }
           ]
         },
@@ -5483,18 +5478,32 @@
         },
         {
           "name": "prefix",
-          "description": "`prefix` {`string | undefined`} - \n\nProperty: prefixString",
+          "description": "`prefix` {`string | undefined`} - \n\nProperty: fInputPrefix",
           "values": []
         },
         {
           "name": "suffix",
-          "description": "`suffix` {`string | undefined`} - \n\nProperty: suffixString",
+          "description": "`suffix` {`string | undefined`} - \n\nProperty: fInputSuffix",
+          "values": []
+        },
+        {
+          "name": "max-length",
+          "description": "`max-length` {`number | undefined`} - \n\nProperty: maxLength",
           "values": []
         },
         {
           "name": "loading",
           "description": "`loading` {`boolean | undefined`} - \n\nProperty: loading\n\nDefault: false",
           "values": []
+        },
+        {
+          "name": "clear",
+          "description": "`clear` {`boolean | undefined`} - \n\nProperty: clear\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "onupdate",
+          "description": "`update` {`CustomEvent<{ value: string; }>`} - "
         }
       ]
     },
@@ -5676,7 +5685,7 @@
     },
     {
       "name": "f-radio",
-      "description": "Attributes:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\nProperties:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `update` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\nProperties:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "value",
@@ -5725,6 +5734,10 @@
               "name": "small"
             }
           ]
+        },
+        {
+          "name": "onupdate",
+          "description": "`update` {`CustomEvent<{ value: string; }>`} - "
         }
       ]
     },
@@ -5760,7 +5773,7 @@
     },
     {
       "name": "f-switch",
-      "description": "Attributes:\n\n  * `value` {`\"on\" | \"off\" | undefined`} - \n\n  * `state` {`FSwitchState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\nProperties:\n\n  * `value` {`\"on\" | \"off\" | undefined`} - \n\n  * `state` {`FSwitchState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `update` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`\"on\" | \"off\" | undefined`} - \n\n  * `state` {`FSwitchState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\nProperties:\n\n  * `value` {`\"on\" | \"off\" | undefined`} - \n\n  * `state` {`FSwitchState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "value",
@@ -5809,6 +5822,10 @@
               "name": "small"
             }
           ]
+        },
+        {
+          "name": "onupdate",
+          "description": "`update` {`CustomEvent<{ value: string; }>`} - "
         }
       ]
     },
@@ -6023,7 +6040,7 @@
     },
     {
       "name": "f-textarea",
-      "description": "Attributes:\n\n  * `value` {`string | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FTextAreaState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `row` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `max-length` {`string | undefined`} - \n\n  * `resizable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`string | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FTextAreaState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `row` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `maxLength` {`string | undefined`} - \n\n  * `resizable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `update` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`string | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FTextAreaState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `row` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `max-length` {`string | undefined`} - \n\n  * `resizable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`string | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FTextAreaState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `row` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `maxLength` {`string | undefined`} - \n\n  * `resizable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "value",
@@ -6105,6 +6122,10 @@
           "name": "clear",
           "description": "`clear` {`boolean | undefined`} - \n\nProperty: clear\n\nDefault: false",
           "values": []
+        },
+        {
+          "name": "onupdate",
+          "description": "`update` {`CustomEvent<{ value: string; }>`} - "
         }
       ]
     }

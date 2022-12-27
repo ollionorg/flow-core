@@ -23,12 +23,6 @@ export class FField extends FRoot {
   /**
    * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
    */
-  @property({ type: String, reflect: true, attribute: "type" })
-  type?: "input" | "checkbox" | "radio" = "input";
-
-  /**
-   * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
-   */
   @property({ type: Boolean, reflect: true })
   disabled?: boolean = false;
 
@@ -45,24 +39,6 @@ export class FField extends FRoot {
   readOnlyValue?: boolean = false;
 
   render() {
-    // if (this.type === "checkbox" || this.type === "radio") {
-    //   this.addEventListener("click", (e) => {
-    //     for (const item in this.children) {
-    //       if (this.children[item].tagName === "F-CHECKBOX") {
-    //         if (this.children[item].getAttribute("value") === "checked")
-    //           this.children[item].setAttribute("value", "unchecked");
-    //         else this.children[item].setAttribute("value", "checked");
-    //       }
-    //       if (this.children[item].tagName === "F-RADIO") {
-    //         if (this.children[item].getAttribute("value") === "selected")
-    //           this.children[item].setAttribute("value", "unselected");
-    //         else this.children[item].setAttribute("value", "selected");
-    //       }
-    //       e.preventDefault();
-    //       e.stopPropagation();
-    //     }
-    //   });
-    // }
     for (const item in this.children) {
       if (this.children[item].tagName === "F-INPUT") {
         if (this.loading) {

@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, state, queryAll, query } from "lit/decorators.js";
+import { customElement, property, state, query } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FormBuilder, TempFormBuilder } from "./f-form-types";
@@ -7,7 +7,6 @@ import eleStyle from "./f-form.scss";
 import { FDiv } from "../f-div/f-div";
 import { FFormGroup } from "../f-form-group/f-form-group";
 import { FField } from "../f-field/f-field";
-import isValidEmail from "../../utils/is-valid-email";
 import { FInput } from "../f-input/f-input";
 // import { ref, createRef } from "lit/directives/ref.js";
 

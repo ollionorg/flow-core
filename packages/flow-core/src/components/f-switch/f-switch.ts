@@ -32,29 +32,26 @@ export class FSwitch extends FRoot {
   @property({ reflect: true, type: String })
   size?: "small" | "medium";
 
-  handleClick(e: any) {
-    if (this.value === "off") {
-      this.value = "on";
-    } else {
-      this.value = "off";
-    }
-    e.preventDefault();
-    e.stopPropagation();
+  handleInput(e: React.ChangeEvent<HTMLInputElement>) {
+    const event = new CustomEvent("update", {
+      detail: {
+        value: e.target.checked ? "off" : "on",
+      },
+    });
+    this.dispatchEvent(event);
   }
 
   render() {
-    console.log(this.value);
     /**
      * Final html to render
      */
 
-    return html`<label
-      class="f-switch"
-      size=${this.size}
-      state=${this.state}
-      @click=${(e: any) => this.handleClick(e)}
-    >
-      <input type="checkbox" checked=${this.value === "on" ? true : false} />
+    return html`<label class="f-switch" size=${this.size} state=${this.state}>
+      <input
+        type="checkbox"
+        checked=${this.value === "on" ? true : false}
+        @input=${this.handleInput}
+      />
       <span class="slider round"></span>
     </label>`;
   }

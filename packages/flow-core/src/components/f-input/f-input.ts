@@ -18,64 +18,76 @@ export class FInput extends FRoot {
   static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles];
 
   /**
-   * @attribute variant of button.
+   * @attribute Variants are various visual representations of an input field.
    */
   @property({ reflect: true, type: String })
-  variant?: "curved-fill" | "round-fill" | "transparent" | "outline" = "curved-fill";
+  variant?: "curved" | "round" | "block" = "curved";
 
   /**
-   * @attribute The states on buttons are to indicate various degrees of emphasis of the action.
+   * @attribute Categories are various visual representations of an input field.
+   */
+  @property({ reflect: true, type: String })
+  category?: "fill" | "outline" | "transparent" = "fill";
+
+  /**
+   * @attribute States are used to communicate purpose and connotations.
    */
   @property({ reflect: true, type: String })
   state?: FInputState = "inherit";
 
   /**
-   * @attribute The states on buttons are to indicate various degrees of emphasis of the action.
+   * @attribute f-input can have 2 sizes. By default size is inherited by the parent f-field.
    */
   @property({ reflect: true, type: String })
   size?: "medium" | "small";
 
   /**
-   * @attribute variant of button.
+   * @attribute The type attribute specifies the type of <input> element to display.
    */
   @property({ reflect: true, type: String })
-  category?: "text" | "number" | "email" | "password" | "url" | "tel" | "date" | "time" = "text";
+  type?: "text" | "number" | "email" | "password" | "url" | "tel" = "text";
 
   /**
-   * @attribute variant of button.
+   * @attribute Defines the value of an f-input. Validation rules are applied on the value depending on the type property of the f-text-input.
    */
   @property({ reflect: true, type: String })
   value?: string;
 
   /**
-   * @attribute variant of button.
+   * @attribute Defines the placeholder text for f-text-input
    */
   @property({ reflect: true, type: String })
   placeholder?: string;
 
   /**
-   * @attribute Icon-left enables an icon on the left of the label of a button.
+   * @attribute Icon-left enables an icon on the left of the input value.
    */
   @property({ reflect: true, type: String, attribute: "icon-left" })
   iconLeft?: string;
 
   /**
-   * @attribute Icon-left enables an icon on the left of the label of a button.
+   * @attribute Icon-right enables an icon on the right of the input value.
    */
   @property({ reflect: true, type: String, attribute: "icon-right" })
   iconRight?: string;
 
   /**
-   * @attribute Icon-left enables an icon on the left of the label of a button.
+   * @attribute Prefix property enables a string before the input value.
    */
   @property({ reflect: true, type: String, attribute: "prefix" })
-  prefixString?: string;
+  fInputPrefix?: string;
 
   /**
-   * @attribute Icon-left enables an icon on the left of the label of a button.
+   * @attribute Suffix property enables a string on the right side of the input box.
    */
   @property({ reflect: true, type: String, attribute: "suffix" })
-  suffixString?: string;
+  fInputSuffix?: string;
+
+  /**
+   * @attribute This shows the character count while typing and auto limits after reaching the max length.
+   */
+  @property({ reflect: true, type: Number, attribute: "max-length" })
+  maxLength?: number;
 
   /**
    * @attribute Loader icon replaces the content of the button .
@@ -83,45 +95,80 @@ export class FInput extends FRoot {
   @property({ reflect: true, type: Boolean })
   loading?: boolean = false;
 
+  /**
+   * @attribute Loader icon replaces the content of the button .
+   */
+  @property({ reflect: true, type: Boolean })
+  clear?: boolean = false;
+
+  /**
+   * fetch read-only value from nearest parent f-field element
+   */
   get isReadOnly() {
     return this.closest("f-field")?.hasAttribute("read-only") ?? false;
   }
 
-  inputHandler(e: any) {
-    console.log(e.target.value);
-    this.value = e.target.value;
+  /**
+   * emit input custom event
+   */
+  handleInput(e: React.ChangeEvent<HTMLInputElement>) {
+    const event = new CustomEvent("update", {
+      detail: {
+        value: e.target.value,
+      },
+    });
+    this.dispatchEvent(event);
+  }
+
+  /**
+   * clear input value on clear icon clicked
+   */
+  clearInputValue() {
+    const event = new CustomEvent("update", {
+      detail: {
+        value: "",
+      },
+    });
+    this.dispatchEvent(event);
+  }
+
+  /**
+   * icon size
+   */
+  get iconSize() {
+    if (this.size === "medium") return "small";
+    else if (this.size === "small") return "x-small";
+    else return undefined;
   }
 
   render() {
     /**
-     * START :  apply inline styles based on attribute values
-     */
-    // this.applySize();
-    /**
-     * END :  apply inline styles based on attribute values
-     */
-
-    /**
-     * Final html to render
-     */
-
-    /**
      * create iconLeft if available
      */
     const iconLeft = this.iconLeft
-      ? html` <f-icon .source=${this.iconLeft} size="small"></f-icon>`
+      ? html` <f-icon
+          .source=${this.iconLeft}
+          .size=${this.iconSize}
+          class=${!this.size ? "f-input-icons-size" : ""}
+        ></f-icon>`
       : "";
     /**
      * create iconRight if available
      */
     const iconRight = this.iconRight
-      ? html`<f-icon .source=${this.iconRight} size="small"></f-icon>`
+      ? html`<f-icon
+          .source=${this.iconRight}
+          .size=${this.iconSize}
+          class=${!this.size ? "f-input-icons-size" : ""}
+        ></f-icon>`
       : "";
-
+    /**
+     * append prefix
+     */
     const prefixAppend =
-      this.prefixString || this.iconLeft
-        ? html` <div class="prefix">
-            ${this.prefixString
+      this.fInputPrefix || this.iconLeft
+        ? html` <div class="f-input-prefix">
+            ${this.fInputPrefix
               ? html`
                   <f-div
                     height="hug-content"
@@ -131,7 +178,7 @@ export class FInput extends FRoot {
                     border="small solid default right"
                   >
                     <f-text variant="para" size="small" weight="regular" class="word-break"
-                      >${this.prefixString}</f-text
+                      >${this.fInputPrefix}</f-text
                     >
                   </f-div>
                 `
@@ -139,14 +186,27 @@ export class FInput extends FRoot {
             ${iconLeft}
           </div>`
         : "";
+    /**
+     * append suffix
+     */
     const suffixAppend = !this.loading
-      ? this.suffixString || this.iconRight
-        ? html` <div class="suffix">
-            ${this.suffixString
+      ? this.value && this.clear
+        ? html`<div class="f-input-suffix">
+            <f-icon
+              ?clickable=${true}
+              source="i-close"
+              .size=${this.iconSize}
+              @click=${this.clearInputValue}
+              class=${!this.size ? "f-input-icons-size" : ""}
+            ></f-icon>
+          </div>`
+        : this.fInputSuffix || this.iconRight
+        ? html` <div class="f-input-suffix">
+            ${this.fInputSuffix
               ? html`
                   <f-div height="hug-content" width="hug-content" padding="none" direction="row">
                     <f-text variant="para" size="small" weight="regular" class="word-break"
-                      >${this.suffixString}</f-text
+                      >${this.fInputSuffix}</f-text
                     >
                   </f-div>
                 `
@@ -156,18 +216,31 @@ export class FInput extends FRoot {
         : ""
       : html`<div class="loader-suffix">${unsafeSVG(loader)}</div>`;
 
+    /**
+     * Final html to render
+     */
+
     return html`
-      <div class="input-icons" variant=${this.variant} state=${this.state}>
+      <div
+        class="f-input-wrapper"
+        variant=${this.variant}
+        category=${this.category}
+        state=${this.state}
+        size=${this.size}
+      >
         ${prefixAppend}
         <input
           class=${classMap({ "f-input": true })}
           variant=${this.variant}
-          type=${this.category}
+          category=${this.category}
+          type=${this.type}
+          state=${this.state}
           placeholder=${this.placeholder}
           .value="${this.value || ""}"
           size=${this.size}
           ?readonly=${this.isReadOnly}
-          @input="${this.inputHandler}"
+          maxlength="${this.maxLength}"
+          @input=${this.handleInput}
         />
         ${suffixAppend}
       </div>

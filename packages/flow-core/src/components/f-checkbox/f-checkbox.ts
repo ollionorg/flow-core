@@ -32,37 +32,33 @@ export class FCheckbox extends FRoot {
   @property({ reflect: true, type: String })
   size?: "small" | "medium";
 
-  handleClick(e: any) {
-    console.log(e);
-    if (this.value === "unchecked") {
-      this.value = "checked";
-    } else {
-      this.value = "unchecked";
-    }
-    e.preventDefault();
-    e.stopPropagation();
-    this.requestUpdate();
+  handleInput(e: React.ChangeEvent<HTMLInputElement>) {
+    const event = new CustomEvent("update", {
+      detail: {
+        value: !e.target.checked ? "checked" : "unchecked",
+      },
+    });
+    this.dispatchEvent(event);
   }
 
   render() {
     /**
      * Final html to render
      */
-    console.log(this.value);
 
     return html`
       <!-- <input class="f-checkbox" /> -->
 
-      <div class="promoted-checkbox" size=${this.size}>
+      <div class="f-checkbox-wrapper" size=${this.size}>
         <input
-          id="tmp"
+          id="f-checkbox"
           type="checkbox"
           checked=${this.value === "unchecked" ? false : true}
           state=${this.state}
           class="f-checkbox"
-          @input=${(e: any) => this.handleClick(e)}
+          @input=${this.handleInput}
         />
-        <label for="tmp" value=${this.value} state=${this.state} size=${this.size}>
+        <label for="f-checkbox" value=${this.value} state=${this.state} size=${this.size}>
           ${this.value === "checked"
             ? html` <svg
                 width="11"

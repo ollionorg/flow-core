@@ -3,14 +3,10 @@
 @import "./../../mixins/scss/mixins";
 
 /**
-$variants map will have state specific inner maps.
+$categories map will have state specific inner maps.
 **/
-$variants: (
-  "curved-fill": (
-    "background": var(--color-surface-tertiary),
-    "hover": var(--color-surface-tertiary-hover),
-  ),
-  "round-fill": (
+$categories: (
+  "fill": (
     "background": var(--color-surface-tertiary),
     "hover": var(--color-surface-tertiary-hover),
   ),
@@ -24,6 +20,9 @@ $variants: (
   ),
 );
 
+/**
+$sizes map will have state specific inner maps.
+**/
 $sizes: (
   "medium": (
     "main-height": 36px,
@@ -37,6 +36,9 @@ $sizes: (
   ),
 );
 
+/**
+$states map will have state specific inner maps.
+**/
 $states: (
   "primary": (
     "input": var(--color-primary-default),
@@ -71,11 +73,11 @@ $states: (
 );
 
 /**
-applies styles on f-div
+applies styles on f-input
 **/
 
 :host {
-  .input-icons {
+  .f-input-wrapper {
     // Important :  always include base mixins
     @include base();
     width: 100%;
@@ -94,17 +96,21 @@ applies styles on f-div
       word-break: normal !important;
     }
 
-    @each $variant, $value in $variants {
-      &[variant^="#{$variant}"] {
+    @each $category, $value in $categories {
+      &[category^="#{$category}"] {
         background-color: map.get($value, "background");
+        &:hover .f-input {
+          background-color: map.get($value, "hover") !important;
+        }
         &:hover {
           background-color: map.get($value, "hover") !important;
         }
       }
     }
+
     @each $state, $color in $states {
       &[state="#{$state}"] {
-        &[variant="transparent"] {
+        &[variant="block"][category="fill"] {
           border-bottom: 1px solid map.get($color, "border");
           border-top: none;
           border-right: none;
@@ -114,7 +120,32 @@ applies styles on f-div
             outline: none;
           }
         }
-        &[variant="outline"] {
+        &[variant="block"][category="transparent"] {
+          border-bottom: 1px solid map.get($color, "border");
+          border-top: none;
+          border-right: none;
+          border-left: none;
+          &:focus-within {
+            border-bottom: 1px solid map.get($color, "focus");
+            outline: none;
+          }
+        }
+        &[variant="block"][category="outline"] {
+          border: 1px solid map.get($color, "border");
+          &:focus-within {
+            border-bottom: 1px solid map.get($color, "focus");
+            outline: none;
+          }
+        }
+        &[variant="curved"][category="fill"] {
+          border: 1px solid map.get($color, "input");
+          border-radius: 4px;
+          &:focus-within {
+            border: 1px solid map.get($color, "focus");
+            outline: none;
+          }
+        }
+        &[variant="curved"][category="outline"] {
           border: 1px solid map.get($color, "border");
           border-radius: 4px;
           &:focus-within {
@@ -122,7 +153,15 @@ applies styles on f-div
             outline: none;
           }
         }
-        &[variant="round-fill"] {
+        &[variant="curved"][category="transparent"] {
+          border: 1px solid map.get($color, "border");
+          border-radius: 4px;
+          &:focus-within {
+            border: 1px solid map.get($color, "focus");
+            outline: none;
+          }
+        }
+        &[variant="round"][category="fill"] {
           border-radius: 22px;
           border: 1px solid map.get($color, "input");
           &:focus-within {
@@ -130,9 +169,17 @@ applies styles on f-div
             outline: none;
           }
         }
-        &[variant="curved-fill"] {
-          border-radius: 4px;
-          border: 1px solid map.get($color, "input");
+        &[variant="round"][category="outline"] {
+          border-radius: 22px;
+          border: 1px solid map.get($color, "border");
+          &:focus-within {
+            border: 1px solid map.get($color, "focus");
+            outline: none;
+          }
+        }
+        &[variant="round"][category="transparent"] {
+          border-radius: 22px;
+          border: 1px solid map.get($color, "border");
           &:focus-within {
             border: 1px solid map.get($color, "focus");
             outline: none;
@@ -140,7 +187,8 @@ applies styles on f-div
         }
       }
     }
-    .prefix {
+
+    .f-input-prefix {
       position: relative;
       display: flex;
       padding: 9px 0px 9px 12px;
@@ -148,7 +196,7 @@ applies styles on f-div
       align-items: center;
     }
 
-    .suffix {
+    .f-input-suffix {
       position: relative;
       padding: 9px 12px 9px 0px;
       display: flex;
@@ -201,25 +249,22 @@ applies styles on f-div
       color: var(--color-text-default);
       color-scheme: dark;
 
-      @each $variant, $value in $variants {
-        &[variant^="#{$variant}"] {
+      @each $category, $value in $categories {
+        &[category^="#{$category}"] {
           background-color: map.get($value, "background");
-          &:hover {
-            background-color: map.get($value, "hover") !important;
-          }
           border: none;
           &:focus {
             outline: none;
           }
         }
       }
-      &[variant="outline"] {
-        border-radius: 4px;
-      }
-      &[variant="round-fill"] {
+      &[variant="round"] {
         border-radius: 22px;
       }
-      &[variant="curved-fill"] {
+      &[variant="curved"] {
+        border-radius: 4px;
+      }
+      &[variant="block"] {
         border-radius: 4px;
       }
       &[type="password"] {

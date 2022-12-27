@@ -25,41 +25,42 @@ $states: (
 
 $sizes: (
   "small": (
-    "height": 12px,
-    "top": -4px,
-    "left": -13.5px,
-    "width": 12px,
-    "padding": 2px,
+    "height": 10px,
+    "width": 9px,
   ),
   "medium": (
-    "height": 16px,
-    "top": -2.5px,
-    "left": -16.5px,
-    "width": 14px,
-    "padding": 3px,
+    "height": 14px,
+    "width": 12px,
   ),
 );
 
 :host {
   height: fit-content;
   .f-checkbox {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
+    border: 0px;
+    /* clip: rect(0px, 0px, 0px, 0px); */
+    height: 0px;
+    width: 0px;
     overflow: hidden;
-    padding: 0;
+    padding: 0px;
     position: absolute;
-    width: 1px;
   }
 
-  .promoted-checkbox {
+  .f-checkbox-wrapper {
     @include base();
 
     input[checked="true"] + label > svg {
-      height: 24px;
+      height: var(--form-checkbox-width);
       animation: draw-checkbox ease-in-out 0.4s forwards;
       -webkit-animation: draw-checkbox ease-in-out 0.4s forwards;
+    }
+
+    @each $size, $value in $sizes {
+      &[size="#{$size}"] {
+        input[checked="true"] + label > svg {
+          height: map.get($value, "width");
+        }
+      }
     }
 
     label:active::after {
@@ -73,12 +74,15 @@ $sizes: (
       line-height: 40px;
       cursor: pointer;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       &:after {
         content: "";
         height: var(--form-checkbox-size);
         width: var(--form-checkbox-size);
         float: left;
-        border: 1.5px solid var(--color-text-default);
+        border: 1px solid var(--color-text-default);
         border-radius: 2px;
       }
       @each $size, $value in $sizes {
@@ -93,14 +97,14 @@ $sizes: (
       @each $state, $color in $states {
         &[state="#{$state}"][value="checked"] {
           &:after {
-            border: 1.5px solid map.get($color, "background");
+            border: 1px solid map.get($color, "background");
             transition: 0.15s all ease-out;
             background-color: map.get($color, "background");
           }
         }
         &[state="#{$state}"][value="indeterminate"] {
           &:after {
-            border: 1.5px solid map.get($color, "background");
+            border: 1px solid map.get($color, "background");
             transition: 0.15s all ease-out;
             background-color: map.get($color, "background");
           }
@@ -113,16 +117,15 @@ $sizes: (
       height: 0px;
       width: var(--form-checkbox-width);
       position: absolute;
-      left: var(--form-checkbox-left);
-      top: var(--form-checkbox-top);
+      align-items: center;
+      display: flex;
+      justify-content: center;
       stroke-dasharray: 33;
     }
     @each $size, $value in $sizes {
       &[size="#{$size}"] {
         svg {
           width: map.get($value, "width");
-          left: map.get($value, "left");
-          top: map.get($value, "top");
         }
       }
     }
@@ -136,16 +139,4 @@ $sizes: (
       stroke-dashoffset: 0;
     }
   }
-}
-
-f-checkbox {
-  // display: flex;
-  // align-items: center;
-  // padding-top: var(--form-checkbox-padding-top);
-  // @each $size, $value in $sizes {
-  //   &[size="#{$size}"] {
-  //     padding-top: map.get($value, "padding");
-  //   }
-  // }
-  padding-top: 0.16em;
 }

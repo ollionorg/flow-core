@@ -68,27 +68,22 @@ export class FTextArea extends FRoot {
   @property({ reflect: true, type: Boolean })
   clear?: boolean = false;
 
-  handleClick(e: any) {
-    if (this.value === "off") {
-      this.value = "on";
-    } else {
-      this.value = "off";
-    }
-    e.preventDefault();
-    e.stopPropagation();
-  }
-
-  inputHandler(e: any) {
-    this.value = e.target.value;
-    // this.dispatchEvent(
-    //   new CustomEvent("value-changed", {
-    //     detail: this.value,
-    //   })
-    // );
+  handleInput(e: React.ChangeEvent<HTMLInputElement>) {
+    const event = new CustomEvent("update", {
+      detail: {
+        value: e.target.value,
+      },
+    });
+    this.dispatchEvent(event);
   }
 
   clearValue() {
-    this.value = "";
+    const event = new CustomEvent("update", {
+      detail: {
+        value: "",
+      },
+    });
+    this.dispatchEvent(event);
   }
 
   applyStyles(parent: HTMLElement | "") {
@@ -119,7 +114,7 @@ export class FTextArea extends FRoot {
           maxlength=${this.maxLength}
           ?resizable=${this.resizable}
           state=${this.state}
-          @input="${this.inputHandler}"
+          @input=${this.handleInput}
         >
 ${this.value}</textarea
         >
@@ -132,9 +127,6 @@ ${this.value}</textarea
               @click=${this.clearValue}
             ></f-icon>`
           : null}
-        <div class="textarea-limit">
-          <f-text>sdcds</f-text>
-        </div>
       </div>
     `;
   }

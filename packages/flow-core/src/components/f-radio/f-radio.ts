@@ -32,14 +32,13 @@ export class FRadio extends FRoot {
   @property({ reflect: true, type: String })
   size?: "small" | "medium";
 
-  handleClick(e: any) {
-    if (this.value === "unselected") {
-      this.value = "selected";
-    } else {
-      this.value = "unselected";
-    }
-    e.preventDefault();
-    e.stopPropagation();
+  handleClick() {
+    const event = new CustomEvent("update", {
+      detail: {
+        value: this.value === "unselected" ? "selected" : "unselected",
+      },
+    });
+    this.dispatchEvent(event);
   }
 
   render() {
@@ -54,7 +53,7 @@ export class FRadio extends FRoot {
         checked=${this.value === "selected" ? true : false}
         size=${this.size}
         state=${this.state}
-        @click=${(e: any) => this.handleClick(e)}
+        @click=${this.handleClick}
       />
     `;
   }

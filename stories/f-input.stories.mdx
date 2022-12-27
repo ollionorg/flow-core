@@ -34,11 +34,15 @@ f-spacer is used to create a pseudo space in the layout.
       placeholder: { control: "text" },
       variant: {
         control: "select",
-        options: ["round-fill", "curved-fill", "outline", "transparent"],
+        options: ["curved", "round", "block"],
       },
       category: {
         control: "select",
-        options: ["text", "number", "email", "password", "url", "tel", "date", "time"],
+        options: ["fill", "transparent", "outline"],
+      },
+      type: {
+        control: "select",
+        options: ["text", "number", "email", "password", "url", "tel"],
       },
       ["icon-left"]: {
         control: "text",
@@ -81,8 +85,9 @@ f-spacer is used to create a pseudo space in the layout.
     args={{
       value: "",
       placeholder: "Enter your text here",
-      variant: "round-fill",
-      category: "text",
+      variant: "round",
+      category: "fill",
+      type: "text",
       ["icon-left"]: undefined,
       ["icon-right"]: undefined,
       ["prefix"]: undefined,
@@ -98,16 +103,23 @@ f-spacer is used to create a pseudo space in the layout.
   >
     {(args) => {
       const [_, updateArgs] = useArgs();
-      useEffect(() => {
-        updateArgs({ value: args.value });
-      }, [args.value]);
-      const handleInput = (e, f) => {
-        console.log(e);
-        updateArgs({ value: args.value });
+      const [checked, setChecked] = useState("unchecked");
+      const [radioChecked, setRadioChecked] = useState("unselected");
+      const [switchValue, setSwitchValue] = useState("off");
+      const handleInput = (e) => {
+        updateArgs({ value: e.detail.value });
       };
-      const handleInputTextArea = (e, f) => {
-        console.log(e.target.value);
-        updateArgs({ ["textarea-value"]: e.target.value });
+      const handleInputTextArea = (e) => {
+        updateArgs({ ["textarea-value"]: e.detail.value });
+      };
+      const handleChecked = (e) => {
+        setChecked(e.detail.value);
+      };
+      const handleRadioChecked = (e) => {
+        setRadioChecked(e.detail.value);
+      };
+      const handleSwitch = (e) => {
+        setSwitchValue(e.detail.value);
       };
       return html`
         <f-form size=${args["form-size"]}>
@@ -121,14 +133,17 @@ f-spacer is used to create a pseudo space in the layout.
               <f-text variant="para" size="small">Label *</f-text>
               <f-input
                 .value=${args.value}
+                @update=${handleInput}
                 .placeholder=${args.placeholder}
                 .variant=${args.variant}
                 .category=${args.category}
+                .type=${args.type}
                 icon-left=${args["icon-left"]}
                 icon-right=${args["icon-right"]}
                 prefix=${args["prefix"]}
                 suffix=${args["suffix"]}
-                @input=${handleInput}
+                clear=${true}
+                size="medium"
               ></f-input>
             </f-field>
             <f-field state=${args["element-state"]}>
@@ -136,8 +151,10 @@ f-spacer is used to create a pseudo space in the layout.
               <f-input
                 value=${args.value}
                 .placeholder=${args.placeholder}
+                @update=${handleInput}
                 .variant=${args.variant}
                 .category=${args.category}
+                .type=${args.type}
                 icon-left=${args["icon-left"]}
                 icon-right=${args["icon-right"]}
                 prefix=${args["prefix"]}
@@ -149,8 +166,10 @@ f-spacer is used to create a pseudo space in the layout.
               <f-input
                 value=${args.value}
                 .placeholder=${args.placeholder}
+                @update=${handleInput}
                 .variant=${args.variant}
                 .category=${args.category}
+                .type=${args.type}
                 icon-left=${args["icon-left"]}
                 icon-right=${args["icon-right"]}
                 prefix=${args["prefix"]}
@@ -159,9 +178,20 @@ f-spacer is used to create a pseudo space in the layout.
             </f-field>
             <f-div padding="small" state="tertiary" clickable variant="curved">
               <f-field type="checkbox" state=${args["element-state"]}>
-                <f-checkbox value="checked"></f-checkbox>
+                <f-checkbox value=${checked} @update=${handleChecked}></f-checkbox>
                 <f-div padding="none" gap="x-small" direction="column" align="middle-left">
-                  <f-text variant="para" size="small">Label *</f-text>
+                  <f-text
+                    variant="para"
+                    size="small"
+                    @click=${() => {
+                      if (checked === "checked") {
+                        setChecked("unchecked");
+                      } else {
+                        setChecked("checked");
+                      }
+                    }}
+                    >Label (value="${checked}") *</f-text
+                  >
                   <f-text variant="para" size="small" state="secondary"
                     >States are used to communicate purpose and connotations. For example, a red
                     color connotes danger, whereas a green color connotes success and so on.
@@ -171,9 +201,20 @@ f-spacer is used to create a pseudo space in the layout.
             </f-div>
             <f-div padding="small" state="tertiary" clickable variant="curved">
               <f-field type="radio" state=${args["element-state"]}>
-                <f-radio></f-radio>
+                <f-radio value=${radioChecked} @update=${handleRadioChecked}></f-radio>
                 <f-div padding="none" gap="x-small" direction="column" align="middle-left">
-                  <f-text variant="para" size="small">Label *</f-text>
+                  <f-text
+                    variant="para"
+                    size="small"
+                    @click=${() => {
+                      if (radioChecked === "selected") {
+                        setRadioChecked("unselected");
+                      } else {
+                        setRadioChecked("selected");
+                      }
+                    }}
+                    >Label (value="${radioChecked}") *</f-text
+                  >
                   <f-text variant="para" size="small" state="secondary"
                     >States are used to communicate purpose and connotations. For example, a red
                     color connotes danger, whereas a green color connotes success and so on.
@@ -194,7 +235,7 @@ f-spacer is used to create a pseudo space in the layout.
               </f-div>
             </f-field>
             <f-field type="switch" state=${args["element-state"]} .disabled=${args.disabled}>
-              <f-switch></f-switch>
+              <f-switch value=${switchValue} @update=${handleSwitch}></f-switch>
             </f-field>
             <f-field state=${args["element-state"]}>
               <f-div height="200px" width="500px" padding="none" overflow="hidden">
@@ -205,7 +246,7 @@ f-spacer is used to create a pseudo space in the layout.
                   clear=${true}
                   state=${args["element-state"]}
                   value=${args["textarea-value"]}
-                  @input=${handleInputTextArea}
+                  @update=${handleInputTextArea}
                 ></f-textarea>
               </f-div>
             </f-field>
@@ -213,19 +254,19 @@ f-spacer is used to create a pseudo space in the layout.
           <f-form-group direction="vertical" gap=${args["group-gap"]}>
             <f-text variant="heading" size="small">Favourite Fruit</f-text>
             <f-field type="checkbox" state=${args["element-state"]}>
-              <f-checkbox></f-checkbox>
+              <f-checkbox value=${checked} @update=${handleChecked}></f-checkbox>
               <f-div padding="none" align="middle-center">
                 <f-text variant="para" size="small">Apple</f-text>
               </f-div>
             </f-field>
             <f-field type="checkbox" state=${args["element-state"]}>
-              <f-checkbox></f-checkbox>
+              <f-checkbox value=${checked} @update=${handleChecked}></f-checkbox>
               <f-div padding="none" align="middle-center">
                 <f-text variant="para" size="small">Banana</f-text>
               </f-div>
             </f-field>
             <f-field type="checkbox" state=${args["element-state"]}>
-              <f-checkbox></f-checkbox>
+              <f-checkbox value=${checked} @update=${handleChecked}></f-checkbox>
               <f-div padding="none" align="middle-center">
                 <f-text variant="para" size="small">Orange</f-text>
               </f-div>

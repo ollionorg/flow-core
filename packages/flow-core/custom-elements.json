@@ -764,12 +764,12 @@
             },
             {
               "kind": "method",
-              "name": "handleClick",
+              "name": "handleInput",
               "parameters": [
                 {
                   "name": "e",
                   "type": {
-                    "text": "any"
+                    "text": "React.ChangeEvent<HTMLInputElement>"
                   }
                 }
               ]
@@ -823,6 +823,186 @@
           "declaration": {
             "name": "FCheckbox",
             "module": "src/components/f-checkbox/f-checkbox.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-counter/f-counter.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FCounter",
+          "members": [
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "number"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FCounterStateProp | undefined"
+              },
+              "default": "\"neutral\"",
+              "attribute": "state"
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "array"
+              },
+              "default": "[\"label\"]",
+              "description": "mention required fields here"
+            },
+            {
+              "kind": "method",
+              "name": "validateProperties"
+            },
+            {
+              "kind": "field",
+              "name": "computedLabel"
+            },
+            {
+              "kind": "method",
+              "name": "abbrNum",
+              "parameters": [
+                {
+                  "name": "number",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "decPlaces",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "textColor",
+              "description": "compute textColor when custom color of tag is defined."
+            },
+            {
+              "kind": "field",
+              "name": "loaderColor",
+              "description": "compute loaderColor when custom color of tag is defined."
+            },
+            {
+              "kind": "method",
+              "name": "applyStyles",
+              "description": "apply inline styles to shadow-dom for custom fill."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "number"
+              },
+              "fieldName": "label"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FCounterStateProp | undefined"
+              },
+              "default": "\"neutral\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-counter",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FCounter",
+          "declaration": {
+            "name": "FCounter",
+            "module": "src/components/f-counter/f-counter.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-counter",
+          "declaration": {
+            "name": "FCounter",
+            "module": "src/components/f-counter/f-counter.ts"
           }
         }
       ]
@@ -1158,287 +1338,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-counter/f-counter.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FCounter",
-          "members": [
-            {
-              "kind": "field",
-              "name": "fill",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"\""
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "number"
-              },
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size"
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FCounterStateProp | undefined"
-              },
-              "default": "\"neutral\"",
-              "attribute": "state"
-            },
-            {
-              "kind": "field",
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "loading"
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled"
-            },
-            {
-              "kind": "field",
-              "name": "required",
-              "type": {
-                "text": "array"
-              },
-              "default": "[\"label\"]",
-              "description": "mention required fields here"
-            },
-            {
-              "kind": "method",
-              "name": "validateProperties"
-            },
-            {
-              "kind": "field",
-              "name": "computedLabel"
-            },
-            {
-              "kind": "method",
-              "name": "abbrNum",
-              "parameters": [
-                {
-                  "name": "number",
-                  "type": {
-                    "text": "number"
-                  }
-                },
-                {
-                  "name": "decPlaces",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "textColor",
-              "description": "compute textColor when custom color of tag is defined."
-            },
-            {
-              "kind": "field",
-              "name": "loaderColor",
-              "description": "compute loaderColor when custom color of tag is defined."
-            },
-            {
-              "kind": "method",
-              "name": "applyStyles",
-              "description": "apply inline styles to shadow-dom for custom fill."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "label",
-              "type": {
-                "text": "number"
-              },
-              "fieldName": "label"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FCounterStateProp | undefined"
-              },
-              "default": "\"neutral\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "loading"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-counter",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FCounter",
-          "declaration": {
-            "name": "FCounter",
-            "module": "src/components/f-counter/f-counter.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-counter",
-          "declaration": {
-            "name": "FCounter",
-            "module": "src/components/f-counter/f-counter.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-divider/f-divider.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FDivider",
-          "members": [
-            {
-              "kind": "field",
-              "name": "fill",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"\""
-            },
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
-              },
-              "default": "\"solid\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FDividerState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
-              },
-              "default": "\"solid\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FDividerState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-divider",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FDivider",
-          "declaration": {
-            "name": "FDivider",
-            "module": "src/components/f-divider/f-divider.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-divider",
-          "declaration": {
-            "name": "FDivider",
-            "module": "src/components/f-divider/f-divider.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-field/f-field.ts",
       "declarations": [
         {
@@ -1454,16 +1353,6 @@
               },
               "default": "\"default\"",
               "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "type",
-              "type": {
-                "text": "\"input\" | \"checkbox\" | \"radio\" | undefined"
-              },
-              "default": "\"input\"",
-              "attribute": "type",
               "reflects": true
             },
             {
@@ -1505,14 +1394,6 @@
               },
               "default": "\"default\"",
               "fieldName": "state"
-            },
-            {
-              "name": "type",
-              "type": {
-                "text": "\"input\" | \"checkbox\" | \"radio\" | undefined"
-              },
-              "default": "\"input\"",
-              "fieldName": "type"
             },
             {
               "name": "disabled",
@@ -1673,6 +1554,107 @@
           "declaration": {
             "name": "FForm",
             "module": "src/components/f-form/f-form.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-divider/f-divider.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FDivider",
+          "members": [
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
+              },
+              "default": "\"solid\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FDividerState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
+              },
+              "default": "\"solid\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FDividerState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-divider",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FDivider",
+          "declaration": {
+            "name": "FDivider",
+            "module": "src/components/f-divider/f-divider.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-divider",
+          "declaration": {
+            "name": "FDivider",
+            "module": "src/components/f-divider/f-divider.ts"
           }
         }
       ]
@@ -2152,10 +2134,20 @@
               "kind": "field",
               "name": "variant",
               "type": {
-                "text": "\"curved-fill\" | \"round-fill\" | \"transparent\" | \"outline\" | undefined"
+                "text": "\"curved\" | \"round\" | \"block\" | undefined"
               },
-              "default": "\"curved-fill\"",
+              "default": "\"curved\"",
               "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "category",
+              "type": {
+                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
+              },
+              "default": "\"fill\"",
+              "attribute": "category",
               "reflects": true
             },
             {
@@ -2179,12 +2171,12 @@
             },
             {
               "kind": "field",
-              "name": "category",
+              "name": "type",
               "type": {
-                "text": "\"text\" | \"number\" | \"email\" | \"password\" | \"url\" | \"tel\" | \"date\" | \"time\" | undefined"
+                "text": "\"text\" | \"number\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined"
               },
               "default": "\"text\"",
-              "attribute": "category",
+              "attribute": "type",
               "reflects": true
             },
             {
@@ -2225,7 +2217,7 @@
             },
             {
               "kind": "field",
-              "name": "prefixString",
+              "name": "fInputPrefix",
               "type": {
                 "text": "string | undefined"
               },
@@ -2234,11 +2226,20 @@
             },
             {
               "kind": "field",
-              "name": "suffixString",
+              "name": "fInputSuffix",
               "type": {
                 "text": "string | undefined"
               },
               "attribute": "suffix",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "maxLength",
+              "type": {
+                "text": "number | undefined"
+              },
+              "attribute": "max-length",
               "reflects": true
             },
             {
@@ -2253,29 +2254,59 @@
             },
             {
               "kind": "field",
-              "name": "isReadOnly"
+              "name": "clear",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "clear",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "isReadOnly",
+              "description": "fetch read-only value from nearest parent f-field element"
             },
             {
               "kind": "method",
-              "name": "inputHandler",
+              "name": "handleInput",
               "parameters": [
                 {
                   "name": "e",
                   "type": {
-                    "text": "any"
+                    "text": "React.ChangeEvent<HTMLInputElement>"
                   }
                 }
-              ]
+              ],
+              "description": "emit input custom event"
+            },
+            {
+              "kind": "method",
+              "name": "clearInputValue",
+              "description": "clear input value on clear icon clicked"
+            },
+            {
+              "kind": "field",
+              "name": "iconSize",
+              "description": "icon size"
             }
           ],
           "attributes": [
             {
               "name": "variant",
               "type": {
-                "text": "\"curved-fill\" | \"round-fill\" | \"transparent\" | \"outline\" | undefined"
+                "text": "\"curved\" | \"round\" | \"block\" | undefined"
               },
-              "default": "\"curved-fill\"",
+              "default": "\"curved\"",
               "fieldName": "variant"
+            },
+            {
+              "name": "category",
+              "type": {
+                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
+              },
+              "default": "\"fill\"",
+              "fieldName": "category"
             },
             {
               "name": "state",
@@ -2293,12 +2324,12 @@
               "fieldName": "size"
             },
             {
-              "name": "category",
+              "name": "type",
               "type": {
-                "text": "\"text\" | \"number\" | \"email\" | \"password\" | \"url\" | \"tel\" | \"date\" | \"time\" | undefined"
+                "text": "\"text\" | \"number\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined"
               },
               "default": "\"text\"",
-              "fieldName": "category"
+              "fieldName": "type"
             },
             {
               "name": "value",
@@ -2333,14 +2364,21 @@
               "type": {
                 "text": "string | undefined"
               },
-              "fieldName": "prefixString"
+              "fieldName": "fInputPrefix"
             },
             {
               "name": "suffix",
               "type": {
                 "text": "string | undefined"
               },
-              "fieldName": "suffixString"
+              "fieldName": "fInputSuffix"
+            },
+            {
+              "name": "max-length",
+              "type": {
+                "text": "number | undefined"
+              },
+              "fieldName": "maxLength"
             },
             {
               "name": "loading",
@@ -2349,6 +2387,14 @@
               },
               "default": "false",
               "fieldName": "loading"
+            },
+            {
+              "name": "clear",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "clear"
             }
           ],
           "superclass": {
@@ -2769,15 +2815,7 @@
             },
             {
               "kind": "method",
-              "name": "handleClick",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "any"
-                  }
-                }
-              ]
+              "name": "handleClick"
             }
           ],
           "attributes": [
@@ -2934,12 +2972,12 @@
             },
             {
               "kind": "method",
-              "name": "handleClick",
+              "name": "handleInput",
               "parameters": [
                 {
                   "name": "e",
                   "type": {
-                    "text": "any"
+                    "text": "React.ChangeEvent<HTMLInputElement>"
                   }
                 }
               ]
@@ -3550,24 +3588,12 @@
             },
             {
               "kind": "method",
-              "name": "handleClick",
+              "name": "handleInput",
               "parameters": [
                 {
                   "name": "e",
                   "type": {
-                    "text": "any"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "inputHandler",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "any"
+                    "text": "React.ChangeEvent<HTMLInputElement>"
                   }
                 }
               ]
@@ -3687,34 +3713,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/mixins/svg/loader.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "src/mixins/svg/loader.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/mixins/svg/not-found.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "src/mixins/svg/not-found.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/modules/config/index.ts",
       "declarations": [
         {
@@ -3746,6 +3744,34 @@
           "declaration": {
             "name": "ConfigUtil",
             "module": "src/modules/config/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/mixins/svg/loader.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/mixins/svg/loader.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/mixins/svg/not-found.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/mixins/svg/not-found.ts"
           }
         }
       ]

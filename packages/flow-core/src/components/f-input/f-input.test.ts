@@ -4,7 +4,7 @@ import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 // import flow-core elements
 import "@cldcvr/flow-core";
 
-import { FButton, FIcon, ConfigUtil, FCounter, FInput } from "@cldcvr/flow-core";
+import { FButton, FIcon, ConfigUtil, FCounter, FInput, FText } from "@cldcvr/flow-core";
 // importing `loadingSVG` to cross check
 import loadingSVG from "../../mixins/svg/loader";
 
@@ -50,14 +50,13 @@ describe("f-input", () => {
     const icon = descendant.children[0];
     expect(icon).instanceOf(FIcon);
   });
-  // it("should render counter", async () => {
-  //   const el = await fixture(html` <f-input counter="88"></f-input> `);
-  //   const descendant = el.shadowRoot!.querySelector(".f-input")!;
-  //   const counter = descendant.children[descendant.children.length - 1];
-  //   expect(counter).instanceOf(FCounter);
-  //   const descCounter = counter.shadowRoot!.querySelector(".f-counter")!;
-  //   expect(descCounter.textContent?.trim()).equal("88");
-  // });
+  it("should render with prefix string", async () => {
+    const el = await fixture(html` <f-input prefix="abc"></f-input> `);
+    const descendant = el.shadowRoot!.querySelector(".f-input-prefix")!;
+    const ftext = descendant.children[0].children[0];
+    expect(ftext).instanceOf(FText);
+    expect(ftext.textContent?.trim()).equal("abc");
+  });
   // it("should render loader", async () => {
   //   const el = await fixture(html` <f-input label="abc" loading></f-input> `);
   //   const descendant = el.shadowRoot!.querySelector(".f-input")!;

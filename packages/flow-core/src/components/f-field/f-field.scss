@@ -18,49 +18,54 @@ $states: (
   ),
 );
 
-f-field {
-  @include base();
-  display: flex;
-  gap: 12px;
-  flex: 1 1;
-  flex-direction: column;
+$sizes: (
+  "medium": 16px,
+  "small": 12px,
+);
 
-  &[validation-state="danger"] {
-    --color-subtext-default: var(--color-danger-default) !important;
-    --color-input-default: var(--color-danger-default) !important;
-    --color-input-border-default: var(--color-danger-default) !important;
-  }
+:host {
+  width: 100%;
+  .f-field-wrapper {
+    overflow: visible;
+    .f-field {
+      @include base();
+      display: flex;
+      gap: 12px;
+      flex: 1 1;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
 
-  @each $state, $value in $states {
-    &[state^="#{$state}"] {
-      // include mixin for inheritance rules
-      @include subtext-color($state);
-      @include input-color($state);
+      &[validation-state="danger"] {
+        --color-subtext-default: var(--color-danger-default) !important;
+        --color-input-default: var(--color-danger-default) !important;
+        --color-input-border-default: var(--color-danger-default) !important;
+      }
+
+      @each $state, $value in $states {
+        &[state^="#{$state}"] {
+          // include mixin for inheritance rules
+          @include subtext-color($state);
+          @include input-color($state);
+        }
+      }
+
+      @each $size, $value in $sizes {
+        &[size="#{$size}"] {
+          @include inherit-size($size);
+        }
+      }
+
+      &[type="f-field-inline"] {
+        display: inline-flex;
+        flex-direction: row;
+        width: fit-content;
+        gap: 12px;
+      }
+
+      &[disabled] {
+        @include disabled();
+      }
     }
-  }
-
-  &[type="checkbox"] {
-    display: inline-flex;
-    flex-direction: row;
-    width: fit-content;
-    gap: 12px;
-  }
-
-  &[type="radio"] {
-    display: inline-flex;
-    flex-direction: row;
-    width: fit-content;
-    gap: 12px;
-  }
-
-  &[type="switch"] {
-    display: inline-flex;
-    flex-direction: row;
-    width: fit-content;
-    gap: 12px;
-  }
-
-  &[disabled] {
-    @include disabled();
   }
 }

@@ -14,6 +14,12 @@ export class FFormGroup extends FRoot {
   static styles = [unsafeCSS(eleStyle)];
 
   /**
+   * @attribute Variant decides whether the input elements in a group have some gap or not when they are aligned horizontally.
+   */
+  @property({ type: String, reflect: true })
+  variant?: "normal" | "compact" = "normal";
+
+  /**
    * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
    */
   @property({ type: String, reflect: true })
@@ -24,6 +30,12 @@ export class FFormGroup extends FRoot {
    */
   @property({ type: String, reflect: true })
   gap?: "large" | "medium" | "small" | "x-small" = "small";
+
+  /**
+   * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
+   */
+  @property({ type: String, reflect: true })
+  collapse?: "none" | "accordion" | "text" = "none";
 
   render() {
     /**

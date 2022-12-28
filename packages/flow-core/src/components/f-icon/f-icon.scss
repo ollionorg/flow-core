@@ -142,6 +142,24 @@ in this case it is `f-icon`
 
     // Edge case : extend styles if `f-icon` is used on `f-button`
     &.fill-button-surface {
+      &.fill-button-surface-input {
+        svg {
+          fill: var(--color-text-default) !important;
+          stroke: none;
+          *[fill^="white"] {
+            fill: var(--color-text-default) !important;
+          }
+        }
+        &:hover {
+          svg {
+            fill: var(--color-text-default-hover);
+            stroke: none;
+            *[fill^="white"] {
+              fill: var(--color-text-default-hover);
+            }
+          }
+        }
+      }
       svg {
         fill: var(--color-surface-default) !important;
         stroke: none;

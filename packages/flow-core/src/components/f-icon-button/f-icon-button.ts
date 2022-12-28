@@ -43,6 +43,12 @@ export class FIconButton extends FRoot {
   fill = "";
 
   /**
+   * @attribute local state for managing input class.
+   */
+  @state()
+  iconInputClass = false;
+
+  /**
    * @attribute Icon property defines what icon will be displayed on the icon. It can take the icon name from a library , any inline SVG or any URL for the image.
    */
   @property({ type: String })
@@ -226,14 +232,24 @@ export class FIconButton extends FRoot {
           ></f-counter>`
         : "";
 
+    // classes to apply on inner element
+    const classes: Record<string, boolean> = {
+      "f-icon-button": true,
+      hasShimmer,
+      "custom-loader": this.fill ? true : false,
+      "custom-hover": this.fill && this.type === "fill" && this.variant !== "block" ? true : false,
+    };
+    // merging host classes
+    this.classList.forEach((cl) => {
+      classes[cl] = true;
+      console.log(cl, classes[cl]);
+      if (cl === "f-input-duplicate") {
+        this.iconInputClass = true;
+      }
+    });
+
     return html`<button
-      class=${classMap({
-        "f-icon-button": true,
-        hasShimmer,
-        "custom-loader": this.fill ? true : false,
-        "custom-hover":
-          this.fill && this.type === "fill" && this.variant !== "block" ? true : false,
-      })}
+      class=${classMap(classes)}
       style=${this.applyStyles()}
       variant=${this.variant}
       type=${this.type}
@@ -248,7 +264,10 @@ export class FIconButton extends FRoot {
         .source=${this.icon}
         .state=${this.state}
         .size=${this.size}
-        class=${classMap(iconClasses)}
+        class=${classMap({
+          ...iconClasses,
+          "fill-button-surface-input": this.iconInputClass ? true : false,
+        })}
       ></f-icon>
       ${counter}
     </button>`;

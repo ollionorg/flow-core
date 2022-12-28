@@ -129,11 +129,68 @@ f-spacer is used to create a pseudo space in the layout.
               required=${true}
               .disabled=${args.disabled}
               .loading=${args.loading}
+              description="This is a subtext"
+              can-duplicate=${true}
             >
               <f-text variant="para" size="small">Label *</f-text>
               <f-input
                 .value=${args.value}
-                @update=${handleInput}
+                @input=${handleInput}
+                .placeholder=${args.placeholder}
+                .variant=${args.variant}
+                .category=${args.category}
+                .type=${args.type}
+                icon-left=${args["icon-left"]}
+                icon-right=${args["icon-right"]}
+                prefix=${args["prefix"]}
+                suffix=${args["suffix"]}
+                clear=${true}
+              ></f-input>
+            </f-field>
+            <f-field state=${args["element-state"]}>
+              <f-text variant="para" size="small">Label *</f-text>
+              <f-input
+                value=${args.value}
+                .placeholder=${args.placeholder}
+                @input=${handleInput}
+                .variant=${args.variant}
+                .category=${args.category}
+                .type=${args.type}
+                icon-left=${args["icon-left"]}
+                icon-right=${args["icon-right"]}
+                prefix=${args["prefix"]}
+                suffix=${args["suffix"]}
+              ></f-input>
+            </f-field>
+            <f-field state=${args["element-state"]}>
+              <f-text variant="para" size="small">Label *</f-text>
+              <f-input
+                value=${args.value}
+                .placeholder=${args.placeholder}
+                @input=${handleInput}
+                .variant=${args.variant}
+                .category=${args.category}
+                .type=${args.type}
+                icon-left=${args["icon-left"]}
+                icon-right=${args["icon-right"]}
+                prefix=${args["prefix"]}
+                suffix=${args["suffix"]}
+              ></f-input>
+            </f-field>
+          </f-form-group>
+          <f-form-group gap=${args["group-gap"]}>
+            <f-field
+              state=${args["element-state"]}
+              required=${true}
+              .disabled=${args.disabled}
+              .loading=${args.loading}
+              description="This is a subtext"
+              can-duplicate=${true}
+            >
+              <f-text variant="para" size="small">Label *</f-text>
+              <f-input
+                .value=${args.value}
+                @input=${handleInput}
                 .placeholder=${args.placeholder}
                 .variant=${args.variant}
                 .category=${args.category}
@@ -151,7 +208,7 @@ f-spacer is used to create a pseudo space in the layout.
               <f-input
                 value=${args.value}
                 .placeholder=${args.placeholder}
-                @update=${handleInput}
+                @input=${handleInput}
                 .variant=${args.variant}
                 .category=${args.category}
                 .type=${args.type}
@@ -166,7 +223,7 @@ f-spacer is used to create a pseudo space in the layout.
               <f-input
                 value=${args.value}
                 .placeholder=${args.placeholder}
-                @update=${handleInput}
+                @input=${handleInput}
                 .variant=${args.variant}
                 .category=${args.category}
                 .type=${args.type}
@@ -177,10 +234,10 @@ f-spacer is used to create a pseudo space in the layout.
               ></f-input>
             </f-field>
             <f-div padding="small" state="tertiary" clickable variant="curved">
-              <f-field type="checkbox" state=${args["element-state"]}>
-                <f-checkbox value=${checked} @update=${handleChecked}></f-checkbox>
-                <f-div padding="none" gap="x-small" direction="column" align="middle-left">
+              <f-field state=${args["element-state"]}>
+                <f-checkbox value=${checked} @update=${handleChecked}>
                   <f-text
+                    slot="label-title"
                     variant="para"
                     size="small"
                     @click=${() => {
@@ -192,15 +249,15 @@ f-spacer is used to create a pseudo space in the layout.
                     }}
                     >Label (value="${checked}") *</f-text
                   >
-                  <f-text variant="para" size="small" state="secondary"
+                  <f-text slot="label-description" variant="para" size="small" state="secondary"
                     >States are used to communicate purpose and connotations. For example, a red
                     color connotes danger, whereas a green color connotes success and so on.
                   </f-text>
-                </f-div>
+                </f-checkbox>
               </f-field>
             </f-div>
             <f-div padding="small" state="tertiary" clickable variant="curved">
-              <f-field type="radio" state=${args["element-state"]}>
+              <f-field state=${args["element-state"]}>
                 <f-radio value=${radioChecked} @update=${handleRadioChecked}></f-radio>
                 <f-div padding="none" gap="x-small" direction="column" align="middle-left">
                   <f-text
@@ -222,20 +279,24 @@ f-spacer is used to create a pseudo space in the layout.
                 </f-div>
               </f-field>
             </f-div>
-            <f-field type="checkbox" state=${args["element-state"]}>
-              <f-checkbox size="small" value="indeterminate"></f-checkbox>
-              <f-div padding="none" align="middle-center">
-                <f-text variant="para" size="small">Banana</f-text>
-              </f-div>
+            <f-field state=${args["element-state"]}>
+              <f-checkbox size="small" value="indeterminate">
+                <f-div slot="label-title" padding="none" align="middle-center">
+                  <f-text variant="para" size="small">Banana</f-text>
+                </f-div></f-checkbox
+              >
             </f-field>
-            <f-field type="radio" state=${args["element-state"]}>
+            <f-field state=${args["element-state"]}>
               <f-radio></f-radio>
               <f-div padding="none" align="middle-center">
                 <f-text variant="para" size="large">Banana</f-text>
               </f-div>
             </f-field>
-            <f-field type="switch" state=${args["element-state"]} .disabled=${args.disabled}>
+            <f-field state=${args["element-state"]} .disabled=${args.disabled}>
               <f-switch value=${switchValue} @update=${handleSwitch}></f-switch>
+              <f-div padding="none" align="middle-center">
+                <f-text variant="para" size="small">Toggle ${switchValue}</f-text>
+              </f-div>
             </f-field>
             <f-field state=${args["element-state"]}>
               <f-div height="200px" width="500px" padding="none" overflow="hidden">
@@ -252,25 +313,29 @@ f-spacer is used to create a pseudo space in the layout.
             </f-field>
           </f-form-group>
           <f-form-group direction="vertical" gap=${args["group-gap"]}>
-            <f-text variant="heading" size="small">Favourite Fruit</f-text>
-            <f-field type="checkbox" state=${args["element-state"]}>
-              <f-checkbox value=${checked} @update=${handleChecked}></f-checkbox>
-              <f-div padding="none" align="middle-center">
-                <f-text variant="para" size="small">Apple</f-text>
-              </f-div>
-            </f-field>
-            <f-field type="checkbox" state=${args["element-state"]}>
-              <f-checkbox value=${checked} @update=${handleChecked}></f-checkbox>
-              <f-div padding="none" align="middle-center">
-                <f-text variant="para" size="small">Banana</f-text>
-              </f-div>
-            </f-field>
-            <f-field type="checkbox" state=${args["element-state"]}>
-              <f-checkbox value=${checked} @update=${handleChecked}></f-checkbox>
-              <f-div padding="none" align="middle-center">
-                <f-text variant="para" size="small">Orange</f-text>
-              </f-div>
-            </f-field>
+            <f-div padding="none">
+              <f-text variant="heading" size="small">Favourite Fruit</f-text>
+            </f-div>
+            <f-form-group direction="horizontal" gap=${args["group-gap"]}>
+              <f-field state=${args["element-state"]} size="medium">
+                <f-checkbox value=${checked} @update=${handleChecked}></f-checkbox>
+                <f-div padding="none" align="middle-center">
+                  <f-text variant="para" size="small">Apple</f-text>
+                </f-div>
+              </f-field>
+              <f-field state=${args["element-state"]}>
+                <f-checkbox value=${checked} @update=${handleChecked}></f-checkbox>
+                <f-div padding="none" align="middle-center">
+                  <f-text variant="para" size="small">Banana</f-text>
+                </f-div>
+              </f-field>
+              <f-field state=${args["element-state"]} description="This is a subtext">
+                <f-checkbox value=${checked} @update=${handleChecked}></f-checkbox>
+                <f-div padding="none" align="middle-center">
+                  <f-text variant="para" size="small">Orange</f-text>
+                </f-div>
+              </f-field>
+            </f-form-group>
           </f-form-group>
         </f-form>
       `;

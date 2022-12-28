@@ -281,8 +281,10 @@
     --field-gap-size: 16px;
   } @else if $gap== "small" {
     --field-gap-size: 12px;
-  } @else {
+  } @else if("x-small") {
     --field-gap-size: 8px;
+  } @else {
+    --field-gap-size: 0px;
   }
 }
 
@@ -297,6 +299,7 @@
     --form-checkbox-top: -2.5px;
     --form-checkbox-left: -16.5px;
     --form-checkbox-width: 12px;
+    --form-checkbox-height: 16px;
     --form-radio-mark-size: 6px;
     --form-switch-height: 20px;
     --form-switch-width: 36px;
@@ -306,6 +309,7 @@
     --form-checkbox-padding-top: 3px;
     --form-textarea-padding-tp-btm: 9px;
     --form-textarea-padding-lt-rt: 12px;
+    --form-checkbox-description-padding: 28px;
   } @else {
     --form-input-div-size: 28px;
     --form-input-size: 26px;
@@ -316,6 +320,7 @@
     --form-checkbox-top: -4px;
     --form-checkbox-left: -13.5px;
     --form-checkbox-width: 9px;
+    --form-checkbox-height: 11px;
     --form-radio-mark-size: 6px;
     --form-switch-height: 16px;
     --form-switch-width: 28px;
@@ -325,5 +330,6 @@
     --form-checkbox-padding-top: 2px;
     --form-textarea-padding-tp-btm: 5px;
     --form-textarea-padding-lt-rt: 8px;
+    --form-checkbox-description-padding: 24px;
   }
 }

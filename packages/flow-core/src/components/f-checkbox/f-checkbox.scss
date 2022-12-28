@@ -38,11 +38,15 @@ $sizes map created to hold values of different sizes
 $sizes: (
   "small": (
     "height": 10px,
-    "width": 9px,
+    "svg-width": 9px,
+    "svg-height": 11px,
+    "padding": 24px,
   ),
   "medium": (
     "height": 14px,
-    "width": 12px,
+    "svg-width": 12px,
+    "svg-height": 16px,
+    "padding": 28px,
   ),
 );
 
@@ -59,9 +63,15 @@ $sizes: (
 
   .f-checkbox-wrapper {
     @include base();
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 
+    .f-checkbox-description {
+      padding-left: var(--form-checkbox-description-padding);
+    }
     input[checked="true"] + label > svg {
-      height: var(--form-checkbox-width);
+      height: var(--form-checkbox-height);
       animation: draw-checkbox ease-in-out 0.4s forwards;
       -webkit-animation: draw-checkbox ease-in-out 0.4s forwards;
     }
@@ -69,7 +79,10 @@ $sizes: (
     @each $size, $value in $sizes {
       &[size="#{$size}"] {
         input[checked="true"] + label > svg {
-          height: map.get($value, "width");
+          height: map.get($value, "svg-height");
+        }
+        .f-checkbox-description {
+          padding-left: map.get($value, "padding");
         }
       }
     }
@@ -80,8 +93,8 @@ $sizes: (
       cursor: pointer;
       position: relative;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       &:after {
         content: "";
         height: var(--form-checkbox-size);
@@ -135,15 +148,12 @@ $sizes: (
       height: 0px;
       width: var(--form-checkbox-width);
       position: absolute;
-      align-items: center;
-      display: flex;
-      justify-content: center;
       stroke-dasharray: 33;
     }
     @each $size, $value in $sizes {
       &[size="#{$size}"] {
         svg {
-          width: map.get($value, "width");
+          width: map.get($value, "svg-width");
         }
       }
     }
@@ -159,14 +169,14 @@ $sizes: (
   }
 }
 
-f-checkbox {
-  @each $state, $color in $states {
-    &[state="#{$state}"] {
-      &:focus {
-        outline: map.get($color, "background") solid 1px;
-        outline-offset: 1px;
-        border-radius: 2px;
-      }
-    }
-  }
-}
+// f-checkbox {
+//   @each $state, $color in $states {
+//     &[state="#{$state}"] {
+//       &:focus {
+//         outline: map.get($color, "background") solid 1px;
+//         outline-offset: 1px;
+//         border-radius: 2px;
+//       }
+//     }
+//   }
+// }

@@ -109,14 +109,24 @@ export class FInput extends FRoot {
   }
 
   /**
+   * fetch can-duplicate value from nearest parent f-field element
+   */
+  get canDuplicate() {
+    return this.closest("f-field")?.hasAttribute("can-duplicate") ?? false;
+  }
+
+  /**
    * emit input custom event
    */
-  handleInput(e: React.ChangeEvent<HTMLInputElement>) {
-    const event = new CustomEvent("update", {
+  handleInput(e: InputEvent) {
+    console.log((e.target as HTMLInputElement)?.value);
+    e.stopPropagation();
+    const event = new CustomEvent("input", {
       detail: {
-        value: e.target.value,
+        value: (e.target as HTMLInputElement)?.value,
       },
     });
+    this.value = (e.target as HTMLInputElement)?.value;
     this.dispatchEvent(event);
   }
 
@@ -244,6 +254,13 @@ export class FInput extends FRoot {
         />
         ${suffixAppend}
       </div>
+      ${this.canDuplicate
+        ? html` <f-icon-button
+            icon="i-plus"
+            size="x-small"
+            class="f-input-duplicate"
+          ></f-icon-button>`
+        : null}
     `;
   }
 }

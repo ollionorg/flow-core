@@ -5,6 +5,7 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import checkedMark from "../../mixins/svg/checked-mark";
 import indeterminateMark from "../../mixins/svg/indeterminate-mark";
+import { FDiv } from "../f-div/f-div";
 
 export type FCheckboxState = "primary" | "default" | "success" | "warning" | "danger" | "inherit";
 
@@ -13,7 +14,7 @@ export class FCheckbox extends FRoot {
   /**
    * css loaded from scss file
    */
-  static styles = [unsafeCSS(eleStyle)];
+  static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
 
   /**
    * @attribute Value of a checkbox defines if it is selected, unselected or indeterminate.
@@ -51,19 +52,27 @@ export class FCheckbox extends FRoot {
      */
     return html`
       <div class="f-checkbox-wrapper" size=${this.size}>
-        <input
-          id="f-checkbox"
-          class="f-checkbox"
-          type="checkbox"
-          checked=${this.value === "unchecked" ? false : true}
-          state=${this.state}
-          @input=${this.handleInput}
-        />
-        <label for="f-checkbox" value=${this.value} state=${this.state} size=${this.size}>
-          ${this.value === "checked"
-            ? html`${unsafeSVG(checkedMark)}`
-            : html`${unsafeSVG(indeterminateMark)}`}
-        </label>
+        <f-div padding="none" gap="small" align="middle-left">
+          <input
+            id="f-checkbox"
+            class="f-checkbox"
+            type="checkbox"
+            checked=${this.value === "unchecked" ? false : true}
+            state=${this.state}
+            @input=${this.handleInput}
+          />
+          <label for="f-checkbox" value=${this.value} state=${this.state} size=${this.size}>
+            ${this.value === "checked"
+              ? html`${unsafeSVG(checkedMark)}`
+              : html`${unsafeSVG(indeterminateMark)}`}
+          </label>
+          <f-div padding="none" align="middle-left">
+            <slot name="label-title"></slot>
+          </f-div>
+        </f-div>
+        <div size=${this.size} class="f-checkbox-description">
+          <slot name="label-description"></slot>
+        </div>
       </div>
     `;
   }

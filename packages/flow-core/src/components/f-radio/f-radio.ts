@@ -2,6 +2,7 @@ import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-radio.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
+import { FDiv } from "../f-div/f-div";
 
 export type FRadioState = "primary" | "default" | "success" | "warning" | "danger" | "inherit";
 
@@ -10,7 +11,7 @@ export class FRadio extends FRoot {
   /**
    * css loaded from scss file
    */
-  static styles = [unsafeCSS(eleStyle)];
+  static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
 
   /**
    * @attribute Value of a radio defines if it is selected or not
@@ -48,14 +49,22 @@ export class FRadio extends FRoot {
      */
 
     return html`
-      <input
-        type="radio"
-        class="f-radio"
-        checked=${this.value === "selected" ? true : false}
-        size=${this.size}
-        state=${this.state}
-        @click=${this.handleClick}
-      />
+      <f-div padding="none" gap="small" direction="column">
+        <f-div padding="none" gap="small" direction="row">
+          <input
+            type="radio"
+            class="f-radio"
+            checked=${this.value === "selected" ? true : false}
+            size=${this.size}
+            state=${this.state}
+            @click=${this.handleClick}
+          />
+          <slot name="label-title"></slot>
+        </f-div>
+        <div class="f-radio-description" size=${this.size}>
+          <slot name="label-description"></slot>
+        </div>
+      </f-div>
     `;
   }
 }

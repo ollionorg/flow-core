@@ -1459,6 +1459,34 @@
             },
             {
               "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "description",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "canDuplicate",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "can-duplicate",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "disabled",
               "type": {
                 "text": "boolean | undefined"
@@ -1496,6 +1524,28 @@
               },
               "default": "\"default\"",
               "fieldName": "state"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "fieldName": "size"
+            },
+            {
+              "name": "description",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "description"
+            },
+            {
+              "name": "can-duplicate",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "canDuplicate"
             },
             {
               "name": "disabled",
@@ -1671,6 +1721,16 @@
           "members": [
             {
               "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"normal\" | \"compact\" | undefined"
+              },
+              "default": "\"normal\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "direction",
               "type": {
                 "text": "\"vertical\" | \"horizontal\" | undefined"
@@ -1688,9 +1748,27 @@
               "default": "\"small\"",
               "attribute": "gap",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "collapse",
+              "type": {
+                "text": "\"none\" | \"accordion\" | \"text\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "collapse",
+              "reflects": true
             }
           ],
           "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"normal\" | \"compact\" | undefined"
+              },
+              "default": "\"normal\"",
+              "fieldName": "variant"
+            },
             {
               "name": "direction",
               "type": {
@@ -1706,6 +1784,14 @@
               },
               "default": "\"small\"",
               "fieldName": "gap"
+            },
+            {
+              "name": "collapse",
+              "type": {
+                "text": "\"none\" | \"accordion\" | \"text\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "collapse"
             }
           ],
           "superclass": {
@@ -1925,6 +2011,14 @@
                 "text": "string"
               },
               "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "iconInputClass",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
             },
             {
               "kind": "field",
@@ -2269,13 +2363,18 @@
               "description": "fetch read-only value from nearest parent f-field element"
             },
             {
+              "kind": "field",
+              "name": "canDuplicate",
+              "description": "fetch can-duplicate value from nearest parent f-field element"
+            },
+            {
               "kind": "method",
               "name": "handleInput",
               "parameters": [
                 {
                   "name": "e",
                   "type": {
-                    "text": "React.ChangeEvent<HTMLInputElement>"
+                    "text": "InputEvent"
                   }
                 }
               ],
@@ -3719,6 +3818,43 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/modules/config/index.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "themeSubject",
+          "default": "new Subject<string>()"
+        },
+        {
+          "kind": "variable",
+          "name": "ConfigUtil",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    if (cfg.theme) {\n      this.initTheme();\n    }\n  },\n  initTheme() {\n    const themeStyleElement = document.querySelector(\n      `style[id^=\"flow-theme-${config.theme}\"]`\n    );\n    if (!themeStyleElement) {\n      const themeElement = initThemeTag();\n\n      if (themeElement) {\n        const themeCSS = getThemeStyle(\n          `[flow-element][theme=\"${config.theme}\"]`\n        );\n\n        if (themeCSS) {\n          themeElement.appendChild(document.createTextNode(themeCSS));\n          themeSubject.next(config.theme);\n        } else {\n          console.error(\n            `Theme ${config.theme} CSS file/selector not found! \\n Please check if css is imported 'import \"@cldcvr/flow-core/dist/style.css\"'`\n          );\n        }\n      }\n    }\n  },\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "themeSubject",
+          "declaration": {
+            "name": "themeSubject",
+            "module": "src/modules/config/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ConfigUtil",
+          "declaration": {
+            "name": "ConfigUtil",
+            "module": "src/modules/config/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/mixins/svg/checked-mark.ts",
       "declarations": [],
       "exports": [
@@ -3769,43 +3905,6 @@
           "name": "default",
           "declaration": {
             "module": "src/mixins/svg/not-found.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/modules/config/index.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "themeSubject",
-          "default": "new Subject<string>()"
-        },
-        {
-          "kind": "variable",
-          "name": "ConfigUtil",
-          "type": {
-            "text": "object"
-          },
-          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    if (cfg.theme) {\n      this.initTheme();\n    }\n  },\n  initTheme() {\n    const themeStyleElement = document.querySelector(\n      `style[id^=\"flow-theme-${config.theme}\"]`\n    );\n    if (!themeStyleElement) {\n      const themeElement = initThemeTag();\n\n      if (themeElement) {\n        const themeCSS = getThemeStyle(\n          `[flow-element][theme=\"${config.theme}\"]`\n        );\n\n        if (themeCSS) {\n          themeElement.appendChild(document.createTextNode(themeCSS));\n          themeSubject.next(config.theme);\n        } else {\n          console.error(\n            `Theme ${config.theme} CSS file/selector not found! \\n Please check if css is imported 'import \"@cldcvr/flow-core/dist/style.css\"'`\n          );\n        }\n      }\n    }\n  },\n}"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "themeSubject",
-          "declaration": {
-            "name": "themeSubject",
-            "module": "src/modules/config/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ConfigUtil",
-          "declaration": {
-            "name": "ConfigUtil",
-            "module": "src/modules/config/index.ts"
           }
         }
       ]

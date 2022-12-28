@@ -51,15 +51,26 @@ $sizes: (
   "small": (
     "height": 12px,
     "inner-height": 6px,
+    "padding": 24px,
   ),
   "medium": (
     "height": 16px,
     "inner-height": 8px,
+    "padding": 28px,
   ),
 );
 
 :host {
   height: fit-content;
+  .f-radio-description {
+    padding-left: var(--form-checkbox-description-padding);
+    @each $size, $value in $sizes {
+      &[size="#{$size}"] {
+        padding-left: map.get($value, "padding");
+      }
+    }
+  }
+
   .f-radio {
     @include base();
     &[type="radio"] {
@@ -68,7 +79,6 @@ $sizes: (
       font: inherit;
       color: currentColor;
       border-radius: 50%;
-      // transform: translateY(-0.075em);
       display: grid;
       place-content: center;
       cursor: pointer;

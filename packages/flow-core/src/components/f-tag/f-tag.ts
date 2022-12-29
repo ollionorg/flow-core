@@ -196,6 +196,7 @@ export class FTag extends FRoot {
           .state=${this.state}
           class=${classMap({ "left-icon": true, ...iconClasses })}
           .size=${this.iconSize}
+          ?clickable=${true}
         ></f-icon>`
       : "";
     /**
@@ -207,6 +208,7 @@ export class FTag extends FRoot {
           .state=${this.state}
           class=${classMap({ "right-icon": true, ...iconClasses })}
           .size=${this.iconSize}
+          ?clickable=${true}
         ></f-icon>`
       : "";
 

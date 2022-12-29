@@ -62,6 +62,9 @@ f-spacer is used to create a pseudo space in the layout.
       disabled: {
         control: "boolean",
       },
+      readOnly: {
+        control: "boolean",
+      },
       ["group-direction"]: {
         control: "radio",
         options: ["vertical", "horizontal"],
@@ -94,6 +97,7 @@ f-spacer is used to create a pseudo space in the layout.
       ["suffix"]: undefined,
       loading: false,
       disabled: false,
+      readOnly: false,
       ["group-direction"]: "vertical",
       ["group-gap"]: "large",
       ["element-state"]: "default",
@@ -124,217 +128,300 @@ f-spacer is used to create a pseudo space in the layout.
       return html`
         <f-form size=${args["form-size"]}>
           <f-form-group direction=${args["group-direction"]} gap=${args["group-gap"]}>
-            <f-field
+            <f-input
+              value=${args.value}
+              .placeholder=${args.placeholder}
+              @input=${handleInput}
+              .variant=${args.variant}
+              .category=${args.category}
+              .type=${args.type}
+              icon-left=${args["icon-left"]}
+              icon-right=${args["icon-right"]}
+              prefix=${args["prefix"]}
+              suffix=${args["suffix"]}
               state=${args["element-state"]}
-              required=${true}
-              .disabled=${args.disabled}
-              .loading=${args.loading}
-              description="This is a subtext"
               can-duplicate=${true}
+              max-length="100"
+              ?loading=${args.loading}
+              ?disabled=${args.disabled}
+              ?clear=${true}
+              ?read-only=${args.readOnly}
             >
-              <f-text variant="para" size="small">Label *</f-text>
-              <f-input
-                .value=${args.value}
-                @input=${handleInput}
-                .placeholder=${args.placeholder}
-                .variant=${args.variant}
-                .category=${args.category}
-                .type=${args.type}
-                icon-left=${args["icon-left"]}
-                icon-right=${args["icon-right"]}
-                prefix=${args["prefix"]}
-                suffix=${args["suffix"]}
-                clear=${true}
-              ></f-input>
-            </f-field>
-            <f-field state=${args["element-state"]}>
-              <f-text variant="para" size="small">Label *</f-text>
-              <f-input
-                value=${args.value}
-                .placeholder=${args.placeholder}
-                @input=${handleInput}
-                .variant=${args.variant}
-                .category=${args.category}
-                .type=${args.type}
-                icon-left=${args["icon-left"]}
-                icon-right=${args["icon-right"]}
-                prefix=${args["prefix"]}
-                suffix=${args["suffix"]}
-              ></f-input>
-            </f-field>
-            <f-field state=${args["element-state"]}>
-              <f-text variant="para" size="small">Label *</f-text>
-              <f-input
-                value=${args.value}
-                .placeholder=${args.placeholder}
-                @input=${handleInput}
-                .variant=${args.variant}
-                .category=${args.category}
-                .type=${args.type}
-                icon-left=${args["icon-left"]}
-                icon-right=${args["icon-right"]}
-                prefix=${args["prefix"]}
-                suffix=${args["suffix"]}
-              ></f-input>
-            </f-field>
+              <f-div slot="label" padding="none" gap="none">Label New *</f-div>
+              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
+              <f-text slot="help" variant="para" size="small">description</f-text>
+            </f-input>
+            <f-input
+              value=${args.value}
+              .placeholder=${args.placeholder}
+              @input=${handleInput}
+              .variant=${args.variant}
+              .category=${args.category}
+              .type=${args.type}
+              icon-left=${args["icon-left"]}
+              icon-right=${args["icon-right"]}
+              prefix=${args["prefix"]}
+              suffix=${args["suffix"]}
+              state=${args["element-state"]}
+              can-duplicate=${true}
+              max-length="100"
+            >
+              <f-div slot="label" padding="none" gap="none">Label New *</f-div>
+              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
+              <f-text slot="help" variant="para" size="small">description</f-text>
+            </f-input>
+            <f-input
+              value=${args.value}
+              .placeholder=${args.placeholder}
+              @input=${handleInput}
+              .variant=${args.variant}
+              .category=${args.category}
+              .type=${args.type}
+              icon-left=${args["icon-left"]}
+              icon-right=${args["icon-right"]}
+              prefix=${args["prefix"]}
+              suffix=${args["suffix"]}
+              state=${args["element-state"]}
+              can-duplicate=${true}
+              max-length="100"
+            >
+              <f-div slot="label" padding="none" gap="none">Label New *</f-div>
+              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
+            </f-input>
           </f-form-group>
           <f-form-group gap=${args["group-gap"]}>
-            <f-field
+            <f-text variant="para" size="small">Label *</f-text>
+            <f-select
+              .variant=${args.variant}
+              .category=${args.category}
+              placeholder="Select an option"
+              type="multiple"
               state=${args["element-state"]}
-              required=${true}
-              .disabled=${args.disabled}
-              .loading=${args.loading}
-              description="This is a subtext"
+              .options=${[
+                { icon: "i-home", title: "option 1" },
+                { icon: "i-user", title: "option 2" },
+                { icon: "i-setting", title: "option 3" },
+                { icon: "i-setting", title: "option 4" },
+                { icon: "i-setting", title: "option 5" },
+                { icon: "i-setting", title: "option 6" },
+                { icon: "i-setting", title: "option 7" },
+                { icon: "i-setting", title: "option 8" },
+                { icon: "i-setting", title: "option 9" },
+                { icon: "i-setting", title: "option 10" },
+                { icon: "i-setting", title: "option 11" },
+                { icon: "i-setting", title: "option 12" },
+              ]}
+              icon-left="i-app"
+            ></f-select>
+            <f-input
+              value=${args.value}
+              .placeholder=${args.placeholder}
+              @input=${handleInput}
+              .variant=${args.variant}
+              .category=${args.category}
+              .type=${args.type}
+              icon-left=${args["icon-left"]}
+              icon-right=${args["icon-right"]}
+              prefix=${args["prefix"]}
+              suffix=${args["suffix"]}
+              state=${args["element-state"]}
               can-duplicate=${true}
+              max-length="100"
             >
-              <f-text variant="para" size="small">Label *</f-text>
-              <f-input
-                .value=${args.value}
-                @input=${handleInput}
-                .placeholder=${args.placeholder}
-                .variant=${args.variant}
-                .category=${args.category}
-                .type=${args.type}
-                icon-left=${args["icon-left"]}
-                icon-right=${args["icon-right"]}
-                prefix=${args["prefix"]}
-                suffix=${args["suffix"]}
-                clear=${true}
-                size="medium"
-              ></f-input>
-            </f-field>
-            <f-field state=${args["element-state"]}>
-              <f-text variant="para" size="small">Label *</f-text>
-              <f-input
-                value=${args.value}
-                .placeholder=${args.placeholder}
-                @input=${handleInput}
-                .variant=${args.variant}
-                .category=${args.category}
-                .type=${args.type}
-                icon-left=${args["icon-left"]}
-                icon-right=${args["icon-right"]}
-                prefix=${args["prefix"]}
-                suffix=${args["suffix"]}
-              ></f-input>
-            </f-field>
-            <f-field state=${args["element-state"]}>
-              <f-text variant="para" size="small">Label *</f-text>
-              <f-input
-                value=${args.value}
-                .placeholder=${args.placeholder}
-                @input=${handleInput}
-                .variant=${args.variant}
-                .category=${args.category}
-                .type=${args.type}
-                icon-left=${args["icon-left"]}
-                icon-right=${args["icon-right"]}
-                prefix=${args["prefix"]}
-                suffix=${args["suffix"]}
-              ></f-input>
-            </f-field>
+              <f-div slot="label" padding="none" gap="none">Label New *</f-div>
+              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
+              <f-text slot="help" variant="para" size="small">description</f-text>
+            </f-input>
+            <f-input
+              value=${args.value}
+              .placeholder=${args.placeholder}
+              @input=${handleInput}
+              .variant=${args.variant}
+              .category=${args.category}
+              .type=${args.type}
+              icon-left=${args["icon-left"]}
+              icon-right=${args["icon-right"]}
+              prefix=${args["prefix"]}
+              suffix=${args["suffix"]}
+              state=${args["element-state"]}
+              can-duplicate=${true}
+              max-length="100"
+            >
+              <f-div slot="label" padding="none" gap="none">Label New *</f-div>
+              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
+              <f-text slot="help" variant="para" size="small">description</f-text>
+            </f-input>
+            <f-input
+              value=${args.value}
+              .placeholder=${args.placeholder}
+              @input=${handleInput}
+              .variant=${args.variant}
+              .category=${args.category}
+              .type=${args.type}
+              icon-left=${args["icon-left"]}
+              icon-right=${args["icon-right"]}
+              prefix=${args["prefix"]}
+              suffix=${args["suffix"]}
+              state=${args["element-state"]}
+              can-duplicate=${true}
+              max-length="100"
+            >
+              <f-div slot="label" padding="none" gap="none">Label New *</f-div>
+              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
+              <f-text slot="help" variant="para" size="small">description</f-text>
+            </f-input>
             <f-div padding="small" state="tertiary" clickable variant="curved">
-              <f-field state=${args["element-state"]}>
-                <f-checkbox value=${checked} @update=${handleChecked}>
-                  <f-text
-                    slot="label-title"
-                    variant="para"
-                    size="small"
-                    @click=${() => {
-                      if (checked === "checked") {
-                        setChecked("unchecked");
-                      } else {
-                        setChecked("checked");
-                      }
-                    }}
-                    >Label (value="${checked}") *</f-text
-                  >
-                  <f-text slot="label-description" variant="para" size="small" state="secondary"
-                    >States are used to communicate purpose and connotations. For example, a red
-                    color connotes danger, whereas a green color connotes success and so on.
-                  </f-text>
-                </f-checkbox>
-              </f-field>
-            </f-div>
-            <f-div padding="small" state="tertiary" clickable variant="curved">
-              <f-field state=${args["element-state"]}>
-                <f-radio value=${radioChecked} @update=${handleRadioChecked}></f-radio>
-                <f-div padding="none" gap="x-small" direction="column" align="middle-left">
-                  <f-text
-                    variant="para"
-                    size="small"
-                    @click=${() => {
-                      if (radioChecked === "selected") {
-                        setRadioChecked("unselected");
-                      } else {
-                        setRadioChecked("selected");
-                      }
-                    }}
-                    >Label (value="${radioChecked}") *</f-text
-                  >
-                  <f-text variant="para" size="small" state="secondary"
-                    >States are used to communicate purpose and connotations. For example, a red
-                    color connotes danger, whereas a green color connotes success and so on.
-                  </f-text>
-                </f-div>
-              </f-field>
-            </f-div>
-            <f-field state=${args["element-state"]}>
-              <f-checkbox size="small" value="indeterminate">
-                <f-div slot="label-title" padding="none" align="middle-center">
-                  <f-text variant="para" size="small">Banana</f-text>
-                </f-div></f-checkbox
+              <f-checkbox
+                value=${checked}
+                @input=${handleChecked}
+                state=${args["element-state"]}
+                ?disabled=${args.disabled}
               >
-            </f-field>
-            <f-field state=${args["element-state"]}>
-              <f-radio></f-radio>
-              <f-div padding="none" align="middle-center">
+                <f-text
+                  slot="label"
+                  variant="para"
+                  size="small"
+                  @click=${() => {
+                    if (checked === "checked") {
+                      setChecked("unchecked");
+                    } else {
+                      setChecked("checked");
+                    }
+                  }}
+                  >Label (value="${checked}") Label (value="${checked}") Label (value="${checked}")
+                  Label (value="${checked}") *</f-text
+                >
+                <f-div slot="description" gap="none" padding="none">
+                  States are used to communicate purpose and connotations. For example, a red color
+                  connotes danger, whereas a green color connotes success and so on. States are used
+                  to communicate purpose and connotations. For example, a red color connotes danger,
+                  whereas a green color connotes success and so on. States are used to communicate
+                  purpose and connotations. For example, a red color connotes danger, whereas a
+                  green color connotes success and so on.
+                </f-div>
+                <f-div slot="help" padding="none" gap="none">
+                  States are used to communicate purpose and connotations. For example, a red color
+                  connotes danger, whereas a green color connotes success and so on.
+                </f-div>
+              </f-checkbox>
+            </f-div>
+            <f-div padding="small" state="tertiary" clickable variant="curved">
+              <f-radio
+                value=${radioChecked}
+                @input=${handleRadioChecked}
+                state=${args["element-state"]}
+                ?disabled=${args.disabled}
+              >
+                <f-text
+                  slot="label"
+                  variant="para"
+                  size="small"
+                  @click=${() => {
+                    if (radioChecked === "selected") {
+                      setRadioChecked("unselected");
+                    } else {
+                      setRadioChecked("selected");
+                    }
+                  }}
+                  >Label (value="${radioChecked}") *</f-text
+                >
+                <f-div slot="description" gap="none" padding="none">
+                  States are used to communicate purpose and connotations.
+                </f-div>
+                <f-div slot="help" padding="none" gap="none">
+                  States are used to communicate purpose and connotations. For example, a red color
+                  connotes danger, whereas a green color connotes success and so on.
+                </f-div>
+              </f-radio>
+            </f-div>
+            <f-checkbox
+              size="small"
+              value="indeterminate"
+              state=${args["element-state"]}
+              ?disabled=${args.disabled}
+            >
+              <f-div slot="label" padding="none" align="middle-center">
+                <f-text variant="para" size="small">Banana</f-text>
+              </f-div>
+              <f-div slot="description" gap="none" padding="none">
+                <f-text variant="para" size="small" state="secondary"
+                  >States are used to communicate purpose and connotations. For example, a red color
+                  connotes danger, whereas a green color connotes success and so on.
+                </f-text>
+              </f-div>
+            </f-checkbox>
+            <f-radio state=${args["element-state"]} ?disabled=${args.disabled}>
+              <f-div slot="label" padding="none">
                 <f-text variant="para" size="large">Banana</f-text>
               </f-div>
-            </f-field>
-            <f-field state=${args["element-state"]} .disabled=${args.disabled}>
-              <f-switch value=${switchValue} @update=${handleSwitch}></f-switch>
-              <f-div padding="none" align="middle-center">
+            </f-radio>
+            <f-switch
+              value=${switchValue}
+              @input=${handleSwitch}
+              state=${args["element-state"]}
+              .disabled=${args.disabled}
+            >
+              <f-div padding="none" align="middle-center" slot="label">
                 <f-text variant="para" size="small">Toggle ${switchValue}</f-text>
               </f-div>
-            </f-field>
-            <f-field state=${args["element-state"]}>
-              <f-div height="200px" width="500px" padding="none" overflow="hidden">
-                <f-text-area
-                  variant="curved-fill"
-                  placeholder="This is a Text Area"
-                  resizable=${true}
-                  clear=${true}
-                  state=${args["element-state"]}
-                  value=${args["textarea-value"]}
-                  @update=${handleInputTextArea}
-                ></f-text-area>
+              <f-div padding="none" align="middle-center" slot="help">
+                <f-text variant="para" size="small">This is helper text</f-text>
               </f-div>
-            </f-field>
+            </f-switch>
+            <f-text-area
+              variant="curved-fill"
+              placeholder="This is a Text Area"
+              resizable=${true}
+              clear=${true}
+              state=${args["element-state"]}
+              value=${args["textarea-value"]}
+              @input=${handleInputTextArea}
+              max-length="10"
+              ?disabled=${args.disabled}
+            >
+              <f-text slot="label" variant="para" size="small">Label *</f-text>
+              <f-text slot="description" variant="para" size="small">This is subtext</f-text>
+              <f-text slot="help" variant="para" size="small">This is subtext</f-text>
+            </f-text-area>
           </f-form-group>
           <f-form-group direction="vertical" gap=${args["group-gap"]}>
             <f-div padding="none">
               <f-text variant="heading" size="small">Favourite Fruit</f-text>
             </f-div>
             <f-form-group direction="horizontal" gap=${args["group-gap"]}>
-              <f-field state=${args["element-state"]} size="medium">
-                <f-checkbox value=${checked} @update=${handleChecked}></f-checkbox>
-                <f-div padding="none" align="middle-center">
+              <f-checkbox
+                value=${checked}
+                @input=${handleChecked}
+                state=${args["element-state"]}
+                ?disabled=${args.disabled}
+              >
+                <f-div slot="label" padding="none" align="middle-center">
                   <f-text variant="para" size="small">Apple</f-text>
                 </f-div>
-              </f-field>
-              <f-field state=${args["element-state"]}>
-                <f-checkbox value=${checked} @update=${handleChecked}></f-checkbox>
-                <f-div padding="none" align="middle-center">
+                <f-text slot="help" variant="para" size="small">Please help!!!</f-text>
+              </f-checkbox>
+              <f-checkbox
+                value=${checked}
+                @input=${handleChecked}
+                state=${args["element-state"]}
+                ?disabled=${args.disabled}
+              >
+                <f-div slot="label" padding="none" align="middle-center">
                   <f-text variant="para" size="small">Banana</f-text>
                 </f-div>
-              </f-field>
-              <f-field state=${args["element-state"]} description="This is a subtext">
-                <f-checkbox value=${checked} @update=${handleChecked}></f-checkbox>
-                <f-div padding="none" align="middle-center">
+                <f-text slot="help" variant="para" size="small">Please help!!!</f-text>
+              </f-checkbox>
+              <f-checkbox
+                value=${checked}
+                @input=${handleChecked}
+                state=${args["element-state"]}
+                ?disabled=${args.disabled}
+              >
+                <f-div slot="label" padding="none" align="middle-center">
                   <f-text variant="para" size="small">Orange</f-text>
                 </f-div>
-              </f-field>
+                <f-text slot="help" variant="para" size="small">Please help!!!</f-text>
+              </f-checkbox>
             </f-form-group>
           </f-form-group>
         </f-form>

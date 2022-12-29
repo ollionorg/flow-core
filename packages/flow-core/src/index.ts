@@ -25,6 +25,7 @@ export * from "./components/f-radio/f-radio";
 export * from "./components/f-form/f-form";
 export * from "./components/f-switch/f-switch";
 export * from "./components/f-text-area/f-text-area";
+export * from "./components/f-select/f-select";
 
 if (document.readyState !== "loading") {
   ConfigUtil.initTheme();

@@ -174,6 +174,14 @@
             "name": "*",
             "package": "\"./components/f-text-area/f-text-area\""
           }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-select/f-select\""
+          }
         }
       ]
     },
@@ -763,13 +771,23 @@
               "reflects": true
             },
             {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
               "kind": "method",
               "name": "handleInput",
               "parameters": [
                 {
                   "name": "e",
                   "type": {
-                    "text": "React.ChangeEvent<HTMLInputElement>"
+                    "text": "InputEvent"
                   }
                 }
               ],
@@ -799,6 +817,14 @@
                 "text": "\"small\" | \"medium\" | undefined"
               },
               "fieldName": "size"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
             }
           ],
           "superclass": {
@@ -1449,6 +1475,16 @@
           "members": [
             {
               "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"inline\" | \"normal\" | undefined"
+              },
+              "default": "\"normal\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "state",
               "type": {
                 "text": "FFieldStateProp | undefined"
@@ -1517,6 +1553,14 @@
             }
           ],
           "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"inline\" | \"normal\" | undefined"
+              },
+              "default": "\"normal\"",
+              "fieldName": "variant"
+            },
             {
               "name": "state",
               "type": {
@@ -2227,6 +2271,14 @@
           "members": [
             {
               "kind": "field",
+              "name": "showPassword",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
               "name": "variant",
               "type": {
                 "text": "\"curved\" | \"round\" | \"block\" | undefined"
@@ -2251,7 +2303,7 @@
               "type": {
                 "text": "FInputState | undefined"
               },
-              "default": "\"inherit\"",
+              "default": "\"default\"",
               "attribute": "state",
               "reflects": true
             },
@@ -2349,6 +2401,16 @@
             },
             {
               "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "clear",
               "type": {
                 "text": "boolean | undefined"
@@ -2359,13 +2421,13 @@
             },
             {
               "kind": "field",
-              "name": "isReadOnly",
-              "description": "fetch read-only value from nearest parent f-field element"
-            },
-            {
-              "kind": "field",
-              "name": "canDuplicate",
-              "description": "fetch can-duplicate value from nearest parent f-field element"
+              "name": "readOnly",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "read-only",
+              "reflects": true
             },
             {
               "kind": "method",
@@ -2389,6 +2451,11 @@
               "kind": "field",
               "name": "iconSize",
               "description": "icon size"
+            },
+            {
+              "kind": "method",
+              "name": "togglePasswordView",
+              "description": "Toggle Password view"
             }
           ],
           "attributes": [
@@ -2413,7 +2480,7 @@
               "type": {
                 "text": "FInputState | undefined"
               },
-              "default": "\"inherit\"",
+              "default": "\"default\"",
               "fieldName": "state"
             },
             {
@@ -2489,12 +2556,28 @@
               "fieldName": "loading"
             },
             {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
               "name": "clear",
               "type": {
                 "text": "boolean | undefined"
               },
               "default": "false",
               "fieldName": "clear"
+            },
+            {
+              "name": "read-only",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "readOnly"
             }
           ],
           "superclass": {
@@ -2914,8 +2997,26 @@
               "reflects": true
             },
             {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
               "kind": "method",
               "name": "handleClick",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
               "description": "emit event on click"
             }
           ],
@@ -2942,6 +3043,14 @@
                 "text": "\"small\" | \"medium\" | undefined"
               },
               "fieldName": "size"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
             }
           ],
           "superclass": {
@@ -2967,6 +3076,358 @@
           "declaration": {
             "name": "FRadio",
             "module": "src/components/f-radio/f-radio.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-select/f-select.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FSelect",
+          "members": [
+            {
+              "kind": "field",
+              "name": "openDropdown",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "selectedOptions",
+              "type": {
+                "text": "FSelectArrayOfObjects"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "\"single\" | \"multiple\" | undefined"
+              },
+              "default": "\"single\"",
+              "attribute": "type",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"curved\" | \"round\" | \"block\" | undefined"
+              },
+              "default": "\"curved\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "category",
+              "type": {
+                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
+              },
+              "default": "\"fill\"",
+              "attribute": "category",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FSelectState | undefined"
+              },
+              "default": "\"inherit\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "FSelectArrayOfObjects | undefined"
+              },
+              "default": "[]",
+              "attribute": "options",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "placeholder",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconLeft",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "icon-left",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "FSelectHeightProp | undefined"
+              },
+              "default": "\"180px\"",
+              "attribute": "height",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "FSelectWidthProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "attribute": "width",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clear",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "clear",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "isReadOnly",
+              "description": "fetch read-only value from nearest parent f-field element"
+            },
+            {
+              "kind": "field",
+              "name": "canDuplicate",
+              "description": "fetch can-duplicate value from nearest parent f-field element"
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ],
+              "description": "emit input custom event"
+            },
+            {
+              "kind": "method",
+              "name": "clearInputValue",
+              "description": "clear input value on clear icon clicked"
+            },
+            {
+              "kind": "field",
+              "name": "iconSize",
+              "description": "icon size"
+            },
+            {
+              "kind": "method",
+              "name": "applyHeight"
+            },
+            {
+              "kind": "method",
+              "name": "applyWidth"
+            },
+            {
+              "kind": "method",
+              "name": "handleDropDown",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleOptionSelection",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "FSelectOptionObject"
+                  }
+                },
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "type",
+              "type": {
+                "text": "\"single\" | \"multiple\" | undefined"
+              },
+              "default": "\"single\"",
+              "fieldName": "type"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"curved\" | \"round\" | \"block\" | undefined"
+              },
+              "default": "\"curved\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "category",
+              "type": {
+                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
+              },
+              "default": "\"fill\"",
+              "fieldName": "category"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FSelectState | undefined"
+              },
+              "default": "\"inherit\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "fieldName": "size"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "options",
+              "type": {
+                "text": "FSelectArrayOfObjects | undefined"
+              },
+              "default": "[]",
+              "fieldName": "options"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "icon-left",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "iconLeft"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "FSelectHeightProp | undefined"
+              },
+              "default": "\"180px\"",
+              "fieldName": "height"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "FSelectWidthProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "fieldName": "width"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "clear",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "clear"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-select",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FSelect",
+          "declaration": {
+            "name": "FSelect",
+            "module": "src/components/f-select/f-select.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-select",
+          "declaration": {
+            "name": "FSelect",
+            "module": "src/components/f-select/f-select.ts"
           }
         }
       ]
@@ -3072,13 +3533,23 @@
               "reflects": true
             },
             {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
               "kind": "method",
               "name": "handleInput",
               "parameters": [
                 {
                   "name": "e",
                   "type": {
-                    "text": "React.ChangeEvent<HTMLInputElement>"
+                    "text": "InputEvent"
                   }
                 }
               ],
@@ -3108,6 +3579,14 @@
                 "text": "\"small\" | \"medium\" | undefined"
               },
               "fieldName": "size"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
             }
           ],
           "superclass": {
@@ -3689,13 +4168,23 @@
               "reflects": true
             },
             {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
               "kind": "method",
               "name": "handleInput",
               "parameters": [
                 {
                   "name": "e",
                   "type": {
-                    "text": "React.ChangeEvent<HTMLInputElement>"
+                    "text": "InputEvent"
                   }
                 }
               ],
@@ -3787,6 +4276,14 @@
               },
               "default": "false",
               "fieldName": "clear"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
             }
           ],
           "superclass": {
@@ -3812,43 +4309,6 @@
           "declaration": {
             "name": "FTextArea",
             "module": "src/components/f-text-area/f-text-area.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/modules/config/index.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "themeSubject",
-          "default": "new Subject<string>()"
-        },
-        {
-          "kind": "variable",
-          "name": "ConfigUtil",
-          "type": {
-            "text": "object"
-          },
-          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    if (cfg.theme) {\n      this.initTheme();\n    }\n  },\n  initTheme() {\n    const themeStyleElement = document.querySelector(\n      `style[id^=\"flow-theme-${config.theme}\"]`\n    );\n    if (!themeStyleElement) {\n      const themeElement = initThemeTag();\n\n      if (themeElement) {\n        const themeCSS = getThemeStyle(\n          `[flow-element][theme=\"${config.theme}\"]`\n        );\n\n        if (themeCSS) {\n          themeElement.appendChild(document.createTextNode(themeCSS));\n          themeSubject.next(config.theme);\n        } else {\n          console.error(\n            `Theme ${config.theme} CSS file/selector not found! \\n Please check if css is imported 'import \"@cldcvr/flow-core/dist/style.css\"'`\n          );\n        }\n      }\n    }\n  },\n}"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "themeSubject",
-          "declaration": {
-            "name": "themeSubject",
-            "module": "src/modules/config/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ConfigUtil",
-          "declaration": {
-            "name": "ConfigUtil",
-            "module": "src/modules/config/index.ts"
           }
         }
       ]
@@ -3905,6 +4365,43 @@
           "name": "default",
           "declaration": {
             "module": "src/mixins/svg/not-found.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/modules/config/index.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "themeSubject",
+          "default": "new Subject<string>()"
+        },
+        {
+          "kind": "variable",
+          "name": "ConfigUtil",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    if (cfg.theme) {\n      this.initTheme();\n    }\n  },\n  initTheme() {\n    const themeStyleElement = document.querySelector(\n      `style[id^=\"flow-theme-${config.theme}\"]`\n    );\n    if (!themeStyleElement) {\n      const themeElement = initThemeTag();\n\n      if (themeElement) {\n        const themeCSS = getThemeStyle(\n          `[flow-element][theme=\"${config.theme}\"]`\n        );\n\n        if (themeCSS) {\n          themeElement.appendChild(document.createTextNode(themeCSS));\n          themeSubject.next(config.theme);\n        } else {\n          console.error(\n            `Theme ${config.theme} CSS file/selector not found! \\n Please check if css is imported 'import \"@cldcvr/flow-core/dist/style.css\"'`\n          );\n        }\n      }\n    }\n  },\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "themeSubject",
+          "declaration": {
+            "name": "themeSubject",
+            "module": "src/modules/config/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ConfigUtil",
+          "declaration": {
+            "name": "ConfigUtil",
+            "module": "src/modules/config/index.ts"
           }
         }
       ]

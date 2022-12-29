@@ -20,6 +20,12 @@ export class FField extends FRoot {
    * @attribute States on f-field are used to communicate purpose and it’s connotation.
    */
   @property({ type: String, reflect: true })
+  variant?: "inline" | "normal" = "normal";
+
+  /**
+   * @attribute States on f-field are used to communicate purpose and it’s connotation.
+   */
+  @property({ type: String, reflect: true })
   state?: FFieldStateProp = "default";
 
   /**
@@ -59,23 +65,6 @@ export class FField extends FRoot {
   readOnlyValue?: boolean = false;
 
   render() {
-    let type;
-    for (const item in this.children) {
-      if (this.children[item].tagName === "F-INPUT") {
-        if (this.loading) {
-          this.children[item].setAttribute("loading", "");
-        } else {
-          this.children[item].removeAttribute("loading");
-        }
-      }
-      if (
-        this.children[item].tagName === "F-CHECKBOX" ||
-        this.children[item].tagName === "F-RADIO" ||
-        this.children[item].tagName === "F-SWITCH"
-      ) {
-        type = "f-field-inline";
-      }
-    }
     /**
      * Final html to render
      */
@@ -84,8 +73,10 @@ export class FField extends FRoot {
       direction="column"
       class="f-field-wrapper"
       gap="small"
-      type=${type}
-      ><div class="f-field" state=${this.state} size=${this.size} type=${type}><slot></slot></div>
+      variant=${this.variant}
+      ><div class="f-field" state=${this.state} size=${this.size} variant=${this.variant}>
+        <slot></slot>
+      </div>
       ${this.description
         ? html` <f-div padding="none"
             ><f-text variant="heading" size="x-small" weight="regular" .state=${this.state}

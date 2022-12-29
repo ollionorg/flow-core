@@ -32,14 +32,22 @@ export class FRadio extends FRoot {
   size?: "small" | "medium";
 
   /**
+   * @attribute
+   */
+  @property({ reflect: true, type: Boolean })
+  disabled?: boolean = false;
+
+  /**
    * emit event on click
    */
-  handleClick() {
-    const event = new CustomEvent("update", {
+  handleClick(e: MouseEvent) {
+    e.stopPropagation();
+    const event = new CustomEvent("input", {
       detail: {
         value: this.value === "unselected" ? "selected" : "unselected",
       },
     });
+    this.value = this.value === "unselected" ? "selected" : "unselected";
     this.dispatchEvent(event);
   }
 
@@ -49,8 +57,14 @@ export class FRadio extends FRoot {
      */
 
     return html`
-      <f-div padding="none" gap="small" direction="column">
-        <f-div padding="none" gap="small" direction="row">
+      <f-div
+        class="f-radio-wrapper"
+        padding="none"
+        gap="x-small"
+        direction="column"
+        size=${this.size}
+      >
+        <f-div class="f-radio-section" align="middle-left" padding="none" gap="medium">
           <input
             type="radio"
             class="f-radio"
@@ -59,11 +73,10 @@ export class FRadio extends FRoot {
             state=${this.state}
             @click=${this.handleClick}
           />
-          <slot name="label-title"></slot>
+          <slot name="label"></slot>
         </f-div>
-        <div class="f-radio-description" size=${this.size}>
-          <slot name="label-description"></slot>
-        </div>
+        <slot name="description"></slot>
+        <slot name="help"></slot>
       </f-div>
     `;
   }

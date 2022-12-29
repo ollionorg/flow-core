@@ -119,7 +119,7 @@
     },
     {
       "name": "f-checkbox",
-      "description": "Events:\n\n  * `update` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\nProperties:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "value",
@@ -173,8 +173,13 @@
           ]
         },
         {
-          "name": "onupdate",
-          "description": "`update` {`CustomEvent<{ value: string; }>`} - "
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
         }
       ]
     },
@@ -5076,8 +5081,20 @@
     },
     {
       "name": "f-field",
-      "description": "Attributes:\n\n  * `state` {`FFieldStateProp | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `description` {`string | undefined`} - \n\n  * `can-duplicate` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `read-only` {`boolean | undefined`} - \n\nProperties:\n\n  * `state` {`FFieldStateProp | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `description` {`string | undefined`} - \n\n  * `canDuplicate` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `readOnlyValue` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Attributes:\n\n  * `variant` {`\"inline\" | \"normal\" | undefined`} - \n\n  * `state` {`FFieldStateProp | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `description` {`string | undefined`} - \n\n  * `can-duplicate` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `read-only` {`boolean | undefined`} - \n\nProperties:\n\n  * `variant` {`\"inline\" | \"normal\" | undefined`} - \n\n  * `state` {`FFieldStateProp | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `description` {`string | undefined`} - \n\n  * `canDuplicate` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `readOnlyValue` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
+        {
+          "name": "variant",
+          "description": "`variant` {`\"inline\" | \"normal\" | undefined`} - \n\nProperty: variant\n\nDefault: normal",
+          "values": [
+            {
+              "name": "inline"
+            },
+            {
+              "name": "normal"
+            }
+          ]
+        },
         {
           "name": "state",
           "description": "`state` {`FFieldStateProp | undefined`} - \n\nProperty: state\n\nDefault: default",
@@ -5418,8 +5435,13 @@
     },
     {
       "name": "f-input",
-      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\n  * `update` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FInputState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `type` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `icon-right` {`string | undefined`} - \n\n  * `prefix` {`string | undefined`} - \n\n  * `suffix` {`string | undefined`} - \n\n  * `max-length` {`number | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\nProperties:\n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FInputState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `type` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `iconRight` {`string | undefined`} - \n\n  * `fInputPrefix` {`string | undefined`} - \n\n  * `fInputSuffix` {`string | undefined`} - \n\n  * `maxLength` {`number | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `isReadOnly` {`boolean`} - fetch read-only value from nearest parent f-field element\n\n  * `canDuplicate` {`boolean`} - fetch can-duplicate value from nearest parent f-field element\n\n  * `iconSize` {`\"small\" | \"x-small\" | undefined`} - icon size\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `showPassword` {`boolean`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FInputState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `type` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `icon-right` {`string | undefined`} - \n\n  * `prefix` {`string | undefined`} - \n\n  * `suffix` {`string | undefined`} - \n\n  * `max-length` {`number | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `read-only` {`boolean | undefined`} - \n\nProperties:\n\n  * `showPassword` {`boolean`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FInputState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `type` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `iconRight` {`string | undefined`} - \n\n  * `fInputPrefix` {`string | undefined`} - \n\n  * `fInputSuffix` {`string | undefined`} - \n\n  * `maxLength` {`number | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `readOnly` {`boolean | undefined`} - \n\n  * `iconSize` {`\"small\" | \"x-small\" | undefined`} - icon size\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
+        {
+          "name": "showPassword",
+          "description": "`showPassword` {`boolean`} - \n\nProperty: showPassword\n\nDefault: false",
+          "valueSet": "v"
+        },
         {
           "name": "variant",
           "description": "`variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\nProperty: variant\n\nDefault: curved",
@@ -5452,7 +5474,7 @@
         },
         {
           "name": "state",
-          "description": "`state` {`FInputState | undefined`} - \n\nProperty: state\n\nDefault: inherit",
+          "description": "`state` {`FInputState | undefined`} - \n\nProperty: state\n\nDefault: default",
           "values": [
             {
               "name": "primary"
@@ -5465,9 +5487,6 @@
             },
             {
               "name": "danger"
-            },
-            {
-              "name": "inherit"
             },
             {
               "name": "default"
@@ -5551,17 +5570,23 @@
           "values": []
         },
         {
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
           "name": "clear",
           "description": "`clear` {`boolean | undefined`} - \n\nProperty: clear\n\nDefault: false",
           "values": []
         },
         {
-          "name": "oninput",
-          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
+          "name": "read-only",
+          "description": "`read-only` {`boolean | undefined`} - \n\nProperty: readOnly\n\nDefault: false",
+          "values": []
         },
         {
-          "name": "onupdate",
-          "description": "`update` {`CustomEvent<{ value: string; }>`} - "
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
         }
       ]
     },
@@ -5743,7 +5768,7 @@
     },
     {
       "name": "f-radio",
-      "description": "Events:\n\n  * `update` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\nProperties:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "value",
@@ -5794,8 +5819,154 @@
           ]
         },
         {
-          "name": "onupdate",
-          "description": "`update` {`CustomEvent<{ value: string; }>`} - "
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
+        }
+      ]
+    },
+    {
+      "name": "f-select",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `openDropdown` {`boolean`} - \n\n  * `selectedOptions` {`FSelectArrayOfObjects`} - \n\n  * `type` {`\"single\" | \"multiple\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FSelectState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `options` {`FSelectArrayOfObjects | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `height` {`FSelectHeightProp | undefined`} - \n\n  * `width` {`FSelectWidthProp | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\nProperties:\n\n  * `openDropdown` {`boolean`} - \n\n  * `selectedOptions` {`FSelectArrayOfObjects`} - \n\n  * `type` {`\"single\" | \"multiple\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FSelectState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `options` {`FSelectArrayOfObjects | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `height` {`FSelectHeightProp | undefined`} - \n\n  * `width` {`FSelectWidthProp | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `isReadOnly` {`boolean`} - fetch read-only value from nearest parent f-field element\n\n  * `canDuplicate` {`boolean`} - fetch can-duplicate value from nearest parent f-field element\n\n  * `iconSize` {`\"small\" | \"x-small\" | undefined`} - icon size\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "attributes": [
+        {
+          "name": "openDropdown",
+          "description": "`openDropdown` {`boolean`} - \n\nProperty: openDropdown\n\nDefault: false",
+          "valueSet": "v"
+        },
+        {
+          "name": "selectedOptions",
+          "description": "`selectedOptions` {`FSelectArrayOfObjects`} - \n\nProperty: selectedOptions\n\nDefault: "
+        },
+        {
+          "name": "type",
+          "description": "`type` {`\"single\" | \"multiple\" | undefined`} - \n\nProperty: type\n\nDefault: single",
+          "values": [
+            {
+              "name": "single"
+            },
+            {
+              "name": "multiple"
+            }
+          ]
+        },
+        {
+          "name": "variant",
+          "description": "`variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\nProperty: variant\n\nDefault: curved",
+          "values": [
+            {
+              "name": "round"
+            },
+            {
+              "name": "curved"
+            },
+            {
+              "name": "block"
+            }
+          ]
+        },
+        {
+          "name": "category",
+          "description": "`category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\nProperty: category\n\nDefault: fill",
+          "values": [
+            {
+              "name": "fill"
+            },
+            {
+              "name": "outline"
+            },
+            {
+              "name": "transparent"
+            }
+          ]
+        },
+        {
+          "name": "state",
+          "description": "`state` {`FSelectState | undefined`} - \n\nProperty: state\n\nDefault: inherit",
+          "values": [
+            {
+              "name": "primary"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
+              "name": "inherit"
+            },
+            {
+              "name": "default"
+            }
+          ]
+        },
+        {
+          "name": "size",
+          "description": "`size` {`\"medium\" | \"small\" | undefined`} - \n\nProperty: size",
+          "values": [
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            }
+          ]
+        },
+        {
+          "name": "value",
+          "description": "`value` {`string | undefined`} - \n\nProperty: value",
+          "values": []
+        },
+        {
+          "name": "options",
+          "description": "`options` {`FSelectArrayOfObjects | undefined`} - \n\nProperty: options\n\nDefault: ",
+          "values": []
+        },
+        {
+          "name": "placeholder",
+          "description": "`placeholder` {`string | undefined`} - \n\nProperty: placeholder",
+          "values": []
+        },
+        {
+          "name": "icon-left",
+          "description": "`icon-left` {`string | undefined`} - \n\nProperty: iconLeft",
+          "values": []
+        },
+        {
+          "name": "height",
+          "description": "`height` {`FSelectHeightProp | undefined`} - \n\nProperty: height\n\nDefault: 180px",
+          "values": []
+        },
+        {
+          "name": "width",
+          "description": "`width` {`FSelectWidthProp | undefined`} - \n\nProperty: width\n\nDefault: fill-container",
+          "values": [
+            {
+              "name": "fill-container"
+            }
+          ]
+        },
+        {
+          "name": "loading",
+          "description": "`loading` {`boolean | undefined`} - \n\nProperty: loading\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "clear",
+          "description": "`clear` {`boolean | undefined`} - \n\nProperty: clear\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
         }
       ]
     },
@@ -5831,7 +6002,7 @@
     },
     {
       "name": "f-switch",
-      "description": "Events:\n\n  * `update` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`\"on\" | \"off\" | undefined`} - \n\n  * `state` {`FSwitchState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\nProperties:\n\n  * `value` {`\"on\" | \"off\" | undefined`} - \n\n  * `state` {`FSwitchState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`\"on\" | \"off\" | undefined`} - \n\n  * `state` {`FSwitchState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`\"on\" | \"off\" | undefined`} - \n\n  * `state` {`FSwitchState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "value",
@@ -5882,8 +6053,13 @@
           ]
         },
         {
-          "name": "onupdate",
-          "description": "`update` {`CustomEvent<{ value: string; }>`} - "
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
         }
       ]
     },
@@ -5977,7 +6153,7 @@
     },
     {
       "name": "f-text-area",
-      "description": "Events:\n\n  * `update` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`string | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FTextAreaState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `row` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `max-length` {`string | undefined`} - \n\n  * `resizable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`string | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FTextAreaState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `row` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `maxLength` {`string | undefined`} - \n\n  * `resizable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`string | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FTextAreaState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `row` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `max-length` {`string | undefined`} - \n\n  * `resizable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`string | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FTextAreaState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `row` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `maxLength` {`string | undefined`} - \n\n  * `resizable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "value",
@@ -6061,8 +6237,13 @@
           "values": []
         },
         {
-          "name": "onupdate",
-          "description": "`update` {`CustomEvent<{ value: string; }>`} - "
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
         }
       ]
     },

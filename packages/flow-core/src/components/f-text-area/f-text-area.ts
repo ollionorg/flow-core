@@ -2,6 +2,8 @@ import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-text-area.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
+import { FText } from "../f-text/f-text";
+import { FDiv } from "../f-div/f-div";
 
 export type FTextAreaState = "primary" | "default" | "success" | "warning" | "danger" | "inherit";
 
@@ -10,7 +12,7 @@ export class FTextArea extends FRoot {
   /**
    * css loaded from scss file
    */
-  static styles = [unsafeCSS(eleStyle)];
+  static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles];
 
   /**
    * @attribute value to be inserted in text-area.
@@ -67,14 +69,22 @@ export class FTextArea extends FRoot {
   clear?: boolean = false;
 
   /**
+   * @attribute Displays a close icon-button on the right side of the input that allows the user to clear the input value
+   */
+  @property({ reflect: true, type: Boolean })
+  disabled?: boolean = false;
+
+  /**
    * emit event
    */
-  handleInput(e: React.ChangeEvent<HTMLInputElement>) {
-    const event = new CustomEvent("update", {
+  handleInput(e: InputEvent) {
+    e.stopPropagation();
+    const event = new CustomEvent("input", {
       detail: {
-        value: e.target.value,
+        value: (e.target as HTMLInputElement)?.value,
       },
     });
+    this.value = (e.target as HTMLInputElement)?.value;
     this.dispatchEvent(event);
   }
 
@@ -82,11 +92,12 @@ export class FTextArea extends FRoot {
    * clear value inside f-text-area on click of clear icon.
    */
   clearValue() {
-    const event = new CustomEvent("update", {
+    const event = new CustomEvent("input", {
       detail: {
         value: "",
       },
     });
+    this.value = "";
     this.dispatchEvent(event);
   }
 
@@ -108,30 +119,46 @@ export class FTextArea extends FRoot {
      */
 
     return html`
-      <div class="f-text-area-wrapper">
-        <textarea
-          class="f-text-area"
-          style=${this.applyStyles(parentDiv)}
-          state=${this.state}
-          placeholder=${this.placeholder}
-          category=${this.category}
-          rows=${this.row ?? "3"}
-          maxlength=${this.maxLength}
-          ?resizable=${this.resizable}
-          @input=${this.handleInput}
-        >
+      <f-div padding="none" gap="x-small" direction="column" width="100%">
+        <f-div padding="none" gap="none" align="bottom-left">
+          <f-div padding="none" gap="x-small" direction="column" width="fill-container">
+            <slot name="label"></slot>
+            <slot name="description"></slot>
+          </f-div>
+          <f-div padding="none" gap="none" width="hug-content">
+            ${this.maxLength
+              ? html` <f-text variant="para" size="small" weight="regular" state="secondary"
+                  >${this.value?.length ?? 0} / ${this.maxLength}</f-text
+                >`
+              : null}
+          </f-div>
+        </f-div>
+        <div class="f-text-area-wrapper">
+          <textarea
+            class="f-text-area"
+            style=${this.applyStyles(parentDiv)}
+            state=${this.state}
+            placeholder=${this.placeholder}
+            category=${this.category}
+            rows=${this.row ?? "3"}
+            maxlength=${this.maxLength}
+            ?resizable=${this.resizable}
+            @input=${this.handleInput}
+          >
 ${this.value}</textarea
-        >
-        ${this.clear && this.value
-          ? html` <f-icon
-              class="f-text-area-clear-icon"
-              source="i-close"
-              clickable
-              size="x-small"
-              @click=${this.clearValue}
-            ></f-icon>`
-          : null}
-      </div>
+          >
+          ${this.clear && this.value
+            ? html` <f-icon
+                class="f-text-area-clear-icon"
+                source="i-close"
+                clickable
+                size="x-small"
+                @click=${this.clearValue}
+              ></f-icon>`
+            : null}
+        </div>
+        <slot name="help"></slot>
+      </f-div>
     `;
   }
 }

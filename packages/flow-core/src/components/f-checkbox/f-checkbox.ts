@@ -35,14 +35,22 @@ export class FCheckbox extends FRoot {
   size?: "small" | "medium";
 
   /**
+   * @attribute
+   */
+  @property({ reflect: true, type: Boolean })
+  disabled?: boolean = false;
+
+  /**
    * emit event.
    */
-  handleInput(e: React.ChangeEvent<HTMLInputElement>) {
-    const event = new CustomEvent("update", {
+  handleInput(e: InputEvent) {
+    e.stopPropagation();
+    const event = new CustomEvent("input", {
       detail: {
-        value: !e.target.checked ? "checked" : "unchecked",
+        value: !(e.target as HTMLInputElement)?.checked ? "checked" : "unchecked",
       },
     });
+    this.value = !(e.target as HTMLInputElement)?.checked ? "checked" : "unchecked";
     this.dispatchEvent(event);
   }
 
@@ -51,8 +59,20 @@ export class FCheckbox extends FRoot {
      * Final html to render
      */
     return html`
-      <div class="f-checkbox-wrapper" size=${this.size}>
-        <f-div padding="none" gap="small" align="middle-left">
+      <f-div
+        class="f-checkbox-wrapper"
+        size=${this.size}
+        padding="none"
+        gap="x-small"
+        direction="column"
+      >
+        <f-div
+          class="f-checkbox-section"
+          size=${this.size}
+          align="middle-left"
+          padding="none"
+          gap="medium"
+        >
           <input
             id="f-checkbox"
             class="f-checkbox"
@@ -67,13 +87,12 @@ export class FCheckbox extends FRoot {
               : html`${unsafeSVG(indeterminateMark)}`}
           </label>
           <f-div padding="none" align="middle-left">
-            <slot name="label-title"></slot>
+            <slot name="label"></slot>
           </f-div>
         </f-div>
-        <div size=${this.size} class="f-checkbox-description">
-          <slot name="label-description"></slot>
-        </div>
-      </div>
+        <slot name="description"></slot>
+        <slot name="help"></slot>
+      </f-div>
     `;
   }
 }

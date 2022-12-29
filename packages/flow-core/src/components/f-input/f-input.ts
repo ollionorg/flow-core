@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import eleStyle from "./f-input.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -8,7 +8,7 @@ import { FDiv } from "../f-div/f-div";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 
-export type FInputState = "primary" | "default" | "success" | "warning" | "danger" | "inherit";
+export type FInputState = "primary" | "default" | "success" | "warning" | "danger";
 
 @customElement("f-input")
 export class FInput extends FRoot {
@@ -16,6 +16,12 @@ export class FInput extends FRoot {
    * css loaded from scss file
    */
   static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles];
+
+  /**
+   * @attribute local state for password to text toggling and vice versa.
+   */
+  @state({})
+  showPassword = false;
 
   /**
    * @attribute Variants are various visual representations of an input field.
@@ -33,7 +39,7 @@ export class FInput extends FRoot {
    * @attribute States are used to communicate purpose and connotations.
    */
   @property({ reflect: true, type: String })
-  state?: FInputState = "inherit";
+  state?: FInputState = "default";
 
   /**
    * @attribute f-input can have 2 sizes. By default size is inherited by the parent f-field.
@@ -96,30 +102,27 @@ export class FInput extends FRoot {
   loading?: boolean = false;
 
   /**
-   * @attribute Loader icon replaces the content of the button .
+   * @attribute Shows disabled state of input element
+   */
+  @property({ reflect: true, type: Boolean })
+  disabled?: boolean = false;
+
+  /**
+   * @attribute  Displays a close icon-button on the right side of the input that allows the user to clear the input value
    */
   @property({ reflect: true, type: Boolean })
   clear?: boolean = false;
 
   /**
-   * fetch read-only value from nearest parent f-field element
+   * @attribute When true the user can not select the input element.
    */
-  get isReadOnly() {
-    return this.closest("f-field")?.hasAttribute("read-only") ?? false;
-  }
-
-  /**
-   * fetch can-duplicate value from nearest parent f-field element
-   */
-  get canDuplicate() {
-    return this.closest("f-field")?.hasAttribute("can-duplicate") ?? false;
-  }
+  @property({ reflect: true, type: Boolean, attribute: "read-only" })
+  readOnly?: boolean = false;
 
   /**
    * emit input custom event
    */
   handleInput(e: InputEvent) {
-    console.log((e.target as HTMLInputElement)?.value);
     e.stopPropagation();
     const event = new CustomEvent("input", {
       detail: {
@@ -134,11 +137,12 @@ export class FInput extends FRoot {
    * clear input value on clear icon clicked
    */
   clearInputValue() {
-    const event = new CustomEvent("update", {
+    const event = new CustomEvent("input", {
       detail: {
         value: "",
       },
     });
+    this.value = "";
     this.dispatchEvent(event);
   }
 
@@ -149,6 +153,18 @@ export class FInput extends FRoot {
     if (this.size === "medium") return "small";
     else if (this.size === "small") return "x-small";
     else return undefined;
+  }
+
+  /**
+   * Toggle Password view
+   */
+  togglePasswordView() {
+    if (this.type === "text") {
+      this.type = "password";
+    } else {
+      this.type = "text";
+    }
+    this.showPassword = !this.showPassword;
   }
 
   render() {
@@ -196,22 +212,39 @@ export class FInput extends FRoot {
             ${iconLeft}
           </div>`
         : "";
+
     /**
-     * append suffix
+     * password view suffix
      */
-    const suffixAppend = !this.loading
-      ? this.value && this.clear
-        ? html`<div class="f-input-suffix">
-            <f-icon
-              ?clickable=${true}
-              source="i-close"
-              .size=${this.iconSize}
-              @click=${this.clearInputValue}
-              class=${!this.size ? "f-input-icons-size" : ""}
-            ></f-icon>
-          </div>`
-        : this.fInputSuffix || this.iconRight
-        ? html` <div class="f-input-suffix">
+    const passwordToggle =
+      this.type === "password" || this.showPassword
+        ? html` <f-icon
+            ?clickable=${true}
+            .source=${this.showPassword ? "i-hide" : "i-view"}
+            .size=${this.iconSize}
+            @click=${this.togglePasswordView}
+            class=${!this.size ? "f-input-icons-size" : ""}
+          ></f-icon>`
+        : "";
+
+    /**
+     * error icon suffix
+     */
+    const dangerSign =
+      this.state === "danger"
+        ? html` <f-icon
+            source="i-alert"
+            .state=${this.state}
+            .size=${this.iconSize}
+            class=${!this.size ? "f-input-icons-size" : ""}
+          ></f-icon>`
+        : "";
+    /**
+     * main suffix
+     */
+    const mainSuffix =
+      this.fInputSuffix || this.iconRight
+        ? html`
             ${this.fInputSuffix
               ? html`
                   <f-div height="hug-content" width="hug-content" padding="none" direction="row">
@@ -222,45 +255,84 @@ export class FInput extends FRoot {
                 `
               : ""}
             ${iconRight}
+          `
+        : "";
+    /**
+     * append suffix
+     */
+    const suffixAppend = !this.loading
+      ? this.value && this.clear
+        ? html`<div class="f-input-suffix">
+            ${passwordToggle}
+            <f-icon
+              ?clickable=${true}
+              source="i-close"
+              .size=${this.iconSize}
+              @click=${this.clearInputValue}
+              class=${!this.size ? "f-input-icons-size" : ""}
+            ></f-icon>
+            ${mainSuffix} ${dangerSign}
           </div>`
-        : ""
-      : html`<div class="loader-suffix">${unsafeSVG(loader)}</div>`;
+        : html`<div class="f-input-suffix">${passwordToggle} ${mainSuffix} ${dangerSign}</div>`
+      : html`
+          <div class="f-input-suffix">${passwordToggle}${mainSuffix} ${dangerSign}</div>
+          <div class="loader-suffix">${unsafeSVG(loader)}</div>
+        `;
 
     /**
      * Final html to render
      */
 
     return html`
-      <div
-        class="f-input-wrapper"
-        variant=${this.variant}
-        category=${this.category}
-        state=${this.state}
-        size=${this.size}
-      >
-        ${prefixAppend}
-        <input
-          class=${classMap({ "f-input": true })}
-          variant=${this.variant}
-          category=${this.category}
-          type=${this.type}
-          state=${this.state}
-          placeholder=${this.placeholder}
-          .value="${this.value || ""}"
-          size=${this.size}
-          ?readonly=${this.isReadOnly}
-          maxlength="${this.maxLength}"
-          @input=${this.handleInput}
-        />
-        ${suffixAppend}
-      </div>
-      ${this.canDuplicate
-        ? html` <f-icon-button
-            icon="i-plus"
-            size="x-small"
-            class="f-input-duplicate"
-          ></f-icon-button>`
-        : null}
+      <f-div padding="none" gap="x-small" direction="column" width="100%">
+        <f-div padding="none" gap="none" align="bottom-left">
+          <f-div padding="none" gap="x-small" direction="column" width="fill-container">
+            <slot name="label"></slot>
+            <slot name="description"></slot>
+          </f-div>
+          <f-div padding="none" gap="none" width="hug-content">
+            ${this.maxLength
+              ? html` <f-text variant="para" size="small" weight="regular" state="secondary"
+                  >${this.value?.length ?? 0} / ${this.maxLength}</f-text
+                >`
+              : null}
+          </f-div>
+        </f-div>
+        <f-div
+          padding="none"
+          gap="x-small"
+          direction="row"
+          width="100%"
+          class="f-input-row"
+          align="middle-center"
+          overflow="hidden"
+        >
+          <div
+            class="f-input-wrapper"
+            variant=${this.variant}
+            category=${this.category}
+            state=${this.state}
+            size=${this.size}
+          >
+            ${prefixAppend}
+            <input
+              class=${classMap({ "f-input": true })}
+              variant=${this.variant}
+              category=${this.category}
+              type=${this.type}
+              state=${this.state}
+              placeholder=${this.placeholder}
+              .value="${this.value || ""}"
+              size=${this.size}
+              ?readonly=${this.readOnly}
+              maxlength="${this.maxLength}"
+              @input=${this.handleInput}
+            />
+            ${suffixAppend}
+          </div>
+        </f-div>
+        <slot name="help"></slot>
+      </f-div>
     `;
   }
 }

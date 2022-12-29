@@ -21,7 +21,7 @@ describe("f-input", () => {
     const descendant = el.shadowRoot!.querySelector(".f-input")!;
     expect(descendant.getAttribute("variant")).to.equal("curved");
     expect(descendant.getAttribute("category")).to.equal("fill");
-    expect(descendant.getAttribute("state")).to.equal("inherit");
+    expect(descendant.getAttribute("state")).to.equal("default");
     expect(descendant.getAttribute("type")).to.equal("text");
   });
   it("should render icon left", async () => {

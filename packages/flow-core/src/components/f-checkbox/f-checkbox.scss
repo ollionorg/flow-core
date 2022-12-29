@@ -40,13 +40,11 @@ $sizes: (
     "height": 10px,
     "svg-width": 9px,
     "svg-height": 11px,
-    "padding": 24px,
   ),
   "medium": (
     "height": 14px,
     "svg-width": 12px,
     "svg-height": 16px,
-    "padding": 28px,
   ),
 );
 
@@ -63,97 +61,109 @@ $sizes: (
 
   .f-checkbox-wrapper {
     @include base();
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-
-    .f-checkbox-description {
-      padding-left: var(--form-checkbox-description-padding);
+    slot[name="description"]::slotted(*) {
+      padding-left: calc(var(--form-checkbox-size) + 14px) !important;
     }
-    input[checked="true"] + label > svg {
-      height: var(--form-checkbox-height);
-      animation: draw-checkbox ease-in-out 0.4s forwards;
-      -webkit-animation: draw-checkbox ease-in-out 0.4s forwards;
-    }
-
     @each $size, $value in $sizes {
       &[size="#{$size}"] {
-        input[checked="true"] + label > svg {
-          height: map.get($value, "svg-height");
-        }
-        .f-checkbox-description {
-          padding-left: map.get($value, "padding");
+        slot[name="description"]::slotted(*) {
+          padding-left: calc(map.get($value, "height") + 14px) !important;
         }
       }
     }
-
-    label {
-      color: var(--color-text-default);
-      line-height: 40px;
-      cursor: pointer;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      &:after {
-        content: "";
-        height: var(--form-checkbox-size);
-        width: var(--form-checkbox-size);
-        float: left;
-        border: 1px solid var(--color-text-default);
-        border-radius: 2px;
+    slot[name="help"]::slotted(*) {
+      padding-left: calc(var(--form-checkbox-size) + 14px) !important;
+    }
+    @each $size, $value in $sizes {
+      &[size="#{$size}"] {
+        slot[name="help"]::slotted(*) {
+          padding-left: calc(map.get($value, "height") + 14px) !important;
+        }
       }
-      &:hover::after {
-        border: 1px solid var(--color-text-default-hover);
+    }
+    .f-checkbox-section {
+      input[checked="true"] + label > svg {
+        height: var(--form-checkbox-height);
+        animation: draw-checkbox ease-in-out 0.4s forwards;
+        -webkit-animation: draw-checkbox ease-in-out 0.4s forwards;
       }
 
       @each $size, $value in $sizes {
         &[size="#{$size}"] {
-          &:after {
-            height: map.get($value, "height");
-            width: map.get($value, "height");
+          input[checked="true"] + label > svg {
+            height: map.get($value, "svg-height");
           }
         }
       }
 
-      @each $state, $color in $states {
-        &[state="#{$state}"][value="checked"] {
-          &:after {
-            border: 1px solid map.get($color, "background");
-            transition: 0.15s all ease-out;
-            background-color: map.get($color, "background");
-          }
-          &:hover::after {
-            border: 1px solid map.get($color, "hover");
-            background-color: map.get($color, "hover");
+      label {
+        color: var(--color-text-default);
+        line-height: 40px;
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:after {
+          content: "";
+          height: var(--form-checkbox-size);
+          width: var(--form-checkbox-size);
+          float: left;
+          border: 1px solid var(--color-text-default);
+          border-radius: 2px;
+        }
+        &:hover::after {
+          border: 1px solid var(--color-text-default-hover);
+        }
+
+        @each $size, $value in $sizes {
+          &[size="#{$size}"] {
+            &:after {
+              height: map.get($value, "height");
+              width: map.get($value, "height");
+            }
           }
         }
-        &[state="#{$state}"][value="indeterminate"] {
-          &:after {
-            border: 1px solid map.get($color, "background");
-            transition: 0.15s all ease-out;
-            background-color: map.get($color, "background");
+
+        @each $state, $color in $states {
+          &[state="#{$state}"][value="checked"] {
+            &:after {
+              border: 1px solid map.get($color, "background");
+              transition: 0.15s all ease-out;
+              background-color: map.get($color, "background");
+            }
+            &:hover::after {
+              border: 1px solid map.get($color, "hover");
+              background-color: map.get($color, "hover");
+            }
           }
-          &:hover::after {
-            border: 1px solid map.get($color, "hover");
-            background-color: map.get($color, "hover");
+          &[state="#{$state}"][value="indeterminate"] {
+            &:after {
+              border: 1px solid map.get($color, "background");
+              transition: 0.15s all ease-out;
+              background-color: map.get($color, "background");
+            }
+            &:hover::after {
+              border: 1px solid map.get($color, "hover");
+              background-color: map.get($color, "hover");
+            }
           }
         }
       }
-    }
 
-    svg {
-      stroke: var(--color-surface-default);
-      stroke-width: 3px;
-      height: 0px;
-      width: var(--form-checkbox-width);
-      position: absolute;
-      stroke-dasharray: 33;
-    }
-    @each $size, $value in $sizes {
-      &[size="#{$size}"] {
-        svg {
-          width: map.get($value, "svg-width");
+      svg {
+        stroke: var(--color-surface-default);
+        stroke-width: 3px;
+        height: 0px;
+        width: var(--form-checkbox-width);
+        position: absolute;
+        stroke-dasharray: 33;
+      }
+      @each $size, $value in $sizes {
+        &[size="#{$size}"] {
+          svg {
+            width: map.get($value, "svg-width");
+          }
         }
       }
     }
@@ -180,3 +190,14 @@ $sizes: (
 //     }
 //   }
 // }
+
+f-checkbox {
+  &[disabled] {
+    @include disabled();
+  }
+  @each $state, $color in $states {
+    &[state="#{$state}"] {
+      @include input-color($state);
+    }
+  }
+}

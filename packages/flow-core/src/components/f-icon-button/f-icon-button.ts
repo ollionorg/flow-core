@@ -242,7 +242,6 @@ export class FIconButton extends FRoot {
     // merging host classes
     this.classList.forEach((cl) => {
       classes[cl] = true;
-      console.log(cl, classes[cl]);
       if (cl === "f-input-duplicate") {
         this.iconInputClass = true;
       }

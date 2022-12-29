@@ -45,6 +45,12 @@ $sizes: (
 );
 
 :host {
+  .f-switch-wrapper {
+    overflow: visible;
+  }
+  .f-switch-section {
+    overflow: visible;
+  }
   .f-switch {
     @include base();
     position: relative;
@@ -55,6 +61,17 @@ $sizes: (
       &[size="#{$size}"] {
         width: map.get($value, "width");
         height: map.get($value, "height");
+      }
+    }
+  }
+
+  slot[name="help"]::slotted(*) {
+    padding-left: calc(var(--form-switch-width) + 12px) !important;
+  }
+  @each $size, $value in $sizes {
+    &[size="#{$size}"] {
+      slot[name="help"]::slotted(*) {
+        padding-left: calc(map.get($value, "width") + 12px) !important;
       }
     }
   }
@@ -132,6 +149,17 @@ $sizes: (
           transform: translateX(map.get($value, "translate-slider"));
         }
       }
+    }
+  }
+}
+
+f-switch {
+  &[disabled] {
+    @include disabled();
+  }
+  @each $state, $color in $states {
+    &[state="#{$state}"] {
+      @include input-color($state);
     }
   }
 }

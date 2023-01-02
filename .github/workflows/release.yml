@@ -58,8 +58,6 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@cldcvr'
-       # Setup .npmrc file to publish to GitHub Packages
-      - run: rm .npmrc
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1

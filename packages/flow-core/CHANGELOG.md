@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.1.5] - 2023-01-02
+
+### Improvements
+- Publishing packages to github registry.
+
 ## [1.1.4] - 2022-11-28
 
 ### Bug fixes

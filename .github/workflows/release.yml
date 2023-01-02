@@ -3,12 +3,12 @@ name: Release
 on:
   push:
     branches:
-      - main
+      - vikas/FLOW-556
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  release:
+  publish_to_npm:
     name: Uploading to npm registry
     runs-on: ubuntu-latest
     steps:
@@ -31,3 +31,39 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+ publish_to_github:
+   name: Uploading to github registry
+   runs-on: ubuntu-latest
+   steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      
+      - name: Setup Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: Install Dependencies
+        run: yarn
+      # Remove original publishConfig in packages/flow-core/package.json
+      - uses: sergeysova/jq-action@v2
+        with:
+          cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/flow-core/package.json`" > packages/flow-core/package.json
+
+      - uses: sergeysova/jq-action@v2
+        with:
+          cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/custom-elements-manifest-to-types/package.json`" > packages/custom-elements-manifest-to-types/package.json
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@cldcvr'
+
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: yarn release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+ 

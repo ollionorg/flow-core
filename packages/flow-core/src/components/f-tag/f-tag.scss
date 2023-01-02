@@ -71,6 +71,7 @@ in this case it is `f-tag`
   display: inline-flex;
   flex: 0 0 auto;
   vertical-align: top;
+  overflow: hidden;
   // inner element used to apply all styles
   .f-tag {
     @include base();
@@ -107,7 +108,10 @@ in this case it is `f-tag`
         background-color: map.get($color, "background") !important;
         border: 1px
           solid
-          map.get($color, "background") !important; // added to match width of outline category
+          map.get(
+            $color,
+            "background"
+          ) !important; // added to match width of outline category
         // hover changes background
         &[selected] {
           background-color: map.get($color, "selected") !important;

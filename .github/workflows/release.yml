@@ -31,10 +31,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
- publish_to_github:
-   name: Uploading to github registry
-   runs-on: ubuntu-latest
-   steps:
+  publish_to_github:
+    name: Uploading to github registry
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
       

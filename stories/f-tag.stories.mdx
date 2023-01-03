@@ -125,7 +125,11 @@ The medium size is the default and recommended option.
 
 <Canvas>
   <Story name="size">
-    {(args) => html`<f-div gap="x-large" padding="x-large" align="middle-center">
+    {(args) => html`<f-div
+      gap="x-large"
+      padding="x-large"
+      align="middle-center"
+    >
       <f-tag size="large" label="Large" state="neutral"></f-tag>
       <f-tag size="medium" label="Medium" state="neutral"></f-tag>
       <f-tag size="small" label="Small" state="neutral"></f-tag>
@@ -172,14 +176,20 @@ whereas a green color connotes success and so on.
 <br />
 
 <p class="note-section">
-  Note: To use a tag of different color other than the state colors, use fill property.
+  Note: To use a tag of different color other than the state colors, use fill
+  property.
 </p>
 
 <br />
 
 <Canvas>
   <Story name="state">
-    {(args) => html`<f-div gap="x-large" padding="x-large" align="middle-center" state="primary">
+    {(args) => html`<f-div
+      gap="x-large"
+      padding="x-large"
+      align="middle-center"
+      state="primary"
+    >
       <f-tag size="medium" label="Neutral" state="neutral"></f-tag>
       <f-tag size="medium" label="Primary" state="primary"></f-tag>
       <f-tag size="medium" label="Success" state="success"></f-tag>
@@ -246,7 +256,12 @@ Label property defines the text label on a tag. Label on the tag is always bold 
 
 <Canvas>
   <Story name="label">
-    {(args) => html`<f-div gap="large" padding="x-large" direction="row" align="middle-center">
+    {(args) => html`<f-div
+      gap="large"
+      padding="x-large"
+      direction="row"
+      align="middle-center"
+    >
       <f-tag label="Label" state="neutral"></f-tag>
       <f-tag state="neutral" icon-left="i-star"></f-tag>
     </f-div>`}
@@ -265,7 +280,12 @@ Icon-left enables an icon on the left of the label of a tag.
 
 <Canvas>
   <Story name="icon-left">
-    {(args) => html`<f-div gap="large" padding="x-large" align="middle-center" direction="row">
+    {(args) => html`<f-div
+      gap="large"
+      padding="x-large"
+      align="middle-center"
+      direction="row"
+    >
       <f-tag label="icon left" icon-left="i-star" state="neutral"></f-tag>
       <f-tag icon-left="i-star" state="neutral"></f-tag>
     </f-div>`}
@@ -284,7 +304,12 @@ Icon-right enables an icon on the right of the label of a tag.
 
 <Canvas>
   <Story name="icon-right">
-    {(args) => html`<f-div gap="large" padding="x-large" direction="row" align="middle-center">
+    {(args) => html`<f-div
+      gap="large"
+      padding="x-large"
+      direction="row"
+      align="middle-center"
+    >
       <f-tag label="icon right" icon-right="i-star" state="neutral"></f-tag>
       <f-tag
         icon-left="i-star"
@@ -310,18 +335,34 @@ The counter component by default abbreviates the value (1000 = 1k). You can lear
 <br />
 
 <p class="note-section">
-  Note: Counter is always on the right end of the button, except if icon-right=”i-close”. In that
-  case counter comes on the left of the close icon.
+  Note: Counter is always on the right end of the button, except if
+  icon-right=”i-close”. In that case counter comes on the left of the close
+  icon.
 </p>
 
 <br />
 
 <Canvas>
   <Story name="counter">
-    {(args) => html`<f-div gap="large" padding="x-large" direction="row" align="middle-center">
+    {(args) => html`<f-div
+      gap="large"
+      padding="x-large"
+      direction="row"
+      align="middle-center"
+    >
       <f-tag label="Label" state="neutral" counter="88"></f-tag>
-      <f-tag label="Label" state="neutral" icon-left="i-star" counter="88"></f-tag>
-      <f-tag label="Label" state="neutral" icon-right="i-star" counter="88"></f-tag>
+      <f-tag
+        label="Label"
+        state="neutral"
+        icon-left="i-star"
+        counter="88"
+      ></f-tag>
+      <f-tag
+        label="Label"
+        state="neutral"
+        icon-right="i-star"
+        counter="88"
+      ></f-tag>
       <f-tag state="neutral" icon-left="i-star" counter="88"></f-tag>
     </f-div>`}
   </Story>
@@ -347,11 +388,21 @@ The counter component by default abbreviates the value (1000 = 1k). You can lear
       </f-div>
       <f-div padding="none" direction="row" gap="x-large">
         <f-tag state="neutral" label="label" icon-left="i-plus"></f-tag>
-        <f-tag state="neutral" label="label" loading=${true} icon-left="i-plus"></f-tag>
+        <f-tag
+          state="neutral"
+          label="label"
+          loading=${true}
+          icon-left="i-plus"
+        ></f-tag>
       </f-div>
       <f-div padding="none" direction="row" gap="x-large">
         <f-tag state="neutral" label="label" icon-right="i-plus"></f-tag>
-        <f-tag state="neutral" label="label" loading=${true} icon-right="i-plus"></f-tag>
+        <f-tag
+          state="neutral"
+          label="label"
+          loading=${true}
+          icon-right="i-plus"
+        ></f-tag>
       </f-div>
       <f-div height="hug-content" padding="none">
         <f-text variant="para" size="large" weight="medium">Disabled</f-text>
@@ -380,7 +431,10 @@ The counter component by default abbreviates the value (1000 = 1k). You can lear
     </tr>
     <tr>
       <td>loading</td>
-      <td>Loader replaces the content of the f-tag. Width of the f-tag remains the same.</td>
+      <td>
+        Loader replaces the content of the f-tag. Width of the f-tag remains the
+        same.
+      </td>
       <td>false</td>
     </tr>
     <tr>
@@ -390,7 +444,10 @@ The counter component by default abbreviates the value (1000 = 1k). You can lear
     </tr>
     <tr>
       <td>selected</td>
-      <td>Set selected to true to make a f-tag toggle Interaction: lightened/darkened by 30%</td>
+      <td>
+        Set selected to true to make a f-tag toggle Interaction:
+        lightened/darkened by 30%
+      </td>
       <td>false</td>
     </tr>
   </tbody>

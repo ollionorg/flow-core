@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.1.6] - 2023-01-03
+
+### Improvements
+- `.width-N` and `.height-N` utility classes added where N is multiple of 50 and less than 1000.
 ## [1.1.5] - 2023-01-02
 
 ### Improvements

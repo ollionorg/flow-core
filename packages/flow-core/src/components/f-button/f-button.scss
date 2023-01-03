@@ -82,13 +82,13 @@ in this case it is `f-button`
   .f-button {
     @include base();
     cursor: pointer;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
     text-transform: uppercase;
     color: var(--color-surface-default);
-    flex: 0 0 auto;
+    flex: 1 0 auto;
     vertical-align: top;
     width: fit-content;
 
@@ -118,7 +118,12 @@ in this case it is `f-button`
     @each $state, $color in $states {
       &[state="#{$state}"][category="fill"] {
         background-color: map.get($color, "background");
-        border: 1px solid map.get($color, "background"); // added to match width of outline category
+        border: 1px
+          solid
+          map.get(
+            $color,
+            "background"
+          ); // added to match width of outline category
         // hover changes background
         &:hover {
           background-color: map.get($color, "hover");

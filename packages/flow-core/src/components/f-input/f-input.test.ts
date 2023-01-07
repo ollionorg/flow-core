@@ -75,6 +75,12 @@ describe("f-input", () => {
     expect(icon).instanceOf(FIcon);
     expect(icon.getAttribute("source")).to.equal("i-close");
   });
+  it("should render hide/view icon at right side", async () => {
+    const el = await fixture(html` <f-input value="abc" type="password"></f-input> `);
+    const descendant = el.shadowRoot!.querySelector(".f-input-suffix")!;
+    const icon = descendant.children[0];
+    expect(icon).instanceOf(FIcon);
+  });
   it("should render loader", async () => {
     const el = await fixture(html` <f-input value="abc" ?loading=${true}></f-input> `);
     const descendant = el.shadowRoot!.querySelector(".loader-suffix")!;

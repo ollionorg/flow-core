@@ -119,6 +119,16 @@ f-div {
           background-color: map.get($value, "hover");
         }
       }
+      &.f-select-options-clickable {
+        &[clickable] {
+          &:hover {
+            background-color: var(--color-surface-tertiary);
+          }
+        }
+        &[selected="background"] {
+          background-color: var(--color-surface-tertiary);
+        }
+      }
       // if selected state is background
       &[selected="background"] {
         background-color: map.get($value, "selected");

@@ -67,11 +67,6 @@ $states: (
     "border": var(--color-danger-default),
     "focus": var(--color-danger-default),
   ),
-  "inherit": (
-    "input": var(--color-input-default),
-    "border": var(--color-input-border-default),
-    "focus": var(--color-input-focus),
-  ),
 );
 
 /**
@@ -237,15 +232,11 @@ applies styles on f-input
       }
 
       .f-input {
+        @include base();
         display: flex;
         flex: 1 1 auto;
         padding: 0px 12px;
-        height: var(--form-input-size);
-        @each $size, $value in $sizes {
-          &[size="#{$size}"] {
-            height: map.get($value, "height");
-          }
-        }
+        height: 15px;
         font-style: normal;
         font-weight: 325;
         font-size: 12px;

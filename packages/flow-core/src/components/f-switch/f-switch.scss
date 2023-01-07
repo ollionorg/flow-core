@@ -50,6 +50,13 @@ $sizes: (
   }
   .f-switch-section {
     overflow: visible;
+    @each $size, $value in $sizes {
+      &[size="#{$size}"] {
+        slot[name="help"]::slotted(*) {
+          padding-left: calc(map.get($value, "width") + 12px) !important;
+        }
+      }
+    }
   }
   .f-switch {
     @include base();
@@ -67,13 +74,6 @@ $sizes: (
 
   slot[name="help"]::slotted(*) {
     padding-left: calc(var(--form-switch-width) + 12px) !important;
-  }
-  @each $size, $value in $sizes {
-    &[size="#{$size}"] {
-      slot[name="help"]::slotted(*) {
-        padding-left: calc(map.get($value, "width") + 12px) !important;
-      }
-    }
   }
 
   .f-switch input {

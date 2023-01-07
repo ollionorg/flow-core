@@ -13,6 +13,6 @@ describe("f-checkbox", () => {
   it("should render with all default properties", async () => {
     const el = await fixture(html` <f-checkbox></f-checkbox> `);
     const descendant = el.shadowRoot!.querySelector(".f-checkbox")!;
-    expect(descendant.getAttribute("state")).to.equal("inherit");
+    expect(descendant.getAttribute("state")).to.equal("default");
   });
 });

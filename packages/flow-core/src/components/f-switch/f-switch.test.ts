@@ -13,6 +13,6 @@ describe("f-switch", () => {
   it("should render with all default properties", async () => {
     const el = await fixture(html` <f-switch></f-switch> `);
     const descendant = el.shadowRoot!.querySelector(".f-switch")!;
-    expect(descendant.getAttribute("state")).to.equal("inherit");
+    expect(descendant.getAttribute("state")).to.equal("default");
   });
 });

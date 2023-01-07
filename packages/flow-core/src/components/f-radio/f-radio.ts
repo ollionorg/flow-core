@@ -4,7 +4,7 @@ import eleStyle from "./f-radio.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 
-export type FRadioState = "primary" | "default" | "success" | "warning" | "danger" | "inherit";
+export type FRadioState = "primary" | "default" | "success" | "warning" | "danger";
 
 @customElement("f-radio")
 export class FRadio extends FRoot {
@@ -23,7 +23,7 @@ export class FRadio extends FRoot {
    * @attribute States are used to communicate purpose and connotations.
    */
   @property({ reflect: true, type: String })
-  state?: FRadioState = "inherit";
+  state?: FRadioState = "default";
 
   /**
    * @attribute f-radio can have 2 sizes.

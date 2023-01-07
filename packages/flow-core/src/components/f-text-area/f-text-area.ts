@@ -5,7 +5,7 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 
-export type FTextAreaState = "primary" | "default" | "success" | "warning" | "danger" | "inherit";
+export type FTextAreaState = "primary" | "default" | "success" | "warning" | "danger";
 
 @customElement("f-text-area")
 export class FTextArea extends FRoot {
@@ -30,7 +30,7 @@ export class FTextArea extends FRoot {
    * @attribute States are used to communicate purpose and connotations.
    */
   @property({ reflect: true, type: String })
-  state?: FTextAreaState = "inherit";
+  state?: FTextAreaState = "default";
 
   /**
    * @attribute f-text-area can have 2 sizes.
@@ -42,7 +42,7 @@ export class FTextArea extends FRoot {
    * @attribute Defines the  no. of rows to display. By default f-text-area provides 3 rows. After 3 rows text area becomes scrollable.
    */
   @property({ reflect: true, type: String })
-  row?: string;
+  rows?: string;
 
   /**
    * @attribute Defines the placeholder text for f-text-area.
@@ -73,6 +73,12 @@ export class FTextArea extends FRoot {
    */
   @property({ reflect: true, type: Boolean })
   disabled?: boolean = false;
+
+  /**
+   * @attribute Only Text could be read, can't be edited
+   */
+  @property({ reflect: true, type: Boolean, attribute: "read-only" })
+  readOnly?: boolean = false;
 
   /**
    * emit event
@@ -138,11 +144,13 @@ export class FTextArea extends FRoot {
             class="f-text-area"
             style=${this.applyStyles(parentDiv)}
             state=${this.state}
+            size=${this.size}
             placeholder=${this.placeholder}
             category=${this.category}
-            rows=${this.row ?? "3"}
+            rows=${this.rows ?? "3"}
             maxlength=${this.maxLength}
             ?resizable=${this.resizable}
+            ?readonly=${this.readOnly}
             @input=${this.handleInput}
           >
 ${this.value}</textarea

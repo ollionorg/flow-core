@@ -7,7 +7,10 @@ import checkedMark from "../../mixins/svg/checked-mark";
 import indeterminateMark from "../../mixins/svg/indeterminate-mark";
 import { FDiv } from "../f-div/f-div";
 
-export type FCheckboxState = "primary" | "default" | "success" | "warning" | "danger" | "inherit";
+export type FCheckboxState = "primary" | "default" | "success" | "warning" | "danger";
+export type FCheckboxElement = {
+  value: string;
+};
 
 @customElement("f-checkbox")
 export class FCheckbox extends FRoot {
@@ -15,7 +18,6 @@ export class FCheckbox extends FRoot {
    * css loaded from scss file
    */
   static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
-
   /**
    * @attribute Value of a checkbox defines if it is selected, unselected or indeterminate.
    */
@@ -26,7 +28,7 @@ export class FCheckbox extends FRoot {
    * @attribute States are used to communicate purpose and connotations. State of an checkbox is controlled by its wrapper f-field.
    */
   @property({ reflect: true, type: String })
-  state?: FCheckboxState = "inherit";
+  state?: FCheckboxState = "default";
 
   /**
    * @attribute f-checkbox can have 2 sizes.
@@ -35,7 +37,7 @@ export class FCheckbox extends FRoot {
   size?: "small" | "medium";
 
   /**
-   * @attribute
+   * @attribute disables the input element
    */
   @property({ reflect: true, type: Boolean })
   disabled?: boolean = false;
@@ -45,7 +47,7 @@ export class FCheckbox extends FRoot {
    */
   handleInput(e: InputEvent) {
     e.stopPropagation();
-    const event = new CustomEvent("input", {
+    const event = new CustomEvent<FCheckboxElement>("input", {
       detail: {
         value: !(e.target as HTMLInputElement)?.checked ? "checked" : "unchecked",
       },

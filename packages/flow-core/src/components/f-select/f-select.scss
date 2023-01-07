@@ -31,7 +31,7 @@ $sizes: (
     "maxlength": -38px,
   ),
   "small": (
-    "main-height": 26px,
+    "main-height": 28px,
     "height": 26px,
     "loader": 16px,
     "maxlength": -34px,
@@ -83,244 +83,243 @@ applies styles on f-select
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 12px;
-  .f-select-wrapper {
-    // Important :  always include base mixins
-    @include base();
+  .f-select-field {
     display: flex;
-    flex-shrink: 1;
-    align-items: center;
-    position: relative;
-    height: var(--form-input-div-size);
-
-    @each $size, $value in $sizes {
-      &[size="#{$size}"] {
-        height: map.get($value, "main-height");
-      }
-    }
-
-    .word-break {
-      word-break: normal !important;
-    }
-
-    @each $category, $value in $categories {
-      &[category^="#{$category}"] {
-        background-color: map.get($value, "background");
-        &:hover .f-select {
-          background-color: map.get($value, "hover") !important;
-        }
-        &:hover {
-          background-color: map.get($value, "hover") !important;
-        }
-      }
-    }
-
-    @each $state, $color in $states {
-      &[state="#{$state}"] {
-        &[variant="block"][category="fill"] {
-          border-bottom: 1px solid map.get($color, "border");
-          border-top: none;
-          border-right: none;
-          border-left: none;
-          &:focus-within {
-            border-bottom: 1px solid map.get($color, "focus");
-            outline: none;
-          }
-        }
-        &[variant="block"][category="transparent"] {
-          border-bottom: 1px solid map.get($color, "border");
-          border-top: none;
-          border-right: none;
-          border-left: none;
-          &:focus-within {
-            border-bottom: 1px solid map.get($color, "focus");
-            outline: none;
-          }
-        }
-        &[variant="block"][category="outline"] {
-          border: 1px solid map.get($color, "border");
-          &:focus-within {
-            border-bottom: 1px solid map.get($color, "focus");
-            outline: none;
-          }
-        }
-        &[variant="curved"][category="fill"] {
-          border: 1px solid map.get($color, "input");
-          border-radius: 4px;
-          &:focus-within {
-            border: 1px solid map.get($color, "focus");
-            outline: none;
-          }
-        }
-        &[variant="curved"][category="outline"] {
-          border: 1px solid map.get($color, "border");
-          border-radius: 4px;
-          &:focus-within {
-            border: 1px solid map.get($color, "focus");
-            outline: none;
-          }
-        }
-        &[variant="curved"][category="transparent"] {
-          border: 1px solid map.get($color, "border");
-          border-radius: 4px;
-          &:focus-within {
-            border: 1px solid map.get($color, "focus");
-            outline: none;
-          }
-        }
-        &[variant="round"][category="fill"] {
-          border-radius: 22px;
-          border: 1px solid map.get($color, "input");
-          &:focus-within {
-            border: 1px solid map.get($color, "focus");
-            outline: none;
-          }
-        }
-        &[variant="round"][category="outline"] {
-          border-radius: 22px;
-          border: 1px solid map.get($color, "border");
-          &:focus-within {
-            border: 1px solid map.get($color, "focus");
-            outline: none;
-          }
-        }
-        &[variant="round"][category="transparent"] {
-          border-radius: 22px;
-          border: 1px solid map.get($color, "border");
-          &:focus-within {
-            border: 1px solid map.get($color, "focus");
-            outline: none;
-          }
-        }
-      }
-    }
-
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
     .f-select-options {
-      top: calc(var(--form-input-size) + 7px);
-      @each $size, $value in $sizes {
-        &[size="#{$size}"] {
-          top: calc(map.get($value, "height") + 7px);
-        }
-      }
       position: absolute;
       z-index: 2;
-      background-color: var(--color-surface-tertiary);
+      background-color: var(--color-surface-secondary);
       border-radius: 0px 0px 4px 4px;
       overflow: auto;
       width: 100%;
       box-shadow: 0px 0px 12px rgba(35, 46, 60, 0.4);
     }
-
-    .f-select-prefix {
+    .f-select-wrapper {
+      // Important :  always include base mixins
+      @include base();
+      display: flex;
+      flex-shrink: 1;
       position: relative;
-      display: flex;
-      padding: 9px 0px 9px 12px;
-      gap: 12px;
-      align-items: center;
-    }
+      min-height: var(--form-input-div-size);
+      cursor: text;
 
-    .f-select-suffix {
-      position: relative;
-      padding: 9px 12px 9px 0px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .loader-suffix {
-      position: relative;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      @include rotate("svg");
-      pointer-events: none;
-      padding: 0px 12px 0px 0px;
-
-      svg {
-        position: relative;
-        height: var(--form-input-loader);
-        width: var(--form-input-loader);
-      }
-    }
-
-    @each $size, $value in $sizes {
-      &[size="#{$size}"] {
-        .loader-suffix {
-          svg {
-            height: map.get($value, "loader");
-            width: map.get($value, "loader");
-          }
-        }
-      }
-    }
-
-    .f-select {
-      display: flex;
-      flex: 1 1 auto;
-      padding: 0px 12px;
-      height: var(--form-input-size);
       @each $size, $value in $sizes {
         &[size="#{$size}"] {
-          height: map.get($value, "height");
+          min-height: map.get($value, "main-height");
         }
       }
-      font-style: normal;
-      font-weight: 325;
-      font-size: 12px;
-      line-height: 18px;
-      color: var(--color-text-default);
-      color-scheme: dark;
+
+      .word-break {
+        word-break: normal !important;
+      }
 
       @each $category, $value in $categories {
         &[category^="#{$category}"] {
           background-color: map.get($value, "background");
-          border: none;
-          &:focus {
-            outline: none;
+          &:hover .f-select {
+            background-color: map.get($value, "hover") !important;
+          }
+          &:hover {
+            background-color: map.get($value, "hover") !important;
           }
         }
       }
-      &[variant="round"] {
-        border-radius: 22px;
+
+      @each $state, $color in $states {
+        &[state="#{$state}"] {
+          &[variant="block"][category="fill"] {
+            border-bottom: 1px solid map.get($color, "border");
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            &:focus-within {
+              border-bottom: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="block"][category="transparent"] {
+            border-bottom: 1px solid map.get($color, "border");
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            &:focus-within {
+              border-bottom: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="block"][category="outline"] {
+            border: 1px solid map.get($color, "border");
+            &:focus-within {
+              border-bottom: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="curved"][category="fill"] {
+            border: 1px solid map.get($color, "input");
+            border-radius: 4px;
+            &:focus-within {
+              border: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="curved"][category="outline"] {
+            border: 1px solid map.get($color, "border");
+            border-radius: 4px;
+            &:focus-within {
+              border: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="curved"][category="transparent"] {
+            border: 1px solid map.get($color, "border");
+            border-radius: 4px;
+            &:focus-within {
+              border: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="round"][category="fill"] {
+            border-radius: 22px;
+            border: 1px solid map.get($color, "input");
+            &:focus-within {
+              border: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="round"][category="outline"] {
+            border-radius: 22px;
+            border: 1px solid map.get($color, "border");
+            &:focus-within {
+              border: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="round"][category="transparent"] {
+            border-radius: 22px;
+            border: 1px solid map.get($color, "border");
+            &:focus-within {
+              border: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+        }
       }
-      &[variant="curved"] {
-        border-radius: 4px;
+
+      .f-select-prefix {
+        position: relative;
+        display: flex;
+        padding: 0px 0px 0px 12px;
+        gap: 12px;
+        align-items: center;
+        width: 100%;
+        .icon-left-padding {
+          align-items: center;
+          display: flex;
+        }
+        .placeholder-text {
+          font-style: normal;
+          font-weight: 325;
+          font-size: 12px;
+          line-height: 18px;
+          color: var(--color-text-subtle);
+        }
       }
-      &[variant="block"] {
-        border-radius: 4px;
+
+      .f-select-suffix {
+        position: relative;
+        padding: 0px 12px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
       }
-      &[type="password"] {
-        font-size: 15px;
-        letter-spacing: 2px;
+
+      .loader-suffix {
+        position: relative;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        @include rotate("svg");
+        pointer-events: none;
+        padding: 0px 12px 0px 0px;
+
+        svg {
+          position: relative;
+          height: var(--form-input-loader);
+          width: var(--form-input-loader);
+        }
       }
-      &::placeholder {
-        /* Chrome, Firefox, Opera, Safari 10.1+ */
+
+      @each $size, $value in $sizes {
+        &[size="#{$size}"] {
+          .loader-suffix {
+            svg {
+              height: map.get($value, "loader");
+              width: map.get($value, "loader");
+            }
+          }
+        }
+      }
+
+      .f-select {
+        @include base();
+        display: flex;
+        flex: 1 1 auto;
+        padding: 0px 0px;
+        min-height: 15px;
+
         font-style: normal;
         font-weight: 325;
         font-size: 12px;
         line-height: 18px;
-        color: var(--color-text-subtle);
-      }
-      /* Chrome, Safari, Edge, Opera */
-      &::-webkit-outer-spin-button,
-      &::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-      /* Firefox */
-      &[type="number"] {
-        -moz-appearance: textfield;
-      }
-      &[type="date"]::-webkit-calendar-picker-indicator {
-        cursor: pointer;
-        border-radius: 4px;
-        margin-right: 2px;
-        opacity: 0.6;
-        font-size: 15px;
-      }
+        color: var(--color-text-default);
+        color-scheme: dark;
 
-      &[type="date"]::-webkit-calendar-picker-indicator:hover {
-        opacity: 1;
+        @each $category, $value in $categories {
+          &[category^="#{$category}"] {
+            background-color: map.get($value, "background");
+            border: none;
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+        border-radius: 4px;
+        &[type="password"] {
+          font-size: 15px;
+          letter-spacing: 2px;
+        }
+        &::placeholder {
+          /* Chrome, Firefox, Opera, Safari 10.1+ */
+          font-style: normal;
+          font-weight: 325;
+          font-size: 12px;
+          line-height: 18px;
+          color: var(--color-text-subtle);
+        }
+        /* Chrome, Safari, Edge, Opera */
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        /* Firefox */
+        &[type="number"] {
+          -moz-appearance: textfield;
+        }
+        &[type="date"]::-webkit-calendar-picker-indicator {
+          cursor: pointer;
+          border-radius: 4px;
+          margin-right: 2px;
+          opacity: 0.6;
+          font-size: 15px;
+        }
+
+        &[type="date"]::-webkit-calendar-picker-indicator:hover {
+          opacity: 1;
+        }
       }
     }
   }

@@ -4,9 +4,7 @@ import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 // import flow-core elements
 import "@cldcvr/flow-core";
 
-import { FIcon, ConfigUtil, FTextArea, FText } from "@cldcvr/flow-core";
-// importing `loadingSVG` to cross check
-import loadingSVG from "../../mixins/svg/loader";
+import { FIcon, ConfigUtil, FTextArea } from "@cldcvr/flow-core";
 
 // setting icon pack for testing icon related test cases
 ConfigUtil.setConfig({ iconPack: IconPack });
@@ -20,7 +18,7 @@ describe("f-text-area", () => {
     const el = await fixture(html` <f-text-area></f-text-area> `);
     const descendant = el.shadowRoot!.querySelector(".f-text-area")!;
     expect(descendant.getAttribute("category")).to.equal("fill");
-    expect(descendant.getAttribute("state")).to.equal("inherit");
+    expect(descendant.getAttribute("state")).to.equal("default");
     expect(descendant.getAttribute("rows")).to.equal("3");
   });
   it("should render clear icon at right side", async () => {

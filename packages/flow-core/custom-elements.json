@@ -187,6 +187,34 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/utils/get-computed-html.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "getComputedHTML",
+          "parameters": [
+            {
+              "name": "data",
+              "type": {
+                "text": "TemplateResult"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "getComputedHTML",
+            "module": "src/utils/get-computed-html.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/utils/get-custom-fill-color.ts",
       "declarations": [
         {
@@ -757,7 +785,7 @@
               "type": {
                 "text": "FCheckboxState | undefined"
               },
-              "default": "\"inherit\"",
+              "default": "\"default\"",
               "attribute": "state",
               "reflects": true
             },
@@ -808,7 +836,7 @@
               "type": {
                 "text": "FCheckboxState | undefined"
               },
-              "default": "\"inherit\"",
+              "default": "\"default\"",
               "fieldName": "state"
             },
             {
@@ -2983,7 +3011,7 @@
               "type": {
                 "text": "FRadioState | undefined"
               },
-              "default": "\"inherit\"",
+              "default": "\"default\"",
               "attribute": "state",
               "reflects": true
             },
@@ -3034,7 +3062,7 @@
               "type": {
                 "text": "FRadioState | undefined"
               },
-              "default": "\"inherit\"",
+              "default": "\"default\"",
               "fieldName": "state"
             },
             {
@@ -3101,9 +3129,92 @@
               "kind": "field",
               "name": "selectedOptions",
               "type": {
-                "text": "FSelectArrayOfObjects"
+                "text": "FSelectOptions"
               },
               "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "filteredOptions",
+              "type": {
+                "text": "FSelectOptions"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "inputElement",
+              "type": {
+                "text": "HTMLInputElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "wrapperElement",
+              "type": {
+                "text": "HTMLDivElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "optionFocus",
+              "type": {
+                "text": "HTMLDivElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "groupFocus",
+              "type": {
+                "text": "HTMLDivElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "groupOptionFocus",
+              "type": {
+                "text": "HTMLDivElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "searchValue",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "currentCursor",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "currentGroupCursor",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "currentGroupOptionCursor",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "viewMoreTags",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
             },
             {
               "kind": "field",
@@ -3158,8 +3269,9 @@
               "kind": "field",
               "name": "value",
               "type": {
-                "text": "string | undefined"
+                "text": "FSelectOptions | string | undefined"
               },
+              "default": "[]",
               "attribute": "value",
               "reflects": true
             },
@@ -3167,9 +3279,8 @@
               "kind": "field",
               "name": "options",
               "type": {
-                "text": "FSelectArrayOfObjects | undefined"
+                "text": "FSelectOptions"
               },
-              "default": "[]",
               "attribute": "options",
               "reflects": true
             },
@@ -3180,6 +3291,15 @@
                 "text": "string | undefined"
               },
               "attribute": "placeholder",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "optionTemplate",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "option-template",
               "reflects": true
             },
             {
@@ -3223,12 +3343,42 @@
             },
             {
               "kind": "field",
+              "name": "searchable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "searchable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "clear",
               "type": {
                 "text": "boolean | undefined"
               },
               "default": "false",
               "attribute": "clear",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "checkbox",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "checkbox",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selectionLimit",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "selectionLimit",
               "reflects": true
             },
             {
@@ -3257,7 +3407,27 @@
             {
               "kind": "method",
               "name": "clearInputValue",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
               "description": "clear input value on clear icon clicked"
+            },
+            {
+              "kind": "method",
+              "name": "emptySelectedValuesInGroups",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
             },
             {
               "kind": "field",
@@ -3274,7 +3444,7 @@
             },
             {
               "kind": "method",
-              "name": "handleDropDown",
+              "name": "handleDropDownOpen",
               "parameters": [
                 {
                   "name": "e",
@@ -3286,12 +3456,54 @@
             },
             {
               "kind": "method",
+              "name": "handleDropDownClose",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getIndex",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "FSelectSingleOption"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getIndexInGroup",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "FSelectSingleOption"
+                  }
+                },
+                {
+                  "name": "group",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
               "name": "handleOptionSelection",
               "parameters": [
                 {
                   "name": "option",
                   "type": {
-                    "text": "FSelectOptionObject"
+                    "text": "FSelectSingleOption"
                   }
                 },
                 {
@@ -3301,6 +3513,210 @@
                   }
                 }
               ]
+            },
+            {
+              "kind": "method",
+              "name": "handleOptionSelectionGroup",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "FSelectSingleOption"
+                  }
+                },
+                {
+                  "name": "group",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleRemoveGroupSelection",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "FSelectSingleOption"
+                  }
+                },
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "isSelected",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "FSelectSingleOption"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "isSelectedInGroup",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "FSelectSingleOption"
+                  }
+                },
+                {
+                  "name": "group",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleCheckboxInput",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "FSelectSingleOption"
+                  }
+                },
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleCheckboxGroup",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "FSelectSingleOption"
+                  }
+                },
+                {
+                  "name": "group",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleSelectAll",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                },
+                {
+                  "name": "group",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getCheckedValue",
+              "parameters": [
+                {
+                  "name": "group",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "validateProperties"
+            },
+            {
+              "kind": "method",
+              "name": "handleViewMoreTags",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getSlicedSelections",
+              "parameters": [
+                {
+                  "name": "optionList",
+                  "type": {
+                    "text": "FSelectOptionsProp"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "applyInputStyle"
+            },
+            {
+              "kind": "method",
+              "name": "handleKeyDown",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "KeyboardEvent | MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getConcaticateGroupOptions",
+              "parameters": [
+                {
+                  "name": "array",
+                  "type": {
+                    "text": "FSelectOptionsGroup"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "clearFilterSearchValue"
             }
           ],
           "attributes": [
@@ -3346,16 +3762,16 @@
             {
               "name": "value",
               "type": {
-                "text": "string | undefined"
+                "text": "FSelectOptions | string | undefined"
               },
+              "default": "[]",
               "fieldName": "value"
             },
             {
               "name": "options",
               "type": {
-                "text": "FSelectArrayOfObjects | undefined"
+                "text": "FSelectOptions"
               },
-              "default": "[]",
               "fieldName": "options"
             },
             {
@@ -3364,6 +3780,13 @@
                 "text": "string | undefined"
               },
               "fieldName": "placeholder"
+            },
+            {
+              "name": "option-template",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "optionTemplate"
             },
             {
               "name": "icon-left",
@@ -3397,12 +3820,36 @@
               "fieldName": "loading"
             },
             {
+              "name": "searchable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "searchable"
+            },
+            {
               "name": "clear",
               "type": {
                 "text": "boolean | undefined"
               },
               "default": "false",
               "fieldName": "clear"
+            },
+            {
+              "name": "checkbox",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "checkbox"
+            },
+            {
+              "name": "selectionLimit",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "fieldName": "selectionLimit"
             }
           ],
           "superclass": {
@@ -3519,7 +3966,7 @@
               "type": {
                 "text": "FSwitchState | undefined"
               },
-              "default": "\"inherit\"",
+              "default": "\"default\"",
               "attribute": "state",
               "reflects": true
             },
@@ -3570,7 +4017,7 @@
               "type": {
                 "text": "FSwitchState | undefined"
               },
-              "default": "\"inherit\"",
+              "default": "\"default\"",
               "fieldName": "state"
             },
             {
@@ -4107,7 +4554,7 @@
               "type": {
                 "text": "FTextAreaState | undefined"
               },
-              "default": "\"inherit\"",
+              "default": "\"default\"",
               "attribute": "state",
               "reflects": true
             },
@@ -4122,11 +4569,11 @@
             },
             {
               "kind": "field",
-              "name": "row",
+              "name": "rows",
               "type": {
                 "text": "string | undefined"
               },
-              "attribute": "row",
+              "attribute": "rows",
               "reflects": true
             },
             {
@@ -4175,6 +4622,16 @@
               },
               "default": "false",
               "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "readOnly",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "read-only",
               "reflects": true
             },
             {
@@ -4230,7 +4687,7 @@
               "type": {
                 "text": "FTextAreaState | undefined"
               },
-              "default": "\"inherit\"",
+              "default": "\"default\"",
               "fieldName": "state"
             },
             {
@@ -4241,11 +4698,11 @@
               "fieldName": "size"
             },
             {
-              "name": "row",
+              "name": "rows",
               "type": {
                 "text": "string | undefined"
               },
-              "fieldName": "row"
+              "fieldName": "rows"
             },
             {
               "name": "placeholder",
@@ -4284,6 +4741,14 @@
               },
               "default": "false",
               "fieldName": "disabled"
+            },
+            {
+              "name": "read-only",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "readOnly"
             }
           ],
           "superclass": {

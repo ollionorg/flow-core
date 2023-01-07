@@ -1,6 +1,5 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
-import fSpacerAnatomy from "./svg/i-fspacer-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 
@@ -11,7 +10,7 @@ import { useArgs, useEffect, useState } from "@storybook/client-api";
   }}
 />
 
-# f-spacer
+# f-input
 
 <br />
 <br />
@@ -20,7 +19,7 @@ import { useArgs, useEffect, useState } from "@storybook/client-api";
 
 <f-divider></f-divider>
 
-f-spacer is used to create a pseudo space in the layout.
+f-input is an input element.
 
 <br />
 
@@ -44,6 +43,14 @@ f-spacer is used to create a pseudo space in the layout.
         control: "select",
         options: ["text", "number", "email", "password", "url", "tel"],
       },
+      state: {
+        control: "select",
+        options: ["default", "success", "primary", "warning", "danger"],
+      },
+      size: {
+        control: "radio",
+        options: ["small", "medium"],
+      },
       ["icon-left"]: {
         control: "text",
       },
@@ -65,23 +72,10 @@ f-spacer is used to create a pseudo space in the layout.
       readOnly: {
         control: "boolean",
       },
-      ["group-direction"]: {
-        control: "radio",
-        options: ["vertical", "horizontal"],
+      clear: {
+        control: "boolean",
       },
-      ["group-gap"]: {
-        control: "select",
-        options: ["large", "medium", "small", "x-small"],
-      },
-      ["element-state"]: {
-        control: "select",
-        options: ["default", "success", "primary", "warning", "danger"],
-      },
-      ["form-size"]: {
-        control: "radio",
-        options: ["small", "medium"],
-      },
-      ["textarea-value"]: {
+      ["max-length"]: {
         control: "text",
       },
     }}
@@ -91,43 +85,27 @@ f-spacer is used to create a pseudo space in the layout.
       variant: "round",
       category: "fill",
       type: "text",
+      state: "default",
+      size: "small",
       ["icon-left"]: undefined,
       ["icon-right"]: undefined,
       ["prefix"]: undefined,
       ["suffix"]: undefined,
+      ["max-length"]: undefined,
       loading: false,
       disabled: false,
       readOnly: false,
-      ["group-direction"]: "vertical",
-      ["group-gap"]: "large",
-      ["element-state"]: "default",
-      ["form-size"]: "small",
-      ["textarea-value"]: "",
+      clear: false,
     }}
   >
     {(args) => {
       const [_, updateArgs] = useArgs();
-      const [checked, setChecked] = useState("unchecked");
-      const [radioChecked, setRadioChecked] = useState("unselected");
-      const [switchValue, setSwitchValue] = useState("off");
       const handleInput = (e) => {
         updateArgs({ value: e.detail.value });
       };
-      const handleInputTextArea = (e) => {
-        updateArgs({ ["textarea-value"]: e.detail.value });
-      };
-      const handleChecked = (e) => {
-        setChecked(e.detail.value);
-      };
-      const handleRadioChecked = (e) => {
-        setRadioChecked(e.detail.value);
-      };
-      const handleSwitch = (e) => {
-        setSwitchValue(e.detail.value);
-      };
       return html`
-        <f-form size=${args["form-size"]}>
-          <f-form-group direction=${args["group-direction"]} gap=${args["group-gap"]}>
+        <f-div width="100%" align="middle-center" padding="large">
+          <f-div width="80%" align="middle-center">
             <f-input
               value=${args.value}
               .placeholder=${args.placeholder}
@@ -139,293 +117,878 @@ f-spacer is used to create a pseudo space in the layout.
               icon-right=${args["icon-right"]}
               prefix=${args["prefix"]}
               suffix=${args["suffix"]}
-              state=${args["element-state"]}
-              can-duplicate=${true}
-              max-length="100"
+              state=${args.state}
+              max-length=${args["max-length"]}
               ?loading=${args.loading}
               ?disabled=${args.disabled}
-              ?clear=${true}
+              ?clear=${args.clear}
               ?read-only=${args.readOnly}
+              .size=${args.size}
             >
-              <f-div slot="label" padding="none" gap="none">Label New *</f-div>
-              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
-              <f-text slot="help" variant="para" size="small">description</f-text>
-            </f-input>
-            <f-input
-              value=${args.value}
-              .placeholder=${args.placeholder}
-              @input=${handleInput}
-              .variant=${args.variant}
-              .category=${args.category}
-              .type=${args.type}
-              icon-left=${args["icon-left"]}
-              icon-right=${args["icon-right"]}
-              prefix=${args["prefix"]}
-              suffix=${args["suffix"]}
-              state=${args["element-state"]}
-              can-duplicate=${true}
-              max-length="100"
-            >
-              <f-div slot="label" padding="none" gap="none">Label New *</f-div>
-              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
-              <f-text slot="help" variant="para" size="small">description</f-text>
-            </f-input>
-            <f-input
-              value=${args.value}
-              .placeholder=${args.placeholder}
-              @input=${handleInput}
-              .variant=${args.variant}
-              .category=${args.category}
-              .type=${args.type}
-              icon-left=${args["icon-left"]}
-              icon-right=${args["icon-right"]}
-              prefix=${args["prefix"]}
-              suffix=${args["suffix"]}
-              state=${args["element-state"]}
-              can-duplicate=${true}
-              max-length="100"
-            >
-              <f-div slot="label" padding="none" gap="none">Label New *</f-div>
-              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
-            </f-input>
-          </f-form-group>
-          <f-form-group gap=${args["group-gap"]}>
-            <f-text variant="para" size="small">Label *</f-text>
-            <f-select
-              .variant=${args.variant}
-              .category=${args.category}
-              placeholder="Select an option"
-              type="multiple"
-              state=${args["element-state"]}
-              .options=${[
-                { icon: "i-home", title: "option 1" },
-                { icon: "i-user", title: "option 2" },
-                { icon: "i-setting", title: "option 3" },
-                { icon: "i-setting", title: "option 4" },
-                { icon: "i-setting", title: "option 5" },
-                { icon: "i-setting", title: "option 6" },
-                { icon: "i-setting", title: "option 7" },
-                { icon: "i-setting", title: "option 8" },
-                { icon: "i-setting", title: "option 9" },
-                { icon: "i-setting", title: "option 10" },
-                { icon: "i-setting", title: "option 11" },
-                { icon: "i-setting", title: "option 12" },
-              ]}
-              icon-left="i-app"
-            ></f-select>
-            <f-input
-              value=${args.value}
-              .placeholder=${args.placeholder}
-              @input=${handleInput}
-              .variant=${args.variant}
-              .category=${args.category}
-              .type=${args.type}
-              icon-left=${args["icon-left"]}
-              icon-right=${args["icon-right"]}
-              prefix=${args["prefix"]}
-              suffix=${args["suffix"]}
-              state=${args["element-state"]}
-              can-duplicate=${true}
-              max-length="100"
-            >
-              <f-div slot="label" padding="none" gap="none">Label New *</f-div>
-              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
-              <f-text slot="help" variant="para" size="small">description</f-text>
-            </f-input>
-            <f-input
-              value=${args.value}
-              .placeholder=${args.placeholder}
-              @input=${handleInput}
-              .variant=${args.variant}
-              .category=${args.category}
-              .type=${args.type}
-              icon-left=${args["icon-left"]}
-              icon-right=${args["icon-right"]}
-              prefix=${args["prefix"]}
-              suffix=${args["suffix"]}
-              state=${args["element-state"]}
-              can-duplicate=${true}
-              max-length="100"
-            >
-              <f-div slot="label" padding="none" gap="none">Label New *</f-div>
-              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
-              <f-text slot="help" variant="para" size="small">description</f-text>
-            </f-input>
-            <f-input
-              value=${args.value}
-              .placeholder=${args.placeholder}
-              @input=${handleInput}
-              .variant=${args.variant}
-              .category=${args.category}
-              .type=${args.type}
-              icon-left=${args["icon-left"]}
-              icon-right=${args["icon-right"]}
-              prefix=${args["prefix"]}
-              suffix=${args["suffix"]}
-              state=${args["element-state"]}
-              can-duplicate=${true}
-              max-length="100"
-            >
-              <f-div slot="label" padding="none" gap="none">Label New *</f-div>
-              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
-              <f-text slot="help" variant="para" size="small">description</f-text>
-            </f-input>
-            <f-div padding="small" state="tertiary" clickable variant="curved">
-              <f-checkbox
-                value=${checked}
-                @input=${handleChecked}
-                state=${args["element-state"]}
-                ?disabled=${args.disabled}
-              >
-                <f-text
-                  slot="label"
-                  variant="para"
-                  size="small"
-                  @click=${() => {
-                    if (checked === "checked") {
-                      setChecked("unchecked");
-                    } else {
-                      setChecked("checked");
-                    }
-                  }}
-                  >Label (value="${checked}") Label (value="${checked}") Label (value="${checked}")
-                  Label (value="${checked}") *</f-text
-                >
-                <f-div slot="description" gap="none" padding="none">
-                  States are used to communicate purpose and connotations. For example, a red color
-                  connotes danger, whereas a green color connotes success and so on. States are used
-                  to communicate purpose and connotations. For example, a red color connotes danger,
-                  whereas a green color connotes success and so on. States are used to communicate
-                  purpose and connotations. For example, a red color connotes danger, whereas a
-                  green color connotes success and so on.
-                </f-div>
-                <f-div slot="help" padding="none" gap="none">
-                  States are used to communicate purpose and connotations. For example, a red color
-                  connotes danger, whereas a green color connotes success and so on.
-                </f-div>
-              </f-checkbox>
-            </f-div>
-            <f-div padding="small" state="tertiary" clickable variant="curved">
-              <f-radio
-                value=${radioChecked}
-                @input=${handleRadioChecked}
-                state=${args["element-state"]}
-                ?disabled=${args.disabled}
-              >
-                <f-text
-                  slot="label"
-                  variant="para"
-                  size="small"
-                  @click=${() => {
-                    if (radioChecked === "selected") {
-                      setRadioChecked("unselected");
-                    } else {
-                      setRadioChecked("selected");
-                    }
-                  }}
-                  >Label (value="${radioChecked}") *</f-text
-                >
-                <f-div slot="description" gap="none" padding="none">
-                  States are used to communicate purpose and connotations.
-                </f-div>
-                <f-div slot="help" padding="none" gap="none">
-                  States are used to communicate purpose and connotations. For example, a red color
-                  connotes danger, whereas a green color connotes success and so on.
-                </f-div>
-              </f-radio>
-            </f-div>
-            <f-checkbox
-              size="small"
-              value="indeterminate"
-              state=${args["element-state"]}
-              ?disabled=${args.disabled}
-            >
-              <f-div slot="label" padding="none" align="middle-center">
-                <f-text variant="para" size="small">Banana</f-text>
-              </f-div>
-              <f-div slot="description" gap="none" padding="none">
-                <f-text variant="para" size="small" state="secondary"
-                  >States are used to communicate purpose and connotations. For example, a red color
-                  connotes danger, whereas a green color connotes success and so on.
-                </f-text>
-              </f-div>
-            </f-checkbox>
-            <f-radio state=${args["element-state"]} ?disabled=${args.disabled}>
-              <f-div slot="label" padding="none">
-                <f-text variant="para" size="large">Banana</f-text>
-              </f-div>
-            </f-radio>
-            <f-switch
-              value=${switchValue}
-              @input=${handleSwitch}
-              state=${args["element-state"]}
-              .disabled=${args.disabled}
-            >
-              <f-div padding="none" align="middle-center" slot="label">
-                <f-text variant="para" size="small">Toggle ${switchValue}</f-text>
-              </f-div>
-              <f-div padding="none" align="middle-center" slot="help">
-                <f-text variant="para" size="small">This is helper text</f-text>
-              </f-div>
-            </f-switch>
-            <f-text-area
-              variant="curved-fill"
-              placeholder="This is a Text Area"
-              resizable=${true}
-              clear=${true}
-              state=${args["element-state"]}
-              value=${args["textarea-value"]}
-              @input=${handleInputTextArea}
-              max-length="10"
-              ?disabled=${args.disabled}
-            >
-              <f-text slot="label" variant="para" size="small">Label *</f-text>
-              <f-text slot="description" variant="para" size="small">This is subtext</f-text>
-              <f-text slot="help" variant="para" size="small">This is subtext</f-text>
-            </f-text-area>
-          </f-form-group>
-          <f-form-group direction="vertical" gap=${args["group-gap"]}>
-            <f-div padding="none">
-              <f-text variant="heading" size="small">Favourite Fruit</f-text>
-            </f-div>
-            <f-form-group direction="horizontal" gap=${args["group-gap"]}>
-              <f-checkbox
-                value=${checked}
-                @input=${handleChecked}
-                state=${args["element-state"]}
-                ?disabled=${args.disabled}
-              >
-                <f-div slot="label" padding="none" align="middle-center">
-                  <f-text variant="para" size="small">Apple</f-text>
-                </f-div>
-                <f-text slot="help" variant="para" size="small">Please help!!!</f-text>
-              </f-checkbox>
-              <f-checkbox
-                value=${checked}
-                @input=${handleChecked}
-                state=${args["element-state"]}
-                ?disabled=${args.disabled}
-              >
-                <f-div slot="label" padding="none" align="middle-center">
-                  <f-text variant="para" size="small">Banana</f-text>
-                </f-div>
-                <f-text slot="help" variant="para" size="small">Please help!!!</f-text>
-              </f-checkbox>
-              <f-checkbox
-                value=${checked}
-                @input=${handleChecked}
-                state=${args["element-state"]}
-                ?disabled=${args.disabled}
-              >
-                <f-div slot="label" padding="none" align="middle-center">
-                  <f-text variant="para" size="small">Orange</f-text>
-                </f-div>
-                <f-text slot="help" variant="para" size="small">Please help!!!</f-text>
-              </f-checkbox>
-            </f-form-group>
-          </f-form-group>
-        </f-form>
+              <f-div slot="label" padding="none" gap="none">Label</f-div>
+              <f-div slot="description" padding="none" gap="none">This is a Description</f-div>
+              <f-text slot="help" variant="para" size="small">This is a Subtext</f-text>
+            </f-input></f-div
+          ></f-div
+        >
       `;
     }}
   </Story>
 </Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider></f-divider>
+
+<br />
+
+## variant
+
+<f-divider></f-divider>
+
+Variants are various visual representations of an input field.
+
+<Canvas>
+  <Story
+    name="variant"
+    parameters={{
+      docs: {
+        inlineStories: false,
+        iframeHeight: 200,
+      },
+    }}
+  >
+    {(args) => {
+      const variants = ["curved", "round", "block"];
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="middle-center" padding="large" gap="medium">
+          ${variants.map(
+            (item) => html`<f-div>
+          <f-input
+            value=${value}
+            placeholder="Write here"
+            @input=${handleValue}
+            .variant=${item}
+            size="medium"
+          >
+             <f-div slot="label" padding="none" gap="none">Label (variant="${item}")</f-div>
+            <f-div slot="description" padding="none" gap="none">This is a ${item} variant</f-div>
+            <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
+          </f-input></f-div
+        ></f-div
+      >`
+          )}
+        </f-div>
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>curved</td>
+      <td>border radius of 4px</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>round</td>
+      <td>border radius of 22px</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>block</td>
+      <td>works well with cateogry="transparent"</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## category
+
+<f-divider></f-divider>
+
+Category decides the background of f-input
+
+<Canvas>
+  <Story
+    name="category"
+    parameters={{
+      docs: {
+        inlineStories: false,
+        iframeHeight: 200,
+      },
+    }}
+  >
+    {(args) => {
+      const categories = ["fill", "outline", "transparent"];
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="middle-center" padding="large" gap="medium">
+          ${categories.map(
+            (item) => html`<f-div>
+          <f-input
+            value=${value}
+            placeholder="Write here"
+            @input=${handleValue}
+            .category=${item}
+            size="medium"
+            .variant=${item === "transparent" ? "block" : "curved"}
+          >
+            <f-div slot="label" padding="none" gap="none">Label (category="${item}")</f-div>
+            <f-div slot="description" padding="none" gap="none">This is a ${item} category</f-div>
+            <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
+          </f-input></f-div
+        ></f-div
+      >`
+          )}
+        </f-div>
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>fill</td>
+      <td>background is filled</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>outline</td>
+      <td>empty background with border</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>transparent</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## type
+
+<f-divider></f-divider>
+
+The type attribute specifies the type of `<f-input>` element to display.
+
+<Canvas>
+  <Story
+    name="type"
+    parameters={{
+      docs: {
+        inlineStories: false,
+        iframeHeight: 400,
+      },
+    }}
+  >
+    {(args) => {
+      const types = [
+        ["text", "number", "email"],
+        ["password", "tel", "url"],
+      ];
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div direction="column" gap="medium">
+          ${types.map(
+            (item) => html` <f-div align="middle-center" padding="large" gap="medium">
+              ${item.map(
+                (type) => html`<f-div
+                  ><f-input
+                    value=${value}
+                    placeholder="Write here"
+                    @input=${handleValue}
+                    type=${type}
+                    size="medium"
+                  >
+                    <f-div slot="label" padding="none" gap="none">Label (type="${type}")</f-div>
+                    <f-div slot="description" padding="none" gap="none"
+                      >This is a ${type} type</f-div
+                    >
+                    <f-text slot="help" variant="para" size="small"
+                      >This is a Subtext (Helper Text)</f-text
+                    >
+                  </f-input></f-div
+                >`
+              )}
+            </f-div>`
+          )}
+        </f-div>
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>text</td>
+      <td>Takes any text as input. </td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>number</td>
+      <td>Takes any number as input.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>email</td>
+      <td>Defines a field for an e-mail address.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>password</td>
+      <td>Defines a field for a password. Masks the characters</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>tel</td>
+      <td>Defines a field for a telephone number.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>url</td>
+      <td>Defines a field for URL. </td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## value
+
+Defines the value of an f-input. Validation rules are applied on the value depending on the type property of the f-text-input.
+
+<Canvas>
+  <Story
+    name="value"
+    parameters={{
+      docs: {
+        inlineStories: false,
+        iframeHeight: 200,
+      },
+    }}
+  >
+    {(args) => {
+      const [value, setValue] = useState("Value Here");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="middle-center" padding="large">
+          <f-div width="80%" align="middle-center">
+            <f-input value=${value} placeholder="Write here" @input=${handleValue} size="medium">
+              <f-div slot="label" padding="none" gap="none">Label</f-div>
+              <f-div slot="description" padding="none" gap="none"
+                >This is a demo for value prop</f-div
+              >
+              <f-text slot="help" variant="para" size="small"
+                >This is a Subtext (Helper Text)</f-text
+              >
+            </f-input></f-div
+          ></f-div
+        >
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<br />
+
+## placeholder
+
+Defines the placeholder text for f-text-input
+
+<Canvas>
+  <Story
+    name="placeholder"
+    parameters={{
+      docs: {
+        inlineStories: false,
+        iframeHeight: 200,
+      },
+    }}
+  >
+    {(args) => {
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="middle-center" padding="large">
+          <f-div width="80%" align="middle-center">
+            <f-input
+              value=${value}
+              placeholder="This is the placeholder"
+              @input=${handleValue}
+              size="medium"
+            >
+              <f-div slot="label" padding="none" gap="none">Label</f-div>
+              <f-div slot="description" padding="none" gap="none"
+                >This is a demo for placeholder</f-div
+              >
+              <f-text slot="help" variant="para" size="small"
+                >This is a Subtext (Helper Text)</f-text
+              >
+            </f-input></f-div
+          ></f-div
+        >
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<br />
+
+## size
+
+<f-divider></f-divider>
+
+f-input can have 2 sizes.
+
+<p class="note-section">Note: By default size is inherited by the parent f-form.</p>
+
+<Canvas>
+  <Story
+    name="size"
+    parameters={{
+      docs: {
+        inlineStories: false,
+        iframeHeight: 200,
+      },
+    }}
+  >
+    {(args) => {
+      const sizes = ["small", "medium"];
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="top-center" padding="large" gap="medium">
+          ${sizes.map(
+            (item) => html`<f-div>
+          <f-input
+            value=${value}
+            placeholder="Write here"
+            @input=${handleValue}
+            size=${item}
+          >
+            <f-div slot="label" padding="none" gap="none">Label (size="${item}")</f-div>
+            <f-div slot="description" padding="none" gap="none">This is a ${item} size</f-div>
+            <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
+          </f-input></f-div
+        ></f-div
+      >`
+          )}
+        </f-div>
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>small</td>
+      <td>height="28px"</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>medium</td>
+      <td>eheight="36px"</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider></f-divider>
+
+States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
+
+<Canvas>
+  <Story
+    name="state"
+    parameters={{
+      docs: {
+        inlineStories: false,
+        iframeHeight: 400,
+      },
+    }}
+  >
+    {(args) => {
+      const states = [
+        ["default", "primary", "success"],
+        ["danger", "warning", "default"],
+      ];
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div direction="column" gap="medium">
+          ${states.map(
+            (item) => html` <f-div align="middle-center" padding="large" gap="medium">
+              ${item.map(
+                (state) => html`<f-div
+                  ><f-input
+                    value=${value}
+                    placeholder="Write here"
+                    @input=${handleValue}
+                    size="medium"
+                    state=${state}
+                  >
+                    <f-div slot="label" padding="none" gap="none">Label (state="${state}")</f-div>
+                    <f-div slot="description" padding="none" gap="none"
+                      >This is a ${state} state</f-div
+                    >
+                    <f-text slot="help" variant="para" size="small"
+                      >This is a Subtext (Helper Text)</f-text
+                    >
+                  </f-input></f-div
+                >`
+              )}
+            </f-div>`
+          )}
+        </f-div>
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>default</td>
+      <td></td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>primary</td>
+      <td></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>success</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>danger</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>warning</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## icon-left
+
+Icon-left enables an icon on the left of the input value.
+
+<p class="note-section">
+  Note: If f-input has a prefix also, then icon-left is placed on the left of the prefix.
+</p>
+
+<Canvas>
+  <Story
+    name="icon-left"
+    parameters={{
+      docs: {
+        inlineStories: false,
+        iframeHeight: 200,
+      },
+    }}
+  >
+    {(args) => {
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="middle-center" padding="large">
+          <f-div width="80%" align="middle-center">
+            <f-input
+              value=${value}
+              placeholder="Write here"
+              @input=${handleValue}
+              size="medium"
+              icon-left="i-app"
+            >
+              <f-div slot="label" padding="none" gap="none">Label</f-div>
+              <f-div slot="description" padding="none" gap="none"
+                >This is a demo for icon-left="i-app" prop</f-div
+              >
+              <f-text slot="help" variant="para" size="small"
+                >This is a Subtext (Helper Text)</f-text
+              >
+            </f-input></f-div
+          ></f-div
+        >
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<br />
+
+## icon-right
+
+Icon-right enables an icon on the right of the input value.
+
+<p class="note-section">
+  Note: If f-input has a suffix also, then icon-right is placed on the right of the suffix.
+</p>
+
+<Canvas>
+  <Story
+    name="icon-right"
+    parameters={{
+      docs: {
+        inlineStories: false,
+        iframeHeight: 200,
+      },
+    }}
+  >
+    {(args) => {
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="middle-center" padding="large">
+          <f-div width="80%" align="middle-center">
+            <f-input
+              value=${value}
+              placeholder="Write here"
+              @input=${handleValue}
+              size="medium"
+              icon-left="i-app"
+              icon-right="i-delete"
+            >
+              <f-div slot="label" padding="none" gap="none">Label</f-div>
+              <f-div slot="description" padding="none" gap="none"
+                >This is a demo for icon-right="i-app" prop</f-div
+              >
+              <f-text slot="help" variant="para" size="small"
+                >This is a Subtext (Helper Text)</f-text
+              >
+            </f-input></f-div
+          ></f-div
+        >
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<br />
+
+## prefix
+
+Prefix property enables a string before the input value.
+
+<Canvas>
+  <Story
+    name="prefix"
+    parameters={{
+      docs: {
+        inlineStories: false,
+        iframeHeight: 200,
+      },
+    }}
+  >
+    {(args) => {
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="middle-center" padding="large">
+          <f-div width="80%" align="middle-center">
+            <f-input
+              value=${value}
+              placeholder="Write here"
+              @input=${handleValue}
+              size="medium"
+              icon-left="i-app"
+              icon-right="i-delete"
+              prefix="+91"
+            >
+              <f-div slot="label" padding="none" gap="none">Label</f-div>
+              <f-div slot="description" padding="none" gap="none">This is a demo for prefix</f-div>
+              <f-text slot="help" variant="para" size="small"
+                >This is a Subtext (Helper Text)</f-text
+              >
+            </f-input></f-div
+          ></f-div
+        >
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<br />
+
+## suffix
+
+Suffix property enables a string on the right side of the input box.
+
+<Canvas>
+  <Story
+    name="suffix"
+    parameters={{
+      docs: {
+        inlineStories: false,
+        iframeHeight: 200,
+      },
+    }}
+  >
+    {(args) => {
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="middle-center" padding="large">
+          <f-div width="80%" align="middle-center">
+            <f-input
+              value=${value}
+              placeholder="Write here"
+              @input=${handleValue}
+              size="medium"
+              icon-left="i-app"
+              icon-right="i-delete"
+              prefix="+91"
+              suffix="Delete"
+            >
+              <f-div slot="label" padding="none" gap="none">Label</f-div>
+              <f-div slot="description" padding="none" gap="none">This is a demo for prefix</f-div>
+              <f-text slot="help" variant="para" size="small"
+                >This is a Subtext (Helper Text)</f-text
+              >
+            </f-input></f-div
+          ></f-div
+        >
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<br />
+
+## max-length
+
+This shows the character count while typing and auto limits after reaching the max length.
+
+<Canvas>
+  <Story
+    name="max-length"
+    parameters={{
+      docs: {
+        inlineStories: false,
+        iframeHeight: 200,
+      },
+    }}
+  >
+    {(args) => {
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="middle-center" padding="large">
+          <f-div width="80%" align="middle-center">
+            <f-input
+              value=${value}
+              placeholder="Write here"
+              @input=${handleValue}
+              size="medium"
+              icon-left="i-app"
+              icon-right="i-delete"
+              prefix="+91"
+              suffix="Delete"
+              max-length="10"
+            >
+              <f-div slot="label" padding="none" gap="none">Label</f-div>
+              <f-div slot="description" padding="none" gap="none">This is a demo for prefix</f-div>
+              <f-text slot="help" variant="para" size="small"
+                >This is a Subtext (Helper Text)</f-text
+              >
+            </f-input></f-div
+          ></f-div
+        >
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<br />
+
+## Flags
+
+<f-divider></f-divider>
+
+<br />
+
+<Canvas>
+  <Story
+    name="Flags"
+    parameters={{
+      docs: {
+        inlineStories: false,
+        iframeHeight: 200,
+      },
+    }}
+  >
+    {(args) => {
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="top-center" padding="large" gap="medium">
+          ${[0, 1, 2, 3].map(
+            (item) => html`<f-div>
+          <f-input
+            value=${value}
+            placeholder="Write here"
+            @input=${handleValue}
+            size="medium"
+            ?loading=${item === 0 ? true : false}
+            ?disabled=${item === 1 ? true : false}
+            ?clear=${item === 2 ? true : false}
+            ?read-only=${item === 3 ? true : false}
+          >
+            <f-div slot="label" padding="none" gap="none">${
+              item === 0
+                ? "Loader"
+                : item === 1
+                ? "Disabled"
+                : item === 2
+                ? "Clear Icon on Type"
+                : "Readonly"
+            }</f-div>
+            <f-div slot="description" padding="none" gap="none">This is a $${
+              item === 0
+                ? "Loader"
+                : item === 1
+                ? "Disabled"
+                : item === 2
+                ? "Clear Icon on Type"
+                : "Readonly"
+            } Flag</f-div>
+            <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
+          </f-input></f-div
+        ></f-div
+      >`
+          )}
+        </f-div>
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>loading</td>
+      <td>Loader appears on right ride of input box.</td>
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+    <tr>
+      <td>disabled</td>
+      <td>Opacity is set to 50% in disabled state in disabled mode.</td>
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+    <tr>
+      <td>clear</td>
+      <td>
+        Displays a close icon-button on the right side of the input that allows the user to clear
+        the input value
+      </td>
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+    <tr>
+      <td>read-only</td>
+      <td>Only Text could be read, can't be edited</td>
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ArgsTable of={"f-input"} />

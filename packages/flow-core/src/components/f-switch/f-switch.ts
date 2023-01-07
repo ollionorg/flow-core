@@ -4,7 +4,7 @@ import eleStyle from "./f-switch.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 
-export type FSwitchState = "primary" | "default" | "success" | "warning" | "danger" | "inherit";
+export type FSwitchState = "primary" | "default" | "success" | "warning" | "danger";
 
 @customElement("f-switch")
 export class FSwitch extends FRoot {
@@ -23,7 +23,7 @@ export class FSwitch extends FRoot {
    * @attribute States are used to communicate purpose and connotations.
    */
   @property({ reflect: true, type: String })
-  state?: FSwitchState = "inherit";
+  state?: FSwitchState = "default";
 
   /**
    * @attribute f-switch can have 2 sizes.
@@ -62,6 +62,7 @@ export class FSwitch extends FRoot {
       direction="column"
       width="hug-content"
       class="f-switch-section"
+      size=${this.size}
     >
       <f-div
         padding="none"

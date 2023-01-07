@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { customElement, property, query, state } from "lit/decorators.js";
 import eleStyle from "./f-select.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -7,18 +7,25 @@ import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
+import _ from "lodash";
+import getComputedHTML from "../../utils/get-computed-html";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 export type FSelectState = "primary" | "default" | "success" | "warning" | "danger" | "inherit";
 export type FSelectHeightProp = `${number}px` | `${number}%` | `${number}vh`;
 export type FSelectWidthProp = "fill-container" | `${number}px` | `${number}%` | `${number}vw`;
-export type FSelectArrayOfStrings = String[];
+export type FSelectArrayOfStrings = string[];
 export type FSelectOptionObject = {
   icon?: string;
   title: string;
+  data?: Record<string, unknown>;
 };
+export type FSelectOptionsGroup = { [key: string]: FSelectOptionsProp };
 export type FSelectArrayOfObjects = FSelectOptionObject[];
-export type FSelectOptionsProp = FSelectArrayOfObjects | FSelectArrayOfStrings;
+export type FSelectArray = FSelectOptionObject[] | string[];
+export type FSelectOptionsProp = FSelectOptionObject[] | string[];
 export type FSelectSingleOption = FSelectOptionObject | string;
+export type FSelectOptions = FSelectOptionsProp | FSelectOptionsGroup;
 
 @customElement("f-select")
 export class FSelect extends FRoot {
@@ -37,7 +44,52 @@ export class FSelect extends FRoot {
    * @attribute local state for dropdown open and close boolean
    */
   @state({})
-  selectedOptions: FSelectArrayOfObjects = [];
+  selectedOptions: FSelectOptions = [];
+
+  /**
+   * @attribute local state for dropdown open and close boolean
+   */
+  @state({})
+  filteredOptions: FSelectOptions = [];
+
+  @query(".f-select")
+  inputElement!: HTMLInputElement;
+
+  @query(".f-select-wrapper")
+  wrapperElement!: HTMLDivElement;
+
+  @query("#option-0")
+  optionFocus!: HTMLDivElement;
+
+  @query("#group-0")
+  groupFocus!: HTMLDivElement;
+
+  @query("#group-0-option-0")
+  groupOptionFocus!: HTMLDivElement;
+
+  /**
+   * @attribute local state for dropdown open and close boolean
+   */
+  @state({})
+  searchValue = "";
+
+  /**
+   * @attribute local state for dropdown open and close boolean
+   */
+  @state({})
+  currentCursor = 0;
+
+  @state({})
+  currentGroupCursor = 0;
+
+  @state({})
+  currentGroupOptionCursor = 0;
+
+  /**
+   * @attribute local state for dropdown open and close boolean
+   */
+  @state({})
+  viewMoreTags = false;
 
   /**
    * @attribute Categories are various visual representations of an input field.
@@ -72,20 +124,26 @@ export class FSelect extends FRoot {
   /**
    * @attribute Defines the value of an f-select. Validation rules are applied on the value depending on the type property of the f-text-input.
    */
-  @property({ reflect: true, type: String })
-  value?: string;
+  @property({ reflect: true, type: Object })
+  value?: FSelectOptions | string = [];
 
   /**
    * @attribute Defines the placeholder text for f-text-input
    */
-  @property({ reflect: true, type: Array })
-  options?: FSelectArrayOfObjects = [];
+  @property({ reflect: true, type: Object })
+  options!: FSelectOptions;
 
   /**
    * @attribute Defines the placeholder text for f-text-input
    */
   @property({ reflect: true, type: String })
   placeholder?: string;
+
+  /**
+   * @attribute Defines the placeholder text for f-text-input
+   */
+  @property({ reflect: true, type: String, attribute: "option-template" })
+  optionTemplate?: string;
 
   /**
    * @attribute Icon-left enables an icon on the left of the input value.
@@ -115,7 +173,25 @@ export class FSelect extends FRoot {
    * @attribute Loader icon replaces the content of the button .
    */
   @property({ reflect: true, type: Boolean })
+  searchable?: boolean = false;
+
+  /**
+   * @attribute Loader icon replaces the content of the button .
+   */
+  @property({ reflect: true, type: Boolean })
   clear?: boolean = false;
+
+  /**
+   * @attribute Loader icon replaces the content of the button .
+   */
+  @property({ reflect: true, type: Boolean })
+  checkbox?: boolean = false;
+
+  /**
+   * @attribute Loader icon replaces the content of the button .
+   */
+  @property({ reflect: true, type: Number })
+  selectionLimit = 1;
 
   /**
    * fetch read-only value from nearest parent f-field element
@@ -136,26 +212,70 @@ export class FSelect extends FRoot {
    */
   handleInput(e: InputEvent) {
     e.stopPropagation();
-    const event = new CustomEvent("input", {
-      detail: {
-        value: (e.target as HTMLInputElement)?.value,
-      },
-    });
-    this.value = (e.target as HTMLInputElement)?.value;
-    this.dispatchEvent(event);
+    e.preventDefault();
+    this.openDropdown = true;
+    if (this.searchable) {
+      this.searchValue = (e.target as HTMLInputElement)?.value;
+      if (Array.isArray(this.options)) {
+        this.filteredOptions = (this.options as FSelectArrayOfObjects)?.filter(
+          (item: FSelectSingleOption) =>
+            typeof item === "string"
+              ? item.toLowerCase().includes((e.target as HTMLInputElement)?.value.toLowerCase())
+              : (item as FSelectOptionObject).title
+                  .toLowerCase()
+                  .includes((e.target as HTMLInputElement)?.value.toLowerCase())
+        );
+      } else {
+        const filteredOptionsCloned = _.cloneDeep(this.filteredOptions);
+        Object.keys(this.options).forEach((item) => {
+          (filteredOptionsCloned as FSelectOptionsGroup)[item] = (
+            (this.options as FSelectOptionsGroup)[item] as FSelectArrayOfObjects
+          )?.filter((obj: FSelectSingleOption) =>
+            typeof obj === "string"
+              ? obj.toLowerCase().includes((e.target as HTMLInputElement)?.value.toLowerCase())
+              : (obj as FSelectOptionObject).title
+                  .toLowerCase()
+                  .includes((e.target as HTMLInputElement)?.value.toLowerCase())
+          );
+        });
+        this.filteredOptions = filteredOptionsCloned;
+      }
+      this.requestUpdate();
+    }
   }
 
   /**
    * clear input value on clear icon clicked
    */
-  clearInputValue() {
+  clearInputValue(e: MouseEvent) {
+    e.stopPropagation();
     const event = new CustomEvent("input", {
       detail: {
-        value: "",
+        value: [],
       },
     });
-    this.value = "";
+    this.selectedOptions = [];
+    this.value = [];
+    this.clearFilterSearchValue();
     this.dispatchEvent(event);
+    this.requestUpdate();
+  }
+
+  emptySelectedValuesInGroups(e: MouseEvent) {
+    e.stopPropagation();
+    const event = new CustomEvent("input", {
+      detail: {
+        value: Array.isArray(this.selectedOptions)
+          ? []
+          : Object.keys(this.selectedOptions).forEach((group) => {
+              (this.selectedOptions as FSelectOptionsGroup)[group] = [];
+            }),
+      },
+    });
+
+    this.clearFilterSearchValue();
+    this.dispatchEvent(event);
+    this.requestUpdate();
   }
 
   /**
@@ -169,111 +289,562 @@ export class FSelect extends FRoot {
 
   applyHeight() {
     if (this.openDropdown)
-      return `max-height:${this.height}; transition: max-height 0.25s ease-in 0s;`;
-    else return `max-height:0px; transition: max-height 0.25s ease-in 0s;`;
+      return `max-height:${this.height}; transition: max-height 0.25s ease-in 0s; top: calc(${this.wrapperElement?.offsetHeight}px + 4px);`;
+    else
+      return `max-height:0px; transition: max-height 0.25s ease-in 0s; top: calc(${this.wrapperElement?.offsetHeight}px + 4px);`;
   }
 
   applyWidth() {
     return `width:${this.width === "fill-container" ? "100%" : this.width};`;
   }
 
-  handleDropDown(e: MouseEvent) {
-    this.openDropdown = !this.openDropdown;
+  handleDropDownOpen(e: MouseEvent) {
+    this.openDropdown = true;
+    const event = new CustomEvent("input", {
+      detail: {
+        value: this.selectedOptions,
+      },
+    });
+    this.dispatchEvent(event);
+    this?.inputElement?.focus();
     e.stopPropagation();
   }
 
-  handleOptionSelection(option: FSelectOptionObject, e: MouseEvent) {
-    if (this.type === "single") {
-      this.selectedOptions = [option];
+  handleDropDownClose(e: MouseEvent) {
+    this.openDropdown = false;
+    this.clearFilterSearchValue();
+    this.currentCursor = 0;
+    const event = new CustomEvent("input", {
+      detail: {
+        value: this.selectedOptions,
+      },
+    });
+    this.dispatchEvent(event);
+    this.requestUpdate();
+    e.stopPropagation();
+  }
+
+  getIndex(option: FSelectSingleOption) {
+    if (typeof option === "string") {
+      return (this.selectedOptions as FSelectArrayOfStrings).indexOf(option);
     } else {
-      this.selectedOptions.indexOf(option) === -1
-        ? this.selectedOptions.push(option)
-        : this.selectedOptions.splice(this.selectedOptions.indexOf(option), 1);
-      e.stopPropagation();
+      return (this.selectedOptions as FSelectOptionsProp).findIndex(
+        (item) => (item as FSelectOptionObject)?.title === (option as FSelectOptionObject)?.title
+      );
     }
+  }
+
+  getIndexInGroup(option: FSelectSingleOption, group: string) {
+    if ((this.selectedOptions as FSelectOptionsGroup)[group]) {
+      return (
+        (this.selectedOptions as FSelectOptionsGroup)[group] as FSelectArrayOfObjects
+      ).findIndex((item) => JSON.stringify(item) === JSON.stringify(option));
+    } else {
+      return -1;
+    }
+  }
+
+  handleOptionSelection(option: FSelectSingleOption, e: MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (Array.isArray(this.options)) {
+      if (this.type === "single") {
+        !this.isSelected(option)
+          ? ((this.selectedOptions as FSelectArrayOfObjects) = [option as FSelectOptionObject])
+          : (this.selectedOptions as FSelectArrayOfObjects).splice(this.getIndex(option), 1);
+      } else {
+        !this.isSelected(option)
+          ? (this.selectedOptions as FSelectArrayOfObjects).push(option as FSelectOptionObject)
+          : (this.selectedOptions as FSelectArrayOfObjects).splice(this.getIndex(option), 1);
+      }
+    }
+    const event = new CustomEvent("input", {
+      detail: {
+        value:
+          this.type === "multiple"
+            ? this.selectedOptions
+            : (this.selectedOptions as FSelectArrayOfObjects)[0],
+      },
+    });
+    this.dispatchEvent(event);
+    this.requestUpdate();
+  }
+
+  handleOptionSelectionGroup(option: FSelectSingleOption, group: string, e: MouseEvent) {
+    e.stopPropagation();
+    e.preventDefault();
+    let selectedOptionsInGroup = (this.selectedOptions as FSelectOptionsGroup)[group];
+    if (this.type === "single") {
+      selectedOptionsInGroup = [option as string];
+    } else {
+      console.log(option, group, this.isSelectedInGroup(option, group));
+      !this.isSelectedInGroup(option, group)
+        ? !selectedOptionsInGroup
+          ? (this.selectedOptions = {
+              ...this.selectedOptions,
+              [group]: [option as FSelectOptionObject],
+            })
+          : (selectedOptionsInGroup as FSelectArrayOfObjects).push(option as FSelectOptionObject)
+        : selectedOptionsInGroup.splice(this.getIndexInGroup(option, group), 1);
+    }
+    console.log(this.selectedOptions);
+    const event = new CustomEvent("input", {
+      detail: {
+        value:
+          this.type === "multiple"
+            ? this.selectedOptions
+            : (this.selectedOptions as FSelectOptionsGroup)[group][0],
+      },
+    });
+    this.dispatchEvent(event);
+    this.requestUpdate();
+  }
+
+  handleRemoveGroupSelection(option: FSelectSingleOption, e: MouseEvent) {
+    e.stopPropagation();
+    Object.keys(this.selectedOptions).forEach((group) => {
+      const index = (this.selectedOptions as FSelectOptionsGroup)[group].findIndex(
+        (item) => JSON.stringify(item) === JSON.stringify(option)
+      );
+      if (index !== -1) {
+        const selectedOptionsInGroup = (this.selectedOptions as FSelectOptionsGroup)[group];
+        selectedOptionsInGroup.splice(index, 1);
+        this.selectedOptions = { ...this.selectedOptions, [group]: selectedOptionsInGroup };
+        e.stopPropagation();
+        const event = new CustomEvent("input", {
+          detail: {
+            value:
+              this.type === "multiple"
+                ? this.selectedOptions
+                : (this.selectedOptions as FSelectOptionsGroup)[group][0],
+          },
+        });
+        this.dispatchEvent(event);
+      }
+    });
+    this.requestUpdate();
+  }
+
+  isSelected(option: FSelectSingleOption) {
+    if (Array.isArray(this.options)) {
+      return (this.selectedOptions as FSelectArrayOfObjects).find(
+        (item) => JSON.stringify(item) === JSON.stringify(option)
+      )
+        ? true
+        : false;
+    } else {
+      return false;
+    }
+  }
+
+  isSelectedInGroup(option: FSelectSingleOption, group: string) {
+    if ((this.selectedOptions as FSelectOptionsGroup)[group]) {
+      return ((this.selectedOptions as FSelectOptionsGroup)[group] as FSelectArrayOfObjects).find(
+        (item) => JSON.stringify(item) === JSON.stringify(option)
+      )
+        ? true
+        : false;
+    } else {
+      return false;
+    }
+  }
+
+  handleCheckboxInput(option: FSelectSingleOption, e: MouseEvent) {
+    e.stopPropagation();
+    this.handleOptionSelection(option, e);
+  }
+
+  handleCheckboxGroup(option: FSelectSingleOption, group: string, e: MouseEvent) {
+    e.stopPropagation();
+    this.handleOptionSelectionGroup(option, group, e);
+  }
+
+  handleSelectAll(e: MouseEvent, group: string) {
+    e.stopPropagation();
+    if (
+      this.getCheckedValue(group) === "unchecked" ||
+      this.getCheckedValue(group) === "indeterminate"
+    ) {
+      (this.selectedOptions as FSelectOptionsGroup)[group] = [
+        ...(this.options as FSelectOptionsGroup)[group],
+      ] as FSelectArrayOfObjects;
+    } else {
+      (this.selectedOptions as FSelectOptionsGroup)[group] = [];
+    }
+    const event = new CustomEvent("input", {
+      detail: {
+        value: this.selectedOptions,
+      },
+    });
+    this.dispatchEvent(event);
+    this.requestUpdate();
+  }
+
+  getCheckedValue(group: string) {
+    if (
+      (this.selectedOptions as FSelectOptionsGroup)[group]?.length === 0 ||
+      !(this.selectedOptions as FSelectOptionsGroup)[group]
+    ) {
+      return "unchecked";
+    } else if (
+      (this.selectedOptions as FSelectOptionsGroup)[group]?.length ===
+      (this.options as FSelectOptionsGroup)[group]?.length
+    ) {
+      return "checked";
+    } else {
+      return "indeterminate";
+    }
+  }
+
+  validateProperties() {
+    if (!this.options) {
+      throw new Error("f-select : option field can't be empty");
+    }
+    if (this.type === "single" && this.checkbox) {
+      throw new Error("f-select : checkbox can only be present in `type=multiple`");
+    }
+  }
+
+  handleViewMoreTags(e: MouseEvent) {
+    this.viewMoreTags = !this.viewMoreTags;
+    const event = new CustomEvent("input", {
+      detail: {
+        value: this.selectedOptions,
+      },
+    });
+    this.dispatchEvent(event);
+    this.requestUpdate();
+    e.stopPropagation();
+  }
+
+  getSlicedSelections(optionList: FSelectOptionsProp) {
+    return this.viewMoreTags ? optionList.length : this.selectionLimit;
+  }
+
+  applyInputStyle() {
+    return this.searchable ? `${this.openDropdown ? "" : "width:0px"}` : `max-width:0px`;
+  }
+
+  handleKeyDown(e: KeyboardEvent | MouseEvent) {
+    e.stopPropagation();
+    if (Array.isArray(this.filteredOptions)) {
+      if (this.openDropdown) {
+        if ((e as KeyboardEvent).keyCode === 38 && this.currentCursor > 0) {
+          this.currentCursor--;
+        } else if (
+          (e as KeyboardEvent).keyCode === 40 &&
+          this.currentCursor < this.filteredOptions.length - 1
+        ) {
+          this.optionFocus.focus();
+          this.optionFocus.style.outline = "none";
+          this.currentCursor++;
+        } else if ((e as KeyboardEvent).keyCode === 13) {
+          this.handleOptionSelection(this.filteredOptions[this.currentCursor], e as MouseEvent);
+          if (this.type === "single") {
+            this.openDropdown = false;
+          }
+        } else if ((e as KeyboardEvent).keyCode === 27) {
+          this.openDropdown = false;
+        }
+      } else {
+        if ((e as KeyboardEvent).keyCode === 13) {
+          this.openDropdown = true;
+        }
+      }
+    } else {
+      if (this.openDropdown) {
+        if (
+          (e as KeyboardEvent).keyCode === 38 &&
+          this.currentGroupCursor <= Object.keys(this.filteredOptions).length - 1
+        ) {
+          if (this.currentGroupOptionCursor > 0) {
+            this.currentGroupOptionCursor--;
+            console.log(this.currentGroupOptionCursor);
+          } else {
+            if (this.currentGroupCursor !== 0) {
+              this.currentGroupCursor--;
+              this.currentGroupOptionCursor =
+                this.filteredOptions[Object.keys(this.filteredOptions)[this.currentGroupCursor]]
+                  .length - 1;
+              console.log(this.currentGroupCursor, this.currentGroupOptionCursor);
+            }
+          }
+        } else if (
+          (e as KeyboardEvent).keyCode === 40 &&
+          this.currentGroupCursor < Object.keys(this.filteredOptions).length
+        ) {
+          if (
+            this.currentGroupOptionCursor <
+            this.filteredOptions[Object.keys(this.filteredOptions)[this.currentGroupCursor]]
+              .length -
+              1
+          ) {
+            this.groupOptionFocus.focus();
+            this.groupOptionFocus.style.outline = "none";
+            this.currentGroupOptionCursor++;
+            console.log(this.currentGroupOptionCursor);
+          } else {
+            if (this.currentGroupCursor < Object.keys(this.filteredOptions).length - 1) {
+              this.currentGroupCursor++;
+              this.currentGroupOptionCursor = 0;
+              console.log(this.currentGroupCursor, this.currentGroupOptionCursor);
+            }
+          }
+        } else if ((e as KeyboardEvent).keyCode === 13) {
+          console.log(
+            Object.keys(this.filteredOptions)[this.currentGroupCursor],
+            this.filteredOptions[Object.keys(this.filteredOptions)[this.currentGroupCursor]][
+              this.currentGroupOptionCursor
+            ]
+          );
+          this.handleOptionSelectionGroup(
+            this.filteredOptions[Object.keys(this.filteredOptions)[this.currentGroupCursor]][
+              this.currentGroupOptionCursor
+            ],
+            Object.keys(this.filteredOptions)[this.currentGroupCursor],
+            e as MouseEvent
+          );
+          if (this.type === "single") {
+            this.openDropdown = false;
+          }
+        } else if ((e as KeyboardEvent).keyCode === 27) {
+          this.openDropdown = false;
+        }
+      } else {
+        if ((e as KeyboardEvent).keyCode === 13) {
+          this.openDropdown = true;
+        }
+      }
+    }
+  }
+
+  getConcaticateGroupOptions(array: FSelectOptionsGroup) {
+    const selectedOptions = _.cloneDeep(array);
+    return Object.keys(array).reduce(function (arr: FSelectArrayOfObjects, key: string) {
+      return arr.concat(selectedOptions[key]);
+    }, []);
+  }
+
+  clearFilterSearchValue() {
+    this.searchValue = "";
+    this.filteredOptions = this.options;
     this.requestUpdate();
   }
 
   render() {
+    this.validateProperties();
+    // const elementHeight = (this.shadowRoot?.children[0]?.children[1] as HTMLElement)?.offsetHeight;
     /**
      * create iconLeft if available
      */
+    const concatinatedSelectedOptions = !Array.isArray(this.selectedOptions)
+      ? this.getConcaticateGroupOptions(this.selectedOptions)
+      : [];
 
     document.body.addEventListener(
       "click",
       (e: MouseEvent) => {
-        if ((e.target as HTMLInputElement)?.tagName !== "F-SELECT") {
+        if (!this.contains(e.target as HTMLInputElement)) {
           this.openDropdown = false;
+          this.clearFilterSearchValue();
         }
       },
       true
     );
 
     const iconLeft = this.iconLeft
-      ? html` <f-icon
-          .source=${this.iconLeft}
-          .size=${this.iconSize}
-          class=${!this.size ? "f-input-icons-size" : ""}
-        ></f-icon>`
+      ? html` <div class="icon-left-padding">
+          <f-icon
+            .source=${this.iconLeft}
+            .size=${this.iconSize}
+            class=${!this.size ? "f-input-icons-size" : ""}
+          ></f-icon>
+        </div>`
       : "";
     /**
      * create iconRight if available
      */
     const iconRight = !this.openDropdown
-      ? html`<f-icon source="i-caret-down" .size=${"small"} clickable></f-icon>`
-      : html`<f-icon source="i-caret-up" .size=${"small"} clickable></f-icon>`;
+      ? html`<f-icon
+          source="i-caret-down"
+          .size=${"small"}
+          clickable
+          @click=${this.handleDropDownOpen}
+        ></f-icon>`
+      : html`<f-icon
+          source="i-caret-up"
+          .size=${"small"}
+          clickable
+          @click=${this.handleDropDownClose}
+        ></f-icon>`;
+
+    const inputAppend =
+      // this.searchable
+      //   ?
+      html`
+        ${this.selectedOptions?.length === 0 &&
+        concatinatedSelectedOptions?.length === 0 &&
+        !this.searchable
+          ? html`<f-text
+              class="placeholder-text"
+              variant="para"
+              size="small"
+              weight="regular"
+              state="subtle"
+              >${this.placeholder}</f-text
+            >`
+          : ""}
+        <input
+          class=${classMap({ "f-select": true })}
+          variant=${this.variant}
+          category=${this.category}
+          state=${this.state}
+          placeholder=${this.selectedOptions?.length > 0 || concatinatedSelectedOptions?.length > 0
+            ? this.searchable && this.openDropdown
+              ? this.placeholder
+              : ""
+            : this.placeholder}
+          size=${this.size}
+          ?readonly=${!this.searchable}
+          .value=${this.searchValue}
+          @input=${this.handleInput}
+          style="${this.applyInputStyle()}"
+        />
+      `;
     /**
      * append prefix
      */
-    const prefixAppend = this.iconLeft
-      ? html` <div class="f-select-prefix">
-          ${iconLeft}
-          ${this.selectedOptions.length > 0
-            ? html` <f-div
-                height="hug-content"
-                width="hug-content"
-                padding="none medium none none"
-                direction="row"
-                gap="small"
-              >
-                ${this.type === "single"
-                  ? this.selectedOptions.map(
-                      (option) =>
-                        html`<f-text variant="para" size="small" weight="regular" class="word-break"
-                          >${option?.title}</f-text
-                        >`
-                    )
-                  : this.selectedOptions.map(
-                      (option) =>
-                        html`<f-tag
-                          icon-right="i-close"
+    const prefixAppend = html`<div class="f-select-prefix">
+      ${this.iconLeft ? html` ${iconLeft}` : ""}
+      ${Array.isArray(this.selectedOptions) && this.selectedOptions?.length > 0
+        ? html` <f-div
+            height="100%"
+            width="100%"
+            padding="x-small x-large x-small none"
+            direction="row"
+            gap="x-small"
+            overflow="wrap"
+            align="middle-left"
+          >
+            ${this.type === "single"
+              ? (this.selectedOptions as FSelectOptionsProp).map(
+                  (option) =>
+                    html`<f-text variant="para" size="small" weight="regular" class="word-break"
+                      >${(option as FSelectOptionObject)?.title ?? option}</f-text
+                    >`
+                )
+              : html`${(this.selectedOptions as FSelectOptionsProp)
+                  .slice(0, this.getSlicedSelections(this.selectedOptions))
+                  .map(
+                    (option) =>
+                      html`<f-tag
+                        icon-right="i-close"
+                        size="small"
+                        label=${(option as FSelectOptionObject)?.title ?? option}
+                        state="neutral"
+                        @click=${(e: MouseEvent) => {
+                          this.handleOptionSelection(option, e);
+                        }}
+                      ></f-tag> `
+                  )}
+                ${this.selectedOptions.length > this.selectionLimit
+                  ? !this.viewMoreTags
+                    ? html` <f-div height="hug-content" width="hug-content" padding="none">
+                        <f-text
+                          variant="para"
                           size="small"
-                          label=${option?.title}
-                          state="neutral"
-                          @click=${(e: MouseEvent) => {
-                            this.handleOptionSelection(option, e);
-                          }}
-                        ></f-tag> `
-                    )}
-              </f-div>`
-            : ""}
-        </div>`
-      : "";
+                          weight="regular"
+                          state="primary"
+                          @click=${this.handleViewMoreTags}
+                          ><a>+${this.selectedOptions.length - this.selectionLimit} more</a></f-text
+                        ></f-div
+                      >`
+                    : html`<f-div height="hug-content" width="hug-content" padding="none"
+                        ><f-text
+                          variant="para"
+                          size="small"
+                          weight="regular"
+                          state="primary"
+                          @click=${this.handleViewMoreTags}
+                          ><a>show less</a></f-text
+                        ></f-div
+                      >`
+                  : ""} `}
+            ${inputAppend}
+          </f-div>`
+        : html`<f-div
+            height="100%"
+            width="100%"
+            padding="x-small x-large x-small none"
+            direction="row"
+            gap="x-small"
+            overflow="wrap"
+            align="middle-left"
+            >${(concatinatedSelectedOptions as FSelectOptionsProp)
+              .slice(0, this.getSlicedSelections(concatinatedSelectedOptions))
+              .map(
+                (option) =>
+                  html`<f-tag
+                    icon-right="i-close"
+                    size="small"
+                    label=${(option as FSelectOptionObject)?.title ?? option}
+                    state="neutral"
+                    @click=${(e: MouseEvent) => {
+                      this.handleRemoveGroupSelection(option, e);
+                    }}
+                  ></f-tag> `
+              )}
+            ${concatinatedSelectedOptions.length > this.selectionLimit
+              ? !this.viewMoreTags
+                ? html`<f-div height="hug-content" width="hug-content" padding="none"
+                    ><f-text
+                      variant="para"
+                      size="small"
+                      weight="regular"
+                      state="primary"
+                      @click=${this.handleViewMoreTags}
+                      ><a
+                        >+${concatinatedSelectedOptions.length - this.selectionLimit} more</a
+                      ></f-text
+                    ></f-div
+                  >`
+                : html`<f-div height="hug-content" width="hug-content" padding="none"
+                    ><f-text
+                      variant="para"
+                      size="small"
+                      weight="regular"
+                      state="primary"
+                      @click=${this.handleViewMoreTags}
+                      ><a>show less</a></f-text
+                    ></f-div
+                  >`
+              : ""}
+            ${inputAppend}
+          </f-div> `}
+    </div>`;
     /**
      * append suffix
      */
     const suffixAppend = !this.loading
-      ? this.value && this.clear
-        ? html`<div class="f-select-suffix">
-            <f-icon
-              ?clickable=${true}
-              source="i-close"
-              .size=${this.iconSize}
-              @click=${this.clearInputValue}
-              class=${!this.size ? "f-select-icons-size" : ""}
-            ></f-icon>
-          </div>`
-        : html`<div class="f-select-suffix">${iconRight}</div>`
+      ? html`<div class="f-select-suffix">
+          ${(this.selectedOptions?.length > 0 || concatinatedSelectedOptions?.length > 0) &&
+          this.clear
+            ? html`
+                <f-icon
+                  ?clickable=${true}
+                  source="i-close"
+                  .size=${this.iconSize}
+                  @click=${(e: MouseEvent) =>
+                    Array.isArray(this.selectedOptions)
+                      ? this.clearInputValue(e)
+                      : this.emptySelectedValuesInGroups(e)}
+                  class=${!this.size ? "f-input-icons-size" : ""}
+                ></f-icon>
+              `
+            : ""}
+          ${iconRight}
+        </div>`
       : html`<div class="loader-suffix">${unsafeSVG(loader)}</div>`;
 
     /**
@@ -281,65 +852,231 @@ export class FSelect extends FRoot {
      */
 
     return html`
-      <div
-        class="f-select-wrapper"
-        variant=${this.variant}
-        category=${this.category}
-        state=${this.state}
-        size=${this.size}
-        style="${this.applyWidth()}"
-        @click=${this.handleDropDown}
-      >
-        ${prefixAppend}
-        <input
-          class=${classMap({ "f-select": true })}
+      <div class="f-select-field">
+        <f-div
+          padding="none"
+          gap="none"
+          align="bottom-left"
+          @click=${() => {
+            this.openDropdown = false;
+          }}
+        >
+          <f-div padding="none" gap="x-small" direction="column" width="fill-container">
+            <slot name="label"></slot>
+            <slot name="description"></slot>
+          </f-div>
+        </f-div>
+        <div
+          class="f-select-wrapper"
           variant=${this.variant}
           category=${this.category}
           state=${this.state}
-          placeholder=${this.placeholder}
-          .value="${this.value || ""}"
           size=${this.size}
-          ?readonly=${this.isReadOnly}
-          @input=${this.handleInput}
-        />
-        ${suffixAppend}
-        <div class="f-select-options" style="${this.applyHeight()}" size=${this.size}>
-          <f-div padding="none" gap="none" direction="column">
-            ${this.options?.map(
-              (option) => html`<f-div
-                padding="medium"
-                height="hug-content"
-                width="fill-container"
-                direction="row"
-                ?clickable=${true}
-                align="middle-left"
-                gap="small"
-                .selected=${this.selectedOptions.indexOf(option) !== -1 ? "background" : undefined}
-                @click=${(e: MouseEvent) => {
-                  this.handleOptionSelection(option, e);
-                }}
-              >
-                ${option?.icon
-                  ? html` <f-div padding="none" gap="none" height="hug-content" width="hug-content"
-                      ><f-icon size="medium" source=${option?.icon}></f-icon
-                    ></f-div>`
-                  : ""}
-                <f-div padding="none" gap="none" height="hug-content" width="fill-container"
-                  ><f-text variant="para" size="small" weight="regular"
-                    >${option?.title ?? option}</f-text
-                  ></f-div
-                >
-                ${this.selectedOptions.indexOf(option) !== -1
-                  ? html` <f-div padding="none" gap="none" height="hug-content" width="hug-content"
-                      ><f-icon size="medium" source="i-tick"></f-icon
-                    ></f-div>`
-                  : ""}
-              </f-div>`
-            )}
-          </f-div>
+          style="${this.applyWidth()}"
+          @click=${this.handleDropDownOpen}
+          @keydown=${this.handleKeyDown}
+        >
+          ${prefixAppend} ${suffixAppend}
+          <div class="f-select-options" style="${this.applyHeight()}" size=${this.size}>
+            <f-div padding="none" gap="none" direction="column">
+              ${Array.isArray(this.options)
+                ? (this.filteredOptions as FSelectArray)?.map((option, index) =>
+                    this.optionTemplate
+                      ? html`<f-div
+                          padding="none"
+                          @click=${(e: MouseEvent) => {
+                            this.handleOptionSelection(option, e);
+                          }}
+                        >
+                          ${unsafeHTML(
+                            getComputedHTML(html`${eval("`" + this.optionTemplate + "`")}`)
+                          )}
+                        </f-div>`
+                      : html`<f-div
+                          class="f-select-options-clickable"
+                          id=${`option-${index}`}
+                          padding="medium"
+                          height="44px"
+                          width="fill-container"
+                          direction="row"
+                          ?clickable=${true}
+                          align="middle-left"
+                          gap="small"
+                          .selected=${this.isSelected(option) || this.currentCursor === index
+                            ? "background"
+                            : undefined}
+                          @click=${(e: MouseEvent) => {
+                            this.handleOptionSelection(option, e);
+                          }}
+                          tabindex=${0}
+                        >
+                          ${this.checkbox
+                            ? html` <f-checkbox
+                                state=${this.state}
+                                size=${this.size}
+                                value=${this.isSelected(option) ? "checked" : "unchecked"}
+                                @input=${(e: MouseEvent) => {
+                                  this.handleCheckboxInput(option, e);
+                                }}
+                              ></f-checkbox>`
+                            : ""}
+                          ${(option as FSelectOptionObject)?.icon
+                            ? html` <f-div
+                                padding="none"
+                                gap="none"
+                                height="hug-content"
+                                width="hug-content"
+                                ><f-icon
+                                  size="medium"
+                                  source=${(option as FSelectOptionObject)?.icon}
+                                ></f-icon
+                              ></f-div>`
+                            : ""}
+                          <f-div
+                            padding="none"
+                            gap="none"
+                            height="hug-content"
+                            width="fill-container"
+                            ><f-text variant="para" size="small" weight="regular"
+                              >${(option as FSelectOptionObject)?.title ?? option}</f-text
+                            ></f-div
+                          >
+                          ${this.isSelected(option) && !this.checkbox
+                            ? html` <f-div
+                                padding="none"
+                                gap="none"
+                                height="hug-content"
+                                width="hug-content"
+                                ><f-icon size="medium" source="i-tick"></f-icon
+                              ></f-div>`
+                            : ""}
+                        </f-div>`
+                  )
+                : Object.keys(this.filteredOptions)?.map((group, groupIndex) =>
+                    (this.filteredOptions as FSelectOptionsGroup)[group].length > 0
+                      ? html`<f-div
+                    padding="none"
+                    height="hug-content"
+                    width="fill-container"
+                    direction="column"
+                    align="middle-left"
+                    border="small solid default bottom"
+                  >
+                    <f-div
+                      class="f-select-options-clickable"
+                      id=${`group-${groupIndex}`}
+                      padding="medium"
+                      height="44px"
+                      width="fill-container"
+                      align="middle-left"
+                      direction="row"
+                      ?clickable=${true}
+                      .selected=${
+                        this.getCheckedValue(group) === "checked" ? "background" : undefined
+                      }
+                      @click=${(e: MouseEvent) => this.handleSelectAll(e, group)}
+                      tabindex=${0}
+                    >
+                       ${
+                         this.checkbox
+                           ? html` <f-checkbox
+                               state=${this.state}
+                               size=${this.size}
+                               .value="${this.getCheckedValue(group)}"
+                               @input=${(e: MouseEvent) => this.handleSelectAll(e, group)}
+                             ></f-checkbox>`
+                           : ""
+                       }
+                      <f-text variant="para" size="small" weight="regular" state="secondary"
+                                  >${group}</f-text
+                                >
+                      </f-div>
+                      ${(this.filteredOptions as FSelectOptionsGroup)[group].map(
+                        (option, optionIndex) =>
+                          html`
+                            <f-div
+                              class="f-select-options-clickable"
+                              id=${`group-${groupIndex}-option-${optionIndex}`}
+                              padding="medium x-large"
+                              height="44px"
+                              width="fill-container"
+                              direction="row"
+                              ?clickable=${true}
+                              align="middle-left"
+                              gap="small"
+                              .selected=${this.isSelectedInGroup(option, group) ||
+                              (this.currentGroupOptionCursor === optionIndex &&
+                                this.currentGroupCursor === groupIndex)
+                                ? "background"
+                                : undefined}
+                              @click=${(e: MouseEvent) => {
+                                this.handleOptionSelectionGroup(option, group, e);
+                              }}
+                              tabindex=${0}
+                            >
+                              ${this.checkbox
+                                ? html` <f-checkbox
+                                    state=${this.state}
+                                    size=${this.size}
+                                    value=${this.isSelectedInGroup(option, group)
+                                      ? "checked"
+                                      : "unchecked"}
+                                    @input=${(e: MouseEvent) => {
+                                      this.handleCheckboxGroup(option, group, e);
+                                    }}
+                                  ></f-checkbox>`
+                                : ""}
+                              ${(option as FSelectOptionObject)?.icon
+                                ? html` <f-div
+                                    padding="none"
+                                    gap="none"
+                                    height="hug-content"
+                                    width="hug-content"
+                                    ><f-icon
+                                      size="medium"
+                                      source=${(option as FSelectOptionObject)?.icon}
+                                    ></f-icon
+                                  ></f-div>`
+                                : ""}
+                              <f-div
+                                padding="none"
+                                gap="none"
+                                height="hug-content"
+                                width="fill-container"
+                                ><f-text variant="para" size="small" weight="regular"
+                                  >${(option as FSelectOptionObject)?.title ?? option}</f-text
+                                ></f-div
+                              >
+                              ${this.isSelectedInGroup(option, group) && !this.checkbox
+                                ? html` <f-div
+                                    padding="none"
+                                    gap="none"
+                                    height="hug-content"
+                                    width="hug-content"
+                                    ><f-icon size="medium" source="i-tick"></f-icon
+                                  ></f-div>`
+                                : ""}
+                            </f-div>
+                          `
+                      )}
+                    </f-div></f-div
+                  >`
+                      : ""
+                  )}
+            </f-div>
+          </div>
         </div>
+        <slot name="help"></slot>
       </div>
     `;
+  }
+  firstUpdated() {
+    this.selectedOptions = this.value
+      ? typeof this.value === "string"
+        ? [this.value]
+        : this.value
+      : [];
+    this.filteredOptions = this.options;
   }
 }
 

@@ -41,16 +41,46 @@ export class FSelect extends FRoot {
   openDropdown = false;
 
   /**
-   * @attribute local state for dropdown open and close boolean
+   * @attribute Multiple tags View/Hide
+   */
+  @state({})
+  viewMoreTags = false;
+
+  /**
+   * @attribute local state for typing string and searching in f-select
+   */
+  @state({})
+  searchValue = "";
+
+  /**
+   * @attribute local state for options selected
    */
   @state({})
   selectedOptions: FSelectOptions = [];
 
   /**
-   * @attribute local state for dropdown open and close boolean
+   * @attribute local state for filtered options on search
    */
   @state({})
   filteredOptions: FSelectOptions = [];
+
+  /**
+   * @attribute keyboard hover for array of objects
+   */
+  @state({})
+  currentCursor = 0;
+
+  /**
+   * @attribute keyboard hover for group for objects consisting groups
+   */
+  @state({})
+  currentGroupCursor = 0;
+
+  /**
+   * @attribute keyboard hover for options in group for objects consisting groups
+   */
+  @state({})
+  currentGroupOptionCursor = 0;
 
   @query(".f-select")
   inputElement!: HTMLInputElement;
@@ -66,30 +96,6 @@ export class FSelect extends FRoot {
 
   @query("#group-0-option-0")
   groupOptionFocus!: HTMLDivElement;
-
-  /**
-   * @attribute local state for dropdown open and close boolean
-   */
-  @state({})
-  searchValue = "";
-
-  /**
-   * @attribute local state for dropdown open and close boolean
-   */
-  @state({})
-  currentCursor = 0;
-
-  @state({})
-  currentGroupCursor = 0;
-
-  @state({})
-  currentGroupOptionCursor = 0;
-
-  /**
-   * @attribute local state for dropdown open and close boolean
-   */
-  @state({})
-  viewMoreTags = false;
 
   /**
    * @attribute Categories are various visual representations of an input field.
@@ -170,45 +176,109 @@ export class FSelect extends FRoot {
   loading?: boolean = false;
 
   /**
-   * @attribute Loader icon replaces the content of the button .
+   * @attribute defines whether user can search within the options or not .
    */
   @property({ reflect: true, type: Boolean })
   searchable?: boolean = false;
 
   /**
-   * @attribute Loader icon replaces the content of the button .
+   * @attribute  a ‘close’ icon button appear on right of the select to clear the input value(s).
    */
   @property({ reflect: true, type: Boolean })
   clear?: boolean = false;
 
   /**
-   * @attribute Loader icon replaces the content of the button .
+   * @attribute options with checkboxes.
    */
   @property({ reflect: true, type: Boolean })
   checkbox?: boolean = false;
 
   /**
-   * @attribute Loader icon replaces the content of the button .
+   * @attribute limit to show the selection tags inside f-select.
    */
   @property({ reflect: true, type: Number })
   selectionLimit = 1;
 
   /**
-   * fetch read-only value from nearest parent f-field element
+   * icon size
    */
-  get isReadOnly() {
-    return this.closest("f-field")?.hasAttribute("read-only") ?? false;
+  get iconSize() {
+    if (this.size === "medium") return "small";
+    else if (this.size === "small") return "x-small";
+    else return undefined;
   }
 
   /**
-   * fetch can-duplicate value from nearest parent f-field element
+   * apply height styling to f-select options wrapper
    */
-  get canDuplicate() {
-    return this.closest("f-field")?.hasAttribute("can-duplicate") ?? false;
+  applyHeight() {
+    if (this.openDropdown)
+      return `max-height:${this.height}; transition: max-height 0.25s ease-in 0s; top: calc(${this.wrapperElement?.offsetHeight}px + 4px);`;
+    else
+      return `max-height:0px; transition: max-height 0.25s ease-in 0s; top: calc(${this.wrapperElement?.offsetHeight}px + 4px);`;
   }
 
   /**
-   * emit input custom event
+   * apply width to f-select
+   */
+  applyWidth() {
+    return `width:${this.width === "fill-container" ? "100%" : this.width};`;
+  }
+
+  /**
+   * index search for the resepctive option
+   */
+  getIndex(option: FSelectSingleOption) {
+    if (typeof option === "string") {
+      return (this.selectedOptions as FSelectArrayOfStrings).indexOf(option);
+    } else {
+      return (this.selectedOptions as FSelectOptionsProp).findIndex(
+        (item) => (item as FSelectOptionObject)?.title === (option as FSelectOptionObject)?.title
+      );
+    }
+  }
+
+  /**
+   * index search for respective option of the respective group
+   */
+  getIndexInGroup(option: FSelectSingleOption, group: string) {
+    if ((this.selectedOptions as FSelectOptionsGroup)[group]) {
+      return (
+        (this.selectedOptions as FSelectOptionsGroup)[group] as FSelectArrayOfObjects
+      ).findIndex((item) => JSON.stringify(item) === JSON.stringify(option));
+    } else {
+      return -1;
+    }
+  }
+
+  /**
+   * check selection for respective option.
+   */
+  isSelected(option: FSelectOptionObject | string) {
+    return (this.selectedOptions as FSelectArrayOfObjects).find(
+      (item) => JSON.stringify(item) === JSON.stringify(option)
+    )
+      ? true
+      : false;
+  }
+
+  /**
+   * check selection for respective option of the respective group
+   */
+  isGroupSelection(option: FSelectSingleOption, group: string) {
+    if ((this.selectedOptions as FSelectOptionsGroup)[group]) {
+      return ((this.selectedOptions as FSelectOptionsGroup)[group] as FSelectArrayOfObjects).find(
+        (item) => JSON.stringify(item) === JSON.stringify(option)
+      )
+        ? true
+        : false;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * emit input custom event for option selection
    */
   handleInput(e: InputEvent) {
     e.stopPropagation();
@@ -256,12 +326,15 @@ export class FSelect extends FRoot {
     });
     this.selectedOptions = [];
     this.value = [];
-    this.clearFilterSearchValue();
+    this.clearFilterSearchString();
     this.dispatchEvent(event);
     this.requestUpdate();
   }
 
-  emptySelectedValuesInGroups(e: MouseEvent) {
+  /**
+   * clear te search string
+   */
+  clearSelectionInGroups(e: MouseEvent) {
     e.stopPropagation();
     const event = new CustomEvent("input", {
       detail: {
@@ -273,31 +346,14 @@ export class FSelect extends FRoot {
       },
     });
 
-    this.clearFilterSearchValue();
+    this.clearFilterSearchString();
     this.dispatchEvent(event);
     this.requestUpdate();
   }
 
   /**
-   * icon size
+   * open options menu
    */
-  get iconSize() {
-    if (this.size === "medium") return "small";
-    else if (this.size === "small") return "x-small";
-    else return undefined;
-  }
-
-  applyHeight() {
-    if (this.openDropdown)
-      return `max-height:${this.height}; transition: max-height 0.25s ease-in 0s; top: calc(${this.wrapperElement?.offsetHeight}px + 4px);`;
-    else
-      return `max-height:0px; transition: max-height 0.25s ease-in 0s; top: calc(${this.wrapperElement?.offsetHeight}px + 4px);`;
-  }
-
-  applyWidth() {
-    return `width:${this.width === "fill-container" ? "100%" : this.width};`;
-  }
-
   handleDropDownOpen(e: MouseEvent) {
     this.openDropdown = true;
     const event = new CustomEvent("input", {
@@ -310,9 +366,12 @@ export class FSelect extends FRoot {
     e.stopPropagation();
   }
 
+  /**
+   * close options menu
+   */
   handleDropDownClose(e: MouseEvent) {
     this.openDropdown = false;
-    this.clearFilterSearchValue();
+    this.clearFilterSearchString();
     this.currentCursor = 0;
     const event = new CustomEvent("input", {
       detail: {
@@ -324,26 +383,9 @@ export class FSelect extends FRoot {
     e.stopPropagation();
   }
 
-  getIndex(option: FSelectSingleOption) {
-    if (typeof option === "string") {
-      return (this.selectedOptions as FSelectArrayOfStrings).indexOf(option);
-    } else {
-      return (this.selectedOptions as FSelectOptionsProp).findIndex(
-        (item) => (item as FSelectOptionObject)?.title === (option as FSelectOptionObject)?.title
-      );
-    }
-  }
-
-  getIndexInGroup(option: FSelectSingleOption, group: string) {
-    if ((this.selectedOptions as FSelectOptionsGroup)[group]) {
-      return (
-        (this.selectedOptions as FSelectOptionsGroup)[group] as FSelectArrayOfObjects
-      ).findIndex((item) => JSON.stringify(item) === JSON.stringify(option));
-    } else {
-      return -1;
-    }
-  }
-
+  /**
+   * action for selection of options if the options is in the form of array
+   */
   handleOptionSelection(option: FSelectSingleOption, e: MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
@@ -371,15 +413,17 @@ export class FSelect extends FRoot {
     this.requestUpdate();
   }
 
-  handleOptionSelectionGroup(option: FSelectSingleOption, group: string, e: MouseEvent) {
+  /**
+   * action for selection of options if the options is in the form of groups
+   */
+  handleSelectionGroup(option: FSelectSingleOption, group: string, e: MouseEvent) {
     e.stopPropagation();
     e.preventDefault();
     let selectedOptionsInGroup = (this.selectedOptions as FSelectOptionsGroup)[group];
     if (this.type === "single") {
       selectedOptionsInGroup = [option as string];
     } else {
-      console.log(option, group, this.isSelectedInGroup(option, group));
-      !this.isSelectedInGroup(option, group)
+      !this.isGroupSelection(option, group)
         ? !selectedOptionsInGroup
           ? (this.selectedOptions = {
               ...this.selectedOptions,
@@ -388,7 +432,6 @@ export class FSelect extends FRoot {
           : (selectedOptionsInGroup as FSelectArrayOfObjects).push(option as FSelectOptionObject)
         : selectedOptionsInGroup.splice(this.getIndexInGroup(option, group), 1);
     }
-    console.log(this.selectedOptions);
     const event = new CustomEvent("input", {
       detail: {
         value:
@@ -401,6 +444,9 @@ export class FSelect extends FRoot {
     this.requestUpdate();
   }
 
+  /**
+   * remove selection option (in group) when f-tag is clicked
+   */
   handleRemoveGroupSelection(option: FSelectSingleOption, e: MouseEvent) {
     e.stopPropagation();
     Object.keys(this.selectedOptions).forEach((group) => {
@@ -426,40 +472,25 @@ export class FSelect extends FRoot {
     this.requestUpdate();
   }
 
-  isSelected(option: FSelectSingleOption) {
-    if (Array.isArray(this.options)) {
-      return (this.selectedOptions as FSelectArrayOfObjects).find(
-        (item) => JSON.stringify(item) === JSON.stringify(option)
-      )
-        ? true
-        : false;
-    } else {
-      return false;
-    }
-  }
-
-  isSelectedInGroup(option: FSelectSingleOption, group: string) {
-    if ((this.selectedOptions as FSelectOptionsGroup)[group]) {
-      return ((this.selectedOptions as FSelectOptionsGroup)[group] as FSelectArrayOfObjects).find(
-        (item) => JSON.stringify(item) === JSON.stringify(option)
-      )
-        ? true
-        : false;
-    } else {
-      return false;
-    }
-  }
-
+  /**
+   * handle click on checkbox
+   */
   handleCheckboxInput(option: FSelectSingleOption, e: MouseEvent) {
     e.stopPropagation();
     this.handleOptionSelection(option, e);
   }
 
+  /**
+   * handle click on checkbox in group
+   */
   handleCheckboxGroup(option: FSelectSingleOption, group: string, e: MouseEvent) {
     e.stopPropagation();
-    this.handleOptionSelectionGroup(option, group, e);
+    this.handleSelectionGroup(option, group, e);
   }
 
+  /**
+   * select all options inside a particular group
+   */
   handleSelectAll(e: MouseEvent, group: string) {
     e.stopPropagation();
     if (
@@ -481,6 +512,9 @@ export class FSelect extends FRoot {
     this.requestUpdate();
   }
 
+  /**
+   * check if all values of group are selected or not or are in idetereminate state
+   */
   getCheckedValue(group: string) {
     if (
       (this.selectedOptions as FSelectOptionsGroup)[group]?.length === 0 ||
@@ -497,15 +531,9 @@ export class FSelect extends FRoot {
     }
   }
 
-  validateProperties() {
-    if (!this.options) {
-      throw new Error("f-select : option field can't be empty");
-    }
-    if (this.type === "single" && this.checkbox) {
-      throw new Error("f-select : checkbox can only be present in `type=multiple`");
-    }
-  }
-
+  /**
+   * hide/show f-tags when multiple options are selected
+   */
   handleViewMoreTags(e: MouseEvent) {
     this.viewMoreTags = !this.viewMoreTags;
     const event = new CustomEvent("input", {
@@ -518,14 +546,23 @@ export class FSelect extends FRoot {
     e.stopPropagation();
   }
 
+  /**
+   * get sliced array to show selected options
+   */
   getSlicedSelections(optionList: FSelectOptionsProp) {
     return this.viewMoreTags ? optionList.length : this.selectionLimit;
   }
 
+  /**
+   * change width of input inside f-select according to searchable prop
+   */
   applyInputStyle() {
     return this.searchable ? `${this.openDropdown ? "" : "width:0px"}` : `max-width:0px`;
   }
 
+  /**
+   * actions on keyboard navigation through options
+   */
   handleKeyDown(e: KeyboardEvent | MouseEvent) {
     e.stopPropagation();
     if (Array.isArray(this.filteredOptions)) {
@@ -560,14 +597,12 @@ export class FSelect extends FRoot {
         ) {
           if (this.currentGroupOptionCursor > 0) {
             this.currentGroupOptionCursor--;
-            console.log(this.currentGroupOptionCursor);
           } else {
             if (this.currentGroupCursor !== 0) {
               this.currentGroupCursor--;
               this.currentGroupOptionCursor =
                 this.filteredOptions[Object.keys(this.filteredOptions)[this.currentGroupCursor]]
                   .length - 1;
-              console.log(this.currentGroupCursor, this.currentGroupOptionCursor);
             }
           }
         } else if (
@@ -583,22 +618,14 @@ export class FSelect extends FRoot {
             this.groupOptionFocus.focus();
             this.groupOptionFocus.style.outline = "none";
             this.currentGroupOptionCursor++;
-            console.log(this.currentGroupOptionCursor);
           } else {
             if (this.currentGroupCursor < Object.keys(this.filteredOptions).length - 1) {
               this.currentGroupCursor++;
               this.currentGroupOptionCursor = 0;
-              console.log(this.currentGroupCursor, this.currentGroupOptionCursor);
             }
           }
         } else if ((e as KeyboardEvent).keyCode === 13) {
-          console.log(
-            Object.keys(this.filteredOptions)[this.currentGroupCursor],
-            this.filteredOptions[Object.keys(this.filteredOptions)[this.currentGroupCursor]][
-              this.currentGroupOptionCursor
-            ]
-          );
-          this.handleOptionSelectionGroup(
+          this.handleSelectionGroup(
             this.filteredOptions[Object.keys(this.filteredOptions)[this.currentGroupCursor]][
               this.currentGroupOptionCursor
             ],
@@ -619,40 +646,64 @@ export class FSelect extends FRoot {
     }
   }
 
+  /**
+   * get concatinated array from groups
+   */
   getConcaticateGroupOptions(array: FSelectOptionsGroup) {
     const selectedOptions = _.cloneDeep(array);
     return Object.keys(array).reduce(function (arr: FSelectArrayOfObjects, key: string) {
-      return arr.concat(selectedOptions[key]);
+      return arr.concat((selectedOptions as any)[key]);
     }, []);
   }
 
-  clearFilterSearchValue() {
+  /**
+   * clear search string
+   */
+  clearFilterSearchString() {
     this.searchValue = "";
     this.filteredOptions = this.options;
     this.requestUpdate();
   }
 
+  /**
+   * validate properties
+   */
+  validateProperties() {
+    if (!this.options) {
+      throw new Error("f-select : option field can't be empty");
+    }
+    if (this.type === "single" && this.checkbox) {
+      throw new Error("f-select : checkbox can only be present in `type=multiple`");
+    }
+  }
+
   render() {
     this.validateProperties();
-    // const elementHeight = (this.shadowRoot?.children[0]?.children[1] as HTMLElement)?.offsetHeight;
+
     /**
-     * create iconLeft if available
+     * concaticated array from groups
      */
     const concatinatedSelectedOptions = !Array.isArray(this.selectedOptions)
       ? this.getConcaticateGroupOptions(this.selectedOptions)
       : [];
 
+    /**
+     * click outside the f-select wrapper area
+     */
     document.body.addEventListener(
       "click",
       (e: MouseEvent) => {
         if (!this.contains(e.target as HTMLInputElement)) {
           this.openDropdown = false;
-          this.clearFilterSearchValue();
+          this.clearFilterSearchString();
         }
       },
       true
     );
 
+    /**
+     * create iconlLeft if available
+     */
     const iconLeft = this.iconLeft
       ? html` <div class="icon-left-padding">
           <f-icon
@@ -662,8 +713,9 @@ export class FSelect extends FRoot {
           ></f-icon>
         </div>`
       : "";
+
     /**
-     * create iconRight if available
+     * create caret-up/caret-down icon for open/close option-menu
      */
     const iconRight = !this.openDropdown
       ? html`<f-icon
@@ -679,41 +731,42 @@ export class FSelect extends FRoot {
           @click=${this.handleDropDownClose}
         ></f-icon>`;
 
-    const inputAppend =
-      // this.searchable
-      //   ?
-      html`
-        ${this.selectedOptions?.length === 0 &&
-        concatinatedSelectedOptions?.length === 0 &&
-        !this.searchable
-          ? html`<f-text
-              class="placeholder-text"
-              variant="para"
-              size="small"
-              weight="regular"
-              state="subtle"
-              >${this.placeholder}</f-text
-            >`
-          : ""}
-        <input
-          class=${classMap({ "f-select": true })}
-          variant=${this.variant}
-          category=${this.category}
-          state=${this.state}
-          placeholder=${this.selectedOptions?.length > 0 || concatinatedSelectedOptions?.length > 0
-            ? this.searchable && this.openDropdown
-              ? this.placeholder
-              : ""
-            : this.placeholder}
-          size=${this.size}
-          ?readonly=${!this.searchable}
-          .value=${this.searchValue}
-          @input=${this.handleInput}
-          style="${this.applyInputStyle()}"
-        />
-      `;
     /**
-     * append prefix
+     * input text area
+     */
+    const inputAppend = html`
+      ${this.selectedOptions?.length === 0 &&
+      concatinatedSelectedOptions?.length === 0 &&
+      !this.searchable
+        ? html`<f-text
+            class="placeholder-text"
+            variant="para"
+            size="small"
+            weight="regular"
+            state="subtle"
+            >${this.placeholder}</f-text
+          >`
+        : ""}
+      <input
+        class=${classMap({ "f-select": true })}
+        variant=${this.variant}
+        category=${this.category}
+        state=${this.state}
+        placeholder=${this.selectedOptions?.length > 0 || concatinatedSelectedOptions?.length > 0
+          ? this.searchable && this.openDropdown
+            ? this.placeholder
+            : ""
+          : this.placeholder}
+        size=${this.size}
+        ?readonly=${!this.searchable}
+        .value=${this.searchValue}
+        @input=${this.handleInput}
+        style="${this.applyInputStyle()}"
+      />
+    `;
+
+    /**
+     * append prefix consisting of f-tags, iiconLeft and search string
      */
     const prefixAppend = html`<div class="f-select-prefix">
       ${this.iconLeft ? html` ${iconLeft}` : ""}
@@ -823,8 +876,9 @@ export class FSelect extends FRoot {
             ${inputAppend}
           </f-div> `}
     </div>`;
+
     /**
-     * append suffix
+     * append suffix consisting of clear icon caret-up/caret-down icon and loader
      */
     const suffixAppend = !this.loading
       ? html`<div class="f-select-suffix">
@@ -838,7 +892,7 @@ export class FSelect extends FRoot {
                   @click=${(e: MouseEvent) =>
                     Array.isArray(this.selectedOptions)
                       ? this.clearInputValue(e)
-                      : this.emptySelectedValuesInGroups(e)}
+                      : this.clearSelectionInGroups(e)}
                   class=${!this.size ? "f-input-icons-size" : ""}
                 ></f-icon>
               `
@@ -850,7 +904,6 @@ export class FSelect extends FRoot {
     /**
      * Final html to render
      */
-
     return html`
       <div class="f-select-field">
         <f-div
@@ -1004,13 +1057,13 @@ export class FSelect extends FRoot {
                               ?clickable=${true}
                               align="middle-left"
                               gap="small"
-                              .selected=${this.isSelectedInGroup(option, group) ||
+                              .selected=${this.isGroupSelection(option, group) ||
                               (this.currentGroupOptionCursor === optionIndex &&
                                 this.currentGroupCursor === groupIndex)
                                 ? "background"
                                 : undefined}
                               @click=${(e: MouseEvent) => {
-                                this.handleOptionSelectionGroup(option, group, e);
+                                this.handleSelectionGroup(option, group, e);
                               }}
                               tabindex=${0}
                             >
@@ -1018,7 +1071,7 @@ export class FSelect extends FRoot {
                                 ? html` <f-checkbox
                                     state=${this.state}
                                     size=${this.size}
-                                    value=${this.isSelectedInGroup(option, group)
+                                    value=${this.isGroupSelection(option, group)
                                       ? "checked"
                                       : "unchecked"}
                                     @input=${(e: MouseEvent) => {
@@ -1047,7 +1100,7 @@ export class FSelect extends FRoot {
                                   >${(option as FSelectOptionObject)?.title ?? option}</f-text
                                 ></f-div
                               >
-                              ${this.isSelectedInGroup(option, group) && !this.checkbox
+                              ${this.isGroupSelection(option, group) && !this.checkbox
                                 ? html` <f-div
                                     padding="none"
                                     gap="none"
@@ -1071,11 +1124,17 @@ export class FSelect extends FRoot {
     `;
   }
   firstUpdated() {
+    /**
+     * initial value of selectedOptions
+     */
     this.selectedOptions = this.value
       ? typeof this.value === "string"
         ? [this.value]
         : this.value
       : [];
+    /**
+     * initial value of filteredOptions
+     */
     this.filteredOptions = this.options;
   }
 }

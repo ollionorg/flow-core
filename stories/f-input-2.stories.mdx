@@ -119,6 +119,16 @@ f-spacer is used to create a pseudo space in the layout.
         {
           icon: "i-home",
           title: "option 1",
+        },
+        {
+          icon: "i-user",
+          title: "option 2",
+        },
+      ]);
+      const [selectedValueTemplate, setSelectedValueTemplate] = useState([
+        {
+          icon: "i-home",
+          title: "option 1",
           data: {
             email: "abc@cldcvr.com",
             mobile: "+91-12345 67890",
@@ -166,6 +176,9 @@ f-spacer is used to create a pseudo space in the layout.
       };
       const handleSelectFirst = (e) => {
         setSelectedValueFirst(e.detail.value);
+      };
+      const handleSelectTemplate = (e) => {
+        setSelectedValueTemplate(e.detail.value);
       };
       const handleSelectNew = (e) => {
         setSelectedValueNew(e.detail.value);
@@ -407,8 +420,8 @@ f-spacer is used to create a pseudo space in the layout.
               placeholder="Select an option"
               type="multiple"
               state=${args["element-state"]}
-              .value=${selectedValueFirst}
-              @input=${handleSelectFirst}
+              .value=${selectedValueTemplate}
+              @input=${handleSelectTemplate}
               ?searchable=${true}
               .options=${[
                 {

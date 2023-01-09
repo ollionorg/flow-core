@@ -3127,6 +3127,22 @@
             },
             {
               "kind": "field",
+              "name": "viewMoreTags",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "searchValue",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
               "name": "selectedOptions",
               "type": {
                 "text": "FSelectOptions"
@@ -3140,6 +3156,30 @@
                 "text": "FSelectOptions"
               },
               "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "currentCursor",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "currentGroupCursor",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "currentGroupOptionCursor",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
             },
             {
               "kind": "field",
@@ -3175,46 +3215,6 @@
               "type": {
                 "text": "HTMLDivElement"
               }
-            },
-            {
-              "kind": "field",
-              "name": "searchValue",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"\""
-            },
-            {
-              "kind": "field",
-              "name": "currentCursor",
-              "type": {
-                "text": "number"
-              },
-              "default": "0"
-            },
-            {
-              "kind": "field",
-              "name": "currentGroupCursor",
-              "type": {
-                "text": "number"
-              },
-              "default": "0"
-            },
-            {
-              "kind": "field",
-              "name": "currentGroupOptionCursor",
-              "type": {
-                "text": "number"
-              },
-              "default": "0"
-            },
-            {
-              "kind": "field",
-              "name": "viewMoreTags",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
             },
             {
               "kind": "field",
@@ -3383,88 +3383,18 @@
             },
             {
               "kind": "field",
-              "name": "isReadOnly",
-              "description": "fetch read-only value from nearest parent f-field element"
-            },
-            {
-              "kind": "field",
-              "name": "canDuplicate",
-              "description": "fetch can-duplicate value from nearest parent f-field element"
-            },
-            {
-              "kind": "method",
-              "name": "handleInput",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ],
-              "description": "emit input custom event"
-            },
-            {
-              "kind": "method",
-              "name": "clearInputValue",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "clear input value on clear icon clicked"
-            },
-            {
-              "kind": "method",
-              "name": "emptySelectedValuesInGroups",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
               "name": "iconSize",
               "description": "icon size"
             },
             {
               "kind": "method",
-              "name": "applyHeight"
+              "name": "applyHeight",
+              "description": "apply height styling to f-select options wrapper"
             },
             {
               "kind": "method",
-              "name": "applyWidth"
-            },
-            {
-              "kind": "method",
-              "name": "handleDropDownOpen",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleDropDownClose",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ]
+              "name": "applyWidth",
+              "description": "apply width to f-select"
             },
             {
               "kind": "method",
@@ -3476,7 +3406,8 @@
                     "text": "FSelectSingleOption"
                   }
                 }
-              ]
+              ],
+              "description": "index search for the resepctive option"
             },
             {
               "kind": "method",
@@ -3494,7 +3425,105 @@
                     "text": "string"
                   }
                 }
-              ]
+              ],
+              "description": "index search for respective option of the respective group"
+            },
+            {
+              "kind": "method",
+              "name": "isSelected",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "FSelectOptionObject | string"
+                  }
+                }
+              ],
+              "description": "check selection for respective option."
+            },
+            {
+              "kind": "method",
+              "name": "isGroupSelection",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "FSelectSingleOption"
+                  }
+                },
+                {
+                  "name": "group",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "check selection for respective option of the respective group"
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ],
+              "description": "emit input custom event for option selection"
+            },
+            {
+              "kind": "method",
+              "name": "clearInputValue",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
+              "description": "clear input value on clear icon clicked"
+            },
+            {
+              "kind": "method",
+              "name": "clearSelectionInGroups",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
+              "description": "clear te search string"
+            },
+            {
+              "kind": "method",
+              "name": "handleDropDownOpen",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
+              "description": "open options menu"
+            },
+            {
+              "kind": "method",
+              "name": "handleDropDownClose",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
+              "description": "close options menu"
             },
             {
               "kind": "method",
@@ -3512,11 +3541,12 @@
                     "text": "MouseEvent"
                   }
                 }
-              ]
+              ],
+              "description": "action for selection of options if the options is in the form of array"
             },
             {
               "kind": "method",
-              "name": "handleOptionSelectionGroup",
+              "name": "handleSelectionGroup",
               "parameters": [
                 {
                   "name": "option",
@@ -3536,7 +3566,8 @@
                     "text": "MouseEvent"
                   }
                 }
-              ]
+              ],
+              "description": "action for selection of options if the options is in the form of groups"
             },
             {
               "kind": "method",
@@ -3554,37 +3585,8 @@
                     "text": "MouseEvent"
                   }
                 }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "isSelected",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "FSelectSingleOption"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "isSelectedInGroup",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "FSelectSingleOption"
-                  }
-                },
-                {
-                  "name": "group",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
+              ],
+              "description": "remove selection option (in group) when f-tag is clicked"
             },
             {
               "kind": "method",
@@ -3602,7 +3604,8 @@
                     "text": "MouseEvent"
                   }
                 }
-              ]
+              ],
+              "description": "handle click on checkbox"
             },
             {
               "kind": "method",
@@ -3626,7 +3629,8 @@
                     "text": "MouseEvent"
                   }
                 }
-              ]
+              ],
+              "description": "handle click on checkbox in group"
             },
             {
               "kind": "method",
@@ -3644,7 +3648,8 @@
                     "text": "string"
                   }
                 }
-              ]
+              ],
+              "description": "select all options inside a particular group"
             },
             {
               "kind": "method",
@@ -3656,11 +3661,8 @@
                     "text": "string"
                   }
                 }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "validateProperties"
+              ],
+              "description": "check if all values of group are selected or not or are in idetereminate state"
             },
             {
               "kind": "method",
@@ -3672,7 +3674,8 @@
                     "text": "MouseEvent"
                   }
                 }
-              ]
+              ],
+              "description": "hide/show f-tags when multiple options are selected"
             },
             {
               "kind": "method",
@@ -3684,11 +3687,13 @@
                     "text": "FSelectOptionsProp"
                   }
                 }
-              ]
+              ],
+              "description": "get sliced array to show selected options"
             },
             {
               "kind": "method",
-              "name": "applyInputStyle"
+              "name": "applyInputStyle",
+              "description": "change width of input inside f-select according to searchable prop"
             },
             {
               "kind": "method",
@@ -3700,7 +3705,8 @@
                     "text": "KeyboardEvent | MouseEvent"
                   }
                 }
-              ]
+              ],
+              "description": "actions on keyboard navigation through options"
             },
             {
               "kind": "method",
@@ -3712,11 +3718,18 @@
                     "text": "FSelectOptionsGroup"
                   }
                 }
-              ]
+              ],
+              "description": "get concatinated array from groups"
             },
             {
               "kind": "method",
-              "name": "clearFilterSearchValue"
+              "name": "clearFilterSearchString",
+              "description": "clear search string"
+            },
+            {
+              "kind": "method",
+              "name": "validateProperties",
+              "description": "validate properties"
             }
           ],
           "attributes": [

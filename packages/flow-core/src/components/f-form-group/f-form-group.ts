@@ -1,6 +1,7 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
+import { FDiv } from "../f-div/f-div";
 import eleStyle from "./f-form-group.scss";
 
 /**
@@ -11,7 +12,7 @@ export class FFormGroup extends FRoot {
   /**
    * css loaded from scss file
    */
-  static styles = [unsafeCSS(eleStyle)];
+  static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
 
   /**
    * @attribute Variant decides whether the input elements in a group have some gap or not when they are aligned horizontally.
@@ -41,7 +42,7 @@ export class FFormGroup extends FRoot {
     /**
      * Final html to render
      */
-    return html`<slot></slot>`;
+    return html` <slot></slot> `;
   }
 }
 

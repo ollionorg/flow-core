@@ -54,8 +54,8 @@ import "@cldcvr/flow-core/dist/style.css";
 #### Step 3: Import flow-core into your project
 
 Copy and import the below snippet into your startup file. In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
-```
-import("@cldcvr/flow-core").then(() => {
+```JavaScript
+import("@cldcvr/flow-core").then(async () => {
   //your application startup code
 });
 ```

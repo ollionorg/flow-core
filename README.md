@@ -35,19 +35,19 @@ If you would like to contribute to an existing starter kit or write a new one fo
 **Vue:**
 Paste the below snippet *after the closing `<template>`* in your `App.vue` 
 
-```
+```html
 <style>
 @import "@cldcvr/flow-core/dist/style.css";
 </style> 
 ```
 **React:** Paste the below snippet in `src/index.tsx` or `index.jsx`
 
-```
+```JavaScript
 import "@cldcvr/flow-core/dist/style.css";
 ```
 **Angular:** Add css file path in `angular.json` in `styles` property array.
 
-```
+```JSON
 "styles": ["@cldcvr/flow-core/dist/style.css"],
 
 ```
@@ -63,17 +63,17 @@ import("@cldcvr/flow-core").then(async () => {
 
 **Vue:** 
 Copy paste below line in your `main.ts` file.
-```
+```JavaScript
 import "@cldcvr/flow-core/dist/types/vue2";
 ```
 or 
-```
+```JavaScript
 import "@cldcvr/flow-core/dist/types/vue3";
 ```
 
 **React**
 Include react type in `tsconfig.json` like below
-```
+```JSON
 "include": ["src", "./node_modules/@cldcvr/flow-core/dist/types/react.ts"]
 ```
 
@@ -91,7 +91,7 @@ yarn add @cldcvr/flow-system-icon
 
 ### Step 2: Import the icon pack 
 
-```
+```JavaScript
 import "@cldcvr/flow-system-icon";
 ```
 

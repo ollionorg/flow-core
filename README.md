@@ -55,7 +55,9 @@ import "@cldcvr/flow-core/dist/style.css";
 
 Copy and import the below snippet into your startup file. In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
 ```
-import '@cldcvr/flow-core';
+import("@cldcvr/flow-core").then(() => {
+  //your application starup code
+});
 ```
 #### Step 4 : If your project is typescript enabled please include import types to
 

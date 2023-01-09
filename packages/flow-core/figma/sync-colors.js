@@ -39,7 +39,7 @@ function generateTokenScss(colorTokens) {
       const tokenEntries = Object.entries(tokens);
 
       scss += `
-	[flow-element][theme="${theme}"]{ `;
+	[data-theme="${theme}"]{ `;
 
       for (let [variable, value] of tokenEntries) {
         variable = `color-${variable}`;

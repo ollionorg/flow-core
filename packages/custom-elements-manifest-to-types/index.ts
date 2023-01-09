@@ -223,22 +223,22 @@ function getComponentPropTypeImports(schema: Package, modulePath?: string): stri
 			}
 
 			if (declaration.attributes) {
-				const extractedTypes: string[] = [];
+				const extractedTypes: Set<string> = new Set();
 				declaration.attributes.forEach((attribute) => {
 					if (attribute.type?.text) {
 						const typesToImport: string[] = attribute.type.text.split(" ");
 						typesToImport.forEach((t) => {
 							if (!builtInTypes.includes(t) && t.charAt(0) !== "'" && t.charAt(0) !== '"' && t) {
-								extractedTypes.push(t);
+								extractedTypes.add(t);
 							}
 						});
 					}
 				});
 
-				if (extractedTypes.length > 0) {
+				if (extractedTypes.size > 0) {
 					let importStatement = `import type { `;
-					extractedTypes.forEach((et, idx) => {
-						importStatement += `${et}${idx < extractedTypes.length - 1 ? "," : ""}`;
+					Array.from(extractedTypes).forEach((et, idx) => {
+						importStatement += `${et}${idx < extractedTypes.size - 1 ? "," : ""}`;
 					});
 					importStatement += `} from '${moduleName}';`;
 					moduleTypeImports.push(importStatement);

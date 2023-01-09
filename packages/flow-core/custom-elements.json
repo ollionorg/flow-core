@@ -182,6 +182,14 @@
             "name": "*",
             "package": "\"./components/f-select/f-select\""
           }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./mixins/components/f-root/f-root\""
+          }
         }
       ]
     },
@@ -4862,7 +4870,7 @@
           "type": {
             "text": "object"
           },
-          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    if (cfg.theme) {\n      this.initTheme();\n    }\n  },\n  initTheme() {\n    const themeStyleElement = document.querySelector(\n      `style[id^=\"flow-theme-${config.theme}\"]`\n    );\n    if (!themeStyleElement) {\n      const themeElement = initThemeTag();\n\n      if (themeElement) {\n        const themeCSS = getThemeStyle(\n          `[flow-element][theme=\"${config.theme}\"]`\n        );\n\n        if (themeCSS) {\n          themeElement.appendChild(document.createTextNode(themeCSS));\n          themeSubject.next(config.theme);\n        } else {\n          console.error(\n            `Theme ${config.theme} CSS file/selector not found! \\n Please check if css is imported 'import \"@cldcvr/flow-core/dist/style.css\"'`\n          );\n        }\n      }\n    }\n  },\n}"
+          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    if (cfg.theme) {\n      this.initTheme();\n    }\n  },\n  initTheme() {\n    document.documentElement.setAttribute(\"data-theme\", `${config.theme}`);\n  },\n}"
         }
       ],
       "exports": [

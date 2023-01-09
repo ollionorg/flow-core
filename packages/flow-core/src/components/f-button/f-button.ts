@@ -168,9 +168,10 @@ export class FButton extends FRoot {
           return `background-color: ${LightenDarkenColor(
             this.fill,
             -150
-          )}; border: 1px solid ${LightenDarkenColor(this.fill, -150)}; color: transparent; fill: ${
-            this.fill
-          }`;
+          )}; border: 1px solid ${LightenDarkenColor(
+            this.fill,
+            -150
+          )}; color: transparent; fill: ${this.fill}`;
         } else if (this.category === "outline") {
           return `background: transparent; border: 1px solid ${this.fill}; fill: ${this.fill};`;
         } else {
@@ -196,7 +197,9 @@ export class FButton extends FRoot {
     /**
      * checks if host element's `:before` has shimmer by accessing  computedstyles
      */
-    const hasShimmer = (getComputedStyle(this, "::before") as any)["animation-name"] === "shimmer";
+    const hasShimmer =
+      (getComputedStyle(this, "::before") as any)["animation-name"] ===
+      "shimmer";
 
     /**
      * if hasShimmer true then add class
@@ -215,13 +218,18 @@ export class FButton extends FRoot {
     //   "fill-button-surface": this.category === "fill",
     // };
     const iconClasses = {
-      "fill-button-surface": this.category === "fill" && !this.fill ? true : false,
+      "fill-button-surface":
+        this.category === "fill" && !this.fill ? true : false,
       "fill-button-surface-light":
-        this.fill && this.category === "fill" && getTextContrast(this.fill) === "light-text"
+        this.fill &&
+        this.category === "fill" &&
+        getTextContrast(this.fill) === "light-text"
           ? true
           : false,
       "fill-button-surface-dark":
-        this.fill && this.category === "fill" && getTextContrast(this.fill) === "dark-text"
+        this.fill &&
+        this.category === "fill" &&
+        getTextContrast(this.fill) === "dark-text"
           ? true
           : false,
     };
@@ -254,13 +262,18 @@ export class FButton extends FRoot {
      * create counter if available
      */
     const counterClasses = {
-      "fill-button-surface": !this.fill && this.category === "fill" ? true : false,
+      "fill-button-surface":
+        !this.fill && this.category === "fill" ? true : false,
       "fill-button-surface-light":
-        this.category === "fill" && this.fill && getTextContrast(this.fill) === "light-text"
+        this.category === "fill" &&
+        this.fill &&
+        getTextContrast(this.fill) === "light-text"
           ? true
           : false,
       "fill-button-surface-dark":
-        this.category === "fill" && this.fill && getTextContrast(this.fill) === "dark-text"
+        this.category === "fill" &&
+        this.fill &&
+        getTextContrast(this.fill) === "dark-text"
           ? true
           : false,
     };

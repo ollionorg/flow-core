@@ -91,8 +91,11 @@ yarn add @cldcvr/flow-system-icon
 
 ### Step 2: Import the icon pack 
 
-```JavaScript
-import "@cldcvr/flow-system-icon";
+```javascript
+import("@cldcvr/flow-core").then(async () => {
+	await import('@cldcvr/flow-system-icon');
+	//add your application startup code here
+});
 ```
 
 #### Icon packs

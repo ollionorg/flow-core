@@ -28,7 +28,7 @@ If you would like to contribute to an existing starter kit or write a new one fo
 #### Step 1: Install flow core
 ```yarn add @cldcvr/flow-core```
 
-*Note:* after adding the snippets, re-start your application.
+*Note:* after installation re-start your application.
 
 
 #### Step 2 : Import CSS 

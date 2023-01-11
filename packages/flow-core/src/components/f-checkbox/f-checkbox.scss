@@ -50,15 +50,6 @@ $sizes: (
 
 :host {
   height: fit-content;
-  .f-checkbox {
-    border: 0px;
-    height: 0px;
-    width: 0px;
-    overflow: hidden;
-    padding: 0px;
-    position: absolute;
-  }
-
   .f-checkbox-wrapper {
     @include base();
     slot[name="description"]::slotted(*) {
@@ -167,6 +158,15 @@ $sizes: (
         }
       }
     }
+    .f-checkbox {
+      border: 0px;
+      height: 0px;
+      width: 0px;
+      overflow: hidden;
+      padding: 0px;
+      position: absolute;
+      visibility: none;
+    }
   }
 
   @keyframes draw-checkbox {
@@ -178,18 +178,6 @@ $sizes: (
     }
   }
 }
-
-// f-checkbox {
-//   @each $state, $color in $states {
-//     &[state="#{$state}"] {
-//       &:focus {
-//         outline: map.get($color, "background") solid 1px;
-//         outline-offset: 1px;
-//         border-radius: 2px;
-//       }
-//     }
-//   }
-// }
 
 f-checkbox {
   &[disabled] {

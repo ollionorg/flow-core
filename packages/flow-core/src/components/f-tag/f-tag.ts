@@ -30,6 +30,12 @@ export class FTag extends FRoot {
   static styles = [unsafeCSS(eleStyle)];
 
   /**
+   * @attribute boolean for inherited class
+   */
+  @state()
+  tagSystemIcon = false;
+
+  /**
    * @attribute local state for managing custom fill.
    */
   @state()
@@ -180,13 +186,21 @@ export class FTag extends FRoot {
     /**
      * classes to apply on icon , based on category
      */
-    const iconClasses = {
+    const iconClasses: Record<string, boolean> = {
       "fill-button-surface": !this.fill ? true : false,
       "fill-button-surface-light":
         this.fill && getTextContrast(this.fill) === "light-text" ? true : false,
       "fill-button-surface-dark":
         this.fill && getTextContrast(this.fill) === "dark-text" ? true : false,
     };
+
+    // merging host classes
+    this.classList.forEach((cl) => {
+      iconClasses[cl] = true;
+      if (cl === "f-tag-system-icon") {
+        this.tagSystemIcon = true;
+      }
+    });
     /**
      * create iconLeft if available
      */
@@ -194,7 +208,11 @@ export class FTag extends FRoot {
       ? html`<f-icon
           .source=${this.iconLeft}
           .state=${this.state}
-          class=${classMap({ "left-icon": true, ...iconClasses })}
+          class=${classMap({
+            "left-icon": true,
+            ...iconClasses,
+            "f-tag-system-icon": this.tagSystemIcon ? true : false,
+          })}
           .size=${this.iconSize}
           ?clickable=${true}
         ></f-icon>`
@@ -206,7 +224,11 @@ export class FTag extends FRoot {
       ? html`<f-icon
           .source=${this.iconRight}
           .state=${this.state}
-          class=${classMap({ "right-icon": true, ...iconClasses })}
+          class=${classMap({
+            "right-icon": true,
+            ...iconClasses,
+            "f-tag-system-icon": this.tagSystemIcon ? true : false,
+          })}
           .size=${this.iconSize}
           ?clickable=${true}
         ></f-icon>`

@@ -68,19 +68,25 @@ export class FSelect extends FRoot {
    * @attribute keyboard hover for array of objects
    */
   @state({})
-  currentCursor = 0;
+  currentCursor = -1;
 
   /**
    * @attribute keyboard hover for group for objects consisting groups
    */
   @state({})
-  currentGroupCursor = 0;
+  currentGroupCursor = -1;
+
+  /**
+   * @attribute wrapper offset height
+   */
+  @state({})
+  fSelectWrapperHeight = 0;
 
   /**
    * @attribute keyboard hover for options in group for objects consisting groups
    */
   @state({})
-  currentGroupOptionCursor = 0;
+  currentGroupOptionCursor = -1;
 
   @query(".f-select")
   inputElement!: HTMLInputElement;
@@ -185,7 +191,7 @@ export class FSelect extends FRoot {
    * @attribute  a ‘close’ icon button appear on right of the select to clear the input value(s).
    */
   @property({ reflect: true, type: Boolean })
-  clear?: boolean = false;
+  clear?: boolean = true;
 
   /**
    * @attribute options with checkboxes.
@@ -197,7 +203,7 @@ export class FSelect extends FRoot {
    * @attribute limit to show the selection tags inside f-select.
    */
   @property({ reflect: true, type: Number })
-  selectionLimit = 1;
+  selectionLimit = 2;
 
   /**
    * icon size
@@ -209,20 +215,13 @@ export class FSelect extends FRoot {
   }
 
   /**
-   * apply height styling to f-select options wrapper
+   * apply height styling to f-select options wrapper.
    */
   applyHeight() {
     if (this.openDropdown)
-      return `max-height:${this.height}; transition: max-height 0.25s ease-in 0s; top: calc(${this.wrapperElement?.offsetHeight}px + 4px);`;
+      return `max-height:${this.height}; transition: max-height 0.25s ease-in 0s; top: calc(${this.fSelectWrapperHeight}px + 4px);`;
     else
-      return `max-height:0px; transition: max-height 0.25s ease-in 0s; top: calc(${this.wrapperElement?.offsetHeight}px + 4px);`;
-  }
-
-  /**
-   * apply width to f-select
-   */
-  applyWidth() {
-    return `width:${this.width === "fill-container" ? "100%" : this.width};`;
+      return `max-height:0px; transition: max-height 0.25s ease-in 0s; top: calc(${this.fSelectWrapperHeight}px + 4px);`;
   }
 
   /**
@@ -356,12 +355,6 @@ export class FSelect extends FRoot {
    */
   handleDropDownOpen(e: MouseEvent) {
     this.openDropdown = true;
-    const event = new CustomEvent("input", {
-      detail: {
-        value: this.selectedOptions,
-      },
-    });
-    this.dispatchEvent(event);
     this?.inputElement?.focus();
     e.stopPropagation();
   }
@@ -372,13 +365,9 @@ export class FSelect extends FRoot {
   handleDropDownClose(e: MouseEvent) {
     this.openDropdown = false;
     this.clearFilterSearchString();
-    this.currentCursor = 0;
-    const event = new CustomEvent("input", {
-      detail: {
-        value: this.selectedOptions,
-      },
-    });
-    this.dispatchEvent(event);
+    this.currentCursor = -1;
+    this.currentGroupCursor = -1;
+    this.currentGroupOptionCursor = -1;
     this.requestUpdate();
     e.stopPropagation();
   }
@@ -535,15 +524,9 @@ export class FSelect extends FRoot {
    * hide/show f-tags when multiple options are selected
    */
   handleViewMoreTags(e: MouseEvent) {
-    this.viewMoreTags = !this.viewMoreTags;
-    const event = new CustomEvent("input", {
-      detail: {
-        value: this.selectedOptions,
-      },
-    });
-    this.dispatchEvent(event);
-    this.requestUpdate();
     e.stopPropagation();
+    this.viewMoreTags = !this.viewMoreTags;
+    this.requestUpdate();
   }
 
   /**
@@ -557,7 +540,9 @@ export class FSelect extends FRoot {
    * change width of input inside f-select according to searchable prop
    */
   applyInputStyle() {
-    return this.searchable ? `${this.openDropdown ? "" : "width:0px"}` : `max-width:0px`;
+    return this.searchable
+      ? `${this.openDropdown ? "width:75%;" : "width:0px; transition: width 0.25s ease-in 0s;"}`
+      : `max-width:0px`;
   }
 
   /**
@@ -567,7 +552,9 @@ export class FSelect extends FRoot {
     e.stopPropagation();
     if (Array.isArray(this.filteredOptions)) {
       if (this.openDropdown) {
-        if ((e as KeyboardEvent).keyCode === 38 && this.currentCursor > 0) {
+        if ((e as KeyboardEvent).keyCode === 38 && this.currentCursor === -1) {
+          this.currentCursor = 0;
+        } else if ((e as KeyboardEvent).keyCode === 38 && this.currentCursor > 0) {
           this.currentCursor--;
         } else if (
           (e as KeyboardEvent).keyCode === 40 &&
@@ -592,6 +579,13 @@ export class FSelect extends FRoot {
     } else {
       if (this.openDropdown) {
         if (
+          (e as KeyboardEvent).keyCode === 38 &&
+          this.currentGroupCursor === -1 &&
+          this.currentGroupOptionCursor === -1
+        ) {
+          this.currentGroupCursor = 0;
+          this.currentGroupOptionCursor = 0;
+        } else if (
           (e as KeyboardEvent).keyCode === 38 &&
           this.currentGroupCursor <= Object.keys(this.filteredOptions).length - 1
         ) {
@@ -665,6 +659,29 @@ export class FSelect extends FRoot {
     this.requestUpdate();
   }
 
+  isStringsArray(arr: string[]) {
+    return arr.every((i) => typeof i === "string");
+  }
+
+  /**
+   * Create New Option when option not present
+   */
+  createNewOption(e: MouseEvent) {
+    const event = new CustomEvent("input", {
+      detail: {
+        value: Array.isArray(this.options)
+          ? this.type === "single"
+            ? (this.selectedOptions as FSelectArray)[0]
+            : this.selectedOptions
+          : this.selectedOptions,
+        searchValue: this.searchValue,
+      },
+    });
+    this.dispatchEvent(event);
+    this.requestUpdate();
+    this.handleDropDownClose(e);
+  }
+
   /**
    * validate properties
    */
@@ -679,7 +696,13 @@ export class FSelect extends FRoot {
 
   render() {
     this.validateProperties();
+    this.fSelectWrapperHeight = this.wrapperElement?.offsetHeight;
 
+    if (this.width === "fill-container") {
+      this.style.width = "100%";
+    } else {
+      this.style.width = this.width ?? "100%";
+    }
     /**
      * concaticated array from groups
      */
@@ -690,10 +713,10 @@ export class FSelect extends FRoot {
     /**
      * click outside the f-select wrapper area
      */
-    document.body.addEventListener(
+    window.addEventListener(
       "click",
       (e: MouseEvent) => {
-        if (!this.contains(e.target as HTMLInputElement)) {
+        if (!this.contains(e.target as HTMLInputElement) && this.openDropdown) {
           this.openDropdown = false;
           this.clearFilterSearchString();
         }
@@ -705,13 +728,13 @@ export class FSelect extends FRoot {
      * create iconlLeft if available
      */
     const iconLeft = this.iconLeft
-      ? html` <div class="icon-left-padding">
+      ? html`
           <f-icon
             .source=${this.iconLeft}
             .size=${this.iconSize}
             class=${!this.size ? "f-input-icons-size" : ""}
           ></f-icon>
-        </div>`
+        `
       : "";
 
     /**
@@ -732,7 +755,7 @@ export class FSelect extends FRoot {
         ></f-icon>`;
 
     /**
-     * input text area
+     * input text area with alternate f-text placeholder when not searchable
      */
     const inputAppend = html`
       ${this.selectedOptions?.length === 0 &&
@@ -771,20 +794,14 @@ export class FSelect extends FRoot {
     const prefixAppend = html`<div class="f-select-prefix">
       ${this.iconLeft ? html` ${iconLeft}` : ""}
       ${Array.isArray(this.selectedOptions) && this.selectedOptions?.length > 0
-        ? html` <f-div
-            height="100%"
-            width="100%"
-            padding="x-small x-large x-small none"
-            direction="row"
-            gap="x-small"
-            overflow="wrap"
-            align="middle-left"
-          >
+        ? html` <div class="f-select-searchable">
             ${this.type === "single"
               ? (this.selectedOptions as FSelectOptionsProp).map(
                   (option) =>
-                    html`<f-text variant="para" size="small" weight="regular" class="word-break"
-                      >${(option as FSelectOptionObject)?.title ?? option}</f-text
+                    html`<f-div padding="none" ellipsis=${true}
+                      ><f-text variant="para" size="small" weight="regular" class="word-break"
+                        >${(option as FSelectOptionObject)?.title ?? option}</f-text
+                      ></f-div
                     >`
                 )
               : html`${(this.selectedOptions as FSelectOptionsProp)
@@ -792,6 +809,7 @@ export class FSelect extends FRoot {
                   .map(
                     (option) =>
                       html`<f-tag
+                        class="f-tag-system-icon"
                         icon-right="i-close"
                         size="small"
                         label=${(option as FSelectOptionObject)?.title ?? option}
@@ -810,7 +828,9 @@ export class FSelect extends FRoot {
                           weight="regular"
                           state="primary"
                           @click=${this.handleViewMoreTags}
-                          ><a>+${this.selectedOptions.length - this.selectionLimit} more</a></f-text
+                          ><a href="" @click=${(e: MouseEvent) => e.preventDefault()}
+                            >+${this.selectedOptions.length - this.selectionLimit} more</a
+                          ></f-text
                         ></f-div
                       >`
                     : html`<f-div height="hug-content" width="hug-content" padding="none"
@@ -820,25 +840,21 @@ export class FSelect extends FRoot {
                           weight="regular"
                           state="primary"
                           @click=${this.handleViewMoreTags}
-                          ><a>show less</a></f-text
+                          ><a href="" @click=${(e: MouseEvent) => e.preventDefault()}
+                            >show less</a
+                          ></f-text
                         ></f-div
                       >`
                   : ""} `}
             ${inputAppend}
-          </f-div>`
-        : html`<f-div
-            height="100%"
-            width="100%"
-            padding="x-small x-large x-small none"
-            direction="row"
-            gap="x-small"
-            overflow="wrap"
-            align="middle-left"
-            >${(concatinatedSelectedOptions as FSelectOptionsProp)
+          </div>`
+        : html`<div class="f-select-searchable">
+            ${(concatinatedSelectedOptions as FSelectOptionsProp)
               .slice(0, this.getSlicedSelections(concatinatedSelectedOptions))
               .map(
                 (option) =>
                   html`<f-tag
+                    class="f-tag-system-icon"
                     icon-right="i-close"
                     size="small"
                     label=${(option as FSelectOptionObject)?.title ?? option}
@@ -857,7 +873,7 @@ export class FSelect extends FRoot {
                       weight="regular"
                       state="primary"
                       @click=${this.handleViewMoreTags}
-                      ><a
+                      ><a href="" @click=${(e: MouseEvent) => e.preventDefault()}
                         >+${concatinatedSelectedOptions.length - this.selectionLimit} more</a
                       ></f-text
                     ></f-div
@@ -869,12 +885,14 @@ export class FSelect extends FRoot {
                       weight="regular"
                       state="primary"
                       @click=${this.handleViewMoreTags}
-                      ><a>show less</a></f-text
+                      ><a href="" @click=${(e: MouseEvent) => e.preventDefault()}
+                        >show less</a
+                      ></f-text
                     ></f-div
                   >`
               : ""}
             ${inputAppend}
-          </f-div> `}
+          </div> `}
     </div>`;
 
     /**
@@ -902,6 +920,39 @@ export class FSelect extends FRoot {
       : html`<div class="loader-suffix">${unsafeSVG(loader)}</div>`;
 
     /**
+     * empty filtered options
+     */
+    const emptyMenu = html`<f-div
+      id=${`option-0`}
+      padding="medium"
+      height="hug-content"
+      width="fill-container"
+      direction="row"
+      align="middle-left"
+      gap="auto"
+      tabindex=${0}
+    >
+      <f-div width="fill-container" height="hug-content" padding="none"
+        ><f-text variant="para" size="small" weight="regular">No Options found.</f-text></f-div
+      >
+      <f-div width="hug-content" height="hug-content" padding="none">
+        ${this.offsetWidth > 200
+          ? html` <f-button
+              size="small"
+              category="transparent"
+              label="CREATE"
+              @click=${this.createNewOption}
+            ></f-button>`
+          : html`<f-icon-button
+              icon="i-plus"
+              state="primary"
+              size="x-small"
+              @click=${this.createNewOption}
+            ></f-icon-button>`}</f-div
+      >
+    </f-div>`;
+
+    /**
      * Final html to render
      */
     return html`
@@ -925,7 +976,6 @@ export class FSelect extends FRoot {
           category=${this.category}
           state=${this.state}
           size=${this.size}
-          style="${this.applyWidth()}"
           @click=${this.handleDropDownOpen}
           @keydown=${this.handleKeyDown}
         >
@@ -933,23 +983,14 @@ export class FSelect extends FRoot {
           <div class="f-select-options" style="${this.applyHeight()}" size=${this.size}>
             <f-div padding="none" gap="none" direction="column">
               ${Array.isArray(this.options)
-                ? (this.filteredOptions as FSelectArray)?.map((option, index) =>
-                    this.optionTemplate
-                      ? html`<f-div
-                          padding="none"
-                          @click=${(e: MouseEvent) => {
-                            this.handleOptionSelection(option, e);
-                          }}
-                        >
-                          ${unsafeHTML(
-                            getComputedHTML(html`${eval("`" + this.optionTemplate + "`")}`)
-                          )}
-                        </f-div>`
-                      : html`<f-div
+                ? this.filteredOptions.length > 0
+                  ? (this.filteredOptions as FSelectArray)?.map(
+                      (option, index) =>
+                        html`<f-div
                           class="f-select-options-clickable"
                           id=${`option-${index}`}
                           padding="medium"
-                          height="44px"
+                          height="hug-content"
                           width="fill-container"
                           direction="row"
                           ?clickable=${true}
@@ -973,7 +1014,7 @@ export class FSelect extends FRoot {
                                 }}
                               ></f-checkbox>`
                             : ""}
-                          ${(option as FSelectOptionObject)?.icon
+                          ${(option as FSelectOptionObject)?.icon && !this.optionTemplate
                             ? html` <f-div
                                 padding="none"
                                 gap="none"
@@ -985,15 +1026,24 @@ export class FSelect extends FRoot {
                                 ></f-icon
                               ></f-div>`
                             : ""}
-                          <f-div
-                            padding="none"
-                            gap="none"
-                            height="hug-content"
-                            width="fill-container"
-                            ><f-text variant="para" size="small" weight="regular"
-                              >${(option as FSelectOptionObject)?.title ?? option}</f-text
-                            ></f-div
-                          >
+                          ${this.optionTemplate
+                            ? html`
+                                ${unsafeHTML(
+                                  getComputedHTML(html`${eval("`" + this.optionTemplate + "`")}`)
+                                )}
+                              `
+                            : ""}
+                          ${!this.optionTemplate
+                            ? html` <f-div
+                                padding="none"
+                                gap="none"
+                                height="hug-content"
+                                width="fill-container"
+                                ><f-text variant="para" size="small" weight="regular"
+                                  >${(option as FSelectOptionObject)?.title ?? option}</f-text
+                                ></f-div
+                              >`
+                            : ""}
                           ${this.isSelected(option) && !this.checkbox
                             ? html` <f-div
                                 padding="none"
@@ -1004,8 +1054,14 @@ export class FSelect extends FRoot {
                               ></f-div>`
                             : ""}
                         </f-div>`
+                    )
+                  : emptyMenu
+                : Object.keys(this.filteredOptions)?.length > 0 &&
+                  Object.keys(this.filteredOptions)?.every(
+                    (groupName) =>
+                      (this.filteredOptions as FSelectOptionsGroup)[groupName].length > 0
                   )
-                : Object.keys(this.filteredOptions)?.map((group, groupIndex) =>
+                ? Object.keys(this.filteredOptions)?.map((group, groupIndex) =>
                     (this.filteredOptions as FSelectOptionsGroup)[group].length > 0
                       ? html`<f-div
                     padding="none"
@@ -1019,7 +1075,7 @@ export class FSelect extends FRoot {
                       class="f-select-options-clickable"
                       id=${`group-${groupIndex}`}
                       padding="medium"
-                      height="44px"
+                      height="hug-content"
                       width="fill-container"
                       align="middle-left"
                       direction="row"
@@ -1051,7 +1107,7 @@ export class FSelect extends FRoot {
                               class="f-select-options-clickable"
                               id=${`group-${groupIndex}-option-${optionIndex}`}
                               padding="medium x-large"
-                              height="44px"
+                              height="hug-content"
                               width="fill-container"
                               direction="row"
                               ?clickable=${true}
@@ -1079,7 +1135,7 @@ export class FSelect extends FRoot {
                                     }}
                                   ></f-checkbox>`
                                 : ""}
-                              ${(option as FSelectOptionObject)?.icon
+                              ${(option as FSelectOptionObject)?.icon && !this.optionTemplate
                                 ? html` <f-div
                                     padding="none"
                                     gap="none"
@@ -1091,15 +1147,26 @@ export class FSelect extends FRoot {
                                     ></f-icon
                                   ></f-div>`
                                 : ""}
-                              <f-div
-                                padding="none"
-                                gap="none"
-                                height="hug-content"
-                                width="fill-container"
-                                ><f-text variant="para" size="small" weight="regular"
-                                  >${(option as FSelectOptionObject)?.title ?? option}</f-text
-                                ></f-div
-                              >
+                              ${this.optionTemplate
+                                ? html`
+                                    ${unsafeHTML(
+                                      getComputedHTML(
+                                        html`${eval("`" + this.optionTemplate + "`")}`
+                                      )
+                                    )}
+                                  `
+                                : ""}
+                              ${!this.optionTemplate
+                                ? html` <f-div
+                                    padding="none"
+                                    gap="none"
+                                    height="hug-content"
+                                    width="fill-container"
+                                    ><f-text variant="para" size="small" weight="regular"
+                                      >${(option as FSelectOptionObject)?.title ?? option}</f-text
+                                    ></f-div
+                                  >`
+                                : ""}
                               ${this.isGroupSelection(option, group) && !this.checkbox
                                 ? html` <f-div
                                     padding="none"
@@ -1115,7 +1182,8 @@ export class FSelect extends FRoot {
                     </f-div></f-div
                   >`
                       : ""
-                  )}
+                  )
+                : emptyMenu}
             </f-div>
           </div>
         </div>
@@ -1136,6 +1204,9 @@ export class FSelect extends FRoot {
      * initial value of filteredOptions
      */
     this.filteredOptions = this.options;
+  }
+  updated(changedProps: any) {
+    this.fSelectWrapperHeight = changedProps.get("fSelectWrapperHeight");
   }
 }
 

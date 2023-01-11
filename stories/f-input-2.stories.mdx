@@ -114,7 +114,7 @@ f-spacer is used to create a pseudo space in the layout.
         { icon: "i-home", title: "option 1" },
         { icon: "i-user", title: "option 2" },
       ]);
-      const optionTemplate = `<f-div><f-div padding="small" direction="column" gap="small" clickable><f-text>\${option.title}</f-text><f-text>\${option.data.name}, \${option.data.email}</f-text></f-div></f-div>`;
+      const optionTemplate = `<f-div><f-div padding="small" direction="column" gap="small"><f-text>\${option.title}</f-text><f-text>\${option.data.name}, \${option.data.email}</f-text></f-div></f-div>`;
       const [selectedValueFirst, setSelectedValueFirst] = useState([
         {
           icon: "i-home",
@@ -156,6 +156,20 @@ f-spacer is used to create a pseudo space in the layout.
       });
       const [selectedValueNew, setSelectedValueNew] = useState(["option 1", "option 2"]);
       const [selectedValueSingle, setSelectedValueSingle] = useState("option 1");
+      const [optionMenuFirst, setOptionMenuFirst] = useState([
+        "option 1",
+        "option 2",
+        "option 3",
+        "option 4",
+        "option 5",
+        "option 6",
+        "option 7",
+        "option 8",
+        "option 9",
+        "option 10",
+        "option 11",
+        "option 12",
+      ]);
       const handleInput = (e) => {
         updateArgs({ value: e.detail.value });
       };
@@ -281,7 +295,6 @@ f-spacer is used to create a pseudo space in the layout.
                   { icon: "i-setting", title: "option 11" },
                   { icon: "i-setting", title: "option 12" },
                 ]}
-                icon-left="i-app"
                 ?checkbox=${true}
                 ?clear=${true}
               >
@@ -298,20 +311,10 @@ f-spacer is used to create a pseudo space in the layout.
                 state=${args["element-state"]}
                 .value=${selectedValueNew}
                 @input=${handleSelectNew}
-                .options=${[
-                  "option 1",
-                  "option 2",
-                  "option 3",
-                  "option 4",
-                  "option 5",
-                  "option 6",
-                  "option 7",
-                  "option 8",
-                  "option 9",
-                  "option 10",
-                  "option 11",
-                  "option 12",
-                ]}
+                .options=${optionMenuFirst}
+                ?searchable=${true}
+                ?clear=${true}
+                selectionLimit="4"
               >
                 <f-div slot="label" padding="none" gap="none">Label New *</f-div>
                 <f-div slot="description" padding="none" gap="none"
@@ -326,21 +329,9 @@ f-spacer is used to create a pseudo space in the layout.
                 state=${args["element-state"]}
                 .value=${selectedValueSingle}
                 @input=${handleSelectSingle}
-                .options=${[
-                  "option 1",
-                  "option 2",
-                  "option 3",
-                  "option 4",
-                  "option 5",
-                  "option 6",
-                  "option 7",
-                  "option 8",
-                  "option 9",
-                  "option 10",
-                  "option 11",
-                  "option 12",
-                ]}
+                .options=${optionMenuFirst ?? []}
                 icon-left="i-app"
+                ?searchable=${true}
               >
                 <f-div slot="label" padding="none" gap="none">Single Selection *</f-div>
                 <f-div slot="description" padding="none" gap="none"
@@ -357,7 +348,8 @@ f-spacer is used to create a pseudo space in the layout.
               .value=${selectedValueGroup}
               @input=${handleSelectGroup}
               ?searchable=${true}
-              width="50%"
+              width="200px"
+              clear=${true}
               .options=${{
                 group1: [
                   { icon: "i-home", title: "option 1" },
@@ -532,7 +524,6 @@ f-spacer is used to create a pseudo space in the layout.
               ]}
               option-template=${optionTemplate}
               icon-left="i-app"
-              ?checkbox=${true}
               ?clear=${true}
             >
               <f-div slot="label" padding="none" gap="none">Template Try</f-div>

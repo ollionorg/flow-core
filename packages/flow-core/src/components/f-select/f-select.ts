@@ -200,6 +200,12 @@ export class FSelect extends FRoot {
   checkbox?: boolean = false;
 
   /**
+   * @attribute when on search no option is presnt, show create new button
+   */
+  @property({ reflect: true, type: Boolean, attribute: "create-option" })
+  createOption?: boolean = false;
+
+  /**
    * @attribute limit to show the selection tags inside f-select.
    */
   @property({ reflect: true, type: Number })
@@ -219,9 +225,9 @@ export class FSelect extends FRoot {
    */
   applyHeight() {
     if (this.openDropdown)
-      return `max-height:${this.height}; transition: max-height var(--transition-time-default) ease-in 0s; top: calc(${this.fSelectWrapperHeight}px + 4px);`;
+      return `max-height:${this.height}; transition: max-height var(--transition-time-rapid) ease-in 0s; top: calc(${this.fSelectWrapperHeight}px + 4px);`;
     else
-      return `max-height:0px; transition: max-height var(--transition-time-default) ease-in 0s; top: calc(${this.fSelectWrapperHeight}px + 4px);`;
+      return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s; top: calc(${this.fSelectWrapperHeight}px + 4px);`;
   }
 
   /**
@@ -544,7 +550,7 @@ export class FSelect extends FRoot {
       ? `${
           this.openDropdown
             ? "width:75%;"
-            : "width:0px; transition: width var(--transition-time-default) ease-in 0s;"
+            : "width:0px; transition: width var(--transition-time-rapid) ease-in 0s;"
         }`
       : `max-width:0px`;
   }
@@ -721,8 +727,7 @@ export class FSelect extends FRoot {
       "click",
       (e: MouseEvent) => {
         if (!this.contains(e.target as HTMLInputElement) && this.openDropdown) {
-          this.openDropdown = false;
-          this.clearFilterSearchString();
+          this.handleDropDownClose(e);
         }
       },
       true
@@ -939,21 +944,25 @@ export class FSelect extends FRoot {
       <f-div width="fill-container" height="hug-content" padding="none"
         ><f-text variant="para" size="small" weight="regular">No Options found.</f-text></f-div
       >
-      <f-div width="hug-content" height="hug-content" padding="none">
-        ${this.offsetWidth > 200
-          ? html` <f-button
-              size="small"
-              category="transparent"
-              label="CREATE"
-              @click=${this.createNewOption}
-            ></f-button>`
-          : html`<f-icon-button
-              icon="i-plus"
-              state="primary"
-              size="x-small"
-              @click=${this.createNewOption}
-            ></f-icon-button>`}</f-div
-      >
+      ${this.createOption && this.searchValue && this.searchable
+        ? html`
+            <f-div width="hug-content" height="hug-content" padding="none">
+              ${this.offsetWidth > 200
+                ? html` <f-button
+                    size="small"
+                    category="transparent"
+                    label="CREATE"
+                    @click=${this.createNewOption}
+                  ></f-button>`
+                : html`<f-icon-button
+                    icon="i-plus"
+                    state="primary"
+                    size="x-small"
+                    @click=${this.createNewOption}
+                  ></f-icon-button>`}
+            </f-div>
+          `
+        : ""}
     </f-div>`;
 
     /**
@@ -965,8 +974,8 @@ export class FSelect extends FRoot {
           padding="none"
           gap="none"
           align="bottom-left"
-          @click=${() => {
-            this.openDropdown = false;
+          @click=${(e: MouseEvent) => {
+            this.handleDropDownClose(e);
           }}
         >
           <f-div padding="none" gap="x-small" direction="column" width="fill-container">

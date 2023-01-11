@@ -219,9 +219,9 @@ export class FSelect extends FRoot {
    */
   applyHeight() {
     if (this.openDropdown)
-      return `max-height:${this.height}; transition: max-height 0.25s ease-in 0s; top: calc(${this.fSelectWrapperHeight}px + 4px);`;
+      return `max-height:${this.height}; transition: max-height var(--transition-time-default) ease-in 0s; top: calc(${this.fSelectWrapperHeight}px + 4px);`;
     else
-      return `max-height:0px; transition: max-height 0.25s ease-in 0s; top: calc(${this.fSelectWrapperHeight}px + 4px);`;
+      return `max-height:0px; transition: max-height var(--transition-time-default) ease-in 0s; top: calc(${this.fSelectWrapperHeight}px + 4px);`;
   }
 
   /**
@@ -541,7 +541,11 @@ export class FSelect extends FRoot {
    */
   applyInputStyle() {
     return this.searchable
-      ? `${this.openDropdown ? "width:75%;" : "width:0px; transition: width 0.25s ease-in 0s;"}`
+      ? `${
+          this.openDropdown
+            ? "width:75%;"
+            : "width:0px; transition: width var(--transition-time-default) ease-in 0s;"
+        }`
       : `max-width:0px`;
   }
 
@@ -1205,7 +1209,7 @@ export class FSelect extends FRoot {
      */
     this.filteredOptions = this.options;
   }
-  updated(changedProps: any) {
+  updated(changedProps: Map<string, any>) {
     this.fSelectWrapperHeight = changedProps.get("fSelectWrapperHeight");
   }
 }

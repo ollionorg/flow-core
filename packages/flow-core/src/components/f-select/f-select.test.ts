@@ -26,7 +26,7 @@ describe("f-select", () => {
   });
   it("should render with preselected f-tags as value and type=multiple is present", async () => {
     const el = await fixture(
-      html` <f-select .options=${["option 1"]} .value=${["option 1"]} type="multiple"></f-select> `
+      html` <f-select .options=${["option 1"]} .value=${"option 1"} type="multiple"></f-select> `
     );
     const descendant = el.shadowRoot!.querySelectorAll(".f-tag-system-icon")!;
     const tag = descendant;

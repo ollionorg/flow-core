@@ -24,79 +24,46 @@ describe("f-select", () => {
     expect(descendant.getAttribute("state")).to.equal("default");
     expect(descendant.getAttribute("type")).to.equal("single");
   });
-  it("should render with preselected f-tags as value is present", async () => {
+  it("should render with preselected f-tags as value and type=multiple is present", async () => {
     const el = await fixture(
       html` <f-select .options=${["option 1"]} .value=${["option 1"]} type="multiple"></f-select> `
     );
     const descendant = el.shadowRoot!.querySelectorAll(".f-tag-system-icon")!;
     const tag = descendant;
-    console.log(descendant);
     const tagLength = descendant.length;
     expect(tag[0]).instanceOf(FTag);
     expect(tagLength).to.equal(1);
   });
-  //   it("should render icon left", async () => {
-  //     const el = await fixture(html` <f-select icon-left="i-plus"></f-select> `);
-  //     const descendant = el.shadowRoot!.querySelector(".f-select-prefix")!;
-  //     const icon = descendant.children[0];
-  //     expect(icon).instanceOf(FIcon);
-  //   });
-  //   it("should render icon right", async () => {
-  //     const el = await fixture(html` <f-select icon-right="i-plus"></f-select> `);
-  //     const descendant = el.shadowRoot!.querySelector(".f-select-suffix")!;
-  //     const icon = descendant.children[0];
-  //     expect(icon).instanceOf(FIcon);
-  //   });
-  //   it("should render with prefix string", async () => {
-  //     const el = await fixture(html` <f-select prefix="abc"></f-select> `);
-  //     const descendant = el.shadowRoot!.querySelector(".f-select-prefix")!;
-  //     const ftext = descendant.children[0].children[0];
-  //     expect(ftext).instanceOf(FText);
-  //     expect(ftext.textContent?.trim()).equal("abc");
-  //   });
-  //   it("should render with suffix string", async () => {
-  //     const el = await fixture(html` <f-select suffix="abc"></f-select> `);
-  //     const descendant = el.shadowRoot!.querySelector(".f-select-suffix")!;
-  //     const ftext = descendant.children[0].children[0];
-  //     expect(ftext).instanceOf(FText);
-  //     expect(ftext.textContent?.trim()).equal("abc");
-  //   });
-  //   it("should render with prefix string and prefix icon", async () => {
-  //     const el = await fixture(html` <f-select prefix="abc" icon-left="i-app"></f-select> `);
-  //     const descendant = el.shadowRoot!.querySelector(".f-select-prefix")!;
-  //     const ftext = descendant.children[0].children[0];
-  //     const ficon = descendant.children[1];
-  //     expect(ftext).instanceOf(FText);
-  //     expect(ficon).instanceOf(FIcon);
-  //     expect(ftext.textContent?.trim()).equal("abc");
-  //   });
-  //   it("should render with suffix string and suffix icon", async () => {
-  //     const el = await fixture(html` <f-select suffix="abc" icon-right="i-app"></f-select> `);
-  //     const descendant = el.shadowRoot!.querySelector(".f-select-suffix")!;
-  //     const ftext = descendant.children[0].children[0];
-  //     const ficon = descendant.children[1];
-  //     expect(ftext).instanceOf(FText);
-  //     expect(ficon).instanceOf(FIcon);
-  //     expect(ftext.textContent?.trim()).equal("abc");
-  //   });
-  //   it("should render clear icon at right side", async () => {
-  //     const el = await fixture(html` <f-select value="abc" ?clear=${true}></f-select> `);
-  //     const descendant = el.shadowRoot!.querySelector(".f-select-suffix")!;
-  //     const icon = descendant.children[0];
-  //     expect(icon).instanceOf(FIcon);
-  //     expect(icon.getAttribute("source")).to.equal("i-close");
-  //   });
-  //   it("should render hide/view icon at right side", async () => {
-  //     const el = await fixture(html` <f-select value="abc" type="password"></f-select> `);
-  //     const descendant = el.shadowRoot!.querySelector(".f-select-suffix")!;
-  //     const icon = descendant.children[0];
-  //     expect(icon).instanceOf(FIcon);
-  //   });
-  //   it("should render loader", async () => {
-  //     const el = await fixture(html` <f-select value="abc" ?loading=${true}></f-select> `);
-  //     const descendant = el.shadowRoot!.querySelector(".loader-suffix")!;
-  //     const loading = descendant.children[0];
-  //     const svg = await fixture(loadingSVG);
-  //     expect(loading.outerHTML).equal(svg.outerHTML);
-  //   });
+  it("should render with preselected text as value and type=single is present", async () => {
+    const el = await fixture(
+      html` <f-select .options=${["option 1"]} .value=${"option 1"} type="single"></f-select> `
+    );
+    const descendant = el.shadowRoot!.querySelector(".f-select-searchable")!;
+    const text = descendant.children[0].children[0];
+    expect(text).instanceOf(FText);
+  });
+  it("should render icon left", async () => {
+    const el = await fixture(
+      html` <f-select icon-left="i-plus" .options=${["option 1"]}></f-select> `
+    );
+    const descendant = el.shadowRoot!.querySelector(".f-select-prefix")!;
+    const icon = descendant.children[0];
+    expect(icon).instanceOf(FIcon);
+  });
+  it("should render clear icon at right side", async () => {
+    const el = await fixture(
+      html`
+        <f-select
+          .options=${["option 1"]}
+          .value=${["option 1"]}
+          type="multiple"
+          ?clear=${true}
+        ></f-select>
+      `
+    );
+    const descendant = el.shadowRoot!.querySelector(".f-select-suffix")!;
+    const icon = descendant.children[0];
+    expect(icon).instanceOf(FIcon);
+    expect(icon.getAttribute("source")).to.equal("i-close");
+  });
 });

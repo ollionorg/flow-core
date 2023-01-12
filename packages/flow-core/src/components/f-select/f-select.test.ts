@@ -4,7 +4,7 @@ import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 // import flow-core elements
 import "@cldcvr/flow-core";
 
-import { FIcon, ConfigUtil, FSelect, FText, FTag } from "@cldcvr/flow-core";
+import { FIcon, ConfigUtil, FSelect, FText, FTag, FCheckbox } from "@cldcvr/flow-core";
 // importing `loadingSVG` to cross check
 import loadingSVG from "../../mixins/svg/loader";
 
@@ -78,8 +78,22 @@ describe("f-select", () => {
       `
     );
     const descendant = el.shadowRoot!.querySelector(".f-select-searchable")!;
-    console.log(descendant);
     const input = descendant.children[1];
     expect(input.tagName.toLowerCase()).to.equal("input");
+  });
+  it("options menu should render with checkboxes when checkbox is true", async () => {
+    const el = await fixture(
+      html`
+        <f-select
+          .options=${["option 1"]}
+          .value=${["option 1"]}
+          type="multiple"
+          ?checkbox=${true}
+        ></f-select>
+      `
+    );
+    const descendant = el.shadowRoot!.querySelector(".f-select-options-clickable")!;
+    const checkbox = descendant.children[0];
+    expect(checkbox).instanceOf(FCheckbox);
   });
 });

@@ -107,9 +107,8 @@ describe("f-select", () => {
       `
     );
     const descendant = el.shadowRoot!.querySelector(".f-select-searchable")!;
-    console.log(descendant.children[1].children);
     const text = descendant.children[1].children[0];
-    console.log(text.children[0].innerHTML);
     expect(text).instanceOf(FText);
+    expect(text.children[0].innerHTML).includes("1 more");
   });
 });

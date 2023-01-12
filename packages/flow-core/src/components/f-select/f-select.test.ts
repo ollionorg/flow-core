@@ -66,4 +66,20 @@ describe("f-select", () => {
     expect(icon).instanceOf(FIcon);
     expect(icon.getAttribute("source")).to.equal("i-close");
   });
+  it("should render with input box when searchable is true", async () => {
+    const el = await fixture(
+      html`
+        <f-select
+          .options=${["option 1"]}
+          .value=${["option 1"]}
+          type="multiple"
+          ?searchable=${true}
+        ></f-select>
+      `
+    );
+    const descendant = el.shadowRoot!.querySelector(".f-select-searchable")!;
+    console.log(descendant);
+    const input = descendant.children[1];
+    expect(input.tagName.toLowerCase()).to.equal("input");
+  });
 });

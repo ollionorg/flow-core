@@ -208,7 +208,7 @@ export class FSelect extends FRoot {
   /**
    * @attribute limit to show the selection tags inside f-select.
    */
-  @property({ reflect: true, type: Number })
+  @property({ reflect: true, type: Number, attribute: "selection-limit" })
   selectionLimit = 2;
 
   /**

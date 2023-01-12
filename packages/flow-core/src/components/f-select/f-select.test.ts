@@ -5,8 +5,6 @@ import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 import "@cldcvr/flow-core";
 
 import { FIcon, ConfigUtil, FSelect, FText, FTag, FCheckbox } from "@cldcvr/flow-core";
-// importing `loadingSVG` to cross check
-import loadingSVG from "../../mixins/svg/loader";
 
 // setting icon pack for testing icon related test cases
 ConfigUtil.setConfig({ iconPack: IconPack });
@@ -95,5 +93,23 @@ describe("f-select", () => {
     const descendant = el.shadowRoot!.querySelector(".f-select-options-clickable")!;
     const checkbox = descendant.children[0];
     expect(checkbox).instanceOf(FCheckbox);
+  });
+  it("render with 'view more' button if limit is less than selected-options", async () => {
+    const el = await fixture(
+      html`
+        <f-select
+          .options=${["option 1", "option 2"]}
+          .value=${["option 1", "option 2"]}
+          type="multiple"
+          ?checkbox=${true}
+          selection-limit=${1}
+        ></f-select>
+      `
+    );
+    const descendant = el.shadowRoot!.querySelector(".f-select-searchable")!;
+    console.log(descendant.children[1].children);
+    const text = descendant.children[1].children[0];
+    console.log(text.innerHTML);
+    expect(text).instanceOf(FText);
   });
 });

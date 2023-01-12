@@ -4,7 +4,7 @@ import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 // import flow-core elements
 import "@cldcvr/flow-core";
 
-import { FIcon, ConfigUtil, FSelect, FText } from "@cldcvr/flow-core";
+import { FIcon, ConfigUtil, FSelect, FText, FTag } from "@cldcvr/flow-core";
 // importing `loadingSVG` to cross check
 import loadingSVG from "../../mixins/svg/loader";
 
@@ -23,6 +23,17 @@ describe("f-select", () => {
     expect(descendant.getAttribute("category")).to.equal("fill");
     expect(descendant.getAttribute("state")).to.equal("default");
     expect(descendant.getAttribute("type")).to.equal("single");
+  });
+  it("should render with preselected f-tags as value is present", async () => {
+    const el = await fixture(
+      html` <f-select .options=${["option 1"]} .value=${["option 1"]} type="multiple"></f-select> `
+    );
+    const descendant = el.shadowRoot!.querySelectorAll(".f-tag-system-icon")!;
+    const tag = descendant;
+    console.log(descendant);
+    const tagLength = descendant.length;
+    expect(tag[0]).instanceOf(FTag);
+    expect(tagLength).to.equal(1);
   });
   //   it("should render icon left", async () => {
   //     const el = await fixture(html` <f-select icon-left="i-plus"></f-select> `);

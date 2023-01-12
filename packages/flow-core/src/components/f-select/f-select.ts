@@ -11,7 +11,7 @@ import _ from "lodash";
 import getComputedHTML from "../../utils/get-computed-html";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
-export type FSelectState = "primary" | "default" | "success" | "warning" | "danger" | "inherit";
+export type FSelectState = "primary" | "default" | "success" | "warning" | "danger";
 export type FSelectHeightProp = `${number}px` | `${number}%` | `${number}vh`;
 export type FSelectWidthProp = "fill-container" | `${number}px` | `${number}%` | `${number}vw`;
 export type FSelectArrayOfStrings = string[];
@@ -125,7 +125,7 @@ export class FSelect extends FRoot {
    * @attribute States are used to communicate purpose and connotations.
    */
   @property({ reflect: true, type: String })
-  state?: FSelectState = "inherit";
+  state?: FSelectState = "default";
 
   /**
    * @attribute f-select can have 2 sizes. By default size is inherited by the parent f-field.
@@ -697,7 +697,7 @@ export class FSelect extends FRoot {
    */
   validateProperties() {
     if (!this.options) {
-      throw new Error("f-select : option field can't be empty");
+      throw new Error("f-select : options field can't be empty");
     }
     if (this.type === "single" && this.checkbox) {
       throw new Error("f-select : checkbox can only be present in `type=multiple`");
@@ -989,6 +989,7 @@ export class FSelect extends FRoot {
           category=${this.category}
           state=${this.state}
           size=${this.size}
+          type=${this.type}
           @click=${this.handleDropDownOpen}
           @keydown=${this.handleKeyDown}
         >

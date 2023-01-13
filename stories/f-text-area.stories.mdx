@@ -124,15 +124,7 @@ f-text-area allows the user to input a longer amount of text than f-input. It is
 Category decides the background of f-text-area
 
 <Canvas>
-  <Story
-    name="category"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
+  <Story name="category">
     {(args) => {
       const categories = ["fill", "outline", "transparent"];
       const [value, setValue] = useState("");
@@ -197,15 +189,7 @@ Category decides the background of f-text-area
 Defines the value of an f-text-area.
 
 <Canvas>
-  <Story
-    name="value"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
+  <Story name="value">
     {(args) => {
       const [value, setValue] = useState("Value Here");
       const handleValue = (e) => {
@@ -238,15 +222,7 @@ Defines the value of an f-text-area.
 Defines the placeholder text for f-text-area
 
 <Canvas>
-  <Story
-    name="placeholder"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
+  <Story name="placeholder">
     {(args) => {
       const [value, setValue] = useState("");
       const handleValue = (e) => {
@@ -286,15 +262,7 @@ f-text-area can have 2 sizes.
 </p>
 
 <Canvas>
-  <Story
-    name="size"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
+  <Story name="size">
     {(args) => {
       const sizes = ["small", "medium"];
       const [value, setValue] = useState("");
@@ -353,15 +321,7 @@ f-text-area can have 2 sizes.
 States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
 
 <Canvas>
-  <Story
-    name="state"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 400,
-      },
-    }}
-  >
+  <Story name="state">
     {(args) => {
       const states = [
         ["default", "primary", "success"],
@@ -444,15 +404,7 @@ States are used to communicate purpose and connotations. For example, a red colo
 This shows the character count while typing and auto limits after reaching the max length.
 
 <Canvas>
-  <Story
-    name="max-length"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
+  <Story name="max-length">
     {(args) => {
       const [value, setValue] = useState("");
       const handleValue = (e) => {
@@ -490,15 +442,7 @@ Defines the no. of rows to display. By default f-text-area provides 3 rows. Afte
 </p>
 
 <Canvas>
-  <Story
-    name="rows"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 500,
-      },
-    }}
-  >
+  <Story name="rows">
     {(args) => {
       const [value, setValue] = useState("");
       const handleValue = (e) => {
@@ -534,15 +478,7 @@ Defines the no. of rows to display. By default f-text-area provides 3 rows. Afte
 <br />
 
 <Canvas>
-  <Story
-    name="Flags"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 300,
-      },
-    }}
-  >
+  <Story name="Flags">
     {(args) => {
       const [value, setValue] = useState("");
       const handleValue = (e) => {
@@ -622,7 +558,7 @@ Defines the no. of rows to display. By default f-text-area provides 3 rows. Afte
         the input value
       </td>
       <td>
-        <code>false</code>
+        <code>true</code>
       </td>
     </tr>
     <tr>

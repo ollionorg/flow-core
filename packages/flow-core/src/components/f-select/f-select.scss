@@ -89,7 +89,7 @@ applies styles on f-select
     flex-direction: column;
     gap: 8px;
     .f-select-options {
-      position: absolute;
+      position: fixed;
       z-index: 2;
       background-color: var(--color-surface-secondary);
       border-radius: 0px 0px 4px 4px;
@@ -329,6 +329,17 @@ applies styles on f-select
           opacity: 1;
         }
       }
+    }
+  }
+}
+
+f-select {
+  &[disabled] {
+    @include disabled();
+  }
+  @each $state, $color in $states {
+    &[state="#{$state}"] {
+      @include input-color($state);
     }
   }
 }

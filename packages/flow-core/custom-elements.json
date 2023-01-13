@@ -2451,7 +2451,7 @@
               "type": {
                 "text": "boolean | undefined"
               },
-              "default": "false",
+              "default": "true",
               "attribute": "clear",
               "reflects": true
             },
@@ -2604,7 +2604,7 @@
               "type": {
                 "text": "boolean | undefined"
               },
-              "default": "false",
+              "default": "true",
               "fieldName": "clear"
             },
             {
@@ -3191,6 +3191,30 @@
             },
             {
               "kind": "field",
+              "name": "optimizedHeight",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "preferredOpenDirection",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"below\""
+            },
+            {
+              "kind": "field",
+              "name": "optionsTop",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
               "name": "currentGroupOptionCursor",
               "type": {
                 "text": "number"
@@ -3213,21 +3237,7 @@
             },
             {
               "kind": "field",
-              "name": "optionFocus",
-              "type": {
-                "text": "HTMLDivElement"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "groupFocus",
-              "type": {
-                "text": "HTMLDivElement"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "groupOptionFocus",
+              "name": "optionElement",
               "type": {
                 "text": "HTMLDivElement"
               }
@@ -3331,9 +3341,9 @@
               "kind": "field",
               "name": "height",
               "type": {
-                "text": "FSelectHeightProp | undefined"
+                "text": "FSelectHeightProp"
               },
-              "default": "\"180px\"",
+              "default": "180",
               "attribute": "height",
               "reflects": true
             },
@@ -3414,8 +3424,16 @@
             },
             {
               "kind": "method",
-              "name": "applyHeight",
-              "description": "apply height styling to f-select options wrapper."
+              "name": "applyOptionsStyle",
+              "parameters": [
+                {
+                  "name": "width",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ],
+              "description": "apply styling to f-select options wrapper."
             },
             {
               "kind": "method",
@@ -3718,19 +3736,6 @@
             },
             {
               "kind": "method",
-              "name": "handleKeyDown",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "KeyboardEvent | MouseEvent"
-                  }
-                }
-              ],
-              "description": "actions on keyboard navigation through options"
-            },
-            {
-              "kind": "method",
               "name": "getConcaticateGroupOptions",
               "parameters": [
                 {
@@ -3776,6 +3781,11 @@
               "kind": "method",
               "name": "validateProperties",
               "description": "validate properties"
+            },
+            {
+              "kind": "method",
+              "name": "updateDimentions",
+              "description": "options wrapper dimentions update on the basis of window screen"
             }
           ],
           "attributes": [
@@ -3857,9 +3867,9 @@
             {
               "name": "height",
               "type": {
-                "text": "FSelectHeightProp | undefined"
+                "text": "FSelectHeightProp"
               },
-              "default": "\"180px\"",
+              "default": "180",
               "fieldName": "height"
             },
             {
@@ -4685,7 +4695,7 @@
               "type": {
                 "text": "boolean | undefined"
               },
-              "default": "false",
+              "default": "true",
               "attribute": "clear",
               "reflects": true
             },
@@ -4806,7 +4816,7 @@
               "type": {
                 "text": "boolean | undefined"
               },
-              "default": "false",
+              "default": "true",
               "fieldName": "clear"
             },
             {

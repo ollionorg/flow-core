@@ -66,7 +66,7 @@ export class FTextArea extends FRoot {
    * @attribute Displays a close icon-button on the right side of the input that allows the user to clear the input value
    */
   @property({ reflect: true, type: Boolean })
-  clear?: boolean = false;
+  clear?: boolean = true;
 
   /**
    * @attribute Displays a close icon-button on the right side of the input that allows the user to clear the input value

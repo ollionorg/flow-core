@@ -272,37 +272,39 @@ f-spacer is used to create a pseudo space in the layout.
           </f-form-group>
           <f-form-group gap=${args["group-gap"]}>
             <f-form-group direction=${args["group-direction"]} gap=${args["group-gap"]}>
-              <f-select
-                .variant=${args.variant}
-                .category=${args.category}
-                placeholder="Select an option"
-                type="multiple"
-                state=${args["element-state"]}
-                .value=${selectedValueFirst}
-                @input=${handleSelectFirst}
-                ?searchable=${true}
-                .options=${[
-                  { icon: "i-home", title: "option 1" },
-                  { icon: "i-user", title: "option 2" },
-                  { icon: "i-setting", title: "option 3" },
-                  { icon: "i-setting", title: "option 4" },
-                  { icon: "i-setting", title: "option 5" },
-                  { icon: "i-setting", title: "option 6" },
-                  { icon: "i-setting", title: "option 7" },
-                  { icon: "i-setting", title: "option 8" },
-                  { icon: "i-setting", title: "option 9" },
-                  { icon: "i-setting", title: "option 10" },
-                  { icon: "i-setting", title: "option 11" },
-                  { icon: "i-setting", title: "option 12" },
-                ]}
-                ?checkbox=${true}
-                ?clear=${true}
-              >
-                <f-div slot="label" padding="none" gap="none">Label New *</f-div>
-                <f-div slot="description" padding="none" gap="none"
-                  >This is a description</f-div
-                ></f-select
-              >
+              <f-div>
+                <f-select
+                  .variant=${args.variant}
+                  .category=${args.category}
+                  placeholder="Select an option"
+                  type="multiple"
+                  state=${args["element-state"]}
+                  .value=${selectedValueFirst}
+                  @input=${handleSelectFirst}
+                  ?searchable=${true}
+                  .options=${[
+                    { icon: "i-home", title: "option 1" },
+                    { icon: "i-user", title: "option 2" },
+                    { icon: "i-setting", title: "option 3" },
+                    { icon: "i-setting", title: "option 4" },
+                    { icon: "i-setting", title: "option 5" },
+                    { icon: "i-setting", title: "option 6" },
+                    { icon: "i-setting", title: "option 7" },
+                    { icon: "i-setting", title: "option 8" },
+                    { icon: "i-setting", title: "option 9" },
+                    { icon: "i-setting", title: "option 10" },
+                    { icon: "i-setting", title: "option 11" },
+                    { icon: "i-setting", title: "option 12" },
+                  ]}
+                  ?checkbox=${true}
+                  ?clear=${true}
+                >
+                  <f-div slot="label" padding="none" gap="none">Label New *</f-div>
+                  <f-div slot="description" padding="none" gap="none"
+                    >This is a description</f-div
+                  ></f-select
+                >
+              </f-div>
               <f-select
                 .variant=${args.variant}
                 .category=${args.category}
@@ -348,7 +350,7 @@ f-spacer is used to create a pseudo space in the layout.
               .value=${selectedValueGroup}
               @input=${handleSelectGroup}
               ?searchable=${true}
-              width="200px"
+              width=${200}
               clear=${true}
               .options=${{
                 group1: [

@@ -96,15 +96,7 @@ Radio allow users to choose a single option among a set of mutually exclusive op
 Value of a switch defines if it is on or off.
 
 <Canvas>
-  <Story
-    name="value"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
+  <Story name="value">
     {(args) => {
       const values = ["selected", "unselected"];
       const [value, setValue] = useState("selected");
@@ -172,15 +164,7 @@ Value of a switch defines if it is on or off.
 f-switch can have 2 sizes.
 
 <Canvas>
-  <Story
-    name="size"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
+  <Story name="size">
     {(args) => {
       const sizes = ["small", "medium"];
       const [value, setValue] = useState("unselected");
@@ -246,15 +230,7 @@ f-switch can have 2 sizes.
 States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
 
 <Canvas>
-  <Story
-    name="state"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
+  <Story name="state">
     {(args) => {
       const states = [
         ["default", "primary", "success"],
@@ -343,15 +319,7 @@ States are used to communicate purpose and connotations. For example, a red colo
 <br />
 
 <Canvas>
-  <Story
-    name="Flags"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
+  <Story name="Flags">
     {(args) => {
       const [value, setValue] = useState("selected");
       const handleValue = (e) => {

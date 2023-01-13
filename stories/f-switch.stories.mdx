@@ -89,15 +89,7 @@ f-switch allows a user to turn an individual option on/off. The change in select
 Value of a radio defines if it is selected, unselected.
 
 <Canvas>
-  <Story
-    name="value"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
+  <Story name="value">
     {(args) => {
       const values = ["on", "off"];
       const [value, setValue] = useState("on");
@@ -160,15 +152,7 @@ Value of a radio defines if it is selected, unselected.
 f-radio can have 2 sizes.
 
 <Canvas>
-  <Story
-    name="size"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
+  <Story name="size">
     {(args) => {
       const sizes = ["small", "medium"];
       const [value, setValue] = useState("off");
@@ -229,21 +213,13 @@ f-radio can have 2 sizes.
 States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
 
 <Canvas>
-  <Story
-    name="state"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 300,
-      },
-    }}
-  >
+  <Story name="state">
     {(args) => {
       const states = [
         ["default", "primary", "success"],
         ["danger", "warning", "default"],
       ];
-      const [value, setValue] = useState("off");
+      const [value, setValue] = useState("on");
       const handleValue = (e) => {
         setValue(e.detail.value);
       };
@@ -317,15 +293,7 @@ States are used to communicate purpose and connotations. For example, a red colo
 <br />
 
 <Canvas>
-  <Story
-    name="Flags"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
+  <Story name="Flags">
     {(args) => {
       const [value, setValue] = useState("on");
       const handleValue = (e) => {

@@ -1277,7 +1277,7 @@ a ‘close’ icon button appear on right of the select to clear the input value
               ?clear=${true}
             >
               <f-div slot="label" padding="none" gap="none">Label for f-select (clear=true)</f-div>
-              <f-div slot="description" padding="none" gap="none">Demo for width</f-div>
+              <f-div slot="description" padding="none" gap="none">This is a dscription</f-div>
               <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
             </f-select></f-div
           >
@@ -1293,7 +1293,46 @@ a ‘close’ icon button appear on right of the select to clear the input value
               ?clear=${false}
             >
               <f-div slot="label" padding="none" gap="none">Label for f-select (clear=false)</f-div>
-              <f-div slot="description" padding="none" gap="none">Demo for width</f-div>
+              <f-div slot="description" padding="none" gap="none">This is a dscription</f-div>
+              <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+            </f-select></f-div
+          >
+        </f-div>
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<br />
+
+## disabled
+
+<Canvas>
+  <Story name="disabled">
+    {(args) => {
+      const [value, setValue] = useState("");
+      const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="middle-center" padding="large" gap="medium">
+          <f-div>
+            <f-select
+              placeholder="Select Option"
+              @input=${handleValue}
+              .options=${options}
+              .value=${value}
+              icon-left=${"i-app"}
+              type="multiple"
+              ?searchable=${true}
+              ?clear=${true}
+              ?disabled=${true}
+            >
+              <f-div slot="label" padding="none" gap="none"
+                >Label for f-select (disabled=true)</f-div
+              >
+              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
               <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
             </f-select></f-div
           >

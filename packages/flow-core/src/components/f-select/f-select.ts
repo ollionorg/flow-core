@@ -185,6 +185,12 @@ export class FSelect extends FRoot {
   loading?: boolean = false;
 
   /**
+   * @attribute Shows disabled state of  select element
+   */
+  @property({ reflect: true, type: Boolean })
+  disabled?: boolean = false;
+
+  /**
    * @attribute defines whether user can search within the options or not .
    */
   @property({ reflect: true, type: Boolean })

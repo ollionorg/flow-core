@@ -55,7 +55,9 @@ export class FFormGroup extends FRoot {
      * Final html to render
      */
     return html`<f-div direction="column" .gap=${this.gap}>
-      ${this.label && Object.keys(this.label)?.length > 0
+      ${this.label &&
+      Object.keys(this.label)?.length > 0 &&
+      Object.values(this.label)?.every((item) => item !== undefined)
         ? html`
             <f-div direction="row" gap="auto" align="middle-left">
               <f-div gap="x-small" direction="column">

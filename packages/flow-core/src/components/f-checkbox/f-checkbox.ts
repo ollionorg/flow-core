@@ -84,16 +84,21 @@ export class FCheckbox extends FRoot {
             @input=${this.handleInput}
           />
           <label for="f-checkbox" value=${this.value} state=${this.state} size=${this.size}>
-            ${this.value === "checked"
-              ? html`${unsafeSVG(checkedMark)}`
-              : html`${unsafeSVG(indeterminateMark)}`}
+            ${
+              this.value === "checked"
+                ? html`${unsafeSVG(checkedMark)}`
+                : html`${unsafeSVG(indeterminateMark)}`
+            }
           </label>
-          <f-div padding="none" align="middle-left">
-            <slot name="label"></slot>
+          <f-div padding="none" align="middle-left" direction="row" gap="small">
+            <f-div width="hug-content" height="hug-content"> <slot name="label"></slot></f-div>
+            <f-div width="hug-content" height="hug-content"
+              ><slot name="icon-tooltip"></slot></f-div>
+            </f-div>
           </f-div>
+          <slot name="description"></slot>
+          <slot name="help"></slot>
         </f-div>
-        <slot name="description"></slot>
-        <slot name="help"></slot>
       </f-div>
     `;
   }

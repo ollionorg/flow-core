@@ -1,45 +1,6 @@
 @import "./../../mixins/scss/mixins";
 
-$gaps: (
-  "large": 16px,
-  "medium": 12px,
-  "small": 8px,
-  "x-small": 4px,
-);
-
-f-form-group {
+:host {
   @include base();
-  display: flex;
-  flex: 1 1;
   width: 100%;
-
-  &[direction="vertical"] {
-    flex-direction: column;
-    max-width: 100%;
-    flex: 1 1;
-  }
-  &[direction="horizontal"] {
-    flex-direction: row;
-    max-width: 100%;
-    flex: 1 1;
-  }
-
-  @each $gap, $value in $gaps {
-    &[gap="#{$gap}"][variant="normal"] {
-      @include inherit-gap($gap);
-      gap: $value;
-    }
-  }
-  &[variant="compact"][direction="horizontal"] {
-    @include inherit-gap("smallest");
-    gap: 0px;
-  }
-  &[variant="compact"][direction="vertical"] {
-    @each $gap, $value in $gaps {
-      &[gap="#{$gap}"] {
-        @include inherit-gap($gap);
-        gap: $value;
-      }
-    }
-  }
 }

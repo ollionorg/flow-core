@@ -1,4 +1,4 @@
-import { html, fixture, expect } from "@open-wc/testing";
+import { html, fixture, expect, oneEvent } from "@open-wc/testing";
 import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 
 // import flow-core elements

@@ -1,13 +1,10 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, state, query } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
-import { FormBuilder, TempFormBuilder } from "./f-form-types";
 import eleStyle from "./f-form.scss";
 import { FDiv } from "../f-div/f-div";
-import { FFormGroup } from "../f-form-group/f-form-group";
-import { FField } from "../f-field/f-field";
-import { FInput } from "../f-input/f-input";
+
 // import { ref, createRef } from "lit/directives/ref.js";
 
 /**
@@ -18,33 +15,7 @@ export class FForm extends FRoot {
   /**
    * css loaded from scss file
    */
-  static styles = [
-    unsafeCSS(eleStyle),
-    ...FText.styles,
-    ...FDiv.styles,
-    ...FFormGroup.styles,
-    ...FField.styles,
-    ...FInput.styles,
-  ];
-
-  @query("f-input")
-  formElements!: FRoot[];
-
-  @state({})
-  customState = "";
-
-  @state({})
-  localFields?: TempFormBuilder;
-
-  @state({})
-  customMessage = [];
-
-  /**
-   * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
-   */
-  @property({ type: String, reflect: true })
-  fields?: FormBuilder;
-
+  static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles];
   /**
    * @attribute The states on buttons are to indicate various degrees of emphasis of the action.
    */

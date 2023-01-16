@@ -287,51 +287,70 @@ export class FInput extends FRoot {
       <f-div padding="none" gap="x-small" direction="column" width="100%">
         <f-div padding="none" gap="none" align="bottom-left">
           <f-div padding="none" gap="x-small" direction="column" width="fill-container">
-            <slot name="label"></slot>
-            <slot name="description"></slot>
+            <f-div
+              padding="none"
+              gap="small"
+              direction="row"
+              width="hug-content"
+              height="hug-content"
+            >
+              <f-div
+                padding="none"
+                direction="row"
+                width="hug-content"
+                height="hug-content"
+              >
+                <slot name="label"></slot>
+              </f-div>
+              <slot name="icon-tooltip"></slot>
+              </f-div>
+              <slot name="description"></slot>
+            </f-div>
+            <f-div padding="none" gap="none" width="hug-content">
+              ${
+                this.maxLength
+                  ? html` <f-text variant="para" size="small" weight="regular" state="secondary"
+                      >${this.value?.length ?? 0} / ${this.maxLength}</f-text
+                    >`
+                  : null
+              }
+            </f-div>
           </f-div>
-          <f-div padding="none" gap="none" width="hug-content">
-            ${this.maxLength
-              ? html` <f-text variant="para" size="small" weight="regular" state="secondary"
-                  >${this.value?.length ?? 0} / ${this.maxLength}</f-text
-                >`
-              : null}
-          </f-div>
-        </f-div>
-        <f-div
-          padding="none"
-          gap="x-small"
-          direction="row"
-          width="100%"
-          class="f-input-row"
-          align="middle-center"
-          overflow="hidden"
-        >
-          <div
-            class="f-input-wrapper"
-            variant=${this.variant}
-            category=${this.category}
-            state=${this.state}
-            size=${this.size}
+          <f-div
+            padding="none"
+            gap="x-small"
+            direction="row"
+            width="100%"
+            class="f-input-row"
+            align="middle-center"
+            overflow="hidden"
           >
-            ${prefixAppend}
-            <input
-              class=${classMap({ "f-input": true })}
+            <div
+              class="f-input-wrapper"
               variant=${this.variant}
               category=${this.category}
-              type=${this.type}
               state=${this.state}
-              placeholder=${this.placeholder}
-              .value="${this.value || ""}"
               size=${this.size}
-              ?readonly=${this.readOnly}
-              maxlength="${this.maxLength}"
-              @input=${this.handleInput}
-            />
-            ${suffixAppend}
-          </div>
+            >
+              ${prefixAppend}
+              <input
+                class=${classMap({ "f-input": true })}
+                variant=${this.variant}
+                category=${this.category}
+                type=${this.type}
+                state=${this.state}
+                placeholder=${this.placeholder}
+                .value="${this.value || ""}"
+                size=${this.size}
+                ?readonly=${this.readOnly}
+                maxlength="${this.maxLength}"
+                @input=${this.handleInput}
+              />
+              ${suffixAppend}
+            </div>
+          </f-div>
+          <slot name="help"></slot>
         </f-div>
-        <slot name="help"></slot>
       </f-div>
     `;
   }

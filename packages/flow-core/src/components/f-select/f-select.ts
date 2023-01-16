@@ -371,6 +371,8 @@ export class FSelect extends FRoot {
   handleDropDownOpen(e: MouseEvent) {
     this.openDropdown = true;
     this?.inputElement?.focus();
+    this.updateDimentions();
+
     e.stopPropagation();
   }
 
@@ -632,7 +634,6 @@ export class FSelect extends FRoot {
     const spaceAbove = this.wrapperElement.getBoundingClientRect().top;
     const spaceBelow = window.innerHeight - this.wrapperElement.getBoundingClientRect().bottom;
     const hasEnoughSpaceBelow = spaceBelow > this.height;
-
     const optionsHeight = this.optionElement.offsetHeight;
     const heightToApply = Math.min(optionsHeight, this.height);
     if (hasEnoughSpaceBelow || spaceBelow > spaceAbove) {
@@ -959,8 +960,25 @@ export class FSelect extends FRoot {
           }}
         >
           <f-div padding="none" gap="x-small" direction="column" width="fill-container">
-            <slot name="label"></slot>
-            <slot name="description"></slot>
+           <f-div
+              padding="none"
+              gap="small"
+              direction="row"
+              width="hug-content"
+              height="hug-content"
+            >
+              <f-div
+                padding="none"
+                direction="row"
+                width="hug-content"
+                height="hug-content"
+              >
+                <slot name="label"></slot>
+              </f-div>
+              <slot name="icon-tooltip"></slot>
+              </f-div>
+              <slot name="description"></slot>
+            </f-div>
           </f-div>
         </f-div>
         <div
@@ -981,86 +999,87 @@ export class FSelect extends FRoot {
             size=${this.size}
           >
             <f-div padding="none" gap="none" direction="column">
-              ${Array.isArray(this.options)
-                ? this.filteredOptions.length > 0
-                  ? (this.filteredOptions as FSelectArray)?.map(
-                      (option, index) =>
-                        html`<f-div
-                          class="f-select-options-clickable"
-                          padding="medium"
-                          height="hug-content"
-                          width="fill-container"
-                          direction="row"
-                          ?clickable=${true}
-                          align="middle-left"
-                          gap="small"
-                          .selected=${this.isSelected(option) || this.currentCursor === index
-                            ? "background"
-                            : undefined}
-                          @click=${(e: MouseEvent) => {
-                            this.handleOptionSelection(option, e);
-                          }}
-                        >
-                          ${this.checkbox
-                            ? html` <f-checkbox
-                                state=${this.state}
-                                size=${this.size}
-                                value=${this.isSelected(option) ? "checked" : "unchecked"}
-                                @input=${(e: MouseEvent) => {
-                                  this.handleCheckboxInput(option, e);
-                                }}
-                              ></f-checkbox>`
-                            : ""}
-                          ${(option as FSelectOptionObject)?.icon && !this.optionTemplate
-                            ? html` <f-div
-                                padding="none"
-                                gap="none"
-                                height="hug-content"
-                                width="hug-content"
-                                ><f-icon
-                                  size="medium"
-                                  source=${(option as FSelectOptionObject)?.icon}
-                                ></f-icon
-                              ></f-div>`
-                            : ""}
-                          ${this.optionTemplate
-                            ? html`
-                                ${unsafeHTML(
-                                  getComputedHTML(html`${eval("`" + this.optionTemplate + "`")}`)
-                                )}
-                              `
-                            : ""}
-                          ${!this.optionTemplate
-                            ? html` <f-div
-                                padding="none"
-                                gap="none"
-                                height="hug-content"
-                                width="fill-container"
-                                ><f-text variant="para" size="small" weight="regular"
-                                  >${(option as FSelectOptionObject)?.title ?? option}</f-text
-                                ></f-div
-                              >`
-                            : ""}
-                          ${this.isSelected(option) && !this.checkbox
-                            ? html` <f-div
-                                padding="none"
-                                gap="none"
-                                height="hug-content"
-                                width="hug-content"
-                                ><f-icon size="medium" source="i-tick"></f-icon
-                              ></f-div>`
-                            : ""}
-                        </f-div>`
+              ${
+                Array.isArray(this.options)
+                  ? this.filteredOptions.length > 0
+                    ? (this.filteredOptions as FSelectArray)?.map(
+                        (option, index) =>
+                          html`<f-div
+                            class="f-select-options-clickable"
+                            padding="medium"
+                            height="hug-content"
+                            width="fill-container"
+                            direction="row"
+                            ?clickable=${true}
+                            align="middle-left"
+                            gap="small"
+                            .selected=${this.isSelected(option) || this.currentCursor === index
+                              ? "background"
+                              : undefined}
+                            @click=${(e: MouseEvent) => {
+                              this.handleOptionSelection(option, e);
+                            }}
+                          >
+                            ${this.checkbox
+                              ? html` <f-checkbox
+                                  state=${this.state}
+                                  size=${this.size}
+                                  value=${this.isSelected(option) ? "checked" : "unchecked"}
+                                  @input=${(e: MouseEvent) => {
+                                    this.handleCheckboxInput(option, e);
+                                  }}
+                                ></f-checkbox>`
+                              : ""}
+                            ${(option as FSelectOptionObject)?.icon && !this.optionTemplate
+                              ? html` <f-div
+                                  padding="none"
+                                  gap="none"
+                                  height="hug-content"
+                                  width="hug-content"
+                                  ><f-icon
+                                    size="medium"
+                                    source=${(option as FSelectOptionObject)?.icon}
+                                  ></f-icon
+                                ></f-div>`
+                              : ""}
+                            ${this.optionTemplate
+                              ? html`
+                                  ${unsafeHTML(
+                                    getComputedHTML(html`${eval("`" + this.optionTemplate + "`")}`)
+                                  )}
+                                `
+                              : ""}
+                            ${!this.optionTemplate
+                              ? html` <f-div
+                                  padding="none"
+                                  gap="none"
+                                  height="hug-content"
+                                  width="fill-container"
+                                  ><f-text variant="para" size="small" weight="regular"
+                                    >${(option as FSelectOptionObject)?.title ?? option}</f-text
+                                  ></f-div
+                                >`
+                              : ""}
+                            ${this.isSelected(option) && !this.checkbox
+                              ? html` <f-div
+                                  padding="none"
+                                  gap="none"
+                                  height="hug-content"
+                                  width="hug-content"
+                                  ><f-icon size="medium" source="i-tick"></f-icon
+                                ></f-div>`
+                              : ""}
+                          </f-div>`
+                      )
+                    : emptyMenu
+                  : Object.keys(this.filteredOptions)?.length > 0 &&
+                    Object.keys(this.filteredOptions)?.every(
+                      (groupName) =>
+                        (this.filteredOptions as FSelectOptionsGroup)[groupName].length > 0
                     )
-                  : emptyMenu
-                : Object.keys(this.filteredOptions)?.length > 0 &&
-                  Object.keys(this.filteredOptions)?.every(
-                    (groupName) =>
-                      (this.filteredOptions as FSelectOptionsGroup)[groupName].length > 0
-                  )
-                ? Object.keys(this.filteredOptions)?.map((group, groupIndex) =>
-                    (this.filteredOptions as FSelectOptionsGroup)[group].length > 0
-                      ? html`<f-div
+                  ? Object.keys(this.filteredOptions)?.map((group, groupIndex) =>
+                      (this.filteredOptions as FSelectOptionsGroup)[group].length > 0
+                        ? html`<f-div
                     padding="none"
                     height="hug-content"
                     width="fill-container"
@@ -1174,9 +1193,10 @@ export class FSelect extends FRoot {
                       )}
                     </f-div></f-div
                   >`
-                      : ""
-                  )
-                : emptyMenu}
+                        : ""
+                    )
+                  : emptyMenu
+              }
             </f-div>
           </div>
         </div>

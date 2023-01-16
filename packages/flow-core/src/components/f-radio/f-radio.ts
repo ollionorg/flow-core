@@ -73,7 +73,12 @@ export class FRadio extends FRoot {
             state=${this.state}
             @click=${this.handleClick}
           />
-          <slot name="label"></slot>
+          <f-div padding="none" align="middle-left" direction="row" gap="small">
+            <f-div width="hug-content" height="hug-content"> <slot name="label"></slot></f-div>
+            <f-div width="hug-content" height="hug-content"
+              ><slot name="icon-tooltip"></slot
+            ></f-div>
+          </f-div>
         </f-div>
         <slot name="description"></slot>
         <slot name="help"></slot>

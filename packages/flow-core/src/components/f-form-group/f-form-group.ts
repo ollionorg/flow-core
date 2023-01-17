@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { customElement, property, query, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
@@ -50,6 +50,15 @@ export class FFormGroup extends FRoot {
   @property({ type: String, reflect: true })
   collapse?: "none" | "accordion" | "text" = "none";
 
+  applyStyles() {
+    if (this.collapse !== "none") {
+      if (this.isAccordianOpen)
+        return `max-height:800px; transition: max-height var(--transition-time-rapid) ease-in 0s; );`;
+      else
+        return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s; );`;
+    } else return ``;
+  }
+
   render() {
     /**
      * Final html to render
@@ -66,7 +75,7 @@ export class FFormGroup extends FRoot {
                     <f-text
                       variant="heading"
                       size="small"
-                      weight="bold"
+                      weight="regular"
                       .state=${this.collapse === "text" ? "primary" : "default"}
                     >
                       ${this.collapse === "text"

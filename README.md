@@ -28,50 +28,52 @@ If you would like to contribute to an existing starter kit or write a new one fo
 #### Step 1: Install flow core
 ```yarn add @cldcvr/flow-core```
 
-*Note:* after adding the snippets, re-start your application.
+*Note:* after installation re-start your application.
 
 
 #### Step 2 : Import CSS 
 **Vue:**
 Paste the below snippet *after the closing `<template>`* in your `App.vue` 
 
-```
+```html
 <style>
 @import "@cldcvr/flow-core/dist/style.css";
 </style> 
 ```
 **React:** Paste the below snippet in `src/index.tsx` or `index.jsx`
 
-```
+```JavaScript
 import "@cldcvr/flow-core/dist/style.css";
 ```
 **Angular:** Add css file path in `angular.json` in `styles` property array.
 
-```
+```JSON
 "styles": ["@cldcvr/flow-core/dist/style.css"],
 
 ```
 #### Step 3: Import flow-core into your project
 
 Copy and import the below snippet into your startup file. In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
-```
-import '@cldcvr/flow-core';
+```JavaScript
+import("@cldcvr/flow-core").then(async () => {
+  //your application startup code
+});
 ```
 #### Step 4 : If your project is typescript enabled please include import types to
 
 **Vue:** 
 Copy paste below line in your `main.ts` file.
-```
+```JavaScript
 import "@cldcvr/flow-core/dist/types/vue2";
 ```
 or 
-```
+```JavaScript
 import "@cldcvr/flow-core/dist/types/vue3";
 ```
 
 **React**
 Include react type in `tsconfig.json` like below
-```
+```JSON
 "include": ["src", "./node_modules/@cldcvr/flow-core/dist/types/react.ts"]
 ```
 
@@ -89,8 +91,11 @@ yarn add @cldcvr/flow-system-icon
 
 ### Step 2: Import the icon pack 
 
-```
-import "@cldcvr/flow-system-icon";
+```javascript
+import("@cldcvr/flow-core").then(async () => {
+	await import('@cldcvr/flow-system-icon');
+	//add your application startup code here
+});
 ```
 
 #### Icon packs

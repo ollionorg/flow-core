@@ -4,22 +4,38 @@
 
 # Change Log
 
+## [1.1.7] - 2023-01-18
+
+### Features
+
+- `f-input`, `f-select`, `f-checkbox`, `f-textarea`, `f-radio`, `f-switch`: Form Input components added.
+
+### Improvements
+
+- added `gap=x-small` for `f-div` with a gap of `4px`.
+
 ## [1.1.6] - 2023-01-03
 
 ### Improvements
+
 - `.width-N` and `.height-N` utility classes added where N is multiple of 50 and less than 1000.
+
 ## [1.1.5] - 2023-01-02
 
 ### Improvements
+
 - Publishing packages to github registry.
 
 ## [1.1.4] - 2022-11-28
 
 ### Bug fixes
+
 - theme setting mechanism changed to remove jest or test library error.
+
 ## [1.1.3] - 2022-11-28
 
 ### Features
+
 - `f-div` added custom fill prop.
 
 ## [1.1.2] - 2022-11-25

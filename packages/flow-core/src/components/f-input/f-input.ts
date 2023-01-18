@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { customElement, property, queryAssignedNodes, state } from "lit/decorators.js";
 import eleStyle from "./f-input.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -22,6 +22,18 @@ export class FInput extends FRoot {
    */
   @state({})
   showPassword = false;
+
+  @queryAssignedNodes("label", true)
+  _labelNodes!: NodeListOf<HTMLElement>;
+
+  @state()
+  _hasLabel = false;
+
+  @queryAssignedNodes("help", true)
+  _helpNodes!: NodeListOf<HTMLElement>;
+
+  @state()
+  _hasHelperText = false;
 
   /**
    * @attribute Variants are various visual representations of an input field.
@@ -167,6 +179,13 @@ export class FInput extends FRoot {
     this.showPassword = !this.showPassword;
   }
 
+  _onLabelSlotChange() {
+    this._hasLabel = this._labelNodes.length > 0;
+  }
+  _onHelpSlotChange() {
+    this._hasHelperText = this._helpNodes.length > 0;
+  }
+
   render() {
     /**
      * create iconLeft if available
@@ -284,9 +303,19 @@ export class FInput extends FRoot {
      */
 
     return html`
-      <f-div padding="none" gap="x-small" direction="column" width="100%">
+      <f-div
+        padding="none"
+        .gap=${this._hasLabel && this._hasHelperText ? "x-small" : "none"}
+        direction="column"
+        width="100%"
+      >
         <f-div padding="none" gap="none" align="bottom-left">
-          <f-div padding="none" gap="x-small" direction="column" width="fill-container">
+          <f-div
+            padding="none"
+            .gap=${this._hasLabel ? "x-small" : "none"}
+            direction="column"
+            width="fill-container"
+          >
             <f-div
               padding="none"
               gap="small"
@@ -294,62 +323,62 @@ export class FInput extends FRoot {
               width="hug-content"
               height="hug-content"
             >
-              <f-div
-                padding="none"
-                direction="row"
-                width="hug-content"
-                height="hug-content"
-              >
-                <slot name="label"></slot>
+              <f-div padding="none" direction="row" width="hug-content" height="hug-content">
+                <slot name="label" @slotchange=${this._onLabelSlotChange}></slot>
               </f-div>
-              <slot name="icon-tooltip"></slot>
-              </f-div>
-              <slot name="description"></slot>
+              <slot name="icon-toolttip"></slot>
             </f-div>
-            <f-div padding="none" gap="none" width="hug-content">
-              ${
-                this.maxLength
-                  ? html` <f-text variant="para" size="small" weight="regular" state="secondary"
-                      >${this.value?.length ?? 0} / ${this.maxLength}</f-text
-                    >`
-                  : null
-              }
-            </f-div>
+            <slot name="description"></slot>
           </f-div>
           <f-div
-            padding="none"
-            gap="x-small"
-            direction="row"
-            width="100%"
-            class="f-input-row"
-            align="middle-center"
-            overflow="hidden"
+            .padding=${this._hasLabel ? "none" : this.maxLength ? "none none x-small none" : "none"}
+            gap="none"
+            width="hug-content"
           >
-            <div
-              class="f-input-wrapper"
+            ${this.maxLength
+              ? html` <f-text variant="para" size="small" weight="regular" state="secondary"
+                  >${this.value?.length ?? 0} / ${this.maxLength}</f-text
+                >`
+              : null}
+          </f-div>
+        </f-div>
+        <f-div
+          .padding=${this._hasLabel && !this._hasHelperText ? "x-small none none none" : "none"}
+          gap="x-small"
+          direction="row"
+          width="100%"
+          class="f-input-row"
+          align="middle-center"
+          overflow="hidden"
+        >
+          <div
+            class="f-input-wrapper"
+            variant=${this.variant}
+            category=${this.category}
+            state=${this.state}
+            size=${this.size}
+          >
+            ${prefixAppend}
+            <input
+              class=${classMap({ "f-input": true })}
               variant=${this.variant}
               category=${this.category}
+              type=${this.type}
               state=${this.state}
+              placeholder=${this.placeholder}
+              .value="${this.value || ""}"
               size=${this.size}
-            >
-              ${prefixAppend}
-              <input
-                class=${classMap({ "f-input": true })}
-                variant=${this.variant}
-                category=${this.category}
-                type=${this.type}
-                state=${this.state}
-                placeholder=${this.placeholder}
-                .value="${this.value || ""}"
-                size=${this.size}
-                ?readonly=${this.readOnly}
-                maxlength="${this.maxLength}"
-                @input=${this.handleInput}
-              />
-              ${suffixAppend}
-            </div>
-          </f-div>
-          <slot name="help"></slot>
+              ?readonly=${this.readOnly}
+              maxlength="${this.maxLength}"
+              @input=${this.handleInput}
+            />
+            ${suffixAppend}
+          </div>
+        </f-div>
+        <f-div
+          .padding=${this._hasHelperText && !this._hasLabel ? "x-small none none none" : "none"}
+        >
+          <slot name="help" @slotchange=${this._onHelpSlotChange}></slot>
         </f-div>
       </f-div>
     `;

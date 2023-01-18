@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { customElement, property, query, queryAssignedNodes, state } from "lit/decorators.js";
 import eleStyle from "./f-select.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -33,6 +33,18 @@ export class FSelect extends FRoot {
    * css loaded from scss file
    */
   static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles];
+
+  @queryAssignedNodes("label", true)
+  _labelNodes!: NodeListOf<HTMLElement>;
+
+  @state()
+  _hasLabel = false;
+
+  @queryAssignedNodes("help", true)
+  _helpNodes!: NodeListOf<HTMLElement>;
+
+  @state()
+  _hasHelperText = false;
 
   /**
    * @attribute local state for dropdown open and close boolean
@@ -656,6 +668,13 @@ export class FSelect extends FRoot {
     }
   }
 
+  _onLabelSlotChange() {
+    this._hasLabel = this._labelNodes.length > 0;
+  }
+  _onHelpSlotChange() {
+    this._hasHelperText = this._helpNodes.length > 0;
+  }
+
   render() {
     this.validateProperties();
     this.fSelectWrapperHeight = this.wrapperElement?.offsetHeight;
@@ -949,7 +968,10 @@ export class FSelect extends FRoot {
      * Final html to render
      */
     return html`
-      <div class="f-select-field">
+      <div
+        class="f-select-field"
+        ?allow-gap=${this._hasLabel && this._hasHelperText ? true : false}
+      >
         <f-div
           padding="none"
           gap="none"
@@ -959,26 +981,23 @@ export class FSelect extends FRoot {
             this.handleDropDownClose(e);
           }}
         >
-          <f-div padding="none" gap="x-small" direction="column" width="fill-container">
-           <f-div
+          <f-div
+            padding="none"
+            .gap=${this._hasLabel ? "x-small" : "none"}
+            direction="column"
+            width="fill-container"
+          >
+            <f-div
               padding="none"
-              gap="small"
               direction="row"
               width="hug-content"
               height="hug-content"
+              gap="small"
             >
-              <f-div
-                padding="none"
-                direction="row"
-                width="hug-content"
-                height="hug-content"
-              >
-                <slot name="label"></slot>
-              </f-div>
+              <slot name="label" @slotchange=${this._onLabelSlotChange}></slot>
               <slot name="icon-tooltip"></slot>
-              </f-div>
-              <slot name="description"></slot>
             </f-div>
+            <slot name="description"></slot>
           </f-div>
         </f-div>
         <div
@@ -989,6 +1008,7 @@ export class FSelect extends FRoot {
           state=${this.state}
           size=${this.size}
           type=${this.type}
+          ?allow-gap=${this._hasLabel && !this._hasHelperText ? true : false}
           @click=${this.handleDropDownOpen}
         >
           ${prefixAppend} ${suffixAppend}
@@ -999,87 +1019,86 @@ export class FSelect extends FRoot {
             size=${this.size}
           >
             <f-div padding="none" gap="none" direction="column">
-              ${
-                Array.isArray(this.options)
-                  ? this.filteredOptions.length > 0
-                    ? (this.filteredOptions as FSelectArray)?.map(
-                        (option, index) =>
-                          html`<f-div
-                            class="f-select-options-clickable"
-                            padding="medium"
-                            height="hug-content"
-                            width="fill-container"
-                            direction="row"
-                            ?clickable=${true}
-                            align="middle-left"
-                            gap="small"
-                            .selected=${this.isSelected(option) || this.currentCursor === index
-                              ? "background"
-                              : undefined}
-                            @click=${(e: MouseEvent) => {
-                              this.handleOptionSelection(option, e);
-                            }}
-                          >
-                            ${this.checkbox
-                              ? html` <f-checkbox
-                                  state=${this.state}
-                                  size=${this.size}
-                                  value=${this.isSelected(option) ? "checked" : "unchecked"}
-                                  @input=${(e: MouseEvent) => {
-                                    this.handleCheckboxInput(option, e);
-                                  }}
-                                ></f-checkbox>`
-                              : ""}
-                            ${(option as FSelectOptionObject)?.icon && !this.optionTemplate
-                              ? html` <f-div
-                                  padding="none"
-                                  gap="none"
-                                  height="hug-content"
-                                  width="hug-content"
-                                  ><f-icon
-                                    size="medium"
-                                    source=${(option as FSelectOptionObject)?.icon}
-                                  ></f-icon
-                                ></f-div>`
-                              : ""}
-                            ${this.optionTemplate
-                              ? html`
-                                  ${unsafeHTML(
-                                    getComputedHTML(html`${eval("`" + this.optionTemplate + "`")}`)
-                                  )}
-                                `
-                              : ""}
-                            ${!this.optionTemplate
-                              ? html` <f-div
-                                  padding="none"
-                                  gap="none"
-                                  height="hug-content"
-                                  width="fill-container"
-                                  ><f-text variant="para" size="small" weight="regular"
-                                    >${(option as FSelectOptionObject)?.title ?? option}</f-text
-                                  ></f-div
-                                >`
-                              : ""}
-                            ${this.isSelected(option) && !this.checkbox
-                              ? html` <f-div
-                                  padding="none"
-                                  gap="none"
-                                  height="hug-content"
-                                  width="hug-content"
-                                  ><f-icon size="medium" source="i-tick"></f-icon
-                                ></f-div>`
-                              : ""}
-                          </f-div>`
-                      )
-                    : emptyMenu
-                  : Object.keys(this.filteredOptions)?.length > 0 &&
-                    Object.keys(this.filteredOptions)?.every(
-                      (groupName) =>
-                        (this.filteredOptions as FSelectOptionsGroup)[groupName].length > 0
+              ${Array.isArray(this.options)
+                ? this.filteredOptions.length > 0
+                  ? (this.filteredOptions as FSelectArray)?.map(
+                      (option, index) =>
+                        html`<f-div
+                          class="f-select-options-clickable"
+                          padding="medium"
+                          height="hug-content"
+                          width="fill-container"
+                          direction="row"
+                          ?clickable=${true}
+                          align="middle-left"
+                          gap="small"
+                          .selected=${this.isSelected(option) || this.currentCursor === index
+                            ? "background"
+                            : undefined}
+                          @click=${(e: MouseEvent) => {
+                            this.handleOptionSelection(option, e);
+                          }}
+                        >
+                          ${this.checkbox
+                            ? html` <f-checkbox
+                                state=${this.state}
+                                size=${this.size}
+                                value=${this.isSelected(option) ? "checked" : "unchecked"}
+                                @input=${(e: MouseEvent) => {
+                                  this.handleCheckboxInput(option, e);
+                                }}
+                              ></f-checkbox>`
+                            : ""}
+                          ${(option as FSelectOptionObject)?.icon && !this.optionTemplate
+                            ? html` <f-div
+                                padding="none"
+                                gap="none"
+                                height="hug-content"
+                                width="hug-content"
+                                ><f-icon
+                                  size="medium"
+                                  source=${(option as FSelectOptionObject)?.icon}
+                                ></f-icon
+                              ></f-div>`
+                            : ""}
+                          ${this.optionTemplate
+                            ? html`
+                                ${unsafeHTML(
+                                  getComputedHTML(html`${eval("`" + this.optionTemplate + "`")}`)
+                                )}
+                              `
+                            : ""}
+                          ${!this.optionTemplate
+                            ? html` <f-div
+                                padding="none"
+                                gap="none"
+                                height="hug-content"
+                                width="fill-container"
+                                ><f-text variant="para" size="small" weight="regular"
+                                  >${(option as FSelectOptionObject)?.title ?? option}</f-text
+                                ></f-div
+                              >`
+                            : ""}
+                          ${this.isSelected(option) && !this.checkbox
+                            ? html` <f-div
+                                padding="none"
+                                gap="none"
+                                height="hug-content"
+                                width="hug-content"
+                                ><f-icon size="medium" source="i-tick"></f-icon
+                              ></f-div>`
+                            : ""}
+                        </f-div>`
                     )
-                  ? Object.keys(this.filteredOptions)?.map((group, groupIndex) =>
-                      (this.filteredOptions as FSelectOptionsGroup)[group].length > 0
-                        ? html`<f-div
+                  : emptyMenu
+                : Object.keys(this.filteredOptions)?.length > 0 &&
+                  Object.keys(this.filteredOptions)?.every(
+                    (groupName) =>
+                      (this.filteredOptions as FSelectOptionsGroup)[groupName].length > 0
+                  )
+                ? Object.keys(this.filteredOptions)?.map((group, groupIndex) =>
+                    (this.filteredOptions as FSelectOptionsGroup)[group].length > 0
+                      ? html`<f-div
                     padding="none"
                     height="hug-content"
                     width="fill-container"
@@ -1193,14 +1212,17 @@ export class FSelect extends FRoot {
                       )}
                     </f-div></f-div
                   >`
-                        : ""
-                    )
-                  : emptyMenu
-              }
+                      : ""
+                  )
+                : emptyMenu}
             </f-div>
           </div>
         </div>
-        <slot name="help"></slot>
+        <f-div
+          .padding=${this._hasHelperText && !this._hasLabel ? "x-small none none none" : "none"}
+        >
+          <slot name="help" @slotchange=${this._onHelpSlotChange}></slot>
+        </f-div>
       </div>
     `;
   }

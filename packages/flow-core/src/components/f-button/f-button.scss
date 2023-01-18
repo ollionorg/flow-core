@@ -118,12 +118,7 @@ in this case it is `f-button`
     @each $state, $color in $states {
       &[state="#{$state}"][category="fill"] {
         background-color: map.get($color, "background");
-        border: 1px
-          solid
-          map.get(
-            $color,
-            "background"
-          ); // added to match width of outline category
+        border: 1px solid map.get($color, "background"); // added to match width of outline category
         // hover changes background
         &:hover {
           background-color: map.get($color, "hover");
@@ -185,7 +180,7 @@ in this case it is `f-button`
         padding: map.get($value, "padding");
         font-size: map.get($value, "fontSize");
         &[variant="round"] {
-          border-radius: math.div(map.get($value, "height"), 2);
+          border-radius: var(--input-border-radius-round);
         }
 
         f-counter {
@@ -209,7 +204,7 @@ in this case it is `f-button`
 
     // if variant is curved then apply 4px border radius
     &[variant="curved"] {
-      border-radius: 4px;
+      border-radius: var(--input-border-radius-curved);
     }
 
     &[variant="block"] {
@@ -255,5 +250,29 @@ f-button {
       content: unset;
     }
     background: transparent !important;
+  }
+}
+
+:root {
+  --input-border-radius-curved: 4px;
+  --input-border-radius-round: 22px;
+}
+
+f-form-group {
+  &[variant="compact"][direction="horizontal"] {
+    f-button {
+      &:first-child {
+        --input-border-radius-curved: 4px 0px 0px 4px;
+        --input-border-radius-round: 22px 0px 0px 22px;
+      }
+      &:last-child {
+        --input-border-radius-curved: 0px 4px 4px 0px;
+        --input-border-radius-round: 0px 22px 22px 0px;
+      }
+      &:not(:first-child):not(:last-child) {
+        --input-border-radius-curved: 0px 0px 0px 0px;
+        --input-border-radius-round: 0px 0px 0px 0px;
+      }
+    }
   }
 }

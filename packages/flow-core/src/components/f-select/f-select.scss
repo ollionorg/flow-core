@@ -87,7 +87,9 @@ applies styles on f-select
     display: flex;
     width: 100%;
     flex-direction: column;
-    gap: 8px;
+    &[allow-gap] {
+      gap: 4px;
+    }
     .f-select-options {
       position: fixed;
       z-index: 2;
@@ -104,6 +106,9 @@ applies styles on f-select
       flex-shrink: 1;
       position: relative;
       min-height: var(--form-input-div-size);
+      &[allow-gap] {
+        margin-top: 4px;
+      }
       cursor: text;
 
       @each $size, $value in $sizes {
@@ -159,7 +164,7 @@ applies styles on f-select
           }
           &[variant="curved"][category="fill"] {
             border: 1px solid map.get($color, "input");
-            border-radius: 4px;
+            border-radius: var(--input-border-radius-curved);
             &:focus-within {
               border: 1px solid map.get($color, "focus");
               outline: none;
@@ -167,7 +172,7 @@ applies styles on f-select
           }
           &[variant="curved"][category="outline"] {
             border: 1px solid map.get($color, "border");
-            border-radius: 4px;
+            border-radius: var(--input-border-radius-curved);
             &:focus-within {
               border: 1px solid map.get($color, "focus");
               outline: none;
@@ -175,14 +180,14 @@ applies styles on f-select
           }
           &[variant="curved"][category="transparent"] {
             border: 1px solid map.get($color, "border");
-            border-radius: 4px;
+            border-radius: var(--input-border-radius-curved);
             &:focus-within {
               border: 1px solid map.get($color, "focus");
               outline: none;
             }
           }
           &[variant="round"][category="fill"] {
-            border-radius: 22px;
+            border-radius: var(--input-border-radius-round);
             border: 1px solid map.get($color, "input");
             &:focus-within {
               border: 1px solid map.get($color, "focus");
@@ -190,7 +195,7 @@ applies styles on f-select
             }
           }
           &[variant="round"][category="outline"] {
-            border-radius: 22px;
+            border-radius: var(--input-border-radius-round);
             border: 1px solid map.get($color, "border");
             &:focus-within {
               border: 1px solid map.get($color, "focus");
@@ -198,7 +203,7 @@ applies styles on f-select
             }
           }
           &[variant="round"][category="transparent"] {
-            border-radius: 22px;
+            border-radius: var(--input-border-radius-round);
             border: 1px solid map.get($color, "border");
             &:focus-within {
               border: 1px solid map.get($color, "focus");
@@ -340,6 +345,30 @@ f-select {
   @each $state, $color in $states {
     &[state="#{$state}"] {
       @include input-color($state);
+    }
+  }
+}
+
+:root {
+  --input-border-radius-curved: 4px;
+  --input-border-radius-round: 22px;
+}
+
+f-form-group {
+  &[variant="compact"][direction="horizontal"] {
+    f-select {
+      &:first-child {
+        --input-border-radius-curved: 4px 0px 0px 4px;
+        --input-border-radius-round: 22px 0px 0px 22px;
+      }
+      &:last-child {
+        --input-border-radius-curved: 0px 4px 4px 0px;
+        --input-border-radius-round: 0px 22px 22px 0px;
+      }
+      &:not(:first-child):not(:last-child) {
+        --input-border-radius-curved: 0px 0px 0px 0px;
+        --input-border-radius-round: 0px 0px 0px 0px;
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
@@ -125,7 +125,9 @@ export class FFormGroup extends FRoot {
         ? html`
             <f-div
               direction=${this.direction === "vertical" ? "column" : "row"}
-              .gap=${this.gap}
+              .gap=${this.variant === "compact" && this.direction === "horizontal"
+                ? "none"
+                : this.gap}
               overflow="scroll"
             >
               <slot></slot>

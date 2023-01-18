@@ -170,3 +170,81 @@
     --color-primary-button-loader: var(--color-primary-surface);
   }
 }
+
+@mixin subtext-color($state) {
+  @if $state== "danger" {
+    --color-subtext-default: var(--color-danger-default);
+  } @else if $state== "success" {
+    --color-subtext-default: var(--color-success-default);
+  } @else if $state== "warning" {
+    --color-subtext-default: var(--color-warning-default);
+  } @else if $state== "primary" {
+    --color-subtext-default: var(--color-primary-default);
+  } @else {
+    --color-subtext-default: var(--color-text-default);
+  }
+}
+
+@mixin input-color($state) {
+  @if $state== "danger" {
+    --color-help-text: var(--color-danger-default);
+  } @else if $state== "success" {
+    --color-help-text: var(--color-success-default);
+  } @else if $state== "warning" {
+    --color-help-text: var(--color-warning-default);
+  } @else if $state== "primary" {
+    --color-help-text: var(--color-primary-default);
+  } @else {
+    --color-help-text: var(--color-text-default);
+  }
+}
+
+@mixin inherit-gap($gap) {
+  @if $gap== "large" {
+    --field-gap-size: 24px;
+  } @else if $gap== "medium" {
+    --field-gap-size: 16px;
+  } @else if $gap== "small" {
+    --field-gap-size: 12px;
+  } @else if("x-small") {
+    --field-gap-size: 8px;
+  } @else {
+    --field-gap-size: 0px;
+  }
+}
+
+@mixin inherit-size($size) {
+  @if $size == "medium" {
+    --form-input-div-size: 36px;
+    --form-input-size: 34px;
+    --form-input-loader: 24px;
+    --form-input-icons-size: 16px;
+    --form-checkbox-size: 14px;
+    --form-radio-size: 16px;
+    --form-checkbox-width: 12px;
+    --form-checkbox-height: 16px;
+    --form-radio-mark-size: 6px;
+    --form-switch-height: 20px;
+    --form-switch-width: 36px;
+    --form-switch-slider-size: 16px;
+    --form-switch-slider-translate: 16px;
+    --form-textarea-padding-tp-btm: 9px;
+    --form-textarea-padding-lt-rt: 12px;
+  } @else {
+    --form-input-div-size: 28px;
+    --form-input-size: 26px;
+    --form-input-loader: 16px;
+    --form-input-icons-size: 12px;
+    --form-checkbox-size: 10px;
+    --form-radio-size: 12px;
+    --form-checkbox-width: 9px;
+    --form-checkbox-height: 11px;
+    --form-radio-mark-size: 6px;
+    --form-switch-height: 16px;
+    --form-switch-width: 28px;
+    --form-switch-slider-size: 12px;
+    --form-switch-slider-translate: 12px;
+    --form-textarea-padding-tp-btm: 5px;
+    --form-textarea-padding-lt-rt: 8px;
+  }
+}

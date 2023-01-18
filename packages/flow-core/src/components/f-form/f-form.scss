@@ -1,0 +1,18 @@
+@import "./../../mixins/scss/mixins";
+
+$sizes: (
+  "medium": 16px,
+  "small": 12px,
+);
+
+f-form {
+  @include base();
+  display: flex;
+  flex: 1 0;
+  width: 100%;
+  @each $size, $value in $sizes {
+    &[size="#{$size}"] {
+      @include inherit-size($size);
+    }
+  }
+}

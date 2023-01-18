@@ -146,6 +146,16 @@ in this case it is `f-icon-button`
     // iterating over states and appying respective css
     @each $state, $color in $states {
       &[state="#{$state}"][type="fill"] {
+        &.f-input-duplicate {
+          background-color: var(--color-surface-subtle) !important;
+          border: 1px
+            solid
+            var(--color-surface-subtle) !important; // added to match width of outline category
+          &:hover {
+            background-color: var(--color-surface-subtle-hover) !important;
+            border: 1px solid var(--color-surface-subtle-hover) !important;
+          }
+        }
         background-color: map.get($color, "background") !important;
         border: 1px
           solid
@@ -197,6 +207,7 @@ in this case it is `f-icon-button`
         }
       }
     }
+
     &[disabled] {
       @include disabled();
     }

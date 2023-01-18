@@ -118,6 +118,69 @@
       ]
     },
     {
+      "name": "f-checkbox",
+      "description": "Events:\n\n  * `input` {`CustomEvent<FCheckboxElement>`} - \n\nAttributes:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "attributes": [
+        {
+          "name": "value",
+          "description": "`value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\nProperty: value\n\nDefault: unchecked",
+          "values": [
+            {
+              "name": "checked"
+            },
+            {
+              "name": "unchecked"
+            },
+            {
+              "name": "indeterminate"
+            }
+          ]
+        },
+        {
+          "name": "state",
+          "description": "`state` {`FCheckboxState | undefined`} - \n\nProperty: state\n\nDefault: default",
+          "values": [
+            {
+              "name": "primary"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
+              "name": "default"
+            }
+          ]
+        },
+        {
+          "name": "size",
+          "description": "`size` {`\"medium\" | \"small\" | undefined`} - \n\nProperty: size",
+          "values": [
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            }
+          ]
+        },
+        {
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<FCheckboxElement>`} - "
+        }
+      ]
+    },
+    {
       "name": "f-counter",
       "description": "Attributes:\n\n  * `fill` {`string`} - \n\n  * `label` {`number`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | undefined`} - \n\n  * `state` {`FCounterStateProp | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `fill` {`string`} - \n\n  * `label` {`number`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | undefined`} - \n\n  * `state` {`FCounterStateProp | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `required` {`string[]`} - mention required fields here\n\n  * `computedLabel` {`string | number`} - \n\n  * `textColor` {`\"#202a36\" | \"#fcfcfd\"`} - compute textColor when custom color of tag is defined.\n\n  * `loaderColor` {`\"#202a36\" | \"#808080\"`} - compute loaderColor when custom color of tag is defined.\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
@@ -235,10 +298,10 @@
               "name": "inherit"
             },
             {
-              "name": "subtle"
+              "name": "default"
             },
             {
-              "name": "default"
+              "name": "subtle"
             },
             {
               "name": "secondary"
@@ -289,100 +352,85 @@
               "name": "small dotted"
             },
             {
-              "name": "large solid subtle"
+              "name": "large solid default"
             },
             {
-              "name": "large solid default"
+              "name": "large solid subtle"
             },
             {
               "name": "large solid secondary"
             },
             {
-              "name": "large dashed subtle"
+              "name": "large dashed default"
             },
             {
-              "name": "large dashed default"
+              "name": "large dashed subtle"
             },
             {
               "name": "large dashed secondary"
             },
             {
-              "name": "large dotted subtle"
+              "name": "large dotted default"
             },
             {
-              "name": "large dotted default"
+              "name": "large dotted subtle"
             },
             {
               "name": "large dotted secondary"
             },
             {
-              "name": "medium solid subtle"
+              "name": "medium solid default"
             },
             {
-              "name": "medium solid default"
+              "name": "medium solid subtle"
             },
             {
               "name": "medium solid secondary"
             },
             {
-              "name": "medium dashed subtle"
+              "name": "medium dashed default"
             },
             {
-              "name": "medium dashed default"
+              "name": "medium dashed subtle"
             },
             {
               "name": "medium dashed secondary"
             },
             {
-              "name": "medium dotted subtle"
+              "name": "medium dotted default"
             },
             {
-              "name": "medium dotted default"
+              "name": "medium dotted subtle"
             },
             {
               "name": "medium dotted secondary"
             },
             {
-              "name": "small solid subtle"
+              "name": "small solid default"
             },
             {
-              "name": "small solid default"
+              "name": "small solid subtle"
             },
             {
               "name": "small solid secondary"
             },
             {
-              "name": "small dashed subtle"
+              "name": "small dashed default"
             },
             {
-              "name": "small dashed default"
+              "name": "small dashed subtle"
             },
             {
               "name": "small dashed secondary"
             },
             {
-              "name": "small dotted subtle"
-            },
-            {
               "name": "small dotted default"
             },
             {
+              "name": "small dotted subtle"
+            },
+            {
               "name": "small dotted secondary"
-            },
-            {
-              "name": "large solid subtle bottom"
-            },
-            {
-              "name": "large solid subtle top"
-            },
-            {
-              "name": "large solid subtle left"
-            },
-            {
-              "name": "large solid subtle right"
-            },
-            {
-              "name": "large solid subtle around"
             },
             {
               "name": "large solid default bottom"
@@ -400,6 +448,21 @@
               "name": "large solid default around"
             },
             {
+              "name": "large solid subtle bottom"
+            },
+            {
+              "name": "large solid subtle top"
+            },
+            {
+              "name": "large solid subtle left"
+            },
+            {
+              "name": "large solid subtle right"
+            },
+            {
+              "name": "large solid subtle around"
+            },
+            {
               "name": "large solid secondary bottom"
             },
             {
@@ -413,21 +476,6 @@
             },
             {
               "name": "large solid secondary around"
-            },
-            {
-              "name": "large dashed subtle bottom"
-            },
-            {
-              "name": "large dashed subtle top"
-            },
-            {
-              "name": "large dashed subtle left"
-            },
-            {
-              "name": "large dashed subtle right"
-            },
-            {
-              "name": "large dashed subtle around"
             },
             {
               "name": "large dashed default bottom"
@@ -445,6 +493,21 @@
               "name": "large dashed default around"
             },
             {
+              "name": "large dashed subtle bottom"
+            },
+            {
+              "name": "large dashed subtle top"
+            },
+            {
+              "name": "large dashed subtle left"
+            },
+            {
+              "name": "large dashed subtle right"
+            },
+            {
+              "name": "large dashed subtle around"
+            },
+            {
               "name": "large dashed secondary bottom"
             },
             {
@@ -458,21 +521,6 @@
             },
             {
               "name": "large dashed secondary around"
-            },
-            {
-              "name": "large dotted subtle bottom"
-            },
-            {
-              "name": "large dotted subtle top"
-            },
-            {
-              "name": "large dotted subtle left"
-            },
-            {
-              "name": "large dotted subtle right"
-            },
-            {
-              "name": "large dotted subtle around"
             },
             {
               "name": "large dotted default bottom"
@@ -490,6 +538,21 @@
               "name": "large dotted default around"
             },
             {
+              "name": "large dotted subtle bottom"
+            },
+            {
+              "name": "large dotted subtle top"
+            },
+            {
+              "name": "large dotted subtle left"
+            },
+            {
+              "name": "large dotted subtle right"
+            },
+            {
+              "name": "large dotted subtle around"
+            },
+            {
               "name": "large dotted secondary bottom"
             },
             {
@@ -503,21 +566,6 @@
             },
             {
               "name": "large dotted secondary around"
-            },
-            {
-              "name": "medium solid subtle bottom"
-            },
-            {
-              "name": "medium solid subtle top"
-            },
-            {
-              "name": "medium solid subtle left"
-            },
-            {
-              "name": "medium solid subtle right"
-            },
-            {
-              "name": "medium solid subtle around"
             },
             {
               "name": "medium solid default bottom"
@@ -535,6 +583,21 @@
               "name": "medium solid default around"
             },
             {
+              "name": "medium solid subtle bottom"
+            },
+            {
+              "name": "medium solid subtle top"
+            },
+            {
+              "name": "medium solid subtle left"
+            },
+            {
+              "name": "medium solid subtle right"
+            },
+            {
+              "name": "medium solid subtle around"
+            },
+            {
               "name": "medium solid secondary bottom"
             },
             {
@@ -548,21 +611,6 @@
             },
             {
               "name": "medium solid secondary around"
-            },
-            {
-              "name": "medium dashed subtle bottom"
-            },
-            {
-              "name": "medium dashed subtle top"
-            },
-            {
-              "name": "medium dashed subtle left"
-            },
-            {
-              "name": "medium dashed subtle right"
-            },
-            {
-              "name": "medium dashed subtle around"
             },
             {
               "name": "medium dashed default bottom"
@@ -580,6 +628,21 @@
               "name": "medium dashed default around"
             },
             {
+              "name": "medium dashed subtle bottom"
+            },
+            {
+              "name": "medium dashed subtle top"
+            },
+            {
+              "name": "medium dashed subtle left"
+            },
+            {
+              "name": "medium dashed subtle right"
+            },
+            {
+              "name": "medium dashed subtle around"
+            },
+            {
               "name": "medium dashed secondary bottom"
             },
             {
@@ -593,21 +656,6 @@
             },
             {
               "name": "medium dashed secondary around"
-            },
-            {
-              "name": "medium dotted subtle bottom"
-            },
-            {
-              "name": "medium dotted subtle top"
-            },
-            {
-              "name": "medium dotted subtle left"
-            },
-            {
-              "name": "medium dotted subtle right"
-            },
-            {
-              "name": "medium dotted subtle around"
             },
             {
               "name": "medium dotted default bottom"
@@ -625,6 +673,21 @@
               "name": "medium dotted default around"
             },
             {
+              "name": "medium dotted subtle bottom"
+            },
+            {
+              "name": "medium dotted subtle top"
+            },
+            {
+              "name": "medium dotted subtle left"
+            },
+            {
+              "name": "medium dotted subtle right"
+            },
+            {
+              "name": "medium dotted subtle around"
+            },
+            {
               "name": "medium dotted secondary bottom"
             },
             {
@@ -638,21 +701,6 @@
             },
             {
               "name": "medium dotted secondary around"
-            },
-            {
-              "name": "small solid subtle bottom"
-            },
-            {
-              "name": "small solid subtle top"
-            },
-            {
-              "name": "small solid subtle left"
-            },
-            {
-              "name": "small solid subtle right"
-            },
-            {
-              "name": "small solid subtle around"
             },
             {
               "name": "small solid default bottom"
@@ -670,6 +718,21 @@
               "name": "small solid default around"
             },
             {
+              "name": "small solid subtle bottom"
+            },
+            {
+              "name": "small solid subtle top"
+            },
+            {
+              "name": "small solid subtle left"
+            },
+            {
+              "name": "small solid subtle right"
+            },
+            {
+              "name": "small solid subtle around"
+            },
+            {
               "name": "small solid secondary bottom"
             },
             {
@@ -683,21 +746,6 @@
             },
             {
               "name": "small solid secondary around"
-            },
-            {
-              "name": "small dashed subtle bottom"
-            },
-            {
-              "name": "small dashed subtle top"
-            },
-            {
-              "name": "small dashed subtle left"
-            },
-            {
-              "name": "small dashed subtle right"
-            },
-            {
-              "name": "small dashed subtle around"
             },
             {
               "name": "small dashed default bottom"
@@ -715,6 +763,21 @@
               "name": "small dashed default around"
             },
             {
+              "name": "small dashed subtle bottom"
+            },
+            {
+              "name": "small dashed subtle top"
+            },
+            {
+              "name": "small dashed subtle left"
+            },
+            {
+              "name": "small dashed subtle right"
+            },
+            {
+              "name": "small dashed subtle around"
+            },
+            {
               "name": "small dashed secondary bottom"
             },
             {
@@ -730,21 +793,6 @@
               "name": "small dashed secondary around"
             },
             {
-              "name": "small dotted subtle bottom"
-            },
-            {
-              "name": "small dotted subtle top"
-            },
-            {
-              "name": "small dotted subtle left"
-            },
-            {
-              "name": "small dotted subtle right"
-            },
-            {
-              "name": "small dotted subtle around"
-            },
-            {
               "name": "small dotted default bottom"
             },
             {
@@ -758,6 +806,21 @@
             },
             {
               "name": "small dotted default around"
+            },
+            {
+              "name": "small dotted subtle bottom"
+            },
+            {
+              "name": "small dotted subtle top"
+            },
+            {
+              "name": "small dotted subtle left"
+            },
+            {
+              "name": "small dotted subtle right"
+            },
+            {
+              "name": "small dotted subtle around"
             },
             {
               "name": "small dotted secondary bottom"
@@ -5001,10 +5064,10 @@
           "description": "`state` {`FDividerState | undefined`} - \n\nProperty: state\n\nDefault: default",
           "values": [
             {
-              "name": "subtle"
+              "name": "default"
             },
             {
-              "name": "default"
+              "name": "subtle"
             },
             {
               "name": "secondary"
@@ -5014,12 +5077,193 @@
       ]
     },
     {
+      "name": "f-field",
+      "description": "Attributes:\n\n  * `variant` {`\"inline\" | \"normal\" | undefined`} - \n\n  * `state` {`FFieldStateProp | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `description` {`string | undefined`} - \n\n  * `can-duplicate` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `read-only` {`boolean | undefined`} - \n\nProperties:\n\n  * `variant` {`\"inline\" | \"normal\" | undefined`} - \n\n  * `state` {`FFieldStateProp | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `description` {`string | undefined`} - \n\n  * `canDuplicate` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `readOnlyValue` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "attributes": [
+        {
+          "name": "variant",
+          "description": "`variant` {`\"inline\" | \"normal\" | undefined`} - \n\nProperty: variant\n\nDefault: normal",
+          "values": [
+            {
+              "name": "inline"
+            },
+            {
+              "name": "normal"
+            }
+          ]
+        },
+        {
+          "name": "state",
+          "description": "`state` {`FFieldStateProp | undefined`} - \n\nProperty: state\n\nDefault: default",
+          "values": [
+            {
+              "name": "primary"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
+              "name": "default"
+            }
+          ]
+        },
+        {
+          "name": "size",
+          "description": "`size` {`\"medium\" | \"small\" | undefined`} - \n\nProperty: size",
+          "values": [
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "description": "`description` {`string | undefined`} - \n\nProperty: description",
+          "values": []
+        },
+        {
+          "name": "can-duplicate",
+          "description": "`can-duplicate` {`boolean | undefined`} - \n\nProperty: canDuplicate\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "loading",
+          "description": "`loading` {`boolean | undefined`} - \n\nProperty: loading\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "read-only",
+          "description": "`read-only` {`boolean | undefined`} - \n\nProperty: readOnlyValue\n\nDefault: false",
+          "values": []
+        }
+      ]
+    },
+    {
+      "name": "f-form-group",
+      "description": "Events:\n\n  * `duplicate-group` {`CustomEvent<{ message: string; duplicate: boolean; }>`} - \n\nAttributes:\n\n  * `isAccordianOpen` {`boolean`} - \n\n  * `label` {`FGroupLabel | undefined`} - \n\n  * `variant` {`\"normal\" | \"compact\" | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `collapse` {`\"none\" | \"accordion\" | \"text\" | undefined`} - \n\n  * `can-duplicate` {`boolean | undefined`} - \n\nProperties:\n\n  * `isAccordianOpen` {`boolean`} - \n\n  * `label` {`FGroupLabel | undefined`} - \n\n  * `variant` {`\"normal\" | \"compact\" | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `collapse` {`\"none\" | \"accordion\" | \"text\" | undefined`} - \n\n  * `canDuplicate` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "attributes": [
+        {
+          "name": "isAccordianOpen",
+          "description": "`isAccordianOpen` {`boolean`} - \n\nProperty: isAccordianOpen\n\nDefault: false",
+          "valueSet": "v"
+        },
+        {
+          "name": "label",
+          "description": "`label` {`FGroupLabel | undefined`} - \n\nProperty: label",
+          "values": []
+        },
+        {
+          "name": "variant",
+          "description": "`variant` {`\"normal\" | \"compact\" | undefined`} - \n\nProperty: variant\n\nDefault: normal",
+          "values": [
+            {
+              "name": "normal"
+            },
+            {
+              "name": "compact"
+            }
+          ]
+        },
+        {
+          "name": "direction",
+          "description": "`direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\nProperty: direction\n\nDefault: vertical",
+          "values": [
+            {
+              "name": "vertical"
+            },
+            {
+              "name": "horizontal"
+            }
+          ]
+        },
+        {
+          "name": "gap",
+          "description": "`gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\nProperty: gap\n\nDefault: small",
+          "values": [
+            {
+              "name": "large"
+            },
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            },
+            {
+              "name": "x-small"
+            }
+          ]
+        },
+        {
+          "name": "collapse",
+          "description": "`collapse` {`\"none\" | \"accordion\" | \"text\" | undefined`} - \n\nProperty: collapse\n\nDefault: none",
+          "values": [
+            {
+              "name": "none"
+            },
+            {
+              "name": "accordion"
+            },
+            {
+              "name": "text"
+            }
+          ]
+        },
+        {
+          "name": "can-duplicate",
+          "description": "`can-duplicate` {`boolean | undefined`} - \n\nProperty: canDuplicate\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "onduplicate-group",
+          "description": "`duplicate-group` {`CustomEvent<{ message: string; duplicate: boolean; }>`} - "
+        }
+      ]
+    },
+    {
+      "name": "f-form",
+      "description": "Attributes:\n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\nProperties:\n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "attributes": [
+        {
+          "name": "size",
+          "description": "`size` {`\"medium\" | \"small\" | undefined`} - \n\nProperty: size\n\nDefault: medium",
+          "values": [
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "f-icon-button",
-      "description": "Attributes:\n\n  * `fill` {`string`} - \n\n  * `icon` {`string`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `type` {`\"fill\" | \"outline\" | \"transparent\" | \"packed\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `state` {`FIconButtonState | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `fill` {`string`} - \n\n  * `icon` {`string`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `type` {`\"fill\" | \"outline\" | \"transparent\" | \"packed\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `state` {`FIconButtonState | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `iconElement` - icon element reference\n\n  * `counterElement` - icon element reference\n\n  * `counterSize` {`\"large\" | \"medium\" | \"small\" | undefined`} - compute counter size based on button size\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Attributes:\n\n  * `fill` {`string`} - \n\n  * `iconInputClass` {`boolean`} - \n\n  * `icon` {`string`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `type` {`\"fill\" | \"outline\" | \"transparent\" | \"packed\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `state` {`FIconButtonState | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `fill` {`string`} - \n\n  * `iconInputClass` {`boolean`} - \n\n  * `icon` {`string`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `type` {`\"fill\" | \"outline\" | \"transparent\" | \"packed\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `state` {`FIconButtonState | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `iconElement` - icon element reference\n\n  * `counterElement` - icon element reference\n\n  * `counterSize` {`\"large\" | \"medium\" | \"small\" | undefined`} - compute counter size based on button size\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "fill",
           "description": "`fill` {`string`} - \n\nProperty: fill\n\nDefault: "
+        },
+        {
+          "name": "iconInputClass",
+          "description": "`iconInputClass` {`boolean`} - \n\nProperty: iconInputClass\n\nDefault: false",
+          "valueSet": "v"
         },
         {
           "name": "icon",
@@ -5169,10 +5413,10 @@
               "name": "inherit"
             },
             {
-              "name": "subtle"
+              "name": "default"
             },
             {
-              "name": "default"
+              "name": "subtle"
             },
             {
               "name": "secondary"
@@ -5197,6 +5441,163 @@
           "name": "clickable",
           "description": "`clickable` {`boolean | undefined`} - \n\nProperty: clickable\n\nDefault: false",
           "values": []
+        }
+      ]
+    },
+    {
+      "name": "f-input",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `showPassword` {`boolean`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FInputState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `type` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `icon-right` {`string | undefined`} - \n\n  * `prefix` {`string | undefined`} - \n\n  * `suffix` {`string | undefined`} - \n\n  * `max-length` {`number | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `read-only` {`boolean | undefined`} - \n\nProperties:\n\n  * `showPassword` {`boolean`} - \n\n  * `_labelNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_hasLabel` {`boolean`} - \n\n  * `_helpNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_hasHelperText` {`boolean`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FInputState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `type` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `iconRight` {`string | undefined`} - \n\n  * `fInputPrefix` {`string | undefined`} - \n\n  * `fInputSuffix` {`string | undefined`} - \n\n  * `maxLength` {`number | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `readOnly` {`boolean | undefined`} - \n\n  * `iconSize` {`\"small\" | \"x-small\" | undefined`} - icon size\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "attributes": [
+        {
+          "name": "showPassword",
+          "description": "`showPassword` {`boolean`} - \n\nProperty: showPassword\n\nDefault: false",
+          "valueSet": "v"
+        },
+        {
+          "name": "variant",
+          "description": "`variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\nProperty: variant\n\nDefault: curved",
+          "values": [
+            {
+              "name": "round"
+            },
+            {
+              "name": "curved"
+            },
+            {
+              "name": "block"
+            }
+          ]
+        },
+        {
+          "name": "category",
+          "description": "`category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\nProperty: category\n\nDefault: fill",
+          "values": [
+            {
+              "name": "fill"
+            },
+            {
+              "name": "outline"
+            },
+            {
+              "name": "transparent"
+            }
+          ]
+        },
+        {
+          "name": "state",
+          "description": "`state` {`FInputState | undefined`} - \n\nProperty: state\n\nDefault: default",
+          "values": [
+            {
+              "name": "primary"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
+              "name": "default"
+            }
+          ]
+        },
+        {
+          "name": "size",
+          "description": "`size` {`\"medium\" | \"small\" | undefined`} - \n\nProperty: size",
+          "values": [
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            }
+          ]
+        },
+        {
+          "name": "type",
+          "description": "`type` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined`} - \n\nProperty: type\n\nDefault: text",
+          "values": [
+            {
+              "name": "number"
+            },
+            {
+              "name": "text"
+            },
+            {
+              "name": "email"
+            },
+            {
+              "name": "password"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "tel"
+            }
+          ]
+        },
+        {
+          "name": "value",
+          "description": "`value` {`string | undefined`} - \n\nProperty: value",
+          "values": []
+        },
+        {
+          "name": "placeholder",
+          "description": "`placeholder` {`string | undefined`} - \n\nProperty: placeholder",
+          "values": []
+        },
+        {
+          "name": "icon-left",
+          "description": "`icon-left` {`string | undefined`} - \n\nProperty: iconLeft",
+          "values": []
+        },
+        {
+          "name": "icon-right",
+          "description": "`icon-right` {`string | undefined`} - \n\nProperty: iconRight",
+          "values": []
+        },
+        {
+          "name": "prefix",
+          "description": "`prefix` {`string | undefined`} - \n\nProperty: fInputPrefix",
+          "values": []
+        },
+        {
+          "name": "suffix",
+          "description": "`suffix` {`string | undefined`} - \n\nProperty: fInputSuffix",
+          "values": []
+        },
+        {
+          "name": "max-length",
+          "description": "`max-length` {`number | undefined`} - \n\nProperty: maxLength",
+          "values": []
+        },
+        {
+          "name": "loading",
+          "description": "`loading` {`boolean | undefined`} - \n\nProperty: loading\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "clear",
+          "description": "`clear` {`boolean | undefined`} - \n\nProperty: clear\n\nDefault: true",
+          "values": []
+        },
+        {
+          "name": "read-only",
+          "description": "`read-only` {`boolean | undefined`} - \n\nProperty: readOnly\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
         }
       ]
     },
@@ -5377,6 +5778,263 @@
       ]
     },
     {
+      "name": "f-radio",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "attributes": [
+        {
+          "name": "value",
+          "description": "`value` {`\"selected\" | \"unselected\" | undefined`} - \n\nProperty: value\n\nDefault: unselected",
+          "values": [
+            {
+              "name": "selected"
+            },
+            {
+              "name": "unselected"
+            }
+          ]
+        },
+        {
+          "name": "state",
+          "description": "`state` {`FRadioState | undefined`} - \n\nProperty: state\n\nDefault: default",
+          "values": [
+            {
+              "name": "primary"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
+              "name": "default"
+            }
+          ]
+        },
+        {
+          "name": "size",
+          "description": "`size` {`\"medium\" | \"small\" | undefined`} - \n\nProperty: size",
+          "values": [
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            }
+          ]
+        },
+        {
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
+        }
+      ]
+    },
+    {
+      "name": "f-select",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: never[]; }>`} - \n\nAttributes:\n\n  * `openDropdown` {`boolean`} - \n\n  * `viewMoreTags` {`boolean`} - \n\n  * `searchValue` {`string`} - \n\n  * `selectedOptions` - \n\n  * `filteredOptions` - \n\n  * `currentCursor` {`number`} - \n\n  * `currentGroupCursor` {`number`} - \n\n  * `fSelectWrapperHeight` {`number`} - \n\n  * `currentGroupOptionCursor` {`number`} - \n\n  * `type` {`\"single\" | \"multiple\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FSelectState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `value` - \n\n  * `options` - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `option-template` {`string | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `height` {`number`} - \n\n  * `width` {`FSelectWidthProp | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `searchable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `checkbox` {`boolean | undefined`} - \n\n  * `create-option` {`boolean | undefined`} - \n\n  * `selection-limit` {`number`} - \n\nProperties:\n\n  * `_labelNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_hasLabel` {`boolean`} - \n\n  * `_helpNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_hasHelperText` {`boolean`} - \n\n  * `openDropdown` {`boolean`} - \n\n  * `viewMoreTags` {`boolean`} - \n\n  * `searchValue` {`string`} - \n\n  * `selectedOptions` - \n\n  * `filteredOptions` - \n\n  * `currentCursor` {`number`} - \n\n  * `currentGroupCursor` {`number`} - \n\n  * `fSelectWrapperHeight` {`number`} - \n\n  * `optimizedHeight` {`number`} - \n\n  * `preferredOpenDirection` {`string`} - \n\n  * `optionsTop` {`string`} - \n\n  * `currentGroupOptionCursor` {`number`} - \n\n  * `inputElement` {`HTMLInputElement`} - \n\n  * `wrapperElement` {`HTMLDivElement`} - \n\n  * `optionElement` {`HTMLDivElement`} - \n\n  * `type` {`\"single\" | \"multiple\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FSelectState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `value` - \n\n  * `options` - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `optionTemplate` {`string | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `height` {`number`} - \n\n  * `width` {`FSelectWidthProp | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `searchable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `checkbox` {`boolean | undefined`} - \n\n  * `createOption` {`boolean | undefined`} - \n\n  * `selectionLimit` {`number`} - \n\n  * `iconSize` {`\"small\" | \"x-small\" | undefined`} - icon size\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "attributes": [
+        {
+          "name": "openDropdown",
+          "description": "`openDropdown` {`boolean`} - \n\nProperty: openDropdown\n\nDefault: false",
+          "valueSet": "v"
+        },
+        {
+          "name": "viewMoreTags",
+          "description": "`viewMoreTags` {`boolean`} - \n\nProperty: viewMoreTags\n\nDefault: false",
+          "valueSet": "v"
+        },
+        {
+          "name": "searchValue",
+          "description": "`searchValue` {`string`} - \n\nProperty: searchValue\n\nDefault: "
+        },
+        {
+          "name": "selectedOptions",
+          "description": "`selectedOptions` - \n\nProperty: selectedOptions\n\nDefault: ",
+          "values": []
+        },
+        {
+          "name": "filteredOptions",
+          "description": "`filteredOptions` - \n\nProperty: filteredOptions\n\nDefault: ",
+          "values": []
+        },
+        {
+          "name": "currentCursor",
+          "description": "`currentCursor` {`number`} - \n\nProperty: currentCursor\n\nDefault: -1"
+        },
+        {
+          "name": "currentGroupCursor",
+          "description": "`currentGroupCursor` {`number`} - \n\nProperty: currentGroupCursor\n\nDefault: -1"
+        },
+        {
+          "name": "fSelectWrapperHeight",
+          "description": "`fSelectWrapperHeight` {`number`} - \n\nProperty: fSelectWrapperHeight\n\nDefault: 0"
+        },
+        {
+          "name": "currentGroupOptionCursor",
+          "description": "`currentGroupOptionCursor` {`number`} - \n\nProperty: currentGroupOptionCursor\n\nDefault: -1"
+        },
+        {
+          "name": "type",
+          "description": "`type` {`\"single\" | \"multiple\" | undefined`} - \n\nProperty: type\n\nDefault: single",
+          "values": [
+            {
+              "name": "single"
+            },
+            {
+              "name": "multiple"
+            }
+          ]
+        },
+        {
+          "name": "variant",
+          "description": "`variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\nProperty: variant\n\nDefault: curved",
+          "values": [
+            {
+              "name": "round"
+            },
+            {
+              "name": "curved"
+            },
+            {
+              "name": "block"
+            }
+          ]
+        },
+        {
+          "name": "category",
+          "description": "`category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\nProperty: category\n\nDefault: fill",
+          "values": [
+            {
+              "name": "fill"
+            },
+            {
+              "name": "outline"
+            },
+            {
+              "name": "transparent"
+            }
+          ]
+        },
+        {
+          "name": "state",
+          "description": "`state` {`FSelectState | undefined`} - \n\nProperty: state\n\nDefault: default",
+          "values": [
+            {
+              "name": "primary"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
+              "name": "default"
+            }
+          ]
+        },
+        {
+          "name": "size",
+          "description": "`size` {`\"medium\" | \"small\" | undefined`} - \n\nProperty: size",
+          "values": [
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            }
+          ]
+        },
+        {
+          "name": "value",
+          "description": "`value` - \n\nProperty: value\n\nDefault: ",
+          "values": []
+        },
+        {
+          "name": "options",
+          "description": "`options` - \n\nProperty: options",
+          "values": []
+        },
+        {
+          "name": "placeholder",
+          "description": "`placeholder` {`string | undefined`} - \n\nProperty: placeholder",
+          "values": []
+        },
+        {
+          "name": "option-template",
+          "description": "`option-template` {`string | undefined`} - \n\nProperty: optionTemplate",
+          "values": []
+        },
+        {
+          "name": "icon-left",
+          "description": "`icon-left` {`string | undefined`} - \n\nProperty: iconLeft",
+          "values": []
+        },
+        {
+          "name": "height",
+          "description": "`height` {`number`} - \n\nProperty: height\n\nDefault: 180"
+        },
+        {
+          "name": "width",
+          "description": "`width` {`FSelectWidthProp | undefined`} - \n\nProperty: width\n\nDefault: fill-container",
+          "values": [
+            {
+              "name": "fill-container"
+            }
+          ]
+        },
+        {
+          "name": "loading",
+          "description": "`loading` {`boolean | undefined`} - \n\nProperty: loading\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "searchable",
+          "description": "`searchable` {`boolean | undefined`} - \n\nProperty: searchable\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "clear",
+          "description": "`clear` {`boolean | undefined`} - \n\nProperty: clear\n\nDefault: true",
+          "values": []
+        },
+        {
+          "name": "checkbox",
+          "description": "`checkbox` {`boolean | undefined`} - \n\nProperty: checkbox\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "create-option",
+          "description": "`create-option` {`boolean | undefined`} - \n\nProperty: createOption\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "selection-limit",
+          "description": "`selection-limit` {`number`} - \n\nProperty: selectionLimit\n\nDefault: 2"
+        },
+        {
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<{ value: never[]; }>`} - "
+        }
+      ]
+    },
+    {
       "name": "f-spacer",
       "description": "Attributes:\n\n  * `size` {`FSpacerSizeProp | undefined`} - \n\nProperties:\n\n  * `size` {`FSpacerSizeProp | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
@@ -5407,9 +6065,74 @@
       ]
     },
     {
-      "name": "f-tag",
-      "description": "Attributes:\n\n  * `fill` {`string`} - \n\n  * `label` {`string`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | undefined`} - \n\n  * `state` {`FTagStateProp | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `icon-right` {`string | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `fill` {`string`} - \n\n  * `label` {`string`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | undefined`} - \n\n  * `state` {`FTagStateProp | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `iconRight` {`string | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `iconSize` {`\"medium\" | \"small\" | \"x-small\"`} - compute icon size based on tag size\n\n  * `textColor` {`\"#202a36\" | \"#fcfcfd\"`} - compute textColor when custom color of tag is defined.\n\n  * `loaderColor` {`\"#202a36\" | \"#808080\"`} - compute loaderColor when custom color of tag is defined.\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "name": "f-switch",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`\"on\" | \"off\" | undefined`} - \n\n  * `state` {`FSwitchState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`\"on\" | \"off\" | undefined`} - \n\n  * `state` {`FSwitchState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
+        {
+          "name": "value",
+          "description": "`value` {`\"on\" | \"off\" | undefined`} - \n\nProperty: value\n\nDefault: off",
+          "values": [
+            {
+              "name": "on"
+            },
+            {
+              "name": "off"
+            }
+          ]
+        },
+        {
+          "name": "state",
+          "description": "`state` {`FSwitchState | undefined`} - \n\nProperty: state\n\nDefault: default",
+          "values": [
+            {
+              "name": "primary"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
+              "name": "default"
+            }
+          ]
+        },
+        {
+          "name": "size",
+          "description": "`size` {`\"medium\" | \"small\" | undefined`} - \n\nProperty: size",
+          "values": [
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            }
+          ]
+        },
+        {
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
+        }
+      ]
+    },
+    {
+      "name": "f-tag",
+      "description": "Attributes:\n\n  * `tagSystemIcon` {`boolean`} - \n\n  * `fill` {`string`} - \n\n  * `label` {`string`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | undefined`} - \n\n  * `state` {`FTagStateProp | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `icon-right` {`string | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `tagSystemIcon` {`boolean`} - \n\n  * `fill` {`string`} - \n\n  * `label` {`string`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | undefined`} - \n\n  * `state` {`FTagStateProp | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `iconRight` {`string | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `iconSize` {`\"medium\" | \"small\" | \"x-small\"`} - compute icon size based on tag size\n\n  * `textColor` {`\"#202a36\" | \"#fcfcfd\"`} - compute textColor when custom color of tag is defined.\n\n  * `loaderColor` {`\"#202a36\" | \"#808080\"`} - compute loaderColor when custom color of tag is defined.\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "attributes": [
+        {
+          "name": "tagSystemIcon",
+          "description": "`tagSystemIcon` {`boolean`} - \n\nProperty: tagSystemIcon\n\nDefault: false",
+          "valueSet": "v"
+        },
         {
           "name": "fill",
           "description": "`fill` {`string`} - \n\nProperty: fill\n\nDefault: "
@@ -5495,6 +6218,104 @@
       "attributes": []
     },
     {
+      "name": "f-text-area",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`string | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FTextAreaState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `rows` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `max-length` {`string | undefined`} - \n\n  * `resizable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `read-only` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`string | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FTextAreaState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `rows` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `maxLength` {`string | undefined`} - \n\n  * `resizable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `readOnly` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "attributes": [
+        {
+          "name": "value",
+          "description": "`value` {`string | undefined`} - \n\nProperty: value",
+          "values": []
+        },
+        {
+          "name": "category",
+          "description": "`category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\nProperty: category\n\nDefault: fill",
+          "values": [
+            {
+              "name": "fill"
+            },
+            {
+              "name": "outline"
+            },
+            {
+              "name": "transparent"
+            }
+          ]
+        },
+        {
+          "name": "state",
+          "description": "`state` {`FTextAreaState | undefined`} - \n\nProperty: state\n\nDefault: default",
+          "values": [
+            {
+              "name": "primary"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
+              "name": "default"
+            }
+          ]
+        },
+        {
+          "name": "size",
+          "description": "`size` {`\"medium\" | \"small\" | undefined`} - \n\nProperty: size",
+          "values": [
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            }
+          ]
+        },
+        {
+          "name": "rows",
+          "description": "`rows` {`string | undefined`} - \n\nProperty: rows",
+          "values": []
+        },
+        {
+          "name": "placeholder",
+          "description": "`placeholder` {`string | undefined`} - \n\nProperty: placeholder",
+          "values": []
+        },
+        {
+          "name": "max-length",
+          "description": "`max-length` {`string | undefined`} - \n\nProperty: maxLength",
+          "values": []
+        },
+        {
+          "name": "resizable",
+          "description": "`resizable` {`boolean | undefined`} - \n\nProperty: resizable\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "clear",
+          "description": "`clear` {`boolean | undefined`} - \n\nProperty: clear\n\nDefault: true",
+          "values": []
+        },
+        {
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "read-only",
+          "description": "`read-only` {`boolean | undefined`} - \n\nProperty: readOnly\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
+        }
+      ]
+    },
+    {
       "name": "f-text",
       "description": "Attributes:\n\n  * `fill` {`string`} - \n\n  * `variant` {`\"code\" | \"heading\" | \"para\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | \"x-large\" | undefined`} - \n\n  * `weight` {`\"medium\" | \"bold\" | \"regular\" | undefined`} - \n\n  * `state` {`FTextStateProp | undefined`} - \n\n  * `align` {`\"left\" | \"right\" | \"center\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `ellipsis` {`boolean | undefined`} - \n\nProperties:\n\n  * `fill` {`string`} - \n\n  * `variant` {`\"code\" | \"heading\" | \"para\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | \"x-large\" | undefined`} - \n\n  * `weight` {`\"medium\" | \"bold\" | \"regular\" | undefined`} - \n\n  * `state` {`FTextStateProp | undefined`} - \n\n  * `align` {`\"left\" | \"right\" | \"center\" | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `ellipsis` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
@@ -5573,10 +6394,10 @@
               "name": "inherit"
             },
             {
-              "name": "subtle"
+              "name": "default"
             },
             {
-              "name": "default"
+              "name": "subtle"
             },
             {
               "name": "secondary"

@@ -17,6 +17,15 @@ export * from "./components/f-pictogram/f-pictogram";
 export * from "./components/f-template/f-template";
 export * from "./components/f-popover/f-popover";
 export * from "./components/f-tag/f-tag";
+export * from "./components/f-input/f-input";
+export * from "./components/f-form-group/f-form-group";
+export * from "./components/f-checkbox/f-checkbox";
+export * from "./components/f-field/f-field";
+export * from "./components/f-radio/f-radio";
+export * from "./components/f-form/f-form";
+export * from "./components/f-switch/f-switch";
+export * from "./components/f-text-area/f-text-area";
+export * from "./components/f-select/f-select";
 export * from "./mixins/components/f-root/f-root";
 
 if (document.readyState !== "loading") {
@@ -30,12 +39,7 @@ if (document.readyState !== "loading") {
 document.addEventListener("keyup", (event: KeyboardEvent) => {
   event.preventDefault();
 
-  if (
-    event.key &&
-    event.key.toLowerCase() === "x" &&
-    event.shiftKey &&
-    event.ctrlKey
-  ) {
+  if (event.key && event.key.toLowerCase() === "x" && event.shiftKey && event.ctrlKey) {
     // console.log("Changing theme");
     const currentTheme = ConfigUtil.getConfig().theme;
 

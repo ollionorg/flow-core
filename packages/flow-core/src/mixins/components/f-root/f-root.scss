@@ -1,6 +1,7 @@
 @import "./../../scss/color-tokens";
 @import "./../../scss/width";
 @import "./../../scss/height";
+@import "./../../scss/mixins";
 
 //https://fonts.google.com/specimen/Montserrat?query=mon
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300&family=Roboto:wght@100;300;400;500;700&display=swap");
@@ -10,6 +11,9 @@
 :root {
   --flow-font: "Montserrat", sans-serif;
   --flow-code-font: "Courier Prime", monospace;
+  --transition-time-default: 0.25s;
+  --transition-time-rapid: 0.12s;
+  --transition-time-delayed: 0.4s;
 }
 html,
 body {
@@ -27,6 +31,7 @@ body {
   #root {
     height: 100%;
   }
+  @include inherit-size("medium");
 }
 
 *[loki-test] [loading] {

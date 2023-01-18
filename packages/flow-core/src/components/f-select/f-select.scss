@@ -1,0 +1,374 @@
+@use "sass:map";
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+
+/**
+$categories map will have state specific inner maps.
+**/
+$categories: (
+  "fill": (
+    "background": var(--color-surface-tertiary),
+    "hover": var(--color-surface-tertiary-hover),
+  ),
+  "transparent": (
+    "background": transparent,
+    "hover": var(--color-surface-default-hover),
+  ),
+  "outline": (
+    "background": transparent,
+    "hover": var(--color-surface-default-hover),
+  ),
+);
+
+/**
+$sizes map will have state specific inner maps.
+**/
+$sizes: (
+  "medium": (
+    "main-height": 36px,
+    "height": 34px,
+    "loader": 24px,
+    "maxlength": -38px,
+  ),
+  "small": (
+    "main-height": 28px,
+    "height": 26px,
+    "loader": 16px,
+    "maxlength": -34px,
+  ),
+);
+
+/**
+$states map will have state specific inner maps.
+**/
+$states: (
+  "primary": (
+    "input": var(--color-primary-default),
+    "border": var(--color-primary-default),
+    "focus": var(--color-primary-default),
+  ),
+  "default": (
+    "input": var(--color-surface-tertiary),
+    "border": var(--color-border-default),
+    "focus": var(--color-primary-default),
+  ),
+  "success": (
+    "input": var(--color-success-default),
+    "border": var(--color-success-default),
+    "focus": var(--color-success-default),
+  ),
+  "warning": (
+    "input": var(--color-warning-default),
+    "border": var(--color-warning-default),
+    "focus": var(--color-warning-default),
+  ),
+  "danger": (
+    "input": var(--color-danger-default),
+    "border": var(--color-danger-default),
+    "focus": var(--color-danger-default),
+  ),
+  "inherit": (
+    "input": var(--color-input-default),
+    "border": var(--color-input-border-default),
+    "focus": var(--color-input-focus),
+  ),
+);
+
+/**
+applies styles on f-select
+**/
+
+:host {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .f-select-field {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    &[allow-gap] {
+      gap: 4px;
+    }
+    .f-select-options {
+      position: fixed;
+      z-index: 2;
+      background-color: var(--color-surface-secondary);
+      border-radius: 0px 0px 4px 4px;
+      overflow: auto;
+      width: 100%;
+      box-shadow: 0px 0px 12px rgba(35, 46, 60, 0.4);
+    }
+    .f-select-wrapper {
+      // Important :  always include base mixins
+      @include base();
+      display: flex;
+      flex-shrink: 1;
+      position: relative;
+      min-height: var(--form-input-div-size);
+      &[allow-gap] {
+        margin-top: 4px;
+      }
+      cursor: text;
+
+      @each $size, $value in $sizes {
+        &[size="#{$size}"] {
+          min-height: map.get($value, "main-height");
+        }
+      }
+
+      .word-break {
+        word-break: normal !important;
+      }
+
+      @each $category, $value in $categories {
+        &[category^="#{$category}"] {
+          background-color: map.get($value, "background");
+          &:hover .f-select {
+            background-color: map.get($value, "hover") !important;
+          }
+          &:hover {
+            background-color: map.get($value, "hover") !important;
+          }
+        }
+      }
+
+      @each $state, $color in $states {
+        &[state="#{$state}"] {
+          &[variant="block"][category="fill"] {
+            border-bottom: 1px solid map.get($color, "border");
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            &:focus-within {
+              border-bottom: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="block"][category="transparent"] {
+            border-bottom: 1px solid map.get($color, "border");
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            &:focus-within {
+              border-bottom: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="block"][category="outline"] {
+            border: 1px solid map.get($color, "border");
+            &:focus-within {
+              border-bottom: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="curved"][category="fill"] {
+            border: 1px solid map.get($color, "input");
+            border-radius: var(--input-border-radius-curved);
+            &:focus-within {
+              border: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="curved"][category="outline"] {
+            border: 1px solid map.get($color, "border");
+            border-radius: var(--input-border-radius-curved);
+            &:focus-within {
+              border: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="curved"][category="transparent"] {
+            border: 1px solid map.get($color, "border");
+            border-radius: var(--input-border-radius-curved);
+            &:focus-within {
+              border: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="round"][category="fill"] {
+            border-radius: var(--input-border-radius-round);
+            border: 1px solid map.get($color, "input");
+            &:focus-within {
+              border: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="round"][category="outline"] {
+            border-radius: var(--input-border-radius-round);
+            border: 1px solid map.get($color, "border");
+            &:focus-within {
+              border: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+          &[variant="round"][category="transparent"] {
+            border-radius: var(--input-border-radius-round);
+            border: 1px solid map.get($color, "border");
+            &:focus-within {
+              border: 1px solid map.get($color, "focus");
+              outline: none;
+            }
+          }
+        }
+      }
+
+      .f-select-prefix {
+        position: relative;
+        display: flex;
+        padding: 0px 0px 0px 12px;
+        gap: 12px;
+        align-items: center;
+        width: 100%;
+        .icon-left-padding {
+          align-items: center;
+          display: flex;
+        }
+        .f-select-searchable {
+          padding: 4px 0px;
+          display: flex;
+          flex-direction: row;
+          gap: 4px;
+          flex-wrap: wrap;
+          width: 100%;
+          align-items: center;
+        }
+        .placeholder-text {
+          font-style: normal;
+          font-weight: 325;
+          font-size: 12px;
+          line-height: 18px;
+          color: var(--color-text-subtle);
+        }
+      }
+
+      .f-select-suffix {
+        position: relative;
+        padding: 0px 12px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .loader-suffix {
+        position: relative;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        @include rotate("svg");
+        pointer-events: none;
+        padding: 0px 12px 0px 0px;
+
+        svg {
+          position: relative;
+          height: var(--form-input-loader);
+          width: var(--form-input-loader);
+        }
+      }
+
+      @each $size, $value in $sizes {
+        &[size="#{$size}"] {
+          .loader-suffix {
+            svg {
+              height: map.get($value, "loader");
+              width: map.get($value, "loader");
+            }
+          }
+        }
+      }
+
+      .f-select {
+        @include base();
+        display: flex;
+        flex: 1 1 auto;
+        padding: 0px 0px;
+        min-height: 15px;
+        font-style: normal;
+        font-weight: 325;
+        font-size: 12px;
+        line-height: 18px;
+        color: var(--color-text-default);
+        color-scheme: dark;
+
+        @each $category, $value in $categories {
+          &[category^="#{$category}"] {
+            background-color: map.get($value, "background");
+            border: none;
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+        border-radius: 4px;
+        &[type="password"] {
+          font-size: 15px;
+          letter-spacing: 2px;
+        }
+        &::placeholder {
+          /* Chrome, Firefox, Opera, Safari 10.1+ */
+          font-style: normal;
+          font-weight: 325;
+          font-size: 12px;
+          line-height: 18px;
+          color: var(--color-text-subtle);
+        }
+        /* Chrome, Safari, Edge, Opera */
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        /* Firefox */
+        &[type="number"] {
+          -moz-appearance: textfield;
+        }
+        &[type="date"]::-webkit-calendar-picker-indicator {
+          cursor: pointer;
+          border-radius: 4px;
+          margin-right: 2px;
+          opacity: 0.6;
+          font-size: 15px;
+        }
+
+        &[type="date"]::-webkit-calendar-picker-indicator:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+f-select {
+  &[disabled] {
+    @include disabled();
+  }
+  @each $state, $color in $states {
+    &[state="#{$state}"] {
+      @include input-color($state);
+    }
+  }
+}
+
+:root {
+  --input-border-radius-curved: 4px;
+  --input-border-radius-round: 22px;
+}
+
+f-form-group {
+  &[variant="compact"][direction="horizontal"] {
+    f-select {
+      &:first-child {
+        --input-border-radius-curved: 4px 0px 0px 4px;
+        --input-border-radius-round: 22px 0px 0px 22px;
+      }
+      &:last-child {
+        --input-border-radius-curved: 0px 4px 4px 0px;
+        --input-border-radius-round: 0px 22px 22px 0px;
+      }
+      &:not(:first-child):not(:last-child) {
+        --input-border-radius-curved: 0px 0px 0px 0px;
+        --input-border-radius-round: 0px 0px 0px 0px;
+      }
+    }
+  }
+}

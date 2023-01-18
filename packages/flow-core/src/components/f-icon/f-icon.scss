@@ -142,6 +142,24 @@ in this case it is `f-icon`
 
     // Edge case : extend styles if `f-icon` is used on `f-button`
     &.fill-button-surface {
+      &.fill-button-surface-input {
+        svg {
+          fill: var(--color-text-default) !important;
+          stroke: none;
+          *[fill^="white"] {
+            fill: var(--color-text-default) !important;
+          }
+        }
+        &:hover {
+          svg {
+            fill: var(--color-text-default-hover);
+            stroke: none;
+            *[fill^="white"] {
+              fill: var(--color-text-default-hover);
+            }
+          }
+        }
+      }
       svg {
         fill: var(--color-surface-default) !important;
         stroke: none;
@@ -164,6 +182,7 @@ in this case it is `f-icon`
     /**
   * Iterating over sizes with padding, fontsize, height
   **/
+
     @each $size, $value in $sizes {
       &[size="#{$size}"] {
         font-size: $value;
@@ -175,6 +194,16 @@ in this case it is `f-icon`
           width: $value;
           height: $value;
         }
+
+        &.f-tag-system-icon {
+          width: 8px;
+          height: 8px;
+          svg,
+          img {
+            width: 8px;
+            height: 8px;
+          }
+        }
         &.f-pictogram-small {
           width: 8px;
           height: 8px;
@@ -184,6 +213,7 @@ in this case it is `f-icon`
             height: 8px;
           }
         }
+
         &.f-pictogram-x-large-emoji {
           font-size: 18px;
           line-height: 18px;
@@ -208,6 +238,17 @@ in this case it is `f-icon`
           width: 10px;
           height: 10px;
         }
+      }
+    }
+    &.f-input-icons-size {
+      font-size: var(--form-input-icons-size);
+      line-height: var(--form-input-icons-size);
+      width: var(--form-input-icons-size);
+      height: var(--form-input-icons-size);
+      svg,
+      img {
+        width: var(--form-input-icons-size);
+        height: var(--form-input-icons-size);
       }
     }
     // applying disabled mixins

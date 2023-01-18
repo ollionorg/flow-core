@@ -12,7 +12,7 @@
 
 ### Improvements
 
-- added `gap=x-small` for `f-div` with a gap of `4px`.
+- replaced `gap` prop for `f-div` with different pixels, x-large:24px, large:16px, medium:12px, small:8px, x-small:4px.
 
 ## [1.1.6] - 2023-01-03
 

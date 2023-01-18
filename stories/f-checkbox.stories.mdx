@@ -3,6 +3,7 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fCheckboxAnatomy from "./svg/i-fcheckbox-anatomy.js";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <Meta
   title="Components/f-checkbox"
@@ -42,11 +43,25 @@ f-checkbox allows a user to mark one individual item as selected, or to select m
       disabled: {
         control: "boolean",
       },
+      slot: {
+        control: "text",
+      },
     }}
     args={{
       value: "checked",
       state: "default",
       size: "small",
+      slot: ` <f-div slot="label" padding="none">
+                <f-text variant="para" size="small">Banana</f-text>
+              </f-div>
+              <f-div slot="description" gap="none" padding="none">
+                <f-text variant="para" size="small" state="secondary"
+                  >States are used to communicate purpose and connotations.
+                </f-text>
+              </f-div>
+              <f-div slot="help" gap="none" padding="none">
+                <f-text variant="para" size="small" state="secondary">This is a subtext </f-text>
+              </f-div>`,
       disabled: false,
     }}
   >
@@ -65,17 +80,7 @@ f-checkbox allows a user to mark one individual item as selected, or to select m
               ?disabled=${args.disabled}
               @input=${handleInput}
             >
-              <f-div slot="label" padding="none">
-                <f-text variant="para" size="small">Banana</f-text>
-              </f-div>
-              <f-div slot="description" gap="none" padding="none">
-                <f-text variant="para" size="small" state="secondary"
-                  >States are used to communicate purpose and connotations.
-                </f-text>
-              </f-div>
-              <f-div slot="help" gap="none" padding="none">
-                <f-text variant="para" size="small" state="secondary">This is a subtext </f-text>
-              </f-div>
+              ${unsafeHTML(args.slot)}
             </f-checkbox></f-div
           ></f-div
         >

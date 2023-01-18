@@ -2327,6 +2327,62 @@
             },
             {
               "kind": "field",
+              "name": "firstState",
+              "type": {
+                "text": "FInputState | undefined"
+              },
+              "default": "\"default\""
+            },
+            {
+              "kind": "field",
+              "name": "helpMessage",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "isCodeMenuOpen",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "selectedCallingCode",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "optimizedHeight",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "preferredOpenDirection",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"below\""
+            },
+            {
+              "kind": "field",
+              "name": "optionsTop",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
               "name": "_labelNodes",
               "type": {
                 "text": "NodeListOf<HTMLElement>"
@@ -2345,6 +2401,20 @@
               "name": "_helpNodes",
               "type": {
                 "text": "NodeListOf<HTMLElement>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "wrapperElement",
+              "type": {
+                "text": "HTMLDivElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "optionElement",
+              "type": {
+                "text": "HTMLDivElement"
               }
             },
             {
@@ -2411,6 +2481,15 @@
                 "text": "string | undefined"
               },
               "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "callingCode",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "callingCode",
               "reflects": true
             },
             {
@@ -2522,6 +2601,32 @@
             },
             {
               "kind": "method",
+              "name": "handleBlur",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ],
+              "description": "on blur action"
+            },
+            {
+              "kind": "method",
+              "name": "handleKeyDown",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ],
+              "description": "on keydown action"
+            },
+            {
+              "kind": "method",
               "name": "clearInputValue",
               "description": "clear input value on clear icon clicked"
             },
@@ -2542,6 +2647,64 @@
             {
               "kind": "method",
               "name": "_onHelpSlotChange"
+            },
+            {
+              "kind": "method",
+              "name": "applyOptionsStyle",
+              "parameters": [
+                {
+                  "name": "width",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ],
+              "description": "apply styling to f-select options wrapper."
+            },
+            {
+              "kind": "field",
+              "name": "optionsHeight",
+              "type": {
+                "text": "number"
+              },
+              "default": "180"
+            },
+            {
+              "kind": "method",
+              "name": "updateDimentions",
+              "description": "options wrapper dimentions update on the basis of window screen"
+            },
+            {
+              "kind": "method",
+              "name": "isSelected",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "check selection for respective option."
+            },
+            {
+              "kind": "method",
+              "name": "handleOptionSelection",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
+              "description": "action for selection of options if the options is in the form of array"
             }
           ],
           "attributes": [
@@ -2590,6 +2753,13 @@
                 "text": "string | undefined"
               },
               "fieldName": "value"
+            },
+            {
+              "name": "callingCode",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "callingCode"
             },
             {
               "name": "placeholder",

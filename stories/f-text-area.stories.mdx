@@ -3,6 +3,7 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fTextAreaAnatomy from "./svg/i-ftextarea-anatomy.js";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <Meta
   title="Components/f-text-area"
@@ -44,6 +45,7 @@ f-text-area allows the user to input a longer amount of text than f-input. It is
         control: "radio",
         options: ["small", "medium"],
       },
+      slot: { control: "text" },
       rows: {
         control: "text",
       },
@@ -69,6 +71,9 @@ f-text-area allows the user to input a longer amount of text than f-input. It is
       category: "fill",
       state: "default",
       size: "small",
+      slot: `  <f-text slot="label" variant="para" size="small">Label *</f-text>
+              <f-text slot="description" variant="para" size="small">This is subtext</f-text>
+              <f-text slot="help" variant="para" size="small">This is subtext</f-text>`,
       rows: undefined,
       ["max-length"]: undefined,
       resizable: false,
@@ -99,9 +104,7 @@ f-text-area allows the user to input a longer amount of text than f-input. It is
               ?read-only=${args["read-only"]}
               rows=${args.rows}
             >
-              <f-text slot="label" variant="para" size="small">Label *</f-text>
-              <f-text slot="description" variant="para" size="small">This is subtext</f-text>
-              <f-text slot="help" variant="para" size="small">This is subtext</f-text>
+              ${unsafeHTML(args.slot)}
             </f-text-area></f-div
           ></f-div
         >

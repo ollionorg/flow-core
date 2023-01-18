@@ -3,6 +3,7 @@ import { html } from "lit-html";
 import fInputAnatomy from "./svg/i-finput-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <Meta
   title="Components/f-input"
@@ -31,6 +32,8 @@ f-input is an input element.
     name="Playground"
     argTypes={{
       value: { control: "text" },
+      slot: { control: "text" },
+      ["calling-code"]: { control: "text", if: { arg: "type", eq: "tel" } },
       placeholder: { control: "text" },
       variant: {
         control: "select",
@@ -82,12 +85,16 @@ f-input is an input element.
     }}
     args={{
       value: "",
+      ["calling-code"]: undefined,
       placeholder: "Enter your text here",
       variant: "round",
       category: "fill",
       type: "text",
       state: "default",
       size: "small",
+      slot: `              <f-div slot="label" padding="none" gap="none">Label</f-div>
+              <f-div slot="description" padding="none" gap="none">This is a Description</f-div>
+              <f-text slot="help" variant="para" size="small">This is a Subtext</f-text>`,
       ["icon-left"]: undefined,
       ["icon-right"]: undefined,
       ["prefix"]: undefined,
@@ -103,6 +110,9 @@ f-input is an input element.
       const [_, updateArgs] = useArgs();
       const handleInput = (e) => {
         updateArgs({ value: e.detail.value });
+        if (args.type === "tel") {
+          updateArgs({ ["calling-code"]: e.detail.callingCode });
+        }
       };
       return html`
         <f-div width="100%" align="middle-center" padding="large">
@@ -125,10 +135,9 @@ f-input is an input element.
               ?clear=${args.clear}
               ?read-only=${args.readOnly}
               .size=${args.size}
+              .calling-code=${args["calling-code"]}
             >
-              <f-div slot="label" padding="none" gap="none">Label</f-div>
-              <f-div slot="description" padding="none" gap="none">This is a Description</f-div>
-              <f-text slot="help" variant="para" size="small">This is a Subtext</f-text>
+              ${unsafeHTML(args.slot)}
             </f-input></f-div
           ></f-div
         >

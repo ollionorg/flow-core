@@ -3,6 +3,7 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fSelectAnatomy from "./svg/i-fselect-anatomy.js";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <Meta
   title="Components/f-select"
@@ -51,6 +52,7 @@ Select allows users to choose one or multiple options from a list of values.
         control: "radio",
         options: ["small", "medium"],
       },
+      slot: { control: "text" },
       ["icon-left"]: {
         control: "text",
       },
@@ -96,6 +98,9 @@ Select allows users to choose one or multiple options from a list of values.
       category: "fill",
       state: "default",
       size: "small",
+      slot: `  <f-div slot="label" padding="none" gap="none">Label for f-select</f-div>
+              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
+              <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>`,
       options: ["options 1", "options 2", "options 3", "options 4"],
       value: [],
       ["option-template"]: undefined,
@@ -146,9 +151,7 @@ Select allows users to choose one or multiple options from a list of values.
               icon-left=${args["icon-left"]}
               .size=${args.size}
             >
-              <f-div slot="label" padding="none" gap="none">Label for f-select</f-div>
-              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
-              <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+              ${unsafeHTML(args.slot)}
             </f-select></f-div
           ></f-div
         >

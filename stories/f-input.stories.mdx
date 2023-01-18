@@ -1,5 +1,6 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
+import fInputAnatomy from "./svg/i-finput-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 
@@ -141,6 +142,10 @@ f-input is an input element.
 ### Anatomy
 
 <f-divider></f-divider>
+
+<Story name="Anatomy">
+  {() => html`<div class="align-center">${unsafeSVG(fInputAnatomy)}</div>`}
+</Story>
 
 <br />
 

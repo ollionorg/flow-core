@@ -5154,8 +5154,13 @@
     },
     {
       "name": "f-form-group",
-      "description": "Attributes:\n\n  * `label` {`FGroupLabel | undefined`} - \n\n  * `variant` {`\"normal\" | \"compact\" | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `collapse` {`\"none\" | \"accordion\" | \"text\" | undefined`} - \n\nProperties:\n\n  * `isAccordianOpen` {`boolean`} - \n\n  * `label` {`FGroupLabel | undefined`} - \n\n  * `variant` {`\"normal\" | \"compact\" | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `collapse` {`\"none\" | \"accordion\" | \"text\" | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `duplicate-group` {`CustomEvent<{ message: string; duplicate: boolean; }>`} - \n\nAttributes:\n\n  * `isAccordianOpen` {`boolean`} - \n\n  * `label` {`FGroupLabel | undefined`} - \n\n  * `variant` {`\"normal\" | \"compact\" | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `collapse` {`\"none\" | \"accordion\" | \"text\" | undefined`} - \n\n  * `can-duplicate` {`boolean | undefined`} - \n\nProperties:\n\n  * `isAccordianOpen` {`boolean`} - \n\n  * `label` {`FGroupLabel | undefined`} - \n\n  * `variant` {`\"normal\" | \"compact\" | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `collapse` {`\"none\" | \"accordion\" | \"text\" | undefined`} - \n\n  * `canDuplicate` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
+        {
+          "name": "isAccordianOpen",
+          "description": "`isAccordianOpen` {`boolean`} - \n\nProperty: isAccordianOpen\n\nDefault: false",
+          "valueSet": "v"
+        },
         {
           "name": "label",
           "description": "`label` {`FGroupLabel | undefined`} - \n\nProperty: label",
@@ -5217,6 +5222,15 @@
               "name": "text"
             }
           ]
+        },
+        {
+          "name": "can-duplicate",
+          "description": "`can-duplicate` {`boolean | undefined`} - \n\nProperty: canDuplicate\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "onduplicate-group",
+          "description": "`duplicate-group` {`CustomEvent<{ message: string; duplicate: boolean; }>`} - "
         }
       ]
     },

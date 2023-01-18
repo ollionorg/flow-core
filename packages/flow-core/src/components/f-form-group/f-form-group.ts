@@ -17,6 +17,9 @@ export class FFormGroup extends FRoot {
    */
   static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles];
 
+  /**
+   * @attribute local property to check open/close accordion
+   */
   @state()
   isAccordianOpen = false;
 
@@ -33,23 +36,32 @@ export class FFormGroup extends FRoot {
   variant?: "normal" | "compact" = "normal";
 
   /**
-   * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
+   * @attribute Decides the direction of the input elements within the group.
    */
   @property({ type: String, reflect: true })
   direction?: "vertical" | "horizontal" = "vertical";
 
   /**
-   * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
+   * @attribute decides the gap between elements of a group
    */
   @property({ type: String, reflect: true })
   gap?: "large" | "medium" | "small" | "x-small" = "small";
 
   /**
-   * @attribute States on texts are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
+   * @attribute Defines whether the group will be collapsed as an accordion or as text.
    */
   @property({ type: String, reflect: true })
   collapse?: "none" | "accordion" | "text" = "none";
 
+  /**
+   * @attribute Allows the group to be duplicated by clicking on the plus button
+   */
+  @property({ type: Boolean, reflect: true, attribute: "can-duplicate" })
+  canDuplicate?: boolean = false;
+
+  /**
+   * apply styles
+   */
   applyStyles() {
     if (this.collapse !== "none") {
       if (this.isAccordianOpen)
@@ -57,6 +69,31 @@ export class FFormGroup extends FRoot {
       else
         return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s; );`;
     } else return ``;
+  }
+
+  /**
+   * apply cursor styles
+   */
+  applyCursorStyles() {
+    if (this.collapse !== "none") {
+      return `cursor:pointer`;
+    } else return ``;
+  }
+
+  /*
+   * emit duplication event
+   */
+  duplicationClick(e: MouseEvent) {
+    e.stopPropagation();
+    const event = new CustomEvent("duplicate-group", {
+      detail: {
+        message: "Duplicate Group clicked!",
+        duplicate: true,
+      },
+      bubbles: true,
+      composed: true,
+    });
+    this.dispatchEvent(event);
   }
 
   render() {
@@ -68,8 +105,16 @@ export class FFormGroup extends FRoot {
       Object.keys(this.label)?.length > 0 &&
       Object.values(this.label)?.every((item) => item !== undefined)
         ? html`
-            <f-div direction="row" gap="auto" align="middle-left">
-              <f-div gap="x-small" direction="column">
+            <f-div
+              direction="row"
+              gap="auto"
+              align="middle-left"
+              @click=${() => {
+                if (this.collapse !== "none") this.isAccordianOpen = !this.isAccordianOpen;
+              }}
+              .style="${this.applyCursorStyles()}"
+            >
+              <f-div gap="x-small" direction="column" width="fill-container">
                 <f-div gap="small" direction="row">
                   <f-div height="hug-content" width="hug-content">
                     <f-text
@@ -107,14 +152,28 @@ export class FFormGroup extends FRoot {
                   </f-text>
                 </f-div>
               </f-div>
-              <f-div width="30px">
+              <f-div
+                direction="row"
+                gap="small"
+                width="hug-content"
+                padding="none large none none"
+                align="middle-center"
+              >
+                ${this.canDuplicate
+                  ? html` <f-icon
+                      source="i-plus-fill"
+                      size="medium"
+                      state="default"
+                      clickable
+                      @click=${this.duplicationClick}
+                    ></f-icon>`
+                  : ""}
                 ${this.collapse === "accordion"
                   ? html` <f-icon
                       .source=${this.isAccordianOpen ? "i-chevron-up" : "i-chevron-down"}
                       size="small"
                       state="default"
                       clickable
-                      @click=${() => (this.isAccordianOpen = !this.isAccordianOpen)}
                     ></f-icon>`
                   : ""}
               </f-div>
@@ -136,7 +195,6 @@ export class FFormGroup extends FRoot {
         : ""}
     </f-div>`;
   }
-  updated() {}
 }
 
 /**

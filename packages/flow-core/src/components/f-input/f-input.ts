@@ -228,8 +228,7 @@ export class FInput extends FRoot {
   /**
    * on blur action
    */
-  handleBlur(e: InputEvent) {
-    e.stopPropagation();
+  handleBlur() {
     if (this.value && this.type === "email" && !isValidEmail(this.value ?? "")) {
       this.state = "danger";
       this.helpMessage = "Enter a valid email address";
@@ -246,8 +245,9 @@ export class FInput extends FRoot {
    * on keydown action
    */
   handleKeyDown(e: KeyboardEvent) {
-    e.stopPropagation();
     const reg = /^-?\d*\.?\d*$/;
+    this.state = this.firstState;
+    this.helpMessage = "";
     if (this.type === "number" && !reg.test(e.key)) {
       this.state = "danger";
       this.helpMessage = "The field must contain only numbers";

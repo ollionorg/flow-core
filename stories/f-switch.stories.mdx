@@ -3,10 +3,7 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fSwitchAnatomy from "./svg/i-fswitch-anatomy.js";
-<<<<<<< HEAD
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
-=======
->>>>>>> main
 
 <Meta
   title="Components/f-switch"
@@ -43,10 +40,7 @@ f-switch allows a user to turn an individual option on/off. The change in select
         control: "radio",
         options: ["small", "medium"],
       },
-<<<<<<< HEAD
       slot: { control: "text" },
-=======
->>>>>>> main
       disabled: {
         control: "boolean",
       },
@@ -54,7 +48,6 @@ f-switch allows a user to turn an individual option on/off. The change in select
     args={{
       value: "on",
       state: "default",
-<<<<<<< HEAD
       size: "medium",
       slot: ` <f-div padding="none" align="middle-center" slot="label">
               <f-text variant="para" size="small">Switch</f-text>
@@ -62,9 +55,6 @@ f-switch allows a user to turn an individual option on/off. The change in select
             <f-div padding="none" align="middle-center" slot="help">
               <f-text variant="para" size="small">This is helper text</f-text>
             </f-div>`,
-=======
-      size: "small",
->>>>>>> main
       disabled: false,
     }}
   >
@@ -82,16 +72,7 @@ f-switch allows a user to turn an individual option on/off. The change in select
             ?disabled=${args.disabled}
             @input=${handleInput}
           >
-<<<<<<< HEAD
             ${unsafeHTML(args.slot)}
-=======
-            <f-div padding="none" align="middle-center" slot="label">
-              <f-text variant="para" size="small">Switch</f-text>
-            </f-div>
-            <f-div padding="none" align="middle-center" slot="help">
-              <f-text variant="para" size="small">This is helper text</f-text>
-            </f-div>
->>>>>>> main
           </f-switch>
         </f-div>
       `;
@@ -369,4 +350,4 @@ States are used to communicate purpose and connotations. For example, a red colo
   </tbody>
 </table>
 
-<ArgsTable of={"f-radio"} />
+<ArgsTable of={"f-switch"} />

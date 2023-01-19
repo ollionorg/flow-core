@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedNodes, state } from "lit/decorators.js";
+import { customElement, property, queryAssignedNodes, state } from "lit/decorators.js";
 import eleStyle from "./f-input.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -7,9 +7,6 @@ import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
-import countryCallingCodes from "./country-calling-codes.json";
-import isValidEmail from "../../utils/is-valid-email";
-import isValidHttpUrl from "../../utils/is-valid-http-url";
 
 export type FInputState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -26,81 +23,15 @@ export class FInput extends FRoot {
   @state({})
   showPassword = false;
 
-  /**
-   * @attribute initial state.
-   */
-  @state({})
-  firstState?: FInputState = "default";
-
-  /**
-   * @attribute helper text message on error
-   */
-  @state({})
-  helpMessage = "";
-
-  /**
-   * @attribute country codes menu open/close
-   */
-  @state({})
-  isCodeMenuOpen = false;
-
-  /**
-   * @attribute locally selected calling code
-   */
-  @state({})
-  selectedCallingCode = "";
-
-  /**
-   * @attribute height of option menu
-   */
-  @state({})
-  optimizedHeight = 0;
-
-  /**
-   * @attribute prefferred opening position of country code option menu
-   */
-  @state({})
-  preferredOpenDirection = "below";
-
-  /**
-   * @attribute top area for options-menu
-   */
-  @state({})
-  optionsTop = "";
-
-  /**
-   * @attribute slots available for label
-   */
   @queryAssignedNodes("label", true)
   _labelNodes!: NodeListOf<HTMLElement>;
 
-  /**
-   * @attribute boolean true/false if slot label is present
-   */
   @state()
   _hasLabel = false;
 
-  /**
-   * @attribute slots available for help text
-   */
   @queryAssignedNodes("help", true)
   _helpNodes!: NodeListOf<HTMLElement>;
 
-  /**
-   * @attribute query selector for input wrapper
-   */
-  @query("#f-input-wrapper")
-  wrapperElement!: HTMLDivElement;
-
-  /**
-   * @attribute query selector for options menu
-   */
-  @query("#f-input-tel-options")
-  optionElement!: HTMLDivElement;
-
-  /**
-   * @attribute boolean value of help slot is present
-   */
   @state()
   _hasHelperText = false;
 
@@ -139,12 +70,6 @@ export class FInput extends FRoot {
    */
   @property({ reflect: true, type: String })
   value?: string;
-
-  /**
-   * @attribute Defines the value of an f-input. Validation rules are applied on the value depending on the type property of the f-text-input.
-   */
-  @property({ reflect: true, type: String })
-  callingCode?: string;
 
   /**
    * @attribute Defines the placeholder text for f-text-input
@@ -214,48 +139,10 @@ export class FInput extends FRoot {
     const event = new CustomEvent("input", {
       detail: {
         value: (e.target as HTMLInputElement)?.value,
-        ...(this.selectedCallingCode &&
-          this.type === "tel" && { callingCode: this.selectedCallingCode }),
       },
     });
-
     this.value = (e.target as HTMLInputElement)?.value;
-    if (this.type === "tel") this.callingCode = this.selectedCallingCode;
-
     this.dispatchEvent(event);
-  }
-
-  /**
-   * on blur action
-   */
-  handleBlur() {
-    if (this.value && this.type === "email" && !isValidEmail(this.value ?? "")) {
-      this.state = "danger";
-      this.helpMessage = "Enter a valid email address";
-    } else if (this.value && this.type === "url" && !isValidHttpUrl(this.value ?? "")) {
-      this.state = "danger";
-      this.helpMessage = "Enter a valid URL";
-    } else {
-      this.state = this.firstState;
-      this.helpMessage = "";
-    }
-  }
-
-  /**
-   * on keydown action
-   */
-  handleKeyDown(e: KeyboardEvent) {
-    const reg = /^-?\d*\.?\d*$/;
-    this.state = this.firstState;
-    this.helpMessage = "";
-    if (this.type === "number" && !reg.test(e.key)) {
-      this.state = "danger";
-      this.helpMessage = "The field must contain only numbers";
-      setTimeout(() => {
-        this.state = this.firstState;
-        this.helpMessage = "";
-      }, 1000);
-    }
   }
 
   /**
@@ -265,16 +152,9 @@ export class FInput extends FRoot {
     const event = new CustomEvent("input", {
       detail: {
         value: "",
-        ...(this.selectedCallingCode && this.type === "tel" && { callingCode: "" }),
       },
     });
     this.value = "";
-
-    if (this.type === "tel") {
-      this.selectedCallingCode = "";
-      this.callingCode = "";
-    }
-
     this.dispatchEvent(event);
   }
 
@@ -306,109 +186,7 @@ export class FInput extends FRoot {
     this._hasHelperText = this._helpNodes.length > 0;
   }
 
-  /**
-   * apply styling to f-select options wrapper.
-   */
-  applyOptionsStyle(width: number) {
-    if (this.isCodeMenuOpen)
-      return `max-height:180px; transition: max-height var(--transition-time-rapid) ease-in 0s; ); width:${width}px; top:${this.optionsTop}`;
-    else
-      return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s; ); width:${width}px; top:${this.optionsTop}`;
-  }
-
-  optionsHeight = 180;
-
-  /**
-   * options wrapper dimentions update on the basis of window screen
-   */
-  updateDimentions() {
-    if (this.type === "tel") {
-      const spaceAbove = this.wrapperElement.getBoundingClientRect().top;
-      const spaceBelow = window.innerHeight - this.wrapperElement.getBoundingClientRect().bottom;
-      const hasEnoughSpaceBelow = spaceBelow > this.optionsHeight;
-      const optionsHeight = this.optionElement.offsetHeight;
-      const heightToApply = Math.min(optionsHeight, this.optionsHeight);
-      if (hasEnoughSpaceBelow || spaceBelow > spaceAbove) {
-        this.preferredOpenDirection = "below";
-        this.optimizedHeight = +Math.min(spaceBelow - 40, this.optionsHeight).toFixed(0);
-        this.optionsTop = `${(
-          this.wrapperElement.getBoundingClientRect().top +
-          this.wrapperElement.offsetHeight +
-          4
-        ).toFixed(0)}px`;
-      } else {
-        this.preferredOpenDirection = "above";
-        this.optimizedHeight = +Math.min(spaceAbove - 40, this.optionsHeight).toFixed(0);
-
-        this.optionsTop = `${(
-          this.wrapperElement.getBoundingClientRect().top -
-          heightToApply -
-          4
-        ).toFixed(0)}px`;
-      }
-    }
-  }
-
-  /**
-   * check selection for respective option.
-   */
-  isSelected(option: string) {
-    return this.selectedCallingCode === option ? true : false;
-  }
-
-  /**
-   * action for selection of options if the options is in the form of array
-   */
-  handleOptionSelection(option: string, e: MouseEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (this.isSelected(option)) {
-      this.selectedCallingCode = "";
-    } else {
-      this.selectedCallingCode = option;
-    }
-
-    this.isCodeMenuOpen = false;
-
-    const event = new CustomEvent("input", {
-      detail: {
-        value: this.value,
-        callingCode: option,
-      },
-    });
-    this.dispatchEvent(event);
-    this.requestUpdate();
-  }
-
   render() {
-    /**
-     * on scoll apply dimetions to options wrapper
-     */
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (this.isCodeMenuOpen) {
-          this.updateDimentions();
-        }
-      },
-      {
-        capture: true,
-      }
-    );
-
-    /**
-     * click outside the f-input wrapper area
-     */
-    window.addEventListener(
-      "click",
-      (e: MouseEvent) => {
-        if (!this.contains(e.target as HTMLInputElement) && this.isCodeMenuOpen) {
-          this.isCodeMenuOpen = false;
-        }
-      },
-      true
-    );
     /**
      * create iconLeft if available
      */
@@ -531,12 +309,7 @@ export class FInput extends FRoot {
         direction="column"
         width="100%"
       >
-        <f-div
-          padding="none"
-          gap="none"
-          align="bottom-left"
-          @click=${() => (this.isCodeMenuOpen = false)}
-        >
+        <f-div padding="none" gap="none" align="bottom-left">
           <f-div
             padding="none"
             .gap=${this._hasLabel ? "x-small" : "none"}
@@ -564,7 +337,7 @@ export class FInput extends FRoot {
           >
             ${this.maxLength
               ? html` <f-text variant="para" size="small" weight="regular" state="secondary"
-                  >${(this.value as string)?.length ?? 0} / ${this.maxLength}</f-text
+                  >${this.value?.length ?? 0} / ${this.maxLength}</f-text
                 >`
               : null}
           </f-div>
@@ -580,36 +353,11 @@ export class FInput extends FRoot {
         >
           <div
             class="f-input-wrapper"
-            id="f-input-wrapper"
             variant=${this.variant}
             category=${this.category}
             state=${this.state}
             size=${this.size}
           >
-            ${this.type === "tel"
-              ? html` <f-div
-                  height="100%"
-                  border="small solid default right"
-                  align="middle-center"
-                  class="f-input-tel-wrapper"
-                  gap="medium"
-                  padding="none medium"
-                >
-                  <f-div align="middle-center"
-                    ><f-text variant="para" size="small" weight="regular"
-                      >${this.selectedCallingCode}</f-text
-                    ></f-div
-                  >
-                  <f-icon
-                    .source=${this.isCodeMenuOpen ? "i-caret-up" : "i-caret-down"}
-                    size="small"
-                    clickable
-                    @click=${() => {
-                      this.isCodeMenuOpen = !this.isCodeMenuOpen;
-                    }}
-                  ></f-icon>
-                </f-div>`
-              : ""}
             ${prefixAppend}
             <input
               class=${classMap({ "f-input": true })}
@@ -621,78 +369,19 @@ export class FInput extends FRoot {
               .value="${this.value || ""}"
               size=${this.size}
               ?readonly=${this.readOnly}
-              .maxlength="${this.maxLength}"
+              maxlength="${this.maxLength}"
               @input=${this.handleInput}
-              @blur=${this.handleBlur}
-              @keydown=${this.handleKeyDown}
             />
             ${suffixAppend}
           </div>
         </f-div>
-        ${this.type === "tel"
-          ? html` <div
-              class="f-input-tel-options"
-              id="f-input-tel-options"
-              .style="${this.applyOptionsStyle(100)}"
-            >
-              <f-div padding="none" gap="none" direction="column">
-                ${countryCallingCodes?.map(
-                  (option) =>
-                    html`<f-div
-                      class="f-select-options-clickable"
-                      padding="medium"
-                      height="hug-content"
-                      width="fill-container"
-                      direction="row"
-                      ?clickable=${true}
-                      align="middle-left"
-                      gap="small"
-                      .selected=${this.isSelected(option.code) ? "background" : undefined}
-                      @click=${(e: MouseEvent) => {
-                        this.handleOptionSelection(option.code, e);
-                      }}
-                      ><f-div padding="none" gap="none" height="hug-content" width="fill-container"
-                        ><f-text variant="para" size="small" weight="regular"
-                          >${option.code}</f-text
-                        ></f-div
-                      >
-                      ${this.isSelected(option.code)
-                        ? html` <f-div
-                            padding="none"
-                            gap="none"
-                            height="hug-content"
-                            width="hug-content"
-                            ><f-icon size="medium" source="i-tick"></f-icon
-                          ></f-div>`
-                        : ""}
-                    </f-div>`
-                )}
-              </f-div>
-            </div>`
-          : ""}
         <f-div
           .padding=${this._hasHelperText && !this._hasLabel ? "x-small none none none" : "none"}
         >
           <slot name="help" @slotchange=${this._onHelpSlotChange}></slot>
         </f-div>
-        ${!this._hasHelperText && this.helpMessage
-          ? html` <f-div padding="x-small none none none">
-              <f-text .state=${this.state} variant="para" size="small" weight="regular"
-                >${this.helpMessage}</f-text
-              >
-            </f-div>`
-          : ""}
       </f-div>
     `;
-  }
-  firstUpdated() {
-    this.firstState = this.state ?? "default";
-    if (this.type === "tel") {
-      this.selectedCallingCode = this.callingCode ?? "";
-    }
-  }
-  updated() {
-    this.updateDimentions();
   }
 }
 

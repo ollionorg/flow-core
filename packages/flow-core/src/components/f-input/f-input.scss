@@ -218,6 +218,13 @@ applies styles on f-input
           height: var(--form-input-loader);
           width: var(--form-input-loader);
         }
+        @each $state, $color in $states {
+          &[state="#{$state}"] {
+            svg path.loader-fill {
+              fill: map.get($color, "focus");
+            }
+          }
+        }
       }
 
       @each $size, $value in $sizes {

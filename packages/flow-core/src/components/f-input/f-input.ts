@@ -247,18 +247,6 @@ export class FInput extends FRoot {
         : "";
 
     /**
-     * error icon suffix
-     */
-    const dangerSign =
-      this.state === "danger"
-        ? html` <f-icon
-            source="i-alert"
-            .state=${this.state}
-            .size=${this.iconSize}
-            class=${!this.size ? "f-input-icons-size" : ""}
-          ></f-icon>`
-        : "";
-    /**
      * main suffix
      */
     const mainSuffix =
@@ -267,7 +255,7 @@ export class FInput extends FRoot {
             ${this.fInputSuffix
               ? html`
                   <f-div height="hug-content" width="hug-content" padding="none" direction="row">
-                    <f-text variant="para" size="small" weight="regular" class="word-break"
+                    <f-text variant="para" size="x-small" weight="regular" class="word-break"
                       >${this.fInputSuffix}</f-text
                     >
                   </f-div>
@@ -290,12 +278,12 @@ export class FInput extends FRoot {
               @click=${this.clearInputValue}
               class=${!this.size ? "f-input-icons-size" : ""}
             ></f-icon>
-            ${mainSuffix} ${dangerSign}
+            ${mainSuffix}
           </div>`
-        : html`<div class="f-input-suffix">${passwordToggle} ${mainSuffix} ${dangerSign}</div>`
+        : html`<div class="f-input-suffix">${passwordToggle} ${mainSuffix}</div>`
       : html`
-          <div class="f-input-suffix">${passwordToggle}${mainSuffix} ${dangerSign}</div>
-          <div class="loader-suffix">${unsafeSVG(loader)}</div>
+          <div class="f-input-suffix">${passwordToggle}${mainSuffix}</div>
+          <div class="loader-suffix" state=${this.state}>${unsafeSVG(loader)}</div>
         `;
 
     /**

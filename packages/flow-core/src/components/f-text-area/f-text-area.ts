@@ -105,6 +105,7 @@ export class FTextArea extends FRoot {
     });
     this.value = "";
     this.dispatchEvent(event);
+    this.requestUpdate();
   }
 
   /**
@@ -163,9 +164,8 @@ export class FTextArea extends FRoot {
             ?resizable=${this.resizable}
             ?readonly=${this.readOnly}
             @input=${this.handleInput}
-          >
-${this.value}</textarea
-          >
+            .value=${this.value}
+          ></textarea>
           ${this.clear && this.value
             ? html` <f-icon
                 class="f-text-area-clear-icon"

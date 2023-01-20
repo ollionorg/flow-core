@@ -17,18 +17,50 @@ export class FForm extends FRoot {
    */
   static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles];
   /**
-   * @attribute The states on buttons are to indicate various degrees of emphasis of the action.
+   * @attribute Controls size of all input elements within the form
    */
   @property({ reflect: true, type: String })
   size?: "medium" | "small" = "medium";
+
+  /**
+   * @attribute Variants are various visual representations of all elements inside form.
+   */
+  @property({ reflect: true, type: String })
+  variant?: "curved" | "round" | "block" = "curved";
+
+  /**
+   * @attribute Categories are various visual representations of all elements inside form.
+   */
+  @property({ reflect: true, type: String })
+  category?: "fill" | "outline" | "transparent" = "fill";
+
+  /**
+   * @attribute Gap is used to define the gap between the elements
+   */
+  @property({ reflect: true, type: String })
+  gap?: "large" | "medium" | "small" | "x-small" = "medium";
+
+  /**
+   * check gap size
+   */
+  get elementGap() {
+    if (this.gap === "large") {
+      return "x-large";
+    } else if (this.gap === "medium") {
+      return "large";
+    } else if (this.gap === "small") {
+      return "medium";
+    } else {
+      return "small";
+    }
+  }
 
   render() {
     /**
      * Final html to render
      */
-
     return html`
-      <f-div padding="large" width="100%" direction="column" gap="medium">
+      <f-div padding="large" width="100%" direction="column" .gap=${this.elementGap}>
         <slot></slot>
       </f-div>
     `;

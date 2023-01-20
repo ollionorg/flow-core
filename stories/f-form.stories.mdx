@@ -1,0 +1,377 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import fFormAnatomy from "./svg/i-fform-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useState } from "@storybook/client-api";
+
+<Meta
+  title="Components/f-form"
+  parameters={{
+    controls: { hideNoControlsWarning: true },
+  }}
+/>
+
+# f-form
+
+<br />
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+f-from component helps to systematically layout and build forms in Flow 2
+
+<br />
+
+### [Playground](/story/components-f-form--playground)
+
+<Canvas>
+  <Story
+    name="Playground"
+    argTypes={{
+      variant: {
+        control: "select",
+        options: ["curved", "round", "block"],
+      },
+      category: {
+        control: "select",
+        options: ["fill", "transparent", "outline"],
+      },
+      size: {
+        control: "select",
+        options: ["medium", "small"],
+      },
+      gap: {
+        control: "select",
+        options: ["large", "medium", "small", "x-small"],
+      },
+    }}
+    args={{
+      variant: "curved",
+      category: "fill",
+      size: "medium",
+      gap: "medium",
+    }}
+  >
+    {(args) => {
+      const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`<f-form
+        .variant=${args.variant}
+        .category=${args.category}
+        .size=${args.size}
+        .gap=${args.gap}
+      >
+        <f-form-group direction="vertical">
+          <f-input placeholder="Write here">
+            <f-div slot="label" padding="none" gap="none">Label</f-div>
+            <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+          </f-input>
+          <f-input placeholder="Write here">
+            <f-div slot="label" padding="none" gap="none">Label</f-div>
+            <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+          </f-input>
+        </f-form-group>
+        <f-divider></f-divider>
+        <f-form-group direction="vertical">
+          <f-select
+            placeholder="Select Option"
+            @input=${handleValue}
+            .options=${options}
+            .value=${value}
+          >
+            <f-div slot="label" padding="none" gap="none">Label for f-select</f-div>
+            <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+          </f-select>
+          <f-text-area placeholder="This is a textarea" rows="4">
+            <f-text slot="label" variant="para" size="small">Label</f-text>
+            <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+          </f-text-area>
+        </f-form-group>
+        <f-divider></f-divider>
+        <f-form-group direction="vertical" gap="medium" .label=${{ title: "Checkbox Label" }}>
+          <f-checkbox>
+            <f-div slot="label" padding="none" gap="none">Apple</f-div>
+          </f-checkbox>
+          <f-checkbox>
+            <f-div slot="label" padding="none" gap="none">Orange</f-div>
+          </f-checkbox>
+          <f-checkbox>
+            <f-div slot="label" padding="none" gap="none">Banana</f-div>
+          </f-checkbox>
+        </f-form-group>
+      </f-form>`;
+    }}
+  </Story>
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider></f-divider>
+
+<Story name="Anatomy">
+  {() => html`<div class="align-center">${unsafeSVG(fFormAnatomy)}</div>`}
+</Story>
+
+<br />
+
+## variant
+
+<f-divider></f-divider>
+
+Variants are various visual representations of a form.
+
+<Canvas>
+  <Story name="variant">
+    {(args) => {
+      const variants = ["curved", "round", "block"];
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="middle-center" padding="large" gap="medium">
+          ${variants.map(
+            (item) => html`<f-form .variant=${item}>
+              <f-input value=${value} placeholder="Write here" @input=${handleValue} size="medium">
+                <f-div slot="label" padding="none" gap="none">Label (variant="${item}")</f-div>
+                <f-text slot="help" variant="para" size="small"
+                  >This is a Subtext (Helper Text)</f-text
+                >
+              </f-input></f-form
+            >`
+          )}
+        </f-div>
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>curved</td>
+      <td>border radius of 4px</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>round</td>
+      <td>border radius of 22px</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>block</td>
+      <td>works well with cateogry="transparent"</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## category
+
+<f-divider></f-divider>
+
+Category decides the background of f-form
+
+<Canvas>
+  <Story name="category">
+    {(args) => {
+      const categories = ["fill", "outline", "transparent"];
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="middle-center" padding="large" gap="medium">
+          ${categories.map(
+            (item) => html`<f-form
+              .category=${item}
+              .variant=${item === "transparent" ? "block" : "curved"}
+            >
+              <f-input value=${value} placeholder="Write here" @input=${handleValue}>
+                <f-div slot="label" padding="none" gap="none">Label (category="${item}")</f-div>
+                <f-text slot="help" variant="para" size="small"
+                  >This is a Subtext (Helper Text)</f-text
+                >
+              </f-input></f-form
+            >`
+          )}
+        </f-div>
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>fill</td>
+      <td>background is filled</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>outline</td>
+      <td>empty background with border</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>transparent</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## size
+
+<f-divider></f-divider>
+
+Controls size of all input elements within the form
+
+<Canvas>
+  <Story name="size">
+    {(args) => {
+      const sizes = ["small", "medium"];
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="top-center" padding="large" gap="medium">
+          ${sizes.map(
+            (item) => html`<f-form size=${item}>
+              <f-input value=${value} placeholder="Write here" @input=${handleValue}>
+                <f-div slot="label" padding="none" gap="none">Label (size="${item}")</f-div>
+                <f-text slot="help" variant="para" size="small"
+                  >This is a Subtext (Helper Text)</f-text
+                >
+              </f-input></f-form
+            >`
+          )}
+        </f-div>
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>small</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>medium</td>
+      <td></td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## gap
+
+<f-divider></f-divider>
+
+Controls gap between all input elements within the form
+
+<Canvas>
+  <Story name="gap">
+    {(args) => {
+      const gaps = ["large", "medium", "small", "x-small"];
+      const [value, setValue] = useState("");
+      const handleValue = (e) => {
+        setValue(e.detail.value);
+      };
+      return html`
+        <f-div width="100%" align="top-center" padding="large" gap="medium">
+          ${gaps.map(
+            (item) => html`<f-form gap=${item}>
+              <f-input value=${value} placeholder="Write here" @input=${handleValue}>
+                <f-div slot="label" padding="none" gap="none">Label (gap="${item}")</f-div>
+                <f-text slot="help" variant="para" size="small"
+                  >This is a Subtext (Helper Text)</f-text
+                >
+              </f-input>
+              <f-input value=${value} placeholder="Write here" @input=${handleValue}>
+                <f-div slot="label" padding="none" gap="none">Label (gap="${item}")</f-div>
+                <f-text slot="help" variant="para" size="small"
+                  >This is a Subtext (Helper Text)</f-text
+                >
+              </f-input>
+            </f-form>`
+          )}
+        </f-div>
+      `;
+    }}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>x-small</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>small</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>medium</td>
+      <td></td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>large</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+<ArgsTable of={"f-form"} />

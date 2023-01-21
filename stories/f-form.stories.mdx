@@ -79,7 +79,11 @@ f-from component helps to systematically layout and build forms in Flow 2
             <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
           </f-input>
         </f-form-group>
-        <f-form-group direction="vertical" collapse="accordion" .label=${{ title: "Group Label" }}>
+        <f-form-group
+          direction="vertical"
+          collapse="accordion"
+          .label=${{ title: "Group Label", description: "This is a description" }}
+        >
           <f-select
             placeholder="Select Option"
             @input=${handleValue}

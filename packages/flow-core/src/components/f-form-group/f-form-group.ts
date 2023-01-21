@@ -146,7 +146,7 @@ export class FFormGroup extends FRoot {
                       ></f-icon>`
                     : ""}
                 </f-div>
-                ${this.label?.iconTooltip
+                ${this.label?.description
                   ? html` <f-div height="hug-content" width="hug-content">
                       <f-text variant="para" size="small" weight="regular">
                         ${this.label.description}

@@ -46,12 +46,14 @@ f-from component helps to systematically layout and build forms in Flow 2
         control: "select",
         options: ["large", "medium", "small", "x-small"],
       },
+      seperator: { control: "boolean" },
     }}
     args={{
       variant: "curved",
       category: "fill",
       size: "medium",
       gap: "medium",
+      seperator: false,
     }}
   >
     {(args) => {
@@ -65,6 +67,7 @@ f-from component helps to systematically layout and build forms in Flow 2
         .category=${args.category}
         .size=${args.size}
         .gap=${args.gap}
+        ?seperator=${args.seperator}
       >
         <f-form-group direction="vertical">
           <f-input placeholder="Write here">
@@ -76,8 +79,7 @@ f-from component helps to systematically layout and build forms in Flow 2
             <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
           </f-input>
         </f-form-group>
-        <f-divider></f-divider>
-        <f-form-group direction="vertical">
+        <f-form-group direction="vertical" collapse="accordion" .label=${{ title: "Group Label" }}>
           <f-select
             placeholder="Select Option"
             @input=${handleValue}
@@ -92,8 +94,7 @@ f-from component helps to systematically layout and build forms in Flow 2
             <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
           </f-text-area>
         </f-form-group>
-        <f-divider></f-divider>
-        <f-form-group direction="vertical" gap="medium" .label=${{ title: "Checkbox Label" }}>
+        <f-form-group direction="vertical" .label=${{ title: "Checkbox Label" }}>
           <f-checkbox>
             <f-div slot="label" padding="none" gap="none">Apple</f-div>
           </f-checkbox>

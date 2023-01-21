@@ -41,6 +41,12 @@ export class FForm extends FRoot {
   gap?: "large" | "medium" | "small" | "x-small" = "medium";
 
   /**
+   * @attribute group seperator
+   */
+  @property({ reflect: true, type: Boolean })
+  seperator?: boolean = false;
+
+  /**
    * check gap size
    */
   get elementGap() {

@@ -4,6 +4,15 @@ $sizes: (
   "medium": 16px,
   "small": 12px,
 );
+/**
+$gaps map hold gap attribute related values
+**/
+$gaps: (
+  "large": 16px,
+  "medium": 12px,
+  "small": 8px,
+  "x-small": 4px,
+);
 
 f-form {
   @include base();
@@ -13,6 +22,18 @@ f-form {
   @each $size, $value in $sizes {
     &[size="#{$size}"] {
       @include inherit-size($size);
+    }
+  }
+  &[seperator] {
+    @each $gap, $value in $gaps {
+      &[gap="#{$gap}"] {
+        > f-form-group {
+          &:not(:first-child) {
+            border-top: 1px solid var(--color-border-default);
+            padding-top: calc($value + $value);
+          }
+        }
+      }
     }
   }
 }

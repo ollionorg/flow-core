@@ -1,11 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import {
-  customElement,
-  property,
-  queryAssignedElements,
-  queryAssignedNodes,
-  state,
-} from "lit/decorators.js";
+import { customElement, property, queryAssignedElements, state } from "lit/decorators.js";
 import eleStyle from "./f-input.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";

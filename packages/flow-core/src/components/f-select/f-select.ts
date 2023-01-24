@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedNodes, state } from "lit/decorators.js";
+import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
 import eleStyle from "./f-select.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -35,13 +35,13 @@ export class FSelect extends FRoot {
    */
   static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles];
 
-  @queryAssignedNodes("label", true)
+  @queryAssignedElements({ slot: "label" })
   _labelNodes!: NodeListOf<HTMLElement>;
 
   @state()
   _hasLabel = false;
 
-  @queryAssignedNodes("help", true)
+  @queryAssignedElements({ slot: "help" })
   _helpNodes!: NodeListOf<HTMLElement>;
 
   @state()

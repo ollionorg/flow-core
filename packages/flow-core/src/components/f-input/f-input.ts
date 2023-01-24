@@ -1,5 +1,11 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, queryAssignedNodes, state } from "lit/decorators.js";
+import {
+  customElement,
+  property,
+  queryAssignedElements,
+  queryAssignedNodes,
+  state,
+} from "lit/decorators.js";
 import eleStyle from "./f-input.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -24,13 +30,13 @@ export class FInput extends FRoot {
   @state({})
   showPassword = false;
 
-  @queryAssignedNodes("label", true)
+  @queryAssignedElements({ slot: "label" })
   _labelNodes!: NodeListOf<HTMLElement>;
 
   @state()
   _hasLabel = false;
 
-  @queryAssignedNodes("help", true)
+  @queryAssignedElements({ slot: "help" })
   _helpNodes!: NodeListOf<HTMLElement>;
 
   @state()

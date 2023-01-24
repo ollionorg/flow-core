@@ -46,29 +46,14 @@ export class FForm extends FRoot {
   @property({ reflect: true, type: Boolean })
   seperator?: boolean = false;
 
-  /**
-   * check gap size
-   */
-  get elementGap() {
-    if (this.gap === "large") {
-      return "x-large";
-    } else if (this.gap === "medium") {
-      return "large";
-    } else if (this.gap === "small") {
-      return "medium";
-    } else {
-      return "small";
-    }
-  }
-
   render() {
     /**
      * Final html to render
      */
     return html`
-      <f-div padding="large" width="100%" direction="column" .gap=${this.elementGap}>
+      <form gap=${this.gap}>
         <slot></slot>
-      </f-div>
+      </form>
     `;
   }
 }

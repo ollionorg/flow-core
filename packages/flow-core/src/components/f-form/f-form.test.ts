@@ -12,5 +12,8 @@ describe("f-form", () => {
   it("should render with default values", async () => {
     const el = await fixture(html` <f-form></f-form> `);
     expect(el.getAttribute("size")).to.equal("medium");
+    expect(el.getAttribute("gap")).to.equal("medium");
+    expect(el.getAttribute("variant")).to.equal("curved");
+    expect(el.getAttribute("category")).to.equal("fill");
   });
 });

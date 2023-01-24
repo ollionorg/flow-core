@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, queryAssignedNodes, state } from "lit/decorators.js";
+import { customElement, property, queryAssignedElements, state } from "lit/decorators.js";
 import eleStyle from "./f-input.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -7,6 +7,7 @@ import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
+import { FForm } from "../f-form/f-form";
 
 export type FInputState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -23,13 +24,13 @@ export class FInput extends FRoot {
   @state({})
   showPassword = false;
 
-  @queryAssignedNodes("label", true)
+  @queryAssignedElements({ slot: "label" })
   _labelNodes!: NodeListOf<HTMLElement>;
 
   @state()
   _hasLabel = false;
 
-  @queryAssignedNodes("help", true)
+  @queryAssignedElements({ slot: "help" })
   _helpNodes!: NodeListOf<HTMLElement>;
 
   @state()
@@ -39,13 +40,13 @@ export class FInput extends FRoot {
    * @attribute Variants are various visual representations of an input field.
    */
   @property({ reflect: true, type: String })
-  variant?: "curved" | "round" | "block" = "curved";
+  variant?: "curved" | "round" | "block";
 
   /**
    * @attribute Categories are various visual representations of an input field.
    */
   @property({ reflect: true, type: String })
-  category?: "fill" | "outline" | "transparent" = "fill";
+  category?: "fill" | "outline" | "transparent";
 
   /**
    * @attribute States are used to communicate purpose and connotations.
@@ -186,6 +187,37 @@ export class FInput extends FRoot {
     this._hasHelperText = this._helpNodes.length > 0;
   }
 
+  /*
+   * whwnever parent attribute changes for category and variant
+   */
+  connectedCallback() {
+    super.connectedCallback();
+    const parentNode = this.closest("f-form") as FForm;
+    if (parentNode && !this.category && !this.variant) {
+      const observer = new MutationObserver((mutationList) => {
+        mutationList.forEach((mutation) => {
+          switch (mutation.type) {
+            case "attributes":
+              if (parentNode?.variant) {
+                this.variant = parentNode?.variant;
+              }
+              if (parentNode?.category) {
+                this.category = this.closest("f-form")?.category;
+              }
+              break;
+          }
+        });
+      });
+      const observerOptions = {
+        attributes: true,
+      };
+      observer.observe(parentNode, observerOptions);
+      this.requestUpdate();
+    } else {
+      if (!this.category) this.category = "fill";
+      if (!this.variant) this.variant = "curved";
+    }
+  }
   render() {
     /**
      * create iconLeft if available

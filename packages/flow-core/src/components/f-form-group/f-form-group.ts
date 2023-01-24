@@ -100,7 +100,7 @@ export class FFormGroup extends FRoot {
     /**
      * Final html to render
      */
-    return html`<f-div direction="column" .gap=${this.gap}>
+    return html` <f-div direction="column" .gap=${this.gap}>
       ${this.label &&
       Object.keys(this.label)?.length > 0 &&
       Object.values(this.label)?.every((item) => item !== undefined)
@@ -146,11 +146,13 @@ export class FFormGroup extends FRoot {
                       ></f-icon>`
                     : ""}
                 </f-div>
-                <f-div height="hug-content" width="hug-content">
-                  <f-text variant="para" size="small" weight="regular">
-                    ${this.label.description}
-                  </f-text>
-                </f-div>
+                ${this.label?.description
+                  ? html` <f-div height="hug-content" width="hug-content">
+                      <f-text variant="para" size="small" weight="regular">
+                        ${this.label.description}
+                      </f-text>
+                    </f-div>`
+                  : ""}
               </f-div>
               <f-div
                 direction="row"

@@ -44,16 +44,18 @@ export class FRadio extends FRoot {
    * emit event on click
    */
   handleClick(e: MouseEvent) {
-    e.stopPropagation();
-    const event = new CustomEvent<FRadioCustomEvent>("input", {
-      detail: {
-        value: "selected",
-      },
-      bubbles: true,
-      composed: true,
-    });
-    this.value = "selected";
-    this.dispatchEvent(event);
+    if (this.value === "unselected") {
+      e.stopPropagation();
+      const event = new CustomEvent<FRadioCustomEvent>("input", {
+        detail: {
+          value: "selected",
+        },
+        bubbles: true,
+        composed: true,
+      });
+      this.value = "selected";
+      this.dispatchEvent(event);
+    }
   }
 
   render() {

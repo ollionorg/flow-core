@@ -279,7 +279,7 @@ export class FInput extends FRoot {
       this.type === "password" || this.showPassword
         ? html` <f-icon
             ?clickable=${true}
-            .source=${this.showPassword ? "i-hide" : "i-view"}
+            .source=${this.showPassword ? "i-view-off-fill" : "i-view-fill"}
             .size=${this.iconSize}
             @click=${this.togglePasswordView}
             class=${!this.size ? "f-input-icons-size" : ""}

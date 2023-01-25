@@ -64,17 +64,15 @@ f-switch allows a user to turn an individual option on/off. The change in select
         updateArgs({ value: e.detail.value });
       };
       return html`
-        <f-div padding="medium">
-          <f-switch
-            size=${args.size}
-            value=${args.value}
-            state=${args.state}
-            ?disabled=${args.disabled}
-            @input=${handleInput}
-          >
-            ${unsafeHTML(args.slot)}
-          </f-switch>
-        </f-div>
+        <f-switch
+          size=${args.size}
+          value=${args.value}
+          state=${args.state}
+          ?disabled=${args.disabled}
+          @input=${handleInput}
+        >
+          ${unsafeHTML(args.slot)}
+        </f-switch>
       `;
     }}
   </Story>

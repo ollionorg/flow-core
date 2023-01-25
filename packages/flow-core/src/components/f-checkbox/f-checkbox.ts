@@ -49,10 +49,10 @@ export class FCheckbox extends FRoot {
     e.stopPropagation();
     const event = new CustomEvent<FCheckboxElement>("input", {
       detail: {
-        value: !(e.target as HTMLInputElement)?.checked ? "checked" : "unchecked",
+        value: this.value === "unchecked" ? "checked" : "unchecked",
       },
     });
-    this.value = !(e.target as HTMLInputElement)?.checked ? "checked" : "unchecked";
+    this.value = this.value === "unchecked" ? "checked" : "unchecked";
     this.dispatchEvent(event);
   }
 

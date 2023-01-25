@@ -44,10 +44,10 @@ export class FSwitch extends FRoot {
     e.stopPropagation();
     const event = new CustomEvent("input", {
       detail: {
-        value: (e.target as HTMLInputElement)?.checked ? "off" : "on",
+        value: this.value === "off" ? "on" : "off",
       },
     });
-    this.value = (e.target as HTMLInputElement)?.checked ? "off" : "on";
+    this.value = this.value === "off" ? "on" : "off";
     this.dispatchEvent(event);
   }
 

@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.1.9] - 2023-01-20
+
+### Features
+
+- `f-form`: Form Input component added along with updating all its properties with resepct to other form-elements.
+
 ## [1.1.8] - 2023-01-18
 
 ### Features

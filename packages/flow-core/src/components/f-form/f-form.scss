@@ -1,9 +1,43 @@
+@use "sass:map";
+
 @import "./../../mixins/scss/mixins";
 
 $sizes: (
   "medium": 16px,
   "small": 12px,
 );
+/**
+$gaps map hold gap attribute related values
+**/
+
+$gaps: (
+  "large": (
+    "gap": 16px,
+  ),
+  "medium": (
+    "gap": 12px,
+  ),
+  "small": (
+    "gap": 8px,
+  ),
+  "x-small": (
+    "gap": 4px,
+  ),
+);
+
+:host {
+  @include base();
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    @each $gap, $value in $gaps {
+      &[gap="#{$gap}"] {
+        gap: map.get($value, "gap");
+      }
+    }
+  }
+}
 
 f-form {
   @include base();
@@ -13,6 +47,18 @@ f-form {
   @each $size, $value in $sizes {
     &[size="#{$size}"] {
       @include inherit-size($size);
+    }
+  }
+  &[seperator] {
+    @each $gap, $value in $gaps {
+      &[gap="#{$gap}"] {
+        > f-form-group {
+          &:not(:first-child) {
+            border-top: 1px solid var(--color-border-default);
+            padding-top: map.get($value, "gap");
+          }
+        }
+      }
     }
   }
 }

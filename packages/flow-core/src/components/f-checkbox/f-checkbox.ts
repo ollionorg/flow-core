@@ -8,7 +8,7 @@ import indeterminateMark from "../../mixins/svg/indeterminate-mark";
 import { FDiv } from "../f-div/f-div";
 
 export type FCheckboxState = "primary" | "default" | "success" | "warning" | "danger";
-export type FCheckboxElement = {
+export type FCheckboxCustomEvent = {
   value: string;
 };
 
@@ -47,10 +47,12 @@ export class FCheckbox extends FRoot {
    */
   handleInput(e: InputEvent) {
     e.stopPropagation();
-    const event = new CustomEvent<FCheckboxElement>("input", {
+    const event = new CustomEvent<FCheckboxCustomEvent>("input", {
       detail: {
         value: this.value === "unchecked" ? "checked" : "unchecked",
       },
+      bubbles: true,
+      composed: true,
     });
     this.value = this.value === "unchecked" ? "checked" : "unchecked";
     this.dispatchEvent(event);

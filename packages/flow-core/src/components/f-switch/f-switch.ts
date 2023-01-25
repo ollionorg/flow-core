@@ -6,6 +6,10 @@ import { FDiv } from "../f-div/f-div";
 
 export type FSwitchState = "primary" | "default" | "success" | "warning" | "danger";
 
+export type FSwitchCustomEvent = {
+  value: string;
+};
+
 @customElement("f-switch")
 export class FSwitch extends FRoot {
   /**
@@ -42,10 +46,12 @@ export class FSwitch extends FRoot {
    */
   handleInput(e: InputEvent) {
     e.stopPropagation();
-    const event = new CustomEvent("input", {
+    const event = new CustomEvent<FSwitchCustomEvent>("input", {
       detail: {
         value: this.value === "off" ? "on" : "off",
       },
+      bubbles: true,
+      composed: true,
     });
     this.value = this.value === "off" ? "on" : "off";
     this.dispatchEvent(event);

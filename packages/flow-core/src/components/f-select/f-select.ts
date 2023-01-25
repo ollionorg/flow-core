@@ -28,6 +28,11 @@ export type FSelectOptionsProp = FSelectOptionObject[] | string[];
 export type FSelectSingleOption = FSelectOptionObject | string;
 export type FSelectOptions = FSelectOptionsProp | FSelectOptionsGroup;
 
+export type FSelectCustomEvent = {
+  value: unknown;
+  searchValue?: string;
+};
+
 @customElement("f-select")
 export class FSelect extends FRoot {
   /**
@@ -346,10 +351,12 @@ export class FSelect extends FRoot {
    */
   clearInputValue(e: MouseEvent) {
     e.stopPropagation();
-    const event = new CustomEvent("input", {
+    const event = new CustomEvent<FSelectCustomEvent>("input", {
       detail: {
         value: [],
       },
+      bubbles: true,
+      composed: true,
     });
     this.selectedOptions = [];
     this.value = [];
@@ -363,7 +370,7 @@ export class FSelect extends FRoot {
    */
   clearSelectionInGroups(e: MouseEvent) {
     e.stopPropagation();
-    const event = new CustomEvent("input", {
+    const event = new CustomEvent<FSelectCustomEvent>("input", {
       detail: {
         value: Array.isArray(this.selectedOptions)
           ? []
@@ -371,8 +378,14 @@ export class FSelect extends FRoot {
               (this.selectedOptions as FSelectOptionsGroup)[group] = [];
             }),
       },
+      bubbles: true,
+      composed: true,
     });
-
+    (this.value as unknown) = Array.isArray(this.selectedOptions)
+      ? []
+      : Object.keys(this.selectedOptions).forEach((group) => {
+          (this.selectedOptions as FSelectOptionsGroup)[group] = [];
+        });
     this.clearFilterSearchString();
     this.dispatchEvent(event);
     this.requestUpdate();
@@ -421,14 +434,20 @@ export class FSelect extends FRoot {
           : (this.selectedOptions as FSelectArrayOfObjects).splice(this.getIndex(option), 1);
       }
     }
-    const event = new CustomEvent("input", {
+    const event = new CustomEvent<FSelectCustomEvent>("input", {
       detail: {
         value:
           this.type === "multiple"
             ? this.selectedOptions
             : (this.selectedOptions as FSelectArrayOfObjects)[0],
       },
+      bubbles: true,
+      composed: true,
     });
+    (this.value as unknown) =
+      this.type === "multiple"
+        ? this.selectedOptions
+        : (this.selectedOptions as FSelectArrayOfObjects)[0];
     this.dispatchEvent(event);
     this.requestUpdate();
   }
@@ -456,14 +475,20 @@ export class FSelect extends FRoot {
           : (selectedOptionsInGroup as FSelectArrayOfObjects).push(option as FSelectOptionObject)
         : selectedOptionsInGroup.splice(this.getIndexInGroup(option, group), 1);
     }
-    const event = new CustomEvent("input", {
+    const event = new CustomEvent<FSelectCustomEvent>("input", {
       detail: {
         value:
           this.type === "multiple"
             ? this.selectedOptions
             : (this.selectedOptions as FSelectOptionsGroup)[group][0],
       },
+      bubbles: true,
+      composed: true,
     });
+    (this.value as unknown) =
+      this.type === "multiple"
+        ? this.selectedOptions
+        : (this.selectedOptions as FSelectOptionsGroup)[group][0];
     this.dispatchEvent(event);
     this.requestUpdate();
   }
@@ -482,14 +507,20 @@ export class FSelect extends FRoot {
         selectedOptionsInGroup.splice(index, 1);
         this.selectedOptions = { ...this.selectedOptions, [group]: selectedOptionsInGroup };
         e.stopPropagation();
-        const event = new CustomEvent("input", {
+        const event = new CustomEvent<FSelectCustomEvent>("input", {
           detail: {
             value:
               this.type === "multiple"
                 ? this.selectedOptions
                 : (this.selectedOptions as FSelectOptionsGroup)[group][0],
           },
+          bubbles: true,
+          composed: true,
         });
+        (this.value as unknown) =
+          this.type === "multiple"
+            ? this.selectedOptions
+            : (this.selectedOptions as FSelectOptionsGroup)[group][0];
         this.dispatchEvent(event);
       }
     });
@@ -528,11 +559,14 @@ export class FSelect extends FRoot {
       } else {
         (this.selectedOptions as FSelectOptionsGroup)[group] = [];
       }
-      const event = new CustomEvent("input", {
+      const event = new CustomEvent<FSelectCustomEvent>("input", {
         detail: {
           value: this.selectedOptions,
         },
+        bubbles: true,
+        composed: true,
       });
+      this.value = this.selectedOptions;
       this.dispatchEvent(event);
       this.requestUpdate();
     }
@@ -613,7 +647,7 @@ export class FSelect extends FRoot {
    * Create New Option when option not present
    */
   createNewOption(e: MouseEvent) {
-    const event = new CustomEvent("input", {
+    const event = new CustomEvent<FSelectCustomEvent>("input", {
       detail: {
         value: Array.isArray(this.options)
           ? this.type === "single"
@@ -622,7 +656,14 @@ export class FSelect extends FRoot {
           : this.selectedOptions,
         searchValue: this.searchValue,
       },
+      bubbles: true,
+      composed: true,
     });
+    (this.value as unknown) = Array.isArray(this.options)
+      ? this.type === "single"
+        ? (this.selectedOptions as FSelectArray)[0]
+        : this.selectedOptions
+      : this.selectedOptions;
     this.dispatchEvent(event);
     this.requestUpdate();
     this.handleDropDownClose(e);
@@ -745,15 +786,11 @@ export class FSelect extends FRoot {
     /**
      * click outside the f-select wrapper area
      */
-    window.addEventListener(
-      "click",
-      (e: MouseEvent) => {
-        if (!this.contains(e.target as HTMLInputElement) && this.openDropdown) {
-          this.handleDropDownClose(e);
-        }
-      },
-      true
-    );
+    window.addEventListener("click", (e: MouseEvent) => {
+      if (!this.contains(e.target as HTMLInputElement) && this.openDropdown) {
+        this.handleDropDownClose(e);
+      }
+    });
 
     /**
      * create iconlLeft if available

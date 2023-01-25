@@ -11,6 +11,10 @@ import { FForm } from "../f-form/f-form";
 
 export type FInputState = "primary" | "default" | "success" | "warning" | "danger";
 
+export type FInputCustomEvent = {
+  value: string;
+};
+
 @customElement("f-input")
 export class FInput extends FRoot {
   /**
@@ -137,10 +141,12 @@ export class FInput extends FRoot {
    */
   handleInput(e: InputEvent) {
     e.stopPropagation();
-    const event = new CustomEvent("input", {
+    const event = new CustomEvent<FInputCustomEvent>("input", {
       detail: {
         value: (e.target as HTMLInputElement)?.value,
       },
+      bubbles: true,
+      composed: true,
     });
     this.value = (e.target as HTMLInputElement)?.value;
     this.dispatchEvent(event);
@@ -150,10 +156,12 @@ export class FInput extends FRoot {
    * clear input value on clear icon clicked
    */
   clearInputValue() {
-    const event = new CustomEvent("input", {
+    const event = new CustomEvent<FInputCustomEvent>("input", {
       detail: {
         value: "",
       },
+      bubbles: true,
+      composed: true,
     });
     this.value = "";
     this.dispatchEvent(event);

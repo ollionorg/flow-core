@@ -8,6 +8,10 @@ import { FForm } from "../f-form/f-form";
 
 export type FTextAreaState = "primary" | "default" | "success" | "warning" | "danger";
 
+export type FTextAreaCustomEvent = {
+  value: string;
+};
+
 @customElement("f-text-area")
 export class FTextArea extends FRoot {
   /**
@@ -86,10 +90,12 @@ export class FTextArea extends FRoot {
    */
   handleInput(e: InputEvent) {
     e.stopPropagation();
-    const event = new CustomEvent("input", {
+    const event = new CustomEvent<FTextAreaCustomEvent>("input", {
       detail: {
         value: (e.target as HTMLInputElement)?.value,
       },
+      bubbles: true,
+      composed: true,
     });
     this.value = (e.target as HTMLInputElement)?.value;
     this.dispatchEvent(event);
@@ -99,10 +105,12 @@ export class FTextArea extends FRoot {
    * clear value inside f-text-area on click of clear icon.
    */
   clearValue() {
-    const event = new CustomEvent("input", {
+    const event = new CustomEvent<FTextAreaCustomEvent>("input", {
       detail: {
         value: "",
       },
+      bubbles: true,
+      composed: true,
     });
     this.value = "";
     this.dispatchEvent(event);

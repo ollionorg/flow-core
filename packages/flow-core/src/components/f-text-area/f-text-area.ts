@@ -201,7 +201,7 @@ export class FTextArea extends FRoot {
             ?resizable=${this.resizable}
             ?readonly=${this.readOnly}
             @input=${this.handleInput}
-            .value=${this.value}
+            .value=${this.value ?? ""}
           ></textarea>
           ${this.clear && this.value
             ? html` <f-icon

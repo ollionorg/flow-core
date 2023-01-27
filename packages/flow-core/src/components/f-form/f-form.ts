@@ -41,10 +41,10 @@ export class FForm extends FRoot {
   gap?: "large" | "medium" | "small" | "x-small" = "medium";
 
   /**
-   * @attribute group seperator
+   * @attribute group separator
    */
   @property({ reflect: true, type: Boolean })
-  seperator?: boolean = false;
+  separator?: boolean = false;
 
   render() {
     /**

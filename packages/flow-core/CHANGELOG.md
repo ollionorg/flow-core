@@ -4,6 +4,14 @@
 
 # Change Log
 
+## [1.2.0] - 2023-01-30
+
+### Improvements
+
+- Removed warning icon from `f-input` danger state. loader in loading state reflecting the state `f-input`.
+- `f-text-area` value not clearing issue fixed.
+- ``f-radio` selection fixed.
+
 ## [1.1.9] - 2023-01-20
 
 ### Features

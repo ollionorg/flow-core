@@ -3,6 +3,7 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fSelectAnatomy from "./svg/i-fselect-anatomy.js";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <Meta
   title="Components/f-select"
@@ -51,6 +52,7 @@ Select allows users to choose one or multiple options from a list of values.
         control: "radio",
         options: ["small", "medium"],
       },
+      slot: { control: "text" },
       ["icon-left"]: {
         control: "text",
       },
@@ -67,7 +69,7 @@ Select allows users to choose one or multiple options from a list of values.
         control: "number",
       },
       height: {
-        control: "text",
+        control: "number",
       },
       width: {
         control: "text",
@@ -95,7 +97,9 @@ Select allows users to choose one or multiple options from a list of values.
       variant: "curved",
       category: "fill",
       state: "default",
-      size: "small",
+      size: "medium",
+      slot: `  <f-div slot="label" padding="none" gap="none">Label for f-select</f-div>
+              <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>`,
       options: ["options 1", "options 2", "options 3", "options 4"],
       value: [],
       ["option-template"]: undefined,
@@ -146,9 +150,7 @@ Select allows users to choose one or multiple options from a list of values.
               icon-left=${args["icon-left"]}
               .size=${args.size}
             >
-              <f-div slot="label" padding="none" gap="none">Label for f-select</f-div>
-              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
-              <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+              ${unsafeHTML(args.slot)}
             </f-select></f-div
           ></f-div
         >
@@ -198,7 +200,6 @@ The type attribute specifies whether a user can select a single option or multip
                 <f-div slot="label" padding="none" gap="none"
                   >Label for f-select | type="${item}"</f-div
                 >
-                <f-div slot="description" padding="none" gap="none">This is a description</f-div>
                 <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
               </f-select></f-div
             >`
@@ -262,7 +263,6 @@ Variants are various visual representations of an input field.
                 <f-div slot="label" padding="none" gap="none"
                   >Label for f-select | variant="${item}"</f-div
                 >
-                <f-div slot="description" padding="none" gap="none">This is a description</f-div>
                 <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
               </f-select></f-div
             >`
@@ -331,7 +331,6 @@ Category decides the background of f-select
                 <f-div slot="label" padding="none" gap="none"
                   >Label for f-select | category="${item}"</f-div
                 >
-                <f-div slot="description" padding="none" gap="none">This is a description</f-div>
                 <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
               </f-select></f-div
             >`
@@ -399,9 +398,6 @@ Defines the value of an f-select.
                 <f-div slot="label" padding="none" gap="none"
                   >Label for f-select | value="option 1"</f-div
                 >
-                <f-div slot="description" padding="none" gap="none"
-                  >Option selection type ${item}</f-div
-                >
                 <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
               </f-select></f-div
             >`
@@ -436,7 +432,6 @@ Defines the placeholder text for f-select
               .value=${value}
             >
               <f-div slot="label" padding="none" gap="none">Label for f-select</f-div>
-              <f-div slot="description" padding="none" gap="none">Demo for placeholder</f-div>
               <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
             </f-select></f-div
           ></f-div
@@ -723,7 +718,6 @@ f-select can have 2 sizes.
                 <f-div slot="label" padding="none" gap="none"
                   >Label for f-select (size="${item}")</f-div
                 >
-                <f-div slot="description" padding="none" gap="none">Demo for placeholder</f-div>
                 <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
               </f-select></f-div
             >`
@@ -789,9 +783,6 @@ States are used to communicate purpose and connotations. For example, a red colo
                   >
                     <f-div slot="label" padding="none" gap="none"
                       >Label for f-select (state="${state}")</f-div
-                    >
-                    <f-div slot="description" padding="none" gap="none"
-                      >This is a description</f-div
                     >
                     <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
                   </f-select></f-div
@@ -869,7 +860,6 @@ Icon-left enables an icon on the left of the input value.
               <f-div slot="label" padding="none" gap="none"
                 >Label for f-select (icon-left="i-app")</f-div
               >
-              <f-div slot="description" padding="none" gap="none">Demo for icon-left</f-div>
               <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
             </f-select></f-div
           ></f-div
@@ -907,7 +897,6 @@ Defines width of the select component. It can take 2 values: fill-container and 
               ?searchable=${true}
             >
               <f-div slot="label" padding="none" gap="none">Label for f-select (width="200")</f-div>
-              <f-div slot="description" padding="none" gap="none">Demo for width</f-div>
               <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
             </f-select></f-div
           ></f-div
@@ -945,7 +934,6 @@ Defines the height of the dropdown in pixels. Default value is 180 .
               <f-div slot="label" padding="none" gap="none"
                 >Label for f-select (height="100")</f-div
               >
-              <f-div slot="description" padding="none" gap="none">Demo for width</f-div>
               <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
             </f-select></f-div
           ></f-div
@@ -994,7 +982,6 @@ limits the no. of tags to be displayed on option selection.
               <f-div slot="label" padding="none" gap="none"
                 >Label for f-select (height="100")</f-div
               >
-              <f-div slot="description" padding="none" gap="none">Demo for width</f-div>
               <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
             </f-select></f-div
           ></f-div
@@ -1282,7 +1269,6 @@ a ‘close’ icon button appear on right of the select to clear the input value
               ?clear=${true}
             >
               <f-div slot="label" padding="none" gap="none">Label for f-select (clear=true)</f-div>
-              <f-div slot="description" padding="none" gap="none">This is a dscription</f-div>
               <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
             </f-select></f-div
           >
@@ -1298,7 +1284,6 @@ a ‘close’ icon button appear on right of the select to clear the input value
               ?clear=${false}
             >
               <f-div slot="label" padding="none" gap="none">Label for f-select (clear=false)</f-div>
-              <f-div slot="description" padding="none" gap="none">This is a dscription</f-div>
               <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
             </f-select></f-div
           >
@@ -1337,7 +1322,6 @@ a ‘close’ icon button appear on right of the select to clear the input value
               <f-div slot="label" padding="none" gap="none"
                 >Label for f-select (disabled=true)</f-div
               >
-              <f-div slot="description" padding="none" gap="none">This is a description</f-div>
               <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
             </f-select></f-div
           >

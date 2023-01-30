@@ -3,6 +3,7 @@ import { html } from "lit-html";
 import fInputAnatomy from "./svg/i-finput-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <Meta
   title="Components/f-input"
@@ -31,6 +32,7 @@ f-input is an input element.
     name="Playground"
     argTypes={{
       value: { control: "text" },
+      slot: { control: "text" },
       placeholder: { control: "text" },
       variant: {
         control: "select",
@@ -87,7 +89,9 @@ f-input is an input element.
       category: "fill",
       type: "text",
       state: "default",
-      size: "small",
+      size: "medium",
+      slot: `              <f-div slot="label" padding="none" gap="none">Label</f-div>
+              <f-text slot="help" variant="para" size="small">This is a Subtext</f-text>`,
       ["icon-left"]: undefined,
       ["icon-right"]: undefined,
       ["prefix"]: undefined,
@@ -103,6 +107,9 @@ f-input is an input element.
       const [_, updateArgs] = useArgs();
       const handleInput = (e) => {
         updateArgs({ value: e.detail.value });
+        if (args.type === "tel") {
+          updateArgs({ ["calling-code"]: e.detail.callingCode });
+        }
       };
       return html`
         <f-div width="100%" align="middle-center" padding="large">
@@ -126,9 +133,7 @@ f-input is an input element.
               ?read-only=${args.readOnly}
               .size=${args.size}
             >
-              <f-div slot="label" padding="none" gap="none">Label</f-div>
-              <f-div slot="description" padding="none" gap="none">This is a Description</f-div>
-              <f-text slot="help" variant="para" size="small">This is a Subtext</f-text>
+              ${unsafeHTML(args.slot)}
             </f-input></f-div
           ></f-div
         >
@@ -175,7 +180,6 @@ Variants are various visual representations of an input field.
             size="medium"
           >
              <f-div slot="label" padding="none" gap="none">Label (variant="${item}")</f-div>
-            <f-div slot="description" padding="none" gap="none">This is a ${item} variant</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-input></f-div
         ></f-div
@@ -243,7 +247,6 @@ Category decides the background of f-input
             .variant=${item === "transparent" ? "block" : "curved"}
           >
             <f-div slot="label" padding="none" gap="none">Label (category="${item}")</f-div>
-            <f-div slot="description" padding="none" gap="none">This is a ${item} category</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-input></f-div
         ></f-div
@@ -315,9 +318,6 @@ The type attribute specifies the type of `<f-input>` element to display.
                     size="medium"
                   >
                     <f-div slot="label" padding="none" gap="none">Label (type="${type}")</f-div>
-                    <f-div slot="description" padding="none" gap="none"
-                      >This is a ${type} type</f-div
-                    >
                     <f-text slot="help" variant="para" size="small"
                       >This is a Subtext (Helper Text)</f-text
                     >
@@ -392,9 +392,6 @@ Defines the value of an f-input. Validation rules are applied on the value depen
           <f-div width="80%" align="middle-center">
             <f-input value=${value} placeholder="Write here" @input=${handleValue} size="medium">
               <f-div slot="label" padding="none" gap="none">Label</f-div>
-              <f-div slot="description" padding="none" gap="none"
-                >This is a demo for value prop</f-div
-              >
               <f-text slot="help" variant="para" size="small"
                 >This is a Subtext (Helper Text)</f-text
               >
@@ -429,9 +426,6 @@ Defines the placeholder text for f-text-input
               size="medium"
             >
               <f-div slot="label" padding="none" gap="none">Label</f-div>
-              <f-div slot="description" padding="none" gap="none"
-                >This is a demo for placeholder</f-div
-              >
               <f-text slot="help" variant="para" size="small"
                 >This is a Subtext (Helper Text)</f-text
               >
@@ -472,7 +466,6 @@ f-input can have 2 sizes.
             size=${item}
           >
             <f-div slot="label" padding="none" gap="none">Label (size="${item}")</f-div>
-            <f-div slot="description" padding="none" gap="none">This is a ${item} size</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-input></f-div
         ></f-div
@@ -537,9 +530,6 @@ States are used to communicate purpose and connotations. For example, a red colo
                     state=${state}
                   >
                     <f-div slot="label" padding="none" gap="none">Label (state="${state}")</f-div>
-                    <f-div slot="description" padding="none" gap="none"
-                      >This is a ${state} state</f-div
-                    >
                     <f-text slot="help" variant="para" size="small"
                       >This is a Subtext (Helper Text)</f-text
                     >
@@ -741,7 +731,7 @@ Suffix property enables a string on the right side of the input box.
               suffix="Delete"
             >
               <f-div slot="label" padding="none" gap="none">Label</f-div>
-              <f-div slot="description" padding="none" gap="none">This is a demo for prefix</f-div>
+              <f-div slot="description" padding="none" gap="none">This is a demo for suffix</f-div>
               <f-text slot="help" variant="para" size="small"
                 >This is a Subtext (Helper Text)</f-text
               >
@@ -781,7 +771,6 @@ This shows the character count while typing and auto limits after reaching the m
               max-length="10"
             >
               <f-div slot="label" padding="none" gap="none">Label</f-div>
-              <f-div slot="description" padding="none" gap="none">This is a demo for prefix</f-div>
               <f-text slot="help" variant="para" size="small"
                 >This is a Subtext (Helper Text)</f-text
               >
@@ -831,15 +820,6 @@ This shows the character count while typing and auto limits after reaching the m
                 ? "Clear Icon on Type"
                 : "Readonly"
             }</f-div>
-            <f-div slot="description" padding="none" gap="none">This is a $${
-              item === 0
-                ? "Loader"
-                : item === 1
-                ? "Disabled"
-                : item === 2
-                ? "Clear Icon on Type"
-                : "Readonly"
-            } Flag</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-input></f-div
         ></f-div

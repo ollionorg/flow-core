@@ -5,6 +5,9 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 
 export type FRadioState = "primary" | "default" | "success" | "warning" | "danger";
+export type FRadioCustomEvent = {
+  value: string;
+};
 
 @customElement("f-radio")
 export class FRadio extends FRoot {
@@ -41,14 +44,18 @@ export class FRadio extends FRoot {
    * emit event on click
    */
   handleClick(e: MouseEvent) {
-    e.stopPropagation();
-    const event = new CustomEvent("input", {
-      detail: {
-        value: this.value === "unselected" ? "selected" : "unselected",
-      },
-    });
-    this.value = this.value === "unselected" ? "selected" : "unselected";
-    this.dispatchEvent(event);
+    if (this.value === "unselected") {
+      e.stopPropagation();
+      const event = new CustomEvent<FRadioCustomEvent>("input", {
+        detail: {
+          value: "selected",
+        },
+        bubbles: true,
+        composed: true,
+      });
+      this.value = "selected";
+      this.dispatchEvent(event);
+    }
   }
 
   render() {

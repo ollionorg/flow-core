@@ -119,7 +119,7 @@
     },
     {
       "name": "f-checkbox",
-      "description": "Events:\n\n  * `input` {`CustomEvent<FCheckboxElement>`} - \n\nAttributes:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `input` {`CustomEvent<FCheckboxCustomEvent>`} - \n\nAttributes:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "value",
@@ -176,7 +176,7 @@
         },
         {
           "name": "oninput",
-          "description": "`input` {`CustomEvent<FCheckboxElement>`} - "
+          "description": "`input` {`CustomEvent<FCheckboxCustomEvent>`} - "
         }
       ]
     },
@@ -5236,7 +5236,7 @@
     },
     {
       "name": "f-form",
-      "description": "Attributes:\n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `seperator` {`boolean | undefined`} - \n\nProperties:\n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `seperator` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Attributes:\n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `separator` {`boolean | undefined`} - \n\nProperties:\n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `separator` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "size",
@@ -5299,8 +5299,8 @@
           ]
         },
         {
-          "name": "seperator",
-          "description": "`seperator` {`boolean | undefined`} - \n\nProperty: seperator\n\nDefault: false",
+          "name": "separator",
+          "description": "`separator` {`boolean | undefined`} - \n\nProperty: separator\n\nDefault: false",
           "values": []
         }
       ]
@@ -5499,7 +5499,7 @@
     },
     {
       "name": "f-input",
-      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `showPassword` {`boolean`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FInputState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `type` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `icon-right` {`string | undefined`} - \n\n  * `prefix` {`string | undefined`} - \n\n  * `suffix` {`string | undefined`} - \n\n  * `max-length` {`number | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `read-only` {`boolean | undefined`} - \n\nProperties:\n\n  * `showPassword` {`boolean`} - \n\n  * `_labelNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_hasLabel` {`boolean`} - \n\n  * `_helpNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_hasHelperText` {`boolean`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FInputState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `type` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `iconRight` {`string | undefined`} - \n\n  * `fInputPrefix` {`string | undefined`} - \n\n  * `fInputSuffix` {`string | undefined`} - \n\n  * `maxLength` {`number | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `readOnly` {`boolean | undefined`} - \n\n  * `iconSize` {`\"small\" | \"x-small\" | undefined`} - icon size\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `input` {`CustomEvent<FInputCustomEvent>`} - \n\nAttributes:\n\n  * `showPassword` {`boolean`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FInputState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `type` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `icon-right` {`string | undefined`} - \n\n  * `prefix` {`string | undefined`} - \n\n  * `suffix` {`string | undefined`} - \n\n  * `max-length` {`number | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `read-only` {`boolean | undefined`} - \n\nProperties:\n\n  * `showPassword` {`boolean`} - \n\n  * `_labelNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_hasLabel` {`boolean`} - \n\n  * `_helpNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_hasHelperText` {`boolean`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FInputState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `type` {`\"number\" | \"text\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `iconRight` {`string | undefined`} - \n\n  * `fInputPrefix` {`string | undefined`} - \n\n  * `fInputSuffix` {`string | undefined`} - \n\n  * `maxLength` {`number | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `readOnly` {`boolean | undefined`} - \n\n  * `iconSize` {`\"small\" | \"x-small\" | undefined`} - icon size\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "showPassword",
@@ -5650,7 +5650,7 @@
         },
         {
           "name": "oninput",
-          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
+          "description": "`input` {`CustomEvent<FInputCustomEvent>`} - "
         }
       ]
     },
@@ -5832,7 +5832,7 @@
     },
     {
       "name": "f-radio",
-      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `input` {`CustomEvent<FRadioCustomEvent>`} - \n\nAttributes:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "value",
@@ -5886,13 +5886,13 @@
         },
         {
           "name": "oninput",
-          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
+          "description": "`input` {`CustomEvent<FRadioCustomEvent>`} - "
         }
       ]
     },
     {
       "name": "f-select",
-      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: never[]; }>`} - \n\nAttributes:\n\n  * `openDropdown` {`boolean`} - \n\n  * `viewMoreTags` {`boolean`} - \n\n  * `searchValue` {`string`} - \n\n  * `selectedOptions` - \n\n  * `filteredOptions` - \n\n  * `currentCursor` {`number`} - \n\n  * `currentGroupCursor` {`number`} - \n\n  * `fSelectWrapperHeight` {`number`} - \n\n  * `currentGroupOptionCursor` {`number`} - \n\n  * `type` {`\"single\" | \"multiple\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FSelectState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `value` - \n\n  * `options` - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `option-template` {`string | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `height` {`number`} - \n\n  * `width` {`FSelectWidthProp | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `searchable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `checkbox` {`boolean | undefined`} - \n\n  * `create-option` {`boolean | undefined`} - \n\n  * `selection-limit` {`number`} - \n\nProperties:\n\n  * `_labelNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_hasLabel` {`boolean`} - \n\n  * `_helpNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_hasHelperText` {`boolean`} - \n\n  * `openDropdown` {`boolean`} - \n\n  * `viewMoreTags` {`boolean`} - \n\n  * `searchValue` {`string`} - \n\n  * `selectedOptions` - \n\n  * `filteredOptions` - \n\n  * `currentCursor` {`number`} - \n\n  * `currentGroupCursor` {`number`} - \n\n  * `fSelectWrapperHeight` {`number`} - \n\n  * `optimizedHeight` {`number`} - \n\n  * `preferredOpenDirection` {`string`} - \n\n  * `optionsTop` {`string`} - \n\n  * `currentGroupOptionCursor` {`number`} - \n\n  * `inputElement` {`HTMLInputElement`} - \n\n  * `wrapperElement` {`HTMLDivElement`} - \n\n  * `optionElement` {`HTMLDivElement`} - \n\n  * `type` {`\"single\" | \"multiple\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FSelectState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `value` - \n\n  * `options` - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `optionTemplate` {`string | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `height` {`number`} - \n\n  * `width` {`FSelectWidthProp | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `searchable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `checkbox` {`boolean | undefined`} - \n\n  * `createOption` {`boolean | undefined`} - \n\n  * `selectionLimit` {`number`} - \n\n  * `iconSize` {`\"small\" | \"x-small\" | undefined`} - icon size\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `input` {`CustomEvent<FSelectCustomEvent>`} - \n\nAttributes:\n\n  * `openDropdown` {`boolean`} - \n\n  * `viewMoreTags` {`boolean`} - \n\n  * `searchValue` {`string`} - \n\n  * `selectedOptions` - \n\n  * `filteredOptions` - \n\n  * `currentCursor` {`number`} - \n\n  * `currentGroupCursor` {`number`} - \n\n  * `fSelectWrapperHeight` {`number`} - \n\n  * `currentGroupOptionCursor` {`number`} - \n\n  * `type` {`\"single\" | \"multiple\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FSelectState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `value` - \n\n  * `options` - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `option-template` {`string | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `height` {`number`} - \n\n  * `width` {`FSelectWidthProp | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `searchable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `checkbox` {`boolean | undefined`} - \n\n  * `create-option` {`boolean | undefined`} - \n\n  * `selection-limit` {`number`} - \n\nProperties:\n\n  * `_labelNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_hasLabel` {`boolean`} - \n\n  * `_helpNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_hasHelperText` {`boolean`} - \n\n  * `openDropdown` {`boolean`} - \n\n  * `viewMoreTags` {`boolean`} - \n\n  * `searchValue` {`string`} - \n\n  * `selectedOptions` - \n\n  * `filteredOptions` - \n\n  * `currentCursor` {`number`} - \n\n  * `currentGroupCursor` {`number`} - \n\n  * `fSelectWrapperHeight` {`number`} - \n\n  * `optimizedHeight` {`number`} - \n\n  * `preferredOpenDirection` {`string`} - \n\n  * `optionsTop` {`string`} - \n\n  * `currentGroupOptionCursor` {`number`} - \n\n  * `inputElement` {`HTMLInputElement`} - \n\n  * `wrapperElement` {`HTMLDivElement`} - \n\n  * `optionElement` {`HTMLDivElement`} - \n\n  * `type` {`\"single\" | \"multiple\" | undefined`} - \n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FSelectState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `value` - \n\n  * `options` - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `optionTemplate` {`string | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `height` {`number`} - \n\n  * `width` {`FSelectWidthProp | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `searchable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `checkbox` {`boolean | undefined`} - \n\n  * `createOption` {`boolean | undefined`} - \n\n  * `selectionLimit` {`number`} - \n\n  * `iconSize` {`\"small\" | \"x-small\" | undefined`} - icon size\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "openDropdown",
@@ -6083,7 +6083,7 @@
         },
         {
           "name": "oninput",
-          "description": "`input` {`CustomEvent<{ value: never[]; }>`} - "
+          "description": "`input` {`CustomEvent<FSelectCustomEvent>`} - "
         }
       ]
     },
@@ -6119,7 +6119,7 @@
     },
     {
       "name": "f-switch",
-      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`\"on\" | \"off\" | undefined`} - \n\n  * `state` {`FSwitchState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`\"on\" | \"off\" | undefined`} - \n\n  * `state` {`FSwitchState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `input` {`CustomEvent<FSwitchCustomEvent>`} - \n\nAttributes:\n\n  * `value` {`\"on\" | \"off\" | undefined`} - \n\n  * `state` {`FSwitchState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`\"on\" | \"off\" | undefined`} - \n\n  * `state` {`FSwitchState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "value",
@@ -6173,7 +6173,7 @@
         },
         {
           "name": "oninput",
-          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
+          "description": "`input` {`CustomEvent<FSwitchCustomEvent>`} - "
         }
       ]
     },
@@ -6272,7 +6272,7 @@
     },
     {
       "name": "f-text-area",
-      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `value` {`string | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FTextAreaState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `rows` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `max-length` {`string | undefined`} - \n\n  * `resizable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `read-only` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`string | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FTextAreaState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `rows` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `maxLength` {`string | undefined`} - \n\n  * `resizable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `readOnly` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `input` {`CustomEvent<FTextAreaCustomEvent>`} - \n\nAttributes:\n\n  * `value` {`string | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FTextAreaState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `rows` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `max-length` {`string | undefined`} - \n\n  * `resizable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `read-only` {`boolean | undefined`} - \n\nProperties:\n\n  * `value` {`string | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `state` {`FTextAreaState | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `rows` {`string | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `maxLength` {`string | undefined`} - \n\n  * `resizable` {`boolean | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `readOnly` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "value",
@@ -6364,7 +6364,7 @@
         },
         {
           "name": "oninput",
-          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
+          "description": "`input` {`CustomEvent<FTextAreaCustomEvent>`} - "
         }
       ]
     },

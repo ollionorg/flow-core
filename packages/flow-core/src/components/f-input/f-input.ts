@@ -11,6 +11,10 @@ import { FForm } from "../f-form/f-form";
 
 export type FInputState = "primary" | "default" | "success" | "warning" | "danger";
 
+export type FInputCustomEvent = {
+  value: string;
+};
+
 @customElement("f-input")
 export class FInput extends FRoot {
   /**
@@ -137,10 +141,12 @@ export class FInput extends FRoot {
    */
   handleInput(e: InputEvent) {
     e.stopPropagation();
-    const event = new CustomEvent("input", {
+    const event = new CustomEvent<FInputCustomEvent>("input", {
       detail: {
         value: (e.target as HTMLInputElement)?.value,
       },
+      bubbles: true,
+      composed: true,
     });
     this.value = (e.target as HTMLInputElement)?.value;
     this.dispatchEvent(event);
@@ -150,10 +156,12 @@ export class FInput extends FRoot {
    * clear input value on clear icon clicked
    */
   clearInputValue() {
-    const event = new CustomEvent("input", {
+    const event = new CustomEvent<FInputCustomEvent>("input", {
       detail: {
         value: "",
       },
+      bubbles: true,
+      composed: true,
     });
     this.value = "";
     this.dispatchEvent(event);
@@ -271,25 +279,13 @@ export class FInput extends FRoot {
       this.type === "password" || this.showPassword
         ? html` <f-icon
             ?clickable=${true}
-            .source=${this.showPassword ? "i-hide" : "i-view"}
+            .source=${this.showPassword ? "i-view-off-fill" : "i-view-fill"}
             .size=${this.iconSize}
             @click=${this.togglePasswordView}
             class=${!this.size ? "f-input-icons-size" : ""}
           ></f-icon>`
         : "";
 
-    /**
-     * error icon suffix
-     */
-    const dangerSign =
-      this.state === "danger"
-        ? html` <f-icon
-            source="i-alert"
-            .state=${this.state}
-            .size=${this.iconSize}
-            class=${!this.size ? "f-input-icons-size" : ""}
-          ></f-icon>`
-        : "";
     /**
      * main suffix
      */
@@ -299,7 +295,7 @@ export class FInput extends FRoot {
             ${this.fInputSuffix
               ? html`
                   <f-div height="hug-content" width="hug-content" padding="none" direction="row">
-                    <f-text variant="para" size="small" weight="regular" class="word-break"
+                    <f-text variant="para" size="x-small" weight="regular" class="word-break"
                       >${this.fInputSuffix}</f-text
                     >
                   </f-div>
@@ -322,12 +318,12 @@ export class FInput extends FRoot {
               @click=${this.clearInputValue}
               class=${!this.size ? "f-input-icons-size" : ""}
             ></f-icon>
-            ${mainSuffix} ${dangerSign}
+            ${mainSuffix}
           </div>`
-        : html`<div class="f-input-suffix">${passwordToggle} ${mainSuffix} ${dangerSign}</div>`
+        : html`<div class="f-input-suffix">${passwordToggle} ${mainSuffix}</div>`
       : html`
-          <div class="f-input-suffix">${passwordToggle}${mainSuffix} ${dangerSign}</div>
-          <div class="loader-suffix">${unsafeSVG(loader)}</div>
+          <div class="f-input-suffix">${passwordToggle}${mainSuffix}</div>
+          <div class="loader-suffix" state=${this.state}>${unsafeSVG(loader)}</div>
         `;
 
     /**

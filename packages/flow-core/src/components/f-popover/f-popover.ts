@@ -70,8 +70,8 @@ export class FPopover extends FRoot {
   /**
    * @attribute query selector of target
    */
-  @property({ type: String, reflect: true })
-  target!: string;
+  @property({ type: [String, Object], reflect: true })
+  target!: string | HTMLElement;
 
   @state()
   cleanup!: () => void;
@@ -80,7 +80,16 @@ export class FPopover extends FRoot {
   isEscapeClicked = false;
 
   get targetElement() {
-    return document.querySelector<HTMLElement>(this.target);
+    if (typeof this.target === "string") {
+      return document.querySelector<HTMLElement>(this.target);
+    } else {
+      return this.target;
+    }
+  }
+  stringToHTML(str: string) {
+    const dom = document.createElement("div");
+    dom.innerHTML = str;
+    return dom;
   }
   computePlacement() {
     return this.placement === "auto" ? undefined : this.placement;

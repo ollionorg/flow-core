@@ -73,7 +73,13 @@ Icons are used to provide visual context where written text is not required and 
       clickable: false,
     }}
   >
-    {(args) => html`<f-div direction="column" padding="x-large">
+    {(args) => html`<f-div
+      direction="column"
+      padding="x-large"
+      height="500px"
+      align="middle-center"
+      gap="large"
+    >
       <f-icon
         source=${args.source}
         .size=${args.size}
@@ -81,7 +87,34 @@ Icons are used to provide visual context where written text is not required and 
         .loading=${args.loading}
         .disabled=${args.disabled}
         .clickable=${args.clickable}
+        tooltip="kjbkjbknbknknnl"
       ></f-icon>
+      <f-icon
+        source="i-app"
+        .size=${args.size}
+        .state=${args.state}
+        .loading=${args.loading}
+        .disabled=${args.disabled}
+        .clickable=${args.clickable}
+        tooltip="loyuiuiyiouy"
+      ></f-icon>
+      <f-icon
+        source="i-delete"
+        .size=${args.size}
+        .state=${args.state}
+        .loading=${args.loading}
+        .disabled=${args.disabled}
+        .clickable=${args.clickable}
+        id="deleteTarget"
+      ></f-icon>
+      <f-tooltip placement="bottom" target="#deleteTarget"
+        ><f-div state="custom,black" padding="small medium">
+          <f-div direction="column">
+            <f-text variant="para" size="small"> Hello Everyone </f-text>
+            <f-text variant="para" size="small" state="primary"> Learn More </f-text>
+          </f-div>
+        </f-div></f-tooltip
+      >
     </f-div>`}
   </Story>
 </Canvas>

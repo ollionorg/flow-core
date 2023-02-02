@@ -96,6 +96,12 @@ export class FTag extends FRoot {
   disabled?: boolean = false;
 
   /**
+   * @attribute is clickable
+   */
+  @property({ type: Boolean })
+  clickable?: boolean = false;
+
+  /**
    * compute icon size based on tag size
    */
   get iconSize() {
@@ -133,9 +139,10 @@ export class FTag extends FRoot {
         return `background-color: ${LightenDarkenColor(
           this.fill,
           -150
-        )}; border: 1px solid ${LightenDarkenColor(this.fill, -150)}; color: transparent; fill: ${
-          this.fill
-        }`;
+        )}; border: 1px solid ${LightenDarkenColor(
+          this.fill,
+          -150
+        )}; color: transparent; fill: ${this.fill}`;
       } else {
         return `background: ${this.fill}; border: 1px solid ${this.fill}; color: ${this.textColor}`;
       }
@@ -174,7 +181,9 @@ export class FTag extends FRoot {
     /**
      * checks if host element's `:before` has shimmer by accessing  computedstyles
      */
-    const hasShimmer = (getComputedStyle(this, "::before") as any)["animation-name"] === "shimmer";
+    const hasShimmer =
+      (getComputedStyle(this, "::before") as any)["animation-name"] ===
+      "shimmer";
 
     /**
      * if hasShimmer true then add class
@@ -191,7 +200,7 @@ export class FTag extends FRoot {
       "fill-button-surface-light":
         this.fill && getTextContrast(this.fill) === "light-text" ? true : false,
       "fill-button-surface-dark":
-        this.fill && getTextContrast(this.fill) === "dark-text" ? true : false,
+        this.fill && getTextContrast(this.fill) === "dark-text" ? true : false
     };
 
     // merging host classes
@@ -211,7 +220,7 @@ export class FTag extends FRoot {
           class=${classMap({
             "left-icon": true,
             ...iconClasses,
-            "f-tag-system-icon": this.tagSystemIcon ? true : false,
+            "f-tag-system-icon": this.tagSystemIcon ? true : false
           })}
           .size=${this.iconSize}
           ?clickable=${true}
@@ -227,7 +236,7 @@ export class FTag extends FRoot {
           class=${classMap({
             "right-icon": true,
             ...iconClasses,
-            "f-tag-system-icon": this.tagSystemIcon ? true : false,
+            "f-tag-system-icon": this.tagSystemIcon ? true : false
           })}
           .size=${this.iconSize}
           ?clickable=${true}
@@ -242,7 +251,7 @@ export class FTag extends FRoot {
       "fill-button-surface-light":
         this.fill && getTextContrast(this.fill) === "light-text" ? true : false,
       "fill-button-surface-dark":
-        this.fill && getTextContrast(this.fill) === "dark-text" ? true : false,
+        this.fill && getTextContrast(this.fill) === "dark-text" ? true : false
     };
     const counter = this.counter
       ? html`<f-counter
@@ -257,7 +266,11 @@ export class FTag extends FRoot {
      */
     if (this.loading) {
       return html`<div
-        class=${classMap({ "f-tag": true, hasShimmer, "custom-loader": this.fill ? true : false })}
+        class=${classMap({
+          "f-tag": true,
+          hasShimmer,
+          "custom-loader": this.fill ? true : false
+        })}
         style=${this.applyStyles()}
         ?label=${this.label ? true : false}
         size=${this.size}
@@ -274,7 +287,11 @@ export class FTag extends FRoot {
      * Final html to render
      */
     return html`<div
-      class=${classMap({ "f-tag": true, hasShimmer, "custom-loader": this.fill ? true : false })}
+      class=${classMap({
+        "f-tag": true,
+        hasShimmer,
+        "custom-loader": this.fill ? true : false
+      })}
       style=${this.applyStyles()}
       ?label=${this.label ? true : false}
       size=${this.size}
@@ -282,6 +299,7 @@ export class FTag extends FRoot {
       ?loading=${this.loading}
       ?disabled=${this.disabled}
       ?selected=${this.selected}
+      ?clickable=${this.clickable}
     >
       ${iconLeft}${this.label}${counter}${iconRight}
     </div>`;

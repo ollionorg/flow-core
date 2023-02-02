@@ -10,32 +10,38 @@ $states: (
     "background": var(--color-primary-default),
     "selected": var(--color-primary-default-selected),
     "loading": var(--color-primary-surface),
+    "hover": var(--color-primary-default-hover)
   ),
   "neutral": (
     "background": var(--color-neutral-default),
     "selected": var(--color-neutral-default-selected),
     "loading": var(--color-surface-tertiary),
+    "hover": var(--color-neutral-default-hover)
   ),
   "success": (
     "background": var(--color-success-default),
     "selected": var(--color-success-default-selected),
     "loading": var(--color-success-surface),
+    "hover": var(--color-success-default-hover)
   ),
   "warning": (
     "background": var(--color-warning-default),
     "selected": var(--color-warning-default-selected),
     "loading": var(--color-warning-surface),
+    "hover": var(--color-warning-default-hover)
   ),
   "danger": (
     "background": var(--color-danger-default),
     "selected": var(--color-danger-default-selected),
     "loading": var(--color-danger-surface),
+    "hover": var(--color-danger-default-hover)
   ),
   "inherit": (
     "background": var(--color-inherit-button),
     "selected": var(--color-inherit-button-selected),
     "loading": var(--color-inherit-button-loader),
-  ),
+    "hover": var(--color-inherit-button-hover)
+  )
 );
 
 // $sizes will all values related to different sizes
@@ -45,25 +51,25 @@ $sizes: (
     "padding": 2px 4px,
     "fontSize": 10px,
     "gap": 4px,
-    "loaderSize": 8px,
+    "loaderSize": 8px
   ),
   "medium": (
     "height": 24px,
     "padding": 4px 8px,
     "fontSize": 12px,
     "gap": 6px,
-    "loaderSize": 16px,
+    "loaderSize": 16px
   ),
   "large": (
     "height": 32px,
     "padding": 7px 12px,
     "fontSize": 14px,
     "gap": 8px,
-    "loaderSize": 20px,
-  ),
+    "loaderSize": 20px
+  )
 );
 /**
-:host selects the host element. 
+:host selects the host element.
 in this case it is `f-tag`
 **/
 :host {
@@ -124,6 +130,13 @@ in this case it is `f-tag`
           color: transparent !important;
           svg path.loader-fill {
             fill: map.get($color, "background") !important;
+          }
+        }
+        // adding clickable behavior
+        &[clickable]:not([selected]) {
+          cursor: pointer;
+          &:hover {
+            background-color: map.get($color, "hover") !important;
           }
         }
       }

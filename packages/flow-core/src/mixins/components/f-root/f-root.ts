@@ -34,7 +34,7 @@ export class FRoot extends LitElement {
       }
       // if tooltip present with particular id `flow-tooltip`
       tooltip = document.querySelector("#flow-tooltip");
-      this.addEventListener("mouseenter", (e) => {
+      this.addEventListener("mouseenter", () => {
         (tooltip as FTooltip).target = this;
         const tooltipText = tooltip?.querySelector("#tooltip-text");
         if (tooltipText) {

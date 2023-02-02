@@ -111,7 +111,9 @@ Icons are used to provide visual context where written text is not required and 
         ><f-div state="custom,black" padding="small medium">
           <f-div direction="column">
             <f-text variant="para" size="small"> Hello Everyone </f-text>
-            <f-text variant="para" size="small" state="primary"> Learn More </f-text>
+            <f-text variant="para" size="small" state="primary">
+              Learn More
+            </f-text>
           </f-div>
         </f-div></f-tooltip
       >
@@ -140,28 +142,64 @@ library , any inline SVG or any URL for the image.
 
 <Canvas>
   <Story name="source">
-    {(args) => html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
-      <f-div padding="large" gap="medium" direction="column" width="hug-content">
+    {(args) => html`<f-div
+      gap="medium"
+      padding="x-large"
+      direction="row"
+      align="middle-center"
+    >
+      <f-div
+        padding="large"
+        gap="medium"
+        direction="column"
+        width="hug-content"
+      >
         <f-div height="hug-content" padding="none" align="middle-center">
-          <f-text variant="para" size="large" weight="medium">Icon from library</f-text>
+          <f-text variant="para" size="large" weight="medium"
+            >Icon from library</f-text
+          >
         </f-div>
         <f-div height="hug-content" padding="none" align="middle-center">
           <f-icon source="i-plus"></f-icon>
         </f-div>
       </f-div>
-      <f-div padding="large" gap="medium" direction="column" width="hug-content">
+      <f-div
+        padding="large"
+        gap="medium"
+        direction="column"
+        width="hug-content"
+      >
         <f-div height="hug-content" padding="none" align="middle-center">
-          <f-text variant="para" size="large" weight="medium">Emoji as a source</f-text>
+          <f-text variant="para" size="large" weight="medium"
+            >Emoji as a source</f-text
+          >
         </f-div>
-        <f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
+        <f-div
+          height="hug-content"
+          padding="none"
+          align="middle-center"
+          overflow="hidden"
+        >
           <f-icon source="😃"></f-icon>
         </f-div>
       </f-div>
-      <f-div padding="large" gap="medium" direction="column" width="hug-content">
+      <f-div
+        padding="large"
+        gap="medium"
+        direction="column"
+        width="hug-content"
+      >
         <f-div height="hug-content" padding="none" align="middle-center">
-          <f-text variant="para" size="large" weight="medium">Icon from URL</f-text>
+          <f-text variant="para" size="large" weight="medium"
+            >Icon from URL</f-text
+          >
         </f-div>
-        <f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
+        <f-div
+          height="hug-content"
+          padding="none"
+          align="middle-center"
+          overflow="hidden"
+        >
           <f-icon
             source="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/1024px-Information_icon.svg.png"
           ></f-icon>
@@ -212,7 +250,7 @@ The small size is the default.
           <f-text variant="para" size="large" weight="medium">x-large</f-text>
         </f-div>
         <f-div height="hug-content" padding="none" align="middle-center">
-          <f-icon source="i-plus" size="x-large"></f-icon>
+          <f-icon tooltip="Test" source="i-plus" size="x-large"></f-icon>
         </f-div>
       </f-div>
       <f-div padding="large" gap="medium" direction="column" width="hug-content">
@@ -453,27 +491,47 @@ States on buttons are used to communicate purpose and it’s connotation.
       </f-div>
       <f-div padding="none" direction="row" gap="x-large" overflow="hidden">
         <f-icon source="i-plus" state="primary" size="x-large"></f-icon>
-        <f-icon source="i-plus" state="primary" size="x-large" loading=${true}></f-icon>
+        <f-icon
+          source="i-plus"
+          state="primary"
+          size="x-large"
+          loading=${true}
+        ></f-icon>
       </f-div>
       <f-div height="hug-content" padding="none">
         <f-text variant="para" size="large" weight="medium">Disabled</f-text>
       </f-div>
       <f-div padding="none" direction="row" gap="x-large">
         <f-icon source="i-plus" state="primary" size="x-large"></f-icon>
-        <f-icon source="i-plus" state="primary" size="x-large" disabled=${true}></f-icon>
+        <f-icon
+          source="i-plus"
+          state="primary"
+          size="x-large"
+          disabled=${true}
+        ></f-icon>
       </f-div>
       <f-div height="hug-content" padding="none">
         <f-text variant="para" size="large" weight="medium">Clickable</f-text>
       </f-div>
       <f-div padding="none" direction="row" gap="x-large">
-        <f-icon source="i-plus" state="primary" size="x-large" clickable=${true}></f-icon>
+        <f-icon
+          source="i-plus"
+          state="primary"
+          size="x-large"
+          clickable=${true}
+        ></f-icon>
       </f-div>
       <f-div height="hug-content" padding="none">
         <f-text variant="para" size="large" weight="medium">Focused</f-text>
       </f-div>
       <f-div padding="none" direction="row" gap="x-large">
         <f-icon source="i-plus" state="primary" size="x-large"></f-icon>
-        <f-icon source="i-plus" state="primary" size="x-large" focused=${true}></f-icon>
+        <f-icon
+          source="i-plus"
+          state="primary"
+          size="x-large"
+          focused=${true}
+        ></f-icon>
       </f-div>
     </f-div>`}
   </Story>

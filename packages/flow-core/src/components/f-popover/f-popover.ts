@@ -144,7 +144,9 @@ export class FPopover extends FRoot {
     if (this.cleanup) {
       this.cleanup();
     }
-    document.removeEventListener("keydown", (e) => this.escapekeyHandle(e, this));
+    document.removeEventListener("keydown", (e) =>
+      this.escapekeyHandle(e, this)
+    );
     this.removeEventListener("click", this.dispatchEsc);
     super.disconnectedCallback();
   }

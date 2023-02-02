@@ -1,5 +1,11 @@
-import { html, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { html, PropertyValues, unsafeCSS } from "lit";
+import {
+  customElement,
+  property,
+  query,
+  queryAssignedElements,
+  state,
+} from "lit/decorators.js";
 import eleStyle from "./f-select.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -12,7 +18,12 @@ import getComputedHTML from "../../utils/get-computed-html";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import { FForm } from "../f-form/f-form";
 
-export type FSelectState = "primary" | "default" | "success" | "warning" | "danger";
+export type FSelectState =
+  | "primary"
+  | "default"
+  | "success"
+  | "warning"
+  | "danger";
 export type FSelectHeightProp = number;
 export type FSelectWidthProp = "fill-container" | `${number}`;
 export type FSelectArrayOfStrings = string[];
@@ -265,7 +276,9 @@ export class FSelect extends FRoot {
       return (this.selectedOptions as FSelectArrayOfStrings).indexOf(option);
     } else {
       return (this.selectedOptions as FSelectOptionsProp).findIndex(
-        (item) => (item as FSelectOptionObject)?.title === (option as FSelectOptionObject)?.title
+        (item) =>
+          (item as FSelectOptionObject)?.title ===
+          (option as FSelectOptionObject)?.title
       );
     }
   }
@@ -276,7 +289,9 @@ export class FSelect extends FRoot {
   getIndexInGroup(option: FSelectSingleOption, group: string) {
     if ((this.selectedOptions as FSelectOptionsGroup)[group]) {
       return (
-        (this.selectedOptions as FSelectOptionsGroup)[group] as FSelectArrayOfObjects
+        (this.selectedOptions as FSelectOptionsGroup)[
+          group
+        ] as FSelectArrayOfObjects
       ).findIndex((item) => JSON.stringify(item) === JSON.stringify(option));
     } else {
       return -1;
@@ -299,9 +314,11 @@ export class FSelect extends FRoot {
    */
   isGroupSelection(option: FSelectSingleOption, group: string) {
     if ((this.selectedOptions as FSelectOptionsGroup)[group]) {
-      return ((this.selectedOptions as FSelectOptionsGroup)[group] as FSelectArrayOfObjects).find(
-        (item) => JSON.stringify(item) === JSON.stringify(option)
-      )
+      return (
+        (this.selectedOptions as FSelectOptionsGroup)[
+          group
+        ] as FSelectArrayOfObjects
+      ).find((item) => JSON.stringify(item) === JSON.stringify(option))
         ? true
         : false;
     } else {
@@ -322,7 +339,9 @@ export class FSelect extends FRoot {
         this.filteredOptions = (this.options as FSelectArrayOfObjects)?.filter(
           (item: FSelectSingleOption) =>
             typeof item === "string"
-              ? item.toLowerCase().includes((e.target as HTMLInputElement)?.value.toLowerCase())
+              ? item
+                  .toLowerCase()
+                  .includes((e.target as HTMLInputElement)?.value.toLowerCase())
               : (item as FSelectOptionObject).title
                   .toLowerCase()
                   .includes((e.target as HTMLInputElement)?.value.toLowerCase())
@@ -334,7 +353,9 @@ export class FSelect extends FRoot {
             (this.options as FSelectOptionsGroup)[item] as FSelectArrayOfObjects
           )?.filter((obj: FSelectSingleOption) =>
             typeof obj === "string"
-              ? obj.toLowerCase().includes((e.target as HTMLInputElement)?.value.toLowerCase())
+              ? obj
+                  .toLowerCase()
+                  .includes((e.target as HTMLInputElement)?.value.toLowerCase())
               : (obj as FSelectOptionObject).title
                   .toLowerCase()
                   .includes((e.target as HTMLInputElement)?.value.toLowerCase())
@@ -425,13 +446,23 @@ export class FSelect extends FRoot {
     if (Array.isArray(this.options)) {
       if (this.type === "single") {
         !this.isSelected(option)
-          ? ((this.selectedOptions as FSelectArrayOfObjects) = [option as FSelectOptionObject])
-          : (this.selectedOptions as FSelectArrayOfObjects).splice(this.getIndex(option), 1);
+          ? ((this.selectedOptions as FSelectArrayOfObjects) = [
+              option as FSelectOptionObject,
+            ])
+          : (this.selectedOptions as FSelectArrayOfObjects).splice(
+              this.getIndex(option),
+              1
+            );
         this.handleDropDownClose(e);
       } else {
         !this.isSelected(option)
-          ? (this.selectedOptions as FSelectArrayOfObjects).push(option as FSelectOptionObject)
-          : (this.selectedOptions as FSelectArrayOfObjects).splice(this.getIndex(option), 1);
+          ? (this.selectedOptions as FSelectArrayOfObjects).push(
+              option as FSelectOptionObject
+            )
+          : (this.selectedOptions as FSelectArrayOfObjects).splice(
+              this.getIndex(option),
+              1
+            );
       }
     }
     const event = new CustomEvent<FSelectCustomEvent>("input", {
@@ -455,10 +486,16 @@ export class FSelect extends FRoot {
   /**
    * action for selection of options if the options is in the form of groups
    */
-  handleSelectionGroup(option: FSelectSingleOption, group: string, e: MouseEvent) {
+  handleSelectionGroup(
+    option: FSelectSingleOption,
+    group: string,
+    e: MouseEvent
+  ) {
     e.stopPropagation();
     e.preventDefault();
-    const selectedOptionsInGroup = (this.selectedOptions as FSelectOptionsGroup)[group];
+    const selectedOptionsInGroup = (
+      this.selectedOptions as FSelectOptionsGroup
+    )[group];
     if (this.type === "single") {
       this.selectedOptions = {
         ...this.selectedOptions,
@@ -472,7 +509,9 @@ export class FSelect extends FRoot {
               ...this.selectedOptions,
               [group]: [option as FSelectOptionObject],
             })
-          : (selectedOptionsInGroup as FSelectArrayOfObjects).push(option as FSelectOptionObject)
+          : (selectedOptionsInGroup as FSelectArrayOfObjects).push(
+              option as FSelectOptionObject
+            )
         : selectedOptionsInGroup.splice(this.getIndexInGroup(option, group), 1);
     }
     const event = new CustomEvent<FSelectCustomEvent>("input", {
@@ -499,13 +538,18 @@ export class FSelect extends FRoot {
   handleRemoveGroupSelection(option: FSelectSingleOption, e: MouseEvent) {
     e.stopPropagation();
     Object.keys(this.selectedOptions).forEach((group) => {
-      const index = (this.selectedOptions as FSelectOptionsGroup)[group].findIndex(
-        (item) => JSON.stringify(item) === JSON.stringify(option)
-      );
+      const index = (this.selectedOptions as FSelectOptionsGroup)[
+        group
+      ].findIndex((item) => JSON.stringify(item) === JSON.stringify(option));
       if (index !== -1) {
-        const selectedOptionsInGroup = (this.selectedOptions as FSelectOptionsGroup)[group];
+        const selectedOptionsInGroup = (
+          this.selectedOptions as FSelectOptionsGroup
+        )[group];
         selectedOptionsInGroup.splice(index, 1);
-        this.selectedOptions = { ...this.selectedOptions, [group]: selectedOptionsInGroup };
+        this.selectedOptions = {
+          ...this.selectedOptions,
+          [group]: selectedOptionsInGroup,
+        };
         e.stopPropagation();
         const event = new CustomEvent<FSelectCustomEvent>("input", {
           detail: {
@@ -538,7 +582,11 @@ export class FSelect extends FRoot {
   /**
    * handle click on checkbox in group
    */
-  handleCheckboxGroup(option: FSelectSingleOption, group: string, e: MouseEvent) {
+  handleCheckboxGroup(
+    option: FSelectSingleOption,
+    group: string,
+    e: MouseEvent
+  ) {
     e.stopPropagation();
     this.handleSelectionGroup(option, group, e);
   }
@@ -625,9 +673,13 @@ export class FSelect extends FRoot {
    */
   getConcaticateGroupOptions(array: FSelectOptionsGroup) {
     const selectedOptions = _.cloneDeep(array);
-    return Object.keys(array).reduce(function (arr: FSelectArrayOfObjects, key: string) {
+    return Object.keys(array).reduce(function (
+      arr: FSelectArrayOfObjects,
+      key: string
+    ) {
       return arr.concat((selectedOptions as any)[key]);
-    }, []);
+    },
+    []);
   }
 
   /**
@@ -677,7 +729,9 @@ export class FSelect extends FRoot {
       throw new Error("f-select : options field can't be empty");
     }
     if (this.type === "single" && this.checkbox) {
-      throw new Error("f-select : checkbox can only be present in `type=multiple`");
+      throw new Error(
+        "f-select : checkbox can only be present in `type=multiple`"
+      );
     }
   }
 
@@ -686,7 +740,8 @@ export class FSelect extends FRoot {
    */
   updateDimentions() {
     const spaceAbove = this.wrapperElement.getBoundingClientRect().top;
-    const spaceBelow = window.innerHeight - this.wrapperElement.getBoundingClientRect().bottom;
+    const spaceBelow =
+      window.innerHeight - this.wrapperElement.getBoundingClientRect().bottom;
     const hasEnoughSpaceBelow = spaceBelow > this.height;
     const optionsHeight = this.optionElement.offsetHeight;
     const heightToApply = Math.min(optionsHeight, this.height);
@@ -844,7 +899,8 @@ export class FSelect extends FRoot {
         variant=${this.variant}
         category=${this.category}
         state=${this.state}
-        placeholder=${this.selectedOptions?.length > 0 || concatinatedSelectedOptions?.length > 0
+        placeholder=${this.selectedOptions?.length > 0 ||
+        concatinatedSelectedOptions?.length > 0
           ? this.searchable && this.openDropdown
             ? this.placeholder
             : ""
@@ -868,8 +924,13 @@ export class FSelect extends FRoot {
               ? (this.selectedOptions as FSelectOptionsProp).map(
                   (option) =>
                     html`<f-div padding="none" ellipsis=${true}
-                      ><f-text variant="para" size="small" weight="regular" class="word-break"
-                        >${(option as FSelectOptionObject)?.title ?? option}</f-text
+                      ><f-text
+                        variant="para"
+                        size="small"
+                        weight="regular"
+                        class="word-break"
+                        >${(option as FSelectOptionObject)?.title ??
+                        option}</f-text
                       ></f-div
                     >`
                 )
@@ -881,7 +942,8 @@ export class FSelect extends FRoot {
                         class="f-tag-system-icon"
                         icon-right="i-close"
                         size="small"
-                        label=${(option as FSelectOptionObject)?.title ?? option}
+                        label=${(option as FSelectOptionObject)?.title ??
+                        option}
                         state="neutral"
                         @click=${(e: MouseEvent) => {
                           this.handleOptionSelection(option, e);
@@ -890,26 +952,39 @@ export class FSelect extends FRoot {
                   )}
                 ${this.selectedOptions.length > this.selectionLimit
                   ? !this.viewMoreTags
-                    ? html` <f-div height="hug-content" width="hug-content" padding="none">
+                    ? html` <f-div
+                        height="hug-content"
+                        width="hug-content"
+                        padding="none"
+                      >
                         <f-text
                           variant="para"
                           size="small"
                           weight="regular"
                           state="primary"
                           @click=${this.handleViewMoreTags}
-                          ><a href="" @click=${(e: MouseEvent) => e.preventDefault()}
-                            >+${this.selectedOptions.length - this.selectionLimit} more</a
+                          ><a
+                            href=""
+                            @click=${(e: MouseEvent) => e.preventDefault()}
+                            >+${this.selectedOptions.length -
+                            this.selectionLimit}
+                            more</a
                           ></f-text
                         ></f-div
                       >`
-                    : html`<f-div height="hug-content" width="hug-content" padding="none"
+                    : html`<f-div
+                        height="hug-content"
+                        width="hug-content"
+                        padding="none"
                         ><f-text
                           variant="para"
                           size="small"
                           weight="regular"
                           state="primary"
                           @click=${this.handleViewMoreTags}
-                          ><a href="" @click=${(e: MouseEvent) => e.preventDefault()}
+                          ><a
+                            href=""
+                            @click=${(e: MouseEvent) => e.preventDefault()}
                             >show less</a
                           ></f-text
                         ></f-div
@@ -922,20 +997,29 @@ export class FSelect extends FRoot {
               ? (concatinatedSelectedOptions as FSelectOptionsProp).map(
                   (option) =>
                     html`<f-div padding="none" ellipsis=${true}
-                      ><f-text variant="para" size="small" weight="regular" class="word-break"
-                        >${(option as FSelectOptionObject)?.title ?? option}</f-text
+                      ><f-text
+                        variant="para"
+                        size="small"
+                        weight="regular"
+                        class="word-break"
+                        >${(option as FSelectOptionObject)?.title ??
+                        option}</f-text
                       ></f-div
                     >`
                 )
               : html` ${(concatinatedSelectedOptions as FSelectOptionsProp)
-                  .slice(0, this.getSlicedSelections(concatinatedSelectedOptions))
+                  .slice(
+                    0,
+                    this.getSlicedSelections(concatinatedSelectedOptions)
+                  )
                   .map(
                     (option) =>
                       html`<f-tag
                         class="f-tag-system-icon"
                         icon-right="i-close"
                         size="small"
-                        label=${(option as FSelectOptionObject)?.title ?? option}
+                        label=${(option as FSelectOptionObject)?.title ??
+                        option}
                         state="neutral"
                         @click=${(e: MouseEvent) => {
                           this.handleRemoveGroupSelection(option, e);
@@ -944,26 +1028,38 @@ export class FSelect extends FRoot {
                   )}
                 ${concatinatedSelectedOptions.length > this.selectionLimit
                   ? !this.viewMoreTags
-                    ? html`<f-div height="hug-content" width="hug-content" padding="none"
+                    ? html`<f-div
+                        height="hug-content"
+                        width="hug-content"
+                        padding="none"
                         ><f-text
                           variant="para"
                           size="small"
                           weight="regular"
                           state="primary"
                           @click=${this.handleViewMoreTags}
-                          ><a href="" @click=${(e: MouseEvent) => e.preventDefault()}
-                            >+${concatinatedSelectedOptions.length - this.selectionLimit} more</a
+                          ><a
+                            href=""
+                            @click=${(e: MouseEvent) => e.preventDefault()}
+                            >+${concatinatedSelectedOptions.length -
+                            this.selectionLimit}
+                            more</a
                           ></f-text
                         ></f-div
                       >`
-                    : html`<f-div height="hug-content" width="hug-content" padding="none"
+                    : html`<f-div
+                        height="hug-content"
+                        width="hug-content"
+                        padding="none"
                         ><f-text
                           variant="para"
                           size="small"
                           weight="regular"
                           state="primary"
                           @click=${this.handleViewMoreTags}
-                          ><a href="" @click=${(e: MouseEvent) => e.preventDefault()}
+                          ><a
+                            href=""
+                            @click=${(e: MouseEvent) => e.preventDefault()}
                             >show less</a
                           ></f-text
                         ></f-div
@@ -978,7 +1074,8 @@ export class FSelect extends FRoot {
      */
     const suffixAppend = !this.loading
       ? html`<div class="f-select-suffix">
-          ${(this.selectedOptions?.length > 0 || concatinatedSelectedOptions?.length > 0) &&
+          ${(this.selectedOptions?.length > 0 ||
+            concatinatedSelectedOptions?.length > 0) &&
           this.clear
             ? html`
                 <f-icon
@@ -1011,7 +1108,9 @@ export class FSelect extends FRoot {
       tabindex=${0}
     >
       <f-div width="fill-container" height="hug-content" padding="none"
-        ><f-text variant="para" size="small" weight="regular">No Options found.</f-text></f-div
+        ><f-text variant="para" size="small" weight="regular"
+          >No Options found.</f-text
+        ></f-div
       >
       ${this.createOption && this.searchValue && this.searchable
         ? html`
@@ -1102,7 +1201,8 @@ export class FSelect extends FRoot {
                           ?clickable=${true}
                           align="middle-left"
                           gap="small"
-                          .selected=${this.isSelected(option) || this.currentCursor === index
+                          .selected=${this.isSelected(option) ||
+                          this.currentCursor === index
                             ? "background"
                             : undefined}
                           @click=${(e: MouseEvent) => {
@@ -1113,13 +1213,16 @@ export class FSelect extends FRoot {
                             ? html` <f-checkbox
                                 state=${this.state}
                                 size=${this.size}
-                                value=${this.isSelected(option) ? "checked" : "unchecked"}
+                                value=${this.isSelected(option)
+                                  ? "checked"
+                                  : "unchecked"}
                                 @input=${(e: MouseEvent) => {
                                   this.handleCheckboxInput(option, e);
                                 }}
                               ></f-checkbox>`
                             : ""}
-                          ${(option as FSelectOptionObject)?.icon && !this.optionTemplate
+                          ${(option as FSelectOptionObject)?.icon &&
+                          !this.optionTemplate
                             ? html` <f-div
                                 padding="none"
                                 gap="none"
@@ -1127,14 +1230,19 @@ export class FSelect extends FRoot {
                                 width="hug-content"
                                 ><f-icon
                                   size="medium"
-                                  source=${(option as FSelectOptionObject)?.icon}
+                                  source=${(option as FSelectOptionObject)
+                                    ?.icon}
                                 ></f-icon
                               ></f-div>`
                             : ""}
                           ${this.optionTemplate
                             ? html`
                                 ${unsafeHTML(
-                                  getComputedHTML(html`${eval("`" + this.optionTemplate + "`")}`)
+                                  getComputedHTML(
+                                    html`${eval(
+                                      "`" + this.optionTemplate + "`"
+                                    )}`
+                                  )
                                 )}
                               `
                             : ""}
@@ -1144,8 +1252,12 @@ export class FSelect extends FRoot {
                                 gap="none"
                                 height="hug-content"
                                 width="fill-container"
-                                ><f-text variant="para" size="small" weight="regular"
-                                  >${(option as FSelectOptionObject)?.title ?? option}</f-text
+                                ><f-text
+                                  variant="para"
+                                  size="small"
+                                  weight="regular"
+                                  >${(option as FSelectOptionObject)?.title ??
+                                  option}</f-text
                                 ></f-div
                               >`
                             : ""}
@@ -1164,10 +1276,12 @@ export class FSelect extends FRoot {
                 : Object.keys(this.filteredOptions)?.length > 0 &&
                   Object.keys(this.filteredOptions)?.every(
                     (groupName) =>
-                      (this.filteredOptions as FSelectOptionsGroup)[groupName].length > 0
+                      (this.filteredOptions as FSelectOptionsGroup)[groupName]
+                        .length > 0
                   )
                 ? Object.keys(this.filteredOptions)?.map((group, groupIndex) =>
-                    (this.filteredOptions as FSelectOptionsGroup)[group].length > 0
+                    (this.filteredOptions as FSelectOptionsGroup)[group]
+                      .length > 0
                       ? html`<f-div
                     padding="none"
                     height="hug-content"
@@ -1185,9 +1299,12 @@ export class FSelect extends FRoot {
                       direction="row"
                       ?clickable=${true}
                       .selected=${
-                        this.getCheckedValue(group) === "checked" ? "background" : undefined
+                        this.getCheckedValue(group) === "checked"
+                          ? "background"
+                          : undefined
                       }
-                      @click=${(e: MouseEvent) => this.handleSelectAll(e, group)}
+                      @click=${(e: MouseEvent) =>
+                        this.handleSelectAll(e, group)}
                     >
                        ${
                          this.checkbox
@@ -1195,7 +1312,8 @@ export class FSelect extends FRoot {
                                state=${this.state}
                                size=${this.size}
                                .value="${this.getCheckedValue(group)}"
-                               @input=${(e: MouseEvent) => this.handleSelectAll(e, group)}
+                               @input=${(e: MouseEvent) =>
+                                 this.handleSelectAll(e, group)}
                              ></f-checkbox>`
                            : ""
                        }
@@ -1203,7 +1321,9 @@ export class FSelect extends FRoot {
                                   >${group}</f-text
                                 >
                       </f-div>
-                      ${(this.filteredOptions as FSelectOptionsGroup)[group].map(
+                      ${(this.filteredOptions as FSelectOptionsGroup)[
+                        group
+                      ].map(
                         (option, optionIndex) =>
                           html`
                             <f-div
@@ -1215,7 +1335,10 @@ export class FSelect extends FRoot {
                               ?clickable=${true}
                               align="middle-left"
                               gap="small"
-                              .selected=${this.isGroupSelection(option, group) ||
+                              .selected=${this.isGroupSelection(
+                                option,
+                                group
+                              ) ||
                               (this.currentGroupOptionCursor === optionIndex &&
                                 this.currentGroupCursor === groupIndex)
                                 ? "background"
@@ -1232,11 +1355,16 @@ export class FSelect extends FRoot {
                                       ? "checked"
                                       : "unchecked"}
                                     @input=${(e: MouseEvent) => {
-                                      this.handleCheckboxGroup(option, group, e);
+                                      this.handleCheckboxGroup(
+                                        option,
+                                        group,
+                                        e
+                                      );
                                     }}
                                   ></f-checkbox>`
                                 : ""}
-                              ${(option as FSelectOptionObject)?.icon && !this.optionTemplate
+                              ${(option as FSelectOptionObject)?.icon &&
+                              !this.optionTemplate
                                 ? html` <f-div
                                     padding="none"
                                     gap="none"
@@ -1244,7 +1372,8 @@ export class FSelect extends FRoot {
                                     width="hug-content"
                                     ><f-icon
                                       size="medium"
-                                      source=${(option as FSelectOptionObject)?.icon}
+                                      source=${(option as FSelectOptionObject)
+                                        ?.icon}
                                     ></f-icon
                                   ></f-div>`
                                 : ""}
@@ -1252,7 +1381,9 @@ export class FSelect extends FRoot {
                                 ? html`
                                     ${unsafeHTML(
                                       getComputedHTML(
-                                        html`${eval("`" + this.optionTemplate + "`")}`
+                                        html`${eval(
+                                          "`" + this.optionTemplate + "`"
+                                        )}`
                                       )
                                     )}
                                   `
@@ -1263,18 +1394,26 @@ export class FSelect extends FRoot {
                                     gap="none"
                                     height="hug-content"
                                     width="fill-container"
-                                    ><f-text variant="para" size="small" weight="regular"
-                                      >${(option as FSelectOptionObject)?.title ?? option}</f-text
+                                    ><f-text
+                                      variant="para"
+                                      size="small"
+                                      weight="regular"
+                                      >${(option as FSelectOptionObject)
+                                        ?.title ?? option}</f-text
                                     ></f-div
                                   >`
                                 : ""}
-                              ${this.isGroupSelection(option, group) && !this.checkbox
+                              ${this.isGroupSelection(option, group) &&
+                              !this.checkbox
                                 ? html` <f-div
                                     padding="none"
                                     gap="none"
                                     height="hug-content"
                                     width="hug-content"
-                                    ><f-icon size="medium" source="i-tick"></f-icon
+                                    ><f-icon
+                                      size="medium"
+                                      source="i-tick"
+                                    ></f-icon
                                   ></f-div>`
                                 : ""}
                             </f-div>
@@ -1289,7 +1428,9 @@ export class FSelect extends FRoot {
           </div>
         </div>
         <f-div
-          .padding=${this._hasHelperText && !this._hasLabel ? "x-small none none none" : "none"}
+          .padding=${this._hasHelperText && !this._hasLabel
+            ? "x-small none none none"
+            : "none"}
         >
           <slot name="help" @slotchange=${this._onHelpSlotChange}></slot>
         </f-div>
@@ -1310,8 +1451,9 @@ export class FSelect extends FRoot {
      */
     this.filteredOptions = this.options;
   }
-  updated(changedProps: Map<string, any>) {
-    this.fSelectWrapperHeight = changedProps.get("fSelectWrapperHeight");
+  updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
+    this.fSelectWrapperHeight = changedProperties.get("fSelectWrapperHeight");
     this.updateDimentions();
   }
 }

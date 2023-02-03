@@ -30,6 +30,10 @@ f-popover {
   border-radius: 4px;
   overflow: auto;
   z-index: 200;
+  &.tooltip {
+    background-color: #000;
+    z-index: 1000;
+  }
 
   &[open] {
     @each $size, $value in $sizes {
@@ -37,6 +41,10 @@ f-popover {
         width: map.get($value, "width");
         max-height: map.get($value, "height");
       }
+    }
+    &.tooltip {
+      width: fit-content;
+      max-width: 300px;
     }
   }
   flex-direction: column;

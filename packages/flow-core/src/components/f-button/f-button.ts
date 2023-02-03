@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValues, unsafeCSS } from "lit";
 import { customElement, property, query, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-button.scss";
@@ -330,7 +330,8 @@ export class FButton extends FRoot {
     </button>`;
   }
 
-  updated() {
+  updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
     /**
      * Force update child element
      */

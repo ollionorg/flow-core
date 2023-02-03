@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValues, unsafeCSS } from "lit";
 import { customElement, property, query, state } from "lit/decorators.js";
 import eleStyle from "./f-icon-button.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -175,7 +175,9 @@ export class FIconButton extends FRoot {
       !validateHTMLColor(this.fill) &&
       !validateHTMLColorName(this.fill)
     ) {
-      throw new Error("f-icon-button : enter correct color-name or hex-color-code");
+      throw new Error(
+        "f-icon-button : enter correct color-name or hex-color-code"
+      );
     }
   }
 
@@ -190,10 +192,14 @@ export class FIconButton extends FRoot {
      */
     this.validateProperties();
 
-    const hasShimmer = (getComputedStyle(this, "::before") as any)["animation-name"] === "shimmer";
+    const hasShimmer =
+      (getComputedStyle(this, "::before") as any)["animation-name"] ===
+      "shimmer";
     const iconClasses = {
       "fill-button-surface":
-        this.type === "fill" && this.variant !== "block" && !this.fill ? true : false,
+        this.type === "fill" && this.variant !== "block" && !this.fill
+          ? true
+          : false,
       "fill-button-surface-light":
         this.fill &&
         this.type === "fill" &&
@@ -237,7 +243,10 @@ export class FIconButton extends FRoot {
       "f-icon-button": true,
       hasShimmer,
       "custom-loader": this.fill ? true : false,
-      "custom-hover": this.fill && this.type === "fill" && this.variant !== "block" ? true : false,
+      "custom-hover":
+        this.fill && this.type === "fill" && this.variant !== "block"
+          ? true
+          : false,
     };
     // merging host classes
     this.classList.forEach((cl) => {
@@ -272,7 +281,8 @@ export class FIconButton extends FRoot {
     </button>`;
   }
 
-  updated() {
+  updated(changedProperties: PropertyValues) {
+    super.updated(changedProperties);
     /**
      * Force update child element
      */

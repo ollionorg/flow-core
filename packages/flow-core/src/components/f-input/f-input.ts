@@ -329,7 +329,6 @@ export class FInput extends FRoot {
     /**
      * Final html to render
      */
-
     return html`
       <f-div
         padding="none"

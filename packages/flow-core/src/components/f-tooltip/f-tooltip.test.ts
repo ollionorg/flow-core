@@ -11,7 +11,6 @@ describe("f-tooltip", () => {
   it("should render open tooltip ", async () => {
     const el = await fixture(html` <f-button label="add" tooltip="This is a tooltip"></f-button> `);
     const tooltip = document.querySelector<FTooltip>("#flow-tooltip");
-    console.log(tooltip.innerText);
     expect(tooltip).not.null;
   });
 });

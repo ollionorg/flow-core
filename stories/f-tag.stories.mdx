@@ -4,9 +4,9 @@ import fTagAnatomy from "./svg/i-ftag-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 <Meta
-  title="Components/f-tag"
+  title='Components/f-tag'
   parameters={{
-    controls: { hideNoControlsWarning: true },
+    controls: { hideNoControlsWarning: true }
   }}
 />
 
@@ -26,12 +26,12 @@ Tags allow users to categorize the content. They can be used to add metadata to 
 
 <Canvas>
   <Story
-    name="Playground"
+    name='Playground'
     argTypes={{
       label: { control: "text" },
       size: {
         control: "select",
-        options: ["large", "medium", "small"],
+        options: ["large", "medium", "small"]
       },
       state: {
         control: "select",
@@ -47,29 +47,33 @@ Tags allow users to categorize the content. They can be used to add metadata to 
           "custom, #fff",
           "custom, white",
           "custom, black",
-          "custom, #607B9F",
-        ],
+          "custom, #607B9F"
+        ]
       },
       ["icon-left"]: {
-        control: "text",
+        control: "text"
       },
       ["icon-right"]: {
-        control: "text",
+        control: "text"
       },
       counter: {
-        control: "text",
+        control: "text"
       },
       loading: {
         control: "boolean",
-        if: { arg: "selected", eq: false },
+        if: { arg: "selected", eq: false }
       },
       disabled: {
         control: "boolean",
-        if: { arg: "selected", eq: false },
+        if: { arg: "selected", eq: false }
       },
       selected: {
-        control: "boolean",
+        control: "boolean"
       },
+      clickable: {
+        control: { type: "boolean" },
+        if: { arg: "disabled", eq: false }
+      }
     }}
     args={{
       label: "label",
@@ -81,6 +85,7 @@ Tags allow users to categorize the content. They can be used to add metadata to 
       loading: false,
       disabled: false,
       selected: false,
+      clickable: false
     }}
   >
     {(args) =>
@@ -95,6 +100,7 @@ Tags allow users to categorize the content. They can be used to add metadata to 
           .loading=${args.loading}
           .disabled=${args.disabled}
           .selected=${args.selected}
+          ?clickable=${args.clickable}
         ></f-tag
       ></f-div>`
     }
@@ -109,7 +115,7 @@ Tags allow users to categorize the content. They can be used to add metadata to 
 
 <br />
 
-<Story name="Anatomy">
+<Story name='Anatomy'>
   {() => html`<div class="align-center">${unsafeSVG(fTagAnatomy)}</div>`}
 </Story>
 
@@ -124,7 +130,7 @@ The medium size is the default and recommended option.
 <br />
 
 <Canvas>
-  <Story name="size">
+  <Story name='size'>
     {(args) => html`<f-div
       gap="x-large"
       padding="x-large"
@@ -137,7 +143,7 @@ The medium size is the default and recommended option.
   </Story>
 </Canvas>
 
-<table class="custom-table">
+<table class='custom-table'>
   <tbody>
     <tr>
       <td>Value</td>
@@ -175,7 +181,7 @@ whereas a green color connotes success and so on.
 
 <br />
 
-<p class="note-section">
+<p class='note-section'>
   Note: To use a tag of different color other than the state colors, use fill
   property.
 </p>
@@ -183,7 +189,7 @@ whereas a green color connotes success and so on.
 <br />
 
 <Canvas>
-  <Story name="state">
+  <Story name='state'>
     {(args) => html`<f-div
       gap="x-large"
       padding="x-large"
@@ -201,7 +207,7 @@ whereas a green color connotes success and so on.
   </Story>
 </Canvas>
 
-<table class="custom-table">
+<table class='custom-table'>
   <tbody>
     <tr>
       <td>Value</td>
@@ -255,7 +261,7 @@ whereas a green color connotes success and so on.
 Label property defines the text label on a tag. Label on the tag is always bold in weight.
 
 <Canvas>
-  <Story name="label">
+  <Story name='label'>
     {(args) => html`<f-div
       gap="large"
       padding="x-large"
@@ -279,7 +285,7 @@ Icon-left enables an icon on the left of the label of a tag.
 <br />
 
 <Canvas>
-  <Story name="icon-left">
+  <Story name='icon-left'>
     {(args) => html`<f-div
       gap="large"
       padding="x-large"
@@ -303,7 +309,7 @@ Icon-right enables an icon on the right of the label of a tag.
 <br />
 
 <Canvas>
-  <Story name="icon-right">
+  <Story name='icon-right'>
     {(args) => html`<f-div
       gap="large"
       padding="x-large"
@@ -334,7 +340,7 @@ The counter component by default abbreviates the value (1000 = 1k). You can lear
 
 <br />
 
-<p class="note-section">
+<p class='note-section'>
   Note: Counter is always on the right end of the button, except if
   icon-right=”i-close”. In that case counter comes on the left of the close
   icon.
@@ -343,7 +349,7 @@ The counter component by default abbreviates the value (1000 = 1k). You can lear
 <br />
 
 <Canvas>
-  <Story name="counter">
+  <Story name='counter'>
     {(args) => html`<f-div
       gap="large"
       padding="x-large"
@@ -377,7 +383,7 @@ The counter component by default abbreviates the value (1000 = 1k). You can lear
 <br />
 
 <Canvas>
-  <Story name="Flags">
+  <Story name='Flags'>
     {(args) => html`<f-div gap="large" padding="x-large" direction="column">
       <f-div height="hug-content" padding="none">
         <f-text variant="para" size="large" weight="medium">Loading</f-text>
@@ -412,6 +418,13 @@ The counter component by default abbreviates the value (1000 = 1k). You can lear
         <f-tag state="neutral" label="label" disabled=${true}></f-tag>
       </f-div>
       <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">Clickable</f-text>
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large">
+        <f-tag state="neutral" label="label"></f-tag>
+        <f-tag state="neutral" label="label" clickable=${true}></f-tag>
+      </f-div>
+      <f-div height="hug-content" padding="none">
         <f-text variant="para" size="large" weight="medium">Selected</f-text>
       </f-div>
       <f-div padding="none" direction="row" gap="x-large">
@@ -422,7 +435,7 @@ The counter component by default abbreviates the value (1000 = 1k). You can lear
   </Story>
 </Canvas>
 
-<table class="custom-table">
+<table class='custom-table'>
   <tbody>
     <tr>
       <td>Name</td>

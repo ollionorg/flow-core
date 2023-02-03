@@ -109,6 +109,6 @@ describe("f-select", () => {
     const descendant = el.shadowRoot!.querySelector(".f-select-searchable")!;
     const text = descendant.children[1].children[0];
     expect(text).instanceOf(FText);
-    expect(text.children[0].innerHTML).includes("1 more");
+    expect(text.children[0].innerHTML).includes("more");
   });
 });

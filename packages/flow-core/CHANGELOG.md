@@ -4,11 +4,17 @@
 
 # Change Log
 
-## [1.2.2] - 2023-02-03
+## [1.2.3] - 2023-02-03
 
 ## Improvements
 
 - Added `overflow="visible"` in `f-div`.
+
+## [1.2.2] - 2023-02-03
+
+### Feature
+
+- `f-tooltip` as a component added, which could be used easily in all components using `tooltip="string"` or could be used as component using `f-tooltip`.
 
 ## [1.2.1] - 2023-02-02
 

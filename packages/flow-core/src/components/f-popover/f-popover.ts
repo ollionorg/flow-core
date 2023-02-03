@@ -70,8 +70,8 @@ export class FPopover extends FRoot {
   /**
    * @attribute query selector of target
    */
-  @property({ type: String, reflect: true })
-  target!: string;
+  @property({ type: [String, Object], reflect: true })
+  target!: string | HTMLElement;
 
   @state()
   cleanup!: () => void;
@@ -79,13 +79,24 @@ export class FPopover extends FRoot {
   @state()
   isEscapeClicked = false;
 
+  isTooltip = false;
+
   get targetElement() {
-    return document.querySelector<HTMLElement>(this.target);
+    if (typeof this.target === "string") {
+      return document.querySelector<HTMLElement>(this.target);
+    } else {
+      return this.target;
+    }
+  }
+  stringToHTML(str: string) {
+    const dom = document.createElement("div");
+    dom.innerHTML = str;
+    return dom;
   }
   computePlacement() {
     return this.placement === "auto" ? undefined : this.placement;
   }
-  computePosition() {
+  computePosition(isTooltip: boolean) {
     let target = document.body;
     if (this.targetElement && this.open) {
       this.targetElement.style.zIndex = "200";
@@ -97,7 +108,11 @@ export class FPopover extends FRoot {
           placement: this.computePlacement(),
           strategy: "fixed",
           middleware: [
-            offset({ mainAxis: 12, crossAxis: 12, alignmentAxis: 12 }),
+            offset({
+              mainAxis: isTooltip ? 8 : 12,
+              crossAxis: isTooltip ? 1 : 12,
+              alignmentAxis: 12,
+            }),
             this.placement === "auto"
               ? autoPlacement({ boundary: document.body })
               : flip({
@@ -110,7 +125,7 @@ export class FPopover extends FRoot {
                   ],
                   crossAxis: false,
                 }),
-            shift({ padding: 16 }),
+            shift({ padding: isTooltip ? 0 : 16 }),
           ],
         }).then(({ x, y }) => {
           if (target.nodeName.toLowerCase() !== "body") {
@@ -177,11 +192,18 @@ export class FPopover extends FRoot {
   }
 
   render() {
+    this.classList.forEach((cl) => {
+      if (cl === "tooltip") {
+        this.isTooltip = true;
+      } else {
+        this.isTooltip = false;
+      }
+    });
     if (this.open) {
       const overlay = this.overlay
         ? html`<div class="f-overlay" @click=${this.overlayClick}></div>`
         : "";
-      this.computePosition();
+      this.computePosition(this.isTooltip);
       return html`<slot></slot>${overlay} `;
     } else {
       if (this.targetElement) {

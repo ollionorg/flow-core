@@ -95,7 +95,7 @@ f-div is used as a container for HTML elements.
       },
       overflow: {
         control: "radio",
-        options: ["wrap", "scroll", "hidden"],
+        options: ["wrap", "scroll", "hidden", "visible"],
       },
       align: {
         control: "select",
@@ -1367,6 +1367,25 @@ Elements can behave in 3 ways in this situation:
         <f-div width="300px" height="hug-content" padding="x-large" state="secondary">
           <f-text variant="para" size="large" weight="medium">Child f-div</f-text>
         </f-div>
+        <f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+          <f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+        </f-div>
+        <f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+          <f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+        </f-div>
+      </f-div>
+      <f-div width="hug-content" height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">overflow="visible"</f-text>
+      </f-div>
+      <f-div
+        width="100%"
+        height="100px"
+        padding="x-large"
+        direction="column"
+        gap="x-large"
+        state="subtle"
+        overflow="visible"
+      >
         <f-div width="300px" height="hug-content" padding="x-large" state="secondary">
           <f-text variant="para" size="large" weight="medium">Child f-div</f-text>
         </f-div>

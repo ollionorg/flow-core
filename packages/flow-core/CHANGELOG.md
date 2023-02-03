@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.2.2] - 2023-02-03
+
+## Improvements
+
+- Added `overflow="visible"` in `f-div`.
+
 ## [1.2.1] - 2023-02-02
 
 ### Improvements

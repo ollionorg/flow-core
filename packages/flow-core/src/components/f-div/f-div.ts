@@ -198,7 +198,7 @@ export class FDiv extends FRoot {
    * @attribute Overflow property defines the behavior of the overflowing elements inside a f-div
    */
   @property({ reflect: true, type: String })
-  overflow?: "wrap" | "scroll" | "hidden" = "wrap";
+  overflow?: "wrap" | "scroll" | "hidden" | "visible" = "wrap";
 
   /**
    * @attribute Sets the f-div to a selected state. Select between border, background, or notch based on your use case.

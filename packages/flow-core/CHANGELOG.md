@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.2.4] - 2023-02-03
+
+## Bug fixes
+
+- HTMLElement type import bug fixed
 ## [1.2.3] - 2023-02-03
 
 ## Improvements

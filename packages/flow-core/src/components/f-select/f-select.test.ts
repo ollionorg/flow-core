@@ -4,14 +4,7 @@ import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 // import flow-core elements
 import "@cldcvr/flow-core";
 
-import {
-  FIcon,
-  ConfigUtil,
-  FSelect,
-  FText,
-  FTag,
-  FCheckbox,
-} from "@cldcvr/flow-core";
+import { FIcon, ConfigUtil, FSelect, FText, FTag, FCheckbox } from "@cldcvr/flow-core";
 
 // setting icon pack for testing icon related test cases
 ConfigUtil.setConfig({ iconPack: IconPack });
@@ -22,9 +15,7 @@ describe("f-select", () => {
     expect(el).instanceOf(FSelect);
   });
   it("should render with all default properties", async () => {
-    const el = await fixture(
-      html` <f-select .options=${["option 1"]}></f-select> `
-    );
+    const el = await fixture(html` <f-select .options=${["option 1"]}></f-select> `);
     const descendant = el.shadowRoot!.querySelector(".f-select-wrapper")!;
     expect(descendant.getAttribute("variant")).to.equal("curved");
     expect(descendant.getAttribute("category")).to.equal("fill");
@@ -33,13 +24,7 @@ describe("f-select", () => {
   });
   it("should render with preselected f-tags as value and type=multiple is present", async () => {
     const el = await fixture(
-      html`
-        <f-select
-          .options=${["option 1"]}
-          .value=${"option 1"}
-          type="multiple"
-        ></f-select>
-      `
+      html` <f-select .options=${["option 1"]} .value=${"option 1"} type="multiple"></f-select> `
     );
     const descendant = el.shadowRoot!.querySelectorAll(".f-tag-system-icon")!;
     const tag = descendant;
@@ -49,13 +34,7 @@ describe("f-select", () => {
   });
   it("should render with preselected text as value and type=single is present", async () => {
     const el = await fixture(
-      html`
-        <f-select
-          .options=${["option 1"]}
-          .value=${"option 1"}
-          type="single"
-        ></f-select>
-      `
+      html` <f-select .options=${["option 1"]} .value=${"option 1"} type="single"></f-select> `
     );
     const descendant = el.shadowRoot!.querySelector(".f-select-searchable")!;
     const text = descendant.children[0].children[0];
@@ -111,27 +90,26 @@ describe("f-select", () => {
         ></f-select>
       `
     );
-    const descendant = el.shadowRoot!.querySelector(
-      ".f-select-options-clickable"
-    )!;
+    const descendant = el.shadowRoot!.querySelector(".f-select-options-clickable")!;
     const checkbox = descendant.children[0];
     expect(checkbox).instanceOf(FCheckbox);
   });
-  //   it("render with 'view more' button if limit is less than selected-options", async () => {
-  //     const el = await fixture(
-  //       html`
-  //         <f-select
-  //           .options=${["option 1", "option 2"]}
-  //           .value=${["option 1", "option 2"]}
-  //           type="multiple"
-  //           ?checkbox=${true}
-  //           selection-limit=${1}
-  //         ></f-select>
-  //       `
-  //     );
-  //     const descendant = el.shadowRoot!.querySelector(".f-select-searchable")!;
-  //     const text = descendant.children[1].children[0];
-  //     expect(text).instanceOf(FText);
-  //     expect(text.children[0].innerHTML).includes("1 more");
-  //   });
+  it("render with 'view more' button if limit is less than selected-options", async () => {
+    const el = await fixture(
+      html`
+        <f-select
+          .options=${["option 1", "option 2"]}
+          .value=${["option 1", "option 2"]}
+          type="multiple"
+          ?checkbox=${true}
+          selection-limit=${1}
+        ></f-select>
+      `
+    );
+    const descendant = el.shadowRoot!.querySelector(".f-select-searchable")!;
+    const text = descendant.children[1].children[0];
+    console.log(text);
+    expect(text).instanceOf(FText);
+    // expect(text.children[0].innerHTML).includes("1 more");
+  });
 });

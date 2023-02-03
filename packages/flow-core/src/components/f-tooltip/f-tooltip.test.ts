@@ -17,7 +17,7 @@ describe("f-tooltip", () => {
     if (tooltip) {
       const isOpen = (tooltip.open = true);
       if (isOpen) {
-        console.log(tooltip);
+        console.log(tooltip.shadowRoot);
       }
     }
   });

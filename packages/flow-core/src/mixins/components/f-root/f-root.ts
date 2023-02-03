@@ -40,14 +40,12 @@ export class FRoot extends LitElement {
       const mouseEnter = () => {
         if (tooltipElement) {
           tooltipElement.target = this;
-
           if (!isExternalTooltip) {
             const tooltipText = tooltipElement?.querySelector("#tooltip-text");
             if (tooltipText) {
               tooltipText.innerHTML = this.tooltip as string;
             }
           }
-
           tooltipElement.open = true;
         }
       };
@@ -56,7 +54,7 @@ export class FRoot extends LitElement {
        * mouse leave behavior
        */
       const mouseLeave = () => {
-        if (tooltipElement) {
+        if (tooltipElement && !tooltipElement?.closable) {
           tooltipElement.open = false;
         }
       };
@@ -79,11 +77,10 @@ export class FRoot extends LitElement {
          * if global tooltip not present
          */
         if (!tooltipElement && !isExternalTooltip) {
-          const tooltipDefine = `<f-tooltip placement="auto" id="flow-tooltip"><f-div state="custom,black" padding="small medium">
+          const tooltipDefine = `<f-tooltip placement="auto" id="flow-tooltip">
         <f-text variant="para" size="small" id="tooltip-text">
-      
         </f-text>
-      </f-div></f-tooltip>`;
+</f-tooltip>`;
           document.body?.insertAdjacentHTML("beforeend", tooltipDefine);
 
           // if tooltip present with particular id `flow-tooltip`

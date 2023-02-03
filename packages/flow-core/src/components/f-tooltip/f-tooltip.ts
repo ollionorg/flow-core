@@ -25,12 +25,7 @@ export class FTooltip extends LitElement {
   /**
    * css loaded from scss file
    */
-  static styles = [
-    unsafeCSS(eleStyle),
-    ...FDiv.styles,
-    ...FText.styles,
-    ...FPopover.styles,
-  ];
+  static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles, ...FPopover.styles];
 
   /**
    * local attribute for opem/close of tooltip
@@ -45,6 +40,12 @@ export class FTooltip extends LitElement {
   placement?: FTooltipPlacement = "auto";
 
   /**
+   * @attribute close icon for tooltip
+   */
+  @property({ type: Boolean, reflect: true })
+  closable?: boolean = false;
+
+  /**
    * @attribute query selector of target
    */
 
@@ -55,14 +56,26 @@ export class FTooltip extends LitElement {
      * Final html to render
      */
     if (this.open) {
-      return html`<f-popover
+      return html` <f-popover
         .overlay=${false}
         .placement=${this.placement}
         ?open=${this.open}
         .target=${this.target}
         class="tooltip"
       >
-        <slot></slot>
+        <f-div gap="small" state="custom, black">
+          <f-div overflow="scroll" padding="small medium"> <slot></slot> </f-div>
+          ${this.closable
+            ? html` <f-div width="hug-content" padding="small"
+                ><f-icon
+                  source="i-close"
+                  size="x-small"
+                  clickable
+                  @click=${() => (this.open = false)}
+                ></f-icon
+              ></f-div>`
+            : ""}
+        </f-div>
       </f-popover>`;
     }
     return html``;

@@ -1,7 +1,14 @@
 import { LitElement, PropertyValues, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
-import { FTooltip } from "./../../../components/f-tooltip/f-tooltip";
+
 import eleStyle from "./f-root.scss";
+
+// to avoid recursive tye check
+type TooltipElement = HTMLElement & {
+  target: unknown;
+  open: boolean;
+  closable: boolean;
+};
 
 /**
  * @summary Every component must extent this class to consume gbobal styles , such as css reset, font family,...
@@ -28,7 +35,8 @@ export class FRoot extends LitElement {
       /**
        * get global tooltip component
        */
-      let tooltipElement = document.querySelector<FTooltip>("#flow-tooltip");
+      let tooltipElement =
+        document.querySelector<TooltipElement>("#flow-tooltip");
       /**
        * is tooltip external
        */
@@ -67,7 +75,7 @@ export class FRoot extends LitElement {
          * check if tooltip contains id
          */
         if (this.tooltip.startsWith("#")) {
-          tooltipElement = document.querySelector<FTooltip>(this.tooltip);
+          tooltipElement = document.querySelector<TooltipElement>(this.tooltip);
           isExternalTooltip = true;
           if (!tooltipElement) {
             console.warn(`${this.tooltip} tooltip not found`);

@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.2.5] - 2023-02-03
+
+## Bug fixes
+
+- Typescript bug fixed
 ## [1.2.4] - 2023-02-03
 
 ## Bug fixes

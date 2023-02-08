@@ -1,6 +1,6 @@
 import { LitElement, PropertyValues, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
-import { FTooltip } from "src/components/f-tooltip/f-tooltip";
+import { FTooltip } from "./../../../components/f-tooltip/f-tooltip";
 import eleStyle from "./f-root.scss";
 
 /**
@@ -19,7 +19,7 @@ export class FRoot extends LitElement {
   @property({ reflect: true, type: String })
   tooltip?: string;
 
-  updated(changedProperties: PropertyValues) {
+  protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
     /**
      * check if changed properties has tooltip

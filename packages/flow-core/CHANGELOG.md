@@ -4,6 +4,27 @@
 
 # Change Log
 
+## [1.2.6] - 2023-02-08
+
+## Bug fixes
+
+- Typescript bug fixed
+## [1.2.5] - 2023-02-03
+
+## Bug fixes
+
+- Typescript bug fixed
+## [1.2.4] - 2023-02-03
+
+## Bug fixes
+
+- HTMLElement type import bug fixed
+## [1.2.3] - 2023-02-03
+
+## Improvements
+
+- Added `overflow="visible"` in `f-div`.
+
 ## [1.2.2] - 2023-02-03
 
 ### Feature

@@ -1451,7 +1451,7 @@ export class FSelect extends FRoot {
      */
     this.filteredOptions = this.options;
   }
-  updated(changedProperties: PropertyValues) {
+  protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
     this.fSelectWrapperHeight = changedProperties.get("fSelectWrapperHeight");
     this.updateDimentions();

@@ -330,7 +330,7 @@ export class FButton extends FRoot {
     </button>`;
   }
 
-  updated(changedProperties: PropertyValues) {
+  protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
     /**
      * Force update child element

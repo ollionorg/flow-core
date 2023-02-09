@@ -3,8 +3,7 @@ import { customElement, property, state } from "lit/decorators.js";
 import eleStyle from "./f-tab-node.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
-
-export type FTabNodeWidthProp = "fill" | "hug-content" | `${number}`;
+import { FTabNodeWidthProp } from "../f-tab/f-tab";
 
 @customElement("f-tab-node")
 export class FTabNode extends FRoot {

@@ -4,21 +4,30 @@
 
 # Change Log
 
+## [1.2.7] - 2023-02-09
+
+### Feature
+
+- `f-tab` as a component added along with its sub-components `f-tab-node` and `f-tab-content`.
+
 ## [1.2.6] - 2023-02-08
 
 ## Bug fixes
 
 - Typescript bug fixed
+
 ## [1.2.5] - 2023-02-03
 
 ## Bug fixes
 
 - Typescript bug fixed
+
 ## [1.2.4] - 2023-02-03
 
 ## Bug fixes
 
 - HTMLElement type import bug fixed
+
 ## [1.2.3] - 2023-02-03
 
 ## Improvements

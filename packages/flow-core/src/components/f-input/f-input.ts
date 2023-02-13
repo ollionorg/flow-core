@@ -12,8 +12,6 @@ import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
-import { FForm } from "../f-form/f-form";
-import { fill } from "lodash";
 
 export type FInputState =
   | "primary"

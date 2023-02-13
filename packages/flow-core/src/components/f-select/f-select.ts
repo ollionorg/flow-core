@@ -16,7 +16,6 @@ import loader from "../../mixins/svg/loader";
 import _ from "lodash";
 import getComputedHTML from "../../utils/get-computed-html";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
-import { FForm } from "../f-form/f-form";
 
 export type FSelectState =
   | "primary"
@@ -145,13 +144,13 @@ export class FSelect extends FRoot {
    * @attribute Variants are various visual representations of an input field.
    */
   @property({ reflect: true, type: String })
-  variant?: "curved" | "round" | "block";
+  variant?: "curved" | "round" | "block" = "curved";
 
   /**
    * @attribute Categories are various visual representations of an input field.
    */
   @property({ reflect: true, type: String })
-  category?: "fill" | "outline" | "transparent";
+  category?: "fill" | "outline" | "transparent" = "fill";
 
   /**
    * @attribute States are used to communicate purpose and connotations.
@@ -770,38 +769,6 @@ export class FSelect extends FRoot {
   }
   _onHelpSlotChange() {
     this._hasHelperText = this._helpNodes.length > 0;
-  }
-
-  /*
-   * whwnever parent attribute changes for category and variant
-   */
-  connectedCallback() {
-    super.connectedCallback();
-    const parentNode = this.closest("f-form") as FForm;
-    if (parentNode && !this.category && !this.variant) {
-      const observer = new MutationObserver((mutationList) => {
-        mutationList.forEach((mutation) => {
-          switch (mutation.type) {
-            case "attributes":
-              if (parentNode?.variant) {
-                this.variant = parentNode?.variant;
-              }
-              if (parentNode?.category) {
-                this.category = this.closest("f-form")?.category;
-              }
-              break;
-          }
-        });
-      });
-      const observerOptions = {
-        attributes: true,
-      };
-      observer.observe(parentNode, observerOptions);
-      this.requestUpdate();
-    } else {
-      if (!this.category) this.category = "fill";
-      if (!this.variant) this.variant = "curved";
-    }
   }
 
   render() {

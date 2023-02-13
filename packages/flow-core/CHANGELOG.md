@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.2.8] - 2023-02-13
+
+### Bug fixes
+
+- `MutationObserver` removed from inputs.
+
 ## [1.2.7] - 2023-02-09
 
 ### Feature

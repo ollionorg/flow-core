@@ -5,7 +5,11 @@ import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import eleStyle from "./f-form-group.scss";
 
-export type FGroupLabel = { title: string; description?: string; iconTooltip?: string };
+export type FGroupLabel = {
+  title: string;
+  description?: string;
+  iconTooltip?: string;
+};
 
 /**
  * @summary Text component includes Headings, titles, body texts and links.
@@ -110,7 +114,8 @@ export class FFormGroup extends FRoot {
               gap="auto"
               align="middle-left"
               @click=${() => {
-                if (this.collapse !== "none") this.isAccordianOpen = !this.isAccordianOpen;
+                if (this.collapse !== "none")
+                  this.isAccordianOpen = !this.isAccordianOpen;
               }}
               .style="${this.applyCursorStyles()}"
             >
@@ -142,6 +147,7 @@ export class FFormGroup extends FRoot {
                         source="i-question-filled"
                         size="small"
                         state="default"
+                        .tooltip="${this.label?.iconTooltip}"
                         clickable
                       ></f-icon>`
                     : ""}
@@ -172,7 +178,9 @@ export class FFormGroup extends FRoot {
                   : ""}
                 ${this.collapse === "accordion"
                   ? html` <f-icon
-                      .source=${this.isAccordianOpen ? "i-chevron-up" : "i-chevron-down"}
+                      .source=${this.isAccordianOpen
+                        ? "i-chevron-up"
+                        : "i-chevron-down"}
                       size="small"
                       state="default"
                       clickable
@@ -186,7 +194,8 @@ export class FFormGroup extends FRoot {
         ? html`
             <f-div
               direction=${this.direction === "vertical" ? "column" : "row"}
-              .gap=${this.variant === "compact" && this.direction === "horizontal"
+              .gap=${this.variant === "compact" &&
+              this.direction === "horizontal"
                 ? "none"
                 : this.gap}
               overflow="scroll"

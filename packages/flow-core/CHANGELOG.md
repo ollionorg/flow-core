@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.2.9] - 2023-02-14
+
+### Bug fixes
+
+- `f-from-group` tooltip bug fixed.
+
 ## [1.2.8] - 2023-02-13
 
 ### Bug fixes

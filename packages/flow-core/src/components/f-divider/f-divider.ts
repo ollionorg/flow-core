@@ -5,6 +5,7 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
+import { FDiv } from "../f-div/f-div";
 
 export type FDividerState = "default" | "secondary" | "subtle" | `custom, ${string}`;
 
@@ -60,7 +61,7 @@ export class FDivider extends FRoot {
     }
 
     // render empty string, since there no need of any child element
-    return html``;
+    return html`&nbsp;`;
   }
 }
 

@@ -59,6 +59,9 @@ Text component includes Headings, titles, body texts and links.
         control: "radio",
         options: ["left", "right", "center"],
       },
+      inline: {
+        control: "boolean",
+      },
       loading: {
         control: { type: "boolean" },
         if: { arg: "disabled", eq: false },
@@ -77,13 +80,14 @@ Text component includes Headings, titles, body texts and links.
       size: "medium",
       state: "default",
       align: "left",
+      inline: false,
       loading: false,
       disabled: false,
       ellipsis: false,
     }}
   >
     {(args) => html`
-      <f-div padding="none">
+      <f-div padding="none" gap="small">
         <f-text
           .variant=${args.variant}
           .size=${args.size}
@@ -92,9 +96,21 @@ Text component includes Headings, titles, body texts and links.
           .loading=${args.loading}
           .disabled=${args.disabled}
           .ellipsis=${args.ellipsis}
-          >This is ${args.variant} with ${args.size} and "${args.state}" state. Alignment is ${args.align}</f-text
-        ></f-div
-      >
+          ?inline=${args.inline}
+          >This is ${args.variant} with ${args.size} and "${args.state}" state. Alignment is ${args.align}.
+        </f-text>
+        <f-text
+          .variant=${args.variant}
+          .size=${args.size}
+          .state=${args.state}
+          .align=${args.align}
+          .loading=${args.loading}
+          .disabled=${args.disabled}
+          .ellipsis=${args.ellipsis}
+          ?inline=${args.inline}
+          >Check for inline</f-text
+        >
+      </f-div>
     `}
   </Story>
 </Canvas>
@@ -424,6 +440,10 @@ predetermined state.
   <Story name="Flags">
     {(args) => html`<f-div gap="large" padding="x-large" direction="column">
       <f-div padding="none" direction="row" gap="x-large" overflow="hidden" height="hug-content">
+        <f-text variant="para" weight="regular" ?inline=${false}>Normal Text</f-text>
+        <f-text variant="para" weight="regular" ?inline=${true}>Inline Text</f-text>
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large" overflow="hidden" height="hug-content">
         <f-div width="hug-content" padding="none">
           <f-text variant="para" weight="regular">Loading</f-text>
         </f-div>
@@ -461,6 +481,11 @@ predetermined state.
       <td>Name</td>
       <td>Description</td>
       <td>Default</td>
+    </tr>
+    <tr>
+      <td>inline</td>
+      <td>width of text would be fit-content</td>
+      <td>false</td>
     </tr>
     <tr>
       <td>loading</td>

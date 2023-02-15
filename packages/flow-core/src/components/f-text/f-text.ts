@@ -64,6 +64,12 @@ export class FText extends FRoot {
   align?: "left" | "center" | "right" = "left";
 
   /**
+   * @attribute will work as in the form inline span element taking just the width of internal text
+   */
+  @property({ reflect: true, type: Boolean })
+  inline?: boolean = false;
+
+  /**
    * @attribute Loader icon replaces the content of the button .
    */
   @property({ reflect: true, type: Boolean })

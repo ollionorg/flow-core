@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
@@ -20,12 +20,6 @@ export class FFormGroup extends FRoot {
    * css loaded from scss file
    */
   static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles];
-
-  /**
-   * @attribute local property to check open/close accordion
-   */
-  @state()
-  isAccordianOpen = false;
 
   /**
    * @attribute Label for showing group label
@@ -58,6 +52,12 @@ export class FFormGroup extends FRoot {
   collapse?: "none" | "accordion" | "text" = "none";
 
   /**
+   * @attribute Defines whether the group will be collapsed as an accordion or as text.
+   */
+  @property({ type: Boolean, reflect: true, attribute: "is-collapsed" })
+  isCollapsed?: boolean = false;
+
+  /**
    * @attribute Allows the group to be duplicated by clicking on the plus button
    */
   @property({ type: Boolean, reflect: true, attribute: "can-duplicate" })
@@ -68,7 +68,7 @@ export class FFormGroup extends FRoot {
    */
   applyStyles() {
     if (this.collapse !== "none") {
-      if (this.isAccordianOpen)
+      if (!this.isCollapsed)
         return `max-height:800px; transition: max-height var(--transition-time-rapid) ease-in 0s; );`;
       else
         return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s; );`;
@@ -114,8 +114,7 @@ export class FFormGroup extends FRoot {
               gap="auto"
               align="middle-left"
               @click=${() => {
-                if (this.collapse !== "none")
-                  this.isAccordianOpen = !this.isAccordianOpen;
+                if (this.collapse !== "none") this.isCollapsed = !this.isCollapsed;
               }}
               .style="${this.applyCursorStyles()}"
             >
@@ -134,7 +133,7 @@ export class FFormGroup extends FRoot {
                             @click=${(e: MouseEvent) => {
                               e.preventDefault();
                               if (this.collapse === "text") {
-                                this.isAccordianOpen = !this.isAccordianOpen;
+                                this.isCollapsed = !this.isCollapsed;
                               }
                             }}
                             >${this.label.title}</a
@@ -178,9 +177,7 @@ export class FFormGroup extends FRoot {
                   : ""}
                 ${this.collapse === "accordion"
                   ? html` <f-icon
-                      .source=${this.isAccordianOpen
-                        ? "i-chevron-up"
-                        : "i-chevron-down"}
+                      .source=${!this.isCollapsed ? "i-chevron-up" : "i-chevron-down"}
                       size="small"
                       state="default"
                       clickable
@@ -190,12 +187,11 @@ export class FFormGroup extends FRoot {
             </f-div>
           `
         : ""}
-      ${this.isAccordianOpen || this.collapse === "none"
+      ${!this.isCollapsed || this.collapse === "none"
         ? html`
             <f-div
               direction=${this.direction === "vertical" ? "column" : "row"}
-              .gap=${this.variant === "compact" &&
-              this.direction === "horizontal"
+              .gap=${this.variant === "compact" && this.direction === "horizontal"
                 ? "none"
                 : this.gap}
               overflow="scroll"

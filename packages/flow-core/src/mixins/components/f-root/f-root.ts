@@ -26,6 +26,14 @@ export class FRoot extends LitElement {
   @property({ reflect: true, type: String })
   tooltip?: string;
 
+  disconnectedCallback() {
+    const tooltipElement = document.querySelector<TooltipElement>("#flow-tooltip");
+    if (this.tooltip && tooltipElement?.target === this && tooltipElement) {
+      tooltipElement.open = false;
+    }
+    super.disconnectedCallback();
+  }
+
   protected updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
     /**
@@ -35,8 +43,7 @@ export class FRoot extends LitElement {
       /**
        * get global tooltip component
        */
-      let tooltipElement =
-        document.querySelector<TooltipElement>("#flow-tooltip");
+      let tooltipElement = document.querySelector<TooltipElement>("#flow-tooltip");
       /**
        * is tooltip external
        */

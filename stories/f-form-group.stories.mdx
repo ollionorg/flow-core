@@ -47,6 +47,9 @@ f-form-group is used to group multiple instances of an input element.
         control: "select",
         options: ["none", "accordion", "text"],
       },
+      ["is-collapsed"]: {
+        control: "boolean",
+      },
       ["can-duplicate"]: {
         control: { type: "boolean" },
       },
@@ -56,6 +59,7 @@ f-form-group is used to group multiple instances of an input element.
       direction: "vertical",
       gap: "small",
       collapse: "none",
+      ["is-collapsed"]: false,
       ["can-duplicate"]: false,
     }}
   >
@@ -67,6 +71,7 @@ f-form-group is used to group multiple instances of an input element.
           direction="horizontal"
           .gap=${args.gap}
           .collapse=${args.collapse}
+          ?is-collapsed=${args["is-collapsed"]}
           ?can-duplicate=${args["can-duplicate"]}
         >
           <f-input placeholder="This is an input field"></f-input>
@@ -94,6 +99,7 @@ f-form-group is used to group multiple instances of an input element.
           direction=${args.direction}
           .gap=${args.gap}
           .collapse=${args.collapse}
+          ?is-collapsed=${args["is-collapsed"]}
         >
           <f-input placeholder="This is an input field"></f-input>
           <f-input placeholder="This is an input field"></f-input>
@@ -107,6 +113,7 @@ f-form-group is used to group multiple instances of an input element.
           direction=${args.direction}
           .gap=${args.gap}
           .collapse=${args.collapse}
+          ?is-collapsed=${args["is-collapsed"]}
         >
           <f-checkbox>
             <f-div slot="label">Apple</f-div>
@@ -127,6 +134,7 @@ f-form-group is used to group multiple instances of an input element.
           direction=${args.direction}
           .gap=${args.gap}
           .collapse=${args.collapse}
+          ?is-collapsed=${args["is-collapsed"]}
         >
           <f-radio>
             <f-div slot="label">Apple</f-div>
@@ -400,7 +408,7 @@ Defines whether the group will be collapsed as an accordion or as text.
 
 <Canvas>
   <Story name="Flags">
-    {(args) => html`<f-form>
+    {(args) => html`<f-form ?separator=${true}>
       <f-form-group
         variant="normal"
         .label=${{ title: "Group Title (can-duplicate)", description: "This is a description" }}
@@ -411,8 +419,22 @@ Defines whether the group will be collapsed as an accordion or as text.
         </f-input>
         <f-input placeholder="This is an input field">
           <f-div slot="label">Input title</f-div>
-        </f-input> </f-form-group
-      ><f-form> </f-form
+        </f-input>
+      </f-form-group>
+      <f-form-group
+        variant="normal"
+        .label=${{ title: "Group Title (is-collapsed)", description: "This is a description" }}
+        ?is-collapsed=${false}
+        collapse="accordion"
+      >
+        <f-input placeholder="This is an input field">
+          <f-div slot="label">is-collpased (false)</f-div>
+        </f-input>
+        <f-input placeholder="This is an input field">
+          <f-div slot="label">Input title</f-div>
+        </f-input>
+      </f-form-group>
+      <f-form> </f-form
     ></f-form> `}
   </Story>
 </Canvas>

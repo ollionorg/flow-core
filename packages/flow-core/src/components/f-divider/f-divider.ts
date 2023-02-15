@@ -5,7 +5,6 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
-import { FDiv } from "../f-div/f-div";
 
 export type FDividerState = "default" | "secondary" | "subtle" | `custom, ${string}`;
 

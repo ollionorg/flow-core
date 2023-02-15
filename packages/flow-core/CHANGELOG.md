@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.3.1] - 2023-02-15
+
+### Improvements
+
+- `f-form-group` `action` slot added.
 ## [1.3.0] - 2023-02-14
 
 ### Bug fixes

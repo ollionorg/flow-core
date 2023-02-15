@@ -114,7 +114,8 @@ export class FFormGroup extends FRoot {
               gap="auto"
               align="middle-left"
               @click=${() => {
-                if (this.collapse !== "none") this.isCollapsed = !this.isCollapsed;
+                if (this.collapse !== "none")
+                  this.isCollapsed = !this.isCollapsed;
               }}
               .style="${this.applyCursorStyles()}"
             >
@@ -177,7 +178,9 @@ export class FFormGroup extends FRoot {
                   : ""}
                 ${this.collapse === "accordion"
                   ? html` <f-icon
-                      .source=${!this.isCollapsed ? "i-chevron-up" : "i-chevron-down"}
+                      .source=${!this.isCollapsed
+                        ? "i-chevron-up"
+                        : "i-chevron-down"}
                       size="small"
                       state="default"
                       clickable
@@ -189,14 +192,18 @@ export class FFormGroup extends FRoot {
         : ""}
       ${!this.isCollapsed || this.collapse === "none"
         ? html`
-            <f-div
-              direction=${this.direction === "vertical" ? "column" : "row"}
-              .gap=${this.variant === "compact" && this.direction === "horizontal"
-                ? "none"
-                : this.gap}
-              overflow="scroll"
-            >
-              <slot></slot>
+            <f-div gap="small">
+              <f-div
+                direction=${this.direction === "vertical" ? "column" : "row"}
+                .gap=${this.variant === "compact" &&
+                this.direction === "horizontal"
+                  ? "none"
+                  : this.gap}
+                overflow="scroll"
+              >
+                <slot></slot>
+              </f-div>
+              <slot name="action"></slot>
             </f-div>
           `
         : ""}

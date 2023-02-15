@@ -5,7 +5,11 @@ import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import eleStyle from "./f-form-group.scss";
 
-export type FGroupLabel = { title: string; description?: string; iconTooltip?: string };
+export type FGroupLabel = {
+  title: string;
+  description?: string;
+  iconTooltip?: string;
+};
 
 /**
  * @summary Text component includes Headings, titles, body texts and links.
@@ -142,6 +146,7 @@ export class FFormGroup extends FRoot {
                         source="i-question-filled"
                         size="small"
                         state="default"
+                        .tooltip="${this.label?.iconTooltip}"
                         clickable
                       ></f-icon>`
                     : ""}

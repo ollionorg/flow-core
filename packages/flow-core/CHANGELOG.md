@@ -4,6 +4,30 @@
 
 # Change Log
 
+## [1.3.0] - 2023-02-14
+
+### Bug fixes
+
+- `f-tooltip` was n't destroying if user changes route using arrow keys, and don't move the mouse off the component. This has been resolved.
+- `f-divider` vertical alignment height inherit issue fixed.
+
+### Improvements
+
+- `f-text`: added inline prop.
+- `f-from-group`: `isCollapsed` prop is added, to see the default collapse (open/close) feature.
+
+## [1.2.9] - 2023-02-14
+
+### Bug fixes
+
+- `f-from-group` tooltip bug fixed.
+
+## [1.2.8] - 2023-02-13
+
+### Bug fixes
+
+- `MutationObserver` removed from inputs.
+
 ## [1.2.7] - 2023-02-09
 
 ### Feature

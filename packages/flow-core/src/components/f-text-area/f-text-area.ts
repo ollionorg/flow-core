@@ -4,9 +4,13 @@ import eleStyle from "./f-text-area.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
-import { FForm } from "../f-form/f-form";
 
-export type FTextAreaState = "primary" | "default" | "success" | "warning" | "danger";
+export type FTextAreaState =
+  | "primary"
+  | "default"
+  | "success"
+  | "warning"
+  | "danger";
 
 export type FTextAreaCustomEvent = {
   value: string;
@@ -29,7 +33,7 @@ export class FTextArea extends FRoot {
    * @attribute categories are of three types.
    */
   @property({ reflect: true, type: String })
-  category?: "fill" | "transparent" | "outline";
+  category?: "fill" | "transparent" | "outline" = "fill";
 
   /**
    * @attribute States are used to communicate purpose and connotations.
@@ -128,36 +132,9 @@ export class FTextArea extends FRoot {
     }
   }
 
-  /*
-   * whwnever parent attribute changes for category and variant
-   */
-  connectedCallback() {
-    super.connectedCallback();
-    const parentNode = this.closest("f-form") as FForm;
-    if (parentNode && !this.category) {
-      const observer = new MutationObserver((mutationList) => {
-        mutationList.forEach((mutation) => {
-          switch (mutation.type) {
-            case "attributes":
-              if (parentNode?.category) {
-                this.category = this.closest("f-form")?.category;
-              }
-              break;
-          }
-        });
-      });
-      const observerOptions = {
-        attributes: true,
-      };
-      observer.observe(parentNode, observerOptions);
-      this.requestUpdate();
-    } else {
-      if (!this.category) this.category = "fill";
-    }
-  }
-
   render() {
-    const parentDiv = this.parentElement?.tagName === "F-DIV" ? this.parentElement : "";
+    const parentDiv =
+      this.parentElement?.tagName === "F-DIV" ? this.parentElement : "";
     /**
      * Final html to render
      */
@@ -165,7 +142,12 @@ export class FTextArea extends FRoot {
     return html`
       <f-div padding="none" gap="x-small" direction="column" width="100%">
         <f-div padding="none" gap="none" align="bottom-left">
-          <f-div padding="none" gap="x-small" direction="column" width="fill-container">
+          <f-div
+            padding="none"
+            gap="x-small"
+            direction="column"
+            width="fill-container"
+          >
             <f-div
               padding="none"
               gap="small"
@@ -173,7 +155,12 @@ export class FTextArea extends FRoot {
               width="hug-content"
               height="hug-content"
             >
-              <f-div padding="none" direction="row" width="hug-content" height="hug-content">
+              <f-div
+                padding="none"
+                direction="row"
+                width="hug-content"
+                height="hug-content"
+              >
                 <slot name="label"></slot>
               </f-div>
               <slot name="icon-tooltip"></slot>
@@ -182,7 +169,11 @@ export class FTextArea extends FRoot {
           </f-div>
           <f-div padding="none" gap="none" width="hug-content">
             ${this.maxLength
-              ? html` <f-text variant="para" size="small" weight="regular" state="secondary"
+              ? html` <f-text
+                  variant="para"
+                  size="small"
+                  weight="regular"
+                  state="secondary"
                   >${this.value?.length ?? 0} / ${this.maxLength}</f-text
                 >`
               : null}

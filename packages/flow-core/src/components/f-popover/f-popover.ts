@@ -20,12 +20,14 @@ export type FPopoverPlacement =
   | "right"
   | "right-start"
   | "right-end"
+  | "right-fixed"
   | "bottom"
   | "bottom-start"
   | "bottom-end"
   | "left"
   | "left-start"
   | "left-end"
+  | "left-fixed"
   | "auto";
 export type FPopoverSize = "stretch" | "large" | "medium" | "small";
 
@@ -94,7 +96,11 @@ export class FPopover extends FRoot {
     return dom;
   }
   computePlacement() {
-    return this.placement === "auto" ? undefined : this.placement;
+    return this.placement === "auto" ||
+      this.placement === "left-fixed" ||
+      this.placement === "right-fixed"
+      ? undefined
+      : this.placement;
   }
   computePosition(isTooltip: boolean) {
     let target = document.body;
@@ -128,19 +134,21 @@ export class FPopover extends FRoot {
             shift({ padding: isTooltip ? 0 : 16 }),
           ],
         }).then(({ x, y }) => {
-          if (target.nodeName.toLowerCase() !== "body") {
-            Object.assign(this.style, {
-              top: `${y}px`,
-              left: `${x}px`,
-            });
-          } else {
-            const left = (document.body.offsetWidth - this.offsetWidth) / 2;
-            const top = (document.body.offsetHeight - this.offsetHeight) / 2;
+          if (this.placement !== "left-fixed" && this.placement !== "right-fixed") {
+            if (target.nodeName.toLowerCase() !== "body") {
+              Object.assign(this.style, {
+                top: `${y}px`,
+                left: `${x}px`,
+              });
+            } else {
+              const left = (document.body.offsetWidth - this.offsetWidth) / 2;
+              const top = (document.body.offsetHeight - this.offsetHeight) / 2;
 
-            Object.assign(this.style, {
-              top: `${top}px`,
-              left: `${left}px`,
-            });
+              Object.assign(this.style, {
+                top: `${top}px`,
+                left: `${left}px`,
+              });
+            }
           }
         });
       });

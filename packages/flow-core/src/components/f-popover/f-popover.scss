@@ -23,31 +23,13 @@ $sizes: (
 f-popover {
   @include base();
   position: fixed;
-  z-index: 200;
-
-  &[placement="left-fixed"] {
-    position: absolute;
-    z-index: 210;
-    left: 0px;
-    top: 0px;
-    height: 100%;
-    max-height: 100% !important;
-  }
-  &[placement="right-fixed"] {
-    position: absolute;
-    z-index: 210;
-    top: 0px;
-    right: 0px;
-    left: auto;
-    height: 100%;
-    max-height: 100% !important;
-  }
 
   display: flex;
   flex: 0 0 auto;
   background-color: var(--color-surface-tertiary);
   border-radius: 4px;
   overflow: auto;
+  z-index: 200;
   &.tooltip {
     background-color: #000;
     z-index: 1000;

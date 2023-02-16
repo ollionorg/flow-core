@@ -57,9 +57,11 @@ be used to show short-lived information such as menus, options, additional actio
           "right-start",
           "right",
           "right-end",
+          "right-fixed",
           "left-start",
           "left",
           "left-end",
+          "left-fixed",
         ],
       },
       open: {
@@ -195,6 +197,8 @@ By default the popover is auto aligned to the center of the viewport.
     }}
   >
     {(args) => {
+      const [open, setOpen] = useState(false);
+      const [openRight, setOpenRight] = useState(false);
       const [dummyPlacementArray, setDummyPlacementArray] = useState([
         [
           { open: false, title: "Bottom End", placement: "bottom-end" },
@@ -226,7 +230,7 @@ By default the popover is auto aligned to the center of the viewport.
         setDummyPlacementArray(array);
       };
       return html`
-        <f-div height="hug-content" gap="large" direction="column">
+        <f-div height="100%" gap="large" direction="column">
           ${dummyPlacementArray.map((item, index) => {
             return html`
               <f-div height="hug-content" gap="auto" direction="row">
@@ -256,6 +260,42 @@ By default the popover is auto aligned to the center of the viewport.
               </f-div>
             `;
           })}
+          <f-divider></f-divider>
+          <f-div height="fill-container" gap="auto" direction="row">
+            <f-popover
+              ?open=${open}
+              ?overlay=${true}
+              placement="left-fixed"
+              target=${`#left-fixed`}
+              @overlay-click=${() => setOpen(false)}
+            >
+              <f-div state="tertiary" padding="medium">
+                <f-text>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim
+                  ut mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex
+                  vehicula tristique.
+                </f-text>
+              </f-div>
+            </f-popover>
+            <f-button id="left-fixed" label="left-fixed" @click=${() => setOpen(true)}> </f-button>
+            <f-popover
+              ?open=${openRight}
+              ?overlay=${true}
+              placement="right-fixed"
+              target=${`#right-fixed`}
+              @overlay-click=${() => setOpenRight(false)}
+            >
+              <f-div state="tertiary" padding="medium">
+                <f-text>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim
+                  ut mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex
+                  vehicula tristique.
+                </f-text>
+              </f-div>
+            </f-popover>
+            <f-button id="right-fixed" label="right-fixed" @click=${() => setOpenRight(true)}>
+            </f-button>
+          </f-div>
         </f-div>
       `;
     }}
@@ -322,6 +362,11 @@ By default the popover is auto aligned to the center of the viewport.
       <td></td>
     </tr>
     <tr>
+      <td>right-fixed</td>
+      <td>position fixed to right according to the parent element</td>
+      <td></td>
+    </tr>
+    <tr>
       <td>left</td>
       <td>placed at left-center position w.r.t the opening button</td>
       <td></td>
@@ -334,6 +379,11 @@ By default the popover is auto aligned to the center of the viewport.
     <tr>
       <td>left-end</td>
       <td>starting from bottom to upwards on left side wrt to the button opening popup</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>left-fixed</td>
+      <td>position fixed to left according to the parent element</td>
       <td></td>
     </tr>
   </tbody>

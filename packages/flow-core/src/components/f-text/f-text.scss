@@ -102,7 +102,9 @@ $aligns: left, center, right;
 f-text {
   @include base();
   display: block;
-  flex: 1 1;
+  &:not([inline]) {
+    flex: 1 1;
+  }
   white-space: normal;
   word-break: break-word;
   max-width: 100%;

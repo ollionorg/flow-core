@@ -321,7 +321,7 @@ export class FInput extends FRoot {
 							<f-div padding="none" direction="row" width="hug-content" height="hug-content">
 								<slot name="label" @slotchange=${this._onLabelSlotChange}></slot>
 							</f-div>
-							<slot name="icon-toolttip"></slot>
+							<slot name="icon-tooltip"></slot>
 						</f-div>
 						<slot name="description"></slot>
 					</f-div>

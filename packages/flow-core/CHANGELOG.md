@@ -4,6 +4,17 @@
 
 # Change Log
 
+## [1.3.4] - 2023-02-20
+
+### Bug fixes
+
+- `f-divider` height `0px` changed to `unset` (it is not working in flex )
+## [1.3.3] - 2023-02-20
+
+### Bug fixes
+
+- `f-switch` toggle isse when value is undefined.
+- `f-divider` height `0px` changed to `unset` (it is not working in flex )
 ## [1.3.1] - 2023-02-15
 
 ### Improvements

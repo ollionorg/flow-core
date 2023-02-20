@@ -6,89 +6,89 @@
 START : scss maps to hold repsective attribute values
 **/
 $variants: (
-  "dotted": dotted,
-  "dashed": dashed,
-  "solid": solid,
+	"dotted": dotted,
+	"dashed": dashed,
+	"solid": solid
 );
 
 $sizes: (
-  "medium": 1px,
-  "large": 2px,
+	"medium": 1px,
+	"large": 2px
 );
 
 $states: (
-  "default": var(--color-border-default),
-  "secondary": var(--color-border-secondary),
-  "subtle": var(--color-border-subtle),
+	"default": var(--color-border-default),
+	"secondary": var(--color-border-secondary),
+	"subtle": var(--color-border-subtle)
 );
 /**
 END : scss maps to hold repsective attribute values
 **/
 
 f-divider {
-  // Important :  always include base mixins
-  @include base();
-  display: flex;
-  flex: 0 0 auto;
-  width: 100%;
-  height: 0px;
-  // iterating over sizes and creating css
-  @each $size, $value in $sizes {
-    &[size="#{$size}"] {
-      border-top-width: $value;
-      border-left-width: 0px;
-      border-right-width: 0px;
-      border-bottom-width: 0px;
-    }
-  }
+	// Important :  always include base mixins
+	@include base();
+	display: flex;
+	flex: 0 0 auto;
+	width: 100%;
+	height: unset;
+	// iterating over sizes and creating css
+	@each $size, $value in $sizes {
+		&[size="#{$size}"] {
+			border-top-width: $value;
+			border-left-width: 0px;
+			border-right-width: 0px;
+			border-bottom-width: 0px;
+		}
+	}
 
-  // iterating over variants and creating css
-  @each $variant, $value in $variants {
-    &[variant="#{$variant}"] {
-      border-style: $value;
-    }
-  }
+	// iterating over variants and creating css
+	@each $variant, $value in $variants {
+		&[variant="#{$variant}"] {
+			border-style: $value;
+		}
+	}
 
-  // iterating over states and creating css
-  @each $state, $color in $states {
-    &[state="#{$state}"] {
-      border-color: $color;
-    }
-  }
+	// iterating over states and creating css
+	@each $state, $color in $states {
+		&[state="#{$state}"] {
+			border-color: $color;
+		}
+	}
 }
 
 //styling divider vertically or horizontally according to the immediate parent f-div
 f-div {
-  &[direction="row"] {
-    > f-divider {
-      height: 100%;
-      width: unset;
-    }
-    > f-divider {
-      @each $size, $value in $sizes {
-        &[size="#{$size}"] {
-          border-left-width: $value;
-          border-top-width: 0px;
-          border-right-width: 0px;
-          border-bottom-width: 0px;
-        }
-      }
-    }
-  }
-  &[direction="column"] {
-    > f-divider {
-      width: 100%;
-      height: unset;
-    }
-    > f-divider {
-      @each $size, $value in $sizes {
-        &[size="#{$size}"] {
-          border-top-width: $value;
-          border-left-width: 0px;
-          border-right-width: 0px;
-          border-bottom-width: 0px;
-        }
-      }
-    }
-  }
+	&[direction="row"] {
+		> f-divider {
+			height: 100%;
+			width: unset;
+		}
+		> f-divider {
+			@each $size, $value in $sizes {
+				&[size="#{$size}"] {
+					border-left-width: $value;
+					border-top-width: 0px;
+					border-right-width: 0px;
+					border-bottom-width: 0px;
+				}
+			}
+		}
+	}
+	&[direction="column"] {
+		> f-divider {
+			width: 100%;
+			height: unset;
+		}
+		> f-divider {
+			@each $size, $value in $sizes {
+				&[size="#{$size}"] {
+					border-top-width: $value;
+					border-left-width: 0px;
+					border-right-width: 0px;
+					border-bottom-width: 0px;
+				}
+			}
+		}
+	}
 }

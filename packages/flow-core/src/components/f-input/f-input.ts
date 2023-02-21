@@ -63,7 +63,7 @@ export class FInput extends FRoot {
 	 * @attribute f-input can have 2 sizes. By default size is inherited by the parent f-field.
 	 */
 	@property({ reflect: true, type: String })
-	size?: "medium" | "small";
+	size?: "medium" | "small" = "medium";
 
 	/**
 	 * @attribute The type attribute specifies the type of <input> element to display.

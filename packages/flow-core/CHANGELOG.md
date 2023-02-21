@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.3.7] - 2023-02-21
+
+### Bug fixes
+
+- `size`, `variant`, `category` removed from `f-form` since it is anti pattern to set it on inner input elements. (This usecase will be covered in `@cldcvr/flow-form-builder`)
 ## [1.3.6] - 2023-02-21
 
 ### Bug fixes

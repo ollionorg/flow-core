@@ -9,6 +9,7 @@
 ### Bug fixes
 
 - `f-input` sides cropping issue fixed, for width less than 170px.
+- `f-text` inline prop bug fixed.
 
 ## [1.3.4] - 2023-02-20
 

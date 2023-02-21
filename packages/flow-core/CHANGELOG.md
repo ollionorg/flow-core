@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.3.6] - 2023-02-21
+
+### Bug fixes
+
+- `f-input` : `suffixWhen` property added.
 ## [1.3.5] - 2023-02-21
 
 ### Bug fixes

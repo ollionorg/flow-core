@@ -14,6 +14,8 @@ export type FInputCustomEvent = {
 	value: string;
 };
 
+export type FInputSuffixWhen = (value: string) => boolean;
+
 @customElement("f-input")
 export class FInput extends FRoot {
 	/**
@@ -135,34 +137,35 @@ export class FInput extends FRoot {
 	@property({ reflect: true, type: Boolean, attribute: "read-only" })
 	readOnly?: boolean = false;
 
+	@property({ reflect: false, type: Function })
+	suffixWhen?: FInputSuffixWhen;
+
 	/**
 	 * emit input custom event
 	 */
 	handleInput(e: InputEvent) {
 		e.stopPropagation();
-		const event = new CustomEvent<FInputCustomEvent>("input", {
-			detail: {
-				value: (e.target as HTMLInputElement)?.value
-			},
-			bubbles: true,
-			composed: true
-		});
 		this.value = (e.target as HTMLInputElement)?.value;
-		this.dispatchEvent(event);
+		this.dispatchInputEvent((e.target as HTMLInputElement)?.value);
 	}
 
 	/**
 	 * clear input value on clear icon clicked
 	 */
 	clearInputValue() {
+		this.value = "";
+		this.dispatchInputEvent("");
+	}
+
+	dispatchInputEvent(value: string) {
 		const event = new CustomEvent<FInputCustomEvent>("input", {
 			detail: {
-				value: ""
+				value
 			},
 			bubbles: true,
 			composed: true
 		});
-		this.value = "";
+
 		this.dispatchEvent(event);
 	}
 
@@ -260,7 +263,7 @@ export class FInput extends FRoot {
 		const mainSuffix =
 			this.fInputSuffix || this.iconRight
 				? html`
-						${this.fInputSuffix
+						${this.fInputSuffix && (this.suffixWhen ? this.suffixWhen(this.value as string) : true)
 							? html`
 									<f-div height="hug-content" width="hug-content" padding="none" direction="row">
 										<f-text variant="para" size="x-small" weight="regular" class="word-break"

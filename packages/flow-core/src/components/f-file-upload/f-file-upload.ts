@@ -177,6 +177,9 @@ export class FFileUpload extends FRoot {
 
 	dispatchOnInput(e: Event) {
 		e.stopPropagation();
+		/**
+		 * @event input
+		 */
 		const event = new CustomEvent("input", {
 			detail: {
 				value:

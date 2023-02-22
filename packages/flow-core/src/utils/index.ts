@@ -5,12 +5,14 @@ import getColourNameToHex from "./get-hex-color";
 import isValidEmail from "./is-valid-email";
 import getCustomFillColor from "./get-custom-fill-color";
 import LightenDarkenColor from "./get-lighten-darken-color";
+import getFormattedBytes from "./get-formatted-bytes";
 export {
-  getThemeStyle,
-  isValidHttpUrl,
-  getTextContrast,
-  getColourNameToHex,
-  isValidEmail,
-  getCustomFillColor,
-  LightenDarkenColor,
+	getThemeStyle,
+	isValidHttpUrl,
+	getTextContrast,
+	getColourNameToHex,
+	isValidEmail,
+	getCustomFillColor,
+	LightenDarkenColor,
+	getFormattedBytes
 };

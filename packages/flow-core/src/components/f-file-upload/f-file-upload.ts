@@ -6,6 +6,8 @@ import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import { getFormattedBytes } from "../../utils/index";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import loader from "../../mixins/svg/loader";
 
 export type FFileUploadState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -27,26 +29,59 @@ export class FFileUpload extends FRoot {
 	 */
 	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles];
 
+	/**
+	 * @attribute f-file-upload has 2 type of modes: single and multiple. When type is single, a user can select only one file and the filename appears inline to the file uploader.  When type is multiple, a user can select multiple files and each filename stacks under the file uploader.
+	 */
 	@property({ reflect: true, type: String })
 	type?: "single" | "multiple" = "single";
 
+	/**
+	 * @attribute Defines the return value of f-file-uploader. When type is single, return value is single file object instance. When type is multiple, return value is an array of file object instances.
+	 */
 	@property({ reflect: true, type: Array })
 	value?: FFileUploadValueType;
 
+	/**
+	 * @attribute Defines the placeholder text for f-file-upload. Note: Placeholder is replaced by file name when type is single.
+	 */
 	@property({ reflect: true, type: String })
 	placeholder?: string;
 
+	/**
+	 * @attribute Users can limit the file types by setting the file-type property to a string containing the allowed file type(s). To specify more than one type, separate the values with a comma. Acceptable file formats are displayed in brackets under description.
+	 */
 	@property({ reflect: true, type: String, attribute: "file-type" })
 	fileType?: FFileUploadFileType;
 
+	/**
+	 * @attribute f-file-upload can have 2 sizes. Note: Font styles are same in both sizes. Only paddings and gaps are different
+	 */
 	@property({ reflect: true, type: String })
-	size?: "medium" | "small";
+	size?: "medium" | "small" = "medium";
 
+	/**
+	 * @attribute States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
+	 */
 	@property({ reflect: true, type: String })
 	state?: FFileUploadState = "default";
 
+	/**
+	 * @attribute This shows the maximum file size allowed per file
+	 */
 	@property({ reflect: true, type: String, attribute: "max-size" })
 	maxSize?: FFileUploadSizeProp;
+
+	/**
+	 * @attribute Sets the file-upload to disabled state.
+	 */
+	@property({ reflect: true, type: Boolean })
+	disabled?: boolean = false;
+
+	/**
+	 * @attribute Sets the file-upload to loading state
+	 */
+	@property({ reflect: true, type: Boolean })
+	loading?: boolean = false;
 
 	@state()
 	bytes = 0;
@@ -86,40 +121,39 @@ export class FFileUpload extends FRoot {
 	fileInputRef: Ref<HTMLInputElement> = createRef();
 
 	handleClick() {
-		const fileInput = this.fileInputRef.value as HTMLInputElement;
-		fileInput.value = "";
-		fileInput.click();
-		this.acceptedFilesFlag = true;
-		this.sizeLimitFlag = true;
+		if (!this.loading) {
+			const fileInput = this.fileInputRef.value as HTMLInputElement;
+			fileInput.value = "";
+			fileInput.click();
+			this.acceptedFilesFlag = true;
+			this.sizeLimitFlag = true;
+		}
 	}
 
 	dropFile(e: DragEvent) {
-		e.preventDefault();
-		const files = e.dataTransfer?.files;
-		const filesArr = files ? Array.from(files) : [];
-		if (this.fileType !== "all") {
-			this.acceptedFilesFlag = filesArr.every(
-				item => item.type && this.fileType?.includes(item.type.split("/")[1])
-			);
-		}
-		this.sizeLimitFlag =
-			this.maxSize && this.bytes ? filesArr.every(item => item.size < this.bytes) : true;
-		if (this.acceptedFilesFlag && this.sizeLimitFlag) {
-			if (this.type === "multiple") {
-				filesArr.forEach(item => {
-					this.selectedFiles?.push(item);
-				});
-			} else {
-				if (filesArr?.length === 1) {
-					this.selectedFiles = filesArr;
-				}
+		if (!this.loading) {
+			e.preventDefault();
+			const files = e.dataTransfer?.files;
+			const filesArr = files ? Array.from(files) : [];
+			if (this.fileType !== "all") {
+				this.acceptedFilesFlag = filesArr.every(
+					item => item.type && this.fileType?.includes(item.type.split("/")[1])
+				);
 			}
-			/**
-			 * input event for validation
-			 *
-			 * @event input
-			 */
-			this.dispatchOnInput(e);
+			this.sizeLimitFlag =
+				this.maxSize && this.bytes ? filesArr.every(item => item.size < this.bytes) : true;
+			if (this.acceptedFilesFlag && this.sizeLimitFlag) {
+				if (this.type === "multiple") {
+					filesArr.forEach(item => {
+						this.selectedFiles?.push(item);
+					});
+				} else {
+					if (filesArr?.length === 1) {
+						this.selectedFiles = filesArr;
+					}
+				}
+				this.dispatchOnInput(e);
+			}
 		}
 	}
 
@@ -271,6 +305,8 @@ export class FFileUpload extends FRoot {
 						class="f-file-upload"
 						tabindex="1"
 						state=${this.state}
+						size=${this.size}
+						?loading=${this.loading}
 						@click=${this.handleClick}
 						@drop=${this.dropFile}
 						@dragover=${(e: DragEvent) => {
@@ -282,39 +318,41 @@ export class FFileUpload extends FRoot {
 								? html`<f-div width="80%"
 										><f-text
 											variant="para"
-											size="medium"
+											size="small"
 											weight="regular"
 											?ellipsis=${true}
 											id="overflow-text"
 											>${(this.value as File)?.name}</f-text
 										></f-div
 								  >`
-								: html`<div class="f-file-upload-placeholder">
-										<f-text variant="para" size="medium" weight="regular"
+								: html`<div class="f-file-upload-placeholder" size=${this.size}>
+										<f-text variant="para" size="small" weight="regular"
 											>${this.placeholder}</f-text
 										>
-										<f-text variant="para" size="medium" weight="regular" state="secondary"
+										<f-text variant="para" size="small" weight="regular" state="secondary"
 											>${this.fileType === "all"
 												? `(All formats supported)`
 												: `(${this.fileType})`}</f-text
 										>
 								  </div>`
-							: html`<div class="f-file-upload-placeholder">
-									<f-text variant="para" size="medium" weight="regular">${this.placeholder}</f-text>
-									<f-text variant="para" size="medium" weight="regular" state="secondary"
+							: html`<div class="f-file-upload-placeholder" size=${this.size}>
+									<f-text variant="para" size="small" weight="regular">${this.placeholder}</f-text>
+									<f-text variant="para" size="small" weight="regular" state="secondary"
 										>${this.fileType === "all"
 											? `(All formats supported)`
 											: `(${this.fileType})`}</f-text
 									>
 							  </div>`}
-						${this.type === "single" && this.value
+						${this.loading
+							? html`<div class="loader-suffix" state=${this.state}>${unsafeSVG(loader)}</div>`
+							: this.type === "single" && this.value
 							? html`<f-icon
 									source="i-close"
-									size="medium"
+									size="small"
 									@click=${this.handleRemoveFile}
 									clickable
 							  ></f-icon>`
-							: html`<f-icon source="i-upload" size="large" clickable></f-icon>`}
+							: html`<f-icon source="i-upload" size="medium" clickable></f-icon>`}
 						<input
 							${ref(this.fileInputRef)}
 							accept=${this.fileType === "all" ? "*/*" : this.fileType}
@@ -364,7 +402,7 @@ export class FFileUpload extends FRoot {
 												</f-div>
 												<f-icon
 													source="i-close"
-													size="medium"
+													size="small"
 													clickable
 													@click=${(e: MouseEvent) => this.handleRemoveRespectiveFile(e, item)}
 												></f-icon>

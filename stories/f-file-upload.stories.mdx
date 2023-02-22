@@ -51,6 +51,9 @@ Radio allow users to choose a single option among a set of mutually exclusive op
 			slot: { control: "text" },
 			disabled: {
 				control: "boolean"
+			},
+			loading: {
+				control: "boolean"
 			}
 		}}
 		args={{
@@ -58,11 +61,13 @@ Radio allow users to choose a single option among a set of mutually exclusive op
 			type: "single",
 			placeholder: "Drag and Drop Files or Click here to upload",
 			state: "default",
+			size: "medium",
 			["file-type"]: "all",
 			["max-size"]: undefined,
 			slot: `              <f-div slot="label" padding="none" gap="none">Label</f-div>
               <f-text slot="help" variant="para" size="small">This is a Subtext</f-text>`,
-			disabled: false
+			disabled: false,
+			loading: false
 		}}
 	>
 		{args => {
@@ -85,9 +90,11 @@ Radio allow users to choose a single option among a set of mutually exclusive op
 							.value=${args.value}
 							placeholder=${args.placeholder}
 							.state=${args.state}
+							.size=${args.size}
 							file-type=${args["file-type"]}
 							max-size=${args["max-size"]}
 							?disabled=${args.disabled}
+							?loading=${args.loading}
 							@input=${handleInput}
 						>
 							${unsafeHTML(args.slot)}
@@ -380,4 +387,4 @@ States are used to communicate purpose and connotations. For example, a red colo
 	</tbody>
 </table>
 
-<ArgsTable of={"f-switch"} />
+<ArgsTable of={"f-file-upload"} />

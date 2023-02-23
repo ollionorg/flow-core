@@ -59,4 +59,14 @@ describe("f-file-upload", () => {
 		expect(descendant).length(1);
 		expect(descendant[0].children[0].innerHTML).includes("test.pdf");
 	});
+
+	it("should render with file type mentioned in selection area", async () => {
+		const el = await fixture(
+			html` <f-file-upload type="multiple" file-type=".pdf"></f-file-upload> `
+		);
+		const descendant = el.shadowRoot!.querySelector(".f-file-upload-placeholder")!;
+		const ftext = descendant.children[1];
+		expect(ftext).instanceOf(FText);
+		expect(ftext.innerHTML).includes(".pdf");
+	});
 });

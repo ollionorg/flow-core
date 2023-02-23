@@ -69,4 +69,11 @@ describe("f-file-upload", () => {
 		expect(ftext).instanceOf(FText);
 		expect(ftext.innerHTML).includes(".pdf");
 	});
+	it("should render loader", async () => {
+		const el = await fixture(html` <f-file-upload ?loading=${true}></f-file-upload> `);
+		const descendant = el.shadowRoot!.querySelector(".loader-suffix")!;
+		const loading = descendant.children[0];
+		const svg = await fixture(loadingSVG);
+		expect(loading.outerHTML).equal(svg.outerHTML);
+	});
 });

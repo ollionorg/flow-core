@@ -2013,6 +2013,7 @@
               "type": {
                 "text": "FFileUploadFileType | undefined"
               },
+              "default": "\"all\"",
               "attribute": "file-type",
               "reflects": true
             },
@@ -2165,7 +2166,8 @@
             },
             {
               "kind": "method",
-              "name": "handleClick"
+              "name": "handleClick",
+              "description": "on click open file selector window on OS"
             },
             {
               "kind": "method",
@@ -2175,7 +2177,8 @@
                   "name": "e",
                   "type": {
                     "text": "DragEvent"
-                  }
+                  },
+                  "description": "DragEvent\ndrag and drop file(s) and event emission"
                 }
               ]
             },
@@ -2187,9 +2190,11 @@
                   "name": "e",
                   "type": {
                     "text": "InputEvent"
-                  }
+                  },
+                  "description": "InputEvent"
                 }
-              ]
+              ],
+              "description": "select file(s) from browse options"
             },
             {
               "kind": "method",
@@ -2199,9 +2204,11 @@
                   "name": "e",
                   "type": {
                     "text": "Event"
-                  }
+                  },
+                  "description": "Event"
                 }
-              ]
+              ],
+              "description": "dispatch input event"
             },
             {
               "kind": "method",
@@ -2211,9 +2218,11 @@
                   "name": "e",
                   "type": {
                     "text": "MouseEvent"
-                  }
+                  },
+                  "description": "MouseEvent"
                 }
-              ]
+              ],
+              "description": "on click remove the selected single file"
             },
             {
               "kind": "method",
@@ -2223,19 +2232,23 @@
                   "name": "e",
                   "type": {
                     "text": "MouseEvent"
-                  }
+                  },
+                  "description": "MouseEvent"
                 },
                 {
                   "name": "file",
                   "type": {
                     "text": "File"
-                  }
+                  },
+                  "description": "contains clicked file"
                 }
-              ]
+              ],
+              "description": "removes the clicked respective file from selection array"
             },
             {
               "kind": "method",
-              "name": "checkOverflowing"
+              "name": "checkOverflowing",
+              "description": "check if ellipsis happens on text and insert tooltip"
             },
             {
               "kind": "method",
@@ -2245,21 +2258,26 @@
                   "name": "e",
                   "type": {
                     "text": "MouseEvent"
-                  }
+                  },
+                  "description": "MouseEvent"
                 }
-              ]
+              ],
+              "description": "in multiple file selection hovering on the particular file name may open the tooltip -if ellipsis is present"
             },
             {
               "kind": "method",
-              "name": "_onLabelSlotChange"
+              "name": "_onLabelSlotChange",
+              "description": "has label slot"
             },
             {
               "kind": "method",
-              "name": "_onDescriptionSlotChange"
+              "name": "_onDescriptionSlotChange",
+              "description": "has description slot"
             },
             {
               "kind": "method",
-              "name": "_onHelpSlotChange"
+              "name": "_onHelpSlotChange",
+              "description": "has help slot"
             },
             {
               "kind": "method",
@@ -2269,9 +2287,15 @@
                   "name": "str",
                   "type": {
                     "text": "string"
-                  }
+                  },
+                  "description": "single character"
                 }
-              ]
+              ],
+              "return": {
+                "type": {
+                  "text": ""
+                }
+              }
             },
             {
               "kind": "method",
@@ -2281,15 +2305,22 @@
                   "name": "str",
                   "type": {
                     "text": "string"
-                  }
+                  },
+                  "description": "string"
                 },
                 {
                   "name": "index",
                   "type": {
                     "text": "number"
-                  }
+                  },
+                  "description": "index to splice from"
                 }
-              ]
+              ],
+              "return": {
+                "type": {
+                  "text": ""
+                }
+              }
             },
             {
               "kind": "field",
@@ -2344,6 +2375,7 @@
               "type": {
                 "text": "FFileUploadFileType | undefined"
               },
+              "default": "\"all\"",
               "fieldName": "fileType"
             },
             {

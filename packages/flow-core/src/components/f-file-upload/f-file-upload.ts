@@ -51,7 +51,7 @@ export class FFileUpload extends FRoot {
 	 * @attribute Users can limit the file types by setting the file-type property to a string containing the allowed file type(s). To specify more than one type, separate the values with a comma. Acceptable file formats are displayed in brackets under description.
 	 */
 	@property({ reflect: true, type: String, attribute: "file-type" })
-	fileType?: FFileUploadFileType;
+	fileType?: FFileUploadFileType = "all";
 
 	/**
 	 * @attribute f-file-upload can have 2 sizes. Note: Font styles are same in both sizes. Only paddings and gaps are different
@@ -83,36 +83,69 @@ export class FFileUpload extends FRoot {
 	@property({ reflect: true, type: Boolean })
 	loading?: boolean = false;
 
+	/**
+	 * @attribute local reactive state for checking bytes
+	 */
 	@state()
 	bytes = 0;
 
+	/**
+	 * @attribute max-size limit flag
+	 */
 	@state()
 	sizeLimitFlag = true;
 
+	/**
+	 * @attribute file acceptance flag
+	 */
 	@state()
 	acceptedFilesFlag = true;
 
+	/**
+	 * @attribute query selector for class `.f-file-upload`
+	 */
 	@query(".f-file-upload")
 	fileUploadSection!: HTMLElement;
 
+	/**
+	 * @attribute query selector for id #overflow-text
+	 */
 	@query("#overflow-text")
 	textOverflow!: FText;
 
+	/**
+	 * @attribute assigned elements inside slot label
+	 */
 	@queryAssignedElements({ slot: "label" })
 	_labelNodes!: NodeListOf<HTMLElement>;
 
+	/**
+	 * @attribute flag to check if slot label is present or not
+	 */
 	@state()
 	_hasLabel = false;
 
+	/**
+	 * @attribute assigned elements inside slot description
+	 */
 	@queryAssignedElements({ slot: "description" })
 	_descriptionNodes!: NodeListOf<HTMLElement>;
 
+	/**
+	 * @attribute flag to check if slot description is present or not
+	 */
 	@state()
 	_hasDescription = false;
 
+	/**
+	 * @attribute assigned elements inside slot help
+	 */
 	@queryAssignedElements({ slot: "help" })
 	_helpNodes!: NodeListOf<HTMLElement>;
 
+	/**
+	 * @attribute flag to check if slot help is present or not
+	 */
 	@state()
 	_hasHelperText = false;
 
@@ -120,6 +153,9 @@ export class FFileUpload extends FRoot {
 
 	fileInputRef: Ref<HTMLInputElement> = createRef();
 
+	/**
+	 * on click open file selector window on OS
+	 */
 	handleClick() {
 		if (!this.loading) {
 			const fileInput = this.fileInputRef.value as HTMLInputElement;
@@ -130,6 +166,10 @@ export class FFileUpload extends FRoot {
 		}
 	}
 
+	/**
+	 * @param e DragEvent
+	 * drag and drop file(s) and event emission
+	 */
 	dropFile(e: DragEvent) {
 		if (!this.loading) {
 			e.preventDefault();
@@ -157,6 +197,10 @@ export class FFileUpload extends FRoot {
 		}
 	}
 
+	/**
+	 * select file(s) from browse options
+	 * @param e InputEvent
+	 */
 	selectFile(e: InputEvent) {
 		const fileInput = this.fileInputRef.value as HTMLInputElement;
 		const files = fileInput.files;
@@ -175,6 +219,10 @@ export class FFileUpload extends FRoot {
 		}
 	}
 
+	/**
+	 * dispatch input event
+	 * @param e Event
+	 */
 	dispatchOnInput(e: Event) {
 		e.stopPropagation();
 		/**
@@ -202,6 +250,10 @@ export class FFileUpload extends FRoot {
 		this.requestUpdate();
 	}
 
+	/**
+	 * on click remove the selected single file
+	 * @param e MouseEvent
+	 */
 	handleRemoveFile(e: MouseEvent) {
 		e.stopPropagation();
 		this.acceptedFilesFlag = true;
@@ -210,6 +262,11 @@ export class FFileUpload extends FRoot {
 		this.dispatchOnInput(e);
 	}
 
+	/**
+	 * removes the clicked respective file from selection array
+	 * @param e MouseEvent
+	 * @param file contains clicked file
+	 */
 	handleRemoveRespectiveFile(e: MouseEvent, file: File) {
 		if (this.selectedFiles && this.selectedFiles?.length > 0) {
 			this.selectedFiles = this.selectedFiles.filter(item => item.name !== file.name);
@@ -217,6 +274,9 @@ export class FFileUpload extends FRoot {
 		}
 	}
 
+	/**
+	 * check if ellipsis happens on text and insert tooltip
+	 */
 	checkOverflowing() {
 		if (this.textOverflow) {
 			if (this.textOverflow.offsetWidth < this.textOverflow.scrollWidth) {
@@ -227,6 +287,10 @@ export class FFileUpload extends FRoot {
 		}
 	}
 
+	/**
+	 * in multiple file selection hovering on the particular file name may open the tooltip -if ellipsis is present
+	 * @param e MouseEvent
+	 */
 	handleMouseEnter(e: MouseEvent) {
 		const element = e.target as HTMLElement;
 		if (element?.offsetWidth < element?.scrollWidth) {
@@ -236,28 +300,52 @@ export class FFileUpload extends FRoot {
 		}
 	}
 
+	/**
+	 * has label slot
+	 */
 	_onLabelSlotChange() {
 		this._hasLabel = this._labelNodes.length > 0;
 	}
+
+	/**
+	 * has description slot
+	 */
 	_onDescriptionSlotChange() {
 		this._hasDescription = this._descriptionNodes.length > 0;
 	}
+
+	/**
+	 * has help slot
+	 */
 	_onHelpSlotChange() {
 		this._hasHelperText = this._helpNodes.length > 0;
 	}
 
+	/**
+	 *
+	 * @param str single character
+	 * @returns boolea value if character present is alphabet or not
+	 */
 	isLetter(str: string) {
 		if (str.length === 1 && str.match(/[a-z]/i)) return true;
 		else return false;
 	}
 
+	/**
+	 *
+	 * @param str string
+	 * @param index index to splice from
+	 * @returns returns an array [number, characters]
+	 */
 	split(str: string, index: number) {
 		const result = [str.slice(0, index), str.slice(index)];
 		return result;
 	}
 
 	render() {
+		//max-size removing space
 		const maxSizeTemp = this.maxSize?.split(" ").join("");
+		//seperating bytes value and byteType from max-size
 		if (maxSizeTemp) {
 			let numberEndIndex = maxSizeTemp?.length;
 			for (let i = 0; i < maxSizeTemp.length; i++) {
@@ -419,12 +507,17 @@ export class FFileUpload extends FRoot {
 		`;
 	}
 	updated() {
+		//update the selectedFiles as per the value being fetched
 		this.selectedFiles = this.value
 			? Array.isArray(this.value)
 				? this.value
 				: ([this.value] as File[])
 			: [];
+
+		//check if ellipsis is present
 		this.checkOverflowing();
+
+		//if size limit exceeds or file doesn't support the format - danger state attribute is added
 		if (this.acceptedFilesFlag && this.sizeLimitFlag) {
 			this.fileUploadSection.removeAttribute("data-state");
 		} else {

@@ -5186,6 +5186,108 @@
       ]
     },
     {
+      "name": "f-file-upload",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: File | File[] | undefined; }>`} - \n\nAttributes:\n\n  * `type` {`\"single\" | \"multiple\" | undefined`} - \n\n  * `value` {`FFileUploadValueType | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `file-type` {`string | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `state` {`FFileUploadState | undefined`} - \n\n  * `max-size` {`FFileUploadSizeProp | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `_labelNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_descriptionNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_helpNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `type` {`\"single\" | \"multiple\" | undefined`} - \n\n  * `value` {`FFileUploadValueType | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `fileType` {`string | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `state` {`FFileUploadState | undefined`} - \n\n  * `maxSize` {`FFileUploadSizeProp | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `fileUploadSection` {`HTMLElement`} - \n\n  * `fileUploadHeader` - \n\n  * `fileUploadError` - \n\n  * `labelSlot` {`HTMLElement`} - \n\n  * `descriptionSlot` {`HTMLElement`} - \n\n  * `helpSlot` {`HTMLElement`} - \n\n  * `textOverflow` - \n\n  * `_labelNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_descriptionNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_helpNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `bytes` {`number`} - \n\n  * `sizeLimitFlag` {`boolean`} - \n\n  * `acceptedFilesFlag` {`boolean`} - \n\n  * `selectedFiles` {`File[] | undefined`} - \n\n  * `fileInputRef` - \n\n  * `hasLabel` {`boolean`} - has label slot\n\n  * `hasDescription` {`boolean`} - has description slot\n\n  * `hasHelperText` {`boolean`} - has help slot\n\n  * `fileFormatError` {`string`} - error if file format is incorrect\n\n  * `fileSizeError` {`string`} - error if file size is more than given size\n\n  * `dispatchValue` {`File | File[] | undefined`} - value for event dispatch\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "attributes": [
+        {
+          "name": "type",
+          "description": "`type` {`\"single\" | \"multiple\" | undefined`} - \n\nProperty: type\n\nDefault: single",
+          "values": [
+            {
+              "name": "single"
+            },
+            {
+              "name": "multiple"
+            }
+          ]
+        },
+        {
+          "name": "value",
+          "description": "`value` {`FFileUploadValueType | undefined`} - \n\nProperty: value",
+          "values": []
+        },
+        {
+          "name": "placeholder",
+          "description": "`placeholder` {`string | undefined`} - \n\nProperty: placeholder",
+          "values": []
+        },
+        {
+          "name": "file-type",
+          "description": "`file-type` {`string | undefined`} - \n\nProperty: fileType\n\nDefault: all",
+          "values": []
+        },
+        {
+          "name": "size",
+          "description": "`size` {`\"medium\" | \"small\" | undefined`} - \n\nProperty: size\n\nDefault: medium",
+          "values": [
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            }
+          ]
+        },
+        {
+          "name": "state",
+          "description": "`state` {`FFileUploadState | undefined`} - \n\nProperty: state\n\nDefault: default",
+          "values": [
+            {
+              "name": "primary"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
+              "name": "default"
+            }
+          ]
+        },
+        {
+          "name": "max-size",
+          "description": "`max-size` {`FFileUploadSizeProp | undefined`} - \n\nProperty: maxSize",
+          "values": []
+        },
+        {
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "loading",
+          "description": "`loading` {`boolean | undefined`} - \n\nProperty: loading\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "_labelNodes",
+          "description": "`_labelNodes` {`NodeListOf<HTMLElement>`} - \n\nProperty: _labelNodes"
+        },
+        {
+          "name": "_descriptionNodes",
+          "description": "`_descriptionNodes` {`NodeListOf<HTMLElement>`} - \n\nProperty: _descriptionNodes"
+        },
+        {
+          "name": "_helpNodes",
+          "description": "`_helpNodes` {`NodeListOf<HTMLElement>`} - \n\nProperty: _helpNodes"
+        },
+        {
+          "name": "tooltip",
+          "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
+          "values": []
+        },
+        {
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<{ value: File | File[] | undefined; }>`} - "
+        }
+      ]
+    },
+    {
       "name": "f-form-group",
       "description": "Events:\n\n  * `duplicate-group` {`CustomEvent<{ message: string; duplicate: boolean; }>`} - \n\nAttributes:\n\n  * `label` {`FGroupLabel | undefined`} - \n\n  * `variant` {`\"normal\" | \"compact\" | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `collapse` {`\"none\" | \"accordion\" | \"text\" | undefined`} - \n\n  * `is-collapsed` {`boolean | undefined`} - \n\n  * `can-duplicate` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `label` {`FGroupLabel | undefined`} - \n\n  * `variant` {`\"normal\" | \"compact\" | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `collapse` {`\"none\" | \"accordion\" | \"text\" | undefined`} - \n\n  * `isCollapsed` {`boolean | undefined`} - \n\n  * `canDuplicate` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [

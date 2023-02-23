@@ -1,0 +1,113 @@
+@use "sass:map";
+
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+/**
+START : scss maps to hold repsective attribute values
+**/
+
+$state-colors: (
+	"primary": var(--color-primary-default),
+	"success": var(--color-success-default),
+	"warning": var(--color-warning-default),
+	"danger": var(--color-danger-default)
+);
+
+$sizes: (
+	"medium": 12px,
+	"small": 8px
+);
+
+:host {
+	div.f-file-upload {
+		@include base();
+		display: flex;
+		border: 1px dashed var(--color-border-default);
+		background-color: var(--color-surface-tertiary);
+		&:not([loading]) {
+			cursor: pointer;
+			&:hover {
+				background-color: var(--color-surface-tertiary-hover);
+			}
+		}
+		&[loading] {
+			cursor: no-drop;
+		}
+		justify-content: space-between;
+		align-items: center;
+		border-radius: 4px;
+		width: 100%;
+		@each $size, $value in $sizes {
+			&[size="#{$size}"] {
+				padding: $value;
+			}
+		}
+
+		> f-div.text-overflow {
+			text-overflow: ellipsis;
+		}
+		> div.f-file-upload-placeholder {
+			display: flex;
+			flex-direction: column;
+			@each $size, $value in $sizes {
+				&[size="#{$size}"] {
+					gap: $value;
+				}
+			}
+		}
+		> div.loader-suffix {
+			position: relative;
+			display: flex;
+			gap: 12px;
+			align-items: center;
+			@include rotate("svg");
+			pointer-events: none;
+			// padding: 0px 12px 0px 0px;
+
+			svg {
+				position: relative;
+				height: 20px;
+				width: 20px;
+			}
+			@each $state, $color in $state-colors {
+				&[state="#{$state}"] {
+					svg path.loader-fill {
+						fill: $color;
+					}
+				}
+			}
+		}
+
+		> input[type="file"] {
+			display: none;
+		}
+
+		&[state="default"] {
+			&:focus {
+				outline: none;
+				border: 1px solid var(--color-primary-default);
+			}
+		}
+
+		@each $state, $color in $state-colors {
+			&[state="#{$state}"] {
+				border: 1px solid $color;
+			}
+		}
+		&[data-state="danger"] {
+			border: 1px solid var(--color-danger-default) !important;
+		}
+	}
+}
+
+f-file-upload {
+	width: 100%;
+	&[disabled] {
+		@include disabled();
+	}
+	@each $state, $color in $state-colors {
+		&[state="#{$state}"] {
+			@include input-color($state);
+		}
+	}
+}

@@ -37,4 +37,14 @@ describe("f-file-upload", () => {
 		expect(ftext).instanceOf(FText);
 		expect(ftext.innerHTML).includes("Drag and Drop Files or Click here to upload");
 	});
+
+	it("should render with value", async () => {
+		const el = await fixture(
+			html` <f-file-upload .value=${new File(["test"], "test.pdf")}></f-file-upload> `
+		);
+		const descendant = el.shadowRoot!.querySelector("#overflow-text")!;
+		const ftext = descendant.innerHTML;
+		expect(descendant).instanceOf(FText);
+		expect(ftext).includes("test.pdf");
+	});
 });

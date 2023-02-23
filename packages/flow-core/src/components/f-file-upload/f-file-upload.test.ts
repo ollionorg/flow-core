@@ -55,8 +55,7 @@ describe("f-file-upload", () => {
 			`
 		);
 		const descendant = el.shadowRoot!.querySelectorAll("#multiple-file-selection")!;
-		// expect(descendant[0]).instanceOf(FDiv);
-		console.log(descendant[0], el.shadowRoot?.querySelectorAll("#abc"));
+		expect(descendant[0]).instanceOf(FDiv);
 		expect(descendant).length(1);
 		expect(descendant[0].children[0].innerHTML).includes("test.pdf");
 	});

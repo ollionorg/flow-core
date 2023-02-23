@@ -5,3 +5,149 @@
 /**
 START : scss maps to hold repsective attribute values
 **/
+
+$sizes: (
+	"medium": 36px,
+	"small": 28px
+);
+
+$state-colors: (
+	"primary": var(--color-primary-default),
+	"success": var(--color-success-default),
+	"warning": var(--color-warning-default),
+	"danger": var(--color-danger-default)
+);
+
+$variants: (
+	"curved": 4px,
+	"round": 22px,
+	"block": 0px
+);
+
+$categories: (
+	"fill": (
+		"background": var(--color-surface-tertiary),
+		"hover": var(--color-surface-tertiary-hover),
+		"border": 1px solid var(--color-surface-tertiary)
+	),
+	"outline": (
+		"background": transparent,
+		"hover": var(--color-surface-default-hover),
+		"border": 1px solid var(--color-border-default)
+	)
+);
+
+:host {
+	.f-emoji-picker {
+		@include base();
+		cursor: pointer;
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+		> f-div:not([placeholder]) {
+			font-style: normal;
+			font-weight: 325;
+			line-height: 18px;
+			color: var(--color-text-subtle);
+			width: fit-content !important;
+			&[size="small"] {
+				font-size: 15px;
+			}
+			&[size="medium"] {
+				font-size: 21px;
+			}
+		}
+		padding: 0px 8px;
+		width: 100%;
+		@each $variant, $value in $variants {
+			&[variant="#{$variant}"] {
+				border-radius: $value;
+			}
+		}
+		@each $size, $value in $sizes {
+			&[size="#{$size}"] {
+				height: $value;
+			}
+		}
+		@each $state, $color in $state-colors {
+			&[state="#{$state}"] {
+				@each $category, $value in $categories {
+					&[category="#{$category}"] {
+						background-color: map.get($value, "background");
+						border: 1px solid $color;
+						&:hover {
+							background-color: map.get($value, "hover");
+						}
+					}
+					&[category="transparent"][variant="block"] {
+						background-color: transparent;
+						border-top: 0px;
+						border-bottom: 1px solid $color;
+						border-left: 0px;
+						border-right: 0px;
+						&:hover {
+							background-color: var(--color-surface-default-hover);
+						}
+					}
+				}
+			}
+		}
+
+		&[state="default"] {
+			// border: 1px solid var(--color-surface-tertiary);
+			@each $category, $value in $categories {
+				&[category="#{$category}"] {
+					background-color: map.get($value, "background");
+					border: map.get($value, "border");
+					&:hover {
+						background-color: map.get($value, "hover");
+					}
+				}
+				&[category="transparent"][variant="block"] {
+					background-color: transparent;
+					border-top: 0px;
+					border-bottom: 1px solid var(--color-border-default);
+					border-left: 0px;
+					border-right: 0px;
+					&:hover {
+						background-color: var(--color-surface-default-hover);
+					}
+				}
+			}
+			&:focus {
+				outline: none;
+				border: 1px solid var(--color-primary-default);
+			}
+		}
+	}
+}
+
+f-emoji-picker {
+	width: 100%;
+	&[disabled] {
+		@include disabled();
+	}
+	@each $state, $color in $state-colors {
+		&[state="#{$state}"] {
+			@include input-color($state);
+		}
+	}
+}
+
+em-emoji-picker {
+	// --background-rgb: 85, 170, 255;
+	// --color-border-over: rgba(0, 0, 0, 0.1);
+	--font-family: var(--flow-font);
+	--color-border: var(--color-surface-tertiary);
+	--rgb-background: var(--color-emoji-picker-background);
+	--rgb-color: var(--color-emoji-picker-text);
+	--rgb-input: var(--color-emoji-picker-input);
+	--shadow: 5px 5px 15px -8px rgb(67, 207, 165);
+	--rgb-accent: var(--color-emoji-picker-accent);
+
+	--border-radius: 4px;
+	width: 400px;
+	min-width: 250px;
+	resize: horizontal;
+	overflow: auto;
+}

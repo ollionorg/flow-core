@@ -83,15 +83,15 @@ f-input is an input element.
 			}
 		}}
 		args={{
-			value: "",
+			value: "😍",
 			placeholder: "Enter your text here",
 			variant: "round",
 			category: "fill",
 			type: "text",
 			state: "default",
 			size: "medium",
-			slot: `              <f-div slot="label" padding="none" gap="none">Label</f-div>
-              <f-text slot="help" variant="para" size="small">This is a Subtext</f-text>`,
+			slot: `             <f-text slot="label" variant="para" size="small">Label</f-text>
+              <f-text slot="help" variant="para" size="small">Help!</f-text>`,
 			["icon-left"]: undefined,
 			["icon-right"]: undefined,
 			["prefix"]: undefined,
@@ -107,15 +107,24 @@ f-input is an input element.
 			const [_, updateArgs] = useArgs();
 			const handleInput = e => {
 				updateArgs({ value: e.detail.value });
-				if (args.type === "tel") {
-					updateArgs({ ["calling-code"]: e.detail.callingCode });
-				}
 			};
 			return html`
-				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-emoji-picker></f-emoji-picker> </f-div
-				></f-div>
+				<f-div width="100%" align="top-left" padding="large">
+					<f-div width="70px" align="top-left">
+						<f-emoji-picker
+							.value=${args.value}
+							.state=${args.state}
+							.size=${args.size}
+							.placeholder=${args.placeholder}
+							.category=${args.category}
+							.variant=${args.variant}
+							?disabled=${args.disabled}
+							@input=${handleInput}
+						>
+							${unsafeHTML(args.slot)}
+						</f-emoji-picker>
+					</f-div>
+				</f-div>
 			`;
 		}}
 	</Story>

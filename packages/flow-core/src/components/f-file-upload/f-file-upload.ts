@@ -38,7 +38,7 @@ export class FFileUpload extends FRoot {
 	/**
 	 * @attribute Defines the return value of f-file-uploader. When type is single, return value is single file object instance. When type is multiple, return value is an array of file object instances.
 	 */
-	@property({ reflect: true, type: Array })
+	@property({ reflect: false, type: Array })
 	value?: FFileUploadValueType;
 
 	/**
@@ -83,33 +83,24 @@ export class FFileUpload extends FRoot {
 	@property({ reflect: true, type: Boolean })
 	loading?: boolean = false;
 
-	/**
-	 * @attribute local reactive state for checking bytes
-	 */
-	@state()
-	bytes = 0;
-
-	/**
-	 * @attribute max-size limit flag
-	 */
-	@state()
-	sizeLimitFlag = true;
-
-	/**
-	 * @attribute file acceptance flag
-	 */
-	@state()
-	acceptedFilesFlag = true;
-
-	/**
-	 * @attribute query selector for class `.f-file-upload`
-	 */
 	@query(".f-file-upload")
 	fileUploadSection!: HTMLElement;
 
-	/**
-	 * @attribute query selector for id #overflow-text
-	 */
+	@query("#f-file-upload-header")
+	fileUploadHeader!: FDiv;
+
+	@query("#f-file-upload-error")
+	fileUploadError!: FDiv;
+
+	@query("slot[name='label']")
+	labelSlot!: HTMLElement;
+
+	@query("slot[name='description']")
+	descriptionSlot!: HTMLElement;
+
+	@query("slot[name='help']")
+	helpSlot!: HTMLElement;
+
 	@query("#overflow-text")
 	textOverflow!: FText;
 
@@ -120,22 +111,10 @@ export class FFileUpload extends FRoot {
 	_labelNodes!: NodeListOf<HTMLElement>;
 
 	/**
-	 * @attribute flag to check if slot label is present or not
-	 */
-	@state()
-	_hasLabel = false;
-
-	/**
 	 * @attribute assigned elements inside slot description
 	 */
 	@queryAssignedElements({ slot: "description" })
 	_descriptionNodes!: NodeListOf<HTMLElement>;
-
-	/**
-	 * @attribute flag to check if slot description is present or not
-	 */
-	@state()
-	_hasDescription = false;
 
 	/**
 	 * @attribute assigned elements inside slot help
@@ -143,15 +122,67 @@ export class FFileUpload extends FRoot {
 	@queryAssignedElements({ slot: "help" })
 	_helpNodes!: NodeListOf<HTMLElement>;
 
-	/**
-	 * @attribute flag to check if slot help is present or not
-	 */
-	@state()
-	_hasHelperText = false;
+	bytes = 0;
+
+	sizeLimitFlag = true;
+
+	acceptedFilesFlag = true;
 
 	selectedFiles?: File[] = [];
 
 	fileInputRef: Ref<HTMLInputElement> = createRef();
+
+	/**
+	 * has label slot
+	 */
+	get hasLabel() {
+		return this._labelNodes.length > 0;
+	}
+
+	/**
+	 * has description slot
+	 */
+	get hasDescription() {
+		return this._descriptionNodes.length > 0;
+	}
+
+	/**
+	 * has help slot
+	 */
+	get hasHelperText() {
+		return this._helpNodes.length > 0;
+	}
+
+	/**
+	 * error if file format is incorrect
+	 */
+	get fileFormatError() {
+		return ` <f-text variant="para" size="small" weight="regular" state="danger">${
+			this.type === "single"
+				? "File format not supported"
+				: "One or more file formats not supported"
+		}</f-text>`;
+	}
+
+	/**
+	 * error if file size is more than given size
+	 */
+	get fileSizeError() {
+		return ` <f-text variant="para" size="small" weight="regular" state="danger">${
+			this.type === "single" ? "File Size too large" : "One or more files are too large"
+		}</f-text>`;
+	}
+
+	/**
+	 * value for event dispatch
+	 */
+	get dispatchValue() {
+		return this.type === "single"
+			? this.selectedFiles
+				? this.selectedFiles[0]
+				: []
+			: this.selectedFiles;
+	}
 
 	/**
 	 * on click open file selector window on OS
@@ -163,6 +194,7 @@ export class FFileUpload extends FRoot {
 			fileInput.click();
 			this.acceptedFilesFlag = true;
 			this.sizeLimitFlag = true;
+			this.helpSectionMessages();
 		}
 	}
 
@@ -194,6 +226,7 @@ export class FFileUpload extends FRoot {
 				}
 				this.dispatchOnInput(e);
 			}
+			this.helpSectionMessages();
 		}
 	}
 
@@ -217,6 +250,7 @@ export class FFileUpload extends FRoot {
 			}
 			this.dispatchOnInput(e);
 		}
+		this.helpSectionMessages();
 	}
 
 	/**
@@ -230,22 +264,12 @@ export class FFileUpload extends FRoot {
 		 */
 		const event = new CustomEvent("input", {
 			detail: {
-				value:
-					this.type === "single"
-						? this.selectedFiles
-							? this.selectedFiles[0]
-							: []
-						: this.selectedFiles
+				value: this.dispatchValue
 			},
 			bubbles: true,
 			composed: true
 		});
-		this.value =
-			this.type === "single"
-				? this.selectedFiles
-					? this.selectedFiles[0]
-					: []
-				: this.selectedFiles;
+		this.value = this.dispatchValue;
 		this.dispatchEvent(event);
 		this.requestUpdate();
 	}
@@ -301,27 +325,6 @@ export class FFileUpload extends FRoot {
 	}
 
 	/**
-	 * has label slot
-	 */
-	_onLabelSlotChange() {
-		this._hasLabel = this._labelNodes.length > 0;
-	}
-
-	/**
-	 * has description slot
-	 */
-	_onDescriptionSlotChange() {
-		this._hasDescription = this._descriptionNodes.length > 0;
-	}
-
-	/**
-	 * has help slot
-	 */
-	_onHelpSlotChange() {
-		this._hasHelperText = this._helpNodes.length > 0;
-	}
-
-	/**
 	 *
 	 * @param str single character
 	 * @returns boolea value if character present is alphabet or not
@@ -342,6 +345,61 @@ export class FFileUpload extends FRoot {
 		return result;
 	}
 
+	/**
+	 * update file array locally
+	 */
+	updateSelectedValues() {
+		this.selectedFiles = this.value
+			? Array.isArray(this.value)
+				? this.value
+				: ([this.value] as File[])
+			: [];
+	}
+
+	/**
+	 * display messages according to conditions
+	 */
+	helpSectionMessages() {
+		if (this.sizeLimitFlag && this.acceptedFilesFlag) {
+			this.fileUploadError.innerHTML = `<slot name="help"></slot>`;
+			this.fileUploadSection.removeAttribute("data-state");
+		} else {
+			this.fileUploadSection.setAttribute("data-state", "danger");
+			if (!this.acceptedFilesFlag) {
+				this.fileUploadError.innerHTML = this.fileFormatError;
+			}
+			if (!this.sizeLimitFlag) {
+				this.fileUploadError.innerHTML = this.fileSizeError;
+			}
+		}
+		this.helpSectionDisplay();
+	}
+
+	/**
+	 * conditional help section display for false spacing issue
+	 */
+	helpSectionDisplay() {
+		if (this.acceptedFilesFlag && this.sizeLimitFlag && !this.hasHelperText) {
+			this.fileUploadError.style.display = "none";
+		} else {
+			this.fileUploadError.style.display = "";
+		}
+	}
+
+	/**
+	 * conditional header section display for false spacing issue
+	 */
+	headerSectionDisplay() {
+		if (!this.hasLabel && !this.hasDescription && !this.maxSize) {
+			this.fileUploadHeader.style.display = "none";
+		} else {
+			this.fileUploadHeader.style.display = "";
+		}
+		if (!this.hasLabel) {
+			this.labelSlot.style.display = "none";
+		}
+	}
+
 	render() {
 		//max-size removing space
 		const maxSizeTemp = this.maxSize?.split(" ").join("");
@@ -360,38 +418,34 @@ export class FFileUpload extends FRoot {
 		}
 		// render empty string, since there no need of any child element
 		return html`
-			<f-div direction="column" width="100%">
-				<f-div padding="none" gap="none" align="bottom-left">
-					<f-div padding="none" direction="column" width="fill-container">
+			<f-div direction="column" gap="x-small">
+				<f-div padding="none" gap="x-small" align="bottom-left" id="f-file-upload-header">
+					<f-div padding="none" direction="column" width="fill-container" gap="x-small">
 						<f-div
 							padding="none"
 							gap="small"
 							direction="row"
 							width="hug-content"
 							height="hug-content"
+							id="label-slot"
 						>
 							<f-div padding="none" direction="row" width="hug-content" height="hug-content">
-								<slot name="label" @slotchange=${this._onLabelSlotChange}></slot>
+								<slot name="label"></slot>
 							</f-div>
 							<slot name="icon-tooltip"></slot>
 						</f-div>
-						${this._hasLabel ? html` <f-spacer size="4px"></f-spacer>` : ""}
-						<slot name="description" @slotchange=${this._onDescriptionSlotChange}></slot>
-						${this._hasDescription ? html` <f-spacer size="4px"></f-spacer>` : ""}
+						<slot name="description"></slot>
 					</f-div>
-					<f-div direction="column" width="hug-content">
-						<f-div gap="none" width="hug-content">
-							${this.maxSize
-								? html` <f-text variant="para" size="small" weight="regular" state="secondary"
-										>${this.type === "single" ? "Max Size: " : "Max Size/file: "}${this
-											.maxSize}</f-text
-								  >`
-								: null}
-						</f-div>
-						${this.maxSize ? html` <f-spacer size="4px"></f-spacer>` : ""}
+					<f-div width="hug-content">
+						${this.maxSize
+							? html` <f-text variant="para" size="small" weight="regular" state="secondary"
+									>${this.type === "single" ? "Max Size: " : "Max Size/file: "}${this
+										.maxSize}</f-text
+							  >`
+							: null}
 					</f-div>
 				</f-div>
-				<f-div direction="column" width="100%">
+				<f-div direction="column" gap="x-small">
 					<div
 						class="f-file-upload"
 						tabindex="1"
@@ -452,77 +506,49 @@ export class FFileUpload extends FRoot {
 							@input=${this.selectFile}
 						/>
 					</div>
-					<f-div direction="column">
-						${this._hasHelperText ? html`<f-spacer size="6px"></f-spacer>` : ""}
-						${this.sizeLimitFlag && this.acceptedFilesFlag
-							? html`<slot name="help" @slotchange=${this._onHelpSlotChange}></slot>`
-							: html` ${!this.acceptedFilesFlag
-									? html` <f-spacer size="6px"></f-spacer>
-											<f-text variant="para" size="small" weight="regular" state="danger"
-												>${this.type === "single"
-													? "File format not supported"
-													: "One or more file formats not supported"}</f-text
-											>`
-									: !this.sizeLimitFlag
-									? html` <f-spacer size="6px"></f-spacer>
-											<f-text variant="para" size="small" weight="regular" state="danger"
-												>${this.type === "single"
-													? "File Size too large"
-													: "One or more files are too large"}</f-text
-											>`
-									: ""}`}
-						${this.type === "multiple" && (this.value as File[])?.length > 0
-							? html`<f-spacer size="6px"></f-spacer>`
-							: ""}
-					</f-div>
-					<f-div direction="column" width="100%" gap="small">
-						${this.type === "multiple"
-							? (this.value as File[])?.length > 0
-								? html`${(this.value as File[]).map(
-										item =>
-											html`<f-div padding="medium" state="tertiary" variant="curved" gap="auto">
-												<f-div width="80%" id="multiple-file-selection">
-													<f-text
-														variant="para"
-														size="medium"
-														weight="regular"
-														?ellipsis=${true}
-														@mouseenter=${this.handleMouseEnter}
-														>${item.name}</f-text
-													>
-												</f-div>
-												<f-icon
-													source="i-close"
-													size="small"
-													clickable
-													@click=${(e: MouseEvent) => this.handleRemoveRespectiveFile(e, item)}
-												></f-icon>
-											</f-div>`
-								  )}`
-								: ""
-							: ""}
-					</f-div>
+					<f-div direction="column" id="f-file-upload-error"> </f-div>
+					${(this.value as File[])?.length > 0
+						? html` <f-div direction="column" gap="small">
+								${this.type === "multiple"
+									? html`${(this.value as File[]).map(
+											item =>
+												html`<f-div padding="medium" state="tertiary" variant="curved" gap="auto">
+													<f-div width="80%" id="multiple-file-selection">
+														<f-text
+															variant="para"
+															size="medium"
+															weight="regular"
+															?ellipsis=${true}
+															@mouseenter=${this.handleMouseEnter}
+															>${item.name}</f-text
+														>
+													</f-div>
+													<f-icon
+														source="i-close"
+														size="small"
+														clickable
+														@click=${(e: MouseEvent) => this.handleRemoveRespectiveFile(e, item)}
+													></f-icon>
+												</f-div>`
+									  )}`
+									: ""}
+						  </f-div>`
+						: ""}
 				</f-div>
 			</f-div>
 		`;
 	}
 	updated() {
 		//update the selectedFiles as per the value being fetched
-		this.selectedFiles = this.value
-			? Array.isArray(this.value)
-				? this.value
-				: ([this.value] as File[])
-			: [];
+		this.updateSelectedValues();
 
 		//check if ellipsis is present
 		this.checkOverflowing();
 
-		//if size limit exceeds or file doesn't support the format - danger state attribute is added
-		if (this.acceptedFilesFlag && this.sizeLimitFlag) {
-			this.fileUploadSection.removeAttribute("data-state");
-		} else {
-			this.fileUploadSection.setAttribute("data-state", "danger");
-		}
+		//check for slot spacing issue of slots not present
+		this.headerSectionDisplay();
+
+		this.helpSectionMessages();
 	}
 }
 

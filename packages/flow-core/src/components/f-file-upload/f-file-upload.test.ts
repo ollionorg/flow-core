@@ -4,7 +4,7 @@ import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 // import flow-core elements
 import "@cldcvr/flow-core";
 
-import { ConfigUtil, FText, FFileUpload } from "@cldcvr/flow-core";
+import { ConfigUtil, FText, FFileUpload, FDiv } from "@cldcvr/flow-core";
 // importing `loadingSVG` to cross check
 import loadingSVG from "../../mixins/svg/loader";
 
@@ -38,7 +38,7 @@ describe("f-file-upload", () => {
 		expect(ftext.innerHTML).includes("Drag and Drop Files or Click here to upload");
 	});
 
-	it("should render with value", async () => {
+	it("should render with value for single file selection type", async () => {
 		const el = await fixture(
 			html` <f-file-upload .value=${new File(["test"], "test.pdf")}></f-file-upload> `
 		);
@@ -46,5 +46,18 @@ describe("f-file-upload", () => {
 		const ftext = descendant.innerHTML;
 		expect(descendant).instanceOf(FText);
 		expect(ftext).includes("test.pdf");
+	});
+
+	it("should render with value array for multiple file selection type", async () => {
+		const el = await fixture(
+			html`
+				<f-file-upload .value=${[new File(["test"], "test.pdf")]} type="multiple"></f-file-upload>
+			`
+		);
+		const descendant = el.shadowRoot!.querySelectorAll("#multiple-file-selection")!;
+		// expect(descendant[0]).instanceOf(FDiv);
+		console.log(descendant[0], el.shadowRoot?.querySelectorAll("#abc"));
+		expect(descendant).length(1);
+		expect(descendant[0].children[0].innerHTML).includes("test.pdf");
 	});
 });

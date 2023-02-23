@@ -480,8 +480,14 @@ export class FFileUpload extends FRoot {
 							? (this.value as File[])?.length > 0
 								? html`${(this.value as File[]).map(
 										item =>
-											html`<f-div padding="medium" state="tertiary" variant="curved" gap="auto">
-												<f-div width="80%">
+											html`<f-div
+												padding="medium"
+												state="tertiary"
+												variant="curved"
+												gap="auto"
+												id="abc"
+											>
+												<f-div width="80%" id="multiple-file-selection">
 													<f-text
 														variant="para"
 														size="medium"

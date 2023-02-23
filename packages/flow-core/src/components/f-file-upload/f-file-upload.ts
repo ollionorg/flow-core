@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-file-upload.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ref, createRef, Ref } from "lit/directives/ref.js";

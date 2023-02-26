@@ -4,7 +4,12 @@
 
 # Change Log
 
-## [1.3.9] - 2023-02-23
+## [1.4.0] - 2023-02-26
+
+### Bug fixes
+
+- `f-select` value not setting bug fixed.
+## [1.3.9] - 2023-02-26
 
 ### Improvements
 

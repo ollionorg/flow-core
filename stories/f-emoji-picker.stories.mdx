@@ -42,10 +42,6 @@ f-input is an input element.
 				control: "select",
 				options: ["fill", "transparent", "outline"]
 			},
-			type: {
-				control: "select",
-				options: ["text", "number", "email", "password", "url", "tel"]
-			},
 			state: {
 				control: "select",
 				options: ["default", "success", "primary", "warning", "danger"]
@@ -54,53 +50,66 @@ f-input is an input element.
 				control: "radio",
 				options: ["small", "medium"]
 			},
-			["icon-left"]: {
-				control: "text"
-			},
-			["icon-right"]: {
-				control: "text"
-			},
-			["prefix"]: {
-				control: "text"
-			},
-			["suffix"]: {
-				control: "text"
-			},
-			loading: {
-				control: "boolean"
-			},
 			disabled: {
-				control: "boolean"
-			},
-			readOnly: {
 				control: "boolean"
 			},
 			clear: {
 				control: "boolean"
 			},
-			["max-length"]: {
-				control: "text"
+			include: {
+				control: "object"
+			},
+			exclude: {
+				control: "object"
+			},
+			["exclude-emojis"]: {
+				control: "object"
+			},
+			custom: {
+				control: "object"
+			},
+			recent: {
+				control: "object"
+			},
+			resizable: {
+				control: "boolean"
+			},
+			["close-on-select"]: {
+				control: "boolean"
 			}
 		}}
 		args={{
-			value: "😍",
+			value: undefined,
 			placeholder: "Enter your text here",
 			variant: "round",
 			category: "fill",
 			type: "text",
 			state: "default",
 			size: "medium",
-			slot: `             <f-text slot="label" variant="para" size="small">Label</f-text>
-              <f-text slot="help" variant="para" size="small">Help!</f-text>`,
-			["icon-left"]: undefined,
-			["icon-right"]: undefined,
-			["prefix"]: undefined,
-			["suffix"]: undefined,
-			["max-length"]: undefined,
-			loading: false,
 			disabled: false,
-			readOnly: false,
-			clear: false
+			clear: true,
+			["close-on-select"]: false,
+			resizable: false,
+			recent: ["office", "compass", "luggage", "hourglass", "gem", "computer"],
+			include: [],
+			exclude: [],
+			["exclude-emojis"]: [],
+			custom: [
+				{
+					id: "github",
+					name: "GitHub",
+					emojis: [
+						{
+							id: "octocat",
+							name: "Octocat",
+							keywords: ["github"],
+							skins: [{ src: "https://octodex.github.com/images/snowoctocat.png" }]
+						}
+					]
+				}
+			],
+			slot: `             <f-text slot="label" variant="para" size="small">Label</f-text>
+              <f-text slot="help" variant="para" size="small">Help!</f-text>`
 		}}
 	>
 		{args => {
@@ -118,7 +127,15 @@ f-input is an input element.
 							.placeholder=${args.placeholder}
 							.category=${args.category}
 							.variant=${args.variant}
+							.recent=${args.recent}
+							.include=${args.include}
+							.exclude=${args.exclude}
+							.exclude-emojis=${args["exclude-emojis"]}
+							.custom=${args.custom}
 							?disabled=${args.disabled}
+							?clear=${args.clear}
+							?resizable=${args.resizable}
+							.close-on-select=${args["close-on-select"]}
 							@input=${handleInput}
 						>
 							${unsafeHTML(args.slot)}

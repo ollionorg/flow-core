@@ -135,19 +135,75 @@ f-emoji-picker {
 }
 
 em-emoji-picker {
-	// --background-rgb: 85, 170, 255;
-	// --color-border-over: rgba(0, 0, 0, 0.1);
 	--font-family: var(--flow-font);
 	--color-border: var(--color-surface-tertiary);
-	--rgb-background: var(--color-emoji-picker-background);
-	--rgb-color: var(--color-emoji-picker-text);
-	--rgb-input: var(--color-emoji-picker-input);
-	--shadow: 5px 5px 15px -8px rgb(67, 207, 165);
-	--rgb-accent: var(--color-emoji-picker-accent);
-
 	--border-radius: 4px;
-	width: 400px;
-	min-width: 250px;
-	resize: horizontal;
-	overflow: auto;
+	&[resizable] {
+		//resizable picker
+		width: 352px;
+		min-width: 250px;
+		resize: horizontal;
+		overflow: auto;
+	}
+}
+
+section#root {
+	background-color: var(--color-surface-secondary);
+	color: var(--color-text-default);
+}
+
+section#root .sticky {
+	background-color: rgba(var(--color-surface-secondary), 1);
+}
+
+section#root .search input[type="search"] {
+	color: var(--color-text-default);
+	&:focus {
+		background-color: var(--color-surface-secondary);
+		border: 1px solid var(--color-primary-default);
+		outline: none;
+	}
+}
+section#root .search .icon {
+	color: rgba(var(--color-text-default), 0.7);
+}
+
+section #nav button[aria-selected] {
+	color: var(--color-primary-default);
+	&:hover {
+		color: var(--color-primary-default);
+	}
+}
+
+section #nav button {
+	color: var(--color-text-default);
+	&:hover {
+		color: var(--color-text-default-hover);
+	}
+}
+
+section#root #nav .bar {
+	background-color: var(--color-primary-default);
+}
+
+section#root .scroll {
+	padding-right: 7px;
+}
+section#root .scroll::-webkit-scrollbar-thumb {
+	border: none;
+}
+section#root .scroll::-webkit-scrollbar {
+	width: 5px;
+}
+
+section#root #preview .preview-placeholder {
+	color: var(--color-text-default);
+}
+
+section#root #preview .preview-title {
+	color: var(--color-text-default);
+}
+
+section#root #preview .color-c {
+	color: var(--color-text-default);
 }

@@ -2,13 +2,54 @@ import { html, unsafeCSS } from "lit";
 import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-emoji-picker.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import data from "@emoji-mart/data";
+import data, { Category, EmojiMartData } from "@emoji-mart/data";
 import { Picker } from "emoji-mart";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import { FPopover } from "../f-popover/f-popover";
 
 export type FEmojiPickerState = "primary" | "default" | "success" | "warning" | "danger";
+
+export type FEmojiPickerCategories =
+	| "activity"
+	| "flags"
+	| "foods"
+	| "frequent"
+	| "nature"
+	| "objects"
+	| "people"
+	| "places"
+	| "symbols";
+
+export type FEmojiPickerIncludesCategories = FEmojiPickerCategories[];
+export type FEmojiPickerExcludesCategories = FEmojiPickerCategories[];
+
+export type EmojiSkins = {
+	src: string;
+};
+
+export type Emoji = {
+	emoticons?: string[];
+	id: string;
+	keywords?: string[];
+	name: string;
+	native?: string | undefined;
+	shortcodes?: string;
+	unified?: string;
+	skins?: EmojiSkins[];
+	src?: string;
+};
+
+export type FEmojiPickerCustomEmoji = {
+	id: string;
+	name?: string;
+	emojis: string[];
+};
+
+export type FEmojiPickerCustomEmojiData = FEmojiPickerCustomEmoji[];
+
+export type RecentEmojis = string[];
+export type ExcludeEmojis = string[];
 
 @customElement("f-emoji-picker")
 export class FEmojiPicker extends FRoot {
@@ -18,43 +59,94 @@ export class FEmojiPicker extends FRoot {
 	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles, ...FPopover.styles];
 
 	/**
-	 * @attribute Variants are various visual representations of an input field.
+	 * @attribute Variants are various visual representations of emoji picker.
 	 */
 	@property({ reflect: true, type: String })
 	variant?: "curved" | "round" | "block" = "curved";
 
 	/**
-	 * @attribute Categories are various visual representations of an input field.
+	 * @attribute Categories are various visual representations of emoji picker.
 	 */
 	@property({ reflect: true, type: String })
 	category?: "fill" | "outline" | "transparent" = "fill";
 
 	/**
-	 * @attribute Defines the value of an f-input. Validation rules are applied on the value depending on the type property of the f-text-input.
+	 * @attribute Defines the value of f-emoji-picker
 	 */
 	@property({ reflect: true, type: String })
 	value?: string;
 
+	/**
+	 * @attribute Defines the placeholder of f-emoji-picker
+	 */
 	@property({ reflect: true, type: String })
 	placeholder?: string;
 
+	/**
+	 * @attribute Defines the size of f-emoji-picker. size can be two types - `medium` | `small`
+	 */
 	@property({ reflect: true, type: String })
 	size?: "medium" | "small" = "medium";
 
+	/**
+	 * @attribute States are used to communicate purpose and connotations.
+	 */
 	@property({ reflect: true, type: String })
 	state?: FEmojiPickerState = "default";
 
 	/**
-	 * @attribute Sets the file-upload to disabled state.
+	 * @attribute recent decides the emojis that are frequenlt added inside emoji picker.
+	 */
+	@property({ reflect: true, type: Array })
+	recent?: RecentEmojis = [];
+
+	/**
+	 * @attribute Only load included categories.
+	 */
+	@property({ reflect: true, type: Array })
+	include?: FEmojiPickerIncludesCategories = [];
+
+	/**
+	 * @attribute remove excluded categories
+	 */
+	@property({ reflect: true, type: Array })
+	exclude?: FEmojiPickerExcludesCategories = [];
+
+	/**
+	 * @attribute List of emoji IDs that will be excluded from the picker
+	 */
+	@property({ reflect: true, type: Array })
+	["exclude-emojis"]?: ExcludeEmojis = [];
+
+	/**
+	 * @attribute add custom emojis array
+	 */
+	@property({ reflect: true, type: Array })
+	custom?: FEmojiPickerCustomEmojiData = [];
+
+	/**
+	 * @attribute if true close picker popover on value select
+	 */
+	@property({ reflect: true, type: Boolean })
+	["close-on-select"]?: boolean = false;
+
+	/**
+	 * @attribute if true picker can be resized
+	 */
+	@property({ reflect: true, type: Boolean })
+	resizable?: boolean = false;
+
+	/**
+	 * @attribute show/remove clear icon
+	 */
+	@property({ reflect: true, type: Boolean })
+	clear?: boolean = true;
+
+	/**
+	 * @attribute Sets the f-emoji-picker to disabled state.
 	 */
 	@property({ reflect: true, type: Boolean })
 	disabled?: boolean = false;
-
-	/**
-	 * @attribute Sets the file-upload to loading state
-	 */
-	@property({ reflect: true, type: Boolean })
-	loading?: boolean = false;
 
 	/**
 	 * @attribute assigned elements inside slot label
@@ -95,6 +187,20 @@ export class FEmojiPicker extends FRoot {
 	@query(".f-emoji-picker-popover")
 	emojiPickerPopover!: FPopover;
 
+	picker?: Picker;
+
+	categories = [
+		"frequent",
+		"people",
+		"nature",
+		"foods",
+		"activity",
+		"places",
+		"objects",
+		"symbols",
+		"flags"
+	];
+
 	/**
 	 * has label slot
 	 */
@@ -116,6 +222,44 @@ export class FEmojiPicker extends FRoot {
 		return this._helpNodes.length > 0;
 	}
 
+	/**
+	 * icon size
+	 */
+	get iconSize() {
+		if (this.size === "medium") return "small";
+		else if (this.size === "small") return "x-small";
+		else return undefined;
+	}
+
+	/**
+	 * exclude categories
+	 */
+	get excludeCategories() {
+		if (this.exclude && this.exclude.length > 0) {
+			const excludeSet = new Set(this.exclude);
+			const displayCategories = this.categories.filter(category => {
+				return !excludeSet.has(category as FEmojiPickerCategories);
+			});
+			return displayCategories;
+		} else {
+			return [];
+		}
+	}
+
+	/**
+	 * categories to be displayed for picker according to inclide amd exclude
+	 */
+	get categroiesToDisplay() {
+		return this.include && this.include.length > 0
+			? this.include
+			: this.excludeCategories.length > 0
+			? this.excludeCategories
+			: this.categories;
+	}
+
+	/**
+	 * header slot display
+	 */
 	headerSectionDisplay() {
 		if (!this.hasLabel && !this.hasDescription) {
 			this.emojiPickerHeader.style.display = "none";
@@ -127,6 +271,9 @@ export class FEmojiPicker extends FRoot {
 		}
 	}
 
+	/**
+	 * help section display
+	 */
 	helpSectionDisplay() {
 		if (!this.hasHelperText) {
 			this.emojiPickerError.style.display = "none";
@@ -135,59 +282,140 @@ export class FEmojiPicker extends FRoot {
 		}
 	}
 
+	/**
+	 * open/close picker
+	 * @param value boolean
+	 */
 	toggleEmojiPicker(value: boolean) {
 		this.emojiPickerPopover.target = this.emojiPicker;
 		this.emojiPickerPopover.open = value;
 	}
 
-	handleSelectEmoji(valuePicked: any) {
+	/**
+	 *
+	 * @param valuePicked emoji as value
+	 */
+	handleSelectEmoji(valuePicked?: Emoji) {
 		// e.stopPropagation();
 		/**
 		 * @event input
 		 */
 		const event = new CustomEvent("input", {
 			detail: {
-				value: valuePicked.native
+				value: valuePicked ? valuePicked.native ?? valuePicked.src : ""
 			},
 			bubbles: true,
 			composed: true
 		});
-		this.value = valuePicked.native;
+		this.value = valuePicked ? valuePicked.native ?? valuePicked.src : "";
 		this.dispatchEvent(event);
-		this.toggleEmojiPicker(false);
-	}
-
-	clearValue(e: MouseEvent) {
-		e.stopPropagation();
-		this.handleSelectEmoji("");
+		if (this["close-on-select"]) {
+			this.toggleEmojiPicker(false);
+		}
 	}
 
 	/**
-	 * icon size
+	 * clear emoji value
+	 * @param e MouseEvent
 	 */
-	get iconSize() {
-		if (this.size === "medium") return "small";
-		else if (this.size === "small") return "x-small";
-		else return undefined;
+	clearValue(e: MouseEvent) {
+		e.stopPropagation();
+		this.handleSelectEmoji();
+	}
+
+	/**
+	 * picker resize
+	 */
+	handleResizablePicker() {
+		const emEmojiPicker = this.emojiPickerPopover.children[0];
+		if (this.resizable && this.picker) {
+			emEmojiPicker.setAttribute("resizable", "true");
+		} else {
+			emEmojiPicker.removeAttribute("resizable");
+		}
+	}
+
+	/**
+	 * add recently used emojis
+	 */
+	handleFrequentEmojiCategory() {
+		if (this.recent && this.recent?.length > 0) {
+			(data as EmojiMartData).categories.forEach((item: Category) => {
+				if (item.id === "frequent") {
+					item.emojis = this.recent as string[];
+				}
+			});
+		}
+	}
+
+	/**
+	 * handle custom emoji insertion
+	 */
+	handleCustomEmoji() {
+		if (this.custom && this.custom?.length > 0) {
+			this.custom?.forEach(item => {
+				(data as EmojiMartData).categories.push(item);
+			});
+		}
 	}
 
 	render() {
 		/**
-		 * click outside the f-select wrapper area
+		 * click outside the f-emoji wrapper area
 		 */
 		window.addEventListener("click", (e: MouseEvent) => {
 			if (!this.contains(e.target as HTMLInputElement) && this.emojiPickerPopover.open) {
 				this.emojiPickerPopover.open = false;
 			}
 		});
-		const temp = new Picker({
-			data: data,
-			onEmojiSelect: (e: any) => {
+
+		/**
+		 * initiate picker component
+		 */
+		this.picker = new Picker({
+			data,
+			onEmojiSelect: (e: Emoji) => {
 				this.handleSelectEmoji(e);
 			},
-			dynamicWidth: true
-			// theme: "dark"
+			dynamicWidth: this.resizable,
+			icons: "solid",
+			skinTonePosition: "none",
+			categories: this.categroiesToDisplay,
+			custom: this.custom,
+			autoFocus: true,
+			exceptEmojis: this["exclude-emojis"]
 		});
+
+		/**
+		 * assign styling to picker component
+		 */
+		this.picker?.injectStyles(unsafeCSS(eleStyle));
+
+		/**
+		 * clear conditional display
+		 */
+		const clearIcon = this.clear
+			? html` <f-div>
+					${this.value
+						? html` <f-icon
+								source="i-close"
+								.size=${this.iconSize}
+								clickable
+								@click=${this.clearValue}
+						  ></f-icon>`
+						: ""}
+			  </f-div>`
+			: "";
+
+		/**
+		 * conditional display of inpu value or plcaeholder
+		 */
+		const inputValue = this.value
+			? html`<f-icon .source=${this.value} .size=${this.size}></f-icon>`
+			: html`<f-text variant="para" size="small" weight="regular" state="subtle" ?ellipsis=${true}
+					>${this.placeholder}</f-text
+			  >`;
+
 		// render empty string, since there no need of any child element
 		return html`
 			<f-div direction="column" gap="x-small">
@@ -220,42 +448,39 @@ export class FEmojiPicker extends FRoot {
 					@click=${() => this.toggleEmojiPicker(true)}
 				>
 					<f-div
+						id="emoji-value"
 						width="80%"
 						height="100%"
 						?placeholder=${this.value ? false : true}
 						size=${this.size}
 						align="middle-left"
 					>
-						${this.value ??
-						html`<f-text
-							variant="para"
-							size="small"
-							weight="regular"
-							state="subtle"
-							?ellipsis=${true}
-							>${this.placeholder}</f-text
-						>`}
+						${inputValue}
 					</f-div>
-					<!-- <div>${this.value ?? this.placeholder}</div> -->
-					<f-div>
-						${this.value
-							? html` <f-icon
-									source="i-close"
-									.size=${this.iconSize}
-									clickable
-									@click=${this.clearValue}
-							  ></f-icon>`
-							: ""}
-					</f-div>
+					${clearIcon}
 				</div>
 				<f-div direction="column" id="f-emoji-picker-error"><slot name="help"></slot> </f-div>
 			</f-div>
-			<f-popover class="f-emoji-picker-popover" .overlay=${false}> ${temp} </f-popover>
+			<f-popover class="f-emoji-picker-popover" .overlay=${false}
+				><f-div>${this.picker}</f-div></f-popover
+			>
 		`;
 	}
 	updated() {
+		// header section-slot display
 		this.headerSectionDisplay();
+
+		// help section-slot display
 		this.helpSectionDisplay();
+
+		// handle resizable picker
+		this.handleResizablePicker();
+
+		// insert recent emojis
+		this.handleFrequentEmojiCategory();
+
+		// custom emoji insertion
+		this.handleCustomEmoji();
 	}
 }
 

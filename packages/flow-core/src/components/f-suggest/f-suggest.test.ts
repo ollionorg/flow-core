@@ -22,7 +22,7 @@ describe("f-suggest", () => {
 				"Suggestion 2",
 				"Suggestion 3",
 				"Suggestion 4"
-			]} ></f-checkbox> `
+			]} ></f-suggest> `
 		);
 		await el.updateComplete;
 		const listner = oneEvent(el.fInput, "focus");
@@ -38,7 +38,7 @@ describe("f-suggest", () => {
 				"Suggestion 2",
 				"Suggestion 3",
 				"Suggestion 4"
-			]} ></f-checkbox> `
+			]} ></f-suggest> `
 		);
 		await el.updateComplete;
 		const listner = oneEvent(el.fInput, "focus");
@@ -67,7 +67,7 @@ describe("f-suggest", () => {
 				"Suggestion 2",
 				"filter 3",
 				"filter 4"
-			]} value="filter"></f-checkbox> `
+			]} value="filter"></f-suggest> `
 		);
 
 		await el.updateComplete;

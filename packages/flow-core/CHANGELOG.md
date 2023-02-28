@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.4.1] - 2023-02-28
+
+### Features
+
+- `f-suggest` element added.
 ## [1.4.0] - 2023-02-26
 
 ### Bug fixes

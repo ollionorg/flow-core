@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, queryAssignedElements, state } from "lit/decorators.js";
+import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
 import eleStyle from "./f-input.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -7,6 +7,7 @@ import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
+import { ifDefined } from "lit-html/directives/if-defined.js";
 
 export type FInputState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -110,7 +111,7 @@ export class FInput extends FRoot {
 	/**
 	 * @attribute This shows the character count while typing and auto limits after reaching the max length.
 	 */
-	@property({ reflect: true, type: Number, attribute: "max-length" })
+	@property({ reflect: true, type: [Number, undefined], attribute: "max-length" })
 	maxLength?: number;
 
 	/**
@@ -139,6 +140,12 @@ export class FInput extends FRoot {
 
 	@property({ reflect: false, type: Function })
 	suffixWhen?: FInputSuffixWhen;
+
+	/**
+	 * input element reference
+	 */
+	@query("input")
+	inputElement!: HTMLInputElement;
 
 	/**
 	 * emit input custom event
@@ -367,7 +374,7 @@ export class FInput extends FRoot {
 							.value="${this.value || ""}"
 							size=${this.size}
 							?readonly=${this.readOnly}
-							maxlength="${this.maxLength}"
+							maxlength="${ifDefined(this.maxLength)}"
 							@input=${this.handleInput}
 						/>
 						${suffixAppend}

@@ -125,6 +125,7 @@ export class FFormGroup extends FRoot {
 											variant="heading"
 											size="small"
 											weight="regular"
+											data-qa-label-for=${this.dataset["qaId"]}
 											.state=${this.collapse === "text" ? "primary" : "default"}
 										>
 											${this.collapse === "text"
@@ -146,6 +147,7 @@ export class FFormGroup extends FRoot {
 												source="i-question-filled"
 												size="small"
 												state="default"
+												data-qa-info-icon-for=${this.dataset["qaId"]}
 												.tooltip="${this.label?.iconTooltip}"
 												clickable
 										  ></f-icon>`

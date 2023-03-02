@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.4.2] - 2023-03-02
+
+### Features
+
+- `data-qa-*` attributes added in `f-select` and `f-form-group`.
 ## [1.4.1] - 2023-02-28
 
 ### Features

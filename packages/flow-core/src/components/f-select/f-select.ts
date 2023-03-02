@@ -1067,6 +1067,7 @@ export class FSelect extends FRoot {
 												html`<f-div
 													class="f-select-options-clickable"
 													padding="medium"
+													data-qa-option
 													height="hug-content"
 													width="fill-container"
 													direction="row"
@@ -1148,6 +1149,7 @@ export class FSelect extends FRoot {
                   >
                     <f-div
                       class="f-select-options-clickable"
+					  data-qa-option
                       padding="medium"
                       height="hug-content"
                       width="fill-container"
@@ -1178,6 +1180,7 @@ export class FSelect extends FRoot {
 													html`
 														<f-div
 															class="f-select-options-clickable"
+															data-qa-option
 															padding="medium x-large"
 															height="hug-content"
 															width="fill-container"

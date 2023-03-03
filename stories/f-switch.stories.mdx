@@ -6,10 +6,10 @@ import fSwitchAnatomy from "./svg/i-fswitch-anatomy.js";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <Meta
-  title="Components/f-switch"
-  parameters={{
-    controls: { hideNoControlsWarning: true },
-  }}
+	title="Components/f-switch"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
 />
 
 # f-switch
@@ -21,61 +21,61 @@ import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <f-divider></f-divider>
 
-f-switch allows a user to turn an individual option on/off. The change in selection takes place immediately unlike checkboxes and radio buttons.
+f-switch allows a user to turn an individual option true/false. The change in selection takes place immediately unlike checkboxes and radio buttons.
 
 <br />
 
 ### [Playground](/story/components-f-switch--playground)
 
 <Canvas>
-  <Story
-    name="Playground"
-    argTypes={{
-      value: { control: "radio", options: ["on", "off"] },
-      state: {
-        control: "select",
-        options: ["default", "success", "primary", "warning", "danger"],
-      },
-      size: {
-        control: "radio",
-        options: ["small", "medium"],
-      },
-      slot: { control: "text" },
-      disabled: {
-        control: "boolean",
-      },
-    }}
-    args={{
-      value: "on",
-      state: "default",
-      size: "medium",
-      slot: ` <f-div padding="none" align="middle-center" slot="label">
+	<Story
+		name="Playground"
+		argTypes={{
+			value: { control: "boolean" },
+			state: {
+				control: "select",
+				options: ["default", "success", "primary", "warning", "danger"]
+			},
+			size: {
+				control: "radio",
+				options: ["small", "medium"]
+			},
+			slot: { control: "text" },
+			disabled: {
+				control: "boolean"
+			}
+		}}
+		args={{
+			value: true,
+			state: "default",
+			size: "medium",
+			slot: ` <f-div padding="none" align="middle-center" slot="label">
               <f-text variant="para" size="small">Switch</f-text>
             </f-div>
             <f-div padding="none" align="middle-center" slot="help">
               <f-text variant="para" size="small">This is helper text</f-text>
             </f-div>`,
-      disabled: false,
-    }}
-  >
-    {(args) => {
-      const [_, updateArgs] = useArgs();
-      const handleInput = (e) => {
-        updateArgs({ value: e.detail.value });
-      };
-      return html`
-        <f-switch
-          size=${args.size}
-          value=${args.value}
-          state=${args.state}
-          ?disabled=${args.disabled}
-          @input=${handleInput}
-        >
-          ${unsafeHTML(args.slot)}
-        </f-switch>
-      `;
-    }}
-  </Story>
+			disabled: false
+		}}
+	>
+		{args => {
+			const [_, updateArgs] = useArgs();
+			const handleInput = e => {
+				updateArgs({ value: e.detail.value });
+			};
+			return html`
+				<f-switch
+					size=${args.size}
+					value=${args.value}
+					state=${args.state}
+					?disabled=${args.disabled}
+					@input=${handleInput}
+				>
+					${unsafeHTML(args.slot)}
+				</f-switch>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <br />
@@ -85,7 +85,7 @@ f-switch allows a user to turn an individual option on/off. The change in select
 <f-divider></f-divider>
 
 <Story name="Anatomy">
-  {() => html`<div class="align-center">${unsafeSVG(fSwitchAnatomy)}</div>`}
+	{() => html`<div class="align-center">${unsafeSVG(fSwitchAnatomy)}</div>`}
 </Story>
 
 <br />
@@ -95,17 +95,17 @@ f-switch allows a user to turn an individual option on/off. The change in select
 Value of a radio defines if it is selected, unselected.
 
 <Canvas>
-  <Story name="value">
-    {(args) => {
-      const values = ["on", "off"];
-      const [value, setValue] = useState("on");
-      const handleValue = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div width="100%" align="middle-center" padding="large" gap="medium">
-          ${values.map(
-            (item) => html`<f-div padding="medium">
+	<Story name="value">
+		{args => {
+			const values = [true, false];
+			const [value, setValue] = useState(true);
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large" gap="medium">
+					${values.map(
+						item => html`<f-div padding="medium">
            <f-switch
               size="medium"
               .value=${item}
@@ -120,33 +120,33 @@ Value of a radio defines if it is selected, unselected.
             </f-switch></f-div
         ></f-div
       >`
-          )}
-        </f-div>
-      `;
-    }}
-  </Story>
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>on</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>off</td>
-      <td></td>
-      <td>
-        <code>default</code>
-      </td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>true</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>false</td>
+			<td></td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -158,17 +158,17 @@ Value of a radio defines if it is selected, unselected.
 f-radio can have 2 sizes.
 
 <Canvas>
-  <Story name="size">
-    {(args) => {
-      const sizes = ["small", "medium"];
-      const [value, setValue] = useState("off");
-      const handleValue = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div width="100%" align="top-center" padding="large" gap="medium">
-          ${sizes.map(
-            (item) => html`<f-div padding="small">
+	<Story name="size">
+		{args => {
+			const sizes = ["small", "medium"];
+			const [value, setValue] = useState(false);
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="top-center" padding="large" gap="medium">
+					${sizes.map(
+						item => html`<f-div padding="small">
          <f-switch
               .size=${item}
               .value=${value}
@@ -183,31 +183,31 @@ f-radio can have 2 sizes.
             </f-switch></f-div
         ></f-div
       >`
-          )}
-        </f-div>
-      `;
-    }}
-  </Story>
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>small</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>medium</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>small</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>medium</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -219,75 +219,75 @@ f-radio can have 2 sizes.
 States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
 
 <Canvas>
-  <Story name="state">
-    {(args) => {
-      const states = [
-        ["default", "primary", "success"],
-        ["danger", "warning", "default"],
-      ];
-      const [value, setValue] = useState("on");
-      const handleValue = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div direction="column" gap="medium">
-          ${states.map(
-            (item) => html` <f-div align="middle-center" padding="large" gap="medium">
-              ${item.map(
-                (state) => html`<f-div padding="small"
-                  ><f-switch size="medium" .value=${value} .state=${state} @input=${handleValue}>
-                    <f-div padding="none" align="middle-center" slot="label">
-                      <f-text variant="para" size="small">Switch (state="${state}")</f-text>
-                    </f-div>
-                    <f-div padding="none" align="middle-center" slot="help">
-                      <f-text variant="para" size="small">This is helper text</f-text>
-                    </f-div>
-                  </f-switch></f-div
-                >`
-              )}
-            </f-div>`
-          )}
-        </f-div>
-      `;
-    }}
-  </Story>
+	<Story name="state">
+		{args => {
+			const states = [
+				["default", "primary", "success"],
+				["danger", "warning", "default"]
+			];
+			const [value, setValue] = useState(true);
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div direction="column" gap="medium">
+					${states.map(
+						item => html` <f-div align="middle-center" padding="large" gap="medium">
+							${item.map(
+								state => html`<f-div padding="small"
+									><f-switch size="medium" .value=${value} .state=${state} @input=${handleValue}>
+										<f-div padding="none" align="middle-center" slot="label">
+											<f-text variant="para" size="small">Switch (state="${state}")</f-text>
+										</f-div>
+										<f-div padding="none" align="middle-center" slot="help">
+											<f-text variant="para" size="small">This is helper text</f-text>
+										</f-div>
+									</f-switch></f-div
+								>`
+							)}
+						</f-div>`
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>default</td>
-      <td></td>
-      <td>
-        <code>default</code>
-      </td>
-    </tr>
-    <tr>
-      <td>primary</td>
-      <td></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>success</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>danger</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>warning</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>default</td>
+			<td></td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>primary</td>
+			<td></td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td>success</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>danger</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>warning</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -299,16 +299,16 @@ States are used to communicate purpose and connotations. For example, a red colo
 <br />
 
 <Canvas>
-  <Story name="Flags">
-    {(args) => {
-      const [value, setValue] = useState("on");
-      const handleValue = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div width="100%" align="top-center" padding="large" gap="medium">
-          ${[0].map(
-            (item) => html`<f-div>
+	<Story name="Flags">
+		{args => {
+			const [value, setValue] = useState(true);
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="top-center" padding="large" gap="medium">
+					${[0].map(
+						item => html`<f-div>
          <f-switch
               size="medium"
               .value=${value}
@@ -324,28 +324,28 @@ States are used to communicate purpose and connotations. For example, a red colo
             </f-switch></f-div
         ></f-div
       >`
-          )}
-        </f-div>
-      `;
-    }}
-  </Story>
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Name</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>Opacity is set to 50% in disabled state in disabled mode.</td>
-      <td>
-        <code>false</code>
-      </td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Name</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>disabled</td>
+			<td>Opacity is set to 50% in disabled state in disabled mode.</td>
+			<td>
+				<code>false</code>
+			</td>
+		</tr>
+	</tbody>
 </table>
 
 <ArgsTable of={"f-switch"} />

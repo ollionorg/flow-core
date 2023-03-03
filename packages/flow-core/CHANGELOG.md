@@ -4,6 +4,30 @@
 
 # Change Log
 
+## [1.4.2] - 2023-03-02
+
+### Features
+
+- `data-qa-*` attributes added in `f-select` and `f-form-group`.
+## [1.4.1] - 2023-02-28
+
+### Features
+
+- `f-suggest` element added.
+## [1.4.0] - 2023-02-26
+
+### Bug fixes
+
+- `f-select` value not setting bug fixed.
+## [1.3.9] - 2023-02-26
+
+### Improvements
+
+- `f-switch` value type changed to boolean
+### Bug fixes
+
+- Various major css issues fixed with `f-divider`, `f-form`, `f-form-group` fixed. 
+
 ## [1.3.8] - 2023-02-23
 
 ### Features

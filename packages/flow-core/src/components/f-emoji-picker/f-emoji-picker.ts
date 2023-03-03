@@ -353,17 +353,32 @@ export class FEmojiPicker extends FRoot {
 		}
 	}
 
+	/**
+	 *
+	 * @param e mMouseEvent
+	 * @param element emoji-picker component
+	 */
+	closeEmojiPicker(e: MouseEvent, element: FEmojiPicker) {
+		if (!element.contains(e.target as HTMLInputElement) && element.emojiPickerPopover.open) {
+			element.emojiPickerPopover.open = false;
+		}
+	}
+
+	/**
+	 * disconnected callback for removing event listener
+	 */
+	disconnectedCallback() {
+		window.removeEventListener("click", e => this.closeEmojiPicker(e, this));
+		super.disconnectedCallback();
+	}
+
 	render() {
 		this.validateProperties();
 
 		/**
 		 * click outside the f-emoji wrapper area
 		 */
-		window.addEventListener("click", (e: MouseEvent) => {
-			if (!this.contains(e.target as HTMLInputElement) && this.emojiPickerPopover.open) {
-				this.emojiPickerPopover.open = false;
-			}
-		});
+		window.addEventListener("click", e => this.closeEmojiPicker(e, this));
 
 		/**
 		 * initiate picker component

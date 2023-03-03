@@ -1,0 +1,79 @@
+@use "sass:map";
+
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+
+$states: (
+	"primary": var(--color-primary-default),
+	"success": var(--color-success-default),
+	"warning": var(--color-warning-default),
+	"danger": var(--color-danger-default)
+);
+
+:host {
+	div.flow-toaster {
+		@each $state, $color in $states {
+			&[data-state="#{$state}"] {
+				background-color: $color;
+			}
+		}
+
+		display: flex;
+
+		height: fit-content;
+		min-height: 80px;
+		width: 412px;
+		border-radius: 4px;
+
+		z-index: 105;
+
+		transition: right 0.3s ease-out, top 0.2s ease-out, transform 0.3s ease-out;
+		overflow: visible;
+
+		&[data-position="fixed"] {
+			position: fixed;
+			right: -412px;
+			top: 12px;
+		}
+		&[data-position="absolute"] {
+			position: absolute;
+			right: -412px;
+			top: 12px;
+		}
+		&[data-position="relative"] {
+			position: relative;
+			transform: translateX(120%);
+		}
+		&:hover {
+			.flow-close-toaster {
+				opacity: 1;
+			}
+		}
+
+		.flow-close-toaster {
+			position: absolute;
+			top: -10px;
+			left: -8px;
+			opacity: 0;
+			z-index: 106;
+			transition: opacity 0.3s linear;
+
+			width: 24px;
+			height: 24px;
+
+			border-radius: 50%;
+
+			background-color: var(--color-surface-subtle);
+
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+
+			cursor: pointer;
+
+			&:hover {
+				background-color: var(--color-surface-subtle-hover);
+			}
+		}
+	}
+}

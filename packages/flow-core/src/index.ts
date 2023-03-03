@@ -32,6 +32,7 @@ export * from "./components/f-tab-node/f-tab-node";
 export * from "./components/f-tab-content/f-tab-content";
 export * from "./components/f-file-upload/f-file-upload";
 export * from "./components/f-suggest/f-suggest";
+export * from "./components/f-toast/f-toast";
 export * from "./mixins/components/f-root/f-root";
 
 if (document.readyState !== "loading") {

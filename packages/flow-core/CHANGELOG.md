@@ -8,7 +8,7 @@
 
 ### Features
 
-- `f-emoji-selector` component added.
+- `f-emoji-picker` component added.
 
 ## [1.4.2] - 2023-03-02
 

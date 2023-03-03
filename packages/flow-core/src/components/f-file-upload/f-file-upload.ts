@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { html, unsafeCSS } from "lit";
 import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-file-upload.scss";

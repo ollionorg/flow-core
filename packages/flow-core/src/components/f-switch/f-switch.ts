@@ -7,7 +7,7 @@ import { FDiv } from "../f-div/f-div";
 export type FSwitchState = "primary" | "default" | "success" | "warning" | "danger";
 
 export type FSwitchCustomEvent = {
-	value: string;
+	value: boolean;
 };
 
 @customElement("f-switch")
@@ -21,7 +21,7 @@ export class FSwitch extends FRoot {
 	 * @attribute Value of a switch defines if it is on or off.
 	 */
 	@property({ reflect: true, type: String })
-	value?: "on" | "off" = "off";
+	value?: boolean = false;
 
 	/**
 	 * @attribute States are used to communicate purpose and connotations.
@@ -46,20 +46,22 @@ export class FSwitch extends FRoot {
 	 */
 	handleInput(e: InputEvent) {
 		e.stopPropagation();
+
+		this.value = !this.value;
 		const event = new CustomEvent<FSwitchCustomEvent>("input", {
 			detail: {
-				value: this.value === "off" ? "on" : "off"
+				value: this.value
 			},
 			bubbles: true,
 			composed: true
 		});
-		this.value = this.value === "off" ? "on" : "off";
+
 		this.dispatchEvent(event);
 	}
 
 	render() {
 		if (!this.value) {
-			this.value = "off";
+			this.value = false;
 		}
 		/**
 		 * Final html to render
@@ -81,11 +83,7 @@ export class FSwitch extends FRoot {
 				class="f-switch-wrapper"
 			>
 				<label class="f-switch" size=${this.size} state=${this.state}>
-					<input
-						type="checkbox"
-						checked=${this.value === "on" ? true : false}
-						@input=${this.handleInput}
-					/>
+					<input type="checkbox" checked=${this.value} @input=${this.handleInput} />
 					<span class="f-switch-slider"></span>
 				</label>
 				<f-div padding="none" align="middle-left" direction="row" gap="small">

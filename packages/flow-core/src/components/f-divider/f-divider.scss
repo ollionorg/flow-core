@@ -31,10 +31,12 @@ f-divider {
 	display: flex;
 	flex: 0 0 auto;
 	width: 100%;
-	height: unset;
+	overflow: hidden;
+
 	// iterating over sizes and creating css
 	@each $size, $value in $sizes {
 		&[size="#{$size}"] {
+			height: $value;
 			border-top-width: $value;
 			border-left-width: 0px;
 			border-right-width: 0px;
@@ -58,15 +60,17 @@ f-divider {
 }
 
 //styling divider vertically or horizontally according to the immediate parent f-div
-f-div {
-	&[direction="row"] {
+f-div,
+f-form-group {
+	&[direction="row"],
+	&[direction="horizontal"] {
 		> f-divider {
 			height: 100%;
-			width: unset;
 		}
 		> f-divider {
 			@each $size, $value in $sizes {
 				&[size="#{$size}"] {
+					width: $value;
 					border-left-width: $value;
 					border-top-width: 0px;
 					border-right-width: 0px;
@@ -75,14 +79,15 @@ f-div {
 			}
 		}
 	}
-	&[direction="column"] {
+	&[direction="column"],
+	&[direction="vertical"] {
 		> f-divider {
 			width: 100%;
-			height: unset;
 		}
 		> f-divider {
 			@each $size, $value in $sizes {
 				&[size="#{$size}"] {
+					height: $value;
 					border-top-width: $value;
 					border-left-width: 0px;
 					border-right-width: 0px;

@@ -6,13 +6,13 @@ import { useArgs, useEffect, useState } from "@storybook/client-api";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <Meta
-	title="Components/f-input"
+	title="Components/f-suggest"
 	parameters={{
 		controls: { hideNoControlsWarning: true }
 	}}
 />
 
-# f-input
+# f-suggest
 
 <br />
 <br />
@@ -21,11 +21,11 @@ import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <f-divider></f-divider>
 
-f-input is an input element.
+f-suggest is an input element.
 
 <br />
 
-### [Playground](/story/components-f-input--playground)
+### [Playground](/story/components-f-suggest--playground)
 
 <Canvas>
 	<Story
@@ -41,10 +41,6 @@ f-input is an input element.
 			category: {
 				control: "select",
 				options: ["fill", "transparent", "outline"]
-			},
-			type: {
-				control: "select",
-				options: ["text", "number", "email", "password", "url", "tel"]
 			},
 			state: {
 				control: "select",
@@ -87,11 +83,10 @@ f-input is an input element.
 			placeholder: "Enter your text here",
 			variant: "round",
 			category: "fill",
-			type: "text",
 			state: "default",
 			size: "medium",
 			slot: `              <f-div slot="label" padding="none" gap="none">Label</f-div>
-              <f-text slot="help" variant="para" size="small">This is a Subtext</f-text>`,
+              <f-div width="100%" slot="help"><f-text  variant="para" size="small">This is a Subtext</f-text></f-div>`,
 			["icon-left"]: undefined,
 			["icon-right"]: undefined,
 			["prefix"]: undefined,
@@ -100,43 +95,67 @@ f-input is an input element.
 			loading: false,
 			disabled: false,
 			readOnly: false,
-			clear: false
+			clear: false,
+			suggestions: [
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam iaculis porta dignissim. Etiam a aliquam elit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam hendrerit quis lorem cursus consectetur. Donec sem ipsum, scelerisque at nulla vel, rutrum efficitur tortor. Praesent eu tincidunt mauris. Nam eu aliquam turpis. Curabitur placerat maximus tempor. Donec non ante in nunc eleifend elementum eu quis lorem",
+				"Suggestion 2",
+				"Suggestion 3",
+				"Suggestion 4",
+				"Suggestion 5",
+				"Suggestion 6",
+				"Suggestion 7",
+				"Suggestion 8",
+				"Suggestion 9",
+				"Suggestion 10",
+				"Suggestion 11",
+				"Suggestion 12",
+				"Suggestion 13",
+				"Suggestion 14",
+				"Suggestion 15",
+				"Suggestion 16",
+				"Suggestion 17",
+				"Suggestion 18",
+				"<f-text state='success'>Using markup</f-text>"
+			]
 		}}
 	>
 		{args => {
 			const [_, updateArgs] = useArgs();
 			const handleInput = e => {
 				updateArgs({ value: e.detail.value });
-				if (args.type === "tel") {
-					updateArgs({ ["calling-code"]: e.detail.callingCode });
-				}
+			};
+			const handleKeydown = event => {
+				event.stopPropagation();
+				event.stopImmediatePropagation();
 			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-input
-							.value=${args.value}
-							.variant=${args.variant}
-							.category=${args.category}
-							.placeholder=${args.placeholder}
-							@input=${handleInput}
-							.type=${args.type}
-							icon-left=${args["icon-left"]}
-							icon-right=${args["icon-right"]}
-							prefix=${args["prefix"]}
-							suffix=${args["suffix"]}
-							state=${args.state}
-							max-length=${args["max-length"]}
-							?loading=${args.loading}
-							?disabled=${args.disabled}
-							?clear=${args.clear}
-							?read-only=${args.readOnly}
-							.size=${args.size}
+					<f-suggest
+						value=${args.value}
+						.variant=${args.variant}
+						.category=${args.category}
+						.placeholder=${args.placeholder}
+						.suggestions=${args.suggestions}
+						@input=${handleInput}
+						icon-left=${args["icon-left"]}
+						icon-right=${args["icon-right"]}
+						prefix=${args["prefix"]}
+						suffix=${args["suffix"]}
+						state=${args.state}
+						max-length=${args["max-length"]}
+						?loading=${args.loading}
+						?disabled=${args.disabled}
+						?clear=${args.clear}
+						?read-only=${args.readOnly}
+						.size=${args.size}
+						@keydown=${handleKeydown}
+					>
+						${unsafeHTML(args.slot)}
+						<f-text slot="description" variant="para" size="small"
+							>Some description about f-suggest</f-text
 						>
-							${unsafeHTML(args.slot)}
-						</f-input></f-div
-					></f-div
-				>
+					</f-suggest>
+				</f-div>
 			`;
 		}}
 	</Story>
@@ -172,7 +191,7 @@ Variants are various visual representations of an input field.
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
 					${variants.map(
 						item => html`<f-div>
-          <f-input
+          <f-suggest
             value=${value}
             placeholder="Write here"
             @input=${handleValue}
@@ -181,7 +200,8 @@ Variants are various visual representations of an input field.
           >
              <f-div slot="label" padding="none" gap="none">Label (variant="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-          </f-input></f-div
+			  
+          </f-suggest></f-div
         ></f-div
       >`
 					)}
@@ -224,7 +244,7 @@ Variants are various visual representations of an input field.
 
 <f-divider></f-divider>
 
-Category decides the background of f-input
+Category decides the background of f-suggest
 
 <Canvas>
 	<Story name="category">
@@ -238,7 +258,7 @@ Category decides the background of f-input
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
 					${categories.map(
 						item => html`<f-div>
-          <f-input
+          <f-suggest
             value=${value}
             placeholder="Write here"
             @input=${handleValue}
@@ -248,7 +268,7 @@ Category decides the background of f-input
           >
             <f-div slot="label" padding="none" gap="none">Label (category="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-          </f-input></f-div
+          </f-suggest></f-div
         ></f-div
       >`
 					)}
@@ -287,98 +307,9 @@ Category decides the background of f-input
 
 <br />
 
-## type
-
-<f-divider></f-divider>
-
-The type attribute specifies the type of `<f-input>` element to display.
-
-<Canvas>
-	<Story name="type">
-		{args => {
-			const types = [
-				["text", "number", "email"],
-				["password", "tel", "url"]
-			];
-			const [value, setValue] = useState("");
-			const handleValue = e => {
-				setValue(e.detail.value);
-			};
-			return html`
-				<f-div direction="column" gap="medium">
-					${types.map(
-						item => html` <f-div align="middle-center" padding="large" gap="medium">
-							${item.map(
-								type => html`<f-div
-									><f-input
-										value=${value}
-										placeholder="Write here"
-										@input=${handleValue}
-										type=${type}
-										size="medium"
-									>
-										<f-div slot="label" padding="none" gap="none">Label (type="${type}")</f-div>
-										<f-text slot="help" variant="para" size="small"
-											>This is a Subtext (Helper Text)</f-text
-										>
-									</f-input></f-div
-								>`
-							)}
-						</f-div>`
-					)}
-				</f-div>
-			`;
-		}}
-	</Story>
-</Canvas>
-
-<table class="custom-table">
-	<tbody>
-		<tr>
-			<td>Value</td>
-			<td>Description</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>text</td>
-			<td>Takes any text as input. </td>
-			<td>
-				<code>default</code>
-			</td>
-		</tr>
-		<tr>
-			<td>number</td>
-			<td>Takes any number as input.</td>
-			<td> </td>
-		</tr>
-		<tr>
-			<td>email</td>
-			<td>Defines a field for an e-mail address.</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>password</td>
-			<td>Defines a field for a password. Masks the characters</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>tel</td>
-			<td>Defines a field for a telephone number.</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>url</td>
-			<td>Defines a field for URL. </td>
-			<td></td>
-		</tr>
-	</tbody>
-</table>
-
-<br />
-
 ## value
 
-Defines the value of an f-input. Validation rules are applied on the value depending on the type property of the f-text-input.
+Defines the value of an f-suggest. Validation rules are applied on the value depending on the type property of the f-text-input.
 
 <Canvas>
 	<Story name="value">
@@ -390,12 +321,12 @@ Defines the value of an f-input. Validation rules are applied on the value depen
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div width="80%" align="middle-center">
-						<f-input value=${value} placeholder="Write here" @input=${handleValue} size="medium">
+						<f-suggest value=${value} placeholder="Write here" @input=${handleValue} size="medium">
 							<f-div slot="label" padding="none" gap="none">Label</f-div>
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-input></f-div
+						</f-suggest></f-div
 					></f-div
 				>
 			`;
@@ -419,7 +350,7 @@ Defines the placeholder text for f-text-input
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div width="80%" align="middle-center">
-						<f-input
+						<f-suggest
 							value=${value}
 							placeholder="This is the placeholder"
 							@input=${handleValue}
@@ -429,7 +360,7 @@ Defines the placeholder text for f-text-input
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-input></f-div
+						</f-suggest></f-div
 					></f-div
 				>
 			`;
@@ -443,7 +374,7 @@ Defines the placeholder text for f-text-input
 
 <f-divider></f-divider>
 
-f-input can have 2 sizes.
+f-suggest can have 2 sizes.
 
 <p class="note-section">Note: By default size is inherited by the parent f-form.</p>
 
@@ -459,7 +390,7 @@ f-input can have 2 sizes.
 				<f-div width="100%" align="top-center" padding="large" gap="medium">
 					${sizes.map(
 						item => html`<f-div>
-          <f-input
+          <f-suggest
             value=${value}
             placeholder="Write here"
             @input=${handleValue}
@@ -467,7 +398,7 @@ f-input can have 2 sizes.
           >
             <f-div slot="label" padding="none" gap="none">Label (size="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-          </f-input></f-div
+          </f-suggest></f-div
         ></f-div
       >`
 					)}
@@ -522,7 +453,7 @@ States are used to communicate purpose and connotations. For example, a red colo
 						item => html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
 								state => html`<f-div
-									><f-input
+									><f-suggest
 										value=${value}
 										placeholder="Write here"
 										@input=${handleValue}
@@ -533,7 +464,7 @@ States are used to communicate purpose and connotations. For example, a red colo
 										<f-text slot="help" variant="para" size="small"
 											>This is a Subtext (Helper Text)</f-text
 										>
-									</f-input></f-div
+									</f-suggest></f-div
 								>`
 							)}
 						</f-div>`
@@ -588,7 +519,7 @@ States are used to communicate purpose and connotations. For example, a red colo
 Icon-left enables an icon on the left of the input value.
 
 <p class="note-section">
-	Note: If f-input has a prefix also, then icon-left is placed on the left of the prefix.
+	Note: If f-suggest has a prefix also, then icon-left is placed on the left of the prefix.
 </p>
 
 <Canvas>
@@ -601,7 +532,7 @@ Icon-left enables an icon on the left of the input value.
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div width="80%" align="middle-center">
-						<f-input
+						<f-suggest
 							value=${value}
 							placeholder="Write here"
 							@input=${handleValue}
@@ -615,7 +546,7 @@ Icon-left enables an icon on the left of the input value.
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-input></f-div
+						</f-suggest></f-div
 					></f-div
 				>
 			`;
@@ -630,7 +561,7 @@ Icon-left enables an icon on the left of the input value.
 Icon-right enables an icon on the right of the input value.
 
 <p class="note-section">
-	Note: If f-input has a suffix also, then icon-right is placed on the right of the suffix.
+	Note: If f-suggest has a suffix also, then icon-right is placed on the right of the suffix.
 </p>
 
 <Canvas>
@@ -643,7 +574,7 @@ Icon-right enables an icon on the right of the input value.
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div width="80%" align="middle-center">
-						<f-input
+						<f-suggest
 							value=${value}
 							placeholder="Write here"
 							@input=${handleValue}
@@ -658,7 +589,7 @@ Icon-right enables an icon on the right of the input value.
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-input></f-div
+						</f-suggest></f-div
 					></f-div
 				>
 			`;
@@ -682,7 +613,7 @@ Prefix property enables a string before the input value.
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div width="80%" align="middle-center">
-						<f-input
+						<f-suggest
 							value=${value}
 							placeholder="Write here"
 							@input=${handleValue}
@@ -696,7 +627,7 @@ Prefix property enables a string before the input value.
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-input></f-div
+						</f-suggest></f-div
 					></f-div
 				>
 			`;
@@ -720,7 +651,7 @@ Suffix property enables a string on the right side of the input box.
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div width="80%" align="middle-center">
-						<f-input
+						<f-suggest
 							value=${value}
 							placeholder="Write here"
 							@input=${handleValue}
@@ -735,7 +666,7 @@ Suffix property enables a string on the right side of the input box.
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-input></f-div
+						</f-suggest></f-div
 					></f-div
 				>
 			`;
@@ -759,7 +690,7 @@ This shows the character count while typing and auto limits after reaching the m
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div width="80%" align="middle-center">
-						<f-input
+						<f-suggest
 							value=${value}
 							placeholder="Write here"
 							@input=${handleValue}
@@ -774,7 +705,7 @@ This shows the character count while typing and auto limits after reaching the m
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-input></f-div
+						</f-suggest></f-div
 					></f-div
 				>
 			`;
@@ -801,7 +732,7 @@ This shows the character count while typing and auto limits after reaching the m
 				<f-div width="100%" align="top-center" padding="large" gap="medium">
 					${[0, 1, 2, 3].map(
 						item => html`<f-div>
-          <f-input
+          <f-suggest
             value=${value}
             placeholder="Write here"
             @input=${handleValue}
@@ -821,7 +752,7 @@ This shows the character count while typing and auto limits after reaching the m
 								: "Readonly"
 						}</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-          </f-input></f-div
+          </f-suggest></f-div
         ></f-div
       >`
 					)}
@@ -872,4 +803,4 @@ This shows the character count while typing and auto limits after reaching the m
 	</tbody>
 </table>
 
-<ArgsTable of={"f-input"} />
+<ArgsTable of={"f-suggest"} />

@@ -31,10 +31,9 @@ describe("f-emoji-picker", () => {
 	});
 
 	it("should render placeholder", async () => {
-		const el = await fixture(html` <f-emoji-picker placeholder="Placeholder"></f-emoji-picker> `);
+		const el = await fixture(html` <f-emoji-picker placeholder="😀"></f-emoji-picker> `);
 		const descendant = el.shadowRoot!.querySelector("#emoji-value")!;
-		const text = descendant.children[0];
-		expect(text).instanceOf(FText);
-		expect(text.innerHTML).includes("Placeholder");
+		const icon = descendant.children[0];
+		expect(icon).instanceOf(FIcon);
 	});
 });

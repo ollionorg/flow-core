@@ -12,7 +12,7 @@ import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 	}}
 />
 
-# f-input
+# f-emoji-picker
 
 <br />
 <br />
@@ -21,11 +21,11 @@ import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <f-divider></f-divider>
 
-f-input is an input element.
+f-emoji-picker helps to select emojis as an input.
 
 <br />
 
-### [Playground](/story/components-f-input--playground)
+### [Playground](/story/components-f-emoji-picker--playground)
 
 <Canvas>
 	<Story
@@ -50,12 +50,6 @@ f-input is an input element.
 				control: "radio",
 				options: ["small", "medium"]
 			},
-			disabled: {
-				control: "boolean"
-			},
-			clear: {
-				control: "boolean"
-			},
 			include: {
 				control: "object"
 			},
@@ -71,25 +65,23 @@ f-input is an input element.
 			recent: {
 				control: "object"
 			},
-			resizable: {
+			["close-on-select"]: {
 				control: "boolean"
 			},
-			["close-on-select"]: {
+			disabled: {
+				control: "boolean"
+			},
+			clear: {
 				control: "boolean"
 			}
 		}}
 		args={{
 			value: undefined,
-			placeholder: "Enter your text here",
+			placeholder: undefined,
 			variant: "round",
 			category: "fill",
-			type: "text",
 			state: "default",
 			size: "medium",
-			disabled: false,
-			clear: true,
-			["close-on-select"]: false,
-			resizable: false,
 			recent: ["office", "compass", "luggage", "hourglass", "gem", "computer"],
 			include: [],
 			exclude: [],
@@ -108,6 +100,9 @@ f-input is an input element.
 					]
 				}
 			],
+			disabled: false,
+			clear: true,
+			["close-on-select"]: false,
 			slot: `             <f-text slot="label" variant="para" size="small">Label</f-text>
               <f-text slot="help" variant="para" size="small">Help!</f-text>`
 		}}
@@ -119,7 +114,7 @@ f-input is an input element.
 			};
 			return html`
 				<f-div width="100%" align="top-left" padding="large">
-					<f-div width="70px" align="top-left">
+					<f-div width="hug-content" align="top-left">
 						<f-emoji-picker
 							.value=${args.value}
 							.state=${args.state}
@@ -149,16 +144,6 @@ f-input is an input element.
 
 <br />
 
-### Anatomy
-
-<f-divider></f-divider>
-
-<Story name="Anatomy">
-	{() => html`<div class="align-center">${unsafeSVG(fInputAnatomy)}</div>`}
-</Story>
-
-<br />
-
 ## variant
 
 <f-divider></f-divider>
@@ -176,17 +161,16 @@ Variants are various visual representations of an input field.
 			return html`
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
 					${variants.map(
-						item => html`<f-div>
-          <f-input
-            value=${value}
-            placeholder="Write here"
+						item => html`<f-div width="hug-content">
+		  <f-emoji-picker
+			value=${value}
             @input=${handleValue}
             .variant=${item}
             size="medium"
-          >
-             <f-div slot="label" padding="none" gap="none">Label (variant="${item}")</f-div>
-            <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-          </f-input></f-div
+						>
+ <f-div slot="label" padding="none" gap="none">Label</f-div>
+            <f-text slot="help" variant="para" size="small">Help!</f-text>						</f-emoji-picker>
+		  </f-div
         ></f-div
       >`
 					)}
@@ -229,7 +213,7 @@ Variants are various visual representations of an input field.
 
 <f-divider></f-divider>
 
-Category decides the background of f-input
+Category decides the background of f-emoji-picker input box
 
 <Canvas>
 	<Story name="category">
@@ -242,18 +226,17 @@ Category decides the background of f-input
 			return html`
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
 					${categories.map(
-						item => html`<f-div>
-          <f-input
+						item => html`<f-div width="hug-content">
+          <f-emoji-picker
             value=${value}
-            placeholder="Write here"
             @input=${handleValue}
             .category=${item}
             size="medium"
             .variant=${item === "transparent" ? "block" : "curved"}
           >
-            <f-div slot="label" padding="none" gap="none">Label (category="${item}")</f-div>
-            <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-          </f-input></f-div
+ <f-div slot="label" padding="none" gap="none">Label</f-div>
+            <f-text slot="help" variant="para" size="small">Help!</f-text>
+          </f-emoji-picker></f-div
         ></f-div
       >`
 					)}
@@ -292,115 +275,24 @@ Category decides the background of f-input
 
 <br />
 
-## type
-
-<f-divider></f-divider>
-
-The type attribute specifies the type of `<f-input>` element to display.
-
-<Canvas>
-	<Story name="type">
-		{args => {
-			const types = [
-				["text", "number", "email"],
-				["password", "tel", "url"]
-			];
-			const [value, setValue] = useState("");
-			const handleValue = e => {
-				setValue(e.detail.value);
-			};
-			return html`
-				<f-div direction="column" gap="medium">
-					${types.map(
-						item => html` <f-div align="middle-center" padding="large" gap="medium">
-							${item.map(
-								type => html`<f-div
-									><f-input
-										value=${value}
-										placeholder="Write here"
-										@input=${handleValue}
-										type=${type}
-										size="medium"
-									>
-										<f-div slot="label" padding="none" gap="none">Label (type="${type}")</f-div>
-										<f-text slot="help" variant="para" size="small"
-											>This is a Subtext (Helper Text)</f-text
-										>
-									</f-input></f-div
-								>`
-							)}
-						</f-div>`
-					)}
-				</f-div>
-			`;
-		}}
-	</Story>
-</Canvas>
-
-<table class="custom-table">
-	<tbody>
-		<tr>
-			<td>Value</td>
-			<td>Description</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>text</td>
-			<td>Takes any text as input. </td>
-			<td>
-				<code>default</code>
-			</td>
-		</tr>
-		<tr>
-			<td>number</td>
-			<td>Takes any number as input.</td>
-			<td> </td>
-		</tr>
-		<tr>
-			<td>email</td>
-			<td>Defines a field for an e-mail address.</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>password</td>
-			<td>Defines a field for a password. Masks the characters</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>tel</td>
-			<td>Defines a field for a telephone number.</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>url</td>
-			<td>Defines a field for URL. </td>
-			<td></td>
-		</tr>
-	</tbody>
-</table>
-
-<br />
-
 ## value
 
-Defines the value of an f-input. Validation rules are applied on the value depending on the type property of the f-text-input.
+Defines the value of an f-emoji-picker in terms of emojis.
 
 <Canvas>
 	<Story name="value">
 		{args => {
-			const [value, setValue] = useState("Value Here");
+			const [value, setValue] = useState("⌛");
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-input value=${value} placeholder="Write here" @input=${handleValue} size="medium">
+					<f-div width="hug-content" align="middle-center">
+						<f-emoji-picker value=${value} @input=${handleValue} size="medium">
 							<f-div slot="label" padding="none" gap="none">Label</f-div>
-							<f-text slot="help" variant="para" size="small"
-								>This is a Subtext (Helper Text)</f-text
-							>
-						</f-input></f-div
+							<f-text slot="help" variant="para" size="small">Help!</f-text>
+						</f-emoji-picker></f-div
 					></f-div
 				>
 			`;
@@ -412,7 +304,9 @@ Defines the value of an f-input. Validation rules are applied on the value depen
 
 ## placeholder
 
-Defines the placeholder text for f-text-input
+Defines the placeholder text for f-emoji-picker.
+
+<p class="note-section">Note: placeholder must always be an emoji</p>
 
 <Canvas>
 	<Story name="placeholder">
@@ -423,18 +317,11 @@ Defines the placeholder text for f-text-input
 			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-input
-							value=${value}
-							placeholder="This is the placeholder"
-							@input=${handleValue}
-							size="medium"
-						>
+					<f-div width="hug-content" align="middle-center">
+						<f-emoji-picker value=${value} placeholder="🧭" @input=${handleValue} size="medium">
 							<f-div slot="label" padding="none" gap="none">Label</f-div>
-							<f-text slot="help" variant="para" size="small"
-								>This is a Subtext (Helper Text)</f-text
-							>
-						</f-input></f-div
+							<f-text slot="help" variant="para" size="small">Help!</f-text>
+						</f-emoji-picker></f-div
 					></f-div
 				>
 			`;
@@ -448,9 +335,7 @@ Defines the placeholder text for f-text-input
 
 <f-divider></f-divider>
 
-f-input can have 2 sizes.
-
-<p class="note-section">Note: By default size is inherited by the parent f-form.</p>
+f-emoji-picker can have 2 sizes.
 
 <Canvas>
 	<Story name="size">
@@ -463,16 +348,15 @@ f-input can have 2 sizes.
 			return html`
 				<f-div width="100%" align="top-center" padding="large" gap="medium">
 					${sizes.map(
-						item => html`<f-div>
-          <f-input
+						item => html`<f-div width="hug-content">
+          <f-emoji-picker
             value=${value}
-            placeholder="Write here"
             @input=${handleValue}
             size=${item}
           >
-            <f-div slot="label" padding="none" gap="none">Label (size="${item}")</f-div>
-            <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-          </f-input></f-div
+           <f-div slot="label" padding="none" gap="none">Label</f-div>
+            <f-text slot="help" variant="para" size="small">Help!</f-text>
+          </f-emoji-picker></f-div
         ></f-div
       >`
 					)}
@@ -496,7 +380,7 @@ f-input can have 2 sizes.
 		</tr>
 		<tr>
 			<td>medium</td>
-			<td>eheight="36px"</td>
+			<td>height="36px"</td>
 			<td></td>
 		</tr>
 	</tbody>
@@ -526,19 +410,16 @@ States are used to communicate purpose and connotations. For example, a red colo
 					${states.map(
 						item => html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
-								state => html`<f-div
-									><f-input
+								state => html`<f-div width="hug-content"
+									><f-emoji-picker
 										value=${value}
-										placeholder="Write here"
 										@input=${handleValue}
 										size="medium"
 										state=${state}
 									>
-										<f-div slot="label" padding="none" gap="none">Label (state="${state}")</f-div>
-										<f-text slot="help" variant="para" size="small"
-											>This is a Subtext (Helper Text)</f-text
-										>
-									</f-input></f-div
+										<f-div slot="label" padding="none" gap="none">Label</f-div>
+										<f-text slot="help" variant="para" size="small">Help!</f-text>
+									</f-emoji-picker></f-div
 								>`
 							)}
 						</f-div>`
@@ -588,39 +469,27 @@ States are used to communicate purpose and connotations. For example, a red colo
 
 <br />
 
-## icon-left
+## recent
 
-Icon-left enables an icon on the left of the input value.
+recently used emojis are added, as array of strings with name of emojis.
 
-<p class="note-section">
-	Note: If f-input has a prefix also, then icon-left is placed on the left of the prefix.
-</p>
+<code>Eg: ["office", "compass", "luggage", "hourglass", "gem", "computer"]</code>
 
 <Canvas>
-	<Story name="icon-left">
+	<Story name="recent">
 		{args => {
 			const [value, setValue] = useState("");
+			const recent = ["office", "compass", "luggage", "hourglass", "gem", "computer"];
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-input
-							value=${value}
-							placeholder="Write here"
-							@input=${handleValue}
-							size="medium"
-							icon-left="i-app"
-						>
+					<f-div width="hug-content" align="middle-center">
+						<f-emoji-picker value=${value} @input=${handleValue} size="medium" .recent=${recent}>
 							<f-div slot="label" padding="none" gap="none">Label</f-div>
-							<f-div slot="description" padding="none" gap="none"
-								>This is a demo for icon-left="i-app" prop</f-div
-							>
-							<f-text slot="help" variant="para" size="small"
-								>This is a Subtext (Helper Text)</f-text
-							>
-						</f-input></f-div
+							<f-text slot="help" variant="para" size="small">Help!</f-text>
+						</f-emoji-picker></f-div
 					></f-div
 				>
 			`;
@@ -630,40 +499,27 @@ Icon-left enables an icon on the left of the input value.
 
 <br />
 
-## icon-right
+## include
 
-Icon-right enables an icon on the right of the input value.
+decides which all category should be displayed inside emoji-picker popover
 
-<p class="note-section">
-	Note: If f-input has a suffix also, then icon-right is placed on the right of the suffix.
-</p>
+<code>Eg: ["frequent", "people", "flags"]</code>
 
 <Canvas>
-	<Story name="icon-right">
+	<Story name="include">
 		{args => {
 			const [value, setValue] = useState("");
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
+			const include = ["frequent", "people", "flags"];
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-input
-							value=${value}
-							placeholder="Write here"
-							@input=${handleValue}
-							size="medium"
-							icon-left="i-app"
-							icon-right="i-delete"
-						>
+					<f-div width="hug-content" align="middle-center">
+						<f-emoji-picker value=${value} @input=${handleValue} size="medium" .include=${include}>
 							<f-div slot="label" padding="none" gap="none">Label</f-div>
-							<f-div slot="description" padding="none" gap="none"
-								>This is a demo for icon-right="i-app" prop</f-div
-							>
-							<f-text slot="help" variant="para" size="small"
-								>This is a Subtext (Helper Text)</f-text
-							>
-						</f-input></f-div
+							<f-text slot="help" variant="para" size="small">Help!</f-text>
+						</f-emoji-picker></f-div
 					></f-div
 				>
 			`;
@@ -673,35 +529,27 @@ Icon-right enables an icon on the right of the input value.
 
 <br />
 
-## prefix
+## exclude
 
-Prefix property enables a string before the input value.
+decides which all category should be excluded from inside emoji-picker popover
+
+<code>Eg: ["frequent", "people", "flags"]</code>
 
 <Canvas>
-	<Story name="prefix">
+	<Story name="exclude">
 		{args => {
 			const [value, setValue] = useState("");
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
+			const exclude = ["people", "foods"];
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-input
-							value=${value}
-							placeholder="Write here"
-							@input=${handleValue}
-							size="medium"
-							icon-left="i-app"
-							icon-right="i-delete"
-							prefix="+91"
-						>
+					<f-div width="hug-content" align="middle-center">
+						<f-emoji-picker value=${value} @input=${handleValue} size="medium" .exclude=${exclude}>
 							<f-div slot="label" padding="none" gap="none">Label</f-div>
-							<f-div slot="description" padding="none" gap="none">This is a demo for prefix</f-div>
-							<f-text slot="help" variant="para" size="small"
-								>This is a Subtext (Helper Text)</f-text
-							>
-						</f-input></f-div
+							<f-text slot="help" variant="para" size="small">Help!</f-text>
+						</f-emoji-picker></f-div
 					></f-div
 				>
 			`;
@@ -711,36 +559,32 @@ Prefix property enables a string before the input value.
 
 <br />
 
-## suffix
+## exclude-emojis
 
-Suffix property enables a string on the right side of the input box.
+decides which all emojis should be excluded from inside emoji-picker popover
+
+<code>Eg: ["office"]</code>
 
 <Canvas>
-	<Story name="suffix">
+	<Story name="exclude-emojis">
 		{args => {
 			const [value, setValue] = useState("");
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
+			const exclude = ["office"];
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-input
+					<f-div width="hug-content" align="middle-center">
+						<f-emoji-picker
 							value=${value}
-							placeholder="Write here"
 							@input=${handleValue}
 							size="medium"
-							icon-left="i-app"
-							icon-right="i-delete"
-							prefix="+91"
-							suffix="Delete"
+							.exclude-emojis=${excludeEmojis}
 						>
 							<f-div slot="label" padding="none" gap="none">Label</f-div>
-							<f-div slot="description" padding="none" gap="none">This is a demo for suffix</f-div>
-							<f-text slot="help" variant="para" size="small"
-								>This is a Subtext (Helper Text)</f-text
-							>
-						</f-input></f-div
+							<f-text slot="help" variant="para" size="small">Help!</f-text>
+						</f-emoji-picker></f-div
 					></f-div
 				>
 			`;
@@ -750,38 +594,64 @@ Suffix property enables a string on the right side of the input box.
 
 <br />
 
-## max-length
+## custom
 
-This shows the character count while typing and auto limits after reaching the max length.
+adds custom emojis
 
 <Canvas>
-	<Story name="max-length">
+	<Story name="custom">
 		{args => {
 			const [value, setValue] = useState("");
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
+			const custom = [
+				{
+					id: "github",
+					name: "GitHub",
+					emojis: [
+						{
+							id: "octocat",
+							name: "Octocat",
+							keywords: ["github"],
+							skins: [{ src: "https://octodex.github.com/images/snowoctocat.png" }]
+						}
+					]
+				}
+			];
 			return html`
-				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-input
-							value=${value}
-							placeholder="Write here"
-							@input=${handleValue}
-							size="medium"
-							icon-left="i-app"
-							icon-right="i-delete"
-							prefix="+91"
-							suffix="Delete"
-							max-length="10"
+				<f-div width="100%" align="middle-center" padding="large" direction="row">
+					<f-div width="50%" align="middle-center">
+						<f-div width="hug-content" align="middle-center">
+							<f-emoji-picker value=${value} @input=${handleValue} size="medium" .custom=${custom}>
+								<f-div slot="label" padding="none" gap="none">Label</f-div>
+								<f-text slot="help" variant="para" size="small">Help!</f-text>
+							</f-emoji-picker></f-div
 						>
-							<f-div slot="label" padding="none" gap="none">Label</f-div>
-							<f-text slot="help" variant="para" size="small"
-								>This is a Subtext (Helper Text)</f-text
+					</f-div>
+					<f-div state="subtle">
+						<f-text>
+							<pre>
+	[{
+	"id": "github",
+	"name": "GitHub",
+	"emojis": 
+	[
+		{
+			"id": "octocat",
+			"name": "Octocat",
+			"keywords": ["github"],
+			"skins": [{"src": 
+			"https://octodex.github.com/images/snowoctocat.png"
+			}]
+		}
+	]
+	}]
+</pre
 							>
-						</f-input></f-div
-					></f-div
-				>
+						</f-text>
+					</f-div>
+				</f-div>
 			`;
 		}}
 	</Story>
@@ -802,36 +672,40 @@ This shows the character count while typing and auto limits after reaching the m
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
-			return html`
-				<f-div width="100%" align="top-center" padding="large" gap="medium">
-					${[0, 1, 2, 3].map(
-						item => html`<f-div>
-          <f-input
-            value=${value}
-            placeholder="Write here"
-            @input=${handleValue}
-            size="medium"
-            ?loading=${item === 0 ? true : false}
-            ?disabled=${item === 1 ? true : false}
-            ?clear=${item === 2 ? true : false}
-            ?read-only=${item === 3 ? true : false}
-          >
-            <f-div slot="label" padding="none" gap="none">${
-							item === 0
-								? "Loader"
-								: item === 1
-								? "Disabled"
-								: item === 2
-								? "Clear Icon on Type"
-								: "Readonly"
-						}</f-div>
-            <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-          </f-input></f-div
-        ></f-div
-      >`
-					)}
+			return html` <f-div width="100%" align="middle-center" padding="large">
+				<f-div direction="column">
+					<f-text>disabled=true</f-text>
+					<f-div width="hug-content" align="middle-center">
+						<f-emoji-picker value=${value} @input=${handleValue} size="medium" ?disabled=${true}>
+							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-text slot="help" variant="para" size="small">Help!</f-text>
+						</f-emoji-picker></f-div
+					>
 				</f-div>
-			`;
+				<f-div direction="column">
+					<f-text>clear=false</f-text>
+					<f-div width="hug-content" align="middle-center">
+						<f-emoji-picker value=${value} @input=${handleValue} size="medium" .clear=${false}>
+							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-text slot="help" variant="para" size="small">Help!</f-text>
+						</f-emoji-picker></f-div
+					>
+				</f-div>
+				<f-div direction="column">
+					<f-text>close-on-select=true</f-text>
+					<f-div width="hug-content" align="middle-center">
+						<f-emoji-picker
+							value=${value}
+							@input=${handleValue}
+							size="medium"
+							.close-on-select=${true}
+						>
+							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-text slot="help" variant="para" size="small">Help!</f-text>
+						</f-emoji-picker></f-div
+					>
+				</f-div>
+			</f-div>`;
 		}}
 	</Story>
 </Canvas>
@@ -842,13 +716,6 @@ This shows the character count while typing and auto limits after reaching the m
 			<td>Name</td>
 			<td>Description</td>
 			<td></td>
-		</tr>
-		<tr>
-			<td>loading</td>
-			<td>Loader appears on right ride of input box.</td>
-			<td>
-				<code>false</code>
-			</td>
 		</tr>
 		<tr>
 			<td>disabled</td>
@@ -868,8 +735,8 @@ This shows the character count while typing and auto limits after reaching the m
 			</td>
 		</tr>
 		<tr>
-			<td>read-only</td>
-			<td>Only Text could be read, can't be edited</td>
+			<td>close-on-select</td>
+			<td>closes popover on emoji-select</td>
 			<td>
 				<code>false</code>
 			</td>
@@ -877,4 +744,4 @@ This shows the character count while typing and auto limits after reaching the m
 	</tbody>
 </table>
 
-<ArgsTable of={"f-input"} />
+<ArgsTable of={"f-emoji-pciker"} />

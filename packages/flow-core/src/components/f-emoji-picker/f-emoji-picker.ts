@@ -131,12 +131,6 @@ export class FEmojiPicker extends FRoot {
 	["close-on-select"]?: boolean = false;
 
 	/**
-	 * @attribute if true picker can be resized
-	 */
-	@property({ reflect: true, type: Boolean })
-	resizable?: boolean = false;
-
-	/**
 	 * @attribute show/remove clear icon
 	 */
 	@property({ reflect: true, type: Boolean })
@@ -324,18 +318,6 @@ export class FEmojiPicker extends FRoot {
 	}
 
 	/**
-	 * picker resize
-	 */
-	handleResizablePicker() {
-		const emEmojiPicker = this.emojiPickerPopover.children[0];
-		if (this.resizable && this.picker) {
-			emEmojiPicker.setAttribute("resizable", "true");
-		} else {
-			emEmojiPicker.removeAttribute("resizable");
-		}
-	}
-
-	/**
 	 * add recently used emojis
 	 */
 	handleFrequentEmojiCategory() {
@@ -359,7 +341,21 @@ export class FEmojiPicker extends FRoot {
 		}
 	}
 
+	/**
+	 * validation for placeolder
+	 */
+	validateProperties() {
+		const emojiRegex = /\p{Extended_Pictographic}/u;
+		if (this.placeholder) {
+			if (!emojiRegex.test(this.placeholder)) {
+				throw new Error("f-emoji-picker : placeholder should be an emoji");
+			}
+		}
+	}
+
 	render() {
+		this.validateProperties();
+
 		/**
 		 * click outside the f-emoji wrapper area
 		 */
@@ -377,7 +373,6 @@ export class FEmojiPicker extends FRoot {
 			onEmojiSelect: (e: Emoji) => {
 				this.handleSelectEmoji(e);
 			},
-			dynamicWidth: this.resizable,
 			icons: "solid",
 			skinTonePosition: "none",
 			categories: this.categroiesToDisplay,
@@ -395,16 +390,18 @@ export class FEmojiPicker extends FRoot {
 		 * clear conditional display
 		 */
 		const clearIcon = this.clear
-			? html` <f-div>
+			? html`
 					${this.value
-						? html` <f-icon
-								source="i-close"
-								.size=${this.iconSize}
-								clickable
-								@click=${this.clearValue}
-						  ></f-icon>`
+						? html`<f-div align="middle-center" overflow="hidden">
+								<f-icon
+									source="i-close"
+									.size=${this.iconSize}
+									clickable
+									@click=${this.clearValue}
+								></f-icon
+						  ></f-div>`
 						: ""}
-			  </f-div>`
+			  `
 			: "";
 
 		/**
@@ -412,9 +409,11 @@ export class FEmojiPicker extends FRoot {
 		 */
 		const inputValue = this.value
 			? html`<f-icon .source=${this.value} .size=${this.size}></f-icon>`
-			: html`<f-text variant="para" size="small" weight="regular" state="subtle" ?ellipsis=${true}
-					>${this.placeholder}</f-text
-			  >`;
+			: html`<f-icon
+					.source=${this.placeholder ?? "🙂"}
+					state="secondary"
+					.size=${this.size}
+			  ></f-icon>`;
 
 		// render empty string, since there no need of any child element
 		return html`
@@ -449,11 +448,11 @@ export class FEmojiPicker extends FRoot {
 				>
 					<f-div
 						id="emoji-value"
-						width="80%"
 						height="100%"
 						?placeholder=${this.value ? false : true}
 						size=${this.size}
 						align="middle-left"
+						gap="small"
 					>
 						${inputValue}
 					</f-div>
@@ -472,9 +471,6 @@ export class FEmojiPicker extends FRoot {
 
 		// help section-slot display
 		this.helpSectionDisplay();
-
-		// handle resizable picker
-		this.handleResizablePicker();
 
 		// insert recent emojis
 		this.handleFrequentEmojiCategory();

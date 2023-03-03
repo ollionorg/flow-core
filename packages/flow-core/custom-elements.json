@@ -220,6 +220,14 @@
           "name": "*",
           "declaration": {
             "name": "*",
+            "package": "\"./components/f-emoji-picker/f-emoji-picker\""
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
             "package": "\"./components/f-file-upload/f-file-upload\""
           }
         },
@@ -1765,6 +1773,530 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-emoji-picker/f-emoji-picker.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FEmojiPicker",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"curved\" | \"round\" | \"block\" | undefined"
+              },
+              "default": "\"curved\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "category",
+              "type": {
+                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
+              },
+              "default": "\"fill\"",
+              "attribute": "category",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "placeholder",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FEmojiPickerState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "recent",
+              "type": {
+                "text": "RecentEmojis | undefined"
+              },
+              "default": "[]",
+              "attribute": "recent",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "include",
+              "type": {
+                "text": "FEmojiPickerIncludesCategories | undefined"
+              },
+              "default": "[]",
+              "attribute": "include",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "exclude",
+              "type": {
+                "text": "FEmojiPickerExcludesCategories | undefined"
+              },
+              "default": "[]",
+              "attribute": "exclude",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "[\"exclude-emojis\"]",
+              "type": {
+                "text": "ExcludeEmojis | undefined"
+              },
+              "default": "[]",
+              "attribute": "[\"exclude-emojis\"]",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "custom",
+              "type": {
+                "text": "FEmojiPickerCustomEmojiData | undefined"
+              },
+              "default": "[]",
+              "attribute": "custom",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "[\"close-on-select\"]",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "[\"close-on-select\"]",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clear",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "attribute": "clear",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "_labelNodes",
+              "type": {
+                "text": "NodeListOf<HTMLElement>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_descriptionNodes",
+              "type": {
+                "text": "NodeListOf<HTMLElement>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_helpNodes",
+              "type": {
+                "text": "NodeListOf<HTMLElement>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "emojiPickerHeader",
+              "type": {
+                "text": "FDiv"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "emojiPickerError",
+              "type": {
+                "text": "FDiv"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "labelSlot",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "descriptionSlot",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "helpSlot",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "emojiPicker",
+              "type": {
+                "text": "FDiv"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "emojiPickerPopover",
+              "type": {
+                "text": "FPopover"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "picker",
+              "type": {
+                "text": "Picker | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "categories",
+              "type": {
+                "text": "array"
+              },
+              "default": "[\n\t\t\"frequent\",\n\t\t\"people\",\n\t\t\"nature\",\n\t\t\"foods\",\n\t\t\"activity\",\n\t\t\"places\",\n\t\t\"objects\",\n\t\t\"symbols\",\n\t\t\"flags\"\n\t]"
+            },
+            {
+              "kind": "field",
+              "name": "hasLabel",
+              "description": "has label slot"
+            },
+            {
+              "kind": "field",
+              "name": "hasDescription",
+              "description": "has description slot"
+            },
+            {
+              "kind": "field",
+              "name": "hasHelperText",
+              "description": "has help slot"
+            },
+            {
+              "kind": "field",
+              "name": "iconSize",
+              "description": "icon size"
+            },
+            {
+              "kind": "field",
+              "name": "excludeCategories",
+              "description": "exclude categories"
+            },
+            {
+              "kind": "field",
+              "name": "categroiesToDisplay",
+              "description": "categories to be displayed for picker according to inclide amd exclude"
+            },
+            {
+              "kind": "method",
+              "name": "headerSectionDisplay",
+              "description": "header slot display"
+            },
+            {
+              "kind": "method",
+              "name": "helpSectionDisplay",
+              "description": "help section display"
+            },
+            {
+              "kind": "method",
+              "name": "toggleEmojiPicker",
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "boolean"
+                  },
+                  "description": "boolean"
+                }
+              ],
+              "description": "open/close picker"
+            },
+            {
+              "kind": "method",
+              "name": "handleSelectEmoji",
+              "parameters": [
+                {
+                  "name": "valuePicked",
+                  "optional": true,
+                  "type": {
+                    "text": "Emoji"
+                  },
+                  "description": "emoji as value"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "clearValue",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  },
+                  "description": "MouseEvent"
+                }
+              ],
+              "description": "clear emoji value"
+            },
+            {
+              "kind": "method",
+              "name": "handleFrequentEmojiCategory",
+              "description": "add recently used emojis"
+            },
+            {
+              "kind": "method",
+              "name": "handleCustomEmoji",
+              "description": "handle custom emoji insertion"
+            },
+            {
+              "kind": "method",
+              "name": "validateProperties",
+              "description": "validation for placeolder"
+            },
+            {
+              "kind": "method",
+              "name": "closeEmojiPicker",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  },
+                  "description": "mMouseEvent"
+                },
+                {
+                  "name": "element",
+                  "type": {
+                    "text": "FEmojiPicker"
+                  },
+                  "description": "emoji-picker component"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"curved\" | \"round\" | \"block\" | undefined"
+              },
+              "default": "\"curved\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "category",
+              "type": {
+                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
+              },
+              "default": "\"fill\"",
+              "fieldName": "category"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FEmojiPickerState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "recent",
+              "type": {
+                "text": "RecentEmojis | undefined"
+              },
+              "default": "[]",
+              "fieldName": "recent"
+            },
+            {
+              "name": "include",
+              "type": {
+                "text": "FEmojiPickerIncludesCategories | undefined"
+              },
+              "default": "[]",
+              "fieldName": "include"
+            },
+            {
+              "name": "exclude",
+              "type": {
+                "text": "FEmojiPickerExcludesCategories | undefined"
+              },
+              "default": "[]",
+              "fieldName": "exclude"
+            },
+            {
+              "name": "[\"exclude-emojis\"]",
+              "type": {
+                "text": "ExcludeEmojis | undefined"
+              },
+              "default": "[]",
+              "fieldName": "[\"exclude-emojis\"]"
+            },
+            {
+              "name": "custom",
+              "type": {
+                "text": "FEmojiPickerCustomEmojiData | undefined"
+              },
+              "default": "[]",
+              "fieldName": "custom"
+            },
+            {
+              "name": "[\"close-on-select\"]",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "[\"close-on-select\"]"
+            },
+            {
+              "name": "clear",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "fieldName": "clear"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-emoji-picker",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FEmojiPicker",
+          "declaration": {
+            "name": "FEmojiPicker",
+            "module": "src/components/f-emoji-picker/f-emoji-picker.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-emoji-picker",
+          "declaration": {
+            "name": "FEmojiPicker",
+            "module": "src/components/f-emoji-picker/f-emoji-picker.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-field/f-field.ts",
       "declarations": [
         {
@@ -1974,537 +2506,6 @@
           "declaration": {
             "name": "FField",
             "module": "src/components/f-field/f-field.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-file-upload/f-file-upload.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FFileUpload",
-          "members": [
-            {
-              "kind": "field",
-              "name": "type",
-              "type": {
-                "text": "\"single\" | \"multiple\" | undefined"
-              },
-              "default": "\"single\"",
-              "attribute": "type",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "FFileUploadValueType | undefined"
-              },
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "placeholder",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "placeholder",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "fileType",
-              "type": {
-                "text": "FFileUploadFileType | undefined"
-              },
-              "default": "\"all\"",
-              "attribute": "file-type",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"medium\" | \"small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FFileUploadState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "maxSize",
-              "type": {
-                "text": "FFileUploadSizeProp | undefined"
-              },
-              "attribute": "max-size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "loading",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "fileUploadSection",
-              "type": {
-                "text": "HTMLElement"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "fileUploadHeader",
-              "type": {
-                "text": "FDiv"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "fileUploadError",
-              "type": {
-                "text": "FDiv"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "labelSlot",
-              "type": {
-                "text": "HTMLElement"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "descriptionSlot",
-              "type": {
-                "text": "HTMLElement"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "helpSlot",
-              "type": {
-                "text": "HTMLElement"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "textOverflow",
-              "type": {
-                "text": "FText"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "_labelNodes",
-              "type": {
-                "text": "NodeListOf<HTMLElement>"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "_descriptionNodes",
-              "type": {
-                "text": "NodeListOf<HTMLElement>"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "_helpNodes",
-              "type": {
-                "text": "NodeListOf<HTMLElement>"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "bytes",
-              "type": {
-                "text": "number"
-              },
-              "default": "0"
-            },
-            {
-              "kind": "field",
-              "name": "sizeLimitFlag",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true"
-            },
-            {
-              "kind": "field",
-              "name": "acceptedFilesFlag",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true"
-            },
-            {
-              "kind": "field",
-              "name": "selectedFiles",
-              "type": {
-                "text": "File[] | undefined"
-              },
-              "default": "[]"
-            },
-            {
-              "kind": "field",
-              "name": "fileInputRef",
-              "type": {
-                "text": "Ref<HTMLInputElement>"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "hasLabel",
-              "description": "has label slot"
-            },
-            {
-              "kind": "field",
-              "name": "hasDescription",
-              "description": "has description slot"
-            },
-            {
-              "kind": "field",
-              "name": "hasHelperText",
-              "description": "has help slot"
-            },
-            {
-              "kind": "field",
-              "name": "fileFormatError",
-              "description": "error if file format is incorrect"
-            },
-            {
-              "kind": "field",
-              "name": "fileSizeError",
-              "description": "error if file size is more than given size"
-            },
-            {
-              "kind": "field",
-              "name": "dispatchValue",
-              "description": "value for event dispatch"
-            },
-            {
-              "kind": "method",
-              "name": "handleClick",
-              "description": "on click open file selector window on OS"
-            },
-            {
-              "kind": "method",
-              "name": "dropFile",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "DragEvent"
-                  },
-                  "description": "DragEvent\ndrag and drop file(s) and event emission"
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "selectFile",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  },
-                  "description": "InputEvent"
-                }
-              ],
-              "description": "select file(s) from browse options"
-            },
-            {
-              "kind": "method",
-              "name": "dispatchOnInput",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "Event"
-                  },
-                  "description": "Event"
-                }
-              ],
-              "description": "dispatch input event"
-            },
-            {
-              "kind": "method",
-              "name": "handleRemoveFile",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  },
-                  "description": "MouseEvent"
-                }
-              ],
-              "description": "on click remove the selected single file"
-            },
-            {
-              "kind": "method",
-              "name": "handleRemoveRespectiveFile",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  },
-                  "description": "MouseEvent"
-                },
-                {
-                  "name": "file",
-                  "type": {
-                    "text": "File"
-                  },
-                  "description": "contains clicked file"
-                }
-              ],
-              "description": "removes the clicked respective file from selection array"
-            },
-            {
-              "kind": "method",
-              "name": "checkOverflowing",
-              "description": "check if ellipsis happens on text and insert tooltip"
-            },
-            {
-              "kind": "method",
-              "name": "handleMouseEnter",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  },
-                  "description": "MouseEvent"
-                }
-              ],
-              "description": "in multiple file selection hovering on the particular file name may open the tooltip -if ellipsis is present"
-            },
-            {
-              "kind": "method",
-              "name": "isLetter",
-              "parameters": [
-                {
-                  "name": "str",
-                  "type": {
-                    "text": "string"
-                  },
-                  "description": "single character"
-                }
-              ],
-              "return": {
-                "type": {
-                  "text": ""
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "split",
-              "parameters": [
-                {
-                  "name": "str",
-                  "type": {
-                    "text": "string"
-                  },
-                  "description": "string"
-                },
-                {
-                  "name": "index",
-                  "type": {
-                    "text": "number"
-                  },
-                  "description": "index to splice from"
-                }
-              ],
-              "return": {
-                "type": {
-                  "text": ""
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "updateSelectedValues",
-              "description": "update file array locally"
-            },
-            {
-              "kind": "method",
-              "name": "helpSectionMessages",
-              "description": "display messages according to conditions"
-            },
-            {
-              "kind": "method",
-              "name": "helpSectionDisplay",
-              "description": "conditional help section display for false spacing issue"
-            },
-            {
-              "kind": "method",
-              "name": "headerSectionDisplay",
-              "description": "conditional header section display for false spacing issue"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "type",
-              "type": {
-                "text": "\"single\" | \"multiple\" | undefined"
-              },
-              "default": "\"single\"",
-              "fieldName": "type"
-            },
-            {
-              "name": "value",
-              "type": {
-                "text": "FFileUploadValueType | undefined"
-              },
-              "fieldName": "value"
-            },
-            {
-              "name": "placeholder",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "placeholder"
-            },
-            {
-              "name": "file-type",
-              "type": {
-                "text": "FFileUploadFileType | undefined"
-              },
-              "default": "\"all\"",
-              "fieldName": "fileType"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "\"medium\" | \"small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FFileUploadState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "max-size",
-              "type": {
-                "text": "FFileUploadSizeProp | undefined"
-              },
-              "fieldName": "maxSize"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "loading"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-file-upload",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FFileUpload",
-          "declaration": {
-            "name": "FFileUpload",
-            "module": "src/components/f-file-upload/f-file-upload.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-file-upload",
-          "declaration": {
-            "name": "FFileUpload",
-            "module": "src/components/f-file-upload/f-file-upload.ts"
           }
         }
       ]
@@ -3045,6 +3046,537 @@
           "declaration": {
             "name": "FIcon",
             "module": "src/components/f-icon/f-icon.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-file-upload/f-file-upload.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FFileUpload",
+          "members": [
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "\"single\" | \"multiple\" | undefined"
+              },
+              "default": "\"single\"",
+              "attribute": "type",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "FFileUploadValueType | undefined"
+              },
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "placeholder",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fileType",
+              "type": {
+                "text": "FFileUploadFileType | undefined"
+              },
+              "default": "\"all\"",
+              "attribute": "file-type",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FFileUploadState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "maxSize",
+              "type": {
+                "text": "FFileUploadSizeProp | undefined"
+              },
+              "attribute": "max-size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fileUploadSection",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "fileUploadHeader",
+              "type": {
+                "text": "FDiv"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "fileUploadError",
+              "type": {
+                "text": "FDiv"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "labelSlot",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "descriptionSlot",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "helpSlot",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "textOverflow",
+              "type": {
+                "text": "FText"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_labelNodes",
+              "type": {
+                "text": "NodeListOf<HTMLElement>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_descriptionNodes",
+              "type": {
+                "text": "NodeListOf<HTMLElement>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_helpNodes",
+              "type": {
+                "text": "NodeListOf<HTMLElement>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "bytes",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "sizeLimitFlag",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "kind": "field",
+              "name": "acceptedFilesFlag",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "kind": "field",
+              "name": "selectedFiles",
+              "type": {
+                "text": "File[] | undefined"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "fileInputRef",
+              "type": {
+                "text": "Ref<HTMLInputElement>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hasLabel",
+              "description": "has label slot"
+            },
+            {
+              "kind": "field",
+              "name": "hasDescription",
+              "description": "has description slot"
+            },
+            {
+              "kind": "field",
+              "name": "hasHelperText",
+              "description": "has help slot"
+            },
+            {
+              "kind": "field",
+              "name": "fileFormatError",
+              "description": "error if file format is incorrect"
+            },
+            {
+              "kind": "field",
+              "name": "fileSizeError",
+              "description": "error if file size is more than given size"
+            },
+            {
+              "kind": "field",
+              "name": "dispatchValue",
+              "description": "value for event dispatch"
+            },
+            {
+              "kind": "method",
+              "name": "handleClick",
+              "description": "on click open file selector window on OS"
+            },
+            {
+              "kind": "method",
+              "name": "dropFile",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "DragEvent"
+                  },
+                  "description": "DragEvent\ndrag and drop file(s) and event emission"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "selectFile",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  },
+                  "description": "InputEvent"
+                }
+              ],
+              "description": "select file(s) from browse options"
+            },
+            {
+              "kind": "method",
+              "name": "dispatchOnInput",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  },
+                  "description": "Event"
+                }
+              ],
+              "description": "dispatch input event"
+            },
+            {
+              "kind": "method",
+              "name": "handleRemoveFile",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  },
+                  "description": "MouseEvent"
+                }
+              ],
+              "description": "on click remove the selected single file"
+            },
+            {
+              "kind": "method",
+              "name": "handleRemoveRespectiveFile",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  },
+                  "description": "MouseEvent"
+                },
+                {
+                  "name": "file",
+                  "type": {
+                    "text": "File"
+                  },
+                  "description": "contains clicked file"
+                }
+              ],
+              "description": "removes the clicked respective file from selection array"
+            },
+            {
+              "kind": "method",
+              "name": "checkOverflowing",
+              "description": "check if ellipsis happens on text and insert tooltip"
+            },
+            {
+              "kind": "method",
+              "name": "handleMouseEnter",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  },
+                  "description": "MouseEvent"
+                }
+              ],
+              "description": "in multiple file selection hovering on the particular file name may open the tooltip -if ellipsis is present"
+            },
+            {
+              "kind": "method",
+              "name": "isLetter",
+              "parameters": [
+                {
+                  "name": "str",
+                  "type": {
+                    "text": "string"
+                  },
+                  "description": "single character"
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": ""
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "split",
+              "parameters": [
+                {
+                  "name": "str",
+                  "type": {
+                    "text": "string"
+                  },
+                  "description": "string"
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  },
+                  "description": "index to splice from"
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": ""
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "updateSelectedValues",
+              "description": "update file array locally"
+            },
+            {
+              "kind": "method",
+              "name": "helpSectionMessages",
+              "description": "display messages according to conditions"
+            },
+            {
+              "kind": "method",
+              "name": "helpSectionDisplay",
+              "description": "conditional help section display for false spacing issue"
+            },
+            {
+              "kind": "method",
+              "name": "headerSectionDisplay",
+              "description": "conditional header section display for false spacing issue"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "type",
+              "type": {
+                "text": "\"single\" | \"multiple\" | undefined"
+              },
+              "default": "\"single\"",
+              "fieldName": "type"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "FFileUploadValueType | undefined"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "file-type",
+              "type": {
+                "text": "FFileUploadFileType | undefined"
+              },
+              "default": "\"all\"",
+              "fieldName": "fileType"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FFileUploadState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "max-size",
+              "type": {
+                "text": "FFileUploadSizeProp | undefined"
+              },
+              "fieldName": "maxSize"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-file-upload",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FFileUpload",
+          "declaration": {
+            "name": "FFileUpload",
+            "module": "src/components/f-file-upload/f-file-upload.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-file-upload",
+          "declaration": {
+            "name": "FFileUpload",
+            "module": "src/components/f-file-upload/f-file-upload.ts"
           }
         }
       ]
@@ -6341,6 +6873,127 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-tab-node/f-tab-node.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTabNode",
+          "members": [
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "FTabNodeWidthProp | undefined"
+              },
+              "default": "\"hug-content\""
+            },
+            {
+              "kind": "field",
+              "name": "contentId",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "content-id",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tabWidth",
+              "description": "tab-width"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "content-id",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "contentId"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "active"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-tab-node",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTabNode",
+          "declaration": {
+            "name": "FTabNode",
+            "module": "src/components/f-tab-node/f-tab-node.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-tab-node",
+          "declaration": {
+            "name": "FTabNode",
+            "module": "src/components/f-tab-node/f-tab-node.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-tag/f-tag.ts",
       "declarations": [
         {
@@ -6621,127 +7274,6 @@
           "declaration": {
             "name": "FTag",
             "module": "src/components/f-tag/f-tag.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-tab-node/f-tab-node.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTabNode",
-          "members": [
-            {
-              "kind": "field",
-              "name": "width",
-              "type": {
-                "text": "FTabNodeWidthProp | undefined"
-              },
-              "default": "\"hug-content\""
-            },
-            {
-              "kind": "field",
-              "name": "contentId",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "content-id",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "active",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "active",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "tabWidth",
-              "description": "tab-width"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "content-id",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "contentId"
-            },
-            {
-              "name": "active",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "active"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-tab-node",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTabNode",
-          "declaration": {
-            "name": "FTabNode",
-            "module": "src/components/f-tab-node/f-tab-node.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-tab-node",
-          "declaration": {
-            "name": "FTabNode",
-            "module": "src/components/f-tab-node/f-tab-node.ts"
           }
         }
       ]

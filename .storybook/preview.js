@@ -10,74 +10,74 @@ import { setCustomElementsManifest, setCustomElements } from "@storybook/web-com
 import "./storybook.css";
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
-  backgrounds: { disable: true },
-  // themes: {
-  //   default: "f-dark",
-  //   clearable: false,
-  //   list: [
-  //     { name: "f-dark", color: "#000" },
-  //     { name: "f-light", color: "#fff" },
-  //   ],
-  // },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
-    },
-  },
-  options: {
-    storySort: {
-      order: [
-        "Foundation",
-        ["Introduction", "Design tokens", ["Overview"]],
-        ["Overview", "Color", "Font", "Icon"],
-        "Components",
-        ["f-div", "f-divider", "f-spacer", "f-button", "f-icon", "f-text", "f-pictogram"],
-      ],
-    },
-  },
-  previewTabs: {
-    "storybook/docs/panel": { index: -1 },
-  },
+	actions: { argTypesRegex: "^on[A-Z].*" },
+	backgrounds: { disable: true },
+	// themes: {
+	//   default: "f-dark",
+	//   clearable: false,
+	//   list: [
+	//     { name: "f-dark", color: "#000" },
+	//     { name: "f-light", color: "#fff" },
+	//   ],
+	// },
+	controls: {
+		matchers: {
+			color: /(background|color)$/i,
+			date: /Date$/
+		}
+	},
+	options: {
+		storySort: {
+			order: [
+				"Foundation",
+				["Introduction", "Design tokens", ["Overview"]],
+				["Overview", "Color", "Font", "Icon"],
+				"Components",
+				["f-div", "f-divider", "f-spacer", "f-button", "f-icon", "f-text", "f-pictogram"]
+			]
+		}
+	},
+	previewTabs: {
+		"storybook/docs/panel": { index: -1 }
+	}
 };
 
 export const decorators = [
-  (story) => {
-    window.onmessage = function (e) {
-      if (e.data && typeof e.data === "string") {
-        const message = JSON.parse(e.data);
+	story => {
+		window.onmessage = function (e) {
+			if (e.data && typeof e.data === "string") {
+				const message = JSON.parse(e.data);
 
-        if (message.event.type === "storybook-addon-themes/change") {
-          ConfigUtil.setConfig({ theme: message.event.args[0] });
-        }
-      }
-    };
-    ConfigUtil.setConfig({
-      iconPack: {
-        ...SystemIconPack,
-        ...ProductIconPack,
-        ...GcpIconPack,
-        ...AwsIconPack,
-      },
-    });
-    return html`
-      <div
-        style="background-color:var(--color-surface-default);color:var(--color-text-default);font-family:var(--flow-font);height:inherit;padding: 0px;"
-      >
-        ${story()}
-      </div>
-    `;
-  },
+				if (message.event.type === "storybook-addon-themes/change") {
+					ConfigUtil.setConfig({ theme: message.event.args[0] });
+				}
+			}
+		};
+		ConfigUtil.setConfig({
+			iconPack: {
+				...SystemIconPack,
+				...ProductIconPack,
+				...GcpIconPack,
+				...AwsIconPack
+			}
+		});
+		return html`
+			<div
+				style="background-color:var(--color-surface-default);color:var(--color-text-default);font-family:var(--flow-font);height:inherit;padding: 0px;"
+			>
+				${story()}
+			</div>
+		`;
+	}
 ];
 
 async function run() {
-  const customElements = await (
-    await fetch(new URL("../packages/flow-core/custom-elements.json", import.meta.url))
-  ).json();
+	const customElements = await (
+		await fetch(new URL("../packages/flow-core/custom-elements.json", import.meta.url))
+	).json();
 
-  setCustomElementsManifest(customElements);
-  setCustomElements(customElements);
+	setCustomElementsManifest(customElements);
+	setCustomElements(customElements);
 }
 
 run();

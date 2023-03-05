@@ -2,7 +2,7 @@ import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
-import fCheckboxAnatomy from "./svg/i-fcheckbox-anatomy.js";
+import fToastAnatomy from "./svg/i-ftoast-anatomy.js";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <Meta
@@ -21,7 +21,9 @@ import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <f-divider></f-divider>
 
-f-checkbox allows a user to mark one individual item as selected, or to select multiple items from a list of individual items.
+Toasts are time-based window elements used to display short messages; they usually appear at the top of the screen and disappear after a few seconds.
+
+f-toast act as the wrapper component for toast templates.
 
 <br />
 
@@ -30,34 +32,28 @@ f-checkbox allows a user to mark one individual item as selected, or to select m
 <Canvas>
 	<Story
 		name="Playground"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 300
+			}
+		}}
 		argTypes={{
-			value: { control: "radio", options: ["checked", "unchecked", "indeterminate"] },
+			type: { control: "radio", options: ["auto-hide", "persists"] },
+			duration: { control: "number" },
 			state: {
 				control: "select",
 				options: ["default", "success", "primary", "warning", "danger"]
 			},
-			size: {
-				control: "radio",
-				options: ["small", "medium"]
-			},
-			disabled: {
+			["close-button"]: {
 				control: "boolean"
-			},
-			slot: {
-				control: "text"
 			}
 		}}
 		args={{
-			value: "checked",
+			type: "auto-hide",
+			duration: 5000,
 			state: "default",
-			size: "medium",
-			slot: ` <f-div slot="label" padding="none">
-                <f-text variant="para" size="small">Banana</f-text>
-              </f-div>
-              <f-div slot="help" gap="none" padding="none">
-                <f-text variant="para" size="small" state="secondary">This is a subtext </f-text>
-              </f-div>`,
-			disabled: false
+			["close-button"]: true
 		}}
 	>
 		{args => {
@@ -68,17 +64,56 @@ f-checkbox allows a user to mark one individual item as selected, or to select m
 			const [toastList, setToastList] = useState([]);
 			const add = () => {
 				let tempToast = [...toastList];
-				tempToast.push(1);
+				tempToast.push(tempToast.length + 1);
 				setToastList(tempToast);
+			};
+			const handleRemove = e => {
+				console.log("removed uid - ", e.detail.value);
 			};
 			return html`
 				<f-div width="100%" padding="large">
 					<f-div>
-						<f-button label="add" icon-right="i-plus" @click=${() => add()}></f-button>
+						<f-button label="add toast" icon-right="i-plus" @click=${() => add()}></f-button>
 					</f-div>
 					${toastList?.length > 0
 						? toastList?.map((item, index) => {
-								return html`<f-toast>Hello 1234 ${index}</f-toast>`;
+								return html`<f-toast
+									.state=${args.state}
+									.duration=${args.duration}
+									.type=${args.type}
+									?close-button=${args["close-button"]}
+									@remove=${handleRemove}
+								>
+									<f-div slot="message" direction="column" gap="medium">
+										<f-div direction="column" gap="x-small">
+											<f-text variant="heading" size="small" weight="bold"
+												>Toast Message Header ${item}</f-text
+											>
+											<f-text variant="para" size="small" weight="regular"
+												>Detailed description of the activity goes here</f-text
+											>
+										</f-div>
+										<f-text variant="para" size="small" weight="regular" state="secondary"
+											>Just now</f-text
+										>
+									</f-div>
+									${item % 2 === 0
+										? html` <f-div slot="actions" direction="row" gap="medium">
+												<f-button
+													label="button 1"
+													state="neutral"
+													category="outline"
+													variant="round"
+												></f-button>
+												<f-button
+													label="button 2"
+													state="neutral"
+													category="outline"
+													variant="round"
+												></f-button>
+										  </f-div>`
+										: ""}
+								</f-toast>`;
 						  })
 						: ""}
 				</f-div>
@@ -94,41 +129,59 @@ f-checkbox allows a user to mark one individual item as selected, or to select m
 <f-divider></f-divider>
 
 <Story name="Anatomy">
-	{() => html`<div class="align-center">${unsafeSVG(fCheckboxAnatomy)}</div>`}
+	{() => html`<div class="align-center">${unsafeSVG(fToastAnatomy)}</div>`}
 </Story>
 
 <br />
 
-## value
+## type
 
-Value of a checkbox defines if it is selected, unselected or indeterminate.
+Flow 2 provides two types of toast:
+
+- auto-hide: toast disappears after the definite amount of time, and
+
+- persist: toast remains on screen until the user interacts with it.
 
 <Canvas>
-	<Story name="value">
+	<Story
+		name="type"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 300
+			}
+		}}
+	>
 		{args => {
-			const values = ["checked", "unchecked", "indeterminate"];
-			const [value, setValue] = useState("checked");
-			const handleValue = e => {
-				setValue(e.detail.value);
+			const [values, setValues] = useState([]);
+			const add = () => {
+				let tempValues = [...values];
+				tempValues.push(tempValues.length === 0 ? "persists" : "auto-hide");
+				setValues(tempValues);
 			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
+					<f-div>
+						<f-button label="add toast" icon-right="i-plus" @click=${() => add()}></f-button>
+					</f-div>
 					${values.map(
 						item => html`<f-div>
-           <f-checkbox
-              size="medium"
-              .value=${item}
-              @input=${handleValue}
-            >
-              <f-div slot="label" padding="none">
-                <f-text variant="para" size="small">This is a checkbox (value="${item}")</f-text>
-              </f-div>
-              <f-div slot="help" gap="none" padding="none">
-                <f-text variant="para" size="small" state="secondary">This is a subtext </f-text>
-              </f-div>
-            </f-checkbox></f-div
-        ></f-div
-      >`
+							<f-toast .type=${item} .close-button=${true}
+								><f-div slot="message" direction="column" gap="medium">
+									<f-div direction="column" gap="x-small">
+										<f-text variant="heading" size="small" weight="bold"
+											>Toast Message Header ${item}</f-text
+										>
+										<f-text variant="para" size="small" weight="regular"
+											>Detailed description of the activity goes here</f-text
+										>
+									</f-div>
+									<f-text variant="para" size="small" weight="regular" state="secondary"
+										>Just now</f-text
+									>
+								</f-div></f-toast
+							>
+						</f-div>`
 					)}
 				</f-div>
 			`;
@@ -144,85 +197,78 @@ Value of a checkbox defines if it is selected, unselected or indeterminate.
 			<td></td>
 		</tr>
 		<tr>
-			<td>checked</td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>unchecked</td>
-			<td></td>
+			<td>auto-hide</td>
+			<td>toast disappears after the definite amount of time</td>
 			<td>
 				<code>default</code>
 			</td>
 		</tr>
 		<tr>
-			<td>indeterminate</td>
-			<td></td>
-			<td></td>
+			<td>persists</td>
+			<td>toast remains on screen until the user interacts with it</td>
+			<td> </td>
 		</tr>
 	</tbody>
 </table>
 
 <br />
 
-## size
+## duration
 
 <f-divider></f-divider>
 
-f-checkbox can have 2 sizes.
+When type is auto-hide, duration property defines the time in milliseconds after which toast disappears. By default it is 5000 ms
 
 <Canvas>
-	<Story name="size">
+	<Story
+		name="duration"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 300
+			}
+		}}
+	>
 		{args => {
-			const sizes = ["small", "medium"];
-			const [value, setValue] = useState("unchecked");
-			const handleValue = e => {
-				setValue(e.detail.value);
+			const [values, setValues] = useState([]);
+			const add = () => {
+				let tempValues = [...values];
+				tempValues.push("auto-hide");
+				setValues(tempValues);
 			};
 			return html`
-				<f-div width="100%" align="top-center" padding="large" gap="medium">
-					${sizes.map(
+				<f-div width="100%" align="middle-center" padding="large" gap="medium">
+					<f-div>
+						<f-button
+							label="add toast (auto hide 2000ms)"
+							icon-right="i-plus"
+							@click=${() => add()}
+						></f-button>
+					</f-div>
+					${values.map(
 						item => html`<f-div>
-          <f-checkbox
-              .size=${item}
-              .value=${value}
-              @input=${handleValue}
-            >
-              <f-div slot="label" padding="none">
-                <f-text variant="para" size="small">This is a checkbox (size="${item}")</f-text>
-              </f-div>
-              <f-div slot="help" gap="none" padding="none">
-                <f-text variant="para" size="small" state="secondary">This is a subtext </f-text>
-              </f-div>
-            </f-checkbox></f-div
-        ></f-div
-      >`
+							<f-toast .type=${item} .close-button=${true} .duration=${2000}
+								><f-div slot="message" direction="column" gap="medium">
+									<f-div direction="column" gap="x-small">
+										<f-text variant="heading" size="small" weight="bold"
+											>Toast Message Header ${item}</f-text
+										>
+										<f-text variant="para" size="small" weight="regular"
+											>Detailed description of the activity goes here</f-text
+										>
+									</f-div>
+									<f-text variant="para" size="small" weight="regular" state="secondary"
+										>Just now</f-text
+									>
+								</f-div></f-toast
+							>
+						</f-div>`
 					)}
 				</f-div>
 			`;
 		}}
 	</Story>
 </Canvas>
-
-<table class="custom-table">
-	<tbody>
-		<tr>
-			<td>Value</td>
-			<td>Description</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>small</td>
-			<td>size="12px"</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>medium</td>
-			<td>size="16px"</td>
-			<td></td>
-		</tr>
-	</tbody>
-</table>
 
 <br />
 
@@ -233,36 +279,48 @@ f-checkbox can have 2 sizes.
 States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
 
 <Canvas>
-	<Story name="state">
+	<Story
+		name="state"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 300
+			}
+		}}
+	>
 		{args => {
-			const states = [
-				["default", "primary", "success"],
-				["danger", "warning", "default"]
-			];
-			const [value, setValue] = useState("unchecked");
-			const handleValue = e => {
-				setValue(e.detail.value);
+			const [values, setValues] = useState([]);
+			const add = () => {
+				let tempValues = [];
+				tempValues = ["default", "primary", "success", "danger", "warning"];
+				setValues(tempValues);
 			};
 			return html`
-				<f-div direction="column" gap="medium">
-					${states.map(
-						item => html` <f-div align="middle-center" padding="large" gap="medium">
-							${item.map(
-								state => html`<f-div
-									><f-checkbox size="medium" .value=${value} .state=${state} @input=${handleValue}>
-										<f-div slot="label" padding="none">
-											<f-text variant="para" size="small"
-												>This is a checkbox (state="${state}")</f-text
-											>
-										</f-div>
-										<f-div slot="help" gap="none" padding="none">
-											<f-text variant="para" size="small" state="secondary"
-												>This is a subtext
-											</f-text>
-										</f-div>
-									</f-checkbox></f-div
-								>`
-							)}
+				<f-div width="100%" align="middle-center" padding="large" gap="medium">
+					<f-div>
+						<f-button
+							label="add toast (auto hide 2000ms)"
+							icon-right="i-plus"
+							@click=${() => add()}
+						></f-button>
+					</f-div>
+					${values.map(
+						item => html`<f-div>
+							<f-toast .type=${item} .close-button=${true} .duration=${5000} .state=${item}
+								><f-div slot="message" direction="column" gap="medium">
+									<f-div direction="column" gap="x-small">
+										<f-text variant="heading" size="small" weight="bold"
+											>Toast Message Header ${item}</f-text
+										>
+										<f-text variant="para" size="small" weight="regular"
+											>Detailed description of the activity goes here</f-text
+										>
+									</f-div>
+									<f-text variant="para" size="small" weight="regular" state="secondary"
+										>Just now</f-text
+									>
+								</f-div></f-toast
+							>
 						</f-div>`
 					)}
 				</f-div>
@@ -317,31 +375,49 @@ States are used to communicate purpose and connotations. For example, a red colo
 <br />
 
 <Canvas>
-	<Story name="Flags">
+	<Story
+		name="Flags"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 300
+			}
+		}}
+	>
 		{args => {
-			const [value, setValue] = useState("checked");
-			const handleValue = e => {
-				setValue(e.detail.value);
+			const [values, setValues] = useState([]);
+			const add = () => {
+				let tempValues = [];
+				tempValues = [true, false];
+				setValues(tempValues);
 			};
 			return html`
-				<f-div width="100%" align="top-center" padding="large" gap="medium">
-					${[0].map(
+				<f-div width="100%" align="middle-center" padding="large" gap="medium">
+					<f-div>
+						<f-button
+							label="add toast (auto hide 2000ms)"
+							icon-right="i-plus"
+							@click=${() => add()}
+						></f-button>
+					</f-div>
+					${values.map(
 						item => html`<f-div>
-          <f-checkbox
-              size="medium"
-              .value=${value}
-              @input=${handleValue}
-              ?disabled=${true}
-            >
-              <f-div slot="label" padding="none">
-                <f-text variant="para" size="small">This is a Disabled checkbox (disabled=true)</f-text>
-              </f-div>
-              <f-div slot="help" gap="none" padding="none">
-                <f-text variant="para" size="small" state="secondary">This is a subtext </f-text>
-              </f-div>
-            </f-checkbox></f-div
-        ></f-div
-      >`
+							<f-toast .close-button=${item} .duration=${5000} state="primary" type="persists"
+								><f-div slot="message" direction="column" gap="medium">
+									<f-div direction="column" gap="x-small">
+										<f-text variant="heading" size="small" weight="bold"
+											>Toast Message Header (close-button=${item})</f-text
+										>
+										<f-text variant="para" size="small" weight="regular"
+											>Detailed description of the activity goes here</f-text
+										>
+									</f-div>
+									<f-text variant="para" size="small" weight="regular" state="secondary"
+										>Just now</f-text
+									>
+								</f-div></f-toast
+							>
+						</f-div>`
 					)}
 				</f-div>
 			`;
@@ -357,10 +433,10 @@ States are used to communicate purpose and connotations. For example, a red colo
 			<td></td>
 		</tr>
 		<tr>
-			<td>disabled</td>
-			<td>Opacity is set to 50% in disabled state in disabled mode.</td>
+			<td>close-button</td>
+			<td>Enables a ‘close’ icon-button on top left of the toast </td>
 			<td>
-				<code>false</code>
+				<code>true</code>
 			</td>
 		</tr>
 	</tbody>

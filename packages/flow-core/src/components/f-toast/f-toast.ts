@@ -1,58 +1,113 @@
-import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { html, unsafeCSS } from "lit";
+import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-toast.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
-import ToastQueue from "./ToastQueue.js";
+import ToastQueue from "./ToastQueue";
+import { FDiv } from "../f-div/f-div";
 
-export type FToastState = "default" | "secondary" | "subtle" | `custom, ${string}`;
+export type FToastState = "default" | "primary" | "success" | "warning" | "danger";
 
 @customElement("f-toast")
 export class FToast extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
 
 	/**
-	 * @attribute local state for managing custom fill.
-	 */
-	@state()
-	fill = "";
-
-	/**
-	 * @attribute The solid variant is the default.
+	 * @attribute Flow 2 provides two types of toast: auto-hide: toast disappears after the definite amount of time, and persist: toast remains on screen until the user interacts with it.
 	 */
 	@property({ reflect: true, type: String })
-	variant?: "solid" | "dashed" | "dotted" = "solid";
+	type?: "auto-hide" | "persists" = "auto-hide";
 
 	/**
-	 * @attribute The medium size is the default.
+	 * @attribute When type is auto-hide, duration property defines the time in milliseconds after which toast disappears. By default it is 5000 ms
 	 */
-	@property({ reflect: true, type: String })
-	size?: "large" | "medium" = "medium";
+	@property({ reflect: true, type: Number })
+	duration?: number = 5000;
 
 	/**
-	 * @attribute The state of Divider helps in indicating the degree of emphasis. By default it is default state.
+	 * @attribute States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
 	 */
 	@property({ reflect: true, type: String })
 	state?: FToastState = "default";
 
+	/**
+	 * @attribute Enables a ‘close’ icon-button on top left of the toast
+	 */
+	@property({ reflect: true, type: Boolean })
+	["close-button"]?: boolean = true;
+
+	/**
+	 * id selector for toast-message f-div
+	 */
+	@query("#message-slot")
+	messageSlot!: FDiv;
+
+	/**
+	 * id selector for toast-action f-div
+	 */
+	@query("#actions-slot")
+	actionsSlot!: FDiv;
+
+	/**
+	 * @attribute assigned elements inside slot message
+	 */
+	@queryAssignedElements({ slot: "message" })
+	_toastMessageNodes!: NodeListOf<HTMLElement>;
+
+	/**
+	 * @attribute assigned elements inside slot actions
+	 */
+	@queryAssignedElements({ slot: "actions" })
+	_toastActionNodes!: NodeListOf<HTMLElement>;
+
 	mouseover = false;
-	position = "fixed";
 
+	height = 208;
+
+	width = 400;
+
+	right = `-${this.width}px`;
+
+	top = "16px";
+
+	toasterRef: Ref<HTMLDivElement> = createRef();
+
+	/**
+	 * get position styling for toasts
+	 */
 	get styleObj() {
-		if (this.position === "relative") {
-			return "transform: translateX(120%)";
-		} else {
-			return "top: 16px;right: 16px";
-		}
+		return `top: ${this.top};right: ${this.right};`;
 	}
 
+	/**
+	 * has toast-message slot
+	 */
+	get hasToastMessage() {
+		return this._toastMessageNodes.length > 0;
+	}
+
+	/**
+	 * has toast-action slot
+	 */
+	get hasToastActions() {
+		return this._toastActionNodes.length > 0;
+	}
+
+	/**
+	 * get current uid
+	 */
 	get uid() {
-		return this.id ? this.id : this.generateId();
+		return this.getAttribute("uid") ?? "";
 	}
 
+	/**
+	 * generating uid for toast queue
+	 * @param length length of uid
+	 * @returns uid
+	 */
 	generateId(length = 5) {
 		let result = "";
 		const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -63,58 +118,106 @@ export class FToast extends FRoot {
 		return result;
 	}
 
-	@state()
-	autoRemove = false;
-
-	height = 108;
-
+	/**
+	 * remove the toast on click of remove icon
+	 */
 	remove() {
-		/**
-			remove event
-			 */
-		// this.$emit("remove", this.uid);
-		ToastQueue.remove(this, () => console.log("removed", this.uid));
+		ToastQueue.remove(this, () => {
+			this.dispatchOnRemove();
+		});
 	}
 
+	/**
+	 * checks for whether or not the toast auto-hides or persists
+	 * @returns void
+	 */
 	autoRemoveConfig() {
-		if (!this.autoRemove) {
+		if (this.type === "persists") {
 			return;
 		}
-
 		setTimeout(() => {
 			if (!this.mouseover) {
 				this.remove();
 			} else {
 				this.autoRemoveConfig();
 			}
-		}, 5000);
+		}, this.duration);
 	}
 
-	toasterRef: Ref<HTMLDivElement> = createRef();
+	/**
+	 * set position of resepective toast
+	 * @param top top position string in px
+	 * @param right rigjt position string in px
+	 */
+	setPosition(top: string, right: string) {
+		this.top = top;
+		this.right = right;
+		this.requestUpdate();
+	}
 
-	top = "16px";
-	width = 412;
-	right = `-${this.width}px`;
-	transform = "translateX(120%)";
+	/**
+	 * dispatch remove event
+	 * @param e Event
+	 */
+	dispatchOnRemove() {
+		/**
+		 * @event remove
+		 */
+		const event = new CustomEvent("remove", {
+			detail: {
+				value: this.uid
+			},
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(event);
+	}
 
-	setPosition(top: string, right: string, transform = "translateX(0%)") {
-		if (this.position === "relative") {
-			this.transform = transform;
+	/**
+	 * display toast message f-div
+	 */
+	displayToastMessage() {
+		if (!this.hasToastMessage) {
+			this.messageSlot.style.display = "none";
 		} else {
-			this.top = top;
-			this.right = right;
-			console.log(top, right);
+			this.messageSlot.style.display = "";
 		}
 	}
 
+	/**
+	 * display toast action f-div
+	 */
+	displayToastActions() {
+		if (!this.hasToastActions) {
+			this.actionsSlot.style.display = "none";
+		} else {
+			this.actionsSlot.style.display = "";
+		}
+	}
+
+	/**
+	 * add toast to queue
+	 */
+	addToastToQueue() {
+		if (this.toasterRef.value) {
+			this.height = this.toasterRef.value?.offsetHeight;
+			this.setAttribute("uid", this.generateId());
+			ToastQueue.add(this);
+			this.autoRemoveConfig();
+		}
+	}
+
+	/**
+	 * Final render
+	 * @returns html
+	 */
 	render() {
 		// render empty string, since there no need of any child element
 		return html` <div
 			${ref(this.toasterRef)}
-			class="flow-toaster"
+			class="f-toast"
 			style=${this.styleObj}
-			data-state=${this.state}
-			data-position=${this.position}
+			data-position="fixed"
 			@mouseover=${() => {
 				this.mouseover = true;
 			}}
@@ -122,18 +225,57 @@ export class FToast extends FRoot {
 				this.mouseover = false;
 			}}
 		>
-			<div class="flow-close-toaster" @click=${this.remove}>
-				<f-icon source="i-close" size="x-small" clickable></f-icon>
-			</div>
-
-			<slot></slot>
+			${this["close-button"]
+				? html` <div class="f-toast-close" @click=${this.remove}>
+						<f-icon source="i-close" size="x-small" clickable></f-icon>
+				  </div>`
+				: ""}
+			<f-div
+				direction="column"
+				gap="medium"
+				state="tertiary"
+				width="100%"
+				padding="large none"
+				variant="curved"
+			>
+				<f-div
+					.selected=${this.state !== "default" ? "notch-left" : "none"}
+					padding="none large"
+					id="message-slot"
+					.state=${this.state}
+					toast-data-state=${this.state}
+				>
+					<slot name="message"></slot>
+				</f-div>
+				<f-div padding="none large" id="actions-slot">
+					<slot name="actions"></slot>
+				</f-div>
+			</f-div>
 		</div>`;
 	}
-	protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-		console.log(_changedProperties);
-		this.height = this.toasterRef.value?.scrollHeight;
-		ToastQueue.add(this);
-		this.autoRemoveConfig();
+	firstUpdated() {
+		if (this.toasterRef.value) {
+			/**
+			 * method that is executed before every repaint
+			 */
+			requestAnimationFrame(() => {
+				/**
+				 * add toast to queue
+				 */
+				this.addToastToQueue();
+			});
+		}
+	}
+	updated() {
+		/**
+		 * display toast message area
+		 */
+		this.displayToastMessage();
+
+		/**
+		 * display toast action area
+		 */
+		this.displayToastActions();
 	}
 }
 

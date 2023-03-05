@@ -7371,6 +7371,20 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-toast/ToastQueue.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/components/f-toast/ToastQueue.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-toast/f-toast.ts",
       "declarations": [
         {
@@ -7380,30 +7394,22 @@
           "members": [
             {
               "kind": "field",
-              "name": "fill",
+              "name": "type",
               "type": {
-                "text": "string"
+                "text": "\"auto-hide\" | \"persists\" | undefined"
               },
-              "default": "\"\""
-            },
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
-              },
-              "default": "\"solid\"",
-              "attribute": "variant",
+              "default": "\"auto-hide\"",
+              "attribute": "type",
               "reflects": true
             },
             {
               "kind": "field",
-              "name": "size",
+              "name": "duration",
               "type": {
-                "text": "\"large\" | \"medium\" | undefined"
+                "text": "number | undefined"
               },
-              "default": "\"medium\"",
-              "attribute": "size",
+              "default": "5000",
+              "attribute": "duration",
               "reflects": true
             },
             {
@@ -7418,41 +7424,47 @@
             },
             {
               "kind": "field",
+              "name": "[\"close-button\"]",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "attribute": "[\"close-button\"]",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "messageSlot",
+              "type": {
+                "text": "FDiv"
+              },
+              "description": "id selector for toast-message f-div"
+            },
+            {
+              "kind": "field",
+              "name": "actionsSlot",
+              "type": {
+                "text": "FDiv"
+              },
+              "description": "id selector for toast-action f-div"
+            },
+            {
+              "kind": "field",
+              "name": "_toastMessageNodes",
+              "type": {
+                "text": "NodeListOf<HTMLElement>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_toastActionNodes",
+              "type": {
+                "text": "NodeListOf<HTMLElement>"
+              }
+            },
+            {
+              "kind": "field",
               "name": "mouseover",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "position",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"fixed\""
-            },
-            {
-              "kind": "field",
-              "name": "styleObj"
-            },
-            {
-              "kind": "field",
-              "name": "uid"
-            },
-            {
-              "kind": "method",
-              "name": "generateId",
-              "parameters": [
-                {
-                  "name": "length",
-                  "default": "5"
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "autoRemove",
               "type": {
                 "text": "boolean"
               },
@@ -7464,22 +7476,20 @@
               "type": {
                 "text": "number"
               },
-              "default": "108"
-            },
-            {
-              "kind": "method",
-              "name": "remove"
-            },
-            {
-              "kind": "method",
-              "name": "autoRemoveConfig"
+              "default": "208"
             },
             {
               "kind": "field",
-              "name": "toasterRef",
+              "name": "width",
               "type": {
-                "text": "Ref<HTMLDivElement>"
-              }
+                "text": "number"
+              },
+              "default": "400"
+            },
+            {
+              "kind": "field",
+              "name": "right",
+              "default": "`-${this.width}px`"
             },
             {
               "kind": "field",
@@ -7491,24 +7501,62 @@
             },
             {
               "kind": "field",
-              "name": "width",
+              "name": "toasterRef",
               "type": {
-                "text": "number"
-              },
-              "default": "412"
+                "text": "Ref<HTMLDivElement>"
+              }
             },
             {
               "kind": "field",
-              "name": "right",
-              "default": "`-${this.width}px`"
+              "name": "styleObj",
+              "description": "get position styling for toasts"
             },
             {
               "kind": "field",
-              "name": "transform",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"translateX(120%)\""
+              "name": "hasToastMessage",
+              "description": "has toast-message slot"
+            },
+            {
+              "kind": "field",
+              "name": "hasToastActions",
+              "description": "has toast-action slot"
+            },
+            {
+              "kind": "field",
+              "name": "uid",
+              "description": "get current uid"
+            },
+            {
+              "kind": "method",
+              "name": "generateId",
+              "parameters": [
+                {
+                  "name": "length",
+                  "default": "5",
+                  "description": "length of uid"
+                }
+              ],
+              "description": "generating uid for toast queue",
+              "return": {
+                "type": {
+                  "text": ""
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "remove",
+              "description": "remove the toast on click of remove icon"
+            },
+            {
+              "kind": "method",
+              "name": "autoRemoveConfig",
+              "description": "checks for whether or not the toast auto-hides or persists",
+              "return": {
+                "type": {
+                  "text": ""
+                }
+              }
             },
             {
               "kind": "method",
@@ -7518,19 +7566,44 @@
                   "name": "top",
                   "type": {
                     "text": "string"
-                  }
+                  },
+                  "description": "top position string in px"
                 },
                 {
                   "name": "right",
                   "type": {
                     "text": "string"
-                  }
-                },
+                  },
+                  "description": "rigjt position string in px"
+                }
+              ],
+              "description": "set position of resepective toast"
+            },
+            {
+              "kind": "method",
+              "name": "dispatchOnRemove",
+              "description": "dispatch remove event",
+              "parameters": [
                 {
-                  "name": "transform",
-                  "default": "\"translateX(0%)\""
+                  "description": "Event",
+                  "name": "e"
                 }
               ]
+            },
+            {
+              "kind": "method",
+              "name": "displayToastMessage",
+              "description": "display toast message f-div"
+            },
+            {
+              "kind": "method",
+              "name": "displayToastActions",
+              "description": "display toast action f-div"
+            },
+            {
+              "kind": "method",
+              "name": "addToastToQueue",
+              "description": "add toast to queue"
             },
             {
               "kind": "field",
@@ -7559,20 +7632,20 @@
           ],
           "attributes": [
             {
-              "name": "variant",
+              "name": "type",
               "type": {
-                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
+                "text": "\"auto-hide\" | \"persists\" | undefined"
               },
-              "default": "\"solid\"",
-              "fieldName": "variant"
+              "default": "\"auto-hide\"",
+              "fieldName": "type"
             },
             {
-              "name": "size",
+              "name": "duration",
               "type": {
-                "text": "\"large\" | \"medium\" | undefined"
+                "text": "number | undefined"
               },
-              "default": "\"medium\"",
-              "fieldName": "size"
+              "default": "5000",
+              "fieldName": "duration"
             },
             {
               "name": "state",
@@ -7581,6 +7654,14 @@
               },
               "default": "\"default\"",
               "fieldName": "state"
+            },
+            {
+              "name": "[\"close-button\"]",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "fieldName": "[\"close-button\"]"
             },
             {
               "name": "tooltip",

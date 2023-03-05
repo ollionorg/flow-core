@@ -6946,58 +6946,67 @@
     },
     {
       "name": "f-toast",
-      "description": "Attributes:\n\n  * `fill` {`string`} - \n\n  * `variant` {`\"solid\" | \"dashed\" | \"dotted\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | undefined`} - \n\n  * `state` {`FToastState | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `fill` {`string`} - \n\n  * `variant` {`\"solid\" | \"dashed\" | \"dotted\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | undefined`} - \n\n  * `state` {`FToastState | undefined`} - \n\n  * `mouseover` {`boolean`} - \n\n  * `position` {`string`} - \n\n  * `styleObj` {`\"transform: translateX(120%)\" | \"top: 16px;right: 16px\"`} - \n\n  * `uid` {`string`} - \n\n  * `autoRemove` {`boolean`} - \n\n  * `height` {`number`} - \n\n  * `toasterRef` - \n\n  * `top` {`string`} - \n\n  * `width` {`number`} - \n\n  * `right` {`string`} - \n\n  * `transform` {`string`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `remove` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `type` {`\"auto-hide\" | \"persists\" | undefined`} - \n\n  * `duration` {`number | undefined`} - \n\n  * `state` {`FToastState | undefined`} - \n\n  * `[\"close-button\"]` {`boolean | undefined`} - \n\n  * `_toastMessageNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_toastActionNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `type` {`\"auto-hide\" | \"persists\" | undefined`} - \n\n  * `duration` {`number | undefined`} - \n\n  * `state` {`FToastState | undefined`} - \n\n  * `[\"close-button\"]` {`boolean | undefined`} - \n\n  * `messageSlot` - id selector for toast-message f-div\n\n  * `actionsSlot` - id selector for toast-action f-div\n\n  * `_toastMessageNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_toastActionNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `mouseover` {`boolean`} - \n\n  * `height` {`number`} - \n\n  * `width` {`number`} - \n\n  * `right` {`string`} - \n\n  * `top` {`string`} - \n\n  * `toasterRef` - \n\n  * `styleObj` {`string`} - get position styling for toasts\n\n  * `hasToastMessage` {`boolean`} - has toast-message slot\n\n  * `hasToastActions` {`boolean`} - has toast-action slot\n\n  * `uid` {`string`} - get current uid\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
-          "name": "fill",
-          "description": "`fill` {`string`} - \n\nProperty: fill\n\nDefault: "
-        },
-        {
-          "name": "variant",
-          "description": "`variant` {`\"solid\" | \"dashed\" | \"dotted\" | undefined`} - \n\nProperty: variant\n\nDefault: solid",
+          "name": "type",
+          "description": "`type` {`\"auto-hide\" | \"persists\" | undefined`} - \n\nProperty: type\n\nDefault: auto-hide",
           "values": [
             {
-              "name": "solid"
+              "name": "auto-hide"
             },
             {
-              "name": "dashed"
-            },
-            {
-              "name": "dotted"
+              "name": "persists"
             }
           ]
         },
         {
-          "name": "size",
-          "description": "`size` {`\"large\" | \"medium\" | undefined`} - \n\nProperty: size\n\nDefault: medium",
-          "values": [
-            {
-              "name": "large"
-            },
-            {
-              "name": "medium"
-            }
-          ]
+          "name": "duration",
+          "description": "`duration` {`number | undefined`} - \n\nProperty: duration\n\nDefault: 5000",
+          "values": []
         },
         {
           "name": "state",
           "description": "`state` {`FToastState | undefined`} - \n\nProperty: state\n\nDefault: default",
           "values": [
             {
+              "name": "primary"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
               "name": "default"
-            },
-            {
-              "name": "subtle"
-            },
-            {
-              "name": "secondary"
             }
           ]
+        },
+        {
+          "name": "[\"close-button\"]",
+          "description": "`[\"close-button\"]` {`boolean | undefined`} - \n\nProperty: [\"close-button\"]\n\nDefault: true",
+          "values": []
+        },
+        {
+          "name": "_toastMessageNodes",
+          "description": "`_toastMessageNodes` {`NodeListOf<HTMLElement>`} - \n\nProperty: _toastMessageNodes"
+        },
+        {
+          "name": "_toastActionNodes",
+          "description": "`_toastActionNodes` {`NodeListOf<HTMLElement>`} - \n\nProperty: _toastActionNodes"
         },
         {
           "name": "tooltip",
           "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
           "values": []
+        },
+        {
+          "name": "onremove",
+          "description": "`remove` {`CustomEvent<{ value: string; }>`} - "
         }
       ]
     },

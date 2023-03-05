@@ -3,7 +3,7 @@ import { customElement, property, query, queryAssignedElements } from "lit/decor
 import eleStyle from "./f-toast.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
-import ToastQueue from "./ToastQueue";
+import toastQueue from "./f-toast-queue";
 import { FDiv } from "../f-div/f-div";
 
 export type FToastState = "default" | "primary" | "success" | "warning" | "danger";
@@ -122,7 +122,7 @@ export class FToast extends FRoot {
 	 * remove the toast on click of remove icon
 	 */
 	remove() {
-		ToastQueue.remove(this, () => {
+		toastQueue.remove(this, () => {
 			this.dispatchOnRemove();
 		});
 	}
@@ -202,7 +202,7 @@ export class FToast extends FRoot {
 		if (this.toasterRef.value) {
 			this.height = this.toasterRef.value?.offsetHeight;
 			this.setAttribute("uid", this.generateId());
-			ToastQueue.add(this);
+			toastQueue.add(this);
 			this.autoRemoveConfig();
 		}
 	}

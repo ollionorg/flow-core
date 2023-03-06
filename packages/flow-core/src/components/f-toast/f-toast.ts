@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-toast.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -41,6 +41,8 @@ export class FToast extends FRoot {
 
 	mouseover = false;
 
+	removeTimeout!: ReturnType<typeof setTimeout>;
+
 	toasterRef: Ref<HTMLDivElement> = createRef();
 
 	/**
@@ -79,10 +81,13 @@ export class FToast extends FRoot {
 	 * @returns void
 	 */
 	autoRemoveConfig() {
+		if (this.removeTimeout) {
+			clearTimeout(this.removeTimeout);
+		}
 		if (this.type === "persists") {
 			return;
 		}
-		setTimeout(() => {
+		this.removeTimeout = setTimeout(() => {
 			if (!this.mouseover) {
 				this.remove();
 			} else {
@@ -178,6 +183,12 @@ export class FToast extends FRoot {
 				 */
 				this.addToastToQueue();
 			});
+		}
+	}
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.updated(changedProperties);
+		if (changedProperties.has("type")) {
+			this.autoRemoveConfig();
 		}
 	}
 }

@@ -7,11 +7,11 @@
 	div.f-toast {
 		display: flex;
 		height: fit-content;
-		// min-height: 120px;
 		width: 400px;
 		border-radius: 4px;
 		z-index: 105;
-		transition: right 0.3s ease-out, top 0.2s ease-out, transform 0.3s ease-out;
+		transition: right var(--transition-time-delayed) ease-out,
+			top var(--transition-time-default) ease-out, transform var(--transition-time-delayed) ease-out;
 		overflow: visible;
 		&[data-position="fixed"] {
 			position: fixed;
@@ -29,7 +29,7 @@
 			left: -8px;
 			opacity: 0;
 			z-index: 1106;
-			transition: opacity 0.3s linear;
+			transition: opacity var(--transition-time-delayed) linear;
 			width: 24px;
 			height: 24px;
 			border-radius: 50%;

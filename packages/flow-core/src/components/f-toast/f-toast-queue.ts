@@ -12,13 +12,13 @@ export default {
 	notify() {
 		let offsetHeight = 0;
 		for (let t = this._queue.length - 1; t >= 0; t--) {
-			const { height } = this._queue[t];
+			const height = this._queue[t].offsetHeight;
 			this._queue[t].setPosition(`${offsetHeight + this._topOffset}px`, `${this._rightOffset}px`);
 			offsetHeight += height + this._gap;
 		}
 	},
 	remove(toaster, onRemoved) {
-		toaster.setPosition(toaster.top, `${-toaster.width}px`);
+		toaster.setPosition(toaster.style.top, `${-toaster.offsetWidth}px`);
 		const idx = this._queue.findIndex(t => t.getAttribute("uid") === toaster.getAttribute("uid"));
 		this._queue.splice(idx, 1);
 		setTimeout(() => {

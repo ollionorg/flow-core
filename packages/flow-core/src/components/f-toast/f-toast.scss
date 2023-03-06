@@ -4,20 +4,21 @@
 @import "./../../mixins/scss/mixins";
 
 :host {
+	display: flex;
+	height: fit-content;
+	width: 400px;
+	border-radius: 4px;
+	z-index: 105;
+	transition: right var(--transition-time-delayed) ease-out,
+		top var(--transition-time-default) ease-out, transform var(--transition-time-delayed) ease-out;
+	overflow: visible;
+
+	position: fixed;
+	right: -412px;
+	top: 16px;
+
 	div.f-toast {
-		display: flex;
-		height: fit-content;
-		width: 400px;
-		border-radius: 4px;
-		z-index: 105;
-		transition: right var(--transition-time-delayed) ease-out,
-			top var(--transition-time-default) ease-out, transform var(--transition-time-delayed) ease-out;
-		overflow: visible;
-		&[data-position="fixed"] {
-			position: fixed;
-			right: -412px;
-			top: 16px;
-		}
+		width: 100%;
 		&:hover {
 			.f-toast-close {
 				opacity: 1;

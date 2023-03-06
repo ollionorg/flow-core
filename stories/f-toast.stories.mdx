@@ -84,35 +84,37 @@ f-toast act as the wrapper component for toast templates.
 									?close-button=${args["close-button"]}
 									@remove=${handleRemove}
 								>
-									<f-div slot="message" direction="column" gap="medium">
-										<f-div direction="column" gap="x-small">
-											<f-text variant="heading" size="small" weight="bold"
-												>Toast Message Header ${item}</f-text
-											>
-											<f-text variant="para" size="small" weight="regular"
-												>Detailed description of the activity goes here</f-text
+									<f-div direction="column" gap="medium">
+										<f-div direction="column" gap="medium">
+											<f-div direction="column" gap="x-small">
+												<f-text variant="heading" size="small" weight="bold"
+													>Toast Message Header ${item}</f-text
+												>
+												<f-text variant="para" size="small" weight="regular"
+													>Detailed description of the activity goes here</f-text
+												>
+											</f-div>
+											<f-text variant="para" size="small" weight="regular" state="secondary"
+												>Just now</f-text
 											>
 										</f-div>
-										<f-text variant="para" size="small" weight="regular" state="secondary"
-											>Just now</f-text
-										>
+										${item % 2 === 0
+											? html` <f-div direction="row" gap="medium">
+													<f-button
+														label="button 1"
+														state="neutral"
+														category="outline"
+														variant="round"
+													></f-button>
+													<f-button
+														label="button 2"
+														state="neutral"
+														category="outline"
+														variant="round"
+													></f-button>
+											  </f-div>`
+											: ""}
 									</f-div>
-									${item % 2 === 0
-										? html` <f-div slot="actions" direction="row" gap="medium">
-												<f-button
-													label="button 1"
-													state="neutral"
-													category="outline"
-													variant="round"
-												></f-button>
-												<f-button
-													label="button 2"
-													state="neutral"
-													category="outline"
-													variant="round"
-												></f-button>
-										  </f-div>`
-										: ""}
 								</f-toast>`;
 						  })
 						: ""}
@@ -167,7 +169,7 @@ Flow 2 provides two types of toast:
 					${values.map(
 						item => html`<f-div>
 							<f-toast .type=${item} .close-button=${true}
-								><f-div slot="message" direction="column" gap="medium">
+								><f-div direction="column" gap="medium">
 									<f-div direction="column" gap="x-small">
 										<f-text variant="heading" size="small" weight="bold"
 											>Toast Message Header ${item}</f-text
@@ -248,7 +250,7 @@ When type is auto-hide, duration property defines the time in milliseconds after
 					${values.map(
 						item => html`<f-div>
 							<f-toast .type=${item} .close-button=${true} .duration=${2000}
-								><f-div slot="message" direction="column" gap="medium">
+								><f-div direction="column" gap="medium">
 									<f-div direction="column" gap="x-small">
 										<f-text variant="heading" size="small" weight="bold"
 											>Toast Message Header ${item}</f-text
@@ -307,7 +309,7 @@ States are used to communicate purpose and connotations. For example, a red colo
 					${values.map(
 						item => html`<f-div>
 							<f-toast .type=${item} .close-button=${true} .duration=${5000} .state=${item}
-								><f-div slot="message" direction="column" gap="medium">
+								><f-div direction="column" gap="medium">
 									<f-div direction="column" gap="x-small">
 										<f-text variant="heading" size="small" weight="bold"
 											>Toast Message Header ${item}</f-text
@@ -403,7 +405,7 @@ States are used to communicate purpose and connotations. For example, a red colo
 					${values.map(
 						item => html`<f-div>
 							<f-toast .close-button=${item} .duration=${5000} state="primary" type="persists"
-								><f-div slot="message" direction="column" gap="medium">
+								><f-div direction="column" gap="medium">
 									<f-div direction="column" gap="x-small">
 										<f-text variant="heading" size="small" weight="bold"
 											>Toast Message Header (close-button=${item})</f-text

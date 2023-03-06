@@ -39,30 +39,6 @@ export class FToast extends FRoot {
 	@property({ reflect: true, type: Boolean })
 	["close-button"]?: boolean = true;
 
-	/**
-	 * id selector for toast-message f-div
-	 */
-	@query("#message-slot")
-	messageSlot!: FDiv;
-
-	/**
-	 * id selector for toast-action f-div
-	 */
-	@query("#actions-slot")
-	actionsSlot!: FDiv;
-
-	/**
-	 * @attribute assigned elements inside slot message
-	 */
-	@queryAssignedElements({ slot: "message" })
-	_toastMessageNodes!: NodeListOf<HTMLElement>;
-
-	/**
-	 * @attribute assigned elements inside slot actions
-	 */
-	@queryAssignedElements({ slot: "actions" })
-	_toastActionNodes!: NodeListOf<HTMLElement>;
-
 	mouseover = false;
 
 	height = 208;
@@ -80,20 +56,6 @@ export class FToast extends FRoot {
 	 */
 	get styleObj() {
 		return `top: ${this.top};right: ${this.right};`;
-	}
-
-	/**
-	 * has toast-message slot
-	 */
-	get hasToastMessage() {
-		return this._toastMessageNodes.length > 0;
-	}
-
-	/**
-	 * has toast-action slot
-	 */
-	get hasToastActions() {
-		return this._toastActionNodes.length > 0;
 	}
 
 	/**
@@ -174,28 +136,6 @@ export class FToast extends FRoot {
 	}
 
 	/**
-	 * display toast message f-div
-	 */
-	displayToastMessage() {
-		if (!this.hasToastMessage) {
-			this.messageSlot.style.display = "none";
-		} else {
-			this.messageSlot.style.display = "";
-		}
-	}
-
-	/**
-	 * display toast action f-div
-	 */
-	displayToastActions() {
-		if (!this.hasToastActions) {
-			this.actionsSlot.style.display = "none";
-		} else {
-			this.actionsSlot.style.display = "";
-		}
-	}
-
-	/**
 	 * add toast to queue
 	 */
 	addToastToQueue() {
@@ -230,26 +170,18 @@ export class FToast extends FRoot {
 						<f-icon source="i-close" size="x-small" clickable></f-icon>
 				  </div>`
 				: ""}
+			${this.state !== "default"
+				? html` <div class="f-toast-border" state=${this.state}></div>`
+				: ""}
 			<f-div
 				direction="column"
 				gap="medium"
 				state="tertiary"
 				width="100%"
-				padding="large none"
+				padding="large"
 				variant="curved"
 			>
-				<f-div
-					.selected=${this.state !== "default" ? "notch-left" : "none"}
-					padding="none large"
-					id="message-slot"
-					.state=${this.state}
-					toast-data-state=${this.state}
-				>
-					<slot name="message"></slot>
-				</f-div>
-				<f-div padding="none large" id="actions-slot">
-					<slot name="actions"></slot>
-				</f-div>
+				<slot></slot>
 			</f-div>
 		</div>`;
 	}
@@ -265,17 +197,6 @@ export class FToast extends FRoot {
 				this.addToastToQueue();
 			});
 		}
-	}
-	updated() {
-		/**
-		 * display toast message area
-		 */
-		this.displayToastMessage();
-
-		/**
-		 * display toast action area
-		 */
-		this.displayToastActions();
 	}
 }
 

@@ -59,7 +59,15 @@ $categories: (
 			}
 		}
 		padding: 0px 8px;
-		width: 100%;
+		&[size="“medium”"] {
+			width: 38px;
+		}
+		&[size="“small”"] {
+			width: 34px;
+		}
+		&[clear="“true”"] {
+			width: 62px;
+		}
 		@each $variant, $value in $variants {
 			&[variant="#{$variant}"] {
 				border-radius: $value;
@@ -95,7 +103,6 @@ $categories: (
 		}
 
 		&[state="default"] {
-			// border: 1px solid var(--color-surface-tertiary);
 			@each $category, $value in $categories {
 				&[category="#{$category}"] {
 					background-color: map.get($value, "background");
@@ -128,6 +135,9 @@ f-emoji-picker {
 	flex: 1 0 auto;
 	&[disabled] {
 		@include disabled();
+	}
+	&[state="default"] {
+		@include input-color("default");
 	}
 	@each $state, $color in $state-colors {
 		&[state="#{$state}"] {

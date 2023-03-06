@@ -1,0 +1,70 @@
+@use "sass:map";
+
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+
+$state-colors: (
+	"primary": var(--color-primary-default),
+	"success": var(--color-success-default),
+	"warning": var(--color-warning-default),
+	"danger": var(--color-danger-default)
+);
+
+:host {
+	display: flex;
+	height: fit-content;
+	width: 400px;
+	border-radius: 4px;
+	z-index: 105;
+	transition: right var(--transition-time-delayed) ease-out,
+		top var(--transition-time-default) ease-out, transform var(--transition-time-delayed) ease-out;
+	overflow: visible;
+
+	position: fixed;
+	right: -412px;
+	top: 16px;
+
+	div.f-toast {
+		width: 100%;
+		&:hover {
+			.f-toast-close {
+				opacity: 1;
+			}
+		}
+		.f-toast-close {
+			position: absolute;
+			top: -10px;
+			left: -8px;
+			opacity: 0;
+			z-index: 1106;
+			transition: opacity var(--transition-time-delayed) linear;
+			width: 24px;
+			height: 24px;
+			border-radius: 50%;
+			background-color: var(--color-surface-tertiary);
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+			cursor: pointer;
+			&:hover {
+				background-color: var(--color-surface-tertiary-hover);
+			}
+		}
+
+		.f-toast-border {
+			position: absolute;
+			top: 20px;
+			opacity: 1;
+			z-index: 1100;
+			height: 48px;
+			width: 4px;
+			@each $state, $color in $state-colors {
+				&[state="#{$state}"] {
+					background-color: $color;
+				}
+			}
+			border-radius: 0px 6px 6px 0px;
+		}
+	}
+}

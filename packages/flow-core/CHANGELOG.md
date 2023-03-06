@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.4.4] - 2023-03-06
+
+### Features
+
+- `f-toast` component added.
+
 ## [1.4.3] - 2023-03-03
 
 ### Features

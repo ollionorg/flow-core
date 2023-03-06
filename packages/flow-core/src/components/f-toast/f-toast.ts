@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import eleStyle from "./f-toast.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
@@ -41,22 +41,7 @@ export class FToast extends FRoot {
 
 	mouseover = false;
 
-	height = 208;
-
-	width = 400;
-
-	right = `-${this.width}px`;
-
-	top = "16px";
-
 	toasterRef: Ref<HTMLDivElement> = createRef();
-
-	/**
-	 * get position styling for toasts
-	 */
-	get styleObj() {
-		return `top: ${this.top};right: ${this.right};`;
-	}
 
 	/**
 	 * get current uid
@@ -112,8 +97,8 @@ export class FToast extends FRoot {
 	 * @param right rigjt position string in px
 	 */
 	setPosition(top: string, right: string) {
-		this.top = top;
-		this.right = right;
+		this.style.top = top;
+		this.style.right = right;
 		this.requestUpdate();
 	}
 
@@ -140,7 +125,6 @@ export class FToast extends FRoot {
 	 */
 	addToastToQueue() {
 		if (this.toasterRef.value) {
-			this.height = this.toasterRef.value?.offsetHeight;
 			this.setAttribute("uid", this.generateId());
 			toastQueue.add(this);
 			this.autoRemoveConfig();
@@ -156,8 +140,6 @@ export class FToast extends FRoot {
 		return html` <div
 			${ref(this.toasterRef)}
 			class="f-toast"
-			style=${this.styleObj}
-			data-position="fixed"
 			@mouseover=${() => {
 				this.mouseover = true;
 			}}

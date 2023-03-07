@@ -26,9 +26,6 @@ $gaps: (
 );
 
 :host {
-	@include base();
-	display: flex;
-	overflow: auto;
 	form {
 		display: flex;
 		flex-direction: column;
@@ -44,6 +41,7 @@ $gaps: (
 f-form {
 	@include base();
 	display: flex;
+	overflow: auto;
 	flex: 1 0 auto;
 	@each $size, $value in $sizes {
 		&[size="#{$size}"] {

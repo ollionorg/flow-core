@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.4.7] - 2023-03-07
+
+### Bug fixes
+
+- `:host` styles applied to respective tag.
+
 ## [1.4.6] - 2023-03-07
 
 ### Bug fixes

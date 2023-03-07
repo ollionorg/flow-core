@@ -7,63 +7,63 @@
 START : scss maps to hold repsective attribute values
 **/
 $sizes: (
-  "x-small": (
-    "size": 20px,
-    "padding": 0px 8px,
-    "gap": 4px,
-    "loaderSize": 12px,
-  ),
-  "small": (
-    "size": 28px,
-    "padding": 0px 12px,
-    "gap": 8px,
-    "loaderSize": 16px,
-  ),
-  "medium": (
-    "size": 36px,
-    "padding": 0px 16px,
-    "gap": 12px,
-    "loaderSize": 20px,
-  ),
-  "large": (
-    "size": 44px,
-    "padding": 0px 20px,
-    "gap": 16px,
-    "loaderSize": 24px,
-  ),
+	"x-small": (
+		"size": 20px,
+		"padding": 0px 8px,
+		"gap": 4px,
+		"loaderSize": 12px
+	),
+	"small": (
+		"size": 28px,
+		"padding": 0px 12px,
+		"gap": 8px,
+		"loaderSize": 16px
+	),
+	"medium": (
+		"size": 36px,
+		"padding": 0px 16px,
+		"gap": 12px,
+		"loaderSize": 20px
+	),
+	"large": (
+		"size": 44px,
+		"padding": 0px 20px,
+		"gap": 16px,
+		"loaderSize": 24px
+	)
 );
 
 $states: (
-  "primary": (
-    "background": var(--color-primary-default),
-    "hover": var(--color-primary-default-hover),
-    "loading": var(--color-primary-surface),
-  ),
-  "neutral": (
-    "background": var(--color-neutral-secondary),
-    "hover": var(--color-neutral-default-hover),
-    "loading": var(--color-surface-tertiary),
-  ),
-  "success": (
-    "background": var(--color-success-default),
-    "hover": var(--color-success-default-hover),
-    "loading": var(--color-success-surface),
-  ),
-  "warning": (
-    "background": var(--color-warning-default),
-    "hover": var(--color-warning-default-hover),
-    "loading": var(--color-warning-surface),
-  ),
-  "danger": (
-    "background": var(--color-danger-default),
-    "hover": var(--color-danger-default-hover),
-    "loading": var(--color-danger-surface),
-  ),
-  "inherit": (
-    "background": var(--color-inherit-button),
-    "hover": var(--color-inherit-button-hover),
-    "loading": var(--color-inherit-button-loader),
-  ),
+	"primary": (
+		"background": var(--color-primary-default),
+		"hover": var(--color-primary-default-hover),
+		"loading": var(--color-primary-surface)
+	),
+	"neutral": (
+		"background": var(--color-neutral-secondary),
+		"hover": var(--color-neutral-default-hover),
+		"loading": var(--color-surface-tertiary)
+	),
+	"success": (
+		"background": var(--color-success-default),
+		"hover": var(--color-success-default-hover),
+		"loading": var(--color-success-surface)
+	),
+	"warning": (
+		"background": var(--color-warning-default),
+		"hover": var(--color-warning-default-hover),
+		"loading": var(--color-warning-surface)
+	),
+	"danger": (
+		"background": var(--color-danger-default),
+		"hover": var(--color-danger-default-hover),
+		"loading": var(--color-danger-surface)
+	),
+	"inherit": (
+		"background": var(--color-inherit-button),
+		"hover": var(--color-inherit-button-hover),
+		"loading": var(--color-inherit-button-loader)
+	)
 );
 /**
 END : scss maps to hold repsective attribute values
@@ -74,166 +74,165 @@ END : scss maps to hold repsective attribute values
 in this case it is `f-icon-button`
 **/
 :host {
-  @include base();
-  display: inline-flex;
-  vertical-align: top;
-  align-items: center;
-  height: fit-content;
-  width: fit-content;
+	.f-icon-button {
+		cursor: pointer;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0px;
+		position: relative;
 
-  .f-icon-button {
-    cursor: pointer;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0px;
-    position: relative;
+		// if counter is specified then overflow has to be visible
+		&[counter] {
+			overflow: visible;
+		}
+		// this class applied though javascript when host has shimmer animation
+		&.hasShimmer {
+			@include shimmer-self();
+		}
 
-    // if counter is specified then overflow has to be visible
-    &[counter] {
-      overflow: visible;
-    }
-    // this class applied though javascript when host has shimmer animation
-    &.hasShimmer {
-      @include shimmer-self();
-    }
+		// iterating over sizes and appying respective css
+		@each $size, $value in $sizes {
+			&[size="#{$size}"] {
+				height: map-get($value, "size");
+				min-width: map-get($value, "size");
 
-    // iterating over sizes and appying respective css
-    @each $size, $value in $sizes {
-      &[size="#{$size}"] {
-        height: map-get($value, "size");
-        min-width: map-get($value, "size");
+				&[variant="round"] {
+					border-radius: math.div(map-get($value, "size"), 2);
+				}
+				&[variant="curved"] {
+					border-radius: 4px;
+				}
+				&[type="packed"] {
+					height: fit-content;
+					min-width: fit-content;
+				}
+				&[variant="block"] {
+					display: flex;
+					flex: 1 1 auto;
+					width: 100%;
+				}
+				&[loading] {
+					svg {
+						height: map.get($value, "loaderSize");
+					}
+				}
+			}
+		}
 
-        &[variant="round"] {
-          border-radius: math.div(map-get($value, "size"), 2);
-        }
-        &[variant="curved"] {
-          border-radius: 4px;
-        }
-        &[type="packed"] {
-          height: fit-content;
-          min-width: fit-content;
-        }
-        &[variant="block"] {
-          display: flex;
-          flex: 1 1 auto;
-          width: 100%;
-        }
-        &[loading] {
-          svg {
-            height: map.get($value, "loaderSize");
-          }
-        }
-      }
-    }
+		&.custom-loader {
+			&[loading] {
+				svg {
+					fill: inherit !important;
+					stroke: none;
+					*[fill^="var(--color-primary-default)"] {
+						fill: inherit !important;
+					}
+				}
+			}
+		}
+		&.custom-hover {
+			&:hover {
+				opacity: 0.9;
+			}
+		}
+		// iterating over states and appying respective css
+		@each $state, $color in $states {
+			&[state="#{$state}"][type="fill"] {
+				&.f-input-duplicate {
+					background-color: var(--color-surface-subtle) !important;
+					border: 1px
+						solid
+						var(--color-surface-subtle) !important; // added to match width of outline category
+					&:hover {
+						background-color: var(--color-surface-subtle-hover) !important;
+						border: 1px solid var(--color-surface-subtle-hover) !important;
+					}
+				}
+				background-color: map.get($color, "background") !important;
+				border: 1px
+					solid
+					map.get($color, "background") !important; // added to match width of outline category
+				&:hover {
+					background-color: map.get($color, "hover") !important;
+					border: 1px solid map.get($color, "hover") !important;
+				}
 
-    &.custom-loader {
-      &[loading] {
-        svg {
-          fill: inherit !important;
-          stroke: none;
-          *[fill^="var(--color-primary-default)"] {
-            fill: inherit !important;
-          }
-        }
-      }
-    }
-    &.custom-hover {
-      &:hover {
-        opacity: 0.9;
-      }
-    }
-    // iterating over states and appying respective css
-    @each $state, $color in $states {
-      &[state="#{$state}"][type="fill"] {
-        &.f-input-duplicate {
-          background-color: var(--color-surface-subtle) !important;
-          border: 1px
-            solid
-            var(--color-surface-subtle) !important; // added to match width of outline category
-          &:hover {
-            background-color: var(--color-surface-subtle-hover) !important;
-            border: 1px solid var(--color-surface-subtle-hover) !important;
-          }
-        }
-        background-color: map.get($color, "background") !important;
-        border: 1px
-          solid
-          map.get($color, "background") !important; // added to match width of outline category
-        &:hover {
-          background-color: map.get($color, "hover") !important;
-          border: 1px solid map.get($color, "hover") !important;
-        }
+				&[loading] {
+					background-color: map.get($color, "loading") !important;
+					border: 1px solid map.get($color, "loading") !important;
 
-        &[loading] {
-          background-color: map.get($color, "loading") !important;
-          border: 1px solid map.get($color, "loading") !important;
+					svg path.loader-fill {
+						fill: map.get($color, "background") !important;
+					}
+				}
+			}
+			&[state="#{$state}"][type="outline"] {
+				background-color: transparent !important;
+				border: 1px
+					solid
+					map.get($color, "background") !important; // added to match width of outline category
+				&:hover {
+					background-color: transparent !important;
+					border: 1px solid map.get($color, "hover") !important;
+				}
+				&[loading] {
+					border: 1px solid map.get($color, "background") !important;
 
-          svg path.loader-fill {
-            fill: map.get($color, "background") !important;
-          }
-        }
-      }
-      &[state="#{$state}"][type="outline"] {
-        background-color: transparent !important;
-        border: 1px
-          solid
-          map.get($color, "background") !important; // added to match width of outline category
-        &:hover {
-          background-color: transparent !important;
-          border: 1px solid map.get($color, "hover") !important;
-        }
-        &[loading] {
-          border: 1px solid map.get($color, "background") !important;
+					svg path.loader-fill {
+						fill: map.get($color, "background") !important;
+					}
+				}
+			}
+			&[state="#{$state}"][type="transparent"],
+			&[state="#{$state}"][type="packed"],
+			&[state="#{$state}"][variant="block"] {
+				background-color: transparent !important;
+				border: 1px solid transparent !important; // added to match width of outline category
+				&:hover {
+					background-color: transparent !important;
+					border: 1px solid transparent !important;
+				}
+				&[loading] {
+					svg path.loader-fill {
+						fill: map.get($color, "background") !important;
+					}
+				}
+			}
+		}
 
-          svg path.loader-fill {
-            fill: map.get($color, "background") !important;
-          }
-        }
-      }
-      &[state="#{$state}"][type="transparent"],
-      &[state="#{$state}"][type="packed"],
-      &[state="#{$state}"][variant="block"] {
-        background-color: transparent !important;
-        border: 1px solid transparent !important; // added to match width of outline category
-        &:hover {
-          background-color: transparent !important;
-          border: 1px solid transparent !important;
-        }
-        &[loading] {
-          svg path.loader-fill {
-            fill: map.get($color, "background") !important;
-          }
-        }
-      }
-    }
-
-    &[disabled] {
-      @include disabled();
-    }
-    &[loading] {
-      @include rotate("svg");
-      pointer-events: none;
-      > *:not(.loader-svg) {
-        visibility: hidden;
-      }
-      svg {
-        position: absolute;
-      }
-    }
-  }
+		&[disabled] {
+			@include disabled();
+		}
+		&[loading] {
+			@include rotate("svg");
+			pointer-events: none;
+			> *:not(.loader-svg) {
+				visibility: hidden;
+			}
+			svg {
+				position: absolute;
+			}
+		}
+	}
 }
 f-icon-button {
-  &[variant="block"] {
-    display: flex;
-    flex: 1 1 auto;
-    width: 100%;
-  }
+	@include base();
+	display: inline-flex;
+	vertical-align: top;
+	align-items: center;
+	height: fit-content;
+	width: fit-content;
+	&[variant="block"] {
+		display: flex;
+		flex: 1 1 auto;
+		width: 100%;
+	}
 
-  &.hasShimmer {
-    &::before {
-      content: unset;
-    }
-    background: transparent !important;
-  }
+	&.hasShimmer {
+		&::before {
+			content: unset;
+		}
+		background: transparent !important;
+	}
 }

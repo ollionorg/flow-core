@@ -7,160 +7,162 @@
 $sizes map will hold all possible values
 **/
 $sizes: (
-  "small": (
-    "height": 12px,
-    "fontSize": 8px,
-    "lineHeight": 10px,
-    "padding": 0px 4px,
-  ),
-  "medium": (
-    "height": 16px,
-    "fontSize": 10px,
-    "lineHeight": 12px,
-    "padding": 0px 6px,
-  ),
-  "large": (
-    "height": 20px,
-    "fontSize": 12px,
-    "lineHeight": 14px,
-    "padding": 0px 8px,
-  ),
+	"small": (
+		"height": 12px,
+		"fontSize": 8px,
+		"lineHeight": 10px,
+		"padding": 0px 4px
+	),
+	"medium": (
+		"height": 16px,
+		"fontSize": 10px,
+		"lineHeight": 12px,
+		"padding": 0px 6px
+	),
+	"large": (
+		"height": 20px,
+		"fontSize": 12px,
+		"lineHeight": 14px,
+		"padding": 0px 8px
+	)
 );
 /**
 $states map will hold all possible values of different states
 **/
 $states: (
-  "primary": (
-    "label": var(--color-surface-default),
-    "background": var(--color-primary-default),
-    "border": var(--color-primary-subtle),
-  ),
-  "success": (
-    "label": var(--color-surface-default),
-    "background": var(--color-success-default),
-    "border": var(--color-success-subtle),
-  ),
-  "danger": (
-    "label": var(--color-surface-default),
-    "background": var(--color-danger-default),
-    "border": var(--color-danger-subtle),
-  ),
-  "warning": (
-    "label": var(--color-surface-default),
-    "background": var(--color-warning-default),
-    "border": var(--color-warning-subtle),
-  ),
-  "neutral": (
-    "label": var(--color-surface-default),
-    "background": var(--color-neutral-default),
-    "border": var(--color-neutral-subtle),
-  ),
-  "inherit": (
-    "label": var(--color-surface-default),
-    "background": var(--color-inherit-counter-background),
-    "border": var(--color-neutral-subtle),
-  ),
+	"primary": (
+		"label": var(--color-surface-default),
+		"background": var(--color-primary-default),
+		"border": var(--color-primary-subtle)
+	),
+	"success": (
+		"label": var(--color-surface-default),
+		"background": var(--color-success-default),
+		"border": var(--color-success-subtle)
+	),
+	"danger": (
+		"label": var(--color-surface-default),
+		"background": var(--color-danger-default),
+		"border": var(--color-danger-subtle)
+	),
+	"warning": (
+		"label": var(--color-surface-default),
+		"background": var(--color-warning-default),
+		"border": var(--color-warning-subtle)
+	),
+	"neutral": (
+		"label": var(--color-surface-default),
+		"background": var(--color-neutral-default),
+		"border": var(--color-neutral-subtle)
+	),
+	"inherit": (
+		"label": var(--color-surface-default),
+		"background": var(--color-inherit-counter-background),
+		"border": var(--color-neutral-subtle)
+	)
 );
 /**
 :host selects the host element. 
 in this case it is `f-counter`
 **/
 :host {
-  display: inline-flex;
-  vertical-align: top;
-  // inner element to apply styles on
-  div.f-counter {
-    // edge if it is used in `f-button` component
-    &.fill-button-surface-dark {
-      background-color: #202a36 !important;
-      color: #fcfcfd !important;
-    }
-    &.fill-button-surface-light {
-      background-color: #fcfcfd !important;
-      color: #202a36 !important;
-    }
-    &.fill-button-surface[state] {
-      background-color: var(--color-surface-default) !important;
-      color: var(--color-text-default) !important;
-    }
-    // used in `f-icon-button` for special case
-    &.absolute-counter {
-      position: absolute;
-    }
-    // Important :  always include base mixins
-    @include base();
-    display: flex;
-    flex: 1 0 auto;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
+	// inner element to apply styles on
+	div.f-counter {
+		// edge if it is used in `f-button` component
+		&.fill-button-surface-dark {
+			background-color: #202a36 !important;
+			color: #fcfcfd !important;
+		}
+		&.fill-button-surface-light {
+			background-color: #fcfcfd !important;
+			color: #202a36 !important;
+		}
+		&.fill-button-surface[state] {
+			background-color: var(--color-surface-default) !important;
+			color: var(--color-text-default) !important;
+		}
+		// used in `f-icon-button` for special case
+		&.absolute-counter {
+			position: absolute;
+		}
+		// Important :  always include base mixins
+		@include base();
+		display: flex;
+		flex: 1 0 auto;
+		justify-content: center;
+		align-items: center;
+		font-weight: bold;
 
-    // iterating over sizes and creating size specific css
-    @each $size, $value in $sizes {
-      &[size="#{$size}"] {
-        height: map.get($value, "height");
-        border-radius: math.div(map.get($value, "height"), 2);
-        font-size: map.get($value, "fontSize");
-        line-height: map.get($value, "lineHeight");
-        padding: map.get($value, "padding");
-        svg {
-          height: map.get($value, "height") - 8px;
-        }
-        // used in `f-icon-button` for special case
-        &.absolute-counter {
-          transform: translateX(-50%) translateY(10%);
-          &.packed-large {
-            transform: translateX(-50%) translateY(-18%);
-          }
+		// iterating over sizes and creating size specific css
+		@each $size, $value in $sizes {
+			&[size="#{$size}"] {
+				height: map.get($value, "height");
+				border-radius: math.div(map.get($value, "height"), 2);
+				font-size: map.get($value, "fontSize");
+				line-height: map.get($value, "lineHeight");
+				padding: map.get($value, "padding");
+				svg {
+					height: map.get($value, "height") - 8px;
+				}
+				// used in `f-icon-button` for special case
+				&.absolute-counter {
+					transform: translateX(-50%) translateY(10%);
+					&.packed-large {
+						transform: translateX(-50%) translateY(-18%);
+					}
 
-          &.size-small {
-            transform: translateX(-50%) translateY(-13%);
-            &.packed-small {
-              transform: translateX(-50%) translateY(-26%);
-            }
-          }
-          &.size-medium {
-            transform: translateX(-50%) translateY(13%);
-            &.packed-medium {
-              transform: translateX(-50%) translateY(-18%);
-            }
-          }
-          &.size-x-small {
-            transform: translateX(-50%) translateY(-16%);
-          }
-        }
-      }
-    }
-    &.fill-outline-counter {
-      background-color: var(--color-surface-default) !important;
-      color: var(--color-text-default) !important;
-      border: 1px solid var(--color-surface-tertiary) !important;
-    }
-    // iterating over states and creating state specific css
-    @each $state, $value in $states {
-      &[state="#{$state}"] {
-        --color: #{map.get($value, "label")};
-        --background-color: #{map.get($value, "background")};
-        color: var(--color) !important;
-        background-color: var(--background-color) !important;
-        &[loading] {
-          background-color: var(--color-primary-surface) !important;
-        }
+					&.size-small {
+						transform: translateX(-50%) translateY(-13%);
+						&.packed-small {
+							transform: translateX(-50%) translateY(-26%);
+						}
+					}
+					&.size-medium {
+						transform: translateX(-50%) translateY(13%);
+						&.packed-medium {
+							transform: translateX(-50%) translateY(-18%);
+						}
+					}
+					&.size-x-small {
+						transform: translateX(-50%) translateY(-16%);
+					}
+				}
+			}
+		}
+		&.fill-outline-counter {
+			background-color: var(--color-surface-default) !important;
+			color: var(--color-text-default) !important;
+			border: 1px solid var(--color-surface-tertiary) !important;
+		}
+		// iterating over states and creating state specific css
+		@each $state, $value in $states {
+			&[state="#{$state}"] {
+				--color: #{map.get($value, "label")};
+				--background-color: #{map.get($value, "background")};
+				color: var(--color) !important;
+				background-color: var(--background-color) !important;
+				&[loading] {
+					background-color: var(--color-primary-surface) !important;
+				}
 
-        &.outline-counter {
-          background-color: var(--color-surface-default) !important;
-          color: var(--color-text-default) !important;
-          border: 1px solid map.get($value, "border") !important;
-        }
-      }
-    }
-    // including disabled mixins
-    &[disabled] {
-      @include disabled();
-    }
-    // including ratate mixins
-    &[loading] {
-      @include rotate("svg");
-    }
-  }
+				&.outline-counter {
+					background-color: var(--color-surface-default) !important;
+					color: var(--color-text-default) !important;
+					border: 1px solid map.get($value, "border") !important;
+				}
+			}
+		}
+		// including disabled mixins
+		&[disabled] {
+			@include disabled();
+		}
+		// including ratate mixins
+		&[loading] {
+			@include rotate("svg");
+		}
+	}
+}
+f-counter {
+	display: inline-flex;
+	vertical-align: top;
 }

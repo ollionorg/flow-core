@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.4.5] - 2023-03-07
+
+### Features
+
+- `f-div` css issue fixed.
+
 ## [1.4.4] - 2023-03-06
 
 ### Features

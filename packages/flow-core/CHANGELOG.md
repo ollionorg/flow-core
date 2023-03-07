@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.4.8-beta] - 2023-03-07
+
+### Bug fixes
+
+- `data-qa-id` propogated to native input element.
+
 ## [1.4.7] - 2023-03-07
 
 ### Bug fixes

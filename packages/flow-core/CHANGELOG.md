@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.5.3] - 2023-03-09
+
+### Improvements
+
+- `f-form-group` label wrapper identifier added.
+
 ## [1.5.2] - 2023-03-09
 
 ### Improvements

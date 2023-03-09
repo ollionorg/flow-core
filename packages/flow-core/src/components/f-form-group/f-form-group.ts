@@ -113,6 +113,7 @@ export class FFormGroup extends FRoot {
 							direction="row"
 							gap="auto"
 							align="middle-left"
+							class="f-form-group-label-wrapper"
 							@click=${() => {
 								if (this.collapse !== "none") this.isCollapsed = !this.isCollapsed;
 							}}

@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.5.2] - 2023-03-09
+
+### Improvements
+
+- `label`, `description` spacing updated for form inputs.
+
 ## [1.5.1] - 2023-03-09
 
 ### Improvements

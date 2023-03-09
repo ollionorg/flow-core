@@ -317,12 +317,7 @@ export class FInput extends FRoot {
 				width="100%"
 			>
 				<f-div padding="none" gap="none" align="bottom-left">
-					<f-div
-						padding="none"
-						.gap=${this._hasLabel ? "x-small" : "none"}
-						direction="column"
-						width="fill-container"
-					>
+					<f-div padding="none" direction="column" width="fill-container">
 						<f-div
 							padding="none"
 							gap="small"

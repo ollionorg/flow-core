@@ -436,7 +436,7 @@ export class FEmojiPicker extends FRoot {
 		return html`
 			<f-div direction="column" gap="x-small">
 				<f-div padding="none" gap="x-small" align="bottom-left" id="f-emoji-picker-header">
-					<f-div padding="none" direction="column" width="fill-container" gap="x-small">
+					<f-div padding="none" direction="column" width="fill-container">
 						<f-div
 							padding="none"
 							gap="small"

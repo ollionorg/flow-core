@@ -4,6 +4,14 @@
 
 # Change Log
 
+## [1.4.9] - 2023-03-09
+
+### Improvements
+
+- `external` updated in build options.
+
+### Bug fixes
+- Type casting: input of type `number` not emitting Number type value.
 ## [1.4.8] - 2023-03-09
 
 ### Improvements

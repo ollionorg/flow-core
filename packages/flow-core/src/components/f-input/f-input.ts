@@ -12,7 +12,7 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 export type FInputState = "primary" | "default" | "success" | "warning" | "danger";
 
 export type FInputCustomEvent = {
-	value: string;
+	value: string | number;
 };
 
 export type FInputSuffixWhen = (value: string) => boolean;
@@ -76,7 +76,7 @@ export class FInput extends FRoot {
 	 * @attribute Defines the value of an f-input. Validation rules are applied on the value depending on the type property of the f-text-input.
 	 */
 	@property({ reflect: true, type: String })
-	value?: string;
+	value?: string | number;
 
 	/**
 	 * @attribute Defines the placeholder text for f-text-input
@@ -152,8 +152,9 @@ export class FInput extends FRoot {
 	 */
 	handleInput(e: InputEvent) {
 		e.stopPropagation();
-		this.value = (e.target as HTMLInputElement)?.value;
-		this.dispatchInputEvent((e.target as HTMLInputElement)?.value);
+		const val = (e.target as HTMLInputElement)?.value;
+		this.value = this.type === "number" ? Number(val) : val;
+		this.dispatchInputEvent(this.value);
 	}
 
 	/**
@@ -164,7 +165,7 @@ export class FInput extends FRoot {
 		this.dispatchInputEvent("");
 	}
 
-	dispatchInputEvent(value: string) {
+	dispatchInputEvent(value: string | number) {
 		const event = new CustomEvent<FInputCustomEvent>("input", {
 			detail: {
 				value
@@ -342,7 +343,7 @@ export class FInput extends FRoot {
 					>
 						${this.maxLength
 							? html` <f-text variant="para" size="small" weight="regular" state="secondary"
-									>${this.value?.length ?? 0} / ${this.maxLength}</f-text
+									>${(this.value + "")?.length ?? 0} / ${this.maxLength}</f-text
 							  >`
 							: null}
 					</f-div>

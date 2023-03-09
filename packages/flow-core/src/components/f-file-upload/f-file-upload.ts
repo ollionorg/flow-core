@@ -6,6 +6,7 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
+import { FIcon } from "../f-icon/f-icon";
 import { getFormattedBytes } from "../../utils/index";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
@@ -28,7 +29,7 @@ export class FFileUpload extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles];
+	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles, ...FIcon.styles];
 
 	/**
 	 * @attribute f-file-upload has 2 type of modes: single and multiple. When type is single, a user can select only one file and the filename appears inline to the file uploader.  When type is multiple, a user can select multiple files and each filename stacks under the file uploader.

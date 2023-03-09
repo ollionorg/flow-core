@@ -30,7 +30,7 @@ export class FButton extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle), ...FIcon.styles, ...FCounter.styles];
 
 	/**
 	 * @attribute local state for managing custom fill.

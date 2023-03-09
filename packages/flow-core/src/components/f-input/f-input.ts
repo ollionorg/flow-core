@@ -5,6 +5,7 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
+import { FIcon } from "../f-icon/f-icon";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { ifDefined } from "lit-html/directives/if-defined.js";
@@ -22,7 +23,7 @@ export class FInput extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles];
+	static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles, ...FIcon.styles];
 
 	/**
 	 * @attribute local state for password to text toggling and vice versa.
@@ -293,7 +294,7 @@ export class FInput extends FRoot {
 						<f-icon
 							?clickable=${true}
 							source="i-close"
-							.size=${this.iconSize}
+							size="x-small"
 							@click=${this.clearInputValue}
 							class=${!this.size ? "f-input-icons-size" : ""}
 						></f-icon>

@@ -6,6 +6,7 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
+import { FIcon } from "../f-icon/f-icon";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import _ from "lodash";
@@ -38,7 +39,7 @@ export class FSelect extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles];
+	static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles, ...FIcon.styles];
 
 	@queryAssignedElements({ slot: "label" })
 	_labelNodes!: NodeListOf<HTMLElement>;
@@ -782,16 +783,16 @@ export class FSelect extends FRoot {
 		 */
 		const iconRight = !this.openDropdown
 			? html`<f-icon
-					data-qa-caret="i-caret-down"
-					source="i-caret-down"
-					.size=${"small"}
+					data-qa-caret="i-chevron-down"
+					source="i-chevron-down"
+					.size=${"x-small"}
 					clickable
 					@click=${this.handleDropDownOpen}
 			  ></f-icon>`
 			: html`<f-icon
-					data-qa-caret="i-caret-up"
-					source="i-caret-up"
-					.size=${"small"}
+					data-qa-caret="i-chevron-up"
+					source="i-chevron-up"
+					.size=${"x-small"}
 					clickable
 					@click=${this.handleDropDownClose}
 			  ></f-icon>`;
@@ -972,7 +973,7 @@ export class FSelect extends FRoot {
 									data-qa-clear
 									?clickable=${true}
 									source="i-close"
-									.size=${this.iconSize}
+									size="x-small"
 									@click=${(e: MouseEvent) =>
 										Array.isArray(this.selectedOptions)
 											? this.clearInputValue(e)
@@ -1148,7 +1149,7 @@ export class FSelect extends FRoot {
 																gap="none"
 																height="hug-content"
 																width="hug-content"
-																><f-icon size="medium" source="i-tick"></f-icon
+																><f-icon size="small" source="i-tick"></f-icon
 														  ></f-div>`
 														: ""}
 												</f-div>`
@@ -1268,7 +1269,7 @@ export class FSelect extends FRoot {
 																		gap="none"
 																		height="hug-content"
 																		width="hug-content"
-																		><f-icon size="medium" source="i-tick"></f-icon
+																		><f-icon size="small" source="i-tick"></f-icon
 																  ></f-div>`
 																: ""}
 														</f-div>

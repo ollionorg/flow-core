@@ -9,6 +9,8 @@ import { validateHTMLColor, validateHTMLColorName } from "validate-color";
 import getTextContrast from "../../utils/get-text-contrast";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import LightenDarkenColor from "../../utils/get-lighten-darken-color";
+import { FIcon } from "../f-icon/f-icon";
+import { FCounter } from "../f-counter/f-counter";
 
 export type FTagStateProp =
 	| "primary"
@@ -27,7 +29,7 @@ export class FTag extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle), ...FIcon.styles, ...FCounter.styles];
 
 	/**
 	 * @attribute boolean for inherited class

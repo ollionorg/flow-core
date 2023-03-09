@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.5.1] - 2023-03-09
+
+### Improvements
+
+- `f-icon` alignment in form inputs.
+
 ## [1.5.0] - 2023-03-09
 
 ### Improvements

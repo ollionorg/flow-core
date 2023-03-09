@@ -4,6 +4,7 @@ import eleStyle from "./f-tab.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { FTabNode } from "../f-tab-node/f-tab-node";
+import { FIconButton } from "../f-icon-button/f-icon-button";
 
 export type FTabNodeWidthProp = "fill" | "hug-content" | `${number}`;
 
@@ -12,7 +13,7 @@ export class FTab extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
+	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FIconButton.styles];
 
 	/**
 	 * id selecteor for f-tab-section

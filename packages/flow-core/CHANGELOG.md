@@ -4,6 +4,24 @@
 
 # Change Log
 
+## [1.4.8-beta] - 2023-03-07
+
+### Bug fixes
+
+- `data-qa-id` propogated to native input element.
+
+## [1.4.7] - 2023-03-07
+
+### Bug fixes
+
+- `:host` styles applied to respective tag.
+
+## [1.4.6] - 2023-03-07
+
+### Bug fixes
+
+- `f-emoji-picker`: added static width to stop the dynamic width extension. The picker wasn't opening in form-builder on click, which is fixed.
+
 ## [1.4.5] - 2023-03-07
 
 ### Features

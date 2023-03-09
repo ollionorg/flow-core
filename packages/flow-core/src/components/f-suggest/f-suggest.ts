@@ -24,7 +24,13 @@ export class FSuggest extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles, ...FPopover.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		...FText.styles,
+		...FDiv.styles,
+		...FPopover.styles,
+		...FInput.styles
+	];
 
 	/**
 	 * @attribute Variants are various visual representations of an input field.

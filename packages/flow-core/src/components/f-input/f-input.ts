@@ -370,6 +370,7 @@ export class FInput extends FRoot {
 							category=${this.category}
 							type=${this.type}
 							state=${this.state}
+							data-qa-id=${this.getAttribute("data-qa-element-id")}
 							placeholder=${this.placeholder}
 							.value="${this.value || ""}"
 							size=${this.size}

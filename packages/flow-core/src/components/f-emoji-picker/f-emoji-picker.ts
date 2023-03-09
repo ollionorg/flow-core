@@ -458,8 +458,12 @@ export class FEmojiPicker extends FRoot {
 					state=${this.state}
 					category=${this.category}
 					variant=${this.variant}
+					clear=${this.value && this.clear ? true : false}
 					tabindex="1"
-					@click=${() => this.toggleEmojiPicker(true)}
+					@click=${(e: MouseEvent) => {
+						e.stopPropagation();
+						this.toggleEmojiPicker(true);
+					}}
 				>
 					<f-div
 						id="emoji-value"

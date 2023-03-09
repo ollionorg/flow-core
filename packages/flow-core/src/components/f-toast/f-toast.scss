@@ -11,19 +11,6 @@ $state-colors: (
 );
 
 :host {
-	display: flex;
-	height: fit-content;
-	width: 400px;
-	border-radius: 4px;
-	z-index: 105;
-	transition: right var(--transition-time-delayed) ease-out,
-		top var(--transition-time-default) ease-out, transform var(--transition-time-delayed) ease-out;
-	overflow: visible;
-
-	position: fixed;
-	right: -412px;
-	top: 16px;
-
 	div.f-toast {
 		width: 100%;
 		&:hover {
@@ -67,4 +54,19 @@ $state-colors: (
 			border-radius: 0px 6px 6px 0px;
 		}
 	}
+}
+
+f-toast {
+	display: flex;
+	height: fit-content;
+	width: 400px;
+	border-radius: 4px;
+	z-index: 105;
+	transition: right var(--transition-time-delayed) ease-out,
+		top var(--transition-time-default) ease-out, transform var(--transition-time-delayed) ease-out;
+	overflow: visible;
+
+	position: fixed;
+	right: -412px;
+	top: 16px;
 }

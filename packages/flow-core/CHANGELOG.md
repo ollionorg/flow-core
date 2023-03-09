@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.5.0] - 2023-03-09
+
+### Improvements
+
+- `external` updated in build options.
+
 ## [1.4.9] - 2023-03-09
 
 ### Improvements

@@ -501,6 +501,7 @@ export class FFileUpload extends FRoot {
 							: html`<f-icon source="i-upload" size="medium" clickable></f-icon>`}
 						<input
 							${ref(this.fileInputRef)}
+							data-qa-id=${this.getAttribute("data-qa-element-id")}
 							accept=${this.fileType === "all" ? "*/*" : this.fileType}
 							type="file"
 							?multiple=${this.type === "multiple" ? true : false}

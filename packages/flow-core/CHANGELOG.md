@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.4.8] - 2023-03-09
+
+### Improvements
+
+- For form elements `data-qa-element-id` propogated to `data-qa-id` of native input element.
+
 ## [1.4.8-beta] - 2023-03-07
 
 ### Bug fixes

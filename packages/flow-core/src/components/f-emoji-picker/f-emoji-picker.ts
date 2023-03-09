@@ -472,6 +472,7 @@ export class FEmojiPicker extends FRoot {
 						size=${this.size}
 						align="middle-left"
 						gap="small"
+						data-qa-id=${this.getAttribute("data-qa-element-id")}
 					>
 						${inputValue}
 					</f-div>
@@ -479,7 +480,10 @@ export class FEmojiPicker extends FRoot {
 				</div>
 				<f-div direction="column" id="f-emoji-picker-error"><slot name="help"></slot> </f-div>
 			</f-div>
-			<f-popover class="f-emoji-picker-popover" .overlay=${false}
+			<f-popover
+				data-qa-emoji-popover=${this.getAttribute("data-qa-element-id")}
+				class="f-emoji-picker-popover"
+				.overlay=${false}
 				><f-div>${this.picker}</f-div></f-popover
 			>
 		`;

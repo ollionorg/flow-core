@@ -211,7 +211,7 @@ export class FPopover extends FRoot {
 		});
 		if (this.open) {
 			const overlay = this.overlay
-				? html`<div class="f-overlay" @click=${this.overlayClick}></div>`
+				? html`<div class="f-overlay" data-qa-overlay @click=${this.overlayClick}></div>`
 				: "";
 			this.computePosition(this.isTooltip);
 			return html`<slot></slot>${overlay} `;

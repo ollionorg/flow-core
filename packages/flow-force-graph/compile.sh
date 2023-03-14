@@ -7,7 +7,7 @@ cd "$HERE"
 yarn analyze
 cd "../custom-elements-manifest-to-types"
 yarn build
-cd .. && cd "./flow-force-chart"
+cd .. && cd "./flow-force-graph"
 
 echo "building library..."
 vite build --emptyOutDir && tsc -emitDeclarationOnly

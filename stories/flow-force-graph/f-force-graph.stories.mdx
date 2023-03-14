@@ -2,7 +2,7 @@ import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 
 <Meta
-	title="Charts/f-force-chart"
+	title="Graphs/f-force-graph"
 	parameters={{
 		controls: { hideNoControlsWarning: true }
 	}}
@@ -27,11 +27,11 @@ f-divider is a line used to separate the content of a layout.
 	<Story name="Playground">
 		{args =>
 			html`<f-div direction="column" width="100%" height="100%" padding="x-large"
-				><f-force-chart
+				><f-force-graph
 					variant=${args.variant}
 					size=${args.size}
 					state=${args.state}
-				></f-force-chart
+				></f-force-graph
 			></f-div>`
 		}
 	</Story>
@@ -39,4 +39,4 @@ f-divider is a line used to separate the content of a layout.
 
 <br />
 
-<ArgsTable of={"f-force-chart"} />
+<ArgsTable of={"f-force-graph"} />

@@ -7,8 +7,8 @@ export default defineConfig({
 		sourcemap: true,
 		lib: {
 			entry: "src/index.ts",
-			name: "flow-force-chart",
-			fileName: format => `flow-force-chart.${format}.js`,
+			name: "flow-force-graph",
+			fileName: format => `flow-force-graph.${format}.js`,
 			formats: ["es", "cjs"]
 		},
 		// outDir: "dist",

@@ -6,7 +6,7 @@ import AwsIconPack from "@cldcvr/flow-aws-icon/dist/types/icon-pack";
 
 import { ConfigUtil } from "@cldcvr/flow-core/src/modules/config";
 import "@cldcvr/flow-core/src";
-import "@cldcvr/flow-force-chart/src";
+import "@cldcvr/flow-force-graph/src";
 import { setCustomElementsManifest, setCustomElements } from "@storybook/web-components";
 import "./storybook.css";
 
@@ -77,7 +77,7 @@ async function run() {
 		await fetch(new URL("../packages/flow-core/custom-elements.json", import.meta.url))
 	).json();
 	const forceCustomElements = await (
-		await fetch(new URL("../packages/flow-force-chart/custom-elements.json", import.meta.url))
+		await fetch(new URL("../packages/flow-force-graph/custom-elements.json", import.meta.url))
 	).json();
 	setCustomElementsManifest(customElements);
 	setCustomElements(customElements);

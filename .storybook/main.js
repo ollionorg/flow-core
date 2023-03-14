@@ -27,8 +27,8 @@ module.exports = {
 					replacement: path.resolve(__dirname, "../packages/flow-core/src")
 				},
 				{
-					find: "@cldcvr/flow-force-chart/src",
-					replacement: path.resolve(__dirname, "../packages/flow-force-chart/src")
+					find: "@cldcvr/flow-force-graph/src",
+					replacement: path.resolve(__dirname, "../packages/flow-force-graph/src")
 				}
 			];
 		}

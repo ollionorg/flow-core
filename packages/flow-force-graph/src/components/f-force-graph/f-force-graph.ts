@@ -1,13 +1,14 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, query } from "lit/decorators.js";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
-import eleStyle from "./f-force-chart.scss";
+import eleStyle from "./f-force-graph.scss";
 import * as d3 from "d3";
 import sampleData from "./sample-data.json";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { BaseType, SimulationNodeDatum } from "d3";
 
-@customElement("f-force-chart")
-export class FForceChart extends FRoot {
+@customElement("f-force-graph")
+export class FForceGraph extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
@@ -49,24 +50,32 @@ export class FForceChart extends FRoot {
 			.data(links)
 			.join("line");
 
-		function dragstarted(event: { active: any }, d: { fx: any; x: any; fy: any; y: any }) {
+		function dragstarted(event: any, d: any) {
 			if (!event.active) simulation.alphaTarget(0.3).restart();
 			d.fx = d.x;
 			d.fy = d.y;
 		}
 
-		function dragged(event: { x: any; y: any }, d: { fx: any; fy: any }) {
+		function dragged(event: any, d: any) {
 			d.fx = event.x;
 			d.fy = event.y;
 		}
 
-		function dragended(event: { active: any }, d: { fx: null; fy: null }) {
+		function dragended(event: any, d: any) {
 			if (!event.active) simulation.alphaTarget(0);
 			d.fx = null;
 			d.fy = null;
 		}
 
-		const drag = d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended);
+		const drag = d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended) as (
+			selection: d3.Selection<
+				BaseType | SVGCircleElement,
+				SimulationNodeDatum,
+				SVGGElement,
+				unknown
+			>,
+			...args: any[]
+		) => void;
 
 		const node = svg
 			.append("g")
@@ -76,21 +85,21 @@ export class FForceChart extends FRoot {
 			.selectAll("circle")
 			.data(nodes)
 			.join("circle")
-			.attr("fill", d => (d.children ? null : "var(--color-border-default)"))
-			.attr("stroke", d => (d.children ? null : "var(--color-surface-default)"))
+			.attr("fill", (d: any) => (d.children ? null : "var(--color-border-default)"))
+			.attr("stroke", (d: any) => (d.children ? null : "var(--color-surface-default)"))
 			.attr("r", 20)
 			.call(drag);
 
-		node.append("title").text(d => d.data.name);
+		node.append("title").text((d: any) => d.data.name);
 
 		simulation.on("tick", () => {
 			link
-				.attr("x1", d => d.source.x)
-				.attr("y1", d => d.source.y)
-				.attr("x2", d => d.target.x)
-				.attr("y2", d => d.target.y);
+				.attr("x1", (d: any) => d.source.x)
+				.attr("y1", (d: any) => d.source.y)
+				.attr("x2", (d: any) => d.target.x)
+				.attr("y2", (d: any) => d.target.y);
 
-			node.attr("cx", d => d.x).attr("cy", d => d.y);
+			node.attr("cx", (d: any) => d.x).attr("cy", (d: any) => d.y);
 		});
 
 		//invalidation.then(() => simulation.stop());
@@ -105,6 +114,6 @@ export class FForceChart extends FRoot {
  */
 declare global {
 	export interface HTMLElementTagNameMap {
-		"f-force-chart": FForceChart;
+		"f-force-graph": FForceGraph;
 	}
 }

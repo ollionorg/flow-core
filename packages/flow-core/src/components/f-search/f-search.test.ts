@@ -31,34 +31,34 @@ describe("f-search", () => {
 		await listner;
 		expect(suggest?.popOverElement.open).equals(true);
 	});
-	// it("it should select result on click", async () => {
-	// 	const el = await fixture<FSearch>(
-	// 		html`
-	// 			<f-search
-	// 				.result=${["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]}
-	// 			></f-search>
-	// 		`
-	// 	);
-	// 	const suggest = el.shadowRoot?.querySelector<FSuggest>("f-suggest");
-	// 	await suggest?.updateComplete;
-	// 	const listner = oneEvent(suggest?.fSuggest, "focus");
-	// 	suggest?.fInput.dispatchEvent(new FocusEvent("focus"));
+	it("it should select result on click", async () => {
+		const el = await fixture<FSearch>(
+			html`
+				<f-search
+					.result=${["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]}
+				></f-search>
+			`
+		);
+		const suggest = el.shadowRoot?.querySelector<FSuggest>("f-suggest");
+		await suggest?.updateComplete;
+		const listner = oneEvent(suggest?.fInput, "focus");
+		suggest?.fInput.dispatchEvent(new FocusEvent("focus"));
 
-	// 	await listner;
-	// 	expect(suggest?.popOverElement.open).equals(true);
+		await listner;
+		expect(suggest?.popOverElement.open).equals(true);
 
-	// 	const suggestion = Array.from(suggest?.popOverElement.querySelectorAll<FDiv>("f-div")).find(
-	// 		d => d.children[0].children[1].textContent?.trim() === "Suggestion 2"
-	// 	);
-	// 	console.log(suggestion);
-	// 	expect(suggestion).instanceOf(FDiv);
-	// 	const suggestionListner = oneEvent(suggestion as FDiv, "click");
-	// 	(suggestion as FDiv).click();
-	// 	await suggestionListner;
+		const suggestion = Array.from(
+			suggest?.popOverElement.querySelectorAll<FDiv>("f-div.f-select-options-clickable")
+		).find(d => d.children[0].children[1].textContent?.trim() === "Suggestion 2");
+		console.log(suggestion);
+		expect(suggestion).instanceOf(FDiv);
+		const suggestionListner = oneEvent(suggestion as FDiv, "click");
+		(suggestion as FDiv).click();
+		await suggestionListner;
 
-	// 	expect(suggest?.value).equals("Suggestion 2");
-	// 	expect(suggest?.popOverElement.open).equals(false);
-	// });
+		expect(suggest?.value).equals("Suggestion 2");
+		expect(suggest?.popOverElement.open).equals(false);
+	});
 
 	it("it should filter result based on value", async () => {
 		const el = await fixture<FSearch>(

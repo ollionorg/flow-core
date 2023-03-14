@@ -50,7 +50,6 @@ describe("f-search", () => {
 		const suggestion = Array.from(
 			suggest?.popOverElement.querySelectorAll<FDiv>("f-div.f-select-options-clickable")
 		).find(d => d.children[0].children[1].textContent?.trim() === "Suggestion 2");
-		console.log(suggestion);
 		expect(suggestion).instanceOf(FDiv);
 		const suggestionListner = oneEvent(suggestion as FDiv, "click");
 		(suggestion as FDiv).click();

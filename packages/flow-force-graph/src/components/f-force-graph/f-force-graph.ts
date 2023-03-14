@@ -21,21 +21,32 @@ export class FForceGraph extends FRoot {
 		super.updated(changedProperties);
 		const width = document.body.offsetWidth;
 		const height = document.body.offsetHeight;
-
+		const radius = 30;
 		type ForceNode = SimulationNodeDatum & { id: number };
 		const dataset: {
 			nodes: ForceNode[];
 			links: SimulationLinkDatum<ForceNode>[];
 		} = {
-			nodes: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 61 }],
+			nodes: [
+				{ id: 1 },
+				{ id: 2 },
+				{ id: 3 },
+				{ id: 4 },
+				{ id: 5 },
+				{ id: 6 },
+				{ id: 7 },
+				{ id: 8 }
+			],
 			links: [
-				{ source: 1, target: 5 },
-				{ source: 4, target: 5 },
-				{ source: 4, target: 61 },
-				{ source: 3, target: 2 },
-				{ source: 5, target: 2 },
 				{ source: 1, target: 2 },
-				{ source: 3, target: 4 }
+				{ source: 2, target: 3 },
+				{ source: 2, target: 4 },
+				{ source: 3, target: 1 },
+				{ source: 5, target: 4 },
+				{ source: 3, target: 5 },
+				{ source: 6, target: 3 },
+				{ source: 5, target: 7 },
+				{ source: 8, target: 5 }
 			]
 		};
 
@@ -49,9 +60,9 @@ export class FForceGraph extends FRoot {
 					.distance(200)
 					.strength(0.5)
 			)
-			.force("charge", d3.forceManyBody().distanceMin(100).strength(-5000))
-			.force("x", d3.forceX())
-			.force("y", d3.forceY())
+			.force("charge", d3.forceManyBody().distanceMin(100).strength(-3000))
+			.force("x", d3.forceX().strength(0.1))
+			.force("y", d3.forceY().strength(0))
 			.alpha(1);
 
 		const svg = d3.select(this.svg).attr("viewBox", [-width / 2, -height / 2, width, height]);
@@ -65,13 +76,73 @@ export class FForceGraph extends FRoot {
 
 		svg.call(zoom).on("dblclick.zoom", null);
 
-		const link = graphContainer
+		const linkG = graphContainer
 			.append("g")
-			.attr("stroke", "#999")
-			.attr("stroke-opacity", 0.6)
-			.selectAll("line")
+			.attr("stroke", "var(--color-border-default)")
+			.selectAll("g")
 			.data(dataset.links)
-			.join("line");
+			.join("g");
+		const link = linkG
+			.append("path")
+			.attr("d", (d: any) => {
+				return `M ${d.source.x} ${d.source.y} L ${d.target.x} ${d.target.y}`;
+			})
+			.attr("id", (d: any) => {
+				return `${d.source.id}->${d.target.id}`;
+			});
+
+		/**
+		 * Link label background
+		 */
+		linkG
+			.append("text")
+			.attr("class", "label-wrapper")
+			.append("textPath")
+			.attr("text-anchor", "middle")
+			.attr("xlink:href", function (d: any) {
+				return `#${d.source.id}->${d.target.id}`;
+			})
+			.attr("startOffset", `50%`)
+			.attr("stroke", "var(--color-surface-default)")
+			.attr("stroke-width", "12px")
+			.attr("dy", 20)
+			.text("direction");
+
+		/**
+		 * Arrow
+		 */
+		linkG
+			.append("text")
+			.attr("class", "label")
+			.attr("stroke", "var(--color-surface-default)")
+			.attr("stroke-width", "1px")
+			.attr("dy", 5.5)
+			.append("textPath")
+			.attr("text-anchor", "end")
+			.attr("xlink:href", function (d: any) {
+				return `#${d.source.id}->${d.target.id}`;
+			})
+			.attr("startOffset", `calc(100% - ${radius - 0.5}px)`)
+			.attr("fill", "var(--color-border-secondary)")
+			.text("▶");
+
+		/**
+		 * Link label
+		 */
+		linkG
+			.append("text")
+			.attr("class", "label")
+			.attr("stroke", "var(--color-surface-default)")
+			.attr("stroke-width", "1px")
+			.attr("dy", 5)
+			.append("textPath")
+			.attr("text-anchor", "middle")
+			.attr("xlink:href", function (d: any) {
+				return `#${d.source.id}->${d.target.id}`;
+			})
+			.attr("startOffset", `50%`)
+			.attr("stroke", "var(--color-text-secondary)")
+			.text("direction");
 
 		function dragstarted(event: any, d: any) {
 			if (!event.active) simulation.alphaTarget(0.3).restart();
@@ -100,9 +171,9 @@ export class FForceGraph extends FRoot {
 			.selectAll("circle")
 			.data(dataset.nodes)
 			.join("circle")
-			.attr("fill", "var(--color-border-default)")
-			.attr("stroke", "var(--color-surface-default)")
-			.attr("r", 30)
+			.attr("fill", "var(--color-surface-subtle)")
+			.attr("stroke", "var(--color-surface-subtle)")
+			.attr("r", radius)
 			.call(drag);
 
 		const text = graphContainer
@@ -115,11 +186,9 @@ export class FForceGraph extends FRoot {
 			.call(drag);
 
 		simulation.on("tick", () => {
-			link
-				.attr("x1", (d: any) => d.source.x)
-				.attr("y1", (d: any) => d.source.y)
-				.attr("x2", (d: any) => d.target.x)
-				.attr("y2", (d: any) => d.target.y);
+			link.attr("d", (d: any) => {
+				return `M ${d.source.x} ${d.source.y} L ${d.target.x} ${d.target.y}`;
+			});
 
 			node.attr("cx", (d: any) => d.x).attr("cy", (d: any) => d.y);
 			text.attr("x", (d: any) => d.x - 5).attr("y", (d: any) => d.y + 5);

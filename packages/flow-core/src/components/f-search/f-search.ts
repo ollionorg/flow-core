@@ -237,7 +237,7 @@ export class FSearch extends FRoot {
 	/**
 	 * conditional help section display for false spacing issue
 	 */
-	helpSectionDisplay() {
+	displayHelpSection() {
 		if (!this.hasHelperText) {
 			this.helperTextSection.style.display = "none";
 		} else {
@@ -248,7 +248,7 @@ export class FSearch extends FRoot {
 	/**
 	 * conditional header section display for false spacing issue
 	 */
-	headerSectionDisplay() {
+	displayHeaderSection() {
 		if (!this.hasLabel && !this.hasDescription) {
 			this.headerSection.style.display = "none";
 		} else {
@@ -329,8 +329,8 @@ export class FSearch extends FRoot {
 		</f-div>`;
 	}
 	updated() {
-		this.helpSectionDisplay();
-		this.headerSectionDisplay();
+		this.displayHelpSection();
+		this.displayHeaderSection();
 	}
 }
 

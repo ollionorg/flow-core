@@ -855,7 +855,7 @@ export class FSelect extends FRoot {
 						${this.type === "single"
 							? (this.selectedOptions as FSelectOptionsProp).map(
 									option =>
-										html`<f-div padding="none" .style=${this.singleSelectionStyle}
+										html`<f-div padding="none" style=${this.singleSelectionStyle}
 											><f-text
 												data-qa-selected-option=${option}
 												variant="para"

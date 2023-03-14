@@ -639,6 +639,103 @@ States are used to communicate purpose and connotations. For example, a red colo
 
 <br />
 
+## suggestions
+
+Provides the search suggestions in the form of an array of strings.
+
+<Canvas>
+	<Story name="suggestions">
+		{args => {
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large" gap="medium">
+					<f-div align="middle-center">
+						<f-suggest
+							value=${value}
+							placeholder="Write here"
+							@input=${handleValue}
+							size="medium"
+							.suggestions=${[
+								"Suggestion 2",
+								"Suggestion 3",
+								"Suggestion 4",
+								"Suggestion 5",
+								"Suggestion 6",
+								"Suggestion 7",
+								"Suggestion 8",
+								"Suggestion 9",
+								"Suggestion 10",
+								"Suggestion 11",
+								"Suggestion 12",
+								"Suggestion 13",
+								"Suggestion 14",
+								"Suggestion 15",
+								"Suggestion 16",
+								"Suggestion 17",
+								"Suggestion 18"
+							]}
+						>
+							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-div slot="description" padding="none" gap="none"
+								>This is a demo for array search result</f-div
+							>
+							<f-text slot="help" variant="para" size="small"
+								>This is a Subtext (Helper Text)</f-text
+							>
+						</f-suggest></f-div
+					>
+					<f-div align="middle-center">
+						<f-suggest
+							value=${value}
+							placeholder="Write here"
+							@input=${handleValue}
+							size="medium"
+							.suggestions=${{
+								Category1: ["option 1", "option2"],
+								Category2: ["option3", "option 4"],
+								Category3: ["option5", "option6"]
+							}}
+						>
+							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-div slot="description" padding="none" gap="none"
+								>This is a demo for categorized search result</f-div
+							>
+							<f-text slot="help" variant="para" size="small"
+								>This is a Subtext (Helper Text)</f-text
+							>
+						</f-suggest></f-div
+					>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>object of categories</td>
+			<td>for eg. category1:["option1", "option2"]</td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td>array os string values</td>
+			<td>for e.g. ["option1", "option2"]</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
 ## icon-left
 
 Icon-left enables an icon on the left of the input value.

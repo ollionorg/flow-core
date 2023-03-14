@@ -4,6 +4,44 @@
 
 # Change Log
 
+## [1.5.3] - 2023-03-09
+
+### Improvements
+
+- `f-form-group` label wrapper identifier added.
+
+## [1.5.2] - 2023-03-09
+
+### Improvements
+
+- `label`, `description` spacing updated for form inputs.
+
+## [1.5.1] - 2023-03-09
+
+### Improvements
+
+- `f-icon` alignment in form inputs.
+
+## [1.5.0] - 2023-03-09
+
+### Improvements
+
+- `external` updated in build options.
+
+## [1.4.9] - 2023-03-09
+
+### Improvements
+
+- `external` updated in build options.
+
+### Bug fixes
+- Type casting: input of type `number` not emitting Number type value.
+## [1.4.8] - 2023-03-09
+
+### Improvements
+
+- For form elements `data-qa-element-id` propogated to `data-qa-id` of native input element.
+
 ## [1.4.8-beta] - 2023-03-07
 
 ### Bug fixes

@@ -6,6 +6,7 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
+import { FIcon } from "../f-icon/f-icon";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import _ from "lodash";
@@ -38,7 +39,7 @@ export class FSelect extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles];
+	static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles, ...FIcon.styles];
 
 	@queryAssignedElements({ slot: "label" })
 	_labelNodes!: NodeListOf<HTMLElement>;
@@ -769,6 +770,7 @@ export class FSelect extends FRoot {
 		const iconLeft = this.iconLeft
 			? html`
 					<f-icon
+						data-qa-icon-left=${this.iconLeft}
 						.source=${this.iconLeft}
 						.size=${this.iconSize}
 						class=${!this.size ? "f-input-icons-size" : ""}
@@ -781,14 +783,16 @@ export class FSelect extends FRoot {
 		 */
 		const iconRight = !this.openDropdown
 			? html`<f-icon
-					source="i-caret-down"
-					.size=${"small"}
+					data-qa-caret="i-chevron-down"
+					source="i-chevron-down"
+					.size=${"x-small"}
 					clickable
 					@click=${this.handleDropDownOpen}
 			  ></f-icon>`
 			: html`<f-icon
-					source="i-caret-up"
-					.size=${"small"}
+					data-qa-caret="i-chevron-up"
+					source="i-chevron-up"
+					.size=${"x-small"}
 					clickable
 					@click=${this.handleDropDownClose}
 			  ></f-icon>`;
@@ -801,6 +805,7 @@ export class FSelect extends FRoot {
 			concatinatedSelectedOptions?.length === 0 &&
 			!this.searchable
 				? html`<f-text
+						data-qa-placeholder
 						class="placeholder-text"
 						variant="para"
 						size="small"
@@ -812,6 +817,7 @@ export class FSelect extends FRoot {
 			<input
 				class=${classMap({ "f-select": true })}
 				id="f-select"
+				data-qa-input
 				variant=${this.variant}
 				category=${this.category}
 				state=${this.state}
@@ -839,7 +845,12 @@ export class FSelect extends FRoot {
 							? (this.selectedOptions as FSelectOptionsProp).map(
 									option =>
 										html`<f-div padding="none" ellipsis=${true}
-											><f-text variant="para" size="small" weight="regular" class="word-break"
+											><f-text
+												data-qa-selected-option=${option}
+												variant="para"
+												size="small"
+												weight="regular"
+												class="word-break"
 												>${(option as FSelectOptionObject)?.title ?? option}</f-text
 											></f-div
 										>`
@@ -849,6 +860,7 @@ export class FSelect extends FRoot {
 									.map(
 										option =>
 											html`<f-tag
+												data-qa-selected-tag=${option}
 												class="f-tag-system-icon"
 												icon-right="i-close"
 												size="small"
@@ -863,6 +875,7 @@ export class FSelect extends FRoot {
 									? !this.viewMoreTags
 										? html` <f-div height="hug-content" width="hug-content" padding="none">
 												<f-text
+													data-qa-more
 													variant="para"
 													size="small"
 													weight="regular"
@@ -875,6 +888,7 @@ export class FSelect extends FRoot {
 										  >`
 										: html`<f-div height="hug-content" width="hug-content" padding="none"
 												><f-text
+													data-qa-less
 													variant="para"
 													size="small"
 													weight="regular"
@@ -904,6 +918,7 @@ export class FSelect extends FRoot {
 										option =>
 											html`<f-tag
 												class="f-tag-system-icon"
+												data-qa-selected-tag=${option}
 												icon-right="i-close"
 												size="small"
 												label=${(option as FSelectOptionObject)?.title ?? option}
@@ -917,6 +932,7 @@ export class FSelect extends FRoot {
 									? !this.viewMoreTags
 										? html`<f-div height="hug-content" width="hug-content" padding="none"
 												><f-text
+													data-qa-more
 													variant="para"
 													size="small"
 													weight="regular"
@@ -929,6 +945,7 @@ export class FSelect extends FRoot {
 										  >`
 										: html`<f-div height="hug-content" width="hug-content" padding="none"
 												><f-text
+													data-qa-less
 													variant="para"
 													size="small"
 													weight="regular"
@@ -953,9 +970,10 @@ export class FSelect extends FRoot {
 					this.clear
 						? html`
 								<f-icon
+									data-qa-clear
 									?clickable=${true}
 									source="i-close"
-									.size=${this.iconSize}
+									size="x-small"
 									@click=${(e: MouseEvent) =>
 										Array.isArray(this.selectedOptions)
 											? this.clearInputValue(e)
@@ -966,7 +984,7 @@ export class FSelect extends FRoot {
 						: ""}
 					${iconRight}
 			  </div>`
-			: html`<div class="loader-suffix">${unsafeSVG(loader)}</div>`;
+			: html`<div class="loader-suffix" data-qa-loader>${unsafeSVG(loader)}</div>`;
 
 		/**
 		 * empty filtered options
@@ -982,19 +1000,23 @@ export class FSelect extends FRoot {
 			tabindex=${0}
 		>
 			<f-div width="fill-container" height="hug-content" padding="none"
-				><f-text variant="para" size="small" weight="regular">No Options found.</f-text></f-div
+				><f-text data-qa-empty variant="para" size="small" weight="regular"
+					>No Options found.</f-text
+				></f-div
 			>
 			${this.createOption && this.searchValue && this.searchable
 				? html`
 						<f-div width="hug-content" height="hug-content" padding="none">
 							${this.offsetWidth > 200
 								? html` <f-button
+										data-qa-create
 										size="small"
 										category="transparent"
 										label="CREATE"
 										@click=${this.createNewOption}
 								  ></f-button>`
 								: html`<f-icon-button
+										data-qa-create
 										icon="i-plus"
 										state="primary"
 										size="x-small"
@@ -1022,12 +1044,7 @@ export class FSelect extends FRoot {
 						this.handleDropDownClose(e);
 					}}
 				>
-					<f-div
-						padding="none"
-						.gap=${this._hasLabel ? "x-small" : "none"}
-						direction="column"
-						width="fill-container"
-					>
+					<f-div padding="none" direction="column" width="fill-container">
 						<f-div
 							padding="none"
 							direction="row"
@@ -1067,7 +1084,7 @@ export class FSelect extends FRoot {
 												html`<f-div
 													class="f-select-options-clickable"
 													padding="medium"
-													data-qa-option
+													data-qa-option=${option}
 													height="hug-content"
 													width="fill-container"
 													direction="row"
@@ -1127,7 +1144,7 @@ export class FSelect extends FRoot {
 																gap="none"
 																height="hug-content"
 																width="hug-content"
-																><f-icon size="medium" source="i-tick"></f-icon
+																><f-icon size="small" source="i-tick"></f-icon
 														  ></f-div>`
 														: ""}
 												</f-div>`
@@ -1149,7 +1166,7 @@ export class FSelect extends FRoot {
                   >
                     <f-div
                       class="f-select-options-clickable"
-					  data-qa-option
+					  data-qa-group=${group}
                       padding="medium"
                       height="hug-content"
                       width="fill-container"
@@ -1180,7 +1197,7 @@ export class FSelect extends FRoot {
 													html`
 														<f-div
 															class="f-select-options-clickable"
-															data-qa-option
+															data-qa-option=${option}
 															padding="medium x-large"
 															height="hug-content"
 															width="fill-container"
@@ -1247,7 +1264,7 @@ export class FSelect extends FRoot {
 																		gap="none"
 																		height="hug-content"
 																		width="hug-content"
-																		><f-icon size="medium" source="i-tick"></f-icon
+																		><f-icon size="small" source="i-tick"></f-icon
 																  ></f-div>`
 																: ""}
 														</f-div>

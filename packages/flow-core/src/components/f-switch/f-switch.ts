@@ -83,7 +83,12 @@ export class FSwitch extends FRoot {
 				class="f-switch-wrapper"
 			>
 				<label class="f-switch" size=${this.size} state=${this.state}>
-					<input type="checkbox" checked=${this.value} @input=${this.handleInput} />
+					<input
+						type="checkbox"
+						data-qa-id=${this.getAttribute("data-qa-element-id")}
+						checked=${this.value}
+						@input=${this.handleInput}
+					/>
 					<span class="f-switch-slider"></span>
 				</label>
 				<f-div padding="none" align="middle-left" direction="row" gap="small">

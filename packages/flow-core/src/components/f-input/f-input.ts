@@ -5,6 +5,7 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
+import { FIcon } from "../f-icon/f-icon";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { ifDefined } from "lit-html/directives/if-defined.js";
@@ -12,7 +13,7 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 export type FInputState = "primary" | "default" | "success" | "warning" | "danger";
 
 export type FInputCustomEvent = {
-	value: string;
+	value: string | number;
 };
 
 export type FInputSuffixWhen = (value: string) => boolean;
@@ -22,7 +23,7 @@ export class FInput extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles];
+	static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles, ...FIcon.styles];
 
 	/**
 	 * @attribute local state for password to text toggling and vice versa.
@@ -76,7 +77,7 @@ export class FInput extends FRoot {
 	 * @attribute Defines the value of an f-input. Validation rules are applied on the value depending on the type property of the f-text-input.
 	 */
 	@property({ reflect: true, type: String })
-	value?: string;
+	value?: string | number;
 
 	/**
 	 * @attribute Defines the placeholder text for f-text-input
@@ -152,8 +153,9 @@ export class FInput extends FRoot {
 	 */
 	handleInput(e: InputEvent) {
 		e.stopPropagation();
-		this.value = (e.target as HTMLInputElement)?.value;
-		this.dispatchInputEvent((e.target as HTMLInputElement)?.value);
+		const val = (e.target as HTMLInputElement)?.value;
+		this.value = this.type === "number" ? Number(val) : val;
+		this.dispatchInputEvent(this.value);
 	}
 
 	/**
@@ -164,7 +166,7 @@ export class FInput extends FRoot {
 		this.dispatchInputEvent("");
 	}
 
-	dispatchInputEvent(value: string) {
+	dispatchInputEvent(value: string | number) {
 		const event = new CustomEvent<FInputCustomEvent>("input", {
 			detail: {
 				value
@@ -292,7 +294,7 @@ export class FInput extends FRoot {
 						<f-icon
 							?clickable=${true}
 							source="i-close"
-							.size=${this.iconSize}
+							size="x-small"
 							@click=${this.clearInputValue}
 							class=${!this.size ? "f-input-icons-size" : ""}
 						></f-icon>
@@ -315,12 +317,7 @@ export class FInput extends FRoot {
 				width="100%"
 			>
 				<f-div padding="none" gap="none" align="bottom-left">
-					<f-div
-						padding="none"
-						.gap=${this._hasLabel ? "x-small" : "none"}
-						direction="column"
-						width="fill-container"
-					>
+					<f-div padding="none" direction="column" width="fill-container">
 						<f-div
 							padding="none"
 							gap="small"
@@ -342,7 +339,7 @@ export class FInput extends FRoot {
 					>
 						${this.maxLength
 							? html` <f-text variant="para" size="small" weight="regular" state="secondary"
-									>${this.value?.length ?? 0} / ${this.maxLength}</f-text
+									>${(this.value + "")?.length ?? 0} / ${this.maxLength}</f-text
 							  >`
 							: null}
 					</f-div>

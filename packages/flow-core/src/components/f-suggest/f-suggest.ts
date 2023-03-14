@@ -209,6 +209,7 @@ export class FSuggest extends FRoot {
 				@focus=${this.handleFocus}
 				@blur=${this.handleBlur}
 				type="text"
+				data-qa-element-id=${this.getAttribute("data-qa-element-id")}
 				icon-left=${this.iconLeft}
 				icon-right=${this.iconRight}
 				prefix=${this.prefix}
@@ -243,7 +244,7 @@ export class FSuggest extends FRoot {
 						clickable
 						padding="medium"
 					>
-						<f-text> ${unsafeHTML(sg)} </f-text>
+						<f-text data-qa-suggest-option=${sg}> ${unsafeHTML(sg)} </f-text>
 					</f-div>`;
 				})}</f-div
 			>`;

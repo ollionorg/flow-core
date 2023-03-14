@@ -25,14 +25,14 @@ describe("f-emoji-picker", () => {
 
 	it("should render value", async () => {
 		const el = await fixture(html` <f-emoji-picker value="🙂"></f-emoji-picker> `);
-		const descendant = el.shadowRoot!.querySelector("#emoji-value")!;
+		const descendant = el.shadowRoot!.querySelector(".emoji-value")!;
 		const icon = descendant.children[0];
 		expect(icon).instanceOf(FIcon);
 	});
 
 	it("should render placeholder", async () => {
 		const el = await fixture(html` <f-emoji-picker placeholder="😀"></f-emoji-picker> `);
-		const descendant = el.shadowRoot!.querySelector("#emoji-value")!;
+		const descendant = el.shadowRoot!.querySelector(".emoji-value")!;
 		const icon = descendant.children[0];
 		expect(icon).instanceOf(FIcon);
 	});

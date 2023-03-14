@@ -34,7 +34,7 @@ export class FIconButton extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle), ...FIcon.styles];
 
 	/**
 	 * @attribute local state for managing custom fill.
@@ -257,9 +257,11 @@ export class FIconButton extends FRoot {
 			?counter=${this.counter}
 			?disabled=${this.disabled}
 			?loading=${this.loading}
+			data-qa-id=${this.getAttribute("data-qa-element-id")}
 		>
 			${this.loading ? unsafeSVG(loader) : ""}
 			<f-icon
+				data-qa-icon=${this.icon}
 				.source=${this.icon}
 				.state=${this.state}
 				.size=${this.size}

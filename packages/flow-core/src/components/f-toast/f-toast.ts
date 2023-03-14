@@ -5,6 +5,7 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import toastQueue from "./f-toast-queue";
 import { FDiv } from "../f-div/f-div";
+import { FIcon } from "../f-icon/f-icon";
 
 export type FToastState = "default" | "primary" | "success" | "warning" | "danger";
 
@@ -13,7 +14,7 @@ export class FToast extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
+	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FIcon.styles];
 
 	/**
 	 * @attribute Flow 2 provides two types of toast: auto-hide: toast disappears after the definite amount of time, and persist: toast remains on screen until the user interacts with it.

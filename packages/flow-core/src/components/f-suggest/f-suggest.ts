@@ -240,6 +240,7 @@ export class FSuggest extends FRoot {
 				@focus=${this.handleFocus}
 				@blur=${this.handleBlur}
 				type="text"
+				data-qa-element-id=${this.getAttribute("data-qa-element-id")}
 				icon-left=${this.iconLeft}
 				icon-right=${this.iconRight}
 				prefix=${this.prefix}
@@ -319,13 +320,14 @@ export class FSuggest extends FRoot {
 								align="middle-left"
 								gap="small"
 								@click=${this.handleSuggest}
-								>
+							>
 								<f-div direction="row" gap="medium">
-								${this.isSearchComponent ? html` <f-icon source="i-search"></f-icon>` : ""}
-								<f-text variant="para" size="small" weight="regular"> ${unsafeHTML(item)} </f-text>
-							</f-div>
-								</f-div
-							>`;
+									${this.isSearchComponent ? html` <f-icon source="i-search"></f-icon>` : ""}
+									<f-text variant="para" size="small" weight="regular">
+										${unsafeHTML(item)}
+									</f-text>
+								</f-div>
+							</f-div>`;
 						})}
 					</f-div>`;
 				}

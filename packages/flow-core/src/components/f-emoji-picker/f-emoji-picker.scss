@@ -45,6 +45,7 @@ $categories: (
 		display: flex;
 		justify-content: space-between;
 		gap: 8px;
+		max-width: 58px;
 		> f-div:not([placeholder]) {
 			font-style: normal;
 			font-weight: 325;
@@ -59,15 +60,7 @@ $categories: (
 			}
 		}
 		padding: 0px 8px;
-		&[size="“medium”"] {
-			width: 38px;
-		}
-		&[size="“small”"] {
-			width: 34px;
-		}
-		&[clear="“true”"] {
-			width: 62px;
-		}
+
 		@each $variant, $value in $variants {
 			&[variant="#{$variant}"] {
 				border-radius: $value;
@@ -150,6 +143,9 @@ em-emoji-picker {
 	--font-family: var(--flow-font);
 	--color-border: var(--color-surface-tertiary);
 	--border-radius: 4px;
+	--preview-placeholder-size: 16px;
+	--preview-title-size: 16px;
+	--preview-subtitle-size: 12px;
 }
 
 section#root {

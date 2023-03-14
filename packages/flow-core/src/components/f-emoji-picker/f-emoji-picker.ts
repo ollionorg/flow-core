@@ -6,6 +6,7 @@ import data, { Category, EmojiMartData } from "@emoji-mart/data";
 import { Picker } from "emoji-mart";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
+import { FIcon } from "../f-icon/f-icon";
 import { FPopover } from "../f-popover/f-popover";
 
 export type FEmojiPickerState = "primary" | "default" | "success" | "warning" | "danger";
@@ -56,7 +57,13 @@ export class FEmojiPicker extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles, ...FPopover.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		...FDiv.styles,
+		...FText.styles,
+		...FPopover.styles,
+		...FIcon.styles
+	];
 
 	/**
 	 * @attribute Variants are various visual representations of emoji picker.
@@ -408,12 +415,7 @@ export class FEmojiPicker extends FRoot {
 			? html`
 					${this.value
 						? html`<f-div align="middle-center" overflow="hidden">
-								<f-icon
-									source="i-close"
-									.size=${this.iconSize}
-									clickable
-									@click=${this.clearValue}
-								></f-icon
+								<f-icon source="i-close" size="x-small" clickable @click=${this.clearValue}></f-icon
 						  ></f-div>`
 						: ""}
 			  `
@@ -425,7 +427,7 @@ export class FEmojiPicker extends FRoot {
 		const inputValue = this.value
 			? html`<f-icon .source=${this.value} .size=${this.size}></f-icon>`
 			: html`<f-icon
-					.source=${this.placeholder ?? "🙂"}
+					.source=${this.placeholder ?? "i-icon"}
 					state="secondary"
 					.size=${this.size}
 			  ></f-icon>`;
@@ -434,7 +436,7 @@ export class FEmojiPicker extends FRoot {
 		return html`
 			<f-div direction="column" gap="x-small">
 				<f-div padding="none" gap="x-small" align="bottom-left" id="f-emoji-picker-header">
-					<f-div padding="none" direction="column" width="fill-container" gap="x-small">
+					<f-div padding="none" direction="column" width="fill-container">
 						<f-div
 							padding="none"
 							gap="small"
@@ -466,12 +468,13 @@ export class FEmojiPicker extends FRoot {
 					}}
 				>
 					<f-div
-						id="emoji-value"
+						class="emoji-value"
 						height="100%"
 						?placeholder=${this.value ? false : true}
 						size=${this.size}
 						align="middle-left"
 						gap="small"
+						data-qa-id=${this.getAttribute("data-qa-element-id")}
 					>
 						${inputValue}
 					</f-div>
@@ -479,7 +482,10 @@ export class FEmojiPicker extends FRoot {
 				</div>
 				<f-div direction="column" id="f-emoji-picker-error"><slot name="help"></slot> </f-div>
 			</f-div>
-			<f-popover class="f-emoji-picker-popover" .overlay=${false}
+			<f-popover
+				data-qa-emoji-popover=${this.getAttribute("data-qa-element-id")}
+				class="f-emoji-picker-popover"
+				.overlay=${false}
 				><f-div>${this.picker}</f-div></f-popover
 			>
 		`;

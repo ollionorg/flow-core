@@ -17,12 +17,11 @@ describe("f-suggest", () => {
 	});
 	it("it should display suggestions on focus", async () => {
 		const el = await fixture<FSuggest>(
-			html` <f-suggest .suggestions=${[
-				"Suggestion 1",
-				"Suggestion 2",
-				"Suggestion 3",
-				"Suggestion 4"
-			]} ></f-suggest> `
+			html`
+				<f-suggest
+					.suggestions=${["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]}
+				></f-suggest>
+			`
 		);
 		await el.updateComplete;
 		const listner = oneEvent(el.fInput, "focus");
@@ -33,12 +32,11 @@ describe("f-suggest", () => {
 	});
 	it("it should select suggestion on click", async () => {
 		const el = await fixture<FSuggest>(
-			html` <f-suggest .suggestions=${[
-				"Suggestion 1",
-				"Suggestion 2",
-				"Suggestion 3",
-				"Suggestion 4"
-			]} ></f-suggest> `
+			html`
+				<f-suggest
+					.suggestions=${["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]}
+				></f-suggest>
+			`
 		);
 		await el.updateComplete;
 		const listner = oneEvent(el.fInput, "focus");
@@ -47,9 +45,9 @@ describe("f-suggest", () => {
 		await listner;
 		expect(el.popOverElement.open).equals(true);
 
-		const suggestion = Array.from(el.popOverElement.querySelectorAll<FDiv>("f-div")).find(
-			d => d.textContent?.trim() === "Suggestion 2"
-		);
+		const suggestion = Array.from(
+			el.popOverElement.querySelectorAll<FDiv>("f-div.f-select-options-clickable")
+		).find(d => d.children[0].children[0].textContent?.trim() === "Suggestion 2");
 
 		expect(suggestion).instanceOf(FDiv);
 		const suggestionListner = oneEvent(suggestion as FDiv, "click");
@@ -62,12 +60,12 @@ describe("f-suggest", () => {
 
 	it("it should filter suggestions based on value", async () => {
 		const el = await fixture<FSuggest>(
-			html` <f-suggest .suggestions=${[
-				"Suggestion 1",
-				"Suggestion 2",
-				"filter 3",
-				"filter 4"
-			]} value="filter"></f-suggest> `
+			html`
+				<f-suggest
+					.suggestions=${["Suggestion 1", "Suggestion 2", "filter 3", "filter 4"]}
+					value="filter"
+				></f-suggest>
+			`
 		);
 
 		await el.updateComplete;
@@ -78,9 +76,10 @@ describe("f-suggest", () => {
 		expect(el.popOverElement.open).equals(true);
 
 		const suggestions = Array.from(
-			el.popOverElement.querySelectorAll<FDiv>("f-div.suggestion")
-		).filter(d => d.textContent?.trim().includes("filter"));
-
+			el.popOverElement.querySelectorAll<FDiv>("f-div.f-select-options-clickable")
+		).filter(d => {
+			return d.children[0].children[0].textContent?.trim().includes("filter");
+		});
 		expect(suggestions.length).equals(2);
 	});
 });

@@ -149,6 +149,12 @@ export class FInput extends FRoot {
 	inputElement!: HTMLInputElement;
 
 	/**
+	 * input element reference
+	 */
+	@query(".f-input-wrapper")
+	inputWrapperElement!: HTMLInputElement;
+
+	/**
 	 * emit input custom event
 	 */
 	handleInput(e: InputEvent) {

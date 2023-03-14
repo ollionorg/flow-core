@@ -68,7 +68,7 @@ export class FIconButton extends FRoot {
 	/**
 	 * @attribute Size of f-icon-button
 	 */
-	@property({ type: String })
+	@property({ type: String, reflect: true })
 	size?: FIconButtonSize = "medium";
 
 	/**

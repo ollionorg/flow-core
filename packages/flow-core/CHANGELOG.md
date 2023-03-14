@@ -4,6 +4,16 @@
 
 # Change Log
 
+## [1.6.0] - 2023-03-14
+
+### Features
+
+- `f-search` component added.
+
+### Improvements
+
+- `f-suggest` added group categorization type dropdown, customization according to `f-search`.
+
 ## [1.5.3] - 2023-03-09
 
 ### Improvements
@@ -35,7 +45,9 @@
 - `external` updated in build options.
 
 ### Bug fixes
+
 - Type casting: input of type `number` not emitting Number type value.
+
 ## [1.4.8] - 2023-03-09
 
 ### Improvements

@@ -1,0 +1,854 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import fInputAnatomy from "./svg/i-finput-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+
+<Meta
+	title="Components/f-date-time-picker"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
+/>
+
+# f-date-time-picker
+
+<br />
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+f-input is an input element.
+
+<br />
+
+### [Playground](/story/components-f-date-time-picker--playground)
+
+<Canvas>
+	<Story
+		name="Playground"
+		argTypes={{
+			value: { control: "text" },
+			slot: { control: "text" },
+			placeholder: { control: "text" },
+			variant: {
+				control: "select",
+				options: ["curved", "round", "block"]
+			},
+			category: {
+				control: "select",
+				options: ["fill", "transparent", "outline"]
+			},
+			type: {
+				control: "select",
+				options: ["text", "number", "email", "password", "url", "tel"]
+			},
+			state: {
+				control: "select",
+				options: ["default", "success", "primary", "warning", "danger"]
+			},
+			size: {
+				control: "radio",
+				options: ["small", "medium"]
+			},
+			["icon-left"]: {
+				control: "text"
+			},
+			["icon-right"]: {
+				control: "text"
+			},
+			["prefix"]: {
+				control: "text"
+			},
+			["suffix"]: {
+				control: "text"
+			},
+			loading: {
+				control: "boolean"
+			},
+			disabled: {
+				control: "boolean"
+			},
+			readOnly: {
+				control: "boolean"
+			},
+			clear: {
+				control: "boolean"
+			},
+			["max-length"]: {
+				control: "text"
+			}
+		}}
+		args={{
+			value: "",
+			placeholder: "Enter your text here",
+			variant: "round",
+			category: "fill",
+			type: "text",
+			state: "default",
+			size: "medium",
+			slot: `              <f-div slot="label" padding="none" gap="none">Label</f-div>
+              <f-text slot="help" variant="para" size="small">This is a Subtext</f-text>`,
+			["icon-left"]: undefined,
+			["icon-right"]: undefined,
+			["prefix"]: undefined,
+			["suffix"]: undefined,
+			["max-length"]: undefined,
+			loading: false,
+			disabled: false,
+			readOnly: false,
+			clear: false
+		}}
+	>
+		{args => {
+			const [_, updateArgs] = useArgs();
+			const handleInput = e => {
+				updateArgs({ value: e.detail.value });
+				if (args.type === "tel") {
+					updateArgs({ ["calling-code"]: e.detail.callingCode });
+				}
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large">
+					<f-div width="80%" align="middle-center">
+						<f-date-time-picker></f-date-time-picker> </f-div
+				></f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider></f-divider>
+
+<Story name="Anatomy">
+	{() => html`<div class="align-center">${unsafeSVG(fInputAnatomy)}</div>`}
+</Story>
+
+<br />
+
+## variant
+
+<f-divider></f-divider>
+
+Variants are various visual representations of an input field.
+
+<Canvas>
+	<Story name="variant">
+		{args => {
+			const variants = ["curved", "round", "block"];
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large" gap="medium">
+					${variants.map(
+						item => html`<f-div>
+          <f-input
+            value=${value}
+            placeholder="Write here"
+            @input=${handleValue}
+            .variant=${item}
+            size="medium"
+          >
+             <f-div slot="label" padding="none" gap="none">Label (variant="${item}")</f-div>
+            <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
+          </f-input></f-div
+        ></f-div
+      >`
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>curved</td>
+			<td>border radius of 4px</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>round</td>
+			<td>border radius of 22px</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>block</td>
+			<td>works well with cateogry="transparent"</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## category
+
+<f-divider></f-divider>
+
+Category decides the background of f-input
+
+<Canvas>
+	<Story name="category">
+		{args => {
+			const categories = ["fill", "outline", "transparent"];
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large" gap="medium">
+					${categories.map(
+						item => html`<f-div>
+          <f-input
+            value=${value}
+            placeholder="Write here"
+            @input=${handleValue}
+            .category=${item}
+            size="medium"
+            .variant=${item === "transparent" ? "block" : "curved"}
+          >
+            <f-div slot="label" padding="none" gap="none">Label (category="${item}")</f-div>
+            <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
+          </f-input></f-div
+        ></f-div
+      >`
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>fill</td>
+			<td>background is filled</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>outline</td>
+			<td>empty background with border</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>transparent</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## type
+
+<f-divider></f-divider>
+
+The type attribute specifies the type of `<f-input>` element to display.
+
+<Canvas>
+	<Story name="type">
+		{args => {
+			const types = [
+				["text", "number", "email"],
+				["password", "tel", "url"]
+			];
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div direction="column" gap="medium">
+					${types.map(
+						item => html` <f-div align="middle-center" padding="large" gap="medium">
+							${item.map(
+								type => html`<f-div
+									><f-input
+										value=${value}
+										placeholder="Write here"
+										@input=${handleValue}
+										type=${type}
+										size="medium"
+									>
+										<f-div slot="label" padding="none" gap="none">Label (type="${type}")</f-div>
+										<f-text slot="help" variant="para" size="small"
+											>This is a Subtext (Helper Text)</f-text
+										>
+									</f-input></f-div
+								>`
+							)}
+						</f-div>`
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>text</td>
+			<td>Takes any text as input. </td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>number</td>
+			<td>Takes any number as input.</td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td>email</td>
+			<td>Defines a field for an e-mail address.</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>password</td>
+			<td>Defines a field for a password. Masks the characters</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>tel</td>
+			<td>Defines a field for a telephone number.</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>url</td>
+			<td>Defines a field for URL. </td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## value
+
+Defines the value of an f-input. Validation rules are applied on the value depending on the type property of the f-text-input.
+
+<Canvas>
+	<Story name="value">
+		{args => {
+			const [value, setValue] = useState("Value Here");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large">
+					<f-div width="80%" align="middle-center">
+						<f-input value=${value} placeholder="Write here" @input=${handleValue} size="medium">
+							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-text slot="help" variant="para" size="small"
+								>This is a Subtext (Helper Text)</f-text
+							>
+						</f-input></f-div
+					></f-div
+				>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## placeholder
+
+Defines the placeholder text for f-text-input
+
+<Canvas>
+	<Story name="placeholder">
+		{args => {
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large">
+					<f-div width="80%" align="middle-center">
+						<f-input
+							value=${value}
+							placeholder="This is the placeholder"
+							@input=${handleValue}
+							size="medium"
+						>
+							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-text slot="help" variant="para" size="small"
+								>This is a Subtext (Helper Text)</f-text
+							>
+						</f-input></f-div
+					></f-div
+				>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## size
+
+<f-divider></f-divider>
+
+f-input can have 2 sizes.
+
+<p class="note-section">Note: By default size is inherited by the parent f-form.</p>
+
+<Canvas>
+	<Story name="size">
+		{args => {
+			const sizes = ["small", "medium"];
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="top-center" padding="large" gap="medium">
+					${sizes.map(
+						item => html`<f-div>
+          <f-input
+            value=${value}
+            placeholder="Write here"
+            @input=${handleValue}
+            size=${item}
+          >
+            <f-div slot="label" padding="none" gap="none">Label (size="${item}")</f-div>
+            <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
+          </f-input></f-div
+        ></f-div
+      >`
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>small</td>
+			<td>height="28px"</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>medium</td>
+			<td>eheight="36px"</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider></f-divider>
+
+States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
+
+<Canvas>
+	<Story name="state">
+		{args => {
+			const states = [
+				["default", "primary", "success"],
+				["danger", "warning", "default"]
+			];
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div direction="column" gap="medium">
+					${states.map(
+						item => html` <f-div align="middle-center" padding="large" gap="medium">
+							${item.map(
+								state => html`<f-div
+									><f-input
+										value=${value}
+										placeholder="Write here"
+										@input=${handleValue}
+										size="medium"
+										state=${state}
+									>
+										<f-div slot="label" padding="none" gap="none">Label (state="${state}")</f-div>
+										<f-text slot="help" variant="para" size="small"
+											>This is a Subtext (Helper Text)</f-text
+										>
+									</f-input></f-div
+								>`
+							)}
+						</f-div>`
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>default</td>
+			<td></td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>primary</td>
+			<td></td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td>success</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>danger</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>warning</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## icon-left
+
+Icon-left enables an icon on the left of the input value.
+
+<p class="note-section">
+	Note: If f-input has a prefix also, then icon-left is placed on the left of the prefix.
+</p>
+
+<Canvas>
+	<Story name="icon-left">
+		{args => {
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large">
+					<f-div width="80%" align="middle-center">
+						<f-input
+							value=${value}
+							placeholder="Write here"
+							@input=${handleValue}
+							size="medium"
+							icon-left="i-app"
+						>
+							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-div slot="description" padding="none" gap="none"
+								>This is a demo for icon-left="i-app" prop</f-div
+							>
+							<f-text slot="help" variant="para" size="small"
+								>This is a Subtext (Helper Text)</f-text
+							>
+						</f-input></f-div
+					></f-div
+				>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## icon-right
+
+Icon-right enables an icon on the right of the input value.
+
+<p class="note-section">
+	Note: If f-input has a suffix also, then icon-right is placed on the right of the suffix.
+</p>
+
+<Canvas>
+	<Story name="icon-right">
+		{args => {
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large">
+					<f-div width="80%" align="middle-center">
+						<f-input
+							value=${value}
+							placeholder="Write here"
+							@input=${handleValue}
+							size="medium"
+							icon-left="i-app"
+							icon-right="i-delete"
+						>
+							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-div slot="description" padding="none" gap="none"
+								>This is a demo for icon-right="i-app" prop</f-div
+							>
+							<f-text slot="help" variant="para" size="small"
+								>This is a Subtext (Helper Text)</f-text
+							>
+						</f-input></f-div
+					></f-div
+				>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## prefix
+
+Prefix property enables a string before the input value.
+
+<Canvas>
+	<Story name="prefix">
+		{args => {
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large">
+					<f-div width="80%" align="middle-center">
+						<f-input
+							value=${value}
+							placeholder="Write here"
+							@input=${handleValue}
+							size="medium"
+							icon-left="i-app"
+							icon-right="i-delete"
+							prefix="+91"
+						>
+							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-div slot="description" padding="none" gap="none">This is a demo for prefix</f-div>
+							<f-text slot="help" variant="para" size="small"
+								>This is a Subtext (Helper Text)</f-text
+							>
+						</f-input></f-div
+					></f-div
+				>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## suffix
+
+Suffix property enables a string on the right side of the input box.
+
+<Canvas>
+	<Story name="suffix">
+		{args => {
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large">
+					<f-div width="80%" align="middle-center">
+						<f-input
+							value=${value}
+							placeholder="Write here"
+							@input=${handleValue}
+							size="medium"
+							icon-left="i-app"
+							icon-right="i-delete"
+							prefix="+91"
+							suffix="Delete"
+						>
+							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-div slot="description" padding="none" gap="none">This is a demo for suffix</f-div>
+							<f-text slot="help" variant="para" size="small"
+								>This is a Subtext (Helper Text)</f-text
+							>
+						</f-input></f-div
+					></f-div
+				>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## max-length
+
+This shows the character count while typing and auto limits after reaching the max length.
+
+<Canvas>
+	<Story name="max-length">
+		{args => {
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large">
+					<f-div width="80%" align="middle-center">
+						<f-input
+							value=${value}
+							placeholder="Write here"
+							@input=${handleValue}
+							size="medium"
+							icon-left="i-app"
+							icon-right="i-delete"
+							prefix="+91"
+							suffix="Delete"
+							max-length="10"
+						>
+							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-text slot="help" variant="para" size="small"
+								>This is a Subtext (Helper Text)</f-text
+							>
+						</f-input></f-div
+					></f-div
+				>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## Flags
+
+<f-divider></f-divider>
+
+<br />
+
+<Canvas>
+	<Story name="Flags">
+		{args => {
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="top-center" padding="large" gap="medium">
+					${[0, 1, 2, 3].map(
+						item => html`<f-div>
+          <f-input
+            value=${value}
+            placeholder="Write here"
+            @input=${handleValue}
+            size="medium"
+            ?loading=${item === 0 ? true : false}
+            ?disabled=${item === 1 ? true : false}
+            ?clear=${item === 2 ? true : false}
+            ?read-only=${item === 3 ? true : false}
+          >
+            <f-div slot="label" padding="none" gap="none">${
+							item === 0
+								? "Loader"
+								: item === 1
+								? "Disabled"
+								: item === 2
+								? "Clear Icon on Type"
+								: "Readonly"
+						}</f-div>
+            <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
+          </f-input></f-div
+        ></f-div
+      >`
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Name</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>loading</td>
+			<td>Loader appears on right ride of input box.</td>
+			<td>
+				<code>false</code>
+			</td>
+		</tr>
+		<tr>
+			<td>disabled</td>
+			<td>Opacity is set to 50% in disabled state in disabled mode.</td>
+			<td>
+				<code>false</code>
+			</td>
+		</tr>
+		<tr>
+			<td>clear</td>
+			<td>
+				Displays a close icon-button on the right side of the input that allows the user to clear
+				the input value
+			</td>
+			<td>
+				<code>true</code>
+			</td>
+		</tr>
+		<tr>
+			<td>read-only</td>
+			<td>Only Text could be read, can't be edited</td>
+			<td>
+				<code>false</code>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<ArgsTable of={"f-input"} />

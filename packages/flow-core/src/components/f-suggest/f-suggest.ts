@@ -8,6 +8,8 @@ import { FPopover } from "../f-popover/f-popover";
 import { FInput } from "../f-input/f-input";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
+import { classMap } from "lit-html/directives/class-map.js";
+import _ from "lodash";
 
 export type FSuggestState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -17,7 +19,9 @@ export type FSuggestCustomEvent = {
 
 export type FSuggestSuffixWhen = (value: string) => boolean;
 
-export type FSuggestSuggestions = string[];
+export type FSuggestSuggestionsCategory = Record<string, string[]>;
+
+export type FSuggestSuggestions = string[] | FSuggestSuggestionsCategory;
 
 @customElement("f-suggest")
 export class FSuggest extends FRoot {
@@ -47,7 +51,7 @@ export class FSuggest extends FRoot {
 	/**
 	 * @attribute suggestions to show on value
 	 */
-	@property({ reflect: true, type: String })
+	@property({ reflect: false, type: Array })
 	suggestions?: FSuggestSuggestions = [];
 
 	/**
@@ -174,14 +178,14 @@ export class FSuggest extends FRoot {
 	async handleBlur(wait = true) {
 		// waiting if it is normal blur or selection blur, otherwise value not updated
 		if (wait) {
-			await new Promise(resolve => setTimeout(resolve, 300));
+			await new Promise(resolve => setTimeout(resolve, 200));
 		}
 		this.popOverElement.open = false;
 	}
 	handleFocus() {
-		this.popOverElement.target = this.fInput.inputElement;
+		this.popOverElement.target = this.fInput.inputWrapperElement;
 		this.popOverElement.offset = {
-			mainAxis: 12
+			mainAxis: 4
 		};
 		this.popOverElement.style.width = this.offsetWidth + "px";
 		this.popOverElement.style.maxHeight = "300px";
@@ -192,16 +196,43 @@ export class FSuggest extends FRoot {
 		return suggestionsCount > 0;
 	}
 
+	get isSuggestionArray() {
+		return Array.isArray(this.suggestions);
+	}
+
 	get filteredSuggestions() {
 		if (this.value) {
-			return this.suggestions?.filter(sg => sg.includes(this.value as string));
+			if (this.isSuggestionArray) {
+				return (this.suggestions as string[])?.filter(sg => sg.includes(this.value as string));
+			} else {
+				const filtered = _.cloneDeep(this.suggestions) as FSuggestSuggestionsCategory;
+				Object.entries(filtered).forEach(([objName, objValue]) => {
+					filtered[objName] = objValue.filter(item => item.includes(this.value as string));
+				});
+				for (const key in filtered) {
+					if (Array.isArray(filtered[key]) && !filtered[key].length) delete filtered[key];
+				}
+				return filtered;
+			}
 		}
 		return this.suggestions;
 	}
+
+	get isSearchComponent() {
+		return this.getAttribute("data-suggest") === "search";
+	}
+
 	render() {
+		// classes to apply on inner element
+		const classes: Record<string, boolean> = {};
+		// merging host classes
+		this.classList.forEach(cl => {
+			classes[cl] = true;
+		});
 		return html` <f-div direction="column" width="100%"
 			><f-input
-				value=${this.value}
+				class=${classMap(classes)}
+				.value=${this.value}
 				.variant=${this.variant}
 				.category=${this.category}
 				.placeholder=${this.placeholder}
@@ -222,34 +253,86 @@ export class FSuggest extends FRoot {
 				?read-only=${this.readOnly}
 				.size=${this.size}
 			>
-				<f-div slot="label"><slot name="label"></slot></f-div>
-				<f-div slot="description"><slot name="description"></slot></f-div>
-				<f-div slot="help"><slot name="help"></slot></f-div>
-				<f-div slot="icon-tooltip"><slot name="icon-tooltip"></slot></f-div>
+				${this.isSearchComponent
+					? ""
+					: html` <f-div slot="label"><slot name="label"></slot></f-div>
+							<f-div slot="description"><slot name="description"></slot></f-div>
+							<f-div slot="help"><slot name="help"></slot></f-div>
+							<f-div slot="icon-tooltip"><slot name="icon-tooltip"></slot></f-div>`}
 			</f-input>
 			<f-popover .overlay=${false} .placement=${"bottom-start"}>
-				${this.getSuggestionHtml(this.filteredSuggestions ?? [])}
+				<f-div direction="column" state="secondary">
+					${this.getSuggestionHtml(this.filteredSuggestions ?? [])}
+				</f-div>
 			</f-popover>
 		</f-div>`;
 	}
+
 	getSuggestionHtml(suggestions: FSuggestSuggestions) {
-		if (this.anySuggestions) {
-			return html`<f-div height="hug-content" direction="column" overflow="scroll"
-				>${suggestions.map(sg => {
+		if (this.isSuggestionArray) {
+			if (this.anySuggestions) {
+				return html`<f-div height="hug-content" direction="column"
+					>${(suggestions as string[]).map(sg => {
+						return html`<f-div
+							class="f-select-options-clickable"
+							height="hug-content"
+							@click=${this.handleSuggest}
+							clickable
+							padding="medium"
+						>
+							<f-div direction="row" gap="medium">
+								${this.isSearchComponent ? html` <f-icon source="i-search"></f-icon>` : ""}
+								<f-text variant="para" size="small" weight="regular"> ${unsafeHTML(sg)} </f-text>
+							</f-div>
+						</f-div>`;
+					})}</f-div
+				>`;
+			}
+			return nothing;
+		} else {
+			return Object.entries(suggestions as FSuggestSuggestionsCategory).map(
+				([objName, objValue]) => {
 					return html`<f-div
-						class="suggestion"
-						state="tertiary"
+						padding="none"
 						height="hug-content"
-						@click=${this.handleSuggest}
-						clickable
-						padding="medium"
-					>
-						<f-text data-qa-suggest-option=${sg}> ${unsafeHTML(sg)} </f-text>
+						width="fill-container"
+						direction="column"
+						align="middle-left"
+						border="small solid default bottom"
+						><f-div
+							padding="medium"
+							height="hug-content"
+							width="fill-container"
+							align="middle-left"
+							direction="row"
+							><f-text variant="para" size="small" weight="regular" state="secondary"
+								>${objName}</f-text
+							></f-div
+						>
+						${objValue.map(item => {
+							return html`<f-div
+								class="f-select-options-clickable"
+								padding="medium"
+								height="hug-content"
+								width="fill-container"
+								direction="row"
+								?clickable=${true}
+								align="middle-left"
+								gap="small"
+								@click=${this.handleSuggest}
+							>
+								<f-div direction="row" gap="medium">
+									${this.isSearchComponent ? html` <f-icon source="i-search"></f-icon>` : ""}
+									<f-text variant="para" size="small" weight="regular">
+										${unsafeHTML(item)}
+									</f-text>
+								</f-div>
+							</f-div>`;
+						})}
 					</f-div>`;
-				})}</f-div
-			>`;
+				}
+			);
 		}
-		return nothing;
 	}
 
 	handleSuggest(event: PointerEvent) {

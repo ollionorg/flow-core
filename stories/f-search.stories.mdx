@@ -6,13 +6,13 @@ import { useArgs, useEffect, useState } from "@storybook/client-api";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <Meta
-	title="Components/f-suggest"
+	title="Components/f-search"
 	parameters={{
 		controls: { hideNoControlsWarning: true }
 	}}
 />
 
-# f-suggest
+# f-search
 
 <br />
 <br />
@@ -21,19 +21,20 @@ import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <f-divider></f-divider>
 
-f-suggest is an input element.
+Search enables users to specify a word or a phrase to find relevant pieces of content.
 
 <br />
 
-### [Playground](/story/components-f-suggest--playground)
+### [Playground](/story/components-f-search--playground)
 
 <Canvas>
 	<Story
 		name="Playground"
 		argTypes={{
 			value: { control: "text" },
-			slot: { control: "text" },
+			["selected-scope"]: { control: "text" },
 			placeholder: { control: "text" },
+			slot: { control: "text" },
 			variant: {
 				control: "select",
 				options: ["curved", "round", "block"]
@@ -50,53 +51,118 @@ f-suggest is an input element.
 				control: "radio",
 				options: ["small", "medium"]
 			},
-			["icon-left"]: {
-				control: "text"
-			},
-			["icon-right"]: {
-				control: "text"
-			},
-			["prefix"]: {
-				control: "text"
-			},
-			["suffix"]: {
-				control: "text"
-			},
-			loading: {
-				control: "boolean"
-			},
 			disabled: {
-				control: "boolean"
-			},
-			readOnly: {
 				control: "boolean"
 			},
 			clear: {
 				control: "boolean"
 			},
-			["max-length"]: {
-				control: "text"
+			["search-button"]: {
+				control: "boolean"
 			}
 		}}
 		args={{
 			value: "",
-			placeholder: "Enter your text here",
-			variant: "round",
+			["selected-scope"]: "",
+			placeholder: undefined,
+			variant: "curved",
 			category: "fill",
 			state: "default",
 			size: "medium",
 			slot: `              <f-div slot="label" padding="none" gap="none">Label</f-div>
+			<f-div slot="description">this is a description</f-div>
               <f-div width="100%" slot="help"><f-text  variant="para" size="small">This is a Subtext</f-text></f-div>`,
-			["icon-left"]: undefined,
-			["icon-right"]: undefined,
-			["prefix"]: undefined,
-			["suffix"]: undefined,
-			["max-length"]: undefined,
-			loading: false,
 			disabled: false,
-			readOnly: false,
 			clear: false,
-			suggestions: [
+			["search-button"]: false,
+			result: {
+				Category1: ["option 1", "option2"],
+				Category2: ["option3", "option 4"],
+				Category3: ["option5", "option6"]
+			},
+			scope: [
+				"Scope 2",
+				"Scope 3",
+				"Scope 4",
+				"Scope 5",
+				"Scope 6",
+				"Scope 7",
+				"Scope 8",
+				"Scope 9",
+				"Scope 10",
+				"Scope 11",
+				"Scope 12",
+				"Scope 13",
+				"Scope 14",
+				"Scope 15",
+				"Scope 16",
+				"Scope 17",
+				"Scope 18"
+			]
+		}}
+	>
+		{args => {
+			const [_, updateArgs] = useArgs();
+			const handleInput = e => {
+				console.log(e.detail);
+				updateArgs({ value: e.detail.value, ["selected-scope"]: e.detail.scope });
+			};
+			const handleSearch = event => {
+				console.log(event.detail);
+			};
+			return html`
+				<f-div padding="large">
+					<f-search
+						value=${args.value}
+						selected-scope=${args["selected-scope"]}
+						.variant=${args.variant}
+						.category=${args.category}
+						.placeholder=${args.placeholder}
+						.result=${args.result}
+						.scope=${args.scope}
+						@input=${handleInput}
+						state=${args.state}
+						?disabled=${args.disabled}
+						?clear=${args.clear}
+						?search-button=${args["search-button"]}
+						.size=${args.size}
+						@search=${handleSearch}
+					>
+						${unsafeHTML(args.slot)}
+					</f-search>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## variant
+
+<f-divider></f-divider>
+
+Variants are various visual representations of an input field.
+
+<Canvas>
+	<Story name="variant">
+		{args => {
+			const variants = ["curved", "round", "block"];
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large" gap="medium">
+					${variants.map(
+						item => html`<f-div>
+          <f-search
+            value=${value}
+            placeholder="Search"
+            @input=${handleValue}
+            .variant=${item}
+            size="medium"
+			.result=${[
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam iaculis porta dignissim. Etiam a aliquam elit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam hendrerit quis lorem cursus consectetur. Donec sem ipsum, scelerisque at nulla vel, rutrum efficitur tortor. Praesent eu tincidunt mauris. Nam eu aliquam turpis. Curabitur placerat maximus tempor. Donec non ante in nunc eleifend elementum eu quis lorem",
 				"Suggestion 2",
 				"Suggestion 3",
@@ -116,112 +182,11 @@ f-suggest is an input element.
 				"Suggestion 17",
 				"Suggestion 18",
 				"<f-text state='success'>Using markup</f-text>"
-			]
-		}}
-	>
-		{args => {
-			const [_, updateArgs] = useArgs();
-			const handleInput = e => {
-				updateArgs({ value: e.detail.value });
-			};
-			const handleKeydown = event => {
-				event.stopPropagation();
-				event.stopImmediatePropagation();
-			};
-			return html`
-				<f-div width="100%" align="middle-center" padding="large">
-					<f-suggest
-						value=${args.value}
-						.variant=${args.variant}
-						.category=${args.category}
-						.placeholder=${args.placeholder}
-						.suggestions=${args.suggestions}
-						@input=${handleInput}
-						icon-left=${args["icon-left"]}
-						icon-right=${args["icon-right"]}
-						prefix=${args["prefix"]}
-						suffix=${args["suffix"]}
-						state=${args.state}
-						max-length=${args["max-length"]}
-						?loading=${args.loading}
-						?disabled=${args.disabled}
-						?clear=${args.clear}
-						?read-only=${args.readOnly}
-						.size=${args.size}
-						@keydown=${handleKeydown}
-					>
-						${unsafeHTML(args.slot)}
-						<f-text slot="description" variant="para" size="small"
-							>Some description about f-suggest</f-text
-						>
-					</f-suggest>
-				</f-div>
-			`;
-		}}
-	</Story>
-</Canvas>
-
-<br />
-
-### Anatomy
-
-<f-divider></f-divider>
-
-<Story name="Anatomy">
-	{() => html`<div class="align-center">${unsafeSVG(fInputAnatomy)}</div>`}
-</Story>
-
-<br />
-
-## variant
-
-<f-divider></f-divider>
-
-Variants are various visual representations of this field.
-
-<Canvas>
-	<Story name="variant">
-		{args => {
-			const variants = ["curved", "round", "block"];
-			const [value, setValue] = useState("");
-			const handleValue = e => {
-				setValue(e.detail.value);
-			};
-			return html`
-				<f-div width="100%" align="middle-center" padding="large" gap="medium">
-					${variants.map(
-						item => html`<f-div>
-          <f-suggest
-            value=${value}
-            placeholder="Write here"
-            @input=${handleValue}
-            .variant=${item}
-            size="medium"
-			.suggestions=${[
-				"Suggestion 1",
-				"Suggestion 2",
-				"Suggestion 3",
-				"Suggestion 4",
-				"Suggestion 5",
-				"Suggestion 6",
-				"Suggestion 7",
-				"Suggestion 8",
-				"Suggestion 9",
-				"Suggestion 10",
-				"Suggestion 11",
-				"Suggestion 12",
-				"Suggestion 13",
-				"Suggestion 14",
-				"Suggestion 15",
-				"Suggestion 16",
-				"Suggestion 17",
-				"Suggestion 18"
 			]}
           >
              <f-div slot="label" padding="none" gap="none">Label (variant="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-			  
-          </f-suggest></f-div
+          </f-search></f-div
         ></f-div
       >`
 					)}
@@ -264,7 +229,7 @@ Variants are various visual representations of this field.
 
 <f-divider></f-divider>
 
-Category decides the background of f-suggest
+Category decides the background of f-search
 
 <Canvas>
 	<Story name="category">
@@ -278,15 +243,14 @@ Category decides the background of f-suggest
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
 					${categories.map(
 						item => html`<f-div>
-          <f-suggest
+          <f-search
             value=${value}
-            placeholder="Write here"
+            placeholder="Search"
             @input=${handleValue}
             .category=${item}
             size="medium"
             .variant=${item === "transparent" ? "block" : "curved"}
-			.suggestions=${[
-				"Suggestion 1",
+			.result=${[
 				"Suggestion 2",
 				"Suggestion 3",
 				"Suggestion 4",
@@ -303,12 +267,13 @@ Category decides the background of f-suggest
 				"Suggestion 15",
 				"Suggestion 16",
 				"Suggestion 17",
-				"Suggestion 18"
+				"Suggestion 18",
+				"<f-text state='success'>Using markup</f-text>"
 			]}
           >
             <f-div slot="label" padding="none" gap="none">Label (category="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-          </f-suggest></f-div
+          </f-search></f-div
         ></f-div
       >`
 					)}
@@ -349,25 +314,24 @@ Category decides the background of f-suggest
 
 ## value
 
-Defines the value of an f-suggest. Validation rules are applied on the value depending on the type property of the f-text-input.
+Defines the value of an f-search. Validation rules are applied on the value depending on the type property of the f-text-input.
 
 <Canvas>
 	<Story name="value">
 		{args => {
-			const [value, setValue] = useState("Value Here");
+			const [value, setValue] = useState("Suggestion 2");
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div width="80%" align="middle-center">
-						<f-suggest
+						<f-search
 							value=${value}
-							placeholder="Write here"
+							placeholder="Search"
 							@input=${handleValue}
 							size="medium"
-							.suggestions=${[
-								"Suggestion 1",
+							.result=${[
 								"Suggestion 2",
 								"Suggestion 3",
 								"Suggestion 4",
@@ -391,7 +355,7 @@ Defines the value of an f-suggest. Validation rules are applied on the value dep
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-suggest></f-div
+						</f-search></f-div
 					></f-div
 				>
 			`;
@@ -415,13 +379,12 @@ Defines the placeholder text for f-text-input
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div width="80%" align="middle-center">
-						<f-suggest
+						<f-search
 							value=${value}
-							placeholder="This is the placeholder"
 							@input=${handleValue}
+							placeholder="Search Here"
 							size="medium"
-							.suggestions=${[
-								"Suggestion 1",
+							.result=${[
 								"Suggestion 2",
 								"Suggestion 3",
 								"Suggestion 4",
@@ -445,7 +408,7 @@ Defines the placeholder text for f-text-input
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-suggest></f-div
+						</f-search></f-div
 					></f-div
 				>
 			`;
@@ -459,9 +422,7 @@ Defines the placeholder text for f-text-input
 
 <f-divider></f-divider>
 
-f-suggest can have 2 sizes.
-
-<p class="note-section">Note: By default size is inherited by the parent f-form.</p>
+f-search can have 2 sizes.
 
 <Canvas>
 	<Story name="size">
@@ -475,13 +436,11 @@ f-suggest can have 2 sizes.
 				<f-div width="100%" align="top-center" padding="large" gap="medium">
 					${sizes.map(
 						item => html`<f-div>
-          <f-suggest
+          <f-search
             value=${value}
-            placeholder="Write here"
             @input=${handleValue}
             size=${item}
-			.suggestions=${[
-				"Suggestion 1",
+			.result=${[
 				"Suggestion 2",
 				"Suggestion 3",
 				"Suggestion 4",
@@ -503,7 +462,7 @@ f-suggest can have 2 sizes.
           >
             <f-div slot="label" padding="none" gap="none">Label (size="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-          </f-suggest></f-div
+          </f-search></f-div
         ></f-div
       >`
 					)}
@@ -558,14 +517,12 @@ States are used to communicate purpose and connotations. For example, a red colo
 						item => html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
 								state => html`<f-div
-									><f-suggest
+									><f-search
 										value=${value}
-										placeholder="Write here"
 										@input=${handleValue}
 										size="medium"
 										state=${state}
-										.suggestions=${[
-											"Suggestion 1",
+										.result=${[
 											"Suggestion 2",
 											"Suggestion 3",
 											"Suggestion 4",
@@ -589,7 +546,7 @@ States are used to communicate purpose and connotations. For example, a red colo
 										<f-text slot="help" variant="para" size="small"
 											>This is a Subtext (Helper Text)</f-text
 										>
-									</f-suggest></f-div
+									</f-search></f-div
 								>`
 							)}
 						</f-div>`
@@ -639,12 +596,12 @@ States are used to communicate purpose and connotations. For example, a red colo
 
 <br />
 
-## suggestions
+## result
 
-Provides the search suggestions in the form of an array of strings.
+Provides the search result in the form of an array of strings.
 
 <Canvas>
-	<Story name="suggestions">
+	<Story name="result">
 		{args => {
 			const [value, setValue] = useState("");
 			const handleValue = e => {
@@ -653,12 +610,12 @@ Provides the search suggestions in the form of an array of strings.
 			return html`
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
 					<f-div align="middle-center">
-						<f-suggest
+						<f-search
 							value=${value}
 							placeholder="Write here"
 							@input=${handleValue}
 							size="medium"
-							.suggestions=${[
+							.result=${[
 								"Suggestion 2",
 								"Suggestion 3",
 								"Suggestion 4",
@@ -685,15 +642,15 @@ Provides the search suggestions in the form of an array of strings.
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-suggest></f-div
+						</f-search></f-div
 					>
 					<f-div align="middle-center">
-						<f-suggest
+						<f-search
 							value=${value}
 							placeholder="Write here"
 							@input=${handleValue}
 							size="medium"
-							.suggestions=${{
+							.result=${{
 								Category1: ["option 1", "option2"],
 								Category2: ["option3", "option 4"],
 								Category3: ["option5", "option6"]
@@ -706,7 +663,7 @@ Provides the search suggestions in the form of an array of strings.
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-suggest></f-div
+						</f-search></f-div
 					>
 				</f-div>
 			`;
@@ -736,16 +693,12 @@ Provides the search suggestions in the form of an array of strings.
 
 <br />
 
-## icon-left
+## scope
 
-Icon-left enables an icon on the left of the input value.
-
-<p class="note-section">
-	Note: If f-suggest has a prefix also, then icon-left is placed on the left of the prefix.
-</p>
+Provides a select dropdown on the left to filter the search query.
 
 <Canvas>
-	<Story name="icon-left">
+	<Story name="scope">
 		{args => {
 			const [value, setValue] = useState("");
 			const handleValue = e => {
@@ -754,14 +707,12 @@ Icon-left enables an icon on the left of the input value.
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div width="80%" align="middle-center">
-						<f-suggest
+						<f-search
 							value=${value}
 							placeholder="Write here"
 							@input=${handleValue}
 							size="medium"
-							icon-left="i-app"
-							.suggestions=${[
-								"Suggestion 1",
+							.result=${[
 								"Suggestion 2",
 								"Suggestion 3",
 								"Suggestion 4",
@@ -780,15 +731,14 @@ Icon-left enables an icon on the left of the input value.
 								"Suggestion 17",
 								"Suggestion 18"
 							]}
+							.scope=${["scope 1", "scope 2", "scope 3"]}
 						>
 							<f-div slot="label" padding="none" gap="none">Label</f-div>
-							<f-div slot="description" padding="none" gap="none"
-								>This is a demo for icon-left="i-app" prop</f-div
-							>
+							<f-div slot="description" padding="none" gap="none">This is a demo for scope</f-div>
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-suggest></f-div
+						</f-search></f-div
 					></f-div
 				>
 			`;
@@ -796,244 +746,27 @@ Icon-left enables an icon on the left of the input value.
 	</Story>
 </Canvas>
 
-<br />
-
-## icon-right
-
-Icon-right enables an icon on the right of the input value.
-
-<p class="note-section">
-	Note: If f-suggest has a suffix also, then icon-right is placed on the right of the suffix.
-</p>
-
-<Canvas>
-	<Story name="icon-right">
-		{args => {
-			const [value, setValue] = useState("");
-			const handleValue = e => {
-				setValue(e.detail.value);
-			};
-			return html`
-				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-suggest
-							value=${value}
-							placeholder="Write here"
-							@input=${handleValue}
-							size="medium"
-							icon-left="i-app"
-							icon-right="i-delete"
-							.suggestions=${[
-								"Suggestion 1",
-								"Suggestion 2",
-								"Suggestion 3",
-								"Suggestion 4",
-								"Suggestion 5",
-								"Suggestion 6",
-								"Suggestion 7",
-								"Suggestion 8",
-								"Suggestion 9",
-								"Suggestion 10",
-								"Suggestion 11",
-								"Suggestion 12",
-								"Suggestion 13",
-								"Suggestion 14",
-								"Suggestion 15",
-								"Suggestion 16",
-								"Suggestion 17",
-								"Suggestion 18"
-							]}
-						>
-							<f-div slot="label" padding="none" gap="none">Label</f-div>
-							<f-div slot="description" padding="none" gap="none"
-								>This is a demo for icon-right="i-app" prop</f-div
-							>
-							<f-text slot="help" variant="para" size="small"
-								>This is a Subtext (Helper Text)</f-text
-							>
-						</f-suggest></f-div
-					></f-div
-				>
-			`;
-		}}
-	</Story>
-</Canvas>
-
-<br />
-
-## prefix
-
-Prefix property enables a string before the input value.
-
-<Canvas>
-	<Story name="prefix">
-		{args => {
-			const [value, setValue] = useState("");
-			const handleValue = e => {
-				setValue(e.detail.value);
-			};
-			return html`
-				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-suggest
-							value=${value}
-							placeholder="Write here"
-							@input=${handleValue}
-							size="medium"
-							icon-left="i-app"
-							icon-right="i-delete"
-							prefix="+91"
-							.suggestions=${[
-								"Suggestion 1",
-								"Suggestion 2",
-								"Suggestion 3",
-								"Suggestion 4",
-								"Suggestion 5",
-								"Suggestion 6",
-								"Suggestion 7",
-								"Suggestion 8",
-								"Suggestion 9",
-								"Suggestion 10",
-								"Suggestion 11",
-								"Suggestion 12",
-								"Suggestion 13",
-								"Suggestion 14",
-								"Suggestion 15",
-								"Suggestion 16",
-								"Suggestion 17",
-								"Suggestion 18"
-							]}
-						>
-							<f-div slot="label" padding="none" gap="none">Label</f-div>
-							<f-div slot="description" padding="none" gap="none">This is a demo for prefix</f-div>
-							<f-text slot="help" variant="para" size="small"
-								>This is a Subtext (Helper Text)</f-text
-							>
-						</f-suggest></f-div
-					></f-div
-				>
-			`;
-		}}
-	</Story>
-</Canvas>
-
-<br />
-
-## suffix
-
-Suffix property enables a string on the right side of the input box.
-
-<Canvas>
-	<Story name="suffix">
-		{args => {
-			const [value, setValue] = useState("");
-			const handleValue = e => {
-				setValue(e.detail.value);
-			};
-			return html`
-				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-suggest
-							value=${value}
-							placeholder="Write here"
-							@input=${handleValue}
-							size="medium"
-							icon-left="i-app"
-							icon-right="i-delete"
-							prefix="+91"
-							suffix="Delete"
-							.suggestions=${[
-								"Suggestion 1",
-								"Suggestion 2",
-								"Suggestion 3",
-								"Suggestion 4",
-								"Suggestion 5",
-								"Suggestion 6",
-								"Suggestion 7",
-								"Suggestion 8",
-								"Suggestion 9",
-								"Suggestion 10",
-								"Suggestion 11",
-								"Suggestion 12",
-								"Suggestion 13",
-								"Suggestion 14",
-								"Suggestion 15",
-								"Suggestion 16",
-								"Suggestion 17",
-								"Suggestion 18"
-							]}
-						>
-							<f-div slot="label" padding="none" gap="none">Label</f-div>
-							<f-div slot="description" padding="none" gap="none">This is a demo for suffix</f-div>
-							<f-text slot="help" variant="para" size="small"
-								>This is a Subtext (Helper Text)</f-text
-							>
-						</f-suggest></f-div
-					></f-div
-				>
-			`;
-		}}
-	</Story>
-</Canvas>
-
-<br />
-
-## max-length
-
-This shows the character count while typing and auto limits after reaching the max length.
-
-<Canvas>
-	<Story name="max-length">
-		{args => {
-			const [value, setValue] = useState("");
-			const handleValue = e => {
-				setValue(e.detail.value);
-			};
-			return html`
-				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-suggest
-							value=${value}
-							placeholder="Write here"
-							@input=${handleValue}
-							size="medium"
-							icon-left="i-app"
-							icon-right="i-delete"
-							prefix="+91"
-							suffix="Delete"
-							max-length="10"
-							.suggestions=${[
-								"Suggestion 1",
-								"Suggestion 2",
-								"Suggestion 3",
-								"Suggestion 4",
-								"Suggestion 5",
-								"Suggestion 6",
-								"Suggestion 7",
-								"Suggestion 8",
-								"Suggestion 9",
-								"Suggestion 10",
-								"Suggestion 11",
-								"Suggestion 12",
-								"Suggestion 13",
-								"Suggestion 14",
-								"Suggestion 15",
-								"Suggestion 16",
-								"Suggestion 17",
-								"Suggestion 18"
-							]}
-						>
-							<f-div slot="label" padding="none" gap="none">Label</f-div>
-							<f-text slot="help" variant="para" size="small"
-								>This is a Subtext (Helper Text)</f-text
-							>
-						</f-suggest></f-div
-					></f-div
-				>
-			`;
-		}}
-	</Story>
-</Canvas>
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>none</td>
+			<td>no scope</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>array os string values</td>
+			<td>for e.g. ["option1", "option2"]</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
 
 <br />
 
@@ -1052,49 +785,22 @@ This shows the character count while typing and auto limits after reaching the m
 			};
 			return html`
 				<f-div width="100%" align="top-center" padding="large" gap="medium">
-					${[0, 1, 2, 3].map(
+					${[0, 1, 2].map(
 						item => html`<f-div>
-          <f-suggest
+          <f-search
             value=${value}
             placeholder="Write here"
             @input=${handleValue}
             size="medium"
-            ?loading=${item === 0 ? true : false}
+            ?search-button=${item === 0 ? true : false}
             ?disabled=${item === 1 ? true : false}
             ?clear=${item === 2 ? true : false}
-            ?read-only=${item === 3 ? true : false}
-			.suggestions=${[
-				"Suggestion 1",
-				"Suggestion 2",
-				"Suggestion 3",
-				"Suggestion 4",
-				"Suggestion 5",
-				"Suggestion 6",
-				"Suggestion 7",
-				"Suggestion 8",
-				"Suggestion 9",
-				"Suggestion 10",
-				"Suggestion 11",
-				"Suggestion 12",
-				"Suggestion 13",
-				"Suggestion 14",
-				"Suggestion 15",
-				"Suggestion 16",
-				"Suggestion 17",
-				"Suggestion 18"
-			]}
           >
             <f-div slot="label" padding="none" gap="none">${
-							item === 0
-								? "Loader"
-								: item === 1
-								? "Disabled"
-								: item === 2
-								? "Clear Icon on Type"
-								: "Readonly"
+							item === 0 ? "search-button" : item === 1 ? "Disabled" : "Clear Icon on Type"
 						}</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-          </f-suggest></f-div
+          </f-search></f-div
         ></f-div
       >`
 					)}
@@ -1112,8 +818,11 @@ This shows the character count while typing and auto limits after reaching the m
 			<td></td>
 		</tr>
 		<tr>
-			<td>loading</td>
-			<td>Loader appears on right ride of input box.</td>
+			<td>search-button</td>
+			<td>
+				Note: Provides an icon button to trigger the search query. Note: Search icon on left is not
+				shown if search-button is true
+			</td>
 			<td>
 				<code>false</code>
 			</td>
@@ -1128,21 +837,14 @@ This shows the character count while typing and auto limits after reaching the m
 		<tr>
 			<td>clear</td>
 			<td>
-				Displays a close icon-button on the right side of the input that allows the user to clear
+				Displays a close icon-button on the right side of the search that allows the user to clear
 				the input value
 			</td>
 			<td>
 				<code>true</code>
 			</td>
 		</tr>
-		<tr>
-			<td>read-only</td>
-			<td>Only Text could be read, can't be edited</td>
-			<td>
-				<code>false</code>
-			</td>
-		</tr>
 	</tbody>
 </table>
 
-<ArgsTable of={"f-suggest"} />
+<ArgsTable of={"f-search"} />

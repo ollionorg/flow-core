@@ -253,9 +253,16 @@ export class FSelect extends FRoot {
 	 */
 	applyOptionsStyle(width: number) {
 		if (this.openDropdown)
-			return `max-height:${this.optimizedHeight}px; transition: max-height var(--transition-time-rapid) ease-in 0s; ); width:${width}px; top:${this.optionsTop}`;
-		else
+			if (this.classList.contains("f-search-border")) {
+				return `max-height:${this.optimizedHeight}px; transition: max-height var(--transition-time-rapid) ease-in 0s; ); min-width:240px; max-width:fit-content; top:${this.optionsTop}`;
+			} else {
+				return `max-height:${this.optimizedHeight}px; transition: max-height var(--transition-time-rapid) ease-in 0s; ); width:${width}px; top:${this.optionsTop}`;
+			}
+		else if (this.classList.contains("f-search-border")) {
+			return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s; ); min-width:240px; max-width:fit-content; top:${this.optionsTop}`;
+		} else {
 			return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s; ); width:${width}px; top:${this.optionsTop}`;
+		}
 	}
 
 	/**
@@ -721,6 +728,10 @@ export class FSelect extends FRoot {
 		this._hasHelperText = this._helpNodes.length > 0;
 	}
 
+	get singleSelectionStyle() {
+		return `max-width:${`${this.offsetWidth - 90}px`}`;
+	}
+
 	render() {
 		this.validateProperties();
 		this.fSelectWrapperHeight = this.wrapperElement?.offsetHeight;
@@ -844,13 +855,14 @@ export class FSelect extends FRoot {
 						${this.type === "single"
 							? (this.selectedOptions as FSelectOptionsProp).map(
 									option =>
-										html`<f-div padding="none" ellipsis=${true}
+										html`<f-div padding="none" style=${this.singleSelectionStyle}
 											><f-text
 												data-qa-selected-option=${option}
 												variant="para"
 												size="small"
 												weight="regular"
 												class="word-break"
+												?ellipsis=${true}
 												>${(option as FSelectOptionObject)?.title ?? option}</f-text
 											></f-div
 										>`

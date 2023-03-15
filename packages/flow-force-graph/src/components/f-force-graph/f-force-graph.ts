@@ -5,14 +5,17 @@ import eleStyle from "./f-force-graph.scss";
 import * as d3 from "d3";
 
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import { BaseType, SimulationLinkDatum, SimulationNodeDatum } from "d3";
+import { SimulationLinkDatum, SimulationNodeDatum } from "d3";
+import { FDiv } from "@cldcvr/flow-core/src/components/f-div/f-div";
+import { FText } from "@cldcvr/flow-core/src/components/f-text/f-text";
+import { FPictogram } from "@cldcvr/flow-core/src/components/f-pictogram/f-pictogram";
 
 @customElement("f-force-graph")
 export class FForceGraph extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles, ...FPictogram.styles];
 
 	@query("svg")
 	svg!: SVGSVGElement;
@@ -21,7 +24,7 @@ export class FForceGraph extends FRoot {
 		super.updated(changedProperties);
 		const width = document.body.offsetWidth;
 		const height = document.body.offsetHeight;
-		const radius = 30;
+		const [nodeWidth, nodeHeight] = [50, 50];
 		type ForceNode = SimulationNodeDatum & { id: number };
 		const dataset: {
 			nodes: ForceNode[];
@@ -60,7 +63,7 @@ export class FForceGraph extends FRoot {
 					.distance(200)
 					.strength(0.5)
 			)
-			.force("charge", d3.forceManyBody().distanceMin(100).strength(-3000))
+			.force("charge", d3.forceManyBody().distanceMin(200).strength(-3000))
 			.force("x", d3.forceX().strength(0.1))
 			.force("y", d3.forceY().strength(0))
 			.alpha(1);
@@ -122,7 +125,7 @@ export class FForceGraph extends FRoot {
 			.attr("xlink:href", function (d: any) {
 				return `#${d.source.id}->${d.target.id}`;
 			})
-			.attr("startOffset", `calc(100% - ${radius - 0.5}px)`)
+			.attr("startOffset", `calc(100% - ${nodeHeight / 2}px)`)
 			.attr("fill", "var(--color-border-secondary)")
 			.text("▶");
 
@@ -161,37 +164,50 @@ export class FForceGraph extends FRoot {
 			d.fy = null;
 		}
 
-		const drag = d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended) as (
-			selection: d3.Selection<BaseType | SVGCircleElement, ForceNode, SVGGElement, unknown>,
+		const drag = d3
+			.drag()
+			.on("start", dragstarted)
+			.on("drag", dragged)
+			.on("end", dragended) as unknown;
+		type NodeDragType = (
+			selection: d3.Selection<SVGForeignObjectElement, ForceNode, SVGGElement, unknown>,
 			...args: any[]
 		) => void;
-
 		const node = graphContainer
 			.append("g")
-			.selectAll("circle")
+			.selectAll("g")
 			.data(dataset.nodes)
-			.join("circle")
-			.attr("fill", "var(--color-surface-subtle)")
-			.attr("stroke", "var(--color-surface-subtle)")
-			.attr("r", radius)
-			.call(drag);
+			.join("g")
+			.append("foreignObject")
+			.attr("width", nodeWidth)
+			.attr("height", nodeHeight)
+			.html((d: any) => {
+				return `<f-div width="100%" height="fit-content" gap="x-small" overflow="visible" direction="column" align="middle-center">
+				<f-pictogram source="i-org" variant="circle" size="x-large"></f-pictogram>
+				<f-div direction="column" width="200px" align="middle-center" overflow="visible" >
+				<f-text class="no-wrap" align="center" inline state="subtle" size="x-small">Team ${d.id} </f-text>
+				<f-text class="no-wrap" align="center" inline >Development </f-text>
+				<f-text class="no-wrap" align="center" state="secondary" size="small" inline>team id | team location </f-text>
+				</f-div>
+				</f-div>`;
+			})
+			.call(drag as NodeDragType);
 
-		const text = graphContainer
-			.append("g")
-			.selectAll("text")
-			.data(dataset.nodes)
-			.join("text")
-			.text(d => d.id)
-			.attr("fill", "var(--color-text-default)")
-			.call(drag);
+		// const text = graphContainer
+		// 	.append("g")
+		// 	.selectAll("text")
+		// 	.data(dataset.nodes)
+		// 	.join("text")
+		// 	.text(d => d.id)
+		// 	.attr("fill", "var(--color-text-default)")
+		// 	.call(drag);
 
 		simulation.on("tick", () => {
 			link.attr("d", (d: any) => {
 				return `M ${d.source.x} ${d.source.y} L ${d.target.x} ${d.target.y}`;
 			});
 
-			node.attr("cx", (d: any) => d.x).attr("cy", (d: any) => d.y);
-			text.attr("x", (d: any) => d.x - 5).attr("y", (d: any) => d.y + 5);
+			node.attr("x", (d: any) => d.x - nodeWidth / 2).attr("y", (d: any) => d.y - nodeHeight / 2);
 		});
 	}
 	render() {

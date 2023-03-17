@@ -270,7 +270,7 @@ export class FSelect extends FRoot {
 		/**
 		 * click outside the f-select wrapper area
 		 */
-		window.addEventListener("click", this.outsideClick);
+		window.addEventListener("mouseup", this.outsideClick);
 
 		/**
 		 * on scoll apply dimetions to options wrapper
@@ -282,7 +282,7 @@ export class FSelect extends FRoot {
 	disconnectedCallback(): void {
 		super.disconnectedCallback();
 
-		window.removeEventListener("click", this.outsideClick);
+		window.removeEventListener("mouseup", this.outsideClick);
 
 		window.removeEventListener("scroll", this.containerScroll, {
 			capture: true

@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.6.2] - 2023-03-17
+
+### Bug Fixes
+- Select dropdowns can’t be dismissed by clicking outside
 ## [1.6.1] - 2023-03-14
 
 ### Bug Fixes

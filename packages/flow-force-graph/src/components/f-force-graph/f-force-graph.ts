@@ -24,7 +24,7 @@ export class FForceGraph extends FRoot {
 		super.updated(changedProperties);
 		const width = document.body.offsetWidth;
 		const height = document.body.offsetHeight;
-		const [nodeWidth, nodeHeight] = [50, 50];
+		const [nodeWidth, nodeHeight] = [44, 44];
 		type ForceNode = SimulationNodeDatum & { id: number };
 		const dataset: {
 			nodes: ForceNode[];
@@ -85,6 +85,7 @@ export class FForceGraph extends FRoot {
 			.selectAll("g")
 			.data(dataset.links)
 			.join("g");
+
 		const link = linkG
 			.append("path")
 			.attr("d", (d: any) => {
@@ -119,7 +120,8 @@ export class FForceGraph extends FRoot {
 			.attr("class", "label")
 			.attr("stroke", "var(--color-surface-default)")
 			.attr("stroke-width", "1px")
-			.attr("dy", 5.5)
+			.attr("dy", 5.75)
+			.attr("dx", 1)
 			.append("textPath")
 			.attr("text-anchor", "end")
 			.attr("xlink:href", function (d: any) {
@@ -173,6 +175,7 @@ export class FForceGraph extends FRoot {
 			selection: d3.Selection<SVGForeignObjectElement, ForceNode, SVGGElement, unknown>,
 			...args: any[]
 		) => void;
+
 		const node = graphContainer
 			.append("g")
 			.selectAll("g")
@@ -191,6 +194,7 @@ export class FForceGraph extends FRoot {
 				</f-div>
 				</f-div>`;
 			})
+			.on("dblclick", this.handleDbClick)
 			.call(drag as NodeDragType);
 
 		// const text = graphContainer
@@ -209,6 +213,9 @@ export class FForceGraph extends FRoot {
 
 			node.attr("x", (d: any) => d.x - nodeWidth / 2).attr("y", (d: any) => d.y - nodeHeight / 2);
 		});
+	}
+	handleDbClick(event: MouseEvent, d: any) {
+		console.log(event, d);
 	}
 	render() {
 		return html` ${unsafeSVG(`<svg xmlns="http://www.w3.org/2000/svg"></svg>`)}`;

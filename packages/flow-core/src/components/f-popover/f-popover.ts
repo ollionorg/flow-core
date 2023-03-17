@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { html, unsafeCSS } from "lit";
+import { html, LitElement, unsafeCSS } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-popover.scss";
@@ -133,7 +133,8 @@ export class FPopover extends FRoot {
 										"top-start",
 										"top-end"
 									],
-									crossAxis: false
+									crossAxis: false,
+									boundary: document.body
 							  }),
 						shift({ padding: isTooltip ? 0 : 16 })
 					]
@@ -152,6 +153,10 @@ export class FPopover extends FRoot {
 							left: `${left}px`
 						});
 					}
+
+					this.querySelectorAll("f-popover").forEach(async pop => {
+						(pop as LitElement).requestUpdate();
+					});
 				});
 			});
 		}

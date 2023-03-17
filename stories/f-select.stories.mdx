@@ -379,29 +379,46 @@ Defines the value of an f-select.
 		{args => {
 			const types = ["single", "multiple"];
 			const [value, setValue] = useState("option 1");
+			const [multiValue, setMultiValue] = useState(["option 1"]);
 			const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
+			const handleMultiValue = e => {
+				setMultiValue(e.detail.value);
+			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
-					${types.map(
-						item => html` <f-div>
-							<f-select
-								placeholder="Select Option"
-								@input=${handleValue}
-								?searchable=${false}
-								.options=${options}
-								.value=${value}
-								.type=${item}
+					<f-div>
+						<f-select
+							placeholder="Select Option"
+							@input=${handleValue}
+							?searchable=${false}
+							.options=${options}
+							.value=${value}
+							.type=${"single"}
+						>
+							<f-div slot="label" padding="none" gap="none"
+								>Label for f-select | value="option 1"</f-div
 							>
-								<f-div slot="label" padding="none" gap="none"
-									>Label for f-select | value="option 1"</f-div
-								>
-								<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
-							</f-select></f-div
-						>`
-					)}
+							<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+						</f-select></f-div
+					>
+					<f-div>
+						<f-select
+							placeholder="Select Option"
+							@input=${handleMultiValue}
+							?searchable=${false}
+							.options=${options}
+							.value=${multiValue}
+							.type=${"multiple"}
+						>
+							<f-div slot="label" padding="none" gap="none"
+								>Label for f-select | value="[option 1]"</f-div
+							>
+							<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+						</f-select></f-div
+					>
 				</f-div>
 			`;
 		}}
@@ -606,8 +623,8 @@ Use to provide a custom template in option list
 <Canvas>
 	<Story name="option-template">
 		{args => {
-			const [value, setValue] = useState([]);
-			const optionTemplate = `<f-div><f-div padding="small" direction="column" gap="small"><f-text>\${option.title}</f-text><f-text>\${option.data.name}, \${option.data.email}</f-text></f-div></f-div>`;
+			const [value, setValue] = useState(null);
+			const optionTemplate = `<f-div><f-div  direction="column" gap="x-small"><f-text>\${option.title}</f-text><f-text>\${option.data.name}, \${option.data.email}</f-text></f-div></f-div>`;
 			const [valueObjects, setValueObjects] = useState(null);
 			const [options, setOptions] = useState([
 				{ icon: "i-home", title: "option 1", data: { name: "Alex", email: "alex#cldcvr.com" } },

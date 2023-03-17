@@ -4,6 +4,14 @@
 
 # Change Log
 
+## [1.6.1] - 2023-03-14
+
+### Bug Fixes
+- TypeError when using single mode on f-select. 
+- Select dropdowns can’t be dismissed by clicking outside
+- Select dropdowns have no shadow
+- Child popover behavior fixed.
+
 ## [1.6.0] - 2023-03-14
 
 ### Features

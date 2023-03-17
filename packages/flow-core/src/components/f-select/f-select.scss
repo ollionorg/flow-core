@@ -93,7 +93,8 @@ applies styles on f-select
 			border-radius: 0px 0px 4px 4px;
 			overflow: auto;
 			width: 100%;
-			box-shadow: 0px 0px 12px rgba(35, 46, 60, 0.4);
+			box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+			@include scrollbar();
 		}
 		.f-select-wrapper {
 			// Important :  always include base mixins
@@ -105,7 +106,10 @@ applies styles on f-select
 			&[allow-gap] {
 				margin-top: 4px;
 			}
-			cursor: text;
+			cursor: pointer;
+			&[searchable] {
+				cursor: text;
+			}
 
 			@each $size, $value in $sizes {
 				&[size="#{$size}"] {

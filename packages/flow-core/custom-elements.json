@@ -3856,6 +3856,471 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-input/f-input.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FInput",
+          "members": [
+            {
+              "kind": "field",
+              "name": "showPassword",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "_labelNodes",
+              "type": {
+                "text": "NodeListOf<HTMLElement>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_hasLabel",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "_helpNodes",
+              "type": {
+                "text": "NodeListOf<HTMLElement>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_hasHelperText",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"curved\" | \"round\" | \"block\" | undefined"
+              },
+              "default": "\"curved\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "category",
+              "type": {
+                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
+              },
+              "default": "\"fill\"",
+              "attribute": "category",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FInputState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "\"text\" | \"number\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined"
+              },
+              "default": "\"text\"",
+              "attribute": "type",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | number | undefined"
+              },
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "placeholder",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconLeft",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "icon-left",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconRight",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "icon-right",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fInputPrefix",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "prefix",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fInputSuffix",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "suffix",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "maxLength",
+              "type": {
+                "text": "number | undefined"
+              },
+              "attribute": "max-length",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clear",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "attribute": "clear",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "readOnly",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "read-only",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "suffixWhen",
+              "type": {
+                "text": "FInputSuffixWhen | undefined"
+              },
+              "attribute": "suffixWhen"
+            },
+            {
+              "kind": "field",
+              "name": "inputElement",
+              "type": {
+                "text": "HTMLInputElement"
+              },
+              "description": "input element reference"
+            },
+            {
+              "kind": "field",
+              "name": "inputWrapperElement",
+              "type": {
+                "text": "HTMLInputElement"
+              },
+              "description": "input element reference"
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ],
+              "description": "emit input custom event"
+            },
+            {
+              "kind": "method",
+              "name": "clearInputValue",
+              "description": "clear input value on clear icon clicked"
+            },
+            {
+              "kind": "method",
+              "name": "dispatchInputEvent",
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "string | number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "iconSize",
+              "description": "icon size"
+            },
+            {
+              "kind": "method",
+              "name": "togglePasswordView",
+              "description": "Toggle Password view"
+            },
+            {
+              "kind": "method",
+              "name": "_onLabelSlotChange"
+            },
+            {
+              "kind": "method",
+              "name": "_onHelpSlotChange"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"curved\" | \"round\" | \"block\" | undefined"
+              },
+              "default": "\"curved\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "category",
+              "type": {
+                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
+              },
+              "default": "\"fill\"",
+              "fieldName": "category"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FInputState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "\"text\" | \"number\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined"
+              },
+              "default": "\"text\"",
+              "fieldName": "type"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string | number | undefined"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "icon-left",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "iconLeft"
+            },
+            {
+              "name": "icon-right",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "iconRight"
+            },
+            {
+              "name": "prefix",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "fInputPrefix"
+            },
+            {
+              "name": "suffix",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "fInputSuffix"
+            },
+            {
+              "name": "max-length",
+              "type": {
+                "text": "number | undefined"
+              },
+              "fieldName": "maxLength"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "clear",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "fieldName": "clear"
+            },
+            {
+              "name": "read-only",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "readOnly"
+            },
+            {
+              "name": "suffixWhen",
+              "type": {
+                "text": "FInputSuffixWhen | undefined"
+              },
+              "fieldName": "suffixWhen"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-input",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FInput",
+          "declaration": {
+            "name": "FInput",
+            "module": "src/components/f-input/f-input.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-input",
+          "declaration": {
+            "name": "FInput",
+            "module": "src/components/f-input/f-input.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-pictogram/f-pictogram.ts",
       "declarations": [
         {
@@ -4056,6 +4521,257 @@
           "declaration": {
             "name": "FPictogram",
             "module": "src/components/f-pictogram/f-pictogram.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-popover/f-popover.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FPopover",
+          "members": [
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "FPopoverPlacement | undefined"
+              },
+              "default": "\"auto\"",
+              "attribute": "placement",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "FPopoverSize | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "overlay",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "attribute": "overlay",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": {
+                "text": "string | HTMLElement"
+              },
+              "attribute": "target",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "cleanup",
+              "type": {
+                "text": "() => void"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isEscapeClicked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "isTooltip",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "offset",
+              "type": {
+                "text": "FPopOverOffset | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "targetElement"
+            },
+            {
+              "kind": "method",
+              "name": "stringToHTML",
+              "parameters": [
+                {
+                  "name": "str",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "computePlacement"
+            },
+            {
+              "kind": "method",
+              "name": "computePosition",
+              "parameters": [
+                {
+                  "name": "isTooltip",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "dispatchEsc"
+            },
+            {
+              "kind": "method",
+              "name": "escapekeyHandle",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                },
+                {
+                  "name": "el",
+                  "type": {
+                    "text": "HTMLElement"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "overlayClick"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "placement",
+              "type": {
+                "text": "FPopoverPlacement | undefined"
+              },
+              "default": "\"auto\"",
+              "fieldName": "placement"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "FPopoverSize | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "overlay",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "fieldName": "overlay"
+            },
+            {
+              "name": "target",
+              "type": {
+                "text": "string | HTMLElement"
+              },
+              "fieldName": "target"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-popover",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FPopover",
+          "declaration": {
+            "name": "FPopover",
+            "module": "src/components/f-popover/f-popover.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-popover",
+          "declaration": {
+            "name": "FPopover",
+            "module": "src/components/f-popover/f-popover.ts"
           }
         }
       ]
@@ -4860,7 +5576,6 @@
               "type": {
                 "text": "FSelectOptions | string | undefined"
               },
-              "default": "[]",
               "attribute": "value",
               "reflects": true
             },
@@ -4996,6 +5711,14 @@
               "description": "icon size"
             },
             {
+              "kind": "field",
+              "name": "outsideClick"
+            },
+            {
+              "kind": "field",
+              "name": "containerScroll"
+            },
+            {
               "kind": "method",
               "name": "applyOptionsStyle",
               "parameters": [
@@ -5074,19 +5797,6 @@
             },
             {
               "kind": "method",
-              "name": "handleInput",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ],
-              "description": "emit input custom event for option selection"
-            },
-            {
-              "kind": "method",
               "name": "clearInputValue",
               "parameters": [
                 {
@@ -5113,158 +5823,6 @@
             },
             {
               "kind": "method",
-              "name": "handleDropDownOpen",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "open options menu"
-            },
-            {
-              "kind": "method",
-              "name": "handleDropDownClose",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "close options menu"
-            },
-            {
-              "kind": "method",
-              "name": "handleOptionSelection",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "FSelectSingleOption"
-                  }
-                },
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "action for selection of options if the options is in the form of array"
-            },
-            {
-              "kind": "method",
-              "name": "handleSelectionGroup",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "FSelectSingleOption"
-                  }
-                },
-                {
-                  "name": "group",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "action for selection of options if the options is in the form of groups"
-            },
-            {
-              "kind": "method",
-              "name": "handleRemoveGroupSelection",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "FSelectSingleOption"
-                  }
-                },
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "remove selection option (in group) when f-tag is clicked"
-            },
-            {
-              "kind": "method",
-              "name": "handleCheckboxInput",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "FSelectSingleOption"
-                  }
-                },
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "handle click on checkbox"
-            },
-            {
-              "kind": "method",
-              "name": "handleCheckboxGroup",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "FSelectSingleOption"
-                  }
-                },
-                {
-                  "name": "group",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "handle click on checkbox in group"
-            },
-            {
-              "kind": "method",
-              "name": "handleSelectAll",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                },
-                {
-                  "name": "group",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ],
-              "description": "select all options inside a particular group"
-            },
-            {
-              "kind": "method",
               "name": "getCheckedValue",
               "parameters": [
                 {
@@ -5275,19 +5833,6 @@
                 }
               ],
               "description": "check if all values of group are selected or not or are in idetereminate state"
-            },
-            {
-              "kind": "method",
-              "name": "handleViewMoreTags",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "hide/show f-tags when multiple options are selected"
             },
             {
               "kind": "method",
@@ -5374,6 +5919,56 @@
             },
             {
               "kind": "field",
+              "name": "handleDropDownOpen",
+              "default": "handleDropDownOpen"
+            },
+            {
+              "kind": "field",
+              "name": "handleDropDownClose",
+              "default": "handleDropDownClose"
+            },
+            {
+              "kind": "field",
+              "name": "handleOptionSelection",
+              "default": "handleOptionSelection"
+            },
+            {
+              "kind": "field",
+              "name": "handleSelectionGroup",
+              "default": "handleSelectionGroup"
+            },
+            {
+              "kind": "field",
+              "name": "handleRemoveGroupSelection",
+              "default": "handleRemoveGroupSelection"
+            },
+            {
+              "kind": "field",
+              "name": "handleCheckboxInput",
+              "default": "handleCheckboxInput"
+            },
+            {
+              "kind": "field",
+              "name": "handleCheckboxGroup",
+              "default": "handleCheckboxGroup"
+            },
+            {
+              "kind": "field",
+              "name": "handleSelectAll",
+              "default": "handleSelectAll"
+            },
+            {
+              "kind": "field",
+              "name": "handleViewMoreTags",
+              "default": "handleViewMoreTags"
+            },
+            {
+              "kind": "field",
+              "name": "handleInput",
+              "default": "handleInput"
+            },
+            {
+              "kind": "field",
               "name": "tooltipElement",
               "type": {
                 "text": "HTMLElement"
@@ -5442,7 +6037,6 @@
               "type": {
                 "text": "FSelectOptions | string | undefined"
               },
-              "default": "[]",
               "fieldName": "value"
             },
             {
@@ -5586,716 +6180,354 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-input/f-input.ts",
+      "path": "src/components/f-select/handlers.ts",
       "declarations": [
         {
-          "kind": "class",
-          "description": "",
-          "name": "FInput",
-          "members": [
+          "kind": "function",
+          "name": "handleDropDownOpen",
+          "parameters": [
             {
-              "kind": "field",
-              "name": "showPassword",
+              "name": "this",
               "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "_labelNodes",
-              "type": {
-                "text": "NodeListOf<HTMLElement>"
+                "text": "FSelect"
               }
             },
             {
-              "kind": "field",
-              "name": "_hasLabel",
+              "name": "e",
               "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "_helpNodes",
-              "type": {
-                "text": "NodeListOf<HTMLElement>"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "_hasHelperText",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "\"curved\" | \"round\" | \"block\" | undefined"
-              },
-              "default": "\"curved\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "category",
-              "type": {
-                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
-              },
-              "default": "\"fill\"",
-              "attribute": "category",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FInputState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"medium\" | \"small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "type",
-              "type": {
-                "text": "\"text\" | \"number\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined"
-              },
-              "default": "\"text\"",
-              "attribute": "type",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "string | number | undefined"
-              },
-              "attribute": "value",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "placeholder",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "placeholder",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "iconLeft",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "icon-left",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "iconRight",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "icon-right",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "fInputPrefix",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "prefix",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "fInputSuffix",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "suffix",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "maxLength",
-              "type": {
-                "text": "number | undefined"
-              },
-              "attribute": "max-length",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "loading",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "clear",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "true",
-              "attribute": "clear",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "readOnly",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "read-only",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "suffixWhen",
-              "type": {
-                "text": "FInputSuffixWhen | undefined"
-              },
-              "attribute": "suffixWhen"
-            },
-            {
-              "kind": "field",
-              "name": "inputElement",
-              "type": {
-                "text": "HTMLInputElement"
-              },
-              "description": "input element reference"
-            },
-            {
-              "kind": "field",
-              "name": "inputWrapperElement",
-              "type": {
-                "text": "HTMLInputElement"
-              },
-              "description": "input element reference"
-            },
-            {
-              "kind": "method",
-              "name": "handleInput",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ],
-              "description": "emit input custom event"
-            },
-            {
-              "kind": "method",
-              "name": "clearInputValue",
-              "description": "clear input value on clear icon clicked"
-            },
-            {
-              "kind": "method",
-              "name": "dispatchInputEvent",
-              "parameters": [
-                {
-                  "name": "value",
-                  "type": {
-                    "text": "string | number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "iconSize",
-              "description": "icon size"
-            },
-            {
-              "kind": "method",
-              "name": "togglePasswordView",
-              "description": "Toggle Password view"
-            },
-            {
-              "kind": "method",
-              "name": "_onLabelSlotChange"
-            },
-            {
-              "kind": "method",
-              "name": "_onHelpSlotChange"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
+                "text": "MouseEvent"
               }
             }
           ],
-          "attributes": [
+          "description": "open options menu"
+        },
+        {
+          "kind": "function",
+          "name": "handleDropDownClose",
+          "parameters": [
             {
-              "name": "variant",
+              "name": "this",
               "type": {
-                "text": "\"curved\" | \"round\" | \"block\" | undefined"
-              },
-              "default": "\"curved\"",
-              "fieldName": "variant"
+                "text": "FSelect"
+              }
             },
             {
-              "name": "category",
+              "name": "e",
               "type": {
-                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
-              },
-              "default": "\"fill\"",
-              "fieldName": "category"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FInputState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "\"medium\" | \"small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "type",
-              "type": {
-                "text": "\"text\" | \"number\" | \"email\" | \"password\" | \"url\" | \"tel\" | undefined"
-              },
-              "default": "\"text\"",
-              "fieldName": "type"
-            },
-            {
-              "name": "value",
-              "type": {
-                "text": "string | number | undefined"
-              },
-              "fieldName": "value"
-            },
-            {
-              "name": "placeholder",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "placeholder"
-            },
-            {
-              "name": "icon-left",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "iconLeft"
-            },
-            {
-              "name": "icon-right",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "iconRight"
-            },
-            {
-              "name": "prefix",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "fInputPrefix"
-            },
-            {
-              "name": "suffix",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "fInputSuffix"
-            },
-            {
-              "name": "max-length",
-              "type": {
-                "text": "number | undefined"
-              },
-              "fieldName": "maxLength"
-            },
-            {
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "loading"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "clear",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "true",
-              "fieldName": "clear"
-            },
-            {
-              "name": "read-only",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "readOnly"
-            },
-            {
-              "name": "suffixWhen",
-              "type": {
-                "text": "FInputSuffixWhen | undefined"
-              },
-              "fieldName": "suffixWhen"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
+                "text": "MouseEvent"
               }
             }
           ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-input",
-          "customElement": true
+          "description": "close options menu"
+        },
+        {
+          "kind": "function",
+          "name": "handleOptionSelection",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "option",
+              "type": {
+                "text": "FSelectSingleOption"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            }
+          ],
+          "description": "action for selection of options if the options is in the form of array"
+        },
+        {
+          "kind": "function",
+          "name": "handleSelectionGroup",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "option",
+              "type": {
+                "text": "FSelectSingleOption"
+              }
+            },
+            {
+              "name": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            }
+          ],
+          "description": "action for selection of options if the options is in the form of groups"
+        },
+        {
+          "kind": "function",
+          "name": "handleRemoveGroupSelection",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "option",
+              "type": {
+                "text": "FSelectSingleOption"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            }
+          ],
+          "description": "remove selection option (in group) when f-tag is clicked"
+        },
+        {
+          "kind": "function",
+          "name": "handleCheckboxInput",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "option",
+              "type": {
+                "text": "FSelectSingleOption"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            }
+          ],
+          "description": "handle click on checkbox"
+        },
+        {
+          "kind": "function",
+          "name": "handleCheckboxGroup",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "option",
+              "type": {
+                "text": "FSelectSingleOption"
+              }
+            },
+            {
+              "name": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            }
+          ],
+          "description": "handle click on checkbox in group"
+        },
+        {
+          "kind": "function",
+          "name": "handleSelectAll",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            },
+            {
+              "name": "group",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "select all options inside a particular group"
+        },
+        {
+          "kind": "function",
+          "name": "handleViewMoreTags",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            }
+          ],
+          "description": "hide/show f-tags when multiple options are selected"
+        },
+        {
+          "kind": "function",
+          "name": "handleInput",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "InputEvent"
+              }
+            }
+          ],
+          "description": "emit input custom event for option selection"
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "FInput",
+          "name": "handleDropDownOpen",
           "declaration": {
-            "name": "FInput",
-            "module": "src/components/f-input/f-input.ts"
+            "name": "handleDropDownOpen",
+            "module": "src/components/f-select/handlers.ts"
           }
         },
         {
-          "kind": "custom-element-definition",
-          "name": "f-input",
+          "kind": "js",
+          "name": "handleDropDownClose",
           "declaration": {
-            "name": "FInput",
-            "module": "src/components/f-input/f-input.ts"
+            "name": "handleDropDownClose",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleOptionSelection",
+          "declaration": {
+            "name": "handleOptionSelection",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleSelectionGroup",
+          "declaration": {
+            "name": "handleSelectionGroup",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleRemoveGroupSelection",
+          "declaration": {
+            "name": "handleRemoveGroupSelection",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleCheckboxInput",
+          "declaration": {
+            "name": "handleCheckboxInput",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleCheckboxGroup",
+          "declaration": {
+            "name": "handleCheckboxGroup",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleSelectAll",
+          "declaration": {
+            "name": "handleSelectAll",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleViewMoreTags",
+          "declaration": {
+            "name": "handleViewMoreTags",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleInput",
+          "declaration": {
+            "name": "handleInput",
+            "module": "src/components/f-select/handlers.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-popover/f-popover.ts",
+      "path": "src/components/f-select/render.ts",
       "declarations": [
         {
-          "kind": "class",
-          "description": "",
-          "name": "FPopover",
-          "members": [
+          "kind": "function",
+          "name": "render",
+          "parameters": [
             {
-              "kind": "field",
-              "name": "placement",
+              "name": "this",
               "type": {
-                "text": "FPopoverPlacement | undefined"
-              },
-              "default": "\"auto\"",
-              "attribute": "placement",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "FPopoverSize | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "overlay",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "true",
-              "attribute": "overlay",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "target",
-              "type": {
-                "text": "string | HTMLElement"
-              },
-              "attribute": "target",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "cleanup",
-              "type": {
-                "text": "() => void"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isEscapeClicked",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "isTooltip",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "offset",
-              "type": {
-                "text": "FPopOverOffset | null"
-              },
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "targetElement"
-            },
-            {
-              "kind": "method",
-              "name": "stringToHTML",
-              "parameters": [
-                {
-                  "name": "str",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "computePlacement"
-            },
-            {
-              "kind": "method",
-              "name": "computePosition",
-              "parameters": [
-                {
-                  "name": "isTooltip",
-                  "type": {
-                    "text": "boolean"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "dispatchEsc"
-            },
-            {
-              "kind": "method",
-              "name": "escapekeyHandle",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "KeyboardEvent"
-                  }
-                },
-                {
-                  "name": "el",
-                  "type": {
-                    "text": "HTMLElement"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "overlayClick"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
+                "text": "FSelect"
               }
             }
-          ],
-          "attributes": [
-            {
-              "name": "placement",
-              "type": {
-                "text": "FPopoverPlacement | undefined"
-              },
-              "default": "\"auto\"",
-              "fieldName": "placement"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "FPopoverSize | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "open"
-            },
-            {
-              "name": "overlay",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "true",
-              "fieldName": "overlay"
-            },
-            {
-              "name": "target",
-              "type": {
-                "text": "string | HTMLElement"
-              },
-              "fieldName": "target"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-popover",
-          "customElement": true
+          ]
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "FPopover",
+          "name": "default",
           "declaration": {
-            "name": "FPopover",
-            "module": "src/components/f-popover/f-popover.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-popover",
-          "declaration": {
-            "name": "FPopover",
-            "module": "src/components/f-popover/f-popover.ts"
+            "name": "render",
+            "module": "src/components/f-select/render.ts"
           }
         }
       ]

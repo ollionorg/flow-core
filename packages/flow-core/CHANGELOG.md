@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.6.3] - 2023-03-20
+
+### Bug Fixes
+- `data-qa-id` added in `f-select`.
 ## [1.6.2] - 2023-03-17
 
 ### Bug Fixes

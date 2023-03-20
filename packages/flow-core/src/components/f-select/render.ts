@@ -334,6 +334,7 @@ export default function render(this: FSelect) {
 				size=${this.size}
 				type=${this.type}
 				?allow-gap=${this._hasLabel && !this._hasHelperText ? true : false}
+				data-qa-id=${this.getAttribute("data-qa-element-id")}
 				@click=${this.handleDropDownOpen}
 			>
 				${prefixAppend} ${suffixAppend}

@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.6.4] - 2023-03-21
+
+### Improvements
+- `data-qa-option` value updated for objects in `f-select`.
+
 ## [1.6.3] - 2023-03-20
 
 ### Bug Fixes

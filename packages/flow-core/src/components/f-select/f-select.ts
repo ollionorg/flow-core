@@ -29,6 +29,7 @@ export type FSelectOptionObject = {
 	icon?: string;
 	title: string;
 	data?: Record<string, unknown>;
+	qaId?: string;
 };
 export type FSelectOptionsGroup = { [key: string]: FSelectOptionsProp };
 export type FSelectArrayOfObjects = FSelectOptionObject[];
@@ -561,6 +562,13 @@ export class FSelect extends FRoot {
 
 		if (changedProperties.has("options")) {
 			this.filteredOptions = this.options;
+		}
+	}
+	getOptionQaId(option: FSelectSingleOption) {
+		if (typeof option === "string") {
+			return option;
+		} else {
+			return option.qaId ?? option.title;
 		}
 	}
 

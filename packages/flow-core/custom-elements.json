@@ -5918,6 +5918,18 @@
               "name": "singleSelectionStyle"
             },
             {
+              "kind": "method",
+              "name": "getOptionQaId",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "FSelectSingleOption"
+                  }
+                }
+              ]
+            },
+            {
               "kind": "field",
               "name": "handleDropDownOpen",
               "default": "handleDropDownOpen"
@@ -8595,6 +8607,97 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-tooltip/f-tooltip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTooltip",
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "local attribute for opem/close of tooltip"
+            },
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "FTooltipPlacement | undefined"
+              },
+              "default": "\"auto\"",
+              "attribute": "placement",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "closable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "closable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": {
+                "text": "string | HTMLElement"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "placement",
+              "type": {
+                "text": "FTooltipPlacement | undefined"
+              },
+              "default": "\"auto\"",
+              "fieldName": "placement"
+            },
+            {
+              "name": "closable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "closable"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "f-tooltip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTooltip",
+          "declaration": {
+            "name": "FTooltip",
+            "module": "src/components/f-tooltip/f-tooltip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-tooltip",
+          "declaration": {
+            "name": "FTooltip",
+            "module": "src/components/f-tooltip/f-tooltip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-toast/f-toast-queue.ts",
       "declarations": [],
       "exports": [
@@ -8845,97 +8948,6 @@
           "declaration": {
             "name": "FToast",
             "module": "src/components/f-toast/f-toast.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-tooltip/f-tooltip.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTooltip",
-          "members": [
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "local attribute for opem/close of tooltip"
-            },
-            {
-              "kind": "field",
-              "name": "placement",
-              "type": {
-                "text": "FTooltipPlacement | undefined"
-              },
-              "default": "\"auto\"",
-              "attribute": "placement",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "closable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "closable",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "target",
-              "type": {
-                "text": "string | HTMLElement"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "placement",
-              "type": {
-                "text": "FTooltipPlacement | undefined"
-              },
-              "default": "\"auto\"",
-              "fieldName": "placement"
-            },
-            {
-              "name": "closable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "closable"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "f-tooltip",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTooltip",
-          "declaration": {
-            "name": "FTooltip",
-            "module": "src/components/f-tooltip/f-tooltip.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-tooltip",
-          "declaration": {
-            "name": "FTooltip",
-            "module": "src/components/f-tooltip/f-tooltip.ts"
           }
         }
       ]

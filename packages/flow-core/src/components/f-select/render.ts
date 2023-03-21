@@ -352,7 +352,7 @@ export default function render(this: FSelect) {
 											html`<f-div
 												class="f-select-options-clickable"
 												padding="medium"
-												data-qa-option=${option}
+												data-qa-option=${this.getOptionQaId(option)}
 												height="hug-content"
 												width="fill-container"
 												direction="row"
@@ -463,7 +463,7 @@ export default function render(this: FSelect) {
 							html`
 								<f-div
 									class="f-select-options-clickable"
-									data-qa-option=${option}
+									data-qa-option=${this.getOptionQaId(option)}
 									padding="medium x-large"
 									height="hug-content"
 									width="fill-container"

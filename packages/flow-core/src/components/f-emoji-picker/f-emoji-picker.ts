@@ -371,21 +371,24 @@ export class FEmojiPicker extends FRoot {
 		}
 	}
 
-	/**
-	 * disconnected callback for removing event listener
-	 */
-	disconnectedCallback() {
-		window.removeEventListener("click", e => this.closeEmojiPicker(e, this));
-		super.disconnectedCallback();
-	}
+	outsideClick = (e: MouseEvent) => {
+		this.closeEmojiPicker(e, this);
+	};
 
+	connectedCallback(): void {
+		super.connectedCallback();
+		/**
+		 * click outside the f-select wrapper area
+		 */
+		window.addEventListener("mouseup", this.outsideClick);
+	}
+	disconnectedCallback(): void {
+		super.disconnectedCallback();
+
+		window.removeEventListener("mouseup", this.outsideClick);
+	}
 	render() {
 		this.validateProperties();
-
-		/**
-		 * click outside the f-emoji wrapper area
-		 */
-		window.addEventListener("click", e => this.closeEmojiPicker(e, this));
 
 		/**
 		 * initiate picker component

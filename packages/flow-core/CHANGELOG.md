@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.6.6] - 2023-03-23
+
+### Bug fixes
+- outside click emoji picker not closing.
+
 ## [1.6.5] - 2023-03-23
 
 ### Improvements

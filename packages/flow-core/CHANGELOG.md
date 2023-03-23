@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.6.5] - 2023-03-23
+
+### Improvements
+- `f-icon-button`: `type`renamed to `category` (more aligned to `f-button`).
+
 ## [1.6.4] - 2023-03-21
 
 ### Improvements

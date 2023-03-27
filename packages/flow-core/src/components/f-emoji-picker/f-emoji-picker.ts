@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-emoji-picker.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -387,29 +387,33 @@ export class FEmojiPicker extends FRoot {
 
 		window.removeEventListener("mouseup", this.outsideClick);
 	}
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		if (!changedProperties.has("value")) {
+			/**
+			 * initiate picker component
+			 */
+
+			this.picker = new Picker({
+				data,
+				onEmojiSelect: (e: Emoji) => {
+					this.handleSelectEmoji(e);
+				},
+				icons: "solid",
+				skinTonePosition: "none",
+				categories: this.categroiesToDisplay,
+				custom: this.custom,
+				autoFocus: true,
+				exceptEmojis: this["exclude-emojis"]
+			});
+
+			/**
+			 * assign styling to picker component
+			 */
+			this.picker?.injectStyles(unsafeCSS(eleStyle));
+		}
+	}
 	render() {
 		this.validateProperties();
-
-		/**
-		 * initiate picker component
-		 */
-		this.picker = new Picker({
-			data,
-			onEmojiSelect: (e: Emoji) => {
-				this.handleSelectEmoji(e);
-			},
-			icons: "solid",
-			skinTonePosition: "none",
-			categories: this.categroiesToDisplay,
-			custom: this.custom,
-			autoFocus: true,
-			exceptEmojis: this["exclude-emojis"]
-		});
-
-		/**
-		 * assign styling to picker component
-		 */
-		this.picker?.injectStyles(unsafeCSS(eleStyle));
 
 		/**
 		 * clear conditional display

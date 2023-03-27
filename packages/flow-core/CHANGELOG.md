@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.6.7] - 2023-03-27
+
+### Bug fixes
+- `emoji` picker category resets on selection.
 ## [1.6.6] - 2023-03-23
 
 ### Bug fixes

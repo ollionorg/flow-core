@@ -388,7 +388,7 @@ export class FEmojiPicker extends FRoot {
 		window.removeEventListener("mouseup", this.outsideClick);
 	}
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-		if (!changedProperties.has("value")) {
+		if (!changedProperties.has("value") || !this.picker) {
 			/**
 			 * initiate picker component
 			 */

@@ -260,36 +260,72 @@
     },
     {
       "name": "f-date-time-picker",
-      "description": "Attributes:\n\n  * `fill` {`string`} - \n\n  * `variant` {`\"solid\" | \"dashed\" | \"dotted\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | undefined`} - \n\n  * `state` {`FDateTimePickerState | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `fill` {`string`} - \n\n  * `variant` {`\"solid\" | \"dashed\" | \"dotted\" | undefined`} - \n\n  * `size` {`\"large\" | \"medium\" | undefined`} - \n\n  * `state` {`FDateTimePickerState | undefined`} - \n\n  * `dateTimePickerElement` {`HTMLInputElement`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: object; date: string; }>`} - \n\nAttributes:\n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `mode` {`\"date-time\" | \"date-only\" | \"time-only\" | undefined`} - \n\n  * `value` {`DateValueType | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `state` {`FDateTimePickerState | undefined`} - \n\n  * `[\"min-date\"]` {`DateOption | undefined`} - \n\n  * `[\"max-date\"]` {`DateOption | undefined`} - \n\n  * `[\"disable-date\"]` {`DateDisableType | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `[\"is-range\"]` {`boolean | undefined`} - \n\n  * `inline` {`boolean | undefined`} - \n\n  * `[\"week-number\"]` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `dateTimePickerElement` {`HTMLInputElement`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `mode` {`\"date-time\" | \"date-only\" | \"time-only\" | undefined`} - \n\n  * `value` {`DateValueType | undefined`} - \n\n  * `placeholder` {`string | undefined`} - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `state` {`FDateTimePickerState | undefined`} - \n\n  * `[\"min-date\"]` {`DateOption | undefined`} - \n\n  * `[\"max-date\"]` {`DateOption | undefined`} - \n\n  * `[\"disable-date\"]` {`DateDisableType | undefined`} - \n\n  * `clear` {`boolean | undefined`} - \n\n  * `[\"is-range\"]` {`boolean | undefined`} - \n\n  * `inline` {`boolean | undefined`} - \n\n  * `[\"week-number\"]` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `dateTimePickerElement` {`HTMLInputElement`} - \n\n  * `flatPickerElement` {`Instance`} - \n\n  * `placeholderText` {`\"Select date\" | \"Select time\" | \"Select date and time\"`} - conditional placeholder\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
-          "name": "fill",
-          "description": "`fill` {`string`} - \n\nProperty: fill\n\nDefault: "
-        },
-        {
           "name": "variant",
-          "description": "`variant` {`\"solid\" | \"dashed\" | \"dotted\" | undefined`} - \n\nProperty: variant\n\nDefault: solid",
+          "description": "`variant` {`\"round\" | \"curved\" | \"block\" | undefined`} - \n\nProperty: variant\n\nDefault: curved",
           "values": [
             {
-              "name": "solid"
+              "name": "round"
             },
             {
-              "name": "dashed"
+              "name": "curved"
             },
             {
-              "name": "dotted"
+              "name": "block"
             }
           ]
         },
         {
-          "name": "size",
-          "description": "`size` {`\"large\" | \"medium\" | undefined`} - \n\nProperty: size\n\nDefault: medium",
+          "name": "category",
+          "description": "`category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\nProperty: category\n\nDefault: fill",
           "values": [
             {
-              "name": "large"
+              "name": "fill"
             },
             {
+              "name": "outline"
+            },
+            {
+              "name": "transparent"
+            }
+          ]
+        },
+        {
+          "name": "mode",
+          "description": "`mode` {`\"date-time\" | \"date-only\" | \"time-only\" | undefined`} - \n\nProperty: mode\n\nDefault: date-time",
+          "values": [
+            {
+              "name": "date-time"
+            },
+            {
+              "name": "date-only"
+            },
+            {
+              "name": "time-only"
+            }
+          ]
+        },
+        {
+          "name": "value",
+          "description": "`value` {`DateValueType | undefined`} - \n\nProperty: value",
+          "values": []
+        },
+        {
+          "name": "placeholder",
+          "description": "`placeholder` {`string | undefined`} - \n\nProperty: placeholder",
+          "values": []
+        },
+        {
+          "name": "size",
+          "description": "`size` {`\"medium\" | \"small\" | undefined`} - \n\nProperty: size\n\nDefault: medium",
+          "values": [
+            {
               "name": "medium"
+            },
+            {
+              "name": "small"
             }
           ]
         },
@@ -298,20 +334,79 @@
           "description": "`state` {`FDateTimePickerState | undefined`} - \n\nProperty: state\n\nDefault: default",
           "values": [
             {
+              "name": "primary"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
               "name": "default"
-            },
-            {
-              "name": "secondary"
-            },
-            {
-              "name": "subtle"
             }
           ]
+        },
+        {
+          "name": "[\"min-date\"]",
+          "description": "`[\"min-date\"]` {`DateOption | undefined`} - \n\nProperty: [\"min-date\"]",
+          "values": []
+        },
+        {
+          "name": "[\"max-date\"]",
+          "description": "`[\"max-date\"]` {`DateOption | undefined`} - \n\nProperty: [\"max-date\"]",
+          "values": []
+        },
+        {
+          "name": "[\"disable-date\"]",
+          "description": "`[\"disable-date\"]` {`DateDisableType | undefined`} - \n\nProperty: [\"disable-date\"]\n\nDefault: ",
+          "values": []
+        },
+        {
+          "name": "clear",
+          "description": "`clear` {`boolean | undefined`} - \n\nProperty: clear\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "[\"is-range\"]",
+          "description": "`[\"is-range\"]` {`boolean | undefined`} - \n\nProperty: [\"is-range\"]\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "inline",
+          "description": "`inline` {`boolean | undefined`} - \n\nProperty: inline\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "[\"week-number\"]",
+          "description": "`[\"week-number\"]` {`boolean | undefined`} - \n\nProperty: [\"week-number\"]\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "disabled",
+          "description": "`disabled` {`boolean | undefined`} - \n\nProperty: disabled\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "loading",
+          "description": "`loading` {`boolean | undefined`} - \n\nProperty: loading\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "dateTimePickerElement",
+          "description": "`dateTimePickerElement` {`HTMLInputElement`} - \n\nProperty: dateTimePickerElement"
         },
         {
           "name": "tooltip",
           "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
           "values": []
+        },
+        {
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<{ value: object; date: string; }>`} - "
         }
       ]
     },
@@ -373,10 +468,10 @@
               "name": "default"
             },
             {
-              "name": "secondary"
+              "name": "subtle"
             },
             {
-              "name": "subtle"
+              "name": "secondary"
             },
             {
               "name": "tertiary"
@@ -427,82 +522,82 @@
               "name": "large solid default"
             },
             {
-              "name": "large solid secondary"
+              "name": "large solid subtle"
             },
             {
-              "name": "large solid subtle"
+              "name": "large solid secondary"
             },
             {
               "name": "large dashed default"
             },
             {
-              "name": "large dashed secondary"
+              "name": "large dashed subtle"
             },
             {
-              "name": "large dashed subtle"
+              "name": "large dashed secondary"
             },
             {
               "name": "large dotted default"
             },
             {
-              "name": "large dotted secondary"
+              "name": "large dotted subtle"
             },
             {
-              "name": "large dotted subtle"
+              "name": "large dotted secondary"
             },
             {
               "name": "medium solid default"
             },
             {
-              "name": "medium solid secondary"
+              "name": "medium solid subtle"
             },
             {
-              "name": "medium solid subtle"
+              "name": "medium solid secondary"
             },
             {
               "name": "medium dashed default"
             },
             {
-              "name": "medium dashed secondary"
+              "name": "medium dashed subtle"
             },
             {
-              "name": "medium dashed subtle"
+              "name": "medium dashed secondary"
             },
             {
               "name": "medium dotted default"
             },
             {
-              "name": "medium dotted secondary"
+              "name": "medium dotted subtle"
             },
             {
-              "name": "medium dotted subtle"
+              "name": "medium dotted secondary"
             },
             {
               "name": "small solid default"
             },
             {
-              "name": "small solid secondary"
+              "name": "small solid subtle"
             },
             {
-              "name": "small solid subtle"
+              "name": "small solid secondary"
             },
             {
               "name": "small dashed default"
             },
             {
-              "name": "small dashed secondary"
+              "name": "small dashed subtle"
             },
             {
-              "name": "small dashed subtle"
+              "name": "small dashed secondary"
             },
             {
               "name": "small dotted default"
             },
             {
-              "name": "small dotted secondary"
+              "name": "small dotted subtle"
             },
             {
-              "name": "small dotted subtle"
+              "name": "small dotted secondary"
             },
             {
               "name": "large solid default bottom"
@@ -520,21 +615,6 @@
               "name": "large solid default around"
             },
             {
-              "name": "large solid secondary bottom"
-            },
-            {
-              "name": "large solid secondary top"
-            },
-            {
-              "name": "large solid secondary left"
-            },
-            {
-              "name": "large solid secondary right"
-            },
-            {
-              "name": "large solid secondary around"
-            },
-            {
               "name": "large solid subtle bottom"
             },
             {
@@ -548,6 +628,21 @@
             },
             {
               "name": "large solid subtle around"
+            },
+            {
+              "name": "large solid secondary bottom"
+            },
+            {
+              "name": "large solid secondary top"
+            },
+            {
+              "name": "large solid secondary left"
+            },
+            {
+              "name": "large solid secondary right"
+            },
+            {
+              "name": "large solid secondary around"
             },
             {
               "name": "large dashed default bottom"
@@ -565,21 +660,6 @@
               "name": "large dashed default around"
             },
             {
-              "name": "large dashed secondary bottom"
-            },
-            {
-              "name": "large dashed secondary top"
-            },
-            {
-              "name": "large dashed secondary left"
-            },
-            {
-              "name": "large dashed secondary right"
-            },
-            {
-              "name": "large dashed secondary around"
-            },
-            {
               "name": "large dashed subtle bottom"
             },
             {
@@ -593,6 +673,21 @@
             },
             {
               "name": "large dashed subtle around"
+            },
+            {
+              "name": "large dashed secondary bottom"
+            },
+            {
+              "name": "large dashed secondary top"
+            },
+            {
+              "name": "large dashed secondary left"
+            },
+            {
+              "name": "large dashed secondary right"
+            },
+            {
+              "name": "large dashed secondary around"
             },
             {
               "name": "large dotted default bottom"
@@ -610,21 +705,6 @@
               "name": "large dotted default around"
             },
             {
-              "name": "large dotted secondary bottom"
-            },
-            {
-              "name": "large dotted secondary top"
-            },
-            {
-              "name": "large dotted secondary left"
-            },
-            {
-              "name": "large dotted secondary right"
-            },
-            {
-              "name": "large dotted secondary around"
-            },
-            {
               "name": "large dotted subtle bottom"
             },
             {
@@ -638,6 +718,21 @@
             },
             {
               "name": "large dotted subtle around"
+            },
+            {
+              "name": "large dotted secondary bottom"
+            },
+            {
+              "name": "large dotted secondary top"
+            },
+            {
+              "name": "large dotted secondary left"
+            },
+            {
+              "name": "large dotted secondary right"
+            },
+            {
+              "name": "large dotted secondary around"
             },
             {
               "name": "medium solid default bottom"
@@ -655,21 +750,6 @@
               "name": "medium solid default around"
             },
             {
-              "name": "medium solid secondary bottom"
-            },
-            {
-              "name": "medium solid secondary top"
-            },
-            {
-              "name": "medium solid secondary left"
-            },
-            {
-              "name": "medium solid secondary right"
-            },
-            {
-              "name": "medium solid secondary around"
-            },
-            {
               "name": "medium solid subtle bottom"
             },
             {
@@ -683,6 +763,21 @@
             },
             {
               "name": "medium solid subtle around"
+            },
+            {
+              "name": "medium solid secondary bottom"
+            },
+            {
+              "name": "medium solid secondary top"
+            },
+            {
+              "name": "medium solid secondary left"
+            },
+            {
+              "name": "medium solid secondary right"
+            },
+            {
+              "name": "medium solid secondary around"
             },
             {
               "name": "medium dashed default bottom"
@@ -700,21 +795,6 @@
               "name": "medium dashed default around"
             },
             {
-              "name": "medium dashed secondary bottom"
-            },
-            {
-              "name": "medium dashed secondary top"
-            },
-            {
-              "name": "medium dashed secondary left"
-            },
-            {
-              "name": "medium dashed secondary right"
-            },
-            {
-              "name": "medium dashed secondary around"
-            },
-            {
               "name": "medium dashed subtle bottom"
             },
             {
@@ -728,6 +808,21 @@
             },
             {
               "name": "medium dashed subtle around"
+            },
+            {
+              "name": "medium dashed secondary bottom"
+            },
+            {
+              "name": "medium dashed secondary top"
+            },
+            {
+              "name": "medium dashed secondary left"
+            },
+            {
+              "name": "medium dashed secondary right"
+            },
+            {
+              "name": "medium dashed secondary around"
             },
             {
               "name": "medium dotted default bottom"
@@ -745,21 +840,6 @@
               "name": "medium dotted default around"
             },
             {
-              "name": "medium dotted secondary bottom"
-            },
-            {
-              "name": "medium dotted secondary top"
-            },
-            {
-              "name": "medium dotted secondary left"
-            },
-            {
-              "name": "medium dotted secondary right"
-            },
-            {
-              "name": "medium dotted secondary around"
-            },
-            {
               "name": "medium dotted subtle bottom"
             },
             {
@@ -773,6 +853,21 @@
             },
             {
               "name": "medium dotted subtle around"
+            },
+            {
+              "name": "medium dotted secondary bottom"
+            },
+            {
+              "name": "medium dotted secondary top"
+            },
+            {
+              "name": "medium dotted secondary left"
+            },
+            {
+              "name": "medium dotted secondary right"
+            },
+            {
+              "name": "medium dotted secondary around"
             },
             {
               "name": "small solid default bottom"
@@ -790,21 +885,6 @@
               "name": "small solid default around"
             },
             {
-              "name": "small solid secondary bottom"
-            },
-            {
-              "name": "small solid secondary top"
-            },
-            {
-              "name": "small solid secondary left"
-            },
-            {
-              "name": "small solid secondary right"
-            },
-            {
-              "name": "small solid secondary around"
-            },
-            {
               "name": "small solid subtle bottom"
             },
             {
@@ -818,6 +898,21 @@
             },
             {
               "name": "small solid subtle around"
+            },
+            {
+              "name": "small solid secondary bottom"
+            },
+            {
+              "name": "small solid secondary top"
+            },
+            {
+              "name": "small solid secondary left"
+            },
+            {
+              "name": "small solid secondary right"
+            },
+            {
+              "name": "small solid secondary around"
             },
             {
               "name": "small dashed default bottom"
@@ -835,21 +930,6 @@
               "name": "small dashed default around"
             },
             {
-              "name": "small dashed secondary bottom"
-            },
-            {
-              "name": "small dashed secondary top"
-            },
-            {
-              "name": "small dashed secondary left"
-            },
-            {
-              "name": "small dashed secondary right"
-            },
-            {
-              "name": "small dashed secondary around"
-            },
-            {
               "name": "small dashed subtle bottom"
             },
             {
@@ -863,6 +943,21 @@
             },
             {
               "name": "small dashed subtle around"
+            },
+            {
+              "name": "small dashed secondary bottom"
+            },
+            {
+              "name": "small dashed secondary top"
+            },
+            {
+              "name": "small dashed secondary left"
+            },
+            {
+              "name": "small dashed secondary right"
+            },
+            {
+              "name": "small dashed secondary around"
             },
             {
               "name": "small dotted default bottom"
@@ -880,21 +975,6 @@
               "name": "small dotted default around"
             },
             {
-              "name": "small dotted secondary bottom"
-            },
-            {
-              "name": "small dotted secondary top"
-            },
-            {
-              "name": "small dotted secondary left"
-            },
-            {
-              "name": "small dotted secondary right"
-            },
-            {
-              "name": "small dotted secondary around"
-            },
-            {
               "name": "small dotted subtle bottom"
             },
             {
@@ -908,6 +988,21 @@
             },
             {
               "name": "small dotted subtle around"
+            },
+            {
+              "name": "small dotted secondary bottom"
+            },
+            {
+              "name": "small dotted secondary top"
+            },
+            {
+              "name": "small dotted secondary left"
+            },
+            {
+              "name": "small dotted secondary right"
+            },
+            {
+              "name": "small dotted secondary around"
             }
           ]
         },
@@ -5147,10 +5242,10 @@
               "name": "default"
             },
             {
-              "name": "secondary"
+              "name": "subtle"
             },
             {
-              "name": "subtle"
+              "name": "secondary"
             }
           ]
         },
@@ -5774,10 +5869,10 @@
               "name": "default"
             },
             {
-              "name": "secondary"
+              "name": "subtle"
             },
             {
-              "name": "subtle"
+              "name": "secondary"
             }
           ]
         },
@@ -7230,10 +7325,10 @@
               "name": "default"
             },
             {
-              "name": "secondary"
+              "name": "subtle"
             },
             {
-              "name": "subtle"
+              "name": "secondary"
             }
           ]
         },

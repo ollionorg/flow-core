@@ -1,6 +1,6 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
-import fInputAnatomy from "./svg/i-finput-anatomy.js";
+import fDateTimePickerAnatomy from "./svg/i-fdate-time-picker-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
@@ -21,7 +21,7 @@ import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <f-divider></f-divider>
 
-f-input is an input element.
+Date time picker is an input field with a popover from which a user can easily select date and time.
 
 <br />
 
@@ -34,6 +34,8 @@ f-input is an input element.
 			value: { control: "text" },
 			slot: { control: "text" },
 			placeholder: { control: "text" },
+			mode: { control: "radio", options: ["date-time", "date-only", "time-only"] },
+			value: { control: "text" },
 			variant: {
 				control: "select",
 				options: ["curved", "round", "block"]
@@ -41,10 +43,6 @@ f-input is an input element.
 			category: {
 				control: "select",
 				options: ["fill", "transparent", "outline"]
-			},
-			type: {
-				control: "select",
-				options: ["text", "number", "email", "password", "url", "tel"]
 			},
 			state: {
 				control: "select",
@@ -54,17 +52,17 @@ f-input is an input element.
 				control: "radio",
 				options: ["small", "medium"]
 			},
-			["icon-left"]: {
+			["min-date"]: {
 				control: "text"
 			},
-			["icon-right"]: {
+			["max-date"]: {
 				control: "text"
 			},
-			["prefix"]: {
-				control: "text"
+			["disable-date"]: {
+				control: "object"
 			},
-			["suffix"]: {
-				control: "text"
+			["is-range"]: {
+				control: "boolean"
 			},
 			loading: {
 				control: "boolean"
@@ -72,50 +70,70 @@ f-input is an input element.
 			disabled: {
 				control: "boolean"
 			},
-			readOnly: {
-				control: "boolean"
-			},
 			clear: {
 				control: "boolean"
 			},
-			["max-length"]: {
-				control: "text"
+			["week-number"]: {
+				control: "boolean"
+			},
+			inline: {
+				control: "boolean"
 			}
 		}}
 		args={{
 			value: "",
 			placeholder: "Enter your text here",
 			variant: "round",
+			mode: "date-time",
+			value: new Date(),
 			category: "fill",
-			type: "text",
 			state: "default",
 			size: "medium",
 			slot: `              <f-div slot="label" padding="none" gap="none">Label</f-div>
               <f-text slot="help" variant="para" size="small">This is a Subtext</f-text>`,
-			["icon-left"]: undefined,
-			["icon-right"]: undefined,
-			["prefix"]: undefined,
-			["suffix"]: undefined,
-			["max-length"]: undefined,
+			["min-date"]: undefined,
+			["max-date"]: undefined,
+			["disable-date"]: [],
+			["is-range"]: false,
+			inline: false,
+			["week-number"]: false,
 			loading: false,
 			disabled: false,
-			readOnly: false,
 			clear: false
 		}}
 	>
 		{args => {
 			const [_, updateArgs] = useArgs();
 			const handleInput = e => {
-				updateArgs({ value: e.detail.value });
-				if (args.type === "tel") {
-					updateArgs({ ["calling-code"]: e.detail.callingCode });
-				}
+				console.log(e.detail);
+				updateArgs({ value: e.detail.date });
 			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div width="80%" align="middle-center">
-						<f-date-time-picker></f-date-time-picker> </f-div
-				></f-div>
+						<f-date-time-picker
+							.mode=${args.mode}
+							.value=${args.value}
+							.size=${args.size}
+							.state=${args.state}
+							.variant=${args.variant}
+							.category=${args.category}
+							.placeholder=${args.placeholder}
+							min-date=${args["min-date"]}
+							max-date=${args["max-date"]}
+							disable-date=${args["disable-date"]}
+							@input=${handleInput}
+							?is-range=${args["is-range"]}
+							?inline=${args.inline}
+							?week-number=${args["week-number"]}
+							?loading=${args.loading}
+							?disabled=${args.disabled}
+							?clear=${args.clear}
+						>
+							${unsafeHTML(args.slot)}
+						</f-date-time-picker>
+					</f-div></f-div
+				>
 			`;
 		}}
 	</Story>
@@ -128,7 +146,7 @@ f-input is an input element.
 <f-divider></f-divider>
 
 <Story name="Anatomy">
-	{() => html`<div class="align-center">${unsafeSVG(fInputAnatomy)}</div>`}
+	{() => html`<div class="align-center">${unsafeSVG(fDateTimePickerAnatomy)}</div>`}
 </Story>
 
 <br />
@@ -137,13 +155,13 @@ f-input is an input element.
 
 <f-divider></f-divider>
 
-Variants are various visual representations of an input field.
+Variants are various visual representations of a date-time-picker field.
 
 <Canvas>
 	<Story name="variant">
 		{args => {
 			const variants = ["curved", "round", "block"];
-			const [value, setValue] = useState("");
+			const [value, setValue] = useState(new Date());
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
@@ -151,16 +169,15 @@ Variants are various visual representations of an input field.
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
 					${variants.map(
 						item => html`<f-div>
-          <f-input
+          <f-date-time-picker
             value=${value}
-            placeholder="Write here"
             @input=${handleValue}
             .variant=${item}
             size="medium"
           >
              <f-div slot="label" padding="none" gap="none">Label (variant="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-          </f-input></f-div
+          </f-date-time-picker></f-div
         ></f-div
       >`
 					)}
@@ -203,13 +220,13 @@ Variants are various visual representations of an input field.
 
 <f-divider></f-divider>
 
-Category decides the background of f-input
+Category decides the background of f-date-time-picker
 
 <Canvas>
 	<Story name="category">
 		{args => {
 			const categories = ["fill", "outline", "transparent"];
-			const [value, setValue] = useState("");
+			const [value, setValue] = useState(new Date());
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
@@ -217,9 +234,8 @@ Category decides the background of f-input
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
 					${categories.map(
 						item => html`<f-div>
-          <f-input
+          <f-date-time-picker
             value=${value}
-            placeholder="Write here"
             @input=${handleValue}
             .category=${item}
             size="medium"
@@ -227,7 +243,7 @@ Category decides the background of f-input
           >
             <f-div slot="label" padding="none" gap="none">Label (category="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-          </f-input></f-div
+          </f-date-time-picker></f-div
         ></f-div
       >`
 					)}
@@ -266,20 +282,17 @@ Category decides the background of f-input
 
 <br />
 
-## type
+## mode
 
 <f-divider></f-divider>
 
-The type attribute specifies the type of `<f-input>` element to display.
+The type attribute specifies the type of `<f-date-time-picker>` element to display.
 
 <Canvas>
-	<Story name="type">
+	<Story name="mode">
 		{args => {
-			const types = [
-				["text", "number", "email"],
-				["password", "tel", "url"]
-			];
-			const [value, setValue] = useState("");
+			const types = [["date-time", "date-only", "time-only"]];
+			const [value, setValue] = useState(new Date());
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
@@ -289,18 +302,17 @@ The type attribute specifies the type of `<f-input>` element to display.
 						item => html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
 								type => html`<f-div
-									><f-input
+									><f-date-time-picker
 										value=${value}
-										placeholder="Write here"
 										@input=${handleValue}
-										type=${type}
+										mode=${type}
 										size="medium"
 									>
-										<f-div slot="label" padding="none" gap="none">Label (type="${type}")</f-div>
+										<f-div slot="label" padding="none" gap="none">Label (mode="${type}")</f-div>
 										<f-text slot="help" variant="para" size="small"
 											>This is a Subtext (Helper Text)</f-text
 										>
-									</f-input></f-div
+									</f-date-time-picker></f-div
 								>`
 							)}
 						</f-div>`
@@ -319,35 +331,20 @@ The type attribute specifies the type of `<f-input>` element to display.
 			<td></td>
 		</tr>
 		<tr>
-			<td>text</td>
-			<td>Takes any text as input. </td>
+			<td>date-time</td>
+			<td>selection for both date and time together </td>
 			<td>
 				<code>default</code>
 			</td>
 		</tr>
 		<tr>
-			<td>number</td>
-			<td>Takes any number as input.</td>
+			<td>date-only</td>
+			<td>selection for only date</td>
 			<td> </td>
 		</tr>
 		<tr>
-			<td>email</td>
-			<td>Defines a field for an e-mail address.</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>password</td>
-			<td>Defines a field for a password. Masks the characters</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>tel</td>
-			<td>Defines a field for a telephone number.</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>url</td>
-			<td>Defines a field for URL. </td>
+			<td>time-only</td>
+			<td>selection for only time</td>
 			<td></td>
 		</tr>
 	</tbody>
@@ -357,24 +354,31 @@ The type attribute specifies the type of `<f-input>` element to display.
 
 ## value
 
-Defines the value of an f-input. Validation rules are applied on the value depending on the type property of the f-text-input.
+Defines the value of an f-date-time-picker.
+
+You may specify those dates in a variety of formats:
+
+- Date Objects are always accepted <code>new Date(2015, 0, 10)</code>
+- Timestamps are always accepted e.g. 1488136398547
+- ISO Date Strings are always accepted e.g. "2017-02-26T19:40:03.243Z"
+- Date Strings, which must match the dateFormat chronologically - This means that "2016" "2016-10", "2016-10-20", "2016-10-20 15", "2016-10-20 15:30" are all valid date strings
 
 <Canvas>
 	<Story name="value">
 		{args => {
-			const [value, setValue] = useState("Value Here");
+			const [value, setValue] = useState("");
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div width="80%" align="middle-center">
-						<f-input value=${value} placeholder="Write here" @input=${handleValue} size="medium">
+						<f-date-time-picker value=${value} @input=${handleValue} size="medium">
 							<f-div slot="label" padding="none" gap="none">Label</f-div>
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-input></f-div
+						</f-date-time-picker></f-div
 					></f-div
 				>
 			`;
@@ -386,7 +390,7 @@ Defines the value of an f-input. Validation rules are applied on the value depen
 
 ## placeholder
 
-Defines the placeholder text for f-text-input
+Defines the placeholder text for f-date-time-picker
 
 <Canvas>
 	<Story name="placeholder">
@@ -398,7 +402,7 @@ Defines the placeholder text for f-text-input
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div width="80%" align="middle-center">
-						<f-input
+						<f-date-time-picker
 							value=${value}
 							placeholder="This is the placeholder"
 							@input=${handleValue}
@@ -408,7 +412,7 @@ Defines the placeholder text for f-text-input
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-input></f-div
+						</f-date-time-picker></f-div
 					></f-div
 				>
 			`;
@@ -422,9 +426,7 @@ Defines the placeholder text for f-text-input
 
 <f-divider></f-divider>
 
-f-input can have 2 sizes.
-
-<p class="note-section">Note: By default size is inherited by the parent f-form.</p>
+f-date-time-picker can have 2 sizes.
 
 <Canvas>
 	<Story name="size">
@@ -438,15 +440,14 @@ f-input can have 2 sizes.
 				<f-div width="100%" align="top-center" padding="large" gap="medium">
 					${sizes.map(
 						item => html`<f-div>
-          <f-input
+          <f-date-time-picker
             value=${value}
-            placeholder="Write here"
             @input=${handleValue}
             size=${item}
           >
             <f-div slot="label" padding="none" gap="none">Label (size="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-          </f-input></f-div
+          </f-date-time-picker></f-div
         ></f-div
       >`
 					)}
@@ -501,9 +502,8 @@ States are used to communicate purpose and connotations. For example, a red colo
 						item => html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
 								state => html`<f-div
-									><f-input
+									><f-date-time-picker
 										value=${value}
-										placeholder="Write here"
 										@input=${handleValue}
 										size="medium"
 										state=${state}
@@ -512,7 +512,7 @@ States are used to communicate purpose and connotations. For example, a red colo
 										<f-text slot="help" variant="para" size="small"
 											>This is a Subtext (Helper Text)</f-text
 										>
-									</f-input></f-div
+									</f-date-time-picker></f-div
 								>`
 							)}
 						</f-div>`
@@ -562,16 +562,20 @@ States are used to communicate purpose and connotations. For example, a red colo
 
 <br />
 
-## icon-left
+## min-date
 
-Icon-left enables an icon on the left of the input value.
+Sets the minimum value of the date allowed in the picker
 
-<p class="note-section">
-	Note: If f-input has a prefix also, then icon-left is placed on the left of the prefix.
-</p>
+You may specify those dates in a variety of formats:
+
+- Date Objects are always accepted <code>new Date(2015, 0, 10)</code>
+- Timestamps are always accepted e.g. 1488136398547
+- ISO Date Strings are always accepted e.g. "2017-02-26T19:40:03.243Z"
+- Date Strings, which must match the dateFormat chronologically - This means that "2016" "2016-10", "2016-10-20", "2016-10-20 15", "2016-10-20 15:30" are all valid date strings
+- The shortcut "today"
 
 <Canvas>
-	<Story name="icon-left">
+	<Story name="min-date">
 		{args => {
 			const [value, setValue] = useState("");
 			const handleValue = e => {
@@ -580,21 +584,60 @@ Icon-left enables an icon on the left of the input value.
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div width="80%" align="middle-center">
-						<f-input
+						<f-date-time-picker value=${value} @input=${handleValue} size="medium" min-date="today">
+							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-div slot="description" padding="none" gap="none"
+								>This is a demo for min-date="today" prop</f-div
+							>
+							<f-text slot="help" variant="para" size="small"
+								>This is a Subtext (Helper Text)</f-text
+							>
+						</f-date-time-picker></f-div
+					></f-div
+				>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## max-date
+
+Sets the maximum value of the date allowed in the picker
+
+You may specify those dates in a variety of formats:
+
+- Date Objects are always accepted <code>new Date(2015, 0, 10)</code>
+- Timestamps are always accepted e.g. 1488136398547
+- ISO Date Strings are always accepted e.g. "2017-02-26T19:40:03.243Z"
+- Date Strings, which must match the dateFormat chronologically - This means that "2016" "2016-10", "2016-10-20", "2016-10-20 15", "2016-10-20 15:30" are all valid date strings
+- The shortcut "today"
+
+<Canvas>
+	<Story name="max-date">
+		{args => {
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large">
+					<f-div width="80%" align="middle-center">
+						<f-date-time-picker
 							value=${value}
-							placeholder="Write here"
 							@input=${handleValue}
 							size="medium"
-							icon-left="i-app"
+							max-date=${new Date()}
 						>
 							<f-div slot="label" padding="none" gap="none">Label</f-div>
 							<f-div slot="description" padding="none" gap="none"
-								>This is a demo for icon-left="i-app" prop</f-div
+								>This is a demo for max-date="new Date()" prop</f-div
 							>
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-input></f-div
+						</f-date-time-picker></f-div
 					></f-div
 				>
 			`;
@@ -604,158 +647,80 @@ Icon-left enables an icon on the left of the input value.
 
 <br />
 
-## icon-right
+## disable-date
 
-Icon-right enables an icon on the right of the input value.
+Sets the certain dates unavailable. There can be multiple options:
 
-<p class="note-section">
-	Note: If f-input has a suffix also, then icon-right is placed on the right of the suffix.
-</p>
+1. Disabling specific date(s), format - dd/mm/YY
+2. Disabling range of dates
+3. Disabling dates using a function
 
 <Canvas>
-	<Story name="icon-right">
+	<Story name="disable-date">
 		{args => {
 			const [value, setValue] = useState("");
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
 			return html`
-				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-input
+				<f-div width="100%" align="middle-center" padding="large" gap="medium">
+					<f-div>
+						<f-date-time-picker
 							value=${value}
-							placeholder="Write here"
 							@input=${handleValue}
 							size="medium"
-							icon-left="i-app"
-							icon-right="i-delete"
+							.disable-date=${[new Date(), new Date().fp_incr(2)]}
 						>
-							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-div slot="label" padding="none" gap="none">Label (Disable specific dates)</f-div>
 							<f-div slot="description" padding="none" gap="none"
-								>This is a demo for icon-right="i-app" prop</f-div
+								>This is a demo - [new Date(), new Date().fp_incr(2)]</f-div
 							>
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-input></f-div
-					></f-div
-				>
-			`;
-		}}
-	</Story>
-</Canvas>
-
-<br />
-
-## prefix
-
-Prefix property enables a string before the input value.
-
-<Canvas>
-	<Story name="prefix">
-		{args => {
-			const [value, setValue] = useState("");
-			const handleValue = e => {
-				setValue(e.detail.value);
-			};
-			return html`
-				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-input
+						</f-date-time-picker></f-div
+					>
+					<f-div>
+						<f-date-time-picker
 							value=${value}
-							placeholder="Write here"
 							@input=${handleValue}
 							size="medium"
-							icon-left="i-app"
-							icon-right="i-delete"
-							prefix="+91"
+							.disable-date=${[{ from: new Date(), to: new Date().fp_incr(8) }]}
 						>
-							<f-div slot="label" padding="none" gap="none">Label</f-div>
-							<f-div slot="description" padding="none" gap="none">This is a demo for prefix</f-div>
+							<f-div slot="label" padding="none" gap="none">Label (Disable dates range)</f-div>
+							<f-div slot="description" padding="none" gap="none"
+								>This is a demo - [{ from: new Date(), to: new Date().fp_incr(8) }]</f-div
+							>
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-input></f-div
-					></f-div
-				>
-			`;
-		}}
-	</Story>
-</Canvas>
-
-<br />
-
-## suffix
-
-Suffix property enables a string on the right side of the input box.
-
-<Canvas>
-	<Story name="suffix">
-		{args => {
-			const [value, setValue] = useState("");
-			const handleValue = e => {
-				setValue(e.detail.value);
-			};
-			return html`
-				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-input
+						</f-date-time-picker></f-div
+					>
+					<f-div>
+						<f-date-time-picker
 							value=${value}
-							placeholder="Write here"
 							@input=${handleValue}
 							size="medium"
-							icon-left="i-app"
-							icon-right="i-delete"
-							prefix="+91"
-							suffix="Delete"
+							.disable-date=${[
+								function (date) {
+									// return true to disable
+									return date.getDay() === 0 || date.getDay() === 6;
+								}
+							]}
 						>
-							<f-div slot="label" padding="none" gap="none">Label</f-div>
-							<f-div slot="description" padding="none" gap="none">This is a demo for suffix</f-div>
+							<f-div slot="label" padding="none" gap="none"
+								>Label (Disable dates from function)</f-div
+							>
+							<f-div slot="description" padding="none" gap="none"
+								>This is a demo - [ function(date) { // return true to disable return (date.getDay()
+								=== 0 || date.getDay() === 6); }]</f-div
+							>
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
-						</f-input></f-div
-					></f-div
-				>
-			`;
-		}}
-	</Story>
-</Canvas>
-
-<br />
-
-## max-length
-
-This shows the character count while typing and auto limits after reaching the max length.
-
-<Canvas>
-	<Story name="max-length">
-		{args => {
-			const [value, setValue] = useState("");
-			const handleValue = e => {
-				setValue(e.detail.value);
-			};
-			return html`
-				<f-div width="100%" align="middle-center" padding="large">
-					<f-div width="80%" align="middle-center">
-						<f-input
-							value=${value}
-							placeholder="Write here"
-							@input=${handleValue}
-							size="medium"
-							icon-left="i-app"
-							icon-right="i-delete"
-							prefix="+91"
-							suffix="Delete"
-							max-length="10"
-						>
-							<f-div slot="label" padding="none" gap="none">Label</f-div>
-							<f-text slot="help" variant="para" size="small"
-								>This is a Subtext (Helper Text)</f-text
-							>
-						</f-input></f-div
-					></f-div
-				>
+						</f-date-time-picker></f-div
+					>
+				</f-div>
 			`;
 		}}
 	</Story>
@@ -780,7 +745,7 @@ This shows the character count while typing and auto limits after reaching the m
 				<f-div width="100%" align="top-center" padding="large" gap="medium">
 					${[0, 1, 2, 3].map(
 						item => html`<f-div>
-          <f-input
+          <f-date-time-picker
             value=${value}
             placeholder="Write here"
             @input=${handleValue}
@@ -800,7 +765,7 @@ This shows the character count while typing and auto limits after reaching the m
 								: "Readonly"
 						}</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
-          </f-input></f-div
+          </f-date-time-picker></f-div
         ></f-div
       >`
 					)}
@@ -851,4 +816,4 @@ This shows the character count while typing and auto limits after reaching the m
 	</tbody>
 </table>
 
-<ArgsTable of={"f-input"} />
+<ArgsTable of={"f-date-time-picker"} />

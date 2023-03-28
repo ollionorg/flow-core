@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-emoji-picker.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -371,42 +371,49 @@ export class FEmojiPicker extends FRoot {
 		}
 	}
 
-	/**
-	 * disconnected callback for removing event listener
-	 */
-	disconnectedCallback() {
-		window.removeEventListener("click", e => this.closeEmojiPicker(e, this));
-		super.disconnectedCallback();
-	}
+	outsideClick = (e: MouseEvent) => {
+		this.closeEmojiPicker(e, this);
+	};
 
+	connectedCallback(): void {
+		super.connectedCallback();
+		/**
+		 * click outside the f-select wrapper area
+		 */
+		window.addEventListener("mouseup", this.outsideClick);
+	}
+	disconnectedCallback(): void {
+		super.disconnectedCallback();
+
+		window.removeEventListener("mouseup", this.outsideClick);
+	}
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		if (!changedProperties.has("value") || !this.picker) {
+			/**
+			 * initiate picker component
+			 */
+
+			this.picker = new Picker({
+				data,
+				onEmojiSelect: (e: Emoji) => {
+					this.handleSelectEmoji(e);
+				},
+				icons: "solid",
+				skinTonePosition: "none",
+				categories: this.categroiesToDisplay,
+				custom: this.custom,
+				autoFocus: true,
+				exceptEmojis: this["exclude-emojis"]
+			});
+
+			/**
+			 * assign styling to picker component
+			 */
+			this.picker?.injectStyles(unsafeCSS(eleStyle));
+		}
+	}
 	render() {
 		this.validateProperties();
-
-		/**
-		 * click outside the f-emoji wrapper area
-		 */
-		window.addEventListener("click", e => this.closeEmojiPicker(e, this));
-
-		/**
-		 * initiate picker component
-		 */
-		this.picker = new Picker({
-			data,
-			onEmojiSelect: (e: Emoji) => {
-				this.handleSelectEmoji(e);
-			},
-			icons: "solid",
-			skinTonePosition: "none",
-			categories: this.categroiesToDisplay,
-			custom: this.custom,
-			autoFocus: true,
-			exceptEmojis: this["exclude-emojis"]
-		});
-
-		/**
-		 * assign styling to picker component
-		 */
-		this.picker?.injectStyles(unsafeCSS(eleStyle));
 
 		/**
 		 * clear conditional display

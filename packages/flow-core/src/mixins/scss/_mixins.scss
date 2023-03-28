@@ -2,7 +2,10 @@
 	font-family: var(--flow-font);
 	box-sizing: border-box;
 	flex-shrink: 0;
+	@include scrollbar();
+}
 
+@mixin scrollbar() {
 	&::-webkit-scrollbar {
 		width: 6px;
 		height: 6px;

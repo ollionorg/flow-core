@@ -260,6 +260,22 @@
           "name": "*",
           "declaration": {
             "name": "*",
+            "package": "\"./components/f-carousel-content/f-carousel-content\""
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-carousel/f-carousel\""
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
             "package": "\"./mixins/components/f-root/f-root\""
           }
         }
@@ -911,6 +927,312 @@
           "declaration": {
             "name": "FButton",
             "module": "src/components/f-button/f-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-carousel/f-carousel.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FCarousel",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "interval",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "5000",
+              "attribute": "interval",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "autoplay",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "autoplay",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "carouselWrapper",
+              "type": {
+                "text": "FDiv"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "allCarouselContents",
+              "type": {
+                "text": "NodeListOf<FCarouselContent>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "currentActiveId",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "intervalTimeout",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "iconSize",
+              "description": "icon size"
+            },
+            {
+              "kind": "method",
+              "name": "handleArrowClicks",
+              "parameters": [
+                {
+                  "name": "clickType",
+                  "type": {
+                    "text": "\"left\" | \"right\""
+                  },
+                  "description": "string value for left and right click"
+                }
+              ],
+              "description": "handling click affect for caraousel"
+            },
+            {
+              "kind": "method",
+              "name": "checkIfActive",
+              "description": "check if default active content is present"
+            },
+            {
+              "kind": "method",
+              "name": "addActiveContent",
+              "description": "add active state if default active state not present"
+            },
+            {
+              "kind": "method",
+              "name": "autoplayMode",
+              "description": "autoplay carousel"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "interval",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "5000",
+              "fieldName": "interval"
+            },
+            {
+              "name": "autoplay",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "autoplay"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-carousel",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FCarousel",
+          "declaration": {
+            "name": "FCarousel",
+            "module": "src/components/f-carousel/f-carousel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-carousel",
+          "declaration": {
+            "name": "FCarousel",
+            "module": "src/components/f-carousel/f-carousel.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-carousel-content/f-carousel-content.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FCarouselContent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "[\"content-id\"]",
+              "type": {
+                "text": "number | undefined"
+              },
+              "attribute": "[\"content-id\"]",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "carouselContentWrapper",
+              "type": {
+                "text": "FDiv"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "active"
+            },
+            {
+              "name": "[\"content-id\"]",
+              "type": {
+                "text": "number | undefined"
+              },
+              "fieldName": "[\"content-id\"]"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-carousel-content",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FCarouselContent",
+          "declaration": {
+            "name": "FCarouselContent",
+            "module": "src/components/f-carousel-content/f-carousel-content.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-carousel-content",
+          "declaration": {
+            "name": "FCarouselContent",
+            "module": "src/components/f-carousel-content/f-carousel-content.ts"
           }
         }
       ]
@@ -7479,116 +7801,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-tab-content/f-tab-content.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTabContent",
-          "members": [
-            {
-              "kind": "field",
-              "name": "transition",
-              "type": {
-                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "transition",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "duration",
-              "type": {
-                "text": "number | undefined"
-              },
-              "default": "200",
-              "attribute": "duration",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "transition",
-              "type": {
-                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "transition"
-            },
-            {
-              "name": "duration",
-              "type": {
-                "text": "number | undefined"
-              },
-              "default": "200",
-              "fieldName": "duration"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-tab-content",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTabContent",
-          "declaration": {
-            "name": "FTabContent",
-            "module": "src/components/f-tab-content/f-tab-content.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-tab-content",
-          "declaration": {
-            "name": "FTabContent",
-            "module": "src/components/f-tab-content/f-tab-content.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-tab-node/f-tab-node.ts",
       "declarations": [
         {
@@ -7704,6 +7916,116 @@
           "declaration": {
             "name": "FTabNode",
             "module": "src/components/f-tab-node/f-tab-node.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-tab-content/f-tab-content.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTabContent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "transition",
+              "type": {
+                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "transition",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "200",
+              "attribute": "duration",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "transition",
+              "type": {
+                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "transition"
+            },
+            {
+              "name": "duration",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "200",
+              "fieldName": "duration"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-tab-content",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTabContent",
+          "declaration": {
+            "name": "FTabContent",
+            "module": "src/components/f-tab-content/f-tab-content.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-tab-content",
+          "declaration": {
+            "name": "FTabContent",
+            "module": "src/components/f-tab-content/f-tab-content.ts"
           }
         }
       ]

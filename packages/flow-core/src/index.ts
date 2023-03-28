@@ -35,6 +35,8 @@ export * from "./components/f-file-upload/f-file-upload";
 export * from "./components/f-suggest/f-suggest";
 export * from "./components/f-toast/f-toast";
 export * from "./components/f-search/f-search";
+export * from "./components/f-carousel-content/f-carousel-content";
+export * from "./components/f-carousel/f-carousel";
 export * from "./mixins/components/f-root/f-root";
 
 if (document.readyState !== "loading") {

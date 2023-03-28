@@ -1,0 +1,304 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import FDivAnatomy from "./svg/i-fdiv-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useState } from "@storybook/client-api";
+import FCarouselExample from "./svg/i-fcarousel-example.js";
+
+<Meta
+	title="Components/f-carousel"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
+/>
+
+# f-carousel
+
+<br />
+<br />
+
+## Overview
+
+<hr />
+
+Tabs are broken into two parts. They are connected by a matching content-[id] for example. Tab node (tab-node-1) : Tab content (tab-content-1)
+
+<br />
+
+### [Playground](/story/components-f-tab--playground)
+
+<Canvas>
+	<Story
+		name="Playground"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 300
+			}
+		}}
+		argTypes={{
+			size: {
+				control: "radio",
+				options: ["medium", "small"]
+			},
+			autoplay: {
+				control: "boolean"
+			},
+			interval: {
+				control: "number"
+			}
+		}}
+		args={{
+			size: "medium",
+			autoplay: false,
+			interval: 5000
+		}}
+	>
+		{args => {
+			const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+			return html`
+				<f-div align="middle-center">
+					<f-div width="50%">
+						<f-carousel .size=${args.size} ?autoplay=${args.autoplay} .interval=${args.interval}>
+							${array.map(
+								item => html` <f-carousel-content
+									><f-div
+										width="100%"
+										height="100%"
+										align="middle-center"
+										direction="column"
+										gap="x-large"
+									>
+										${unsafeSVG(FCarouselExample)}
+										<f-div direction="column" padding="x-large" gap="large" align="middle-center">
+											<f-text variant="heading" weight="bold" size="medium">Heading ${item}</f-text>
+											<f-div width="288px" height="hug-content">
+												<f-text
+													variant="para"
+													weight="regular"
+													size="small"
+													state="secondary"
+													align="center"
+													>Lorem ipsum dolor sit amet. At rerum conse quatur et esse iste qui Quis
+													deserunt eum voluptatibus totam.
+												</f-text>
+											</f-div>
+										</f-div>
+									</f-div></f-carousel-content
+								>`
+							)}</f-carousel
+						></f-div
+					>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## size
+
+<f-divider></f-divider>
+
+f-carousel can have 2 sizes.
+
+<Canvas>
+	<Story
+		name="size"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 300
+			}
+		}}
+	>
+		{args => {
+			const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+			return html`
+				<f-div align="middle-center" gap="x-large">
+					${["medium", "small"].map(item => {
+						return html` <f-div>
+							<f-carousel .size=${item}>
+								${array.map(
+									item => html` <f-carousel-content
+										><f-div
+											width="100%"
+											height="100%"
+											align="middle-center"
+											direction="column"
+											gap="x-large"
+										>
+											${unsafeSVG(FCarouselExample)}
+											<f-div direction="column" padding="x-large" gap="large" align="middle-center">
+												<f-text variant="heading" weight="bold" size="medium"
+													>Heading ${item}</f-text
+												>
+												<f-div width="288px" height="hug-content">
+													<f-text
+														variant="para"
+														weight="regular"
+														size="small"
+														state="secondary"
+														align="center"
+														>Lorem ipsum dolor sit amet. At rerum conse quatur et esse iste qui Quis
+														deserunt eum voluptatibus totam.
+													</f-text>
+												</f-div>
+											</f-div>
+										</f-div></f-carousel-content
+									>`
+								)}</f-carousel
+							></f-div
+						>`;
+					})}
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>medium</td>
+			<td></td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>small</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## autoplay
+
+<f-divider></f-divider>
+
+boolean value autoplay so that carousel automatically scrolls
+
+<Canvas>
+	<Story
+		name="autoplay"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 300
+			}
+		}}
+	>
+		{args => {
+			const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+			return html`
+				<f-div align="middle-center">
+					<f-div width="50%">
+						<f-carousel ?autoplay=${true}>
+							${array.map(
+								item => html` <f-carousel-content
+									><f-div
+										width="100%"
+										height="100%"
+										align="middle-center"
+										direction="column"
+										gap="x-large"
+									>
+										${unsafeSVG(FCarouselExample)}
+										<f-div direction="column" padding="x-large" gap="large" align="middle-center">
+											<f-text variant="heading" weight="bold" size="medium">Heading ${item}</f-text>
+											<f-div width="288px" height="hug-content">
+												<f-text
+													variant="para"
+													weight="regular"
+													size="small"
+													state="secondary"
+													align="center"
+													>Lorem ipsum dolor sit amet. At rerum conse quatur et esse iste qui Quis
+													deserunt eum voluptatibus totam.
+												</f-text>
+											</f-div>
+										</f-div>
+									</f-div></f-carousel-content
+								>`
+							)}</f-carousel
+						></f-div
+					>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## interval
+
+<f-divider></f-divider>
+
+Interval property defines the time in ms in which carousel changes the slide automatically.
+Interval property is conditional and works only when autoplay is set to true. default value is 5000 ms
+
+<Canvas>
+	<Story
+		name="interval"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 300
+			}
+		}}
+	>
+		{args => {
+			const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+			return html`
+				<f-div align="middle-center">
+					<f-div width="50%">
+						<f-carousel ?autoplay=${true} .interval=${2000}>
+							${array.map(
+								item => html` <f-carousel-content
+									><f-div
+										width="100%"
+										height="100%"
+										align="middle-center"
+										direction="column"
+										gap="x-large"
+									>
+										${unsafeSVG(FCarouselExample)}
+										<f-div direction="column" padding="x-large" gap="large" align="middle-center">
+											<f-text variant="heading" weight="bold" size="medium">Heading ${item}</f-text>
+											<f-div width="288px" height="hug-content">
+												<f-text
+													variant="para"
+													weight="regular"
+													size="small"
+													state="secondary"
+													align="center"
+													>Lorem ipsum dolor sit amet. At rerum conse quatur et esse iste qui Quis
+													deserunt eum voluptatibus totam.
+												</f-text>
+											</f-div>
+										</f-div>
+									</f-div></f-carousel-content
+								>`
+							)}</f-carousel
+						></f-div
+					>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+<ArgsTable of={"f-carousel"} />

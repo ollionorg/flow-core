@@ -2,9 +2,8 @@
 
 // common mixins imported from this file
 @import "./../../mixins/scss/mixins";
-@import "flatpickr/dist/flatpickr.min.css"; /**
-START : scss maps to hold repsective attribute values
-**/
+// IMPORT flatpickr css
+@import "flatpickr/dist/flatpickr.min.css";
 
 f-date-time-picker {
 	@include base();
@@ -307,7 +306,12 @@ span.flatpickr-weekday {
 	border: 1px solid transparent;
 }
 
-.flatpickr-day.inRange {
+.flatpickr-day.inRange,
+.flatpickr-day.prevMonthDay.inRange,
+.flatpickr-day.nextMonthDay.inRange,
+.flatpickr-day.today.inRange,
+.flatpickr-day.prevMonthDay.today.inRange,
+.flatpickr-day.nextMonthDay.today.inRange {
 	background: var(--color-primary-text);
 	border-color: var(--color-primary-text);
 	color: var(--color-surface-default);
@@ -331,4 +335,10 @@ span.flatpickr-weekday {
 .flatpickr-weekwrapper span.flatpickr-day,
 .flatpickr-weekwrapper span.flatpickr-day:hover {
 	color: var(--color-text-subtle);
+}
+
+.flatpickr-day.inRange {
+	border-radius: 0;
+	-webkit-box-shadow: -5px 0 0 var(--color-primary-text), 5px 0 0 var(--color-primary-text);
+	box-shadow: -5px 0 0 var(--color-primary-text), 5px 0 0 var(--color-primary-text);
 }

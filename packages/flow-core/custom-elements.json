@@ -1464,7 +1464,14 @@
               "kind": "field",
               "name": "dateTimePickerElement",
               "type": {
-                "text": "HTMLInputElement"
+                "text": "FInput"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "helpSlotElement",
+              "type": {
+                "text": "FDiv"
               }
             },
             {
@@ -1472,7 +1479,23 @@
               "name": "flatPickerElement",
               "type": {
                 "text": "Instance"
-              }
+              },
+              "description": "flatpickr instance"
+            },
+            {
+              "kind": "field",
+              "name": "placeholderText",
+              "description": "conditional placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "regexDateTime",
+              "description": "regex for date-time validation on keyboard typing"
+            },
+            {
+              "kind": "field",
+              "name": "dateValidationMessage",
+              "description": "validation message"
             },
             {
               "kind": "method",
@@ -1514,9 +1537,74 @@
               ]
             },
             {
-              "kind": "field",
-              "name": "placeholderText",
-              "description": "conditional placeholder"
+              "kind": "method",
+              "name": "dateObjectFromString",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent"
+                  },
+                  "description": "custom-event value having date string"
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": ""
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleKeyboardInput",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent"
+                  },
+                  "description": "custom-event value having date string"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "datePickerOnChange",
+              "parameters": [
+                {
+                  "name": "selectedDates",
+                  "type": {
+                    "text": "Date[]"
+                  },
+                  "description": "selected date object array"
+                },
+                {
+                  "name": "dateStr",
+                  "type": {
+                    "text": "string"
+                  },
+                  "description": "selected date string"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "createDateTimePicker",
+              "parameters": [
+                {
+                  "name": "element",
+                  "type": {
+                    "text": "HTMLElement"
+                  },
+                  "description": "element w.r.t which creation of date picker takes place"
+                }
+              ],
+              "description": "creates date picker"
+            },
+            {
+              "kind": "method",
+              "name": "addWeekNoStyle",
+              "description": "week-number border conditional styling"
             },
             {
               "kind": "field",
@@ -4525,6 +4613,12 @@
                   "type": {
                     "text": "string | number"
                   }
+                },
+                {
+                  "name": "type",
+                  "type": {
+                    "text": "\"clear\" | \"input\""
+                  }
                 }
               ]
             },
@@ -4941,6 +5035,257 @@
           "declaration": {
             "name": "FPictogram",
             "module": "src/components/f-pictogram/f-pictogram.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-popover/f-popover.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FPopover",
+          "members": [
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "FPopoverPlacement | undefined"
+              },
+              "default": "\"auto\"",
+              "attribute": "placement",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "FPopoverSize | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "overlay",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "attribute": "overlay",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": {
+                "text": "string | HTMLElement"
+              },
+              "attribute": "target",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "cleanup",
+              "type": {
+                "text": "() => void"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isEscapeClicked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "isTooltip",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "offset",
+              "type": {
+                "text": "FPopOverOffset | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "targetElement"
+            },
+            {
+              "kind": "method",
+              "name": "stringToHTML",
+              "parameters": [
+                {
+                  "name": "str",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "computePlacement"
+            },
+            {
+              "kind": "method",
+              "name": "computePosition",
+              "parameters": [
+                {
+                  "name": "isTooltip",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "dispatchEsc"
+            },
+            {
+              "kind": "method",
+              "name": "escapekeyHandle",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                },
+                {
+                  "name": "el",
+                  "type": {
+                    "text": "HTMLElement"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "overlayClick"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "placement",
+              "type": {
+                "text": "FPopoverPlacement | undefined"
+              },
+              "default": "\"auto\"",
+              "fieldName": "placement"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "FPopoverSize | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "overlay",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "fieldName": "overlay"
+            },
+            {
+              "name": "target",
+              "type": {
+                "text": "string | HTMLElement"
+              },
+              "fieldName": "target"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-popover",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FPopover",
+          "declaration": {
+            "name": "FPopover",
+            "module": "src/components/f-popover/f-popover.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-popover",
+          "declaration": {
+            "name": "FPopover",
+            "module": "src/components/f-popover/f-popover.ts"
           }
         }
       ]
@@ -5530,257 +5875,6 @@
           "declaration": {
             "name": "FSearch",
             "module": "src/components/f-search/f-search.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-popover/f-popover.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FPopover",
-          "members": [
-            {
-              "kind": "field",
-              "name": "placement",
-              "type": {
-                "text": "FPopoverPlacement | undefined"
-              },
-              "default": "\"auto\"",
-              "attribute": "placement",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "FPopoverSize | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "overlay",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "true",
-              "attribute": "overlay",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "target",
-              "type": {
-                "text": "string | HTMLElement"
-              },
-              "attribute": "target",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "cleanup",
-              "type": {
-                "text": "() => void"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isEscapeClicked",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "isTooltip",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "offset",
-              "type": {
-                "text": "FPopOverOffset | null"
-              },
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "targetElement"
-            },
-            {
-              "kind": "method",
-              "name": "stringToHTML",
-              "parameters": [
-                {
-                  "name": "str",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "computePlacement"
-            },
-            {
-              "kind": "method",
-              "name": "computePosition",
-              "parameters": [
-                {
-                  "name": "isTooltip",
-                  "type": {
-                    "text": "boolean"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "dispatchEsc"
-            },
-            {
-              "kind": "method",
-              "name": "escapekeyHandle",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "KeyboardEvent"
-                  }
-                },
-                {
-                  "name": "el",
-                  "type": {
-                    "text": "HTMLElement"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "overlayClick"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "placement",
-              "type": {
-                "text": "FPopoverPlacement | undefined"
-              },
-              "default": "\"auto\"",
-              "fieldName": "placement"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "FPopoverSize | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "open"
-            },
-            {
-              "name": "overlay",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "true",
-              "fieldName": "overlay"
-            },
-            {
-              "name": "target",
-              "type": {
-                "text": "string | HTMLElement"
-              },
-              "fieldName": "target"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-popover",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FPopover",
-          "declaration": {
-            "name": "FPopover",
-            "module": "src/components/f-popover/f-popover.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-popover",
-          "declaration": {
-            "name": "FPopover",
-            "module": "src/components/f-popover/f-popover.ts"
           }
         }
       ]

@@ -5,6 +5,9 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import flatpickr from "flatpickr";
 import { Instance } from "flatpickr/dist/types/instance";
 import { DateLimit, DateOption } from "flatpickr/dist/types/options";
+import { FInput } from "../f-input/f-input";
+import { FDiv } from "../f-div/f-div";
+import { FText } from "../f-text/f-text";
 
 export type FDateTimePickerState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -17,7 +20,7 @@ export class FDateTimePicker extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles, ...FInput.styles];
 
 	/**
 	 * @attribute Variants are various visual representations of a date-time-picker field.
@@ -122,9 +125,57 @@ export class FDateTimePicker extends FRoot {
 	 * @attribute query selector for input field
 	 */
 	@query("f-input")
-	dateTimePickerElement!: HTMLInputElement;
+	dateTimePickerElement!: FInput;
 
+	/**
+	 * @attribute query selector for help slot
+	 */
+	@query("f-div[slot='help']")
+	helpSlotElement!: FDiv;
+
+	/**
+	 * flatpickr instance
+	 */
 	flatPickerElement!: Instance;
+
+	/**
+	 * conditional placeholder
+	 */
+	get placeholderText() {
+		if (this.mode === "date-only") {
+			return "Select date";
+		} else if (this.mode === "time-only") {
+			return "Select time";
+		} else {
+			return "Select date and time";
+		}
+	}
+
+	/**
+	 * regex for date-time validation on keyboard typing
+	 */
+	get regexDateTime() {
+		if (this.mode === "date-time") {
+			return /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4} ([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+		} else if (this.mode === "date-only") {
+			return /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$/;
+		} else {
+			return /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+		}
+	}
+
+	/**
+	 * validation message
+	 */
+	get dateValidationMessage() {
+		return `<f-text size="small" variant="para" weight="regular">Please Enter a valid date format: ${
+			this.mode === "date-time"
+				? "DD/MM/YYYY HH:ii"
+				: this.mode === "date-only"
+				? "DD/MM/YYYY"
+				: "HH:ii"
+		}</f-text>`;
+	}
 
 	/**
 	 * close the date-picker on unmount
@@ -161,15 +212,89 @@ export class FDateTimePicker extends FRoot {
 	}
 
 	/**
-	 * conditional placeholder
+	 *
+	 * @param e custom-event value having date string
+	 * @returns date object formed from string
 	 */
-	get placeholderText() {
-		if (this.mode === "date-only") {
-			return "Select date";
-		} else if (this.mode === "time-only") {
-			return "Select time";
+	dateObjectFromString(e: CustomEvent) {
+		const dateTime = e.detail.value.split(" ");
+		const date = dateTime[0].split("/");
+		const time = dateTime[1].split(":");
+		const dateObjFormation = new Date(date[2], date[1], date[0], time[0], time[1]);
+		return dateObjFormation;
+	}
+
+	/**
+	 *
+	 * @param e custom-event value having date string
+	 */
+	handleKeyboardInput(e: CustomEvent) {
+		e.stopPropagation();
+		if (e.detail?.value) {
+			if (e.detail.value.match(this.regexDateTime)) {
+				this.helpSlotElement.innerHTML = `<slot name="help"></slot>`;
+				this.handleInput([this.dateObjectFromString(e)], e.detail.value);
+				this.dateTimePickerElement.state = this.state;
+			} else {
+				this.helpSlotElement.innerHTML = this.dateValidationMessage;
+				this.dateTimePickerElement.state = "danger";
+			}
+			this.dateTimePickerElement.inputElement.focus();
+		}
+		if (e.detail?.type === "clear") {
+			this.handleInput([], "");
+		}
+	}
+
+	/**
+	 *
+	 * @param selectedDates selected date object array
+	 * @param dateStr selected date string
+	 */
+	datePickerOnChange(selectedDates: Date[], dateStr: string) {
+		if (this["is-range"]) {
+			if (selectedDates.length === 2) {
+				this.handleInput(selectedDates, dateStr);
+			}
 		} else {
-			return "Select date and time";
+			this.handleInput(selectedDates, dateStr);
+		}
+	}
+
+	/**
+	 * creates date picker
+	 * @param element element w.r.t which creation of date picker takes place
+	 */
+	createDateTimePicker(element: HTMLElement) {
+		this.flatPickerElement = flatpickr(element, {
+			dateFormat:
+				this.mode === "date-time" ? "d/m/Y H:i" : this.mode === "date-only" ? "d/m/Y" : "H:i",
+			enableTime: this.mode === "date-time" || this.mode === "time-only",
+			noCalendar: this.mode === "time-only",
+			defaultDate: this.value,
+			mode: this["is-range"] ? "range" : "single",
+			minDate: this["min-date"],
+			maxDate: this["max-date"],
+			disable: this["disable-date"] && this["disable-date"]?.length > 0 ? this["disable-date"] : [],
+			inline: this.inline,
+			weekNumbers: this["week-number"],
+			onChange: (selectedDates, dateStr) => {
+				this.datePickerOnChange(selectedDates, dateStr);
+			},
+			nextArrow:
+				"<f-icon-button icon='i-chevron-right' size='small' class='datepicker-arrow-icon' variant='block' type='packed' state='neutral'></f-icon-button>",
+			prevArrow:
+				"<f-icon-button icon='i-chevron-left' size='small' class='datepicker-arrow-icon' variant='block' type='packed' state='neutral'></f-icon-button>"
+		});
+	}
+
+	/**
+	 * week-number border conditional styling
+	 */
+	addWeekNoStyle() {
+		if (this["week-number"]) {
+			(this.flatPickerElement.rContainer as HTMLDivElement).style.borderLeft =
+				"1px solid var(--color-border-secondary";
 		}
 	}
 
@@ -185,7 +310,12 @@ export class FDateTimePicker extends FRoot {
 				?clear=${this.clear}
 				?loading=${this.loading}
 				?disabled=${this.disabled}
-				?read-only=${true}
+				@keydown=${() => {
+					this.flatPickerElement.close();
+					this.dateTimePickerElement.inputElement.focus();
+				}}
+				@input=${this.handleKeyboardInput}
+				?read-only=${this["is-range"]}
 			>
 				<f-div slot="label"><slot name="label"></slot></f-div>
 				<f-div slot="description"><slot name="description"></slot></f-div>
@@ -194,33 +324,15 @@ export class FDateTimePicker extends FRoot {
 		></f-div>`;
 	}
 	updated() {
-		this.flatPickerElement = flatpickr(this.dateTimePickerElement, {
-			dateFormat:
-				this.mode === "date-time" ? "d/m/Y H:i" : this.mode === "date-only" ? "d/m/Y" : "H:i",
-			enableTime: this.mode === "date-time" || this.mode === "time-only",
-			noCalendar: this.mode === "time-only",
-			defaultDate: this.value,
-			mode: this["is-range"] ? "range" : "single",
-			minDate: this["min-date"],
-			maxDate: this["max-date"],
-			disable: this["disable-date"] && this["disable-date"]?.length > 0 ? this["disable-date"] : [],
-			inline: this.inline,
-			weekNumbers: this["week-number"],
-			onChange: (selectedDates, dateStr) => {
-				if (this["is-range"]) {
-					if (selectedDates.length === 2) {
-						this.handleInput(selectedDates, dateStr);
-					}
-				} else {
-					console.log(selectedDates);
-					this.handleInput(selectedDates, dateStr);
-				}
-			},
-			nextArrow:
-				"<f-icon-button icon='i-chevron-right' size='small' class='datepicker-arrow-icon' variant='block' type='packed' state='neutral'></f-icon-button>",
-			prevArrow:
-				"<f-icon-button icon='i-chevron-left' size='small' class='datepicker-arrow-icon' variant='block' type='packed' state='neutral'></f-icon-button>"
-		});
+		if (!this.inline) {
+			requestAnimationFrame(() => {
+				this.createDateTimePicker(this.dateTimePickerElement.inputWrapperElement);
+				this.dateTimePickerElement.value = this.flatPickerElement.input.value;
+				this.addWeekNoStyle();
+			});
+		} else {
+			this.createDateTimePicker(this.dateTimePickerElement);
+		}
 	}
 }
 

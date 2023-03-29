@@ -741,19 +741,27 @@ Sets the certain dates unavailable. There can be multiple options:
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
+			const array = [
+				[0, 1, 2],
+				[3, 4, 5]
+			];
 			return html`
-				<f-div width="100%" align="top-center" padding="large" gap="medium">
-					${[0, 1, 2, 3].map(
-						item => html`<f-div>
+				<f-div width="100%" align="top-center" padding="large" gap="large" direction="column">
+					${array.map(
+						row =>
+							html`<f-div gap="medium"
+								>${row.map(item => {
+									return html`<f-div>
           <f-date-time-picker
             value=${value}
-            placeholder="Write here"
             @input=${handleValue}
             size="medium"
-            ?loading=${item === 0 ? true : false}
-            ?disabled=${item === 1 ? true : false}
-            ?clear=${item === 2 ? true : false}
-            ?read-only=${item === 3 ? true : false}
+            ?loading=${item === 0}
+            ?disabled=${item === 1}
+            ?clear=${item === 2}
+			?is-range=${item === 3}
+			?week-number=${item === 4}
+			?inline=${item === 5}
           >
             <f-div slot="label" padding="none" gap="none">${
 							item === 0
@@ -762,12 +770,18 @@ Sets the certain dates unavailable. There can be multiple options:
 								? "Disabled"
 								: item === 2
 								? "Clear Icon on Type"
-								: "Readonly"
+								: item === 3
+								? "Range Calendar"
+								: item === 4
+								? "Week Numbers Display"
+								: "Inline"
 						}</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-date-time-picker></f-div
         ></f-div
-      >`
+      >`;
+								})}</f-div
+							>`
 					)}
 				</f-div>
 			`;
@@ -807,8 +821,22 @@ Sets the certain dates unavailable. There can be multiple options:
 			</td>
 		</tr>
 		<tr>
-			<td>read-only</td>
-			<td>Only Text could be read, can't be edited</td>
+			<td>is-range</td>
+			<td>for range calnedar</td>
+			<td>
+				<code>false</code>
+			</td>
+		</tr>
+		<tr>
+			<td>week-number</td>
+			<td>Displays the week number inside calendar</td>
+			<td>
+				<code>false</code>
+			</td>
+		</tr>
+		<tr>
+			<td>inline</td>
+			<td>calnedar always open without popover mode</td>
 			<td>
 				<code>false</code>
 			</td>

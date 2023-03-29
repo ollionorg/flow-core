@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { customElement, property, query, state } from "lit/decorators.js";
 import eleStyle from "./f-carousel-content.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
@@ -15,17 +15,17 @@ export class FCarouselContent extends FRoot {
 	/**
 	 * @attribute active selected f-carousel-content
 	 */
-	@property({ type: Boolean, reflect: true })
+	@state()
 	active?: boolean = false;
 
 	/**
 	 * @attribute content-id for f-carousel
 	 */
-	@property({ type: Number, reflect: true })
-	["content-id"]?: number;
+	@property({ type: Number, reflect: true, attribute: "content-id" })
+	contentId?: number;
 
 	@query(".f-carousel-content")
-	carouselContentWrapper!: FDiv;
+	carouselContentWrapper?: FDiv;
 
 	render() {
 		const classes: Record<string, boolean> = {
@@ -39,15 +39,9 @@ export class FCarouselContent extends FRoot {
 		/**
 		 * Final html to render
 		 */
-		return html`<f-div class=${classMap(classes)} width="100%"><slot></slot></f-div>`;
-	}
-	updated() {
-		// condition for making a particualr content active
-		if (!this.active) {
-			this.carouselContentWrapper.style.display = "none";
-		} else {
-			this.carouselContentWrapper?.style?.removeProperty("display");
-		}
+		return this.active
+			? html`<f-div class=${classMap(classes)} width="100%"><slot></slot></f-div>`
+			: "";
 	}
 }
 

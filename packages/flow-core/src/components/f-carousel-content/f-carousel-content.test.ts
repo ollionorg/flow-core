@@ -8,9 +8,9 @@ describe("f-carousel-content", () => {
 		const el = document.createElement("f-carousel-content");
 		expect(el).instanceOf(FCarouselContent);
 	});
-	it("active false display style to be none", async () => {
-		const el = await fixture(html` <f-carousel-content></f-carousel-content> `);
+	it("active false dont displays the carousel-content", async () => {
+		const el = await fixture(html` <f-carousel-content content-id=${0}></f-carousel-content> `);
 		const descendant = el.shadowRoot!.querySelector<FDiv>(".f-carousel-content")!;
-		expect(descendant.style.display).to.equal("none");
+		expect(descendant).to.equal(null);
 	});
 });

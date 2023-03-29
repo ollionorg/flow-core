@@ -13,6 +13,12 @@ export class FCarousel extends FRoot {
 	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
 
 	/**
+	 * @attribute content-id for f-carousel
+	 */
+	@property({ type: Number, reflect: true, attribute: "active-content-id" })
+	activeContentId?: number = 0;
+
+	/**
 	 * @attribute f-carousel can have 2 sizes.
 	 */
 	@property({ type: String, reflect: true })
@@ -36,9 +42,8 @@ export class FCarousel extends FRoot {
 	@query(".f-carousel")
 	carouselWrapper!: FDiv;
 
-	allCarouselContents!: NodeListOf<FCarouselContent>;
-	currentActiveId = 0;
-	intervalTimeout!: number;
+	allCarouselContents?: NodeListOf<FCarouselContent>;
+	intervalTimeout?: number;
 
 	/**
 	 * icon size
@@ -64,48 +69,40 @@ export class FCarousel extends FRoot {
 	 * @param clickType string value for left and right click
 	 */
 	handleArrowClicks(clickType: "left" | "right") {
-		this.allCarouselContents[this.currentActiveId].active = false;
-		if (clickType === "right") {
-			if (this.currentActiveId < this.allCarouselContents.length - 1) {
-				this.currentActiveId++;
+		if (this.allCarouselContents) {
+			let currentActiveId = this.activeContentId ?? 0;
+			if (clickType === "right") {
+				if (currentActiveId < this.allCarouselContents.length - 1) {
+					currentActiveId++;
+				} else {
+					currentActiveId = 0;
+				}
 			} else {
-				this.currentActiveId = 0;
+				if (currentActiveId > 0) {
+					currentActiveId--;
+				} else {
+					currentActiveId = this.allCarouselContents.length - 1;
+				}
 			}
-		} else {
-			if (this.currentActiveId > 0) {
-				this.currentActiveId--;
-			} else {
-				this.currentActiveId = this.allCarouselContents.length - 1;
-			}
-		}
-		this.allCarouselContents[this.currentActiveId].active = true;
-		this.allCarouselContents[this.currentActiveId].setAttribute(
-			"class",
-			`content-slide-${clickType === "right" ? "left" : "right"}`
-		);
-		clearInterval(this.intervalTimeout);
-		this.requestUpdate();
-	}
+			this.activeContentId = currentActiveId;
+			this.allCarouselContents[currentActiveId].setAttribute(
+				"class",
+				`content-slide-${clickType === "right" ? "left" : "right"}`
+			);
 
-	/**
-	 * check if default active content is present
-	 */
-	checkIfActive() {
-		this.allCarouselContents.forEach((item, index) => {
-			if (item.active) {
-				this.currentActiveId = index;
-			}
-		});
+			clearInterval(this.intervalTimeout);
+		}
 	}
 
 	/**
 	 * add active state if default active state not present
 	 */
 	addActiveContent() {
-		this.allCarouselContents.forEach((item, index) => {
-			item["content-id"] = index;
-			if (this.currentActiveId === 0 && index === 0) {
+		this.allCarouselContents?.forEach(item => {
+			if (item.contentId === this.activeContentId) {
 				item.active = true;
+			} else {
+				item.active = false;
 			}
 		});
 	}
@@ -157,7 +154,6 @@ export class FCarousel extends FRoot {
 	}
 	updated() {
 		this.allCarouselContents = this.querySelectorAll<FCarouselContent>("f-carousel-content");
-		this.checkIfActive();
 		this.addActiveContent();
 		this.autoplayMode();
 	}

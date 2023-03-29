@@ -3,160 +3,161 @@
 @import "./../../mixins/scss/mixins";
 
 $categories: (
-  "fill": (
-    "background": var(--color-surface-tertiary),
-    "hover": var(--color-surface-tertiary-hover),
-  ),
-  "transparent": (
-    "background": transparent,
-    "hover": var(--color-surface-default-hover),
-  ),
-  "outline": (
-    "background": transparent,
-    "hover": var(--color-surface-default-hover),
-  ),
+	"fill": (
+		"background": var(--color-surface-tertiary),
+		"hover": var(--color-surface-tertiary-hover)
+	),
+	"transparent": (
+		"background": transparent,
+		"hover": var(--color-surface-default-hover)
+	),
+	"outline": (
+		"background": transparent,
+		"hover": var(--color-surface-default-hover)
+	)
 );
 
 $sizes: (
-  "medium": (
-    "padding-top-bottom": 9px,
-    "padding-left-right": 12px,
-  ),
-  "small": (
-    "padding-top-bottom": 5px,
-    "padding-left-right": 8px,
-  ),
+	"medium": (
+		"padding-top-bottom": 9px,
+		"padding-left-right": 12px
+	),
+	"small": (
+		"padding-top-bottom": 5px,
+		"padding-left-right": 8px
+	)
 );
 
 $states: (
-  "primary": (
-    "input": var(--color-primary-default),
-    "border": var(--color-primary-default),
-    "focus": var(--color-primary-default),
-  ),
-  "default": (
-    "input": var(--color-surface-tertiary),
-    "border": var(--color-border-default),
-    "focus": var(--color-primary-default),
-  ),
-  "success": (
-    "input": var(--color-success-default),
-    "border": var(--color-success-default),
-    "focus": var(--color-success-default),
-  ),
-  "warning": (
-    "input": var(--color-warning-default),
-    "border": var(--color-warning-default),
-    "focus": var(--color-warning-default),
-  ),
-  "danger": (
-    "input": var(--color-danger-default),
-    "border": var(--color-danger-default),
-    "focus": var(--color-danger-default),
-  ),
-  "inherit": (
-    "input": var(--color-input-default),
-    "border": var(--color-input-border-default),
-    "focus": var(--color-input-focus),
-  ),
+	"primary": (
+		"input": var(--color-primary-default),
+		"border": var(--color-primary-default),
+		"focus": var(--color-primary-default)
+	),
+	"default": (
+		"input": var(--color-surface-tertiary),
+		"border": var(--color-border-default),
+		"focus": var(--color-primary-default)
+	),
+	"success": (
+		"input": var(--color-success-default),
+		"border": var(--color-success-default),
+		"focus": var(--color-success-default)
+	),
+	"warning": (
+		"input": var(--color-warning-default),
+		"border": var(--color-warning-default),
+		"focus": var(--color-warning-default)
+	),
+	"danger": (
+		"input": var(--color-danger-default),
+		"border": var(--color-danger-default),
+		"focus": var(--color-danger-default)
+	),
+	"inherit": (
+		"input": var(--color-input-default),
+		"border": var(--color-input-border-default),
+		"focus": var(--color-input-focus)
+	)
 );
 
 :host {
-  .f-text-area-wrapper {
-    position: relative;
-    width: 100%;
-    .f-text-area-maxlength {
-      position: absolute;
-      right: 0%;
-      transform: translateY(-28px);
-    }
-    .f-text-area {
-      @include base();
-      width: 100%;
-      padding: var(--form-textarea-padding-tp-btm) var(--form-textarea-padding-lt-rt);
-      box-sizing: border-box;
-      border-radius: 4px;
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 325;
-      font-size: 12px;
-      line-height: 18px;
-      color: var(--color-text-default);
-      resize: none;
-      max-height: 100%;
-      &[resizable] {
-        resize: vertical;
-      }
-      @each $size, $value in $sizes {
-        &[size="#{$size}"] {
-          padding: map.get($value, "padding-top-bottom") map.get($value, "padding-left-right");
-        }
-      }
-      &::placeholder {
-        /* Modern browsers */
-        /* Chrome, Firefox, Opera, Safari 10.1+ */
-        font-style: normal;
-        font-weight: 325;
-        font-size: 12px;
-        line-height: 18px;
-        color: var(--color-text-subtle);
-      }
-      @each $category, $value in $categories {
-        &[category="#{$category}"] {
-          background-color: map.get($value, "background");
-          &:hover {
-            background-color: map.get($value, "hover") !important;
-          }
-        }
-      }
-      @each $state, $value in $states {
-        &[state="#{$state}"] {
-          &[category="fill"] {
-            border: 1px solid map.get($value, "input");
-            &:focus {
-              outline: none;
-              border: 1px solid map.get($value, "focus");
-            }
-          }
-          &[category="transparent"] {
-            border-bottom: 1px solid map.get($value, "border");
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            &:focus {
-              outline: none;
-              border-bottom: 1px solid map.get($value, "focus");
-            }
-          }
-          &[category="outline"] {
-            border: 1px solid map.get($value, "border");
-            &:focus {
-              outline: none;
-              border: 1px solid map.get($value, "focus");
-            }
-          }
-        }
-      }
-    }
-    .f-text-area-clear-icon {
-      position: absolute;
-      right: 7px;
-      bottom: 0%;
-      top: 10px;
-    }
-    .textarea-limit {
-      transform: translateY(-0.075em);
-    }
-  }
+	.f-text-area-wrapper {
+		position: relative;
+		width: 100%;
+		.f-text-area-maxlength {
+			position: absolute;
+			right: 0%;
+			transform: translateY(-28px);
+		}
+		.f-text-area {
+			@include base();
+			width: 100%;
+			padding: var(--form-textarea-padding-tp-btm) var(--form-textarea-padding-lt-rt);
+			box-sizing: border-box;
+			border-radius: 4px;
+			font-size: 12px;
+			font-style: normal;
+			font-weight: 325;
+			font-size: 12px;
+			line-height: 18px;
+			color: var(--color-text-default);
+			resize: none;
+			max-height: 100%;
+			scroll-padding-block: var(--form-textarea-padding-tp-btm);
+			&[resizable] {
+				resize: vertical;
+			}
+			@each $size, $value in $sizes {
+				&[size="#{$size}"] {
+					padding: map.get($value, "padding-top-bottom") map.get($value, "padding-left-right");
+				}
+			}
+			&::placeholder {
+				/* Modern browsers */
+				/* Chrome, Firefox, Opera, Safari 10.1+ */
+				font-style: normal;
+				font-weight: 325;
+				font-size: 12px;
+				line-height: 18px;
+				color: var(--color-text-subtle);
+			}
+			@each $category, $value in $categories {
+				&[category="#{$category}"] {
+					background-color: map.get($value, "background");
+					&:hover {
+						background-color: map.get($value, "hover") !important;
+					}
+				}
+			}
+			@each $state, $value in $states {
+				&[state="#{$state}"] {
+					&[category="fill"] {
+						border: 1px solid map.get($value, "input");
+						&:focus {
+							outline: none;
+							border: 1px solid map.get($value, "focus");
+						}
+					}
+					&[category="transparent"] {
+						border-bottom: 1px solid map.get($value, "border");
+						border-top: none;
+						border-left: none;
+						border-right: none;
+						&:focus {
+							outline: none;
+							border-bottom: 1px solid map.get($value, "focus");
+						}
+					}
+					&[category="outline"] {
+						border: 1px solid map.get($value, "border");
+						&:focus {
+							outline: none;
+							border: 1px solid map.get($value, "focus");
+						}
+					}
+				}
+			}
+		}
+		.f-text-area-clear-icon {
+			position: absolute;
+			right: 7px;
+			bottom: 0%;
+			top: 10px;
+		}
+		.textarea-limit {
+			transform: translateY(-0.075em);
+		}
+	}
 }
 f-text-area {
-  width: 100%;
-  &[disabled] {
-    @include disabled();
-  }
-  @each $state, $color in $states {
-    &[state="#{$state}"] {
-      @include input-color($state);
-    }
-  }
+	width: 100%;
+	&[disabled] {
+		@include disabled();
+	}
+	@each $state, $color in $states {
+		&[state="#{$state}"] {
+			@include input-color($state);
+		}
+	}
 }

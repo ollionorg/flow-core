@@ -4,6 +4,46 @@
 
 # Change Log
 
+## [1.6.8] - 2023-03-27
+
+### Bug fixes
+- `emoji` picker not opening in `f-form-builder`;
+
+## [1.6.7] - 2023-03-27
+
+### Bug fixes
+- `emoji` picker category resets on selection.
+## [1.6.6] - 2023-03-23
+
+### Bug fixes
+- outside click emoji picker not closing.
+
+## [1.6.5] - 2023-03-23
+
+### Improvements
+- `f-icon-button`: `type`renamed to `category` (more aligned to `f-button`).
+
+## [1.6.4] - 2023-03-21
+
+### Improvements
+- `data-qa-option` value updated for objects in `f-select`.
+
+## [1.6.3] - 2023-03-20
+
+### Bug Fixes
+- `data-qa-id` added in `f-select`.
+## [1.6.2] - 2023-03-17
+
+### Bug Fixes
+- Select dropdowns can’t be dismissed by clicking outside
+## [1.6.1] - 2023-03-14
+
+### Bug Fixes
+- TypeError when using single mode on f-select. 
+- Select dropdowns can’t be dismissed by clicking outside
+- Select dropdowns have no shadow
+- Child popover behavior fixed.
+
 ## [1.6.0] - 2023-03-14
 
 ### Features

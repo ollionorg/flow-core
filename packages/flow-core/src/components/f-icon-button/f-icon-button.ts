@@ -14,12 +14,12 @@ import getCustomFillColor from "../../utils/get-custom-fill-color";
 import LightenDarkenColor from "../../utils/get-lighten-darken-color";
 
 const variants = ["round", "curved", "block"] as const;
-const types = ["fill", "outline", "transparent", "packed"] as const;
+const categories = ["fill", "outline", "transparent", "packed"] as const;
 const sizes = ["large", "medium", "small", "x-small"] as const;
 
-export type FIconButtonVariant = typeof variants[number];
-export type FIconButtonType = typeof types[number];
-export type FIconButtonSize = typeof sizes[number];
+export type FIconButtonVariant = (typeof variants)[number];
+export type FIconButtonType = (typeof categories)[number];
+export type FIconButtonSize = (typeof sizes)[number];
 export type FIconButtonState =
 	| "primary"
 	| "danger"
@@ -63,7 +63,7 @@ export class FIconButton extends FRoot {
 	 * @attribute Type of f-icon-button
 	 */
 	@property({ type: String })
-	type?: FIconButtonType = "fill";
+	category?: FIconButtonType = "fill";
 
 	/**
 	 * @attribute Size of f-icon-button
@@ -112,15 +112,15 @@ export class FIconButton extends FRoot {
 	 */
 	get counterSize() {
 		if (this.size === "small") {
-			return this.type === "packed" ? "small" : "medium";
+			return this.category === "packed" ? "small" : "medium";
 		}
 		if (this.size === "x-small") {
 			return "small";
 		}
-		if (this.size === "large" && this.type === "packed") {
+		if (this.size === "large" && this.category === "packed") {
 			return "medium";
 		}
-		if (this.size === "medium" && this.type === "packed") {
+		if (this.size === "medium" && this.category === "packed") {
 			return "small";
 		}
 		return this.size;
@@ -132,7 +132,7 @@ export class FIconButton extends FRoot {
 	applyStyles() {
 		if (this.fill) {
 			if (this.loading) {
-				if (this.type === "fill") {
+				if (this.category === "fill") {
 					if (this.variant !== "block") {
 						return `background-color: ${LightenDarkenColor(
 							this.fill,
@@ -144,19 +144,19 @@ export class FIconButton extends FRoot {
 					} else {
 						return `background: transparent; border: none; fill: ${this.fill};`;
 					}
-				} else if (this.type === "outline") {
+				} else if (this.category === "outline") {
 					return `background: transparent; border: 1px solid ${this.fill}; fill: ${this.fill};`;
 				} else {
 					return `background: transparent; border: none; fill: ${this.fill};`;
 				}
 			} else {
-				if (this.type === "fill") {
+				if (this.category === "fill") {
 					if (this.variant !== "block") {
 						return `background: ${this.fill}; border: 1px solid ${this.fill};`;
 					} else {
 						return "background: transparent; border: none;";
 					}
-				} else if (this.type === "outline") {
+				} else if (this.category === "outline") {
 					return `background: transparent; border: 1px solid ${this.fill};`;
 				} else {
 					return "background: transparent; border: none;";
@@ -193,17 +193,17 @@ export class FIconButton extends FRoot {
 		const hasShimmer = (getComputedStyle(this, "::before") as any)["animation-name"] === "shimmer";
 		const iconClasses = {
 			"fill-button-surface":
-				this.type === "fill" && this.variant !== "block" && !this.fill ? true : false,
+				this.category === "fill" && this.variant !== "block" && !this.fill ? true : false,
 			"fill-button-surface-light":
 				this.fill &&
-				this.type === "fill" &&
+				this.category === "fill" &&
 				this.variant !== "block" &&
 				getTextContrast(this.fill) === "light-text"
 					? true
 					: false,
 			"fill-button-surface-dark":
 				this.fill &&
-				this.type === "fill" &&
+				this.category === "fill" &&
 				this.variant !== "block" &&
 				getTextContrast(this.fill) === "dark-text"
 					? true
@@ -217,13 +217,13 @@ export class FIconButton extends FRoot {
 		 */
 		const counterClasses = {
 			"absolute-counter": true,
-			"outline-counter": this.type === "fill" ? true : false,
-			[`packed-${this.size}`]: this.type === "packed" ? true : false,
+			"outline-counter": this.category === "fill" ? true : false,
+			[`packed-${this.size}`]: this.category === "packed" ? true : false,
 			[`size-${this.size}`]: true,
-			"fill-outline-counter": this.type === "fill" && this.fill ? true : false
+			"fill-outline-counter": this.category === "fill" && this.fill ? true : false
 		};
 		const counter =
-			this.counter && !(this.type === "packed" && this.size === "x-small")
+			this.counter && !(this.category === "packed" && this.size === "x-small")
 				? html`<f-counter
 						.state=${this.state}
 						.size=${this.counterSize}
@@ -237,7 +237,8 @@ export class FIconButton extends FRoot {
 			"f-icon-button": true,
 			hasShimmer,
 			"custom-loader": this.fill ? true : false,
-			"custom-hover": this.fill && this.type === "fill" && this.variant !== "block" ? true : false
+			"custom-hover":
+				this.fill && this.category === "fill" && this.variant !== "block" ? true : false
 		};
 		// merging host classes
 		this.classList.forEach(cl => {
@@ -251,7 +252,7 @@ export class FIconButton extends FRoot {
 			class=${classMap(classes)}
 			style=${this.applyStyles()}
 			variant=${this.variant}
-			type=${this.type}
+			category=${this.category}
 			size=${this.size}
 			state=${this.state}
 			?counter=${this.counter}

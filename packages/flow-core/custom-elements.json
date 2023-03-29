@@ -2646,6 +2646,10 @@
             },
             {
               "kind": "field",
+              "name": "outsideClick"
+            },
+            {
+              "kind": "field",
               "name": "tooltipElement",
               "type": {
                 "text": "HTMLElement"
@@ -4149,12 +4153,12 @@
             },
             {
               "kind": "field",
-              "name": "type",
+              "name": "category",
               "type": {
                 "text": "FIconButtonType | undefined"
               },
               "default": "\"fill\"",
-              "attribute": "type"
+              "attribute": "category"
             },
             {
               "kind": "field",
@@ -4277,12 +4281,12 @@
               "fieldName": "variant"
             },
             {
-              "name": "type",
+              "name": "category",
               "type": {
                 "text": "FIconButtonType | undefined"
               },
               "default": "\"fill\"",
-              "fieldName": "type"
+              "fieldName": "category"
             },
             {
               "name": "size",
@@ -6090,7 +6094,6 @@
               "type": {
                 "text": "FSelectOptions | string | undefined"
               },
-              "default": "[]",
               "attribute": "value",
               "reflects": true
             },
@@ -6226,6 +6229,14 @@
               "description": "icon size"
             },
             {
+              "kind": "field",
+              "name": "outsideClick"
+            },
+            {
+              "kind": "field",
+              "name": "containerScroll"
+            },
+            {
               "kind": "method",
               "name": "applyOptionsStyle",
               "parameters": [
@@ -6304,19 +6315,6 @@
             },
             {
               "kind": "method",
-              "name": "handleInput",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ],
-              "description": "emit input custom event for option selection"
-            },
-            {
-              "kind": "method",
               "name": "clearInputValue",
               "parameters": [
                 {
@@ -6343,158 +6341,6 @@
             },
             {
               "kind": "method",
-              "name": "handleDropDownOpen",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "open options menu"
-            },
-            {
-              "kind": "method",
-              "name": "handleDropDownClose",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "close options menu"
-            },
-            {
-              "kind": "method",
-              "name": "handleOptionSelection",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "FSelectSingleOption"
-                  }
-                },
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "action for selection of options if the options is in the form of array"
-            },
-            {
-              "kind": "method",
-              "name": "handleSelectionGroup",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "FSelectSingleOption"
-                  }
-                },
-                {
-                  "name": "group",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "action for selection of options if the options is in the form of groups"
-            },
-            {
-              "kind": "method",
-              "name": "handleRemoveGroupSelection",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "FSelectSingleOption"
-                  }
-                },
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "remove selection option (in group) when f-tag is clicked"
-            },
-            {
-              "kind": "method",
-              "name": "handleCheckboxInput",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "FSelectSingleOption"
-                  }
-                },
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "handle click on checkbox"
-            },
-            {
-              "kind": "method",
-              "name": "handleCheckboxGroup",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "FSelectSingleOption"
-                  }
-                },
-                {
-                  "name": "group",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "handle click on checkbox in group"
-            },
-            {
-              "kind": "method",
-              "name": "handleSelectAll",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                },
-                {
-                  "name": "group",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ],
-              "description": "select all options inside a particular group"
-            },
-            {
-              "kind": "method",
               "name": "getCheckedValue",
               "parameters": [
                 {
@@ -6505,19 +6351,6 @@
                 }
               ],
               "description": "check if all values of group are selected or not or are in idetereminate state"
-            },
-            {
-              "kind": "method",
-              "name": "handleViewMoreTags",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "hide/show f-tags when multiple options are selected"
             },
             {
               "kind": "method",
@@ -6603,6 +6436,68 @@
               "name": "singleSelectionStyle"
             },
             {
+              "kind": "method",
+              "name": "getOptionQaId",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "FSelectSingleOption"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "handleDropDownOpen",
+              "default": "handleDropDownOpen"
+            },
+            {
+              "kind": "field",
+              "name": "handleDropDownClose",
+              "default": "handleDropDownClose"
+            },
+            {
+              "kind": "field",
+              "name": "handleOptionSelection",
+              "default": "handleOptionSelection"
+            },
+            {
+              "kind": "field",
+              "name": "handleSelectionGroup",
+              "default": "handleSelectionGroup"
+            },
+            {
+              "kind": "field",
+              "name": "handleRemoveGroupSelection",
+              "default": "handleRemoveGroupSelection"
+            },
+            {
+              "kind": "field",
+              "name": "handleCheckboxInput",
+              "default": "handleCheckboxInput"
+            },
+            {
+              "kind": "field",
+              "name": "handleCheckboxGroup",
+              "default": "handleCheckboxGroup"
+            },
+            {
+              "kind": "field",
+              "name": "handleSelectAll",
+              "default": "handleSelectAll"
+            },
+            {
+              "kind": "field",
+              "name": "handleViewMoreTags",
+              "default": "handleViewMoreTags"
+            },
+            {
+              "kind": "field",
+              "name": "handleInput",
+              "default": "handleInput"
+            },
+            {
               "kind": "field",
               "name": "tooltipElement",
               "type": {
@@ -6672,7 +6567,6 @@
               "type": {
                 "text": "FSelectOptions | string | undefined"
               },
-              "default": "[]",
               "fieldName": "value"
             },
             {
@@ -6810,6 +6704,360 @@
           "declaration": {
             "name": "FSelect",
             "module": "src/components/f-select/f-select.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-select/handlers.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "handleDropDownOpen",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            }
+          ],
+          "description": "open options menu"
+        },
+        {
+          "kind": "function",
+          "name": "handleDropDownClose",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            }
+          ],
+          "description": "close options menu"
+        },
+        {
+          "kind": "function",
+          "name": "handleOptionSelection",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "option",
+              "type": {
+                "text": "FSelectSingleOption"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            }
+          ],
+          "description": "action for selection of options if the options is in the form of array"
+        },
+        {
+          "kind": "function",
+          "name": "handleSelectionGroup",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "option",
+              "type": {
+                "text": "FSelectSingleOption"
+              }
+            },
+            {
+              "name": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            }
+          ],
+          "description": "action for selection of options if the options is in the form of groups"
+        },
+        {
+          "kind": "function",
+          "name": "handleRemoveGroupSelection",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "option",
+              "type": {
+                "text": "FSelectSingleOption"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            }
+          ],
+          "description": "remove selection option (in group) when f-tag is clicked"
+        },
+        {
+          "kind": "function",
+          "name": "handleCheckboxInput",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "option",
+              "type": {
+                "text": "FSelectSingleOption"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            }
+          ],
+          "description": "handle click on checkbox"
+        },
+        {
+          "kind": "function",
+          "name": "handleCheckboxGroup",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "option",
+              "type": {
+                "text": "FSelectSingleOption"
+              }
+            },
+            {
+              "name": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            }
+          ],
+          "description": "handle click on checkbox in group"
+        },
+        {
+          "kind": "function",
+          "name": "handleSelectAll",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            },
+            {
+              "name": "group",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "select all options inside a particular group"
+        },
+        {
+          "kind": "function",
+          "name": "handleViewMoreTags",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "MouseEvent"
+              }
+            }
+          ],
+          "description": "hide/show f-tags when multiple options are selected"
+        },
+        {
+          "kind": "function",
+          "name": "handleInput",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            },
+            {
+              "name": "e",
+              "type": {
+                "text": "InputEvent"
+              }
+            }
+          ],
+          "description": "emit input custom event for option selection"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "handleDropDownOpen",
+          "declaration": {
+            "name": "handleDropDownOpen",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleDropDownClose",
+          "declaration": {
+            "name": "handleDropDownClose",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleOptionSelection",
+          "declaration": {
+            "name": "handleOptionSelection",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleSelectionGroup",
+          "declaration": {
+            "name": "handleSelectionGroup",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleRemoveGroupSelection",
+          "declaration": {
+            "name": "handleRemoveGroupSelection",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleCheckboxInput",
+          "declaration": {
+            "name": "handleCheckboxInput",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleCheckboxGroup",
+          "declaration": {
+            "name": "handleCheckboxGroup",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleSelectAll",
+          "declaration": {
+            "name": "handleSelectAll",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleViewMoreTags",
+          "declaration": {
+            "name": "handleViewMoreTags",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleInput",
+          "declaration": {
+            "name": "handleInput",
+            "module": "src/components/f-select/handlers.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-select/render.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "render",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FSelect"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "render",
+            "module": "src/components/f-select/render.ts"
           }
         }
       ]

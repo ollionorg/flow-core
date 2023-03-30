@@ -3,18 +3,18 @@ import litcss from "rollup-plugin-postcss-lit";
 import path from "path";
 
 /**
- * Es build with no externals , to consume through CDN in static html files.
+ * UMD build with no externals , to consume through CDN in static html files.
  */
 export default defineConfig({
 	build: {
 		sourcemap: true,
 		lib: {
 			entry: "src/index.ts",
-			name: "flow-elements",
+			name: "flowCore",
 			fileName: format => `flow-core.${format}.js`,
-			formats: ["es"]
+			formats: ["umd"]
 		},
-		outDir: "es-bundle"
+		outDir: "umd"
 	},
 
 	resolve: {

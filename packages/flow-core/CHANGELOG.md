@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.7.1] - 2023-03-31
+
+### Improvements
+- `umd` changed to `es` to avoid depednecy consume error.
 ## [1.7.0] - 2023-03-31
 
 ### Features

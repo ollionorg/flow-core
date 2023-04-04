@@ -1,6 +1,6 @@
 {
   "name": "@cldcvr/flow-core",
-  "version": "1.6.8",
+  "version": "1.7.2",
   "description": "Core package of flow design system",
   "module": "dist/flow-core.es.js",
   "main": "dist/flow-core.cjs.js",
@@ -10,7 +10,7 @@
     "prepublishOnly": "./compile.sh",
     "compile": "./compile.sh",
     "meta-build": "./meta-build.sh",
-    "build": "vite build --emptyOutDir && tsc -emitDeclarationOnly",
+    "build": "vite build --emptyOutDir && vite build --emptyOutDir --config vite.umd.config.ts && tsc -emitDeclarationOnly",
     "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
     "sync-colors": "node ./figma/sync-colors.js",
     "sync-md-file": "node ./figma/sync-md-file.js",

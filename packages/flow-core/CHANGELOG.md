@@ -10,6 +10,14 @@
 
 - `f-carousel` and `f-carousel-content` component added;
 
+## [1.7.2] - 2023-03-31
+
+### Improvements
+- `umd` bundle updated.
+## [1.7.0] - 2023-03-31
+
+### Features
+- `umd` bundles added in package. to use flow-core in static html file.
 ## [1.6.8] - 2023-03-27
 
 ### Bug fixes

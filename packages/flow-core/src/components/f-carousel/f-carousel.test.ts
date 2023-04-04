@@ -5,17 +5,6 @@ import { FCarousel, FCarouselContent, FDiv } from "@cldcvr/flow-core";
 
 function isInViewport(element) {
 	const rect = element.getBoundingClientRect();
-	console.log(element);
-	console.log(
-		rect.top,
-		rect.left,
-		rect.bottom,
-		rect.right,
-		window.innerHeight,
-		window.innerWidth,
-		document.documentElement.clientHeight,
-		document.documentElement.clientWidth
-	);
 	return (
 		rect.top >= 0 &&
 		rect.left >= 0 &&

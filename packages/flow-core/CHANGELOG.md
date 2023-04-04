@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.7.4] - 2023-04-04
+
+### Bug fixes
+- tooltip not visible in light theme.
+
 ## [1.7.3] - 2023-04-04
 
 ### Bug fixes

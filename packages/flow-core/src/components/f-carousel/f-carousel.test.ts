@@ -3,6 +3,27 @@ import { html, fixture, expect } from "@open-wc/testing";
 import "@cldcvr/flow-core";
 import { FCarousel, FCarouselContent, FDiv } from "@cldcvr/flow-core";
 
+function isInViewport(element) {
+	const rect = element.getBoundingClientRect();
+	console.log(element);
+	console.log(
+		rect.top,
+		rect.left,
+		rect.bottom,
+		rect.right,
+		window.innerHeight,
+		window.innerWidth,
+		document.documentElement.clientHeight,
+		document.documentElement.clientWidth
+	);
+	return (
+		rect.top >= 0 &&
+		rect.left >= 0 &&
+		rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+		rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+	);
+}
+
 describe("f-carousel", () => {
 	it("is defined", () => {
 		const el = document.createElement("f-carousel");
@@ -24,11 +45,7 @@ describe("f-carousel", () => {
 		const descendants = el.querySelectorAll<FCarouselContent>("f-carousel-content")!;
 		descendants.forEach(item => {
 			if (item.contentId === 1) {
-				const carouselContent = item.shadowRoot.querySelector<FDiv>(".f-carousel-content")!;
-				expect(carouselContent).instanceOf(FDiv);
-			} else {
-				const carouselContent = item.shadowRoot.querySelector<FDiv>(".f-carousel-content")!;
-				expect(carouselContent).to.equal(null);
+				expect(isInViewport(item)).to.equal(true);
 			}
 		});
 	});

@@ -64,7 +64,7 @@ f-carousel act as the wrapper component for f-carousel-content. Each f-carousel-
 			const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 			return html`
 				<f-div align="middle-center">
-					<f-div width="50%">
+					<f-div width="50%" overflow="hidden">
 						<f-carousel
 							.size=${args.size}
 							?autoplay=${args.autoplay}
@@ -128,7 +128,7 @@ a number field for showing the active content
 			const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 			return html`
 				<f-div align="middle-center">
-					<f-div width="50%">
+					<f-div width="50%" overflow="hidden">
 						<f-carousel active-content-id=${4}>
 							${array.map(
 								item => html` <f-carousel-content content-id=${item}
@@ -188,7 +188,7 @@ f-carousel can have 2 sizes.
 			return html`
 				<f-div align="middle-center" gap="x-large">
 					${["medium", "small"].map(item => {
-						return html` <f-div>
+						return html` <f-div width="30%" overflow="hidden">
 							<f-carousel .size=${item}>
 								${array.map(
 									item => html` <f-carousel-content content-id=${item}
@@ -272,7 +272,7 @@ boolean value autoplay so that carousel automatically scrolls
 			const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 			return html`
 				<f-div align="middle-center">
-					<f-div width="50%">
+					<f-div width="50%" overflow="hidden">
 						<f-carousel ?autoplay=${true}>
 							${array.map(
 								item => html` <f-carousel-content content-id=${item}
@@ -332,7 +332,7 @@ Interval property is conditional and works only when autoplay is set to true. de
 			const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 			return html`
 				<f-div align="middle-center">
-					<f-div width="50%">
+					<f-div width="50%" overflow="hidden">
 						<f-carousel ?autoplay=${true} .interval=${2000}>
 							${array.map(
 								item => html` <f-carousel-content content-id=${item}

@@ -43,7 +43,7 @@ export class FCarousel extends FRoot {
 	carouselWrapper!: FDiv;
 
 	allCarouselContents?: NodeListOf<FCarouselContent>;
-	intervalTimeout?: number;
+	currentActiveId = 0;
 
 	/**
 	 * icon size
@@ -57,40 +57,25 @@ export class FCarousel extends FRoot {
 	}
 
 	/**
-	 * clear the interval on unmount
-	 */
-	disconnectedCallback() {
-		clearInterval(this.intervalTimeout);
-		super.disconnectedCallback();
-	}
-
-	/**
 	 * handling click affect for caraousel
 	 * @param clickType string value for left and right click
 	 */
 	handleArrowClicks(clickType: "left" | "right") {
 		if (this.allCarouselContents) {
-			let currentActiveId = this.activeContentId ?? 0;
 			if (clickType === "right") {
-				if (currentActiveId < this.allCarouselContents.length - 1) {
-					currentActiveId++;
+				if (this.currentActiveId < this.allCarouselContents.length - 1) {
+					this.currentActiveId++;
 				} else {
-					currentActiveId = 0;
+					this.currentActiveId = 0;
 				}
 			} else {
-				if (currentActiveId > 0) {
-					currentActiveId--;
+				if (this.currentActiveId > 0) {
+					this.currentActiveId--;
 				} else {
-					currentActiveId = this.allCarouselContents.length - 1;
+					this.currentActiveId = this.allCarouselContents.length - 1;
 				}
 			}
-			this.activeContentId = currentActiveId;
-			this.allCarouselContents[currentActiveId].setAttribute(
-				"class",
-				`content-slide-${clickType === "right" ? "left" : "right"}`
-			);
-
-			clearInterval(this.intervalTimeout);
+			this.allCarouselContents[this.currentActiveId].scrollIntoView({ behavior: "smooth" });
 		}
 	}
 
@@ -98,13 +83,10 @@ export class FCarousel extends FRoot {
 	 * add active state if default active state not present
 	 */
 	addActiveContent() {
-		this.allCarouselContents?.forEach(item => {
-			if (item.contentId === this.activeContentId) {
-				item.active = true;
-			} else {
-				item.active = false;
-			}
-		});
+		if (this.allCarouselContents && this.activeContentId) {
+			this.currentActiveId = this.activeContentId;
+			this.allCarouselContents[this.activeContentId ?? 0].scrollIntoView();
+		}
 	}
 
 	/**
@@ -112,10 +94,17 @@ export class FCarousel extends FRoot {
 	 */
 	autoplayMode() {
 		if (this.autoplay) {
-			this.intervalTimeout = window.setInterval(() => {
+			window.setInterval(() => {
 				this.handleArrowClicks("right");
 			}, this.interval);
 		}
+	}
+
+	get arrowStylesLeft() {
+		return `position:fixed; left:${this.getBoundingClientRect().left - 30}px`;
+	}
+	get arrowStylesRight() {
+		return `position:fixed; left:${this.getBoundingClientRect().right}px`;
 	}
 
 	render() {
@@ -127,8 +116,9 @@ export class FCarousel extends FRoot {
 			align="middle-center"
 			width="100%"
 			.gap=${this.size === "small" ? "medium" : "small"}
+			height="hug-content"
 		>
-			<f-div width="hug-content" align="middle-center">
+			<f-div width="hug-content" align="middle-center" style=${this.arrowStylesLeft}>
 				<f-icon-button
 					icon="i-chevron-left"
 					type="packed"
@@ -138,10 +128,10 @@ export class FCarousel extends FRoot {
 					@click=${() => this.handleArrowClicks("left")}
 				></f-icon-button>
 			</f-div>
-			<f-div align="middle-center">
+			<f-div align="middle-center" width="100%" overflow="scroll">
 				<slot></slot>
 			</f-div>
-			<f-div width="hug-content" align="middle-center">
+			<f-div width="hug-content" align="middle-center" style=${this.arrowStylesRight}>
 				<f-icon-button
 					icon="i-chevron-right"
 					type="packed"
@@ -154,7 +144,13 @@ export class FCarousel extends FRoot {
 	}
 	updated() {
 		this.allCarouselContents = this.querySelectorAll<FCarouselContent>("f-carousel-content");
-		this.addActiveContent();
+		this.allCarouselContents.forEach(item => {
+			item.style.width = `${this.offsetWidth}px`;
+		});
+		requestAnimationFrame(() => {
+			this.addActiveContent();
+		});
+
 		this.autoplayMode();
 	}
 }

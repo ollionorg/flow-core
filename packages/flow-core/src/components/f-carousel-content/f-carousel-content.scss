@@ -5,40 +5,10 @@
 	/***** Slide Right *****/
 	.f-carousel-content {
 		@include base();
-		overflow: hidden;
-		&.content-slide-right {
-			animation: var(--transition-time-delayed) slide-right;
-		}
-		@keyframes slide-right {
-			from {
-				margin-left: -100%;
-			}
-			to {
-				margin-left: 0%;
-			}
-		}
-
-		/***** Slide Left *****/
-		&.content-slide-left {
-			animation: var(--transition-time-delayed) slide-left;
-		}
-		@keyframes slide-left {
-			from {
-				margin-left: 100%;
-			}
-			to {
-				margin-left: 0%;
-			}
-		}
 	}
 }
 
 f-carousel-content {
-	&[active] {
-		display: flex;
-		flex: 1 0 auto;
-	}
-	&.content-slide-left {
-		overflow: hidden;
-	}
+	display: flex;
+	flex: 1 0 auto;
 }

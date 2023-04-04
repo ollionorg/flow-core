@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.7.3] - 2023-04-04
+
+### Bug fixes
+- Text not wrapping in forms.
 ## [1.7.2] - 2023-03-31
 
 ### Improvements

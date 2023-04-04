@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.8.1] - 2023-04-04
+
+### Improvements
+- support to pass state in help slot of inputs.
 ## [1.8.0] - 2023-04-04
 
 ### Features

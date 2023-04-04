@@ -311,15 +311,20 @@ export default function render(this: FSelect) {
 				}}
 			>
 				<f-div padding="none" direction="column" width="fill-container">
-					<f-div
-						padding="none"
-						direction="row"
-						width="hug-content"
-						height="hug-content"
-						gap="small"
-					>
-						<slot name="label" @slotchange=${this._onLabelSlotChange}></slot>
-						<slot name="icon-tooltip"></slot>
+					<f-div padding="none" gap="auto" direction="row" height="hug-content">
+						<f-div
+							padding="none"
+							gap="small"
+							direction="row"
+							width="hug-content"
+							height="hug-content"
+						>
+							<slot name="label" @slotchange=${this._onLabelSlotChange}></slot>
+							<slot name="icon-tooltip"></slot>
+						</f-div>
+						<f-div width="hug-content">
+							<slot name="subtitle"></slot>
+						</f-div>
 					</f-div>
 					<slot name="description"></slot>
 				</f-div>

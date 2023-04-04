@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.8.0] - 2023-04-04
+
+### Features
+- `subtitle` slot support added to all input elements.
+
 ## [1.7.4] - 2023-04-04
 
 ### Bug fixes

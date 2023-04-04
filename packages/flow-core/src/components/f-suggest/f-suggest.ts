@@ -258,7 +258,8 @@ export class FSuggest extends FRoot {
 					: html` <f-div slot="label"><slot name="label"></slot></f-div>
 							<f-div slot="description"><slot name="description"></slot></f-div>
 							<f-div slot="help"><slot name="help"></slot></f-div>
-							<f-div slot="icon-tooltip"><slot name="icon-tooltip"></slot></f-div>`}
+							<f-div slot="icon-tooltip"><slot name="icon-tooltip"></slot></f-div
+							><f-div slot="subtitle"><slot name="subtitle"></slot></f-div>`}
 			</f-input>
 			<f-popover .overlay=${false} .placement=${"bottom-start"}>
 				<f-div direction="column" state="secondary">

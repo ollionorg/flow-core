@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.8.2] - 2023-04-07
+
+### Improvements
+- shadow added to `f-suggest` options.
+
 ## [1.8.1] - 2023-04-04
 
 ### Improvements

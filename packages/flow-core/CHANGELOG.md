@@ -4,6 +4,16 @@
 
 # Change Log
 
+## [1.8.4] - 2023-04-10
+
+### Improvements
+- Icon story updated with external storybook link.
+- `f-input`: `autocomplete`, `autofocus` attribute support added.
+### Bug Fixes
+
+- `f-text`: alignment fixed when used in `f-div` column direction.
+- `f-radio`, `f-checkbox` spacing issue fixed.
+
 ## [1.8.3] - 2023-04-10
 
 ### Bug Fixes

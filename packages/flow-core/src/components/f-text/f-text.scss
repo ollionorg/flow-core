@@ -102,8 +102,8 @@ $aligns: left, center, right;
 f-text {
 	@include base();
 	&:not([inline]) {
-		flex: 1 1;
-		display: block;
+		flex: 0 0 fit-content;
+		display: flex;
 	}
 	white-space: normal;
 	word-break: break-word;
@@ -128,6 +128,7 @@ f-text {
 	@each $align in $aligns {
 		&[align="#{$align}"] {
 			text-align: $align;
+			justify-content: $align;
 		}
 	}
 
@@ -184,5 +185,16 @@ f-text {
 		> f-text[state="#{$state}"] {
 			color: map-get($color, "text");
 		}
+	}
+}
+
+f-div[direction="column"] {
+	> f-text {
+		height: fit-content;
+	}
+}
+f-div[direction="row"] {
+	> f-text {
+		width: fit-content;
 	}
 }

@@ -381,6 +381,8 @@ export class FInput extends FRoot {
 							.value="${this.value || ""}"
 							size=${this.size}
 							?readonly=${this.readOnly}
+							autofocus=${ifDefined(this.getAttribute("autofocus"))}
+							autocomplete=${ifDefined(this.getAttribute("autocomplete"))}
 							maxlength="${ifDefined(this.maxLength)}"
 							@input=${this.handleInput}
 						/>

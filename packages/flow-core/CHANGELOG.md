@@ -4,6 +4,29 @@
 
 # Change Log
 
+## [1.8.2] - 2023-04-07
+
+### Improvements
+- shadow added to `f-suggest` options.
+
+## [1.8.1] - 2023-04-04
+
+### Improvements
+- support to pass state in help slot of inputs.
+## [1.8.0] - 2023-04-04
+
+### Features
+- `subtitle` slot support added to all input elements.
+
+## [1.7.4] - 2023-04-04
+
+### Bug fixes
+- tooltip not visible in light theme.
+
+## [1.7.3] - 2023-04-04
+
+### Bug fixes
+- Text not wrapping in forms.
 ## [1.7.2] - 2023-03-31
 
 ### Improvements

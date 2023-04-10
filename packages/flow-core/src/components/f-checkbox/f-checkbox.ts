@@ -97,6 +97,7 @@ export class FCheckbox extends FRoot {
             <f-div width="hug-content" height="hug-content"> <slot name="label"></slot></f-div>
             <f-div width="hug-content" height="hug-content"
               ><slot name="icon-tooltip"></slot></f-div>
+			  <f-div> <slot name="subtitle"></slot></f-div>
             </f-div>
           </f-div>
           <slot name="description"></slot>

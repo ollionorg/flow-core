@@ -260,25 +260,22 @@ export class FSearch extends FRoot {
 	}
 	render() {
 		return html` <f-div width="100%" direction="column" gap="x-small" height="hug-content">
-			<f-div
-				padding="none"
-				direction="column"
-				width="fill-container"
-				gap="x-small"
-				id="header-section"
-			>
-				<f-div
-					padding="none"
-					gap="small"
-					direction="row"
-					width="hug-content"
-					height="hug-content"
-					id="label-slot"
-				>
-					<f-div padding="none" direction="row" width="hug-content" height="hug-content">
+			<f-div padding="none" direction="column" width="fill-container" id="header-section">
+				<f-div padding="none" gap="auto" direction="row" height="hug-content">
+					<f-div
+						padding="none"
+						gap="small"
+						direction="row"
+						width="hug-content"
+						height="hug-content"
+						id="label-slot"
+					>
 						<slot name="label"></slot>
+						<slot name="icon-tooltip"></slot>
 					</f-div>
-					<slot name="icon-tooltip"></slot>
+					<f-div width="hug-content">
+						<slot name="subtitle"></slot>
+					</f-div>
 				</f-div>
 				<slot name="description"></slot>
 			</f-div>

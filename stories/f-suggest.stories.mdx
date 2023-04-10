@@ -86,7 +86,9 @@ f-suggest is an input element.
 			state: "default",
 			size: "medium",
 			slot: `              <f-div slot="label" padding="none" gap="none">Label</f-div>
-              <f-div width="100%" slot="help"><f-text  variant="para" size="small">This is a Subtext</f-text></f-div>`,
+              <f-div width="100%" slot="help"><f-text  variant="para" size="small">This is a Subtext</f-text></f-div>
+			  <f-text slot="subtitle" state="secondary" variant="para" size="small">Optional</f-text>
+			<f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>`,
 			["icon-left"]: undefined,
 			["icon-right"]: undefined,
 			["prefix"]: undefined,
@@ -151,9 +153,6 @@ f-suggest is an input element.
 						@keydown=${handleKeydown}
 					>
 						${unsafeHTML(args.slot)}
-						<f-text slot="description" variant="para" size="small"
-							>Some description about f-suggest</f-text
-						>
 					</f-suggest>
 				</f-div>
 			`;

@@ -4,73 +4,101 @@
 
 # Change Log
 
+## [1.8.3] - 2023-04-10
+
+### Bug Fixes
+
+- `f-icon-button`: in block variant, hover on icon added.
+
 ## [1.8.2] - 2023-04-07
 
 ### Improvements
+
 - shadow added to `f-suggest` options.
 
 ## [1.8.1] - 2023-04-04
 
 ### Improvements
+
 - support to pass state in help slot of inputs.
+
 ## [1.8.0] - 2023-04-04
 
 ### Features
+
 - `subtitle` slot support added to all input elements.
 
 ## [1.7.4] - 2023-04-04
 
 ### Bug fixes
+
 - tooltip not visible in light theme.
 
 ## [1.7.3] - 2023-04-04
 
 ### Bug fixes
+
 - Text not wrapping in forms.
+
 ## [1.7.2] - 2023-03-31
 
 ### Improvements
+
 - `umd` bundle updated.
+
 ## [1.7.0] - 2023-03-31
 
 ### Features
+
 - `umd` bundles added in package. to use flow-core in static html file.
+
 ## [1.6.8] - 2023-03-27
 
 ### Bug fixes
+
 - `emoji` picker not opening in `f-form-builder`;
 
 ## [1.6.7] - 2023-03-27
 
 ### Bug fixes
+
 - `emoji` picker category resets on selection.
+
 ## [1.6.6] - 2023-03-23
 
 ### Bug fixes
+
 - outside click emoji picker not closing.
 
 ## [1.6.5] - 2023-03-23
 
 ### Improvements
+
 - `f-icon-button`: `type`renamed to `category` (more aligned to `f-button`).
 
 ## [1.6.4] - 2023-03-21
 
 ### Improvements
+
 - `data-qa-option` value updated for objects in `f-select`.
 
 ## [1.6.3] - 2023-03-20
 
 ### Bug Fixes
+
 - `data-qa-id` added in `f-select`.
+
 ## [1.6.2] - 2023-03-17
 
 ### Bug Fixes
+
 - Select dropdowns can’t be dismissed by clicking outside
+
 ## [1.6.1] - 2023-03-14
 
 ### Bug Fixes
-- TypeError when using single mode on f-select. 
+
+- TypeError when using single mode on f-select.
 - Select dropdowns can’t be dismissed by clicking outside
 - Select dropdowns have no shadow
 - Child popover behavior fixed.

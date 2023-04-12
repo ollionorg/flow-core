@@ -99,11 +99,8 @@ import("@cldcvr/flow-core").then(async () => {
 ```
 
 #### Icon packs
-
-* Product icons (logos of other products)
-* AWS cloud
-* GCP cloud
-* [View all](https://github.com/cldcvr/flow-icon)
+* [Installation](https://github.com/cldcvr/flow-icon)
+* [View icons](https://flow.cldcvr.com/icons/index.html)
 
 
 ## VScode Plugin and debuggers

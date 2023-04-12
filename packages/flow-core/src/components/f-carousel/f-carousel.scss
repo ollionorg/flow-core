@@ -1,0 +1,82 @@
+@import "./../../mixins/scss/mixins";
+
+f-carousel {
+	display: flex;
+	flex: 1 0 fit-content;
+	flex-wrap: wrap;
+	overflow-y: auto;
+	align-items: flex-start;
+	justify-content: flex-start;
+	@include base();
+
+	f-carousel-content {
+		width: 100%;
+		flex: 0 0 auto;
+		display: inline-flex;
+	}
+}
+:host {
+	.slides {
+		@include base();
+
+		&::-webkit-scrollbar {
+			display: none; /* Safari and Chrome */
+		}
+		-ms-overflow-style: none; /* Internet Explorer 10+ */
+		scrollbar-width: none; /* Firefox */
+	}
+
+	.arrow {
+		align-self: center;
+	}
+
+	.dot {
+		width: 8px;
+		height: 8px;
+		fill: var(--color-surface-secondary);
+	}
+}
+
+// :host {
+// 	.slides {
+// 		overflow-x: auto;
+// 		scroll-snap-type: x mandatory;
+
+// 		scroll-behavior: smooth;
+// 		-webkit-overflow-scrolling: touch;
+
+// 		&::-webkit-scrollbar {
+// 			display: none;
+// 			-ms-overflow-style: none; /* IE and Edge */
+// 			scrollbar-width: none; /* Firefox */
+// 		}
+// 	}
+
+// 	.splide__slide {
+// 		min-height: 50px;
+// 	}
+// 	.splide {
+// 		width: 100%;
+// 		padding: 0px 50px;
+// 	}
+
+// 	slot {
+// 		display: contents;
+// 	}
+// }
+
+f-div[direction="column"] {
+	> f-carousel {
+		flex: 1 1;
+		max-height: 100%;
+		width: 100%;
+	}
+}
+
+f-div[direction="row"] {
+	> f-carousel {
+		flex: 1 1;
+		max-width: 100%;
+		height: 100%;
+	}
+}

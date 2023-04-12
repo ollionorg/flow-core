@@ -97,13 +97,8 @@ import("@cldcvr/flow-core").then(async () => {
 	//add your application startup code here
 });
 ```
-
-#### Icon packs
-
-* Product icons (logos of other products)
-* AWS cloud
-* GCP cloud
-* [View all](https://github.com/cldcvr/flow-icon)
+* [Icons Github repo](https://github.com/cldcvr/flow-icon)
+* [View icons](https://flow.cldcvr.com/icons/index.html)
 
 
 ## VScode Plugin and debuggers
@@ -112,27 +107,22 @@ import("@cldcvr/flow-core").then(async () => {
 **Browser Debugger**: [Chrome](https://chrome.google.com/webstore/detail/web-component-devtools/gdniinfdlmmmjpnhgnkmfpffipenjljo), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/web-component-devtools/), [Safari](https://developer.apple.com/documentation/safariservices/safari_web_extensions/adding_a_web_development_tool_to_safari_web_inspector)
 
 
-## Dependencies (coming soon)
-* Tabs (coming soon)
-* Form builder (coming soon)
-* Pipelines (coming soon)
+## Dependencies
+* [Lineage](https://github.com/cldcvr/flow-lineage)
+* [Form builder](https://github.com/cldcvr/flow-form-builder)
 * Logs (coming soon)
+* Force graph (coming soon)
 * Tables (coming soon)
 * Themes (coming soon)
-* Time-series widgets (coming soon)
-* Lineage (coming soon)
-* Auth flow (coming soon)
-* Admin flow (coming soon)
+* Time-series (coming soon)
 
 
 ## Components
-* Button - [documentation](https://docs.google.com/document/d/1jwpo28kx61ybL3AOVzD2XaJ-aogZSThCTHtFWeqqMp8/edit?usp=sharing) |  Storybook
-* Icon - [documentation](https://docs.google.com/document/d/1kLruoml15fZCo8XUoo48xsNDVgzaDe9freI6XeP7HOs/edit#heading=h.b81ibd1zmiy) |  Storybook
-* Layout (f-div) - [documentation](https://docs.google.com/document/d/1X2i89A34pOnnTarzDDbEfP_GdK7sUBshr4gvX5ZEcPY/edit?usp=sharing) |  Storybook
-* Icon-button - [documentation](https://docs.google.com/document/d/1kLruoml15fZCo8XUoo48xsNDVgzaDe9freI6XeP7HOs/edit#heading=h.b81ibd1zmiy) |  Storybook
-* Typography (f-text) - [documentation](https://docs.google.com/document/d/1gc2pg9aZd1NsYvTXjAREsJkVYUsuin0-BiRa9vX9QNY/edit?usp=sharing)  |  Storybook
-* Tooltip - [documentation](https://docs.google.com/document/d/15k1dfr1wU3xaOj7tuxIQQcGFM5jz1SuX2_x6-91PSZo/edit?usp=sharing) |  Storybook
-* Colors - [documentation](https://docs.google.com/document/d/18EwptEUyenxyj1kC_kfdYsDfETZnWQF8EqEHLdwRQv0/edit?usp=sharing) |  Storybook
+Visit the [Flow components Storybook](https://flow.cldcvr.com/v2/index.html)
+
+
+## Templates
+Visit the [Flow templates Storybook](https://flow.cldcvr.com/templates/index.html)
 
 
 ## Resources

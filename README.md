@@ -97,7 +97,7 @@ import("@cldcvr/flow-core").then(async () => {
 	//add your application startup code here
 });
 ```
-* [Icon installation](https://github.com/cldcvr/flow-icon)
+* [Icons Github repo](https://github.com/cldcvr/flow-icon)
 * [View icons](https://flow.cldcvr.com/icons/index.html)
 
 

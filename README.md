@@ -123,11 +123,11 @@ import("@cldcvr/flow-core").then(async () => {
 
 
 ## Components
-Visit the [Flow Storybook](https://flow.cldcvr.com/v2/index.html)
+Visit the [Flow components Storybook](https://flow.cldcvr.com/v2/index.html)
 
 
 ## Templates
-Visit the [Flow Storybook](https://flow.cldcvr.com/templates/index.html)
+Visit the [Flow templates Storybook](https://flow.cldcvr.com/templates/index.html)
 
 
 ## Resources

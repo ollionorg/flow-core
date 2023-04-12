@@ -112,7 +112,7 @@ import("@cldcvr/flow-core").then(async () => {
 **Browser Debugger**: [Chrome](https://chrome.google.com/webstore/detail/web-component-devtools/gdniinfdlmmmjpnhgnkmfpffipenjljo), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/web-component-devtools/), [Safari](https://developer.apple.com/documentation/safariservices/safari_web_extensions/adding_a_web_development_tool_to_safari_web_inspector)
 
 
-## Dependencies (coming soon)
+## Dependencies
 * [Lineage](https://github.com/cldcvr/flow-lineage)
 * [Form builder](https://github.com/cldcvr/flow-form-builder)
 * Logs (coming soon)

@@ -21,7 +21,7 @@ If you would like to contribute to an existing starter kit or write a new one fo
 
 **Browser Debugger**: [Chrome](https://chrome.google.com/webstore/detail/web-component-devtools/gdniinfdlmmmjpnhgnkmfpffipenjljo), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/web-component-devtools/), [Safari](https://developer.apple.com/documentation/safariservices/safari_web_extensions/adding_a_web_development_tool_to_safari_web_inspector)
 
-**Note** For Typescript, make sure you are using version >4.5
+**Note:** For Typescript, make sure you are using version >4.5
 
 ---
 
@@ -32,6 +32,7 @@ If you would like to contribute to an existing starter kit or write a new one fo
 
 *Note:* after installation re-start your application.
 
+<br>
 
 #### 2️⃣ Import CSS 
 **Vue:**
@@ -53,6 +54,9 @@ import "@cldcvr/flow-core/dist/style.css";
 "styles": ["@cldcvr/flow-core/dist/style.css"],
 
 ```
+
+<br>
+
 #### 3️⃣ Import flow-core into your project
 
 Copy and import the below snippet into your startup file. In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
@@ -61,8 +65,11 @@ import("@cldcvr/flow-core").then(async () => {
   //your application startup code
 });
 ```
+
+<br>
+
 #### 4️⃣ If your project is typescript enabled please include import types to
-**Note** For Typescript, make sure you are using version >4.5
+**Note:** For Typescript, make sure you are using version >4.5
 
 **Vue:** 
 Copy paste below line in your `main.ts` file.

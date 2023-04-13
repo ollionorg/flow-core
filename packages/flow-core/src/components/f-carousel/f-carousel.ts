@@ -1,4 +1,4 @@
-import { html, PropertyValueMap, render, unsafeCSS } from "lit";
+import { html, PropertyValueMap, render, unsafeCSS, svg } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 import { FRoot } from "./../../mixins/components/f-root/f-root";
 import eleStyle from "./f-carousel.scss";
@@ -10,11 +10,7 @@ export class FCarousel extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [
-		unsafeCSS(eleStyle),
-		...FDiv.styles
-		// unsafeCSS(splidecss), unsafeCSS(splidetheme)
-	];
+	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
 
 	/**
 	 * @attribute  provide `f-corousel-content` content-id
@@ -24,6 +20,9 @@ export class FCarousel extends FRoot {
 
 	@query(".slides")
 	slides!: HTMLElement;
+
+	@query(".slider")
+	slider!: HTMLElement;
 
 	@query("#dots")
 	dots!: HTMLElement;
@@ -38,13 +37,31 @@ export class FCarousel extends FRoot {
 			if (type === "prev") {
 				nextActive = this.activeSlide.previousElementSibling;
 			}
-			if (nextActive) {
-				nextActive.scrollIntoView({ block: "end", inline: "nearest", behavior: "smooth" });
-				this.activeSlide = nextActive as HTMLElement;
+			if ((nextActive as HTMLElement).id === "firstNode") {
+				this.slideTransition((this.slideElements?.length as number) + 1);
+			} else if ((nextActive as HTMLElement).id === "lastNode") {
+				this.slideTransition(0);
+			} else if (nextActive) {
+				this.slideTransition(this.getSlideIndex(nextActive as HTMLElement) + 1);
 			}
+
+			this.activeSlide = nextActive as HTMLElement;
 
 			this.renderDots();
 		}
+	}
+
+	handleTransitionEnd() {
+		if (this.activeSlide?.id === "firstNode") {
+			this.slideTransition(1, 0);
+			this.activeSlide = this.slideElements?.item(0) as HTMLElement;
+		}
+		if (this.activeSlide?.id === "lastNode") {
+			this.slideTransition(this.slideElements?.length as number, 0);
+			this.activeSlide = this.slideElements?.item(this.slideElements.length - 1) as HTMLElement;
+		}
+
+		this.renderDots();
 	}
 
 	render() {
@@ -57,7 +74,11 @@ export class FCarousel extends FRoot {
 						@click=${() => this.handleNavigation("prev")}
 					></f-icon
 				></f-div>
-				<f-div overflow="scroll" class="slides"><slot></slot></f-div>
+				<f-div class="slider" overflow="scroll">
+					<f-div class="slides" @transitionend=${this.handleTransitionEnd}>
+						<slot></slot>
+					</f-div>
+				</f-div>
 				<f-div
 					class="arrow"
 					width="hug-content"
@@ -72,7 +93,9 @@ export class FCarousel extends FRoot {
 					></f-icon>
 				</f-div>
 			</f-div>
-			<f-div align="middle-center" id="dots" gap="x-small"> </f-div>
+			<f-div class="dot-wrapper" width="hug-content" align="middle-center">
+				<f-div overflow="visible" id="dots" gap="small" align="middle-left"> </f-div>
+			</f-div>
 		</f-div>`;
 	}
 
@@ -84,27 +107,62 @@ export class FCarousel extends FRoot {
 
 		this.slideElements = this.querySelectorAll<FCarouselContent>(`f-carousel-content`);
 
-		this.activeSlide = this.querySelector<HTMLElement>(`[content-id='${this.activeContentId}']`);
+		const lastNode = this.slideElements
+			?.item(this.slideElements.length - 1)
+			.cloneNode(true) as HTMLElement;
+		lastNode.id = "lastNode";
+		this.prepend(lastNode);
 
+		const firstNode = this.slideElements?.item(0).cloneNode(true) as HTMLElement;
+		firstNode.id = "firstNode";
+		this.append(firstNode);
+
+		this.activeSlide = this.querySelector<HTMLElement>(`[content-id='${this.activeContentId}']`);
+		this.slideElements.forEach(n => {
+			n.style.width = this.slider.offsetWidth + "px";
+		});
+		lastNode.style.width = this.slider.offsetWidth + "px";
+		firstNode.style.width = this.slider.offsetWidth + "px";
 		this.renderDots();
 
 		if (this.activeSlide) {
-			setTimeout(() => {
-				this.activeSlide?.scrollIntoView({ block: "end", inline: "nearest" });
-			});
+			this.slideTransition(this.getSlideIndex(this.activeSlide) + 1, 0);
 		}
+	}
+
+	jumpTo(contentId: string) {
+		this.activeSlide = this.querySelector<HTMLElement>(`[content-id='${contentId}']`);
+		if (this.activeSlide) {
+			this.slideTransition(this.getSlideIndex(this.activeSlide) + 1);
+		}
+	}
+
+	getSlideIndex(slide: HTMLElement) {
+		if (this.slideElements) {
+			return Array.from(this.slideElements).findIndex(el => el === slide);
+		}
+		return -1;
+	}
+	slideTransition(slideIndex: number, duration = 0.3) {
+		this.slides.style.transition = `transform ${duration}s ease-in-out`;
+		this.slides.style.transform = "translateX(" + -this.slider.offsetWidth * slideIndex + "px)";
 	}
 
 	renderDots() {
 		if (this.slideElements) {
+			const activeIndex = Array.from(this.slideElements).findIndex(el => el === this.activeSlide);
 			render(
-				html`${Array.from(this.slideElements).map(el => {
-					let state = "inherit";
+				html`${Array.from(this.slideElements).map((_el, index) => {
+					let dotClass = "dot tertiary";
 
-					if (el === this.activeSlide) {
-						state = "primary";
+					if (activeIndex === index) {
+						dotClass = "dot active";
+					} else if (Math.abs(activeIndex - index) === 1) {
+						dotClass = "dot secondary";
 					}
-					return html`<f-icon source="i-circle" .state=${state} size="x-small"></f-icon>`;
+					return svg`<svg class=${dotClass} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+					<circle cx="50" cy="50" r="50"  />
+				  </svg>`;
 				})}`,
 				this.dots
 			);

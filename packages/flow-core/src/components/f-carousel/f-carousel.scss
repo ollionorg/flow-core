@@ -10,7 +10,7 @@ f-carousel {
 	@include base();
 
 	f-carousel-content {
-		width: 100%;
+		// width: 100%;
 		flex: 0 0 auto;
 		display: inline-flex;
 	}
@@ -24,6 +24,18 @@ f-carousel {
 		}
 		-ms-overflow-style: none; /* Internet Explorer 10+ */
 		scrollbar-width: none; /* Firefox */
+		flex-wrap: nowrap !important;
+		overflow-y: auto;
+		max-width: unset !important;
+		flex: 1 0 fit-content !important;
+	}
+
+	.slider {
+		&::-webkit-scrollbar {
+			display: none; /* Safari and Chrome */
+		}
+		-ms-overflow-style: none; /* Internet Explorer 10+ */
+		scrollbar-width: none; /* Firefox */
 	}
 
 	.arrow {
@@ -31,39 +43,43 @@ f-carousel {
 	}
 
 	.dot {
-		width: 8px;
-		height: 8px;
+		width: 10px;
+		height: 10px;
 		fill: var(--color-surface-secondary);
+
+		&.active {
+			width: 12px;
+			height: 12px;
+			fill: var(--color-text-default);
+		}
+
+		&.secondary {
+			width: 10px;
+			height: 10px;
+			fill: var(--color-text-secondary);
+		}
+
+		&.tertiary {
+			width: 8px;
+			height: 8px;
+			fill: var(--color-text-subtle);
+		}
+	}
+
+	.dot-wrapper {
+		align-self: center;
+		flex-wrap: nowrap;
+		flex: 0 0 auto !important;
+		overflow: hidden !important;
+		height: 20px;
+
+		&::-webkit-scrollbar {
+			display: none; /* Safari and Chrome */
+		}
+		-ms-overflow-style: none; /* Internet Explorer 10+ */
+		scrollbar-width: none; /* Firefox */
 	}
 }
-
-// :host {
-// 	.slides {
-// 		overflow-x: auto;
-// 		scroll-snap-type: x mandatory;
-
-// 		scroll-behavior: smooth;
-// 		-webkit-overflow-scrolling: touch;
-
-// 		&::-webkit-scrollbar {
-// 			display: none;
-// 			-ms-overflow-style: none; /* IE and Edge */
-// 			scrollbar-width: none; /* Firefox */
-// 		}
-// 	}
-
-// 	.splide__slide {
-// 		min-height: 50px;
-// 	}
-// 	.splide {
-// 		width: 100%;
-// 		padding: 0px 50px;
-// 	}
-
-// 	slot {
-// 		display: contents;
-// 	}
-// }
 
 f-div[direction="column"] {
 	> f-carousel {

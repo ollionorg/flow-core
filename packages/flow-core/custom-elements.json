@@ -1147,6 +1147,96 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-carousel-content/f-carousel-content.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FCarouselContent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "contentId",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "content-id",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "content-id",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "contentId"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-carousel-content",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FCarouselContent",
+          "declaration": {
+            "name": "FCarouselContent",
+            "module": "src/components/f-carousel-content/f-carousel-content.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-carousel-content",
+          "declaration": {
+            "name": "FCarouselContent",
+            "module": "src/components/f-carousel-content/f-carousel-content.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-carousel/f-carousel.ts",
       "declarations": [
         {
@@ -1296,6 +1386,48 @@
             },
             {
               "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FCheckboxState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ],
+              "description": "emit event."
+            },
+            {
+              "kind": "field",
               "name": "tooltipElement",
               "type": {
                 "text": "HTMLElement"
@@ -1397,7 +1529,7 @@
             },
             {
               "kind": "field",
-              "name": "size",
+              "name": "activeSlide",
               "type": {
                 "text": "\"small\" | \"medium\" | undefined"
               },
@@ -1406,9 +1538,9 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "tooltip",
               "type": {
-                "text": "boolean | undefined"
+                "text": "string | undefined"
               },
               "default": "false",
               "attribute": "disabled",
@@ -2441,6 +2573,142 @@
           "declaration": {
             "name": "FDiv",
             "module": "src/components/f-div/f-div.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-divider/f-divider.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FDivider",
+          "members": [
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
+              },
+              "default": "\"solid\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FDividerState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
+              },
+              "default": "\"solid\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FDividerState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-divider",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FDivider",
+          "declaration": {
+            "name": "FDivider",
+            "module": "src/components/f-divider/f-divider.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-divider",
+          "declaration": {
+            "name": "FDivider",
+            "module": "src/components/f-divider/f-divider.ts"
           }
         }
       ]

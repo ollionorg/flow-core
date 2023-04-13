@@ -18,9 +18,6 @@ export class FCarouselContent extends FRoot {
 	contentId!: string;
 
 	render() {
-		// if (!this.classList.contains("splide__slide")) {
-		// 	this.classList.add("splide__slide");
-		// }
 		/**
 		 * Final html to render
 		 */

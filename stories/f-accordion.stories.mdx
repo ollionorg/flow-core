@@ -1,0 +1,352 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import fAccordionAnatomy from "./svg/i-faccordion-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+
+<Meta
+	title="Components/f-accordion"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
+/>
+
+# f-accordion
+
+<br />
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+Accordion is a wrapper component which reveals or hide the content on click of header of the component.
+
+<br />
+
+### [Playground](/story/components-f-accordion--playground)
+
+<Canvas>
+	<Story
+		name="Playground"
+		argTypes={{
+			open: { control: "boolean" },
+			icon: { control: "radio", options: ["chevron", "caret", "plus", "none"] },
+			["icon-size"]: { control: "radio", options: ["x-small", "small", "medium", "large"] },
+			["icon-placement"]: { control: "radio", options: ["right", "left"] }
+		}}
+		args={{
+			open: false,
+			icon: "chevron",
+			["icon-size"]: "small",
+			["icon-placement"]: "right"
+		}}
+	>
+		{args => {
+			const metaData = {
+				["NAME"]: { type: "label-text", value: "Brendon Compliance" },
+				["ROLE"]: { type: "text", value: "Senior DevOps Engineer" },
+				["TEAM"]: { type: "text", value: "Office of CTO" },
+				["LOCATION"]: { type: "text", value: "Singapore" },
+				["ORG ID"]: { type: "text", value: "brendon.compliance@cldcvr.com" },
+				["CONNECT ON"]: {
+					type: "connect-array",
+					value: [
+						{ icon: "p-slack", name: "Slack" },
+						{ icon: "i-mail", name: "Email" }
+					]
+				}
+			};
+			return html`<f-div direction="column" padding="x-large"
+				><f-accordion
+					.open=${args.open}
+					.icon=${args.icon}
+					icon-size=${args["icon-size"]}
+					icon-placement=${args["icon-placement"]}
+				>
+					<f-div
+						><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
+					>
+					<f-div slot="body" direction="column" width="400px">
+						${Object.entries(metaData).map(
+							([name, value]) => html`
+								<f-div direction="row" padding="small none" height="hug-content">
+									<f-div width="33%"
+										><f-text variant="para" size="small" weight="regular" state="secondary"
+											>${name}</f-text
+										></f-div
+									>
+									${value.type === "label-text"
+										? html` <f-div align="middle-left" gap="x-small">
+												<f-pictogram
+													variant="circle"
+													size="small"
+													state="default"
+													source="BC"
+												></f-pictogram>
+												<f-text variant="para" size="small" weight="regular"
+													>${value.value}</f-text
+												></f-div
+										  >`
+										: value.type === "text"
+										? html` <f-div
+												><f-text variant="para" size="small" weight="regular"
+													>${value.value}</f-text
+												></f-div
+										  >`
+										: html` <f-div direction="column" gap="small" align="middle-center">
+												${value.value.map(
+													item => html` <f-div gap="x-small">
+														<f-icon .source=${item.icon} size="small" clickable></f-icon>
+														<f-text ?inline=${true} variant="para" size="small" weight="medium"
+															>${item.name}</f-text
+														>
+													</f-div>`
+												)}
+										  </f-div>`}
+								</f-div>
+							`
+						)}
+					</f-div>
+				</f-accordion>
+			</f-div>`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider></f-divider>
+
+<Story name="Anatomy">
+	{() => html`<div class="align-center">${unsafeSVG(fAccordionAnatomy)}</div>`}
+</Story>
+
+<br />
+
+### icon
+
+<f-divider></f-divider>
+
+icon to be shown for toggling accordion
+
+<br />
+
+<Canvas>
+	<Story name="icon">
+		{args => {
+			const icons = ["chevron", "caret", "plus", "none"];
+			return html`<f-div
+				>${icons.map(
+					item => html`<f-div direction="column" padding="x-large"
+						><f-accordion .open=${true} .icon=${item}>
+							<f-div
+								><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
+							>
+							<f-div slot="body" direction="column" padding="small none">
+								<f-text variant="para" size="small" weight="regular" state="secondary">
+									In publishing and graphic design, Lorem ipsum is a placeholder text commonly used
+									to demonstrate the visual form.</f-text
+								>
+							</f-div>
+						</f-accordion></f-div
+					>`
+				)}</f-div
+			>`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>chevron</td>
+			<td>i-chevron icon</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>caret</td>
+			<td>i-caret icon</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>plus</td>
+			<td>i-plus-fill icon</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>none</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## icon-size
+
+<f-divider></f-divider>
+
+The small size is the default and recommended option.
+
+<br />
+
+<Canvas>
+	<Story name="icon-size">
+		{args => {
+			const icons = ["x-small", "small", "medium", "large"];
+			return html`<f-div
+				>${icons.map(
+					item => html`<f-div direction="column" padding="x-large"
+						><f-accordion .open=${true} icon-size=${item}>
+							<f-div
+								><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
+							>
+							<f-div slot="body" direction="column">
+								<f-text variant="para" size="small" weight="regular" state="secondary">
+									In publishing and graphic design, Lorem ipsum is a placeholder text commonly used
+									to demonstrate the visual form.</f-text
+								>
+							</f-div>
+						</f-accordion></f-div
+					>`
+				)}</f-div
+			>`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>large</td>
+			<td>large f-icon size</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>medium</td>
+			<td>medium f-icon size</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>small</td>
+			<td>small f-icon size</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>x-small</td>
+			<td>x-small f-icon size</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## icon-placement
+
+<f-divider></f-divider>
+
+The small size is the default and recommended option.
+
+<br />
+
+<Canvas>
+	<Story name="icon-placement">
+		{args => {
+			const icons = ["right", "left"];
+			return html`<f-div
+				>${icons.map(
+					item => html`<f-div direction="column" padding="x-large"
+						><f-accordion .open=${true} icon-placement=${item}>
+							<f-div
+								><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
+							>
+							<f-div slot="body" direction="column">
+								<f-text variant="para" size="small" weight="regular" state="secondary">
+									In publishing and graphic design, Lorem ipsum is a placeholder text commonly used
+									to demonstrate the visual form.</f-text
+								>
+							</f-div>
+						</f-accordion></f-div
+					>`
+				)}</f-div
+			>`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>right</td>
+			<td>icon placed on right side</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>lrft</td>
+			<td>icon placed on left side</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## Flags
+
+<f-divider></f-divider>
+
+<br />
+
+<Canvas>
+	<Story name="Flags">
+		{args => {
+			const icons = [true, false];
+			return html`<f-div
+				>${icons.map(
+					item => html`<f-div direction="column" padding="x-large"
+						><f-accordion .open=${item}>
+							<f-div
+								><f-text variant="para" size="small" weight="bold"
+									>Accordion (open=${item})</f-text
+								></f-div
+							>
+							<f-div slot="body" direction="column">
+								<f-text variant="para" size="small" weight="regular" state="secondary">
+									In publishing and graphic design, Lorem ipsum is a placeholder text commonly used
+									to demonstrate the visual form.</f-text
+								>
+							</f-div>
+						</f-accordion></f-div
+					>`
+				)}</f-div
+			>`;
+		}}
+	</Story>
+</Canvas>
+
+<ArgsTable of={"f-accordion"} />

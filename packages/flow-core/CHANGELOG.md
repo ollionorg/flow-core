@@ -4,11 +4,19 @@
 
 # Change Log
 
+## [1.9.0] - 2023-04-13
+
+### Features
+
+- `f-accordion` component added.
+
 ## [1.8.4] - 2023-04-10
 
 ### Improvements
+
 - Icon story updated with external storybook link.
 - `f-input`: `autocomplete`, `autofocus` attribute support added.
+
 ### Bug Fixes
 
 - `f-text`: alignment fixed when used in `f-div` column direction.

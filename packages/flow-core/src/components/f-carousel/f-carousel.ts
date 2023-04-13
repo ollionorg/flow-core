@@ -37,17 +37,20 @@ export class FCarousel extends FRoot {
 			if (type === "prev") {
 				nextActive = this.activeSlide.previousElementSibling;
 			}
-			if ((nextActive as HTMLElement).id === "firstNode") {
-				this.slideTransition((this.slideElements?.length as number) + 1);
-			} else if ((nextActive as HTMLElement).id === "lastNode") {
-				this.slideTransition(0);
-			} else if (nextActive) {
-				this.slideTransition(this.getSlideIndex(nextActive as HTMLElement) + 1);
+
+			if (nextActive) {
+				if ((nextActive as HTMLElement).id === "firstNode") {
+					this.slideTransition((this.slideElements?.length as number) + 1);
+				} else if ((nextActive as HTMLElement).id === "lastNode") {
+					this.slideTransition(0);
+				} else if (nextActive) {
+					this.slideTransition(this.getSlideIndex(nextActive as HTMLElement) + 1);
+				}
+
+				this.activeSlide = nextActive as HTMLElement;
+
+				this.updateDots();
 			}
-
-			this.activeSlide = nextActive as HTMLElement;
-
-			this.renderDots();
 		}
 	}
 
@@ -61,7 +64,7 @@ export class FCarousel extends FRoot {
 			this.activeSlide = this.slideElements?.item(this.slideElements.length - 1) as HTMLElement;
 		}
 
-		this.renderDots();
+		this.updateDots();
 	}
 
 	render() {
@@ -152,7 +155,7 @@ export class FCarousel extends FRoot {
 		if (this.slideElements) {
 			const activeIndex = Array.from(this.slideElements).findIndex(el => el === this.activeSlide);
 			render(
-				html`${Array.from(this.slideElements).map((_el, index) => {
+				html`${Array.from(this.slideElements).map((el, index) => {
 					let dotClass = "dot tertiary";
 
 					if (activeIndex === index) {
@@ -160,12 +163,42 @@ export class FCarousel extends FRoot {
 					} else if (Math.abs(activeIndex - index) === 1) {
 						dotClass = "dot secondary";
 					}
-					return svg`<svg class=${dotClass} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+					return svg`<svg content-id=${el.getAttribute(
+						"content-id"
+					)} class=${dotClass} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 					<circle cx="50" cy="50" r="50"  />
 				  </svg>`;
 				})}`,
 				this.dots
 			);
+		}
+	}
+
+	updateDots() {
+		if (this.slideElements) {
+			const activeIndex = Array.from(this.slideElements).findIndex(el => el === this.activeSlide);
+
+			Array.from(this.slideElements).forEach((el, index) => {
+				let dotClass = "tertiary";
+
+				if (activeIndex === index) {
+					dotClass = "active";
+				} else if (Math.abs(activeIndex - index) === 1) {
+					dotClass = "secondary";
+				}
+
+				const svgElement = this.shadowRoot?.querySelector<HTMLElement>(
+					`[content-id='${el.getAttribute("content-id")}']`
+				);
+
+				if (svgElement) {
+					svgElement.classList.remove("tertiary");
+					svgElement.classList.remove("active");
+					svgElement.classList.remove("secondary");
+
+					svgElement.classList.add(dotClass);
+				}
+			});
 		}
 	}
 }

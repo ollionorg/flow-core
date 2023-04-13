@@ -21,17 +21,19 @@ If you would like to contribute to an existing starter kit or write a new one fo
 
 **Browser Debugger**: [Chrome](https://chrome.google.com/webstore/detail/web-component-devtools/gdniinfdlmmmjpnhgnkmfpffipenjljo), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/web-component-devtools/), [Safari](https://developer.apple.com/documentation/safariservices/safari_web_extensions/adding_a_web_development_tool_to_safari_web_inspector)
 
+**Note** For Typescript, make sure you are using version >4.5
+
 ---
 
 ### Existing project
 
-#### Step 1: Install flow core
+#### 1️⃣ Install flow core
 ```yarn add @cldcvr/flow-core```
 
 *Note:* after installation re-start your application.
 
 
-#### Step 2 : Import CSS 
+#### 2️⃣ Import CSS 
 **Vue:**
 Paste the below snippet *after the closing `<template>`* in your `App.vue` 
 
@@ -51,7 +53,7 @@ import "@cldcvr/flow-core/dist/style.css";
 "styles": ["@cldcvr/flow-core/dist/style.css"],
 
 ```
-#### Step 3: Import flow-core into your project
+#### 3️⃣ Import flow-core into your project
 
 Copy and import the below snippet into your startup file. In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
 ```JavaScript
@@ -59,7 +61,8 @@ import("@cldcvr/flow-core").then(async () => {
   //your application startup code
 });
 ```
-#### Step 4 : If your project is typescript enabled please include import types to
+#### 4️⃣ If your project is typescript enabled please include import types to
+**Note** For Typescript, make sure you are using version >4.5
 
 **Vue:** 
 Copy paste below line in your `main.ts` file.
@@ -84,12 +87,12 @@ Include react type in `tsconfig.json` like below
 
 Icons are not packaged with Flow core to allow more flexibility and customization. We recommend that you install the system icon pack to get started.
 
-### Step 1: Install the icon pack 
+### 1️⃣ Install the icon pack 
 ```
 yarn add @cldcvr/flow-system-icon
 ```
 
-### Step 2: Import the icon pack 
+### 2️⃣ Import the icon pack 
 
 ```javascript
 import("@cldcvr/flow-core").then(async () => {

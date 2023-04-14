@@ -32,13 +32,15 @@ Accordion is a wrapper component which reveals or hide the content on click of h
 			open: { control: "boolean" },
 			icon: { control: "radio", options: ["chevron", "caret", "plus", "none"] },
 			["icon-size"]: { control: "radio", options: ["x-small", "small", "medium", "large"] },
-			["icon-placement"]: { control: "radio", options: ["right", "left"] }
+			["icon-placement"]: { control: "radio", options: ["right", "left"] },
+			["max-height"]: { control: "text" }
 		}}
 		args={{
 			open: false,
 			icon: "chevron",
 			["icon-size"]: "small",
-			["icon-placement"]: "right"
+			["icon-placement"]: "right",
+			["max-height"]: "180px"
 		}}
 	>
 		{args => {
@@ -62,6 +64,7 @@ Accordion is a wrapper component which reveals or hide the content on click of h
 					.icon=${args.icon}
 					icon-size=${args["icon-size"]}
 					icon-placement=${args["icon-placement"]}
+					max-height=${args["max-height"]}
 				>
 					<f-div
 						><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
@@ -137,21 +140,23 @@ icon to be shown for toggling accordion
 	<Story name="icon">
 		{args => {
 			const icons = ["chevron", "caret", "plus", "none"];
-			return html`<f-div
+			return html`<f-div direction="column"
 				>${icons.map(
-					item => html`<f-div direction="column" padding="x-large"
-						><f-accordion .open=${true} .icon=${item}>
+					item => html`<f-accordion .open=${true} .icon=${item}>
 							<f-div
 								><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
 							>
 							<f-div slot="body" direction="column" padding="small none">
 								<f-text variant="para" size="small" weight="regular" state="secondary">
 									In publishing and graphic design, Lorem ipsum is a placeholder text commonly used
-									to demonstrate the visual form.</f-text
-								>
+									to demonstrate the visual form. In publishing and graphic design, Lorem ipsum is a
+									placeholder text commonly used to demonstrate the visual form. In publishing and
+									graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the
+									visual form.
+								</f-text>
 							</f-div>
-						</f-accordion></f-div
-					>`
+						</f-accordion>
+						<f-divider></f-divider> `
 				)}</f-div
 			>`;
 		}}
@@ -211,7 +216,7 @@ The small size is the default and recommended option.
 							<f-div
 								><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
 							>
-							<f-div slot="body" direction="column">
+							<f-div slot="body" direction="column" padding="medium none">
 								<f-text variant="para" size="small" weight="regular" state="secondary">
 									In publishing and graphic design, Lorem ipsum is a placeholder text commonly used
 									to demonstrate the visual form.</f-text
@@ -278,7 +283,7 @@ The small size is the default and recommended option.
 							<f-div
 								><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
 							>
-							<f-div slot="body" direction="column">
+							<f-div slot="body" direction="column" padding="medium none">
 								<f-text variant="para" size="small" weight="regular" state="secondary">
 									In publishing and graphic design, Lorem ipsum is a placeholder text commonly used
 									to demonstrate the visual form.</f-text
@@ -316,6 +321,38 @@ The small size is the default and recommended option.
 
 <br />
 
+## max-height
+
+<f-divider></f-divider>
+
+The small size is the default and recommended option.
+
+<br />
+
+<Canvas>
+	<Story name="max-height">
+		{args => {
+			return html`<f-div
+				><f-div direction="column" padding="x-large" width="300px"
+					><f-accordion .open=${true} max-height="50px">
+						<f-div
+							><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
+						>
+						<f-div slot="body" direction="column" padding="medium none">
+							<f-text variant="para" size="small" weight="regular" state="secondary">
+								In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to
+								demonstrate the visual form.</f-text
+							>
+						</f-div>
+					</f-accordion></f-div
+				></f-div
+			>`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
 ## Flags
 
 <f-divider></f-divider>
@@ -335,7 +372,7 @@ The small size is the default and recommended option.
 									>Accordion (open=${item})</f-text
 								></f-div
 							>
-							<f-div slot="body" direction="column">
+							<f-div slot="body" direction="column" padding="medium none">
 								<f-text variant="para" size="small" weight="regular" state="secondary">
 									In publishing and graphic design, Lorem ipsum is a placeholder text commonly used
 									to demonstrate the visual form.</f-text

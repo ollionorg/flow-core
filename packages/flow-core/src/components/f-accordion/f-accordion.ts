@@ -1,8 +1,10 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, query } from "lit/decorators.js";
 import eleStyle from "./f-accordion.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
+
+export type FAccordionBodyHeightProp = `${number}px` | `${number}%` | `${number}vh`;
 
 @customElement("f-accordion")
 export class FAccordion extends FRoot {
@@ -36,6 +38,15 @@ export class FAccordion extends FRoot {
 	iconPlacement?: "right" | "left" = "right";
 
 	/**
+	 * @attribute placement of icon on left or right
+	 */
+	@property({ reflect: true, type: String, attribute: "max-height" })
+	maxHeight?: FAccordionBodyHeightProp;
+
+	@query(".f-accordion")
+	fAccordionBody?: FDiv;
+
+	/**
 	 * identify icon-name from string
 	 */
 	get iconName() {
@@ -44,8 +55,8 @@ export class FAccordion extends FRoot {
 			: this.icon === "chevron"
 			? "i-chevron-down"
 			: this.open
-			? "i-minus-fill"
-			: "i-plus-fill";
+			? "i-minus"
+			: "i-plus";
 	}
 
 	/**
@@ -56,15 +67,17 @@ export class FAccordion extends FRoot {
 	}
 
 	/**
-	 * handling overflow of body on max-height
+	 * handling max-height of body
 	 */
-	handleBodyOverflow() {
-		const bodySlot = this.querySelector<FDiv>("f-div[slot='body']");
-		if (bodySlot) {
-			if (!this.open) {
-				bodySlot.overflow = "hidden";
-			} else {
-				bodySlot.overflow = "scroll";
+	handleAccordionBody() {
+		if (this.fAccordionBody) {
+			if (this.maxHeight) {
+				if (this.open) {
+					this.fAccordionBody.style.setProperty("max-height", this.maxHeight, "important");
+					this.fAccordionBody.style.setProperty("overflow-y", "scroll", "important");
+				} else {
+					this.fAccordionBody.style.setProperty("max-height", "0px", "important");
+				}
 			}
 		}
 	}
@@ -92,7 +105,7 @@ export class FAccordion extends FRoot {
 					.gap=${this.iconPlacement === "left" ? "medium" : "auto"}
 					width="100%"
 					class="f-accordion-header"
-					padding="small"
+					padding="medium"
 					state="default"
 					clickable
 				>
@@ -104,7 +117,7 @@ export class FAccordion extends FRoot {
 					class="f-accordion"
 					?data-accordion-open=${this.open}
 					direction="column"
-					padding="none small"
+					padding="none medium"
 					overflow="hidden"
 				>
 					<slot name="body"></slot>
@@ -113,7 +126,7 @@ export class FAccordion extends FRoot {
 		`;
 	}
 	updated() {
-		this.handleBodyOverflow();
+		this.handleAccordionBody();
 	}
 }
 

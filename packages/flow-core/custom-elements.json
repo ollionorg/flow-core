@@ -657,6 +657,22 @@
             },
             {
               "kind": "field",
+              "name": "maxHeight",
+              "type": {
+                "text": "FAccordionBodyHeightProp | undefined"
+              },
+              "attribute": "max-height",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fAccordionBody",
+              "type": {
+                "text": "FDiv | undefined"
+              }
+            },
+            {
+              "kind": "field",
               "name": "iconName",
               "description": "identify icon-name from string"
             },
@@ -667,8 +683,8 @@
             },
             {
               "kind": "method",
-              "name": "handleBodyOverflow",
-              "description": "handling overflow of body on max-height"
+              "name": "handleAccordionBody",
+              "description": "handling max-height of body"
             },
             {
               "kind": "field",
@@ -727,6 +743,13 @@
               },
               "default": "\"right\"",
               "fieldName": "iconPlacement"
+            },
+            {
+              "name": "max-height",
+              "type": {
+                "text": "FAccordionBodyHeightProp | undefined"
+              },
+              "fieldName": "maxHeight"
             },
             {
               "name": "tooltip",
@@ -9127,6 +9150,43 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/modules/config/index.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "themeSubject",
+          "default": "new Subject<string>()"
+        },
+        {
+          "kind": "variable",
+          "name": "ConfigUtil",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    if (cfg.theme) {\n      this.initTheme();\n    }\n  },\n  initTheme() {\n    document.documentElement.setAttribute(\"data-theme\", `${config.theme}`);\n  },\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "themeSubject",
+          "declaration": {
+            "name": "themeSubject",
+            "module": "src/modules/config/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ConfigUtil",
+          "declaration": {
+            "name": "ConfigUtil",
+            "module": "src/modules/config/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/mixins/svg/checked-mark.ts",
       "declarations": [],
       "exports": [
@@ -9177,43 +9237,6 @@
           "name": "default",
           "declaration": {
             "module": "src/mixins/svg/not-found.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/modules/config/index.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "themeSubject",
-          "default": "new Subject<string>()"
-        },
-        {
-          "kind": "variable",
-          "name": "ConfigUtil",
-          "type": {
-            "text": "object"
-          },
-          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    if (cfg.theme) {\n      this.initTheme();\n    }\n  },\n  initTheme() {\n    document.documentElement.setAttribute(\"data-theme\", `${config.theme}`);\n  },\n}"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "themeSubject",
-          "declaration": {
-            "name": "themeSubject",
-            "module": "src/modules/config/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ConfigUtil",
-          "declaration": {
-            "name": "ConfigUtil",
-            "module": "src/modules/config/index.ts"
           }
         }
       ]

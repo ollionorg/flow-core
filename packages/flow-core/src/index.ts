@@ -35,6 +35,7 @@ export * from "./components/f-file-upload/f-file-upload";
 export * from "./components/f-suggest/f-suggest";
 export * from "./components/f-toast/f-toast";
 export * from "./components/f-search/f-search";
+export * from "./components/f-accordion/f-accordion";
 export * from "./mixins/components/f-root/f-root";
 
 if (document.readyState !== "loading") {

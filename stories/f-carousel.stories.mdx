@@ -1,7 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import FCarouselExample from "./svg/i-fcarousel-example.js";
+import FCarouselAnatomy from "./svg/i-fcarousel-anatomy.js";
 
 <Meta
 	title="Components/f-carousel"
@@ -10,7 +10,7 @@ import FCarouselExample from "./svg/i-fcarousel-example.js";
 	}}
 />
 
-# f-div
+# f-carousel
 
 <br />
 <br />
@@ -19,14 +19,33 @@ import FCarouselExample from "./svg/i-fcarousel-example.js";
 
 <hr />
 
-f-div is used as a container for HTML elements.
+A slideshow component like a carousel for cycling through the content..
 
 <br />
 
 ### [Playground](/story/components-f-div--playground)
 
 <Canvas>
-	<Story name="Playground">
+	<Story
+		name="Playground"
+		argTypes={{
+			["active-content-id"]: {
+				control: "select",
+				options: ["slide-1", "slide-2", "slide-3", "slide-4", "slide-5"]
+			},
+			["auto-play"]: {
+				control: "boolean"
+			},
+			["auto-play-interval"]: {
+				control: "number"
+			}
+		}}
+		args={{
+			["active-content-id"]: "slide-3",
+			["auto-play"]: true,
+			["auto-play-interval"]: 5000
+		}}
+	>
 		{args => {
 			const handleNext = e => {
 				console.log("in next callback", e);
@@ -34,30 +53,29 @@ f-div is used as a container for HTML elements.
 			const handlePrev = () => {
 				console.log("in previous callback", e);
 			};
-			return html`<f-div width="100%">
-				<f-carousel auto-play active-content-id="slide-3" @next=${handleNext} @prev=${handlePrev}>
-					${[1, 2, 3, 4, 5].map(
-						idx =>
-							html`<f-carousel-content content-id=${"slide-" + idx}>
-								<f-div> ${unsafeSVG(FCarouselExample)} </f-div>
-								<f-text>${"slide-" + idx}</f-text>
-							</f-carousel-content>`
-					)}
-				</f-carousel>
-				<f-carousel active-content-id="slide-primary">
-					${["secondary", "tertiary", "primary", "danger", "warning"].map(
-						idx =>
-							html`<f-carousel-content content-id=${"slide-" + idx}>
+			return html`<f-div width="100%" padding="large">
+				<f-carousel
+					.autoPlay=${args["auto-play"]}
+					.autoPlayInterval=${args["auto-play-interval"]}
+					.activeContentId=${args["active-content-id"]}
+					@next=${handleNext}
+					@prev=${handlePrev}
+				>
+					${["primary", "secondary", "tertiary", "warning", "danger"].map(
+						(state, idx) =>
+							html`<f-carousel-content content-id=${"slide-" + (idx + 1)}>
 								<f-div
 									height="300px"
 									width="100%"
 									padding="large"
 									gap="large"
 									variant="curved"
-									.state=${idx}
+									align="middle-center"
+									.state=${state}
 								>
-									<f-text state="inherit">${idx}</f-text>
-									<f-icon source="i-crown" state="inherit"></f-icon>
+									<f-text size="x-large" weight="bold" variant="heading" state="inherit"
+										>${"slide-" + (idx + 1)}</f-text
+									>
 								</f-div>
 							</f-carousel-content>`
 					)}
@@ -66,3 +84,171 @@ f-div is used as a container for HTML elements.
 		}}
 	</Story>
 </Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider></f-divider>
+
+<br />
+
+<Story name="Anatomy">
+	{() => html`<f-div align="middle-center" padding="large">${unsafeSVG(FCarouselAnatomy)}</f-div>`}
+</Story>
+
+<br />
+
+### active-content-id
+
+<f-divider></f-divider>
+
+<br />
+
+<Story name="active-content-id">
+	{args => {
+		return html`<f-div width="100%" padding="large">
+			<f-carousel active-content-id="slide-3">
+				${["primary", "secondary", "tertiary", "warning", "danger"].map(
+					(state, idx) =>
+						html`<f-carousel-content content-id=${"slide-" + (idx + 1)}>
+							<f-div
+								height="300px"
+								width="100%"
+								padding="large"
+								gap="large"
+								variant="curved"
+								align="middle-center"
+								.state=${state}
+							>
+								<f-text size="x-large" weight="bold" variant="heading" state="inherit">
+									${"slide-" + (idx + 1)}</f-text
+								>
+								<f-text size="small">active-content-id set to ${"slide-" + (idx + 1)}</f-text>
+							</f-div>
+						</f-carousel-content>`
+				)}
+			</f-carousel>
+		</f-div>`;
+	}}
+</Story>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>string</td>
+			<td>Provide `content-id` of `f-carousel-content`</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+### auto-play
+
+<f-divider></f-divider>
+
+<br />
+
+<Story name="auto-play">
+	{args => {
+		return html`<f-div width="100%" padding="large">
+			<f-carousel auto-play>
+				${["primary", "secondary", "tertiary", "warning", "danger"].map(
+					(state, idx) =>
+						html`<f-carousel-content content-id=${"slide-" + (idx + 1)}>
+							<f-div
+								height="300px"
+								width="100%"
+								padding="large"
+								gap="large"
+								variant="curved"
+								align="middle-center"
+								.state=${state}
+							>
+								<f-text size="x-large" weight="bold" variant="heading" state="inherit">
+									${"slide-" + (idx + 1)}</f-text
+								>
+								<f-text size="small">auto-play set to true</f-text>
+							</f-div>
+						</f-carousel-content>`
+				)}
+			</f-carousel>
+		</f-div>`;
+	}}
+</Story>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>boolean</td>
+			<td>slides will change automatically</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+### auto-play-interval
+
+<f-divider></f-divider>
+
+<br />
+
+<Story name="auto-play-interval">
+	{args => {
+		return html`<f-div width="100%" padding="large">
+			<f-carousel auto-play auto-play-interval="7000">
+				${["primary", "secondary", "tertiary", "warning", "danger"].map(
+					(state, idx) =>
+						html`<f-carousel-content content-id=${"slide-" + (idx + 1)}>
+							<f-div
+								height="300px"
+								width="100%"
+								direction="column"
+								padding="large"
+								gap="large"
+								variant="curved"
+								align="middle-center"
+								.state=${state}
+							>
+								<f-text size="x-large" weight="bold" variant="heading" state="inherit">
+									${"slide-" + (idx + 1)}</f-text
+								>
+								<f-text size="small">auto-play-interval is 7000ms</f-text>
+							</f-div>
+						</f-carousel-content>`
+				)}
+			</f-carousel>
+		</f-div>`;
+	}}
+</Story>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>number</td>
+			<td>Interval in milliseconds (considered when auto-play is set to true)</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />

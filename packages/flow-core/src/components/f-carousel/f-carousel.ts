@@ -145,20 +145,40 @@ export class FCarousel extends FRoot {
 	): Promise<void> {
 		super.updated(changedProperties);
 		await this.updateComplete;
+		/**
+		 * remove clonned elements if any
+		 */
+		this.removeClonnedSlides();
 
+		/**
+		 * get all slide elements
+		 */
 		this.slideElements = this.querySelectorAll<FCarouselContent>(`f-carousel-content`);
+		/**
+		 * set active slide if any
+		 */
+		if (this.activeContentId) {
+			this.activeSlide = this.querySelector<HTMLElement>(`[content-id='${this.activeContentId}']`);
+		} else {
+			this.activeSlide = this.slideElements.item(0);
+		}
 
+		/**
+		 clone last slide for looping 
+		 */
 		const lastNode = this.slideElements
 			?.item(this.slideElements.length - 1)
 			.cloneNode(true) as HTMLElement;
 		lastNode.id = "lastNode";
 		this.prepend(lastNode);
 
+		/**
+		 clone first slide for looping 
+		 */
 		const firstNode = this.slideElements?.item(0).cloneNode(true) as HTMLElement;
 		firstNode.id = "firstNode";
 		this.append(firstNode);
 
-		this.activeSlide = this.querySelector<HTMLElement>(`[content-id='${this.activeContentId}']`);
 		this.slideElements.forEach(n => {
 			n.style.width = this.slider.offsetWidth + "px";
 		});
@@ -173,6 +193,13 @@ export class FCarousel extends FRoot {
 		}
 
 		this.checkAutoPlay();
+	}
+
+	removeClonnedSlides() {
+		const clonnedNodes = this.querySelectorAll<FCarouselContent>(`#firstNode,#lastNode`);
+		clonnedNodes.forEach(el => {
+			el.remove();
+		});
 	}
 
 	checkAutoPlay() {

@@ -52,11 +52,6 @@ f-carousel {
 		transition-timing-function: ease-out;
 
 		cursor: pointer;
-		&:hover {
-			transform: scale(1.5);
-			transition-duration: 0.2s;
-			fill: var(--color-primary-default) !important;
-		}
 
 		&.active {
 			width: 12px;
@@ -78,6 +73,14 @@ f-carousel {
 	}
 	.dot-container {
 		cursor: pointer;
+
+		&:hover {
+			.dot {
+				transform: scale(1.5);
+				transition-duration: 0.2s;
+				fill: var(--color-primary-default) !important;
+			}
+		}
 	}
 	.dot-wrapper {
 		align-self: center;

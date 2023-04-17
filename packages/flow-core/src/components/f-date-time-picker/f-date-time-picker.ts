@@ -168,13 +168,13 @@ export class FDateTimePicker extends FRoot {
 	 * validation message
 	 */
 	get dateValidationMessage() {
-		return `<f-text size="small" variant="para" weight="regular">Please Enter a valid date format: ${
+		return `Please Enter a valid date format: ${
 			this.mode === "date-time"
 				? "DD/MM/YYYY HH:ii"
 				: this.mode === "date-only"
 				? "DD/MM/YYYY"
 				: "HH:ii"
-		}</f-text>`;
+		}`;
 	}
 
 	/**
@@ -189,6 +189,8 @@ export class FDateTimePicker extends FRoot {
 	 * emit input custom event
 	 */
 	handleInput(dateObj: object, dateStr: string) {
+		this.helpSlotElement.innerHTML = `<slot name="help"></slot>`;
+		this.dateTimePickerElement.state = this.state;
 		this.value = dateStr;
 		this.dispatchInputEvent(dateObj, dateStr);
 	}
@@ -232,9 +234,7 @@ export class FDateTimePicker extends FRoot {
 		e.stopPropagation();
 		if (e.detail?.value) {
 			if (e.detail.value.match(this.regexDateTime)) {
-				this.helpSlotElement.innerHTML = `<slot name="help"></slot>`;
 				this.handleInput([this.dateObjectFromString(e)], e.detail.value);
-				this.dateTimePickerElement.state = this.state;
 			} else {
 				this.helpSlotElement.innerHTML = this.dateValidationMessage;
 				this.dateTimePickerElement.state = "danger";

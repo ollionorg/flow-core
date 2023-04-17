@@ -27,34 +27,42 @@ f-div is used as a container for HTML elements.
 
 <Canvas>
 	<Story name="Playground">
-		{args => html`<f-div width="100%">
-			<f-carousel active-content-id="slide-3">
-				${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(
-					idx =>
-						html`<f-carousel-content content-id=${"slide-" + idx}>
-							<f-div> ${unsafeSVG(FCarouselExample)} </f-div>
-							<f-text>${"slide-" + idx}</f-text>
-						</f-carousel-content>`
-				)}
-			</f-carousel>
-			<f-carousel active-content-id="slide-primary">
-				${["secondary", "tertiary", "primary", "danger", "warning"].map(
-					idx =>
-						html`<f-carousel-content content-id=${"slide-" + idx}>
-							<f-div
-								height="300px"
-								width="100%"
-								padding="large"
-								gap="large"
-								variant="curved"
-								.state=${idx}
-							>
-								<f-text state="inherit">${idx}</f-text>
-								<f-icon source="i-crown" state="inherit"></f-icon>
-							</f-div>
-						</f-carousel-content>`
-				)}
-			</f-carousel>
-		</f-div>`}
+		{args => {
+			const handleNext = e => {
+				console.log("in next callback", e);
+			};
+			const handlePrev = () => {
+				console.log("in previous callback", e);
+			};
+			return html`<f-div width="100%">
+				<f-carousel active-content-id="slide-3" @next=${handleNext} @prev=${handlePrev}>
+					${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(
+						idx =>
+							html`<f-carousel-content content-id=${"slide-" + idx}>
+								<f-div> ${unsafeSVG(FCarouselExample)} </f-div>
+								<f-text>${"slide-" + idx}</f-text>
+							</f-carousel-content>`
+					)}
+				</f-carousel>
+				<f-carousel active-content-id="slide-primary">
+					${["secondary", "tertiary", "primary", "danger", "warning"].map(
+						idx =>
+							html`<f-carousel-content content-id=${"slide-" + idx}>
+								<f-div
+									height="300px"
+									width="100%"
+									padding="large"
+									gap="large"
+									variant="curved"
+									.state=${idx}
+								>
+									<f-text state="inherit">${idx}</f-text>
+									<f-icon source="i-crown" state="inherit"></f-icon>
+								</f-div>
+							</f-carousel-content>`
+					)}
+				</f-carousel>
+			</f-div>`;
+		}}
 	</Story>
 </Canvas>

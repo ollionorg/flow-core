@@ -4,6 +4,7 @@ import { FRoot } from "./../../mixins/components/f-root/f-root";
 import eleStyle from "./f-carousel.scss";
 import { FDiv } from "../f-div/f-div";
 import { FCarouselContent } from "../f-carousel-content/f-carousel-content";
+import { FIcon } from "../f-icon/f-icon";
 
 @customElement("f-carousel")
 export class FCarousel extends FRoot {
@@ -27,11 +28,17 @@ export class FCarousel extends FRoot {
 	@query("#dots")
 	dots!: HTMLElement;
 
+	@query(".next")
+	nextArrow!: FIcon;
+
+	@query(".prev")
+	prevArrow!: FIcon;
+
 	activeSlide?: HTMLElement | null;
 
 	slideElements?: NodeListOf<FCarouselContent>;
 
-	handleNavigation(type = "next") {
+	handleNavigation(type: "next" | "prev" = "next") {
 		if (this.activeSlide) {
 			let nextActive = this.activeSlide.nextElementSibling;
 			if (type === "prev") {
@@ -50,6 +57,8 @@ export class FCarousel extends FRoot {
 				this.activeSlide = nextActive as HTMLElement;
 
 				this.updateDots();
+
+				this.emitNavigationEvent(type, (this.activeSlide as FCarouselContent).contentId);
 			}
 		}
 	}
@@ -72,6 +81,7 @@ export class FCarousel extends FRoot {
 			<f-div height="hug-content">
 				<f-div class="arrow" width="hug-content" padding="large" height="100%" align="middle-center"
 					><f-icon
+						class="prev"
 						source="i-chevron-left"
 						clickable
 						@click=${() => this.handleNavigation("prev")}
@@ -91,6 +101,7 @@ export class FCarousel extends FRoot {
 				>
 					<f-icon
 						source="i-chevron-right"
+						class="next"
 						clickable
 						@click=${() => this.handleNavigation("next")}
 					></f-icon>
@@ -130,7 +141,20 @@ export class FCarousel extends FRoot {
 
 		if (this.activeSlide) {
 			this.slideTransition(this.getSlideIndex(this.activeSlide) + 1, 0);
+
+			this.emitNavigationEvent("next", (this.activeSlide as FCarouselContent).contentId);
 		}
+	}
+
+	emitNavigationEvent(type: "next" | "prev", contentId: string) {
+		const event = new CustomEvent(type, {
+			detail: {
+				contentId: contentId
+			},
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(event);
 	}
 
 	jumpTo(contentId: string) {

@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.10.1] - 2023-04-17
+
+### Improvements
+
+- `f-accordion`: `toggle` event dispatch fucntion added.
+
 ## [1.10.0] - 2023-04-17
 
 ### Features

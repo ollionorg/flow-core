@@ -21,57 +21,69 @@ If you would like to contribute to an existing starter kit or write a new one fo
 
 **Browser Debugger**: [Chrome](https://chrome.google.com/webstore/detail/web-component-devtools/gdniinfdlmmmjpnhgnkmfpffipenjljo), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/web-component-devtools/), [Safari](https://developer.apple.com/documentation/safariservices/safari_web_extensions/adding_a_web_development_tool_to_safari_web_inspector)
 
+**Note:** For Typescript, make sure you are using version >4.5
+
 ---
 
 ### Existing project
 
-#### Step 1: Install flow core
+#### 1️⃣ Install flow core
 ```yarn add @cldcvr/flow-core```
 
-*Note:* after adding the snippets, re-start your application.
+*Note:* after installation re-start your application.
 
+<br>
 
-#### Step 2 : Import CSS 
+#### 2️⃣ Import CSS 
 **Vue:**
 Paste the below snippet *after the closing `<template>`* in your `App.vue` 
 
-```
+```html
 <style>
 @import "@cldcvr/flow-core/dist/style.css";
 </style> 
 ```
 **React:** Paste the below snippet in `src/index.tsx` or `index.jsx`
 
-```
+```JavaScript
 import "@cldcvr/flow-core/dist/style.css";
 ```
 **Angular:** Add css file path in `angular.json` in `styles` property array.
 
-```
+```JSON
 "styles": ["@cldcvr/flow-core/dist/style.css"],
 
 ```
-#### Step 3: Import flow-core into your project
+
+<br>
+
+#### 3️⃣ Import flow-core into your project
 
 Copy and import the below snippet into your startup file. In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
+```JavaScript
+import("@cldcvr/flow-core").then(async () => {
+  //your application startup code
+});
 ```
-import '@cldcvr/flow-core';
-```
-#### Step 4 : If your project is typescript enabled please include import types to
+
+<br>
+
+#### 4️⃣ If your project is typescript enabled please include import types to
+**Note:** For Typescript, make sure you are using version >4.5
 
 **Vue:** 
 Copy paste below line in your `main.ts` file.
-```
+```JavaScript
 import "@cldcvr/flow-core/dist/types/vue2";
 ```
 or 
-```
+```JavaScript
 import "@cldcvr/flow-core/dist/types/vue3";
 ```
 
 **React**
 Include react type in `tsconfig.json` like below
-```
+```JSON
 "include": ["src", "./node_modules/@cldcvr/flow-core/dist/types/react.ts"]
 ```
 
@@ -82,23 +94,21 @@ Include react type in `tsconfig.json` like below
 
 Icons are not packaged with Flow core to allow more flexibility and customization. We recommend that you install the system icon pack to get started.
 
-### Step 1: Install the icon pack 
+### 1️⃣ Install the icon pack 
 ```
 yarn add @cldcvr/flow-system-icon
 ```
 
-### Step 2: Import the icon pack 
+### 2️⃣ Import the icon pack 
 
+```javascript
+import("@cldcvr/flow-core").then(async () => {
+	await import('@cldcvr/flow-system-icon');
+	//add your application startup code here
+});
 ```
-import "@cldcvr/flow-system-icon";
-```
-
-#### Icon packs
-
-* Product icons (logos of other products)
-* AWS cloud
-* GCP cloud
-* [View all](https://github.com/cldcvr/flow-icon)
+* [Icons Github repo](https://github.com/cldcvr/flow-icon)
+* [View icons](https://flow.cldcvr.com/icons/index.html)
 
 
 ## VScode Plugin and debuggers
@@ -107,27 +117,22 @@ import "@cldcvr/flow-system-icon";
 **Browser Debugger**: [Chrome](https://chrome.google.com/webstore/detail/web-component-devtools/gdniinfdlmmmjpnhgnkmfpffipenjljo), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/web-component-devtools/), [Safari](https://developer.apple.com/documentation/safariservices/safari_web_extensions/adding_a_web_development_tool_to_safari_web_inspector)
 
 
-## Dependencies (coming soon)
-* Tabs (coming soon)
-* Form builder (coming soon)
-* Pipelines (coming soon)
+## Dependencies
+* [Lineage](https://github.com/cldcvr/flow-lineage)
+* [Form builder](https://github.com/cldcvr/flow-form-builder)
 * Logs (coming soon)
+* Force graph (coming soon)
 * Tables (coming soon)
 * Themes (coming soon)
-* Time-series widgets (coming soon)
-* Lineage (coming soon)
-* Auth flow (coming soon)
-* Admin flow (coming soon)
+* Time-series (coming soon)
 
 
 ## Components
-* Button - [documentation](https://docs.google.com/document/d/1jwpo28kx61ybL3AOVzD2XaJ-aogZSThCTHtFWeqqMp8/edit?usp=sharing) |  Storybook
-* Icon - [documentation](https://docs.google.com/document/d/1kLruoml15fZCo8XUoo48xsNDVgzaDe9freI6XeP7HOs/edit#heading=h.b81ibd1zmiy) |  Storybook
-* Layout (f-div) - [documentation](https://docs.google.com/document/d/1X2i89A34pOnnTarzDDbEfP_GdK7sUBshr4gvX5ZEcPY/edit?usp=sharing) |  Storybook
-* Icon-button - [documentation](https://docs.google.com/document/d/1kLruoml15fZCo8XUoo48xsNDVgzaDe9freI6XeP7HOs/edit#heading=h.b81ibd1zmiy) |  Storybook
-* Typography (f-text) - [documentation](https://docs.google.com/document/d/1gc2pg9aZd1NsYvTXjAREsJkVYUsuin0-BiRa9vX9QNY/edit?usp=sharing)  |  Storybook
-* Tooltip - [documentation](https://docs.google.com/document/d/15k1dfr1wU3xaOj7tuxIQQcGFM5jz1SuX2_x6-91PSZo/edit?usp=sharing) |  Storybook
-* Colors - [documentation](https://docs.google.com/document/d/18EwptEUyenxyj1kC_kfdYsDfETZnWQF8EqEHLdwRQv0/edit?usp=sharing) |  Storybook
+Visit the [Flow components Storybook](https://flow.cldcvr.com/v2/index.html)
+
+
+## Templates
+Visit the [Flow templates Storybook](https://flow.cldcvr.com/templates/index.html)
 
 
 ## Resources

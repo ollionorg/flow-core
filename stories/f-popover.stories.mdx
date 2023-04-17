@@ -6,10 +6,10 @@ import { useArgs, useState } from "@storybook/client-api";
 import { ConfigUtil } from "@cldcvr/flow-core/src/modules/config";
 
 <Meta
-  title="Components/f-popover"
-  parameters={{
-    controls: { hideNoControlsWarning: true },
-  }}
+	title="Components/f-popover"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
 />
 
 <br />
@@ -31,77 +31,78 @@ be used to show short-lived information such as menus, options, additional actio
 ### [Playground](/story/components-f-popover--playground)
 
 <Canvas>
-  <Story
-    name="Playground"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-    argTypes={{
-      size: {
-        control: "select",
-        options: ["stretch", "large", "medium", "small"],
-      },
-      placement: {
-        control: "select",
-        options: [
-          "auto",
-          "top-start",
-          "top",
-          "top-end",
-          "bottom-start",
-          "bottom",
-          "bottom-end",
-          "right-start",
-          "right",
-          "right-end",
-          "left-start",
-          "left",
-          "left-end",
-        ],
-      },
-      open: {
-        control: "boolean",
-      },
-      overlay: {
-        control: "boolean",
-      },
-    }}
-    args={{
-      open: false,
-      overlay: true,
-      size: "small",
-      placement: "auto",
-    }}
-  >
-    {(args) => {
-      const [_, updateArgs] = useArgs();
-      const handlePopover = (e, f) => {
-        updateArgs({ open: !args.open });
-      };
-      return html` <f-div height="100px" align="middle-center">
-        <f-popover
-          .open=${args.open}
-          .overlay=${args.overlay}
-          .size=${args.size}
-          .placement=${args.placement}
-          @overlay-click=${handlePopover}
-          target="#popoverTarget"
-        >
-          <f-div state="tertiary" padding="medium">
-            <f-text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
-              mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
-              tristique.
-            </f-text>
-          </f-div>
-        </f-popover>
-        <f-button id="popoverTarget" label="Open" @click=${handlePopover}></f-button>
-      </f-div>`;
-    }}
-  </Story>
+	<Story
+		name="Playground"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 200
+			}
+		}}
+		argTypes={{
+			size: {
+				control: "select",
+				options: ["stretch", "large", "medium", "small"]
+			},
+			placement: {
+				control: "select",
+				options: [
+					"auto",
+					"top-start",
+					"top",
+					"top-end",
+					"bottom-start",
+					"bottom",
+					"bottom-end",
+					"right-start",
+					"right",
+					"right-end",
+					"left-start",
+					"left",
+					"left-end"
+				]
+			},
+			open: {
+				control: "boolean"
+			},
+			overlay: {
+				control: "boolean"
+			}
+		}}
+		args={{
+			open: false,
+			overlay: true,
+			size: "small",
+			placement: "auto"
+		}}
+	>
+		{args => {
+			const [_, updateArgs] = useArgs();
+			const handlePopover = (e, f) => {
+				console.log(e, f);
+				updateArgs({ open: !args.open });
+			};
+			return html` <f-div height="100px" align="middle-center">
+				<f-popover
+					.open=${args.open}
+					.overlay=${args.overlay}
+					.size=${args.size}
+					.placement=${args.placement}
+					@overlay-click=${handlePopover}
+					target="#popoverTarget"
+				>
+					<f-div state="tertiary" padding="medium">
+						<f-text>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+							mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+							tristique.
+						</f-text>
+					</f-div>
+				</f-popover>
+				<f-button id="popoverTarget" label="Open" @click=${handlePopover}></f-button>
+			</f-div>`;
+		}}
+	</Story>
 </Canvas>
 
 <br />
@@ -112,7 +113,7 @@ be used to show short-lived information such as menus, options, additional actio
 <br />
 
 <Story name="Anatomy">
-  {() => html`<div class="align-center">${unsafeSVG(fPopoverAnatomy)}</div>`}
+	{() => html`<div class="align-center">${unsafeSVG(fPopoverAnatomy)}</div>`}
 </Story>
 
 <br />
@@ -127,49 +128,49 @@ Target property specifies a name or a keyword that indicates where to display th
 <br />
 
 <Canvas>
-  <Story
-    name="target"
-    args={{
-      open: false,
-    }}
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
-    {(args) => {
-      const [_, updateArgs] = useArgs();
-      const handlePopover = (e, f) => {
-        updateArgs({ open: !args.open });
-      };
-      const escapePopover = (e, f) => {
-        updateArgs({ open: !args.open });
-      };
-      return html`
-        <f-div height="hug-content" align="middle-center">
-          <f-popover
-            ?open=${args.open}
-            ?overlay=${true}
-            @overlay-click=${handlePopover}
-            @esc=${escapePopover}
-            size="small"
-            target="#popoverTarget"
-          >
-            <f-div state="tertiary" padding="medium">
-              <f-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
-                mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
-                tristique.
-              </f-text>
-            </f-div>
-          </f-popover>
-          <f-button id="popoverTarget" label="Open" @click=${handlePopover}> </f-button>
-        </f-div>
-      `;
-    }}
-  </Story>
+	<Story
+		name="target"
+		args={{
+			open: false
+		}}
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 200
+			}
+		}}
+	>
+		{args => {
+			const [_, updateArgs] = useArgs();
+			const handlePopover = (e, f) => {
+				updateArgs({ open: !args.open });
+			};
+			const escapePopover = (e, f) => {
+				updateArgs({ open: !args.open });
+			};
+			return html`
+				<f-div height="hug-content" align="middle-center">
+					<f-popover
+						?open=${args.open}
+						?overlay=${true}
+						@overlay-click=${handlePopover}
+						@esc=${escapePopover}
+						size="small"
+						target="#popoverTarget"
+					>
+						<f-div state="tertiary" padding="medium">
+							<f-text>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+								mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+								tristique.
+							</f-text>
+						</f-div>
+					</f-popover>
+					<f-button id="popoverTarget" label="Open" @click=${handlePopover}> </f-button>
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <br />
@@ -184,158 +185,158 @@ By default the popover is auto aligned to the center of the viewport.
 <br />
 
 <Canvas>
-  <Story
-    name="placement"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 350,
-      },
-    }}
-  >
-    {(args) => {
-      const [dummyPlacementArray, setDummyPlacementArray] = useState([
-        [
-          { open: false, title: "Bottom End", placement: "bottom-end" },
-          { open: false, title: "Bottom", placement: "bottom" },
-          { open: false, title: "Bottom Start", placement: "bottom-start" },
-        ],
-        [
-          { open: false, title: "Right Start", placement: "right-start" },
-          { open: false, title: "Left Start", placement: "left-start" },
-        ],
-        [
-          { open: false, title: "Right", placement: "right" },
-          { open: false, title: "Auto", placement: "auto" },
-          { open: false, title: "Left", placement: "left" },
-        ],
-        [
-          { open: false, title: "Right End", placement: "right-end" },
-          { open: false, title: "left End", placement: "left-end" },
-        ],
-        [
-          { open: false, title: "Top End", placement: "top-end" },
-          { open: false, title: "Top", placement: "top" },
-          { open: false, title: "Top Start", placement: "top-start" },
-        ],
-      ]);
-      const handlePopover = (main_index, index) => {
-        const array = [...dummyPlacementArray];
-        array[index][main_index].open = !dummyPlacementArray[index][main_index].open;
-        setDummyPlacementArray(array);
-      };
-      return html`
-        <f-div height="hug-content" gap="large" direction="column">
-          ${dummyPlacementArray.map((item, index) => {
-            return html`
-              <f-div height="hug-content" gap="auto" direction="row">
-                ${item.map((main, main_index) => {
-                  return html` <f-popover
-                      ?open=${main.open}
-                      ?overlay=${true}
-                      placement=${main.placement}
-                      target=${`#${main.placement}`}
-                      @overlay-click=${() => handlePopover(main_index, index)}
-                    >
-                      <f-div state="tertiary" padding="medium">
-                        <f-text>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-                          imperdiet enim ut mi egestas, non efficitur odio varius. Phasellus
-                          accumsan pellentesque ex vehicula tristique.
-                        </f-text>
-                      </f-div>
-                    </f-popover>
-                    <f-button
-                      id=${main.placement}
-                      label=${main.title}
-                      @click=${() => handlePopover(main_index, index)}
-                    >
-                    </f-button>`;
-                })}
-              </f-div>
-            `;
-          })}
-        </f-div>
-      `;
-    }}
-  </Story>
+	<Story
+		name="placement"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 350
+			}
+		}}
+	>
+		{args => {
+			const [dummyPlacementArray, setDummyPlacementArray] = useState([
+				[
+					{ open: false, title: "Bottom End", placement: "bottom-end" },
+					{ open: false, title: "Bottom", placement: "bottom" },
+					{ open: false, title: "Bottom Start", placement: "bottom-start" }
+				],
+				[
+					{ open: false, title: "Right Start", placement: "right-start" },
+					{ open: false, title: "Left Start", placement: "left-start" }
+				],
+				[
+					{ open: false, title: "Right", placement: "right" },
+					{ open: false, title: "Auto", placement: "auto" },
+					{ open: false, title: "Left", placement: "left" }
+				],
+				[
+					{ open: false, title: "Right End", placement: "right-end" },
+					{ open: false, title: "left End", placement: "left-end" }
+				],
+				[
+					{ open: false, title: "Top End", placement: "top-end" },
+					{ open: false, title: "Top", placement: "top" },
+					{ open: false, title: "Top Start", placement: "top-start" }
+				]
+			]);
+			const handlePopover = (main_index, index) => {
+				const array = [...dummyPlacementArray];
+				array[index][main_index].open = !dummyPlacementArray[index][main_index].open;
+				setDummyPlacementArray(array);
+			};
+			return html`
+				<f-div height="hug-content" gap="large" direction="column">
+					${dummyPlacementArray.map((item, index) => {
+						return html`
+							<f-div height="hug-content" gap="auto" direction="row">
+								${item.map((main, main_index) => {
+									return html` <f-popover
+											?open=${main.open}
+											?overlay=${true}
+											placement=${main.placement}
+											target=${`#${main.placement}`}
+											@overlay-click=${() => handlePopover(main_index, index)}
+										>
+											<f-div state="tertiary" padding="medium">
+												<f-text>
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+													imperdiet enim ut mi egestas, non efficitur odio varius. Phasellus
+													accumsan pellentesque ex vehicula tristique.
+												</f-text>
+											</f-div>
+										</f-popover>
+										<f-button
+											id=${main.placement}
+											label=${main.title}
+											@click=${() => handlePopover(main_index, index)}
+										>
+										</f-button>`;
+								})}
+							</f-div>
+						`;
+					})}
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>auto</td>
-      <td>Sets the placement of popover automatically according to the screen size</td>
-      <td>
-        <code>default</code>
-      </td>
-    </tr>
-    <tr>
-      <td>top</td>
-      <td>placed at top-middle part w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>top-start</td>
-      <td>placed at top-start position w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>top-end</td>
-      <td>placed at top-end position w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>bottom</td>
-      <td>placed at bottom-middle position w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>bottom-start</td>
-      <td>placed at bottom-start position w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>bottom-end</td>
-      <td>placed at bottom-end position w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>right</td>
-      <td>placed at right-center position w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>right-start</td>
-      <td>starting from top to downwards on right side wrt to the button opening popup</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>right-end</td>
-      <td>starting from bottom to upwards on right side wrt to the button opening popup</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>left</td>
-      <td>placed at left-center position w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>left-start</td>
-      <td>starting from top to downwards on left side wrt to the button opening popup</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>left-end</td>
-      <td>starting from bottom to upwards on left side wrt to the button opening popup</td>
-      <td></td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>auto</td>
+			<td>Sets the placement of popover automatically according to the screen size</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>top</td>
+			<td>placed at top-middle part w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>top-start</td>
+			<td>placed at top-start position w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>top-end</td>
+			<td>placed at top-end position w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>bottom</td>
+			<td>placed at bottom-middle position w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>bottom-start</td>
+			<td>placed at bottom-start position w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>bottom-end</td>
+			<td>placed at bottom-end position w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>right</td>
+			<td>placed at right-center position w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>right-start</td>
+			<td>starting from top to downwards on right side wrt to the button opening popup</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>right-end</td>
+			<td>starting from bottom to upwards on right side wrt to the button opening popup</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>left</td>
+			<td>placed at left-center position w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>left-start</td>
+			<td>starting from top to downwards on left side wrt to the button opening popup</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>left-end</td>
+			<td>starting from bottom to upwards on left side wrt to the button opening popup</td>
+			<td></td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -352,106 +353,106 @@ popover and if the max height is attained, the body contents will scroll.
 
 <br />
 <p class="note-section">
-  Note: Popover will be constrained with viewport and can not go beyond it.
+	Note: Popover will be constrained with viewport and can not go beyond it.
 </p>
 
 <br />
 
 <Canvas>
-  <Story
-    name="size"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 300,
-      },
-    }}
-  >
-    {(args) => {
-      const [dummySizeArray, setDummySizeArray] = useState([
-        {
-          popoverId: "stretchSize",
-          open: false,
-          title: "Stretch Size",
-          size: "stretch",
-        },
-        { popoverId: "large", open: false, title: "Large Size", size: "large" },
-        {
-          popoverId: "medium",
-          open: false,
-          title: "Medium Size",
-          size: "medium",
-        },
-        { popoverId: "small", open: false, title: "Small Size", size: "small" },
-      ]);
-      const handlePopover = (item, index) => {
-        const array = [...dummySizeArray];
-        array[index].open = !dummySizeArray[index].open;
-        setDummySizeArray(array);
-      };
-      return html` <f-div height="hug-content" gap="large">
-        ${dummySizeArray.map((item, index) => {
-          return html`
-            <f-popover
-              ?open=${item.open}
-              ?overlay=${true}
-              size=${item.size}
-              target=${`#${item.popoverId}`}
-              @overlay-click=${() => handlePopover(item, index)}
-            >
-              <f-div state="tertiary" padding="medium">
-                <f-text>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim
-                  ut mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex
-                  vehicula tristique.
-                </f-text>
-              </f-div>
-            </f-popover>
-            <f-button
-              id=${item.popoverId}
-              label=${item.title}
-              @click=${() => handlePopover(item, index)}
-            >
-            </f-button>
-          `;
-        })}
-      </f-div>`;
-    }}
-  </Story>
+	<Story
+		name="size"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 300
+			}
+		}}
+	>
+		{args => {
+			const [dummySizeArray, setDummySizeArray] = useState([
+				{
+					popoverId: "stretchSize",
+					open: false,
+					title: "Stretch Size",
+					size: "stretch"
+				},
+				{ popoverId: "large", open: false, title: "Large Size", size: "large" },
+				{
+					popoverId: "medium",
+					open: false,
+					title: "Medium Size",
+					size: "medium"
+				},
+				{ popoverId: "small", open: false, title: "Small Size", size: "small" }
+			]);
+			const handlePopover = (item, index) => {
+				const array = [...dummySizeArray];
+				array[index].open = !dummySizeArray[index].open;
+				setDummySizeArray(array);
+			};
+			return html` <f-div height="hug-content" gap="large">
+				${dummySizeArray.map((item, index) => {
+					return html`
+						<f-popover
+							?open=${item.open}
+							?overlay=${true}
+							size=${item.size}
+							target=${`#${item.popoverId}`}
+							@overlay-click=${() => handlePopover(item, index)}
+						>
+							<f-div state="tertiary" padding="medium">
+								<f-text>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim
+									ut mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex
+									vehicula tristique.
+								</f-text>
+							</f-div>
+						</f-popover>
+						<f-button
+							id=${item.popoverId}
+							label=${item.title}
+							@click=${() => handlePopover(item, index)}
+						>
+						</f-button>
+					`;
+				})}
+			</f-div>`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>stretch</td>
-      <td>
-        Viewport width with a 16px gutter/padding and Viewport height with a 16px gutter/padding
-      </td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>large</td>
-      <td>width: 864px. max-height: 600px</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>medium</td>
-      <td>width: 432px. max-height: 600px</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>top-end</td>
-      <td>width: 320px. max-height: 432px</td>
-      <td>
-        <code>default</code>
-      </td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>stretch</td>
+			<td>
+				Viewport width with a 16px gutter/padding and Viewport height with a 16px gutter/padding
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>large</td>
+			<td>width: 864px. max-height: 600px</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>medium</td>
+			<td>width: 432px. max-height: 600px</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>top-end</td>
+			<td>width: 320px. max-height: 432px</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -463,120 +464,159 @@ popover and if the max height is attained, the body contents will scroll.
 <br />
 
 <Canvas>
-  <Story
-    name="Flags"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 300,
-      },
-    }}
-  >
-    {(args) => {
-      const [openFlag, setOpenFlag] = useState(false);
-      const [openFlagForOverlay, setOpenFlagForOverlay] = useState(false);
-      const [openFlagForNoOverlay, setOpenFlagForNoOverlay] = useState(false);
-      return html` <f-div height="hug-content" gap="large" direction="column">
-        <f-div height="hug-content" gap="large" direction="row">
-          <f-popover
-            ?open=${openFlag}
-            ?overlay=${true}
-            size="small"
-            target="#openFlag"
-            @overlay-click=${() => setOpenFlag(!openFlag)}
-          >
-            <f-div state="tertiary" padding="medium">
-              <f-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
-                mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
-                tristique.
-              </f-text>
-            </f-div>
-          </f-popover>
-          <f-button id="openFlag" label="open='true'" @click=${() => setOpenFlag(!openFlag)}>
-          </f-button>
-          <f-popover ?open=${false} ?overlay=${true} size="small" target="#openFlag2">
-            <f-div state="tertiary" padding="medium">
-              <f-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
-                mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
-                tristique.
-              </f-text>
-            </f-div>
-          </f-popover>
-          <f-button id="openFlag2" label="open='false'"> </f-button>
-        </f-div>
-        <f-div height="hug-content" gap="large" direction="row">
-          <f-popover
-            ?open=${openFlagForOverlay}
-            ?overlay=${true}
-            size="small"
-            target="#openFlagForOverlay"
-            @overlay-click=${() => setOpenFlagForOverlay(!openFlagForOverlay)}
-          >
-            <f-div state="tertiary" padding="medium">
-              <f-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
-                mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
-                tristique.
-              </f-text>
-            </f-div>
-          </f-popover>
-          <f-button
-            id="openFlagForOverlay"
-            label="overlay='true'"
-            @click=${() => setOpenFlagForOverlay(!openFlagForOverlay)}
-          >
-          </f-button>
-          <f-popover
-            ?open=${openFlagForNoOverlay}
-            .overlay=${false}
-            size="small"
-            target="#openFlagForNoOverlay2"
-            @overlay-click=${() => setOpenFlagForNoOverlay(!openFlagForNoOverlay)}
-          >
-            <f-div state="tertiary" padding="medium">
-              <f-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
-                mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
-                tristique.
-              </f-text>
-            </f-div>
-          </f-popover>
-          <f-button
-            id="openFlagForNoOverlay2"
-            label="overlay='false'"
-            @click=${() => setOpenFlagForNoOverlay(!openFlagForNoOverlay)}
-          >
-          </f-button>
-        </f-div>
-      </f-div>`;
-    }}
-  </Story>
+	<Story
+		name="Flags"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 300
+			}
+		}}
+	>
+		{args => {
+			const [openFlag, setOpenFlag] = useState(false);
+			const [openFlagForOverlay, setOpenFlagForOverlay] = useState(false);
+			const [openFlagForNoOverlay, setOpenFlagForNoOverlay] = useState(false);
+			return html` <f-div height="hug-content" gap="large" direction="column">
+				<f-div height="hug-content" gap="large" direction="row">
+					<f-popover
+						?open=${openFlag}
+						?overlay=${true}
+						size="small"
+						target="#openFlag"
+						@overlay-click=${() => setOpenFlag(!openFlag)}
+					>
+						<f-div state="tertiary" padding="medium">
+							<f-text>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+								mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+								tristique.
+							</f-text>
+						</f-div>
+					</f-popover>
+					<f-button id="openFlag" label="open='true'" @click=${() => setOpenFlag(!openFlag)}>
+					</f-button>
+					<f-popover ?open=${false} ?overlay=${true} size="small" target="#openFlag2">
+						<f-div state="tertiary" padding="medium">
+							<f-text>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+								mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+								tristique.
+							</f-text>
+						</f-div>
+					</f-popover>
+					<f-button id="openFlag2" label="open='false'"> </f-button>
+				</f-div>
+				<f-div height="hug-content" gap="large" direction="row">
+					<f-popover
+						?open=${openFlagForOverlay}
+						?overlay=${true}
+						size="small"
+						target="#openFlagForOverlay"
+						@overlay-click=${() => setOpenFlagForOverlay(!openFlagForOverlay)}
+					>
+						<f-div state="tertiary" padding="medium">
+							<f-text>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+								mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+								tristique.
+							</f-text>
+						</f-div>
+					</f-popover>
+					<f-button
+						id="openFlagForOverlay"
+						label="overlay='true'"
+						@click=${() => setOpenFlagForOverlay(!openFlagForOverlay)}
+					>
+					</f-button>
+					<f-popover
+						?open=${openFlagForNoOverlay}
+						.overlay=${false}
+						size="small"
+						target="#openFlagForNoOverlay2"
+						@overlay-click=${() => setOpenFlagForNoOverlay(!openFlagForNoOverlay)}
+					>
+						<f-div state="tertiary" padding="medium">
+							<f-text>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+								mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+								tristique.
+							</f-text>
+						</f-div>
+					</f-popover>
+					<f-button
+						id="openFlagForNoOverlay2"
+						label="overlay='false'"
+						@click=${() => setOpenFlagForNoOverlay(!openFlagForNoOverlay)}
+					>
+					</f-button>
+				</f-div>
+			</f-div>`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Name</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>overlay</td>
-      <td>If we need black with 50% opacity background ot not when open the popover</td>
-      <td>
-        <code>true</code>
-      </td>
-    </tr>
-    <tr>
-      <td>open</td>
-      <td>To open and close popover</td>
-      <td>
-        <code>false</code>
-      </td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Name</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>overlay</td>
+			<td>If we need black with 50% opacity background ot not when open the popover</td>
+			<td>
+				<code>true</code>
+			</td>
+		</tr>
+		<tr>
+			<td>open</td>
+			<td>To open and close popover</td>
+			<td>
+				<code>false</code>
+			</td>
+		</tr>
+	</tbody>
 </table>
+
+## Child Popovers
+
+<hr />
+
+<br />
+
+<Canvas>
+	<Story
+		name="Child Popover"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 300
+			}
+		}}
+	>
+		{args => {
+			return html`
+				<f-popover ?open=${true} ?overlay=${true} size="medium">
+					<f-div id="mainPopoverContent" state="tertiary" height="500px" padding="medium">
+						<f-text> Main Popover </f-text>
+					</f-div>
+					<f-popover
+						?open=${true}
+						?overlay=${false}
+						target="#mainPopoverContent"
+						placement="left-start"
+						size="small"
+					>
+						<f-div state="tertiary" height="200px" padding="medium">
+							<f-text> Chota Popover </f-text>
+						</f-div>
+					</f-popover>
+				</f-popover>
+			`;
+		}}
+	</Story>
+</Canvas>
 
 <ArgsTable of={"f-popover"} />

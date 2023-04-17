@@ -59,6 +59,9 @@ Text component includes Headings, titles, body texts and links.
         control: "radio",
         options: ["left", "right", "center"],
       },
+      inline: {
+        control: "boolean",
+      },
       loading: {
         control: { type: "boolean" },
         if: { arg: "disabled", eq: false },
@@ -77,13 +80,13 @@ Text component includes Headings, titles, body texts and links.
       size: "medium",
       state: "default",
       align: "left",
+      inline: false,
       loading: false,
       disabled: false,
       ellipsis: false,
     }}
   >
     {(args) => html`
-      <f-div padding="none">
         <f-text
           .variant=${args.variant}
           .size=${args.size}
@@ -92,10 +95,20 @@ Text component includes Headings, titles, body texts and links.
           .loading=${args.loading}
           .disabled=${args.disabled}
           .ellipsis=${args.ellipsis}
-          >This is ${args.variant} with ${args.size} and "${args.state}" state. Alignment
-          is ${args.align}</f-text
-        ></f-div
-      >
+          ?inline=${args.inline}
+          >This is ${args.variant} with ${args.size} and "${args.state}" state. Alignment is ${args.align}.
+        </f-text>
+        <f-text
+          .variant=${args.variant}
+          .size=${args.size}
+          .state=${args.state}
+          .align=${args.align}
+          .loading=${args.loading}
+          .disabled=${args.disabled}
+          .ellipsis=${args.ellipsis}
+          ?inline=${args.inline}
+          >Check for inline</f-text
+        >
     `}
   </Story>
 </Canvas>
@@ -110,11 +123,7 @@ variants of text component are use cases such as Heading, paragraph, and code.
 
 <Canvas>
   <Story name="variant">
-    {(args) => html`<f-div
-      gap="x-large"
-      padding="x-large"
-      align="middle-center"
-    >
+    {(args) => html`<f-div gap="x-large" padding="x-large" align="middle-center">
       <f-text variant="heading">heading</f-text>
       <f-text variant="para">para</f-text>
       <f-text variant="code">code</f-text>
@@ -158,36 +167,26 @@ Each variant has various sizes. By default medium is the default size.
 <Canvas>
   <Story name="size">
     {(args) => html`<f-div gap="medium" padding="x-large" direction="column">
-      <f-text variant="para" size="large" weight="medium"
-        >size of variant="heading"</f-text
-      >
+      <f-text variant="para" size="large" weight="medium">size of variant="heading"</f-text>
       <f-divider></f-divider>
       <f-div gap="medium" padding="medium" align="middle-center">
         <f-div height="hug-content" padding="none" align="middle-center">
-          <f-text variant="heading" size="x-large" weight="medium"
-            >x-large</f-text
-          >
+          <f-text variant="heading" size="x-large" weight="medium">x-large</f-text>
         </f-div>
         <f-div height="hug-content" padding="none" align="middle-center">
           <f-text variant="heading" size="large" weight="medium">large</f-text>
         </f-div>
         <f-div height="hug-content" padding="none" align="middle-center">
-          <f-text variant="heading" size="medium" weight="medium"
-            >medium</f-text
-          >
+          <f-text variant="heading" size="medium" weight="medium">medium</f-text>
         </f-div>
         <f-div height="hug-content" padding="none" align="middle-center">
           <f-text variant="heading" size="small" weight="medium">small</f-text>
         </f-div>
         <f-div height="hug-content" padding="none" align="middle-center">
-          <f-text variant="heading" size="x-small" weight="medium"
-            >x-small</f-text
-          >
+          <f-text variant="heading" size="x-small" weight="medium">x-small</f-text>
         </f-div>
       </f-div>
-      <f-text variant="para" size="large" weight="medium"
-        >size of variant="para"</f-text
-      >
+      <f-text variant="para" size="large" weight="medium">size of variant="para"</f-text>
       <f-divider></f-divider>
       <f-div gap="medium" padding="medium" align="middle-center">
         <f-div height="hug-content" padding="none" align="middle-center">
@@ -203,9 +202,7 @@ Each variant has various sizes. By default medium is the default size.
           <f-text variant="para" size="x-small" weight="medium">x-small</f-text>
         </f-div>
       </f-div>
-      <f-text variant="para" size="large" weight="medium"
-        >size of variant="code"</f-text
-      >
+      <f-text variant="para" size="large" weight="medium">size of variant="code"</f-text>
       <f-divider></f-divider>
       <f-div gap="medium" padding="medium" align="middle-center">
         <f-div height="hug-content" padding="none" align="middle-center">
@@ -345,12 +342,7 @@ connotes danger, whereas a green color connotes success and so on.
 
 <Canvas>
   <Story name="state">
-    {(args) => html`<f-div
-      gap="medium"
-      padding="x-large"
-      direction="column"
-      state="primary"
-    >
+    {(args) => html`<f-div gap="medium" padding="x-large" direction="column" state="primary">
       <f-text variant="para" size="large" weight="medium" state="default"
         >This is a default state. This is a default state.</f-text
       >
@@ -394,8 +386,7 @@ Sets the alignment of the text. Can take 3 values: left, center, and right.
   <Story name="align">
     {(args) => html`
       <br />
-      <f-text variant="para" size="large" weight="medium" align="left"
-        >This is left aligned.</f-text
+      <f-text variant="para" size="large" weight="medium" align="left">This is left aligned.</f-text
       ><br />
       <f-text variant="para" size="large" weight="medium" align="center"
         >This is center aligned.</f-text
@@ -446,45 +437,27 @@ predetermined state.
 <Canvas>
   <Story name="Flags">
     {(args) => html`<f-div gap="large" padding="x-large" direction="column">
-      <f-div
-        padding="none"
-        direction="row"
-        gap="x-large"
-        overflow="hidden"
-        height="hug-content"
-      >
+      <f-div padding="none" direction="row" gap="x-large" overflow="hidden" height="hug-content">
+        <f-text variant="para" weight="regular" ?inline=${false}>Normal Text</f-text>
+        <f-text variant="para" weight="regular" ?inline=${true}>Inline Text</f-text>
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large" overflow="hidden" height="hug-content">
         <f-div width="hug-content" padding="none">
           <f-text variant="para" weight="regular">Loading</f-text>
         </f-div>
         <f-div width="hug-content" padding="none">
-          <f-text variant="para" weight="regular" loading=${true}
-            >Loading</f-text
-          >
+          <f-text variant="para" weight="regular" loading=${true}>Loading</f-text>
         </f-div>
       </f-div>
-      <f-div
-        padding="none"
-        direction="row"
-        gap="x-large"
-        overflow="hidden"
-        height="hug-content"
-      >
+      <f-div padding="none" direction="row" gap="x-large" overflow="hidden" height="hug-content">
         <f-div width="hug-content" padding="none">
           <f-text variant="para" weight="regular">Not Disabled</f-text>
         </f-div>
         <f-div width="hug-content" padding="none">
-          <f-text variant="para" weight="regular" disabled=${true}
-            >Disabled</f-text
-          >
+          <f-text variant="para" weight="regular" disabled=${true}>Disabled</f-text>
         </f-div>
       </f-div>
-      <f-div
-        padding="none"
-        direction="row"
-        gap="x-large"
-        overflow="hidden"
-        height="hug-content"
-      >
+      <f-div padding="none" direction="row" gap="x-large" overflow="hidden" height="hug-content">
         <f-div width="300px" padding="none">
           <f-text variant="para" weight="regular"
             >We can see the ellipis happening here when ellipsis="true"</f-text
@@ -508,6 +481,11 @@ predetermined state.
       <td>Default</td>
     </tr>
     <tr>
+      <td>inline</td>
+      <td>width of text would be fit-content</td>
+      <td>false</td>
+    </tr>
+    <tr>
       <td>loading</td>
       <td>skeleton will replace the text</td>
       <td>false</td>
@@ -520,8 +498,8 @@ predetermined state.
     <tr>
       <td>ellipsis</td>
       <td>
-        By default no. of rows is to 1. Ellipsis will crop the text after one
-        line w.r.t the outer div
+        By default no. of rows is to 1. Ellipsis will crop the text after one line w.r.t the outer
+        div
       </td>
       <td>false</td>
     </tr>

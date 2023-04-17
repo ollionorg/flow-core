@@ -1,0 +1,210 @@
+@use "sass:map";
+
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+/**
+START : scss maps to hold repsective attribute values
+**/
+
+$sizes: (
+	"medium": 36px,
+	"small": 28px
+);
+
+$state-colors: (
+	"primary": var(--color-primary-default),
+	"success": var(--color-success-default),
+	"warning": var(--color-warning-default),
+	"danger": var(--color-danger-default)
+);
+
+$variants: (
+	"curved": 4px,
+	"round": 22px,
+	"block": 0px
+);
+
+$categories: (
+	"fill": (
+		"background": var(--color-surface-tertiary),
+		"hover": var(--color-surface-tertiary-hover),
+		"border": 1px solid var(--color-surface-tertiary)
+	),
+	"outline": (
+		"background": transparent,
+		"hover": var(--color-surface-default-hover),
+		"border": 1px solid var(--color-border-default)
+	)
+);
+
+:host {
+	.f-emoji-picker {
+		@include base();
+		cursor: pointer;
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+		gap: 8px;
+		max-width: 58px;
+		> f-div:not([placeholder]) {
+			font-style: normal;
+			font-weight: 325;
+			line-height: 18px;
+			color: var(--color-text-subtle);
+			width: fit-content !important;
+			&[size="small"] {
+				font-size: 15px;
+			}
+			&[size="medium"] {
+				font-size: 21px;
+			}
+		}
+		padding: 0px 8px;
+
+		@each $variant, $value in $variants {
+			&[variant="#{$variant}"] {
+				border-radius: $value;
+			}
+		}
+		@each $size, $value in $sizes {
+			&[size="#{$size}"] {
+				height: $value;
+			}
+		}
+		@each $state, $color in $state-colors {
+			&[state="#{$state}"] {
+				@each $category, $value in $categories {
+					&[category="#{$category}"] {
+						background-color: map.get($value, "background");
+						border: 1px solid $color;
+						&:hover {
+							background-color: map.get($value, "hover");
+						}
+					}
+					&[category="transparent"][variant="block"] {
+						background-color: transparent;
+						border-top: 0px;
+						border-bottom: 1px solid $color;
+						border-left: 0px;
+						border-right: 0px;
+						&:hover {
+							background-color: var(--color-surface-default-hover);
+						}
+					}
+				}
+			}
+		}
+
+		&[state="default"] {
+			@each $category, $value in $categories {
+				&[category="#{$category}"] {
+					background-color: map.get($value, "background");
+					border: map.get($value, "border");
+					&:hover {
+						background-color: map.get($value, "hover");
+					}
+				}
+				&[category="transparent"][variant="block"] {
+					background-color: transparent;
+					border-top: 0px;
+					border-bottom: 1px solid var(--color-border-default);
+					border-left: 0px;
+					border-right: 0px;
+					&:hover {
+						background-color: var(--color-surface-default-hover);
+					}
+				}
+			}
+			&:focus {
+				outline: none;
+				border: 1px solid var(--color-primary-default);
+			}
+		}
+	}
+}
+
+f-emoji-picker {
+	display: flex;
+	flex: 1 0 auto;
+	&[disabled] {
+		@include disabled();
+	}
+	&[state="default"] {
+		@include input-color("default");
+	}
+	@each $state, $color in $state-colors {
+		&[state="#{$state}"] {
+			@include input-color($state);
+		}
+	}
+}
+
+em-emoji-picker {
+	--font-family: var(--flow-font);
+	--color-border: var(--color-surface-tertiary);
+	--border-radius: 4px;
+	--preview-placeholder-size: 16px;
+	--preview-title-size: 16px;
+	--preview-subtitle-size: 12px;
+}
+
+section#root {
+	background-color: var(--color-surface-secondary);
+	color: var(--color-text-default);
+}
+
+section#root .sticky {
+	background-color: rgba(var(--color-surface-secondary), 1);
+}
+
+section#root .search input[type="search"] {
+	color: var(--color-text-default);
+	&:focus {
+		background-color: var(--color-surface-secondary);
+		border: 1px solid var(--color-primary-default);
+		outline: none;
+	}
+}
+section#root .search .icon {
+	color: rgba(var(--color-text-default), 0.7);
+}
+
+section #nav button[aria-selected] {
+	color: var(--color-primary-default);
+	&:hover {
+		color: var(--color-primary-default);
+	}
+}
+
+section #nav button {
+	color: var(--color-text-default);
+	&:hover {
+		color: var(--color-text-default-hover);
+	}
+}
+
+section#root #nav .bar {
+	background-color: var(--color-primary-default);
+}
+
+section#root .scroll {
+	padding-right: 7px;
+}
+section#root .scroll::-webkit-scrollbar-thumb {
+	border: none;
+}
+section#root .scroll::-webkit-scrollbar {
+	width: 5px;
+}
+
+section#root #preview .preview-placeholder {
+	color: var(--color-text-default);
+}
+
+section#root #preview .preview-title {
+	color: var(--color-text-default);
+}
+
+section#root #preview .color-c {
+	color: var(--color-text-default);
+}

@@ -4,22 +4,393 @@
 
 # Change Log
 
+## [1.9.0] - 2023-04-13
+
+### Features
+
+- `f-accordion` component added.
+
+## [1.8.4] - 2023-04-10
+
+### Improvements
+
+- Icon story updated with external storybook link.
+- `f-input`: `autocomplete`, `autofocus` attribute support added.
+
+### Bug Fixes
+
+- `f-text`: alignment fixed when used in `f-div` column direction.
+- `f-radio`, `f-checkbox` spacing issue fixed.
+
+## [1.8.3] - 2023-04-10
+
+### Bug Fixes
+
+- `f-icon-button`: in block variant, hover on icon added.
+
+## [1.8.2] - 2023-04-07
+
+### Improvements
+
+- shadow added to `f-suggest` options.
+
+## [1.8.1] - 2023-04-04
+
+### Improvements
+
+- support to pass state in help slot of inputs.
+
+## [1.8.0] - 2023-04-04
+
+### Features
+
+- `subtitle` slot support added to all input elements.
+
+## [1.7.4] - 2023-04-04
+
+### Bug fixes
+
+- tooltip not visible in light theme.
+
+## [1.7.3] - 2023-04-04
+
+### Bug fixes
+
+- Text not wrapping in forms.
+
+## [1.7.2] - 2023-03-31
+
+### Improvements
+
+- `umd` bundle updated.
+
+## [1.7.0] - 2023-03-31
+
+### Features
+
+- `umd` bundles added in package. to use flow-core in static html file.
+
+## [1.6.8] - 2023-03-27
+
+### Bug fixes
+
+- `emoji` picker not opening in `f-form-builder`;
+
+## [1.6.7] - 2023-03-27
+
+### Bug fixes
+
+- `emoji` picker category resets on selection.
+
+## [1.6.6] - 2023-03-23
+
+### Bug fixes
+
+- outside click emoji picker not closing.
+
+## [1.6.5] - 2023-03-23
+
+### Improvements
+
+- `f-icon-button`: `type`renamed to `category` (more aligned to `f-button`).
+
+## [1.6.4] - 2023-03-21
+
+### Improvements
+
+- `data-qa-option` value updated for objects in `f-select`.
+
+## [1.6.3] - 2023-03-20
+
+### Bug Fixes
+
+- `data-qa-id` added in `f-select`.
+
+## [1.6.2] - 2023-03-17
+
+### Bug Fixes
+
+- Select dropdowns can’t be dismissed by clicking outside
+
+## [1.6.1] - 2023-03-14
+
+### Bug Fixes
+
+- TypeError when using single mode on f-select.
+- Select dropdowns can’t be dismissed by clicking outside
+- Select dropdowns have no shadow
+- Child popover behavior fixed.
+
+## [1.6.0] - 2023-03-14
+
+### Features
+
+- `f-search` component added.
+
+### Improvements
+
+- `f-suggest` added group categorization type dropdown, customization according to `f-search`.
+
+## [1.5.3] - 2023-03-09
+
+### Improvements
+
+- `f-form-group` label wrapper identifier added.
+
+## [1.5.2] - 2023-03-09
+
+### Improvements
+
+- `label`, `description` spacing updated for form inputs.
+
+## [1.5.1] - 2023-03-09
+
+### Improvements
+
+- `f-icon` alignment in form inputs.
+
+## [1.5.0] - 2023-03-09
+
+### Improvements
+
+- `external` updated in build options.
+
+## [1.4.9] - 2023-03-09
+
+### Improvements
+
+- `external` updated in build options.
+
+### Bug fixes
+
+- Type casting: input of type `number` not emitting Number type value.
+
+## [1.4.8] - 2023-03-09
+
+### Improvements
+
+- For form elements `data-qa-element-id` propogated to `data-qa-id` of native input element.
+
+## [1.4.8-beta] - 2023-03-07
+
+### Bug fixes
+
+- `data-qa-id` propogated to native input element.
+
+## [1.4.7] - 2023-03-07
+
+### Bug fixes
+
+- `:host` styles applied to respective tag.
+
+## [1.4.6] - 2023-03-07
+
+### Bug fixes
+
+- `f-emoji-picker`: added static width to stop the dynamic width extension. The picker wasn't opening in form-builder on click, which is fixed.
+
+## [1.4.5] - 2023-03-07
+
+### Features
+
+- `f-div` css issue fixed.
+
+## [1.4.4] - 2023-03-06
+
+### Features
+
+- `f-toast` component added.
+
+## [1.4.3] - 2023-03-03
+
+### Features
+
+- `f-emoji-picker` component added.
+
+## [1.4.2] - 2023-03-02
+
+### Features
+
+- `data-qa-*` attributes added in `f-select` and `f-form-group`.
+
+## [1.4.1] - 2023-02-28
+
+### Features
+
+- `f-suggest` element added.
+
+## [1.4.0] - 2023-02-26
+
+### Bug fixes
+
+- `f-select` value not setting bug fixed.
+
+## [1.3.9] - 2023-02-26
+
+### Improvements
+
+- `f-switch` value type changed to boolean
+
+### Bug fixes
+
+- Various major css issues fixed with `f-divider`, `f-form`, `f-form-group` fixed.
+
+## [1.3.8] - 2023-02-23
+
+### Features
+
+- `f-file-upload` added as a component.
+
+## [1.3.7] - 2023-02-21
+
+### Bug fixes
+
+- `size`, `variant`, `category` removed from `f-form` since it is anti pattern to set it on inner input elements. (This usecase will be covered in `@cldcvr/flow-form-builder`)
+
+## [1.3.6] - 2023-02-21
+
+### Bug fixes
+
+- `f-input` : `suffixWhen` property added.
+
+## [1.3.5] - 2023-02-21
+
+### Bug fixes
+
+- `f-input` sides cropping issue fixed, for width less than 170px.
+- `f-text` inline prop bug fixed.
+
+## [1.3.4] - 2023-02-20
+
+### Bug fixes
+
+- `f-divider` height `0px` changed to `unset` (it is not working in flex )
+
+## [1.3.3] - 2023-02-20
+
+### Bug fixes
+
+- `f-switch` toggle isse when value is undefined.
+- `f-divider` height `0px` changed to `unset` (it is not working in flex )
+
+## [1.3.1] - 2023-02-15
+
+### Improvements
+
+- `f-form-group` `action` slot added.
+
+## [1.3.0] - 2023-02-14
+
+### Bug fixes
+
+- `f-tooltip` was n't destroying if user changes route using arrow keys, and don't move the mouse off the component. This has been resolved.
+- `f-divider` vertical alignment height inherit issue fixed.
+
+### Improvements
+
+- `f-text`: added inline prop.
+- `f-from-group`: `isCollapsed` prop is added, to see the default collapse (open/close) feature.
+
+## [1.2.9] - 2023-02-14
+
+### Bug fixes
+
+- `f-from-group` tooltip bug fixed.
+
+## [1.2.8] - 2023-02-13
+
+### Bug fixes
+
+- `MutationObserver` removed from inputs.
+
+## [1.2.7] - 2023-02-09
+
+### Feature
+
+- `f-tab` as a component added along with its sub-components `f-tab-node` and `f-tab-content`.
+
+## [1.2.6] - 2023-02-08
+
+## Bug fixes
+
+- Typescript bug fixed
+
+## [1.2.5] - 2023-02-03
+
+## Bug fixes
+
+- Typescript bug fixed
+
+## [1.2.4] - 2023-02-03
+
+## Bug fixes
+
+- HTMLElement type import bug fixed
+
+## [1.2.3] - 2023-02-03
+
+## Improvements
+
+- Added `overflow="visible"` in `f-div`.
+
+## [1.2.2] - 2023-02-03
+
+### Feature
+
+- `f-tooltip` as a component added, which could be used easily in all components using `tooltip="string"` or could be used as component using `f-tooltip`.
+
+## [1.2.1] - 2023-02-02
+
+### Improvements
+
+- Added `clickable` flag to `f-tag` component.
+
+## [1.2.0] - 2023-01-30
+
+### Improvements
+
+- Removed warning icon from `f-input` danger state. loader in loading state reflecting the state `f-input`.
+- `f-text-area` value not clearing issue fixed.
+- `f-radio` selection fixed.
+
+## [1.1.9] - 2023-01-20
+
+### Features
+
+- `f-form`: Form Input component added along with updating all its properties with resepct to other form-elements.
+
+## [1.1.8] - 2023-01-18
+
+### Features
+
+- `f-input`, `f-select`, `f-checkbox`, `f-textarea`, `f-radio`, `f-switch`: Form Input components added.
+
+### Improvements
+
+- replaced `gap` prop for `f-div` with different pixels, x-large:24px, large:16px, medium:12px, small:8px, x-small:4px.
+
 ## [1.1.6] - 2023-01-03
 
 ### Improvements
+
 - `.width-N` and `.height-N` utility classes added where N is multiple of 50 and less than 1000.
+
 ## [1.1.5] - 2023-01-02
 
 ### Improvements
+
 - Publishing packages to github registry.
 
 ## [1.1.4] - 2022-11-28
 
 ### Bug fixes
+
 - theme setting mechanism changed to remove jest or test library error.
+
 ## [1.1.3] - 2022-11-28
 
 ### Features
+
 - `f-div` added custom fill prop.
 
 ## [1.1.2] - 2022-11-25

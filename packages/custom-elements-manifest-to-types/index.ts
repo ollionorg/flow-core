@@ -213,10 +213,23 @@ function getComponentCodeFromDeclarationVue2(declaration: Declaration) {
 }
 
 function getComponentPropTypeImports(schema: Package, modulePath?: string): string[] {
-	const builtInTypes = ["null", "undefined", "boolean", "|", "string", "number", "any", "{}", "unknown", "void"];
+	const builtInTypes = [
+		"null",
+		"undefined",
+		"boolean",
+		"|",
+		"string",
+		"number",
+		"any",
+		"{}",
+		"unknown",
+		"void",
+		"HTMLElement",
+	];
 	const moduleTypeImports: string[] = [];
 	schema.modules.forEach((module) => {
 		const moduleName = modulePath || "./src"; //module.path.slice(0, -3);
+
 		module.declarations?.forEach((declaration) => {
 			if (!("customElement" in declaration) || !declaration.customElement) {
 				return null;

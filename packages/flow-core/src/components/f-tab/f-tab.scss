@@ -1,0 +1,68 @@
+@use "sass:map";
+@import "./../../mixins/scss/mixins";
+
+:host {
+  .f-tab {
+    .f-tab-scroll-icons {
+      position: absolute;
+      z-index: 10;
+      background: transparent;
+      &.icon-left {
+        left: 0;
+        background: linear-gradient(
+          273deg,
+          rgba(255, 255, 255, 0) 2%,
+          rgba(255, 255, 255, 0) 10%,
+          var(--color-surface-subtle) 100%
+        );
+      }
+      &.icon-right {
+        right: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0) 2%,
+          rgba(255, 255, 255, 0) 10%,
+          var(--color-surface-subtle) 100%
+        );
+      }
+      &.icon-top {
+        top: 0px;
+        background: linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0) 2%,
+          rgba(255, 255, 255, 0) 10%,
+          var(--color-surface-subtle) 100%
+        );
+      }
+      &.icon-bottom {
+        bottom: 0px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0) 2%,
+          rgba(255, 255, 255, 0) 10%,
+          var(--color-surface-subtle) 100%
+        );
+      }
+    }
+  }
+}
+
+:root {
+  --color-tab-background: "transparent";
+}
+
+f-tab {
+  &[direction="horizontal"] {
+    width: 100%;
+  }
+  &[direction="vertical"] {
+    width: fit-content;
+    height: 100%;
+  }
+  &[variant="fill"] {
+    --color-tab-background: var(--color-surface-secondary);
+  }
+  &[variant="transparent"] {
+    --color-tab-background: "transparent";
+  }
+}

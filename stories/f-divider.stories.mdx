@@ -60,11 +60,7 @@ f-divider is a line used to separate the content of a layout.
   >
     {(args) =>
       html`<f-div direction="column" padding="x-large"
-        ><f-divider
-          variant=${args.variant}
-          size=${args.size}
-          state=${args.state}
-        ></f-divider
+        ><f-divider variant=${args.variant} size=${args.size} state=${args.state}></f-divider
       ></f-div>`
     }
   </Story>
@@ -112,24 +108,9 @@ divider is vertical. In a column layout it is horizontal.
             height="100%"
             direction="column"
           >
-            <f-div
-              height="80px"
-              padding="none"
-              state="secondary"
-              variant="curved"
-            ></f-div>
-            <f-div
-              height="80px"
-              padding="none"
-              state="secondary"
-              variant="curved"
-            ></f-div>
-            <f-div
-              height="200px"
-              padding="none"
-              state="secondary"
-              variant="curved"
-            ></f-div>
+            <f-div height="80px" padding="none" state="secondary" variant="curved"></f-div>
+            <f-div height="80px" padding="none" state="secondary" variant="curved"></f-div>
+            <f-div height="200px" padding="none" state="secondary" variant="curved"></f-div>
           </f-div>
           <f-divider></f-divider>
           <f-div
@@ -154,18 +135,8 @@ divider is vertical. In a column layout it is horizontal.
             height="hug-content"
             direction="column"
           >
-            <f-div
-              height="80px"
-              padding="none"
-              state="secondary"
-              variant="curved"
-            ></f-div>
-            <f-div
-              height="80px"
-              padding="none"
-              state="secondary"
-              variant="curved"
-            ></f-div>
+            <f-div height="80px" padding="none" state="secondary" variant="curved"></f-div>
+            <f-div height="80px" padding="none" state="secondary" variant="curved"></f-div>
           </f-div>
           <f-divider></f-divider>
           <f-div
@@ -300,30 +271,22 @@ States on buttons are used to communicate purpose and it’s connotation.
   <Story name="state">
     {(args) => html`<f-div gap="medium" padding="x-large" direction="column">
       <f-div height="hug-content" padding="none">
-        <f-text variant="para" size="large" weight="medium"
-          >state="default"</f-text
-        >
+        <f-text variant="para" size="large" weight="medium">state="default"</f-text>
       </f-div>
       <f-divider size="large" state="default"></f-divider>
       <br />
       <f-div height="hug-content" padding="none">
-        <f-text variant="para" size="large" weight="medium"
-          >state="secondary"</f-text
-        >
+        <f-text variant="para" size="large" weight="medium">state="secondary"</f-text>
       </f-div>
       <f-divider size="large" state="secondary"></f-divider>
       <br />
       <f-div height="hug-content" padding="none">
-        <f-text variant="para" size="large" weight="medium"
-          >state="subtle"</f-text
-        >
+        <f-text variant="para" size="large" weight="medium">state="subtle"</f-text>
       </f-div>
       <f-divider size="large" state="subtle"></f-divider>
       <br />
       <f-div height="hug-content" padding="none">
-        <f-text variant="para" size="large" weight="medium"
-          >state="custom,black"</f-text
-        >
+        <f-text variant="para" size="large" weight="medium">state="custom,black"</f-text>
       </f-div>
       <f-divider size="large" state="custom,black"></f-divider>
     </f-div>`}

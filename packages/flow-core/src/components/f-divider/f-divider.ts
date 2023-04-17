@@ -60,7 +60,7 @@ export class FDivider extends FRoot {
     }
 
     // render empty string, since there no need of any child element
-    return html``;
+    return html`&nbsp;`;
   }
 }
 

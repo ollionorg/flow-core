@@ -616,6 +616,190 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-accordion/f-accordion.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FAccordion",
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "icon",
+              "type": {
+                "text": "\"chevron\" | \"caret\" | \"plus\" | \"none\" | undefined"
+              },
+              "default": "\"chevron\"",
+              "attribute": "icon",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconSize",
+              "type": {
+                "text": "\"x-small\" | \"small\" | \"medium\" | \"large\" | undefined"
+              },
+              "default": "\"small\"",
+              "attribute": "icon-size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconPlacement",
+              "type": {
+                "text": "\"right\" | \"left\" | undefined"
+              },
+              "default": "\"right\"",
+              "attribute": "icon-placement",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "maxHeight",
+              "type": {
+                "text": "FAccordionBodyHeightProp | undefined"
+              },
+              "attribute": "max-height",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fAccordionBody",
+              "type": {
+                "text": "FDiv | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "iconName",
+              "description": "identify icon-name from string"
+            },
+            {
+              "kind": "method",
+              "name": "toggleAccordion",
+              "description": "toggle accordion"
+            },
+            {
+              "kind": "method",
+              "name": "handleAccordionBody",
+              "description": "handling max-height of body"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "icon",
+              "type": {
+                "text": "\"chevron\" | \"caret\" | \"plus\" | \"none\" | undefined"
+              },
+              "default": "\"chevron\"",
+              "fieldName": "icon"
+            },
+            {
+              "name": "icon-size",
+              "type": {
+                "text": "\"x-small\" | \"small\" | \"medium\" | \"large\" | undefined"
+              },
+              "default": "\"small\"",
+              "fieldName": "iconSize"
+            },
+            {
+              "name": "icon-placement",
+              "type": {
+                "text": "\"right\" | \"left\" | undefined"
+              },
+              "default": "\"right\"",
+              "fieldName": "iconPlacement"
+            },
+            {
+              "name": "max-height",
+              "type": {
+                "text": "FAccordionBodyHeightProp | undefined"
+              },
+              "fieldName": "maxHeight"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-accordion",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FAccordion",
+          "declaration": {
+            "name": "FAccordion",
+            "module": "src/components/f-accordion/f-accordion.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-accordion",
+          "declaration": {
+            "name": "FAccordion",
+            "module": "src/components/f-accordion/f-accordion.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-button/f-button.ts",
       "declarations": [
         {
@@ -1084,190 +1268,6 @@
           "declaration": {
             "name": "FCheckbox",
             "module": "src/components/f-checkbox/f-checkbox.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-accordion/f-accordion.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FAccordion",
-          "members": [
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "icon",
-              "type": {
-                "text": "\"chevron\" | \"caret\" | \"plus\" | \"none\" | undefined"
-              },
-              "default": "\"chevron\"",
-              "attribute": "icon",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "iconSize",
-              "type": {
-                "text": "\"x-small\" | \"small\" | \"medium\" | \"large\" | undefined"
-              },
-              "default": "\"small\"",
-              "attribute": "icon-size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "iconPlacement",
-              "type": {
-                "text": "\"right\" | \"left\" | undefined"
-              },
-              "default": "\"right\"",
-              "attribute": "icon-placement",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "maxHeight",
-              "type": {
-                "text": "FAccordionBodyHeightProp | undefined"
-              },
-              "attribute": "max-height",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "fAccordionBody",
-              "type": {
-                "text": "FDiv | undefined"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "iconName",
-              "description": "identify icon-name from string"
-            },
-            {
-              "kind": "method",
-              "name": "toggleAccordion",
-              "description": "toggle accordion"
-            },
-            {
-              "kind": "method",
-              "name": "handleAccordionBody",
-              "description": "handling max-height of body"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "open"
-            },
-            {
-              "name": "icon",
-              "type": {
-                "text": "\"chevron\" | \"caret\" | \"plus\" | \"none\" | undefined"
-              },
-              "default": "\"chevron\"",
-              "fieldName": "icon"
-            },
-            {
-              "name": "icon-size",
-              "type": {
-                "text": "\"x-small\" | \"small\" | \"medium\" | \"large\" | undefined"
-              },
-              "default": "\"small\"",
-              "fieldName": "iconSize"
-            },
-            {
-              "name": "icon-placement",
-              "type": {
-                "text": "\"right\" | \"left\" | undefined"
-              },
-              "default": "\"right\"",
-              "fieldName": "iconPlacement"
-            },
-            {
-              "name": "max-height",
-              "type": {
-                "text": "FAccordionBodyHeightProp | undefined"
-              },
-              "fieldName": "maxHeight"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-accordion",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FAccordion",
-          "declaration": {
-            "name": "FAccordion",
-            "module": "src/components/f-accordion/f-accordion.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-accordion",
-          "declaration": {
-            "name": "FAccordion",
-            "module": "src/components/f-accordion/f-accordion.ts"
           }
         }
       ]
@@ -5716,103 +5716,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-spacer/f-spacer.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FSpacer",
-          "members": [
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "FSpacerSizeProp | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "applySize",
-              "description": "Applying height,width related style, based on size property"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "size",
-              "type": {
-                "text": "FSpacerSizeProp | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-spacer",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FSpacer",
-          "declaration": {
-            "name": "FSpacer",
-            "module": "src/components/f-spacer/f-spacer.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-spacer",
-          "declaration": {
-            "name": "FSpacer",
-            "module": "src/components/f-spacer/f-spacer.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-select/f-select.ts",
       "declarations": [
         {
@@ -6992,6 +6895,103 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-spacer/f-spacer.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FSpacer",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "FSpacerSizeProp | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "applySize",
+              "description": "Applying height,width related style, based on size property"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "FSpacerSizeProp | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-spacer",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FSpacer",
+          "declaration": {
+            "name": "FSpacer",
+            "module": "src/components/f-spacer/f-spacer.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-spacer",
+          "declaration": {
+            "name": "FSpacer",
+            "module": "src/components/f-spacer/f-spacer.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-suggest/f-suggest.ts",
       "declarations": [
         {
@@ -7454,6 +7454,163 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-switch/f-switch.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FSwitch",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FSwitchState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ],
+              "description": "emit event."
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "value"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FSwitchState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "fieldName": "size"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-switch",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FSwitch",
+          "declaration": {
+            "name": "FSwitch",
+            "module": "src/components/f-switch/f-switch.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-switch",
+          "declaration": {
+            "name": "FSwitch",
+            "module": "src/components/f-switch/f-switch.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-tab/f-tab.ts",
       "declarations": [
         {
@@ -7667,6 +7824,116 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-tab-content/f-tab-content.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTabContent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "transition",
+              "type": {
+                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "transition",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "200",
+              "attribute": "duration",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "transition",
+              "type": {
+                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "transition"
+            },
+            {
+              "name": "duration",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "200",
+              "fieldName": "duration"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-tab-content",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTabContent",
+          "declaration": {
+            "name": "FTabContent",
+            "module": "src/components/f-tab-content/f-tab-content.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-tab-content",
+          "declaration": {
+            "name": "FTabContent",
+            "module": "src/components/f-tab-content/f-tab-content.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-tab-node/f-tab-node.ts",
       "declarations": [
         {
@@ -7782,163 +8049,6 @@
           "declaration": {
             "name": "FTabNode",
             "module": "src/components/f-tab-node/f-tab-node.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-switch/f-switch.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FSwitch",
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "value",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FSwitchState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"small\" | \"medium\" | undefined"
-              },
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "handleInput",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ],
-              "description": "emit event."
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "value"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FSwitchState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "\"small\" | \"medium\" | undefined"
-              },
-              "fieldName": "size"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-switch",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FSwitch",
-          "declaration": {
-            "name": "FSwitch",
-            "module": "src/components/f-switch/f-switch.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-switch",
-          "declaration": {
-            "name": "FSwitch",
-            "module": "src/components/f-switch/f-switch.ts"
           }
         }
       ]
@@ -8840,116 +8950,6 @@
           "declaration": {
             "name": "FTextArea",
             "module": "src/components/f-text-area/f-text-area.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-tab-content/f-tab-content.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTabContent",
-          "members": [
-            {
-              "kind": "field",
-              "name": "transition",
-              "type": {
-                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "transition",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "duration",
-              "type": {
-                "text": "number | undefined"
-              },
-              "default": "200",
-              "attribute": "duration",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "transition",
-              "type": {
-                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "transition"
-            },
-            {
-              "name": "duration",
-              "type": {
-                "text": "number | undefined"
-              },
-              "default": "200",
-              "fieldName": "duration"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-tab-content",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTabContent",
-          "declaration": {
-            "name": "FTabContent",
-            "module": "src/components/f-tab-content/f-tab-content.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-tab-content",
-          "declaration": {
-            "name": "FTabContent",
-            "module": "src/components/f-tab-content/f-tab-content.ts"
           }
         }
       ]

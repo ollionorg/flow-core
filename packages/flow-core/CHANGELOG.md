@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.10.0] - 2023-04-17
+
+### Features
+
+- `f-grid` component added.
+
 ## [1.9.0] - 2023-04-13
 
 ### Features

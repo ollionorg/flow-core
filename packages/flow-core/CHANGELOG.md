@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.11.0] - 2023-04-17
+
+### Features
+
+- `f-carousel` component added.
+
 ## [1.10.1] - 2023-04-17
 
 ### Improvements

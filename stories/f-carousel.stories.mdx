@@ -35,8 +35,8 @@ f-div is used as a container for HTML elements.
 				console.log("in previous callback", e);
 			};
 			return html`<f-div width="100%">
-				<f-carousel active-content-id="slide-3" @next=${handleNext} @prev=${handlePrev}>
-					${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(
+				<f-carousel auto-play active-content-id="slide-3" @next=${handleNext} @prev=${handlePrev}>
+					${[1, 2, 3, 4, 5].map(
 						idx =>
 							html`<f-carousel-content content-id=${"slide-" + idx}>
 								<f-div> ${unsafeSVG(FCarouselExample)} </f-div>

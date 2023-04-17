@@ -1,4 +1,4 @@
-import { html, PropertyValueMap, render, unsafeCSS, svg } from "lit";
+import { html, PropertyValueMap, render, unsafeCSS, svg, nothing } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 import { FRoot } from "./../../mixins/components/f-root/f-root";
 import eleStyle from "./f-carousel.scss";
@@ -19,6 +19,17 @@ export class FCarousel extends FRoot {
 	@property({ type: String, attribute: "active-content-id" })
 	activeContentId?: string;
 
+	/**
+	 * @attribute  it will auto-play all content in loop
+	 */
+	@property({ type: Boolean, attribute: "auto-play" })
+	autoPlay?: boolean;
+	/**
+	 * @attribute  it will auto-play all content in loop
+	 */
+	@property({ type: Number, attribute: "auto-play-interval" })
+	autoPlayInterval?: number;
+
 	@query(".slides")
 	slides!: HTMLElement;
 
@@ -30,6 +41,9 @@ export class FCarousel extends FRoot {
 
 	@query(".next")
 	nextArrow!: FIcon;
+
+	@query(".progress")
+	progress?: FDiv;
 
 	@query(".prev")
 	prevArrow!: FIcon;
@@ -107,6 +121,19 @@ export class FCarousel extends FRoot {
 					></f-icon>
 				</f-div>
 			</f-div>
+			${this.autoPlay
+				? html`
+						<f-div class="progress-bar" state="secondary">
+							<f-div
+								class="progress"
+								@transitionend=${this.handleProgressEnd}
+								width="2px"
+								height="2px"
+							>
+							</f-div>
+						</f-div>
+				  `
+				: nothing}
 			<f-div class="dot-wrapper" width="hug-content" align="middle-center">
 				<f-div overflow="visible" id="dots" align="middle-left"> </f-div>
 			</f-div>
@@ -144,6 +171,30 @@ export class FCarousel extends FRoot {
 
 			this.emitNavigationEvent("next", (this.activeSlide as FCarouselContent).contentId);
 		}
+
+		this.checkAutoPlay();
+	}
+
+	checkAutoPlay() {
+		if (this.autoPlay) {
+			if (this.progress) {
+				this.progress.style.transitionDuration = `${
+					this.autoPlayInterval ? this.autoPlayInterval / 1000 : 5
+				}s`;
+				this.progress.width = "100%";
+			}
+		}
+	}
+
+	handleProgressEnd() {
+		if (this.progress) {
+			this.progress.style.transitionDuration = `0s`;
+			this.progress.width = "2px";
+		}
+		this.nextArrow.click();
+		setTimeout(() => {
+			this.checkAutoPlay();
+		});
 	}
 
 	emitNavigationEvent(type: "next" | "prev", contentId: string) {

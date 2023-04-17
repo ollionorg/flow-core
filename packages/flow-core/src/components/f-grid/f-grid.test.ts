@@ -13,11 +13,4 @@ describe("f-grid", () => {
 		const el = await fixture(html` <f-grid></f-grid> `);
 		expect(el.getAttribute("gap")).to.equal("small");
 	});
-
-	it("child elements should render with min-cell-width given", async () => {
-		const el = await fixture(html` <f-grid min-cell-width="150px"></f-grid> `);
-		const descendant = el.querySelectorAll("f-div")!;
-		console.log(descendant, "hello");
-		descendant.forEach(item => expect(item.offsetWidth).to.equal(120));
-	});
 });

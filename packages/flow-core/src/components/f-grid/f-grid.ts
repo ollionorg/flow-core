@@ -38,12 +38,19 @@ export class FGrid extends FRoot {
 	gap?: "x-large" | "large" | "medium" | "small" | "x-small" = "small";
 
 	/**
+	 * grid-template-columns to assign cell-width
+	 */
+	get gridTemplateColumns() {
+		return `repeat(auto-fill,minmax(${
+			this.minCellWidth && this.minCellWidth > 0 ? this.minCellWidth : 180
+		}px, ${this.maxCellWidth ? `${this.maxCellWidth}px` : "1fr"}))`;
+	}
+
+	/**
 	 * styling for grid
 	 */
 	applyGridStyles() {
-		this.style.gridTemplateColumns = `repeat(auto-fill,minmax(${
-			this.minCellWidth && this.minCellWidth > 0 ? this.minCellWidth : 180
-		}px, ${this.maxCellWidth ? `${this.maxCellWidth}px` : "1fr"}))`;
+		this.style.gridTemplateColumns = this.gridTemplateColumns;
 		this.style.gridTemplateRows = this.cellHeight ? `repeat(auto-fill,${this.cellHeight}px)` : "";
 		this.style.gridAutoRows = this.cellHeight ? `${this.cellHeight}px` : `1fr`;
 	}

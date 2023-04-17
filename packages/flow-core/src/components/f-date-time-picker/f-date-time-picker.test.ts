@@ -34,6 +34,7 @@ describe("f-date-time-picker", () => {
 			html` <f-date-time-picker mode="date-time"></f-date-time-picker> `
 		);
 		const flatpickr = document.body.querySelector(".flatpickr-calendar");
+		console.log(flatpickr?.classList.contains("hasTime"));
 		expect(flatpickr?.classList.contains("hasTime")).equals(true);
 	});
 });

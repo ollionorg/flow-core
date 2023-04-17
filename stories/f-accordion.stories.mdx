@@ -2,6 +2,7 @@ import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import fAccordionAnatomy from "./svg/i-faccordion-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useState } from "@storybook/client-api";
 
 <Meta
 	title="Components/f-accordion"
@@ -44,6 +45,7 @@ Accordion is a wrapper component which reveals or hide the content on click of h
 		}}
 	>
 		{args => {
+			const [_, updateArgs] = useArgs();
 			const metaData = {
 				["NAME"]: { type: "label-text", value: "Brendon Compliance" },
 				["ROLE"]: { type: "text", value: "Senior DevOps Engineer" },
@@ -58,6 +60,10 @@ Accordion is a wrapper component which reveals or hide the content on click of h
 					]
 				}
 			};
+			const handleToggle = e => {
+				console.log(e.detail.value);
+				updateArgs({ open: e.detail.value });
+			};
 			return html`<f-div direction="column" padding="x-large"
 				><f-accordion
 					.open=${args.open}
@@ -65,6 +71,7 @@ Accordion is a wrapper component which reveals or hide the content on click of h
 					icon-size=${args["icon-size"]}
 					icon-placement=${args["icon-placement"]}
 					max-height=${args["max-height"]}
+					@toggle=${handleToggle}
 				>
 					<f-div
 						><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div

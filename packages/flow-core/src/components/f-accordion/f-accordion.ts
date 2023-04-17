@@ -6,6 +6,10 @@ import { FDiv } from "../f-div/f-div";
 
 export type FAccordionBodyHeightProp = `${number}px` | `${number}%` | `${number}vh`;
 
+export type FAccordionCustomEvent = {
+	value: boolean;
+};
+
 @customElement("f-accordion")
 export class FAccordion extends FRoot {
 	/**
@@ -64,6 +68,23 @@ export class FAccordion extends FRoot {
 	 */
 	toggleAccordion() {
 		this.open = !this.open;
+		this.dispatchToggleEvent(this.open);
+	}
+
+	/**
+	 * toggle event dispatch
+	 * @param value boolean
+	 */
+	dispatchToggleEvent(value: boolean) {
+		const event = new CustomEvent<FAccordionCustomEvent>("toggle", {
+			detail: {
+				value
+			},
+			bubbles: true,
+			composed: true
+		});
+
+		this.dispatchEvent(event);
 	}
 
 	/**

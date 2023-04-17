@@ -47,9 +47,16 @@ f-carousel {
 		height: 10px;
 		fill: var(--color-surface-secondary);
 
-		transition-property: width, height, fill;
+		transition-property: width, height, fill, transform;
 		transition-duration: 0.3s;
 		transition-timing-function: ease-out;
+
+		cursor: pointer;
+		&:hover {
+			transform: scale(1.5);
+			transition-duration: 0.2s;
+			fill: var(--color-primary-default) !important;
+		}
 
 		&.active {
 			width: 12px;
@@ -69,12 +76,14 @@ f-carousel {
 			fill: var(--color-text-subtle);
 		}
 	}
-
+	.dot-container {
+		cursor: pointer;
+	}
 	.dot-wrapper {
 		align-self: center;
 		flex-wrap: nowrap;
 		flex: 0 0 auto !important;
-		overflow: hidden !important;
+		overflow: visible !important;
 		height: 20px;
 
 		&::-webkit-scrollbar {

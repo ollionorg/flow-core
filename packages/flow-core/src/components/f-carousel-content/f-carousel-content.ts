@@ -12,7 +12,7 @@ export class FCarouselContent extends FRoot {
 	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
 
 	/**
-	 * @attribute comments baout title
+	 * @attribute mandatory content-id to uniquely identify content
 	 */
 	@property({ type: String, attribute: "content-id", reflect: true })
 	contentId!: string;

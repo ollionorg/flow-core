@@ -13,7 +13,7 @@ export class FCarousel extends FRoot {
 	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
 
 	/**
-	 * @attribute  provide `f-corousel-content` content-id
+	 * @attribute  provide `f-corousel-content` content-id for activation
 	 */
 	@property({ type: String, attribute: "active-content-id" })
 	activeContentId?: string;
@@ -97,7 +97,7 @@ export class FCarousel extends FRoot {
 				</f-div>
 			</f-div>
 			<f-div class="dot-wrapper" width="hug-content" align="middle-center">
-				<f-div overflow="visible" id="dots" gap="small" align="middle-left"> </f-div>
+				<f-div overflow="visible" id="dots" align="middle-left"> </f-div>
 			</f-div>
 		</f-div>`;
 	}
@@ -163,27 +163,40 @@ export class FCarousel extends FRoot {
 					} else if (Math.abs(activeIndex - index) === 1) {
 						dotClass = "dot secondary";
 					}
-					return svg`<svg content-id=${el.getAttribute(
-						"content-id"
-					)} class=${dotClass} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+					return html`<f-div
+						align="middle-center"
+						overflow="visible"
+						class="dot-container"
+						padding="x-small"
+						@click=${() => {
+							this.updateDots(index);
+							this.jumpTo(el.getAttribute("content-id") as string);
+						}}
+					>
+						${svg`<svg content-id=${el.getAttribute(
+							"content-id"
+						)} class=${dotClass} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 					<circle cx="50" cy="50" r="50"  />
-				  </svg>`;
+				  </svg>`}</f-div
+					>`;
 				})}`,
 				this.dots
 			);
 		}
 	}
 
-	updateDots() {
+	updateDots(activeIndex: number | null = null) {
 		if (this.slideElements) {
-			const activeIndex = Array.from(this.slideElements).findIndex(el => el === this.activeSlide);
+			if (!activeIndex) {
+				activeIndex = Array.from(this.slideElements).findIndex(el => el === this.activeSlide);
+			}
 
 			Array.from(this.slideElements).forEach((el, index) => {
 				let dotClass = "tertiary";
 
 				if (activeIndex === index) {
 					dotClass = "active";
-				} else if (Math.abs(activeIndex - index) === 1) {
+				} else if (activeIndex && Math.abs(activeIndex - index) === 1) {
 					dotClass = "secondary";
 				}
 

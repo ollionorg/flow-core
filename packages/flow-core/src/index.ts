@@ -38,6 +38,8 @@ export * from "./components/f-search/f-search";
 export * from "./components/f-date-time-picker/f-date-time-picker";
 export * from "./components/f-accordion/f-accordion";
 export * from "./components/f-grid/f-grid";
+export * from "./components/f-carousel/f-carousel";
+export * from "./components/f-carousel-content/f-carousel-content";
 export * from "./mixins/components/f-root/f-root";
 
 if (document.readyState !== "loading") {

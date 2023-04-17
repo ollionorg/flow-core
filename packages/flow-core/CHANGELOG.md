@@ -4,6 +4,18 @@
 
 # Change Log
 
+## [1.12.0] - 2023-04-18
+
+### Features
+
+- `f-date-time-picker` component added.
+
+## [1.11.0] - 2023-04-17
+
+### Features
+
+- `f-carousel` component added.
+
 ## [1.10.1] - 2023-04-17
 
 ### Improvements

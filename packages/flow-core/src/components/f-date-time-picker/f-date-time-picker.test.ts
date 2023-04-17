@@ -58,7 +58,6 @@ describe("f-date-time-picker", () => {
 		];
 		const dateFormat =
 			months[new Date().getMonth()] + " " + new Date().getDate() + ", " + new Date().getFullYear();
-		console.log(dateFormat);
 		expect(flatpickrToday?.getAttribute("aria-label")).to.equal(dateFormat);
 	});
 });

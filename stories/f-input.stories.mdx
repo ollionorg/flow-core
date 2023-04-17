@@ -133,6 +133,8 @@ f-input is an input element.
 							?clear=${args.clear}
 							?read-only=${args.readOnly}
 							.size=${args.size}
+							autofocus
+							autocomplete="on"
 						>
 							${unsafeHTML(args.slot)}
 						</f-input></f-div
@@ -182,6 +184,8 @@ Variants are various visual representations of an input field.
           >
              <f-div slot="label" padding="none" gap="none">Label (variant="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
+			<f-text slot="subtitle" state="secondary" variant="para" size="small">Optional</f-text>
+			<f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>
           </f-input></f-div
         ></f-div
       >`

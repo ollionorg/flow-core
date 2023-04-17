@@ -137,17 +137,20 @@ export class FTextArea extends FRoot {
 			<f-div padding="none" gap="x-small" direction="column" width="100%">
 				<f-div padding="none" gap="none" align="bottom-left">
 					<f-div padding="none" direction="column" width="fill-container">
-						<f-div
-							padding="none"
-							gap="small"
-							direction="row"
-							width="hug-content"
-							height="hug-content"
-						>
-							<f-div padding="none" direction="row" width="hug-content" height="hug-content">
+						<f-div padding="none" gap="auto" direction="row" height="hug-content">
+							<f-div
+								padding="none"
+								gap="small"
+								direction="row"
+								width="hug-content"
+								height="hug-content"
+							>
 								<slot name="label"></slot>
+								<slot name="icon-tooltip"></slot>
 							</f-div>
-							<slot name="icon-tooltip"></slot>
+							<f-div width="hug-content">
+								<slot name="subtitle"></slot>
+							</f-div>
 						</f-div>
 						<slot name="description"></slot>
 					</f-div>

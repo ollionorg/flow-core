@@ -63,47 +63,53 @@ export class FCheckbox extends FRoot {
 		 * Final html to render
 		 */
 		return html`
-      <f-div
-        class="f-checkbox-wrapper"
-        size=${this.size}
-        padding="none"
-        gap="x-small"
-        direction="column"
-      >
-        <f-div
-          class="f-checkbox-section"
-          size=${this.size}
-          align="middle-left"
-          padding="none"
-          gap="medium"
-        >
-          <input
-            id="f-checkbox"
-            class="f-checkbox"
-            type="checkbox"
-			data-qa-id=${this.getAttribute("data-qa-element-id")}
-            checked=${this.value === "unchecked" ? false : true}
-            state=${this.state}
-            @input=${this.handleInput}
-          />
-          <label for="f-checkbox" value=${this.value} state=${this.state} size=${this.size}>
-            ${
-							this.value === "checked"
-								? html`${unsafeSVG(checkedMark)}`
-								: html`${unsafeSVG(indeterminateMark)}`
-						}
-          </label>
-          <f-div padding="none" align="middle-left" direction="row" gap="small">
-            <f-div width="hug-content" height="hug-content"> <slot name="label"></slot></f-div>
-            <f-div width="hug-content" height="hug-content"
-              ><slot name="icon-tooltip"></slot></f-div>
-            </f-div>
-          </f-div>
-          <slot name="description"></slot>
-          <slot name="help"></slot>
-        </f-div>
-      </f-div>
-    `;
+			<f-div
+				class="f-checkbox-wrapper"
+				size=${this.size}
+				padding="none"
+				gap="x-small"
+				direction="column"
+				width="hug-content"
+			>
+				<f-div
+					class="f-checkbox-section"
+					size=${this.size}
+					align="middle-left"
+					padding="none"
+					gap="medium"
+					width="hug-content"
+				>
+					<input
+						id="f-checkbox"
+						class="f-checkbox"
+						type="checkbox"
+						data-qa-id=${this.getAttribute("data-qa-element-id")}
+						checked=${this.value === "unchecked" ? false : true}
+						state=${this.state}
+						@input=${this.handleInput}
+					/>
+					<label for="f-checkbox" value=${this.value} state=${this.state} size=${this.size}>
+						${this.value === "checked"
+							? html`${unsafeSVG(checkedMark)}`
+							: html`${unsafeSVG(indeterminateMark)}`}
+					</label>
+					<f-div
+						padding="none"
+						class="label-wrapper"
+						width="hug-content"
+						align="middle-left"
+						direction="row"
+						gap="small"
+					>
+						<slot name="label"></slot>
+						<slot name="icon-tooltip"></slot>
+						<slot name="subtitle"></slot>
+					</f-div>
+				</f-div>
+				<slot name="description"></slot>
+				<slot name="help"></slot>
+			</f-div>
+		`;
 	}
 }
 

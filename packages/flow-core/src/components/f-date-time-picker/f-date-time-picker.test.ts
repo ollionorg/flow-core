@@ -29,4 +29,11 @@ describe("f-date-time-picker", () => {
 		const flatpickr = document.body.querySelector(".flatpickr-calendar");
 		expect(flatpickr?.classList.contains("open")).equals(false);
 	});
+	it("check if date-time both are present", async () => {
+		const el = await fixture<FDateTimePicker>(
+			html` <f-date-time-picker mode="date-time"></f-date-time-picker> `
+		);
+		const flatpickr = document.body.querySelector(".flatpickr-calendar");
+		expect(flatpickr?.classList.contains("hasTime")).equals(true);
+	});
 });

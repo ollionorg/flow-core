@@ -6,10 +6,10 @@ import fTextAreaAnatomy from "./svg/i-ftextarea-anatomy.js";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <Meta
-  title="Components/f-text-area"
-  parameters={{
-    controls: { hideNoControlsWarning: true },
-  }}
+	title="Components/f-text-area"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
 />
 
 # f-text-area
@@ -28,88 +28,90 @@ f-text-area allows the user to input a longer amount of text than f-input. It is
 ### [Playground](/story/components-f-text-area--playground)
 
 <Canvas>
-  <Story
-    name="Playground"
-    argTypes={{
-      value: { control: "text" },
-      placeholder: { control: "text" },
-      category: {
-        control: "select",
-        options: ["fill", "transparent", "outline"],
-      },
-      state: {
-        control: "select",
-        options: ["default", "success", "primary", "warning", "danger"],
-      },
-      size: {
-        control: "radio",
-        options: ["small", "medium"],
-      },
-      slot: { control: "text" },
-      rows: {
-        control: "text",
-      },
-      ["max-length"]: {
-        control: "text",
-      },
-      disabled: {
-        control: "boolean",
-      },
-      ["read-only"]: {
-        control: "boolean",
-      },
-      clear: {
-        control: "boolean",
-      },
-      resizable: {
-        control: "boolean",
-      },
-    }}
-    args={{
-      value: undefined,
-      placeholder: "Enter your text here",
-      category: "fill",
-      state: "default",
-      size: "medium",
-      slot: `  <f-text slot="label" variant="para" size="small">Label *</f-text>
-              <f-text slot="help" variant="para" size="small">This is subtext</f-text>`,
-      rows: undefined,
-      ["max-length"]: undefined,
-      resizable: false,
-      disabled: false,
-      ["read-only"]: false,
-      clear: false,
-    }}
-  >
-    {(args) => {
-      const [_, updateArgs] = useArgs();
-      const handleInput = (e) => {
-        updateArgs({ value: e.detail.value });
-      };
-      return html`
-        <f-div width="100%" align="middle-center" padding="large">
-          <f-div width="80%" align="middle-center">
-            <f-text-area
-              category=${args.category}
-              placeholder=${args.placeholder}
-              ?resizable=${args.resizable}
-              ?clear=${args.clear}
-              .state=${args.state}
-              .size=${args.size}
-              value=${args.value}
-              @input=${handleInput}
-              max-length=${args["max-length"]}
-              ?disabled=${args.disabled}
-              ?read-only=${args["read-only"]}
-              rows=${args.rows}
-            >
-              ${unsafeHTML(args.slot)}
-            </f-text-area></f-div
-          ></f-div
-        >
-      `;
-    }}
-  </Story>
+	<Story
+		name="Playground"
+		argTypes={{
+			value: { control: "text" },
+			placeholder: { control: "text" },
+			category: {
+				control: "select",
+				options: ["fill", "transparent", "outline"]
+			},
+			state: {
+				control: "select",
+				options: ["default", "success", "primary", "warning", "danger"]
+			},
+			size: {
+				control: "radio",
+				options: ["small", "medium"]
+			},
+			slot: { control: "text" },
+			rows: {
+				control: "text"
+			},
+			["max-length"]: {
+				control: "text"
+			},
+			disabled: {
+				control: "boolean"
+			},
+			["read-only"]: {
+				control: "boolean"
+			},
+			clear: {
+				control: "boolean"
+			},
+			resizable: {
+				control: "boolean"
+			}
+		}}
+		args={{
+			value: undefined,
+			placeholder: "Enter your text here",
+			category: "fill",
+			state: "default",
+			size: "medium",
+			slot: `  <f-text slot="label" variant="para" size="small">Label</f-text>
+              <f-text slot="help" variant="para" size="small">This is subtext</f-text>
+			  <f-text slot="subtitle" state="secondary" variant="para" size="small">Optional</f-text>
+			<f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>`,
+			rows: undefined,
+			["max-length"]: undefined,
+			resizable: false,
+			disabled: false,
+			["read-only"]: false,
+			clear: false
+		}}
+	>
+		{args => {
+			const [_, updateArgs] = useArgs();
+			const handleInput = e => {
+				updateArgs({ value: e.detail.value });
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large">
+					<f-div width="80%" align="middle-center">
+						<f-text-area
+							category=${args.category}
+							placeholder=${args.placeholder}
+							?resizable=${args.resizable}
+							?clear=${args.clear}
+							.state=${args.state}
+							.size=${args.size}
+							value=${args.value}
+							@input=${handleInput}
+							max-length=${args["max-length"]}
+							?disabled=${args.disabled}
+							?read-only=${args["read-only"]}
+							rows=${args.rows}
+						>
+							${unsafeHTML(args.slot)}
+						</f-text-area></f-div
+					></f-div
+				>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <br />
@@ -119,7 +121,7 @@ f-text-area allows the user to input a longer amount of text than f-input. It is
 <f-divider></f-divider>
 
 <Story name="Anatomy">
-  {() => html`<div class="align-center">${unsafeSVG(fTextAreaAnatomy)}</div>`}
+	{() => html`<div class="align-center">${unsafeSVG(fTextAreaAnatomy)}</div>`}
 </Story>
 
 <br />
@@ -131,17 +133,17 @@ f-text-area allows the user to input a longer amount of text than f-input. It is
 Category decides the background of f-text-area
 
 <Canvas>
-  <Story name="category">
-    {(args) => {
-      const categories = ["fill", "outline", "transparent"];
-      const [value, setValue] = useState("");
-      const handleInput = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div width="100%" align="middle-center" padding="large" gap="medium">
-          ${categories.map(
-            (item) => html`<f-div>
+	<Story name="category">
+		{args => {
+			const categories = ["fill", "outline", "transparent"];
+			const [value, setValue] = useState("");
+			const handleInput = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large" gap="medium">
+					${categories.map(
+						item => html`<f-div>
            <f-text-area
               category=${item}
               placeholder="This is a textarea"
@@ -154,38 +156,38 @@ Category decides the background of f-text-area
             </f-text-area></f-div
         ></f-div
       >`
-          )}
-        </f-div>
-      `;
-    }}
-  </Story>
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>fill</td>
-      <td>background is filled</td>
-      <td>
-        <code>default</code>
-      </td>
-    </tr>
-    <tr>
-      <td>outline</td>
-      <td>empty background with border</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>transparent</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>fill</td>
+			<td>background is filled</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>outline</td>
+			<td>empty background with border</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>transparent</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -195,29 +197,29 @@ Category decides the background of f-text-area
 Defines the value of an f-text-area.
 
 <Canvas>
-  <Story name="value">
-    {(args) => {
-      const [value, setValue] = useState("Value Here");
-      const handleValue = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div width="100%" align="middle-center" padding="large">
-          <f-div width="80%" align="middle-center">
-            <f-text-area
-              placeholder="This is a textarea"
-              size="medium"
-              value=${value}
-              @input=${handleValue}
-            >
-              <f-text slot="label" variant="para" size="small">Label</f-text>
-              <f-text slot="help" variant="para" size="small">This is subtext</f-text>
-            </f-text-area></f-div
-          ></f-div
-        >
-      `;
-    }}
-  </Story>
+	<Story name="value">
+		{args => {
+			const [value, setValue] = useState("Value Here");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large">
+					<f-div width="80%" align="middle-center">
+						<f-text-area
+							placeholder="This is a textarea"
+							size="medium"
+							value=${value}
+							@input=${handleValue}
+						>
+							<f-text slot="label" variant="para" size="small">Label</f-text>
+							<f-text slot="help" variant="para" size="small">This is subtext</f-text>
+						</f-text-area></f-div
+					></f-div
+				>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <br />
@@ -227,29 +229,29 @@ Defines the value of an f-text-area.
 Defines the placeholder text for f-text-area
 
 <Canvas>
-  <Story name="placeholder">
-    {(args) => {
-      const [value, setValue] = useState("");
-      const handleValue = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div width="100%" align="middle-center" padding="large">
-          <f-div width="80%" align="middle-center">
-            <f-text-area
-              placeholder="This is a textarea"
-              size="medium"
-              value=${value}
-              @input=${handleValue}
-            >
-              <f-text slot="label" variant="para" size="small">Label </f-text>
-              <f-text slot="help" variant="para" size="small">This is subtext</f-text>
-            </f-text-area></f-div
-          ></f-div
-        >
-      `;
-    }}
-  </Story>
+	<Story name="placeholder">
+		{args => {
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large">
+					<f-div width="80%" align="middle-center">
+						<f-text-area
+							placeholder="This is a textarea"
+							size="medium"
+							value=${value}
+							@input=${handleValue}
+						>
+							<f-text slot="label" variant="para" size="small">Label </f-text>
+							<f-text slot="help" variant="para" size="small">This is subtext</f-text>
+						</f-text-area></f-div
+					></f-div
+				>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <br />
@@ -261,22 +263,22 @@ Defines the placeholder text for f-text-area
 f-text-area can have 2 sizes.
 
 <p class="note-section">
-  Note: Font styles are same in both sizes. Only paddings and gaps are different. By default size is
-  inherited by the parent f-form.
+	Note: Font styles are same in both sizes. Only paddings and gaps are different. By default size is
+	inherited by the parent f-form.
 </p>
 
 <Canvas>
-  <Story name="size">
-    {(args) => {
-      const sizes = ["small", "medium"];
-      const [value, setValue] = useState("");
-      const handleValue = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div width="100%" align="top-center" padding="large" gap="medium">
-          ${sizes.map(
-            (item) => html`<f-div>
+	<Story name="size">
+		{args => {
+			const sizes = ["small", "medium"];
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="top-center" padding="large" gap="medium">
+					${sizes.map(
+						item => html`<f-div>
           <f-text-area
               placeholder="This is a textarea"
               size=${item}
@@ -288,31 +290,31 @@ f-text-area can have 2 sizes.
             </f-text-area></f-div
         ></f-div
       >`
-          )}
-        </f-div>
-      `;
-    }}
-  </Story>
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>small</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>medium</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>small</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>medium</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -324,79 +326,79 @@ f-text-area can have 2 sizes.
 States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
 
 <Canvas>
-  <Story name="state">
-    {(args) => {
-      const states = [
-        ["default", "primary", "success"],
-        ["danger", "warning", "default"],
-      ];
-      const [value, setValue] = useState("");
-      const handleValue = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div direction="column" gap="medium">
-          ${states.map(
-            (item) => html` <f-div align="middle-center" padding="large" gap="medium">
-              ${item.map(
-                (state) => html`<f-div>
-                  <f-text-area
-                    placeholder="This is a textarea"
-                    size="medium"
-                    state=${state}
-                    value=${value}
-                    @input=${handleValue}
-                  >
-                    <f-text slot="label" variant="para" size="small"
-                      >Label (state="${state}")</f-text
-                    >
-                    <f-text slot="help" variant="para" size="small">This is subtext</f-text>
-                  </f-text-area></f-div
-                >`
-              )}
-            </f-div>`
-          )}
-        </f-div>
-      `;
-    }}
-  </Story>
+	<Story name="state">
+		{args => {
+			const states = [
+				["default", "primary", "success"],
+				["danger", "warning", "default"]
+			];
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div direction="column" gap="medium">
+					${states.map(
+						item => html` <f-div align="middle-center" padding="large" gap="medium">
+							${item.map(
+								state => html`<f-div>
+									<f-text-area
+										placeholder="This is a textarea"
+										size="medium"
+										state=${state}
+										value=${value}
+										@input=${handleValue}
+									>
+										<f-text slot="label" variant="para" size="small"
+											>Label (state="${state}")</f-text
+										>
+										<f-text slot="help" variant="para" size="small">This is subtext</f-text>
+									</f-text-area></f-div
+								>`
+							)}
+						</f-div>`
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>default</td>
-      <td></td>
-      <td>
-        <code>default</code>
-      </td>
-    </tr>
-    <tr>
-      <td>primary</td>
-      <td></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>success</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>danger</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>warning</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>default</td>
+			<td></td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>primary</td>
+			<td></td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td>success</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>danger</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>warning</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -406,30 +408,30 @@ States are used to communicate purpose and connotations. For example, a red colo
 This shows the character count while typing and auto limits after reaching the max length.
 
 <Canvas>
-  <Story name="max-length">
-    {(args) => {
-      const [value, setValue] = useState("");
-      const handleValue = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div width="100%" align="middle-center" padding="large">
-          <f-div width="80%" align="middle-center">
-            <f-text-area
-              placeholder="This is a textarea"
-              size="medium"
-              value=${value}
-              @input=${handleValue}
-              max-length="100"
-            >
-              <f-text slot="label" variant="para" size="small">Label</f-text>
-              <f-text slot="help" variant="para" size="small">This is subtext</f-text>
-            </f-text-area></f-div
-          ></f-div
-        >
-      `;
-    }}
-  </Story>
+	<Story name="max-length">
+		{args => {
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large">
+					<f-div width="80%" align="middle-center">
+						<f-text-area
+							placeholder="This is a textarea"
+							size="medium"
+							value=${value}
+							@input=${handleValue}
+							max-length="100"
+						>
+							<f-text slot="label" variant="para" size="small">Label</f-text>
+							<f-text slot="help" variant="para" size="small">This is subtext</f-text>
+						</f-text-area></f-div
+					></f-div
+				>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <br />
@@ -439,34 +441,34 @@ This shows the character count while typing and auto limits after reaching the m
 Defines the no. of rows to display. By default f-text-area provides 3 rows. After 3 rows text area becomes scrollable.
 
 <p class="note-section">
-  Note: row property controls height. Width of text-area is always fill-container
+	Note: row property controls height. Width of text-area is always fill-container
 </p>
 
 <Canvas>
-  <Story name="rows">
-    {(args) => {
-      const [value, setValue] = useState("");
-      const handleValue = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div width="100%" align="middle-center" padding="large">
-          <f-div width="80%" align="middle-center">
-            <f-text-area
-              placeholder="This is a textarea"
-              size="medium"
-              value=${value}
-              @input=${handleValue}
-              rows="8"
-            >
-              <f-text slot="label" variant="para" size="small">Label (rows="8")</f-text>
-              <f-text slot="help" variant="para" size="small">This is subtext</f-text>
-            </f-text-area></f-div
-          ></f-div
-        >
-      `;
-    }}
-  </Story>
+	<Story name="rows">
+		{args => {
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large">
+					<f-div width="80%" align="middle-center">
+						<f-text-area
+							placeholder="This is a textarea"
+							size="medium"
+							value=${value}
+							@input=${handleValue}
+							rows="8"
+						>
+							<f-text slot="label" variant="para" size="small">Label (rows="8")</f-text>
+							<f-text slot="help" variant="para" size="small">This is subtext</f-text>
+						</f-text-area></f-div
+					></f-div
+				>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <br />
@@ -478,16 +480,16 @@ Defines the no. of rows to display. By default f-text-area provides 3 rows. Afte
 <br />
 
 <Canvas>
-  <Story name="Flags">
-    {(args) => {
-      const [value, setValue] = useState("");
-      const handleValue = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div width="100%" align="top-center" padding="large" gap="medium">
-          ${[0, 1, 2, 3].map(
-            (item) => html`<f-div>
+	<Story name="Flags">
+		{args => {
+			const [value, setValue] = useState("");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="top-center" padding="large" gap="medium">
+					${[0, 1, 2, 3].map(
+						item => html`<f-div>
           <f-text-area
             value=${value}
             placeholder="Write here"
@@ -499,76 +501,76 @@ Defines the no. of rows to display. By default f-text-area provides 3 rows. Afte
             ?read-only=${item === 3 ? true : false}
           >
             <f-div slot="label" padding="none" gap="none">${
-              item === 0
-                ? "Resizable"
-                : item === 1
-                ? "Disabled"
-                : item === 2
-                ? "Clear Icon on Type"
-                : "Readonly"
-            }</f-div>
+							item === 0
+								? "Resizable"
+								: item === 1
+								? "Disabled"
+								: item === 2
+								? "Clear Icon on Type"
+								: "Readonly"
+						}</f-div>
             <f-div slot="description" padding="none" gap="none">This is a ${
-              item === 0
-                ? "Resizable"
-                : item === 1
-                ? "Disabled"
-                : item === 2
-                ? "Clear Icon on Type"
-                : "Readonly"
-            } Flag</f-div>
+							item === 0
+								? "Resizable"
+								: item === 1
+								? "Disabled"
+								: item === 2
+								? "Clear Icon on Type"
+								: "Readonly"
+						} Flag</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-text-area></f-div
         ></f-div
       >`
-          )}
-        </f-div>
-      `;
-    }}
-  </Story>
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Name</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>resizable</td>
-      <td>
-        Provides a resize handle on the bottom right of text-area which enables a user to resize the
-        text-area within the parents scope. Note: text-area can be resized only vertically.
-      </td>
-      <td>
-        <code>false</code>
-      </td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>Opacity is set to 50% in disabled state in disabled mode.</td>
-      <td>
-        <code>false</code>
-      </td>
-    </tr>
-    <tr>
-      <td>clear</td>
-      <td>
-        Displays a close icon-button on the right side of the input that allows the user to clear
-        the input value
-      </td>
-      <td>
-        <code>true</code>
-      </td>
-    </tr>
-    <tr>
-      <td>read-only</td>
-      <td>Only Text could be read, can't be edited</td>
-      <td>
-        <code>false</code>
-      </td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Name</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>resizable</td>
+			<td>
+				Provides a resize handle on the bottom right of text-area which enables a user to resize the
+				text-area within the parents scope. Note: text-area can be resized only vertically.
+			</td>
+			<td>
+				<code>false</code>
+			</td>
+		</tr>
+		<tr>
+			<td>disabled</td>
+			<td>Opacity is set to 50% in disabled state in disabled mode.</td>
+			<td>
+				<code>false</code>
+			</td>
+		</tr>
+		<tr>
+			<td>clear</td>
+			<td>
+				Displays a close icon-button on the right side of the input that allows the user to clear
+				the input value
+			</td>
+			<td>
+				<code>true</code>
+			</td>
+		</tr>
+		<tr>
+			<td>read-only</td>
+			<td>Only Text could be read, can't be edited</td>
+			<td>
+				<code>false</code>
+			</td>
+		</tr>
+	</tbody>
 </table>
 
 <br />

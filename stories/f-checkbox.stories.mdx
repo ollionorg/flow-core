@@ -6,10 +6,10 @@ import fCheckboxAnatomy from "./svg/i-fcheckbox-anatomy.js";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 <Meta
-  title="Components/f-checkbox"
-  parameters={{
-    controls: { hideNoControlsWarning: true },
-  }}
+	title="Components/f-checkbox"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
 />
 
 # f-checkbox
@@ -28,60 +28,61 @@ f-checkbox allows a user to mark one individual item as selected, or to select m
 ### [Playground](/story/components-f-checkbox--playground)
 
 <Canvas>
-  <Story
-    name="Playground"
-    argTypes={{
-      value: { control: "radio", options: ["checked", "unchecked", "indeterminate"] },
-      state: {
-        control: "select",
-        options: ["default", "success", "primary", "warning", "danger"],
-      },
-      size: {
-        control: "radio",
-        options: ["small", "medium"],
-      },
-      disabled: {
-        control: "boolean",
-      },
-      slot: {
-        control: "text",
-      },
-    }}
-    args={{
-      value: "checked",
-      state: "default",
-      size: "medium",
-      slot: ` <f-div slot="label" padding="none">
+	<Story
+		name="Playground"
+		argTypes={{
+			value: { control: "radio", options: ["checked", "unchecked", "indeterminate"] },
+			state: {
+				control: "select",
+				options: ["default", "success", "primary", "warning", "danger"]
+			},
+			size: {
+				control: "radio",
+				options: ["small", "medium"]
+			},
+			disabled: {
+				control: "boolean"
+			},
+			slot: {
+				control: "text"
+			}
+		}}
+		args={{
+			value: "checked",
+			state: "default",
+			size: "medium",
+			slot: ` <f-div slot="label" padding="none">
                 <f-text variant="para" size="small">Banana</f-text>
               </f-div>
               <f-div slot="help" gap="none" padding="none">
                 <f-text variant="para" size="small" state="secondary">This is a subtext </f-text>
-              </f-div>`,
-      disabled: false,
-    }}
-  >
-    {(args) => {
-      const [_, updateArgs] = useArgs();
-      const handleInput = (e) => {
-        updateArgs({ value: e.detail.value });
-      };
-      return html`
-        <f-div width="100%" padding="large">
-          <f-div width="80%">
-            <f-checkbox
-              size=${args.size}
-              value=${args.value}
-              state=${args.state}
-              ?disabled=${args.disabled}
-              @input=${handleInput}
-            >
-              ${unsafeHTML(args.slot)}
-            </f-checkbox></f-div
-          ></f-div
-        >
-      `;
-    }}
-  </Story>
+              </f-div>	<f-text slot="subtitle" align="right" state="secondary" variant="para" size="small">Optional</f-text>
+			<f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>`,
+			disabled: false
+		}}
+	>
+		{args => {
+			const [_, updateArgs] = useArgs();
+			const handleInput = e => {
+				updateArgs({ value: e.detail.value });
+			};
+			return html`
+				<f-div width="100%" padding="large">
+					<f-div width="80%">
+						<f-checkbox
+							size=${args.size}
+							value=${args.value}
+							state=${args.state}
+							?disabled=${args.disabled}
+							@input=${handleInput}
+						>
+							${unsafeHTML(args.slot)}
+						</f-checkbox></f-div
+					></f-div
+				>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <br />
@@ -91,7 +92,7 @@ f-checkbox allows a user to mark one individual item as selected, or to select m
 <f-divider></f-divider>
 
 <Story name="Anatomy">
-  {() => html`<div class="align-center">${unsafeSVG(fCheckboxAnatomy)}</div>`}
+	{() => html`<div class="align-center">${unsafeSVG(fCheckboxAnatomy)}</div>`}
 </Story>
 
 <br />
@@ -101,17 +102,17 @@ f-checkbox allows a user to mark one individual item as selected, or to select m
 Value of a checkbox defines if it is selected, unselected or indeterminate.
 
 <Canvas>
-  <Story name="value">
-    {(args) => {
-      const values = ["checked", "unchecked", "indeterminate"];
-      const [value, setValue] = useState("checked");
-      const handleValue = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div width="100%" align="middle-center" padding="large" gap="medium">
-          ${values.map(
-            (item) => html`<f-div>
+	<Story name="value">
+		{args => {
+			const values = ["checked", "unchecked", "indeterminate"];
+			const [value, setValue] = useState("checked");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large" gap="medium">
+					${values.map(
+						item => html`<f-div>
            <f-checkbox
               size="medium"
               .value=${item}
@@ -126,38 +127,38 @@ Value of a checkbox defines if it is selected, unselected or indeterminate.
             </f-checkbox></f-div
         ></f-div
       >`
-          )}
-        </f-div>
-      `;
-    }}
-  </Story>
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>checked</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>unchecked</td>
-      <td></td>
-      <td>
-        <code>default</code>
-      </td>
-    </tr>
-    <tr>
-      <td>indeterminate</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>checked</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>unchecked</td>
+			<td></td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>indeterminate</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -169,17 +170,17 @@ Value of a checkbox defines if it is selected, unselected or indeterminate.
 f-checkbox can have 2 sizes.
 
 <Canvas>
-  <Story name="size">
-    {(args) => {
-      const sizes = ["small", "medium"];
-      const [value, setValue] = useState("unchecked");
-      const handleValue = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div width="100%" align="top-center" padding="large" gap="medium">
-          ${sizes.map(
-            (item) => html`<f-div>
+	<Story name="size">
+		{args => {
+			const sizes = ["small", "medium"];
+			const [value, setValue] = useState("unchecked");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="top-center" padding="large" gap="medium">
+					${sizes.map(
+						item => html`<f-div>
           <f-checkbox
               .size=${item}
               .value=${value}
@@ -194,31 +195,31 @@ f-checkbox can have 2 sizes.
             </f-checkbox></f-div
         ></f-div
       >`
-          )}
-        </f-div>
-      `;
-    }}
-  </Story>
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>small</td>
-      <td>size="12px"</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>medium</td>
-      <td>size="16px"</td>
-      <td></td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>small</td>
+			<td>size="12px"</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>medium</td>
+			<td>size="16px"</td>
+			<td></td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -230,79 +231,79 @@ f-checkbox can have 2 sizes.
 States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
 
 <Canvas>
-  <Story name="state">
-    {(args) => {
-      const states = [
-        ["default", "primary", "success"],
-        ["danger", "warning", "default"],
-      ];
-      const [value, setValue] = useState("unchecked");
-      const handleValue = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div direction="column" gap="medium">
-          ${states.map(
-            (item) => html` <f-div align="middle-center" padding="large" gap="medium">
-              ${item.map(
-                (state) => html`<f-div
-                  ><f-checkbox size="medium" .value=${value} .state=${state} @input=${handleValue}>
-                    <f-div slot="label" padding="none">
-                      <f-text variant="para" size="small"
-                        >This is a checkbox (state="${state}")</f-text
-                      >
-                    </f-div>
-                    <f-div slot="help" gap="none" padding="none">
-                      <f-text variant="para" size="small" state="secondary"
-                        >This is a subtext
-                      </f-text>
-                    </f-div>
-                  </f-checkbox></f-div
-                >`
-              )}
-            </f-div>`
-          )}
-        </f-div>
-      `;
-    }}
-  </Story>
+	<Story name="state">
+		{args => {
+			const states = [
+				["default", "primary", "success"],
+				["danger", "warning", "default"]
+			];
+			const [value, setValue] = useState("unchecked");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div direction="column" gap="medium">
+					${states.map(
+						item => html` <f-div align="middle-center" padding="large" gap="medium">
+							${item.map(
+								state => html`<f-div
+									><f-checkbox size="medium" .value=${value} .state=${state} @input=${handleValue}>
+										<f-div slot="label" padding="none">
+											<f-text variant="para" size="small"
+												>This is a checkbox (state="${state}")</f-text
+											>
+										</f-div>
+										<f-div slot="help" gap="none" padding="none">
+											<f-text variant="para" size="small" state="secondary"
+												>This is a subtext
+											</f-text>
+										</f-div>
+									</f-checkbox></f-div
+								>`
+							)}
+						</f-div>`
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>default</td>
-      <td></td>
-      <td>
-        <code>default</code>
-      </td>
-    </tr>
-    <tr>
-      <td>primary</td>
-      <td></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>success</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>danger</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>warning</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>default</td>
+			<td></td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>primary</td>
+			<td></td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td>success</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>danger</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>warning</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -314,16 +315,16 @@ States are used to communicate purpose and connotations. For example, a red colo
 <br />
 
 <Canvas>
-  <Story name="Flags">
-    {(args) => {
-      const [value, setValue] = useState("checked");
-      const handleValue = (e) => {
-        setValue(e.detail.value);
-      };
-      return html`
-        <f-div width="100%" align="top-center" padding="large" gap="medium">
-          ${[0].map(
-            (item) => html`<f-div>
+	<Story name="Flags">
+		{args => {
+			const [value, setValue] = useState("checked");
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="top-center" padding="large" gap="medium">
+					${[0].map(
+						item => html`<f-div>
           <f-checkbox
               size="medium"
               .value=${value}
@@ -339,28 +340,28 @@ States are used to communicate purpose and connotations. For example, a red colo
             </f-checkbox></f-div
         ></f-div
       >`
-          )}
-        </f-div>
-      `;
-    }}
-  </Story>
+					)}
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Name</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>Opacity is set to 50% in disabled state in disabled mode.</td>
-      <td>
-        <code>false</code>
-      </td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Name</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>disabled</td>
+			<td>Opacity is set to 50% in disabled state in disabled mode.</td>
+			<td>
+				<code>false</code>
+			</td>
+		</tr>
+	</tbody>
 </table>
 
 <ArgsTable of={"f-checkbox"} />

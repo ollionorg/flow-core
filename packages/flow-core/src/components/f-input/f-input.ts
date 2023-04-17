@@ -326,17 +326,20 @@ export class FInput extends FRoot {
 			>
 				<f-div padding="none" gap="none" align="bottom-left">
 					<f-div padding="none" direction="column" width="fill-container">
-						<f-div
-							padding="none"
-							gap="small"
-							direction="row"
-							width="hug-content"
-							height="hug-content"
-						>
-							<f-div padding="none" direction="row" width="hug-content" height="hug-content">
+						<f-div padding="none" gap="auto" direction="row" height="hug-content">
+							<f-div
+								padding="none"
+								gap="small"
+								direction="row"
+								width="hug-content"
+								height="hug-content"
+							>
 								<slot name="label" @slotchange=${this._onLabelSlotChange}></slot>
+								<slot name="icon-tooltip"></slot>
 							</f-div>
-							<slot name="icon-tooltip"></slot>
+							<f-div width="hug-content">
+								<slot name="subtitle"></slot>
+							</f-div>
 						</f-div>
 						<slot name="description"></slot>
 					</f-div>
@@ -380,6 +383,8 @@ export class FInput extends FRoot {
 							.value="${this.value || ""}"
 							size=${this.size}
 							?readonly=${this.readOnly}
+							autofocus=${ifDefined(this.getAttribute("autofocus"))}
+							autocomplete=${ifDefined(this.getAttribute("autocomplete"))}
 							maxlength="${ifDefined(this.maxLength)}"
 							@input=${this.handleInput}
 						/>

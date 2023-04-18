@@ -35,6 +35,7 @@ export * from "./components/f-file-upload/f-file-upload";
 export * from "./components/f-suggest/f-suggest";
 export * from "./components/f-toast/f-toast";
 export * from "./components/f-search/f-search";
+export * from "./components/f-date-time-picker/f-date-time-picker";
 export * from "./components/f-accordion/f-accordion";
 export * from "./components/f-grid/f-grid";
 export * from "./components/f-carousel/f-carousel";

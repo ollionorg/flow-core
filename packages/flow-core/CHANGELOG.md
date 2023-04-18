@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.12.1] - 2023-04-18
+
+### Bug fixes
+
+- `f-date-time-picker` typescript bug fixed.
 ## [1.12.0] - 2023-04-18
 
 ### Features

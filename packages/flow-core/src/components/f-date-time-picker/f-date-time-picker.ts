@@ -15,6 +15,8 @@ export type DateValueType = DateOption | DateOption[];
 
 export type DateDisableType = DateLimit<DateOption>[];
 
+export type FDateOption = DateOption;
+
 @customElement("f-date-time-picker")
 export class FDateTimePicker extends FRoot {
 	/**
@@ -68,13 +70,13 @@ export class FDateTimePicker extends FRoot {
 	 * @attribute Sets the minimum value of the date allowed in the picker
 	 */
 	@property({ reflect: true, type: Date })
-	["min-date"]?: DateOption;
+	["min-date"]?: FDateOption;
 
 	/**
 	 * @attribute Sets the maximum value of the date allowed in the picker
 	 */
 	@property({ reflect: true, type: Date })
-	["max-date"]?: DateOption;
+	["max-date"]?: FDateOption;
 
 	/**
 	 * @attribute Sets the certain dates unavailable. There can be multiple options:

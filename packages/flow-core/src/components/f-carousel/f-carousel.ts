@@ -73,6 +73,8 @@ export class FCarousel extends FRoot {
 				this.updateDots();
 
 				this.emitNavigationEvent(type, (this.activeSlide as FCarouselContent).contentId);
+
+				this.checkAutoPlay();
 			}
 		}
 	}
@@ -91,6 +93,22 @@ export class FCarousel extends FRoot {
 	}
 
 	render() {
+		const progressBar = () => {
+			return nothing;
+			// return this.autoPlay
+			// 	? html`
+			// 			<f-div class="progress-bar" state="secondary">
+			// 				<f-div
+			// 					class="progress"
+			// 					@transitionend=${this.handleProgressEnd}
+			// 					width="2px"
+			// 					height="2px"
+			// 				>
+			// 				</f-div>
+			// 			</f-div>
+			// 	  `
+			// 	: nothing;
+		};
 		return html` <f-div width="100%" direction="column" gap="medium">
 			<f-div height="hug-content">
 				<f-div class="arrow" width="hug-content" padding="large" height="100%" align="middle-center"
@@ -121,19 +139,7 @@ export class FCarousel extends FRoot {
 					></f-icon>
 				</f-div>
 			</f-div>
-			${this.autoPlay
-				? html`
-						<f-div class="progress-bar" state="secondary">
-							<f-div
-								class="progress"
-								@transitionend=${this.handleProgressEnd}
-								width="2px"
-								height="2px"
-							>
-							</f-div>
-						</f-div>
-				  `
-				: nothing}
+			${progressBar()}
 			<f-div class="dot-wrapper" width="hug-content" align="middle-center">
 				<f-div overflow="visible" id="dots" align="middle-left"> </f-div>
 			</f-div>
@@ -204,13 +210,18 @@ export class FCarousel extends FRoot {
 
 	checkAutoPlay() {
 		if (this.autoPlay) {
-			if (this.progress) {
-				this.progress.style.transitionDuration = `${
-					this.autoPlayInterval ? this.autoPlayInterval / 1000 : 5
-				}s`;
-				this.progress.width = "100%";
-			}
+			setTimeout(() => {
+				this.nextArrow.click();
+			}, this.autoPlayInterval ?? 5000);
 		}
+		// if (this.autoPlay) {
+		// 	if (this.progress) {
+		// 		this.progress.style.transitionDuration = `${
+		// 			this.autoPlayInterval ? this.autoPlayInterval / 1000 : 5
+		// 		}s`;
+		// 		this.progress.width = "100%";
+		// 	}
+		// }
 	}
 
 	handleProgressEnd() {

@@ -13,12 +13,12 @@ export const parameters = {
 	actions: { argTypesRegex: "^on[A-Z].*" },
 	backgrounds: { disable: true },
 	// themes: {
-	//   default: "f-dark",
-	//   clearable: false,
-	//   list: [
-	//     { name: "f-dark", color: "#000" },
-	//     { name: "f-light", color: "#fff" },
-	//   ],
+	// 	default: "f-dark",
+	// 	clearable: false,
+	// 	list: [
+	// 		{ name: "f-dark", color: "#000" },
+	// 		{ name: "f-light", color: "#fff" }
+	// 	]
 	// },
 	controls: {
 		matchers: {

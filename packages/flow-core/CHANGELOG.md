@@ -4,6 +4,21 @@
 
 # Change Log
 
+## [1.12.1] - 2023-04-18
+
+### Bug fixes
+
+- `f-date-time-picker` typescript bug fixed.
+## [1.12.0] - 2023-04-18
+
+### Features
+
+- `f-date-time-picker` component added.
+
+### Improvements
+
+- `f-input`: added a prop in custom-event named `type` other than the `value` to check for "clear" field.
+
 ## [1.11.0] - 2023-04-17
 
 ### Features

@@ -14,6 +14,7 @@ export type FInputState = "primary" | "default" | "success" | "warning" | "dange
 
 export type FInputCustomEvent = {
 	value: string | number;
+	type: "clear" | "input";
 };
 
 export type FInputSuffixWhen = (value: string) => boolean;
@@ -161,7 +162,7 @@ export class FInput extends FRoot {
 		e.stopPropagation();
 		const val = (e.target as HTMLInputElement)?.value;
 		this.value = this.type === "number" ? Number(val) : val;
-		this.dispatchInputEvent(this.value);
+		this.dispatchInputEvent(this.value, "input");
 	}
 
 	/**
@@ -169,13 +170,14 @@ export class FInput extends FRoot {
 	 */
 	clearInputValue() {
 		this.value = "";
-		this.dispatchInputEvent("");
+		this.dispatchInputEvent("", "clear");
 	}
 
-	dispatchInputEvent(value: string | number) {
+	dispatchInputEvent(value: string | number, type: "clear" | "input") {
 		const event = new CustomEvent<FInputCustomEvent>("input", {
 			detail: {
-				value
+				value: value,
+				type: type
 			},
 			bubbles: true,
 			composed: true

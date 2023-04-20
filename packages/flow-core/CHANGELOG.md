@@ -4,11 +4,18 @@
 
 # Change Log
 
+## [1.12.2] - 2023-04-20
+
+### Bug fixes
+
+- `f-div` hover state bug fixed for child f-div's with state inherit.
+
 ## [1.12.1] - 2023-04-18
 
 ### Bug fixes
 
 - `f-date-time-picker` typescript bug fixed.
+
 ## [1.12.0] - 2023-04-18
 
 ### Features

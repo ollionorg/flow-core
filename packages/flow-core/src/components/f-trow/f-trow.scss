@@ -1,7 +1,16 @@
 @import "./../../mixins/scss/mixins";
 
 f-trow {
-	display: table-row;
+	display: contents;
 	vertical-align: middle;
 	@include base();
+}
+
+:host {
+	.expandable {
+		grid-column-start: 1;
+	}
+	.details-toggle {
+		grid-column-start: last;
+	}
 }

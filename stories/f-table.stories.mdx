@@ -49,26 +49,25 @@ Text component includes Headings, titles, body texts and links.
 	>
 		{args => html`
 			<f-table .selectable=${args.selectable} .variant=${args.variant} .size=${args.size}>
-				<f-thead>
-					<f-trow>
-						${[1, 2, 3, 4, 5].map(cellNumber => {
-							return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
-						})}
-					</f-trow>
-				</f-thead>
-				<f-tbody>
-					${[1, 2, 3, 4, 5].map(rowNumber => {
-						return html`<f-trow>
-							${[1, 2, 3, 4, 5].map(cellNumber => {
-								return html`<f-tcell>
-									Column ${cellNumber} ${cellNumber === 2 && rowNumber === 2
-										? "sahdjhf dsfghgdf dsjhfgjshdf dfgsjhdf sdfhg"
-										: ""}
-								</f-tcell>`;
-							})}
-						</f-trow>`;
+				<f-trow>
+					${[1, 2, 3, 4, 5, 6].map(cellNumber => {
+						return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
 					})}
-				</f-tbody>
+				</f-trow>
+				${[1, 2, 3, 4, 5].map(rowNumber => {
+					return html`<f-trow open>
+						<f-div padding="large" slot="details">
+							<f-text variant="heading" size="x-large">This is details slot</f-text>
+						</f-div>
+						${[1, 2, 3, 4, 5, 6].map(cellNumber => {
+							return html`<f-tcell>
+								Column ${cellNumber} ${cellNumber === 2 && rowNumber === 2
+									? "sahdjhf dsfghgdf dsjhfgjshdf dfgsjhdf sdfhg"
+									: ""}
+							</f-tcell>`;
+						})}
+					</f-trow>`;
+				})}
 			</f-table>
 		`}
 	</Story>

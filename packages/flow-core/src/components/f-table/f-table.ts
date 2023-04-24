@@ -42,7 +42,13 @@ export class FTable extends FRoot {
 		this.propogateProps();
 	}
 	propogateProps() {
+		this.updateGridTemplateColumns();
 		this.applySelectable();
+	}
+
+	updateGridTemplateColumns() {
+		const firstRow = this.querySelector("f-trow");
+		this.style.gridTemplateColumns = `repeat(${firstRow?.children.length},auto)`;
 	}
 
 	applySelectable() {

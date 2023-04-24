@@ -11,19 +11,18 @@ $sizes: (
 );
 
 f-table {
-	display: table;
+	display: grid;
+	//grid-template-columns: repeat(5, auto);
 	flex: 1 0 fit-content;
 	@include base();
 
 	&[variant="stripped"] {
-		> f-tbody > f-trow:nth-child(odd),
-		> f-trow:nth-child(odd) {
-			background-color: var(--color-surface-subtle);
+		> f-trow:nth-child(odd) > f-tcell {
+			background-color: var(--color-surface-default);
 		}
 
-		> f-tbody > f-trow:nth-child(even),
-		> f-trow:nth-child(even) {
-			background-color: var(--color-surface-default);
+		> f-trow:nth-child(even) > f-tcell {
+			background-color: var(--color-surface-subtle);
 		}
 	}
 
@@ -32,28 +31,21 @@ f-table {
 	}
 
 	&[variant="underlined"] {
-		> f-tbody > f-trow > f-tcell {
+		> f-trow > f-tcell {
 			border-bottom: 1px solid var(--color-border-default);
 		}
-		> f-thead > f-trow > f-tcell {
+
+		> f-trow > f-tcell {
 			border-bottom: 1px solid var(--color-border-default);
 		}
 	}
 
 	&[variant="bordered"] {
-		border: 1px solid var(--color-border-default);
-		> f-tbody > f-trow:not(:last-child) > f-tcell {
-			&:not(:last-child) {
-				border-right: 1px solid var(--color-border-default);
-			}
-			border-bottom: 1px solid var(--color-border-default);
-		}
-		> f-tbody > f-trow > f-tcell {
-			&:not(:last-child) {
-				border-right: 1px solid var(--color-border-default);
-			}
-		}
-		> f-thead > f-trow > f-tcell {
+		border-top: 1px solid var(--color-border-default);
+		border-left: 1px solid var(--color-border-default);
+		border-right: 1px solid var(--color-border-default);
+
+		> f-trow > f-tcell {
 			&:not(:last-child) {
 				border-right: 1px solid var(--color-border-default);
 			}
@@ -62,10 +54,7 @@ f-table {
 	}
 	@each $size, $value in $sizes {
 		&[size="#{$size}"] {
-			> f-tbody > f-trow > f-tcell {
-				padding: map.get($value, "padding");
-			}
-			> f-thead > f-trow > f-tcell {
+			> f-trow > f-tcell {
 				padding: map.get($value, "padding");
 			}
 		}

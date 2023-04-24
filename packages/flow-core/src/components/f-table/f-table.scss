@@ -1,0 +1,73 @@
+@use "sass:map";
+@import "./../../mixins/scss/mixins";
+
+$sizes: (
+	"medium": (
+		"padding": 16px
+	),
+	"small": (
+		"padding": 12px
+	)
+);
+
+f-table {
+	display: table;
+	flex: 1 0 fit-content;
+	@include base();
+
+	&[variant="stripped"] {
+		> f-tbody > f-trow:nth-child(odd),
+		> f-trow:nth-child(odd) {
+			background-color: var(--color-surface-subtle);
+		}
+
+		> f-tbody > f-trow:nth-child(even),
+		> f-trow:nth-child(even) {
+			background-color: var(--color-surface-default);
+		}
+	}
+
+	&[variant="outlined"] {
+		border: 1px solid var(--color-border-default);
+	}
+
+	&[variant="underlined"] {
+		> f-tbody > f-trow > f-tcell {
+			border-bottom: 1px solid var(--color-border-default);
+		}
+		> f-thead > f-trow > f-tcell {
+			border-bottom: 1px solid var(--color-border-default);
+		}
+	}
+
+	&[variant="bordered"] {
+		border: 1px solid var(--color-border-default);
+		> f-tbody > f-trow:not(:last-child) > f-tcell {
+			&:not(:last-child) {
+				border-right: 1px solid var(--color-border-default);
+			}
+			border-bottom: 1px solid var(--color-border-default);
+		}
+		> f-tbody > f-trow > f-tcell {
+			&:not(:last-child) {
+				border-right: 1px solid var(--color-border-default);
+			}
+		}
+		> f-thead > f-trow > f-tcell {
+			&:not(:last-child) {
+				border-right: 1px solid var(--color-border-default);
+			}
+			border-bottom: 1px solid var(--color-border-default);
+		}
+	}
+	@each $size, $value in $sizes {
+		&[size="#{$size}"] {
+			> f-tbody > f-trow > f-tcell {
+				padding: map.get($value, "padding");
+			}
+			> f-thead > f-trow > f-tcell {
+				padding: map.get($value, "padding");
+			}
+		}
+	}
+}

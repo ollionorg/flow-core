@@ -1,0 +1,75 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+
+<Meta
+	title="Components/f-table"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
+/>
+
+# f-table
+
+<br />
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+Text component includes Headings, titles, body texts and links.
+
+<br />
+
+### [Playground](/story/components-f-table--playground)
+
+<Canvas>
+	<Story
+		name="Playground"
+		argTypes={{
+			variant: {
+				control: "select",
+				options: ["stripped", "outlined", "underlined", "bordered"]
+			},
+			size: {
+				control: "select",
+				options: ["medium", "small"]
+			},
+			selectable: {
+				control: "select",
+				options: ["single", "multiple", "none"]
+			}
+		}}
+		args={{
+			variant: "stripped",
+			size: "medium",
+			selectable: "none"
+		}}
+	>
+		{args => html`
+			<f-table .selectable=${args.selectable} .variant=${args.variant} .size=${args.size}>
+				<f-thead>
+					<f-trow>
+						${[1, 2, 3, 4, 5].map(cellNumber => {
+							return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+						})}
+					</f-trow>
+				</f-thead>
+				<f-tbody>
+					${[1, 2, 3, 4, 5].map(rowNumber => {
+						return html`<f-trow>
+							${[1, 2, 3, 4, 5].map(cellNumber => {
+								return html`<f-tcell>
+									Column ${cellNumber} ${cellNumber === 2 && rowNumber === 2
+										? "sahdjhf dsfghgdf dsjhfgjshdf dfgsjhdf sdfhg"
+										: ""}
+								</f-tcell>`;
+							})}
+						</f-trow>`;
+					})}
+				</f-tbody>
+			</f-table>
+		`}
+	</Story>
+</Canvas>

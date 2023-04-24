@@ -40,6 +40,11 @@ export * from "./components/f-accordion/f-accordion";
 export * from "./components/f-grid/f-grid";
 export * from "./components/f-carousel/f-carousel";
 export * from "./components/f-carousel-content/f-carousel-content";
+export * from "./components/f-table/f-table";
+export * from "./components/f-thead/f-thead";
+export * from "./components/f-tbody/f-tbody";
+export * from "./components/f-trow/f-trow";
+export * from "./components/f-tcell/f-tcell";
 export * from "./mixins/components/f-root/f-root";
 
 if (document.readyState !== "loading") {

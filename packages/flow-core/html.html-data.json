@@ -238,7 +238,7 @@
     },
     {
       "name": "f-checkbox",
-      "description": "Events:\n\n  * `input` {`CustomEvent<FCheckboxCustomEvent>`} - \n\nAttributes:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"small\" | \"medium\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"small\" | \"medium\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `input` {`CustomEvent<FCheckboxCustomEvent>`} - \n\nAttributes:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"small\" | \"medium\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `value` {`\"checked\" | \"unchecked\" | \"indeterminate\" | undefined`} - \n\n  * `state` {`FCheckboxState | undefined`} - \n\n  * `size` {`\"small\" | \"medium\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `slotWrapper` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "value",
@@ -6423,7 +6423,7 @@
     },
     {
       "name": "f-radio",
-      "description": "Events:\n\n  * `input` {`CustomEvent<FRadioCustomEvent>`} - \n\nAttributes:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"small\" | \"medium\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"small\" | \"medium\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `input` {`CustomEvent<FRadioCustomEvent>`} - \n\nAttributes:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"small\" | \"medium\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `value` {`\"selected\" | \"unselected\" | undefined`} - \n\n  * `state` {`FRadioState | undefined`} - \n\n  * `size` {`\"small\" | \"medium\" | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `slotWrapper` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "value",
@@ -7197,6 +7197,62 @@
       ]
     },
     {
+      "name": "f-table",
+      "description": "Attributes:\n\n  * `variant` {`FTableVariant | undefined`} - \n\n  * `size` {`FTableSize | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `variant` {`FTableVariant | undefined`} - \n\n  * `size` {`FTableSize | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "attributes": [
+        {
+          "name": "variant",
+          "description": "`variant` {`FTableVariant | undefined`} - \n\nProperty: variant\n\nDefault: stripped",
+          "values": [
+            {
+              "name": "stripped"
+            },
+            {
+              "name": "outlined"
+            },
+            {
+              "name": "underlined"
+            },
+            {
+              "name": "bordered"
+            }
+          ]
+        },
+        {
+          "name": "size",
+          "description": "`size` {`FTableSize | undefined`} - \n\nProperty: size\n\nDefault: medium",
+          "values": [
+            {
+              "name": "small"
+            },
+            {
+              "name": "medium"
+            }
+          ]
+        },
+        {
+          "name": "selectable",
+          "description": "`selectable` {`FTableSelectable | undefined`} - \n\nProperty: selectable\n\nDefault: none",
+          "values": [
+            {
+              "name": "none"
+            },
+            {
+              "name": "single"
+            },
+            {
+              "name": "multiple"
+            }
+          ]
+        },
+        {
+          "name": "tooltip",
+          "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
+          "values": []
+        }
+      ]
+    },
+    {
       "name": "f-tag",
       "description": "Attributes:\n\n  * `tagSystemIcon` {`boolean`} - \n\n  * `fill` {`string`} - \n\n  * `label` {`string`} - \n\n  * `size` {`\"small\" | \"medium\" | \"large\" | undefined`} - \n\n  * `state` {`FTagStateProp | undefined`} - \n\n  * `icon-left` {`string | undefined`} - \n\n  * `icon-right` {`string | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `clickable` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `tagSystemIcon` {`boolean`} - \n\n  * `fill` {`string`} - \n\n  * `label` {`string`} - \n\n  * `size` {`\"small\" | \"medium\" | \"large\" | undefined`} - \n\n  * `state` {`FTagStateProp | undefined`} - \n\n  * `iconLeft` {`string | undefined`} - \n\n  * `iconRight` {`string | undefined`} - \n\n  * `counter` {`string | undefined`} - \n\n  * `loading` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `disabled` {`boolean | undefined`} - \n\n  * `clickable` {`boolean | undefined`} - \n\n  * `iconSize` {`\"x-small\" | \"small\" | \"medium\"`} - compute icon size based on tag size\n\n  * `textColor` {`\"#202a36\" | \"#fcfcfd\"`} - compute textColor when custom color of tag is defined.\n\n  * `loaderColor` {`\"#202a36\" | \"#808080\"`} - compute loaderColor when custom color of tag is defined.\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
@@ -7286,6 +7342,36 @@
           "name": "clickable",
           "description": "`clickable` {`boolean | undefined`} - \n\nProperty: clickable\n\nDefault: false",
           "values": []
+        },
+        {
+          "name": "tooltip",
+          "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
+          "values": []
+        }
+      ]
+    },
+    {
+      "name": "f-tbody",
+      "description": "Attributes:\n\n  * `title` {`string`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `title` {`string`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "attributes": [
+        {
+          "name": "title",
+          "description": "`title` {`string`} - \n\nProperty: title"
+        },
+        {
+          "name": "tooltip",
+          "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
+          "values": []
+        }
+      ]
+    },
+    {
+      "name": "f-tcell",
+      "description": "Attributes:\n\n  * `title` {`string`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `title` {`string`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "attributes": [
+        {
+          "name": "title",
+          "description": "`title` {`string`} - \n\nProperty: title"
         },
         {
           "name": "tooltip",
@@ -7540,6 +7626,21 @@
       ]
     },
     {
+      "name": "f-thead",
+      "description": "Attributes:\n\n  * `title` {`string`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `title` {`string`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "attributes": [
+        {
+          "name": "title",
+          "description": "`title` {`string`} - \n\nProperty: title"
+        },
+        {
+          "name": "tooltip",
+          "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
+          "values": []
+        }
+      ]
+    },
+    {
       "name": "f-toast",
       "description": "Events:\n\n  * `remove` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `type` {`\"auto-hide\" | \"persists\" | undefined`} - \n\n  * `duration` {`number | undefined`} - \n\n  * `state` {`FToastState | undefined`} - \n\n  * `[\"close-button\"]` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `type` {`\"auto-hide\" | \"persists\" | undefined`} - \n\n  * `duration` {`number | undefined`} - \n\n  * `state` {`FToastState | undefined`} - \n\n  * `[\"close-button\"]` {`boolean | undefined`} - \n\n  * `mouseover` {`boolean`} - \n\n  * `removeTimeout` {`Timeout`} - \n\n  * `toasterRef` - \n\n  * `uid` {`string`} - get current uid\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
@@ -7654,6 +7755,21 @@
         {
           "name": "target",
           "description": "`target` {`string | HTMLElement`} - \n\nProperty: target",
+          "values": []
+        }
+      ]
+    },
+    {
+      "name": "f-trow",
+      "description": "Attributes:\n\n  * `title` {`string`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `title` {`string`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "attributes": [
+        {
+          "name": "title",
+          "description": "`title` {`string`} - \n\nProperty: title"
+        },
+        {
+          "name": "tooltip",
+          "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
           "values": []
         }
       ]

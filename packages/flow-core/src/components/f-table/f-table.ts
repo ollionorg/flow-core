@@ -52,10 +52,15 @@ export class FTable extends FRoot {
 	}
 
 	applySelectable() {
-		const allRows = this.querySelectorAll<FTcell>("f-thead > f-trow, f-tbody > f-trow");
+		const allRows = this.querySelectorAll<FTcell>("f-trow");
+
 		allRows.forEach(row => {
-			const firstChild = row.children.item(0) as FTcell;
-			firstChild.selectable = this.selectable;
+			const firstChild = Array.from(row.children).find(child => {
+				return child.tagName === "F-TCELL";
+			}) as FTcell;
+			if (firstChild) {
+				firstChild.selectable = this.selectable;
+			}
 		});
 	}
 }

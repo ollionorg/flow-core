@@ -7,8 +7,7 @@ module.exports = {
 		"@storybook/addon-links",
 		"@storybook/addon-essentials",
 		"storybook-addon-themes",
-		"@storybook/addon-storysource",
-		"@storybook/addon-google-analytics"
+		"@storybook/addon-storysource"
 	],
 	framework: "@storybook/web-components",
 	core: {

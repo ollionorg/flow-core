@@ -14,15 +14,21 @@ f-table {
 	display: grid;
 	//grid-template-columns: repeat(5, auto);
 	flex: 1 0 fit-content;
+	overflow: auto;
 	@include base();
 
 	&[variant="stripped"] {
-		> f-trow:nth-child(odd) > f-tcell {
-			background-color: var(--color-surface-default);
+		> f-trow:nth-child(odd) {
+			--color-background-row: var(--color-surface-default);
+			> f-tcell {
+				background-color: var(--color-background-row);
+			}
 		}
-
-		> f-trow:nth-child(even) > f-tcell {
-			background-color: var(--color-surface-subtle);
+		> f-trow:nth-child(even) {
+			--color-background-row: var(--color-surface-subtle);
+			> f-tcell {
+				background-color: var(--color-background-row);
+			}
 		}
 	}
 
@@ -31,12 +37,11 @@ f-table {
 	}
 
 	&[variant="underlined"] {
-		> f-trow > f-tcell {
-			border-bottom: 1px solid var(--color-border-default);
-		}
-
-		> f-trow > f-tcell {
-			border-bottom: 1px solid var(--color-border-default);
+		> f-trow {
+			--border-bottom: 1px solid var(--color-border-default);
+			> f-tcell {
+				border-bottom: var(--border-bottom);
+			}
 		}
 	}
 
@@ -45,11 +50,15 @@ f-table {
 		border-left: 1px solid var(--color-border-default);
 		border-right: 1px solid var(--color-border-default);
 
-		> f-trow > f-tcell {
-			&:not(:last-child) {
-				border-right: 1px solid var(--color-border-default);
+		> f-trow {
+			--border-bottom: 1px solid var(--color-border-default);
+			--border-left: 1px solid var(--color-border-default);
+			> f-tcell {
+				&:not(:last-child) {
+					border-right: 1px solid var(--color-border-default);
+				}
+				border-bottom: 1px solid var(--color-border-default);
 			}
-			border-bottom: 1px solid var(--color-border-default);
 		}
 	}
 	@each $size, $value in $sizes {

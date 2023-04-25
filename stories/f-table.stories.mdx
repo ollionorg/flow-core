@@ -61,9 +61,11 @@ Text component includes Headings, titles, body texts and links.
 						</f-div>
 						${[1, 2, 3, 4, 5, 6].map(cellNumber => {
 							return html`<f-tcell>
-								Column ${cellNumber} ${cellNumber === 2 && rowNumber === 2
-									? "sahdjhf dsfghgdf dsjhfgjshdf dfgsjhdf sdfhg"
-									: ""}
+								<f-text>
+									Column ${cellNumber} ${cellNumber === 2 && rowNumber === 2
+										? "sahdjhf dsfghgdf dsjhfgjshdf dfgsjhdf sdfhg"
+										: ""}
+								</f-text>
 							</f-tcell>`;
 						})}
 					</f-trow>`;

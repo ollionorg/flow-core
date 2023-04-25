@@ -28,13 +28,8 @@ export class FTrow extends FRoot {
 	detailsSlotElement?: FDiv;
 
 	render() {
-		return html`<slot></slot
-			><f-div
-				class="details-toggle"
-				@click=${this.toggleDetails}
-				align="middle-center"
-				border="small solid default bottom"
-			>
+		return html`<slot></slot>
+			<f-div class="details-toggle" width="36px" @click=${this.toggleDetails} align="middle-center">
 				<f-icon clickable .source=${this.open ? "i-chevron-up" : "i-chevron-down"}></f-icon>
 			</f-div>
 			${this.open

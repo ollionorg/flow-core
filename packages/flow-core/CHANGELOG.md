@@ -4,11 +4,18 @@
 
 # Change Log
 
+## [1.13.0] - 2023-04-26
+
+### Features
+
+- `f-progress-bar` component added.
+
 ## [1.12.3] - 2023-04-20
 
 ### Bug fixes
 
 - `f-popover` target z-index bug fixed.
+
 ## [1.12.2] - 2023-04-20
 
 ### Bug fixes

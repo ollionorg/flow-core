@@ -2,6 +2,7 @@ import { html, nothing, unsafeCSS } from "lit";
 import { customElement, property, query, state } from "lit/decorators.js";
 import { FCheckbox } from "../f-checkbox/f-checkbox";
 import { FDiv } from "../f-div/f-div";
+import { FIcon } from "../f-icon/f-icon";
 import { FRadio } from "../f-radio/f-radio";
 import { FTableSelectable } from "../f-table/f-table";
 import { FRoot } from "./../../mixins/components/f-root/f-root";
@@ -23,19 +24,33 @@ export class FTcell extends FRoot {
 	@state()
 	selectable?: FTableSelectable = "none";
 
+	@state()
+	expandIcon = false;
+
 	@query("f-checkbox")
 	checkbox?: FCheckbox;
 
 	@query("f-radio")
 	radio?: FRadio;
 
+	@query(".row-toggler")
+	chevron?: FIcon;
+
 	render() {
 		return html`<f-div aling="middle-left" gap="medium"
 			>${this.selectable === "multiple"
 				? html`<f-checkbox @input=${this.handleSelection}></f-checkbox>`
 				: nothing}
-			${this.selectable === "single" ? html`<f-radio></f-radio>` : nothing} <slot></slot
-		></f-div>`;
+			${this.selectable === "single"
+				? html`<f-radio @input=${this.handleSelection} class="cell-radio"></f-radio>`
+				: nothing} <slot></slot>
+
+			${this.expandIcon
+				? html`<f-div class="details-toggle" @click=${this.toggleDetails} align="middle-center">
+						<f-icon class="row-toggler" clickable source="i-chevron-down"></f-icon>
+				  </f-div>`
+				: nothing}
+		</f-div>`;
 	}
 
 	setSelection(value = false) {
@@ -57,8 +72,16 @@ export class FTcell extends FRoot {
 	}
 
 	handleSelection(event: CustomEvent) {
-		const toggle = new CustomEvent("toggle-row", {
+		const toggle = new CustomEvent("toggle-row-selection", {
 			detail: event.detail.value === "checked" || event.detail.value === "selected",
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(toggle);
+	}
+	toggleDetails() {
+		const toggle = new CustomEvent("toggle-row", {
+			detail: {},
 			bubbles: true,
 			composed: true
 		});

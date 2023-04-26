@@ -1,4 +1,4 @@
-import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 
 import { FDiv } from "../f-div/f-div";
@@ -15,44 +15,44 @@ export class FTrow extends FRoot {
 	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FIcon.styles];
 
 	/**
-	 * @attribute open row details
+	 * @attribute is details slot collapsed
 	 */
 	@property({ type: Boolean, reflect: true })
 	open?: boolean;
 
 	/**
-	 * @attribute open row details
+	 * @attribute is row selected
 	 */
 	@property({ type: Boolean, reflect: true })
 	selected?: boolean;
 
 	@query(".expandable")
 	expndablePanel?: FTcell;
-	@query(".details-toggle")
-	toggleElement?: FDiv;
+
 	@query("slot[name='details']")
-	detailsSlotElement?: FDiv;
+	detailsSlotElement!: HTMLSlotElement;
 
 	render() {
-		return html`<slot @slotchange=${this.propogateProps} @toggle-row=${this.handleInput}></slot>
-			<f-div class="details-toggle" width="36px" @click=${this.toggleDetails} align="middle-center">
-				<f-icon clickable .source=${this.open ? "i-chevron-up" : "i-chevron-down"}></f-icon>
-			</f-div>
-			${this.open
-				? html`<f-div direction="column" border="small solid default bottom" class="expandable">
-						<slot name="details"></slot>
-				  </f-div>`
-				: nothing}`;
+		return html`<slot
+				@slotchange=${this.propogateProps}
+				@toggle-row=${this.toggleDetails}
+				@toggle-row-selection=${this.handleInput}
+			></slot>
+
+			<f-div
+				direction="column"
+				border="small solid default bottom"
+				class="expandable ${this.open ? "opened" : "closed"}"
+			>
+				<slot name="details" @slotchange=${this.handleDetailsSlot}></slot>
+			</f-div>`;
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
 
 		const allCells = this.querySelectorAll(":scope > f-tcell");
 		if (this.expndablePanel) {
-			this.expndablePanel.style.gridColumnEnd = `${allCells.length + 2}`;
-		}
-		if (this.toggleElement) {
-			this.toggleElement.style.gridColumnEnd = `${allCells.length + 1}`;
+			this.expndablePanel.style.gridColumnEnd = `${allCells.length + 1}`;
 		}
 
 		this.propogateProps();
@@ -61,20 +61,44 @@ export class FTrow extends FRoot {
 	propogateProps() {
 		const firstCell = this.querySelector<FTcell>(":scope > f-tcell");
 		firstCell?.setSelection(this.selected);
+		this.handleDetailsSlot();
 	}
 
-	toggleDetails() {
+	toggleDetails(event: CustomEvent) {
 		this.open = !this.open;
+		const chevron = (event.target as FTcell).chevron;
+		if (chevron) {
+			if (this.open) {
+				chevron.source = "i-chevron-up";
+			} else {
+				chevron.source = "i-chevron-down";
+			}
+		}
 	}
 
 	handleInput(event: CustomEvent) {
 		this.selected = event.detail;
 		const toggle = new CustomEvent("select", {
-			detail: event.detail,
+			detail: { element: this, value: event.detail },
 			bubbles: true,
 			composed: true
 		});
 		this.dispatchEvent(toggle);
+	}
+	handleDetailsSlot() {
+		if (this.detailsSlotElement.assignedNodes().length > 0) {
+			const lastCell = this.lastElementChild as FTcell;
+			lastCell.expandIcon = true;
+
+			const chevron = lastCell.chevron;
+			if (chevron) {
+				if (this.open) {
+					chevron.source = "i-chevron-up";
+				} else {
+					chevron.source = "i-chevron-down";
+				}
+			}
+		}
 	}
 }
 

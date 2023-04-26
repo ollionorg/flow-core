@@ -15,14 +15,29 @@ f-trow {
 		background-color: var(--color-background-row);
 		border-bottom: var(--border-bottom);
 		border-left: var(--border-left);
+		min-width: 36px;
+
+		&.hidden {
+			f-icon {
+				visibility: hidden;
+			}
+		}
+	}
+	.closed {
+		display: none;
 	}
 }
 
 f-trow {
+	--display-cell-radio: flex;
 	&[selected]:not(:hover) {
 		--color-background-row: var(--color-background-row-selected);
 		f-tcell {
 			background-color: var(--color-background-row-selected);
 		}
+	}
+
+	&[slot="header"] {
+		--display-cell-radio: none;
 	}
 }

@@ -1,6 +1,7 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { FTcell } from "../f-tcell/f-tcell";
+import { FTrow } from "../f-trow/f-trow";
 import { FRoot } from "./../../mixins/components/f-root/f-root";
 import eleStyle from "./f-table.scss";
 
@@ -46,13 +47,15 @@ export class FTable extends FRoot {
 	highlightHover = false;
 
 	render() {
-		return html`<slot @slotchange=${this.propogateProps}></slot>`;
+		return html`<slot name="header"></slot
+			><slot @slotchange=${this.propogateProps} @select=${this.handleRowSelection}></slot>`;
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
 
 		this.propogateProps();
 	}
+
 	propogateProps() {
 		this.updateGridTemplateColumns();
 		this.applySelectable();
@@ -64,14 +67,24 @@ export class FTable extends FRoot {
 	}
 
 	applySelectable() {
-		const allRows = this.querySelectorAll<FTcell>(":scope > f-trow");
-
+		const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
 		allRows.forEach(row => {
 			const firstChild = Array.from(row.children).find(child => {
 				return child.tagName === "F-TCELL";
 			}) as FTcell;
 			if (firstChild) {
 				firstChild.selectable = this.selectable;
+			}
+		});
+	}
+	handleRowSelection(event: CustomEvent) {
+		const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
+
+		allRows.forEach(row => {
+			if (this.selectable === "single") {
+				if (row.selected && row !== event.detail.element) {
+					row.selected = false;
+				}
 			}
 		});
 	}

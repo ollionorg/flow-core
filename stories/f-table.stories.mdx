@@ -61,19 +61,17 @@ Text component includes Headings, titles, body texts and links.
 					@selected-rows=${handleSelectedRows}
 				>
 					<f-trow slot="header">
-						${[1, 2, 3, 4, 5, 6].map(cellNumber => {
+						${[1, 2, 3, 4, 5].map(cellNumber => {
 							return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
 						})}
-						<f-div padding="large" slot="details">
-							<f-text variant="heading" size="x-large">This is details slot</f-text>
-						</f-div>
+						<f-tcell></f-tcell>
 					</f-trow>
 					${[1, 2, 3, 4, 5].map(rowNumber => {
 						return html`<f-trow>
 							<f-div padding="large" slot="details">
 								<f-text variant="heading" size="x-large">This is details slot</f-text>
 							</f-div>
-							${[1, 2, 3, 4, 5, 6].map(cellNumber => {
+							${[1, 2, 3, 4, 5].map(cellNumber => {
 								return html`<f-tcell>
 									<f-text>
 										Column ${cellNumber} ${cellNumber === 2 && rowNumber === 2
@@ -82,6 +80,14 @@ Text component includes Headings, titles, body texts and links.
 									</f-text>
 								</f-tcell>`;
 							})}
+							<f-tcell
+								.actions=${[
+									{ icon: "i-copy", onClick: () => console.log("i-launch clicked") },
+									{ icon: "i-git-branch", onClick: () => console.log("i-launch clicked") },
+									{ icon: "i-launch", onClick: () => console.log("i-launch clicked") }
+								]}
+							>
+							</f-tcell>
 						</f-trow>`;
 					})}
 				</f-table>

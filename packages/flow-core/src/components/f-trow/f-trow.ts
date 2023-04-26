@@ -72,9 +72,9 @@ export class FTrow extends FRoot {
 		const chevron = (event.target as FTcell).chevron;
 		if (chevron) {
 			if (this.open) {
-				chevron.source = "i-chevron-up";
+				chevron.icon = "i-chevron-up";
 			} else {
-				chevron.source = "i-chevron-down";
+				chevron.icon = "i-chevron-down";
 			}
 		}
 	}
@@ -97,9 +97,9 @@ export class FTrow extends FRoot {
 			const chevron = lastCell.chevron;
 			if (chevron) {
 				if (this.open) {
-					chevron.source = "i-chevron-up";
+					chevron.icon = "i-chevron-up";
 				} else {
-					chevron.source = "i-chevron-down";
+					chevron.icon = "i-chevron-down";
 				}
 			}
 		}

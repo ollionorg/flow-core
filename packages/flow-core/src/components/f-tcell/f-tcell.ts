@@ -1,25 +1,42 @@
 import { html, nothing, unsafeCSS } from "lit";
+import { ifDefined } from "lit-html/directives/if-defined.js";
 import { customElement, property, query, state } from "lit/decorators.js";
 import { FCheckbox } from "../f-checkbox/f-checkbox";
 import { FDiv } from "../f-div/f-div";
+import { FIconButton } from "../f-icon-button/f-icon-button";
 import { FIcon } from "../f-icon/f-icon";
 import { FRadio } from "../f-radio/f-radio";
 import { FTableSelectable } from "../f-table/f-table";
 import { FRoot } from "./../../mixins/components/f-root/f-root";
 import eleStyle from "./f-tcell.scss";
 
+export type FTcellAction = {
+	icon: string;
+	onClick?: (event: PointerEvent) => void;
+	onMouseOver?: (event: MouseEvent) => void;
+	onMouseLeave?: (event: MouseEvent) => void;
+};
+
+export type FTcellActions = FTcellAction[];
 @customElement("f-tcell")
 export class FTcell extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FCheckbox.styles, ...FRadio.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		...FDiv.styles,
+		...FCheckbox.styles,
+		...FRadio.styles,
+		...FIcon.styles,
+		...FIconButton.styles
+	];
 
 	/**
 	 * @attribute comments baout title
 	 */
-	@property({ type: String })
-	title!: string;
+	@property({ type: Object, reflect: false })
+	actions?: FTcellActions;
 
 	@state()
 	selectable?: FTableSelectable = "none";
@@ -34,7 +51,24 @@ export class FTcell extends FRoot {
 	radio?: FRadio;
 
 	@query(".row-toggler")
-	chevron?: FIcon;
+	chevron?: FIconButton;
+
+	renderActions() {
+		if (this.actions) {
+			return html`${this.actions.map(ac => {
+				return html`<f-icon-button
+					size="medium"
+					category="packed"
+					state="neutral"
+					.icon=${ac.icon}
+					@click=${ifDefined(ac.onClick)}
+					@mouseover=${ifDefined(ac.onMouseOver)}
+					@mouseleave=${ifDefined(ac.onMouseLeave)}
+				></f-icon-button>`;
+			})}`;
+		}
+		return nothing;
+	}
 
 	render() {
 		return html`<f-div aling="middle-left" gap="medium"
@@ -44,17 +78,21 @@ export class FTcell extends FRoot {
 			${this.selectable === "single"
 				? html`<f-radio @input=${this.handleSelection} class="cell-radio"></f-radio>`
 				: nothing} <slot></slot>
-
-			${this.expandIcon
-				? html`<f-div
-						class="details-toggle"
-						width="hug-content"
-						@click=${this.toggleDetails}
-						align="middle-center"
-				  >
-						<f-icon class="row-toggler" clickable source="i-chevron-down"></f-icon>
-				  </f-div>`
-				: nothing}
+			<f-div class="details-toggle" gap="medium" align="middle-right">
+				${this.renderActions()}
+				${this.expandIcon
+					? html`
+							<f-icon-button
+								size="medium"
+								category="packed"
+								class="row-toggler"
+								state="neutral"
+								@click=${this.toggleDetails}
+								icon="i-chevron-down"
+							></f-icon-button>
+					  `
+					: nothing}
+			</f-div>
 		</f-div>`;
 	}
 

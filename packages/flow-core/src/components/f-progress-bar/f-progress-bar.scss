@@ -1,0 +1,42 @@
+@use "sass:map";
+
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+
+$states: (
+	"primary": (
+		"background": var(--color-primary-default)
+	),
+	"default": (
+		"background": var(--color-neutral-default)
+	),
+	"success": (
+		"background": var(--color-success-default)
+	),
+	"warning": (
+		"background": var(--color-warning-default)
+	),
+	"danger": (
+		"background": var(--color-danger-default)
+	)
+);
+
+:host {
+	.f-progress-bar {
+		@include base();
+		background-color: var(--color-neutral-subtle) !important;
+		&[data-variant="curved"] {
+			border-radius: 12px;
+		}
+		@each $state, $color in $states {
+			[data-state="#{$state}"] {
+				background-color: map.get($color, "background") !important;
+			}
+		}
+	}
+}
+f-progress-bar {
+	@include base();
+	display: flex;
+	flex: 1 0 auto;
+}

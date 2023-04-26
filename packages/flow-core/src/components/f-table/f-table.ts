@@ -96,6 +96,7 @@ export class FTable extends FRoot {
 	 * @param event
 	 */
 	handleHeaderRowSelection(event: CustomEvent) {
+		event.stopPropagation();
 		if (this.selectable === "multiple") {
 			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
 			if (event.detail.value === true) {
@@ -114,6 +115,7 @@ export class FTable extends FRoot {
 	 * @param event
 	 */
 	async handleRowSelection(event: CustomEvent) {
+		event.stopPropagation();
 		this.updateRadioChecks(event.detail.element);
 		this.updateHeaderSelectionCheckboxState();
 		await this.updateComplete;

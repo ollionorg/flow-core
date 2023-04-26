@@ -68,8 +68,46 @@ Text component includes Headings, titles, body texts and links.
 					</f-trow>
 					${[1, 2, 3, 4, 5].map(rowNumber => {
 						return html`<f-trow>
-							<f-div padding="large" slot="details">
-								<f-text variant="heading" size="x-large">This is details slot</f-text>
+							<f-div padding="large" width="100%" slot="details">
+								<f-table
+									highlight-hover
+									highlight-selected
+									.selectable=${args.selectable}
+									variant="outlined"
+									.size=${args.size}
+									@selected-rows=${handleSelectedRows}
+								>
+									<f-trow slot="header">
+										${[1, 2, 3, 4, 5].map(cellNumber => {
+											return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+										})}
+										<f-tcell></f-tcell>
+									</f-trow>
+									${[1, 2, 3, 4, 5].map(rowNumber => {
+										return html`<f-trow>
+											<f-div padding="large" slot="details">
+												<f-text variant="heading" size="x-large">This is details slot</f-text>
+											</f-div>
+											${[1, 2, 3, 4, 5].map(cellNumber => {
+												return html`<f-tcell>
+													<f-text>
+														Column ${cellNumber} ${cellNumber === 2 && rowNumber === 2
+															? "sahdjhf dsfghgdf dsjhfgjshdf dfgsjhdf sdfhg"
+															: ""}
+													</f-text>
+												</f-tcell>`;
+											})}
+											<f-tcell
+												.actions=${[
+													{ icon: "i-copy", onClick: () => console.log("i-launch clicked") },
+													{ icon: "i-git-branch", onClick: () => console.log("i-launch clicked") },
+													{ icon: "i-launch", onClick: () => console.log("i-launch clicked") }
+												]}
+											>
+											</f-tcell>
+										</f-trow>`;
+									})}
+								</f-table>
 							</f-div>
 							${[1, 2, 3, 4, 5].map(cellNumber => {
 								return html`<f-tcell>

@@ -47,7 +47,7 @@ export class FTable extends FRoot {
 	highlightHover = false;
 
 	render() {
-		return html`<slot name="header"></slot
+		return html`<slot name="header" @select=${this.handleHeaderRowSelection}></slot
 			><slot @slotchange=${this.propogateProps} @select=${this.handleRowSelection}></slot>`;
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
@@ -56,16 +56,30 @@ export class FTable extends FRoot {
 		this.propogateProps();
 	}
 
-	propogateProps() {
+	async propogateProps() {
 		this.updateGridTemplateColumns();
 		this.applySelectable();
+		await this.updateComplete;
+		if (this.selectable === "multiple") {
+			this.updateHeaderSelectionCheckboxState();
+		}
+		if (this.selectable === "single") {
+			const selectedRow = this.querySelector<FTrow>(":scope > f-trow[selected]");
+			if (selectedRow) {
+				this.updateRadioChecks(selectedRow);
+			}
+		}
 	}
 
 	updateGridTemplateColumns() {
 		const firstRow = this.querySelector(":scope > f-trow");
-		this.style.gridTemplateColumns = `repeat(${firstRow?.children.length},auto)`;
+		const firstRowCells = firstRow?.querySelectorAll(":scope > f-tcell");
+		this.style.gridTemplateColumns = `repeat(${firstRowCells?.length},auto)`;
 	}
 
+	/**
+	 * apply checkbox or radio based on selection property
+	 */
 	applySelectable() {
 		const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
 		allRows.forEach(row => {
@@ -77,16 +91,85 @@ export class FTable extends FRoot {
 			}
 		});
 	}
-	handleRowSelection(event: CustomEvent) {
-		const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
+	/**
+	 * if checkbox from header got clicked
+	 * @param event
+	 */
+	handleHeaderRowSelection(event: CustomEvent) {
+		if (this.selectable === "multiple") {
+			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
+			if (event.detail.value === true) {
+				allRows.forEach(r => {
+					r.selected = true;
+				});
+			} else {
+				allRows.forEach(r => {
+					r.selected = false;
+				});
+			}
+		}
+	}
+	/**
+	 * if checkbox or radio clicked in row
+	 * @param event
+	 */
+	async handleRowSelection(event: CustomEvent) {
+		this.updateRadioChecks(event.detail.element);
+		this.updateHeaderSelectionCheckboxState();
+		await this.updateComplete;
 
-		allRows.forEach(row => {
-			if (this.selectable === "single") {
-				if (row.selected && row !== event.detail.element) {
+		const selectedRows = this.querySelectorAll<FTrow>(
+			":scope > f-trow[selected]:not([slot='header'])"
+		);
+		const toggle = new CustomEvent("selected-rows", {
+			detail: Array.from(selectedRows),
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(toggle);
+	}
+	/**
+	 * only one radio should be selected
+	 * @param element
+	 */
+	updateRadioChecks(element: HTMLElement) {
+		if (this.selectable === "single") {
+			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
+
+			allRows.forEach(row => {
+				if (row.selected && row !== element) {
 					row.selected = false;
 				}
+			});
+		}
+	}
+	/**
+	 * update header checkbox based on rest of the selection
+	 */
+	async updateHeaderSelectionCheckboxState() {
+		if (this.selectable === "multiple") {
+			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
+			const rowsWithoutHeader = Array.from(allRows).filter(
+				r => r.getAttribute("slot") !== "header"
+			);
+			const selectedRows = rowsWithoutHeader.filter(r => r.selected);
+			const headerRow = this.querySelector<FTrow>(":scope > f-trow[slot='header']");
+			if (headerRow) {
+				const firstCell = headerRow.querySelector<FTcell>(":scope > f-tcell");
+				if (firstCell && firstCell.checkbox) {
+					if (selectedRows.length === 0) {
+						headerRow.selected = false;
+						firstCell.checkbox.value = "unchecked";
+					} else if (selectedRows.length === rowsWithoutHeader.length) {
+						headerRow.selected = true;
+					} else {
+						headerRow.selected = false;
+						await headerRow.updateComplete;
+						firstCell.checkbox.value = "indeterminate";
+					}
+				}
 			}
-		});
+		}
 	}
 }
 

@@ -47,36 +47,45 @@ Text component includes Headings, titles, body texts and links.
 			selectable: "none"
 		}}
 	>
-		{args => html`
-			<f-table
-				highlight-hover
-				highlight-selected
-				.selectable=${args.selectable}
-				.variant=${args.variant}
-				.size=${args.size}
-			>
-				<f-trow slot="header">
-					${[1, 2, 3, 4, 5, 6].map(cellNumber => {
-						return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
-					})}
-				</f-trow>
-				${[1, 2, 3, 4, 5].map(rowNumber => {
-					return html`<f-trow>
+		{args => {
+			const handleSelectedRows = event => {
+				console.log("selected rows", event.detail);
+			};
+			return html`
+				<f-table
+					highlight-hover
+					highlight-selected
+					.selectable=${args.selectable}
+					.variant=${args.variant}
+					.size=${args.size}
+					@selected-rows=${handleSelectedRows}
+				>
+					<f-trow slot="header">
+						${[1, 2, 3, 4, 5, 6].map(cellNumber => {
+							return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+						})}
 						<f-div padding="large" slot="details">
 							<f-text variant="heading" size="x-large">This is details slot</f-text>
 						</f-div>
-						${[1, 2, 3, 4, 5, 6].map(cellNumber => {
-							return html`<f-tcell>
-								<f-text>
-									Column ${cellNumber} ${cellNumber === 2 && rowNumber === 2
-										? "sahdjhf dsfghgdf dsjhfgjshdf dfgsjhdf sdfhg"
-										: ""}
-								</f-text>
-							</f-tcell>`;
-						})}
-					</f-trow>`;
-				})}
-			</f-table>
-		`}
+					</f-trow>
+					${[1, 2, 3, 4, 5].map(rowNumber => {
+						return html`<f-trow>
+							<f-div padding="large" slot="details">
+								<f-text variant="heading" size="x-large">This is details slot</f-text>
+							</f-div>
+							${[1, 2, 3, 4, 5, 6].map(cellNumber => {
+								return html`<f-tcell>
+									<f-text>
+										Column ${cellNumber} ${cellNumber === 2 && rowNumber === 2
+											? "sahdjhf dsfghgdf dsjhfgjshdf dfgsjhdf sdfhg"
+											: ""}
+									</f-text>
+								</f-tcell>`;
+							})}
+						</f-trow>`;
+					})}
+				</f-table>
+			`;
+		}}
 	</Story>
 </Canvas>

@@ -58,6 +58,9 @@ export class FTrow extends FRoot {
 		this.propogateProps();
 	}
 
+	/**
+	 * propogate props related to chevron and checkbox and radio boxes
+	 */
 	propogateProps() {
 		const firstCell = this.querySelector<FTcell>(":scope > f-tcell");
 		firstCell?.setSelection(this.selected);
@@ -87,7 +90,8 @@ export class FTrow extends FRoot {
 	}
 	handleDetailsSlot() {
 		if (this.detailsSlotElement.assignedNodes().length > 0) {
-			const lastCell = this.lastElementChild as FTcell;
+			const allCells = this.querySelectorAll<FTcell>(":scope > f-tcell");
+			const lastCell = allCells.item(allCells.length - 1);
 			lastCell.expandIcon = true;
 
 			const chevron = lastCell.chevron;

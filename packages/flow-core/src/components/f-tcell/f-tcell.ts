@@ -46,7 +46,12 @@ export class FTcell extends FRoot {
 				: nothing} <slot></slot>
 
 			${this.expandIcon
-				? html`<f-div class="details-toggle" @click=${this.toggleDetails} align="middle-center">
+				? html`<f-div
+						class="details-toggle"
+						width="hug-content"
+						@click=${this.toggleDetails}
+						align="middle-center"
+				  >
 						<f-icon class="row-toggler" clickable source="i-chevron-down"></f-icon>
 				  </f-div>`
 				: nothing}

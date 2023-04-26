@@ -17,8 +17,14 @@ export class FTrow extends FRoot {
 	/**
 	 * @attribute open row details
 	 */
-	@property({ type: Boolean })
+	@property({ type: Boolean, reflect: true })
 	open?: boolean;
+
+	/**
+	 * @attribute open row details
+	 */
+	@property({ type: Boolean, reflect: true })
+	selected?: boolean;
 
 	@query(".expandable")
 	expndablePanel?: FTcell;
@@ -28,7 +34,7 @@ export class FTrow extends FRoot {
 	detailsSlotElement?: FDiv;
 
 	render() {
-		return html`<slot></slot>
+		return html`<slot @slotchange=${this.propogateProps} @toggle-row=${this.handleInput}></slot>
 			<f-div class="details-toggle" width="36px" @click=${this.toggleDetails} align="middle-center">
 				<f-icon clickable .source=${this.open ? "i-chevron-up" : "i-chevron-down"}></f-icon>
 			</f-div>
@@ -41,17 +47,34 @@ export class FTrow extends FRoot {
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
 
-		const allCells = this.querySelectorAll("f-tcell");
+		const allCells = this.querySelectorAll(":scope > f-tcell");
 		if (this.expndablePanel) {
 			this.expndablePanel.style.gridColumnEnd = `${allCells.length + 2}`;
 		}
 		if (this.toggleElement) {
 			this.toggleElement.style.gridColumnEnd = `${allCells.length + 1}`;
 		}
+
+		this.propogateProps();
+	}
+
+	propogateProps() {
+		const firstCell = this.querySelector<FTcell>(":scope > f-tcell");
+		firstCell?.setSelection(this.selected);
 	}
 
 	toggleDetails() {
 		this.open = !this.open;
+	}
+
+	handleInput(event: CustomEvent) {
+		this.selected = event.detail;
+		const toggle = new CustomEvent("select", {
+			detail: event.detail,
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(toggle);
 	}
 }
 

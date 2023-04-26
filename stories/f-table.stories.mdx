@@ -48,7 +48,13 @@ Text component includes Headings, titles, body texts and links.
 		}}
 	>
 		{args => html`
-			<f-table .selectable=${args.selectable} .variant=${args.variant} .size=${args.size}>
+			<f-table
+				highlight-hover
+				highlight-selected
+				.selectable=${args.selectable}
+				.variant=${args.variant}
+				.size=${args.size}
+			>
 				<f-trow>
 					${[1, 2, 3, 4, 5, 6].map(cellNumber => {
 						return html`<f-tcell> Header ${cellNumber} </f-tcell>`;

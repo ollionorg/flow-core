@@ -16,6 +16,55 @@ f-table {
 	flex: 1 0 fit-content;
 	overflow: auto;
 	@include base();
+	--color-background-row: transparent;
+
+	> f-trow {
+		> f-tcell {
+			background-color: var(--color-background-row);
+		}
+	}
+
+	&[highlight-hover] {
+		&[variant="stripped"] {
+			> f-trow:nth-child(odd) {
+				&:hover {
+					--color-background-row: var(--color-surface-default-hover);
+				}
+			}
+			> f-trow:nth-child(even) {
+				&:hover {
+					--color-background-row: var(--color-surface-subtle-hover);
+				}
+			}
+		}
+		&[variant="outlined"],
+		&[variant="underlined"],
+		&[variant="bordered"] {
+			> f-trow {
+				&:hover {
+					--color-background-row: var(--color-surface-default-hover);
+				}
+			}
+		}
+	}
+
+	&[highlight-selected] {
+		&[variant="stripped"] {
+			> f-trow:nth-child(odd) {
+				--color-background-row-selected: var(--color-surface-default-selected);
+			}
+			> f-trow:nth-child(even) {
+				--color-background-row-selected: var(--color-surface-subtle-selected);
+			}
+		}
+		&[variant="outlined"],
+		&[variant="underlined"],
+		&[variant="bordered"] {
+			> f-trow {
+				--color-background-row-selected: var(--color-surface-default-selected);
+			}
+		}
+	}
 
 	&[variant="stripped"] {
 		> f-trow:nth-child(odd) {

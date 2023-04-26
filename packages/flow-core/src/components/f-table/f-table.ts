@@ -28,10 +28,22 @@ export class FTable extends FRoot {
 	size?: FTableSize = "medium";
 
 	/**
-	 * @attribute size to apply on each cell
+	 * @attribute whether to display checkbox or radiobox
 	 */
 	@property({ type: String, reflect: true })
 	selectable?: FTableSelectable = "none";
+
+	/**
+	 * @attribute highlight selected row, when selectable has value "single" or "multiple"
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "highlight-selected" })
+	highlightSelected = false;
+
+	/**
+	 * @attribute highlight on hover
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "highlight-hover" })
+	highlightHover = false;
 
 	render() {
 		return html`<slot @slotchange=${this.propogateProps}></slot>`;
@@ -47,12 +59,12 @@ export class FTable extends FRoot {
 	}
 
 	updateGridTemplateColumns() {
-		const firstRow = this.querySelector("f-trow");
+		const firstRow = this.querySelector(":scope > f-trow");
 		this.style.gridTemplateColumns = `repeat(${firstRow?.children.length},auto)`;
 	}
 
 	applySelectable() {
-		const allRows = this.querySelectorAll<FTcell>("f-trow");
+		const allRows = this.querySelectorAll<FTcell>(":scope > f-trow");
 
 		allRows.forEach(row => {
 			const firstChild = Array.from(row.children).find(child => {

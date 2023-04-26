@@ -7198,7 +7198,7 @@
     },
     {
       "name": "f-table",
-      "description": "Attributes:\n\n  * `variant` {`FTableVariant | undefined`} - \n\n  * `size` {`FTableSize | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `variant` {`FTableVariant | undefined`} - \n\n  * `size` {`FTableSize | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Attributes:\n\n  * `variant` {`FTableVariant | undefined`} - \n\n  * `size` {`FTableSize | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `highlight-selected` {`boolean`} - \n\n  * `highlight-hover` {`boolean`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `variant` {`FTableVariant | undefined`} - \n\n  * `size` {`FTableSize | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `highlightSelected` {`boolean`} - \n\n  * `highlightHover` {`boolean`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "variant",
@@ -7244,6 +7244,16 @@
               "name": "multiple"
             }
           ]
+        },
+        {
+          "name": "highlight-selected",
+          "description": "`highlight-selected` {`boolean`} - \n\nProperty: highlightSelected\n\nDefault: false",
+          "valueSet": "v"
+        },
+        {
+          "name": "highlight-hover",
+          "description": "`highlight-hover` {`boolean`} - \n\nProperty: highlightHover\n\nDefault: false",
+          "valueSet": "v"
         },
         {
           "name": "tooltip",
@@ -7352,7 +7362,7 @@
     },
     {
       "name": "f-tcell",
-      "description": "Attributes:\n\n  * `title` {`string`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `title` {`string`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `toggle-row` {`CustomEvent<boolean>`} - \n\nAttributes:\n\n  * `title` {`string`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `title` {`string`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `checkbox` - \n\n  * `radio` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "title",
@@ -7362,6 +7372,10 @@
           "name": "tooltip",
           "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
           "values": []
+        },
+        {
+          "name": "ontoggle-row",
+          "description": "`toggle-row` {`CustomEvent<boolean>`} - "
         }
       ]
     },
@@ -7731,7 +7745,7 @@
     },
     {
       "name": "f-trow",
-      "description": "Attributes:\n\n  * `open` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `open` {`boolean | undefined`} - \n\n  * `expndablePanel` - \n\n  * `toggleElement` - \n\n  * `detailsSlotElement` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `select` {`CustomEvent<any>`} - \n\nAttributes:\n\n  * `open` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `open` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `expndablePanel` - \n\n  * `toggleElement` - \n\n  * `detailsSlotElement` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "open",
@@ -7739,9 +7753,18 @@
           "values": []
         },
         {
+          "name": "selected",
+          "description": "`selected` {`boolean | undefined`} - \n\nProperty: selected",
+          "values": []
+        },
+        {
           "name": "tooltip",
           "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
           "values": []
+        },
+        {
+          "name": "onselect",
+          "description": "`select` {`CustomEvent<any>`} - "
         }
       ]
     }

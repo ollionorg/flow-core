@@ -7,12 +7,27 @@ import { FTcell } from "../f-tcell/f-tcell";
 import { FRoot } from "./../../mixins/components/f-root/f-root";
 import eleStyle from "./f-trow.scss";
 
+export type FTrowState =
+	| "primary"
+	| "neutral"
+	| "success"
+	| "warning"
+	| "danger"
+	| "inherit"
+	| "default";
+
 @customElement("f-trow")
 export class FTrow extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
 	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FIcon.styles];
+
+	/**
+	 * @attribute state applies background to row
+	 */
+	@property({ type: String, reflect: true })
+	state?: FTrowState = "default";
 
 	/**
 	 * @attribute is details slot collapsed

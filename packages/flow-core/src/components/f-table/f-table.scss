@@ -9,6 +9,38 @@ $sizes: (
 		"padding": 12px
 	)
 );
+$states: (
+	"primary": (
+		"background": var(--color-primary-surface),
+		"hover": var(--color-primary-surface-hover),
+		"selected": var(--color-primary-surface-selected)
+	),
+	"danger": (
+		"background": var(--color-danger-surface),
+		"hover": var(--color-danger-surface-hover),
+		"selected": var(--color-danger-surface-selected)
+	),
+	"warning": (
+		"background": var(--color-warning-surface),
+		"hover": var(--color-warning-surface-hover),
+		"selected": var(--color-warning-surface-selected)
+	),
+	"success": (
+		"background": var(--color-success-surface),
+		"hover": var(--color-success-surface-hover),
+		"selected": var(--color-success-surface-selected)
+	),
+	"neutral": (
+		"background": var(--color-neutral-surface),
+		"hover": var(--color-neutral-surface-hover),
+		"selected": var(--color-neutral-surface-selected)
+	),
+	"inherit": (
+		"background": var(--color-inherit-background),
+		"hover": var(--color-inherit-background-hover),
+		"selected": var(--color-inherit-background-selected)
+	)
+);
 
 f-table {
 	display: grid;
@@ -46,6 +78,17 @@ f-table {
 				}
 			}
 		}
+		&[variant] {
+			> f-trow {
+				@each $state, $value in $states {
+					&[state="#{$state}"] {
+						&:hover {
+							--color-background-row: #{map.get($value, "hover")};
+						}
+					}
+				}
+			}
+		}
 	}
 
 	&[highlight-selected] {
@@ -64,8 +107,25 @@ f-table {
 				--color-background-row-selected: var(--color-surface-default-selected);
 			}
 		}
+		&[variant] {
+			> f-trow {
+				@each $state, $value in $states {
+					&[state="#{$state}"] {
+						--color-background-row-selected: #{map.get($value, "selected")};
+					}
+				}
+			}
+		}
 	}
-
+	&[variant] {
+		> f-trow {
+			@each $state, $value in $states {
+				&[state="#{$state}"] {
+					--color-background-row: #{map.get($value, "background")} !important;
+				}
+			}
+		}
+	}
 	&[variant="stripped"] {
 		> f-trow:nth-child(odd) {
 			--color-background-row: var(--color-surface-default);

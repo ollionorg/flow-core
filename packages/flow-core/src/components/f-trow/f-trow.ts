@@ -47,9 +47,11 @@ export class FTrow extends FRoot {
 				<slot name="details" @slotchange=${this.handleDetailsSlot}></slot>
 			</f-div>`;
 	}
-	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+	protected async updated(
+		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
 		super.updated(changedProperties);
-
+		await this.updateComplete;
 		const allCells = this.querySelectorAll(":scope > f-tcell");
 		if (this.expndablePanel) {
 			this.expndablePanel.style.gridColumnEnd = `${allCells.length + 1}`;

@@ -64,7 +64,14 @@ export class FTable extends FRoot {
 			this.updateHeaderSelectionCheckboxState();
 		}
 		if (this.selectable === "single") {
-			const selectedRow = this.querySelector<FTrow>(":scope > f-trow[selected]");
+			const headerRow = this.querySelector<FTrow>(":scope > f-trow[selected][slot='header']");
+			if (headerRow) {
+				headerRow.selected = false;
+			}
+
+			const selectedRow = this.querySelector<FTrow>(
+				":scope > f-trow[selected]:not([slot='header'])"
+			);
 			if (selectedRow) {
 				this.updateRadioChecks(selectedRow);
 			}
@@ -88,6 +95,7 @@ export class FTable extends FRoot {
 			}) as FTcell;
 			if (firstChild) {
 				firstChild.selectable = this.selectable;
+				setTimeout(() => firstChild.setSelection(row.selected));
 			}
 		});
 	}
@@ -95,7 +103,7 @@ export class FTable extends FRoot {
 	 * if checkbox from header got clicked
 	 * @param event
 	 */
-	handleHeaderRowSelection(event: CustomEvent) {
+	async handleHeaderRowSelection(event: CustomEvent) {
 		event.stopPropagation();
 		if (this.selectable === "multiple") {
 			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
@@ -108,6 +116,9 @@ export class FTable extends FRoot {
 					r.selected = false;
 				});
 			}
+			await this.updateComplete;
+
+			this.dispatchSelectedRowEvent();
 		}
 	}
 	/**
@@ -120,6 +131,10 @@ export class FTable extends FRoot {
 		this.updateHeaderSelectionCheckboxState();
 		await this.updateComplete;
 
+		this.dispatchSelectedRowEvent();
+	}
+
+	dispatchSelectedRowEvent() {
 		const selectedRows = this.querySelectorAll<FTrow>(
 			":scope > f-trow[selected]:not([slot='header'])"
 		);
@@ -136,7 +151,7 @@ export class FTable extends FRoot {
 	 */
 	updateRadioChecks(element: HTMLElement) {
 		if (this.selectable === "single") {
-			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
+			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow:not([slot='header'])");
 
 			allRows.forEach(row => {
 				if (row.selected && row !== element) {

@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.13.1] - 2023-04-27
+
+### Bug fixes
+
+- `z-index` not resetting in `f-popover`.
 ## [1.13.0] - 2023-04-26
 
 ### Features

@@ -168,6 +168,10 @@ export class FPopover extends FRoot {
 		document.removeEventListener("keydown", e => this.escapekeyHandle(e, this));
 		this.removeEventListener("click", this.dispatchEsc);
 		super.disconnectedCallback();
+
+		if (this.targetElement) {
+			this.targetElement.style.zIndex = "unset";
+		}
 	}
 
 	connectedCallback() {

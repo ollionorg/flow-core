@@ -51,6 +51,9 @@ Text component includes Headings, titles, body texts and links.
 			const handleSelectedRows = event => {
 				console.log("selected rows", event.detail);
 			};
+			const testOverrideClick = event => {
+				console.log("clicked", event);
+			};
 			return html`
 				<f-table
 					highlight-hover
@@ -62,12 +65,12 @@ Text component includes Headings, titles, body texts and links.
 				>
 					<f-trow slot="header">
 						${[1, 2, 3, 4, 5].map(cellNumber => {
-							return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+							return html`<f-tcell @click=${testOverrideClick}> Header ${cellNumber} </f-tcell>`;
 						})}
 						<f-tcell></f-tcell>
 					</f-trow>
 					${[1, 2, 3, 4, 5].map(rowNumber => {
-						return html`<f-trow>
+						return html`<f-trow .state=${rowNumber === 2 ? "success" : "default"}>
 							<f-div padding="large" width="100%" slot="details">
 								<f-table
 									highlight-hover

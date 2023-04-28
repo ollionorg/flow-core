@@ -47,7 +47,12 @@ export class FTable extends FRoot {
 	highlightHover = false;
 
 	render() {
-		return html`<slot name="header" @select=${this.handleHeaderRowSelection}></slot
+		return html`<slot
+				name="header"
+				@toggle-column-selected=${this.toggleColumnSelected}
+				@toggle-column-highlight=${this.toggleColumnHighlight}
+				@select=${this.handleHeaderRowSelection}
+			></slot
 			><slot @slotchange=${this.propogateProps} @select=${this.handleRowSelection}></slot>`;
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
@@ -186,6 +191,29 @@ export class FTable extends FRoot {
 					}
 				}
 			}
+		}
+	}
+
+	toggleColumnHighlight(event: CustomEvent) {
+		if (event.detail.columnIndex >= 0) {
+			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
+			allRows.forEach(row => {
+				const allCells = row.querySelectorAll<FTrow>(":scope > f-tcell");
+				allCells[event.detail.columnIndex]?.classList.toggle("highlight");
+			});
+		}
+	}
+
+	toggleColumnSelected(event: CustomEvent) {
+		if (event.detail.columnIndex >= 0) {
+			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
+			allRows.forEach(row => {
+				const allCells = row.querySelectorAll<FTrow>(":scope > f-tcell");
+				if (allCells[event.detail.columnIndex]) {
+					allCells[event.detail.columnIndex].selected =
+						!allCells[event.detail.columnIndex].selected;
+				}
+			});
 		}
 	}
 }

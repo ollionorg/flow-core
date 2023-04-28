@@ -3,6 +3,31 @@
 f-tcell {
 	display: block;
 	@include base();
+	position: relative;
+	&.highlight {
+		&::before {
+			position: absolute;
+			content: "";
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			opacity: 0.1;
+			background-color: var(--color-neutral-default);
+		}
+	}
+	&[selected] {
+		&::before {
+			position: absolute;
+			content: "";
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			opacity: 0.1;
+			background-color: var(--color-neutral-default);
+		}
+	}
 }
 
 :host {

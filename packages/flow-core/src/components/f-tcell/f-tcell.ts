@@ -1,4 +1,4 @@
-import { html, nothing, unsafeCSS } from "lit";
+import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { customElement, property, query, state } from "lit/decorators.js";
 import { FCheckbox } from "../f-checkbox/f-checkbox";
@@ -37,6 +37,9 @@ export class FTcell extends FRoot {
 	 */
 	@property({ type: Object, reflect: false })
 	actions?: FTcellActions;
+
+	@property({ type: Boolean, reflect: true })
+	selected? = false;
 
 	@state()
 	selectable?: FTableSelectable = "none";
@@ -129,6 +132,42 @@ export class FTcell extends FRoot {
 			composed: true
 		});
 		this.dispatchEvent(toggle);
+	}
+	protected async updated(
+		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
+		super.updated(changedProperties);
+
+		this.onmouseover = this.toggleColumnHighlight;
+
+		this.onmouseleave = this.toggleColumnHighlight;
+		this.onclick = this.toggleColumnSelected;
+	}
+
+	toggleColumnSelected() {
+		const row = this.closest("f-trow");
+		if (row?.getAttribute("slot") === "header") {
+			const columnIndex = Array.from(this.parentNode?.children ?? []).indexOf(this);
+			const toggle = new CustomEvent("toggle-column-selected", {
+				detail: { columnIndex },
+				bubbles: true,
+				composed: true
+			});
+			this.dispatchEvent(toggle);
+		}
+	}
+
+	toggleColumnHighlight() {
+		const row = this.closest("f-trow");
+		if (row?.getAttribute("slot") === "header") {
+			const columnIndex = Array.from(this.parentNode?.children ?? []).indexOf(this);
+			const toggle = new CustomEvent("toggle-column-highlight", {
+				detail: { columnIndex },
+				bubbles: true,
+				composed: true
+			});
+			this.dispatchEvent(toggle);
+		}
 	}
 }
 

@@ -14,8 +14,9 @@
     "build-storybook": "build-storybook",
     "prebuild-flow-core": "cd packages/custom-elements-manifest-to-types && yarn build",
     "build-flow-core": "cd packages/flow-core && yarn compile",
+    "build-flow-table": "cd packages/flow-table && yarn compile",
     "build-types-generator": "cd packages/custom-elements-manifest-to-types && yarn build",
-    "build-packages": "yarn build-types-generator && yarn build-flow-core",
+    "build-packages": "yarn build-flow-core && yarn build-flow-table",
     "release": "cp README.md packages/flow-core && yarn build-packages && yarn changeset publish",
     "prepare": "husky install",
     "test": "yarn loki test"
@@ -28,7 +29,7 @@
     "storybook"
   ],
   "devDependencies": {
-	"@cldcvr/prettier-config": "^1.0.3",
+    "@cldcvr/prettier-config": "^1.0.3",
     "@storybook/addon-actions": "^6.5.7",
     "@storybook/addon-essentials": "^6.5.7",
     "@storybook/addon-links": "^6.5.7",

@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "tags": [
+    {
+      "name": "f-table",
+      "description": "Events:\n\n  * `selected-rows` {`CustomEvent<FTrow[]>`} - \n\nAttributes:\n\n  * `variant` {`FTableVariant | undefined`} - \n\n  * `size` {`FTableSize | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `highlight-selected` {`boolean`} - \n\n  * `highlight-hover` {`boolean`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `variant` {`FTableVariant | undefined`} - \n\n  * `size` {`FTableSize | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `highlightSelected` {`boolean`} - \n\n  * `highlightHover` {`boolean`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "attributes": [
+        {
+          "name": "variant",
+          "description": "`variant` {`FTableVariant | undefined`} - \n\nProperty: variant\n\nDefault: stripped",
+          "values": [
+            {
+              "name": "stripped"
+            },
+            {
+              "name": "outlined"
+            },
+            {
+              "name": "underlined"
+            },
+            {
+              "name": "bordered"
+            }
+          ]
+        },
+        {
+          "name": "size",
+          "description": "`size` {`FTableSize | undefined`} - \n\nProperty: size\n\nDefault: medium",
+          "values": [
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            }
+          ]
+        },
+        {
+          "name": "selectable",
+          "description": "`selectable` {`FTableSelectable | undefined`} - \n\nProperty: selectable\n\nDefault: none",
+          "values": [
+            {
+              "name": "single"
+            },
+            {
+              "name": "multiple"
+            },
+            {
+              "name": "none"
+            }
+          ]
+        },
+        {
+          "name": "highlight-selected",
+          "description": "`highlight-selected` {`boolean`} - \n\nProperty: highlightSelected\n\nDefault: false",
+          "valueSet": "v"
+        },
+        {
+          "name": "highlight-hover",
+          "description": "`highlight-hover` {`boolean`} - \n\nProperty: highlightHover\n\nDefault: false",
+          "valueSet": "v"
+        },
+        {
+          "name": "tooltip",
+          "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
+          "values": []
+        },
+        {
+          "name": "onselected-rows",
+          "description": "`selected-rows` {`CustomEvent<FTrow[]>`} - "
+        }
+      ]
+    },
+    {
+      "name": "f-tcell",
+      "description": "Events:\n\n  * `toggle-row-selection` {`CustomEvent<boolean>`} - \n\n  * `toggle-row` {`CustomEvent<{}>`} - \n\n  * `toggle-column-selected` {`CustomEvent<{ columnIndex: number; }>`} - \n\n  * `toggle-column-highlight` {`CustomEvent<{ columnIndex: number; }>`} - \n\nAttributes:\n\n  * `actions` {`FTcellActions | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `actions` {`FTcellActions | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `expandIcon` {`boolean`} - \n\n  * `checkbox` - \n\n  * `radio` - \n\n  * `chevron` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "attributes": [
+        {
+          "name": "actions",
+          "description": "`actions` {`FTcellActions | undefined`} - \n\nProperty: actions",
+          "values": []
+        },
+        {
+          "name": "selected",
+          "description": "`selected` {`boolean | undefined`} - \n\nProperty: selected\n\nDefault: false",
+          "values": []
+        },
+        {
+          "name": "tooltip",
+          "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
+          "values": []
+        },
+        {
+          "name": "ontoggle-row-selection",
+          "description": "`toggle-row-selection` {`CustomEvent<boolean>`} - "
+        },
+        {
+          "name": "ontoggle-row",
+          "description": "`toggle-row` {`CustomEvent<{}>`} - "
+        },
+        {
+          "name": "ontoggle-column-selected",
+          "description": "`toggle-column-selected` {`CustomEvent<{ columnIndex: number; }>`} - "
+        },
+        {
+          "name": "ontoggle-column-highlight",
+          "description": "`toggle-column-highlight` {`CustomEvent<{ columnIndex: number; }>`} - "
+        }
+      ]
+    },
+    {
+      "name": "f-trow",
+      "description": "Events:\n\n  * `select` {`CustomEvent<{ element: this; value: any; }>`} - \n\nAttributes:\n\n  * `state` {`FTrowState | undefined`} - \n\n  * `open` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `state` {`FTrowState | undefined`} - \n\n  * `open` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `expndablePanel` - \n\n  * `detailsSlotElement` {`HTMLSlotElement`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "attributes": [
+        {
+          "name": "state",
+          "description": "`state` {`FTrowState | undefined`} - \n\nProperty: state\n\nDefault: default",
+          "values": [
+            {
+              "name": "primary"
+            },
+            {
+              "name": "neutral"
+            },
+            {
+              "name": "success"
+            },
+            {
+              "name": "warning"
+            },
+            {
+              "name": "danger"
+            },
+            {
+              "name": "inherit"
+            },
+            {
+              "name": "default"
+            }
+          ]
+        },
+        {
+          "name": "open",
+          "description": "`open` {`boolean | undefined`} - \n\nProperty: open",
+          "values": []
+        },
+        {
+          "name": "selected",
+          "description": "`selected` {`boolean | undefined`} - \n\nProperty: selected",
+          "values": []
+        },
+        {
+          "name": "tooltip",
+          "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
+          "values": []
+        },
+        {
+          "name": "onselect",
+          "description": "`select` {`CustomEvent<{ element: this; value: any; }>`} - "
+        }
+      ]
+    }
+  ],
+  "globalAttributes": [],
+  "valueSets": []
+}

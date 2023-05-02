@@ -1,13 +1,13 @@
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { customElement, property, query, state } from "lit/decorators.js";
-import { FCheckbox } from "../f-checkbox/f-checkbox";
-import { FDiv } from "../f-div/f-div";
-import { FIconButton } from "../f-icon-button/f-icon-button";
-import { FIcon } from "../f-icon/f-icon";
-import { FRadio } from "../f-radio/f-radio";
+import { FCheckbox } from "@cldcvr/flow-core/src/components/f-checkbox/f-checkbox";
+import { FDiv } from "@cldcvr/flow-core/src/components/f-div/f-div";
+import { FIconButton } from "@cldcvr/flow-core/src/components/f-icon-button/f-icon-button";
+import { FIcon } from "@cldcvr/flow-core/src/components/f-icon/f-icon";
+import { FRadio } from "@cldcvr/flow-core/src/components/f-radio/f-radio";
 import { FTableSelectable } from "../f-table/f-table";
-import { FRoot } from "./../../mixins/components/f-root/f-root";
+import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import eleStyle from "./f-tcell.scss";
 
 export type FTcellAction = {

@@ -1,10 +1,10 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 
-import { FDiv } from "../f-div/f-div";
-import { FIcon } from "../f-icon/f-icon";
+import { FDiv } from "@cldcvr/flow-core/src/components/f-div/f-div";
+import { FIcon } from "@cldcvr/flow-core/src/components/f-icon/f-icon";
 import { FTcell } from "../f-tcell/f-tcell";
-import { FRoot } from "./../../mixins/components/f-root/f-root";
+import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import eleStyle from "./f-trow.scss";
 
 export type FTrowState =

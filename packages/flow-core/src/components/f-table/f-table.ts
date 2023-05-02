@@ -209,6 +209,9 @@ export class FTable extends FRoot {
 			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
 			allRows.forEach(row => {
 				const allCells = row.querySelectorAll<FTrow>(":scope > f-tcell");
+				allCells.forEach(cell => {
+					cell.selected = false;
+				});
 				if (allCells[event.detail.columnIndex]) {
 					allCells[event.detail.columnIndex].selected =
 						!allCells[event.detail.columnIndex].selected;

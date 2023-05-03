@@ -1,11 +1,7 @@
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { customElement, property, query, state } from "lit/decorators.js";
-import { FCheckbox } from "@cldcvr/flow-core/src/components/f-checkbox/f-checkbox";
-import { FDiv } from "@cldcvr/flow-core/src/components/f-div/f-div";
-import { FIconButton } from "@cldcvr/flow-core/src/components/f-icon-button/f-icon-button";
-import { FIcon } from "@cldcvr/flow-core/src/components/f-icon/f-icon";
-import { FRadio } from "@cldcvr/flow-core/src/components/f-radio/f-radio";
+import { FCheckbox, FDiv, FIconButton, FIcon, FRadio } from "@cldcvr/flow-core";
 import { FTableSelectable } from "../f-table/f-table";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import eleStyle from "./f-tcell.scss";

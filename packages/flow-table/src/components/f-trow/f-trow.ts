@@ -1,8 +1,7 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 
-import { FDiv } from "@cldcvr/flow-core/src/components/f-div/f-div";
-import { FIcon } from "@cldcvr/flow-core/src/components/f-icon/f-icon";
+import { FDiv, FIcon } from "@cldcvr/flow-core";
 import { FTcell } from "../f-tcell/f-tcell";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import eleStyle from "./f-trow.scss";

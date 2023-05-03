@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.13.3] - 2023-05-03
+
+### Bug fixes
+
+- `f-select` : setting `clear` prop to false.
 ## [1.13.2] - 2023-05-03
 
 ### Bug fixes

@@ -1,0 +1,160 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+
+<Meta
+	title="@cldcvr:flow-table/Components/f-tcell"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
+/>
+
+# f-tcell
+
+<br />
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+Cell component for f-trow.
+
+<br />
+
+### [Playground](/story/components-f-tcell--playground)
+
+<Canvas>
+	<Story
+		name="Playground"
+		argTypes={{
+			actions: {
+				control: "object"
+			},
+			selected: {
+				control: { type: "boolean" }
+			}
+		}}
+		args={{
+			actions: [
+				{ icon: "i-copy", onClick: () => console.log("i-launch clicked") },
+				{ icon: "i-git-branch", onClick: () => console.log("i-launch clicked") },
+				{ icon: "i-launch", onClick: () => console.log("i-launch clicked") }
+			],
+			selected: false
+		}}
+	>
+		{args => {
+			return html`
+				<f-table>
+					<f-trow slot="header">
+						${[1, 2, 3].map(cellNumber => {
+							return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+						})}
+					</f-trow>
+					${[1, 2, 3].map(rowNumber => {
+						return html`<f-trow>
+							${[1, 2, 3].map(cellNumber => {
+								return html`<f-tcell .actions=${args.actions}>
+									<f-text> Column ${cellNumber} </f-text>
+								</f-tcell>`;
+							})}
+						</f-trow>`;
+					})}
+				</f-table>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<hr />
+
+<br />
+
+<Story name="Anatomy">
+	{() => html`<f-div align="middle-center" padding="large">Display anatomy here</f-div>`}
+</Story>
+
+<br />
+
+## actions
+
+<hr />
+
+It will be used to display set of icons in column.
+
+<Canvas>
+	<Story name="actions">
+		{args =>
+			html`<f-div direction="column" state="subtle" padding="small" gap="large">
+				<f-text>3rd column has actions</f-text>
+				<f-table>
+					<f-trow slot="header">
+						${[1, 2, 3].map(cellNumber => {
+							return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+						})}
+					</f-trow>
+					${[1, 2, 3].map(rowNumber => {
+						return html`<f-trow>
+							${[1, 2, 3].map(cellNumber => {
+								return html`<f-tcell
+									.actions=${cellNumber === 3
+										? [
+												{ icon: "i-copy", onClick: () => console.log("i-launch clicked") },
+												{ icon: "i-git-branch", onClick: () => console.log("i-launch clicked") },
+												{ icon: "i-launch", onClick: () => console.log("i-launch clicked") }
+										  ]
+										: []}
+								>
+									<f-text> Column ${cellNumber} </f-text>
+								</f-tcell>`;
+							})}
+						</f-trow>`;
+					})}
+				</f-table>
+			</f-div>`
+		}
+	</Story>
+</Canvas>
+
+<br />
+
+## selected
+
+<hr />
+
+It will be used to select column, set on cell inside slot="header".
+
+<Canvas>
+	<Story name="selected">
+		{args =>
+			html`<f-div direction="column" state="subtle" padding="small" gap="large"
+				>${[true].map(
+					selected => html`<f-text>2nd column is selected</f-text
+						><f-table>
+							<f-trow slot="header">
+								${[1, 2, 3].map(cellNumber => {
+									return html`<f-tcell .selected=${cellNumber === 2}>
+										Header ${cellNumber}
+									</f-tcell>`;
+								})}
+							</f-trow>
+							${[1, 2, 3].map(rowNumber => {
+								return html`<f-trow>
+									${[1, 2, 3].map(cellNumber => {
+										return html`<f-tcell .selected=${cellNumber === 2}>
+											<f-text> Column ${cellNumber} </f-text>
+										</f-tcell>`;
+									})}
+								</f-trow>`;
+							})}
+						</f-table>`
+				)}</f-div
+			>`
+		}
+	</Story>
+</Canvas>

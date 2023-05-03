@@ -141,10 +141,10 @@ export class FTcell extends FRoot {
 		this.onmouseover = this.toggleColumnHighlight;
 
 		this.onmouseleave = this.toggleColumnHighlight;
-		this.onclick = this.toggleColumnSelected;
+		this.onclick = this.toggleColumnSelection;
 	}
 
-	toggleColumnSelected() {
+	toggleColumnSelection() {
 		const row = this.closest("f-trow");
 		if (row?.getAttribute("slot") === "header") {
 			const columnIndex = Array.from(this.parentNode?.children ?? []).indexOf(this);

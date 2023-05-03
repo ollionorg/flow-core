@@ -51,7 +51,7 @@ export class FTrow extends FRoot {
 		return html`<slot
 				@slotchange=${this.propogateProps}
 				@toggle-row=${this.toggleDetails}
-				@toggle-row-selection=${this.handleInput}
+				@update-row-selection=${this.handleInput}
 			></slot>
 
 			<f-div
@@ -75,7 +75,7 @@ export class FTrow extends FRoot {
 		this.propogateProps();
 
 		if (changedProperties.has("selected")) {
-			const toggle = new CustomEvent("select", {
+			const toggle = new CustomEvent("selected-row", {
 				detail: { element: this, value: this.selected },
 				bubbles: true,
 				composed: true
@@ -107,7 +107,7 @@ export class FTrow extends FRoot {
 
 	handleInput(event: CustomEvent) {
 		this.selected = event.detail;
-		const toggle = new CustomEvent("select", {
+		const toggle = new CustomEvent("selected-row", {
 			detail: { element: this, value: event.detail },
 			bubbles: true,
 			composed: true

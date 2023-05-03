@@ -49,11 +49,11 @@ export class FTable extends FRoot {
 	render() {
 		return html`<slot
 				name="header"
-				@toggle-column-selected=${this.toggleColumnSelected}
-				@toggle-column-highlight=${this.toggleColumnHighlight}
-				@select=${this.handleHeaderRowSelection}
+				@selected-column=${this.toggleColumnSelected}
+				@highlight-column=${this.toggleColumnHighlight}
+				@selected-row=${this.handleHeaderRowSelection}
 			></slot>
-			<slot @slotchange=${this.propogateProps} @select=${this.handleRowSelection}></slot>`;
+			<slot @slotchange=${this.propogateProps} @selected-row=${this.handleRowSelection}></slot>`;
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);

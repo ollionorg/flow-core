@@ -118,7 +118,7 @@ export class FTcell extends FRoot {
 	}
 
 	handleSelection(event: CustomEvent) {
-		const toggle = new CustomEvent("toggle-row-selection", {
+		const toggle = new CustomEvent("update-row-selection", {
 			detail: event.detail.value === "checked" || event.detail.value === "selected",
 			bubbles: true,
 			composed: true
@@ -148,7 +148,7 @@ export class FTcell extends FRoot {
 		const row = this.closest("f-trow");
 		if (row?.getAttribute("slot") === "header") {
 			const columnIndex = Array.from(this.parentNode?.children ?? []).indexOf(this);
-			const toggle = new CustomEvent("toggle-column-selected", {
+			const toggle = new CustomEvent("selected-column", {
 				detail: { columnIndex },
 				bubbles: true,
 				composed: true
@@ -161,7 +161,7 @@ export class FTcell extends FRoot {
 		const row = this.closest("f-trow");
 		if (row?.getAttribute("slot") === "header") {
 			const columnIndex = Array.from(this.parentNode?.children ?? []).indexOf(this);
-			const toggle = new CustomEvent("toggle-column-highlight", {
+			const toggle = new CustomEvent("highlight-column", {
 				detail: { columnIndex },
 				bubbles: true,
 				composed: true

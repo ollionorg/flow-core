@@ -7,10 +7,10 @@ const reactTypesFileName = `${__dirname}/dist/types/react.ts`;
 
 const { transformSchema } = require("./../custom-elements-manifest-to-types");
 
-const vue2Types = transformSchema(customElementsJSON, "vue2", "./src/index");
-const vue3Types = transformSchema(customElementsJSON, "vue3", "./src/index");
+const vue2Types = transformSchema(customElementsJSON, "vue2", "./index");
+const vue3Types = transformSchema(customElementsJSON, "vue3", "./index");
 
-const reactTypes = transformSchema(customElementsJSON, "react", "./src/index");
+const reactTypes = transformSchema(customElementsJSON, "react", "./index");
 
 try {
 	fs.writeFileSync(vue2TypesFileName, vue2Types);

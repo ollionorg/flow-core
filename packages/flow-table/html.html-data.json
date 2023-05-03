@@ -73,7 +73,7 @@
     },
     {
       "name": "f-tcell",
-      "description": "Events:\n\n  * `toggle-row-selection` {`CustomEvent<boolean>`} - \n\n  * `toggle-row` {`CustomEvent<{}>`} - \n\n  * `toggle-column-selected` {`CustomEvent<{ columnIndex: number; }>`} - \n\n  * `toggle-column-highlight` {`CustomEvent<{ columnIndex: number; }>`} - \n\nAttributes:\n\n  * `actions` {`FTcellActions | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `actions` {`FTcellActions | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `expandIcon` {`boolean`} - \n\n  * `checkbox` - \n\n  * `radio` - \n\n  * `chevron` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `update-row-selection` {`CustomEvent<boolean>`} - \n\n  * `toggle-row` {`CustomEvent<{}>`} - \n\n  * `selected-column` {`CustomEvent<{ columnIndex: number; }>`} - \n\n  * `highlight-column` {`CustomEvent<{ columnIndex: number; }>`} - \n\nAttributes:\n\n  * `actions` {`FTcellActions | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `actions` {`FTcellActions | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `expandIcon` {`boolean`} - \n\n  * `checkbox` - \n\n  * `radio` - \n\n  * `chevron` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "actions",
@@ -91,26 +91,26 @@
           "values": []
         },
         {
-          "name": "ontoggle-row-selection",
-          "description": "`toggle-row-selection` {`CustomEvent<boolean>`} - "
+          "name": "onupdate-row-selection",
+          "description": "`update-row-selection` {`CustomEvent<boolean>`} - "
         },
         {
           "name": "ontoggle-row",
           "description": "`toggle-row` {`CustomEvent<{}>`} - "
         },
         {
-          "name": "ontoggle-column-selected",
-          "description": "`toggle-column-selected` {`CustomEvent<{ columnIndex: number; }>`} - "
+          "name": "onselected-column",
+          "description": "`selected-column` {`CustomEvent<{ columnIndex: number; }>`} - "
         },
         {
-          "name": "ontoggle-column-highlight",
-          "description": "`toggle-column-highlight` {`CustomEvent<{ columnIndex: number; }>`} - "
+          "name": "onhighlight-column",
+          "description": "`highlight-column` {`CustomEvent<{ columnIndex: number; }>`} - "
         }
       ]
     },
     {
       "name": "f-trow",
-      "description": "Events:\n\n  * `select` {`CustomEvent<{ element: this; value: any; }>`} - \n\nAttributes:\n\n  * `state` {`FTrowState | undefined`} - \n\n  * `open` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `state` {`FTrowState | undefined`} - \n\n  * `open` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `expndablePanel` - \n\n  * `detailsSlotElement` {`HTMLSlotElement`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `selected-row` {`CustomEvent<{ element: this; value: boolean | undefined; }>`} - \n\nAttributes:\n\n  * `state` {`FTrowState | undefined`} - \n\n  * `open` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `state` {`FTrowState | undefined`} - \n\n  * `open` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `expndablePanel` - \n\n  * `detailsSlotElement` {`HTMLSlotElement`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "state",
@@ -155,8 +155,8 @@
           "values": []
         },
         {
-          "name": "onselect",
-          "description": "`select` {`CustomEvent<{ element: this; value: any; }>`} - "
+          "name": "onselected-row",
+          "description": "`selected-row` {`CustomEvent<{ element: this; value: boolean | undefined; }>`} - "
         }
       ]
     }

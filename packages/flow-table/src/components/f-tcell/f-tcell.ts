@@ -1,9 +1,8 @@
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { customElement, property, query, state } from "lit/decorators.js";
-import { FCheckbox, FDiv, FIconButton, FIcon, FRadio } from "@cldcvr/flow-core/src";
+import { FCheckbox, FDiv, FIconButton, FIcon, FRadio, FRoot } from "@cldcvr/flow-core/src/index";
 import { FTableSelectable } from "../f-table/f-table";
-import { FRoot } from "@cldcvr/flow-core/src";
 import eleStyle from "./f-tcell.scss";
 
 export type FTcellAction = {

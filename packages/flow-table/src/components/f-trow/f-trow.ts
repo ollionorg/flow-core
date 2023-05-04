@@ -1,9 +1,8 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 
-import { FDiv, FIcon } from "@cldcvr/flow-core/src";
+import { FDiv, FIcon, FRoot } from "@cldcvr/flow-core/src/index";
 import { FTcell } from "../f-tcell/f-tcell";
-import { FRoot } from "@cldcvr/flow-core/src";
 import eleStyle from "./f-trow.scss";
 
 export type FTrowState =

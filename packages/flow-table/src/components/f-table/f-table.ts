@@ -2,7 +2,7 @@ import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { FTcell } from "../f-tcell/f-tcell";
 import { FTrow } from "../f-trow/f-trow";
-import { FRoot } from "@cldcvr/flow-core/src";
+import { FRoot } from "@cldcvr/flow-core/src/index";
 import eleStyle from "./f-table.scss";
 
 export type FTableVariant = "stripped" | "outlined" | "underlined" | "bordered";

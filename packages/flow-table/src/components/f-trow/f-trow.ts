@@ -3,7 +3,7 @@ import { customElement, property, query } from "lit/decorators.js";
 
 import { FDiv, FIcon } from "@cldcvr/flow-core/src";
 import { FTcell } from "../f-tcell/f-tcell";
-import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
+import { FRoot } from "@cldcvr/flow-core/src";
 import eleStyle from "./f-trow.scss";
 
 export type FTrowState =

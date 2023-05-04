@@ -3,7 +3,7 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 import { customElement, property, query, state } from "lit/decorators.js";
 import { FCheckbox, FDiv, FIconButton, FIcon, FRadio } from "@cldcvr/flow-core/src";
 import { FTableSelectable } from "../f-table/f-table";
-import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
+import { FRoot } from "@cldcvr/flow-core/src";
 import eleStyle from "./f-tcell.scss";
 
 export type FTcellAction = {

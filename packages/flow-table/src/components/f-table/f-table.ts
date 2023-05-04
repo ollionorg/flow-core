@@ -177,6 +177,7 @@ export class FTable extends FRoot {
 			const selectedRows = rowsWithoutHeader.filter(r => r.selected);
 			const headerRow = this.querySelector<FTrow>(":scope > f-trow[slot='header']");
 			if (headerRow) {
+				await headerRow.updateComplete;
 				const firstCell = headerRow.querySelector<FTcell>(":scope > f-tcell");
 				if (firstCell && firstCell.checkbox) {
 					if (selectedRows.length === 0) {
@@ -186,7 +187,6 @@ export class FTable extends FRoot {
 						headerRow.selected = true;
 					} else {
 						headerRow.selected = false;
-						await headerRow.updateComplete;
 						firstCell.checkbox.value = "indeterminate";
 					}
 				}
@@ -209,13 +209,15 @@ export class FTable extends FRoot {
 			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
 			allRows.forEach(row => {
 				const allCells = row.querySelectorAll<FTrow>(":scope > f-tcell");
-				allCells.forEach(cell => {
-					cell.selected = false;
-				});
 				if (allCells[event.detail.columnIndex]) {
 					allCells[event.detail.columnIndex].selected =
 						!allCells[event.detail.columnIndex].selected;
 				}
+				allCells.forEach(cell => {
+					if (cell !== allCells[event.detail.columnIndex]) {
+						cell.selected = false;
+					}
+				});
 			});
 		}
 	}

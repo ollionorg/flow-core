@@ -26,7 +26,8 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			"~": path.resolve(__dirname, "./src/index.ts")
+			"~": path.resolve(__dirname, "./src/index.ts"),
+			"@cldcvr/flow-core/src": "@cldcvr/flow-core"
 		}
 	},
 	plugins: [litcss()]

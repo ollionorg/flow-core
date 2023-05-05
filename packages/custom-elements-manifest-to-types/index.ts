@@ -1,6 +1,7 @@
-import { Declaration, Package, PropertyLike } from "custom-elements-manifest/schema";
+import { Declaration, Package, PropertyLike, MixinDeclaration } from "custom-elements-manifest/schema";
 import { vaidateOptions } from "./options";
 import prettier from "prettier";
+const camelToSnakeCase = (str: string) => str.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
 
 const options = vaidateOptions({});
 export function transformSchema(schema: Package, framework: "vue2" | "react" | "vue3", modulePath?: string) {
@@ -83,7 +84,7 @@ function transformSchemaVue3(schema: Package, modulePath?: string) {
 
 	schema.modules.forEach((module) => {
 		module.declarations?.forEach((declaration) => {
-			const component = getComponentCodeFromDeclarationVue3(declaration);
+			const component = getComponentCodeFromDeclarationVue3(declaration as MixinDeclaration);
 
 			if (component) {
 				components.push(component);
@@ -110,12 +111,18 @@ function transformSchemaVue3(schema: Package, modulePath?: string) {
 	return output;
 }
 function getComponentCodeFromDeclarationReact(declaration: Declaration) {
-	if (!("customElement" in declaration) || !declaration.customElement) {
+	declaration = declaration as MixinDeclaration;
+	if (
+		!(
+			declaration.superclass &&
+			(declaration.superclass.name === "FRoot" || declaration.superclass.name === "LitElement")
+		)
+	) {
 		return null;
 	}
 
 	let componentDeclaration = `
-        ["${declaration.tagName}"]:{
+        ["${camelToSnakeCase(declaration.name).substring(1)}"]:{
     `;
 	let requiredAttributes: string[] = [];
 	if (declaration.members) {
@@ -142,13 +149,18 @@ function getComponentCodeFromDeclarationReact(declaration: Declaration) {
 
 	return componentDeclaration;
 }
-function getComponentCodeFromDeclarationVue3(declaration: Declaration) {
-	if (!("customElement" in declaration) || !declaration.customElement) {
+function getComponentCodeFromDeclarationVue3(declaration: MixinDeclaration) {
+	if (
+		!(
+			declaration.superclass &&
+			(declaration.superclass.name === "FRoot" || declaration.superclass.name === "LitElement")
+		)
+	) {
 		return null;
 	}
 
 	let componentDeclaration = `
-        ["${declaration.tagName}"]: DefineComponent<
+        ["${camelToSnakeCase(declaration.name).substring(1)}"]: DefineComponent<
             {
 				
     `;
@@ -177,12 +189,18 @@ function getComponentCodeFromDeclarationVue3(declaration: Declaration) {
 	return componentDeclaration;
 }
 function getComponentCodeFromDeclarationVue2(declaration: Declaration) {
-	if (!("customElement" in declaration) || !declaration.customElement) {
+	declaration = declaration as MixinDeclaration;
+	if (
+		!(
+			declaration.superclass &&
+			(declaration.superclass.name === "FRoot" || declaration.superclass.name === "LitElement")
+		)
+	) {
 		return null;
 	}
 
 	let componentDeclaration = `
-        "${declaration.tagName}": VueConstructor<
+        "${camelToSnakeCase(declaration.name).substring(1)}": VueConstructor<
             {
 				$props: {
     `;
@@ -231,7 +249,13 @@ function getComponentPropTypeImports(schema: Package, modulePath?: string): stri
 		const moduleName = modulePath || "./src"; //module.path.slice(0, -3);
 
 		module.declarations?.forEach((declaration) => {
-			if (!("customElement" in declaration) || !declaration.customElement) {
+			declaration = declaration as MixinDeclaration;
+			if (
+				!(
+					declaration.superclass &&
+					(declaration.superclass.name === "FRoot" || declaration.superclass.name === "LitElement")
+				)
+			) {
 				return null;
 			}
 

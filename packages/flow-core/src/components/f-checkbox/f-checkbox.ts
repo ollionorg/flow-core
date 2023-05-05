@@ -1,18 +1,19 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-checkbox.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import checkedMark from "../../mixins/svg/checked-mark";
 import indeterminateMark from "../../mixins/svg/indeterminate-mark";
 import { FDiv } from "../f-div/f-div";
+import { flowElement } from "./../../utils";
 
 export type FCheckboxState = "primary" | "default" | "success" | "warning" | "danger";
 export type FCheckboxCustomEvent = {
 	value: string;
 };
 
-@customElement("f-checkbox")
+@flowElement("f-checkbox")
 export class FCheckbox extends FRoot {
 	/**
 	 * css loaded from scss file

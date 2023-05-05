@@ -1,9 +1,10 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import eleStyle from "./f-text-area.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
+import { flowElement } from "./../../utils";
 
 export type FTextAreaState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -11,7 +12,7 @@ export type FTextAreaCustomEvent = {
 	value: string;
 };
 
-@customElement("f-text-area")
+@flowElement("f-text-area")
 export class FTextArea extends FRoot {
 	/**
 	 * css loaded from scss file

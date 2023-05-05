@@ -1,5 +1,5 @@
 import { html, nothing, unsafeCSS } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-suggest.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
@@ -10,6 +10,7 @@ import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { classMap } from "lit-html/directives/class-map.js";
 import _ from "lodash";
+import { flowElement } from "./../../utils";
 
 export type FSuggestState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -23,7 +24,7 @@ export type FSuggestSuggestionsCategory = Record<string, string[]>;
 
 export type FSuggestSuggestions = string[] | FSuggestSuggestionsCategory;
 
-@customElement("f-suggest")
+@flowElement("f-suggest")
 export class FSuggest extends FRoot {
 	/**
 	 * css loaded from scss file

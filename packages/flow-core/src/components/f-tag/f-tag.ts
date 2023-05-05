@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-tag.scss";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
@@ -11,6 +11,7 @@ import getCustomFillColor from "../../utils/get-custom-fill-color";
 import LightenDarkenColor from "../../utils/get-lighten-darken-color";
 import { FIcon } from "../f-icon/f-icon";
 import { FCounter } from "../f-counter/f-counter";
+import { flowElement } from "./../../utils";
 
 export type FTagStateProp =
 	| "primary"
@@ -24,7 +25,7 @@ export type FTagStateProp =
 /**
  * @summary Tags allow users to categorize the content. They can be used to add metadata to an element such as category, or property or show a status.
  */
-@customElement("f-tag")
+@flowElement("f-tag")
 export class FTag extends FRoot {
 	/**
 	 * css loaded from scss file

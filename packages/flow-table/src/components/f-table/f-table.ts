@@ -1,15 +1,15 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { FTcell } from "../f-tcell/f-tcell";
 import { FTrow } from "../f-trow/f-trow";
-import { FRoot } from "@cldcvr/flow-core/src/index";
+import { FRoot, flowElement } from "@cldcvr/flow-core";
 import eleStyle from "./f-table.scss";
 
 export type FTableVariant = "stripped" | "outlined" | "underlined" | "bordered";
 export type FTableSize = "medium" | "small";
 export type FTableSelectable = "single" | "multiple" | "none";
 
-@customElement("f-table")
+@flowElement("f-table")
 export class FTable extends FRoot {
 	/**
 	 * css loaded from scss file

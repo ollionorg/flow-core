@@ -1,7 +1,7 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 
-import { FDiv, FIcon, FRoot } from "@cldcvr/flow-core/src/index";
+import { FDiv, FIcon, FRoot, flowElement } from "@cldcvr/flow-core";
 import { FTcell } from "../f-tcell/f-tcell";
 import eleStyle from "./f-trow.scss";
 
@@ -14,7 +14,7 @@ export type FTrowState =
 	| "inherit"
 	| "default";
 
-@customElement("f-trow")
+@flowElement("f-trow")
 export class FTrow extends FRoot {
 	/**
 	 * css loaded from scss file

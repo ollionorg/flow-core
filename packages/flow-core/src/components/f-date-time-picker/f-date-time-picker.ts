@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-date-time-picker.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import flatpickr from "flatpickr";
@@ -8,6 +8,7 @@ import { DateLimit, DateOption } from "flatpickr/dist/types/options";
 import { FInput } from "../f-input/f-input";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
+import { flowElement } from "./../../utils";
 
 export type FDateTimePickerState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -17,7 +18,7 @@ export type DateDisableType = DateLimit<DateOption>[];
 
 export type FDateOption = DateOption;
 
-@customElement("f-date-time-picker")
+@flowElement("f-date-time-picker")
 export class FDateTimePicker extends FRoot {
 	/**
 	 * css loaded from scss file

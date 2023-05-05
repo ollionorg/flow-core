@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
+import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-file-upload.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
@@ -10,6 +10,7 @@ import { FIcon } from "../f-icon/f-icon";
 import { getFormattedBytes } from "../../utils/index";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
+import { flowElement } from "./../../utils";
 
 export type FFileUploadState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -24,7 +25,7 @@ export type FFileUploadSizeProp =
 	| `${number} GB`
 	| `${number} TB`;
 
-@customElement("f-file-upload")
+@flowElement("f-file-upload")
 export class FFileUpload extends FRoot {
 	/**
 	 * css loaded from scss file

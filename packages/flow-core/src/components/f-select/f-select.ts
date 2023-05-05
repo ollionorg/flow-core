@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { PropertyValues, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import eleStyle from "./f-select.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
@@ -20,6 +20,7 @@ import {
 	handleViewMoreTags,
 	handleInput
 } from "./handlers";
+import { flowElement } from "./../../utils";
 
 export type FSelectState = "primary" | "default" | "success" | "warning" | "danger";
 export type FSelectHeightProp = number;
@@ -43,7 +44,7 @@ export type FSelectCustomEvent = {
 	searchValue?: string;
 };
 
-@customElement("f-select")
+@flowElement("f-select")
 export class FSelect extends FRoot {
 	/**
 	 * css loaded from scss file

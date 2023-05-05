@@ -1,15 +1,16 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-radio.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
+import { flowElement } from "./../../utils";
 
 export type FRadioState = "primary" | "default" | "success" | "warning" | "danger";
 export type FRadioCustomEvent = {
 	value: string;
 };
 
-@customElement("f-radio")
+@flowElement("f-radio")
 export class FRadio extends FRoot {
 	/**
 	 * css loaded from scss file

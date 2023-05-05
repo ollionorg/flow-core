@@ -1,11 +1,12 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import eleStyle from "./f-tab-node.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { FTabNodeWidthProp } from "../f-tab/f-tab";
+import { flowElement } from "./../../utils";
 
-@customElement("f-tab-node")
+@flowElement("f-tab-node")
 export class FTabNode extends FRoot {
 	/**
 	 * css loaded from scss file

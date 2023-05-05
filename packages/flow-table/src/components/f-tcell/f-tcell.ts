@@ -1,7 +1,7 @@
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { ifDefined } from "lit-html/directives/if-defined.js";
-import { customElement, property, query, state } from "lit/decorators.js";
-import { FCheckbox, FDiv, FIconButton, FIcon, FRadio, FRoot } from "@cldcvr/flow-core/src/index";
+import { property, query, state } from "lit/decorators.js";
+import { FCheckbox, FDiv, FIconButton, FIcon, FRadio, FRoot, flowElement } from "@cldcvr/flow-core";
 import { FTableSelectable } from "../f-table/f-table";
 import eleStyle from "./f-tcell.scss";
 
@@ -13,7 +13,7 @@ export type FTcellAction = {
 };
 
 export type FTcellActions = FTcellAction[];
-@customElement("f-tcell")
+@flowElement("f-tcell")
 export class FTcell extends FRoot {
 	/**
 	 * css loaded from scss file

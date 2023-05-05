@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { html, LitElement, unsafeCSS } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-popover.scss";
 import {
@@ -12,6 +12,7 @@ import {
 	autoUpdate,
 	Placement
 } from "@floating-ui/dom";
+import { flowElement } from "./../../utils";
 
 // export type FPopoverVariant = "relative" | "absolute";
 export type FPopoverPlacement =
@@ -35,7 +36,7 @@ export type FPopOverOffset = {
 	crossAxis?: number;
 	alignmentAxis?: number;
 };
-@customElement("f-popover")
+@flowElement("f-popover")
 export class FPopover extends FRoot {
 	/**
 	 * css loaded from scss file

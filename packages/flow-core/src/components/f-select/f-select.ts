@@ -229,7 +229,7 @@ export class FSelect extends FRoot {
 	 * @attribute  a ‘close’ icon button appear on right of the select to clear the input value(s).
 	 */
 	@property({ reflect: true, type: Boolean })
-	clear?: boolean = true;
+	clear?: boolean = false;
 
 	/**
 	 * @attribute options with checkboxes.

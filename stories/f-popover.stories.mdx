@@ -4,6 +4,7 @@ import fPopoverAnatomy from "./svg/i-fpopover-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useState } from "@storybook/client-api";
 import { ConfigUtil } from "@cldcvr/flow-core/src/modules/config";
+import { createRef, ref } from "lit/directives/ref.js";
 
 <Meta
 	title="Components/f-popover"
@@ -597,10 +598,16 @@ popover and if the max height is attained, the body contents will scroll.
 		}}
 	>
 		{args => {
+			const innerPopover = createRef();
+			const handleInnerClose = () => {
+				if (innerPopover.value) {
+					innerPopover.value.open = !innerPopover.value.open;
+				}
+			};
 			return html`
 				<f-popover ?open=${true} ?overlay=${true} size="medium">
 					<f-div id="mainPopoverContent" state="tertiary" height="500px" padding="medium">
-						<f-text> Main Popover </f-text>
+						<f-text @click=${handleInnerClose}> Main Popover </f-text>
 					</f-div>
 					<f-popover
 						?open=${true}
@@ -608,9 +615,11 @@ popover and if the max height is attained, the body contents will scroll.
 						target="#mainPopoverContent"
 						placement="left-start"
 						size="small"
+						${ref(innerPopover)}
 					>
-						<f-div state="tertiary" height="200px" padding="medium">
+						<f-div state="tertiary" gap="auto" height="200px" padding="medium">
 							<f-text> Chota Popover </f-text>
+							<f-icon source="i-close" @click=${handleInnerClose}></f-icon>
 						</f-div>
 					</f-popover>
 				</f-popover>

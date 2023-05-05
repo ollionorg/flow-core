@@ -42,9 +42,11 @@ export function handleOptionSelection(this: FSelect, option: FSelectSingleOption
 
 	if (Array.isArray(this.options)) {
 		if (this.type === "single") {
-			!this.isSelected(option)
-				? ((this.selectedOptions as FSelectArrayOfObjects) = [option as FSelectOptionObject])
-				: (this.selectedOptions as FSelectArrayOfObjects).splice(this.getIndex(option), 1);
+			if (!this.isSelected(option)) {
+				(this.selectedOptions as FSelectArrayOfObjects) = [option as FSelectOptionObject];
+			} else if (this.clear) {
+				(this.selectedOptions as FSelectArrayOfObjects).splice(this.getIndex(option), 1);
+			}
 			this.handleDropDownClose(e);
 		} else {
 			!this.isSelected(option)

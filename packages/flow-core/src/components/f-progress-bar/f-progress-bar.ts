@@ -1,11 +1,12 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-progress-bar.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
+import { flowElement } from "../../utils";
 
 export type FProgressBarState =
 	| "primary"
@@ -19,7 +20,7 @@ export type FProgressBarWidthProp = "fill-container" | `${number}px`;
 
 export type FProgressBarValueProp = `${number}%`;
 
-@customElement("f-progress-bar")
+@flowElement("f-progress-bar")
 export class FProgressBar extends FRoot {
 	/**
 	 * css loaded from scss file

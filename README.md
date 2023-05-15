@@ -1,4 +1,6 @@
-# Flow/flow-core
+# Flow/flow-core ![npm](https://badgen.net/npm/v/@cldcvr/flow-core) ![license](https://badgen.net/npm/license/@cldcvr/flow-core) ![types](https://badgen.net/npm/types/@cldcvr/flow-core) ![stars](https://badgen.net/github/stars/cldcvr/flow-core) ![open-issues](https://badgen.net/github/open-issues/cldcvr/flow-core) ![downloads](https://badgen.net//npm/dw/@cldcvr/flow-core) ![build](https://github.com/cldcvr/flow-core/actions/workflows/build.yml/badge.svg) ![release](https://github.com/cldcvr/flow-core/actions/workflows/release.yml/badge.svg) ![CodeQL](https://github.com/cldcvr/flow-core/workflows/CodeQL/badge.svg) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/@cldcvr/flow-core?style=flat-square) ![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/cldcvr/flow-core/main) ![npms.io (quality)](https://img.shields.io/npms-io/quality-score/@cldcvr/flow-core)
+
+
 
 Flow-core is the base library required by any flow dependecies. It consists mostly of building blocks such design + system tokens, atoms, molecules, base themes, etc.
 

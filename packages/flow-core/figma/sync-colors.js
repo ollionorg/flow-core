@@ -41,11 +41,11 @@ function generateTokenScss(colorTokens) {
 	[data-theme="${theme}"]{ `;
 
 			for (let [variable, value] of tokenEntries) {
-				variable = `color-${variable}`;
-				scss += `$${variable} : ${value} ;\n`;
-				scss += `--${variable} : #{$${variable}} ;\n`;
-				scss += `--${variable}-hover : #{getHover($${variable})};\n`;
-				scss += `--${variable}-selected : #{getSelected($${variable})};\n`;
+				const cssVariable = `color-${variable}`;
+				scss += `$${cssVariable} : ${value} ;\n`;
+				scss += `--${cssVariable} : #{$${cssVariable}} ;\n`;
+				scss += `--${cssVariable}-hover : #{getHover($${cssVariable})};\n`;
+				scss += `--${cssVariable}-selected : #{getSelected($${cssVariable})};\n`;
 			}
 			scss += `
 };\n`;

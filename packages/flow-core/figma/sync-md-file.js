@@ -25,7 +25,7 @@ function generateBaseColorMdx(colorTokens) {
 	iconColors = compareAndFindTokens(colorTokens, "icon", "base-color");
 	borderColors = compareAndFindTokens(colorTokens, "border", "base-color");
 
-	mdxFile = `## Base colors
+	let mdxFile = `## Base colors
 
 <f-divider></f-divider>
 

@@ -10,8 +10,6 @@ import { html } from "lit";
 import { classMap } from "lit-html/directives/class-map.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
-import getComputedHTML from "../../utils/get-computed-html";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 export default function render(this: FSelect) {
 	this.validateProperties();
@@ -393,13 +391,7 @@ export default function render(this: FSelect) {
 															></f-icon
 													  ></f-div>`
 													: ""}
-												${this.optionTemplate
-													? html`
-															${unsafeHTML(
-																getComputedHTML(html`${eval("`" + this.optionTemplate + "`")}`)
-															)}
-													  `
-													: ""}
+												${this.optionTemplate ? this.optionTemplate(option) : ""}
 												${!this.optionTemplate
 													? html` <f-div
 															padding="none"
@@ -507,13 +499,7 @@ export default function render(this: FSelect) {
 												></f-icon
 										  ></f-div>`
 										: ""}
-									${this.optionTemplate
-										? html`
-												${unsafeHTML(
-													getComputedHTML(html`${eval("`" + this.optionTemplate + "`")}`)
-												)}
-										  `
-										: ""}
+									${this.optionTemplate ? this.optionTemplate(option) : ""}
 									${!this.optionTemplate
 										? html` <f-div
 												padding="none"

@@ -493,45 +493,9 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/utils/get-theme-style.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "getThemeStyle",
-          "parameters": [
-            {
-              "name": "selector",
-              "type": {
-                "text": "string"
-              }
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "getThemeStyle",
-            "module": "src/utils/get-theme-style.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/utils/index.ts",
       "declarations": [],
       "exports": [
-        {
-          "kind": "js",
-          "name": "getThemeStyle",
-          "declaration": {
-            "name": "getThemeStyle",
-            "module": "src/utils/index.ts"
-          }
-        },
         {
           "kind": "js",
           "name": "isValidHttpUrl",
@@ -4193,6 +4157,117 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-form/f-form.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FForm",
+          "members": [
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "separator",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "separator",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "gap"
+            },
+            {
+              "name": "separator",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "separator"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "summary": "Text component includes Headings, titles, body texts and links.",
+          "tagName": "f-form",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FForm",
+          "declaration": {
+            "name": "FForm",
+            "module": "src/components/f-form/f-form.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-form",
+          "declaration": {
+            "name": "FForm",
+            "module": "src/components/f-form/f-form.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-form-group/f-form-group.ts",
       "declarations": [
         {
@@ -4408,117 +4483,6 @@
           "declaration": {
             "name": "FFormGroup",
             "module": "src/components/f-form-group/f-form-group.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form/f-form.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FForm",
-          "members": [
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "gap",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "separator",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "separator",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "gap",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "gap"
-            },
-            {
-              "name": "separator",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "separator"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "summary": "Text component includes Headings, titles, body texts and links.",
-          "tagName": "f-form",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FForm",
-          "declaration": {
-            "name": "FForm",
-            "module": "src/components/f-form/f-form.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-form",
-          "declaration": {
-            "name": "FForm",
-            "module": "src/components/f-form/f-form.ts"
           }
         }
       ]
@@ -7084,7 +7048,7 @@
               "kind": "field",
               "name": "optionTemplate",
               "type": {
-                "text": "string | undefined"
+                "text": "FSelectOptionTemplate | undefined"
               },
               "attribute": "option-template",
               "reflects": true
@@ -7551,7 +7515,7 @@
             {
               "name": "option-template",
               "type": {
-                "text": "string | undefined"
+                "text": "FSelectOptionTemplate | undefined"
               },
               "fieldName": "optionTemplate"
             },
@@ -9189,80 +9153,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-template/f-template.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTemplate",
-          "members": [
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-template",
-          "customElement": true,
-          "attributes": [
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTemplate",
-          "declaration": {
-            "name": "FTemplate",
-            "module": "src/components/f-template/f-template.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-template",
-          "declaration": {
-            "name": "FTemplate",
-            "module": "src/components/f-template/f-template.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-tag/f-tag.ts",
       "declarations": [
         {
@@ -9543,6 +9433,80 @@
           "declaration": {
             "name": "FTag",
             "module": "src/components/f-tag/f-tag.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-template/f-template.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTemplate",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-template",
+          "customElement": true,
+          "attributes": [
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTemplate",
+          "declaration": {
+            "name": "FTemplate",
+            "module": "src/components/f-template/f-template.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-template",
+          "declaration": {
+            "name": "FTemplate",
+            "module": "src/components/f-template/f-template.ts"
           }
         }
       ]
@@ -10181,14 +10145,13 @@
             {
               "kind": "method",
               "name": "generateId",
+              "description": "generating uid for toast queue",
               "parameters": [
                 {
-                  "name": "length",
-                  "default": "5",
-                  "description": "length of uid"
+                  "description": "length of uid",
+                  "name": "length"
                 }
               ],
-              "description": "generating uid for toast queue",
               "return": {
                 "type": {
                   "text": ""

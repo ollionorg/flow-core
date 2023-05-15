@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.14.0] - 2023-05-15
+
+### Bug fixes
+
+- `f-select` : `optionTemplate` converted from string to function to fix security hotspots.
+
 ## [1.13.3] - 2023-05-03
 
 ### Bug fixes

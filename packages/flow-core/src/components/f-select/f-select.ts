@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { PropertyValues, unsafeCSS } from "lit";
+import { HTMLTemplateResult, PropertyValues, unsafeCSS } from "lit";
 import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
 import eleStyle from "./f-select.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -37,6 +37,7 @@ export type FSelectArray = FSelectSingleOption[];
 export type FSelectOptionsProp = FSelectSingleOption[];
 export type FSelectSingleOption = FSelectOptionObject | string;
 export type FSelectOptions = FSelectOptionsProp | FSelectOptionsGroup;
+export type FSelectOptionTemplate = (option: FSelectSingleOption) => HTMLTemplateResult;
 
 export type FSelectCustomEvent = {
 	value: unknown;
@@ -185,8 +186,8 @@ export class FSelect extends FRoot {
 	/**
 	 * @attribute Defines the placeholder text for f-text-input
 	 */
-	@property({ reflect: true, type: String, attribute: "option-template" })
-	optionTemplate?: string;
+	@property({ reflect: true, type: Function, attribute: "option-template" })
+	optionTemplate?: FSelectOptionTemplate;
 
 	/**
 	 * @attribute Icon-left enables an icon on the left of the input value.

@@ -336,13 +336,13 @@ export class FSuggest extends FRoot {
 		}
 	}
 
-	handleSuggest(event: PointerEvent) {
+	async handleSuggest(event: PointerEvent) {
 		if (event.target && (event.target as FDiv).textContent) {
 			this.value = (event.target as FDiv).textContent?.trim();
 
 			this.dispatchInputEvent(this.value as string);
 		}
-		this.handleBlur(false);
+		await this.handleBlur(false);
 	}
 }
 

@@ -13,19 +13,19 @@ const rgbToHex = (r, g, b) => "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toStr
  * @param {*} colorTokens Json object of theme and color variables
  */
 function generateBaseColorMdx(colorTokens) {
-  const tokenFileName = `${__dirname}/../figma/base-colors.mdx`;
+	const tokenFileName = `${__dirname}/../figma/base-colors.mdx`;
 
-  let surfaceColors = [];
-  let textColors = [];
-  let iconColors = [];
-  let borderColors = [];
+	let surfaceColors = [];
+	let textColors = [];
+	let iconColors = [];
+	let borderColors = [];
 
-  surfaceColors = compareAndFindTokens(colorTokens, "surface", "base-color");
-  textColors = compareAndFindTokens(colorTokens, "text", "base-color");
-  iconColors = compareAndFindTokens(colorTokens, "icon", "base-color");
-  borderColors = compareAndFindTokens(colorTokens, "border", "base-color");
+	surfaceColors = compareAndFindTokens(colorTokens, "surface", "base-color");
+	textColors = compareAndFindTokens(colorTokens, "text", "base-color");
+	iconColors = compareAndFindTokens(colorTokens, "icon", "base-color");
+	borderColors = compareAndFindTokens(colorTokens, "border", "base-color");
 
-  mdxFile = `## Base colors
+	mdxFile = `## Base colors
 
 <f-divider></f-divider>
 
@@ -44,7 +44,7 @@ function generateBaseColorMdx(colorTokens) {
 
 `;
 
-  mdxFile += `<Preview>
+	mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -52,10 +52,10 @@ function generateBaseColorMdx(colorTokens) {
       <th>Value (light mode)</th>
       <th>Value (dark mode)</th>
     </tr>`;
-  for (let i = 0; i < surfaceColors.length; i++) {
-    mdxFile += getPreviewColorTable(surfaceColors[i]);
-  }
-  mdxFile += `
+	for (let i = 0; i < surfaceColors.length; i++) {
+		mdxFile += getPreviewColorTable(surfaceColors[i]);
+	}
+	mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -66,7 +66,7 @@ function generateBaseColorMdx(colorTokens) {
 
 `;
 
-  mdxFile += `<Preview>
+	mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -74,10 +74,10 @@ function generateBaseColorMdx(colorTokens) {
       <th>Value (light mode)</th>
       <th>Value (dark mode)</th>
     </tr>`;
-  for (let i = 0; i < textColors.length; i++) {
-    mdxFile += getPreviewColorTable(textColors[i]);
-  }
-  mdxFile += `
+	for (let i = 0; i < textColors.length; i++) {
+		mdxFile += getPreviewColorTable(textColors[i]);
+	}
+	mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -88,7 +88,7 @@ function generateBaseColorMdx(colorTokens) {
 
 `;
 
-  mdxFile += `<Preview>
+	mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -96,10 +96,10 @@ function generateBaseColorMdx(colorTokens) {
       <th>Value (light mode)</th>
       <th>Value (dark mode)</th>
     </tr>`;
-  for (let i = 0; i < iconColors.length; i++) {
-    mdxFile += getPreviewColorTable(iconColors[i]);
-  }
-  mdxFile += `
+	for (let i = 0; i < iconColors.length; i++) {
+		mdxFile += getPreviewColorTable(iconColors[i]);
+	}
+	mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -110,7 +110,7 @@ function generateBaseColorMdx(colorTokens) {
 
 `;
 
-  mdxFile += `<Preview>
+	mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -118,26 +118,26 @@ function generateBaseColorMdx(colorTokens) {
       <th>Value (light mode)</th>
       <th>Value (dark mode)</th>
     </tr>`;
-  for (let i = 0; i < borderColors.length; i++) {
-    mdxFile += getPreviewColorTable(borderColors[i]);
-  }
-  mdxFile += `
+	for (let i = 0; i < borderColors.length; i++) {
+		mdxFile += getPreviewColorTable(borderColors[i]);
+	}
+	mdxFile += `
 </tbody></table></Preview>`;
 
-  try {
-    fs.writeFileSync(
-      tokenFileName,
-      prettier.format(mdxFile, {
-        printWidth: 100,
-        singleQuote: true,
-        tabWidth: 4,
-        parser: "mdx",
-      })
-    );
-    console.log(`\x1b[32m \r ${tokenFileName} generated  \u2705 \x1b[0m`);
-  } catch (e) {
-    console.log(e);
-  }
+	try {
+		fs.writeFileSync(
+			tokenFileName,
+			prettier.format(mdxFile, {
+				printWidth: 100,
+				singleQuote: true,
+				tabWidth: 4,
+				parser: "mdx"
+			})
+		);
+		console.log(`\x1b[32m \r ${tokenFileName} generated  \u2705 \x1b[0m`);
+	} catch (e) {
+		console.log(e);
+	}
 }
 
 /**
@@ -145,23 +145,23 @@ function generateBaseColorMdx(colorTokens) {
  * @param {*} colorTokens Json object of theme and color variables
  */
 function generateSystemColorMdx(colorTokens) {
-  const tokenFileName = `${__dirname}/../figma/system-colors.mdx`;
+	const tokenFileName = `${__dirname}/../figma/system-colors.mdx`;
 
-  let primaryColors = [];
-  let highlightColors = [];
-  let neutralColors = [];
-  let successColors = [];
-  let warningColors = [];
-  let dangerColors = [];
+	let primaryColors = [];
+	let highlightColors = [];
+	let neutralColors = [];
+	let successColors = [];
+	let warningColors = [];
+	let dangerColors = [];
 
-  primaryColors = compareAndFindTokens(colorTokens, "color-primary", "system-color");
-  highlightColors = compareAndFindTokens(colorTokens, "color-highlight", "system-color");
-  neutralColors = compareAndFindTokens(colorTokens, "color-neutral", "system-color");
-  successColors = compareAndFindTokens(colorTokens, "color-success", "system-color");
-  warningColors = compareAndFindTokens(colorTokens, "color-warning", "system-color");
-  dangerColors = compareAndFindTokens(colorTokens, "color-danger", "system-color");
+	primaryColors = compareAndFindTokens(colorTokens, "color-primary", "system-color");
+	highlightColors = compareAndFindTokens(colorTokens, "color-highlight", "system-color");
+	neutralColors = compareAndFindTokens(colorTokens, "color-neutral", "system-color");
+	successColors = compareAndFindTokens(colorTokens, "color-success", "system-color");
+	warningColors = compareAndFindTokens(colorTokens, "color-warning", "system-color");
+	dangerColors = compareAndFindTokens(colorTokens, "color-danger", "system-color");
 
-  mdxFile = `## System colors
+	mdxFile = `## System colors
 
 <f-divider></f-divider>
 
@@ -185,7 +185,7 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-  mdxFile += `<Preview>
+	mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -193,10 +193,10 @@ function generateSystemColorMdx(colorTokens) {
       <th>Value (light mode)</th>
       <th>Value (dark mode)</th>
     </tr>`;
-  for (let i = 0; i < primaryColors.length; i++) {
-    mdxFile += getPreviewColorTable(primaryColors[i]);
-  }
-  mdxFile += `
+	for (let i = 0; i < primaryColors.length; i++) {
+		mdxFile += getPreviewColorTable(primaryColors[i]);
+	}
+	mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -212,7 +212,7 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-  mdxFile += `<Preview>
+	mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -220,10 +220,10 @@ function generateSystemColorMdx(colorTokens) {
       <th>Value (light mode)</th>
       <th>Value (dark mode)</th>
     </tr>`;
-  for (let i = 0; i < highlightColors.length; i++) {
-    mdxFile += getPreviewColorTable(highlightColors[i]);
-  }
-  mdxFile += `
+	for (let i = 0; i < highlightColors.length; i++) {
+		mdxFile += getPreviewColorTable(highlightColors[i]);
+	}
+	mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -236,7 +236,7 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-  mdxFile += `<Preview>
+	mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -244,10 +244,10 @@ function generateSystemColorMdx(colorTokens) {
       <th>Value (light mode)</th>
       <th>Value (dark mode)</th>
     </tr>`;
-  for (let i = 0; i < neutralColors.length; i++) {
-    mdxFile += getPreviewColorTable(neutralColors[i]);
-  }
-  mdxFile += `
+	for (let i = 0; i < neutralColors.length; i++) {
+		mdxFile += getPreviewColorTable(neutralColors[i]);
+	}
+	mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -263,7 +263,7 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-  mdxFile += `<Preview>
+	mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -271,10 +271,10 @@ function generateSystemColorMdx(colorTokens) {
       <th>Value (light mode)</th>
       <th>Value (dark mode)</th>
     </tr>`;
-  for (let i = 0; i < successColors.length; i++) {
-    mdxFile += getPreviewColorTable(successColors[i]);
-  }
-  mdxFile += `
+	for (let i = 0; i < successColors.length; i++) {
+		mdxFile += getPreviewColorTable(successColors[i]);
+	}
+	mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -291,7 +291,7 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-  mdxFile += `<Preview>
+	mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -299,10 +299,10 @@ function generateSystemColorMdx(colorTokens) {
       <th>Value (light mode)</th>
       <th>Value (dark mode)</th>
     </tr>`;
-  for (let i = 0; i < warningColors.length; i++) {
-    mdxFile += getPreviewColorTable(warningColors[i]);
-  }
-  mdxFile += `
+	for (let i = 0; i < warningColors.length; i++) {
+		mdxFile += getPreviewColorTable(warningColors[i]);
+	}
+	mdxFile += `
 </tbody></table></Preview>
 
 <br/>
@@ -319,7 +319,7 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-  mdxFile += `<Preview>
+	mdxFile += `<Preview>
   <table class="custom-color-table">
   <tbody>
             <tr>
@@ -327,72 +327,72 @@ function generateSystemColorMdx(colorTokens) {
       <th>Value (light mode)</th>
       <th>Value (dark mode)</th>
     </tr>`;
-  for (let i = 0; i < dangerColors.length; i++) {
-    mdxFile += getPreviewColorTable(dangerColors[i]);
-  }
-  mdxFile += `
+	for (let i = 0; i < dangerColors.length; i++) {
+		mdxFile += getPreviewColorTable(dangerColors[i]);
+	}
+	mdxFile += `
 </tbody></table></Preview>`;
-  try {
-    fs.writeFileSync(
-      tokenFileName,
-      prettier.format(mdxFile, {
-        printWidth: 100,
-        singleQuote: true,
-        tabWidth: 4,
-        parser: "mdx",
-      })
-    );
-    console.log(`\x1b[32m \r ${tokenFileName} generated  \u2705 \x1b[0m`);
-  } catch (e) {
-    console.log(e);
-  }
+	try {
+		fs.writeFileSync(
+			tokenFileName,
+			prettier.format(mdxFile, {
+				printWidth: 100,
+				singleQuote: true,
+				tabWidth: 4,
+				parser: "mdx"
+			})
+		);
+		console.log(`\x1b[32m \r ${tokenFileName} generated  \u2705 \x1b[0m`);
+	} catch (e) {
+		console.log(e);
+	}
 }
 
 /**
  * Get document of specified file Id
  */
 getStyles()
-  .then(async (response) => {
-    let nodeids = [];
-    response.data.meta.styles.forEach((element) => {
-      nodeids.push(element.node_id);
-    });
-    getNode(nodeids.join(",")).then(async (response) => {
-      const colorTokens = {};
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      for (const [_id, obj] of Object.entries(response.data.nodes)) {
-        if (obj.document.fills[0].color) {
-          const { r, g, b } = obj.document.fills[0].color;
+	.then(async response => {
+		let nodeids = [];
+		response.data.meta.styles.forEach(element => {
+			nodeids.push(element.node_id);
+		});
+		await getNode(nodeids.join(",")).then(async response => {
+			const colorTokens = {};
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			for (const [_id, obj] of Object.entries(response.data.nodes)) {
+				if (obj.document.fills[0].color) {
+					const { r, g, b } = obj.document.fills[0].color;
 
-          const [theme, token] = obj.document.name.split("/");
-          if (!colorTokens[theme]) {
-            colorTokens[theme] = {};
-          }
+					const [theme, token] = obj.document.name.split("/");
+					if (!colorTokens[theme]) {
+						colorTokens[theme] = {};
+					}
 
-          colorTokens[theme][token] = rgbToHex(
-            +(r * 255).toFixed(0),
-            +(g * 255).toFixed(0),
-            +(b * 255).toFixed(0)
-          );
-        }
-      }
-      // generate mdx for base colors
-      generateBaseColorMdx(colorTokens);
-      //genrating mdx for system colors
-      generateSystemColorMdx(colorTokens);
-    });
-    console.log("\n");
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+					colorTokens[theme][token] = rgbToHex(
+						+(r * 255).toFixed(0),
+						+(g * 255).toFixed(0),
+						+(b * 255).toFixed(0)
+					);
+				}
+			}
+			// generate mdx for base colors
+			generateBaseColorMdx(colorTokens);
+			//genrating mdx for system colors
+			generateSystemColorMdx(colorTokens);
+		});
+		console.log("\n");
+	})
+	.catch(error => {
+		console.error(error);
+	});
 
 /**
  * get structurized Table according to colors.
  * @param {*} colorObject Json object of color variable name and its values for light and dark theme.
  */
 function getPreviewColorTable(colorObject) {
-  mdx = `
+	mdx = `
     <tr>
       <td>
         <p class="color-table-token">--${colorObject.variable}</p>
@@ -403,8 +403,8 @@ function getPreviewColorTable(colorObject) {
             <p>${colorObject.fLightValue ? colorObject.fLightValue : ""}</p>
           </div>
           <div style={{background: "${
-            colorObject.fLightValue
-          }", height: 16, width: 60, borderRadius: 0, marginLeft: 50}}></div>
+						colorObject.fLightValue
+					}", height: 16, width: 60, borderRadius: 0, marginLeft: 50}}></div>
         </div>
       </td>z
       <td>
@@ -413,12 +413,12 @@ function getPreviewColorTable(colorObject) {
             <p>${colorObject.fDarkValue ? colorObject.fDarkValue : ""}</p>
           </div>
           <div style={{background: "${
-            colorObject.fDarkValue
-          }", height: 16, width: 60, borderRadius: 0, marginLeft: 50}}></div>
+						colorObject.fDarkValue
+					}", height: 16, width: 60, borderRadius: 0, marginLeft: 50}}></div>
         </div>
       </td>
     </tr>`;
-  return mdx;
+	return mdx;
 }
 
 /**
@@ -429,38 +429,38 @@ function getPreviewColorTable(colorObject) {
  * @return {Array<[Object]>} the resulting structurized array would be returned
  */
 function compareAndFindTokens(colorTokens, comparisionString, colorCategory) {
-  let resultingArr = [];
-  for (const [theme, tokens] of Object.entries(colorTokens)) {
-    const tokenEntries = Object.entries(tokens);
+	let resultingArr = [];
+	for (const [theme, tokens] of Object.entries(colorTokens)) {
+		const tokenEntries = Object.entries(tokens);
 
-    for (let [variable, value] of tokenEntries) {
-      variable = `color-${variable}`;
-      hasComparision = false;
-      if (colorCategory === "base-color") {
-        hasComparision = variable.includes(comparisionString);
-      } else {
-        hasComparision =
-          variable.includes(comparisionString) &&
-          !variable.includes("surface") &&
-          !variable.includes("text");
-      }
-      if (hasComparision) {
-        if (resultingArr.length > 0 && resultingArr.some((item) => item.variable === variable)) {
-          let index = resultingArr.findIndex((item) => item.variable === variable);
-          if (theme === "f-light") {
-            resultingArr[index].fLightValue = value;
-          } else {
-            resultingArr[index].fDarkValue = value;
-          }
-        } else {
-          if (theme === "f-light") {
-            resultingArr.push({ variable: variable, fLightValue: value });
-          } else {
-            resultingArr.push({ variable: variable, fDarkValue: value });
-          }
-        }
-      }
-    }
-  }
-  return resultingArr;
+		for (let [variable, value] of tokenEntries) {
+			variable = `color-${variable}`;
+			hasComparision = false;
+			if (colorCategory === "base-color") {
+				hasComparision = variable.includes(comparisionString);
+			} else {
+				hasComparision =
+					variable.includes(comparisionString) &&
+					!variable.includes("surface") &&
+					!variable.includes("text");
+			}
+			if (hasComparision) {
+				if (resultingArr.length > 0 && resultingArr.some(item => item.variable === variable)) {
+					let index = resultingArr.findIndex(item => item.variable === variable);
+					if (theme === "f-light") {
+						resultingArr[index].fLightValue = value;
+					} else {
+						resultingArr[index].fDarkValue = value;
+					}
+				} else {
+					if (theme === "f-light") {
+						resultingArr.push({ variable: variable, fLightValue: value });
+					} else {
+						resultingArr.push({ variable: variable, fDarkValue: value });
+					}
+				}
+			}
+		}
+	}
+	return resultingArr;
 }

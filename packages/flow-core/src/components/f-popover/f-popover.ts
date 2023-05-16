@@ -170,7 +170,7 @@ export class FPopover extends FRoot {
 		super.disconnectedCallback();
 
 		if (this.targetElement) {
-			this.targetElement.style.zIndex = "unset";
+			this.targetElement.style.removeProperty("z-index");
 		}
 	}
 
@@ -226,7 +226,7 @@ export class FPopover extends FRoot {
 			return html`<slot></slot>${overlay} `;
 		} else {
 			if (this.targetElement) {
-				this.targetElement.style.zIndex = "unset";
+				this.targetElement.style.removeProperty("z-index");
 			}
 		}
 		return ``;

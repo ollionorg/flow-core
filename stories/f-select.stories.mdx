@@ -626,7 +626,14 @@ Use to provide a custom template in option list
 	<Story name="option-template">
 		{args => {
 			const [value, setValue] = useState(null);
-			const optionTemplate = `<f-div><f-div  direction="column" gap="x-small"><f-text>\${option.title}</f-text><f-text>\${option.data.name}, \${option.data.email}</f-text></f-div></f-div>`;
+			const optionTemplate = function (option) {
+				return html`<f-div
+					><f-div direction="column" gap="x-small"
+						><f-text>${option.title}</f-text
+						><f-text>${option.data.name}, ${option.data.email}</f-text></f-div
+					></f-div
+				>`;
+			};
 			const [valueObjects, setValueObjects] = useState(null);
 			const [options, setOptions] = useState([
 				{ icon: "i-home", title: "option 1", data: { name: "Alex", email: "alex#cldcvr.com" } },
@@ -671,7 +678,7 @@ Use to provide a custom template in option list
 							?searchable=${false}
 							.options=${options}
 							.value=${value}
-							option-template=${optionTemplate}
+							.optionTemplate=${optionTemplate}
 						>
 							<f-div slot="label" padding="none" gap="none">Label for f-select</f-div>
 							<f-div slot="description" padding="none" gap="none"
@@ -687,7 +694,7 @@ Use to provide a custom template in option list
 							?searchable=${false}
 							.options=${groupOtionsObjects}
 							.value=${valueObjects}
-							option-template=${optionTemplate}
+							.optionTemplate=${optionTemplate}
 						>
 							<f-div slot="label" padding="none" gap="none"
 								>Label for f-select (Group Categorization</f-div
@@ -1264,7 +1271,7 @@ checkboxes apper in front of every option in menu. By default its <code>false</c
 
 ## clear
 
-a ‘close’ icon button appear on right of the select to clear the input value(s). By default its <code>true</code>
+a ‘close’ icon button appear on right of the select to clear the input value(s). By default its <code>false</code>
 
 <Canvas>
 	<Story name="clear">

@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-switch.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
@@ -41,6 +41,48 @@ export class FSwitch extends FRoot {
 	@property({ reflect: true, type: Boolean })
 	disabled?: boolean = false;
 
+	@query(".switch-slots")
+	switchSlots!: FDiv;
+
+	/**
+	 * @attribute assigned elements inside slot label
+	 */
+	@queryAssignedElements({ slot: "label" })
+	_labelNodes!: NodeListOf<HTMLElement>;
+
+	/**
+	 * @attribute assigned elements inside slot description
+	 */
+	@queryAssignedElements({ slot: "subtitle" })
+	_subtitleNodes!: NodeListOf<HTMLElement>;
+
+	/**
+	 * @attribute assigned elements inside slot help
+	 */
+	@queryAssignedElements({ slot: "icon-tooltip" })
+	_iconTooltipNodes!: NodeListOf<HTMLElement>;
+
+	/**
+	 * has label slot
+	 */
+	get hasLabel() {
+		return this._labelNodes.length > 0;
+	}
+
+	/**
+	 * has subtitle slot
+	 */
+	get hasSubtitle() {
+		return this._subtitleNodes.length > 0;
+	}
+
+	/**
+	 * has icon-tooltip slot
+	 */
+	get hasIconTooltip() {
+		return this._iconTooltipNodes.length > 0;
+	}
+
 	/**
 	 * emit event.
 	 */
@@ -81,6 +123,7 @@ export class FSwitch extends FRoot {
 				direction="row"
 				height="hug-content"
 				class="f-switch-wrapper"
+				width="hug-content"
 			>
 				<label class="f-switch" size=${this.size} state=${this.state}>
 					<input
@@ -91,7 +134,7 @@ export class FSwitch extends FRoot {
 					/>
 					<span class="f-switch-slider"></span>
 				</label>
-				<f-div padding="none" align="middle-left" direction="row" gap="small">
+				<f-div padding="none" align="middle-left" direction="row" gap="small" class="switch-slots">
 					<slot name="label"></slot>
 					<slot name="icon-tooltip"></slot>
 					<slot name="subtitle"></slot>
@@ -99,6 +142,11 @@ export class FSwitch extends FRoot {
 			</f-div>
 			<slot name="help"></slot>
 		</f-div>`;
+	}
+	updated() {
+		if (!this.hasLabel && !this.hasIconTooltip && !this.hasSubtitle) {
+			this.switchSlots.style.display = "none";
+		}
 	}
 }
 

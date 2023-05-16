@@ -4,7 +4,8 @@ import {
 	FSelectArray,
 	FSelectOptionObject,
 	FSelectOptionsGroup,
-	FSelectOptionsProp
+	FSelectOptionsProp,
+	FSelectSingleOption
 } from "./f-select";
 import { html } from "lit";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -108,36 +109,12 @@ export default function render(this: FSelect) {
 		${Array.isArray(this.selectedOptions) && this.selectedOptions?.length > 0
 			? html` <div class="f-select-searchable">
 					${this.type === "single"
-						? (this.selectedOptions as FSelectOptionsProp).map(
-								option =>
-									html`<f-div padding="none" style=${this.singleSelectionStyle}
-										><f-text
-											data-qa-selected-option=${option}
-											variant="para"
-											size="small"
-											weight="regular"
-											class="word-break"
-											?ellipsis=${true}
-											>${(option as FSelectOptionObject)?.title ?? option}</f-text
-										></f-div
-									>`
+						? (this.selectedOptions as FSelectOptionsProp).map(option =>
+								this.renderSingleSelection(option)
 						  )
 						: html`${(this.selectedOptions as FSelectOptionsProp)
 								.slice(0, this.getSlicedSelections(this.selectedOptions))
-								.map(
-									option =>
-										html`<f-tag
-											data-qa-selected-tag=${option}
-											class="f-tag-system-icon"
-											icon-right="i-close"
-											size="small"
-											label=${(option as FSelectOptionObject)?.title ?? option}
-											state="neutral"
-											@click=${(e: MouseEvent) => {
-												this.handleOptionSelection(option, e);
-											}}
-										></f-tag> `
-								)}
+								.map(option => this.renderMultipleSelectionTag(option))}
 						  ${this.selectedOptions.length > this.selectionLimit
 								? !this.viewMoreTags
 									? html` <f-div height="hug-content" width="hug-content" padding="none">
@@ -171,30 +148,12 @@ export default function render(this: FSelect) {
 			  </div>`
 			: html`<div class="f-select-searchable">
 					${this.type === "single"
-						? (concatinatedSelectedOptions as FSelectOptionsProp).map(
-								option =>
-									html`<f-div padding="none" ellipsis=${true}
-										><f-text variant="para" size="small" weight="regular" class="word-break"
-											>${(option as FSelectOptionObject)?.title ?? option}</f-text
-										></f-div
-									>`
+						? (concatinatedSelectedOptions as FSelectOptionsProp).map(option =>
+								this.renderSingleSelection(option)
 						  )
 						: html` ${(concatinatedSelectedOptions as FSelectOptionsProp)
 								.slice(0, this.getSlicedSelections(concatinatedSelectedOptions))
-								.map(
-									option =>
-										html`<f-tag
-											class="f-tag-system-icon"
-											data-qa-selected-tag=${option}
-											icon-right="i-close"
-											size="small"
-											label=${(option as FSelectOptionObject)?.title ?? option}
-											state="neutral"
-											@click=${(e: MouseEvent) => {
-												this.handleRemoveGroupSelection(option, e);
-											}}
-										></f-tag> `
-								)}
+								.map(option => this.renderMultipleSelectionTag(option))}
 						  ${concatinatedSelectedOptions.length > this.selectionLimit
 								? !this.viewMoreTags
 									? html`<f-div height="hug-content" width="hug-content" padding="none"
@@ -368,6 +327,7 @@ export default function render(this: FSelect) {
 												@click=${(e: MouseEvent) => {
 													this.handleOptionSelection(option, e);
 												}}
+												.disabled=${typeof option === "object" && option.disabled}
 											>
 												${this.checkbox
 													? html` <f-checkbox
@@ -476,6 +436,7 @@ export default function render(this: FSelect) {
 									@click=${(e: MouseEvent) => {
 										this.handleSelectionGroup(option, group, e);
 									}}
+									.disabled=${typeof option === "object" && option.disabled}
 								>
 									${this.checkbox
 										? html` <f-checkbox
@@ -536,4 +497,62 @@ export default function render(this: FSelect) {
 			</f-div>
 		</div>
 	`;
+}
+
+export function renderSingleSelection(this: FSelect, option: FSelectSingleOption) {
+	const withoutTemplate = () => {
+		return html` <f-text
+			data-qa-selected-option=${option}
+			variant="para"
+			size="small"
+			weight="regular"
+			class="word-break"
+			?ellipsis=${true}
+			>${(option as FSelectOptionObject)?.title ?? option}</f-text
+		>`;
+	};
+
+	const getTemplate = () => {
+		return this.optionTemplate ? this.optionTemplate(option) : withoutTemplate();
+	};
+	return html`<f-div padding="none" style=${this.singleSelectionStyle}> ${getTemplate()} </f-div>`;
+}
+
+export function renderMultipleSelectionTag(this: FSelect, option: FSelectSingleOption) {
+	const withoutTemplate = () => {
+		return html`<f-tag
+			data-qa-selected-tag=${option}
+			class="f-tag-system-icon"
+			icon-right="i-close"
+			size="small"
+			label=${(option as FSelectOptionObject)?.title ?? option}
+			state="neutral"
+			@click=${(e: MouseEvent) => {
+				this.handleOptionSelection(option, e);
+			}}
+		></f-tag> `;
+	};
+
+	const getTemplate = () => {
+		return this.optionTemplate
+			? html`<f-div
+					width="hug-content"
+					variant="curved"
+					gap="small"
+					state="secondary"
+					padding="small"
+					>${this.optionTemplate(option)}
+					<f-icon-button
+						icon="i-close"
+						state="inherit"
+						size="x-small"
+						@click=${(e: MouseEvent) => {
+							this.handleOptionSelection(option, e);
+						}}
+						category="packed"
+					></f-icon-button>
+			  </f-div>`
+			: withoutTemplate();
+	};
+	return getTemplate();
 }

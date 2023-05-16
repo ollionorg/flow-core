@@ -4,6 +4,13 @@
 
 # Change Log
 
+## [1.14.2] - 2023-05-16
+
+### Improvements
+
+- `f-select` : selected value must display using optionTemplate if available.
+- `disabled` property support added to option object 
+
 ## [1.14.1] - 2023-05-16
 
 ### Bug fixes

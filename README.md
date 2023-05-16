@@ -12,9 +12,11 @@ Flow-core is the base library required by any flow dependecies. It consists most
 * [Starter-kits](#Starter-kits)
 * [Install for an existing project](#Existing-project)
 * [VScode Plugin and debuggers](#VScode-Plugin-and-debuggers)
-* [Dependencies](#Dependencies)
 * [Components](https://flow.cldcvr.com/v2/index.html)
 * [Templates](https://flow.cldcvr.com/templates/index.html)
+* [Dependencies](#Dependencies)
+	* [Lineage](https://github.com/cldcvr/flow-lineage)
+	* [Form builder](https://github.com/cldcvr/flow-form-builder)
 * [Resources](#Resources)
 * [Get in touch](#Get-in-touch)
 
@@ -131,6 +133,13 @@ import("@cldcvr/flow-core").then(async () => {
 **Browser Debugger**: [Chrome](https://chrome.google.com/webstore/detail/web-component-devtools/gdniinfdlmmmjpnhgnkmfpffipenjljo), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/web-component-devtools/), [Safari](https://developer.apple.com/documentation/safariservices/safari_web_extensions/adding_a_web_development_tool_to_safari_web_inspector)
 
 
+## Components
+Visit the [Flow components Storybook](https://flow.cldcvr.com/v2/index.html)
+
+
+## Templates
+Visit the [Flow templates Storybook](https://flow.cldcvr.com/templates/index.html)
+
 ## Dependencies
 * [Lineage](https://github.com/cldcvr/flow-lineage)
 * [Form builder](https://github.com/cldcvr/flow-form-builder)
@@ -139,14 +148,6 @@ import("@cldcvr/flow-core").then(async () => {
 * Force graph (coming soon)
 * Themes (coming soon)
 * Time-series (coming soon)
-
-
-## Components
-Visit the [Flow components Storybook](https://flow.cldcvr.com/v2/index.html)
-
-
-## Templates
-Visit the [Flow templates Storybook](https://flow.cldcvr.com/templates/index.html)
 
 
 ## Resources

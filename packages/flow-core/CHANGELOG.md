@@ -22,10 +22,7 @@
 ### Bug fixes
 
 - `f-select` : setting `clear` prop to false.
-<<<<<<< HEAD
 
-=======
->>>>>>> main
 ## [1.13.2] - 2023-05-03
 
 ### Bug fixes

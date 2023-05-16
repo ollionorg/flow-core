@@ -8,16 +8,21 @@ Flow-core is the base library required by any flow dependecies. It consists most
 You learn more about flow [here](https://github.com/cldcvr/flow-core/blob/main/ABOUT.md)
 
 **Table of contents**
-[For a new project](#For-a-new-project)
-[Starter-kits](#Starter-kits)
+* [Starter-kits](#Starter-kits)
+* [Install for an existing project](#Existing-project)
+* [VScode Plugin and debuggers](#VScode-Plugin-and-debuggers)
+* [Dependencies](#Dependencies)
+* [Components](#Components)
+* [Templates](#Templates)
+* [Resources](#Resources)
 
 ## Getting started
 
-### For a new project
+### Starter kits
 
-Flow has put together starter kits with basic dependencies to get you going. Each starter kit will contain Flow core, [Flow system icons](https://github.com/cldcvr/flow-icon), Default google fonts and fully functional Flow templates (eg: top navigation, profile, left navigation, etc)
+For a new project, Flow has put together starter kits with basic dependencies to get you going. Each starter kit will contain Flow core, [Flow system icons](https://github.com/cldcvr/flow-icon), Default google fonts and fully functional Flow templates (eg: top navigation, profile, left navigation, etc)
 
-#### Starter kits
+#### Kits
 * [Vue JS](https://github.com/cldcvr/flow-starterkit-vue)
 * [Aungular](https://github.com/cldcvr/flow-starterkit-angular)
 * [React](https://github.com/cldcvr/flow-starterkit-react)

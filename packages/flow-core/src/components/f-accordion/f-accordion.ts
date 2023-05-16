@@ -50,6 +50,9 @@ export class FAccordion extends FRoot {
 	@query(".f-accordion")
 	fAccordionBody?: FDiv;
 
+	@query(".f-accordion-header")
+	fAccordionHeader?: FDiv;
+
 	/**
 	 * identify icon-name from string
 	 */
@@ -69,6 +72,19 @@ export class FAccordion extends FRoot {
 	toggleAccordion() {
 		this.open = !this.open;
 		this.dispatchToggleEvent(this.open);
+	}
+
+	/**
+	 * changeState
+	 */
+	stateChange(mouseState: "enter" | "leave") {
+		if (this.fAccordionHeader) {
+			if (mouseState === "enter") {
+				this.fAccordionHeader.style.background = "var(--color-surface-default-hover)";
+			} else {
+				this.fAccordionHeader.style.background = "transparent";
+			}
+		}
 	}
 
 	/**
@@ -127,8 +143,9 @@ export class FAccordion extends FRoot {
 					width="100%"
 					class="f-accordion-header"
 					padding="medium"
-					state="default"
 					clickable
+					@mouseenter=${() => this.stateChange("enter")}
+					@mouseleave=${() => this.stateChange("leave")}
 				>
 					${this.icon !== "none" && this.iconPlacement === "left" ? accordionIcon : ""}
 					<slot></slot>

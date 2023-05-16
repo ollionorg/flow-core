@@ -43,8 +43,6 @@ declare global {
 		{ ...options.prettierConfig, parser: "typescript" }
 	);
 
-	//console.log(output);
-
 	return output;
 }
 function transformSchemaVue2(schema: Package, modulePath?: string) {
@@ -74,8 +72,6 @@ function transformSchemaVue2(schema: Package, modulePath?: string) {
 		{ ...options.prettierConfig, parser: "typescript" }
 	);
 
-	//console.log(output);
-
 	return output;
 }
 function transformSchemaVue3(schema: Package, modulePath?: string) {
@@ -104,8 +100,6 @@ function transformSchemaVue3(schema: Package, modulePath?: string) {
     `,
 		{ ...options.prettierConfig, parser: "typescript" }
 	);
-
-	//console.log(output);
 
 	return output;
 }
@@ -228,7 +222,7 @@ function getComponentPropTypeImports(schema: Package, modulePath?: string): stri
 	];
 	const moduleTypeImports: string[] = [];
 	schema.modules.forEach((module) => {
-		const moduleName = modulePath || "./src"; //module.path.slice(0, -3);
+		const moduleName = modulePath || "./src";
 
 		module.declarations?.forEach((declaration) => {
 			if (!("customElement" in declaration) || !declaration.customElement) {

@@ -65,7 +65,7 @@ f-switch allows a user to turn an individual option true/false. The change in se
 				updateArgs({ value: e.detail.value });
 			};
 			return html`
-				<f-div width="100%">
+				<f-div width="hug-content">
 					<f-switch
 						size=${args.size}
 						value=${args.value}
@@ -73,7 +73,6 @@ f-switch allows a user to turn an individual option true/false. The change in se
 						?disabled=${args.disabled}
 						@input=${handleInput}
 					>
-						${unsafeHTML(args.slot)}
 					</f-switch>
 				</f-div>
 			`;

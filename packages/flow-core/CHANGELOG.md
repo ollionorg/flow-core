@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.14.3] - 2023-05-16
+
+### Improvements
+
+- `f-checkbox` && `f-radio` label click added
 ## [1.14.2] - 2023-05-16
 
 ### Improvements

@@ -101,7 +101,7 @@ export class FCheckbox extends FRoot {
 						direction="row"
 						gap="small"
 					>
-						<slot name="label"></slot>
+						<slot name="label" @click=${this.handleInput}></slot>
 						<slot name="icon-tooltip"></slot>
 						<slot name="subtitle"></slot>
 					</f-div>

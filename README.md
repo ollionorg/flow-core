@@ -7,6 +7,10 @@ Flow-core is the base library required by any flow dependecies. It consists most
 
 You learn more about flow [here](https://github.com/cldcvr/flow-core/blob/main/ABOUT.md)
 
+**Table of contents**
+[For a new project](#For-a-new-project)
+[Starter-kits](#Starter-kits)
+
 ## Getting started
 
 ### For a new project

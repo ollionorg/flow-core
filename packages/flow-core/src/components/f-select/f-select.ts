@@ -7,7 +7,7 @@ import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { FIcon } from "../f-icon/f-icon";
 import _ from "lodash";
-import render from "./render";
+import render, { renderSingleSelection, renderMultipleSelectionTag } from "./render";
 import {
 	handleDropDownOpen,
 	handleDropDownClose,
@@ -20,6 +20,7 @@ import {
 	handleViewMoreTags,
 	handleInput
 } from "./handlers";
+import { FIconButton } from "../f-icon-button/f-icon-button";
 
 export type FSelectState = "primary" | "default" | "success" | "warning" | "danger";
 export type FSelectHeightProp = number;
@@ -30,6 +31,7 @@ export type FSelectOptionObject = {
 	title: string;
 	data?: Record<string, unknown>;
 	qaId?: string;
+	disabled?: boolean;
 };
 export type FSelectOptionsGroup = { [key: string]: FSelectOptionsProp };
 export type FSelectArrayOfObjects = FSelectOptionObject[];
@@ -49,7 +51,13 @@ export class FSelect extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles, ...FIcon.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		...FText.styles,
+		...FDiv.styles,
+		...FIcon.styles,
+		...FIconButton.styles
+	];
 
 	@queryAssignedElements({ slot: "label" })
 	_labelNodes!: NodeListOf<HTMLElement>;
@@ -355,9 +363,13 @@ export class FSelect extends FRoot {
 			)
 				? true
 				: false;
-		} else {
-			return false;
+		} else if (
+			this.type === "single" &&
+			JSON.stringify((this.selectedOptions as FSelectOptionsProp)[0]) === JSON.stringify(option)
+		) {
+			return true;
 		}
+		return false;
 	}
 
 	/**
@@ -584,6 +596,8 @@ export class FSelect extends FRoot {
 	handleViewMoreTags = handleViewMoreTags;
 	handleInput = handleInput;
 	render = render;
+	renderSingleSelection = renderSingleSelection;
+	renderMultipleSelectionTag = renderMultipleSelectionTag;
 }
 
 /**

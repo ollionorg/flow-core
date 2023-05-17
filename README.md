@@ -18,6 +18,7 @@ Flow-core is the base library required by any flow dependecies. It consists most
 	* [Lineage](https://github.com/cldcvr/flow-lineage)
 	* [Form builder](https://github.com/cldcvr/flow-form-builder)
 * [Resources](#Resources)
+* [Figma for designers](https://www.figma.com/community/file/1240565037876928288/Flow-UI-Kit)
 * [Get in touch](#Get-in-touch)
 
 ## Getting started
@@ -152,7 +153,7 @@ Visit the [Flow templates Storybook](https://flow.cldcvr.com/templates/index.htm
 
 ## Resources
 * [Documentation](https://drive.google.com/drive/u/0/folders/1K4TLqpqrY0BNjQZ4fwZK_ZF-9M69Q4is)
-* [Figma for designers](pragyan-adds-url-here)
+* [Figma for designers](https://www.figma.com/community/file/1240565037876928288/Flow-UI-Kit)
 * [VS code plugin](https://marketplace.visualstudio.com/items?itemName=dev-vikas.flow-intellisense-vscode)
 * Releases
 

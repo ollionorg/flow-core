@@ -57,10 +57,20 @@ jobs:
               "text": "Updates",
               "blocks": [
                 {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Flow Updates"
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "${{ fromJSON(steps.changesets.outputs)[0].name }} updated to ${{ fromJSON(steps.changesets.outputs)[0].version }} on ${{ steps.date.outputs.date }}"
+                    "text": "${{ fromJSON(steps.changesets.outputs).publishedPackages[0].name }} updated to ${{ fromJSON(steps.changesets.outputs).publishedPackages[0].version }} on ${{ steps.date.outputs.date }}"
                   }
                 },
                 {

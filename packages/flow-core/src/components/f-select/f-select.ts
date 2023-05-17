@@ -128,6 +128,9 @@ export class FSelect extends FRoot {
 	@state({})
 	optionsTop = "";
 
+	@state({})
+	optionsBottom = "";
+
 	/**
 	 * @attribute keyboard hover for options in group for objects consisting groups
 	 */
@@ -288,6 +291,8 @@ export class FSelect extends FRoot {
 		window.addEventListener("scroll", this.containerScroll, {
 			capture: true
 		});
+
+		window.addEventListener("resize", this.updateDimentions);
 	}
 	disconnectedCallback(): void {
 		super.disconnectedCallback();
@@ -297,6 +302,7 @@ export class FSelect extends FRoot {
 		window.removeEventListener("scroll", this.containerScroll, {
 			capture: true
 		});
+		window.removeEventListener("resize", this.updateDimentions);
 	}
 
 	/**
@@ -305,14 +311,14 @@ export class FSelect extends FRoot {
 	applyOptionsStyle(width: number) {
 		if (this.openDropdown)
 			if (this.classList.contains("f-search-border")) {
-				return `max-height:${this.optimizedHeight}px; transition: max-height var(--transition-time-rapid) ease-in 0s;  min-width:240px; max-width:fit-content; top:${this.optionsTop}`;
+				return `max-height:${this.optimizedHeight}px; transition: max-height var(--transition-time-rapid) ease-in 0s;  min-width:240px; max-width:fit-content; top:${this.optionsTop};bottom:${this.optionsBottom}`;
 			} else {
-				return `max-height:${this.optimizedHeight}px; transition: max-height var(--transition-time-rapid) ease-in 0s;  width:${width}px; top:${this.optionsTop}`;
+				return `max-height:${this.optimizedHeight}px; transition: max-height var(--transition-time-rapid) ease-in 0s;  width:${width}px; top:${this.optionsTop};bottom:${this.optionsBottom}`;
 			}
 		else if (this.classList.contains("f-search-border")) {
-			return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s;  min-width:240px; max-width:fit-content; top:${this.optionsTop}`;
+			return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s;  min-width:240px; max-width:fit-content; top:${this.optionsTop};bottom:${this.optionsBottom}`;
 		} else {
-			return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s;  width:${width}px; top:${this.optionsTop}`;
+			return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s;  width:${width}px; top:${this.optionsTop};bottom:${this.optionsBottom}`;
 		}
 	}
 
@@ -525,11 +531,11 @@ export class FSelect extends FRoot {
 		const spaceAbove = this.wrapperElement.getBoundingClientRect().top;
 		const spaceBelow = window.innerHeight - this.wrapperElement.getBoundingClientRect().bottom;
 		const hasEnoughSpaceBelow = spaceBelow > this.height;
-		const optionsHeight = this.optionElement.offsetHeight;
-		const heightToApply = Math.min(optionsHeight, this.height);
+
 		if (hasEnoughSpaceBelow || spaceBelow > spaceAbove) {
 			this.preferredOpenDirection = "below";
 			this.optimizedHeight = +Math.min(spaceBelow - 40, this.height).toFixed(0);
+			this.optionsBottom = "";
 			this.optionsTop = `${(
 				this.wrapperElement.getBoundingClientRect().top +
 				this.wrapperElement.offsetHeight +
@@ -538,12 +544,8 @@ export class FSelect extends FRoot {
 		} else {
 			this.preferredOpenDirection = "above";
 			this.optimizedHeight = +Math.min(spaceAbove - 40, this.height).toFixed(0);
-
-			this.optionsTop = `${(
-				this.wrapperElement.getBoundingClientRect().top -
-				heightToApply -
-				4
-			).toFixed(0)}px`;
+			this.optionsTop = "";
+			this.optionsBottom = `${(spaceBelow + this.wrapperElement.offsetHeight - 4).toFixed(0)}px`;
 		}
 	}
 
@@ -558,7 +560,7 @@ export class FSelect extends FRoot {
 		return `max-width:${`${this.offsetWidth - 90}px`}`;
 	}
 
-	protected updated(changedProperties: PropertyValues) {
+	protected async updated(changedProperties: PropertyValues) {
 		super.updated(changedProperties);
 		this.fSelectWrapperHeight = changedProperties.get("fSelectWrapperHeight");
 		this.updateDimentions();

@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.14.4] - 2023-05-16
+
+### Bug Fixes
+
+- `f-select` opening issue fixed.
+
 ## [1.14.3] - 2023-05-16
 
 ### Improvements

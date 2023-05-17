@@ -4,6 +4,15 @@
 
 # Change Log
 
+## [1.14.4-alpha3] - 2023-05-17
+
+### Features
+- Slack notifications integrated
+### Improvements
+- Unnecessary badges removed from README
+
+### Bug Fixes
+- Testing this third category in slack message
 ## [1.14.4] - 2023-05-16
 
 ### Bug Fixes

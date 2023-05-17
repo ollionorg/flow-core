@@ -31,17 +31,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Extract release notes
+        if: steps.changesets.outputs.published == 'true'
         id: extract-release-notes
         uses: ffurrer2/extract-release-notes@v1
         with:
           changelog_file: packages/flow-core/CHANGELOG.md
       - name: Slack Markdown Converter
+        if: steps.changesets.outputs.published == 'true'
         id: md-converter
         uses: LoveToKnow/slackify-markdown-action@v1.0.0
         with: 
           text: ${{ steps.extract-release-notes.outputs.release_notes }}
       - name: Send Slack Notification
+        if: steps.changesets.outputs.published == 'true'
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
         with:
@@ -50,6 +56,13 @@ jobs:
             {
               "text": "Updates",
               "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "${{ fromJSON(steps.changesets.outputs)[0].name }} updated to ${{ fromJSON(steps.changesets.outputs)[0].version }} on ${{ steps.date.outputs.date }}"
+                  }
+                },
                 {
                   "type": "section",
                   "text": {

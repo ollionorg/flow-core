@@ -3,7 +3,7 @@ name: Test and Release
 on:
   push:
     branches:
-      - main
+      - vikas/FLOW-773
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -31,6 +31,27 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Send Slack Notification
+        id: slack
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          # For posting a rich message using Block Kit
+          payload: |
+            {
+              "text": "Updates",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "## [1.14.4] - 2023-05-16\n\n### Bug Fixes\n\n- `f-select` opening issue fixed."
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
   publish_to_github:
     name: Publishing to github registry
     runs-on: ubuntu-latest

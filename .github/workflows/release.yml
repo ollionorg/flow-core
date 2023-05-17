@@ -3,7 +3,7 @@ name: Test and Release
 on:
   push:
     branches:
-      - vikas/FLOW-773
+      - main
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -33,7 +33,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        run: echo "::set-output name=date::$(date +'%B %d, %Y')"
       - name: Extract release notes
         if: steps.changesets.outputs.published == 'true'
         id: extract-release-notes
@@ -60,8 +60,17 @@ jobs:
                   "type": "header",
                   "text": {
                     "type": "plain_text",
-                    "text": "Flow Updates"
+                    "text": ":mega: Flow Announcement"
                   }
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "text": "*${{ steps.date.outputs.date }}*",
+                      "type": "mrkdwn"
+                    }
+                  ]
                 },
                 {
                   "type": "divider"
@@ -70,7 +79,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }} updated to ${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].version }} on ${{ steps.date.outputs.date }}"
+                    "text": "Hello everyone! We are thrilled to announce that a new version of the *${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }}* package is now available! 🎉. \nPlease find below the changelogs for the new version (*${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].version }}*):"
                   }
                 },
                 {
@@ -78,6 +87,27 @@ jobs:
                   "text": {
                     "type": "mrkdwn",
                     "text": ${{ toJSON(steps.md-converter.outputs.text) }}
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "To update your package to the latest version, simply run the following command in your project directory:"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "`npm install ${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }}@${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].version }}`\n\nIf you're using Yarn, you can use the following command:\n`yarn add ${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }}@${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].version }}`"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "We would love to hear your feedback and any issues you might encounter while using the new version. Feel free to reach out to us on Slack or submit a GitHub issue if you need any assistance.\n\n Happy coding with the new `${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }}` version! :rocket:"
                   }
                 }
               ]

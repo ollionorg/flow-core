@@ -36,6 +36,11 @@ jobs:
         uses: ffurrer2/extract-release-notes@v1
         with:
           changelog_file: packages/flow-core/CHANGELOG.md
+      - name: Slack Markdown Converter
+        id: md-converter
+        uses: LoveToKnow/slackify-markdown-action@v1.0.0
+        with: 
+          text: ${{ steps.extract-release-notes.outputs.release_notes }}
       - name: Send Slack Notification
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
@@ -49,7 +54,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ${{ toJSON(steps.extract-release-notes.outputs.release_notes) }}
+                    "text": ${{ toJSON(steps.md-converter.outputs.text) }}
                   }
                 }
               ]

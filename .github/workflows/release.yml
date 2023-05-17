@@ -31,7 +31,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Extract release notes
+        if: steps.changesets.outputs.published == 'true'
+        id: extract-release-notes
+        uses: ffurrer2/extract-release-notes@v1
+        with:
+          changelog_file: packages/flow-core/CHANGELOG.md
       - name: Send Slack Notification
+        if: steps.changesets.outputs.published == 'true'
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
         with:
@@ -44,7 +51,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "## [1.14.4] - 2023-05-16\n\n### Bug Fixes\n\n- `f-select` opening issue fixed."
+                    "text": "${{ steps.extract-release-notes.outputs.release_notes }}"
                   }
                 }
               ]

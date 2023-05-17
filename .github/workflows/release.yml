@@ -70,7 +70,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "${{ fromJSON(steps.changesets.outputs).publishedPackages[0].name }} updated to ${{ fromJSON(steps.changesets.outputs).publishedPackages[0].version }} on ${{ steps.date.outputs.date }}"
+                    "text": "${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }} updated to ${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].version }} on ${{ steps.date.outputs.date }}"
                   }
                 },
                 {

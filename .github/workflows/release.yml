@@ -47,7 +47,7 @@ jobs:
         with: 
           text: ${{ steps.extract-release-notes.outputs.release_notes }}
       - name: Send Slack Notification
-        if: steps.changesets.outputs.published == 'true'
+        if: steps.changesets.outputs.published == 'true' && fromJSON(steps.changesets.outputs.publishedPackages)[0].name == '@cldcvr/flow-core'
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
         with:

@@ -67,7 +67,7 @@ jobs:
                   "type": "context",
                   "elements": [
                     {
-                      "text": "*${{ steps.date.outputs.date }}*",
+                      "text": "*${{ steps.date.outputs.date }}* | New Release Alert: ${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }}@${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].version }}",
                       "type": "mrkdwn"
                     }
                   ]
@@ -79,7 +79,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Hello everyone! We are thrilled to announce that a new version of the *${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }}* package is now available! 🎉. \nPlease find below the changelogs for the new version (*${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].version }}*):"
+                    "text": "Hello everyone! We are thrilled to announce that a new version of the *${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }}* package is now available! 🎉. \nPlease find below the changelogs for the new version *${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].version }}*:"
                   }
                 },
                 {
@@ -110,7 +110,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "We would love to hear your feedback and any issues you might encounter while using the new version. Feel free to reach out to us on Slack or submit a GitHub issue if you need any assistance.\n\n Happy coding with the new `${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }}` version! :rocket:"
+                    "text": "We would love to hear your feedback and any issues you might encounter while using the new version. Feel free to reach out to us on Slack or submit a GitHub issue if you need any assistance.\n\nHappy coding with the new `${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }}` version! :rocket:"
                   }
                 }
               ]

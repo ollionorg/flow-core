@@ -1,5 +1,5 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
+import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-emoji-picker.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import data, { Category, EmojiMartData } from "@emoji-mart/data";
@@ -8,6 +8,7 @@ import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import { FIcon } from "../f-icon/f-icon";
 import { FPopover } from "../f-popover/f-popover";
+import { flowElement } from "./../../utils";
 
 export type FEmojiPickerState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -52,7 +53,7 @@ export type FEmojiPickerCustomEmojiData = FEmojiPickerCustomEmoji[];
 export type RecentEmojis = string[];
 export type ExcludeEmojis = string[];
 
-@customElement("f-emoji-picker")
+@flowElement("f-emoji-picker")
 export class FEmojiPicker extends FRoot {
 	/**
 	 * css loaded from scss file

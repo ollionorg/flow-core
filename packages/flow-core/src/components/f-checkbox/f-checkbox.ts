@@ -1,18 +1,19 @@
-import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-checkbox.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import checkedMark from "../../mixins/svg/checked-mark";
 import indeterminateMark from "../../mixins/svg/indeterminate-mark";
 import { FDiv } from "../f-div/f-div";
+import { flowElement } from "./../../utils";
 
 export type FCheckboxState = "primary" | "default" | "success" | "warning" | "danger";
 export type FCheckboxCustomEvent = {
 	value: string;
 };
 
-@customElement("f-checkbox")
+@flowElement("f-checkbox")
 export class FCheckbox extends FRoot {
 	/**
 	 * css loaded from scss file
@@ -41,6 +42,9 @@ export class FCheckbox extends FRoot {
 	 */
 	@property({ reflect: true, type: Boolean })
 	disabled?: boolean = false;
+
+	@query(".slot-wrapper")
+	slotWrapper!: FDiv;
 
 	/**
 	 * emit event.
@@ -95,21 +99,42 @@ export class FCheckbox extends FRoot {
 					</label>
 					<f-div
 						padding="none"
-						class="label-wrapper"
+						class="label-wrapper slot-wrapper"
 						width="hug-content"
 						align="middle-left"
 						direction="row"
 						gap="small"
 					>
-						<slot name="label" @click=${this.handleInput}></slot>
-						<slot name="icon-tooltip"></slot>
-						<slot name="subtitle"></slot>
+						<slot name="label" @click=${this.handleInput} @slotchange=${this.checkSlots}></slot>
+						<slot name="icon-tooltip" @slotchange=${this.checkSlots}></slot>
+						<slot name="subtitle" @slotchange=${this.checkSlots}></slot>
 					</f-div>
 				</f-div>
-				<slot name="description"></slot>
-				<slot name="help"></slot>
+				<slot name="description" @slotchange=${this.checkSlots}></slot>
+				<slot name="help" @slotchange=${this.checkSlots}></slot>
 			</f-div>
 		`;
+	}
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.updated(changedProperties);
+
+		this.checkSlots();
+	}
+
+	checkSlots() {
+		const labelSlots = this.shadowRoot?.querySelectorAll<HTMLSlotElement>(
+			"slot[name='label'],slot[name='icon-tooltip'],slot[name='subtitle']"
+		);
+		let displaySlotWrapper = false;
+		labelSlots?.forEach(slot => {
+			if (slot.assignedNodes().length > 0) {
+				displaySlotWrapper = true;
+			}
+		});
+
+		if (!displaySlotWrapper) {
+			this.slotWrapper.style.display = "none";
+		}
 	}
 }
 

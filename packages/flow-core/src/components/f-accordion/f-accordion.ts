@@ -1,8 +1,9 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-accordion.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
+import { flowElement } from "./../../utils";
 
 export type FAccordionBodyHeightProp = `${number}px` | `${number}%` | `${number}vh`;
 
@@ -10,7 +11,7 @@ export type FAccordionCustomEvent = {
 	value: boolean;
 };
 
-@customElement("f-accordion")
+@flowElement("f-accordion")
 export class FAccordion extends FRoot {
 	/**
 	 * css loaded from scss file

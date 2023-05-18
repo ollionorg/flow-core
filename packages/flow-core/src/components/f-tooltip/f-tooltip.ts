@@ -1,9 +1,10 @@
 import { html, LitElement, unsafeCSS } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import eleStyle from "./f-tooltip.scss";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import { FPopover } from "../f-popover/f-popover";
+import { flowElement } from "./../../utils";
 
 export type FTooltipPlacement =
 	| "top"
@@ -20,7 +21,7 @@ export type FTooltipPlacement =
 	| "left-end"
 	| "auto";
 
-@customElement("f-tooltip")
+@flowElement("f-tooltip")
 export class FTooltip extends LitElement {
 	/**
 	 * css loaded from scss file

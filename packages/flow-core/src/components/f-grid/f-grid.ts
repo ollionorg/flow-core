@@ -1,12 +1,13 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import eleStyle from "./f-grid.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
+import { flowElement } from "./../../utils";
 
 export type FGridBodyHeightProp = `${number}px` | `${number}%` | `${number}vh`;
 
-@customElement("f-grid")
+@flowElement("f-grid")
 export class FGrid extends FRoot {
 	/**
 	 * css loaded from scss file

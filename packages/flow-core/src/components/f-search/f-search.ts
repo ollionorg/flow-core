@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
+import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-search.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
@@ -7,6 +7,7 @@ import { FDiv } from "../f-div/f-div";
 import { FSelect } from "../f-select/f-select";
 import { FSuggest } from "../f-suggest/f-suggest";
 import { FIconButton } from "../f-icon-button/f-icon-button";
+import { flowElement } from "./../../utils";
 
 export type FSearchState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -21,7 +22,7 @@ export type FSearchSuggestions = string[];
 
 export type FSearchScope = string[] | "none";
 
-@customElement("f-search")
+@flowElement("f-search")
 export class FSearch extends FRoot {
 	/**
 	 * css loaded from scss file

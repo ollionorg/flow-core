@@ -9,6 +9,14 @@
       "exports": [
         {
           "kind": "js",
+          "name": "flowElement",
+          "declaration": {
+            "name": "flowElement",
+            "module": "\"./utils\""
+          }
+        },
+        {
+          "kind": "js",
           "name": "*",
           "declaration": {
             "name": "*",
@@ -315,6 +323,34 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/utils/flow-element.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "flowElement",
+          "parameters": [
+            {
+              "name": "tagName",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "flowElement",
+            "module": "src/utils/flow-element.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/utils/get-computed-html.ts",
       "declarations": [
         {
@@ -549,6 +585,14 @@
           "name": "getFormattedBytes",
           "declaration": {
             "name": "getFormattedBytes",
+            "module": "src/utils/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "flowElement",
+          "declaration": {
+            "name": "flowElement",
             "module": "src/utils/index.ts"
           }
         }
@@ -804,23 +848,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-accordion",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FAccordion",
-          "declaration": {
-            "name": "FAccordion",
-            "module": "src/components/f-accordion/f-accordion.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-accordion",
           "declaration": {
             "name": "FAccordion",
             "module": "src/components/f-accordion/f-accordion.ts"
@@ -1121,23 +1155,13 @@
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
           },
-          "summary": "Buttons allow users to perform an action or to initiate a new function.",
-          "tagName": "f-button",
-          "customElement": true
+          "summary": "Buttons allow users to perform an action or to initiate a new function."
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FButton",
-          "declaration": {
-            "name": "FButton",
-            "module": "src/components/f-button/f-button.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-button",
           "declaration": {
             "name": "FButton",
             "module": "src/components/f-button/f-button.ts"
@@ -1400,23 +1424,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-carousel",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FCarousel",
-          "declaration": {
-            "name": "FCarousel",
-            "module": "src/components/f-carousel/f-carousel.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-carousel",
           "declaration": {
             "name": "FCarousel",
             "module": "src/components/f-carousel/f-carousel.ts"
@@ -1505,23 +1519,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-carousel-content",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FCarouselContent",
-          "declaration": {
-            "name": "FCarouselContent",
-            "module": "src/components/f-carousel-content/f-carousel-content.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-carousel-content",
           "declaration": {
             "name": "FCarouselContent",
             "module": "src/components/f-carousel-content/f-carousel-content.ts"
@@ -1578,6 +1582,13 @@
               "reflects": true
             },
             {
+              "kind": "field",
+              "name": "slotWrapper",
+              "type": {
+                "text": "FDiv"
+              }
+            },
+            {
               "kind": "method",
               "name": "handleInput",
               "parameters": [
@@ -1589,6 +1600,10 @@
                 }
               ],
               "description": "emit event."
+            },
+            {
+              "kind": "method",
+              "name": "checkSlots"
             },
             {
               "kind": "field",
@@ -1662,23 +1677,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-checkbox",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FCheckbox",
-          "declaration": {
-            "name": "FCheckbox",
-            "module": "src/components/f-checkbox/f-checkbox.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-checkbox",
           "declaration": {
             "name": "FCheckbox",
             "module": "src/components/f-checkbox/f-checkbox.ts"
@@ -1877,23 +1882,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-counter",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FCounter",
-          "declaration": {
-            "name": "FCounter",
-            "module": "src/components/f-counter/f-counter.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-counter",
           "declaration": {
             "name": "FCounter",
             "module": "src/components/f-counter/f-counter.ts"
@@ -2377,23 +2372,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-date-time-picker",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FDateTimePicker",
-          "declaration": {
-            "name": "FDateTimePicker",
-            "module": "src/components/f-date-time-picker/f-date-time-picker.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-date-time-picker",
           "declaration": {
             "name": "FDateTimePicker",
             "module": "src/components/f-date-time-picker/f-date-time-picker.ts"
@@ -2481,7 +2466,7 @@
               "kind": "field",
               "name": "align",
               "type": {
-                "text": "| \"top-left\"\n    | \"top-center\"\n    | \"top-right\"\n    | \"middle-left\"\n    | \"middle-center\"\n    | \"middle-right\"\n    | \"bottom-left\"\n    | \"bottom-center\"\n    | \"bottom-right\" | undefined"
+                "text": "| \"top-left\"\n\t\t| \"top-center\"\n\t\t| \"top-right\"\n\t\t| \"middle-left\"\n\t\t| \"middle-center\"\n\t\t| \"middle-right\"\n\t\t| \"bottom-left\"\n\t\t| \"bottom-center\"\n\t\t| \"bottom-right\" | undefined"
               },
               "default": "\"top-left\"",
               "attribute": "align",
@@ -2657,7 +2642,7 @@
             {
               "name": "align",
               "type": {
-                "text": "| \"top-left\"\n    | \"top-center\"\n    | \"top-right\"\n    | \"middle-left\"\n    | \"middle-center\"\n    | \"middle-right\"\n    | \"bottom-left\"\n    | \"bottom-center\"\n    | \"bottom-right\" | undefined"
+                "text": "| \"top-left\"\n\t\t| \"top-center\"\n\t\t| \"top-right\"\n\t\t| \"middle-left\"\n\t\t| \"middle-center\"\n\t\t| \"middle-right\"\n\t\t| \"bottom-left\"\n\t\t| \"bottom-center\"\n\t\t| \"bottom-right\" | undefined"
               },
               "default": "\"top-left\"",
               "fieldName": "align"
@@ -2741,23 +2726,13 @@
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
           },
-          "summary": "F-div is used as a container for HTML elements.",
-          "tagName": "f-div",
-          "customElement": true
+          "summary": "F-div is used as a container for HTML elements."
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FDiv",
-          "declaration": {
-            "name": "FDiv",
-            "module": "src/components/f-div/f-div.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-div",
           "declaration": {
             "name": "FDiv",
             "module": "src/components/f-div/f-div.ts"
@@ -2877,23 +2852,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-divider",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FDivider",
-          "declaration": {
-            "name": "FDivider",
-            "module": "src/components/f-divider/f-divider.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-divider",
           "declaration": {
             "name": "FDivider",
             "module": "src/components/f-divider/f-divider.ts"
@@ -3405,23 +3370,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-emoji-picker",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FEmojiPicker",
-          "declaration": {
-            "name": "FEmojiPicker",
-            "module": "src/components/f-emoji-picker/f-emoji-picker.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-emoji-picker",
           "declaration": {
             "name": "FEmojiPicker",
             "module": "src/components/f-emoji-picker/f-emoji-picker.ts"
@@ -3620,23 +3575,13 @@
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
           },
-          "summary": "Text component includes Headings, titles, body texts and links.",
-          "tagName": "f-field",
-          "customElement": true
+          "summary": "Text component includes Headings, titles, body texts and links."
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FField",
-          "declaration": {
-            "name": "FField",
-            "module": "src/components/f-field/f-field.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-field",
           "declaration": {
             "name": "FField",
             "module": "src/components/f-field/f-field.ts"
@@ -4151,23 +4096,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-file-upload",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FFileUpload",
-          "declaration": {
-            "name": "FFileUpload",
-            "module": "src/components/f-file-upload/f-file-upload.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-file-upload",
           "declaration": {
             "name": "FFileUpload",
             "module": "src/components/f-file-upload/f-file-upload.ts"
@@ -4262,23 +4197,13 @@
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
           },
-          "summary": "Text component includes Headings, titles, body texts and links.",
-          "tagName": "f-form",
-          "customElement": true
+          "summary": "Text component includes Headings, titles, body texts and links."
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FForm",
-          "declaration": {
-            "name": "FForm",
-            "module": "src/components/f-form/f-form.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-form",
           "declaration": {
             "name": "FForm",
             "module": "src/components/f-form/f-form.ts"
@@ -4483,23 +4408,13 @@
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
           },
-          "summary": "Text component includes Headings, titles, body texts and links.",
-          "tagName": "f-form-group",
-          "customElement": true
+          "summary": "Text component includes Headings, titles, body texts and links."
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FFormGroup",
-          "declaration": {
-            "name": "FFormGroup",
-            "module": "src/components/f-form-group/f-form-group.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-form-group",
           "declaration": {
             "name": "FFormGroup",
             "module": "src/components/f-form-group/f-form-group.ts"
@@ -4633,23 +4548,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-grid",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FGrid",
-          "declaration": {
-            "name": "FGrid",
-            "module": "src/components/f-grid/f-grid.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-grid",
           "declaration": {
             "name": "FGrid",
             "module": "src/components/f-grid/f-grid.ts"
@@ -4841,23 +4746,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-icon",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FIcon",
-          "declaration": {
-            "name": "FIcon",
-            "module": "src/components/f-icon/f-icon.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-icon",
           "declaration": {
             "name": "FIcon",
             "module": "src/components/f-icon/f-icon.ts"
@@ -5098,23 +4993,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-icon-button",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FIconButton",
-          "declaration": {
-            "name": "FIconButton",
-            "module": "src/components/f-icon-button/f-icon-button.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-icon-button",
           "declaration": {
             "name": "FIconButton",
             "module": "src/components/f-icon-button/f-icon-button.ts"
@@ -5569,23 +5454,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-input",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FInput",
-          "declaration": {
-            "name": "FInput",
-            "module": "src/components/f-input/f-input.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-input",
           "declaration": {
             "name": "FInput",
             "module": "src/components/f-input/f-input.ts"
@@ -5775,23 +5650,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-pictogram",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FPictogram",
-          "declaration": {
-            "name": "FPictogram",
-            "module": "src/components/f-pictogram/f-pictogram.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-pictogram",
           "declaration": {
             "name": "FPictogram",
             "module": "src/components/f-pictogram/f-pictogram.ts"
@@ -6026,23 +5891,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-popover",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FPopover",
-          "declaration": {
-            "name": "FPopover",
-            "module": "src/components/f-popover/f-popover.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-popover",
           "declaration": {
             "name": "FPopover",
             "module": "src/components/f-popover/f-popover.ts"
@@ -6219,23 +6074,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-progress-bar",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FProgressBar",
-          "declaration": {
-            "name": "FProgressBar",
-            "module": "src/components/f-progress-bar/f-progress-bar.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-progress-bar",
           "declaration": {
             "name": "FProgressBar",
             "module": "src/components/f-progress-bar/f-progress-bar.ts"
@@ -6292,6 +6137,13 @@
               "reflects": true
             },
             {
+              "kind": "field",
+              "name": "slotWrapper",
+              "type": {
+                "text": "FDiv"
+              }
+            },
+            {
               "kind": "method",
               "name": "handleClick",
               "parameters": [
@@ -6303,6 +6155,10 @@
                 }
               ],
               "description": "emit event on click"
+            },
+            {
+              "kind": "method",
+              "name": "checkSlots"
             },
             {
               "kind": "field",
@@ -6376,23 +6232,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-radio",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FRadio",
-          "declaration": {
-            "name": "FRadio",
-            "module": "src/components/f-radio/f-radio.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-radio",
           "declaration": {
             "name": "FRadio",
             "module": "src/components/f-radio/f-radio.ts"
@@ -6808,23 +6654,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-search",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FSearch",
-          "declaration": {
-            "name": "FSearch",
-            "module": "src/components/f-search/f-search.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-search",
           "declaration": {
             "name": "FSearch",
             "module": "src/components/f-search/f-search.ts"
@@ -7651,23 +7487,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-select",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FSelect",
-          "declaration": {
-            "name": "FSelect",
-            "module": "src/components/f-select/f-select.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-select",
           "declaration": {
             "name": "FSelect",
             "module": "src/components/f-select/f-select.ts"
@@ -8154,9 +7980,7 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-spacer",
-          "customElement": true
+          }
         }
       ],
       "exports": [
@@ -8167,13 +7991,195 @@
             "name": "FSpacer",
             "module": "src/components/f-spacer/f-spacer.ts"
           }
-        },
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-switch/f-switch.ts",
+      "declarations": [
         {
-          "kind": "custom-element-definition",
-          "name": "f-spacer",
+          "kind": "class",
+          "description": "",
+          "name": "FSwitch",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FSwitchState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "switchSlots",
+              "type": {
+                "text": "FDiv"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_labelNodes",
+              "type": {
+                "text": "NodeListOf<HTMLElement>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_subtitleNodes",
+              "type": {
+                "text": "NodeListOf<HTMLElement>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_iconTooltipNodes",
+              "type": {
+                "text": "NodeListOf<HTMLElement>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hasLabel",
+              "description": "has label slot"
+            },
+            {
+              "kind": "field",
+              "name": "hasSubtitle",
+              "description": "has subtitle slot"
+            },
+            {
+              "kind": "field",
+              "name": "hasIconTooltip",
+              "description": "has icon-tooltip slot"
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ],
+              "description": "emit event."
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "value"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FSwitchState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "fieldName": "size"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FSwitch",
           "declaration": {
-            "name": "FSpacer",
-            "module": "src/components/f-spacer/f-spacer.ts"
+            "name": "FSwitch",
+            "module": "src/components/f-switch/f-switch.ts"
           }
         }
       ]
@@ -8616,9 +8622,7 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-suggest",
-          "customElement": true
+          }
         }
       ],
       "exports": [
@@ -8628,214 +8632,6 @@
           "declaration": {
             "name": "FSuggest",
             "module": "src/components/f-suggest/f-suggest.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-suggest",
-          "declaration": {
-            "name": "FSuggest",
-            "module": "src/components/f-suggest/f-suggest.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-switch/f-switch.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FSwitch",
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "value",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FSwitchState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"small\" | \"medium\" | undefined"
-              },
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "switchSlots",
-              "type": {
-                "text": "FDiv"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "_labelNodes",
-              "type": {
-                "text": "NodeListOf<HTMLElement>"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "_subtitleNodes",
-              "type": {
-                "text": "NodeListOf<HTMLElement>"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "_iconTooltipNodes",
-              "type": {
-                "text": "NodeListOf<HTMLElement>"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "hasLabel",
-              "description": "has label slot"
-            },
-            {
-              "kind": "field",
-              "name": "hasSubtitle",
-              "description": "has subtitle slot"
-            },
-            {
-              "kind": "field",
-              "name": "hasIconTooltip",
-              "description": "has icon-tooltip slot"
-            },
-            {
-              "kind": "method",
-              "name": "handleInput",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ],
-              "description": "emit event."
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "value"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FSwitchState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "\"small\" | \"medium\" | undefined"
-              },
-              "fieldName": "size"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-switch",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FSwitch",
-          "declaration": {
-            "name": "FSwitch",
-            "module": "src/components/f-switch/f-switch.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-switch",
-          "declaration": {
-            "name": "FSwitch",
-            "module": "src/components/f-switch/f-switch.ts"
           }
         }
       ]
@@ -9029,23 +8825,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-tab",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FTab",
-          "declaration": {
-            "name": "FTab",
-            "module": "src/components/f-tab/f-tab.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-tab",
           "declaration": {
             "name": "FTab",
             "module": "src/components/f-tab/f-tab.ts"
@@ -9139,23 +8925,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-tab-content",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FTabContent",
-          "declaration": {
-            "name": "FTabContent",
-            "module": "src/components/f-tab-content/f-tab-content.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-tab-content",
           "declaration": {
             "name": "FTabContent",
             "module": "src/components/f-tab-content/f-tab-content.ts"
@@ -9260,23 +9036,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-tab-node",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FTabNode",
-          "declaration": {
-            "name": "FTabNode",
-            "module": "src/components/f-tab-node/f-tab-node.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-tab-node",
           "declaration": {
             "name": "FTabNode",
             "module": "src/components/f-tab-node/f-tab-node.ts"
@@ -9546,23 +9312,13 @@
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
           },
-          "summary": "Tags allow users to categorize the content. They can be used to add metadata to an element such as category, or property or show a status.",
-          "tagName": "f-tag",
-          "customElement": true
+          "summary": "Tags allow users to categorize the content. They can be used to add metadata to an element such as category, or property or show a status."
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FTag",
-          "declaration": {
-            "name": "FTag",
-            "module": "src/components/f-tag/f-tag.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-tag",
           "declaration": {
             "name": "FTag",
             "module": "src/components/f-tag/f-tag.ts"
@@ -9608,8 +9364,6 @@
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
           },
-          "tagName": "f-template",
-          "customElement": true,
           "attributes": [
             {
               "name": "tooltip",
@@ -9629,14 +9383,6 @@
         {
           "kind": "js",
           "name": "FTemplate",
-          "declaration": {
-            "name": "FTemplate",
-            "module": "src/components/f-template/f-template.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-template",
           "declaration": {
             "name": "FTemplate",
             "module": "src/components/f-template/f-template.ts"
@@ -9688,6 +9434,15 @@
                 "text": "\"bold\" | \"medium\" | \"regular\" | undefined"
               },
               "attribute": "weight",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "highlight",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "highlight",
               "reflects": true
             },
             {
@@ -9751,9 +9506,40 @@
               "reflects": true
             },
             {
+              "kind": "field",
+              "name": "defaultSlot",
+              "type": {
+                "text": "HTMLSlotElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "highlightedText",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null"
+            },
+            {
               "kind": "method",
               "name": "validateProperties",
               "description": "validation for all atrributes"
+            },
+            {
+              "kind": "method",
+              "name": "removeMarkTag",
+              "parameters": [
+                {
+                  "name": "str",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleSlotChange"
             },
             {
               "kind": "field",
@@ -9803,6 +9589,13 @@
                 "text": "\"bold\" | \"medium\" | \"regular\" | undefined"
               },
               "fieldName": "weight"
+            },
+            {
+              "name": "highlight",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "highlight"
             },
             {
               "name": "state",
@@ -9868,23 +9661,13 @@
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
           },
-          "summary": "Text component includes Headings, titles, body texts and links.",
-          "tagName": "f-text",
-          "customElement": true
+          "summary": "Text component includes Headings, titles, body texts and links."
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FText",
-          "declaration": {
-            "name": "FText",
-            "module": "src/components/f-text/f-text.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-text",
           "declaration": {
             "name": "FText",
             "module": "src/components/f-text/f-text.ts"
@@ -10161,23 +9944,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-text-area",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FTextArea",
-          "declaration": {
-            "name": "FTextArea",
-            "module": "src/components/f-text-area/f-text-area.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-text-area",
           "declaration": {
             "name": "FTextArea",
             "module": "src/components/f-text-area/f-text-area.ts"
@@ -10416,23 +10189,13 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-toast",
-          "customElement": true
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
           "name": "FToast",
-          "declaration": {
-            "name": "FToast",
-            "module": "src/components/f-toast/f-toast.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-toast",
           "declaration": {
             "name": "FToast",
             "module": "src/components/f-toast/f-toast.ts"
@@ -10508,7 +10271,6 @@
             "name": "LitElement",
             "package": "lit"
           },
-          "tagName": "f-tooltip",
           "customElement": true
         }
       ],
@@ -10519,51 +10281,6 @@
           "declaration": {
             "name": "FTooltip",
             "module": "src/components/f-tooltip/f-tooltip.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-tooltip",
-          "declaration": {
-            "name": "FTooltip",
-            "module": "src/components/f-tooltip/f-tooltip.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/modules/config/index.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "themeSubject",
-          "default": "new Subject<string>()"
-        },
-        {
-          "kind": "variable",
-          "name": "ConfigUtil",
-          "type": {
-            "text": "object"
-          },
-          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    if (cfg.theme) {\n      this.initTheme();\n    }\n  },\n  initTheme() {\n    document.documentElement.setAttribute(\"data-theme\", `${config.theme}`);\n  },\n}"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "themeSubject",
-          "declaration": {
-            "name": "themeSubject",
-            "module": "src/modules/config/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "ConfigUtil",
-          "declaration": {
-            "name": "ConfigUtil",
-            "module": "src/modules/config/index.ts"
           }
         }
       ]
@@ -10620,6 +10337,43 @@
           "name": "default",
           "declaration": {
             "module": "src/mixins/svg/not-found.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/modules/config/index.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "themeSubject",
+          "default": "new Subject<string>()"
+        },
+        {
+          "kind": "variable",
+          "name": "ConfigUtil",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\n  getConfig() {\n    return config;\n  },\n  setConfig(cfg: Partial<FlowCoreConfig>) {\n    config = { ...config, ...cfg };\n    if (cfg.theme) {\n      this.initTheme();\n    }\n  },\n  initTheme() {\n    document.documentElement.setAttribute(\"data-theme\", `${config.theme}`);\n  },\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "themeSubject",
+          "declaration": {
+            "name": "themeSubject",
+            "module": "src/modules/config/index.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ConfigUtil",
+          "declaration": {
+            "name": "ConfigUtil",
+            "module": "src/modules/config/index.ts"
           }
         }
       ]

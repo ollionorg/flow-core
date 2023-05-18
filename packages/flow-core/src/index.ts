@@ -3,6 +3,7 @@
 import { ConfigUtil } from "./modules/config";
 import { version } from "./../package.json";
 
+export { flowElement } from "./utils";
 export * from "./modules/config";
 
 export * from "./components/f-button/f-button";

@@ -5,6 +5,7 @@ import isValidEmail from "./is-valid-email";
 import getCustomFillColor from "./get-custom-fill-color";
 import LightenDarkenColor from "./get-lighten-darken-color";
 import getFormattedBytes from "./get-formatted-bytes";
+import flowElement from "./flow-element";
 export {
 	isValidHttpUrl,
 	getTextContrast,
@@ -12,5 +13,6 @@ export {
 	isValidEmail,
 	getCustomFillColor,
 	LightenDarkenColor,
-	getFormattedBytes
+	getFormattedBytes,
+	flowElement
 };

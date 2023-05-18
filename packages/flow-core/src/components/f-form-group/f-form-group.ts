@@ -1,9 +1,10 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import eleStyle from "./f-form-group.scss";
+import { flowElement } from "./../../utils";
 
 export type FGroupLabel = {
 	title: string;
@@ -14,7 +15,7 @@ export type FGroupLabel = {
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
-@customElement("f-form-group")
+@flowElement("f-form-group")
 export class FFormGroup extends FRoot {
 	/**
 	 * css loaded from scss file

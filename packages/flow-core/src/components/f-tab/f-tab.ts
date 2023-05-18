@@ -1,14 +1,15 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 import eleStyle from "./f-tab.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { FTabNode } from "../f-tab-node/f-tab-node";
 import { FIconButton } from "../f-icon-button/f-icon-button";
+import { flowElement } from "./../../utils";
 
 export type FTabNodeWidthProp = "fill" | "hug-content" | `${number}`;
 
-@customElement("f-tab")
+@flowElement("f-tab")
 export class FTab extends FRoot {
 	/**
 	 * css loaded from scss file

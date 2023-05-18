@@ -1,8 +1,9 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
+import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-switch.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
+import { flowElement } from "./../../utils";
 
 export type FSwitchState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -10,7 +11,7 @@ export type FSwitchCustomEvent = {
 	value: boolean;
 };
 
-@customElement("f-switch")
+@flowElement("f-switch")
 export class FSwitch extends FRoot {
 	/**
 	 * css loaded from scss file

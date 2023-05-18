@@ -1,12 +1,13 @@
 import { html, PropertyValueMap, render, unsafeCSS, svg, nothing } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { FRoot } from "./../../mixins/components/f-root/f-root";
 import eleStyle from "./f-carousel.scss";
 import { FDiv } from "../f-div/f-div";
 import { FCarouselContent } from "../f-carousel-content/f-carousel-content";
 import { FIcon } from "../f-icon/f-icon";
+import { flowElement } from "./../../utils";
 
-@customElement("f-carousel")
+@flowElement("f-carousel")
 export class FCarousel extends FRoot {
 	/**
 	 * css loaded from scss file

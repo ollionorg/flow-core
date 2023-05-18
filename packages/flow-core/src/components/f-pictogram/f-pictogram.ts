@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import eleStyle from "./f-pictogram.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ConfigUtil } from "./../../modules/config";
@@ -7,16 +7,17 @@ import { isValidHttpUrl } from "./../../utils";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import { classMap } from "lit-html/directives/class-map.js";
 import { FIcon } from "../f-icon/f-icon";
+import { flowElement } from "./../../utils";
 
 const variants = ["circle", "square", "hexagon", "squircle"] as const;
 const sizes = ["x-large", "large", "medium", "small"] as const;
 const states = ["primary", "danger", "warning", "success", "default", "inherit"] as const;
 
-export type FPictogramVariant = typeof variants[number];
-export type FPictogramSize = typeof sizes[number];
-export type FPictogramState = typeof states[number];
+export type FPictogramVariant = (typeof variants)[number];
+export type FPictogramSize = (typeof sizes)[number];
+export type FPictogramState = (typeof states)[number];
 
-@customElement("f-pictogram")
+@flowElement("f-pictogram")
 export class FPictogram extends FRoot {
 	/**
 	 * css loaded from scss file

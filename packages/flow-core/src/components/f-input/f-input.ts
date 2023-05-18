@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import eleStyle from "./f-input.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -9,6 +9,7 @@ import { FIcon } from "../f-icon/f-icon";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { ifDefined } from "lit-html/directives/if-defined.js";
+import { flowElement } from "./../../utils";
 
 export type FInputState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -19,7 +20,7 @@ export type FInputCustomEvent = {
 
 export type FInputSuffixWhen = (value: string) => boolean;
 
-@customElement("f-input")
+@flowElement("f-input")
 export class FInput extends FRoot {
 	/**
 	 * css loaded from scss file

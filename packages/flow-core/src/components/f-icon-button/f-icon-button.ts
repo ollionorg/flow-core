@@ -1,5 +1,5 @@
 import { html, PropertyValues, unsafeCSS } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 import eleStyle from "./f-icon-button.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -12,14 +12,15 @@ import { validateHTMLColor } from "validate-color";
 import getTextContrast from "../../utils/get-text-contrast";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import LightenDarkenColor from "../../utils/get-lighten-darken-color";
+import { flowElement } from "./../../utils";
 
 const variants = ["round", "curved", "block"] as const;
 const categories = ["fill", "outline", "transparent", "packed"] as const;
 const sizes = ["large", "medium", "small", "x-small"] as const;
 
-export type FIconButtonVariant = typeof variants[number];
-export type FIconButtonType = typeof categories[number];
-export type FIconButtonSize = typeof sizes[number];
+export type FIconButtonVariant = (typeof variants)[number];
+export type FIconButtonType = (typeof categories)[number];
+export type FIconButtonSize = (typeof sizes)[number];
 export type FIconButtonState =
 	| "primary"
 	| "danger"
@@ -29,7 +30,7 @@ export type FIconButtonState =
 	| "inherit"
 	| `custom, ${string}`;
 
-@customElement("f-icon-button")
+@flowElement("f-icon-button")
 export class FIconButton extends FRoot {
 	/**
 	 * css loaded from scss file

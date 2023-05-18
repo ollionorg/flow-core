@@ -16,8 +16,9 @@
     "build-flow-core": "cd packages/flow-core && yarn compile",
     "build-flow-log": "cd packages/flow-log && yarn compile",
     "build-flow-code-editor": "cd packages/flow-code-editor && yarn compile",
+    "build-flow-table": "cd packages/flow-table && yarn compile",
     "build-types-generator": "cd packages/custom-elements-manifest-to-types && yarn build",
-    "build-packages": "yarn build-types-generator && yarn build-flow-core && yarn build-flow-code-editor && yarn build-flow-log",
+    "build-packages": "yarn build-types-generator && yarn build-flow-core && yarn build-flow-code-editor && yarn build-flow-log && yarn build-flow-table",
     "release": "cp README.md packages/flow-core && yarn build-packages && yarn changeset publish",
     "prepare": "husky install",
     "test": "yarn loki test"
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@changesets/cli": "^2.25.0",
     "@cldcvr/prettier-config": "^1.0.3",
+    "@faker-js/faker": "^7.6.0",
     "@storybook/addon-actions": "^6.5.7",
     "@storybook/addon-essentials": "^6.5.7",
     "@storybook/addon-links": "^6.5.7",

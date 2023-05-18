@@ -1,0 +1,501 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+
+<Meta
+	title="@cldcvr:flow-table/Components/f-table"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
+/>
+
+# f-table
+
+<br />
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+Table component includes rows and cells.
+
+<br />
+
+### [Playground](/story/components-f-table--playground)
+
+<Canvas>
+	<Story
+		name="Playground"
+		argTypes={{
+			variant: {
+				control: "select",
+				options: ["stripped", "outlined", "underlined", "bordered"]
+			},
+			size: {
+				control: "select",
+				options: ["medium", "small"]
+			},
+			selectable: {
+				control: "select",
+				options: ["single", "multiple", "none"]
+			},
+			["highlight-selected"]: {
+				control: { type: "boolean" }
+			},
+			["highlight-hover"]: {
+				control: { type: "boolean" }
+			}
+		}}
+		args={{
+			variant: "stripped",
+			size: "medium",
+			selectable: "none",
+			["highlight-selected"]: true,
+			["highlight-hover"]: true
+		}}
+	>
+		{args => {
+			const handleSelectedRows = event => {
+				console.log("selected rows", event.detail);
+			};
+			const testOverrideClick = event => {
+				console.log("clicked", event);
+			};
+			return html`
+				<f-table
+					.highlightSelected=${args["highlight-selected"]}
+					.highlightHover=${args["highlight-hover"]}
+					.selectable=${args.selectable}
+					.variant=${args.variant}
+					.size=${args.size}
+					@selected-rows=${handleSelectedRows}
+				>
+					<f-trow slot="header">
+						${[1, 2, 3, 4, 5].map(cellNumber => {
+							return html`<f-tcell @click=${testOverrideClick}> Header ${cellNumber} </f-tcell>`;
+						})}
+					</f-trow>
+					${[1, 2, 3, 4, 5].map(rowNumber => {
+						return html`<f-trow>
+							<f-div padding="large" slot="details">
+								<f-text variant="heading" size="x-large">This is details slot</f-text>
+							</f-div>
+							${[1, 2, 3, 4, 5].map(cellNumber => {
+								return html`<f-tcell>
+									<f-text> Column ${cellNumber} </f-text>
+								</f-tcell>`;
+							})}
+						</f-trow>`;
+					})}
+				</f-table>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<hr />
+
+<br />
+
+<Story name="Anatomy">
+	{() => html`<f-div align="middle-center" padding="large">Display anatomy here</f-div>`}
+</Story>
+
+<br />
+
+## variant
+
+<hr />
+
+variant are representations of a f-table with different row background and borders.
+
+<Canvas>
+	<Story name="variant">
+		{args =>
+			html`<f-div direction="column" state="subtle" padding="small" gap="large"
+				>${["stripped", "outlined", "underlined", "bordered"].map(
+					variant => html`<f-text>variant="${variant}"</f-text
+						><f-table .variant=${variant}>
+							<f-trow slot="header">
+								${[1, 2, 3, 4, 5].map(cellNumber => {
+									return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+								})}
+							</f-trow>
+							${[1, 2, 3, 4, 5].map(rowNumber => {
+								return html`<f-trow>
+									${[1, 2, 3, 4, 5].map(cellNumber => {
+										return html`<f-tcell>
+											<f-text> Column ${cellNumber} </f-text>
+										</f-tcell>`;
+									})}
+								</f-trow>`;
+							})} </f-table
+						><f-divider></f-divider>`
+				)}</f-div
+			>`
+		}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>stripped</td>
+			<td>Sets aletrnate background on each row</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>outlined</td>
+			<td>Sets border around table</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>underlined</td>
+			<td>Sets border at bottom of each row</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>bordered</td>
+			<td>Sets border around each cell</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## size
+
+<hr />
+
+size sets differrent padding on each cell of table
+
+<Canvas>
+	<Story name="size">
+		{args =>
+			html`<f-div direction="column" state="subtle" padding="small" gap="large"
+				>${["small", "medium"].map(
+					size => html`<f-text>size="${size}"</f-text
+						><f-table .size=${size}>
+							<f-trow slot="header">
+								${[1, 2, 3, 4, 5].map(cellNumber => {
+									return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+								})}
+							</f-trow>
+							${[1, 2, 3, 4, 5].map(rowNumber => {
+								return html`<f-trow>
+									${[1, 2, 3, 4, 5].map(cellNumber => {
+										return html`<f-tcell>
+											<f-text> Column ${cellNumber} </f-text>
+										</f-tcell>`;
+									})}
+								</f-trow>`;
+							})} </f-table
+						><f-divider></f-divider>`
+				)}</f-div
+			>`
+		}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>medium</td>
+			<td>Sets 16px padding on each cell</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>small</td>
+			<td>Sets 12px padding on each cell</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## selectable
+
+<hr />
+
+selectable sets checkbox or radio for row selection.
+
+<Canvas>
+	<Story name="selectable">
+		{args =>
+			html`<f-div direction="column" state="subtle" padding="small" gap="large"
+				>${["single", "multiple", "none"].map(
+					selectable => html`<f-text>selectable="${selectable}"</f-text
+						><f-table .selectable=${selectable}>
+							<f-trow slot="header">
+								${[1, 2, 3, 4, 5].map(cellNumber => {
+									return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+								})}
+							</f-trow>
+							${[1, 2, 3, 4, 5].map(rowNumber => {
+								return html`<f-trow>
+									${[1, 2, 3, 4, 5].map(cellNumber => {
+										return html`<f-tcell>
+											<f-text> Column ${cellNumber} </f-text>
+										</f-tcell>`;
+									})}
+								</f-trow>`;
+							})} </f-table
+						><f-divider></f-divider>`
+				)}</f-div
+			>`
+		}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>none</td>
+			<td>Sets no selection on rows</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>single</td>
+			<td>radio available for selection on rows</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>multiple</td>
+			<td>checkbox available for selection on rows</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## highlight-selected
+
+<hr />
+
+Sets background for selected rows
+
+<Canvas>
+	<Story name="highlight-selected">
+		{args =>
+			html`<f-div direction="column" state="subtle" padding="small" gap="large"
+				>${[true, false].map(
+					highlightSelected => html`<f-text>${highlightSelected ? "highlight-selected" : ""}</f-text
+						><f-table .highlightSelected=${highlightSelected} selectable="multiple">
+							<f-trow slot="header">
+								${[1, 2, 3, 4, 5].map(cellNumber => {
+									return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+								})}
+							</f-trow>
+							${[1, 2, 3, 4, 5].map(rowNumber => {
+								return html`<f-trow .selected=${rowNumber === 3}>
+									${[1, 2, 3, 4, 5].map(cellNumber => {
+										return html`<f-tcell>
+											<f-text> Column ${cellNumber} </f-text>
+										</f-tcell>`;
+									})}
+								</f-trow>`;
+							})} </f-table
+						><f-divider></f-divider>`
+				)}</f-div
+			>`
+		}
+	</Story>
+</Canvas>
+
+<br />
+
+## highlight-hover
+
+<hr />
+
+Sets background on row hover
+
+<Canvas>
+	<Story name="highlight-hover">
+		{args =>
+			html`<f-div direction="column" state="subtle" padding="small" gap="large"
+				>${[true, false].map(
+					highlightHover => html`<f-text>${highlightHover ? "highlight-hover" : ""}</f-text
+						><f-table .highlightHover=${highlightHover}>
+							<f-trow slot="header">
+								${[1, 2, 3, 4, 5].map(cellNumber => {
+									return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+								})}
+							</f-trow>
+							${[1, 2, 3, 4, 5].map(rowNumber => {
+								return html`<f-trow>
+									${[1, 2, 3, 4, 5].map(cellNumber => {
+										return html`<f-tcell>
+											<f-text> Column ${cellNumber} </f-text>
+										</f-tcell>`;
+									})}
+								</f-trow>`;
+							})} </f-table
+						><f-divider></f-divider>`
+				)}</f-div
+			>`
+		}
+	</Story>
+</Canvas>
+
+<br />
+
+### debug
+
+<Canvas>
+	<Story
+		name="debug"
+		argTypes={{
+			variant: {
+				control: "select",
+				options: ["stripped", "outlined", "underlined", "bordered"]
+			},
+			size: {
+				control: "select",
+				options: ["medium", "small"]
+			},
+			selectable: {
+				control: "select",
+				options: ["single", "multiple", "none"]
+			},
+			["highlight-selected"]: {
+				control: { type: "boolean" }
+			},
+			["highlight-hover"]: {
+				control: { type: "boolean" }
+			}
+		}}
+		args={{
+			variant: "stripped",
+			size: "medium",
+			selectable: "multiple",
+			["highlight-selected"]: true,
+			["highlight-hover"]: true
+		}}
+	>
+		{args => {
+			const handleSelectedRows = event => {
+				console.log("selected rows", event.detail);
+			};
+			const testOverrideClick = event => {
+				console.log("clicked", event);
+			};
+			return html`
+				<f-table
+					.highlightSelected=${args["highlight-selected"]}
+					.highlightHover=${args["highlight-hover"]}
+					.selectable=${args.selectable}
+					.variant=${args.variant}
+					.size=${args.size}
+					@selected-rows=${handleSelectedRows}
+				>
+					<f-trow slot="header">
+						${[1, 2, 3, 4, 5].map(cellNumber => {
+							return html`<f-tcell
+								.width=${cellNumber === 2 ? "200px" : undefined}
+								@click=${testOverrideClick}
+							>
+								Header ${cellNumber}
+							</f-tcell>`;
+						})}
+						<f-tcell></f-tcell>
+					</f-trow>
+					${[1, 2, 3, 4, 5].map(rowNumber => {
+						return html`<f-trow .state=${rowNumber === 2 ? "success" : "default"}>
+							<f-div padding="large" width="100%" slot="details">
+								<f-table
+									highlight-hover
+									highlight-selected
+									.selectable=${args.selectable}
+									variant="outlined"
+									.size=${args.size}
+									@selected-rows=${handleSelectedRows}
+								>
+									<f-trow slot="header">
+										${[1, 2, 3, 4, 5].map(cellNumber => {
+											return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+										})}
+										<f-tcell></f-tcell>
+									</f-trow>
+									${[1, 2, 3, 4, 5].map(rowNumber => {
+										return html`<f-trow>
+											<f-div padding="large" slot="details">
+												<f-text variant="heading" size="x-large">This is details slot</f-text>
+											</f-div>
+											${[1, 2, 3, 4, 5].map(cellNumber => {
+												return html`<f-tcell>
+													<f-text>
+														Column ${cellNumber} ${cellNumber === 2 && rowNumber === 2
+															? "sahdjhf dsfghgdf dsjhfgjshdf dfgsjhdf sdfhg"
+															: ""}
+													</f-text>
+												</f-tcell>`;
+											})}
+											<f-tcell
+												.actions=${[
+													{ icon: "i-copy", onClick: () => console.log("i-launch clicked") },
+													{
+														icon: "i-git-branch",
+														onClick: () => console.log("i-launch clicked")
+													},
+													{ icon: "i-launch", onClick: () => console.log("i-launch clicked") }
+												]}
+											>
+											</f-tcell>
+										</f-trow>`;
+									})}
+								</f-table>
+							</f-div>
+							${[1, 2, 3, 4, 5].map(cellNumber => {
+								return html`<f-tcell .width=${cellNumber === 2 ? "200px" : undefined}>
+									<f-text>
+										Column ${cellNumber} ${cellNumber === 2 && rowNumber === 2
+											? "sahdjhf dsfghgdf dsjhfgjshdf dfgsjhdf sdfhg"
+											: ""}
+									</f-text>
+								</f-tcell>`;
+							})}
+							<f-tcell
+								.actions=${[
+									{ icon: "i-copy", onClick: () => console.log("i-launch clicked") },
+									{ icon: "i-git-branch", onClick: () => console.log("i-launch clicked") },
+									{ icon: "i-launch", onClick: () => console.log("i-launch clicked") }
+								]}
+							>
+							</f-tcell>
+						</f-trow>`;
+					})}
+				</f-table>
+			`;
+		}}
+	</Story>
+</Canvas>

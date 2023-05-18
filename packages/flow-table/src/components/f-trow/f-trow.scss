@@ -1,0 +1,48 @@
+@import "@cldcvr/flow-core/src/mixins/scss/mixins";
+
+f-trow {
+	display: contents;
+	vertical-align: middle;
+	@include base();
+}
+
+:host {
+	.expandable {
+		grid-column-start: 1;
+	}
+	.details-toggle {
+		grid-column-start: last;
+		background-color: var(--color-background-row);
+		border-bottom: var(--border-bottom);
+		border-left: var(--border-left);
+		min-width: 36px;
+
+		&.hidden {
+			f-icon {
+				visibility: hidden;
+			}
+		}
+	}
+	.closed {
+		display: none;
+	}
+}
+
+f-trow {
+	--display-cell-radio: flex;
+
+	&[slot="header"] {
+		--display-cell-radio: none;
+	}
+}
+
+f-table[highlight-selected] {
+	f-trow {
+		&[selected]:not(:hover) {
+			--color-background-row: var(--color-background-row-selected);
+			> f-tcell {
+				background-color: var(--color-background-row-selected) !important;
+			}
+		}
+	}
+}

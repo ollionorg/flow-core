@@ -33,6 +33,10 @@ module.exports = {
 				{
 					find: "@cldcvr/flow-code-editor/src",
 					replacement: path.resolve(__dirname, "../packages/flow-code-editor/src")
+				},
+				{
+					find: "@cldcvr/flow-table/src",
+					replacement: path.resolve(__dirname, "../packages/flow-table/src")
 				}
 			];
 		}

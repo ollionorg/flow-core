@@ -1,0 +1,41 @@
+@import "@cldcvr/flow-core/src/mixins/scss/mixins";
+
+f-tcell {
+	display: flex;
+	@include base();
+	position: relative;
+	min-width: max-content;
+	&.highlight {
+		&::before {
+			position: absolute;
+			content: "";
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			opacity: 0.1;
+			background-color: var(--color-neutral-default);
+		}
+	}
+	&[selected] {
+		&::before {
+			position: absolute;
+			content: "";
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			opacity: 0.1;
+			background-color: var(--color-neutral-default);
+		}
+	}
+}
+
+:host {
+	.cell-radio {
+		display: var(--display-cell-radio);
+	}
+	.details-toggle {
+		margin-left: auto;
+	}
+}

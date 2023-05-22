@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, PluginOption } from "vite";
 import litcss from "rollup-plugin-postcss-lit";
 import path from "path";
 
@@ -30,5 +30,5 @@ export default defineConfig({
 			"@cldcvr/flow-core/src/index": "@cldcvr/flow-core"
 		}
 	},
-	plugins: [litcss() as Plugin]
+	plugins: [litcss() as PluginOption]
 });

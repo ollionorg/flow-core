@@ -30,5 +30,5 @@ export default defineConfig({
 			"@cldcvr/flow-core/src/index": "@cldcvr/flow-core"
 		}
 	},
-	plugins: [litcss()]
+	plugins: [litcss() as Plugin]
 });

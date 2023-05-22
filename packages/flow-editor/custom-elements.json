@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-editor/f-editor\""
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shims.d.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "content",
+          "type": {
+            "text": "Record<string, string>"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "content",
+            "module": "src/shims.d.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "content",
+            "module": "src/shims.d.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-editor/f-editor.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FEditor",
+          "members": [
+            {
+              "kind": "field",
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "title"
+            },
+            {
+              "kind": "field",
+              "name": "editor",
+              "type": {
+                "text": "monaco.editor.IStandaloneCodeEditor | undefined"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "createRenderRoot"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "title"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FEditor",
+          "declaration": {
+            "name": "FEditor",
+            "module": "src/components/f-editor/f-editor.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

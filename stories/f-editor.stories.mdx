@@ -1,0 +1,36 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import fDividerAnatomy from "./svg/i-fdivider-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+
+<Meta
+	title="Components/f-editor"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
+/>
+
+# f-editor
+
+<br />
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+f-editor used to edit content/code.
+
+<br />
+
+### [Playground](/story/components-f-editor--playground)
+
+<Canvas>
+	<Story name="Playground">
+		{args =>
+			html`<f-div direction="column" padding="x-large" height="100%"><f-editor></f-editor></f-div>`
+		}
+	</Story>
+</Canvas>
+
+<br />

@@ -26,10 +26,37 @@ f-editor used to edit content/code.
 ### [Playground](/story/components-f-editor--playground)
 
 <Canvas>
-	<Story name="Playground">
+	<Story
+		name="Playground"
+		argTypes={{
+			code: { control: "text" },
+			language: {
+				control: "select",
+				options: [
+					"scala",
+					"python",
+					"json",
+					"css",
+					"scss",
+					"less",
+					"html",
+					"javascript",
+					"typescript"
+				]
+			}
+		}}
+		args={{
+			code: `object ScalaExample{  
+    def main(args:Array[String]){  
+        println "Hello Scala"  
+    }  
+}  `,
+			language: "scala"
+		}}
+	>
 		{args =>
 			html`<f-div direction="column" padding="x-large" height="100%"
-				><f-code-editor></f-code-editor
+				><f-code-editor .code=${args.code} .language=${args.language}></f-code-editor
 			></f-div>`
 		}
 	</Story>

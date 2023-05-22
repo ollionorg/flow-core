@@ -7,8 +7,8 @@ export default defineConfig({
 		sourcemap: true,
 		lib: {
 			entry: "src/index.ts",
-			name: "flow-editor",
-			fileName: format => `flow-editor.${format}.js`,
+			name: "flow-code-editor",
+			fileName: format => `flow-code-editor.${format}.js`,
 			formats: ["es"]
 		},
 		// outDir: "dist",

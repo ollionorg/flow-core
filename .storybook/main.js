@@ -27,8 +27,8 @@ module.exports = {
 					replacement: path.resolve(__dirname, "../packages/flow-core/src")
 				},
 				{
-					find: "@cldcvr/flow-editor/src",
-					replacement: path.resolve(__dirname, "../packages/flow-editor/src")
+					find: "@cldcvr/flow-code-editor/src",
+					replacement: path.resolve(__dirname, "../packages/flow-code-editor/src")
 				}
 			];
 		}

@@ -1,7 +1,6 @@
 import { PropertyValueMap, unsafeCSS } from "lit";
-import { property } from "lit/decorators.js";
 import { FRoot, flowElement } from "@cldcvr/flow-core";
-import eleStyle from "./f-editor.scss";
+import eleStyle from "./f-code-editor.scss";
 import * as monaco from "monaco-editor";
 
 import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
@@ -28,18 +27,12 @@ self.MonacoEnvironment = {
 	}
 };
 
-@flowElement("f-editor")
-export class FEditor extends FRoot {
+@flowElement("f-code-editor")
+export class FCodeEditor extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
 	static styles = [unsafeCSS(eleStyle)];
-
-	/**
-	 * @attribute comments baout title
-	 */
-	@property({ type: String })
-	title!: string;
 
 	editor?: monaco.editor.IStandaloneCodeEditor;
 
@@ -195,6 +188,6 @@ export class FEditor extends FRoot {
  */
 declare global {
 	export interface HTMLElementTagNameMap {
-		"f-editor": FEditor;
+		"f-code-editor": FCodeEditor;
 	}
 }

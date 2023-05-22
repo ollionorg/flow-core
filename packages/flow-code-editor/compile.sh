@@ -8,7 +8,7 @@ cd "$HERE"
 yarn analyze
 cd "../custom-elements-manifest-to-types"
 yarn build
-cd .. && cd "./flow-editor"
+cd .. && cd "./flow-code-editor"
 
 echo "building library..."
 vite build --emptyOutDir && tsc -emitDeclarationOnly

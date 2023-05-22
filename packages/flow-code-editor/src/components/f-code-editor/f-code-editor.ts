@@ -45,14 +45,38 @@ export class FCodeEditor extends FRoot {
 	 */
 	static styles = [unsafeCSS(eleStyle)];
 
+	/**
+	 * editor instance
+	 */
 	editor?: monaco.editor.IStandaloneCodeEditor;
 
+	/**
+	 * actual code to display in editor
+	 */
 	@property({ type: String })
 	code?: string;
 
+	/**
+	 * language of code
+	 */
 	@property({ reflect: true, type: String })
 	language?: FCodeEditorLanguage;
 
+	/**
+	 * height to is required to create editor
+	 */
+	@property({ type: String })
+	height?: string = "100%";
+
+	/**
+	 * width to is required to create editor
+	 */
+	@property({ type: String })
+	width?: string = "100%";
+
+	/**
+	 * monoco editor never works in shadow dom
+	 */
 	createRenderRoot() {
 		return this;
 	}
@@ -65,6 +89,10 @@ export class FCodeEditor extends FRoot {
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
+
+		this.style.height = this.height as string;
+		this.style.width = this.width as string;
+
 		this.editor = monaco.editor.create(this, {
 			value: this.code,
 			theme: "vs-dark",
@@ -76,6 +104,7 @@ export class FCodeEditor extends FRoot {
 			padding: {
 				top: 16
 			},
+			minimap: { enabled: false },
 			dimension: {
 				width: this.offsetWidth,
 				height: this.offsetHeight

@@ -2,15 +2,26 @@
 
 f-code-editor {
 	@include base();
-	display: flex;
+	display: block;
 	min-height: 100px;
-	flex: 1 1;
-	width: 100%;
-	height: 100%;
 	overflow: visible;
 
 	[class^="codicon-"],
 	[class*="codicon-"] {
 		font-family: codicon, Arial, Helvetica, sans-serif !important;
+	}
+
+	.monaco-editor {
+		--vscode-editor-background: var(--color-surface-default);
+		--vscode-editor-foreground: var(--color-text-default);
+		--vscode-editorStickyScroll-background: var(--color-surface-default);
+		--vscode-breadcrumb-background: var(--color-surface-default);
+		--vscode-editorGutter-background: var(--color-surface-default);
+		--vscode-editorMarkerNavigation-background: var(--color-surface-default);
+		--vscode-editorSuggestWidget-foreground: var(--color-text-default);
+	}
+
+	.mtk1 {
+		color: var(--color-text-default);
 	}
 }

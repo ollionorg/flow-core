@@ -39,7 +39,7 @@ jobs:
         id: change-logs
         uses: vikas-cldcvr/extract-changelogs@v0.1.1
         with:
-          released-package-versions: ${{ toJSON(steps.changesets.outputs.publishedPackages) }}
+          released-package-versions: ${{ steps.changesets.outputs.publishedPackages }}
           changelog-files-config: |
             {
               "@cldcvr/flow-code-editor":"packages/flow-code-editor/CHANGELOG.md",

@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Setup Node.js 16.x
-        uses: actions/setup-node@v2
+      - name: Setup Node.js 18.x
+        uses: actions/setup-node@v2.5.2
         with:
-          node-version: 16.x
+          node-version: 18.x
 
       - name: Install Dependencies
         run: yarn
@@ -95,7 +95,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "We would love to hear your feedback and any issues you might encounter while using the new version. Feel free to reach out to us on Slack or submit a GitHub issue if you need any assistance.\n\nHappy coding with the new `${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }}` version! :rocket:"
+                    "text": "We would love to hear your feedback and any issues you might encounter while using the new version. Feel free to reach out to us on Slack or submit a GitHub issue if you need any assistance.\n\nHappy coding! :rocket:"
                   }
                 }
               ]
@@ -109,7 +109,7 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
-      
+
       - name: Setup Node.js 16.x
         uses: actions/setup-node@v2
         with:
@@ -127,10 +127,10 @@ jobs:
           cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/custom-elements-manifest-to-types/package.json`" > packages/custom-elements-manifest-to-types/package.json
       - uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
-          registry-url: 'https://npm.pkg.github.com'
+          node-version: "16.x"
+          registry-url: "https://npm.pkg.github.com"
           always-auth: true
-          scope: '@cldcvr'
+          scope: "@cldcvr"
       - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
@@ -147,4 +147,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
- 

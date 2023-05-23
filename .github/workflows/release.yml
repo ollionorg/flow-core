@@ -37,14 +37,14 @@ jobs:
       - name: extract-changelogs
         if: steps.changesets.outputs.published == 'true'
         id: change-logs
-        uses: vikas-cldcvr/extract-changelogs@v0.0.1
+        uses: vikas-cldcvr/extract-changelogs@v0.1.0
         with:
           changelog-files-config: |
             {
               "@cldcvr/flow-code-editor":"packages/flow-code-editor/CHANGELOG.md",
               "@cldcvr/flow-core":"packages/flow-core/CHANGELOG.md"
             }
-          released-package-versions: ${{ steps.changesets.outputs.publishedPackages }}
+          released-package-versions: ${{ toJSON(steps.changesets.outputs.publishedPackages) }}
       - name: Send Slack Notification
         if: steps.changesets.outputs.published == 'true'
         id: slack

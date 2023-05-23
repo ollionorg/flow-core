@@ -85,7 +85,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "${{ steps.change-logs.outputs.changeLogs }}"
+                    "text": ${{ toJSON(steps.change-logs.outputs.changeLogs) }}
                   }
                 },
                 {

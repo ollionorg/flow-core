@@ -38,6 +38,9 @@ export type FCodeEditorLanguage =
 	| "html"
 	| "javascript"
 	| "typescript";
+
+export type FCodeEditorSettings = monaco.editor.IStandaloneEditorConstructionOptions;
+export type FCodeEditorServices = monaco.editor.IStandaloneEditorConstructionOptions;
 @flowElement("f-code-editor")
 export class FCodeEditor extends FRoot {
 	/**
@@ -74,6 +77,12 @@ export class FCodeEditor extends FRoot {
 	@property({ type: String })
 	width?: string = "100%";
 
+	@property({ type: Object })
+	settings?: FCodeEditorSettings = {};
+
+	@property({ type: Object })
+	services?: FCodeEditorServices = {};
+
 	/**
 	 * monoco editor never works in shadow dom
 	 */
@@ -93,23 +102,28 @@ export class FCodeEditor extends FRoot {
 		this.style.height = this.height as string;
 		this.style.width = this.width as string;
 
-		this.editor = monaco.editor.create(this, {
-			value: this.code,
-			theme: "vs-dark",
-			language: this.language,
-			automaticLayout: true,
-			autoDetectHighContrast: false,
-			readOnly: false,
-			fontSize: 16,
-			padding: {
-				top: 16
+		this.editor = monaco.editor.create(
+			this,
+			{
+				value: this.code,
+				theme: "vs-dark",
+				language: this.language,
+				automaticLayout: true,
+				autoDetectHighContrast: false,
+				readOnly: false,
+				fontSize: 16,
+				padding: {
+					top: 16
+				},
+				minimap: { enabled: false },
+				dimension: {
+					width: this.offsetWidth,
+					height: this.offsetHeight
+				},
+				...this.settings
 			},
-			minimap: { enabled: false },
-			dimension: {
-				width: this.offsetWidth,
-				height: this.offsetHeight
-			}
-		});
+			this.services
+		);
 	}
 }
 

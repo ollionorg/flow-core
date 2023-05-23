@@ -656,214 +656,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-accordion/f-accordion.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FAccordion",
-          "members": [
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "icon",
-              "type": {
-                "text": "\"chevron\" | \"caret\" | \"plus\" | \"none\" | undefined"
-              },
-              "default": "\"chevron\"",
-              "attribute": "icon",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "iconSize",
-              "type": {
-                "text": "\"x-small\" | \"small\" | \"medium\" | \"large\" | undefined"
-              },
-              "default": "\"small\"",
-              "attribute": "icon-size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "iconPlacement",
-              "type": {
-                "text": "\"right\" | \"left\" | undefined"
-              },
-              "default": "\"right\"",
-              "attribute": "icon-placement",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "maxHeight",
-              "type": {
-                "text": "FAccordionBodyHeightProp | undefined"
-              },
-              "attribute": "max-height",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "fAccordionBody",
-              "type": {
-                "text": "FDiv | undefined"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "fAccordionHeader",
-              "type": {
-                "text": "FDiv | undefined"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "iconName",
-              "description": "identify icon-name from string"
-            },
-            {
-              "kind": "method",
-              "name": "toggleAccordion",
-              "description": "toggle accordion"
-            },
-            {
-              "kind": "method",
-              "name": "stateChange",
-              "parameters": [
-                {
-                  "name": "mouseState",
-                  "type": {
-                    "text": "\"enter\" | \"leave\""
-                  }
-                }
-              ],
-              "description": "changeState"
-            },
-            {
-              "kind": "method",
-              "name": "dispatchToggleEvent",
-              "parameters": [
-                {
-                  "name": "value",
-                  "type": {
-                    "text": "boolean"
-                  },
-                  "description": "boolean"
-                }
-              ],
-              "description": "toggle event dispatch"
-            },
-            {
-              "kind": "method",
-              "name": "handleAccordionBody",
-              "description": "handling max-height of body"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "open"
-            },
-            {
-              "name": "icon",
-              "type": {
-                "text": "\"chevron\" | \"caret\" | \"plus\" | \"none\" | undefined"
-              },
-              "default": "\"chevron\"",
-              "fieldName": "icon"
-            },
-            {
-              "name": "icon-size",
-              "type": {
-                "text": "\"x-small\" | \"small\" | \"medium\" | \"large\" | undefined"
-              },
-              "default": "\"small\"",
-              "fieldName": "iconSize"
-            },
-            {
-              "name": "icon-placement",
-              "type": {
-                "text": "\"right\" | \"left\" | undefined"
-              },
-              "default": "\"right\"",
-              "fieldName": "iconPlacement"
-            },
-            {
-              "name": "max-height",
-              "type": {
-                "text": "FAccordionBodyHeightProp | undefined"
-              },
-              "fieldName": "maxHeight"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FAccordion",
-          "declaration": {
-            "name": "FAccordion",
-            "module": "src/components/f-accordion/f-accordion.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-button/f-button.ts",
       "declarations": [
         {
@@ -1171,21 +963,117 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-carousel-content/f-carousel-content.ts",
+      "path": "src/components/f-accordion/f-accordion.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "FCarouselContent",
+          "name": "FAccordion",
           "members": [
             {
               "kind": "field",
-              "name": "contentId",
+              "name": "open",
               "type": {
-                "text": "string"
+                "text": "boolean | undefined"
               },
-              "attribute": "content-id",
+              "default": "false",
+              "attribute": "open",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "icon",
+              "type": {
+                "text": "\"chevron\" | \"caret\" | \"plus\" | \"none\" | undefined"
+              },
+              "default": "\"chevron\"",
+              "attribute": "icon",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconSize",
+              "type": {
+                "text": "\"x-small\" | \"small\" | \"medium\" | \"large\" | undefined"
+              },
+              "default": "\"small\"",
+              "attribute": "icon-size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconPlacement",
+              "type": {
+                "text": "\"right\" | \"left\" | undefined"
+              },
+              "default": "\"right\"",
+              "attribute": "icon-placement",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "maxHeight",
+              "type": {
+                "text": "FAccordionBodyHeightProp | undefined"
+              },
+              "attribute": "max-height",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fAccordionBody",
+              "type": {
+                "text": "FDiv | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "fAccordionHeader",
+              "type": {
+                "text": "FDiv | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "iconName",
+              "description": "identify icon-name from string"
+            },
+            {
+              "kind": "method",
+              "name": "toggleAccordion",
+              "description": "toggle accordion"
+            },
+            {
+              "kind": "method",
+              "name": "stateChange",
+              "parameters": [
+                {
+                  "name": "mouseState",
+                  "type": {
+                    "text": "\"enter\" | \"leave\""
+                  }
+                }
+              ],
+              "description": "changeState"
+            },
+            {
+              "kind": "method",
+              "name": "dispatchToggleEvent",
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "boolean"
+                  },
+                  "description": "boolean"
+                }
+              ],
+              "description": "toggle event dispatch"
+            },
+            {
+              "kind": "method",
+              "name": "handleAccordionBody",
+              "description": "handling max-height of body"
             },
             {
               "kind": "field",
@@ -1214,11 +1102,43 @@
           ],
           "attributes": [
             {
-              "name": "content-id",
+              "name": "open",
               "type": {
-                "text": "string"
+                "text": "boolean | undefined"
               },
-              "fieldName": "contentId"
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "icon",
+              "type": {
+                "text": "\"chevron\" | \"caret\" | \"plus\" | \"none\" | undefined"
+              },
+              "default": "\"chevron\"",
+              "fieldName": "icon"
+            },
+            {
+              "name": "icon-size",
+              "type": {
+                "text": "\"x-small\" | \"small\" | \"medium\" | \"large\" | undefined"
+              },
+              "default": "\"small\"",
+              "fieldName": "iconSize"
+            },
+            {
+              "name": "icon-placement",
+              "type": {
+                "text": "\"right\" | \"left\" | undefined"
+              },
+              "default": "\"right\"",
+              "fieldName": "iconPlacement"
+            },
+            {
+              "name": "max-height",
+              "type": {
+                "text": "FAccordionBodyHeightProp | undefined"
+              },
+              "fieldName": "maxHeight"
             },
             {
               "name": "tooltip",
@@ -1241,10 +1161,10 @@
       "exports": [
         {
           "kind": "js",
-          "name": "FCarouselContent",
+          "name": "FAccordion",
           "declaration": {
-            "name": "FCarouselContent",
-            "module": "src/components/f-carousel-content/f-carousel-content.ts"
+            "name": "FAccordion",
+            "module": "src/components/f-accordion/f-accordion.ts"
           }
         }
       ]
@@ -1535,6 +1455,86 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-carousel-content/f-carousel-content.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FCarouselContent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "contentId",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "content-id",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "content-id",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "contentId"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FCarouselContent",
+          "declaration": {
+            "name": "FCarouselContent",
+            "module": "src/components/f-carousel-content/f-carousel-content.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-checkbox/f-checkbox.ts",
       "declarations": [
         {
@@ -1687,211 +1687,6 @@
           "declaration": {
             "name": "FCheckbox",
             "module": "src/components/f-checkbox/f-checkbox.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-counter/f-counter.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FCounter",
-          "members": [
-            {
-              "kind": "field",
-              "name": "fill",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"\""
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "number"
-              },
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size"
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FCounterStateProp | undefined"
-              },
-              "default": "\"neutral\"",
-              "attribute": "state"
-            },
-            {
-              "kind": "field",
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "loading"
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled"
-            },
-            {
-              "kind": "field",
-              "name": "required",
-              "type": {
-                "text": "array"
-              },
-              "default": "[\"label\"]",
-              "description": "mention required fields here"
-            },
-            {
-              "kind": "method",
-              "name": "validateProperties"
-            },
-            {
-              "kind": "field",
-              "name": "computedLabel"
-            },
-            {
-              "kind": "method",
-              "name": "abbrNum",
-              "parameters": [
-                {
-                  "name": "number",
-                  "type": {
-                    "text": "number"
-                  }
-                },
-                {
-                  "name": "decPlaces",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "textColor",
-              "description": "compute textColor when custom color of tag is defined."
-            },
-            {
-              "kind": "field",
-              "name": "loaderColor",
-              "description": "compute loaderColor when custom color of tag is defined."
-            },
-            {
-              "kind": "method",
-              "name": "applyStyles",
-              "description": "apply inline styles to shadow-dom for custom fill."
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "label",
-              "type": {
-                "text": "number"
-              },
-              "fieldName": "label"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FCounterStateProp | undefined"
-              },
-              "default": "\"neutral\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "loading"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FCounter",
-          "declaration": {
-            "name": "FCounter",
-            "module": "src/components/f-counter/f-counter.ts"
           }
         }
       ]
@@ -2382,6 +2177,211 @@
           "declaration": {
             "name": "FDateTimePicker",
             "module": "src/components/f-date-time-picker/f-date-time-picker.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-counter/f-counter.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FCounter",
+          "members": [
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "number"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FCounterStateProp | undefined"
+              },
+              "default": "\"neutral\"",
+              "attribute": "state"
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "array"
+              },
+              "default": "[\"label\"]",
+              "description": "mention required fields here"
+            },
+            {
+              "kind": "method",
+              "name": "validateProperties"
+            },
+            {
+              "kind": "field",
+              "name": "computedLabel"
+            },
+            {
+              "kind": "method",
+              "name": "abbrNum",
+              "parameters": [
+                {
+                  "name": "number",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "decPlaces",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "textColor",
+              "description": "compute textColor when custom color of tag is defined."
+            },
+            {
+              "kind": "field",
+              "name": "loaderColor",
+              "description": "compute loaderColor when custom color of tag is defined."
+            },
+            {
+              "kind": "method",
+              "name": "applyStyles",
+              "description": "apply inline styles to shadow-dom for custom fill."
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "number"
+              },
+              "fieldName": "label"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FCounterStateProp | undefined"
+              },
+              "default": "\"neutral\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FCounter",
+          "declaration": {
+            "name": "FCounter",
+            "module": "src/components/f-counter/f-counter.ts"
           }
         }
       ]
@@ -5470,202 +5470,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-pictogram/f-pictogram.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FPictogram",
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "FPictogramVariant | undefined"
-              },
-              "default": "\"squircle\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "source",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "source",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "FPictogramSize | undefined"
-              },
-              "default": "\"large\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FPictogramState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "loading",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "clickable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "clickable",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "renderedHtml"
-            },
-            {
-              "kind": "method",
-              "name": "sourceSize"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "FPictogramVariant | undefined"
-              },
-              "default": "\"squircle\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "source",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "source"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "FPictogramSize | undefined"
-              },
-              "default": "\"large\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FPictogramState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "loading"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "clickable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "clickable"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FPictogram",
-          "declaration": {
-            "name": "FPictogram",
-            "module": "src/components/f-pictogram/f-pictogram.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-popover/f-popover.ts",
       "declarations": [
         {
@@ -5901,6 +5705,202 @@
           "declaration": {
             "name": "FPopover",
             "module": "src/components/f-popover/f-popover.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-pictogram/f-pictogram.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FPictogram",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "FPictogramVariant | undefined"
+              },
+              "default": "\"squircle\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "source",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "source",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "FPictogramSize | undefined"
+              },
+              "default": "\"large\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FPictogramState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "clickable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "renderedHtml"
+            },
+            {
+              "kind": "method",
+              "name": "sourceSize"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "FPictogramVariant | undefined"
+              },
+              "default": "\"squircle\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "source",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "source"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "FPictogramSize | undefined"
+              },
+              "default": "\"large\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FPictogramState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "clickable"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FPictogram",
+          "declaration": {
+            "name": "FPictogram",
+            "module": "src/components/f-pictogram/f-pictogram.ts"
           }
         }
       ]

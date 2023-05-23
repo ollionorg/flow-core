@@ -12,7 +12,7 @@
           "name": "*",
           "declaration": {
             "name": "*",
-            "package": "\"./components/f-editor/f-editor\""
+            "package": "\"./components/f-code-editor/f-code-editor\""
           }
         }
       ]
@@ -45,45 +45,146 @@
             "name": "content",
             "module": "src/shims.d.ts"
           }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/shims.d.ts"
+          }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-editor/f-editor.ts",
+      "path": "src/components/f-code-editor/f-code-editor.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "FEditor",
+          "name": "FCodeEditor",
           "members": [
-            {
-              "kind": "field",
-              "name": "title",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "title"
-            },
             {
               "kind": "field",
               "name": "editor",
               "type": {
                 "text": "monaco.editor.IStandaloneCodeEditor | undefined"
-              }
+              },
+              "description": "editor instance"
+            },
+            {
+              "kind": "field",
+              "name": "code",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "actual code to display in editor",
+              "attribute": "code"
+            },
+            {
+              "kind": "field",
+              "name": "language",
+              "type": {
+                "text": "FCodeEditorLanguage | undefined"
+              },
+              "description": "language of code",
+              "attribute": "language",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string | undefined"
+              },
+              "default": "\"100%\"",
+              "description": "height to is required to create editor",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string | undefined"
+              },
+              "default": "\"100%\"",
+              "description": "width to is required to create editor",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "settings",
+              "type": {
+                "text": "FCodeEditorSettings | undefined"
+              },
+              "default": "{}",
+              "attribute": "settings"
+            },
+            {
+              "kind": "field",
+              "name": "services",
+              "type": {
+                "text": "FCodeEditorServices | undefined"
+              },
+              "default": "{}",
+              "attribute": "services"
             },
             {
               "kind": "method",
-              "name": "createRenderRoot"
+              "name": "createRenderRoot",
+              "description": "monoco editor never works in shadow dom"
             }
           ],
           "attributes": [
             {
-              "name": "title",
+              "name": "code",
               "type": {
-                "text": "string"
+                "text": "string | undefined"
               },
-              "fieldName": "title"
+              "description": "actual code to display in editor",
+              "fieldName": "code"
+            },
+            {
+              "name": "language",
+              "type": {
+                "text": "FCodeEditorLanguage | undefined"
+              },
+              "description": "language of code",
+              "fieldName": "language"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "string | undefined"
+              },
+              "default": "\"100%\"",
+              "description": "height to is required to create editor",
+              "fieldName": "height"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "string | undefined"
+              },
+              "default": "\"100%\"",
+              "description": "width to is required to create editor",
+              "fieldName": "width"
+            },
+            {
+              "name": "settings",
+              "type": {
+                "text": "FCodeEditorSettings | undefined"
+              },
+              "default": "{}",
+              "fieldName": "settings"
+            },
+            {
+              "name": "services",
+              "type": {
+                "text": "FCodeEditorServices | undefined"
+              },
+              "default": "{}",
+              "fieldName": "services"
             }
           ],
           "superclass": {
@@ -95,10 +196,10 @@
       "exports": [
         {
           "kind": "js",
-          "name": "FEditor",
+          "name": "FCodeEditor",
           "declaration": {
-            "name": "FEditor",
-            "module": "src/components/f-editor/f-editor.ts"
+            "name": "FCodeEditor",
+            "module": "src/components/f-code-editor/f-code-editor.ts"
           }
         }
       ]

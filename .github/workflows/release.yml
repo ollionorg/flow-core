@@ -37,7 +37,7 @@ jobs:
       - name: extract-changelogs
         if: steps.changesets.outputs.published == 'true'
         id: change-logs
-        uses: vikas-cldcvr/extract-changelogs@v0.1.0
+        uses: vikas-cldcvr/extract-changelogs@v0.1.1
         with:
           released-package-versions: ${{ toJSON(steps.changesets.outputs.publishedPackages) }}
           changelog-files-config: |

@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.14.7-beta] - 2023-05-25
+
+### Warning: Use only to test f-text features.
+### Bug Fixes
+- `f-text` to test ellipsis and old changes.
+
 ## [1.14.6] - 2023-05-25
 ### Improvements
 - `f-select` blur event is cutomized to emit only when dropdown closes.

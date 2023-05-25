@@ -82,6 +82,7 @@ export default function render(this: FSelect) {
 			  >`
 			: ""}
 		<input
+			tabindex="0"
 			class=${classMap({ "f-select": true })}
 			id="f-select"
 			data-qa-input
@@ -97,6 +98,7 @@ export default function render(this: FSelect) {
 			?readonly=${!this.searchable}
 			.value=${this.searchValue}
 			@input=${this.handleInput}
+			@blur=${this.handleBlur}
 			style="${this.applyInputStyle()}"
 		/>
 	`;

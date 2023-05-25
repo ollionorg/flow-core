@@ -18,7 +18,8 @@ import {
 	handleCheckboxGroup,
 	handleSelectAll,
 	handleViewMoreTags,
-	handleInput
+	handleInput,
+	handleBlur
 } from "./handlers";
 import { FIconButton } from "../f-icon-button/f-icon-button";
 import { flowElement } from "./../../utils";
@@ -598,6 +599,7 @@ export class FSelect extends FRoot {
 	handleSelectAll = handleSelectAll;
 	handleViewMoreTags = handleViewMoreTags;
 	handleInput = handleInput;
+	handleBlur = handleBlur;
 	render = render;
 	renderSingleSelection = renderSingleSelection;
 	renderMultipleSelectionTag = renderMultipleSelectionTag;

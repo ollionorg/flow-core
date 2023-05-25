@@ -1073,6 +1073,9 @@ Can search by typing out the query. By default its <code>false</code>
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
+			const handleBlur = e => {
+				console.log(e.detail.value);
+			};
 			const handleValueGroup = e => {
 				setValueObjects(e.detail.value);
 			};
@@ -1082,6 +1085,7 @@ Can search by typing out the query. By default its <code>false</code>
 						<f-select
 							placeholder="Select Option"
 							@input=${handleValue}
+							@blur=${handleBlur}
 							.options=${options}
 							.value=${value}
 							?searchable=${true}
@@ -1097,6 +1101,7 @@ Can search by typing out the query. By default its <code>false</code>
 						<f-select
 							placeholder="Select Option"
 							@input=${handleValue}
+							@blur=${handleBlur}
 							.options=${optionsObjects}
 							.value=${value}
 							?searchable=${true}
@@ -1114,6 +1119,7 @@ Can search by typing out the query. By default its <code>false</code>
 						<f-select
 							placeholder="Select Option"
 							@input=${handleValueGroup}
+							@blur=${handleBlur}
 							.options=${groupOptions}
 							.value=${valueObjects}
 							?searchable=${true}
@@ -1131,6 +1137,7 @@ Can search by typing out the query. By default its <code>false</code>
 						<f-select
 							placeholder="Select Option"
 							@input=${handleValueGroup}
+							@blur=${handleBlur}
 							.options=${groupOtionsObjects}
 							.value=${valueObjects}
 							?searchable=${true}

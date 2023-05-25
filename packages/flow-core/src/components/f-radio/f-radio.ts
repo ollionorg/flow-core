@@ -75,7 +75,7 @@ export class FRadio extends FRoot {
 				direction="column"
 				size=${this.size}
 			>
-				<f-div class="f-radio-section" align="middle-left" padding="none" gap="medium">
+				<f-div class="f-radio-section" align="top-left" padding="none" gap="medium">
 					<input
 						type="radio"
 						class="f-radio"
@@ -85,13 +85,7 @@ export class FRadio extends FRoot {
 						state=${this.state}
 						@click=${this.handleClick}
 					/>
-					<f-div
-						class="label-wrapper slot-wrapper"
-						width="hug-content"
-						align="middle-left"
-						direction="row"
-						gap="small"
-					>
+					<f-div class="label-wrapper slot-wrapper" align="middle-left" direction="row" gap="small">
 						<slot name="label" @slotchange=${this.checkSlots} @click=${this.handleClick}></slot>
 						<slot name="icon-tooltip" @slotchange=${this.checkSlots}></slot>
 						<slot name="subtitle" @slotchange=${this.checkSlots}></slot>

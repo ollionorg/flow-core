@@ -31,6 +31,15 @@ export function handleDropDownClose(this: FSelect, e: MouseEvent) {
 	this.currentGroupOptionCursor = -1;
 	this.requestUpdate();
 	e.stopPropagation();
+
+	const event = new CustomEvent("blur", {
+		detail: {
+			value: this.value
+		},
+		bubbles: true,
+		composed: true
+	});
+	this.dispatchEvent(event);
 }
 
 /**
@@ -253,4 +262,9 @@ export function handleInput(this: FSelect, e: InputEvent) {
 		}
 		this.requestUpdate();
 	}
+}
+
+export function handleBlur(this: FSelect, e: FocusEvent) {
+	e.stopImmediatePropagation();
+	e.stopPropagation();
 }

@@ -3,7 +3,7 @@ name: Test and Release
 on:
   push:
     branches:
-      - main
+      - vikas/FLOW-774
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -46,7 +46,7 @@ jobs:
               "@cldcvr/flow-core":"packages/flow-core/CHANGELOG.md"
             }
       - name: Send Slack Notification
-        if: steps.changesets.outputs.published == 'true'
+        if: steps.changesets.outputs.published == 'true1'
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
         with:

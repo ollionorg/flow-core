@@ -199,7 +199,7 @@ export class FSelect extends FRoot {
 	/**
 	 * @attribute Defines the placeholder text for f-text-input
 	 */
-	@property({ reflect: true, type: Function, attribute: "option-template" })
+	@property({ reflect: false, type: Function, attribute: "option-template" })
 	optionTemplate?: FSelectOptionTemplate;
 
 	/**

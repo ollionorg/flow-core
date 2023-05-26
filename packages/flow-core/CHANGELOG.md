@@ -4,6 +4,13 @@
 
 # Change Log
 
+## [1.14.7] - 2023-05-26
+
+### Bug Fixes
+- `f-text` not rendering ellipsis fixed.
+- `f-text` not rendering ellispis in multioption selection in `f-select`.
+- `f-text` height issue fixed if used in f-div `direction="column"`.
+
 ## [1.14.7-beta] - 2023-05-25
 
 ### Warning: Use only to test f-text features.

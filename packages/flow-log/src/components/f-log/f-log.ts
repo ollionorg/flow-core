@@ -127,25 +127,11 @@ export class FTerminal extends FRoot {
 				const style = getComputedStyle(themeElement);
 
 				const getTheme = () => {
-					/**
-					 * Default Dark theme object
-					 */
-					if (themeElement && themeElement.getAttribute("data-theme") === "f-dark") {
-						return {
-							foreground: style.getPropertyValue("--color-text-default"),
-							selectionBackground: "#ffff05",
-							selectionForeground: "#000"
-						};
-					} else {
-						/**
-						 * Check if light theme applied and return theme object
-						 */
-						return {
-							foreground: style.getPropertyValue("--color-text-default"),
-							selectionBackground: "#ffff05",
-							selectionForeground: "#000"
-						};
-					}
+					return {
+						foreground: style.getPropertyValue("--color-text-default"),
+						selectionBackground: "#ffff05",
+						selectionForeground: "#000"
+					};
 				};
 
 				/**
@@ -162,7 +148,7 @@ export class FTerminal extends FRoot {
 				 * Observe for theme changes
 				 */
 				if (!this.themeobserver) {
-					this.themeobserver = new MutationObserver(async () => {
+					this.themeobserver = new MutationObserver(() => {
 						this.terminal.options = { theme: getTheme() };
 					});
 

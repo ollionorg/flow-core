@@ -82,6 +82,7 @@ export class FTerminal extends FRoot {
 	}
 
 	addLineNumbers(logs: string) {
+		const termRegex = /".+":/g;
 		return `${`\x1b[38;2;123;147;178m${this.lineNumber++}\x1b[0m `.padEnd(4)} ${logs
 			.replace(/\n/g, "\r\n")
 			.replace(/\[INFO\]/g, "\x1b[38;2;26;149;255m[INFO]\x1b[0m")
@@ -91,7 +92,7 @@ export class FTerminal extends FRoot {
 			.replace(/\d{4}(?:-|\/)[01]\d(?:-|\/)[0-3]\d.[0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?Z?/g, date => {
 				return `\x1b[38;2;123;147;178m${date}\x1b[0m`;
 			})
-			.replace(/".+":/g, key => {
+			.replace(termRegex, key => {
 				return `\x1b[38;2;242;137;104m${key}\x1b[0m`;
 			})
 			.replace(/(\r\n|\n\r|\n|\r)/g, (match, p1, _offset, _string) => {

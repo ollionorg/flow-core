@@ -82,6 +82,7 @@ export default function render(this: FSelect) {
 			  >`
 			: ""}
 		<input
+			tabindex="0"
 			class=${classMap({ "f-select": true })}
 			id="f-select"
 			data-qa-input
@@ -97,6 +98,7 @@ export default function render(this: FSelect) {
 			?readonly=${!this.searchable}
 			.value=${this.searchValue}
 			@input=${this.handleInput}
+			@blur=${this.handleBlur}
 			style="${this.applyInputStyle()}"
 		/>
 	`;
@@ -536,8 +538,8 @@ export function renderMultipleSelectionTag(this: FSelect, option: FSelectSingleO
 	const getTemplate = () => {
 		return this.optionTemplate
 			? html`<f-div
-					width="hug-content"
 					variant="curved"
+					style="max-width:${this.offsetWidth - 72}px"
 					gap="small"
 					state="secondary"
 					padding="small"

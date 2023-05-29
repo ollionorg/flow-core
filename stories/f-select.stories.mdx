@@ -639,13 +639,21 @@ Use to provide a custom template in option list
 				return html`<f-div
 					><f-div direction="column" gap="x-small"
 						><f-text>${option.title}</f-text
-						><f-text>${option.data.name}, ${option.data.email}</f-text></f-div
+						><f-text ellipsis>${option.data.name}, ${option.data.email}</f-text></f-div
 					></f-div
 				>`;
 			};
 			const [valueObjects, setValueObjects] = useState(null);
 			const [options, setOptions] = useState([
-				{ icon: "i-home", title: "option 1", data: { name: "Alex", email: "alex#cldcvr.com" } },
+				{
+					icon: "i-home",
+					title: "option 1",
+					data: {
+						name: "Alex",
+						email:
+							"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a m"
+					}
+				},
 				{ icon: "i-user", title: "option 2", data: { name: "Cran", email: "alex#cldcvr.com" } },
 				{ icon: "i-setting", title: "option 3", data: { name: "Tony", email: "alex#cldcvr.com" } },
 				{ icon: "i-app", title: "option 4", data: { name: "Stark", email: "alex#cldcvr.com" } }
@@ -687,6 +695,7 @@ Use to provide a custom template in option list
 							?searchable=${false}
 							.options=${options}
 							.value=${value}
+							type="multiple"
 							.optionTemplate=${optionTemplate}
 						>
 							<f-div slot="label" padding="none" gap="none">Label for f-select</f-div>
@@ -1073,6 +1082,9 @@ Can search by typing out the query. By default its <code>false</code>
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
+			const handleBlur = e => {
+				console.log(e.detail.value);
+			};
 			const handleValueGroup = e => {
 				setValueObjects(e.detail.value);
 			};
@@ -1082,6 +1094,7 @@ Can search by typing out the query. By default its <code>false</code>
 						<f-select
 							placeholder="Select Option"
 							@input=${handleValue}
+							@blur=${handleBlur}
 							.options=${options}
 							.value=${value}
 							?searchable=${true}
@@ -1097,6 +1110,7 @@ Can search by typing out the query. By default its <code>false</code>
 						<f-select
 							placeholder="Select Option"
 							@input=${handleValue}
+							@blur=${handleBlur}
 							.options=${optionsObjects}
 							.value=${value}
 							?searchable=${true}
@@ -1114,6 +1128,7 @@ Can search by typing out the query. By default its <code>false</code>
 						<f-select
 							placeholder="Select Option"
 							@input=${handleValueGroup}
+							@blur=${handleBlur}
 							.options=${groupOptions}
 							.value=${valueObjects}
 							?searchable=${true}
@@ -1131,6 +1146,7 @@ Can search by typing out the query. By default its <code>false</code>
 						<f-select
 							placeholder="Select Option"
 							@input=${handleValueGroup}
+							@blur=${handleBlur}
 							.options=${groupOtionsObjects}
 							.value=${valueObjects}
 							?searchable=${true}

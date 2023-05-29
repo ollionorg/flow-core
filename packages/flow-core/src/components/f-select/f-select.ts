@@ -18,7 +18,12 @@ import {
 	handleCheckboxGroup,
 	handleSelectAll,
 	handleViewMoreTags,
+<<<<<<< HEAD
 	handleInput
+=======
+	handleInput,
+	handleBlur
+>>>>>>> main
 } from "./handlers";
 import { FIconButton } from "../f-icon-button/f-icon-button";
 import { flowElement } from "./../../utils";
@@ -198,7 +203,11 @@ export class FSelect extends FRoot {
 	/**
 	 * @attribute Defines the placeholder text for f-text-input
 	 */
+<<<<<<< HEAD
 	@property({ reflect: true, type: Function, attribute: "option-template" })
+=======
+	@property({ reflect: false, type: Function, attribute: "option-template" })
+>>>>>>> main
 	optionTemplate?: FSelectOptionTemplate;
 
 	/**
@@ -598,6 +607,10 @@ export class FSelect extends FRoot {
 	handleSelectAll = handleSelectAll;
 	handleViewMoreTags = handleViewMoreTags;
 	handleInput = handleInput;
+<<<<<<< HEAD
+=======
+	handleBlur = handleBlur;
+>>>>>>> main
 	render = render;
 	renderSingleSelection = renderSingleSelection;
 	renderMultipleSelectionTag = renderMultipleSelectionTag;

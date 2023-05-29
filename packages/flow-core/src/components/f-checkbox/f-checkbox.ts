@@ -78,7 +78,7 @@ export class FCheckbox extends FRoot {
 				<f-div
 					class="f-checkbox-section"
 					size=${this.size}
-					align="middle-left"
+					align="top-left"
 					padding="none"
 					gap="medium"
 					width="hug-content"
@@ -100,7 +100,6 @@ export class FCheckbox extends FRoot {
 					<f-div
 						padding="none"
 						class="label-wrapper slot-wrapper"
-						width="hug-content"
 						align="middle-left"
 						direction="row"
 						gap="small"

@@ -21,11 +21,11 @@ import { useArgs, useEffect, useState } from "@storybook/client-api";
 
 <f-divider></f-divider>
 
-f-editor used to edit content/code.
+f-log is used for terminal purpose.
 
 <br />
 
-### [Playground](/story/components-f-log--playground)
+### [Playground](/story/cldcvr-flow-log-components-f-log--playground)
 
 <Canvas>
 	<Story
@@ -62,3 +62,61 @@ f-editor used to edit content/code.
 </Canvas>
 
 <br />
+
+## logs
+
+<f-divider></f-divider>
+
+logs is the stringied form of data to be inserted into the terminal `f-log`
+
+<Canvas>
+	<Story name="logs">
+		{args => {
+			return html`
+				<f-div direction="column" padding="x-large" height="100%"
+					><f-log .logs=${samplelogs}></f-log
+				></f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## show-search
+
+<f-divider></f-divider>
+
+f-log would have search box to find any key name
+
+<Canvas>
+	<Story name="show-search">
+		{args => {
+			return html`
+				<f-div direction="column" padding="x-large" height="100%"
+					><f-log ?show-search=${true} .logs=${samplelogs}></f-log
+				></f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## show-scrollbar
+
+<f-divider></f-divider>
+
+f-log would have scrollbar
+
+<Canvas>
+	<Story name="show-scrollbar">
+		{args => {
+			return html`
+				<f-div direction="column" padding="x-large" height="100%"
+					><f-log ?show-scrollbar=${true} .logs=${samplelogs}></f-log
+				></f-div>
+			`;
+		}}
+	</Story>
+</Canvas>

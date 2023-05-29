@@ -1,0 +1,253 @@
+@mixin base() {
+	font-family: var(--flow-font);
+	box-sizing: border-box;
+	flex-shrink: 0;
+	@include scrollbar();
+}
+
+@mixin scrollbar() {
+	&::-webkit-scrollbar {
+		width: 6px;
+		height: 6px;
+	}
+	&::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 2px transparent;
+		background-color: transparent;
+	}
+	scrollbar-color: var(--color-neutral-default) transparent;
+	scrollbar-width: thin;
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--color-neutral-default);
+	}
+}
+
+@mixin disabled {
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+@mixin rotate($tag) {
+	> #{$tag} {
+		-webkit-animation: spin 2s linear infinite;
+		-moz-animation: spin 2s linear infinite;
+		animation: spin 2s linear infinite;
+	}
+	@-moz-keyframes spin {
+		100% {
+			-moz-transform: rotate(360deg);
+		}
+	}
+	@-webkit-keyframes spin {
+		100% {
+			-webkit-transform: rotate(360deg);
+		}
+	}
+	@keyframes spin {
+		100% {
+			-webkit-transform: rotate(360deg);
+			transform: rotate(360deg);
+		}
+	}
+}
+@mixin shimmer-keyframe {
+	@keyframes shimmer {
+		0% {
+			background-position: -1500px 0;
+		}
+		100% {
+			background-position: 1500px 0;
+		}
+	}
+}
+
+@mixin shimmer-self {
+	@include shimmer-keyframe();
+	position: relative;
+	overflow: hidden;
+	background: var(--color-surface-default) !important;
+	> * {
+		visibility: hidden;
+	}
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		bottom: 0px;
+		left: 0px;
+		animation-duration: 1s;
+		animation-fill-mode: forwards;
+		animation-iteration-count: infinite;
+		animation-name: shimmer;
+		animation-timing-function: linear;
+		background-image: linear-gradient(
+			to right,
+			var(--color-surface-default-hover) 0%,
+			var(--color-surface-secondary) 20%,
+			var(--color-surface-subtle) 50%,
+			var(--color-surface-secondary) 60%,
+			var(--color-surface-default-hover) 100%
+		);
+		background-repeat: repeat-x;
+		background-size: 1500px 100%;
+	}
+}
+@mixin shimmer-child() {
+	> * {
+		@include shimmer-self();
+	}
+}
+
+@mixin hasShimmer {
+	&.hasShimmer {
+		visibility: hidden;
+	}
+}
+
+// inheritance rules w.r.t to parent element
+@mixin inheirt-parent($state) {
+	@if $state== "danger" {
+		--color-inherit-background: var(--color-danger-surface);
+		--color-inherit-text: var(--color-danger-text);
+		--color-inherit-counter-background: var(--color-danger-text);
+		--color-inherit-background-hover: var(--color-danger-surface-hover);
+		--color-inherit-background-selected: var(--color-danger-surface-selected);
+		--color-inherit-background-border: var(--color-danger-text);
+		--color-inherit-icon: var(--color-danger-text);
+		--color-inherit-icon-hover: var(--color-danger-text-hover);
+		--color-inherit-pictogram: var(--color-danger-default);
+		--color-inherit-button: var(--color-danger-text);
+		--color-inherit-button-hover: var(--color-danger-text-hover);
+		--color-primary-button-loader: var(--color-danger-surface);
+	} @else if $state== "success" {
+		--color-inherit-background: var(--color-success-surface);
+		--color-inherit-text: var(--color-success-text);
+		--color-inherit-counter-background: var(--color-success-text);
+		--color-inherit-background-hover: var(--color-success-surface-hover);
+		--color-inherit-background-selected: var(--color-success-surface-selected);
+		--color-inherit-background-border: var(--color-success-text);
+		--color-inherit-icon: var(--color-success-text);
+		--color-inherit-icon-hover: var(--color-success-text-hover);
+		--color-inherit-pictogram: var(--color-success-default);
+		--color-inherit-button: var(--color-success-text);
+		--color-inherit-button-hover: var(--color-success-text-hover);
+		--color-primary-button-loader: var(--color-success-surface);
+	} @else if $state== "warning" {
+		--color-inherit-background: var(--color-warning-surface);
+		--color-inherit-text: var(--color-warning-text);
+		--color-inherit-counter-background: var(--color-warning-text);
+		--color-inherit-background-hover: var(--color-warning-surface-hover);
+		--color-inherit-background-selected: var(--color-warning-surface-selected);
+		--color-inherit-background-border: var(--color-warning-text);
+		--color-inherit-icon: var(--color-warning-text);
+		--color-inherit-icon-hover: var(--color-warning-text-hover);
+		--color-inherit-pictogram: var(--color-warning-default);
+		--color-inherit-button: var(--color-warning-text);
+		--color-inherit-button-hover: var(--color-warning-text-hover);
+		--color-primary-button-loader: var(--color-warning-surface);
+	} @else if $state== "primary" {
+		--color-inherit-background: var(--color-primary-surface);
+		--color-inherit-text: var(--color-primary-text);
+		--color-inherit-counter-background: var(--color-primary-text);
+		--color-inherit-icon: var(--color-primary-text);
+		--color-inherit-icon-hover: var(--color-primary-text-hover);
+		--color-inherit-background-hover: var(--color-primary-surface-hover);
+		--color-inherit-background-selected: var(--color-primary-surface-selected);
+		--color-inherit-background-border: var(--color-primary-text);
+		--color-inherit-pictogram: var(--color-primary-default);
+		--color-inherit-button: var(--color-primary-text);
+		--color-inherit-button-hover: var(--color-primary-text-hover);
+		--color-primary-button-loader: var(--color-primary-surface);
+	} @else {
+		--color-inherit-background: "transparent";
+		--color-inherit-text: var(--color-text-default);
+		--color-inherit-counter-background: var(--color-neutral-default);
+		--color-inherit-icon: var(--color-icon-default);
+		--color-inherit-icon-hover: var(--color-icon-default-hover);
+		--color-inherit-background-hover: var(--color-surface-subtle-hover);
+		--color-inherit-background-selected: var(--color-surface-subtle-selected);
+		--color-inherit-background-border: var(--color-primary-default);
+		--color-inherit-pictogram: var(--color-neutral-subtle);
+		--color-inherit-button: var(--color-primary-default);
+		--color-inherit-button-hover: var(--color-primary-default-hover);
+		--color-primary-button-loader: var(--color-primary-surface);
+	}
+}
+
+@mixin subtext-color($state) {
+	@if $state== "danger" {
+		--color-subtext-default: var(--color-danger-default);
+	} @else if $state== "success" {
+		--color-subtext-default: var(--color-success-default);
+	} @else if $state== "warning" {
+		--color-subtext-default: var(--color-warning-default);
+	} @else if $state== "primary" {
+		--color-subtext-default: var(--color-primary-default);
+	} @else {
+		--color-subtext-default: var(--color-text-default);
+	}
+}
+
+@mixin input-color($state) {
+	@if $state== "danger" {
+		--color-help-text: var(--color-danger-default);
+	} @else if $state== "success" {
+		--color-help-text: var(--color-success-default);
+	} @else if $state== "warning" {
+		--color-help-text: var(--color-warning-default);
+	} @else if $state== "primary" {
+		--color-help-text: var(--color-primary-default);
+	} @else {
+		--color-help-text: var(--color-text-default);
+	}
+}
+
+@mixin inherit-gap($gap) {
+	@if $gap== "large" {
+		--field-gap-size: 24px;
+	} @else if $gap== "medium" {
+		--field-gap-size: 16px;
+	} @else if $gap== "small" {
+		--field-gap-size: 12px;
+	} @else if("x-small") {
+		--field-gap-size: 8px;
+	} @else {
+		--field-gap-size: 0px;
+	}
+}
+
+@mixin inherit-size($size) {
+	@if $size == "medium" {
+		--form-input-div-size: 36px;
+		--form-input-size: 34px;
+		--form-input-loader: 24px;
+		--form-input-icons-size: 12px;
+		--form-checkbox-size: 14px;
+		--form-radio-size: 16px;
+		--form-checkbox-width: 12px;
+		--form-checkbox-height: 16px;
+		--form-radio-mark-size: 6px;
+		--form-switch-height: 20px;
+		--form-switch-width: 36px;
+		--form-switch-slider-size: 16px;
+		--form-switch-slider-translate: 16px;
+		--form-textarea-padding-tp-btm: 9px;
+		--form-textarea-padding-lt-rt: 12px;
+	} @else {
+		--form-input-div-size: 28px;
+		--form-input-size: 26px;
+		--form-input-loader: 16px;
+		--form-input-icons-size: 12px;
+		--form-checkbox-size: 10px;
+		--form-radio-size: 12px;
+		--form-checkbox-width: 9px;
+		--form-checkbox-height: 11px;
+		--form-radio-mark-size: 6px;
+		--form-switch-height: 16px;
+		--form-switch-width: 28px;
+		--form-switch-slider-size: 12px;
+		--form-switch-slider-translate: 12px;
+		--form-textarea-padding-tp-btm: 5px;
+		--form-textarea-padding-lt-rt: 8px;
+	}
+}

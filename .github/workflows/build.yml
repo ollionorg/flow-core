@@ -1,0 +1,51 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+defaults:
+  run:
+    shell: bash
+    working-directory: .
+env:
+  DISTRIBUTION_ID: E1JYXHU7GFQMKF
+  BUCKET_NAME: flow.cldcvr.com
+  AWS_REGION: us-east-1
+  ROLE_NAME: flow.cldcvr.com-role
+  ACCOUNT_ID: 679519065279
+jobs:
+  build:
+    name: Build and upload to amazon s3
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: Install Dependencies and Build
+        run:  export NODE_OPTIONS="--max_old_space_size=4096" && yarn && yarn build-storybook
+
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::${{env.ACCOUNT_ID}}:role/${{env.ROLE_NAME}}
+          aws-region: ${{env.AWS_REGION}}
+
+      - name: Check Access
+        run: |
+          aws sts get-caller-identity
+
+      - name: Copy files to the website with the AWS CLI
+        run: |
+          aws s3 sync storybook-static/ s3://${{env.BUCKET_NAME}}/v2/
+
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{env.DISTRIBUTION_ID}} --paths "/*"

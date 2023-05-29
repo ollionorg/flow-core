@@ -1,0 +1,73 @@
+{
+  "name": "flow-core-storybook",
+  "version": "1.0.0",
+  "description": "Storybook project for flow-core component development",
+  "private": true,
+  "sideEffects": false,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "preinstall": "npx only-allow yarn",
+    "storybook": "start-storybook -p 6007",
+    "start": "yarn storybook",
+    "build-storybook": "build-storybook",
+    "prebuild-flow-core": "cd packages/custom-elements-manifest-to-types && yarn build",
+    "build-flow-core": "cd packages/flow-core && yarn compile",
+    "build-types-generator": "cd packages/custom-elements-manifest-to-types && yarn build",
+    "build-packages": "yarn build-types-generator && yarn build-flow-core",
+    "release": "cp README.md packages/flow-core && yarn build-packages && yarn changeset publish",
+    "prepare": "husky install",
+    "test": "yarn loki test"
+  },
+  "keywords": [
+    "web-components",
+    "lit-element",
+    "typescript",
+    "lit",
+    "storybook"
+  ],
+  "devDependencies": {
+    "@changesets/cli": "^2.25.0",
+    "@cldcvr/prettier-config": "^1.0.3",
+    "@storybook/addon-actions": "^6.5.7",
+    "@storybook/addon-essentials": "^6.5.7",
+    "@storybook/addon-links": "^6.5.7",
+    "@storybook/addon-storysource": "^6.5.12",
+    "@storybook/builder-vite": "^0.1.36",
+    "@storybook/web-components": "^6.5.7",
+    "@types/eslint": "^8.4.3",
+    "@types/jest": "28.1.3",
+    "@types/prettier": "^2.6.3",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
+    "eslint": "^8.17.0",
+    "husky": "^8.0.1",
+    "lit-html": "^2.2.5",
+    "loki": "^0.30.3",
+    "prettier": "^2.6.2",
+    "rollup-plugin-postcss-lit": "^2.0.0",
+    "rollup-plugin-scss": "3.0.0",
+    "sass": "^1.52.3",
+    "storybook-addon-themes": "^6.1.0",
+    "typescript": "^4.5.4",
+    "vite": "^2.9.9"
+  },
+  "dependencies": {
+    "@cldcvr/flow-aws-icon": "1.0.5",
+    "@cldcvr/flow-gcp-icon": "1.0.5",
+    "@cldcvr/flow-product-icon": "1.0.5",
+    "@cldcvr/flow-system-icon": "1.0.5"
+  },
+  "loki": {
+    "configurations": {
+      "chrome.laptop": {
+        "target": "chrome.app",
+        "width": 1366,
+        "height": 768,
+        "deviceScaleFactor": 1,
+        "mobile": false
+      }
+    }
+  }
+}

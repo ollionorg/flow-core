@@ -1,0 +1,64 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import fDividerAnatomy from "./svg/i-fdivider-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import samplelogs from "./logs/logs.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
+
+<Meta
+	title="@cldcvr/flow-log/Components/f-log"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
+/>
+
+# f-log
+
+<br />
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+f-editor used to edit content/code.
+
+<br />
+
+### [Playground](/story/components-f-log--playground)
+
+<Canvas>
+	<Story
+		name="Playground"
+		argTypes={{
+			logs: { control: "text" },
+			["show-search"]: { control: "boolean" },
+			["show-scrollbar"]: { control: "boolean" }
+		}}
+		args={{
+			logs: samplelogs,
+			["show-search"]: false,
+			["show-scrollbar"]: false
+		}}
+	>
+		{args => {
+			const [_, updateArgs] = useArgs();
+			const handleClose = e => {
+				console.log(e.detail.value);
+				const handleInput = e => {
+					updateArgs({ ["show-search"]: e.detail.value });
+				};
+			};
+			return html`<f-div direction="column" padding="x-large" height="100%"
+				><f-log
+					.logs=${args.logs}
+					?show-search=${args["show-search"]}
+					?show-scrollbar=${args["show-scrollbar"]}
+					@close=${handleClose}
+				></f-log
+			></f-div>`;
+		}}
+	</Story>
+</Canvas>
+
+<br />

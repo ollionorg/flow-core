@@ -1,0 +1,593 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import fButtonAnatomy from "./svg/i-fbutton-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+
+<Meta
+  title="Components/f-button"
+  parameters={{
+    controls: { hideNoControlsWarning: true },
+  }}
+/>
+
+# f-button
+
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+### Do
+
+- To enable a user action
+
+### Don't
+
+- To navigate to another page, use text as link
+- If you need an icon only button use the Icon button
+- To show a hybrid of an action and a dropdown, use Split button
+
+<br />
+
+### [Playground](/story/components-f-button--playground)
+
+<Canvas>
+  <Story
+    name="Playground"
+    argTypes={{
+      label: { control: "text" },
+      category: {
+        control: "select",
+        options: ["fill", "outline", "transparent"],
+      },
+      size: {
+        control: "select",
+        options: ["large", "medium", "small", "x-small"],
+      },
+      state: {
+        control: "select",
+        options: [
+          "primary",
+          "neutral",
+          "success",
+          "warning",
+          "danger",
+          "inherit",
+          "custom, #0000FF",
+          "custom, gray",
+          "custom, #fff",
+          "custom, white",
+          "custom, black",
+          "custom, #607B9F",
+        ],
+      },
+      variant: {
+        control: "select",
+        options: ["round", "curved", "block"],
+      },
+      ["icon-left"]: {
+        control: "text",
+      },
+      ["icon-right"]: {
+        control: "text",
+      },
+      counter: {
+        control: "text",
+      },
+      loading: {
+        control: "boolean",
+      },
+      disabled: {
+        control: "boolean",
+      },
+      ["label-wrap"]: {
+        control: "boolean",
+      },
+    }}
+    args={{
+      label: "label",
+      category: "fill",
+      size: "medium",
+      state: "primary",
+      variant: "round",
+      ["icon-left"]: undefined,
+      ["icon-right"]: undefined,
+      counter: undefined,
+      loading: false,
+      disabled: false,
+      ["label-wrap"]: false,
+    }}
+  >
+    {(args) =>
+      html` <f-div padding="none">
+        <f-button
+          .label=${args.label}
+          .category=${args.category}
+          .size=${args.size}
+          .state=${args.state}
+          .variant=${args.variant}
+          icon-left=${args["icon-left"]}
+          icon-right=${args["icon-right"]}
+          .counter=${args.counter}
+          .loading=${args.loading}
+          .disabled=${args.disabled}
+          .label-wrap=${args["label-wrap"]}
+        ></f-button
+      ></f-div>`
+    }
+  </Story>
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider></f-divider>
+
+<br />
+
+<Story name="Anatomy">
+  {() => html`<div class="align-center">${unsafeSVG(fButtonAnatomy)}</div>`}
+</Story>
+
+<br />
+
+## variant
+
+<f-divider></f-divider>
+
+Variants are various representations of a button. For example a button can be round, curved or
+block.
+
+<br />
+
+<Canvas>
+  <Story name="variant">
+    {(args) => html`<f-div gap="x-large" padding="x-large" align="middle-center">
+      <f-button variant="round" label="Round"></f-button>
+      <f-button variant="curved" label="Curved"></f-button>
+      <f-button variant="block" label="Block (taking width of its parent)"></f-button>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>round</td>
+      <td>Round border edges of button</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>curved</td>
+      <td>Curved edged button with border radius of 4px</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>block</td>
+      <td>A block button takes up the entire available parent width.</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## category
+
+<f-divider></f-divider>
+
+<br />
+
+<Canvas>
+  <Story name="category">
+    {(args) => html`<f-div gap="x-large" padding="x-large" align="middle-center">
+      <f-button label="Fill" category="fill"></f-button>
+      <f-button label="Outline" category="outline"></f-button>
+      <f-button label="Transparent" category="transparent"></f-button>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<p class="note-section margin-btm-24 margin-tp-16">
+  Note: A transparent button can only have block shape.
+</p>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>fill</td>
+      <td>background-color in the button present</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>outline</td>
+      <td>only outer border outline color present </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>transparent</td>
+      <td>label to be visible</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## size
+
+<f-divider></f-divider>
+
+The medium size is default.
+
+<br />
+
+<Canvas>
+  <Story name="size">
+    {(args) => html`<f-div gap="x-large" padding="x-large" align="middle-center">
+      <f-button size="large" label="Large"></f-button>
+      <f-button size="medium" label="Medium"></f-button>
+      <f-button size="small" label="Small"></f-button>
+      <f-button size="x-small" label="x-Small"></f-button>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>large</td>
+      <td>Button Size is 44px</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>medium</td>
+      <td>Button Size is 36px</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>small</td>
+      <td>Button Size is 28px</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>x-small</td>
+      <td>Button Size is 20px</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider></f-divider>
+
+States on buttons are used to communicate purpose and it’s connotation. For example, a red color
+connotes danger, whereas a green color connotes success and so on.
+
+<br />
+
+<Canvas>
+  <Story name="state">
+    {(args) => html`<f-div gap="large" padding="x-large" direction="column">
+      <f-div padding="none" gap="x-large">
+        <f-button category="fill" label="Primary" state="primary"></f-button>
+        <f-button category="outline" label="Primary" state="primary"></f-button>
+        <f-button category="transparent" label="Primary" state="primary"></f-button>
+      </f-div>
+      <f-div padding="none" gap="x-large">
+        <f-button category="fill" label="Neutral" state="neutral"></f-button>
+        <f-button category="outline" label="Neutral" state="neutral"></f-button>
+        <f-button category="transparent" label="Neutral" state="neutral"></f-button>
+      </f-div>
+      <f-div padding="none" gap="x-large">
+        <f-button category="fill" label="Success" state="success"></f-button>
+        <f-button category="outline" label="Success" state="success"></f-button>
+        <f-button category="transparent" label="Success" state="success"></f-button>
+      </f-div>
+      <f-div padding="none" gap="x-large">
+        <f-button category="fill" label="Warning" state="warning"></f-button>
+        <f-button category="outline" label="Warning" state="warning"></f-button>
+        <f-button category="transparent" label="Warning" state="warning"></f-button>
+      </f-div>
+      <f-div padding="none" gap="x-large">
+        <f-button category="fill" label="Danger" state="danger"></f-button>
+        <f-button category="outline" label="Danger" state="danger"></f-button>
+        <f-button category="transparent" label="Danger" state="danger"></f-button>
+      </f-div>
+      <f-div padding="none" gap="x-large" state="warning">
+        <f-button category="fill" label="inherit" state="inherit"></f-button>
+        <f-button category="outline" label="inherit" state="inherit"></f-button>
+        <f-button category="transparent" label="inherit" state="inherit"></f-button>
+      </f-div>
+      <f-div padding="none" gap="x-large">
+        <f-button category="fill" label="custom" state="custom, pink"></f-button>
+        <f-button category="outline" label="custom" state="custom, pink"></f-button>
+        <f-button category="transparent" label="custom" state="custom, pink"></f-button>
+      </f-div>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>primary</td>
+      <td>Reserved for essential actions</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>neutral</td>
+      <td>Requires less prominence, Multiple actions of the same importance</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>success</td>
+      <td>Actions Indicating success, Positive results</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>warning</td>
+      <td>Discouraged action, Not always destructive</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>danger</td>
+      <td>Destructive actions, Negative consequences</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>inherit</td>
+      <td>inherit color according to parent f-div</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>custom</td>
+      <td>custom color can be given to the f-button</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## label
+
+<f-divider></f-divider>
+
+Label property defines the text on a button.
+
+<br />
+
+<p class="note-section margin-btm-24">Note: Label of a button is always uppercase.</p>
+
+<Canvas>
+  <Story name="label">
+    {(args) => html`<f-div gap="large" padding="x-large" direction="column" align="middle-center">
+      <f-button label="label"></f-button>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<br />
+
+## icon-left
+
+<f-divider></f-divider>
+
+Icon-left enables an icon on the left of the label.
+
+<br />
+<br />
+
+If you require just an icon button, refer to f-icon-button
+
+<br />
+
+<p class="note-section">Note: Label of a button is always uppercase.</p>
+
+<br />
+
+<Canvas>
+  <Story name="icon-left">
+    {(args) => html`<f-div gap="large" padding="x-large" direction="column" align="middle-center">
+      <f-button label="icon left" icon-left="i-plus"></f-button>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<br />
+
+## icon-right
+
+<f-divider></f-divider>
+
+Icon-right enables an icon on the right of the label. If you require just an icon button, refer to
+f-icon-button
+
+<br />
+
+<p class="note-section">Note: A button can have both icon-left and icon-right if needed</p>
+
+<br />
+
+<Canvas>
+  <Story name="icon-right">
+    {(args) => html`<f-div gap="large" padding="x-large" direction="row" align="middle-center">
+      <f-button label="icon right" icon-right="i-plus"></f-button>
+      <f-button label="icon left-right" icon-right="i-plus" icon-left="💰"></f-button>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<br />
+
+## counter
+
+<f-divider></f-divider>
+
+Counter property enables a numerical counter on the button.
+
+The counter component by default abbreviates the value (1000 = 1k). You can learn more about the counter
+[here](/docs/components-f-counter--anatomy).
+
+<br />
+
+<Canvas>
+  <Story name="counter">
+    {(args) => html`<f-div gap="large" padding="x-large" direction="row" align="middle-center">
+      <f-button label="Label" counter="88"></f-button>
+      <f-button label="Label" icon-left="i-plus" counter="88"></f-button>
+      <f-button label="Label" icon-right="i-plus" counter="88"></f-button>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<br />
+
+## Flags
+
+<f-divider></f-divider>
+
+<br />
+
+<Canvas>
+  <Story name="Flags">
+    {(args) => html`<f-div gap="large" padding="x-large" direction="column">
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">Loading</f-text>
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large">
+        <f-button label="label"></f-button>
+        <f-button label="label" loading=${true}></f-button>
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large">
+        <f-button label="label" icon-left="i-plus"></f-button>
+        <f-button label="label" loading=${true} icon-left="i-plus"></f-button>
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large">
+        <f-button label="label" icon-right="i-plus"></f-button>
+        <f-button label="label" loading=${true} icon-right="i-plus"></f-button>
+      </f-div>
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">Disabled</f-text>
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large">
+        <f-button label="label"></f-button>
+        <f-button label="label" disabled=${true}></f-button>
+      </f-div>
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium"
+          >Clickable (Button is always clickable)</f-text
+        >
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large">
+        <f-button label="label"></f-button>
+      </f-div>
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">Selected</f-text>
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large">
+        <f-button label="label"></f-button>
+        <f-button label="label" selected=${true}></f-button>
+      </f-div>
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">Focused</f-text>
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large">
+        <f-button label="label"></f-button>
+        <f-button label="label" focused=${true}></f-button>
+      </f-div>
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">Label Wrap</f-text>
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large">
+        <f-button label="Text-wrap label button"></f-button>
+        <f-button label="Text-wrap label button" label-wrap=${true}></f-button>
+      </f-div>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+      <td>Default</td>
+    </tr>
+    <tr>
+      <td>loading</td>
+      <td>Loader replaces the content of the button. Width of the button remains the same.</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>disabled</td>
+      <td>Opacity of button is set to 50% in disabled state.</td>
+      <td>false </td>
+    </tr>
+    <tr>
+      <td>clickable</td>
+      <td>
+        button is always clickable. On hover: lightened/darkened by 15%. On press:
+        lightened/darkened by 30%
+      </td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>selected</td>
+      <td>Set selected to true to make a button toggle Interaction: lightened/darkened by 30%</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>focused</td>
+      <td>Focused is a browser native property.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>label-wrap</td>
+      <td>
+        Text is ellipsized and the complete label is shown by tooltip on hover. In case the label is
+        too long and trying to truncate to the 3rd line, it is ellipsized on the 2nd line and the
+        tooltip shows the complete label.
+      </td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+<ArgsTable of={"f-button"} />

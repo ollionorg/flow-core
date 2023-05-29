@@ -130,6 +130,12 @@ Select allows users to choose one or multiple options from a list of values.
 			const handleInput = e => {
 				updateArgs({ value: e.detail.value });
 			};
+			const handleCreateOption = e => {
+				console.log(e.detail.value);
+				const array = [...args.options];
+				array.push(e.detail.value);
+				updateArgs({ options: array });
+			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div
@@ -160,6 +166,7 @@ Select allows users to choose one or multiple options from a list of values.
 							.option-template=${args["option-template"]}
 							icon-left=${args["icon-left"]}
 							.size=${args.size}
+							@create-option=${handleCreateOption}
 						>
 							${unsafeHTML(args.slot)}
 						</f-select></f-div
@@ -1400,6 +1407,9 @@ if true, shows a ‘create’ button when no query is found. On click of button,
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
+			const handleCreateOption = e => {
+				console.log(e.detail.value);
+			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
 					<f-div>
@@ -1413,6 +1423,7 @@ if true, shows a ‘create’ button when no query is found. On click of button,
 							?searchable=${true}
 							width="200"
 							?create-option=${true}
+							@create-option=${handleCreateOption}
 						>
 							<f-div slot="label" padding="none" gap="none"
 								>Label for f-select (create-option=true)</f-div

@@ -5,10 +5,10 @@ import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import { useArgs, useState } from "@storybook/client-api";
 
 <Meta
-  title="Components/f-tooltip"
-  parameters={{
-    controls: { hideNoControlsWarning: true },
-  }}
+	title="Components/f-tooltip"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
 />
 
 # f-tooltip
@@ -27,26 +27,26 @@ Tooltips appear when a user hovers, focuses, clicks on any element. They provide
 ### [Playground - Directive Tooltip](/story/components-f-tooltip--playground-directive-tooltip)
 
 <Canvas>
-  <Story
-    name="Playground - Directive Tooltip"
-    argTypes={{
-      tooltip: {
-        content: "text",
-      },
-    }}
-    args={{
-      tooltip: "This is a tooltip!",
-    }}
-  >
-    {(args) => html`<f-div padding="large" height="200px" align="middle-center" gap="auto">
-      <f-icon source="i-question-filled" size="medium" .tooltip=${args.tooltip} clickable></f-icon>
-      <f-button label="Submit" .tooltip=${args.tooltip}></f-button>
-      <f-tag label="Environment" .tooltip=${args.tooltip}></f-tag>
-      <f-icon-button icon="i-plus" .tooltip=${args.tooltip}></f-icon-button>
-      <f-counter size="large" label="88" .tooltip=${args.tooltip}></f-counter>
-      <f-pictogram size="large" source="i-app" .tooltip=${args.tooltip}></f-pictogram>
-    </f-div>`}
-  </Story>
+	<Story
+		name="Playground - Directive Tooltip"
+		argTypes={{
+			tooltip: {
+				content: "text"
+			}
+		}}
+		args={{
+			tooltip: "This is a tooltip!"
+		}}
+	>
+		{args => html`<f-div padding="large" height="200px" align="middle-center" gap="auto">
+			<f-icon source="i-question-filled" size="medium" .tooltip=${args.tooltip} clickable></f-icon>
+			<f-button label="Submit" .tooltip=${args.tooltip}></f-button>
+			<f-tag label="Environment" .tooltip=${args.tooltip}></f-tag>
+			<f-icon-button icon="i-plus" .tooltip=${args.tooltip}></f-icon-button>
+			<f-counter size="large" label="88" .tooltip=${args.tooltip}></f-counter>
+			<f-pictogram size="large" source="i-app" .tooltip=${args.tooltip}></f-pictogram>
+		</f-div>`}
+	</Story>
 </Canvas>
 
 <br />
@@ -54,61 +54,61 @@ Tooltips appear when a user hovers, focuses, clicks on any element. They provide
 ### [Playground - Rich Tooltip Component](/story/components-f-tooltip--playground-rich-tooltip-component)
 
 <Canvas>
-  <Story
-    name="Playground - Rich Tooltip Component"
-    argTypes={{
-      placement: {
-        control: "select",
-        options: [
-          "auto",
-          "top-start",
-          "top",
-          "top-end",
-          "bottom-start",
-          "bottom",
-          "bottom-end",
-          "right-start",
-          "right",
-          "right-end",
-          "left-start",
-          "left",
-          "left-end",
-        ],
-      },
-      ["Custom Tooltip Template"]: {
-        control: "text",
-      },
-      tooltip: {
-        control: "text",
-      },
-      closable: { control: "boolean" },
-    }}
-    args={{
-      tooltip: "#tooltipTarget",
-      placement: "auto",
-      ["Custom Tooltip Template"]: `
+	<Story
+		name="Playground - Rich Tooltip Component"
+		argTypes={{
+			placement: {
+				control: "select",
+				options: [
+					"auto",
+					"top-start",
+					"top",
+					"top-end",
+					"bottom-start",
+					"bottom",
+					"bottom-end",
+					"right-start",
+					"right",
+					"right-end",
+					"left-start",
+					"left",
+					"left-end"
+				]
+			},
+			["Custom Tooltip Template"]: {
+				control: "text"
+			},
+			tooltip: {
+				control: "text"
+			},
+			closable: { control: "boolean" }
+		}}
+		args={{
+			tooltip: "#tooltipTarget",
+			placement: "auto",
+			["Custom Tooltip Template"]: `
           <f-div direction="column" width="hug-content">
             <f-text variant="para" size="small"> Hello Everyone </f-text>
             <f-text variant="para" size="small" state="primary"> Learn More </f-text>
           </f-div>`,
-      closable: false,
-    }}
-  >
-    {(args) =>
-      html`${args.tooltip.startsWith("#")
-        ? html`<f-div padding="large" height="200px" align="middle-center" gap="large">
-              <f-icon-button icon="i-plus" .tooltip=${args.tooltip}></f-icon-button>
-              <f-button label="Submit" .tooltip=${args.tooltip}></f-button>
-            </f-div>
-            <f-tooltip .placement=${args.placement} id="tooltipTarget" ?closable=${args.closable}
-              >${unsafeHTML(args["Custom Tooltip Template"])}</f-tooltip
-            >`
-        : html`<f-div padding="large" height="200px" align="middle-center" gap="large">
-            <f-icon-button icon="i-plus" .tooltip=${args.tooltip}></f-icon-button>
-            <f-button label="Submit" .tooltip=${args.tooltip}></f-button>
-          </f-div>`}`
-    }
-  </Story>
+			closable: false
+		}}
+	>
+		{args =>
+			html`${args.tooltip.startsWith("#")
+				? html`<f-div padding="large" height="200px" align="middle-center" gap="large">
+							<f-icon-button icon="i-plus" .tooltip=${args.tooltip}></f-icon-button>
+							<f-button label="Submit" .tooltip=${args.tooltip}></f-button>
+						</f-div>
+						<f-tooltip .placement=${args.placement} id="tooltipTarget" ?closable=${args.closable}
+							>${unsafeHTML(args["Custom Tooltip Template"])}</f-tooltip
+						>`
+				: html`<f-div padding="large" height="200px" align="middle-center" gap="large">
+						<f-icon-button icon="i-plus" .tooltip=${args.tooltip}></f-icon-button>
+						<f-button label="Submit" .tooltip=${args.tooltip}></f-button>
+				  </f-div>`}`
+		}
+	</Story>
 </Canvas>
 
 <br />
@@ -122,26 +122,43 @@ id property specifies a name or a keyword that indicates to which component the 
 <br />
 
 <Canvas>
-  <Story name="id">
-    {(args) => {
-      return html`
-        <f-div gap="large" padding="x-large" direction="column">
-          <f-div height="hug-content" padding="none">
-            <f-text variant="para" size="large" weight="medium">id="tooltip-target"</f-text>
-          </f-div>
-          <f-div padding="none" direction="row" gap="x-large" overflow="hidden">
-            <f-icon-button icon="i-plus" tooltip="#tooltip-target"></f-icon-button>
-          </f-div>
-          <f-tooltip id="tooltip-target"
-            ><f-div direction="column" width="hug-content">
-              <f-text variant="para" size="small"> This is a tooltip </f-text>
-              <f-text variant="para" size="small" state="primary"> Learn More </f-text>
-            </f-div></f-tooltip
-          >
-        </f-div>
-      `;
-    }}
-  </Story>
+	<Story name="id">
+		{args => {
+			return html`
+				<f-div gap="large" padding="x-large" direction="column">
+					<f-div height="hug-content" padding="none">
+						<f-text variant="para" size="large" weight="medium">id="tooltip-target"</f-text>
+					</f-div>
+					<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
+						<f-icon-button icon="i-plus" tooltip="#tooltip-target"></f-icon-button>
+					</f-div>
+					<f-tooltip id="tooltip-target">
+						<f-div width="180px" gap="medium" direction="column" overflow="visible">
+							<f-text size="small" inline data-qa-azure-cred-field-clientId-tooltip
+								>1. Go to the
+								<f-text size="small" weight="bold" inline>
+									Azure Portal Home page > All Services > Azure Active Directory > App
+									Registrations.
+								</f-text>
+							</f-text>
+							<f-text size="small"
+								>2. Select an existing application or register a new application (e.g.
+								CodePipes).</f-text
+							>
+							<f-text size="small"
+								>3. Copy the Application (client) ID of the newly registered application.</f-text
+							>
+							<f-text size="small">
+								<f-text size="small" inline weight="bold">Note: </f-text> Once you have registered
+								an Application, it is required to explicitly grant it permissions in a form of a
+								Role assignment to work with the current Azure subscription.
+							</f-text>
+						</f-div>
+					</f-tooltip>
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <br />
@@ -155,140 +172,140 @@ Placement property defines the placement of a tooltip with respect to the elemen
 <br />
 
 <Canvas>
-  <Story
-    name="placement"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 350,
-      },
-    }}
-  >
-    {(args) => {
-      const [dummyPlacementArray, setDummyPlacementArray] = useState([
-        [
-          { title: "Bottom Button End", placement: "bottom-end" },
-          { title: "Bottom", placement: "bottom" },
-          { title: "Bottom Start", placement: "bottom-start" },
-        ],
-        [
-          { title: "Right Start", placement: "right-start" },
-          { title: "Left Start", placement: "left-start" },
-        ],
-        [
-          { title: "Right", placement: "right" },
-          { title: "Auto", placement: "auto" },
-          { title: "Left", placement: "left" },
-        ],
-        [
-          { title: "Right End", placement: "right-end" },
-          { title: "left End", placement: "left-end" },
-        ],
-        [
-          { title: "Top End", placement: "top-end" },
-          { title: "Top", placement: "top" },
-          { title: "Top Start", placement: "top-start" },
-        ],
-      ]);
-      return html`
-        <f-div height="hug-content" gap="large" direction="column">
-          ${dummyPlacementArray.map((item, index) => {
-            return html`
-              <f-div height="hug-content" gap="auto" direction="row">
-                ${item.map((main, main_index) => {
-                  return html`
-                    <f-tooltip placement=${main.placement} id=${main.placement}>
-                      <f-text variant="para" size="small" id="tooltip-text">
-                        This is a tooltip
-                      </f-text></f-tooltip
-                    >
-                    <f-button tooltip=${`#${main.placement}`} label=${main.title}> </f-button>
-                  `;
-                })}
-              </f-div>
-            `;
-          })}
-        </f-div>
-      `;
-    }}
-  </Story>
+	<Story
+		name="placement"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 350
+			}
+		}}
+	>
+		{args => {
+			const [dummyPlacementArray, setDummyPlacementArray] = useState([
+				[
+					{ title: "Bottom Button End", placement: "bottom-end" },
+					{ title: "Bottom", placement: "bottom" },
+					{ title: "Bottom Start", placement: "bottom-start" }
+				],
+				[
+					{ title: "Right Start", placement: "right-start" },
+					{ title: "Left Start", placement: "left-start" }
+				],
+				[
+					{ title: "Right", placement: "right" },
+					{ title: "Auto", placement: "auto" },
+					{ title: "Left", placement: "left" }
+				],
+				[
+					{ title: "Right End", placement: "right-end" },
+					{ title: "left End", placement: "left-end" }
+				],
+				[
+					{ title: "Top End", placement: "top-end" },
+					{ title: "Top", placement: "top" },
+					{ title: "Top Start", placement: "top-start" }
+				]
+			]);
+			return html`
+				<f-div height="hug-content" gap="large" direction="column">
+					${dummyPlacementArray.map((item, index) => {
+						return html`
+							<f-div height="hug-content" gap="auto" direction="row">
+								${item.map((main, main_index) => {
+									return html`
+										<f-tooltip placement=${main.placement} id=${main.placement}>
+											<f-text variant="para" size="small" id="tooltip-text">
+												This is a tooltip
+											</f-text></f-tooltip
+										>
+										<f-button tooltip=${`#${main.placement}`} label=${main.title}> </f-button>
+									`;
+								})}
+							</f-div>
+						`;
+					})}
+				</f-div>
+			`;
+		}}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>auto</td>
-      <td>Sets the placement of popover automatically according to the screen size</td>
-      <td>
-        <code>default</code>
-      </td>
-    </tr>
-    <tr>
-      <td>top</td>
-      <td>placed at top-middle part w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>top-start</td>
-      <td>placed at top-start position w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>top-end</td>
-      <td>placed at top-end position w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>bottom</td>
-      <td>placed at bottom-middle position w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>bottom-start</td>
-      <td>placed at bottom-start position w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>bottom-end</td>
-      <td>placed at bottom-end position w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>right</td>
-      <td>placed at right-center position w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>right-start</td>
-      <td>starting from top to downwards on right side wrt to the button opening popup</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>right-end</td>
-      <td>starting from bottom to upwards on right side wrt to the button opening popup</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>left</td>
-      <td>placed at left-center position w.r.t the opening button</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>left-start</td>
-      <td>starting from top to downwards on left side wrt to the button opening popup</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>left-end</td>
-      <td>starting from bottom to upwards on left side wrt to the button opening popup</td>
-      <td></td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>auto</td>
+			<td>Sets the placement of popover automatically according to the screen size</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>top</td>
+			<td>placed at top-middle part w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>top-start</td>
+			<td>placed at top-start position w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>top-end</td>
+			<td>placed at top-end position w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>bottom</td>
+			<td>placed at bottom-middle position w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>bottom-start</td>
+			<td>placed at bottom-start position w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>bottom-end</td>
+			<td>placed at bottom-end position w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>right</td>
+			<td>placed at right-center position w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>right-start</td>
+			<td>starting from top to downwards on right side wrt to the button opening popup</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>right-end</td>
+			<td>starting from bottom to upwards on right side wrt to the button opening popup</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>left</td>
+			<td>placed at left-center position w.r.t the opening button</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>left-start</td>
+			<td>starting from top to downwards on left side wrt to the button opening popup</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>left-end</td>
+			<td>starting from bottom to upwards on left side wrt to the button opening popup</td>
+			<td></td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -298,37 +315,37 @@ Placement property defines the placement of a tooltip with respect to the elemen
 <f-divider></f-divider>
 
 <Canvas>
-  <Story name="Flags">
-    {(args) => html`<f-div gap="large" padding="x-large" direction="column">
-      <f-div height="hug-content" padding="none">
-        <f-text variant="para" size="large" weight="medium">closable="true"</f-text>
-      </f-div>
-      <f-div padding="none" direction="row" gap="x-large" overflow="hidden">
-        <f-button label="Closable Tooltip" tooltip="#tooltipTarget2"></f-button>
-      </f-div>
-      <f-tooltip id="tooltipTarget2" ?closable=${true}
-        ><f-div direction="column" width="hug-content">
-          <f-text variant="para" size="small"> This is a tooltip </f-text>
-          <f-text variant="para" size="small" state="primary"> Learn More </f-text>
-        </f-div></f-tooltip
-      >
-    </f-div>`}
-  </Story>
+	<Story name="Flags">
+		{args => html`<f-div gap="large" padding="x-large" direction="column">
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">closable="true"</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
+				<f-button label="Closable Tooltip" tooltip="#tooltipTarget2"></f-button>
+			</f-div>
+			<f-tooltip id="tooltipTarget2" ?closable=${true}
+				><f-div direction="column" width="hug-content">
+					<f-text variant="para" size="small"> This is a tooltip </f-text>
+					<f-text variant="para" size="small" state="primary"> Learn More </f-text>
+				</f-div></f-tooltip
+			>
+		</f-div>`}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Name</td>
-      <td>Description</td>
-      <td>Default</td>
-    </tr>
-    <tr>
-      <td>closable</td>
-      <td>It enables/disables a close icon on top right of the tooltip.</td>
-      <td>false</td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Name</td>
+			<td>Description</td>
+			<td>Default</td>
+		</tr>
+		<tr>
+			<td>closable</td>
+			<td>It enables/disables a close icon on top right of the tooltip.</td>
+			<td>false</td>
+		</tr>
+	</tbody>
 </table>
 
 <ArgsTable of={"f-tooltip"} />

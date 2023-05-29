@@ -1,5 +1,5 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { property, query, state } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import eleStyle from "./f-log.scss";
 
 import { FRoot, flowElement } from "@cldcvr/flow-core";

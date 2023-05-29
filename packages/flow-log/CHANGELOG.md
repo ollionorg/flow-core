@@ -3,8 +3,8 @@
 
 # Change Log
 
-## [0.0.1] - 2023-05-02
+## [0.0.1] - 2023-05-29
 
-### Improvements
+### Features
 
-- First release
+- `f-log` package added.

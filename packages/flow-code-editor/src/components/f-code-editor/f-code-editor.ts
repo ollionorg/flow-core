@@ -78,29 +78,30 @@ export class FCodeEditor extends FRoot {
 
 		this.style.height = this.height as string;
 		this.style.width = this.width as string;
-
-		this.editor = monaco.editor.create(
-			this,
-			{
-				value: this.code,
-				theme: "vs-dark",
-				language: this.language,
-				automaticLayout: true,
-				autoDetectHighContrast: false,
-				readOnly: false,
-				fontSize: 16,
-				padding: {
-					top: 16
+		if (this.code) {
+			this.editor = monaco.editor.create(
+				this,
+				{
+					value: this.code,
+					theme: "vs-dark",
+					language: this.language,
+					automaticLayout: true,
+					autoDetectHighContrast: false,
+					readOnly: false,
+					fontSize: 16,
+					padding: {
+						top: 16
+					},
+					minimap: { enabled: false },
+					dimension: {
+						width: this.offsetWidth,
+						height: this.offsetHeight
+					},
+					...this.settings
 				},
-				minimap: { enabled: false },
-				dimension: {
-					width: this.offsetWidth,
-					height: this.offsetHeight
-				},
-				...this.settings
-			},
-			this.services
-		);
+				this.services
+			);
+		}
 	}
 }
 

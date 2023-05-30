@@ -109,11 +109,11 @@ export class FTag extends FRoot {
 	 */
 	get iconSize() {
 		if (this.size === "large") {
-			return "medium";
-		} else if (this.size === "medium") {
 			return "small";
-		} else {
+		} else if (this.size === "medium") {
 			return "x-small";
+		} else {
+			return "medium";
 		}
 	}
 
@@ -221,7 +221,8 @@ export class FTag extends FRoot {
 					class=${classMap({
 						"left-icon": true,
 						...iconClasses,
-						"f-tag-system-icon": this.tagSystemIcon ? true : false
+						"f-tag-system-icon": this.tagSystemIcon ? true : false,
+						"system-icon-size": this.size === "small" ? true : false
 					})}
 					.size=${this.iconSize}
 					?clickable=${true}
@@ -238,7 +239,8 @@ export class FTag extends FRoot {
 					class=${classMap({
 						"right-icon": true,
 						...iconClasses,
-						"f-tag-system-icon": this.tagSystemIcon ? true : false
+						"f-tag-system-icon": this.tagSystemIcon ? true : false,
+						"system-icon-size": this.size === "small" ? true : false
 					})}
 					.size=${this.iconSize}
 					?clickable=${true}

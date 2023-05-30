@@ -497,7 +497,7 @@ export class FSelect extends FRoot {
 	 * Create New Option when option not present
 	 */
 	createNewOption(e: MouseEvent) {
-		const event = new CustomEvent<FSelectCreateOptionEvent>("create-option", {
+		const event = new CustomEvent<FSelectCreateOptionEvent>("add-option", {
 			detail: {
 				value: this.searchValue,
 				options: this.options

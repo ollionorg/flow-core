@@ -180,6 +180,16 @@ in this case it is `f-icon`
   * Iterating over sizes with padding, fontsize, height
   **/
 
+		&.system-icon-size {
+			width: 8px !important;
+			height: 8px !important;
+			svg,
+			img {
+				width: 8px !important;
+				height: 8px !important;
+			}
+		}
+
 		@each $size, $value in $sizes {
 			&[size="#{$size}"] {
 				font-size: $value;

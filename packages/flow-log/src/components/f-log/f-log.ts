@@ -90,21 +90,21 @@ export class FLog extends FRoot {
 	 * @returns line no.'s appended on every line
 	 */
 	addLineNumbers(logs: string) {
-		const termRegex = /".+?":/g;
-		return `${`\x1b[38;2;123;147;178m${this.lineNumber++}\x1b[0m `.padEnd(4)} ${logs
+		const termRegex = /"([^"]+)":/g;
+		return `${("\x1b[38;2;123;147;178m" + this.lineNumber++ + "\x1b[0m ").padEnd(4)} ${logs
 			.replace(/\n/g, "\r\n")
 			.replace(/\[INFO\]/g, "\x1b[38;2;26;149;255m[INFO]\x1b[0m")
 			.replace(/\[WARN\]/g, "\x1b[38;2;254;164;1m[WARN]\x1b[0m")
 			.replace(/\[ERROR\]/g, "\x1b[38;2;242;66;66m[ERROR]\x1b[0m")
 			.replace(/\[DEBUG\]/g, "\x1b[38;2;211;153;255m[DEBUG]\x1b[0m")
-			.replace(/\d{4}(?:-|\/)[01]\d(?:-|\/)[0-3]\d.[0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?Z?/g, date => {
+			.replace(/\d{4}[-\/][01]\d[-\/][0-3]\d.[0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?Z?/g, date => {
 				return `\x1b[38;2;123;147;178m${date}\x1b[0m`;
 			})
 			.replace(termRegex, key => {
 				return `\x1b[38;2;242;137;104m${key}\x1b[0m`;
 			})
 			.replace(/(\r\n|\n\r|\n|\r)/g, (_match, p1, _offset, _string) => {
-				return `${p1}${`\x1b[38;2;123;147;178m${this.lineNumber++}\x1b[0m `.padEnd(4)} `;
+				return `${p1}${("\x1b[38;2;123;147;178m" + this.lineNumber++ + "\x1b[0m ").padEnd(4)} `;
 			})}`;
 	}
 

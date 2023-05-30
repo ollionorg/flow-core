@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Setup Node.js 16.x
-        uses: actions/setup-node@v2
+      - name: Setup Node.js 18.x
+        uses: actions/setup-node@v2.5.2
         with:
-          node-version: 16.x
+          node-version: 18.x
 
       - name: Install Dependencies
         run: yarn
@@ -34,20 +34,19 @@ jobs:
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%B %d, %Y')"
-      - name: Extract release notes
+      - name: extract-changelogs
         if: steps.changesets.outputs.published == 'true'
-        id: extract-release-notes
-        uses: ffurrer2/extract-release-notes@v1
+        id: change-logs
+        uses: vikas-cldcvr/extract-changelogs@v0.1.1
         with:
-          changelog_file: packages/flow-core/CHANGELOG.md
-      - name: Slack Markdown Converter
-        if: steps.changesets.outputs.published == 'true'
-        id: md-converter
-        uses: LoveToKnow/slackify-markdown-action@v1.0.0
-        with: 
-          text: ${{ steps.extract-release-notes.outputs.release_notes }}
+          released-package-versions: ${{ steps.changesets.outputs.publishedPackages }}
+          changelog-files-config: |
+            {
+              "@cldcvr/flow-log":"packages/flow-log/CHANGELOG.md",
+              "@cldcvr/flow-core":"packages/flow-core/CHANGELOG.md"
+            }
       - name: Send Slack Notification
-        if: steps.changesets.outputs.published == 'true' && fromJSON(steps.changesets.outputs.publishedPackages)[0].name == '@cldcvr/flow-core'
+        if: steps.changesets.outputs.published == 'true'
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
         with:
@@ -67,7 +66,7 @@ jobs:
                   "type": "context",
                   "elements": [
                     {
-                      "text": "*${{ steps.date.outputs.date }}* | New Release Alert: ${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }}@${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].version }}",
+                      "text": "*${{ steps.date.outputs.date }}* | New Release Alert",
                       "type": "mrkdwn"
                     }
                   ]
@@ -79,14 +78,14 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Hello everyone! We are thrilled to announce that a new version of the *${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }}* package is now available! 🎉. \nPlease find below the changelogs for the new version *${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].version }}*:"
+                    "text": "Hello everyone!\nPlease find below the changelogs"
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ${{ toJSON(steps.md-converter.outputs.text) }}
+                    "text": ${{ toJSON(steps.change-logs.outputs.changeLogs) }}
                   }
                 },
                 {
@@ -96,21 +95,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "To update your package to the latest version, simply run the following command in your project directory:"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "`npm install ${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }}@${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].version }}`\n\nIf you're using Yarn, you can use the following command:\n\n`yarn add ${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }}@${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].version }}`"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "We would love to hear your feedback and any issues you might encounter while using the new version. Feel free to reach out to us on Slack or submit a GitHub issue if you need any assistance.\n\nHappy coding with the new `${{ fromJSON(steps.changesets.outputs.publishedPackages)[0].name }}` version! :rocket:"
+                    "text": "We would love to hear your feedback and any issues you might encounter while using the new version. Feel free to reach out to us on Slack or submit a GitHub issue if you need any assistance.\n\nHappy coding! :rocket:"
                   }
                 }
               ]
@@ -124,7 +109,7 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
-      
+
       - name: Setup Node.js 16.x
         uses: actions/setup-node@v2
         with:
@@ -136,16 +121,19 @@ jobs:
       - uses: sergeysova/jq-action@v2
         with:
           cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/flow-core/package.json`" > packages/flow-core/package.json
+      - uses: sergeysova/jq-action@v2
+        with:
+          cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/flow-log/package.json`" > packages/flow-log/package.json
 
       - uses: sergeysova/jq-action@v2
         with:
           cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/custom-elements-manifest-to-types/package.json`" > packages/custom-elements-manifest-to-types/package.json
       - uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
-          registry-url: 'https://npm.pkg.github.com'
+          node-version: "16.x"
+          registry-url: "https://npm.pkg.github.com"
           always-auth: true
-          scope: '@cldcvr'
+          scope: "@cldcvr"
       - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
@@ -162,4 +150,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
- 

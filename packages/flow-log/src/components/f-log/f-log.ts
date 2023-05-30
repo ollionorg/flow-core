@@ -11,22 +11,11 @@ import { SearchBarAddon } from "xterm-addon-search-bar";
 import { WebLinksAddon } from "xterm-addon-web-links";
 import xtermCSS from "xterm/css/xterm.css";
 
-export type FTerminalStateProp =
-	| "default"
-	| "secondary"
-	| "subtle"
-	| "primary"
-	| "success"
-	| "danger"
-	| "warning"
-	| "inherit"
-	| `custom, ${string}`;
-
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
 @flowElement("f-log")
-export class FTerminal extends FRoot {
+export class FLog extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
@@ -101,7 +90,7 @@ export class FTerminal extends FRoot {
 	 * @returns line no.'s appended on every line
 	 */
 	addLineNumbers(logs: string) {
-		const termRegex = /".+":/g;
+		const termRegex = /".+?":/g;
 		return `${`\x1b[38;2;123;147;178m${this.lineNumber++}\x1b[0m `.padEnd(4)} ${logs
 			.replace(/\n/g, "\r\n")
 			.replace(/\[INFO\]/g, "\x1b[38;2;26;149;255m[INFO]\x1b[0m")
@@ -114,7 +103,7 @@ export class FTerminal extends FRoot {
 			.replace(termRegex, key => {
 				return `\x1b[38;2;242;137;104m${key}\x1b[0m`;
 			})
-			.replace(/(\r\n|\n\r|\n|\r)/g, (match, p1, _offset, _string) => {
+			.replace(/(\r\n|\n\r|\n|\r)/g, (_match, p1, _offset, _string) => {
 				return `${p1}${`\x1b[38;2;123;147;178m${this.lineNumber++}\x1b[0m `.padEnd(4)} `;
 			})}`;
 	}
@@ -202,7 +191,9 @@ export class FTerminal extends FRoot {
 				 * Search add-on for searching text inside canvas
 				 */
 				this.searchAddon = new SearchAddon();
-				this.searchAddonBar = new SearchBarAddon({ searchAddon: this.searchAddon });
+				this.searchAddonBar = new SearchBarAddon({
+					searchAddon: this.searchAddon
+				});
 				this.lineNumber = 1;
 
 				this.terminal.loadAddon(this.fitAddon);
@@ -218,9 +209,24 @@ export class FTerminal extends FRoot {
 				this.toggleSearch();
 
 				const closeSearch = this.fterminalRef.value.querySelector(".search-bar__btn.close");
+				const nextSearch = this.fterminalRef.value.querySelector(".search-bar__btn.next");
+				const prevSearch = this.fterminalRef.value.querySelector(".search-bar__btn.prev");
+
 				closeSearch?.addEventListener("click", () => {
 					this.searchAddonBar.hidden();
 					this.dispatchCloseSearchEvent();
+				});
+
+				nextSearch?.addEventListener("click", () => {
+					const searchInputValue =
+						this.fterminalRef.value?.querySelector<HTMLInputElement>(".search-bar__input")?.value;
+					this.searchAddon.findNext(searchInputValue ?? "");
+				});
+
+				prevSearch?.addEventListener("click", () => {
+					const searchInputValue =
+						this.fterminalRef.value?.querySelector<HTMLInputElement>(".search-bar__input")?.value;
+					this.searchAddon.findPrevious(searchInputValue ?? "");
 				});
 
 				this.fitAddon.fit();
@@ -278,6 +284,6 @@ export class FTerminal extends FRoot {
  */
 declare global {
 	interface HTMLElementTagNameMap {
-		"f-log": FTerminal;
+		"f-log": FLog;
 	}
 }

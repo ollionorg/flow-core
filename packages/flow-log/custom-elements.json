@@ -12,7 +12,7 @@
           "name": "*",
           "declaration": {
             "name": "*",
-            "package": "\"./components/f-editor/f-editor\""
+            "package": "\"./components/f-log/f-log\""
           }
         }
       ]
@@ -45,60 +45,189 @@
             "name": "content",
             "module": "src/shims.d.ts"
           }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/shims.d.ts"
+          }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-editor/f-editor.ts",
+      "path": "src/components/f-log/f-log.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "FEditor",
+          "name": "FLog",
           "members": [
             {
               "kind": "field",
-              "name": "title",
+              "name": "logs",
               "type": {
-                "text": "string"
+                "text": "string | undefined"
               },
-              "attribute": "title"
+              "attribute": "logs"
             },
             {
               "kind": "field",
-              "name": "editor",
+              "name": "showSearch",
               "type": {
-                "text": "monaco.editor.IStandaloneCodeEditor | undefined"
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "show-search",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "showScrollbar",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "show-scrollbar",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "terminal",
+              "type": {
+                "text": "Terminal"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "fitAddon",
+              "type": {
+                "text": "FitAddon"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "searchAddon",
+              "type": {
+                "text": "SearchAddon"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "searchAddonBar",
+              "type": {
+                "text": "SearchBarAddon"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "themeobserver",
+              "type": {
+                "text": "MutationObserver"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "lineNumber",
+              "type": {
+                "text": "number"
+              },
+              "default": "1"
+            },
+            {
+              "kind": "field",
+              "name": "fterminalRef",
+              "type": {
+                "text": "Ref<HTMLDivElement>"
               }
             },
             {
               "kind": "method",
-              "name": "createRenderRoot"
+              "name": "write",
+              "parameters": [
+                {
+                  "name": "logs",
+                  "type": {
+                    "text": "string | undefined"
+                  },
+                  "description": "string value"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "toggleSearch",
+              "description": "show and hide search"
+            },
+            {
+              "kind": "method",
+              "name": "addLineNumbers",
+              "parameters": [
+                {
+                  "name": "logs",
+                  "type": {
+                    "text": "string"
+                  },
+                  "description": "string value of logs"
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": ""
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "dispatchCloseSearchEvent",
+              "description": "custom event on close of search bar"
+            },
+            {
+              "kind": "method",
+              "name": "init",
+              "description": "creating the terminal"
             }
           ],
           "attributes": [
             {
-              "name": "title",
+              "name": "logs",
               "type": {
-                "text": "string"
+                "text": "string | undefined"
               },
-              "fieldName": "title"
+              "fieldName": "logs"
+            },
+            {
+              "name": "show-search",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "showSearch"
+            },
+            {
+              "name": "show-scrollbar",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "showScrollbar"
             }
           ],
           "superclass": {
             "name": "FRoot",
             "package": "@cldcvr/flow-core"
-          }
+          },
+          "summary": "Text component includes Headings, titles, body texts and links."
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "FEditor",
+          "name": "FLog",
           "declaration": {
-            "name": "FEditor",
-            "module": "src/components/f-editor/f-editor.ts"
+            "name": "FLog",
+            "module": "src/components/f-log/f-log.ts"
           }
         }
       ]

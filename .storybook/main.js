@@ -25,6 +25,10 @@ module.exports = {
 				{
 					find: "@cldcvr/flow-core/src",
 					replacement: path.resolve(__dirname, "../packages/flow-core/src")
+				},
+				{
+					find: "@cldcvr/flow-log/src",
+					replacement: path.resolve(__dirname, "../packages/flow-log/src")
 				}
 			];
 		}

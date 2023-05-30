@@ -33,14 +33,20 @@ export class FTerminal extends FRoot {
 	static styles = [unsafeCSS(eleStyle), unsafeCSS(xtermCSS)];
 
 	/**
-	 * @attribute Variants of text component are use cases such as Heading, paragraph, and code.
+	 * @attribute logs to be displayed on screen
 	 */
 	@property({ type: String, reflect: false })
 	logs?: string;
 
+	/**
+	 * @attribute show search bar
+	 */
 	@property({ type: Boolean, reflect: true, attribute: "show-search" })
 	showSearch?: boolean = false;
 
+	/**
+	 * @attribute show scroll bar to scroll the terminal
+	 */
 	@property({ type: Boolean, reflect: true, attribute: "show-scrollbar" })
 	showScrollbar?: boolean = false;
 
@@ -58,11 +64,19 @@ export class FTerminal extends FRoot {
 
 	fterminalRef: Ref<HTMLDivElement> = createRef();
 
+	/**
+	 *
+	 * @param logs string value
+	 */
 	write(logs: string | undefined) {
 		if (logs) {
 			this.terminal.write(this.addLineNumbers(logs));
 		}
 	}
+
+	/**
+	 * show and hide search
+	 */
 	toggleSearch() {
 		if (this.showSearch && this.fterminalRef.value) {
 			this.searchAddonBar.show();
@@ -81,6 +95,11 @@ export class FTerminal extends FRoot {
 		}
 	}
 
+	/**
+	 *
+	 * @param logs string value of logs
+	 * @returns line no.'s appended on every line
+	 */
 	addLineNumbers(logs: string) {
 		const termRegex = /".+":/g;
 		return `${`\x1b[38;2;123;147;178m${this.lineNumber++}\x1b[0m `.padEnd(4)} ${logs
@@ -100,6 +119,9 @@ export class FTerminal extends FRoot {
 			})}`;
 	}
 
+	/**
+	 * custom event on close of search bar
+	 */
 	dispatchCloseSearchEvent() {
 		const event = new CustomEvent("close", {
 			detail: {
@@ -112,6 +134,19 @@ export class FTerminal extends FRoot {
 		this.dispatchEvent(event);
 	}
 
+	/**
+	 * destroy themeobserver
+	 */
+	disconnectedCallback() {
+		if (this.themeobserver) {
+			this.themeobserver.disconnect();
+		}
+		super.disconnectedCallback();
+	}
+
+	/**
+	 * creating the terminal
+	 */
 	init() {
 		// Checking if parent container is present
 		if (this.fterminalRef.value) {
@@ -202,6 +237,10 @@ export class FTerminal extends FRoot {
 		}
 	}
 
+	/**
+	 *
+	 * @returns html remdered
+	 */
 	render() {
 		/**
 		 * Final html to render
@@ -211,10 +250,17 @@ export class FTerminal extends FRoot {
 		`;
 	}
 
+	/**
+	 * on mount
+	 */
 	protected firstUpdated() {
 		this.init();
 	}
 
+	/**
+	 * works on every updates taking place
+	 * @param changedProperties updated properties
+	 */
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		changedProperties.forEach((oldValue, propName) => {
 			if (propName === "logs" && oldValue !== this.logs) {

@@ -7,6 +7,7 @@ import AwsIconPack from "@cldcvr/flow-aws-icon/dist/types/icon-pack";
 import { ConfigUtil } from "@cldcvr/flow-core/src/modules/config";
 import "@cldcvr/flow-core/src";
 import "@cldcvr/flow-log/src";
+import "@cldcvr/flow-code-editor/src";
 import { setCustomElementsManifest, setCustomElements } from "@storybook/web-components";
 import "./storybook.css";
 
@@ -77,12 +78,18 @@ async function run() {
 		await fetch(new URL("../packages/flow-core/custom-elements.json", import.meta.url))
 	).json();
 
-	const editorCustomElements = await (
+	const loggerCustomElements = await (
 		await fetch(new URL("../packages/flow-log/custom-elements.json", import.meta.url))
+	).json();
+
+	const editorCustomElements = await (
+		await fetch(new URL("../packages/flow-code-editor/custom-elements.json", import.meta.url))
 	).json();
 
 	setCustomElementsManifest(customElements);
 	setCustomElements(customElements);
+	setCustomElementsManifest(loggerCustomElements);
+	setCustomElements(loggerCustomElements);
 	setCustomElementsManifest(editorCustomElements);
 	setCustomElements(editorCustomElements);
 }

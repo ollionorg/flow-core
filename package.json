@@ -15,8 +15,9 @@
     "prebuild-flow-core": "cd packages/custom-elements-manifest-to-types && yarn build",
     "build-flow-core": "cd packages/flow-core && yarn compile",
     "build-flow-log": "cd packages/flow-log && yarn compile",
+    "build-flow-code-editor": "cd packages/flow-code-editor && yarn compile",
     "build-types-generator": "cd packages/custom-elements-manifest-to-types && yarn build",
-    "build-packages": "yarn build-types-generator && yarn build-flow-core && yarn build-flow-log",
+    "build-packages": "yarn build-types-generator && yarn build-flow-core && yarn build-flow-code-editor && yarn build-flow-log",
     "release": "cp README.md packages/flow-core && yarn build-packages && yarn changeset publish",
     "prepare": "husky install",
     "test": "yarn loki test"

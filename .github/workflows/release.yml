@@ -43,6 +43,7 @@ jobs:
           changelog-files-config: |
             {
               "@cldcvr/flow-log":"packages/flow-log/CHANGELOG.md",
+              "@cldcvr/flow-code-editor":"packages/flow-code-editor/CHANGELOG.md",
               "@cldcvr/flow-core":"packages/flow-core/CHANGELOG.md"
             }
       - name: Send Slack Notification
@@ -124,7 +125,9 @@ jobs:
       - uses: sergeysova/jq-action@v2
         with:
           cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/flow-log/package.json`" > packages/flow-log/package.json
-
+      - uses: sergeysova/jq-action@v2
+        with:
+          cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/flow-code-editor/package.json`" > packages/flow-code-editor/package.json
       - uses: sergeysova/jq-action@v2
         with:
           cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/custom-elements-manifest-to-types/package.json`" > packages/custom-elements-manifest-to-types/package.json

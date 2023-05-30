@@ -1412,7 +1412,7 @@ if true, shows a ‘create’ button when no query is found. On click of button,
 			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
-					<f-div>
+					<f-div @add-option=${handleCreateOption}>
 						<f-select
 							placeholder="Select Option"
 							@input=${handleValue}
@@ -1423,7 +1423,6 @@ if true, shows a ‘create’ button when no query is found. On click of button,
 							?searchable=${true}
 							width="200"
 							?create-option=${true}
-							@create-option=${handleCreateOption}
 						>
 							<f-div slot="label" padding="none" gap="none"
 								>Label for f-select (create-option=true)</f-div

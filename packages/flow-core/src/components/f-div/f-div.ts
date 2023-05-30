@@ -114,7 +114,7 @@ export class FDiv extends FRoot {
 	 * @attribute Variants are various representations of a f-div.
 	 */
 	@property({ type: String, reflect: true })
-	variant?: "block" | "curved" = "block";
+	variant?: "block" | "curved" | "round" = "block";
 	/**
 	 * @attribute Direction will decide whether these elements needs to be displayed in vertical or horizontal manner.
 	 */
@@ -292,6 +292,15 @@ export class FDiv extends FRoot {
 		 * Final html to render
 		 */
 		return html`<slot></slot>${this.loading === "loader" ? html`${unsafeSVG(loader)}` : ""}`;
+	}
+	updated() {
+		if (this.variant === "round") {
+			this.style.borderRadius = `${this.offsetHeight / 2}px`;
+		} else if (this.variant === "curved") {
+			this.style.borderRadius = `4px`;
+		} else {
+			this.style.borderRadius = "0px";
+		}
 	}
 }
 

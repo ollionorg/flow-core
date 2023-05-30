@@ -4,6 +4,14 @@
 
 # Change Log
 
+## [1.15.2] - 2023-05-30
+
+### Bug Fixes
+
+- `f-select`: changed `create-option` event name to `add-option`.
+- `f-div`: added `round` variant.
+- `f-tag`: size of icons inside tags are adjusted.
+
 ## [1.15.1] - 2023-05-29
 
 ### Bug Fixes

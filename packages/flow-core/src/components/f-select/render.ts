@@ -241,14 +241,14 @@ export default function render(this: FSelect) {
 									size="small"
 									category="transparent"
 									label="CREATE"
-									@click=${this.createNewOption}
+									@click=${(e: MouseEvent) => this.createNewOption(e)}
 							  ></f-button>`
 							: html`<f-icon-button
 									data-qa-create
 									icon="i-plus"
 									state="primary"
 									size="x-small"
-									@click=${this.createNewOption}
+									@click=${(e: MouseEvent) => this.createNewOption(e)}
 							  ></f-icon-button>`}
 					</f-div>
 			  `

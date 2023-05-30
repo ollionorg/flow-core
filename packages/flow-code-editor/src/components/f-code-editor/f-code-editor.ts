@@ -40,7 +40,7 @@ export class FCodeEditor extends FRoot {
 	 * language of code
 	 */
 	@property({ reflect: true, type: String })
-	language?: FCodeEditorLanguage;
+	language?: FCodeEditorLanguage = "typescript";
 
 	/**
 	 * height to is required to create editor

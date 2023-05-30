@@ -10,7 +10,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 	}}
 />
 
-# f-editor
+# f-code-editor
 
 <br />
 <br />
@@ -19,11 +19,11 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 <f-divider></f-divider>
 
-f-editor used to edit content/code.
+f-code-editor used to edit content/code.
 
 <br />
 
-### [Playground](/story/components-f-editor--playground)
+### [Playground](/story/cldcvr-flow-code-editor-components-f-code-editor--playground)
 
 <Canvas>
 	<Story
@@ -63,3 +63,67 @@ f-editor used to edit content/code.
 </Canvas>
 
 <br />
+
+## code
+
+<f-divider></f-divider>
+
+code to display in `f-code-editor` for sepcified language
+
+<Canvas>
+	<Story
+		name="code"
+		argTypes={{
+			code: { control: false },
+			language: { control: false }
+		}}
+		args={{
+			code: `object ScalaExample{  
+    def main(args:Array[String]){  
+        println "Hello Scala"  
+    }  
+}  `,
+			language: "scala"
+		}}
+	>
+		{args => {
+			return html`
+				<f-div padding="x-large" height="100%">
+					<f-code-editor .code=${args.code} .language=${args.language}></f-code-editor>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+## language
+
+<f-divider></f-divider>
+
+language is used to display code in correct synatx highlighting
+
+<Canvas>
+	<Story
+		name="language"
+		argTypes={{
+			code: { control: false },
+			language: { control: false }
+		}}
+		args={{
+			code: `object ScalaExample{  
+    def main(args:Array[String]){  
+        println "Hello Scala"  
+    }  
+}  `,
+			language: "scala"
+		}}
+	>
+		{args => {
+			return html`
+				<f-div padding="x-large" height="100%">
+					<f-code-editor .code=${args.code} .language=${args.language}></f-code-editor>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>

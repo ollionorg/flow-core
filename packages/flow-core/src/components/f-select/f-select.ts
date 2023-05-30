@@ -48,6 +48,11 @@ export type FSelectCustomEvent = {
 	searchValue?: string;
 };
 
+export type FSelectCreateOptionEvent = {
+	value: string;
+	options?: FSelectOptions;
+};
+
 @flowElement("f-select")
 export class FSelect extends FRoot {
 	/**
@@ -199,7 +204,7 @@ export class FSelect extends FRoot {
 	/**
 	 * @attribute Defines the placeholder text for f-text-input
 	 */
-	@property({ reflect: true, type: Function, attribute: "option-template" })
+	@property({ reflect: false, type: Function, attribute: "option-template" })
 	optionTemplate?: FSelectOptionTemplate;
 
 	/**
@@ -492,25 +497,15 @@ export class FSelect extends FRoot {
 	 * Create New Option when option not present
 	 */
 	createNewOption(e: MouseEvent) {
-		const event = new CustomEvent<FSelectCustomEvent>("input", {
+		const event = new CustomEvent<FSelectCreateOptionEvent>("create-option", {
 			detail: {
-				value: Array.isArray(this.options)
-					? this.type === "single"
-						? (this.selectedOptions as FSelectArray)[0]
-						: this.selectedOptions
-					: this.selectedOptions,
-				searchValue: this.searchValue
+				value: this.searchValue,
+				options: this.options
 			},
 			bubbles: true,
 			composed: true
 		});
-		(this.value as unknown) = Array.isArray(this.options)
-			? this.type === "single"
-				? (this.selectedOptions as FSelectArray)[0]
-				: this.selectedOptions
-			: this.selectedOptions;
 		this.dispatchEvent(event);
-		this.requestUpdate();
 		this.handleDropDownClose(e);
 	}
 

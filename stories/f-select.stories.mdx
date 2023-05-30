@@ -130,6 +130,12 @@ Select allows users to choose one or multiple options from a list of values.
 			const handleInput = e => {
 				updateArgs({ value: e.detail.value });
 			};
+			const handleCreateOption = e => {
+				console.log(e.detail.value);
+				const array = [...args.options];
+				array.push(e.detail.value);
+				updateArgs({ options: array });
+			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div
@@ -160,6 +166,7 @@ Select allows users to choose one or multiple options from a list of values.
 							.option-template=${args["option-template"]}
 							icon-left=${args["icon-left"]}
 							.size=${args.size}
+							@create-option=${handleCreateOption}
 						>
 							${unsafeHTML(args.slot)}
 						</f-select></f-div
@@ -639,13 +646,21 @@ Use to provide a custom template in option list
 				return html`<f-div
 					><f-div direction="column" gap="x-small"
 						><f-text>${option.title}</f-text
-						><f-text>${option.data.name}, ${option.data.email}</f-text></f-div
+						><f-text ellipsis>${option.data.name}, ${option.data.email}</f-text></f-div
 					></f-div
 				>`;
 			};
 			const [valueObjects, setValueObjects] = useState(null);
 			const [options, setOptions] = useState([
-				{ icon: "i-home", title: "option 1", data: { name: "Alex", email: "alex#cldcvr.com" } },
+				{
+					icon: "i-home",
+					title: "option 1",
+					data: {
+						name: "Alex",
+						email:
+							"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a m"
+					}
+				},
 				{ icon: "i-user", title: "option 2", data: { name: "Cran", email: "alex#cldcvr.com" } },
 				{ icon: "i-setting", title: "option 3", data: { name: "Tony", email: "alex#cldcvr.com" } },
 				{ icon: "i-app", title: "option 4", data: { name: "Stark", email: "alex#cldcvr.com" } }
@@ -687,6 +702,7 @@ Use to provide a custom template in option list
 							?searchable=${false}
 							.options=${options}
 							.value=${value}
+							type="multiple"
 							.optionTemplate=${optionTemplate}
 						>
 							<f-div slot="label" padding="none" gap="none">Label for f-select</f-div>
@@ -1391,6 +1407,9 @@ if true, shows a ‘create’ button when no query is found. On click of button,
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
+			const handleCreateOption = e => {
+				console.log(e.detail.value);
+			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
 					<f-div>
@@ -1404,6 +1423,7 @@ if true, shows a ‘create’ button when no query is found. On click of button,
 							?searchable=${true}
 							width="200"
 							?create-option=${true}
+							@create-option=${handleCreateOption}
 						>
 							<f-div slot="label" padding="none" gap="none"
 								>Label for f-select (create-option=true)</f-div

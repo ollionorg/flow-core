@@ -3,7 +3,7 @@ name: Test and Release
 on:
   push:
     branches:
-      - vikas/FLOW-774
+      - main
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -42,11 +42,12 @@ jobs:
           released-package-versions: ${{ steps.changesets.outputs.publishedPackages }}
           changelog-files-config: |
             {
+              "@cldcvr/flow-log":"packages/flow-log/CHANGELOG.md",
               "@cldcvr/flow-code-editor":"packages/flow-code-editor/CHANGELOG.md",
               "@cldcvr/flow-core":"packages/flow-core/CHANGELOG.md"
             }
       - name: Send Slack Notification
-        if: steps.changesets.outputs.published == 'true1'
+        if: steps.changesets.outputs.published == 'true'
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
         with:
@@ -121,7 +122,12 @@ jobs:
       - uses: sergeysova/jq-action@v2
         with:
           cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/flow-core/package.json`" > packages/flow-core/package.json
-
+      - uses: sergeysova/jq-action@v2
+        with:
+          cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/flow-log/package.json`" > packages/flow-log/package.json
+      - uses: sergeysova/jq-action@v2
+        with:
+          cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/flow-code-editor/package.json`" > packages/flow-code-editor/package.json
       - uses: sergeysova/jq-action@v2
         with:
           cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/custom-elements-manifest-to-types/package.json`" > packages/custom-elements-manifest-to-types/package.json

@@ -538,8 +538,8 @@ export function renderMultipleSelectionTag(this: FSelect, option: FSelectSingleO
 	const getTemplate = () => {
 		return this.optionTemplate
 			? html`<f-div
-					width="hug-content"
 					variant="curved"
+					style="max-width:${this.offsetWidth - 72}px"
 					gap="small"
 					state="secondary"
 					padding="small"

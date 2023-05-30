@@ -1,19 +1,16 @@
 {
-  "name": "@cldcvr/flow-core",
-  "version": "1.15.1",
-  "description": "Core package of flow design system",
-  "module": "dist/flow-core.es.js",
-  "main": "dist/flow-core.cjs.js",
-  "types": "dist/types/src/index.d.ts",
+  "name": "@cldcvr/flow-log",
+  "version": "0.0.1",
+  "description": "Code editor component for flow library",
+  "module": "dist/flow-log.es.js",
+  "main": "dist/flow-log.es.js",
+  "types": "dist/types/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "prepublishOnly": "./compile.sh",
-    "compile": "./compile.sh",
-    "meta-build": "./meta-build.sh",
-    "build": "vite build --emptyOutDir && vite build --emptyOutDir --config vite.umd.config.ts && tsc -emitDeclarationOnly",
+    "prepublishOnly": "bash ./compile.sh",
+    "compile": "bash ./compile.sh",
+    "build": "vite build --emptyOutDir && tsc -emitDeclarationOnly",
     "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
-    "sync-colors": "node ./figma/sync-colors.js",
-    "sync-md-file": "node ./figma/sync-md-file.js",
     "lint:eslint": "eslint 'src/**/*.ts' './custom-elements.vue.ts'",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
     "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
@@ -29,14 +26,12 @@
     "lit"
   ],
   "dependencies": {
-    "@emoji-mart/data": "^1.1.2",
-    "@floating-ui/dom": "^1.0.2",
-    "axios": "^0.27.2",
-    "emoji-mart": "^5.5.2",
-    "flatpickr": "^4.6.13",
     "lit": "^2.2.4",
-    "rxjs": "^7.5.7",
-    "validate-color": "^2.2.1"
+    "xterm": "^5.1.0",
+    "xterm-addon-fit": "^0.7.0",
+    "xterm-addon-search": "^0.11.0",
+    "xterm-addon-search-bar": "^0.2.0",
+    "xterm-addon-web-links": "^0.8.0"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.5.7",
@@ -50,7 +45,6 @@
     "@web/dev-server-rollup": "0.3.18",
     "@web/test-runner": "^0.13.30",
     "concurrently": "^7.3.0",
-    "dotenv": "^16.0.3",
     "esbuild-sass-plugin": "2.2.6",
     "eslint": "^8.17.0",
     "lit-html": "^2.2.5",
@@ -59,14 +53,16 @@
     "rollup-plugin-scss": "3.0.0",
     "sass": "^1.52.3",
     "typescript": "^4.5.4",
-    "vite": "^2.9.9",
-    "vue": "2.6.14",
+    "vite": "^4.3.8",
     "web-component-analyzer": "^2.0.0-next.4"
+  },
+  "peerDependencies": {
+    "@cldcvr/flow-core": "*"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://github.com/cldcvr/flow-core.git",
-    "directory": "packages/flow-core"
+    "directory": "packages/flow-log"
   },
   "publishConfig": {
     "access": "public",
@@ -76,7 +72,7 @@
   "bugs": {
     "url": "https://github.com/cldcvr/flow-core/issues"
   },
-  "homepage": "https://github.com/cldcvr/flow-core#readme",
+  "homepage": "https://github.com/cldcvr/flow-table#readme",
   "author": "@cldcvr",
   "license": "MIT"
 }

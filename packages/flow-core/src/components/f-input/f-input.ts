@@ -102,14 +102,13 @@ export class FInput extends FRoot {
 	/**
 	 * @attribute Prefix property enables a string before the input value.
 	 */
-	@property({ reflect: true, type: String, attribute: "prefix" })
-	fInputPrefix?: string;
-
+	@property({ reflect: true, type: String })
+	prefix: string | null = null;
 	/**
 	 * @attribute Suffix property enables a string on the right side of the input box.
 	 */
-	@property({ reflect: true, type: String, attribute: "suffix" })
-	fInputSuffix?: string;
+	@property({ reflect: true, type: String })
+	suffix?: string;
 
 	/**
 	 * @attribute This shows the character count while typing and auto limits after reaching the max length.
@@ -240,9 +239,9 @@ export class FInput extends FRoot {
 		 * append prefix
 		 */
 		const prefixAppend =
-			this.fInputPrefix || this.iconLeft
+			this.prefix || this.iconLeft
 				? html` <div class="f-input-prefix">
-						${this.fInputPrefix
+						${this.prefix
 							? html`
 									<f-div
 										height="hug-content"
@@ -252,7 +251,7 @@ export class FInput extends FRoot {
 										border="small solid default right"
 									>
 										<f-text variant="para" size="small" weight="regular" class="word-break"
-											>${this.fInputPrefix}</f-text
+											>${this.prefix}</f-text
 										>
 									</f-div>
 							  `
@@ -279,13 +278,13 @@ export class FInput extends FRoot {
 		 * main suffix
 		 */
 		const mainSuffix =
-			this.fInputSuffix || this.iconRight
+			this.suffix || this.iconRight
 				? html`
-						${this.fInputSuffix && (this.suffixWhen ? this.suffixWhen(this.value as string) : true)
+						${this.suffix && (this.suffixWhen ? this.suffixWhen(this.value as string) : true)
 							? html`
 									<f-div height="hug-content" width="hug-content" padding="none" direction="row">
 										<f-text variant="para" size="x-small" weight="regular" class="word-break"
-											>${this.fInputSuffix}</f-text
+											>${this.suffix}</f-text
 										>
 									</f-div>
 							  `

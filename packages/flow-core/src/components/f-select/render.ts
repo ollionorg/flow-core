@@ -226,6 +226,11 @@ export default function render(this: FSelect) {
 		align="middle-left"
 		gap="auto"
 		tabindex=${0}
+		@mouseup=${(e: MouseEvent) => {
+			e.stopImmediatePropagation();
+			e.stopPropagation();
+		}}
+		@click=${(e: MouseEvent) => this.createNewOption(e)}
 	>
 		<f-div width="fill-container" height="hug-content" padding="none"
 			><f-text data-qa-empty variant="para" size="small" weight="regular"
@@ -241,14 +246,12 @@ export default function render(this: FSelect) {
 									size="small"
 									category="transparent"
 									label="CREATE"
-									@click=${(e: MouseEvent) => this.createNewOption(e)}
 							  ></f-button>`
 							: html`<f-icon-button
 									data-qa-create
 									icon="i-plus"
 									state="primary"
 									size="x-small"
-									@click=${(e: MouseEvent) => this.createNewOption(e)}
 							  ></f-icon-button>`}
 					</f-div>
 			  `

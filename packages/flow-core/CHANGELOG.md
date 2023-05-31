@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.15.4] - 2023-05-31
+
+### Bug Fixes
+
+- `f-select` : `add-option` event emission logic fixed.
+
 ## [1.15.3] - 2023-05-31
 
 ### Bug Fixes

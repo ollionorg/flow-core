@@ -497,6 +497,8 @@ export class FSelect extends FRoot {
 	 * Create New Option when option not present
 	 */
 	createNewOption(e: MouseEvent) {
+		e.stopPropagation();
+		e.stopImmediatePropagation();
 		const event = new CustomEvent<FSelectCreateOptionEvent>("add-option", {
 			detail: {
 				value: this.searchValue,
@@ -506,7 +508,6 @@ export class FSelect extends FRoot {
 			composed: true
 		});
 		this.dispatchEvent(event);
-		this.handleDropDownClose(e);
 	}
 
 	/**
@@ -525,24 +526,26 @@ export class FSelect extends FRoot {
 	 * options wrapper dimentions update on the basis of window screen
 	 */
 	updateDimentions() {
-		const spaceAbove = this.wrapperElement.getBoundingClientRect().top;
-		const spaceBelow = window.innerHeight - this.wrapperElement.getBoundingClientRect().bottom;
-		const hasEnoughSpaceBelow = spaceBelow > this.height;
+		if (this.wrapperElement) {
+			const spaceAbove = this.wrapperElement.getBoundingClientRect().top;
+			const spaceBelow = window.innerHeight - this.wrapperElement.getBoundingClientRect().bottom;
+			const hasEnoughSpaceBelow = spaceBelow > this.height;
 
-		if (hasEnoughSpaceBelow || spaceBelow > spaceAbove) {
-			this.preferredOpenDirection = "below";
-			this.optimizedHeight = +Math.min(spaceBelow - 40, this.height).toFixed(0);
-			this.optionsBottom = "";
-			this.optionsTop = `${(
-				this.wrapperElement.getBoundingClientRect().top +
-				this.wrapperElement.offsetHeight +
-				4
-			).toFixed(0)}px`;
-		} else {
-			this.preferredOpenDirection = "above";
-			this.optimizedHeight = +Math.min(spaceAbove - 40, this.height).toFixed(0);
-			this.optionsTop = "";
-			this.optionsBottom = `${(spaceBelow + this.wrapperElement.offsetHeight - 4).toFixed(0)}px`;
+			if (hasEnoughSpaceBelow || spaceBelow > spaceAbove) {
+				this.preferredOpenDirection = "below";
+				this.optimizedHeight = +Math.min(spaceBelow - 40, this.height).toFixed(0);
+				this.optionsBottom = "";
+				this.optionsTop = `${(
+					this.wrapperElement.getBoundingClientRect().top +
+					this.wrapperElement.offsetHeight +
+					4
+				).toFixed(0)}px`;
+			} else {
+				this.preferredOpenDirection = "above";
+				this.optimizedHeight = +Math.min(spaceAbove - 40, this.height).toFixed(0);
+				this.optionsTop = "";
+				this.optionsBottom = `${(spaceBelow + this.wrapperElement.offsetHeight - 4).toFixed(0)}px`;
+			}
 		}
 	}
 

@@ -94,14 +94,14 @@ export class FSuggest extends FRoot {
 	/**
 	 * @attribute Prefix property enables a string before the input value.
 	 */
-	@property({ reflect: true, type: String, attribute: "prefix" })
-	fInputPrefix?: string;
+	@property({ reflect: true, type: String })
+	prefix: string | null = null;
 
 	/**
 	 * @attribute Suffix property enables a string on the right side of the input box.
 	 */
-	@property({ reflect: true, type: String, attribute: "suffix" })
-	fInputSuffix?: string;
+	@property({ reflect: true, type: String})
+	suffix?: string;
 
 	/**
 	 * @attribute This shows the character count while typing and auto limits after reaching the max length.
@@ -245,7 +245,7 @@ export class FSuggest extends FRoot {
 				icon-left=${this.iconLeft}
 				icon-right=${this.iconRight}
 				prefix=${this.prefix}
-				suffix=${this.fInputSuffix}
+				suffix=${this.suffix}
 				state=${this.state}
 				.maxLength=${ifDefined(this.maxLength)}
 				?loading=${this.loading}

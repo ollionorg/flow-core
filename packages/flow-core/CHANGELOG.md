@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.15.3] - 2023-05-31
+
+### Bug Fixes
+
+- `f-input` bug fixed nomenclature difference in attribute and variable name of property `prefix` and `suffix`, it was not working in vue3
+
 ## [1.15.2] - 2023-05-30
 
 ### Bug Fixes

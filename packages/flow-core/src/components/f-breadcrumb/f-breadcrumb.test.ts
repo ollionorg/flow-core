@@ -40,7 +40,6 @@ describe("f-breadcrumb", () => {
 			`
 		);
 		const descendant = el.shadowRoot!.querySelector(".f-breadcrumb-text-hover")!;
-		console.log(descendant);
-		// expect(descendant.getAttribute("size")).to.equal("x-small");
+		expect(descendant.getAttribute("size")).to.equal("x-small");
 	});
 });

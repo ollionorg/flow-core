@@ -171,7 +171,9 @@ export class FBreadcrumb extends FRoot {
 							@mouseenter=${() => this.togglePopover("open")}
 							id="breadcrumb-popover"
 						>
-							<f-text variant="heading" state="secondary" size="small">...</f-text>
+							<f-text class="toggle-popover-hover" variant="heading" state="secondary" size="small"
+								>...</f-text
+							>
 						</f-div>
 						<f-popover .overlay=${false} size="small">
 							<f-div
@@ -188,7 +190,11 @@ export class FBreadcrumb extends FRoot {
 											: "small solid secondary bottom"}
 										clickable
 										@click=${(event: MouseEvent) => this.handleDispatchEvent(event, crumb)}
-										><f-text variant="para" size="small" weight="regular"
+										><f-text
+											class="popover-text-hover"
+											variant="para"
+											size="medium"
+											weight="regular"
 											>${crumb?.title}</f-text
 										></f-div
 									>`

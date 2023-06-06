@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.16.0] - 2023-06-06
+
+### Features
+
+- `f-breadcrumb` : component added.
+
 ## [1.15.4] - 2023-05-31
 
 ### Bug Fixes

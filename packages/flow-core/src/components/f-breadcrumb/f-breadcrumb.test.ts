@@ -57,4 +57,21 @@ describe("f-breadcrumb", () => {
 		const descendant = el.shadowRoot!.querySelectorAll(".f-breadcrumb-content")!;
 		expect(descendant.length).to.equal(2);
 	});
+	it("should render with crumbs inside poppover when crumb length is more than 4", async () => {
+		const el = await fixture(
+			html`
+				<f-breadcrumb
+					.crumbs=${[
+						{ tabIndex: 0, title: "Label 1" },
+						{ tabIndex: 1, title: "Label 2" },
+						{ tabIndex: 2, title: "Label 3" },
+						{ tabIndex: 3, title: "Label 4" },
+						{ tabIndex: 4, title: "Label 5" }
+					]}
+				></f-breadcrumb>
+			`
+		);
+		const descendant = el.shadowRoot!.querySelectorAll(".popover-crumb-list")!;
+		expect(descendant.length).to.equal(2);
+	});
 });

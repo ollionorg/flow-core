@@ -42,4 +42,19 @@ describe("f-breadcrumb", () => {
 		const descendant = el.shadowRoot!.querySelector(".f-breadcrumb-text-hover")!;
 		expect(descendant.getAttribute("size")).to.equal("x-small");
 	});
+	it("should render with proper crumb list", async () => {
+		const el = await fixture(
+			html`
+				<f-breadcrumb
+					size="small"
+					.crumbs=${[
+						{ tabIndex: 0, title: "Label 1" },
+						{ tabIndex: 1, title: "Label 2" }
+					]}
+				></f-breadcrumb>
+			`
+		);
+		const descendant = el.shadowRoot!.querySelectorAll(".f-breadcrumb-content")!;
+		expect(descendant.length).to.equal(2);
+	});
 });

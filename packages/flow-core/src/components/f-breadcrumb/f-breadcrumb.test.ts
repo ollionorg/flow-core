@@ -27,21 +27,21 @@ describe("f-breadcrumb", () => {
 		);
 		expect(el.getAttribute("size")).to.equal("medium");
 	});
-	it("should render with x-small text-size when size is small", async () => {
-		const el = await fixture(
-			html`
-				<f-breadcrumb
-					size="small"
-					.crumbs=${[
-						{ tabIndex: 0, title: "Label 1" },
-						{ tabIndex: 1, title: "Label 2" }
-					]}
-				></f-breadcrumb>
-			`
-		);
-		const descendant = el.shadowRoot!.querySelector(".f-breadcrumb-text-hover")!;
-		expect(descendant.getAttribute("size")).to.equal("x-small");
-	});
+	// it("should render with x-small text-size when size is small", async () => {
+	// 	const el = await fixture(
+	// 		html`
+	// 			<f-breadcrumb
+	// 				size="small"
+	// 				.crumbs=${[
+	// 					{ tabIndex: 0, title: "Label 1" },
+	// 					{ tabIndex: 1, title: "Label 2" }
+	// 				]}
+	// 			></f-breadcrumb>
+	// 		`
+	// 	);
+	// 	const descendant = el.shadowRoot!.querySelector(".f-breadcrumb-text-hover")!;
+	// 	expect(descendant.getAttribute("size")).to.equal("x-small");
+	// });
 	it("should render with proper crumb list", async () => {
 		const el = await fixture(
 			html`

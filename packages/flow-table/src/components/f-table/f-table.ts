@@ -55,10 +55,12 @@ export class FTable extends FRoot {
 			></slot>
 			<slot @slotchange=${this.propogateProps} @selected-row=${this.handleRowSelection}></slot>`;
 	}
-	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+	protected async updated(
+		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
 		super.updated(changedProperties);
 
-		this.propogateProps();
+		await this.propogateProps();
 	}
 
 	async propogateProps() {
@@ -66,7 +68,7 @@ export class FTable extends FRoot {
 		this.applySelectable();
 		await this.updateComplete;
 		if (this.selectable === "multiple") {
-			this.updateHeaderSelectionCheckboxState();
+			await this.updateHeaderSelectionCheckboxState();
 		}
 		if (this.selectable === "single") {
 			const headerRow = this.querySelector<FTrow>(":scope > f-trow[selected][slot='header']");
@@ -144,7 +146,7 @@ export class FTable extends FRoot {
 	async handleRowSelection(event: CustomEvent) {
 		event.stopPropagation();
 		this.updateRadioChecks(event.detail.element);
-		this.updateHeaderSelectionCheckboxState();
+		await this.updateHeaderSelectionCheckboxState();
 		await this.updateComplete;
 
 		this.dispatchSelectedRowEvent();

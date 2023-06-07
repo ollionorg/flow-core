@@ -2,7 +2,8 @@ import { faker } from "@faker-js/faker";
 import { html } from "lit";
 import type {
 	FTableSchemaData,
-	FTableSchemaDataRow
+	FTableSchemaDataRow,
+	FTableSchemaCellObject
 } from "./../../packages/flow-table/src/components/f-table-schema/f-table-schema";
 
 export default function getFakeUsers(): FTableSchemaData {
@@ -12,11 +13,27 @@ export default function getFakeUsers(): FTableSchemaData {
 	for (let i = 0; i < 100; i++) {
 		const firstName = faker.name.firstName();
 		const lastName = faker.name.lastName();
-		const email = faker.internet.email();
+		const email: FTableSchemaCellObject & { value: string } = {
+			value: faker.internet.email(),
+			template: function () {
+				return html`<f-text inline state="warning">${this.value}</f-text>`;
+			},
+			actions: [
+				{
+					icon: "i-chat"
+				},
+				{
+					icon: "i-mail"
+				},
+				{
+					icon: "i-star"
+				}
+			]
+		};
 		const mobile = faker.phone.number();
 		const sex = faker.name.sex();
 		const age = faker.random.numeric(2);
-		const birthDate = {
+		const birthDate: FTableSchemaCellObject & { value: Date } = {
 			value: faker.date.birthdate({ min: 18, max: 65, mode: "age" }),
 			template: function () {
 				return html`<f-div gap="small" width="hug-content">

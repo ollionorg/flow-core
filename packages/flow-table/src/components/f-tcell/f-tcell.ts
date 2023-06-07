@@ -79,7 +79,7 @@ export class FTcell extends FRoot {
 			${this.selectable === "single"
 				? html`<f-radio @input=${this.handleSelection} class="cell-radio"></f-radio>`
 				: nothing} <slot></slot>
-			<f-div class="details-toggle" width="hug-content" gap="medium" align="middle-right">
+			<f-div class="details-toggle" width="hug-content" gap="medium" align="top-right">
 				${this.renderActions()}
 				${this.expandIcon
 					? html`

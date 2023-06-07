@@ -3,7 +3,7 @@ import { html, HTMLTemplateResult, nothing, PropertyValueMap, unsafeCSS } from "
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { property, query, state } from "lit/decorators.js";
 import { FTable, FTableSelectable, FTableSize, FTableVariant } from "../f-table/f-table";
-import { FTcell } from "../f-tcell/f-tcell";
+import { FTcell, FTcellActions } from "../f-tcell/f-tcell";
 import { FTrow, FTrowState } from "../f-trow/f-trow";
 import eleStyle from "./f-table-schema.scss";
 
@@ -24,6 +24,7 @@ export type FTableSchemaHeaderCell = string | FTableSchemaHeaderCellObject;
 export type FTableSchemaCell = unknown | FTableSchemaCellObject;
 export type FTableSchemaCellObject = {
 	value: unknown;
+	actions?: FTcellActions;
 	template: () => HTMLTemplateResult;
 	toString: () => string;
 };
@@ -204,6 +205,7 @@ export class FTableSchema extends FRoot {
 					let width = undefined;
 					let selected = false;
 					let sticky = undefined;
+					let actions = undefined;
 					if (typeof columnHeader[1] === "object") {
 						if (columnHeader[1].width) {
 							width = columnHeader[1].width;
@@ -211,9 +213,15 @@ export class FTableSchema extends FRoot {
 						selected = columnHeader[1].selected ?? false;
 						sticky = columnHeader[1].sticky;
 					}
+					const cell = row.data[columnHeader[0]];
+
+					if (typeof cell === "object") {
+						actions = (cell as FTableSchemaCellObject).actions;
+					}
 					return html`<f-tcell
 						.selected=${selected}
 						.width=${width}
+						.actions=${actions}
 						sticky-left=${ifDefined(sticky)}
 						><f-text inline .highlight=${this.searchTerm}
 							>${this.getCellTemplate(row.data[columnHeader[0]])}</f-text
@@ -248,9 +256,7 @@ export class FTableSchema extends FRoot {
 					Object.values(row.data).findIndex(v => {
 						if (this.searchTerm !== null) {
 							if (typeof v === "string") {
-								return (v as string)
-									.toLocaleLowerCase()
-									.includes(this.searchTerm.toLocaleLowerCase());
+								return v.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase());
 							} else if (typeof v === "object" && v !== null) {
 								return v
 									.toString()

@@ -101,6 +101,18 @@ export class FCodeEditor extends FRoot {
 				},
 				this.services
 			);
+
+			this.editor?.getModel()?.onDidChangeContent(() => {
+				const inputEvent = new CustomEvent("content-change", {
+					detail: {
+						value: this.editor?.getModel()?.getValue()
+					},
+					bubbles: true,
+					composed: true
+				});
+
+				this.dispatchEvent(inputEvent);
+			});
 		}
 	}
 }

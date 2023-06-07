@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import eleStyle from "./f-tab.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -213,7 +213,10 @@ For vertical f-tab, content can align to top, middle, or bottom.
 			${lastScrollButton}
 		</f-div>`;
 	}
-	updated() {
+	protected async updated(
+		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
+		super.updated(changedProperties);
 		/**
 		 * on every update check if scroll is present or not
 		 */

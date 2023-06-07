@@ -42,6 +42,7 @@ export * from "./components/f-grid/f-grid";
 export * from "./components/f-carousel/f-carousel";
 export * from "./components/f-carousel-content/f-carousel-content";
 export * from "./components/f-progress-bar/f-progress-bar";
+export * from "./components/f-breadcrumb/f-breadcrumb";
 export * from "./mixins/components/f-root/f-root";
 
 if (document.readyState !== "loading") {

@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-file-upload.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -545,7 +545,10 @@ export class FFileUpload extends FRoot {
 			</f-div>
 		`;
 	}
-	updated() {
+	protected async updated(
+		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
+		super.updated(changedProperties);
 		//update the selectedFiles as per the value being fetched
 		this.updateSelectedValues();
 

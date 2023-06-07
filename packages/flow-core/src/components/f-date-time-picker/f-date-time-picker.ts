@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-date-time-picker.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -327,7 +327,10 @@ export class FDateTimePicker extends FRoot {
 				<f-div slot="icon-tooltip"><slot name="icon-tooltip"></slot></f-div> </f-input
 		></f-div>`;
 	}
-	updated() {
+	protected async updated(
+		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
+		super.updated(changedProperties);
 		if (!this.inline) {
 			requestAnimationFrame(() => {
 				this.createDateTimePicker(this.dateTimePickerElement.inputWrapperElement);

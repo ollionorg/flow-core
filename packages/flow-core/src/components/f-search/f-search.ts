@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-search.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -326,7 +326,10 @@ export class FSearch extends FRoot {
 			<f-div direction="column" id="helper-text-section"><slot name="help"></slot> </f-div>
 		</f-div>`;
 	}
-	updated() {
+	protected async updated(
+		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
+		super.updated(changedProperties);
 		this.displayHelpSection();
 		this.displayHeaderSection();
 	}

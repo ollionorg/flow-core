@@ -4,6 +4,16 @@
 
 # Change Log
 
+## [1.16.0] - 2023-06-06
+
+### Features
+
+- `f-breadcrumb` : component added.
+
+### Bug Fixes
+
+- Fixed - `tooltip` wasn't working on various components as they were not inheriting properties from root component
+
 ## [1.15.4] - 2023-05-31
 
 ### Bug Fixes

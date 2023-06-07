@@ -1,0 +1,25 @@
+@import "./../../mixins/scss/mixins";
+
+:host {
+	.f-breadcrumb-content {
+		max-width: 100px !important;
+		.f-breadcrumb-text-hover {
+			&:hover {
+				cursor: pointer;
+				color: var(--color-primary-default) !important;
+			}
+		}
+	}
+	.toggle-popover-hover {
+		&:hover {
+			cursor: pointer;
+			color: var(--color-primary-default) !important;
+		}
+	}
+}
+
+f-breadcrumb {
+	&[disabled] {
+		@include disabled();
+	}
+}

@@ -46,14 +46,14 @@ export default function getFakeUsers(): FTableSchemaData {
 
 	return {
 		header: {
-			firstName: "First name",
+			firstName: { value: "First name", sticky: true },
 			lastName: "Last name",
 			age: "Age",
 			birthDate: "Birth Date",
 			email: "Email",
 			mobile: "Mobile",
 			sex: "Sex",
-			address: { value: "Address", width: "300px", selected: true }
+			address: { value: "Address", width: "300px", selected: true, sticky: true }
 		},
 		rows: users
 	};

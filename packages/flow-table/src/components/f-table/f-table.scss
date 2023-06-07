@@ -44,15 +44,21 @@ $states: (
 
 f-table {
 	display: grid;
-	//grid-template-columns: repeat(5, auto);
 	flex: 1 0 fit-content;
-	overflow: auto;
 	@include base();
 	--color-background-row: transparent;
 
 	> f-trow {
 		> f-tcell {
 			background-color: var(--color-background-row);
+			&[sticky-left],
+			&[sticky-top] {
+				--color-background-row: var(--color-surface-default);
+				z-index: 1;
+			}
+			&[sticky-left][sticky-top] {
+				z-index: 2;
+			}
 		}
 	}
 
@@ -120,7 +126,8 @@ f-table {
 	&[variant] {
 		> f-trow {
 			@each $state, $value in $states {
-				&[state="#{$state}"] {
+				&[state="#{$state}"],
+				&[state="#{$state}"] > f-tcell {
 					--color-background-row: #{map.get($value, "background")} !important;
 				}
 			}

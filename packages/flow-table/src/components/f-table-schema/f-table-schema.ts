@@ -1,5 +1,6 @@
 import { FButton, FDiv, flowElement, FRoot, FSearch, FText } from "@cldcvr/flow-core";
 import { html, HTMLTemplateResult, nothing, PropertyValueMap, unsafeCSS } from "lit";
+import { ifDefined } from "lit-html/directives/if-defined.js";
 import { property, query, state } from "lit/decorators.js";
 import { FTable, FTableSelectable, FTableSize, FTableVariant } from "../f-table/f-table";
 import { FTcell } from "../f-tcell/f-tcell";
@@ -32,6 +33,7 @@ export type FTableSchemaHeaderCellObject = {
 	template?: () => HTMLTemplateResult;
 	width?: string;
 	selected?: boolean;
+	sticky?: boolean;
 };
 
 @flowElement("f-table-schema")
@@ -90,6 +92,12 @@ export class FTableSchema extends FRoot {
 	@property({ type: Boolean, reflect: true, attribute: "highlight-hover" })
 	highlightHover = false;
 
+	/**
+	 * @attribute is sticky header
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "sticky-header" })
+	stickyHeader = false;
+
 	@state()
 	offset = 0;
 
@@ -111,11 +119,21 @@ export class FTableSchema extends FRoot {
 					${Object.entries(this.data.header).map(columnHeader => {
 						let width = undefined;
 						let selected = false;
-						if (typeof columnHeader[1] === "object" && columnHeader[1].width) {
-							width = columnHeader[1].width;
+						let sticky = undefined;
+						if (typeof columnHeader[1] === "object") {
+							if (columnHeader[1].width) {
+								width = columnHeader[1].width;
+							}
 							selected = columnHeader[1].selected ?? false;
+							sticky = columnHeader[1].sticky;
 						}
-						return html`<f-tcell .selected=${selected} .width=${width}>
+
+						return html`<f-tcell
+							.selected=${selected}
+							.width=${width}
+							sticky-left=${ifDefined(sticky)}
+							sticky-top=${ifDefined(this.stickyHeader)}
+						>
 							<f-div gap="small" width="fit-content">
 								<f-text>${this.getHeaderCellTemplate(columnHeader[1])}</f-text>
 								${this.getSortIcon(columnHeader[0])}</f-div
@@ -185,11 +203,18 @@ export class FTableSchema extends FRoot {
 				${Object.entries(this.data.header).map(columnHeader => {
 					let width = undefined;
 					let selected = false;
-					if (typeof columnHeader[1] === "object" && columnHeader[1].width) {
-						width = columnHeader[1].width;
+					let sticky = undefined;
+					if (typeof columnHeader[1] === "object") {
+						if (columnHeader[1].width) {
+							width = columnHeader[1].width;
+						}
 						selected = columnHeader[1].selected ?? false;
+						sticky = columnHeader[1].sticky;
 					}
-					return html`<f-tcell .selected=${selected} .width=${width}
+					return html`<f-tcell
+						.selected=${selected}
+						.width=${width}
+						sticky-left=${ifDefined(sticky)}
 						><f-text inline .highlight=${this.searchTerm}
 							>${this.getCellTemplate(row.data[columnHeader[0]])}</f-text
 						></f-tcell

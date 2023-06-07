@@ -96,8 +96,8 @@ export class FBreadcrumb extends FRoot {
 					variant="para"
 					.weight=${this.isCurrentCrumb(index, array) ? "medium" : "regular"}
 					class=${this.isCurrentCrumb(index, array) ? "" : "f-breadcrumb-text-hover"}
-					.tooltip=${crumb?.title}
 					?ellipsis=${true}
+					.tooltip=${crumb?.title}
 					>${crumb?.title}</f-text
 				></f-div
 			>

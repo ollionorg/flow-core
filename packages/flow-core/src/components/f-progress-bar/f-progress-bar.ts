@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-progress-bar.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -129,7 +129,10 @@ export class FProgressBar extends FRoot {
 			</f-div>
 		`;
 	}
-	updated() {
+	protected async updated(
+		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
+		super.updated(changedProperties);
 		if (this.fill && this.state?.includes("custom") && this.fProgressBarFill) {
 			this.fProgressBarFill.style.background = this.fill;
 		}

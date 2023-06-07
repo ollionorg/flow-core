@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-switch.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -144,7 +144,10 @@ export class FSwitch extends FRoot {
 			<slot name="help"></slot>
 		</f-div>`;
 	}
-	updated() {
+	protected async updated(
+		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
+		super.updated(changedProperties);
 		if (!this.hasLabel && !this.hasIconTooltip && !this.hasSubtitle) {
 			this.switchSlots.style.display = "none";
 		}

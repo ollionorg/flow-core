@@ -498,7 +498,10 @@ export class FEmojiPicker extends FRoot {
 			>
 		`;
 	}
-	updated() {
+	protected async updated(
+		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
+		super.updated(changedProperties);
 		// header section-slot display
 		this.headerSectionDisplay();
 

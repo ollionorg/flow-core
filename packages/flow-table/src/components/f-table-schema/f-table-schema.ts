@@ -3,11 +3,14 @@ import { html, HTMLTemplateResult, nothing, PropertyValueMap, unsafeCSS } from "
 import { property, query, state } from "lit/decorators.js";
 import { FTable, FTableSelectable, FTableSize, FTableVariant } from "../f-table/f-table";
 import { FTcell } from "../f-tcell/f-tcell";
-import { FTrow } from "../f-trow/f-trow";
+import { FTrow, FTrowState } from "../f-trow/f-trow";
 import eleStyle from "./f-table-schema.scss";
 
 export type FTableSchemaDataRow = {
 	selected?: boolean;
+	details?: () => HTMLTemplateResult;
+	state?: FTrowState;
+	open?: boolean;
 	data: Record<string, FTableSchemaCell>;
 };
 export type FTableSchemaData = {
@@ -28,6 +31,7 @@ export type FTableSchemaHeaderCellObject = {
 	value: string | unknown;
 	template?: () => HTMLTemplateResult;
 	width?: string;
+	selected?: boolean;
 };
 
 @flowElement("f-table-schema")
@@ -106,10 +110,12 @@ export class FTableSchema extends FRoot {
 			? html`<f-trow slot="header">
 					${Object.entries(this.data.header).map(columnHeader => {
 						let width = undefined;
+						let selected = false;
 						if (typeof columnHeader[1] === "object" && columnHeader[1].width) {
 							width = columnHeader[1].width;
+							selected = columnHeader[1].selected ?? false;
 						}
-						return html`<f-tcell .width=${width}>
+						return html`<f-tcell .selected=${selected} .width=${width}>
 							<f-div gap="small" width="fit-content">
 								<f-text>${this.getHeaderCellTemplate(columnHeader[1])}</f-text>
 								${this.getSortIcon(columnHeader[0])}</f-div
@@ -167,13 +173,23 @@ export class FTableSchema extends FRoot {
 
 	get rowsHtml() {
 		return this.filteredRows.map(row => {
-			return html`<f-trow>
+			const getDetailsSlot = () => {
+				if (row.details) {
+					return html` <f-div slot="details"> ${row.details()} </f-div>`;
+				} else {
+					return nothing;
+				}
+			};
+			return html`<f-trow .open=${row.open ?? false} .state=${row.state ?? "default"}>
+				${getDetailsSlot()}
 				${Object.entries(this.data.header).map(columnHeader => {
 					let width = undefined;
+					let selected = false;
 					if (typeof columnHeader[1] === "object" && columnHeader[1].width) {
 						width = columnHeader[1].width;
+						selected = columnHeader[1].selected ?? false;
 					}
-					return html`<f-tcell .width=${width}
+					return html`<f-tcell .selected=${selected} .width=${width}
 						><f-text inline .highlight=${this.searchTerm}
 							>${this.getCellTemplate(row.data[columnHeader[0]])}</f-text
 						></f-tcell

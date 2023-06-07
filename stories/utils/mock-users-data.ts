@@ -1,6 +1,9 @@
 import { faker } from "@faker-js/faker";
 import { html } from "lit";
-import type { FTableSchemaData } from "./../../packages/flow-table/src/components/f-table-schema/f-table-schema";
+import type {
+	FTableSchemaData,
+	FTableSchemaDataRow
+} from "./../../packages/flow-table/src/components/f-table-schema/f-table-schema";
 
 export default function getFakeUsers(): FTableSchemaData {
 	const users = [];
@@ -30,7 +33,15 @@ export default function getFakeUsers(): FTableSchemaData {
 
 		const address = `${faker.address.street()}, ${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.zipCode()} ${faker.address.country()}`;
 
-		users.push({ data: { firstName, lastName, age, birthDate, email, mobile, sex, address } });
+		const userRow: FTableSchemaDataRow = {
+			data: { firstName, lastName, age, birthDate, email, mobile, sex, address },
+			details: function () {
+				return html`<f-div padding="large"
+					><f-text state="danger">This is Details slot</f-text></f-div
+				>`;
+			}
+		};
+		users.push(userRow);
 	}
 
 	return {
@@ -42,7 +53,7 @@ export default function getFakeUsers(): FTableSchemaData {
 			email: "Email",
 			mobile: "Mobile",
 			sex: "Sex",
-			address: { value: "Address", width: "300px" }
+			address: { value: "Address", width: "300px", selected: true }
 		},
 		rows: users
 	};

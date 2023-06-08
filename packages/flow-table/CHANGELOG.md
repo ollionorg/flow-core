@@ -3,7 +3,7 @@
 
 # Change Log
 
-## [0.1.0-beta1] - 2023-06-08
+## [0.1.0-beta2] - 2023-06-08
 
 ### Note : Published for testing
 

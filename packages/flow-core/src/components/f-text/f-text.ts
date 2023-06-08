@@ -164,8 +164,8 @@ export class FText extends FRoot {
 		super.updated(changedProperties);
 		await this.updateComplete;
 		if (this.highlight && this.highlight.trim() && !this.highlightedText) {
-			let content = this.innerHTML;
-			content = this.removeMarkTag(content);
+			let content = this.textContent;
+			content = this.removeMarkTag(content ?? "");
 
 			const regex = new RegExp(this.highlight, "gi");
 			content = content.replace(regex, "<mark>$&</mark>");

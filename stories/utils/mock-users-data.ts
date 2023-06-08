@@ -11,12 +11,15 @@ export default function getFakeUsers(): FTableSchemaData {
 
 	// Generate 1000 mock user records
 	for (let i = 0; i < 100; i++) {
-		const firstName = faker.name.firstName();
-		const lastName = faker.name.lastName();
+		const firstName = { value: faker.name.firstName() };
+		const lastName = { value: faker.name.lastName() };
 		const email: FTableSchemaCellObject & { value: string } = {
 			value: faker.internet.email(),
 			template: function () {
-				return html`<f-text inline state="warning">${this.value}</f-text>`;
+				return html`<f-div gap="x-small"
+					><f-icon state="warning" source="i-hashtag"></f-icon
+					><f-text inline state="warning">${this.value}</f-text></f-div
+				>`;
 			},
 			actions: [
 				{
@@ -30,9 +33,9 @@ export default function getFakeUsers(): FTableSchemaData {
 				}
 			]
 		};
-		const mobile = faker.phone.number();
-		const sex = faker.name.sex();
-		const age = faker.random.numeric(2);
+		const mobile = { value: faker.phone.number() };
+		const sex = { value: faker.name.sex() };
+		const age = { value: faker.random.numeric(2) };
 		const birthDate: FTableSchemaCellObject & { value: Date } = {
 			value: faker.date.birthdate({ min: 18, max: 65, mode: "age" }),
 			template: function () {
@@ -48,10 +51,13 @@ export default function getFakeUsers(): FTableSchemaData {
 			}
 		};
 
-		const address = `${faker.address.street()}, ${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.zipCode()} ${faker.address.country()}`;
+		const address = {
+			value: `${faker.address.street()}, ${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.zipCode()} ${faker.address.country()}`
+		};
 
 		const userRow: FTableSchemaDataRow = {
 			data: { firstName, lastName, age, birthDate, email, mobile, sex, address },
+			selected: true,
 			details: function () {
 				return html`<f-div padding="large"
 					><f-text state="danger">This is Details slot</f-text></f-div
@@ -64,12 +70,12 @@ export default function getFakeUsers(): FTableSchemaData {
 	return {
 		header: {
 			firstName: { value: "First name", sticky: true },
-			lastName: "Last name",
-			age: "Age",
-			birthDate: "Birth Date",
-			email: "Email",
-			mobile: "Mobile",
-			sex: "Sex",
+			lastName: { value: "Last name" },
+			age: { value: "Age" },
+			birthDate: { value: "Birth Date" },
+			email: { value: "Email" },
+			mobile: { value: "Mobile" },
+			sex: { value: "Sex" },
 			address: { value: "Address", width: "300px", selected: true, sticky: true }
 		},
 		rows: users

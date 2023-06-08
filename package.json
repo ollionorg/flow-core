@@ -10,7 +10,7 @@
   "scripts": {
     "preinstall": "npx only-allow yarn",
     "storybook": "start-storybook -p 6007",
-    "start": "yarn storybook",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider yarn storybook",
     "build-storybook": "build-storybook",
     "prebuild-flow-core": "cd packages/custom-elements-manifest-to-types && yarn build",
     "build-flow-core": "cd packages/flow-core && yarn compile",

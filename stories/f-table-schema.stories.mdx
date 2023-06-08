@@ -31,12 +31,17 @@ Schema based Table component includes rows and cells.
 			const handleNext = () => {
 				console.log("in next event");
 			};
+			const toggleRowDetails = event => {
+				console.log("row toggled", event);
+			};
 			return html`
 				<f-table-schema
 					@next=${handleNext}
+					selectable="multiple"
 					sticky-header
 					variant="underlined"
 					rows-per-page="20"
+					@toggle-row-details=${toggleRowDetails}
 					.data=${getFakeUsers()}
 				>
 				</f-table-schema>

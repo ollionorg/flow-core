@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FButton, FDiv, flowElement, FRoot, FSearch, FText } from "@cldcvr/flow-core";
 import { html, HTMLTemplateResult, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { ifDefined } from "lit-html/directives/if-defined.js";
@@ -19,18 +21,18 @@ export type FTableSchemaData = {
 	rows: FTableSchemaDataRow[];
 };
 
-export type FTableSchemaHeaderCell = string | FTableSchemaHeaderCellObject;
+export type FTableSchemaHeaderCell = FTableSchemaHeaderCellObject;
 
-export type FTableSchemaCell = unknown | FTableSchemaCellObject;
+export type FTableSchemaCell = FTableSchemaCellObject;
 export type FTableSchemaCellObject = {
-	value: unknown;
+	value: any;
 	actions?: FTcellActions;
-	template: () => HTMLTemplateResult;
-	toString: () => string;
+	template?: () => HTMLTemplateResult;
+	toString?: () => string;
 };
 
 export type FTableSchemaHeaderCellObject = {
-	value: string | unknown;
+	value: any;
 	template?: () => HTMLTemplateResult;
 	width?: string;
 	selected?: boolean;
@@ -53,7 +55,7 @@ export class FTableSchema extends FRoot {
 	];
 
 	/**
-	 * @attribute data to dusplay in table
+	 * @attribute data to display in table
 	 */
 	@property({ type: Object })
 	data!: FTableSchemaData;
@@ -61,6 +63,9 @@ export class FTableSchema extends FRoot {
 	@property({ type: String, reflect: true })
 	variant?: FTableVariant = "stripped";
 
+	/**
+	 * header key used to specify sort attribute
+	 */
 	@property({ type: String, reflect: true, attribute: "sort-by" })
 	sortBy?: string;
 
@@ -99,11 +104,14 @@ export class FTableSchema extends FRoot {
 	@property({ type: Boolean, reflect: true, attribute: "sticky-header" })
 	stickyHeader = false;
 
-	@state()
-	offset = 0;
+	@property({ type: String, reflect: true, attribute: "search-term" })
+	searchTerm: string | null = null;
+
+	@property({ type: Boolean, reflect: true, attribute: "show-search-bar" })
+	showSearchBar = true;
 
 	@state()
-	searchTerm: string | null = null;
+	offset = 0;
 
 	@query("f-div.load-more")
 	loadMoreButton?: FDiv;
@@ -115,7 +123,7 @@ export class FTableSchema extends FRoot {
 	}
 
 	get header() {
-		return this.data.header
+		return this.data?.header
 			? html`<f-trow slot="header">
 					${Object.entries(this.data.header).map(columnHeader => {
 						let width = undefined;
@@ -134,6 +142,7 @@ export class FTableSchema extends FRoot {
 							.width=${width}
 							sticky-left=${ifDefined(sticky)}
 							sticky-top=${ifDefined(this.stickyHeader)}
+							@selected-column=${this.handleColumnSelection}
 						>
 							<f-div gap="small" width="fit-content">
 								<f-text>${this.getHeaderCellTemplate(columnHeader[1])}</f-text>
@@ -145,51 +154,6 @@ export class FTableSchema extends FRoot {
 			: nothing;
 	}
 
-	getHeaderCellTemplate(cell: FTableSchemaHeaderCell) {
-		if (cell && typeof cell === "object" && cell.value && cell.template) {
-			return cell.template();
-		} else if (cell && typeof cell === "object" && cell.value) {
-			return cell.value;
-		}
-
-		return cell;
-	}
-
-	setSortBy(columnKey: string) {
-		if (columnKey === this.sortBy) {
-			if (this.sortOrder === "asc") {
-				this.sortOrder = "desc";
-			} else {
-				this.sortOrder = "asc";
-			}
-		} else {
-			this.sortBy = columnKey;
-			this.sortOrder = "asc";
-		}
-	}
-
-	getSortIcon(columnKey: string) {
-		let iconName = "i-sort";
-		if (columnKey === this.sortBy) {
-			if (this.sortOrder === "asc") {
-				iconName = "i-sort-asc";
-			}
-			if (this.sortOrder === "desc") {
-				iconName = "i-sort-desc";
-			}
-		}
-
-		return html`<f-icon-button
-			@click=${(event: Event) => {
-				event.stopPropagation();
-				this.setSortBy(columnKey);
-			}}
-			.icon=${iconName}
-			category="packed"
-			state="neutral"
-		></f-icon-button>`;
-	}
-
 	get rowsHtml() {
 		return this.filteredRows.map(row => {
 			const getDetailsSlot = () => {
@@ -199,7 +163,13 @@ export class FTableSchema extends FRoot {
 					return nothing;
 				}
 			};
-			return html`<f-trow .open=${row.open ?? false} .state=${row.state ?? "default"}>
+			return html`<f-trow
+				.open=${row.open ?? false}
+				.selected=${row.selected ?? false}
+				.state=${row.state ?? "default"}
+				@toggle-row=${(e: CustomEvent) => this.toggleRowDetails(row, e)}
+				@selected-row=${(e: CustomEvent) => this.handleRowSelection(row, e)}
+			>
 				${getDetailsSlot()}
 				${Object.entries(this.data.header).map(columnHeader => {
 					let width = undefined;
@@ -232,19 +202,6 @@ export class FTableSchema extends FRoot {
 		});
 	}
 
-	getCellTemplate(cell: FTableSchemaCell) {
-		if (
-			cell &&
-			typeof cell === "object" &&
-			(cell as FTableSchemaCellObject).value &&
-			(cell as FTableSchemaCellObject).template
-		) {
-			return (cell as FTableSchemaCellObject).template();
-		}
-
-		return cell;
-	}
-
 	get filteredRows() {
 		return this.paginatedRows;
 	}
@@ -255,15 +212,18 @@ export class FTableSchema extends FRoot {
 				return (
 					Object.values(row.data).findIndex(v => {
 						if (this.searchTerm !== null) {
-							if (typeof v === "string") {
-								return v.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase());
-							} else if (typeof v === "object" && v !== null) {
-								return v
-									.toString()
-									.toLocaleLowerCase()
-									.includes(this.searchTerm.toLocaleLowerCase());
-							} else if (typeof v === "number" && v !== null) {
-								return v === Number(this.searchTerm);
+							if (v !== null) {
+								if (typeof v.value === "object" && v.toString) {
+									return v
+										.toString()
+										.toLocaleLowerCase()
+										.includes(this.searchTerm.toLocaleLowerCase());
+								} else {
+									return (v.value as any)
+										.toString()
+										.toLocaleLowerCase()
+										.includes(this.searchTerm.toLocaleLowerCase());
+								}
 							}
 
 							return false;
@@ -273,14 +233,33 @@ export class FTableSchema extends FRoot {
 				);
 			});
 		}
-		return this.data.rows;
+		return this.data?.rows ?? [];
 	}
 
 	get sortedRows() {
 		return this.searchedRows.sort((first, second) => {
 			if (this.sortBy) {
-				const columnA = first.data[this.sortBy],
-					columnB = second.data[this.sortBy];
+				let columnA = first.data[this.sortBy].value,
+					columnB = second.data[this.sortBy].value;
+
+				if (
+					first.data[this.sortBy].toString &&
+					typeof columnA === "object" &&
+					!(columnA instanceof Date)
+				) {
+					// @ts-ignore
+					columnA = first.data[this.sortBy].toString();
+				}
+
+				if (
+					second.data[this.sortBy].toString &&
+					typeof columnB === "object" &&
+					!(columnB instanceof Date)
+				) {
+					// @ts-ignore
+					columnB = second.data[this.sortBy].toString();
+				}
+
 				if (typeof columnA === "string" && typeof columnB === "string") {
 					if (columnA < columnB) {
 						return this.sortOrder === "asc" ? -1 : 1;
@@ -295,22 +274,6 @@ export class FTableSchema extends FRoot {
 					return this.sortOrder === "asc"
 						? (columnA as any) - (columnB as any)
 						: (columnB as any) - (columnA as any);
-				} else if (typeof columnA === "object" && typeof columnB === "object") {
-					const cellA = columnA as FTableSchemaCellObject;
-					const cellB = columnB as FTableSchemaCellObject;
-					if (cellA.value instanceof Date && cellB.value instanceof Date) {
-						return this.sortOrder === "asc"
-							? (cellA.value as any) - (cellB.value as any)
-							: (cellB.value as any) - (cellA.value as any);
-					}
-
-					if (cellA.toString() < cellB.toString()) {
-						return this.sortOrder === "asc" ? -1 : 1;
-					}
-					if (cellA.toString() > cellB.toString()) {
-						return this.sortOrder === "asc" ? 1 : -1;
-					}
-					return 0;
 				}
 				return 0;
 			} else {
@@ -329,12 +292,22 @@ export class FTableSchema extends FRoot {
 
 	render() {
 		this.nextEmitted = false;
+
+		if (!this.data) {
+			return html`<f-text state="warning"> Warning: The 'data' property is required.</f-text>`;
+		}
 		return html`
 			<div>
 				<slot name="search">
-					<f-div padding="medium none">
-						<f-search variant="round" @input=${this.search}></f-search>
-					</f-div>
+					${this.showSearchBar
+						? html`<f-div padding="medium none">
+								<f-search
+									.value=${this.searchTerm}
+									variant="round"
+									@input=${this.search}
+								></f-search>
+						  </f-div>`
+						: nothing}
 				</slot>
 				<f-table
 					.variant=${this.variant}
@@ -387,6 +360,114 @@ export class FTableSchema extends FRoot {
 		if (this.filteredRows.length < this.searchedRows.length) {
 			this.offset += this.max;
 		}
+	}
+
+	setSortBy(columnKey: string) {
+		if (columnKey === this.sortBy) {
+			if (this.sortOrder === "asc") {
+				this.sortOrder = "desc";
+			} else {
+				this.sortOrder = "asc";
+			}
+		} else {
+			this.sortBy = columnKey;
+			this.sortOrder = "asc";
+		}
+	}
+
+	getSortIcon(columnKey: string) {
+		let iconName = "i-sort";
+		if (columnKey === this.sortBy) {
+			if (this.sortOrder === "asc") {
+				iconName = "i-sort-asc";
+			}
+			if (this.sortOrder === "desc") {
+				iconName = "i-sort-desc";
+			}
+		}
+
+		return html`<f-icon-button
+			@click=${(event: Event) => {
+				event.stopPropagation();
+				this.setSortBy(columnKey);
+			}}
+			.icon=${iconName}
+			category="packed"
+			state="neutral"
+		></f-icon-button>`;
+	}
+
+	handleRowSelection(row: FTableSchemaDataRow, event: CustomEvent) {
+		row.selected = event.detail.value;
+		/**
+		 * Whenever row is selected/de-selected this event emitts with header object
+		 */
+		const rowInputEvent = new CustomEvent("row-input", {
+			detail: row,
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(rowInputEvent);
+	}
+
+	toggleRowDetails(row: FTableSchemaDataRow, _event: CustomEvent) {
+		row.open = !row.open;
+		/**
+		 * Whenever row is selected/de-selected this event emitts with header object
+		 */
+		const rowInputEvent = new CustomEvent("toggle-row-details", {
+			detail: row,
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(rowInputEvent);
+	}
+
+	getCellTemplate(cell: FTableSchemaCell) {
+		if (cell && cell.template) {
+			return cell.template();
+		}
+
+		return cell.value;
+	}
+
+	handleColumnSelection(e: CustomEvent) {
+		if (this.data?.header) {
+			const cellToToggleEntry = Object.entries(this.data.header).at(e.detail.columnIndex);
+			let cellToToggle: string;
+			if (cellToToggleEntry) {
+				cellToToggle = cellToToggleEntry[0];
+			}
+
+			Object.entries(this.data.header).forEach(cellEntry => {
+				const [key, cellObject] = cellEntry;
+				if (cellToToggle === key) {
+					cellObject.selected = !cellObject.selected;
+					if (cellObject.selected) {
+						/**
+						 * Whenever header is selcted this event emitts with header object
+						 */
+						const headerSelected = new CustomEvent("header-selected", {
+							detail: cellObject,
+							bubbles: true,
+							composed: true
+						});
+						this.dispatchEvent(headerSelected);
+					}
+				} else {
+					cellObject.selected = false;
+				}
+			});
+		}
+	}
+	getHeaderCellTemplate(cell: FTableSchemaHeaderCell) {
+		if (cell && typeof cell === "object" && cell.value && cell.template) {
+			return cell.template();
+		} else if (cell && typeof cell === "object" && cell.value) {
+			return cell.value;
+		}
+
+		return cell;
 	}
 }
 

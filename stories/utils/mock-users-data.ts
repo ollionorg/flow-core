@@ -3,7 +3,7 @@ import { html } from "lit";
 import type {
 	FTableSchemaData,
 	FTableSchemaDataRow,
-	FTableSchemaCellObject
+	FTableSchemaCell
 } from "./../../packages/flow-table/src/components/f-table-schema/f-table-schema";
 
 export default function getFakeUsers(): FTableSchemaData {
@@ -13,7 +13,7 @@ export default function getFakeUsers(): FTableSchemaData {
 	for (let i = 0; i < 100; i++) {
 		const firstName = { value: faker.name.firstName() };
 		const lastName = { value: faker.name.lastName() };
-		const email: FTableSchemaCellObject & { value: string } = {
+		const email: FTableSchemaCell & { value: string } = {
 			value: faker.internet.email(),
 			template: function () {
 				return html`<f-div gap="x-small"
@@ -36,7 +36,7 @@ export default function getFakeUsers(): FTableSchemaData {
 		const mobile = { value: faker.phone.number() };
 		const sex = { value: faker.name.sex() };
 		const age = { value: faker.random.numeric(2) };
-		const birthDate: FTableSchemaCellObject & { value: Date } = {
+		const birthDate: FTableSchemaCell & { value: Date } = {
 			value: faker.date.birthdate({ min: 18, max: 65, mode: "age" }),
 			template: function () {
 				return html`<f-div gap="small" width="hug-content">

@@ -21,17 +21,14 @@ export type FTableSchemaData = {
 	rows: FTableSchemaDataRow[];
 };
 
-export type FTableSchemaHeaderCell = FTableSchemaHeaderCellObject;
-
-export type FTableSchemaCell = FTableSchemaCellObject;
-export type FTableSchemaCellObject = {
+export type FTableSchemaCell = {
 	value: any;
 	actions?: FTcellActions;
 	template?: () => HTMLTemplateResult;
 	toString?: () => string;
 };
 
-export type FTableSchemaHeaderCellObject = {
+export type FTableSchemaHeaderCell = {
 	value: any;
 	template?: () => HTMLTemplateResult;
 	width?: string;
@@ -185,9 +182,8 @@ export class FTableSchema extends FRoot {
 					}
 					const cell = row.data[columnHeader[0]];
 
-					if (typeof cell === "object") {
-						actions = (cell as FTableSchemaCellObject).actions;
-					}
+					actions = cell.actions;
+
 					return html`<f-tcell
 						.selected=${selected}
 						.width=${width}
@@ -219,7 +215,7 @@ export class FTableSchema extends FRoot {
 										.toLocaleLowerCase()
 										.includes(this.searchTerm.toLocaleLowerCase());
 								} else {
-									return (v.value as any)
+									return v.value
 										.toString()
 										.toLocaleLowerCase()
 										.includes(this.searchTerm.toLocaleLowerCase());
@@ -424,7 +420,7 @@ export class FTableSchema extends FRoot {
 	}
 
 	getCellTemplate(cell: FTableSchemaCell) {
-		if (cell && cell.template) {
+		if (cell?.template) {
 			return cell.template();
 		}
 

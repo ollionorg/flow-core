@@ -71,15 +71,6 @@ export class FTrow extends FRoot {
 		}
 
 		this.propogateProps();
-
-		// if (changedProperties.has("selected")) {
-		// 	const toggle = new CustomEvent("selected-row", {
-		// 		detail: { element: this, value: this.selected },
-		// 		bubbles: true,
-		// 		composed: true
-		// 	});
-		// 	this.dispatchEvent(toggle);
-		// }
 	}
 
 	/**

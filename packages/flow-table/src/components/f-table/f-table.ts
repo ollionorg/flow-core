@@ -192,7 +192,7 @@ export class FTable extends FRoot {
 			if (headerRow) {
 				await headerRow.updateComplete;
 				const firstCell = headerRow.querySelector<FTcell>(":scope > f-tcell");
-				if (firstCell && firstCell.checkbox) {
+				if (firstCell?.checkbox) {
 					if (selectedRows.length === 0) {
 						headerRow.selected = false;
 						firstCell.checkbox.value = "unchecked";

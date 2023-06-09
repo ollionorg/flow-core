@@ -66,9 +66,15 @@ export class FTableSchema extends FRoot {
 	@property({ type: String, reflect: true, attribute: "sort-by" })
 	sortBy?: string;
 
+	/**
+	 * sort order for `sort-by` attribute
+	 */
 	@property({ type: String, reflect: true, attribute: "sort-order" })
 	sortOrder?: "asc" | "desc" = "asc";
 
+	/**
+	 * max rows per page , after that it will paginate on scroll
+	 */
 	@property({ type: Number, reflect: true, attribute: "rows-per-page" })
 	rowsPerPage?: number = 50;
 	/**
@@ -101,9 +107,14 @@ export class FTableSchema extends FRoot {
 	@property({ type: Boolean, reflect: true, attribute: "sticky-header" })
 	stickyHeader = false;
 
+	/**
+	 * filter rows based on search term
+	 */
 	@property({ type: String, reflect: true, attribute: "search-term" })
 	searchTerm: string | null = null;
-
+	/**
+	 * show search input box on top
+	 */
 	@property({ type: Boolean, reflect: true, attribute: "show-search-bar" })
 	showSearchBar = true;
 

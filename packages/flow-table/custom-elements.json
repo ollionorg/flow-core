@@ -320,6 +320,7 @@
                 "text": "\"asc\" | \"desc\" | undefined"
               },
               "default": "\"asc\"",
+              "description": "sort order for `sort-by` attribute",
               "attribute": "sort-order",
               "reflects": true
             },
@@ -330,6 +331,7 @@
                 "text": "number | undefined"
               },
               "default": "50",
+              "description": "max rows per page , after that it will paginate on scroll",
               "attribute": "rows-per-page",
               "reflects": true
             },
@@ -390,7 +392,19 @@
                 "text": "string | null"
               },
               "default": "null",
-              "attribute": "searchTerm",
+              "description": "filter rows based on search term",
+              "attribute": "search-term",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "showSearchBar",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "show search input box on top",
+              "attribute": "show-search-bar",
               "reflects": true
             },
             {
@@ -504,6 +518,24 @@
             },
             {
               "kind": "method",
+              "name": "toggleRowDetails",
+              "parameters": [
+                {
+                  "name": "row",
+                  "type": {
+                    "text": "FTableSchemaDataRow"
+                  }
+                },
+                {
+                  "name": "_event",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
               "name": "getCellTemplate",
               "parameters": [
                 {
@@ -569,6 +601,7 @@
                 "text": "\"asc\" | \"desc\" | undefined"
               },
               "default": "\"asc\"",
+              "description": "sort order for `sort-by` attribute",
               "fieldName": "sortOrder"
             },
             {
@@ -577,6 +610,7 @@
                 "text": "number | undefined"
               },
               "default": "50",
+              "description": "max rows per page , after that it will paginate on scroll",
               "fieldName": "rowsPerPage"
             },
             {
@@ -620,12 +654,22 @@
               "fieldName": "stickyHeader"
             },
             {
-              "name": "searchTerm",
+              "name": "search-term",
               "type": {
                 "text": "string | null"
               },
               "default": "null",
+              "description": "filter rows based on search term",
               "fieldName": "searchTerm"
+            },
+            {
+              "name": "show-search-bar",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "show search input box on top",
+              "fieldName": "showSearchBar"
             }
           ],
           "superclass": {
@@ -641,132 +685,6 @@
           "declaration": {
             "name": "FTableSchema",
             "module": "src/components/f-table-schema/f-table-schema.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-trow/f-trow.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTrow",
-          "members": [
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FTrowState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "selected",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "attribute": "selected",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "expndablePanel",
-              "type": {
-                "text": "FTcell | undefined"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "detailsSlotElement",
-              "type": {
-                "text": "HTMLSlotElement"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "propogateProps",
-              "description": "propogate props related to chevron and checkbox and radio boxes"
-            },
-            {
-              "kind": "method",
-              "name": "toggleDetails",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleInput",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleDetailsSlot"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "state",
-              "type": {
-                "text": "FTrowState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "fieldName": "open"
-            },
-            {
-              "name": "selected",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "fieldName": "selected"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTrow",
-          "declaration": {
-            "name": "FTrow",
-            "module": "src/components/f-trow/f-trow.ts"
           }
         }
       ]
@@ -928,6 +846,132 @@
           "declaration": {
             "name": "FTcell",
             "module": "src/components/f-tcell/f-tcell.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-trow/f-trow.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTrow",
+          "members": [
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FTrowState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "expndablePanel",
+              "type": {
+                "text": "FTcell | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "detailsSlotElement",
+              "type": {
+                "text": "HTMLSlotElement"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "propogateProps",
+              "description": "propogate props related to chevron and checkbox and radio boxes"
+            },
+            {
+              "kind": "method",
+              "name": "toggleDetails",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleDetailsSlot"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "FTrowState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "fieldName": "open"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "fieldName": "selected"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTrow",
+          "declaration": {
+            "name": "FTrow",
+            "module": "src/components/f-trow/f-trow.ts"
           }
         }
       ]

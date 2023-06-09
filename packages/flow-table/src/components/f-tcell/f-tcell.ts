@@ -58,6 +58,7 @@ export class FTcell extends FRoot {
 		if (this.actions) {
 			return html`${this.actions.map(ac => {
 				return html`<f-icon-button
+					class="f-tcell-actions"
 					size="medium"
 					category="packed"
 					state="neutral"

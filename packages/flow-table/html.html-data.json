@@ -3,7 +3,7 @@
   "tags": [
     {
       "name": "f-table-schema",
-      "description": "Events:\n\n  * `next` {`CustomEvent<{}>`} - \n\n  * `row-input` {`CustomEvent<FTableSchemaDataRow>`} - \n\n  * `header-selected` {`CustomEvent<FTableSchemaHeaderCellObject>`} - \n\nAttributes:\n\n  * `data` {`FTableSchemaData`} - \n\n  * `variant` {`FTableVariant | undefined`} - \n\n  * `sort-by` {`string | undefined`} - header key used to specify sort attribute\n\n  * `sort-order` {`\"asc\" | \"desc\" | undefined`} - \n\n  * `rows-per-page` {`number | undefined`} - \n\n  * `size` {`FTableSize | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `highlight-selected` {`boolean`} - \n\n  * `highlight-hover` {`boolean`} - \n\n  * `sticky-header` {`boolean`} - \n\n  * `searchTerm` {`string | null`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `data` {`FTableSchemaData`} - \n\n  * `variant` {`FTableVariant | undefined`} - \n\n  * `sortBy` {`string | undefined`} - header key used to specify sort attribute\n\n  * `sortOrder` {`\"asc\" | \"desc\" | undefined`} - \n\n  * `rowsPerPage` {`number | undefined`} - \n\n  * `size` {`FTableSize | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `highlightSelected` {`boolean`} - \n\n  * `highlightHover` {`boolean`} - \n\n  * `stickyHeader` {`boolean`} - \n\n  * `searchTerm` {`string | null`} - \n\n  * `offset` {`number`} - \n\n  * `loadMoreButton` - \n\n  * `nextEmitted` {`boolean`} - \n\n  * `max` {`number`} - \n\n  * `header` {`unique symbol | TemplateResult<1>`} - \n\n  * `rowsHtml` {`TemplateResult<1>[]`} - \n\n  * `filteredRows` {`FTableSchemaDataRow[]`} - \n\n  * `searchedRows` {`FTableSchemaDataRow[]`} - \n\n  * `sortedRows` {`FTableSchemaDataRow[]`} - \n\n  * `paginatedRows` {`FTableSchemaDataRow[]`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `next` {`CustomEvent<{}>`} - \n\n  * `row-input` {`CustomEvent<FTableSchemaDataRow>`} - \n\n  * `toggle-row-details` {`CustomEvent<FTableSchemaDataRow>`} - \n\n  * `header-selected` {`CustomEvent<FTableSchemaHeaderCell>`} - \n\nAttributes:\n\n  * `data` {`FTableSchemaData`} - \n\n  * `variant` {`FTableVariant | undefined`} - \n\n  * `sort-by` {`string | undefined`} - header key used to specify sort attribute\n\n  * `sort-order` {`\"asc\" | \"desc\" | undefined`} - sort order for `sort-by` attribute\n\n  * `rows-per-page` {`number | undefined`} - max rows per page , after that it will paginate on scroll\n\n  * `size` {`FTableSize | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `highlight-selected` {`boolean`} - \n\n  * `highlight-hover` {`boolean`} - \n\n  * `sticky-header` {`boolean`} - \n\n  * `search-term` {`string | null`} - filter rows based on search term\n\n  * `show-search-bar` {`boolean`} - show search input box on top\n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `data` {`FTableSchemaData`} - \n\n  * `variant` {`FTableVariant | undefined`} - \n\n  * `sortBy` {`string | undefined`} - header key used to specify sort attribute\n\n  * `sortOrder` {`\"asc\" | \"desc\" | undefined`} - sort order for `sort-by` attribute\n\n  * `rowsPerPage` {`number | undefined`} - max rows per page , after that it will paginate on scroll\n\n  * `size` {`FTableSize | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `highlightSelected` {`boolean`} - \n\n  * `highlightHover` {`boolean`} - \n\n  * `stickyHeader` {`boolean`} - \n\n  * `searchTerm` {`string | null`} - filter rows based on search term\n\n  * `showSearchBar` {`boolean`} - show search input box on top\n\n  * `offset` {`number`} - \n\n  * `loadMoreButton` - \n\n  * `nextEmitted` {`boolean`} - \n\n  * `max` {`number`} - \n\n  * `header` {`unique symbol | TemplateResult<1>`} - \n\n  * `rowsHtml` {`TemplateResult<1>[]`} - \n\n  * `filteredRows` {`FTableSchemaDataRow[]`} - \n\n  * `searchedRows` {`FTableSchemaDataRow[]`} - \n\n  * `sortedRows` {`FTableSchemaDataRow[]`} - \n\n  * `paginatedRows` {`FTableSchemaDataRow[]`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "data",
@@ -34,7 +34,7 @@
         },
         {
           "name": "sort-order",
-          "description": "`sort-order` {`\"asc\" | \"desc\" | undefined`} - \n\nProperty: sortOrder\n\nDefault: asc",
+          "description": "`sort-order` {`\"asc\" | \"desc\" | undefined`} - sort order for `sort-by` attribute\n\nProperty: sortOrder\n\nDefault: asc",
           "values": [
             {
               "name": "asc"
@@ -46,7 +46,7 @@
         },
         {
           "name": "rows-per-page",
-          "description": "`rows-per-page` {`number | undefined`} - \n\nProperty: rowsPerPage\n\nDefault: 50",
+          "description": "`rows-per-page` {`number | undefined`} - max rows per page , after that it will paginate on scroll\n\nProperty: rowsPerPage\n\nDefault: 50",
           "values": []
         },
         {
@@ -92,9 +92,14 @@
           "valueSet": "v"
         },
         {
-          "name": "searchTerm",
-          "description": "`searchTerm` {`string | null`} - \n\nProperty: searchTerm\n\nDefault: null",
+          "name": "search-term",
+          "description": "`search-term` {`string | null`} - filter rows based on search term\n\nProperty: searchTerm\n\nDefault: null",
           "values": []
+        },
+        {
+          "name": "show-search-bar",
+          "description": "`show-search-bar` {`boolean`} - show search input box on top\n\nProperty: showSearchBar\n\nDefault: true",
+          "valueSet": "v"
         },
         {
           "name": "tooltip",
@@ -110,8 +115,12 @@
           "description": "`row-input` {`CustomEvent<FTableSchemaDataRow>`} - "
         },
         {
+          "name": "ontoggle-row-details",
+          "description": "`toggle-row-details` {`CustomEvent<FTableSchemaDataRow>`} - "
+        },
+        {
           "name": "onheader-selected",
-          "description": "`header-selected` {`CustomEvent<FTableSchemaHeaderCellObject>`} - "
+          "description": "`header-selected` {`CustomEvent<FTableSchemaHeaderCell>`} - "
         }
       ]
     },
@@ -187,7 +196,7 @@
     },
     {
       "name": "f-tcell",
-      "description": "Events:\n\n  * `update-row-selection` {`CustomEvent<boolean>`} - \n\n  * `toggle-row` {`CustomEvent<{}>`} - \n\n  * `selected-column` {`CustomEvent<{ columnIndex: number; }>`} - \n\n  * `highlight-column` {`CustomEvent<{ columnIndex: number; type: \"add\" | \"remove\"; }>`} - \n\nAttributes:\n\n  * `actions` {`FTcellActions | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `width` {`string | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `actions` {`FTcellActions | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `width` {`string | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `expandIcon` {`boolean`} - \n\n  * `checkbox` - \n\n  * `radio` - \n\n  * `chevron` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `update-row-selection` {`CustomEvent<boolean>`} - \n\n  * `toggle-row` {`CustomEvent<{ value: boolean; }>`} - \n\n  * `selected-column` {`CustomEvent<{ columnIndex: number; }>`} - \n\n  * `highlight-column` {`CustomEvent<{ columnIndex: number; type: \"add\" | \"remove\"; }>`} - \n\nAttributes:\n\n  * `actions` {`FTcellActions | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `width` {`string | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `actions` {`FTcellActions | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `width` {`string | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `expandIcon` {`boolean`} - \n\n  * `checkbox` - \n\n  * `radio` - \n\n  * `chevron` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "actions",
@@ -215,7 +224,7 @@
         },
         {
           "name": "ontoggle-row",
-          "description": "`toggle-row` {`CustomEvent<{}>`} - "
+          "description": "`toggle-row` {`CustomEvent<{ value: boolean; }>`} - "
         },
         {
           "name": "onselected-column",

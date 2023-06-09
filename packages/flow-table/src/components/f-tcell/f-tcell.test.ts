@@ -7,8 +7,6 @@ import "@cldcvr/flow-core";
 
 import { ConfigUtil, FIconButton } from "@cldcvr/flow-core";
 import { FTcell, FTable } from "@cldcvr/flow-table";
-// importing `loadingSVG` to cross check
-// setting icon pack for testing icon related test cases
 ConfigUtil.setConfig({ iconPack: IconPack });
 
 describe("f-tcell", () => {

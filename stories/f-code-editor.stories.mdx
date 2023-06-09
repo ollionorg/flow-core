@@ -54,11 +54,18 @@ f-code-editor used to edit content/code.
 			language: "scala"
 		}}
 	>
-		{args =>
-			html`<f-div padding="x-large" height="100%">
-				<f-code-editor .code=${args.code} .language=${args.language}></f-code-editor>
-			</f-div>`
-		}
+		{args => {
+			const handleInput = function (ev) {
+				console.log(ev);
+			};
+			return html`<f-div padding="x-large" height="100%">
+				<f-code-editor
+					.code=${args.code}
+					.language=${args.language}
+					@content-change=${handleInput}
+				></f-code-editor>
+			</f-div>`;
+		}}
 	</Story>
 </Canvas>
 

@@ -1,0 +1,63 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import getFakeUsers from "./utils/mock-users-data.ts";
+
+<Meta
+	title="@cldcvr/flow-table/Components/f-table-schema"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
+/>
+
+# f-table
+
+<br />
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+Schema based Table component includes rows and cells.
+
+<br />
+
+### [Playground](/story/components-f-table--playground)
+
+<Canvas>
+	<Story name="Playground">
+		{args => {
+			const handleNext = () => {
+				console.log("in next event");
+			};
+			const toggleRowDetails = event => {
+				console.log("row toggled", event);
+			};
+			return html`
+				<f-table-schema
+					@next=${handleNext}
+					selectable="multiple"
+					sticky-header
+					variant="underlined"
+					rows-per-page="20"
+					@toggle-row-details=${toggleRowDetails}
+					.data=${getFakeUsers()}
+				>
+				</f-table-schema>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<hr />
+
+<br />
+
+<Story name="Anatomy">
+	{() => html`<f-div align="middle-center" padding="large">Display anatomy here</f-div>`}
+</Story>

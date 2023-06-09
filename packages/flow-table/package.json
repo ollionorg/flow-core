@@ -1,9 +1,9 @@
 {
-  "name": "@cldcvr/flow-code-editor",
-  "version": "0.1.0",
-  "description": "Code editor component for flow library",
-  "module": "dist/flow-code-editor.es.js",
-  "main": "dist/flow-code-editor.es.js",
+  "name": "@cldcvr/flow-table",
+  "version": "1.0.0",
+  "description": "Table component for flow library",
+  "module": "dist/flow-table.es.js",
+  "main": "dist/flow-table.cjs.js",
   "types": "dist/types/index.d.ts",
   "sideEffects": false,
   "scripts": {
@@ -13,7 +13,11 @@
     "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
     "lint:eslint": "eslint 'src/**/*.ts' './custom-elements.vue.ts'",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
-    "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch"
+    "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
+    "test-build": "web-test-runner ./src/**/*.test.ts --node-resolve",
+    "test": "yarn build && web-test-runner ./src/**/*.test.ts --node-resolve",
+    "test:file": "yarn build && web-test-runner --node-resolve",
+    "test:watch": "yarn build && web-test-runner ./src/**/*.test.ts --node-resolve --watch"
   },
   "keywords": [
     "web-components",
@@ -22,8 +26,7 @@
     "lit"
   ],
   "dependencies": {
-    "lit": "^2.2.4",
-    "monaco-editor": "^0.38.0"
+    "lit": "^2.2.4"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.5.7",
@@ -45,16 +48,13 @@
     "rollup-plugin-scss": "3.0.0",
     "sass": "^1.52.3",
     "typescript": "^4.5.4",
-    "vite": "^4.3.8",
+    "vite": "^2.9.9",
     "web-component-analyzer": "^2.0.0-next.4"
-  },
-  "peerDependencies": {
-    "@cldcvr/flow-core": "*"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://github.com/cldcvr/flow-core.git",
-    "directory": "packages/flow-code-editor"
+    "directory": "packages/flow-table"
   },
   "publishConfig": {
     "access": "public",

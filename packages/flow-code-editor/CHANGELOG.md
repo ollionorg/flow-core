@@ -3,6 +3,11 @@
 
 # Change Log
 
+## [0.1.0] - 2023-06-09
+### Features
+
+- `content-change` event added to listen on updates in editor.
+
 ## [0.0.9] - 2023-05-30
 
 ### Note

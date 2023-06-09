@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.16.1] - 2023-06-08
+
+### Improvements
+
+- `f-text` : highlight inner text logic updated.
 ## [1.16.0] - 2023-06-06
 
 ### Features

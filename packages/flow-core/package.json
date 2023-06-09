@@ -1,6 +1,6 @@
 {
   "name": "@cldcvr/flow-core",
-  "version": "1.16.0",
+  "version": "1.16.1",
   "description": "Core package of flow design system",
   "module": "dist/flow-core.es.js",
   "main": "dist/flow-core.cjs.js",
@@ -14,7 +14,7 @@
     "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
     "sync-colors": "node ./figma/sync-colors.js",
     "sync-md-file": "node ./figma/sync-md-file.js",
-    "lint:eslint": "eslint 'src/**/*.ts' './custom-elements.vue.ts'",
+    "lint:eslint": "eslint 'src/**/*.ts'",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
     "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
     "test-build": "web-test-runner ./src/**/*.test.ts --node-resolve",
@@ -39,7 +39,7 @@
     "validate-color": "^2.2.1"
   },
   "devDependencies": {
-    "@custom-elements-manifest/analyzer": "^0.5.7",
+    "@custom-elements-manifest/analyzer": "^0.8.1",
     "@open-wc/testing": "^3.1.5",
     "@types/eslint": "^8.4.3",
     "@types/jest": "28.1.3",

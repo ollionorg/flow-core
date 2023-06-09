@@ -1,24 +1,34 @@
-import { faker } from "@faker-js/faker";
-import { html } from "lit";
-import type {
+/* eslint-disable no-mixed-spaces-and-tabs */
+import { html, fixture, expect } from "@open-wc/testing";
+import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
+// import flow-core elements
+import "@cldcvr/flow-core";
+
+import { ConfigUtil } from "@cldcvr/flow-core";
+import {
+	FTableSchema,
 	FTableSchemaData,
 	FTableSchemaDataRow,
 	FTableSchemaCell
-} from "./../../packages/flow-table/src/components/f-table-schema/f-table-schema";
+} from "@cldcvr/flow-table";
+
+ConfigUtil.setConfig({ iconPack: IconPack });
+
+import { HTMLTemplateResult } from "lit";
 
 export default function getFakeUsers(count = 100): FTableSchemaData {
 	const users = [];
 
 	for (let i = 0; i < count; i++) {
-		const firstName = { value: faker.name.firstName() };
-		const lastName = { value: faker.name.lastName() };
+		const firstName = { value: `Vikas ${i}` };
+		const lastName = { value: `Last name ${i}` };
 		const email: FTableSchemaCell & { value: string } = {
-			value: faker.internet.email(),
+			value: `vikas${i}@cldcvr.com`,
 			template: function () {
 				return html`<f-div gap="x-small"
 					><f-icon state="warning" source="i-hashtag"></f-icon
 					><f-text inline state="warning">${this.value}</f-text></f-div
-				>`;
+				>` as HTMLTemplateResult;
 			},
 			actions: [
 				{
@@ -32,18 +42,18 @@ export default function getFakeUsers(count = 100): FTableSchemaData {
 				}
 			]
 		};
-		const mobile = { value: faker.phone.number() };
-		const sex = { value: faker.name.sex() };
-		const age = { value: faker.random.numeric(2) };
+		const mobile = { value: `8989899981` };
+		const sex = { value: `male` };
+		const age = { value: `33` };
 		const birthDate: FTableSchemaCell & { value: Date } = {
-			value: faker.date.birthdate({ min: 18, max: 65, mode: "age" }),
+			value: new Date(),
 			template: function () {
 				return html`<f-div gap="small" width="hug-content">
 					<f-icon source="i-date-time"></f-icon>
 					<f-text inline
 						>${this.value.getDate()}-${this.value.getMonth()}-${this.value.getFullYear()}</f-text
 					></f-div
-				>`;
+				>` as HTMLTemplateResult;
 			},
 			toString: function () {
 				return this.value.toString();
@@ -51,7 +61,7 @@ export default function getFakeUsers(count = 100): FTableSchemaData {
 		};
 
 		const address = {
-			value: `${faker.address.street()}, ${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.zipCode()} ${faker.address.country()}`
+			value: `Wagholi Pune 412207`
 		};
 
 		const userRow: FTableSchemaDataRow = {
@@ -60,7 +70,7 @@ export default function getFakeUsers(count = 100): FTableSchemaData {
 			details: function () {
 				return html`<f-div padding="large"
 					><f-text state="danger">This is Details slot</f-text></f-div
-				>`;
+				>` as HTMLTemplateResult;
 			}
 		};
 		users.push(userRow);
@@ -80,3 +90,18 @@ export default function getFakeUsers(count = 100): FTableSchemaData {
 		rows: users
 	};
 }
+
+describe("f-table-schema", () => {
+	it("is defined", () => {
+		const el = document.createElement("f-table-schema");
+		expect(el).instanceOf(FTableSchema);
+	});
+	it("should display rows and column based on data", async () => {
+		const el = await fixture<FTableSchema>(
+			html`<f-table-schema .data=${getFakeUsers(2)}></f-table-schema>`
+		);
+		await el.updateComplete;
+
+		await expect(el).shadowDom.to.equalSnapshot();
+	});
+});

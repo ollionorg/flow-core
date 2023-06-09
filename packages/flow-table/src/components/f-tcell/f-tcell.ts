@@ -125,7 +125,7 @@ export class FTcell extends FRoot {
 	}
 	toggleDetails() {
 		const toggle = new CustomEvent("toggle-row", {
-			detail: {},
+			detail: { value: this.chevron?.icon === "i-chevron-down" },
 			bubbles: true,
 			composed: true
 		});

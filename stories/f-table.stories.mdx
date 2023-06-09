@@ -1,6 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { createRef, ref } from "lit/directives/ref.js";
 
 <Meta
 	title="@cldcvr/flow-table/Components/f-table"
@@ -364,6 +365,60 @@ Sets background on row hover
 				)}</f-div
 			>`
 		}
+	</Story>
+</Canvas>
+
+<br />
+
+## @selected-rows
+
+<hr />
+
+`selected-rows` event
+
+<Canvas>
+	<Story name="@selected-rows">
+		{args => {
+			const fieldRef = createRef();
+			const selectedRowsHandler = event => {
+				if (fieldRef.value) {
+					const selectedrows = [];
+					event.detail.forEach(element => {
+						selectedrows.push(element.toString());
+					});
+					fieldRef.value.textContent = JSON.stringify(selectedrows, undefined, 2);
+				}
+			};
+			return html`<f-div direction="column" state="subtle" padding="small" gap="large">
+					<f-text>'selected-rows' event emitted whenever any row is selected or de-selected</f-text>
+					<f-table
+						.highlightHover=${highlightHover}
+						selectable="multiple"
+						@selected-rows=${selectedRowsHandler}
+					>
+						<f-trow slot="header">
+							${[1, 2, 3, 4, 5].map(cellNumber => {
+								return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+							})}
+						</f-trow>
+						${[1, 2, 3, 4, 5].map(rowNumber => {
+							return html`<f-trow>
+								${[1, 2, 3, 4, 5].map(cellNumber => {
+									return html`<f-tcell>
+										<f-text> Column ${cellNumber} </f-text>
+									</f-tcell>`;
+								})}
+							</f-trow>`;
+						})}
+					</f-table>
+					<f-divider></f-divider>
+				</f-div>
+				<br />
+				<f-divider></f-divider>
+				<br />
+				<f-text state="secondary">'event.detail' will display here</f-text>
+				<pre ${ref(fieldRef)}></pre>`;
+		}}
 	</Story>
 </Canvas>
 

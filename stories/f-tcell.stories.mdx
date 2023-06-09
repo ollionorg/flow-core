@@ -1,6 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { createRef, ref } from "lit/directives/ref.js";
 
 <Meta
 	title="@cldcvr/flow-table/Components/f-tcell"
@@ -156,5 +157,113 @@ It will be used to select column, set on cell inside slot="header".
 				)}</f-div
 			>`
 		}
+	</Story>
+</Canvas>
+
+<br />
+
+## @highlight-column
+
+<hr />
+
+It will be used to select column, set on cell inside slot="header".
+
+<Canvas>
+	<Story name="@highlight-column">
+		{args => {
+			const fieldRef = createRef();
+			const highlightColumnHandler = event => {
+				if (fieldRef.value) {
+					fieldRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
+				}
+			};
+			return html`<f-div direction="column" state="subtle" padding="small" gap="large"
+					>${[true].map(
+						selected => html`<f-text
+								>Hover on header cell, it will trigger 'highlight-column' event
+							</f-text>
+							<f-table>
+								<f-trow slot="header">
+									${[1, 2, 3].map(cellNumber => {
+										return html`<f-tcell
+											@highlight-column=${highlightColumnHandler}
+											.selected=${cellNumber === 2}
+										>
+											Hover to Highlight ${cellNumber}
+										</f-tcell>`;
+									})}
+								</f-trow>
+								${[1, 2, 3].map(rowNumber => {
+									return html`<f-trow>
+										${[1, 2, 3].map(cellNumber => {
+											return html`<f-tcell .selected=${cellNumber === 2}>
+												<f-text> Column ${cellNumber} </f-text>
+											</f-tcell>`;
+										})}
+									</f-trow>`;
+								})}
+							</f-table> `
+					)}
+				</f-div>
+				<br />
+				<f-divider></f-divider>
+				<br />
+				<f-text state="secondary">'event.detail' will display here</f-text>
+				<pre ${ref(fieldRef)}></pre>`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## @selected-column
+
+<hr />
+
+It will be used to select column, set on cell inside slot="header".
+
+<Canvas>
+	<Story name="@selected-column">
+		{args => {
+			const fieldRef = createRef();
+			const selectedColumnHandler = event => {
+				if (fieldRef.value) {
+					fieldRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
+				}
+			};
+			return html`<f-div direction="column" state="subtle" padding="small" gap="large"
+					>${[true].map(
+						selected => html`<f-text
+								>Click on header cell, it will trigger 'selected-column' event
+							</f-text>
+							<f-table>
+								<f-trow slot="header">
+									${[1, 2, 3].map(cellNumber => {
+										return html`<f-tcell
+											@selected-column=${selectedColumnHandler}
+											.selected=${cellNumber === 2}
+										>
+											Click to select ${cellNumber}
+										</f-tcell>`;
+									})}
+								</f-trow>
+								${[1, 2, 3].map(rowNumber => {
+									return html`<f-trow>
+										${[1, 2, 3].map(cellNumber => {
+											return html`<f-tcell .selected=${cellNumber === 2}>
+												<f-text> Column ${cellNumber} </f-text>
+											</f-tcell>`;
+										})}
+									</f-trow>`;
+								})}
+							</f-table> `
+					)}
+				</f-div>
+				<br />
+				<f-divider></f-divider>
+				<br />
+				<f-text state="secondary">'event.detail' will display here</f-text>
+				<pre ${ref(fieldRef)}></pre>`;
+		}}
 	</Story>
 </Canvas>

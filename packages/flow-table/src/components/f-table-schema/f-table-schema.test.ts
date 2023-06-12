@@ -46,7 +46,7 @@ export default function getFakeUsers(count = 100): FTableSchemaData {
 		const sex = { value: `male` };
 		const age = { value: `33` };
 		const birthDate: FTableSchemaCell & { value: Date } = {
-			value: new Date(),
+			value: new Date("December 17, 1995 03:24:00"),
 			template: function () {
 				return html`<f-div gap="small" width="hug-content">
 					<f-icon source="i-date-time"></f-icon>

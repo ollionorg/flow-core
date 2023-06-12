@@ -5,6 +5,7 @@ import GcpIconPack from "@cldcvr/flow-gcp-icon/dist/types/icon-pack";
 import AwsIconPack from "@cldcvr/flow-aws-icon/dist/types/icon-pack";
 
 import { ConfigUtil } from "@cldcvr/flow-core/src/modules/config";
+import { changeRoute } from "./utils";
 import "@cldcvr/flow-core/src";
 import "@cldcvr/flow-log/src";
 import "@cldcvr/flow-code-editor/src";
@@ -103,3 +104,49 @@ async function run() {
 }
 
 run();
+
+// 404 error state --start
+const el = document.body.querySelector(".sb-errordisplay.sb-wrapper");
+const errorMessage = el.querySelector("#error-message.sb-heading");
+const codeMessage = el.querySelector(".sb-errordisplay_code");
+const url = new URL(window.location.href);
+const url_id = url.searchParams.get("id");
+
+const errorSnippet = `<f-div direction="column" align="middle-center" gap="large" width="hug-content">
+		<f-pictogram source="⛔️" variant="hexagon" size="large" state="default"></f-pictogram>
+		<f-div direction="column" gap="small" align="middle-center" width="500px" height="hug-content">
+			<f-text variant="heading" size="medium" weight="bold" align="center"
+				>404 Page Not Found!!</f-text
+			>
+			<f-text variant="para" size="medium" weight="regular" align="center"
+				>Couldn't find story matching '${url_id}'</f-text
+			>
+		</f-div>
+			<f-div direction="column" gap="small" align="middle-left" width="400px" height="hug-content">
+	<f-text  variant="para" size="small" weight="regular" state="secondary"><li>Are you sure a story with that id exists?</li></f-text>
+	<f-text  variant="para" size="small" weight="regular" state="secondary"><li>Please check your stories field of your main.js config.</li></f-text>
+	<f-text  variant="para" size="small" weight="regular" state="secondary"><li>Also check the browser console and terminal for errors.</li></f-text>
+	</f-div>
+		<f-div align="middle-center">
+			<f-button
+			id="home-button"
+				label="Home"
+				size="small"
+				variant="round"
+			></f-button>
+		</f-div>
+	</f-div>`;
+
+if (el) {
+	const paraDefine = errorSnippet;
+	el?.insertAdjacentHTML("afterbegin", paraDefine);
+	codeMessage.style.display = "none";
+	errorMessage.style.display = "none";
+	const homeButton = el.querySelector("#home-button");
+	homeButton.addEventListener("click", changePath);
+}
+
+function changePath() {
+	changeRoute("ft-time-schedule-popover", "/story/foundation-introduction-about--page");
+}
+//404 error state --end

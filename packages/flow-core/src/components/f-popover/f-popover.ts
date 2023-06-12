@@ -77,8 +77,8 @@ export class FPopover extends FRoot {
 	/**
 	 * @attribute display overlay?
 	 */
-	@property({ type: Boolean, reflect: true, attribute: "stretch-height" })
-	stretchHeight?: boolean = false;
+	@property({ type: Boolean, reflect: true, attribute: "auto-height" })
+	autoHeight?: boolean = false;
 
 	/**
 	 * @attribute display overlay?
@@ -251,7 +251,7 @@ export class FPopover extends FRoot {
 		 * method that is executed before every repaint
 		 */
 		requestAnimationFrame(() => {
-			if (this.stretchHeight) {
+			if (this.autoHeight) {
 				const topPosition = Number(this.style.top.replace("px", "")) + 16;
 				this.style.height = `calc(100vh - ${topPosition}px)`;
 				this.style.maxHeight = `calc(100vh - ${topPosition}px)`;

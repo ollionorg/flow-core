@@ -69,7 +69,7 @@ be used to show short-lived information such as menus, options, additional actio
 			overlay: {
 				control: "boolean"
 			},
-			["stretch-height"]: {
+			["auto-height"]: {
 				control: "boolean"
 			},
 			["close-on-escape"]: {
@@ -81,7 +81,7 @@ be used to show short-lived information such as menus, options, additional actio
 			overlay: true,
 			size: "small",
 			placement: "auto",
-			["stretch-height"]: false,
+			["auto-height"]: false,
 			["close-on-escape"]: true
 		}}
 	>
@@ -99,7 +99,7 @@ be used to show short-lived information such as menus, options, additional actio
 					.placement=${args.placement}
 					@overlay-click=${handlePopover}
 					target="#popoverTarget"
-					?stretch-height=${args["stretch-height"]}
+					?auto-height=${args["auto-height"]}
 					?close-on-escape=${args["close-on-escape"]}
 				>
 					<f-div state="tertiary" padding="medium">
@@ -571,7 +571,7 @@ popover and if the max height is attained, the body contents will scroll.
 						size="stretch"
 						target="#popover-height-stretch"
 						@overlay-click=${() => setOpenHeightStretch(!openHeightStretch)}
-						?stretch-height=${true}
+						?auto-height=${true}
 					>
 						<f-div state="tertiary" padding="medium">
 							<f-text>
@@ -583,7 +583,7 @@ popover and if the max height is attained, the body contents will scroll.
 					</f-popover>
 					<f-button
 						id="popover-height-stretch"
-						label="stretch-height='true'"
+						label="auto-height='true'"
 						@click=${() => setOpenHeightStretch(!openHeightStretch)}
 					>
 					</f-button>

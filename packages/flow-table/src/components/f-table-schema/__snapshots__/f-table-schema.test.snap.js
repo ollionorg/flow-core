@@ -419,7 +419,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
               variant="para"
               weight="regular"
             >
-              9-5-2023
+              17-11-1995
             </f-text>
           </f-div>
         </f-text>
@@ -620,7 +620,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
               variant="para"
               weight="regular"
             >
-              9-5-2023
+              17-11-1995
             </f-text>
           </f-div>
         </f-text>

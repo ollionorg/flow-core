@@ -4,11 +4,18 @@
 
 # Change Log
 
+## [1.16.2] - 2023-06-09
+
+### Improvements
+
+- `f-popover` : `close-on-escape` and `stretch-height` boolean flags props added.
+
 ## [1.16.1] - 2023-06-08
 
 ### Improvements
 
 - `f-text` : highlight inner text logic updated.
+
 ## [1.16.0] - 2023-06-06
 
 ### Features

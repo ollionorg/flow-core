@@ -68,13 +68,21 @@ be used to show short-lived information such as menus, options, additional actio
 			},
 			overlay: {
 				control: "boolean"
+			},
+			["stretch-height"]: {
+				control: "boolean"
+			},
+			["close-on-escape"]: {
+				control: "boolean"
 			}
 		}}
 		args={{
 			open: false,
 			overlay: true,
 			size: "small",
-			placement: "auto"
+			placement: "auto",
+			["stretch-height"]: false,
+			["close-on-escape"]: true
 		}}
 	>
 		{args => {
@@ -91,6 +99,8 @@ be used to show short-lived information such as menus, options, additional actio
 					.placement=${args.placement}
 					@overlay-click=${handlePopover}
 					target="#popoverTarget"
+					?stretch-height=${args["stretch-height"]}
+					?close-on-escape=${args["close-on-escape"]}
 				>
 					<f-div state="tertiary" padding="medium">
 						<f-text>
@@ -478,6 +488,8 @@ popover and if the max height is attained, the body contents will scroll.
 			const [openFlag, setOpenFlag] = useState(false);
 			const [openFlagForOverlay, setOpenFlagForOverlay] = useState(false);
 			const [openFlagForNoOverlay, setOpenFlagForNoOverlay] = useState(false);
+			const [openHeightStretch, setOpenHeightStretch] = useState(false);
+			const [openEscape, setOpenEscape] = useState(false);
 			return html` <f-div height="hug-content" gap="large" direction="column">
 				<f-div height="hug-content" gap="large" direction="row">
 					<f-popover
@@ -549,6 +561,52 @@ popover and if the max height is attained, the body contents will scroll.
 						id="openFlagForNoOverlay2"
 						label="overlay='false'"
 						@click=${() => setOpenFlagForNoOverlay(!openFlagForNoOverlay)}
+					>
+					</f-button>
+				</f-div>
+				<f-div gap="medium">
+					<f-popover
+						?open=${openHeightStretch}
+						.overlay=${true}
+						size="stretch"
+						target="#popover-height-stretch"
+						@overlay-click=${() => setOpenHeightStretch(!openHeightStretch)}
+						?stretch-height=${true}
+					>
+						<f-div state="tertiary" padding="medium">
+							<f-text>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+								mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+								tristique.
+							</f-text>
+						</f-div>
+					</f-popover>
+					<f-button
+						id="popover-height-stretch"
+						label="stretch-height='true'"
+						@click=${() => setOpenHeightStretch(!openHeightStretch)}
+					>
+					</f-button>
+					<f-popover
+						?open=${openEscape}
+						.overlay=${true}
+						size="stretch"
+						target="#popover-height-stretch"
+						@overlay-click=${() => setOpenEscape(!openEscape)}
+						close-on-escape=${false}
+					>
+						<f-div state="tertiary" padding="medium">
+							<f-text>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+								mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+								tristique.
+							</f-text>
+						</f-div>
+					</f-popover>
+					<f-button
+						id="popover-height-stretch"
+						label="close-on-escape='false'"
+						@click=${() => setOpenEscape(!openEscape)}
 					>
 					</f-button>
 				</f-div>

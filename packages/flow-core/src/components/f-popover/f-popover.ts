@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { html, LitElement, unsafeCSS } from "lit";
+import { html, LitElement, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-popover.scss";
@@ -73,6 +73,18 @@ export class FPopover extends FRoot {
 	 */
 	@property({ type: Boolean, reflect: true })
 	overlay?: boolean = true;
+
+	/**
+	 * @attribute display overlay?
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "stretch-height" })
+	stretchHeight?: boolean = false;
+
+	/**
+	 * @attribute display overlay?
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "close-on-escape" })
+	closeOnEscape?: boolean = true;
 
 	/**
 	 * @attribute query selector of target
@@ -181,7 +193,7 @@ export class FPopover extends FRoot {
 		this.addEventListener("click", this.dispatchEsc);
 	}
 	dispatchEsc() {
-		if (this.isEscapeClicked) {
+		if (this.isEscapeClicked && this.closeOnEscape) {
 			const event = new CustomEvent("esc", {
 				detail: {
 					message: "Popover close on escape key"
@@ -231,5 +243,22 @@ export class FPopover extends FRoot {
 			}
 		}
 		return ``;
+	}
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.updated(changedProperties);
+		/**
+		 * method that is executed before every repaint
+		 */
+		requestAnimationFrame(() => {
+			if (this.stretchHeight) {
+				const topPosition = Number(this.style.top.replace("px", "")) + 16;
+				this.style.height = `calc(100vh - ${topPosition}px)`;
+				this.style.maxHeight = `calc(100vh - ${topPosition}px)`;
+			} else {
+				this.style.removeProperty("height");
+				this.style.removeProperty("max-height");
+			}
+		});
 	}
 }

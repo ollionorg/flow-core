@@ -873,258 +873,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-breadcrumb/f-breadcrumb.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FBreadcrumb",
-          "members": [
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"medium\" | \"small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "crumbs",
-              "type": {
-                "text": "FBreadcrumbs"
-              },
-              "attribute": "crumbs"
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "popOverElement",
-              "type": {
-                "text": "FPopover"
-              },
-              "description": "popover element reference"
-            },
-            {
-              "kind": "field",
-              "name": "breadCrumbPopover",
-              "type": {
-                "text": "FDiv"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "initialCrumbs",
-              "type": {
-                "text": "FBreadCrumbsProp"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "middlePopoverCrumbs",
-              "type": {
-                "text": "FBreadcrumbs"
-              },
-              "default": "[]"
-            },
-            {
-              "kind": "field",
-              "name": "endingCrumbs",
-              "type": {
-                "text": "FBreadcrumbs"
-              },
-              "default": "[]"
-            },
-            {
-              "kind": "field",
-              "name": "textSize",
-              "description": "text size computed",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "isCurrentCrumb",
-              "parameters": [
-                {
-                  "name": "index",
-                  "type": {
-                    "text": "number"
-                  },
-                  "description": "index number of crumbs"
-                },
-                {
-                  "name": "array",
-                  "type": {
-                    "text": "FBreadcrumbs"
-                  },
-                  "description": "crumbs array"
-                }
-              ],
-              "return": {
-                "type": {
-                  "text": ""
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "createSeperateCrumbs",
-              "description": "create seperate crumbs when crumbs length is greater than 4"
-            },
-            {
-              "kind": "method",
-              "name": "crumbLoop",
-              "parameters": [
-                {
-                  "name": "crumb",
-                  "type": {
-                    "text": "FBreadCrumbsProp"
-                  }
-                },
-                {
-                  "name": "index",
-                  "type": {
-                    "text": "number"
-                  }
-                },
-                {
-                  "name": "array",
-                  "type": {
-                    "text": "FBreadcrumbs"
-                  }
-                }
-              ],
-              "return": {
-                "type": {
-                  "text": ""
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "togglePopover",
-              "parameters": [
-                {
-                  "name": "action",
-                  "type": {
-                    "text": "\"open\" | \"close\""
-                  },
-                  "description": "action whether to close or open popover"
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleDispatchEvent",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  },
-                  "description": "event"
-                },
-                {
-                  "name": "value",
-                  "type": {
-                    "text": "FBreadCrumbsProp"
-                  },
-                  "description": "crumb value"
-                }
-              ],
-              "description": "dispatch click event"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "size",
-              "type": {
-                "text": "\"medium\" | \"small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "crumbs",
-              "type": {
-                "text": "FBreadcrumbs"
-              },
-              "fieldName": "crumbs"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FBreadcrumb",
-          "declaration": {
-            "name": "FBreadcrumb",
-            "module": "src/components/f-breadcrumb/f-breadcrumb.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-button/f-button.ts",
       "declarations": [
         {
@@ -1429,6 +1177,258 @@
           "declaration": {
             "name": "FButton",
             "module": "src/components/f-button/f-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-breadcrumb/f-breadcrumb.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FBreadcrumb",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "crumbs",
+              "type": {
+                "text": "FBreadcrumbs"
+              },
+              "attribute": "crumbs"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "popOverElement",
+              "type": {
+                "text": "FPopover"
+              },
+              "description": "popover element reference"
+            },
+            {
+              "kind": "field",
+              "name": "breadCrumbPopover",
+              "type": {
+                "text": "FDiv"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "initialCrumbs",
+              "type": {
+                "text": "FBreadCrumbsProp"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "middlePopoverCrumbs",
+              "type": {
+                "text": "FBreadcrumbs"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "endingCrumbs",
+              "type": {
+                "text": "FBreadcrumbs"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "textSize",
+              "description": "text size computed",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "isCurrentCrumb",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  },
+                  "description": "index number of crumbs"
+                },
+                {
+                  "name": "array",
+                  "type": {
+                    "text": "FBreadcrumbs"
+                  },
+                  "description": "crumbs array"
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": ""
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "createSeperateCrumbs",
+              "description": "create seperate crumbs when crumbs length is greater than 4"
+            },
+            {
+              "kind": "method",
+              "name": "crumbLoop",
+              "parameters": [
+                {
+                  "name": "crumb",
+                  "type": {
+                    "text": "FBreadCrumbsProp"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "array",
+                  "type": {
+                    "text": "FBreadcrumbs"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": ""
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "togglePopover",
+              "parameters": [
+                {
+                  "name": "action",
+                  "type": {
+                    "text": "\"open\" | \"close\""
+                  },
+                  "description": "action whether to close or open popover"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleDispatchEvent",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  },
+                  "description": "event"
+                },
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "FBreadCrumbsProp"
+                  },
+                  "description": "crumb value"
+                }
+              ],
+              "description": "dispatch click event"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "\"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "crumbs",
+              "type": {
+                "text": "FBreadcrumbs"
+              },
+              "fieldName": "crumbs"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FBreadcrumb",
+          "declaration": {
+            "name": "FBreadcrumb",
+            "module": "src/components/f-breadcrumb/f-breadcrumb.ts"
           }
         }
       ]
@@ -5759,203 +5759,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-pictogram/f-pictogram.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FPictogram",
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "FPictogramVariant | undefined"
-              },
-              "default": "\"squircle\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "source",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "source",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "FPictogramSize | undefined"
-              },
-              "default": "\"large\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FPictogramState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "loading",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "clickable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "clickable",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "renderedHtml",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "sourceSize"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "FPictogramVariant | undefined"
-              },
-              "default": "\"squircle\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "source",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "source"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "FPictogramSize | undefined"
-              },
-              "default": "\"large\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FPictogramState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "loading"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "clickable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "clickable"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FPictogram",
-          "declaration": {
-            "name": "FPictogram",
-            "module": "src/components/f-pictogram/f-pictogram.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-popover/f-popover.ts",
       "declarations": [
         {
@@ -9012,6 +8815,106 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-tab-content/f-tab-content.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTabContent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "transition",
+              "type": {
+                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "transition",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "200",
+              "attribute": "duration",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "transition",
+              "type": {
+                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "transition"
+            },
+            {
+              "name": "duration",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "200",
+              "fieldName": "duration"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTabContent",
+          "declaration": {
+            "name": "FTabContent",
+            "module": "src/components/f-tab-content/f-tab-content.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-tab/f-tab.ts",
       "declarations": [
         {
@@ -9216,32 +9119,90 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-tab-content/f-tab-content.ts",
+      "path": "src/components/f-pictogram/f-pictogram.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "FTabContent",
+          "name": "FPictogram",
           "members": [
             {
               "kind": "field",
-              "name": "transition",
+              "name": "variant",
               "type": {
-                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
+                "text": "FPictogramVariant | undefined"
               },
-              "default": "\"none\"",
-              "attribute": "transition",
+              "default": "\"squircle\"",
+              "attribute": "variant",
               "reflects": true
             },
             {
               "kind": "field",
-              "name": "duration",
+              "name": "source",
               "type": {
-                "text": "number | undefined"
+                "text": "string"
               },
-              "default": "200",
-              "attribute": "duration",
+              "attribute": "source",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "FPictogramSize | undefined"
+              },
+              "default": "\"large\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FPictogramState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "clickable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "renderedHtml",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "sourceSize"
             },
             {
               "kind": "field",
@@ -9270,20 +9231,59 @@
           ],
           "attributes": [
             {
-              "name": "transition",
+              "name": "variant",
               "type": {
-                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
+                "text": "FPictogramVariant | undefined"
               },
-              "default": "\"none\"",
-              "fieldName": "transition"
+              "default": "\"squircle\"",
+              "fieldName": "variant"
             },
             {
-              "name": "duration",
+              "name": "source",
               "type": {
-                "text": "number | undefined"
+                "text": "string"
               },
-              "default": "200",
-              "fieldName": "duration"
+              "fieldName": "source"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "FPictogramSize | undefined"
+              },
+              "default": "\"large\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FPictogramState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "clickable"
             },
             {
               "name": "tooltip",
@@ -9306,56 +9306,23 @@
       "exports": [
         {
           "kind": "js",
-          "name": "FTabContent",
+          "name": "FPictogram",
           "declaration": {
-            "name": "FTabContent",
-            "module": "src/components/f-tab-content/f-tab-content.ts"
+            "name": "FPictogram",
+            "module": "src/components/f-pictogram/f-pictogram.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-tab-node/f-tab-node.ts",
+      "path": "src/components/f-template/f-template.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "FTabNode",
+          "name": "FTemplate",
           "members": [
-            {
-              "kind": "field",
-              "name": "width",
-              "type": {
-                "text": "FTabNodeWidthProp | undefined"
-              },
-              "default": "\"hug-content\""
-            },
-            {
-              "kind": "field",
-              "name": "contentId",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "content-id",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "active",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "active",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "tabWidth",
-              "description": "tab-width",
-              "readonly": true
-            },
             {
               "kind": "field",
               "name": "tooltipElement",
@@ -9381,22 +9348,11 @@
               }
             }
           ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
           "attributes": [
-            {
-              "name": "content-id",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "contentId"
-            },
-            {
-              "name": "active",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "active"
-            },
             {
               "name": "tooltip",
               "type": {
@@ -9408,20 +9364,16 @@
                 "module": "src/mixins/components/f-root/f-root.ts"
               }
             }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
+          ]
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "FTabNode",
+          "name": "FTemplate",
           "declaration": {
-            "name": "FTabNode",
-            "module": "src/components/f-tab-node/f-tab-node.ts"
+            "name": "FTemplate",
+            "module": "src/components/f-template/f-template.ts"
           }
         }
       ]
@@ -9707,13 +9659,46 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-template/f-template.ts",
+      "path": "src/components/f-tab-node/f-tab-node.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "FTemplate",
+          "name": "FTabNode",
           "members": [
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "FTabNodeWidthProp | undefined"
+              },
+              "default": "\"hug-content\""
+            },
+            {
+              "kind": "field",
+              "name": "contentId",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "content-id",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tabWidth",
+              "description": "tab-width",
+              "readonly": true
+            },
             {
               "kind": "field",
               "name": "tooltipElement",
@@ -9739,11 +9724,22 @@
               }
             }
           ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
           "attributes": [
+            {
+              "name": "content-id",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "contentId"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "active"
+            },
             {
               "name": "tooltip",
               "type": {
@@ -9755,16 +9751,20 @@
                 "module": "src/mixins/components/f-root/f-root.ts"
               }
             }
-          ]
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "FTemplate",
+          "name": "FTabNode",
           "declaration": {
-            "name": "FTemplate",
-            "module": "src/components/f-template/f-template.ts"
+            "name": "FTabNode",
+            "module": "src/components/f-tab-node/f-tab-node.ts"
           }
         }
       ]
@@ -10585,88 +10585,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-tooltip/f-tooltip.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTooltip",
-          "members": [
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "local attribute for opem/close of tooltip"
-            },
-            {
-              "kind": "field",
-              "name": "placement",
-              "type": {
-                "text": "FTooltipPlacement | undefined"
-              },
-              "default": "\"auto\"",
-              "attribute": "placement",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "closable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "closable",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "target",
-              "type": {
-                "text": "string | HTMLElement"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "placement",
-              "type": {
-                "text": "FTooltipPlacement | undefined"
-              },
-              "default": "\"auto\"",
-              "fieldName": "placement"
-            },
-            {
-              "name": "closable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "closable"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTooltip",
-          "declaration": {
-            "name": "FTooltip",
-            "module": "src/components/f-tooltip/f-tooltip.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/mixins/svg/checked-mark.ts",
       "declarations": [],
       "exports": [
@@ -10754,6 +10672,88 @@
           "declaration": {
             "name": "ConfigUtil",
             "module": "src/modules/config/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-tooltip/f-tooltip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTooltip",
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "local attribute for opem/close of tooltip"
+            },
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "FTooltipPlacement | undefined"
+              },
+              "default": "\"auto\"",
+              "attribute": "placement",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "closable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "closable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": {
+                "text": "string | HTMLElement"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "placement",
+              "type": {
+                "text": "FTooltipPlacement | undefined"
+              },
+              "default": "\"auto\"",
+              "fieldName": "placement"
+            },
+            {
+              "name": "closable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "closable"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTooltip",
+          "declaration": {
+            "name": "FTooltip",
+            "module": "src/components/f-tooltip/f-tooltip.ts"
           }
         }
       ]

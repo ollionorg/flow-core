@@ -8,7 +8,7 @@
 
 ### Improvements
 
-- `f-popover` : `close-on-escape` and `stretch-height` boolean flags props added.
+- `f-popover` : `close-on-escape` and `auto-height` boolean flags props added.
 
 ## [1.16.1] - 2023-06-08
 

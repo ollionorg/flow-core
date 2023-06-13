@@ -138,14 +138,13 @@ export class FText extends FRoot {
 		e.stopPropagation();
 		const event = new CustomEvent("input", {
 			detail: {
-				value: this.innerTextValue.innerText
+				value: this.innerTextValue.textContent
 			},
 			bubbles: true,
 			composed: true
 		});
 
 		this.dispatchEvent(event);
-		this.innerText = this.innerTextValue.innerText;
 	}
 
 	handleEdit() {
@@ -242,9 +241,7 @@ export class FText extends FRoot {
 					${this.isTextInput ? textareaSnippet : editableSnippet}
 				</div>
 			`;
-		}
-
-		if (this.highlightedText) {
+		} else if (this.highlightedText) {
 			return highlightSnippet;
 		}
 

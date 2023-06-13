@@ -3,6 +3,18 @@
 
 # Change Log
 
+## [1.0.1] - 2023-06-13
+
+### Improvements
+
+- `f-table-schema` : `data` property options doc added.
+- More stories added to understand properties and events of `f-table-schema`.
+
+### Bug Fixes
+
+- `f-table-schema` : alignment fixed when used inside `f-div`.
+- `f-table-schema` : background color fixed when variant="stripped" with sticy column combination.
+
 ## [1.0.0] - 2023-06-08
 
 ### Improvements

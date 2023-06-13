@@ -148,8 +148,8 @@ export class FTableSchema extends FRoot {
 						return html`<f-tcell
 							.selected=${selected}
 							.width=${width}
-							sticky-left=${ifDefined(sticky)}
-							sticky-top=${ifDefined(this.stickyHeader)}
+							?sticky-left=${ifDefined(sticky)}
+							?sticky-top=${ifDefined(this.stickyHeader)}
 							@selected-column=${this.handleColumnSelection}
 						>
 							<f-div gap="small" width="fit-content">
@@ -199,7 +199,7 @@ export class FTableSchema extends FRoot {
 						.selected=${selected}
 						.width=${width}
 						.actions=${actions}
-						sticky-left=${ifDefined(sticky)}
+						?sticky-left=${ifDefined(sticky)}
 						><f-text inline .highlight=${this.searchTerm}
 							>${this.getCellTemplate(row.data[columnHeader[0]])}</f-text
 						></f-tcell
@@ -325,7 +325,7 @@ export class FTableSchema extends FRoot {
 				>
 					${this.header} ${this.rowsHtml}
 				</f-table>
-				<f-div class="load-more" style="display:none" align="middle-right" padding="medium none">
+				<f-div class="load-more" style="display:none" align="middle-left" padding="medium none">
 					<f-button @click=${this.paginate} label="load more" category="outline"></f-button>
 				</f-div>
 			</div>
@@ -344,7 +344,7 @@ export class FTableSchema extends FRoot {
 				setTimeout(() => {
 					this.nextEmitted = true;
 					const toggle = new CustomEvent("next", {
-						detail: {},
+						detail: { offset: this.offset, rowsPerPage: this.rowsPerPage },
 						bubbles: true,
 						composed: true
 					});

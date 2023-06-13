@@ -105,7 +105,7 @@ async function run() {
 
 run();
 
-// 404 error state --start
+// 404 error state --start--
 const el = document.body.querySelector(".sb-errordisplay.sb-wrapper");
 const errorMessage = el.querySelector("#error-message.sb-heading");
 const codeMessage = el.querySelector(".sb-errordisplay_code");
@@ -144,4 +144,4 @@ if (el) {
 function changePath() {
 	changeRoute("ft-time-schedule-popover", "/story/foundation-introduction-about--page");
 }
-//404 error state --end
+//404 error state --end--

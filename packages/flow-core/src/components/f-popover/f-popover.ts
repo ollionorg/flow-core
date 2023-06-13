@@ -75,13 +75,13 @@ export class FPopover extends FRoot {
 	overlay?: boolean = true;
 
 	/**
-	 * @attribute display overlay?
+	 * @attribute stretch the height to auto
 	 */
 	@property({ type: Boolean, reflect: true, attribute: "auto-height" })
 	autoHeight?: boolean = false;
 
 	/**
-	 * @attribute display overlay?
+	 * @attribute conditional closing popover on escape key press
 	 */
 	@property({ type: Boolean, reflect: true, attribute: "close-on-escape" })
 	closeOnEscape?: boolean = true;

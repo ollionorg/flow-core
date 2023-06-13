@@ -122,11 +122,6 @@ const errorSnippet = `<f-div direction="column" align="middle-center" gap="large
 				>Couldn't find story matching '${url_id}'</f-text
 			>
 		</f-div>
-			<f-div direction="column" gap="small" align="middle-left" width="400px" height="hug-content">
-	<f-text  variant="para" size="small" weight="regular" state="secondary"><li>Are you sure a story with that id exists?</li></f-text>
-	<f-text  variant="para" size="small" weight="regular" state="secondary"><li>Please check your stories field of your main.js config.</li></f-text>
-	<f-text  variant="para" size="small" weight="regular" state="secondary"><li>Also check the browser console and terminal for errors.</li></f-text>
-	</f-div>
 		<f-div align="middle-center">
 			<f-button
 			id="home-button"

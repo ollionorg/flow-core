@@ -105,6 +105,9 @@ f-text {
 		flex: 1 1;
 		display: block;
 	}
+	&[editable] {
+		width: -webkit-fill-available;
+	}
 	white-space: normal;
 	word-break: break-word;
 	max-width: 100%;
@@ -201,9 +204,74 @@ f-div[direction="row"] {
 }
 
 :host {
+	@include base();
 	mark {
 		background-color: transparent;
 		color: var(--color-highlight-default);
 		display: contents;
+	}
+	.f-text-editable {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+	}
+	.pseudo-edit-text {
+		display: none;
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+	.pseudo-submit-text {
+		position: absolute;
+		top: 5px;
+		right: 6px;
+	}
+	.non-editable-slot {
+		width: 95%;
+	}
+	.textarea {
+		display: block;
+		width: 100%;
+		overflow: hidden;
+		resize: both;
+		min-height: 15px;
+		// line-height: 20px;
+		border: 1px solid var(--color-border-default);
+		border-radius: 4px;
+		font-family: inherit;
+		font-size: inherit;
+		padding: 3px 6px;
+		resize: none;
+		.slot-text {
+			width: 95%;
+		}
+
+		@each $variant, $valmap in $variants {
+			&[variant="#{$variant}"] {
+				@each $size, $sizemap in $valmap {
+					&[size="#{$size}"] {
+						font-size: map-get($sizemap, "fontSize");
+						line-height: map-get($sizemap, "lineHeight");
+					}
+				}
+			}
+		}
+
+		@each $weight, $value in $weights {
+			&[weight="#{$weight}"] {
+				font-weight: $value;
+			}
+		}
+		&:focus {
+			outline: none;
+			border: 1px solid var(--color-primary-default);
+		}
+	}
+
+	.textarea[contenteditable]:empty::before {
+		@include base();
+		font-size: 12px;
+		content: "Enter Your Text here";
+		color: var(--color-text-secondary);
 	}
 }

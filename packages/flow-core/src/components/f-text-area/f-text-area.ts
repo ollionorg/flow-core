@@ -96,15 +96,33 @@ export class FTextArea extends FRoot {
 	 */
 	handleInput(e: InputEvent) {
 		e.stopPropagation();
-		const event = new CustomEvent<FTextAreaCustomEvent>("input", {
-			detail: {
-				value: (e.target as HTMLInputElement)?.value
-			},
-			bubbles: true,
-			composed: true
-		});
-		this.value = (e.target as HTMLInputElement)?.value;
-		this.dispatchEvent(event);
+		if (this.maskValue) {
+			let currentvalue = this.value ?? "";
+			if (e.data === null && e.inputType === "insertLineBreak") {
+				currentvalue += "\n";
+			} else if (e.data !== null) {
+				currentvalue += e.data;
+			}
+			const event = new CustomEvent<FTextAreaCustomEvent>("input", {
+				detail: {
+					value: currentvalue
+				},
+				bubbles: true,
+				composed: true
+			});
+			this.value = currentvalue;
+			this.dispatchEvent(event);
+		} else {
+			const event = new CustomEvent<FTextAreaCustomEvent>("input", {
+				detail: {
+					value: (e.target as HTMLInputElement)?.value
+				},
+				bubbles: true,
+				composed: true
+			});
+			this.value = (e.target as HTMLInputElement)?.value;
+			this.dispatchEvent(event);
+		}
 	}
 
 	/**
@@ -169,12 +187,7 @@ export class FTextArea extends FRoot {
 							: null}
 					</f-div>
 				</f-div>
-				<div
-					class="f-text-area-wrapper"
-					data-dots=${this.getDots()}
-					?mask-value=${this.maskValue}
-					category=${this.category}
-				>
+				<div class="f-text-area-wrapper">
 					<textarea
 						class="f-text-area"
 						data-qa-id=${this.getAttribute("data-qa-element-id")}
@@ -188,8 +201,9 @@ export class FTextArea extends FRoot {
 						?resizable=${this.resizable}
 						?readonly=${this.readOnly}
 						?mask-value=${this.maskValue}
+						spellcheck=${this.maskValue ? "false" : "true"}
 						@input=${this.handleInput}
-						.value=${this.value ?? ""}
+						.value=${this.maskValue ? this.getDots() : this.value ?? ""}
 					></textarea>
 					${this.clear && this.value
 						? html` <f-icon
@@ -207,7 +221,7 @@ export class FTextArea extends FRoot {
 	}
 
 	getDots() {
-		return this.value?.replace(/./g, "·");
+		return this.value?.replace(/[^\n]/g, "·");
 	}
 }
 

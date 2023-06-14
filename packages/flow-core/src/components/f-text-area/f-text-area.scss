@@ -64,33 +64,6 @@ $states: (
 :host {
 	.f-text-area-wrapper {
 		position: relative;
-		&[mask-value] {
-			&::before {
-				content: attr(data-dots);
-				padding: var(--form-textarea-padding-tp-btm) var(--form-textarea-padding-lt-rt);
-				position: absolute;
-				top: 0px;
-				left: 0px;
-				right: 0px;
-				bottom: 0px;
-				pointer-events: none;
-				border-radius: 4px;
-				font-size: 24px;
-			}
-
-			// @each $category, $value in $categories {
-			// 	&[category="#{$category}"] {
-			// 		&::before {
-			// 			background-color: map.get($value, "background");
-			// 		}
-			// 		&:hover {
-			// 			&::before {
-			// 				background-color: map.get($value, "hover") !important;
-			// 			}
-			// 		}
-			// 	}
-			// }
-		}
 		width: 100%;
 		.f-text-area-maxlength {
 			position: absolute;
@@ -163,9 +136,6 @@ $states: (
 						}
 					}
 				}
-			}
-			&[mask-value] {
-				color: transparent;
 			}
 		}
 		.f-text-area-clear-icon {

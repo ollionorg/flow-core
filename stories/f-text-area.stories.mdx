@@ -58,6 +58,9 @@ f-text-area allows the user to input a longer amount of text than f-input. It is
 			["read-only"]: {
 				control: "boolean"
 			},
+			["mask-value"]: {
+				control: "boolean"
+			},
 			clear: {
 				control: "boolean"
 			},
@@ -80,6 +83,7 @@ f-text-area allows the user to input a longer amount of text than f-input. It is
 			resizable: false,
 			disabled: false,
 			["read-only"]: false,
+			["mask-value"]: false,
 			clear: false
 		}}
 	>
@@ -103,6 +107,7 @@ f-text-area allows the user to input a longer amount of text than f-input. It is
 							max-length=${args["max-length"]}
 							?disabled=${args.disabled}
 							?read-only=${args["read-only"]}
+							?mask-value=${args["mask-value"]}
 							rows=${args.rows}
 							mask-value
 						>
@@ -483,42 +488,27 @@ Defines the no. of rows to display. By default f-text-area provides 3 rows. Afte
 <Canvas>
 	<Story name="Flags">
 		{args => {
-			const [value, setValue] = useState("");
+			const [value, setValue] = useState("some text");
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
 			return html`
 				<f-div width="100%" align="top-center" padding="large" gap="medium">
-					${[0, 1, 2, 3].map(
+					${["Resizable", "Disabled", "Clear Icon on Type", "Readonly", "Mask Value"].map(
 						item => html`<f-div>
           <f-text-area
             value=${value}
             placeholder="Write here"
             @input=${handleValue}
             size="medium"
-            ?resizable=${item === 0 ? true : false}
-            ?disabled=${item === 1 ? true : false}
-            ?clear=${item === 2 ? true : false}
-            ?read-only=${item === 3 ? true : false}
+            ?resizable=${item === "Resizable" ? true : false}
+            ?disabled=${item === "Disabled" ? true : false}
+            ?clear=${item === "Clear Icon on Type" ? true : false}
+            ?read-only=${item === "Readonly" ? true : false}
+			?mask-value=${item === "Mask Value" ? true : false}
           >
-            <f-div slot="label" padding="none" gap="none">${
-							item === 0
-								? "Resizable"
-								: item === 1
-								? "Disabled"
-								: item === 2
-								? "Clear Icon on Type"
-								: "Readonly"
-						}</f-div>
-            <f-div slot="description" padding="none" gap="none">This is a ${
-							item === 0
-								? "Resizable"
-								: item === 1
-								? "Disabled"
-								: item === 2
-								? "Clear Icon on Type"
-								: "Readonly"
-						} Flag</f-div>
+            <f-div slot="label" padding="none" gap="none">${item}</f-div>
+            <f-div slot="description" padding="none" gap="none">This is a ${item} Flag</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-text-area></f-div
         ></f-div
@@ -567,6 +557,13 @@ Defines the no. of rows to display. By default f-text-area provides 3 rows. Afte
 		<tr>
 			<td>read-only</td>
 			<td>Only Text could be read, can't be edited</td>
+			<td>
+				<code>false</code>
+			</td>
+		</tr>
+		<tr>
+			<td>mask-value</td>
+			<td>text will be masked with dots</td>
 			<td>
 				<code>false</code>
 			</td>

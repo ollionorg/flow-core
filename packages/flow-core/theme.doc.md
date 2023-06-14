@@ -13,7 +13,8 @@ Follow these steps to create flow theme in your project.
 
 5. If your project does not support SCSS files, use the Sass [CLI](https://sass-lang.com/guide) to compile and generate a CSS file.
 
-6. Once you have successfully added the theme file to your project, use the following API to apply the theme.
+6. Once you have successfully added the theme file to your project, use the following API to apply the theme to your startup file.In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
+
 ```javascript
 
 import { ConfigUtil } from "@cldcvr/flow-core";

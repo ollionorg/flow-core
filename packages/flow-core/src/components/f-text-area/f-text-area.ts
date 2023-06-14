@@ -86,6 +86,12 @@ export class FTextArea extends FRoot {
 	readOnly?: boolean = false;
 
 	/**
+	 * @attribute mask value of text area
+	 */
+	@property({ reflect: true, type: Boolean, attribute: "mask-value" })
+	maskValue?: boolean = false;
+
+	/**
 	 * emit event
 	 */
 	handleInput(e: InputEvent) {
@@ -163,7 +169,12 @@ export class FTextArea extends FRoot {
 							: null}
 					</f-div>
 				</f-div>
-				<div class="f-text-area-wrapper">
+				<div
+					class="f-text-area-wrapper"
+					data-dots=${this.getDots()}
+					?mask-value=${this.maskValue}
+					category=${this.category}
+				>
 					<textarea
 						class="f-text-area"
 						data-qa-id=${this.getAttribute("data-qa-element-id")}
@@ -176,6 +187,7 @@ export class FTextArea extends FRoot {
 						maxlength=${this.maxLength}
 						?resizable=${this.resizable}
 						?readonly=${this.readOnly}
+						?mask-value=${this.maskValue}
 						@input=${this.handleInput}
 						.value=${this.value ?? ""}
 					></textarea>
@@ -192,6 +204,10 @@ export class FTextArea extends FRoot {
 				<slot name="help"></slot>
 			</f-div>
 		`;
+	}
+
+	getDots() {
+		return this.value?.replace(/./g, "·");
 	}
 }
 

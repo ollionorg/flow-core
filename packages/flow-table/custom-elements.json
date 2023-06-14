@@ -1,980 +1,980 @@
 {
-  "schemaVersion": "1.0.0",
-  "readme": "",
-  "modules": [
-    {
-      "kind": "javascript-module",
-      "path": "src/index.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "*",
-          "declaration": {
-            "name": "*",
-            "package": "\"./components/f-table/f-table\""
-          }
-        },
-        {
-          "kind": "js",
-          "name": "*",
-          "declaration": {
-            "name": "*",
-            "package": "\"./components/f-trow/f-trow\""
-          }
-        },
-        {
-          "kind": "js",
-          "name": "*",
-          "declaration": {
-            "name": "*",
-            "package": "\"./components/f-tcell/f-tcell\""
-          }
-        },
-        {
-          "kind": "js",
-          "name": "*",
-          "declaration": {
-            "name": "*",
-            "package": "\"./components/f-table-schema/f-table-schema\""
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/shims.d.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "content",
-          "type": {
-            "text": "Record<string, string>"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "content",
-            "module": "src/shims.d.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "content",
-            "module": "src/shims.d.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-table/f-table.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTable",
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "FTableVariant | undefined"
-              },
-              "default": "\"stripped\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "FTableSize | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "selectable",
-              "type": {
-                "text": "FTableSelectable | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "selectable",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "highlightSelected",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "highlight-selected",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "highlightHover",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "highlight-hover",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "propogateProps"
-            },
-            {
-              "kind": "method",
-              "name": "updateGridTemplateColumns"
-            },
-            {
-              "kind": "method",
-              "name": "applySelectable",
-              "description": "apply checkbox or radio based on selection property"
-            },
-            {
-              "kind": "method",
-              "name": "handleHeaderRowSelection",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ],
-              "description": "if checkbox from header got clicked"
-            },
-            {
-              "kind": "method",
-              "name": "handleRowSelection",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ],
-              "description": "if checkbox or radio clicked in row"
-            },
-            {
-              "kind": "method",
-              "name": "dispatchSelectedRowEvent"
-            },
-            {
-              "kind": "method",
-              "name": "updateRadioChecks",
-              "parameters": [
-                {
-                  "name": "element",
-                  "type": {
-                    "text": "HTMLElement"
-                  }
-                }
-              ],
-              "description": "only one radio should be selected"
-            },
-            {
-              "kind": "method",
-              "name": "updateHeaderSelectionCheckboxState",
-              "description": "update header checkbox based on rest of the selection"
-            },
-            {
-              "kind": "method",
-              "name": "toggleColumnHighlight",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "toggleColumnSelected",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "FTableVariant | undefined"
-              },
-              "default": "\"stripped\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "FTableSize | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "selectable",
-              "type": {
-                "text": "FTableSelectable | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "selectable"
-            },
-            {
-              "name": "highlight-selected",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "highlightSelected"
-            },
-            {
-              "name": "highlight-hover",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "highlightHover"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTable",
-          "declaration": {
-            "name": "FTable",
-            "module": "src/components/f-table/f-table.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-table-schema/f-table-schema.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTableSchema",
-          "members": [
-            {
-              "kind": "field",
-              "name": "data",
-              "type": {
-                "text": "FTableSchemaData"
-              },
-              "attribute": "data"
-            },
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "FTableVariant | undefined"
-              },
-              "default": "\"stripped\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "sortBy",
-              "type": {
-                "text": "string | undefined"
-              },
-              "description": "header key used to specify sort attribute",
-              "attribute": "sort-by",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "sortOrder",
-              "type": {
-                "text": "\"asc\" | \"desc\" | undefined"
-              },
-              "default": "\"asc\"",
-              "description": "sort order for `sort-by` attribute",
-              "attribute": "sort-order",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "rowsPerPage",
-              "type": {
-                "text": "number | undefined"
-              },
-              "default": "50",
-              "description": "max rows per page , after that it will paginate on scroll",
-              "attribute": "rows-per-page",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "FTableSize | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "selectable",
-              "type": {
-                "text": "FTableSelectable | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "selectable",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "highlightSelected",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "highlight-selected",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "highlightHover",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "highlight-hover",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "stickyHeader",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "sticky-header",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "searchTerm",
-              "type": {
-                "text": "string | null"
-              },
-              "default": "null",
-              "description": "filter rows based on search term",
-              "attribute": "search-term",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "showSearchBar",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true",
-              "description": "show search input box on top",
-              "attribute": "show-search-bar",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "offset",
-              "type": {
-                "text": "number"
-              },
-              "default": "0"
-            },
-            {
-              "kind": "field",
-              "name": "loadMoreButton",
-              "type": {
-                "text": "FDiv | undefined"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "nextEmitted",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "max"
-            },
-            {
-              "kind": "field",
-              "name": "header"
-            },
-            {
-              "kind": "field",
-              "name": "rowsHtml"
-            },
-            {
-              "kind": "field",
-              "name": "filteredRows"
-            },
-            {
-              "kind": "field",
-              "name": "searchedRows"
-            },
-            {
-              "kind": "field",
-              "name": "sortedRows"
-            },
-            {
-              "kind": "field",
-              "name": "paginatedRows"
-            },
-            {
-              "kind": "method",
-              "name": "search",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "paginate"
-            },
-            {
-              "kind": "method",
-              "name": "setSortBy",
-              "parameters": [
-                {
-                  "name": "columnKey",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "getSortIcon",
-              "parameters": [
-                {
-                  "name": "columnKey",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleRowSelection",
-              "parameters": [
-                {
-                  "name": "row",
-                  "type": {
-                    "text": "FTableSchemaDataRow"
-                  }
-                },
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "toggleRowDetails",
-              "parameters": [
-                {
-                  "name": "row",
-                  "type": {
-                    "text": "FTableSchemaDataRow"
-                  }
-                },
-                {
-                  "name": "_event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "getCellTemplate",
-              "parameters": [
-                {
-                  "name": "cell",
-                  "type": {
-                    "text": "FTableSchemaCell"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleColumnSelection",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "getHeaderCellTemplate",
-              "parameters": [
-                {
-                  "name": "cell",
-                  "type": {
-                    "text": "FTableSchemaHeaderCell"
-                  }
-                }
-              ]
-            }
-          ],
-          "attributes": [
-            {
-              "name": "data",
-              "type": {
-                "text": "FTableSchemaData"
-              },
-              "fieldName": "data"
-            },
-            {
-              "name": "variant",
-              "type": {
-                "text": "FTableVariant | undefined"
-              },
-              "default": "\"stripped\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "sort-by",
-              "type": {
-                "text": "string | undefined"
-              },
-              "description": "header key used to specify sort attribute",
-              "fieldName": "sortBy"
-            },
-            {
-              "name": "sort-order",
-              "type": {
-                "text": "\"asc\" | \"desc\" | undefined"
-              },
-              "default": "\"asc\"",
-              "description": "sort order for `sort-by` attribute",
-              "fieldName": "sortOrder"
-            },
-            {
-              "name": "rows-per-page",
-              "type": {
-                "text": "number | undefined"
-              },
-              "default": "50",
-              "description": "max rows per page , after that it will paginate on scroll",
-              "fieldName": "rowsPerPage"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "FTableSize | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "selectable",
-              "type": {
-                "text": "FTableSelectable | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "selectable"
-            },
-            {
-              "name": "highlight-selected",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "highlightSelected"
-            },
-            {
-              "name": "highlight-hover",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "highlightHover"
-            },
-            {
-              "name": "sticky-header",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "stickyHeader"
-            },
-            {
-              "name": "search-term",
-              "type": {
-                "text": "string | null"
-              },
-              "default": "null",
-              "description": "filter rows based on search term",
-              "fieldName": "searchTerm"
-            },
-            {
-              "name": "show-search-bar",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true",
-              "description": "show search input box on top",
-              "fieldName": "showSearchBar"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTableSchema",
-          "declaration": {
-            "name": "FTableSchema",
-            "module": "src/components/f-table-schema/f-table-schema.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-tcell/f-tcell.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTcell",
-          "members": [
-            {
-              "kind": "field",
-              "name": "actions",
-              "type": {
-                "text": "FTcellActions | undefined"
-              },
-              "attribute": "actions"
-            },
-            {
-              "kind": "field",
-              "name": "selected",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "selected",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "width",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "width",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "selectable",
-              "type": {
-                "text": "FTableSelectable | undefined"
-              },
-              "default": "\"none\""
-            },
-            {
-              "kind": "field",
-              "name": "expandIcon",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "checkbox",
-              "type": {
-                "text": "FCheckbox | undefined"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "radio",
-              "type": {
-                "text": "FRadio | undefined"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "chevron",
-              "type": {
-                "text": "FIconButton | undefined"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "renderActions"
-            },
-            {
-              "kind": "method",
-              "name": "setSelection",
-              "parameters": [
-                {
-                  "name": "value",
-                  "default": "false"
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleSelection",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "toggleDetails"
-            },
-            {
-              "kind": "method",
-              "name": "toggleColumnSelection"
-            },
-            {
-              "kind": "method",
-              "name": "toggleColumnHighlight",
-              "parameters": [
-                {
-                  "name": "type",
-                  "type": {
-                    "text": "\"add\" | \"remove\""
-                  }
-                }
-              ]
-            }
-          ],
-          "attributes": [
-            {
-              "name": "actions",
-              "type": {
-                "text": "FTcellActions | undefined"
-              },
-              "fieldName": "actions"
-            },
-            {
-              "name": "selected",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "selected"
-            },
-            {
-              "name": "width",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "width"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTcell",
-          "declaration": {
-            "name": "FTcell",
-            "module": "src/components/f-tcell/f-tcell.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-trow/f-trow.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTrow",
-          "members": [
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FTrowState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "selected",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "attribute": "selected",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "expndablePanel",
-              "type": {
-                "text": "FTcell | undefined"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "detailsSlotElement",
-              "type": {
-                "text": "HTMLSlotElement"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "propogateProps",
-              "description": "propogate props related to chevron and checkbox and radio boxes"
-            },
-            {
-              "kind": "method",
-              "name": "toggleDetails",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleInput",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleDetailsSlot"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "state",
-              "type": {
-                "text": "FTrowState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "fieldName": "open"
-            },
-            {
-              "name": "selected",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "fieldName": "selected"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTrow",
-          "declaration": {
-            "name": "FTrow",
-            "module": "src/components/f-trow/f-trow.ts"
-          }
-        }
-      ]
-    }
-  ]
+	"schemaVersion": "1.0.0",
+	"readme": "",
+	"modules": [
+		{
+			"kind": "javascript-module",
+			"path": "src/index.ts",
+			"declarations": [],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "*",
+					"declaration": {
+						"name": "*",
+						"package": "\"./components/f-table/f-table\""
+					}
+				},
+				{
+					"kind": "js",
+					"name": "*",
+					"declaration": {
+						"name": "*",
+						"package": "\"./components/f-trow/f-trow\""
+					}
+				},
+				{
+					"kind": "js",
+					"name": "*",
+					"declaration": {
+						"name": "*",
+						"package": "\"./components/f-tcell/f-tcell\""
+					}
+				},
+				{
+					"kind": "js",
+					"name": "*",
+					"declaration": {
+						"name": "*",
+						"package": "\"./components/f-table-schema/f-table-schema\""
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/shims.d.ts",
+			"declarations": [
+				{
+					"kind": "variable",
+					"name": "content",
+					"type": {
+						"text": "Record<string, string>"
+					}
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "content",
+						"module": "src/shims.d.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "content",
+						"module": "src/shims.d.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-table/f-table.ts",
+			"declarations": [
+				{
+					"kind": "class",
+					"description": "",
+					"name": "FTable",
+					"members": [
+						{
+							"kind": "field",
+							"name": "variant",
+							"type": {
+								"text": "FTableVariant | undefined"
+							},
+							"default": "\"stripped\"",
+							"attribute": "variant",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "size",
+							"type": {
+								"text": "FTableSize | undefined"
+							},
+							"default": "\"medium\"",
+							"attribute": "size",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "selectable",
+							"type": {
+								"text": "FTableSelectable | undefined"
+							},
+							"default": "\"none\"",
+							"attribute": "selectable",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "highlightSelected",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "false",
+							"attribute": "highlight-selected",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "highlightHover",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "false",
+							"attribute": "highlight-hover",
+							"reflects": true
+						},
+						{
+							"kind": "method",
+							"name": "propogateProps"
+						},
+						{
+							"kind": "method",
+							"name": "updateGridTemplateColumns"
+						},
+						{
+							"kind": "method",
+							"name": "applySelectable",
+							"description": "apply checkbox or radio based on selection property"
+						},
+						{
+							"kind": "method",
+							"name": "handleHeaderRowSelection",
+							"parameters": [
+								{
+									"name": "event",
+									"type": {
+										"text": "CustomEvent"
+									}
+								}
+							],
+							"description": "if checkbox from header got clicked"
+						},
+						{
+							"kind": "method",
+							"name": "handleRowSelection",
+							"parameters": [
+								{
+									"name": "event",
+									"type": {
+										"text": "CustomEvent"
+									}
+								}
+							],
+							"description": "if checkbox or radio clicked in row"
+						},
+						{
+							"kind": "method",
+							"name": "dispatchSelectedRowEvent"
+						},
+						{
+							"kind": "method",
+							"name": "updateRadioChecks",
+							"parameters": [
+								{
+									"name": "element",
+									"type": {
+										"text": "HTMLElement"
+									}
+								}
+							],
+							"description": "only one radio should be selected"
+						},
+						{
+							"kind": "method",
+							"name": "updateHeaderSelectionCheckboxState",
+							"description": "update header checkbox based on rest of the selection"
+						},
+						{
+							"kind": "method",
+							"name": "toggleColumnHighlight",
+							"parameters": [
+								{
+									"name": "event",
+									"type": {
+										"text": "CustomEvent"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "toggleColumnSelected",
+							"parameters": [
+								{
+									"name": "event",
+									"type": {
+										"text": "CustomEvent"
+									}
+								}
+							]
+						}
+					],
+					"attributes": [
+						{
+							"name": "variant",
+							"type": {
+								"text": "FTableVariant | undefined"
+							},
+							"default": "\"stripped\"",
+							"fieldName": "variant"
+						},
+						{
+							"name": "size",
+							"type": {
+								"text": "FTableSize | undefined"
+							},
+							"default": "\"medium\"",
+							"fieldName": "size"
+						},
+						{
+							"name": "selectable",
+							"type": {
+								"text": "FTableSelectable | undefined"
+							},
+							"default": "\"none\"",
+							"fieldName": "selectable"
+						},
+						{
+							"name": "highlight-selected",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "false",
+							"fieldName": "highlightSelected"
+						},
+						{
+							"name": "highlight-hover",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "false",
+							"fieldName": "highlightHover"
+						}
+					],
+					"superclass": {
+						"name": "FRoot",
+						"package": "@cldcvr/flow-core"
+					}
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "FTable",
+					"declaration": {
+						"name": "FTable",
+						"module": "src/components/f-table/f-table.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-table-schema/f-table-schema.ts",
+			"declarations": [
+				{
+					"kind": "class",
+					"description": "",
+					"name": "FTableSchema",
+					"members": [
+						{
+							"kind": "field",
+							"name": "data",
+							"type": {
+								"text": "FTableSchemaData"
+							},
+							"attribute": "data"
+						},
+						{
+							"kind": "field",
+							"name": "variant",
+							"type": {
+								"text": "FTableVariant | undefined"
+							},
+							"default": "\"stripped\"",
+							"attribute": "variant",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "sortBy",
+							"type": {
+								"text": "string | undefined"
+							},
+							"description": "header key used to specify sort attribute",
+							"attribute": "sort-by",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "sortOrder",
+							"type": {
+								"text": "\"asc\" | \"desc\" | undefined"
+							},
+							"default": "\"asc\"",
+							"description": "sort order for `sort-by` attribute",
+							"attribute": "sort-order",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "rowsPerPage",
+							"type": {
+								"text": "number | undefined"
+							},
+							"default": "50",
+							"description": "max rows per page , after that it will paginate on scroll",
+							"attribute": "rows-per-page",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "size",
+							"type": {
+								"text": "FTableSize | undefined"
+							},
+							"default": "\"medium\"",
+							"attribute": "size",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "selectable",
+							"type": {
+								"text": "FTableSelectable | undefined"
+							},
+							"default": "\"none\"",
+							"attribute": "selectable",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "highlightSelected",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "false",
+							"attribute": "highlight-selected",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "highlightHover",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "false",
+							"attribute": "highlight-hover",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "stickyHeader",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "false",
+							"attribute": "sticky-header",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "searchTerm",
+							"type": {
+								"text": "string | null"
+							},
+							"default": "null",
+							"description": "filter rows based on search term",
+							"attribute": "search-term",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "showSearchBar",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "true",
+							"description": "show search input box on top",
+							"attribute": "show-search-bar",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "offset",
+							"type": {
+								"text": "number"
+							},
+							"default": "0"
+						},
+						{
+							"kind": "field",
+							"name": "loadMoreButton",
+							"type": {
+								"text": "FDiv | undefined"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "nextEmitted",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "false"
+						},
+						{
+							"kind": "field",
+							"name": "max"
+						},
+						{
+							"kind": "field",
+							"name": "header"
+						},
+						{
+							"kind": "field",
+							"name": "rowsHtml"
+						},
+						{
+							"kind": "field",
+							"name": "filteredRows"
+						},
+						{
+							"kind": "field",
+							"name": "searchedRows"
+						},
+						{
+							"kind": "field",
+							"name": "sortedRows"
+						},
+						{
+							"kind": "field",
+							"name": "paginatedRows"
+						},
+						{
+							"kind": "method",
+							"name": "search",
+							"parameters": [
+								{
+									"name": "event",
+									"type": {
+										"text": "CustomEvent"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "paginate"
+						},
+						{
+							"kind": "method",
+							"name": "setSortBy",
+							"parameters": [
+								{
+									"name": "columnKey",
+									"type": {
+										"text": "string"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "getSortIcon",
+							"parameters": [
+								{
+									"name": "columnKey",
+									"type": {
+										"text": "string"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "handleRowSelection",
+							"parameters": [
+								{
+									"name": "row",
+									"type": {
+										"text": "FTableSchemaDataRow"
+									}
+								},
+								{
+									"name": "event",
+									"type": {
+										"text": "CustomEvent"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "toggleRowDetails",
+							"parameters": [
+								{
+									"name": "row",
+									"type": {
+										"text": "FTableSchemaDataRow"
+									}
+								},
+								{
+									"name": "_event",
+									"type": {
+										"text": "CustomEvent"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "getCellTemplate",
+							"parameters": [
+								{
+									"name": "cell",
+									"type": {
+										"text": "FTableSchemaCell"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "handleColumnSelection",
+							"parameters": [
+								{
+									"name": "e",
+									"type": {
+										"text": "CustomEvent"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "getHeaderCellTemplate",
+							"parameters": [
+								{
+									"name": "cell",
+									"type": {
+										"text": "FTableSchemaHeaderCell"
+									}
+								}
+							]
+						}
+					],
+					"attributes": [
+						{
+							"name": "data",
+							"type": {
+								"text": "FTableSchemaData"
+							},
+							"fieldName": "data"
+						},
+						{
+							"name": "variant",
+							"type": {
+								"text": "FTableVariant | undefined"
+							},
+							"default": "\"stripped\"",
+							"fieldName": "variant"
+						},
+						{
+							"name": "sort-by",
+							"type": {
+								"text": "string | undefined"
+							},
+							"description": "header key used to specify sort attribute",
+							"fieldName": "sortBy"
+						},
+						{
+							"name": "sort-order",
+							"type": {
+								"text": "\"asc\" | \"desc\" | undefined"
+							},
+							"default": "\"asc\"",
+							"description": "sort order for `sort-by` attribute",
+							"fieldName": "sortOrder"
+						},
+						{
+							"name": "rows-per-page",
+							"type": {
+								"text": "number | undefined"
+							},
+							"default": "50",
+							"description": "max rows per page , after that it will paginate on scroll",
+							"fieldName": "rowsPerPage"
+						},
+						{
+							"name": "size",
+							"type": {
+								"text": "FTableSize | undefined"
+							},
+							"default": "\"medium\"",
+							"fieldName": "size"
+						},
+						{
+							"name": "selectable",
+							"type": {
+								"text": "FTableSelectable | undefined"
+							},
+							"default": "\"none\"",
+							"fieldName": "selectable"
+						},
+						{
+							"name": "highlight-selected",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "false",
+							"fieldName": "highlightSelected"
+						},
+						{
+							"name": "highlight-hover",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "false",
+							"fieldName": "highlightHover"
+						},
+						{
+							"name": "sticky-header",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "false",
+							"fieldName": "stickyHeader"
+						},
+						{
+							"name": "search-term",
+							"type": {
+								"text": "string | null"
+							},
+							"default": "null",
+							"description": "filter rows based on search term",
+							"fieldName": "searchTerm"
+						},
+						{
+							"name": "show-search-bar",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "true",
+							"description": "show search input box on top",
+							"fieldName": "showSearchBar"
+						}
+					],
+					"superclass": {
+						"name": "FRoot",
+						"package": "@cldcvr/flow-core"
+					}
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "FTableSchema",
+					"declaration": {
+						"name": "FTableSchema",
+						"module": "src/components/f-table-schema/f-table-schema.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-tcell/f-tcell.ts",
+			"declarations": [
+				{
+					"kind": "class",
+					"description": "",
+					"name": "FTcell",
+					"members": [
+						{
+							"kind": "field",
+							"name": "actions",
+							"type": {
+								"text": "FTcellActions | undefined"
+							},
+							"attribute": "actions"
+						},
+						{
+							"kind": "field",
+							"name": "selected",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "false",
+							"attribute": "selected",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "width",
+							"type": {
+								"text": "string | undefined"
+							},
+							"attribute": "width",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "selectable",
+							"type": {
+								"text": "FTableSelectable | undefined"
+							},
+							"default": "\"none\""
+						},
+						{
+							"kind": "field",
+							"name": "expandIcon",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "false"
+						},
+						{
+							"kind": "field",
+							"name": "checkbox",
+							"type": {
+								"text": "FCheckbox | undefined"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "radio",
+							"type": {
+								"text": "FRadio | undefined"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "chevron",
+							"type": {
+								"text": "FIconButton | undefined"
+							}
+						},
+						{
+							"kind": "method",
+							"name": "renderActions"
+						},
+						{
+							"kind": "method",
+							"name": "setSelection",
+							"parameters": [
+								{
+									"name": "value",
+									"default": "false"
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "handleSelection",
+							"parameters": [
+								{
+									"name": "event",
+									"type": {
+										"text": "CustomEvent"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "toggleDetails"
+						},
+						{
+							"kind": "method",
+							"name": "toggleColumnSelection"
+						},
+						{
+							"kind": "method",
+							"name": "toggleColumnHighlight",
+							"parameters": [
+								{
+									"name": "type",
+									"type": {
+										"text": "\"add\" | \"remove\""
+									}
+								}
+							]
+						}
+					],
+					"attributes": [
+						{
+							"name": "actions",
+							"type": {
+								"text": "FTcellActions | undefined"
+							},
+							"fieldName": "actions"
+						},
+						{
+							"name": "selected",
+							"type": {
+								"text": "boolean"
+							},
+							"default": "false",
+							"fieldName": "selected"
+						},
+						{
+							"name": "width",
+							"type": {
+								"text": "string | undefined"
+							},
+							"fieldName": "width"
+						}
+					],
+					"superclass": {
+						"name": "FRoot",
+						"package": "@cldcvr/flow-core"
+					}
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "FTcell",
+					"declaration": {
+						"name": "FTcell",
+						"module": "src/components/f-tcell/f-tcell.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-trow/f-trow.ts",
+			"declarations": [
+				{
+					"kind": "class",
+					"description": "",
+					"name": "FTrow",
+					"members": [
+						{
+							"kind": "field",
+							"name": "state",
+							"type": {
+								"text": "FTrowState | undefined"
+							},
+							"default": "\"default\"",
+							"attribute": "state",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "open",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"attribute": "open",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "selected",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"attribute": "selected",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "expndablePanel",
+							"type": {
+								"text": "FTcell | undefined"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "detailsSlotElement",
+							"type": {
+								"text": "HTMLSlotElement"
+							}
+						},
+						{
+							"kind": "method",
+							"name": "propogateProps",
+							"description": "propogate props related to chevron and checkbox and radio boxes"
+						},
+						{
+							"kind": "method",
+							"name": "toggleDetails",
+							"parameters": [
+								{
+									"name": "event",
+									"type": {
+										"text": "CustomEvent"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "handleInput",
+							"parameters": [
+								{
+									"name": "event",
+									"type": {
+										"text": "CustomEvent"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "handleDetailsSlot"
+						}
+					],
+					"attributes": [
+						{
+							"name": "state",
+							"type": {
+								"text": "FTrowState | undefined"
+							},
+							"default": "\"default\"",
+							"fieldName": "state"
+						},
+						{
+							"name": "open",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"fieldName": "open"
+						},
+						{
+							"name": "selected",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"fieldName": "selected"
+						}
+					],
+					"superclass": {
+						"name": "FRoot",
+						"package": "@cldcvr/flow-core"
+					}
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "FTrow",
+					"declaration": {
+						"name": "FTrow",
+						"module": "src/components/f-trow/f-trow.ts"
+					}
+				}
+			]
+		}
+	]
 }

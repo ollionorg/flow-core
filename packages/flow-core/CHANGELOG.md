@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.17.0] - 2023-06-14
+
+### Features
+
+- `f-text-area` : `mask-value` property added to behave like password field.
 ## [1.16.2] - 2023-06-09
 
 ### Improvements

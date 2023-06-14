@@ -100,6 +100,20 @@ export class FTextArea extends FRoot {
 			let currentvalue = this.value ?? "";
 			if (e.data === null && e.inputType === "insertLineBreak") {
 				currentvalue += "\n";
+			} else if (e.data === null && e.inputType === "deleteContentBackward") {
+				currentvalue = currentvalue.substring(0, currentvalue.length - 1);
+			} else if (e.data === null && e.inputType === "insertFromPaste") {
+				let val = (e.target as HTMLInputElement)?.value;
+
+				if (this.value) {
+					for (let i = 0; i < this.value.length; i++) {
+						const idx = val.indexOf("·");
+						if (idx >= 0) {
+							val = this.replaceCharacter(val, idx, this.value.charAt(i));
+						}
+					}
+				}
+				currentvalue = val;
 			} else if (e.data !== null) {
 				currentvalue += e.data;
 			}
@@ -123,6 +137,10 @@ export class FTextArea extends FRoot {
 			this.value = (e.target as HTMLInputElement)?.value;
 			this.dispatchEvent(event);
 		}
+	}
+
+	replaceCharacter(string: string, index: number, replacement: string) {
+		return string.slice(0, index) + replacement + string.slice(index + replacement.length);
 	}
 
 	/**

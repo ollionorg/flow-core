@@ -3,16 +3,16 @@ import { property, state } from "lit/decorators.js";
 import eleStyle from "./f-icon.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import { ConfigUtil } from "./../../modules/config";
+// themeSubject will used to listen theme update
+import { configSubject, themeSubject } from "@cldcvr/flow-core-config";
 import { classMap } from "lit-html/directives/class-map.js";
 import loader from "../../mixins/svg/loader";
 import notFound from "../../mixins/svg/not-found";
 import { flowElement, isValidHttpUrl } from "./../../utils";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
-// themeSubject will used to listen theme update
-import { themeSubject } from "./../../modules/config";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor, validateHTMLColorName } from "validate-color";
+import { Subscription } from "rxjs";
 
 export type FIconState =
 	| "default"
@@ -40,12 +40,16 @@ export class FIcon extends FRoot {
 	fill = "";
 
 	private _source!: string;
+	private _originalSource?: string;
 
 	/**
 	 * @internal
 	 * @property set it to true if source value is url
 	 */
 	private isURLSource = false;
+
+	private _themeSubscription?: Subscription;
+	private _configSubscription?: Subscription;
 
 	/**
 	 * @attribute The small size is the default.
@@ -70,40 +74,8 @@ export class FIcon extends FRoot {
 	}
 	// source computed based on value given by user
 	set source(value) {
-		const emojiRegex = /\p{Extended_Pictographic}/u;
-		if (isValidHttpUrl(value)) {
-			this.isURLSource = true;
-			this._source = `<img src="${value}"/>`;
-		} else if (emojiRegex.test(value)) {
-			this._source = value;
-		} else {
-			const IconPack = ConfigUtil.getConfig().iconPack;
-			if (IconPack) {
-				let svg = IconPack[value];
-				const theme = ConfigUtil.getConfig().theme;
-				if (!svg && theme === "f-dark") {
-					svg = IconPack[value + "-dark"];
-				}
-				if (!svg && theme === "f-light") {
-					svg = IconPack[value + "-light"];
-				}
-				if (svg) {
-					this._source = svg;
-				} else {
-					this._source = notFound;
-				}
-			} else {
-				this._source = notFound;
-				throw new Error(
-					`Icon pack not configured! \n please install \`yarn add @cldcvr/flow-system-icon\` \n Set config as below \n 	
-		\`import IconPack from "@cldcvr/flow-system-icon" \n;
-		import { ConfigUtil } from "@cldcvr/flow-core" \n;
-	 import { getCustomFillColor } from 'src/utils/get-custom-fill-color';
-  ConfigUtil.setConfig({ iconPack: IconPack });\``
-				);
-			}
-		}
-		this.requestUpdate();
+		this._originalSource =value;
+		this.computeSource(value);
 	}
 
 	/**
@@ -147,9 +119,18 @@ export class FIcon extends FRoot {
 		super.connectedCallback();
 
 		// whenever theme changes this subscription runs
-		themeSubject.subscribe(() => {
+		this._themeSubscription = themeSubject.subscribe(() => {
 			this.requestUpdate();
 		});
+
+		this._configSubscription = configSubject.subscribe(() => {
+			this.computeSource(this._originalSource!);
+		});
+	}
+
+	disconnectedCallback(): void {
+		this._themeSubscription?.unsubscribe();
+		this._configSubscription?.unsubscribe();
 	}
 
 	/**
@@ -164,6 +145,37 @@ export class FIcon extends FRoot {
 			}
 		}
 		return "";
+	}
+
+	computeSource(value: string) {
+
+		const emojiRegex = /\p{Extended_Pictographic}/u;
+		if (isValidHttpUrl(value)) {
+			this.isURLSource = true;
+			this._source = `<img src="${value}"/>`;
+		} else if (emojiRegex.test(value)) {
+			this._source = value;
+		} else {
+			const IconPack = configSubject.value.iconPack;
+			if (IconPack) {
+				let svg = IconPack[value];
+				const theme = configSubject.value.theme;
+				if (!svg && theme === "f-dark") {
+					svg = IconPack[value + "-dark"];
+				}
+				if (!svg && theme === "f-light") {
+					svg = IconPack[value + "-light"];
+				}
+				if (svg) {
+					this._source = svg;
+				} else {
+					this._source = notFound;
+				}
+			} else {
+				this._source = notFound;
+			}
+		}
+		this.requestUpdate();
 	}
 
 	render() {

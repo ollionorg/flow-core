@@ -4,6 +4,14 @@
 
 # Change Log
 
+## [1.17.1] - 2023-06-21
+### Improvements
+- Extract shared configuration into `@cldcvr/flow-core-config` package.
+- Allow loading of icon bundles asynchronously
+
+### Bug Fixes
+- Fix theme subscription cleanup in f-icon
+
 ## [1.17.0] - 2023-06-14
 
 ### Features

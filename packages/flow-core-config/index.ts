@@ -1,4 +1,4 @@
-import { Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 
 /**
  * TODO :include font-family, icons
@@ -10,22 +10,22 @@ export type FlowCoreConfig = {
 
 export const themeSubject = new Subject<string>();
 
-let config: FlowCoreConfig = {
+export const configSubject = new BehaviorSubject<FlowCoreConfig>({
 	theme: "f-dark",
 	iconPack: null
-};
+});
 
 export const ConfigUtil = {
 	getConfig() {
-		return config;
+		return configSubject.value;
 	},
 	setConfig(cfg: Partial<FlowCoreConfig>) {
-		config = { ...config, ...cfg };
+		configSubject.next({ ...configSubject.value, ...cfg });
 		if (cfg.theme) {
 			this.initTheme();
 		}
 	},
 	initTheme() {
-		document.documentElement.setAttribute("data-theme", `${config.theme}`);
+		document.documentElement.setAttribute("data-theme", `${configSubject.value.theme}`);
 	}
 };

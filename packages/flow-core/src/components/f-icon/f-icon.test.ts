@@ -1,5 +1,7 @@
-import { html, fixture, expect } from "@open-wc/testing";
+import { html, fixture, expect, elementUpdated } from "@open-wc/testing";
 import loadingSVG from "./../../mixins/svg/loader";
+import notFound from "../../mixins/svg/not-found";
+import { ConfigUtil } from "@cldcvr/flow-core-config";
 
 // import all flow -core components
 import "@cldcvr/flow-core";
@@ -11,6 +13,7 @@ describe("f-icon", () => {
     const el = document.createElement("f-icon");
     expect(el).instanceOf(FIcon);
   });
+
   it("should throw error", async () => {
     try {
       await fixture(html`<f-icon></f-icon>`);
@@ -34,5 +37,22 @@ describe("f-icon", () => {
     const loading = descendant.children[0];
     const svg = await fixture(loadingSVG);
     expect(loading.outerHTML).equal(svg.outerHTML);
+  });
+
+  it("should render deferred icon sets", async () => {
+    const el = await fixture(html` <f-icon source="testing"></f-icon>`);
+    await expect(el.shadowRoot!.firstElementChild?.firstElementChild).dom.to.equal(notFound);
+
+    const testSvg = "<svg id='testing'></svg>";
+
+    ConfigUtil.setConfig({
+      iconPack: {
+        testing: testSvg
+      }
+    });
+
+    await elementUpdated(el);
+
+    await expect(el.shadowRoot!.firstElementChild?.firstElementChild).dom.to.equal(testSvg);
   });
 });

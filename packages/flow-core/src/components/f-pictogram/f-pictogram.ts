@@ -2,7 +2,7 @@ import { html, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import eleStyle from "./f-pictogram.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import { ConfigUtil } from "./../../modules/config";
+import { ConfigUtil } from "@cldcvr/flow-core-config";
 import { isValidHttpUrl } from "./../../utils";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import { classMap } from "lit-html/directives/class-map.js";

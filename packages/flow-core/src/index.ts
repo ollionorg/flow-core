@@ -1,11 +1,11 @@
 /// <reference types="vite/client" />
 
-import { ConfigUtil } from "./modules/config";
+import { ConfigUtil } from "@cldcvr/flow-core-config";
 import { version } from "./../package.json";
 
 export { flowElement } from "./utils";
-export * from "./modules/config";
 
+export * from "@cldcvr/flow-core-config";
 export * from "./components/f-button/f-button";
 export * from "./components/f-icon/f-icon";
 export * from "./components/f-divider/f-divider";

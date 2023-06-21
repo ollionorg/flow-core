@@ -1,0 +1,36 @@
+{
+  "name": "@cldcvr/flow-core-config",
+  "version": "1.0.0",
+  "description": "Shared configuration for the Flow UI library",
+  "module": "dist/index.es.js",
+  "main": "dist/index.cjs.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "yarn build",
+    "build": "vite build --emptyOutDir && tsc -emitDeclarationOnly"
+  },
+  "dependencies": {
+    "rxjs": "^7.5.7"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.4",
+    "vite": "^2.9.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://github.com/cldcvr/flow-core.git",
+    "directory": "packages/flow-core-config"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "customElements": "custom-elements.json",
+  "bugs": {
+    "url": "https://github.com/cldcvr/flow-core/issues"
+  },
+  "homepage": "https://github.com/cldcvr/flow-core#readme",
+  "author": "@cldcvr",
+  "license": "MIT"
+}

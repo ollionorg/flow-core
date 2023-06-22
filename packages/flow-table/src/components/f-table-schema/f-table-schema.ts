@@ -36,6 +36,10 @@ export type FTableSchemaHeaderCell = {
 	sticky?: boolean;
 };
 
+export type FTableSchemaVariant = FTableVariant;
+export type FTableSchemaSize = FTableSize;
+export type FTableSchemaSelectable = FTableSelectable;
+
 @flowElement("f-table-schema")
 export class FTableSchema extends FRoot {
 	/**
@@ -58,7 +62,7 @@ export class FTableSchema extends FRoot {
 	data!: FTableSchemaData;
 
 	@property({ type: String, reflect: true })
-	variant?: FTableVariant = "stripped";
+	variant?: FTableSchemaVariant = "stripped";
 
 	/**
 	 * header key used to specify sort attribute
@@ -81,13 +85,13 @@ export class FTableSchema extends FRoot {
 	 * @attribute size to apply on each cell
 	 */
 	@property({ type: String, reflect: true })
-	size?: FTableSize = "medium";
+	size?: FTableSchemaSize = "medium";
 
 	/**
 	 * @attribute whether to display checkbox or radiobox
 	 */
 	@property({ type: String, reflect: true })
-	selectable?: FTableSelectable = "none";
+	selectable?: FTableSchemaSelectable = "none";
 
 	/**
 	 * @attribute highlight selected row, when selectable has value "single" or "multiple"

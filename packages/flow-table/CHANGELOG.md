@@ -3,6 +3,12 @@
 
 # Change Log
 
+## [1.0.2] - 2023-06-13
+
+### Bug Fixes
+
+- `f-table-schema` : duplicate vue3 types export bug fixed.
+
 ## [1.0.1] - 2023-06-13
 
 ### Improvements

@@ -4,7 +4,7 @@ import ProductIconPack from "@cldcvr/flow-product-icon/dist/types/icon-pack";
 import GcpIconPack from "@cldcvr/flow-gcp-icon/dist/types/icon-pack";
 import AwsIconPack from "@cldcvr/flow-aws-icon/dist/types/icon-pack";
 
-import { ConfigUtil } from "@cldcvr/flow-core/src/modules/config";
+import { ConfigUtil } from "@cldcvr/flow-core-config";
 import { changeRoute } from "./utils";
 import "@cldcvr/flow-core/src";
 import "@cldcvr/flow-log/src";

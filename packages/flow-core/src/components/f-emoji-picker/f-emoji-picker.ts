@@ -470,6 +470,7 @@ export class FEmojiPicker extends FRoot {
 					variant=${this.variant}
 					clear=${this.value && this.clear ? true : false}
 					tabindex="1"
+					?disabled=${this.disabled}
 					@click=${(e: MouseEvent) => {
 						e.stopPropagation();
 						this.toggleEmojiPicker(true);

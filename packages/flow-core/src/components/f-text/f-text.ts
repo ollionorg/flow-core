@@ -136,8 +136,10 @@ export class FText extends FRoot {
 		/**
 		 * set default weight according to variant
 		 */
-		if (this.fill) {
+		if (this.fill && this.fill.trim() !== "") {
 			this.style.color = this.fill;
+		} else {
+			this.style.removeProperty("color");
 		}
 		if (!this.weight) {
 			if (this.variant === "heading") {

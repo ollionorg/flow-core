@@ -117,6 +117,7 @@ export class FSwitch extends FRoot {
 			width="100%"
 			class="f-switch-section"
 			size=${this.size}
+			?disabled=${this.disabled}
 		>
 			<f-div
 				padding="none"

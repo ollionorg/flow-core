@@ -74,6 +74,7 @@ export class FCheckbox extends FRoot {
 				gap="x-small"
 				direction="column"
 				width="hug-content"
+				?disabled=${this.disabled}
 			>
 				<f-div
 					class="f-checkbox-section"

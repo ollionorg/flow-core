@@ -84,6 +84,12 @@ applies styles on f-input
 			position: relative;
 			height: var(--form-input-div-size);
 
+			&[disabled] {
+				@include disabled();
+				pointer-events: none;
+				opacity: 1;
+			}
+
 			@each $size, $value in $sizes {
 				&[size="#{$size}"] {
 					height: map.get($value, "main-height");
@@ -250,6 +256,7 @@ applies styles on f-input
 				color: var(--color-text-default);
 				color-scheme: dark;
 				width: 50px;
+				-webkit-background-clip: text;
 
 				@each $category, $value in $categories {
 					&[category^="#{$category}"] {

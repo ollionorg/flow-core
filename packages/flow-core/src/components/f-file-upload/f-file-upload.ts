@@ -458,6 +458,7 @@ export class FFileUpload extends FRoot {
 						state=${this.state}
 						size=${this.size}
 						?loading=${this.loading}
+						?disabled=${this.disabled}
 						@click=${this.handleClick}
 						@drop=${this.dropFile}
 						@dragover=${(e: DragEvent) => {

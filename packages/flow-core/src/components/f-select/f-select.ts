@@ -509,6 +509,14 @@ export class FSelect extends FRoot {
 			composed: true
 		});
 		if (this.isStringsArray(this.selectedOptions as string[])) {
+			const event = new CustomEvent<FSelectCustomEvent>("input", {
+				detail: {
+					value: this.searchValue
+				},
+				bubbles: true,
+				composed: true
+			});
+			this.dispatchEvent(event);
 			(this.selectedOptions as string[]).push(this.searchValue);
 		}
 		this.openDropdown = false;

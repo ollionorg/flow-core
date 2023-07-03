@@ -262,7 +262,11 @@ export default function render(this: FSelect) {
 	 * Final html to render
 	 */
 	return html`
-		<div class="f-select-field" ?allow-gap=${this._hasLabel && this._hasHelperText ? true : false}>
+		<div
+			class="f-select-field"
+			?disabled=${this.disabled}
+			?allow-gap=${this._hasLabel && this._hasHelperText ? true : false}
+		>
 			<f-div
 				padding="none"
 				gap="none"

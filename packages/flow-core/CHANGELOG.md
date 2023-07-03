@@ -4,12 +4,26 @@
 
 # Change Log
 
-## [1.17.1] - 2023-06-21
+## [1.17.2] - 2023-07-03
+
 ### Improvements
+
+- `f-select`: showOnlyTitle key added in options prop, whether if user wants to show just title in option selection when a template is given.
+
+### Bug Fixes
+
+- `f-select`: on create a new option, the creation must be always auto selected; z-index of dropdown is fixed.
+- `f-progress-bar`: variant curved issue fixed.
+
+## [1.17.1] - 2023-06-21
+
+### Improvements
+
 - Extract shared configuration into `@cldcvr/flow-core-config` package.
 - Allow loading of icon bundles asynchronously
 
 ### Bug Fixes
+
 - Fix theme subscription cleanup in f-icon
 
 ## [1.17.0] - 2023-06-14
@@ -17,6 +31,7 @@
 ### Features
 
 - `f-text-area` : `mask-value` property added to behave like password field.
+
 ## [1.16.2] - 2023-06-09
 
 ### Improvements

@@ -74,6 +74,7 @@ export class FRadio extends FRoot {
 				gap="x-small"
 				direction="column"
 				size=${this.size}
+				?disabled=${this.disabled}
 			>
 				<f-div class="f-radio-section" align="top-left" padding="none" gap="medium">
 					<input

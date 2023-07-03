@@ -22,8 +22,11 @@
 }
 
 @mixin disabled {
-	pointer-events: none;
+	cursor: not-allowed;
 	opacity: 0.5;
+	&:active {
+		pointer-events: none;
+	}
 }
 
 @mixin rotate($tag) {

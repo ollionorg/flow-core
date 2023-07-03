@@ -5,7 +5,6 @@
 # Change Log
 
 ## [1.17.3] - 2023-07-03
-
 ### Improvements
 
 - `f-select`: `optionTemplate` function has now a second value `isSelected`, to check and differ the template displayed on selection area.
@@ -14,6 +13,13 @@
 
 - `f-select`: on create a new option, the creation must be always auto selected; z-index of dropdown is fixed.
 - `f-progress-bar`: variant curved issue fixed.
+
+## [1.17.2] - 2023-07-03
+### Bug Fixes
+- tooltip not displaying when element is disabled.
+- `f-input` browser autofill style updated.
+- `f-text` state switching issue.
+
 
 ## [1.17.1] - 2023-06-21
 

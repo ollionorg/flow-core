@@ -149,6 +149,8 @@ $hexagon-clip-path: polygon(
 		overflow: hidden;
 		&[disabled] {
 			@include disabled();
+			opacity: 1;
+			pointer-events: none;
 		}
 
 		&.hasShimmer {
@@ -304,5 +306,8 @@ f-pictogram {
 			content: unset;
 		}
 		background: transparent !important;
+	}
+	&[disabled] {
+		@include disabled();
 	}
 }

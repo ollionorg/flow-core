@@ -370,6 +370,7 @@ export class FInput extends FRoot {
 						category=${this.category}
 						state=${this.state}
 						size=${this.size}
+						?disabled=${this.disabled}
 					>
 						${prefixAppend}
 						<input

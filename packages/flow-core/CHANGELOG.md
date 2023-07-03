@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.17.2] - 2023-07-03
+### Bug Fixes
+- tooltip not displaying when element is disabled.
+- `f-input` browser autofill style updated.
+- `f-text` state switching issue.
+
 ## [1.17.1] - 2023-06-21
 ### Improvements
 - Extract shared configuration into `@cldcvr/flow-core-config` package.

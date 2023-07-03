@@ -520,9 +520,9 @@ export class FSelect extends FRoot {
 			});
 			this.dispatchEvent(event);
 			(this.selectedOptions as string[]).push(this.searchValue);
+			this.openDropdown = false;
+			this.clearFilterSearchString();
 		}
-		this.openDropdown = false;
-		this.clearFilterSearchString();
 		this.dispatchEvent(event);
 	}
 

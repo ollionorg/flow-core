@@ -34,6 +34,7 @@ export type FSelectOptionObject = {
 	data?: Record<string, unknown>;
 	qaId?: string;
 	disabled?: boolean;
+	showOnlyTitle?: boolean;
 };
 export type FSelectOptionsGroup = { [key: string]: FSelectOptionsProp };
 export type FSelectArrayOfObjects = FSelectOptionObject[];
@@ -507,6 +508,11 @@ export class FSelect extends FRoot {
 			bubbles: true,
 			composed: true
 		});
+		if (this.isStringsArray(this.selectedOptions as string[])) {
+			(this.selectedOptions as string[]).push(this.searchValue);
+		}
+		this.openDropdown = false;
+		this.clearFilterSearchString();
 		this.dispatchEvent(event);
 	}
 

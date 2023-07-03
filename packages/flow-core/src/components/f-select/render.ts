@@ -539,7 +539,7 @@ export function renderMultipleSelectionTag(this: FSelect, option: FSelectSingleO
 	};
 
 	const getTemplate = () => {
-		return this.optionTemplate
+		return this.optionTemplate && !(option as FSelectOptionObject)?.showOnlyTitle
 			? html`<f-div
 					variant="curved"
 					style="max-width:${this.offsetWidth - 72}px"

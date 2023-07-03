@@ -655,6 +655,7 @@ Use to provide a custom template in option list
 				{
 					icon: "i-home",
 					title: "option 1",
+					showOnlyTitle: true,
 					data: {
 						name: "Alex",
 						email:
@@ -702,7 +703,7 @@ Use to provide a custom template in option list
 							?searchable=${false}
 							.options=${options}
 							.value=${value}
-							type="multiple"
+							type="single"
 							.optionTemplate=${optionTemplate}
 						>
 							<f-div slot="label" padding="none" gap="none">Label for f-select</f-div>
@@ -1408,11 +1409,11 @@ if true, shows a ‘create’ button when no query is found. On click of button,
 				setValue(e.detail.value);
 			};
 			const handleCreateOption = e => {
-				console.log(e.detail.value);
+				console.log(e.detail);
 			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
-					<f-div @add-option=${handleCreateOption}>
+					<f-div>
 						<f-select
 							placeholder="Select Option"
 							@input=${handleValue}
@@ -1423,6 +1424,7 @@ if true, shows a ‘create’ button when no query is found. On click of button,
 							?searchable=${true}
 							width="200"
 							?create-option=${true}
+							@add-option=${handleCreateOption}
 						>
 							<f-div slot="label" padding="none" gap="none"
 								>Label for f-select (create-option=true)</f-div

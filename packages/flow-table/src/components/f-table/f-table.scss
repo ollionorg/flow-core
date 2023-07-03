@@ -50,14 +50,24 @@ f-table {
 
 	> f-trow {
 		> f-tcell {
-			background-color: var(--color-background-row);
 			&[sticky-left],
 			&[sticky-top] {
-				--color-background-row: var(--color-surface-default);
 				z-index: 1;
 			}
 			&[sticky-left][sticky-top] {
 				z-index: 2;
+			}
+		}
+	}
+
+	&:not([variant="stripped"]) {
+		> f-trow {
+			> f-tcell {
+				background-color: var(--color-background-row);
+				&[sticky-left],
+				&[sticky-top] {
+					--color-background-row: var(--color-surface-default);
+				}
 			}
 		}
 	}

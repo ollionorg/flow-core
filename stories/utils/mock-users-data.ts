@@ -6,10 +6,10 @@ import type {
 	FTableSchemaCell
 } from "./../../packages/flow-table/src/components/f-table-schema/f-table-schema";
 
-export default function getFakeUsers(count = 100): FTableSchemaData {
+export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSchemaData {
 	const users = [];
 
-	for (let i = 0; i < count; i++) {
+	for (let i = 0; i < rowCount; i++) {
 		const firstName = { value: faker.name.firstName() };
 		const lastName = { value: faker.name.lastName() };
 		const email: FTableSchemaCell & { value: string } = {
@@ -56,7 +56,6 @@ export default function getFakeUsers(count = 100): FTableSchemaData {
 
 		const userRow: FTableSchemaDataRow = {
 			data: { firstName, lastName, age, birthDate, email, mobile, sex, address },
-			selected: true,
 			details: function () {
 				return html`<f-div padding="large"
 					><f-text state="danger">This is Details slot</f-text></f-div
@@ -66,17 +65,19 @@ export default function getFakeUsers(count = 100): FTableSchemaData {
 		users.push(userRow);
 	}
 
+	const header = {
+		firstName: { value: "First name", sticky: true },
+		lastName: { value: "Last name" },
+		age: { value: "Age" },
+		birthDate: { value: "Birth Date" },
+		mobile: { value: "Mobile" },
+		email: { value: "Email" },
+		sex: { value: "Sex" },
+		address: { value: "Address", width: "300px", selected: true, sticky: true }
+	};
+
 	return {
-		header: {
-			firstName: { value: "First name", sticky: true },
-			lastName: { value: "Last name" },
-			age: { value: "Age" },
-			birthDate: { value: "Birth Date" },
-			email: { value: "Email" },
-			mobile: { value: "Mobile" },
-			sex: { value: "Sex" },
-			address: { value: "Address", width: "300px", selected: true, sticky: true }
-		},
+		header: Object.fromEntries(Object.entries(header).slice(0, columnCount)),
 		rows: users
 	};
 }

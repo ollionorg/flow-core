@@ -40,10 +40,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
       slot="header"
       state="default"
     >
-      <f-tcell
-        sticky-left="true"
-        sticky-top="false"
-      >
+      <f-tcell sticky-left="">
         <f-div
           align="top-left"
           direction="row"
@@ -75,7 +72,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-icon-button>
         </f-div>
       </f-tcell>
-      <f-tcell sticky-top="false">
+      <f-tcell>
         <f-div
           align="top-left"
           direction="row"
@@ -107,7 +104,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-icon-button>
         </f-div>
       </f-tcell>
-      <f-tcell sticky-top="false">
+      <f-tcell>
         <f-div
           align="top-left"
           direction="row"
@@ -139,7 +136,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-icon-button>
         </f-div>
       </f-tcell>
-      <f-tcell sticky-top="false">
+      <f-tcell>
         <f-div
           align="top-left"
           direction="row"
@@ -171,7 +168,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-icon-button>
         </f-div>
       </f-tcell>
-      <f-tcell sticky-top="false">
+      <f-tcell>
         <f-div
           align="top-left"
           direction="row"
@@ -203,7 +200,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-icon-button>
         </f-div>
       </f-tcell>
-      <f-tcell sticky-top="false">
+      <f-tcell>
         <f-div
           align="top-left"
           direction="row"
@@ -235,7 +232,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-icon-button>
         </f-div>
       </f-tcell>
-      <f-tcell sticky-top="false">
+      <f-tcell>
         <f-div
           align="top-left"
           direction="row"
@@ -269,8 +266,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
       </f-tcell>
       <f-tcell
         selected=""
-        sticky-left="true"
-        sticky-top="false"
+        sticky-left=""
         style="min-width: 300px; display: block;"
         width="300px"
       >
@@ -350,7 +346,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-text>
         </f-div>
       </f-div>
-      <f-tcell sticky-left="true">
+      <f-tcell sticky-left="">
         <f-text
           align="left"
           inline=""
@@ -491,7 +487,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
       </f-tcell>
       <f-tcell
         selected=""
-        sticky-left="true"
+        sticky-left=""
         style="min-width: 300px; display: block;"
         width="300px"
       >
@@ -551,7 +547,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-text>
         </f-div>
       </f-div>
-      <f-tcell sticky-left="true">
+      <f-tcell sticky-left="">
         <f-text
           align="left"
           inline=""
@@ -692,7 +688,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
       </f-tcell>
       <f-tcell
         selected=""
-        sticky-left="true"
+        sticky-left=""
         style="min-width: 300px; display: block;"
         width="300px"
       >
@@ -710,7 +706,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
     </f-trow>
   </f-table>
   <f-div
-    align="middle-right"
+    align="middle-left"
     class="load-more"
     direction="row"
     gap="none"

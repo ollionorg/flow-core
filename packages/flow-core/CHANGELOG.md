@@ -4,11 +4,34 @@
 
 # Change Log
 
+## [1.17.3] - 2023-07-03
+
+### Improvements
+
+- `f-text`: editable feature added.
+
+## [1.17.1] - 2023-06-21
+
+### Improvements
+
+- Extract shared configuration into `@cldcvr/flow-core-config` package.
+- Allow loading of icon bundles asynchronously
+
+### Bug Fixes
+
+- Fix theme subscription cleanup in f-icon
+
+## [1.17.0] - 2023-06-14
+
+### Features
+
+- `f-text-area` : `mask-value` property added to behave like password field.
+
 ## [1.16.2] - 2023-06-09
 
 ### Improvements
 
-- `f-popover` : `close-on-escape` and `stretch-height` boolean flags props added.
+- `f-popover` : `close-on-escape` and `auto-height` boolean flags props added.
 
 ## [1.16.1] - 2023-06-08
 

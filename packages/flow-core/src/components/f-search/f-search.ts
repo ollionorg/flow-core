@@ -260,7 +260,13 @@ export class FSearch extends FRoot {
 		}
 	}
 	render() {
-		return html` <f-div width="100%" direction="column" gap="x-small" height="hug-content">
+		return html` <f-div
+			width="100%"
+			?disabled=${this.disabled}
+			direction="column"
+			gap="x-small"
+			height="hug-content"
+		>
 			<f-div padding="none" direction="column" width="fill-container" id="header-section">
 				<f-div padding="none" gap="auto" direction="row" height="hug-content">
 					<f-div

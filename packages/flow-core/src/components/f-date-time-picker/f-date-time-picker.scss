@@ -346,3 +346,11 @@ span.flatpickr-weekday {
 .flatpickr-day.selected {
 	color: var(--color-surface-default);
 }
+
+:host {
+	[disabled] {
+		@include disabled();
+		pointer-events: none;
+		opacity: 1;
+	}
+}

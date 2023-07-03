@@ -261,6 +261,7 @@ in this case it is `f-icon`
 		// applying disabled mixins
 		&[disabled] {
 			@include disabled();
+			opacity: 1;
 		}
 
 		// applying loading mixins
@@ -277,4 +278,7 @@ in this case it is `f-icon`
 f-icon {
 	display: inline-flex;
 	vertical-align: top;
+	&[disabled] {
+		@include disabled();
+	}
 }

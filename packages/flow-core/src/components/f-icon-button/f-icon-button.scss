@@ -219,6 +219,11 @@ in this case it is `f-icon-button`
 			}
 		}
 	}
+	[disabled] {
+		@include disabled();
+		pointer-events: none;
+		opacity: 1 !important;
+	}
 }
 
 :root {
@@ -257,6 +262,9 @@ f-icon-button {
 	}
 	&[size="large"] {
 		--input-border-radius-round: 22px;
+	}
+	&[disabled] {
+		@include disabled();
 	}
 }
 

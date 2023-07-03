@@ -4,11 +4,11 @@
 
 # Change Log
 
-## [1.17.2] - 2023-07-03
+## [1.17.3] - 2023-07-03
 
 ### Improvements
 
-- `f-select`: showOnlyTitle key added in options prop, whether if user wants to show just title in option selection when a template is given.
+- `f-select`: `optionTemplate` function has now a second value `isSelected`, to check and differ the template displayed on selection area.
 
 ### Bug Fixes
 

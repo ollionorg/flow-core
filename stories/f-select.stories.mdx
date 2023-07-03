@@ -642,13 +642,15 @@ Use to provide a custom template in option list
 	<Story name="option-template">
 		{args => {
 			const [value, setValue] = useState(null);
-			const optionTemplate = function (option) {
-				return html`<f-div
-					><f-div direction="column" gap="x-small"
-						><f-text>${option.title}</f-text
-						><f-text ellipsis>${option.data.name}, ${option.data.email}</f-text></f-div
-					></f-div
-				>`;
+			const optionTemplate = function (option, isSelected) {
+				return !isSelected
+					? html`<f-div
+							><f-div direction="column" gap="x-small"
+								><f-text>${option.title}</f-text
+								><f-text ellipsis>${option.data.name}, ${option.data.email}</f-text></f-div
+							></f-div
+					  >`
+					: html`<f-text>${option.title}</f-text>`;
 			};
 			const [valueObjects, setValueObjects] = useState(null);
 			const [options, setOptions] = useState([
@@ -703,7 +705,7 @@ Use to provide a custom template in option list
 							?searchable=${false}
 							.options=${options}
 							.value=${value}
-							type="single"
+							type="multiple"
 							.optionTemplate=${optionTemplate}
 						>
 							<f-div slot="label" padding="none" gap="none">Label for f-select</f-div>

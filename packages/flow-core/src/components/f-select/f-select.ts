@@ -34,7 +34,6 @@ export type FSelectOptionObject = {
 	data?: Record<string, unknown>;
 	qaId?: string;
 	disabled?: boolean;
-	showOnlyTitle?: boolean;
 };
 export type FSelectOptionsGroup = { [key: string]: FSelectOptionsProp };
 export type FSelectArrayOfObjects = FSelectOptionObject[];
@@ -42,7 +41,10 @@ export type FSelectArray = FSelectSingleOption[];
 export type FSelectOptionsProp = FSelectSingleOption[];
 export type FSelectSingleOption = FSelectOptionObject | string;
 export type FSelectOptions = FSelectOptionsProp | FSelectOptionsGroup;
-export type FSelectOptionTemplate = (option: FSelectSingleOption) => HTMLTemplateResult;
+export type FSelectOptionTemplate = (
+	option: FSelectSingleOption,
+	isSelected?: boolean
+) => HTMLTemplateResult;
 
 export type FSelectCustomEvent = {
 	value: unknown;

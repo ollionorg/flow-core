@@ -522,7 +522,7 @@ export function renderSingleSelection(this: FSelect, option: FSelectSingleOption
 	};
 
 	const getTemplate = () => {
-		return this.optionTemplate ? this.optionTemplate(option) : withoutTemplate();
+		return this.optionTemplate ? this.optionTemplate(option, true) : withoutTemplate();
 	};
 	return html`<f-div padding="none" style=${this.singleSelectionStyle}> ${getTemplate()} </f-div>`;
 }
@@ -550,7 +550,7 @@ export function renderMultipleSelectionTag(this: FSelect, option: FSelectSingleO
 					gap="small"
 					state="secondary"
 					padding="small"
-					>${this.optionTemplate(option)}
+					>${this.optionTemplate(option, true)}
 					<f-icon-button
 						icon="i-close"
 						state="inherit"

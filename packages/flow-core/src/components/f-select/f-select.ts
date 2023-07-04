@@ -41,7 +41,10 @@ export type FSelectArray = FSelectSingleOption[];
 export type FSelectOptionsProp = FSelectSingleOption[];
 export type FSelectSingleOption = FSelectOptionObject | string;
 export type FSelectOptions = FSelectOptionsProp | FSelectOptionsGroup;
-export type FSelectOptionTemplate = (option: FSelectSingleOption) => HTMLTemplateResult;
+export type FSelectOptionTemplate = (
+	option: FSelectSingleOption,
+	isSelected?: boolean
+) => HTMLTemplateResult;
 
 export type FSelectCustomEvent = {
 	value: unknown;
@@ -507,6 +510,19 @@ export class FSelect extends FRoot {
 			bubbles: true,
 			composed: true
 		});
+		if (this.isStringsArray(this.selectedOptions as string[])) {
+			const event = new CustomEvent<FSelectCustomEvent>("input", {
+				detail: {
+					value: this.searchValue
+				},
+				bubbles: true,
+				composed: true
+			});
+			this.dispatchEvent(event);
+			(this.selectedOptions as string[]).push(this.searchValue);
+			this.openDropdown = false;
+			this.clearFilterSearchString();
+		}
 		this.dispatchEvent(event);
 	}
 

@@ -89,6 +89,7 @@ export class FBreadcrumb extends FRoot {
 				width="hug-content"
 				align="middle-left"
 				class="f-breadcrumb-content"
+				?disabled=${this.disabled}
 				@click=${(event: MouseEvent) => this.handleDispatchEvent(event, crumb)}
 			>
 				<f-text
@@ -97,6 +98,7 @@ export class FBreadcrumb extends FRoot {
 					.weight=${this.isCurrentCrumb(index, array) ? "medium" : "regular"}
 					class=${this.isCurrentCrumb(index, array) ? "" : "f-breadcrumb-text-hover"}
 					?ellipsis=${true}
+					?disabled=${this.disabled}
 					.tooltip=${crumb?.title}
 					>${crumb?.title}</f-text
 				></f-div
@@ -148,6 +150,7 @@ export class FBreadcrumb extends FRoot {
 							width="hug-content"
 							align="middle-left"
 							class="f-breadcrumb-content"
+							?disabled=${this.disabled}
 							@click=${(event: MouseEvent) => this.handleDispatchEvent(event, this.initialCrumbs)}
 						>
 							<f-text
@@ -168,6 +171,7 @@ export class FBreadcrumb extends FRoot {
 						></f-icon>
 						<f-div
 							clickable
+							?disabled=${this.disabled}
 							@mouseenter=${() => this.togglePopover("open")}
 							id="breadcrumb-popover"
 						>

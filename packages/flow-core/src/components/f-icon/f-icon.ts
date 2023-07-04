@@ -74,14 +74,14 @@ export class FIcon extends FRoot {
 	}
 	// source computed based on value given by user
 	set source(value) {
-		this._originalSource =value;
+		this._originalSource = value;
 		this.computeSource(value);
 	}
 
 	/**
 	 * @attribute The disabled attribute can be set to keep a user from clicking on the f-icon.
 	 */
-	@property({ type: Boolean })
+	@property({ type: Boolean, reflect: true })
 	disabled?: boolean = false;
 
 	/**
@@ -148,7 +148,6 @@ export class FIcon extends FRoot {
 	}
 
 	computeSource(value: string) {
-
 		const emojiRegex = /\p{Extended_Pictographic}/u;
 		if (isValidHttpUrl(value)) {
 			this.isURLSource = true;

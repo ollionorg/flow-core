@@ -642,19 +642,24 @@ Use to provide a custom template in option list
 	<Story name="option-template">
 		{args => {
 			const [value, setValue] = useState(null);
-			const optionTemplate = function (option) {
-				return html`<f-div
-					><f-div direction="column" gap="x-small"
-						><f-text>${option.title}</f-text
-						><f-text ellipsis>${option.data.name}, ${option.data.email}</f-text></f-div
-					></f-div
-				>`;
+			const optionTemplate = function (option, isSelected) {
+				if (isSelected) {
+					return html`<f-text>${option.title}</f-text>`;
+				} else {
+					return html`<f-div
+						><f-div direction="column" gap="x-small"
+							><f-text>${option.title}</f-text
+							><f-text ellipsis>${option.data.name}, ${option.data.email}</f-text></f-div
+						></f-div
+					>`;
+				}
 			};
 			const [valueObjects, setValueObjects] = useState(null);
 			const [options, setOptions] = useState([
 				{
 					icon: "i-home",
 					title: "option 1",
+					showOnlyTitle: true,
 					data: {
 						name: "Alex",
 						email:
@@ -1408,11 +1413,11 @@ if true, shows a ‘create’ button when no query is found. On click of button,
 				setValue(e.detail.value);
 			};
 			const handleCreateOption = e => {
-				console.log(e.detail.value);
+				console.log(e.detail);
 			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
-					<f-div @add-option=${handleCreateOption}>
+					<f-div>
 						<f-select
 							placeholder="Select Option"
 							@input=${handleValue}
@@ -1423,6 +1428,7 @@ if true, shows a ‘create’ button when no query is found. On click of button,
 							?searchable=${true}
 							width="200"
 							?create-option=${true}
+							@add-option=${handleCreateOption}
 						>
 							<f-div slot="label" padding="none" gap="none"
 								>Label for f-select (create-option=true)</f-div

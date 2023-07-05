@@ -14,7 +14,6 @@ import loader from "../../mixins/svg/loader";
 
 export default function render(this: FSelect) {
 	this.validateProperties();
-	this.fSelectWrapperHeight = this.wrapperElement?.offsetHeight;
 
 	/**
 	 * apply width according to the prop

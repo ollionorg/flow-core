@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.17.4] - 2023-07-05
+### Bug Fixes
+
+- `f-select`: `create-option` not working in formbuilder.
+- `f-select` : searched option not getting selected in formbuilder.
+
 ## [1.17.3] - 2023-07-03
 ### Improvements
 

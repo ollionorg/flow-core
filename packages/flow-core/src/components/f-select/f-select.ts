@@ -123,12 +123,6 @@ export class FSelect extends FRoot {
 	@state({})
 	currentGroupCursor = -1;
 
-	/**
-	 * @attribute wrapper offset height
-	 */
-	@state({})
-	fSelectWrapperHeight = 0;
-
 	@state({})
 	optimizedHeight = 0;
 
@@ -280,7 +274,7 @@ export class FSelect extends FRoot {
 	}
 	outsideClick = (e: MouseEvent) => {
 		if (!this.contains(e.target as HTMLInputElement) && this.openDropdown) {
-			this.handleDropDownClose(e);
+			this.handleDropDownClose(e, false);
 		}
 	};
 	containerScroll = () => {
@@ -492,7 +486,7 @@ export class FSelect extends FRoot {
 		this.requestUpdate();
 	}
 
-	isStringsArray(arr: string[]) {
+	isStringsArray(arr: unknown[]) {
 		return arr.every(i => typeof i === "string");
 	}
 
@@ -510,7 +504,7 @@ export class FSelect extends FRoot {
 			bubbles: true,
 			composed: true
 		});
-		if (this.isStringsArray(this.selectedOptions as string[])) {
+		if (this.isStringsArray(this.options as unknown[])) {
 			const event = new CustomEvent<FSelectCustomEvent>("input", {
 				detail: {
 					value: this.searchValue
@@ -519,7 +513,16 @@ export class FSelect extends FRoot {
 				composed: true
 			});
 			this.dispatchEvent(event);
-			(this.selectedOptions as string[]).push(this.searchValue);
+
+			if (this.type === "single") {
+				(this.selectedOptions as string[]) = [this.searchValue];
+				this.value = this.searchValue;
+			} else {
+				(this.selectedOptions as string[]).push(this.searchValue);
+				this.value = this.selectedOptions;
+			}
+			(this.options as string[]).push(this.searchValue);
+
 			this.openDropdown = false;
 			this.clearFilterSearchString();
 		}
@@ -576,9 +579,9 @@ export class FSelect extends FRoot {
 		return `max-width:${`${this.offsetWidth - 90}px`}`;
 	}
 
-	protected async updated(changedProperties: PropertyValues) {
+	protected updated(changedProperties: PropertyValues) {
 		super.updated(changedProperties);
-		this.fSelectWrapperHeight = changedProperties.get("fSelectWrapperHeight");
+
 		this.updateDimentions();
 
 		if (changedProperties.has("value")) {

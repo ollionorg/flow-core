@@ -23,9 +23,11 @@ export function handleDropDownOpen(this: FSelect, e: MouseEvent) {
 /**
  * close options menu
  */
-export function handleDropDownClose(this: FSelect, e: MouseEvent) {
+export function handleDropDownClose(this: FSelect, e: MouseEvent, clearSearch = true) {
 	this.openDropdown = false;
-	this.clearFilterSearchString();
+	if (clearSearch) {
+		this.clearFilterSearchString();
+	}
 	this.currentCursor = -1;
 	this.currentGroupCursor = -1;
 	this.currentGroupOptionCursor = -1;

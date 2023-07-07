@@ -7,6 +7,7 @@ import eleStyle from "./f-tcell.scss";
 
 export type FTcellAction = {
 	icon: string;
+	id: string;
 	onClick?: (event: PointerEvent) => void;
 	onMouseOver?: (event: MouseEvent) => void;
 	onMouseLeave?: (event: MouseEvent) => void;
@@ -58,6 +59,7 @@ export class FTcell extends FRoot {
 		if (this.actions) {
 			return html`${this.actions.map(ac => {
 				return html`<f-icon-button
+					id=${ac.id}
 					class="f-tcell-actions"
 					size="medium"
 					category="packed"

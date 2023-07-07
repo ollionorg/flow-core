@@ -22,13 +22,16 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 			},
 			actions: [
 				{
-					icon: "i-chat"
+					icon: "i-chat",
+					id: faker.random.alpha(5)
 				},
 				{
-					icon: "i-mail"
+					icon: "i-mail",
+					id: faker.random.alpha(5)
 				},
 				{
-					icon: "i-star"
+					icon: "i-star",
+					id: faker.random.alpha(5)
 				}
 			]
 		};

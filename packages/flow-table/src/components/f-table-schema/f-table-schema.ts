@@ -8,12 +8,14 @@ import { FTable, FTableSelectable, FTableSize, FTableVariant } from "../f-table/
 import { FTcell, FTcellActions } from "../f-tcell/f-tcell";
 import { FTrow, FTrowState } from "../f-trow/f-trow";
 import eleStyle from "./f-table-schema.scss";
+import { repeat } from "lit/directives/repeat.js";
 
 export type FTableSchemaDataRow = {
 	selected?: boolean;
 	details?: () => HTMLTemplateResult;
 	state?: FTrowState;
 	open?: boolean;
+	id: string;
 	data: Record<string, FTableSchemaCell>;
 };
 export type FTableSchemaData = {
@@ -167,50 +169,55 @@ export class FTableSchema extends FRoot {
 	}
 
 	get rowsHtml() {
-		return this.filteredRows.map(row => {
-			const getDetailsSlot = () => {
-				if (row.details) {
-					return html` <f-div slot="details"> ${row.details()} </f-div>`;
-				} else {
-					return nothing;
-				}
-			};
-			return html`<f-trow
-				.open=${row.open ?? false}
-				.selected=${row.selected ?? false}
-				.state=${row.state ?? "default"}
-				@toggle-row=${(e: CustomEvent) => this.toggleRowDetails(row, e)}
-				@selected-row=${(e: CustomEvent) => this.handleRowSelection(row, e)}
-			>
-				${getDetailsSlot()}
-				${Object.entries(this.data.header).map(columnHeader => {
-					let width = undefined;
-					let selected = false;
-					let sticky = undefined;
-					let actions = undefined;
-					if (typeof columnHeader[1] === "object") {
-						if (columnHeader[1].width) {
-							width = columnHeader[1].width;
-						}
-						selected = columnHeader[1].selected ?? false;
-						sticky = columnHeader[1].sticky;
+		return repeat(
+			this.filteredRows,
+			row => row.id,
+			row => {
+				const getDetailsSlot = () => {
+					if (row.details) {
+						return html` <f-div slot="details"> ${row.details()} </f-div>`;
+					} else {
+						return nothing;
 					}
-					const cell = row.data[columnHeader[0]];
+				};
+				return html`<f-trow
+					id=${row.id}
+					.open=${row.open ?? false}
+					.selected=${row.selected ?? false}
+					.state=${row.state ?? "default"}
+					@toggle-row=${(e: CustomEvent) => this.toggleRowDetails(row, e)}
+					@selected-row=${(e: CustomEvent) => this.handleRowSelection(row, e)}
+				>
+					${getDetailsSlot()}
+					${Object.entries(this.data.header).map(columnHeader => {
+						let width = undefined;
+						let selected = false;
+						let sticky = undefined;
+						let actions = undefined;
+						if (typeof columnHeader[1] === "object") {
+							if (columnHeader[1].width) {
+								width = columnHeader[1].width;
+							}
+							selected = columnHeader[1].selected ?? false;
+							sticky = columnHeader[1].sticky;
+						}
+						const cell = row.data[columnHeader[0]];
 
-					actions = cell.actions;
+						actions = cell.actions;
 
-					return html`<f-tcell
-						.selected=${selected}
-						.width=${width}
-						.actions=${actions}
-						?sticky-left=${ifDefined(sticky)}
-						><f-text inline .highlight=${this.searchTerm}
-							>${this.getCellTemplate(row.data[columnHeader[0]])}</f-text
-						></f-tcell
-					>`;
-				})}
-			</f-trow>`;
-		});
+						return html`<f-tcell
+							.selected=${selected}
+							.width=${width}
+							.actions=${actions}
+							?sticky-left=${ifDefined(sticky)}
+							><f-text inline .highlight=${this.searchTerm}
+								>${this.getCellTemplate(row.data[columnHeader[0]])}</f-text
+							></f-tcell
+						>`;
+					})}
+				</f-trow>`;
+			}
+		);
 	}
 
 	get filteredRows() {

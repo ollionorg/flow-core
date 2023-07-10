@@ -119,6 +119,11 @@ export class FTableSchema extends FRoot {
 	@property({ type: String, reflect: true, attribute: "search-term" })
 	searchTerm: string | null = null;
 	/**
+	 * search on selected header
+	 */
+	@property({ type: String, reflect: true, attribute: "search-on" })
+	searchScope = "all";
+	/**
 	 * show search input box on top
 	 */
 	@property({ type: Boolean, reflect: true, attribute: "show-search-bar" })
@@ -205,12 +210,17 @@ export class FTableSchema extends FRoot {
 
 						actions = cell.actions;
 
+						let highlightTerm = columnHeader[0] === this.searchScope ? this.searchTerm : null;
+						if (this.searchScope === "all") {
+							highlightTerm = this.searchTerm;
+						}
+
 						return html`<f-tcell
 							.selected=${selected}
 							.width=${width}
 							.actions=${actions}
 							?sticky-left=${ifDefined(sticky)}
-							><f-text inline .highlight=${this.searchTerm}
+							><f-text inline .highlight=${highlightTerm}
 								>${this.getCellTemplate(row.data[columnHeader[0]])}</f-text
 							></f-tcell
 						>`;
@@ -225,7 +235,7 @@ export class FTableSchema extends FRoot {
 	}
 
 	get searchedRows() {
-		if (this.searchTerm) {
+		if (this.searchScope === "all" && this.searchTerm) {
 			return this.data.rows.filter(row => {
 				return (
 					Object.values(row.data).findIndex(v => {
@@ -249,6 +259,23 @@ export class FTableSchema extends FRoot {
 						return true;
 					}) !== -1
 				);
+			});
+		} else if (this.searchScope !== "all" && this.searchTerm) {
+			return this.data.rows.filter(row => {
+				if (this.searchTerm !== null) {
+					const v = row.data[this.searchScope];
+					if (v !== null) {
+						if (typeof v.value === "object" && v.toString) {
+							return v.toString().toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase());
+						} else {
+							return v.value
+								.toString()
+								.toLocaleLowerCase()
+								.includes(this.searchTerm.toLocaleLowerCase());
+						}
+					}
+				}
+				return false;
 			});
 		}
 		return this.data?.rows ?? [];
@@ -305,6 +332,7 @@ export class FTableSchema extends FRoot {
 	}
 
 	search(event: CustomEvent) {
+		this.searchScope = event.detail.scope;
 		this.searchTerm = event.detail.value;
 	}
 
@@ -320,6 +348,8 @@ export class FTableSchema extends FRoot {
 					${this.showSearchBar
 						? html`<f-div padding="medium none">
 								<f-search
+									.scope=${["all", ...Object.keys(this.data.header)]}
+									.selected-scope=${this.searchScope}
 									.value=${this.searchTerm}
 									variant="round"
 									@input=${this.search}

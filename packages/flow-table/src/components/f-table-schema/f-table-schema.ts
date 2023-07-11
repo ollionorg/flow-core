@@ -36,6 +36,7 @@ export type FTableSchemaHeaderCell = {
 	template?: () => HTMLTemplateResult;
 	width?: string;
 	selected?: boolean;
+	disableSort?: boolean;
 	sticky?: boolean;
 };
 
@@ -166,7 +167,7 @@ export class FTableSchema extends FRoot {
 						>
 							<f-div gap="small" width="fit-content">
 								<f-text>${this.getHeaderCellTemplate(columnHeader[1])}</f-text>
-								${this.getSortIcon(columnHeader[0])}</f-div
+								${columnHeader[1].disableSort ? nothing : this.getSortIcon(columnHeader[0])}</f-div
 							></f-tcell
 						>`;
 					})}

@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.17.5] - 2023-07-05
+### Bug Fixes
+
+- `f-search`: `scope` dropdown width updated.
+- disabled css updated for elements in shadowRoot.
 ## [1.17.4] - 2023-07-05
 ### Bug Fixes
 

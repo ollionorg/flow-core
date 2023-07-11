@@ -7,6 +7,7 @@ import eleStyle from "./f-tcell.scss";
 
 export type FTcellAction = {
 	icon: string;
+	id: string;
 	onClick?: (event: PointerEvent) => void;
 	onMouseOver?: (event: MouseEvent) => void;
 	onMouseLeave?: (event: MouseEvent) => void;
@@ -43,6 +44,9 @@ export class FTcell extends FRoot {
 	selectable?: FTableSelectable = "none";
 
 	@state()
+	isDisabled = false;
+
+	@state()
 	expandIcon = false;
 
 	@query("f-checkbox")
@@ -58,6 +62,7 @@ export class FTcell extends FRoot {
 		if (this.actions) {
 			return html`${this.actions.map(ac => {
 				return html`<f-icon-button
+					id=${ac.id}
 					class="f-tcell-actions"
 					size="medium"
 					category="packed"
@@ -75,10 +80,17 @@ export class FTcell extends FRoot {
 	render() {
 		return html`<f-div aling="middle-left" width="100%" gap="medium"
 			>${this.selectable === "multiple"
-				? html`<f-checkbox @input=${this.handleSelection}></f-checkbox>`
+				? html`<f-checkbox
+						?disabled=${this.isDisabled}
+						@input=${this.handleSelection}
+				  ></f-checkbox>`
 				: nothing}
 			${this.selectable === "single"
-				? html`<f-radio @input=${this.handleSelection} class="cell-radio"></f-radio>`
+				? html`<f-radio
+						?disabled=${this.isDisabled}
+						@input=${this.handleSelection}
+						class="cell-radio"
+				  ></f-radio>`
 				: nothing} <slot></slot>
 			<f-div class="details-toggle" width="hug-content" gap="medium" align="top-right">
 				${this.renderActions()}
@@ -98,7 +110,8 @@ export class FTcell extends FRoot {
 		</f-div>`;
 	}
 
-	setSelection(value = false) {
+	setSelection(value = false, isDisabled = false) {
+		this.isDisabled = isDisabled;
 		if (value) {
 			if (this.checkbox) {
 				this.checkbox.value = "checked";

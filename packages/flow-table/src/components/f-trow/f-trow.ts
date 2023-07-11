@@ -39,6 +39,12 @@ export class FTrow extends FRoot {
 	@property({ type: Boolean, reflect: true })
 	selected?: boolean;
 
+	/**
+	 * @attribute is row selected
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "disable-selection" })
+	disableSelection?: boolean;
+
 	@query(".expandable")
 	expndablePanel?: FTcell;
 
@@ -78,7 +84,7 @@ export class FTrow extends FRoot {
 	 */
 	propogateProps() {
 		const firstCell = this.querySelector<FTcell>(":scope > f-tcell");
-		firstCell?.setSelection(this.selected);
+		firstCell?.setSelection(this.selected, Boolean(this.disableSelection));
 		this.handleDetailsSlot();
 	}
 

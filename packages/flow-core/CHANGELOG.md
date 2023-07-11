@@ -4,7 +4,12 @@
 
 # Change Log
 
-## [1.17.5] - 2023-07-05
+## [1.17.6] - 2023-07-11
+### Bug Fixes
+
+- tooltip removal logic updated (when value switch from string to null or undefined)
+
+## [1.17.5] - 2023-07-11
 ### Bug Fixes
 
 - `f-search`: `scope` dropdown width updated.

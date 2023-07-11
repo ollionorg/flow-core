@@ -38,12 +38,16 @@ Row component for f-table.
 			},
 			selected: {
 				control: { type: "boolean" }
+			},
+			["disable-selection"]: {
+				control: { type: "boolean" }
 			}
 		}}
 		args={{
 			state: "default",
 			open: false,
-			selected: false
+			selected: false,
+			["disable-selection"]: false
 		}}
 	>
 		{args => {
@@ -61,7 +65,12 @@ Row component for f-table.
 						})}
 					</f-trow>
 					${[1, 2, 3, 4, 5].map(rowNumber => {
-						return html`<f-trow .state=${args.state} .open=${args.open} .selected=${args.selected}>
+						return html`<f-trow
+							.disableSelection=${args["disable-selection"]}
+							.state=${args.state}
+							.open=${args.open}
+							.selected=${args.selected}
+						>
 							<f-div padding="large" slot="details">
 								<f-text variant="heading" size="x-large">This is details slot</f-text>
 							</f-div>

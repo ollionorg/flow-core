@@ -16,6 +16,7 @@ export type FTableSchemaDataRow = {
 	state?: FTrowState;
 	open?: boolean;
 	id: string;
+	disableSelection?: boolean;
 	data: Record<string, FTableSchemaCell>;
 };
 export type FTableSchemaData = {
@@ -189,6 +190,7 @@ export class FTableSchema extends FRoot {
 					id=${row.id}
 					.open=${row.open ?? false}
 					.selected=${row.selected ?? false}
+					.disableSelection=${Boolean(row.disableSelection)}
 					.state=${row.state ?? "default"}
 					@toggle-row=${(e: CustomEvent) => this.toggleRowDetails(row, e)}
 					@selected-row=${(e: CustomEvent) => this.handleRowSelection(row, e)}

@@ -1,0 +1,69 @@
+{
+  "name": "@cldcvr/flow-md-editor",
+  "version": "0.0.1",
+  "description": "Code editor component for flow library",
+  "module": "dist/flow-md-editor.es.js",
+  "main": "dist/flow-md-editor.es.js",
+  "types": "dist/types/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "bash ./compile.sh",
+    "compile": "bash ./compile.sh",
+    "build": "vite build --emptyOutDir && tsc -emitDeclarationOnly",
+    "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
+    "lint:eslint": "eslint 'src/**/*.ts' './custom-elements.vue.ts'",
+    "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
+    "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch"
+  },
+  "keywords": [
+    "web-components",
+    "lit-element",
+    "typescript",
+    "lit"
+  ],
+  "dependencies": {
+    "lit": "^2.2.4"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.5.7",
+    "@open-wc/testing": "^3.1.5",
+    "@types/eslint": "^8.4.3",
+    "@types/jest": "28.1.3",
+    "@types/prettier": "^2.6.3",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
+    "@web/dev-server-esbuild": "^0.3.0",
+    "@web/dev-server-rollup": "0.3.18",
+    "@web/test-runner": "^0.13.30",
+    "concurrently": "^7.3.0",
+    "esbuild-sass-plugin": "2.2.6",
+    "eslint": "^8.17.0",
+    "lit-html": "^2.2.5",
+    "prettier": "^2.6.2",
+    "rollup-plugin-postcss-lit": "^2.0.0",
+    "rollup-plugin-scss": "3.0.0",
+    "sass": "^1.52.3",
+    "typescript": "^4.5.4",
+    "vite": "^4.3.8",
+    "web-component-analyzer": "^2.0.0-next.4"
+  },
+  "peerDependencies": {
+    "@cldcvr/flow-core": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://github.com/cldcvr/flow-core.git",
+    "directory": "packages/flow-md-editor"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "customElements": "custom-elements.json",
+  "bugs": {
+    "url": "https://github.com/cldcvr/flow-core/issues"
+  },
+  "homepage": "https://github.com/cldcvr/flow-core",
+  "author": "@cldcvr",
+  "license": "MIT"
+}

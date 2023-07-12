@@ -2,6 +2,7 @@ import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import fDividerAnatomy from "./svg/i-fdivider-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import sampleMd from "./utils/sample-md.ts";
 
 <Meta
 	title="@cldcvr/flow-md-editor/Components/f-md-editor"
@@ -26,13 +27,26 @@ f-md-editor used to edit and view markdown content.
 ### [Playground](/story/cldcvr-flow-md-editor-components-f-md-editor--playground)
 
 <Canvas>
-	<Story name="Playground">
+	<Story
+		name="Playground"
+		argTypes={{
+			value: { control: "text" },
+			mode: {
+				control: "radio",
+				options: ["edit", "view"]
+			}
+		}}
+		args={{
+			value: sampleMd,
+			mode: "view"
+		}}
+	>
 		{args => {
 			const handleInput = function (ev) {
 				console.log(ev);
 			};
 			return html`<f-div padding="x-large" height="100%">
-				<f-md-editor></f-md-editor>
+				<f-md-editor .value=${args.value} .mode=${args.mode}></f-md-editor>
 			</f-div>`;
 		}}
 	</Story>

@@ -2,4 +2,26 @@
 
 f-md-editor {
 	@include base();
+	display: block;
+	flex: 1 0 auto;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+:host {
+	div.flow-editable {
+		outline: none;
+		height: fit-content;
+		overflow: auto;
+		word-break: break-all;
+		border-radius: 4px;
+		border: 1px solid transparent;
+		padding: 8px;
+		overflow-y: auto;
+		background-color: var(--color-surface-tertiary);
+
+		&:focus {
+			border: 1px solid var(--color-primary-default);
+		}
+	}
 }

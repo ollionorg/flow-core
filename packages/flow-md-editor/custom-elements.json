@@ -45,13 +45,6 @@
             "name": "content",
             "module": "src/shims.d.ts"
           }
-        },
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "src/shims.d.ts"
-          }
         }
       ]
     },
@@ -63,7 +56,43 @@
           "kind": "class",
           "description": "",
           "name": "FMDEditor",
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "\"edit\" | \"view\" | undefined"
+              },
+              "default": "\"view\"",
+              "attribute": "mode",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "mode",
+              "type": {
+                "text": "\"edit\" | \"view\" | undefined"
+              },
+              "default": "\"view\"",
+              "fieldName": "mode"
+            }
+          ],
           "superclass": {
             "name": "FRoot",
             "package": "@cldcvr/flow-core"

@@ -3,6 +3,11 @@
 
 # Change Log
 
+## [1.1.1] - 2023-07-13
+
+### Bug Fixes
+- `f-table-schema` : details slot width issue fixed.
+
 ## [1.1.0] - 2023-07-11
 
 ### Features

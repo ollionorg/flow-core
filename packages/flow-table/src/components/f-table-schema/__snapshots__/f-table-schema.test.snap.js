@@ -318,9 +318,9 @@ snapshots["f-table-schema should display rows and column based on data"] =
         slot="details"
         state="transparent"
         sticky="none"
-        style="padding: 0px; border-radius: 0px;"
+        style="padding: 0px; width: 100%; border-radius: 0px;"
         variant="block"
-        width="fill-container"
+        width="100%"
       >
         <f-div
           align="top-left"
@@ -519,9 +519,9 @@ snapshots["f-table-schema should display rows and column based on data"] =
         slot="details"
         state="transparent"
         sticky="none"
-        style="padding: 0px; border-radius: 0px;"
+        style="padding: 0px; width: 100%; border-radius: 0px;"
         variant="block"
-        width="fill-container"
+        width="100%"
       >
         <f-div
           align="top-left"

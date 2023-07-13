@@ -182,7 +182,7 @@ export class FTableSchema extends FRoot {
 			row => {
 				const getDetailsSlot = () => {
 					if (row.details) {
-						return html` <f-div slot="details"> ${row.details()} </f-div>`;
+						return html` <f-div slot="details" width="100%"> ${row.details()} </f-div>`;
 					} else {
 						return nothing;
 					}

@@ -1909,6 +1909,382 @@
 		},
 		{
 			"kind": "javascript-module",
+			"path": "src/components/f-div/f-div.ts",
+			"declarations": [
+				{
+					"kind": "class",
+					"description": "END :  constant values required for `f-div`",
+					"name": "FDiv",
+					"members": [
+						{
+							"kind": "field",
+							"name": "fill",
+							"type": {
+								"text": "string"
+							},
+							"default": "\"\""
+						},
+						{
+							"kind": "field",
+							"name": "variant",
+							"type": {
+								"text": "\"block\" | \"curved\" | \"round\" | undefined"
+							},
+							"default": "\"block\"",
+							"attribute": "variant",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "direction",
+							"type": {
+								"text": "\"row\" | \"column\" | undefined"
+							},
+							"default": "\"row\"",
+							"attribute": "direction",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "state",
+							"type": {
+								"text": "FDivStateProp | undefined"
+							},
+							"default": "\"transparent\"",
+							"attribute": "state",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "border",
+							"type": {
+								"text": "FDivBorderProp | undefined"
+							},
+							"attribute": "border",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "gap",
+							"type": {
+								"text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
+							},
+							"default": "\"none\"",
+							"attribute": "gap",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "padding",
+							"type": {
+								"text": "FDivPaddingProp | undefined"
+							},
+							"default": "\"none\"",
+							"attribute": "padding",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "align",
+							"type": {
+								"text": "| \"top-left\"\n\t\t| \"top-center\"\n\t\t| \"top-right\"\n\t\t| \"middle-left\"\n\t\t| \"middle-center\"\n\t\t| \"middle-right\"\n\t\t| \"bottom-left\"\n\t\t| \"bottom-center\"\n\t\t| \"bottom-right\" | undefined"
+							},
+							"default": "\"top-left\"",
+							"attribute": "align",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "width",
+							"type": {
+								"text": "FDivWidthProp | undefined"
+							},
+							"default": "\"fill-container\"",
+							"attribute": "width",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "height",
+							"type": {
+								"text": "FDivHeightProp | undefined"
+							},
+							"default": "\"fill-container\"",
+							"attribute": "height",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "disabled",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"attribute": "disabled",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "loading",
+							"type": {
+								"text": "\"skeleton\" | \"loader\" | undefined"
+							},
+							"attribute": "loading",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "clickable",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"attribute": "clickable",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "overflow",
+							"type": {
+								"text": "\"wrap\" | \"scroll\" | \"hidden\" | \"visible\" | undefined"
+							},
+							"default": "\"wrap\"",
+							"attribute": "overflow",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "selected",
+							"type": {
+								"text": "\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined"
+							},
+							"default": "\"none\"",
+							"attribute": "selected",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "sticky",
+							"type": {
+								"text": "\"none\" | \"top\" | \"bottom\" | \"left\" | \"right\" | undefined"
+							},
+							"default": "\"none\"",
+							"attribute": "sticky",
+							"reflects": true
+						},
+						{
+							"kind": "method",
+							"name": "applyBorder",
+							"description": "Applying border related style, based on value"
+						},
+						{
+							"kind": "method",
+							"name": "applyPadding",
+							"description": "Applying padding related style, based on value"
+						},
+						{
+							"kind": "method",
+							"name": "applySize",
+							"description": "Applying height,width related style, based on value"
+						},
+						{
+							"kind": "field",
+							"name": "tooltipElement",
+							"type": {
+								"text": "HTMLElement"
+							},
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "tooltip",
+							"type": {
+								"text": "string | undefined"
+							},
+							"attribute": "tooltip",
+							"reflects": true,
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "mouseEnter",
+							"type": {
+								"text": "() => void | undefined"
+							},
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "mouseLeave",
+							"type": {
+								"text": "() => void | undefined"
+							},
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						}
+					],
+					"attributes": [
+						{
+							"name": "variant",
+							"type": {
+								"text": "\"block\" | \"curved\" | \"round\" | undefined"
+							},
+							"default": "\"block\"",
+							"fieldName": "variant"
+						},
+						{
+							"name": "direction",
+							"type": {
+								"text": "\"row\" | \"column\" | undefined"
+							},
+							"default": "\"row\"",
+							"fieldName": "direction"
+						},
+						{
+							"name": "state",
+							"type": {
+								"text": "FDivStateProp | undefined"
+							},
+							"default": "\"transparent\"",
+							"fieldName": "state"
+						},
+						{
+							"name": "border",
+							"type": {
+								"text": "FDivBorderProp | undefined"
+							},
+							"fieldName": "border"
+						},
+						{
+							"name": "gap",
+							"type": {
+								"text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
+							},
+							"default": "\"none\"",
+							"fieldName": "gap"
+						},
+						{
+							"name": "padding",
+							"type": {
+								"text": "FDivPaddingProp | undefined"
+							},
+							"default": "\"none\"",
+							"fieldName": "padding"
+						},
+						{
+							"name": "align",
+							"type": {
+								"text": "| \"top-left\"\n\t\t| \"top-center\"\n\t\t| \"top-right\"\n\t\t| \"middle-left\"\n\t\t| \"middle-center\"\n\t\t| \"middle-right\"\n\t\t| \"bottom-left\"\n\t\t| \"bottom-center\"\n\t\t| \"bottom-right\" | undefined"
+							},
+							"default": "\"top-left\"",
+							"fieldName": "align"
+						},
+						{
+							"name": "width",
+							"type": {
+								"text": "FDivWidthProp | undefined"
+							},
+							"default": "\"fill-container\"",
+							"fieldName": "width"
+						},
+						{
+							"name": "height",
+							"type": {
+								"text": "FDivHeightProp | undefined"
+							},
+							"default": "\"fill-container\"",
+							"fieldName": "height"
+						},
+						{
+							"name": "disabled",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"fieldName": "disabled"
+						},
+						{
+							"name": "loading",
+							"type": {
+								"text": "\"skeleton\" | \"loader\" | undefined"
+							},
+							"fieldName": "loading"
+						},
+						{
+							"name": "clickable",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"fieldName": "clickable"
+						},
+						{
+							"name": "overflow",
+							"type": {
+								"text": "\"wrap\" | \"scroll\" | \"hidden\" | \"visible\" | undefined"
+							},
+							"default": "\"wrap\"",
+							"fieldName": "overflow"
+						},
+						{
+							"name": "selected",
+							"type": {
+								"text": "\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined"
+							},
+							"default": "\"none\"",
+							"fieldName": "selected"
+						},
+						{
+							"name": "sticky",
+							"type": {
+								"text": "\"none\" | \"top\" | \"bottom\" | \"left\" | \"right\" | undefined"
+							},
+							"default": "\"none\"",
+							"fieldName": "sticky"
+						},
+						{
+							"name": "tooltip",
+							"type": {
+								"text": "string | undefined"
+							},
+							"fieldName": "tooltip",
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						}
+					],
+					"superclass": {
+						"name": "FRoot",
+						"module": "/src/mixins/components/f-root/f-root"
+					},
+					"summary": "F-div is used as a container for HTML elements."
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "FDiv",
+					"declaration": {
+						"name": "FDiv",
+						"module": "src/components/f-div/f-div.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
 			"path": "src/components/f-checkbox/f-checkbox.ts",
 			"declarations": [
 				{
@@ -2083,237 +2459,6 @@
 					"declaration": {
 						"name": "FCheckbox",
 						"module": "src/components/f-checkbox/f-checkbox.ts"
-					}
-				}
-			]
-		},
-		{
-			"kind": "javascript-module",
-			"path": "src/components/f-counter/f-counter.ts",
-			"declarations": [
-				{
-					"kind": "class",
-					"description": "",
-					"name": "FCounter",
-					"members": [
-						{
-							"kind": "field",
-							"name": "fill",
-							"type": {
-								"text": "string"
-							},
-							"default": "\"\""
-						},
-						{
-							"kind": "field",
-							"name": "label",
-							"type": {
-								"text": "number"
-							},
-							"attribute": "label"
-						},
-						{
-							"kind": "field",
-							"name": "size",
-							"type": {
-								"text": "\"large\" | \"medium\" | \"small\" | undefined"
-							},
-							"default": "\"medium\"",
-							"attribute": "size"
-						},
-						{
-							"kind": "field",
-							"name": "state",
-							"type": {
-								"text": "FCounterStateProp | undefined"
-							},
-							"default": "\"neutral\"",
-							"attribute": "state"
-						},
-						{
-							"kind": "field",
-							"name": "loading",
-							"type": {
-								"text": "boolean | undefined"
-							},
-							"default": "false",
-							"attribute": "loading"
-						},
-						{
-							"kind": "field",
-							"name": "disabled",
-							"type": {
-								"text": "boolean | undefined"
-							},
-							"default": "false",
-							"attribute": "disabled"
-						},
-						{
-							"kind": "field",
-							"name": "required",
-							"type": {
-								"text": "array"
-							},
-							"readonly": true,
-							"default": "[\"label\"]",
-							"description": "mention required fields here"
-						},
-						{
-							"kind": "method",
-							"name": "validateProperties"
-						},
-						{
-							"kind": "field",
-							"name": "computedLabel",
-							"readonly": true
-						},
-						{
-							"kind": "method",
-							"name": "abbrNum",
-							"parameters": [
-								{
-									"name": "number",
-									"type": {
-										"text": "number"
-									}
-								},
-								{
-									"name": "decPlaces",
-									"type": {
-										"text": "number"
-									}
-								}
-							]
-						},
-						{
-							"kind": "field",
-							"name": "textColor",
-							"description": "compute textColor when custom color of tag is defined.",
-							"readonly": true
-						},
-						{
-							"kind": "field",
-							"name": "loaderColor",
-							"description": "compute loaderColor when custom color of tag is defined.",
-							"readonly": true
-						},
-						{
-							"kind": "method",
-							"name": "applyStyles",
-							"description": "apply inline styles to shadow-dom for custom fill."
-						},
-						{
-							"kind": "field",
-							"name": "tooltipElement",
-							"type": {
-								"text": "HTMLElement"
-							},
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "tooltip",
-							"type": {
-								"text": "string | undefined"
-							},
-							"attribute": "tooltip",
-							"reflects": true,
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "mouseEnter",
-							"type": {
-								"text": "() => void | undefined"
-							},
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "mouseLeave",
-							"type": {
-								"text": "() => void | undefined"
-							},
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						}
-					],
-					"attributes": [
-						{
-							"name": "label",
-							"type": {
-								"text": "number"
-							},
-							"fieldName": "label"
-						},
-						{
-							"name": "size",
-							"type": {
-								"text": "\"large\" | \"medium\" | \"small\" | undefined"
-							},
-							"default": "\"medium\"",
-							"fieldName": "size"
-						},
-						{
-							"name": "state",
-							"type": {
-								"text": "FCounterStateProp | undefined"
-							},
-							"default": "\"neutral\"",
-							"fieldName": "state"
-						},
-						{
-							"name": "loading",
-							"type": {
-								"text": "boolean | undefined"
-							},
-							"default": "false",
-							"fieldName": "loading"
-						},
-						{
-							"name": "disabled",
-							"type": {
-								"text": "boolean | undefined"
-							},
-							"default": "false",
-							"fieldName": "disabled"
-						},
-						{
-							"name": "tooltip",
-							"type": {
-								"text": "string | undefined"
-							},
-							"fieldName": "tooltip",
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						}
-					],
-					"superclass": {
-						"name": "FRoot",
-						"module": "/src/mixins/components/f-root/f-root"
-					}
-				}
-			],
-			"exports": [
-				{
-					"kind": "js",
-					"name": "FCounter",
-					"declaration": {
-						"name": "FCounter",
-						"module": "src/components/f-counter/f-counter.ts"
 					}
 				}
 			]
@@ -2835,12 +2980,12 @@
 		},
 		{
 			"kind": "javascript-module",
-			"path": "src/components/f-div/f-div.ts",
+			"path": "src/components/f-counter/f-counter.ts",
 			"declarations": [
 				{
 					"kind": "class",
-					"description": "END :  constant values required for `f-div`",
-					"name": "FDiv",
+					"description": "",
+					"name": "FCounter",
 					"members": [
 						{
 							"kind": "field",
@@ -2852,92 +2997,38 @@
 						},
 						{
 							"kind": "field",
-							"name": "variant",
+							"name": "label",
 							"type": {
-								"text": "\"block\" | \"curved\" | \"round\" | undefined"
+								"text": "number"
 							},
-							"default": "\"block\"",
-							"attribute": "variant",
-							"reflects": true
+							"attribute": "label"
 						},
 						{
 							"kind": "field",
-							"name": "direction",
+							"name": "size",
 							"type": {
-								"text": "\"row\" | \"column\" | undefined"
+								"text": "\"large\" | \"medium\" | \"small\" | undefined"
 							},
-							"default": "\"row\"",
-							"attribute": "direction",
-							"reflects": true
+							"default": "\"medium\"",
+							"attribute": "size"
 						},
 						{
 							"kind": "field",
 							"name": "state",
 							"type": {
-								"text": "FDivStateProp | undefined"
+								"text": "FCounterStateProp | undefined"
 							},
-							"default": "\"transparent\"",
-							"attribute": "state",
-							"reflects": true
+							"default": "\"neutral\"",
+							"attribute": "state"
 						},
 						{
 							"kind": "field",
-							"name": "border",
+							"name": "loading",
 							"type": {
-								"text": "FDivBorderProp | undefined"
+								"text": "boolean | undefined"
 							},
-							"attribute": "border",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "gap",
-							"type": {
-								"text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
-							},
-							"default": "\"none\"",
-							"attribute": "gap",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "padding",
-							"type": {
-								"text": "FDivPaddingProp | undefined"
-							},
-							"default": "\"none\"",
-							"attribute": "padding",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "align",
-							"type": {
-								"text": "| \"top-left\"\n\t\t| \"top-center\"\n\t\t| \"top-right\"\n\t\t| \"middle-left\"\n\t\t| \"middle-center\"\n\t\t| \"middle-right\"\n\t\t| \"bottom-left\"\n\t\t| \"bottom-center\"\n\t\t| \"bottom-right\" | undefined"
-							},
-							"default": "\"top-left\"",
-							"attribute": "align",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "width",
-							"type": {
-								"text": "FDivWidthProp | undefined"
-							},
-							"default": "\"fill-container\"",
-							"attribute": "width",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "height",
-							"type": {
-								"text": "FDivHeightProp | undefined"
-							},
-							"default": "\"fill-container\"",
-							"attribute": "height",
-							"reflects": true
+							"default": "false",
+							"attribute": "loading"
 						},
 						{
 							"kind": "field",
@@ -2946,72 +3037,61 @@
 								"text": "boolean | undefined"
 							},
 							"default": "false",
-							"attribute": "disabled",
-							"reflects": true
+							"attribute": "disabled"
 						},
 						{
 							"kind": "field",
-							"name": "loading",
+							"name": "required",
 							"type": {
-								"text": "\"skeleton\" | \"loader\" | undefined"
+								"text": "array"
 							},
-							"attribute": "loading",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "clickable",
-							"type": {
-								"text": "boolean | undefined"
-							},
-							"default": "false",
-							"attribute": "clickable",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "overflow",
-							"type": {
-								"text": "\"wrap\" | \"scroll\" | \"hidden\" | \"visible\" | undefined"
-							},
-							"default": "\"wrap\"",
-							"attribute": "overflow",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "selected",
-							"type": {
-								"text": "\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined"
-							},
-							"default": "\"none\"",
-							"attribute": "selected",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "sticky",
-							"type": {
-								"text": "\"none\" | \"top\" | \"bottom\" | \"left\" | \"right\" | undefined"
-							},
-							"default": "\"none\"",
-							"attribute": "sticky",
-							"reflects": true
+							"readonly": true,
+							"default": "[\"label\"]",
+							"description": "mention required fields here"
 						},
 						{
 							"kind": "method",
-							"name": "applyBorder",
-							"description": "Applying border related style, based on value"
+							"name": "validateProperties"
+						},
+						{
+							"kind": "field",
+							"name": "computedLabel",
+							"readonly": true
 						},
 						{
 							"kind": "method",
-							"name": "applyPadding",
-							"description": "Applying padding related style, based on value"
+							"name": "abbrNum",
+							"parameters": [
+								{
+									"name": "number",
+									"type": {
+										"text": "number"
+									}
+								},
+								{
+									"name": "decPlaces",
+									"type": {
+										"text": "number"
+									}
+								}
+							]
+						},
+						{
+							"kind": "field",
+							"name": "textColor",
+							"description": "compute textColor when custom color of tag is defined.",
+							"readonly": true
+						},
+						{
+							"kind": "field",
+							"name": "loaderColor",
+							"description": "compute loaderColor when custom color of tag is defined.",
+							"readonly": true
 						},
 						{
 							"kind": "method",
-							"name": "applySize",
-							"description": "Applying height,width related style, based on value"
+							"name": "applyStyles",
+							"description": "apply inline styles to shadow-dom for custom fill."
 						},
 						{
 							"kind": "field",
@@ -3062,75 +3142,35 @@
 					],
 					"attributes": [
 						{
-							"name": "variant",
+							"name": "label",
 							"type": {
-								"text": "\"block\" | \"curved\" | \"round\" | undefined"
+								"text": "number"
 							},
-							"default": "\"block\"",
-							"fieldName": "variant"
+							"fieldName": "label"
 						},
 						{
-							"name": "direction",
+							"name": "size",
 							"type": {
-								"text": "\"row\" | \"column\" | undefined"
+								"text": "\"large\" | \"medium\" | \"small\" | undefined"
 							},
-							"default": "\"row\"",
-							"fieldName": "direction"
+							"default": "\"medium\"",
+							"fieldName": "size"
 						},
 						{
 							"name": "state",
 							"type": {
-								"text": "FDivStateProp | undefined"
+								"text": "FCounterStateProp | undefined"
 							},
-							"default": "\"transparent\"",
+							"default": "\"neutral\"",
 							"fieldName": "state"
 						},
 						{
-							"name": "border",
+							"name": "loading",
 							"type": {
-								"text": "FDivBorderProp | undefined"
+								"text": "boolean | undefined"
 							},
-							"fieldName": "border"
-						},
-						{
-							"name": "gap",
-							"type": {
-								"text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
-							},
-							"default": "\"none\"",
-							"fieldName": "gap"
-						},
-						{
-							"name": "padding",
-							"type": {
-								"text": "FDivPaddingProp | undefined"
-							},
-							"default": "\"none\"",
-							"fieldName": "padding"
-						},
-						{
-							"name": "align",
-							"type": {
-								"text": "| \"top-left\"\n\t\t| \"top-center\"\n\t\t| \"top-right\"\n\t\t| \"middle-left\"\n\t\t| \"middle-center\"\n\t\t| \"middle-right\"\n\t\t| \"bottom-left\"\n\t\t| \"bottom-center\"\n\t\t| \"bottom-right\" | undefined"
-							},
-							"default": "\"top-left\"",
-							"fieldName": "align"
-						},
-						{
-							"name": "width",
-							"type": {
-								"text": "FDivWidthProp | undefined"
-							},
-							"default": "\"fill-container\"",
-							"fieldName": "width"
-						},
-						{
-							"name": "height",
-							"type": {
-								"text": "FDivHeightProp | undefined"
-							},
-							"default": "\"fill-container\"",
-							"fieldName": "height"
+							"default": "false",
+							"fieldName": "loading"
 						},
 						{
 							"name": "disabled",
@@ -3139,45 +3179,6 @@
 							},
 							"default": "false",
 							"fieldName": "disabled"
-						},
-						{
-							"name": "loading",
-							"type": {
-								"text": "\"skeleton\" | \"loader\" | undefined"
-							},
-							"fieldName": "loading"
-						},
-						{
-							"name": "clickable",
-							"type": {
-								"text": "boolean | undefined"
-							},
-							"default": "false",
-							"fieldName": "clickable"
-						},
-						{
-							"name": "overflow",
-							"type": {
-								"text": "\"wrap\" | \"scroll\" | \"hidden\" | \"visible\" | undefined"
-							},
-							"default": "\"wrap\"",
-							"fieldName": "overflow"
-						},
-						{
-							"name": "selected",
-							"type": {
-								"text": "\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined"
-							},
-							"default": "\"none\"",
-							"fieldName": "selected"
-						},
-						{
-							"name": "sticky",
-							"type": {
-								"text": "\"none\" | \"top\" | \"bottom\" | \"left\" | \"right\" | undefined"
-							},
-							"default": "\"none\"",
-							"fieldName": "sticky"
 						},
 						{
 							"name": "tooltip",
@@ -3194,17 +3195,16 @@
 					"superclass": {
 						"name": "FRoot",
 						"module": "/src/mixins/components/f-root/f-root"
-					},
-					"summary": "F-div is used as a container for HTML elements."
+					}
 				}
 			],
 			"exports": [
 				{
 					"kind": "js",
-					"name": "FDiv",
+					"name": "FCounter",
 					"declaration": {
-						"name": "FDiv",
-						"module": "src/components/f-div/f-div.ts"
+						"name": "FCounter",
+						"module": "src/components/f-counter/f-counter.ts"
 					}
 				}
 			]
@@ -4132,6 +4132,129 @@
 		},
 		{
 			"kind": "javascript-module",
+			"path": "src/components/f-form/f-form.ts",
+			"declarations": [
+				{
+					"kind": "class",
+					"description": "",
+					"name": "FForm",
+					"members": [
+						{
+							"kind": "field",
+							"name": "gap",
+							"type": {
+								"text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+							},
+							"default": "\"medium\"",
+							"attribute": "gap",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "separator",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"attribute": "separator",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "tooltipElement",
+							"type": {
+								"text": "HTMLElement"
+							},
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "tooltip",
+							"type": {
+								"text": "string | undefined"
+							},
+							"attribute": "tooltip",
+							"reflects": true,
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "mouseEnter",
+							"type": {
+								"text": "() => void | undefined"
+							},
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "mouseLeave",
+							"type": {
+								"text": "() => void | undefined"
+							},
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						}
+					],
+					"attributes": [
+						{
+							"name": "gap",
+							"type": {
+								"text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+							},
+							"default": "\"medium\"",
+							"fieldName": "gap"
+						},
+						{
+							"name": "separator",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"fieldName": "separator"
+						},
+						{
+							"name": "tooltip",
+							"type": {
+								"text": "string | undefined"
+							},
+							"fieldName": "tooltip",
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						}
+					],
+					"superclass": {
+						"name": "FRoot",
+						"module": "/src/mixins/components/f-root/f-root"
+					},
+					"summary": "Text component includes Headings, titles, body texts and links."
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "FForm",
+					"declaration": {
+						"name": "FForm",
+						"module": "src/components/f-form/f-form.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
 			"path": "src/components/f-file-upload/f-file-upload.ts",
 			"declarations": [
 				{
@@ -4675,129 +4798,6 @@
 					"declaration": {
 						"name": "FFileUpload",
 						"module": "src/components/f-file-upload/f-file-upload.ts"
-					}
-				}
-			]
-		},
-		{
-			"kind": "javascript-module",
-			"path": "src/components/f-form/f-form.ts",
-			"declarations": [
-				{
-					"kind": "class",
-					"description": "",
-					"name": "FForm",
-					"members": [
-						{
-							"kind": "field",
-							"name": "gap",
-							"type": {
-								"text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-							},
-							"default": "\"medium\"",
-							"attribute": "gap",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "separator",
-							"type": {
-								"text": "boolean | undefined"
-							},
-							"default": "false",
-							"attribute": "separator",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "tooltipElement",
-							"type": {
-								"text": "HTMLElement"
-							},
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "tooltip",
-							"type": {
-								"text": "string | undefined"
-							},
-							"attribute": "tooltip",
-							"reflects": true,
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "mouseEnter",
-							"type": {
-								"text": "() => void | undefined"
-							},
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "mouseLeave",
-							"type": {
-								"text": "() => void | undefined"
-							},
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						}
-					],
-					"attributes": [
-						{
-							"name": "gap",
-							"type": {
-								"text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-							},
-							"default": "\"medium\"",
-							"fieldName": "gap"
-						},
-						{
-							"name": "separator",
-							"type": {
-								"text": "boolean | undefined"
-							},
-							"default": "false",
-							"fieldName": "separator"
-						},
-						{
-							"name": "tooltip",
-							"type": {
-								"text": "string | undefined"
-							},
-							"fieldName": "tooltip",
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						}
-					],
-					"superclass": {
-						"name": "FRoot",
-						"module": "/src/mixins/components/f-root/f-root"
-					},
-					"summary": "Text component includes Headings, titles, body texts and links."
-				}
-			],
-			"exports": [
-				{
-					"kind": "js",
-					"name": "FForm",
-					"declaration": {
-						"name": "FForm",
-						"module": "src/components/f-form/f-form.ts"
 					}
 				}
 			]
@@ -9446,6 +9446,221 @@
 		},
 		{
 			"kind": "javascript-module",
+			"path": "src/components/f-switch/f-switch.ts",
+			"declarations": [
+				{
+					"kind": "class",
+					"description": "",
+					"name": "FSwitch",
+					"members": [
+						{
+							"kind": "field",
+							"name": "value",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"attribute": "value",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "state",
+							"type": {
+								"text": "FSwitchState | undefined"
+							},
+							"default": "\"default\"",
+							"attribute": "state",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "size",
+							"type": {
+								"text": "\"small\" | \"medium\" | undefined"
+							},
+							"attribute": "size",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "disabled",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"attribute": "disabled",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "switchSlots",
+							"type": {
+								"text": "FDiv"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "_labelNodes",
+							"type": {
+								"text": "NodeListOf<HTMLElement>"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "_subtitleNodes",
+							"type": {
+								"text": "NodeListOf<HTMLElement>"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "_iconTooltipNodes",
+							"type": {
+								"text": "NodeListOf<HTMLElement>"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "hasLabel",
+							"description": "has label slot",
+							"readonly": true
+						},
+						{
+							"kind": "field",
+							"name": "hasSubtitle",
+							"description": "has subtitle slot",
+							"readonly": true
+						},
+						{
+							"kind": "field",
+							"name": "hasIconTooltip",
+							"description": "has icon-tooltip slot",
+							"readonly": true
+						},
+						{
+							"kind": "method",
+							"name": "handleInput",
+							"parameters": [
+								{
+									"name": "e",
+									"type": {
+										"text": "InputEvent"
+									}
+								}
+							],
+							"description": "emit event."
+						},
+						{
+							"kind": "field",
+							"name": "tooltipElement",
+							"type": {
+								"text": "HTMLElement"
+							},
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "tooltip",
+							"type": {
+								"text": "string | undefined"
+							},
+							"attribute": "tooltip",
+							"reflects": true,
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "mouseEnter",
+							"type": {
+								"text": "() => void | undefined"
+							},
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "mouseLeave",
+							"type": {
+								"text": "() => void | undefined"
+							},
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						}
+					],
+					"attributes": [
+						{
+							"name": "value",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"fieldName": "value"
+						},
+						{
+							"name": "state",
+							"type": {
+								"text": "FSwitchState | undefined"
+							},
+							"default": "\"default\"",
+							"fieldName": "state"
+						},
+						{
+							"name": "size",
+							"type": {
+								"text": "\"small\" | \"medium\" | undefined"
+							},
+							"fieldName": "size"
+						},
+						{
+							"name": "disabled",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"fieldName": "disabled"
+						},
+						{
+							"name": "tooltip",
+							"type": {
+								"text": "string | undefined"
+							},
+							"fieldName": "tooltip",
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						}
+					],
+					"superclass": {
+						"name": "FRoot",
+						"module": "/src/mixins/components/f-root/f-root"
+					}
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "FSwitch",
+					"declaration": {
+						"name": "FSwitch",
+						"module": "src/components/f-switch/f-switch.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
 			"path": "src/components/f-tab/f-tab.ts",
 			"declarations": [
 				{
@@ -9672,343 +9887,6 @@
 		},
 		{
 			"kind": "javascript-module",
-			"path": "src/components/f-switch/f-switch.ts",
-			"declarations": [
-				{
-					"kind": "class",
-					"description": "",
-					"name": "FSwitch",
-					"members": [
-						{
-							"kind": "field",
-							"name": "value",
-							"type": {
-								"text": "boolean | undefined"
-							},
-							"default": "false",
-							"attribute": "value",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "state",
-							"type": {
-								"text": "FSwitchState | undefined"
-							},
-							"default": "\"default\"",
-							"attribute": "state",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "size",
-							"type": {
-								"text": "\"small\" | \"medium\" | undefined"
-							},
-							"attribute": "size",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "disabled",
-							"type": {
-								"text": "boolean | undefined"
-							},
-							"default": "false",
-							"attribute": "disabled",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "switchSlots",
-							"type": {
-								"text": "FDiv"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "_labelNodes",
-							"type": {
-								"text": "NodeListOf<HTMLElement>"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "_subtitleNodes",
-							"type": {
-								"text": "NodeListOf<HTMLElement>"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "_iconTooltipNodes",
-							"type": {
-								"text": "NodeListOf<HTMLElement>"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "hasLabel",
-							"description": "has label slot",
-							"readonly": true
-						},
-						{
-							"kind": "field",
-							"name": "hasSubtitle",
-							"description": "has subtitle slot",
-							"readonly": true
-						},
-						{
-							"kind": "field",
-							"name": "hasIconTooltip",
-							"description": "has icon-tooltip slot",
-							"readonly": true
-						},
-						{
-							"kind": "method",
-							"name": "handleInput",
-							"parameters": [
-								{
-									"name": "e",
-									"type": {
-										"text": "InputEvent"
-									}
-								}
-							],
-							"description": "emit event."
-						},
-						{
-							"kind": "field",
-							"name": "tooltipElement",
-							"type": {
-								"text": "HTMLElement"
-							},
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "tooltip",
-							"type": {
-								"text": "string | undefined"
-							},
-							"attribute": "tooltip",
-							"reflects": true,
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "mouseEnter",
-							"type": {
-								"text": "() => void | undefined"
-							},
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "mouseLeave",
-							"type": {
-								"text": "() => void | undefined"
-							},
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						}
-					],
-					"attributes": [
-						{
-							"name": "value",
-							"type": {
-								"text": "boolean | undefined"
-							},
-							"default": "false",
-							"fieldName": "value"
-						},
-						{
-							"name": "state",
-							"type": {
-								"text": "FSwitchState | undefined"
-							},
-							"default": "\"default\"",
-							"fieldName": "state"
-						},
-						{
-							"name": "size",
-							"type": {
-								"text": "\"small\" | \"medium\" | undefined"
-							},
-							"fieldName": "size"
-						},
-						{
-							"name": "disabled",
-							"type": {
-								"text": "boolean | undefined"
-							},
-							"default": "false",
-							"fieldName": "disabled"
-						},
-						{
-							"name": "tooltip",
-							"type": {
-								"text": "string | undefined"
-							},
-							"fieldName": "tooltip",
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						}
-					],
-					"superclass": {
-						"name": "FRoot",
-						"module": "/src/mixins/components/f-root/f-root"
-					}
-				}
-			],
-			"exports": [
-				{
-					"kind": "js",
-					"name": "FSwitch",
-					"declaration": {
-						"name": "FSwitch",
-						"module": "src/components/f-switch/f-switch.ts"
-					}
-				}
-			]
-		},
-		{
-			"kind": "javascript-module",
-			"path": "src/components/f-tab-content/f-tab-content.ts",
-			"declarations": [
-				{
-					"kind": "class",
-					"description": "",
-					"name": "FTabContent",
-					"members": [
-						{
-							"kind": "field",
-							"name": "transition",
-							"type": {
-								"text": "\"fade\" | \"slide\" | \"none\" | undefined"
-							},
-							"default": "\"none\"",
-							"attribute": "transition",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "duration",
-							"type": {
-								"text": "number | undefined"
-							},
-							"default": "200",
-							"attribute": "duration",
-							"reflects": true
-						},
-						{
-							"kind": "field",
-							"name": "tooltipElement",
-							"type": {
-								"text": "HTMLElement"
-							},
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "tooltip",
-							"type": {
-								"text": "string | undefined"
-							},
-							"attribute": "tooltip",
-							"reflects": true,
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "mouseEnter",
-							"type": {
-								"text": "() => void | undefined"
-							},
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						},
-						{
-							"kind": "field",
-							"name": "mouseLeave",
-							"type": {
-								"text": "() => void | undefined"
-							},
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						}
-					],
-					"attributes": [
-						{
-							"name": "transition",
-							"type": {
-								"text": "\"fade\" | \"slide\" | \"none\" | undefined"
-							},
-							"default": "\"none\"",
-							"fieldName": "transition"
-						},
-						{
-							"name": "duration",
-							"type": {
-								"text": "number | undefined"
-							},
-							"default": "200",
-							"fieldName": "duration"
-						},
-						{
-							"name": "tooltip",
-							"type": {
-								"text": "string | undefined"
-							},
-							"fieldName": "tooltip",
-							"inheritedFrom": {
-								"name": "FRoot",
-								"module": "src/mixins/components/f-root/f-root.ts"
-							}
-						}
-					],
-					"superclass": {
-						"name": "FRoot",
-						"module": "/src/mixins/components/f-root/f-root"
-					}
-				}
-			],
-			"exports": [
-				{
-					"kind": "js",
-					"name": "FTabContent",
-					"declaration": {
-						"name": "FTabContent",
-						"module": "src/components/f-tab-content/f-tab-content.ts"
-					}
-				}
-			]
-		},
-		{
-			"kind": "javascript-module",
 			"path": "src/components/f-tab-node/f-tab-node.ts",
 			"declarations": [
 				{
@@ -10137,6 +10015,128 @@
 					"declaration": {
 						"name": "FTabNode",
 						"module": "src/components/f-tab-node/f-tab-node.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-tab-content/f-tab-content.ts",
+			"declarations": [
+				{
+					"kind": "class",
+					"description": "",
+					"name": "FTabContent",
+					"members": [
+						{
+							"kind": "field",
+							"name": "transition",
+							"type": {
+								"text": "\"fade\" | \"slide\" | \"none\" | undefined"
+							},
+							"default": "\"none\"",
+							"attribute": "transition",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "duration",
+							"type": {
+								"text": "number | undefined"
+							},
+							"default": "200",
+							"attribute": "duration",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "tooltipElement",
+							"type": {
+								"text": "HTMLElement"
+							},
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "tooltip",
+							"type": {
+								"text": "string | undefined"
+							},
+							"attribute": "tooltip",
+							"reflects": true,
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "mouseEnter",
+							"type": {
+								"text": "() => void | undefined"
+							},
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "mouseLeave",
+							"type": {
+								"text": "() => void | undefined"
+							},
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						}
+					],
+					"attributes": [
+						{
+							"name": "transition",
+							"type": {
+								"text": "\"fade\" | \"slide\" | \"none\" | undefined"
+							},
+							"default": "\"none\"",
+							"fieldName": "transition"
+						},
+						{
+							"name": "duration",
+							"type": {
+								"text": "number | undefined"
+							},
+							"default": "200",
+							"fieldName": "duration"
+						},
+						{
+							"name": "tooltip",
+							"type": {
+								"text": "string | undefined"
+							},
+							"fieldName": "tooltip",
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
+						}
+					],
+					"superclass": {
+						"name": "FRoot",
+						"module": "/src/mixins/components/f-root/f-root"
+					}
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "FTabContent",
+					"declaration": {
+						"name": "FTabContent",
+						"module": "src/components/f-tab-content/f-tab-content.ts"
 					}
 				}
 			]

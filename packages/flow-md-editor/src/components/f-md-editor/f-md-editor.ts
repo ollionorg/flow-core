@@ -27,17 +27,13 @@ export class FMDEditor extends FRoot {
 
 	render() {
 		if (this.mode === "view") {
-			const converter = new showdown.Converter({
-				simplifiedAutoLink: true,
-				simpleLineBreaks: true
-			});
+			const converter = new showdown.Converter();
+			converter.setFlavor("github");
 
 			const htmlContent = converter.makeHtml(this.value ?? "");
 			return html`${unsafeHTML(htmlContent)}`;
 		}
-		return html`<div class="flow-editable" contenteditable="true">
-			${unsafeHTML(this.value?.replace(/(?:\r\n|\r|\n)/g, "<br>"))}
-		</div>`;
+		return html`<div class="flow-editable" contenteditable="true">${this.value}</div>`;
 	}
 }
 

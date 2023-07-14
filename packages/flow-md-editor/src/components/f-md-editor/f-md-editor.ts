@@ -3,7 +3,7 @@ import { FRoot, flowElement } from "@cldcvr/flow-core";
 import eleStyle from "./f-md-editor.scss";
 import { FTextArea } from "@cldcvr/flow-core";
 import * as showdown from "showdown";
-import { property } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 @flowElement("f-md-editor")
@@ -25,6 +25,9 @@ export class FMDEditor extends FRoot {
 	@property({ reflect: true, type: String })
 	mode?: "edit" | "view" = "view";
 
+	@query(".flow-editable")
+	editor?: HTMLDivElement;
+
 	render() {
 		if (this.mode === "view") {
 			const converter = new showdown.Converter();
@@ -33,7 +36,27 @@ export class FMDEditor extends FRoot {
 			const htmlContent = converter.makeHtml(this.value ?? "");
 			return html`${unsafeHTML(htmlContent)}`;
 		}
-		return html`<div class="flow-editable" contenteditable="true">${this.value}</div>`;
+		return html`<div class="flow-editable" @input=${this.handleInput} contenteditable="true">
+			${this.value}
+		</div>`;
+	}
+
+	handleInput(event: InputEvent) {
+		if (this.editor) {
+			event.stopPropagation();
+			event.stopImmediatePropagation();
+
+			const inputEvent = new CustomEvent("input", {
+				detail: {
+					value: this.editor?.textContent,
+					nativeEvent: event
+				},
+				bubbles: true,
+				composed: true
+			});
+
+			this.dispatchEvent(inputEvent);
+		}
 	}
 }
 

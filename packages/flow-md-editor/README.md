@@ -1,11 +1,11 @@
-# Flow Code Editor
-The Flow code editor is built on the Flow design framework ([website](https://flow.cldcvr.com/) / [github](https://github.com/cldcvr/flow-core)) using [Monaco Editor](https://microsoft.github.io/monaco-editor/)
+# Flow MD Editor
+The Flow md editor is built on the Flow design framework ([website](https://flow.cldcvr.com/) / [github](https://github.com/cldcvr/flow-core)) using [Monaco Editor](https://microsoft.github.io/monaco-editor/)
 
 # Installation
 
 ### 1️⃣ Install flow code editor dependency
 ```
-yarn add @cldcvr/flow-code-editor
+yarn add @cldcvr/flow-md-editor
 ```
 **Note:** after installation, re-start your application.
 
@@ -16,7 +16,7 @@ For **Vue JS:**
 Paste the below snippet after the closing `<template>` tag in your `App.vue` file
 ```html
 <style>
- @import "@cldcvr/flow-code-editor/dist/style.css";
+ @import "@cldcvr/flow-md-editor/dist/style.css";
 </style> 
 ```
 <details>
@@ -24,7 +24,7 @@ Paste the below snippet after the closing `<template>` tag in your `App.vue` fil
 
 **React:** Paste the below snippet in `src/index.tsx` or `index.jsx` file
 ```Javascript
-import "@cldcvr/flow-code-editor/dist/style.css";
+import "@cldcvr/flow-md-editor/dist/style.css";
 ```
 </details>
 
@@ -33,13 +33,13 @@ import "@cldcvr/flow-code-editor/dist/style.css";
 **Angular:** Add css file path in `angular.json` in `styles` property array.
 
 ```json
-"styles": ["@cldcvr/flow-code-editor/dist/style.css"],
+"styles": ["@cldcvr/flow-md-editor/dist/style.css"],
 ```
 </details>
 
 <br>
 
-### 3️⃣ Import flow-code-editor into your project
+### 3️⃣ Import flow-md-editor into your project
 
 Paste the below snippet in your project and add your application startup/runtime code to it. 
 
@@ -49,7 +49,7 @@ For **Vue JS:**
 Paste the below snippet in your project, for `src/main.ts` or `main.js`
 ```javascript
 import("@cldcvr/flow-core").then(async () => {
-	await import('@cldcvr/flow-code-editor');
+	await import('@cldcvr/flow-md-editor');
 	//add your application startup/runtime code here **
 });
 ```
@@ -61,7 +61,7 @@ Paste the below snippet in your project, for `src/main.ts`
 
 ```javascript
 import("@cldcvr/flow-core").then(async () => {
-	await import("@cldcvr/flow-code-editor");
+	await import("@cldcvr/flow-md-editor");
 	//add your application startup/runtime code here **
 });
 ```
@@ -82,7 +82,7 @@ Paste the below snippet in your project, for `src/index.tsx` or `index.jsx`
 **For Vue 3:**
 Copy paste below import types in your `main.ts` file.
 ```Javascript
-import "@cldcvr/flow-code-editor/dist/types/vue3";
+import "@cldcvr/flow-md-editor/dist/types/vue3";
 ```
 <details>
 <summary>For Vue 2</summary>
@@ -90,7 +90,7 @@ import "@cldcvr/flow-code-editor/dist/types/vue3";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@cldcvr/flow-code-editor/dist/types/vue2";
+import "@cldcvr/flow-md-editor/dist/types/vue2";
 ```
 </details>
 
@@ -99,67 +99,7 @@ import "@cldcvr/flow-code-editor/dist/types/vue2";
 
 **React**: Include react type in `tsconfig.json` file like below.
 ```json
-"include": ["src", "./node_modules/@cldcvr/flow-code-editor/dist/types/react.ts"]
+"include": ["src", "./node_modules/@cldcvr/flow-md-editor/dist/types/react.ts"]
 ```
 </details>
 <br>
-
-# Integration in Vite App
-
-### Add following code snippet in `vite.config.ts`
-
-```typescript
-import * as fs from "fs";
-import * as path from "path";
-
-const copyDir = (src, dest, callback?: (er: Error) => void) => {
-  const copy = (copySrc, copyDest) => {
-    fs.readdir(copySrc, (err, list) => {
-      if (err) {
-        callback(err);
-        return;
-      }
-      list.forEach((item) => {
-        const ss = path.resolve(copySrc, item);
-        fs.stat(ss, (err, stat) => {
-          if (err) {
-            callback(err);
-          } else {
-            const curSrc = path.resolve(copySrc, item);
-            const curDest = path.resolve(copyDest, item);
-
-            if (stat.isFile()) {
-              fs.createReadStream(curSrc).pipe(fs.createWriteStream(curDest));
-            } else if (stat.isDirectory()) {
-              fs.mkdirSync(curDest, { recursive: true });
-              copy(curSrc, curDest);
-            }
-          }
-        });
-      });
-    });
-  };
-
-  fs.access(dest, (err) => {
-    if (err) {
-      fs.mkdirSync(dest, { recursive: true });
-    }
-    copy(src, dest);
-  });
-};
-
-copyDir("node_modules/@cldcvr/flow-code-editor/dist/assets", "assets");
-```
-
-### add specify `assets` folder in `assetsInclude` property.
-
-For example
-
-```typescript
-export default defineConfig({
-  plugins: [vue()],
-  base: "",
-  // `assets` folder specified here 👇 
-  assetsInclude: ["assets"],
-});
-```

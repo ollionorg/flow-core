@@ -10,6 +10,7 @@ import "@cldcvr/flow-core/src";
 import "@cldcvr/flow-log/src";
 import "@cldcvr/flow-code-editor/src";
 import "@cldcvr/flow-table/src";
+import "@cldcvr/flow-md-editor/src";
 import { setCustomElementsManifest, setCustomElements } from "@storybook/web-components";
 import "./storybook.css";
 
@@ -92,6 +93,10 @@ async function run() {
 		await fetch(new URL("../packages/flow-table/custom-elements.json", import.meta.url))
 	).json();
 
+	const mdEditorCustomElements = await (
+		await fetch(new URL("../packages/flow-md-editor/custom-elements.json", import.meta.url))
+	).json();
+
 	setCustomElementsManifest(customElements);
 	setCustomElements(customElements);
 	setCustomElementsManifest(loggerCustomElements);
@@ -101,6 +106,9 @@ async function run() {
 
 	setCustomElementsManifest(tableCustomElements);
 	setCustomElements(tableCustomElements);
+
+	setCustomElementsManifest(mdEditorCustomElements);
+	setCustomElements(mdEditorCustomElements);
 }
 
 run();

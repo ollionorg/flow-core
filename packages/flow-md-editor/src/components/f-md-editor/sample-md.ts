@@ -41,15 +41,6 @@ Ordered list:
 ![Markdown logo](https://markdown-here.com/img/icon256.png)
 
 ## Code
-
-Inline code: \`var x = 10;\`
-
-Code block:
-
-\`\`\`python
-def greet(name):
-    print(f"Hello, {name}!")
-\`\`\`
 `;
 
 export default sampleMd;

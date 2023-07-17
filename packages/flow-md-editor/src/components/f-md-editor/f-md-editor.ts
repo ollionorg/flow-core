@@ -34,11 +34,10 @@ export class FMDEditor extends FRoot {
 			converter.setFlavor("github");
 
 			const htmlContent = converter.makeHtml(this.value ?? "");
-			return html`${unsafeHTML(htmlContent)}`;
+			return html`<div class="markdown-body">${unsafeHTML(htmlContent)}</div>`;
 		}
-		return html`<div class="flow-editable" @input=${this.handleInput} contenteditable="true">
-			${this.value}
-		</div>`;
+		// prettier-ignore
+		return html`<div class="flow-editable" @input=${this.handleInput} contenteditable="true">${this.value?.trim()}</div>`;
 	}
 
 	handleInput(event: InputEvent) {

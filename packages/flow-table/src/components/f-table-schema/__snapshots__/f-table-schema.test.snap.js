@@ -38,6 +38,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
     variant="stripped"
   >
     <f-trow
+      expand-icon-position="right"
       slot="header"
       state="default"
     >
@@ -304,6 +305,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
       </f-tcell>
     </f-trow>
     <f-trow
+      expand-icon-position="right"
       selected=""
       state="default"
     >
@@ -505,6 +507,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
       </f-tcell>
     </f-trow>
     <f-trow
+      expand-icon-position="right"
       selected=""
       state="default"
     >

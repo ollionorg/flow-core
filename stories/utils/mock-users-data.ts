@@ -75,7 +75,15 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 	}
 
 	const header: Record<string, FTableSchemaHeaderCell> = {
-		firstName: { value: "First name", sticky: true },
+		firstName: {
+			value: "First name",
+			sticky: true,
+			template: function () {
+				return html`<f-div height="100%" align="middle-left"
+					><f-text state="success">${this.value}</f-text></f-div
+				>`;
+			}
+		},
 		lastName: { value: "Last name" },
 		age: { value: "Age" },
 		birthDate: { value: "Birth Date" },

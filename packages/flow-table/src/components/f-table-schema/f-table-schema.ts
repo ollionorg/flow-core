@@ -57,7 +57,8 @@ export class FTableSchema extends FRoot {
 		...FTrow.styles,
 		...FButton.styles,
 		...FSearch.styles,
-		...FText.styles
+		...FText.styles,
+		...FDiv.styles
 	];
 
 	/**
@@ -166,8 +167,8 @@ export class FTableSchema extends FRoot {
 							?sticky-top=${ifDefined(this.stickyHeader)}
 							@selected-column=${this.handleColumnSelection}
 						>
-							<f-div gap="small" width="fit-content">
-								<f-text>${this.getHeaderCellTemplate(columnHeader[1])}</f-text>
+							<f-div gap="small" height="100%" width="fit-content">
+								${this.getHeaderCellTemplate(columnHeader[1])}
 								${columnHeader[1].disableSort ? nothing : this.getSortIcon(columnHeader[0])}</f-div
 							></f-tcell
 						>`;
@@ -225,7 +226,7 @@ export class FTableSchema extends FRoot {
 							.width=${width}
 							.actions=${actions}
 							?sticky-left=${ifDefined(sticky)}
-							><f-text inline .highlight=${highlightTerm}
+							><f-text style="height:100%" inline .highlight=${highlightTerm}
 								>${this.getCellTemplate(row.data[columnHeader[0]])}</f-text
 							></f-tcell
 						>`;
@@ -517,10 +518,10 @@ export class FTableSchema extends FRoot {
 		if (cell && typeof cell === "object" && cell.value && cell.template) {
 			return cell.template();
 		} else if (cell && typeof cell === "object" && cell.value) {
-			return cell.value;
+			return html`<f-text>${cell.value}</f-text>`;
 		}
 
-		return cell;
+		return html`<f-text>${cell}</f-text>`;
 	}
 }
 

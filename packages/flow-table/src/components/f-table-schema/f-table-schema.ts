@@ -161,6 +161,7 @@ export class FTableSchema extends FRoot {
 						}
 
 						return html`<f-tcell
+							part="cell"
 							.selected=${selected}
 							.width=${width}
 							?sticky-left=${ifDefined(sticky)}
@@ -222,6 +223,7 @@ export class FTableSchema extends FRoot {
 						}
 
 						return html`<f-tcell
+							part="cell"
 							.selected=${selected}
 							.width=${width}
 							.actions=${actions}

@@ -38,21 +38,25 @@ snapshots["f-table-schema should display rows and column based on data"] =
     variant="stripped"
   >
     <f-trow
+      expand-icon-position="right"
       slot="header"
       state="default"
     >
-      <f-tcell sticky-left="">
+      <f-tcell
+        part="cell"
+        sticky-left=""
+      >
         <f-div
           align="top-left"
           direction="row"
           gap="small"
-          height="fill-container"
+          height="100%"
           overflow="wrap"
           padding="none"
           selected="none"
           state="transparent"
           sticky="none"
-          style="padding: 0px; width: fit-content; border-radius: 0px;"
+          style="padding: 0px; width: fit-content; height: 100%; border-radius: 0px;"
           variant="block"
           width="fit-content"
         >
@@ -73,18 +77,18 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-icon-button>
         </f-div>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-div
           align="top-left"
           direction="row"
           gap="small"
-          height="fill-container"
+          height="100%"
           overflow="wrap"
           padding="none"
           selected="none"
           state="transparent"
           sticky="none"
-          style="padding: 0px; width: fit-content; border-radius: 0px;"
+          style="padding: 0px; width: fit-content; height: 100%; border-radius: 0px;"
           variant="block"
           width="fit-content"
         >
@@ -105,18 +109,18 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-icon-button>
         </f-div>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-div
           align="top-left"
           direction="row"
           gap="small"
-          height="fill-container"
+          height="100%"
           overflow="wrap"
           padding="none"
           selected="none"
           state="transparent"
           sticky="none"
-          style="padding: 0px; width: fit-content; border-radius: 0px;"
+          style="padding: 0px; width: fit-content; height: 100%; border-radius: 0px;"
           variant="block"
           width="fit-content"
         >
@@ -137,18 +141,18 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-icon-button>
         </f-div>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-div
           align="top-left"
           direction="row"
           gap="small"
-          height="fill-container"
+          height="100%"
           overflow="wrap"
           padding="none"
           selected="none"
           state="transparent"
           sticky="none"
-          style="padding: 0px; width: fit-content; border-radius: 0px;"
+          style="padding: 0px; width: fit-content; height: 100%; border-radius: 0px;"
           variant="block"
           width="fit-content"
         >
@@ -169,18 +173,18 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-icon-button>
         </f-div>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-div
           align="top-left"
           direction="row"
           gap="small"
-          height="fill-container"
+          height="100%"
           overflow="wrap"
           padding="none"
           selected="none"
           state="transparent"
           sticky="none"
-          style="padding: 0px; width: fit-content; border-radius: 0px;"
+          style="padding: 0px; width: fit-content; height: 100%; border-radius: 0px;"
           variant="block"
           width="fit-content"
         >
@@ -201,18 +205,18 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-icon-button>
         </f-div>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-div
           align="top-left"
           direction="row"
           gap="small"
-          height="fill-container"
+          height="100%"
           overflow="wrap"
           padding="none"
           selected="none"
           state="transparent"
           sticky="none"
-          style="padding: 0px; width: fit-content; border-radius: 0px;"
+          style="padding: 0px; width: fit-content; height: 100%; border-radius: 0px;"
           variant="block"
           width="fit-content"
         >
@@ -233,18 +237,18 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-icon-button>
         </f-div>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-div
           align="top-left"
           direction="row"
           gap="small"
-          height="fill-container"
+          height="100%"
           overflow="wrap"
           padding="none"
           selected="none"
           state="transparent"
           sticky="none"
-          style="padding: 0px; width: fit-content; border-radius: 0px;"
+          style="padding: 0px; width: fit-content; height: 100%; border-radius: 0px;"
           variant="block"
           width="fit-content"
         >
@@ -266,6 +270,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
         </f-div>
       </f-tcell>
       <f-tcell
+        part="cell"
         selected=""
         sticky-left=""
         style="min-width: 300px; display: block;"
@@ -275,13 +280,13 @@ snapshots["f-table-schema should display rows and column based on data"] =
           align="top-left"
           direction="row"
           gap="small"
-          height="fill-container"
+          height="100%"
           overflow="wrap"
           padding="none"
           selected="none"
           state="transparent"
           sticky="none"
-          style="padding: 0px; width: fit-content; border-radius: 0px;"
+          style="padding: 0px; width: fit-content; height: 100%; border-radius: 0px;"
           variant="block"
           width="fit-content"
         >
@@ -304,6 +309,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
       </f-tcell>
     </f-trow>
     <f-trow
+      expand-icon-position="right"
       selected=""
       state="default"
     >
@@ -347,48 +353,55 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-text>
         </f-div>
       </f-div>
-      <f-tcell sticky-left="">
+      <f-tcell
+        part="cell"
+        sticky-left=""
+      >
         <f-text
           align="left"
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >
           Vikas 0
         </f-text>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-text
           align="left"
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >
           Last name 0
         </f-text>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-text
           align="left"
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >
           33
         </f-text>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-text
           align="left"
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >
@@ -421,12 +434,13 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-div>
         </f-text>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-text
           align="left"
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >
@@ -462,24 +476,26 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-div>
         </f-text>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-text
           align="left"
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >
           8989899981
         </f-text>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-text
           align="left"
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >
@@ -487,6 +503,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
         </f-text>
       </f-tcell>
       <f-tcell
+        part="cell"
         selected=""
         sticky-left=""
         style="min-width: 300px; display: block;"
@@ -497,6 +514,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >
@@ -505,6 +523,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
       </f-tcell>
     </f-trow>
     <f-trow
+      expand-icon-position="right"
       selected=""
       state="default"
     >
@@ -548,48 +567,55 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-text>
         </f-div>
       </f-div>
-      <f-tcell sticky-left="">
+      <f-tcell
+        part="cell"
+        sticky-left=""
+      >
         <f-text
           align="left"
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >
           Vikas 1
         </f-text>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-text
           align="left"
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >
           Last name 1
         </f-text>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-text
           align="left"
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >
           33
         </f-text>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-text
           align="left"
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >
@@ -622,12 +648,13 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-div>
         </f-text>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-text
           align="left"
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >
@@ -663,24 +690,26 @@ snapshots["f-table-schema should display rows and column based on data"] =
           </f-div>
         </f-text>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-text
           align="left"
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >
           8989899981
         </f-text>
       </f-tcell>
-      <f-tcell>
+      <f-tcell part="cell">
         <f-text
           align="left"
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >
@@ -688,6 +717,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
         </f-text>
       </f-tcell>
       <f-tcell
+        part="cell"
         selected=""
         sticky-left=""
         style="min-width: 300px; display: block;"
@@ -698,6 +728,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
           inline=""
           size="medium"
           state="default"
+          style="height:100%"
           variant="para"
           weight="regular"
         >

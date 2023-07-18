@@ -13,6 +13,7 @@ export type FTrowState =
 	| "danger"
 	| "inherit"
 	| "default";
+export type FTrowChevronPosition = "left" | "right";
 
 @flowElement("f-trow")
 export class FTrow extends FRoot {
@@ -38,6 +39,12 @@ export class FTrow extends FRoot {
 	 */
 	@property({ type: Boolean, reflect: true })
 	selected?: boolean;
+
+	/**
+	 * @attribute chevron position
+	 */
+	@property({ type: String, reflect: true, attribute: "expand-icon-position" })
+	expandIconPosition?: FTrowChevronPosition = "right";
 
 	/**
 	 * @attribute is row selected
@@ -112,10 +119,16 @@ export class FTrow extends FRoot {
 	handleDetailsSlot() {
 		if (this.detailsSlotElement.assignedNodes().length > 0) {
 			const allCells = this.querySelectorAll<FTcell>(":scope > f-tcell");
-			const lastCell = allCells.item(allCells.length - 1);
-			lastCell.expandIcon = true;
 
-			const chevron = lastCell.chevron;
+			let chevronCell;
+			if (this.expandIconPosition === "left") {
+				chevronCell = allCells.item(0);
+			} else {
+				chevronCell = allCells.item(allCells.length - 1);
+			}
+			chevronCell.expandIcon = true;
+			chevronCell.expandIconPosition = this.expandIconPosition as FTrowChevronPosition;
+			const chevron = chevronCell.chevron;
 			if (chevron) {
 				if (this.open) {
 					chevron.icon = "i-chevron-up";

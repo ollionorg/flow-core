@@ -24,14 +24,17 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 			actions: [
 				{
 					icon: "i-chat",
+					tooltip: "This is Tooltip",
 					id: faker.random.alpha(5)
 				},
 				{
 					icon: "i-mail",
+					tooltip: "This is 2nd Tooltip",
 					id: faker.random.alpha(5)
 				},
 				{
 					icon: "i-star",
+					tooltip: "This is 3rd Tooltip",
 					id: faker.random.alpha(5)
 				}
 			]
@@ -60,6 +63,7 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 
 		const userRow: FTableSchemaDataRow = {
 			id: faker.random.alpha(10),
+			expandIconPosition: "left",
 			data: { firstName, lastName, age, birthDate, email, mobile, sex, address },
 			details: function () {
 				return html`<f-div padding="large"
@@ -71,7 +75,15 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 	}
 
 	const header: Record<string, FTableSchemaHeaderCell> = {
-		firstName: { value: "First name", sticky: true },
+		firstName: {
+			value: "First name",
+			sticky: true,
+			template: function () {
+				return html`<f-div height="100%" align="middle-left"
+					><f-text state="success">${this.value}</f-text></f-div
+				>`;
+			}
+		},
 		lastName: { value: "Last name" },
 		age: { value: "Age" },
 		birthDate: { value: "Birth Date" },

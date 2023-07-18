@@ -200,7 +200,7 @@
     },
     {
       "name": "f-tcell",
-      "description": "Events:\n\n  * `update-row-selection` {`CustomEvent<boolean>`} - \n\n  * `toggle-row` {`CustomEvent<{ value: boolean; }>`} - \n\n  * `selected-column` {`CustomEvent<{ columnIndex: number; }>`} - \n\n  * `highlight-column` {`CustomEvent<{ columnIndex: number; type: \"add\" | \"remove\"; }>`} - \n\nAttributes:\n\n  * `actions` {`FTcellActions | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `width` {`string | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `actions` {`FTcellActions | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `width` {`string | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `isDisabled` {`boolean`} - \n\n  * `expandIcon` {`boolean`} - \n\n  * `checkbox` - \n\n  * `radio` - \n\n  * `chevron` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - \n\n  * `mouseEnter` - \n\n  * `mouseLeave` - ",
+      "description": "Events:\n\n  * `update-row-selection` {`CustomEvent<boolean>`} - \n\n  * `toggle-row` {`CustomEvent<{ value: boolean; }>`} - \n\n  * `selected-column` {`CustomEvent<{ columnIndex: number; }>`} - \n\n  * `highlight-column` {`CustomEvent<{ columnIndex: number; type: \"add\" | \"remove\"; }>`} - \n\nAttributes:\n\n  * `actions` {`FTcellActions | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `width` {`string | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `actions` {`FTcellActions | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `width` {`string | undefined`} - \n\n  * `selectable` {`FTableSelectable | undefined`} - \n\n  * `isDisabled` {`boolean`} - \n\n  * `expandIcon` {`boolean`} - \n\n  * `expandIconPosition` {`FTrowChevronPosition`} - \n\n  * `checkbox` - \n\n  * `radio` - \n\n  * `chevron` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - \n\n  * `mouseEnter` - \n\n  * `mouseLeave` - ",
       "attributes": [
         {
           "name": "actions",
@@ -242,7 +242,7 @@
     },
     {
       "name": "f-trow",
-      "description": "Events:\n\n  * `selected-row` {`CustomEvent<{ element: this; value: any; }>`} - \n\nAttributes:\n\n  * `state` {`FTrowState | undefined`} - \n\n  * `open` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `disable-selection` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `state` {`FTrowState | undefined`} - \n\n  * `open` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `disableSelection` {`boolean | undefined`} - \n\n  * `expndablePanel` - \n\n  * `detailsSlotElement` {`HTMLSlotElement`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - \n\n  * `mouseEnter` - \n\n  * `mouseLeave` - ",
+      "description": "Events:\n\n  * `selected-row` {`CustomEvent<{ element: this; value: any; }>`} - \n\nAttributes:\n\n  * `state` {`FTrowState | undefined`} - \n\n  * `open` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `expand-icon-position` {`FTrowChevronPosition | undefined`} - \n\n  * `disable-selection` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `state` {`FTrowState | undefined`} - \n\n  * `open` {`boolean | undefined`} - \n\n  * `selected` {`boolean | undefined`} - \n\n  * `expandIconPosition` {`FTrowChevronPosition | undefined`} - \n\n  * `disableSelection` {`boolean | undefined`} - \n\n  * `expndablePanel` - \n\n  * `detailsSlotElement` {`HTMLSlotElement`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - \n\n  * `mouseEnter` - \n\n  * `mouseLeave` - ",
       "attributes": [
         {
           "name": "state",
@@ -280,6 +280,18 @@
           "name": "selected",
           "description": "`selected` {`boolean | undefined`} - \n\nProperty: selected",
           "values": []
+        },
+        {
+          "name": "expand-icon-position",
+          "description": "`expand-icon-position` {`FTrowChevronPosition | undefined`} - \n\nProperty: expandIconPosition\n\nDefault: right",
+          "values": [
+            {
+              "name": "left"
+            },
+            {
+              "name": "right"
+            }
+          ]
         },
         {
           "name": "disable-selection",

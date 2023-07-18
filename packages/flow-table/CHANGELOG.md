@@ -3,6 +3,19 @@
 
 # Change Log
 
+## [1.2.0] - 2023-07-18
+
+### Features
+- `f-table-schema` : expandIconPosition position made configurable.
+- `f-trow` now supports `expand-icon-position` attribute.
+- `f-tcell` actions now supports tooltip
+
+### Improvements
+- `part="cell"` added `f-table-schema` to support external styles.
+
+### Bug fixes
+- `f-table-schema` : external template alignment fixed.
+
 ## [1.1.1] - 2023-07-13
 
 ### Bug Fixes

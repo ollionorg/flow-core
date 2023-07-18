@@ -6,7 +6,7 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 import { property, query, state } from "lit/decorators.js";
 import { FTable, FTableSelectable, FTableSize, FTableVariant } from "../f-table/f-table";
 import { FTcell, FTcellActions } from "../f-tcell/f-tcell";
-import { FTrow, FTrowState } from "../f-trow/f-trow";
+import { FTrow, FTrowChevronPosition, FTrowState } from "../f-trow/f-trow";
 import eleStyle from "./f-table-schema.scss";
 import { repeat } from "lit/directives/repeat.js";
 
@@ -17,6 +17,7 @@ export type FTableSchemaDataRow = {
 	open?: boolean;
 	id: string;
 	disableSelection?: boolean;
+	expandIconPosition?: FTrowChevronPosition;
 	data: Record<string, FTableSchemaCell>;
 };
 export type FTableSchemaData = {
@@ -56,7 +57,8 @@ export class FTableSchema extends FRoot {
 		...FTrow.styles,
 		...FButton.styles,
 		...FSearch.styles,
-		...FText.styles
+		...FText.styles,
+		...FDiv.styles
 	];
 
 	/**
@@ -159,14 +161,15 @@ export class FTableSchema extends FRoot {
 						}
 
 						return html`<f-tcell
+							part="cell"
 							.selected=${selected}
 							.width=${width}
 							?sticky-left=${ifDefined(sticky)}
 							?sticky-top=${ifDefined(this.stickyHeader)}
 							@selected-column=${this.handleColumnSelection}
 						>
-							<f-div gap="small" width="fit-content">
-								<f-text>${this.getHeaderCellTemplate(columnHeader[1])}</f-text>
+							<f-div gap="small" height="100%" width="fit-content">
+								${this.getHeaderCellTemplate(columnHeader[1])}
 								${columnHeader[1].disableSort ? nothing : this.getSortIcon(columnHeader[0])}</f-div
 							></f-tcell
 						>`;
@@ -189,6 +192,7 @@ export class FTableSchema extends FRoot {
 				};
 				return html`<f-trow
 					id=${row.id}
+					.expandIconPosition=${row.expandIconPosition ?? "right"}
 					.open=${row.open ?? false}
 					.selected=${row.selected ?? false}
 					.disableSelection=${Boolean(row.disableSelection)}
@@ -219,11 +223,12 @@ export class FTableSchema extends FRoot {
 						}
 
 						return html`<f-tcell
+							part="cell"
 							.selected=${selected}
 							.width=${width}
 							.actions=${actions}
 							?sticky-left=${ifDefined(sticky)}
-							><f-text inline .highlight=${highlightTerm}
+							><f-text style="height:100%" inline .highlight=${highlightTerm}
 								>${this.getCellTemplate(row.data[columnHeader[0]])}</f-text
 							></f-tcell
 						>`;
@@ -515,10 +520,10 @@ export class FTableSchema extends FRoot {
 		if (cell && typeof cell === "object" && cell.value && cell.template) {
 			return cell.template();
 		} else if (cell && typeof cell === "object" && cell.value) {
-			return cell.value;
+			return html`<f-text>${cell.value}</f-text>`;
 		}
 
-		return cell;
+		return html`<f-text>${cell}</f-text>`;
 	}
 }
 

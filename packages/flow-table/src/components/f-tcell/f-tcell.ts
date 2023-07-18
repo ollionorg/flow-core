@@ -4,16 +4,19 @@ import { property, query, state } from "lit/decorators.js";
 import { FCheckbox, FDiv, FIconButton, FIcon, FRadio, FRoot, flowElement } from "@cldcvr/flow-core";
 import { FTableSelectable } from "../f-table/f-table";
 import eleStyle from "./f-tcell.scss";
+import { FTrowChevronPosition } from "../f-trow/f-trow";
 
 export type FTcellAction = {
 	icon: string;
 	id: string;
+	tooltip?: string;
 	onClick?: (event: PointerEvent) => void;
 	onMouseOver?: (event: MouseEvent) => void;
 	onMouseLeave?: (event: MouseEvent) => void;
 };
 
 export type FTcellActions = FTcellAction[];
+
 @flowElement("f-tcell")
 export class FTcell extends FRoot {
 	/**
@@ -49,6 +52,9 @@ export class FTcell extends FRoot {
 	@state()
 	expandIcon = false;
 
+	@state()
+	expandIconPosition: FTrowChevronPosition = "right";
+
 	@query("f-checkbox")
 	checkbox?: FCheckbox;
 
@@ -68,6 +74,7 @@ export class FTcell extends FRoot {
 					category="packed"
 					state="neutral"
 					.icon=${ac.icon}
+					.tooltip=${ac.tooltip ?? undefined}
 					@click=${ifDefined(ac.onClick)}
 					@mouseover=${ifDefined(ac.onMouseOver)}
 					@mouseleave=${ifDefined(ac.onMouseLeave)}
@@ -91,10 +98,22 @@ export class FTcell extends FRoot {
 						@input=${this.handleSelection}
 						class="cell-radio"
 				  ></f-radio>`
-				: nothing} <slot></slot>
+				: nothing}
+			${this.expandIcon && this.expandIconPosition === "left"
+				? html`
+						<f-icon-button
+							size="medium"
+							category="packed"
+							class="row-toggler"
+							state="neutral"
+							@click=${this.toggleDetails}
+							icon="i-chevron-down"
+						></f-icon-button>
+				  `
+				: nothing}<slot></slot>
 			<f-div class="details-toggle" width="hug-content" gap="medium" align="top-right">
 				${this.renderActions()}
-				${this.expandIcon
+				${this.expandIcon && this.expandIconPosition === "right"
 					? html`
 							<f-icon-button
 								size="medium"

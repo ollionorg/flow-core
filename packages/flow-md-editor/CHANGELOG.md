@@ -3,6 +3,11 @@
 
 # Change Log
 
+## [0.0.2] - 2023-07-18
+
+### Improvements
+- `f-md-editor` : edit mode css updated
+
 ## [0.0.1] - 2023-07-12
 
 ### Features

@@ -24,14 +24,17 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 			actions: [
 				{
 					icon: "i-chat",
+					tooltip: "This is Tooltip",
 					id: faker.random.alpha(5)
 				},
 				{
 					icon: "i-mail",
+					tooltip: "This is 2nd Tooltip",
 					id: faker.random.alpha(5)
 				},
 				{
 					icon: "i-star",
+					tooltip: "This is 3rd Tooltip",
 					id: faker.random.alpha(5)
 				}
 			]

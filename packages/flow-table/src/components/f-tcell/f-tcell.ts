@@ -9,6 +9,7 @@ import { FTrowChevronPosition } from "../f-trow/f-trow";
 export type FTcellAction = {
 	icon: string;
 	id: string;
+	tooltip?: string;
 	onClick?: (event: PointerEvent) => void;
 	onMouseOver?: (event: MouseEvent) => void;
 	onMouseLeave?: (event: MouseEvent) => void;
@@ -73,6 +74,7 @@ export class FTcell extends FRoot {
 					category="packed"
 					state="neutral"
 					.icon=${ac.icon}
+					.tooltip=${ac.tooltip ?? undefined}
 					@click=${ifDefined(ac.onClick)}
 					@mouseover=${ifDefined(ac.onMouseOver)}
 					@mouseleave=${ifDefined(ac.onMouseLeave)}

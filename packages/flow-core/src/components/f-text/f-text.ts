@@ -204,11 +204,12 @@ export class FText extends FRoot {
 		const textareaSnippet = html`<span
 			class="textarea"
 			role="textbox"
-			contenteditable
+			contenteditable=${true}
 			.variant=${this.variant}
 			.size=${this.size}
 			.weight=${this.weight}
 			@input=${this.handleInput}
+			data-placeholder="Enter Your Text here"
 			><div class="slot-text">${this.textContent ?? ""}</div>
 			<div class="pseudo-submit-text">
 				<f-icon

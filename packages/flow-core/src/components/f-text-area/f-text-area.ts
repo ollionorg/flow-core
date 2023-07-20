@@ -179,6 +179,7 @@ export class FTextArea extends FRoot {
 		return html`
 			<f-div
 				padding="none"
+				class="f-text-area-root"
 				?disabled=${this.disabled}
 				gap="x-small"
 				direction="column"

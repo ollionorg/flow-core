@@ -10,7 +10,7 @@ f-md-editor {
 	border-radius: 4px;
 }
 
-:host {
+f-md-editor {
 	div.flow-editable {
 		@include scrollbar();
 		outline: none;
@@ -28,12 +28,10 @@ f-md-editor {
 	a {
 		color: var(--color-primary-default);
 	}
-	code {
+	.markdown-body code {
 		box-sizing: border-box;
-
-		font-family: var(--flow-code-font);
 	}
-	pre {
+	.markdown-body pre {
 		background-color: var(--color-surface-tertiary);
 		display: block;
 		box-sizing: border-box;
@@ -98,13 +96,13 @@ f-md-editor {
 
 	.markdown-body code,
 	.markdown-body pre {
-		font-family: var(--flow-code-font);
+		font-family: var(--flow-code-font) !important;
 		font-size: 0.9em;
 	}
 
 	.markdown-body code {
 		padding: 0.15em 0.2em;
-		background-color: var(--color-surface-tertiary);
+		background-color: var(--color-surface-tertiary) !important;
 		border-radius: 4px;
 	}
 

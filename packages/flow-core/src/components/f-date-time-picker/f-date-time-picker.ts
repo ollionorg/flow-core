@@ -313,6 +313,7 @@ export class FDateTimePicker extends FRoot {
 				?clear=${this.clear}
 				?loading=${this.loading}
 				?disabled=${this.disabled}
+				class="f-date-input-picker"
 				data-qa-element-id=${this.getAttribute("data-qa-element-id")}
 				@keydown=${() => {
 					this.flatPickerElement.close();

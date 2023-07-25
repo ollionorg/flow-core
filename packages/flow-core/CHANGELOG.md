@@ -4,34 +4,47 @@
 
 # Change Log
 
+## [1.17.9] - 2023-07-25
+
+### Improvements
+
+- `f-pictogram` have an `auto-bg` flag where it auto assigns a dynamic color based on characters.
+
 ## [1.17.8] - 2023-07-21
+
 ### Improvements
 
 - `disabled` behavior updated for `f-date-time-picker`, `f-emoji-picker`,`f-icon-button`,`f-search`.
 
 ## [1.17.7] - 2023-07-20
+
 ### Bug Fixes
 
 - `f-select` : `disabled` option css fixed.
 - `f-form-builder` not taking full width in `f-div` direction `column`.
 
 ## [1.17.6] - 2023-07-11
+
 ### Bug Fixes
 
 - tooltip removal logic updated (when value switch from string to null or undefined)
 
 ## [1.17.5] - 2023-07-11
+
 ### Bug Fixes
 
 - `f-search`: `scope` dropdown width updated.
 - disabled css updated for elements in shadowRoot.
+
 ## [1.17.4] - 2023-07-05
+
 ### Bug Fixes
 
 - `f-select`: `create-option` not working in formbuilder.
 - `f-select` : searched option not getting selected in formbuilder.
 
 ## [1.17.3] - 2023-07-03
+
 ### Improvements
 
 - `f-select`: `optionTemplate` function has now a second value `isSelected`, to check and differ the template displayed on selection area.
@@ -42,11 +55,12 @@
 - `f-progress-bar`: variant curved issue fixed.
 
 ## [1.17.2] - 2023-07-03
+
 ### Bug Fixes
+
 - tooltip not displaying when element is disabled.
 - `f-input` browser autofill style updated.
 - `f-text` state switching issue.
-
 
 ## [1.17.1] - 2023-06-21
 

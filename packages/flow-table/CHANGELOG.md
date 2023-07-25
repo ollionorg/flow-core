@@ -3,6 +3,10 @@
 
 # Change Log
 
+## [1.2.2] - 2023-07-20
+
+### Improvements
+- `f-tcell` : In actions callback, passing additional parameter as element for further implementation (like opening popover).
 ## [1.2.1] - 2023-07-20
 
 ### Improvements

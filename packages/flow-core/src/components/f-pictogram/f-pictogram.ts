@@ -122,7 +122,7 @@ export class FPictogram extends FRoot {
 		if (!this.hashCode(this.source).includes("#")) {
 			const hsla = this.hashCode(this.source)
 				.replace("hsla", "")
-				.replace(/[\(\)]/g, "")
+				.replace(/\(|\)/g, "")
 				.split("%")
 				.join("")
 				.split(",");
@@ -145,12 +145,15 @@ export class FPictogram extends FRoot {
 	get renderedHtml() {
 		const emojiRegex = /\p{Extended_Pictographic}/u;
 		if (isValidHttpUrl(this.source)) {
+			this.autoBg = false;
 			return `<img src="${this.source}" />`;
 		} else if (emojiRegex.test(this.source)) {
+			this.autoBg = false;
 			return `<f-icon class="${"f-pictogram-" + this.size + "-emoji"}" source="${
 				this.source
 			}" size="${this.sourceSize()}"></f-icon>`;
 		} else {
+			this.autoBg = false;
 			const IconPack = ConfigUtil.getConfig().iconPack;
 			if (IconPack) {
 				const svg = IconPack[this.source];

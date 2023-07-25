@@ -28,6 +28,10 @@ export class FMDEditor extends FRoot {
 	@query(".flow-editable")
 	editor?: HTMLDivElement;
 
+	createRenderRoot() {
+		return this;
+	}
+
 	render() {
 		if (this.mode === "view") {
 			const converter = new showdown.Converter();

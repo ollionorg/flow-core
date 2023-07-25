@@ -20,13 +20,13 @@ describe("f-md-editor", () => {
 			html` <f-md-editor .value=${sampleMd} mode="view"></f-md-editor>`
 		);
 		await el.updateComplete;
-		await expect(el).shadowDom.to.equalSnapshot();
+		await expect(el).lightDom.to.equalSnapshot();
 	});
 	it("should match edit mode snapshot", async () => {
 		const el = await fixture<FMDEditor>(
 			html` <f-md-editor .value=${sampleMd} mode="edit"></f-md-editor>`
 		);
 		await el.updateComplete;
-		await expect(el).shadowDom.to.equalSnapshot();
+		await expect(el).lightDom.to.equalSnapshot();
 	});
 });

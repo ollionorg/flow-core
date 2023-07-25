@@ -266,6 +266,7 @@ export class FSearch extends FRoot {
 			direction="column"
 			gap="x-small"
 			height="hug-content"
+			class="f-search-wrapper"
 		>
 			<f-div padding="none" direction="column" width="fill-container" id="header-section">
 				<f-div padding="none" gap="auto" direction="row" height="hug-content">

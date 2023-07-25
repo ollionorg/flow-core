@@ -3,6 +3,14 @@
 
 # Change Log
 
+## [1.2.1] - 2023-07-20
+
+### Improvements
+- `f-table-schema` : `@row-click` event emitted with row object
+
+### Bug Fixes
+- `f-table-schema` : `show-search-bar` not working in vue
+
 ## [1.2.0] - 2023-07-18
 
 ### Features

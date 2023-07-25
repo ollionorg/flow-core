@@ -3,6 +3,11 @@
 
 # Change Log
 
+## [1.0.0] - 2023-07-20
+
+### Feature
+- BREAKING : Using lightDom for markdown customization (This change will apply gloabl or userAgent styles in md viewer)
+
 ## [0.0.2] - 2023-07-18
 
 ### Improvements

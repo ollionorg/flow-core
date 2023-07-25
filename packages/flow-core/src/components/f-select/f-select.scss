@@ -336,11 +336,13 @@ applies styles on f-select
 			}
 		}
 	}
-	div[disabled],
-	f-div[disabled] {
+	div.f-select-field[disabled] {
 		@include disabled();
 		pointer-events: none;
 		opacity: 1;
+	}
+	f-div.f-select-options-clickable[disabled] {
+		@include disabled();
 	}
 }
 

@@ -125,13 +125,17 @@ export class FTableSchema extends FRoot {
 	/**
 	 * search on selected header
 	 */
-	@property({ type: String, reflect: true, attribute: "search-on" })
+	@property({ type: String, reflect: true, attribute: "search-scope" })
 	searchScope = "all";
 	/**
 	 * show search input box on top
 	 */
 	@property({ type: Boolean, reflect: true, attribute: "show-search-bar" })
 	showSearchBar = true;
+
+	set ["show-search-bar"](val: boolean) {
+		this.showSearchBar = val;
+	}
 
 	@state()
 	offset = 0;
@@ -197,6 +201,7 @@ export class FTableSchema extends FRoot {
 					.selected=${row.selected ?? false}
 					.disableSelection=${Boolean(row.disableSelection)}
 					.state=${row.state ?? "default"}
+					@click=${(e: PointerEvent) => this.handleRowClick(row, e)}
 					@toggle-row=${(e: CustomEvent) => this.toggleRowDetails(row, e)}
 					@selected-row=${(e: CustomEvent) => this.handleRowSelection(row, e)}
 				>
@@ -459,6 +464,14 @@ export class FTableSchema extends FRoot {
 		 * Whenever row is selected/de-selected this event emitts with header object
 		 */
 		const rowInputEvent = new CustomEvent("row-input", {
+			detail: row,
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(rowInputEvent);
+	}
+	handleRowClick(row: FTableSchemaDataRow, _event: PointerEvent) {
+		const rowInputEvent = new CustomEvent("row-click", {
 			detail: row,
 			bubbles: true,
 			composed: true

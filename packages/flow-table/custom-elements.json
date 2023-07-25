@@ -404,7 +404,7 @@
               },
               "default": "\"all\"",
               "description": "search on selected header",
-              "attribute": "search-on",
+              "attribute": "search-scope",
               "reflects": true
             },
             {
@@ -417,6 +417,10 @@
               "description": "show search input box on top",
               "attribute": "show-search-bar",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "[\"show-search-bar\"]"
             },
             {
               "kind": "field",
@@ -523,6 +527,24 @@
                   "name": "event",
                   "type": {
                     "text": "CustomEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleRowClick",
+              "parameters": [
+                {
+                  "name": "row",
+                  "type": {
+                    "text": "FTableSchemaDataRow"
+                  }
+                },
+                {
+                  "name": "_event",
+                  "type": {
+                    "text": "PointerEvent"
                   }
                 }
               ]
@@ -674,7 +696,7 @@
               "fieldName": "searchTerm"
             },
             {
-              "name": "search-on",
+              "name": "search-scope",
               "type": {
                 "text": "string"
               },
@@ -705,166 +727,6 @@
           "declaration": {
             "name": "FTableSchema",
             "module": "src/components/f-table-schema/f-table-schema.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-trow/f-trow.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTrow",
-          "members": [
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FTrowState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "selected",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "attribute": "selected",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "expandIconPosition",
-              "type": {
-                "text": "FTrowChevronPosition | undefined"
-              },
-              "default": "\"right\"",
-              "attribute": "expand-icon-position",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disableSelection",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "attribute": "disable-selection",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "expndablePanel",
-              "type": {
-                "text": "FTcell | undefined"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "detailsSlotElement",
-              "type": {
-                "text": "HTMLSlotElement"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "propogateProps",
-              "description": "propogate props related to chevron and checkbox and radio boxes"
-            },
-            {
-              "kind": "method",
-              "name": "toggleDetails",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleInput",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleDetailsSlot"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "state",
-              "type": {
-                "text": "FTrowState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "fieldName": "open"
-            },
-            {
-              "name": "selected",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "fieldName": "selected"
-            },
-            {
-              "name": "expand-icon-position",
-              "type": {
-                "text": "FTrowChevronPosition | undefined"
-              },
-              "default": "\"right\"",
-              "fieldName": "expandIconPosition"
-            },
-            {
-              "name": "disable-selection",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "fieldName": "disableSelection"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTrow",
-          "declaration": {
-            "name": "FTrow",
-            "module": "src/components/f-trow/f-trow.ts"
           }
         }
       ]
@@ -1046,6 +908,166 @@
           "declaration": {
             "name": "FTcell",
             "module": "src/components/f-tcell/f-tcell.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-trow/f-trow.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTrow",
+          "members": [
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FTrowState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "expandIconPosition",
+              "type": {
+                "text": "FTrowChevronPosition | undefined"
+              },
+              "default": "\"right\"",
+              "attribute": "expand-icon-position",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disableSelection",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "attribute": "disable-selection",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "expndablePanel",
+              "type": {
+                "text": "FTcell | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "detailsSlotElement",
+              "type": {
+                "text": "HTMLSlotElement"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "propogateProps",
+              "description": "propogate props related to chevron and checkbox and radio boxes"
+            },
+            {
+              "kind": "method",
+              "name": "toggleDetails",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleDetailsSlot"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "FTrowState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "fieldName": "open"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "fieldName": "selected"
+            },
+            {
+              "name": "expand-icon-position",
+              "type": {
+                "text": "FTrowChevronPosition | undefined"
+              },
+              "default": "\"right\"",
+              "fieldName": "expandIconPosition"
+            },
+            {
+              "name": "disable-selection",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "fieldName": "disableSelection"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTrow",
+          "declaration": {
+            "name": "FTrow",
+            "module": "src/components/f-trow/f-trow.ts"
           }
         }
       ]

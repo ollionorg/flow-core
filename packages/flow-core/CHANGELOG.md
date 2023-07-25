@@ -4,6 +4,17 @@
 
 # Change Log
 
+## [1.17.8] - 2023-07-21
+### Improvements
+
+- `disabled` behavior updated for `f-date-time-picker`, `f-emoji-picker`,`f-icon-button`,`f-search`.
+
+## [1.17.7] - 2023-07-20
+### Bug Fixes
+
+- `f-select` : `disabled` option css fixed.
+- `f-form-builder` not taking full width in `f-div` direction `column`.
+
 ## [1.17.6] - 2023-07-11
 ### Bug Fixes
 

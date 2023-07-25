@@ -1,18 +1,18 @@
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
-import { ifDefined } from "lit-html/directives/if-defined.js";
 import { property, query, state } from "lit/decorators.js";
 import { FCheckbox, FDiv, FIconButton, FIcon, FRadio, FRoot, flowElement } from "@cldcvr/flow-core";
 import { FTableSelectable } from "../f-table/f-table";
 import eleStyle from "./f-tcell.scss";
 import { FTrowChevronPosition } from "../f-trow/f-trow";
+import { createRef, ref } from "lit/directives/ref.js";
 
 export type FTcellAction = {
 	icon: string;
 	id: string;
 	tooltip?: string;
-	onClick?: (event: PointerEvent) => void;
-	onMouseOver?: (event: MouseEvent) => void;
-	onMouseLeave?: (event: MouseEvent) => void;
+	onClick?: (event: PointerEvent, element?: FIconButton) => void;
+	onMouseOver?: (event: MouseEvent, element?: FIconButton) => void;
+	onMouseLeave?: (event: MouseEvent, element?: FIconButton) => void;
 };
 
 export type FTcellActions = FTcellAction[];
@@ -67,7 +67,9 @@ export class FTcell extends FRoot {
 	renderActions() {
 		if (this.actions) {
 			return html`${this.actions.map(ac => {
+				const actionRef = createRef<FIconButton>();
 				return html`<f-icon-button
+					${ref(actionRef)}
 					id=${ac.id}
 					class="f-tcell-actions"
 					size="medium"
@@ -75,9 +77,21 @@ export class FTcell extends FRoot {
 					state="neutral"
 					.icon=${ac.icon}
 					.tooltip=${ac.tooltip ?? undefined}
-					@click=${ifDefined(ac.onClick)}
-					@mouseover=${ifDefined(ac.onMouseOver)}
-					@mouseleave=${ifDefined(ac.onMouseLeave)}
+					@click=${(event: PointerEvent) => {
+						if (ac.onClick) {
+							ac.onClick(event, actionRef.value);
+						}
+					}}
+					@mouseover=${(event: MouseEvent) => {
+						if (ac.onMouseOver) {
+							ac.onMouseOver(event, actionRef.value);
+						}
+					}}
+					@mouseleave=${(event: MouseEvent) => {
+						if (ac.onMouseLeave) {
+							ac.onMouseLeave(event, actionRef.value);
+						}
+					}}
 				></f-icon-button>`;
 			})}`;
 		}

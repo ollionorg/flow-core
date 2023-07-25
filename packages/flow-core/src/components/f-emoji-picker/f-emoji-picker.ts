@@ -423,7 +423,13 @@ export class FEmojiPicker extends FRoot {
 			? html`
 					${this.value
 						? html`<f-div align="middle-center" overflow="hidden">
-								<f-icon source="i-close" size="x-small" clickable @click=${this.clearValue}></f-icon
+								<f-icon
+									source="i-close"
+									data-qa-remove-emoji=${this.getAttribute("data-qa-element-id")}
+									size="x-small"
+									clickable
+									@click=${this.clearValue}
+								></f-icon
 						  ></f-div>`
 						: ""}
 			  `

@@ -4,6 +4,22 @@
 
 # Change Log
 
+## [1.17.6] - 2023-07-11
+### Bug Fixes
+
+- tooltip removal logic updated (when value switch from string to null or undefined)
+
+## [1.17.5] - 2023-07-11
+### Bug Fixes
+
+- `f-search`: `scope` dropdown width updated.
+- disabled css updated for elements in shadowRoot.
+## [1.17.4] - 2023-07-05
+### Bug Fixes
+
+- `f-select`: `create-option` not working in formbuilder.
+- `f-select` : searched option not getting selected in formbuilder.
+
 ## [1.17.3] - 2023-07-03
 ### Improvements
 

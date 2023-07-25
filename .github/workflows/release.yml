@@ -44,6 +44,7 @@ jobs:
             {
               "@cldcvr/flow-log":"packages/flow-log/CHANGELOG.md",
               "@cldcvr/flow-code-editor":"packages/flow-code-editor/CHANGELOG.md",
+              "@cldcvr/flow-md-editor":"packages/flow-md-editor/CHANGELOG.md",
               "@cldcvr/flow-core":"packages/flow-core/CHANGELOG.md",
               "@cldcvr/flow-table":"packages/flow-table/CHANGELOG.md",
               "@cldcvr/flow-core-config":"packages/flow-core-config/CHANGELOG.md"
@@ -89,16 +90,6 @@ jobs:
                   "text": {
                     "type": "mrkdwn",
                     "text": ${{ toJSON(steps.change-logs.outputs.changeLogs) }}
-                  }
-                },
-                {
-                  "type": "divider"
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "We would love to hear your feedback and any issues you might encounter while using the new version. Feel free to reach out to us on Slack or submit a GitHub issue if you need any assistance.\n\nHappy coding! :rocket:"
                   }
                 }
               ]

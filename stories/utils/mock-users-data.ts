@@ -3,7 +3,8 @@ import { html } from "lit";
 import type {
 	FTableSchemaData,
 	FTableSchemaDataRow,
-	FTableSchemaCell
+	FTableSchemaCell,
+	FTableSchemaHeaderCell
 } from "./../../packages/flow-table/src/components/f-table-schema/f-table-schema";
 
 export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSchemaData {
@@ -22,13 +23,19 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 			},
 			actions: [
 				{
-					icon: "i-chat"
+					icon: "i-chat",
+					tooltip: "This is Tooltip",
+					id: faker.random.alpha(5)
 				},
 				{
-					icon: "i-mail"
+					icon: "i-mail",
+					tooltip: "This is 2nd Tooltip",
+					id: faker.random.alpha(5)
 				},
 				{
-					icon: "i-star"
+					icon: "i-star",
+					tooltip: "This is 3rd Tooltip",
+					id: faker.random.alpha(5)
 				}
 			]
 		};
@@ -55,6 +62,8 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 		};
 
 		const userRow: FTableSchemaDataRow = {
+			id: faker.random.alpha(10),
+			expandIconPosition: "left",
 			data: { firstName, lastName, age, birthDate, email, mobile, sex, address },
 			details: function () {
 				return html`<f-div padding="large"
@@ -65,14 +74,22 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 		users.push(userRow);
 	}
 
-	const header = {
-		firstName: { value: "First name", sticky: true },
+	const header: Record<string, FTableSchemaHeaderCell> = {
+		firstName: {
+			value: "First name",
+			sticky: true,
+			template: function () {
+				return html`<f-div height="100%" align="middle-left"
+					><f-text state="success">${this.value}</f-text></f-div
+				>`;
+			}
+		},
 		lastName: { value: "Last name" },
 		age: { value: "Age" },
 		birthDate: { value: "Birth Date" },
 		mobile: { value: "Mobile" },
 		email: { value: "Email" },
-		sex: { value: "Sex" },
+		sex: { value: "Sex", disableSort: true },
 		address: { value: "Address", width: "300px", selected: true, sticky: true }
 	};
 

@@ -3,6 +3,37 @@
 
 # Change Log
 
+## [1.2.0] - 2023-07-18
+
+### Features
+- `f-table-schema` : expandIconPosition position made configurable.
+- `f-trow` now supports `expand-icon-position` attribute.
+- `f-tcell` actions now supports tooltip
+
+### Improvements
+- `part="cell"` added `f-table-schema` to support external styles.
+
+### Bug fixes
+- `f-table-schema` : external template alignment fixed.
+
+## [1.1.1] - 2023-07-13
+
+### Bug Fixes
+- `f-table-schema` : details slot width issue fixed.
+
+## [1.1.0] - 2023-07-11
+
+### Features
+- `f-table-schema` : Search on a specific column
+### Improvements
+- Action in the cell requires id (in case of displaying popover)
+- Disable row selection for a specific rows
+- Hide sort on a specific columns
+### Bug Fixes
+
+- Sort doesn’t work if we have the search term
+- Highlight row not changing the background of the sticky column
+
 ## [1.0.2] - 2023-06-13
 
 ### Bug Fixes

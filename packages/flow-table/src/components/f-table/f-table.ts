@@ -113,7 +113,7 @@ export class FTable extends FRoot {
 			}) as FTcell;
 			if (firstChild) {
 				firstChild.selectable = this.selectable;
-				setTimeout(() => firstChild.setSelection(row.selected));
+				setTimeout(() => firstChild.setSelection(row.selected, Boolean(row.disableSelection)));
 			}
 		});
 	}
@@ -127,11 +127,15 @@ export class FTable extends FRoot {
 			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
 			if (event.detail.value === true) {
 				allRows.forEach(r => {
-					r.selected = true;
+					if (!r.disableSelection) {
+						r.selected = true;
+					}
 				});
 			} else {
 				allRows.forEach(r => {
-					r.selected = false;
+					if (!r.disableSelection) {
+						r.selected = false;
+					}
 				});
 			}
 			await this.updateComplete;

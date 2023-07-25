@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-md-editor/f-md-editor\""
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shims.d.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "content",
+          "type": {
+            "text": "Record<string, string>"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "content",
+            "module": "src/shims.d.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "content",
+            "module": "src/shims.d.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-md-editor/f-md-editor.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FMDEditor",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "\"edit\" | \"view\" | undefined"
+              },
+              "default": "\"view\"",
+              "attribute": "mode",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "editor",
+              "type": {
+                "text": "HTMLDivElement | undefined"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "mode",
+              "type": {
+                "text": "\"edit\" | \"view\" | undefined"
+              },
+              "default": "\"view\"",
+              "fieldName": "mode"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FMDEditor",
+          "declaration": {
+            "name": "FMDEditor",
+            "module": "src/components/f-md-editor/f-md-editor.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-md-editor/sample-md.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "sampleMd",
+          "default": "`# Heading 1\n\n## Heading 2\n\n### Heading 3\n\n#### Heading 4\n\n##### Heading 5\n\n###### Heading 6\n\nParagraph text. This is a sample Markdown file demonstrating various features.\n\n## Emphasis\n\n*Italic text* or _Italic text_\n\n**Bold text** or __Bold text__\n\n**_Bold and italic text_**\n\n## Lists\n\nUnordered list:\n- Item 1\n- Item 2\n- Item 3\n\nOrdered list:\n1. First item\n2. Second item\n3. Third item\n\n## Links\n\n[Link to OpenAI's website](https://openai.com)\n\n## Images\n\n![Markdown logo](https://markdown-here.com/img/icon256.png)\n\n## Code\n`"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "sampleMd",
+            "module": "src/components/f-md-editor/sample-md.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

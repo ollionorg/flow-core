@@ -4,10 +4,10 @@ import fPictogramAnatomy from "./svg/i-fpictogram-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 <Meta
-  title="Components/f-pictogram"
-  parameters={{
-    controls: { hideNoControlsWarning: true },
-  }}
+	title="Components/f-pictogram"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
 />
 
 # f-pictogram
@@ -28,56 +28,61 @@ content.
 ### [Playground](/story/components-f-pictogram--playground)
 
 <Canvas>
-  <Story
-    name="Playground"
-    argTypes={{
-      variant: {
-        control: "select",
-        options: ["squircle", "sqaure", "circle", "hexagon"],
-      },
-      size: {
-        control: "select",
-        options: ["x-large", "large", "medium", "small"],
-      },
-      state: {
-        control: "select",
-        options: ["default", "primary", "success", "danger", "warning", "inherit"],
-      },
-      loading: {
-        control: { type: "boolean" },
-        if: { arg: "disabled", eq: false },
-      },
-      disabled: {
-        control: { type: "boolean" },
-        if: { arg: "loading", eq: false },
-      },
-      clickable: {
-        control: { type: "boolean" },
-        if: { arg: "disabled", eq: false },
-      },
-    }}
-    args={{
-      variant: "squircle",
-      source: "i-app",
-      size: "medium",
-      state: "default",
-      loading: false,
-      disabled: false,
-      clickable: false,
-    }}
-  >
-    {(args) => html`<f-div direction="column" padding="x-large">
-      <f-pictogram
-        .variant=${args.variant}
-        source=${args.source}
-        .size=${args.size}
-        .state=${args.state}
-        .loading=${args.loading}
-        .disabled=${args.disabled}
-        .clickable=${args.clickable}
-      ></f-pictogram>
-    </f-div>`}
-  </Story>
+	<Story
+		name="Playground"
+		argTypes={{
+			variant: {
+				control: "select",
+				options: ["squircle", "sqaure", "circle", "hexagon"]
+			},
+			size: {
+				control: "select",
+				options: ["x-large", "large", "medium", "small"]
+			},
+			state: {
+				control: "select",
+				options: ["default", "primary", "success", "danger", "warning", "inherit"]
+			},
+			["auto-bg"]: {
+				control: { type: "boolean" }
+			},
+			loading: {
+				control: { type: "boolean" },
+				if: { arg: "disabled", eq: false }
+			},
+			disabled: {
+				control: { type: "boolean" },
+				if: { arg: "loading", eq: false }
+			},
+			clickable: {
+				control: { type: "boolean" },
+				if: { arg: "disabled", eq: false }
+			}
+		}}
+		args={{
+			variant: "squircle",
+			source: "i-app",
+			size: "medium",
+			state: "default",
+			["auto-bg"]: false,
+			loading: false,
+			disabled: false,
+			clickable: false
+		}}
+	>
+		{args => html`<f-div direction="column" padding="x-large">
+			<f-pictogram
+				.variant=${args.variant}
+				source=${args.source}
+				.size=${args.size}
+				.state=${args.state}
+				.loading=${args.loading}
+				.disabled=${args.disabled}
+				.clickable=${args.clickable}
+				?auto-bg=${args["auto-bg"]}
+			></f-pictogram>
+		</f-div>`}
+	</Story>
 </Canvas>
 
 <br />
@@ -87,7 +92,7 @@ content.
 <f-divider></f-divider>
 
 <Story name="Anatomy">
-  {() => html`<div class="align-center">${unsafeSVG(fPictogramAnatomy)}</div>`}
+	{() => html`<div class="align-center">${unsafeSVG(fPictogramAnatomy)}</div>`}
 </Story>
 
 <br />
@@ -100,90 +105,90 @@ Variants are various representations of a pictogram . For example a pictogram ca
 square or squircle.
 
 <Canvas>
-  <Story
-    name="variant"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
-    {(args) => html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
-      <f-div
-        height="hug-content"
-        align="middle-center"
-        padding="none"
-        gap="large"
-        direction="column"
-      >
-        <f-text variant="para" size="large" weight="medium">squircle</f-text>
-        <f-pictogram source="💬"></f-pictogram>
-      </f-div>
-      <f-div
-        height="hug-content"
-        align="middle-center"
-        padding="none"
-        gap="large"
-        direction="column"
-      >
-        <f-text variant="para" size="large" weight="medium">square</f-text>
-        <f-pictogram source="🎲" variant="square"></f-pictogram>
-      </f-div>
-      <f-div
-        height="hug-content"
-        align="middle-center"
-        padding="none"
-        gap="large"
-        direction="column"
-      >
-        <f-text variant="para" size="large" weight="medium">hexagon</f-text>
-        <f-pictogram source="🚀" variant="hexagon"></f-pictogram>
-      </f-div>
-      <f-div
-        height="hug-content"
-        align="middle-center"
-        padding="none"
-        gap="large"
-        direction="column"
-      >
-        <f-text variant="para" size="large" weight="medium">circle</f-text>
-        <f-pictogram source="🚗" variant="circle"></f-pictogram>
-      </f-div>
-    </f-div>`}
-  </Story>
+	<Story
+		name="variant"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 200
+			}
+		}}
+	>
+		{args => html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
+			<f-div
+				height="hug-content"
+				align="middle-center"
+				padding="none"
+				gap="large"
+				direction="column"
+			>
+				<f-text variant="para" size="large" weight="medium">squircle</f-text>
+				<f-pictogram source="💬"></f-pictogram>
+			</f-div>
+			<f-div
+				height="hug-content"
+				align="middle-center"
+				padding="none"
+				gap="large"
+				direction="column"
+			>
+				<f-text variant="para" size="large" weight="medium">square</f-text>
+				<f-pictogram source="🎲" variant="square"></f-pictogram>
+			</f-div>
+			<f-div
+				height="hug-content"
+				align="middle-center"
+				padding="none"
+				gap="large"
+				direction="column"
+			>
+				<f-text variant="para" size="large" weight="medium">hexagon</f-text>
+				<f-pictogram source="🚀" variant="hexagon"></f-pictogram>
+			</f-div>
+			<f-div
+				height="hug-content"
+				align="middle-center"
+				padding="none"
+				gap="large"
+				direction="column"
+			>
+				<f-text variant="para" size="large" weight="medium">circle</f-text>
+				<f-pictogram source="🚗" variant="circle"></f-pictogram>
+			</f-div>
+		</f-div>`}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>squircle</td>
-      <td>a shape mixup of sqaure and circle</td>
-      <td>
-        <code>default</code>
-      </td>
-    </tr>
-    <tr>
-      <td>square</td>
-      <td>square shaped pictogram with border-radius of 4px</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>hexagon</td>
-      <td>hexagon shaped pictogram</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>circle</td>
-      <td>circular shaped pictogram</td>
-      <td></td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>squircle</td>
+			<td>a shape mixup of sqaure and circle</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>square</td>
+			<td>square shaped pictogram with border-radius of 4px</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>hexagon</td>
+			<td>hexagon shaped pictogram</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>circle</td>
+			<td>circular shaped pictogram</td>
+			<td></td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -196,82 +201,82 @@ Source property defines what will be displayed on the pictogram. This could be a
 inline SVG or image.
 
 <Canvas>
-  <Story
-    name="source"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
-    {(args) => html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
-      <f-div padding="large" gap="medium" direction="column" width="hug-content">
-        <f-div height="hug-content" padding="none" align="middle-center">
-          <f-text variant="para" size="large" weight="medium">Icon from library</f-text>
-        </f-div>
-        <f-div height="hug-content" padding="none" align="middle-center">
-          <f-pictogram source="i-app"></f-pictogram>
-        </f-div>
-      </f-div>
-      <f-div padding="large" gap="medium" direction="column" width="hug-content">
-        <f-div height="hug-content" padding="none" align="middle-center">
-          <f-text variant="para" size="large" weight="medium">Emoji as a source</f-text>
-        </f-div>
-        <f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
-          <f-pictogram source="💬"></f-pictogram>
-        </f-div>
-      </f-div>
-      <f-div padding="large" gap="medium" direction="column" width="hug-content">
-        <f-div height="hug-content" padding="none" align="middle-center">
-          <f-text variant="para" size="large" weight="medium">Text as a source</f-text>
-        </f-div>
-        <f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
-          <f-pictogram source="A1"></f-pictogram>
-        </f-div>
-      </f-div>
-      <f-div padding="large" gap="medium" direction="column" width="hug-content">
-        <f-div height="hug-content" padding="none" align="middle-center">
-          <f-text variant="para" size="large" weight="medium">Image from URL</f-text>
-        </f-div>
-        <f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
-          <f-pictogram
-            source="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80"
-          ></f-pictogram>
-        </f-div>
-      </f-div>
-    </f-div>`}
-  </Story>
+	<Story
+		name="source"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 200
+			}
+		}}
+	>
+		{args => html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
+			<f-div padding="large" gap="medium" direction="column" width="hug-content">
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="large" weight="medium">Icon from library</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-pictogram source="i-app"></f-pictogram>
+				</f-div>
+			</f-div>
+			<f-div padding="large" gap="medium" direction="column" width="hug-content">
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="large" weight="medium">Emoji as a source</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
+					<f-pictogram source="💬"></f-pictogram>
+				</f-div>
+			</f-div>
+			<f-div padding="large" gap="medium" direction="column" width="hug-content">
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="large" weight="medium">Text as a source</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
+					<f-pictogram source="A1"></f-pictogram>
+				</f-div>
+			</f-div>
+			<f-div padding="large" gap="medium" direction="column" width="hug-content">
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="large" weight="medium">Image from URL</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
+					<f-pictogram
+						source="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80"
+					></f-pictogram>
+				</f-div>
+			</f-div>
+		</f-div>`}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Icon from library</td>
-      <td>e.g i-plus</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Emoji as source</td>
-      <td>e.g. 😃</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Text as source</td>
-      <td>e.g. A1</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>URL as source</td>
-      <td>url to be entered as source to see the image</td>
-      <td></td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Icon from library</td>
+			<td>e.g i-plus</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Emoji as source</td>
+			<td>e.g. 😃</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Text as source</td>
+			<td>e.g. A1</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>URL as source</td>
+			<td>url to be entered as source to see the image</td>
+			<td></td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -283,16 +288,16 @@ inline SVG or image.
 The large size is the default.
 
 <Canvas>
-  <Story
-    name="size"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
-    {(args) => html`<f-div gap="medium" padding="x-large" align="middle-center">
+	<Story
+		name="size"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 200
+			}
+		}}
+	>
+		{args => html`<f-div gap="medium" padding="x-large" align="middle-center">
       <f-div padding="large" gap="medium" direction="column" width="hug-content">
         <f-div height="hug-content" padding="none" align="middle-center">
           <f-text variant="para" size="large" weight="medium">x-large</f-text>
@@ -326,39 +331,39 @@ The large size is the default.
         </f-div>
       </f-div>
     </f-div>`}
-  </Story>
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>x-large</td>
-      <td>Extra large size - 44px</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>large</td>
-      <td>Large size - 36px</td>
-      <td>
-        <code>default</code>
-      </td>
-    </tr>
-    <tr>
-      <td>medium</td>
-      <td>Medium size - 28px</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>small</td>
-      <td>Small size - 20px</td>
-      <td></td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>x-large</td>
+			<td>Extra large size - 44px</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>large</td>
+			<td>Large size - 36px</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>medium</td>
+			<td>Medium size - 28px</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>small</td>
+			<td>Small size - 20px</td>
+			<td></td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -371,16 +376,16 @@ States on pictograms are used to communicate purpose and it’s connotation. For
 color connotes danger, whereas a green color connotes success and so on.
 
 <Canvas>
-  <Story
-    name="state"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
-    {(args) => html`<f-div gap="medium" padding="x-large" align="middle-center">
+	<Story
+		name="state"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 200
+			}
+		}}
+	>
+		{args => html`<f-div gap="medium" padding="x-large" align="middle-center">
       <f-div padding="large" gap="medium" direction="column" width="hug-content">
         <f-div height="hug-content" padding="none" align="middle-center">
           <f-text variant="para" size="large" weight="medium">default</f-text>
@@ -422,44 +427,44 @@ color connotes danger, whereas a green color connotes success and so on.
         </f-div>
       </f-div>
     </f-div>`}
-  </Story>
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Value</td>
-      <td>Description</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>default</td>
-      <td></td>
-      <td>
-        <code>default</code>
-      </td>
-    </tr>
-    <tr>
-      <td>primary</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>success</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>danger</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>warning</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>default</td>
+			<td></td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>primary</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>success</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>danger</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>warning</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
 </table>
 
 <br />
@@ -469,63 +474,74 @@ color connotes danger, whereas a green color connotes success and so on.
 <f-divider></f-divider>
 
 <Canvas>
-  <Story
-    name="Flags"
-    parameters={{
-      docs: {
-        inlineStories: false,
-        iframeHeight: 200,
-      },
-    }}
-  >
-    {(args) => html`<f-div gap="large" padding="x-large" direction="column">
-      <f-div height="hug-content" padding="none">
-        <f-text variant="para" size="large" weight="medium">Loading</f-text>
-      </f-div>
-      <f-div padding="none" direction="row" gap="x-large" overflow="hidden">
-        <f-pictogram source="💬" size="x-large"></f-pictogram>
-        <f-pictogram source="💬" size="x-large" loading=${true}></f-pictogram>
-      </f-div>
-      <f-div height="hug-content" padding="none">
-        <f-text variant="para" size="large" weight="medium">Disabled</f-text>
-      </f-div>
-      <f-div padding="none" direction="row" gap="x-large">
-        <f-pictogram source="💬" size="x-large"></f-pictogram>
-        <f-pictogram source="💬" size="x-large" disabled=${true}></f-pictogram>
-      </f-div>
-      <f-div height="hug-content" padding="none">
-        <f-text variant="para" size="large" weight="medium">Clickable</f-text>
-      </f-div>
-      <f-div padding="none" direction="row" gap="x-large">
-        <f-pictogram source="💬" size="x-large" clickable=${true}></f-pictogram>
-      </f-div>
-    </f-div>`}
-  </Story>
+	<Story
+		name="Flags"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 200
+			}
+		}}
+	>
+		{args => html`<f-div gap="large" padding="x-large" direction="column">
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">Loading</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
+				<f-pictogram source="💬" size="x-large"></f-pictogram>
+				<f-pictogram source="💬" size="x-large" loading=${true}></f-pictogram>
+			</f-div>
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">Disabled</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large">
+				<f-pictogram source="💬" size="x-large"></f-pictogram>
+				<f-pictogram source="💬" size="x-large" disabled=${true}></f-pictogram>
+			</f-div>
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">Clickable</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large">
+				<f-pictogram source="💬" size="x-large" clickable=${true}></f-pictogram>
+			</f-div>
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">auto-bg</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large">
+				<f-pictogram variant="circle" source="AN" size="x-large" auto-bg=${true}></f-pictogram>
+			</f-div>
+		</f-div>`}
+	</Story>
 </Canvas>
 
 <table class="custom-table">
-  <tbody>
-    <tr>
-      <td>Name</td>
-      <td>Description</td>
-      <td>Default</td>
-    </tr>
-    <tr>
-      <td>loading</td>
-      <td>Loading flag enables a transition on the border.</td>
-      <td>false</td>
-    </tr>
-    <tr>
-      <td>disabled</td>
-      <td>Opacity of pictogram is set to 50% in disabled state.</td>
-      <td>false </td>
-    </tr>
-    <tr>
-      <td>clickable</td>
-      <td>Color change on hover</td>
-      <td>false</td>
-    </tr>
-  </tbody>
+	<tbody>
+		<tr>
+			<td>Name</td>
+			<td>Description</td>
+			<td>Default</td>
+		</tr>
+		<tr>
+			<td>loading</td>
+			<td>Loading flag enables a transition on the border.</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>disabled</td>
+			<td>Opacity of pictogram is set to 50% in disabled state.</td>
+			<td>false </td>
+		</tr>
+		<tr>
+			<td>clickable</td>
+			<td>Color change on hover</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>auto-bg</td>
+			<td>background color change according to the text dynamically</td>
+			<td>false</td>
+		</tr>
+	</tbody>
 </table>
 
 <ArgsTable of={"f-pictogram"} />

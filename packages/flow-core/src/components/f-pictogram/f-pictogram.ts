@@ -72,6 +72,8 @@ export class FPictogram extends FRoot {
 	@property({ reflect: true, type: Boolean, attribute: "auto-bg" })
 	autoBg = false;
 
+	isText = false;
+
 	colors = [
 		"#FFB900",
 		"#D83B01",
@@ -145,15 +147,15 @@ export class FPictogram extends FRoot {
 	get renderedHtml() {
 		const emojiRegex = /\p{Extended_Pictographic}/u;
 		if (isValidHttpUrl(this.source)) {
-			this.autoBg = false;
+			this.isText = false;
 			return `<img src="${this.source}" />`;
 		} else if (emojiRegex.test(this.source)) {
-			this.autoBg = false;
+			this.isText = false;
 			return `<f-icon class="${"f-pictogram-" + this.size + "-emoji"}" source="${
 				this.source
 			}" size="${this.sourceSize()}"></f-icon>`;
 		} else {
-			this.autoBg = false;
+			this.isText = false;
 			const IconPack = ConfigUtil.getConfig().iconPack;
 			if (IconPack) {
 				const svg = IconPack[this.source];
@@ -164,6 +166,7 @@ export class FPictogram extends FRoot {
 				}
 			}
 		}
+		this.isText = true;
 		return `<p class="text-styling" style=${this.textColorStyling}>${this.textSource}</p>`;
 	}
 	// calculating computed source size according to the user input size
@@ -259,7 +262,7 @@ export class FPictogram extends FRoot {
 		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
 	): Promise<void> {
 		super.updated(changedProperties);
-		if (this.fPicorgramWrapper && this.autoBg) {
+		if (this.fPicorgramWrapper && this.autoBg && this.isText) {
 			// Modify the background-color property
 			this.fPicorgramWrapper.style.setProperty(
 				"--after-background-color",

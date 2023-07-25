@@ -4,11 +4,17 @@
 
 # Change Log
 
-## [1.17.9] - 2023-07-25
+## [1.18.0] - 2023-07-25
 
 ### Improvements
 
 - `f-pictogram` have an `auto-bg` flag where it auto assigns a dynamic color based on characters.
+
+## [1.17.9] - 2023-07-25
+
+### Improvements
+
+- `data-qa-remove-emoji` attribute added in `f-emoji-picker` for automation.
 
 ## [1.17.8] - 2023-07-21
 

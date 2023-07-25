@@ -7,6 +7,10 @@ import type {
 	FTableSchemaHeaderCell
 } from "./../../packages/flow-table/src/components/f-table-schema/f-table-schema";
 
+import { createRef } from "lit/directives/ref.js";
+import { FPopover } from "@cldcvr/flow-core";
+
+export const popoverRef = createRef<FPopover>();
 export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSchemaData {
 	const users = [];
 
@@ -25,7 +29,13 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 				{
 					icon: "i-chat",
 					tooltip: "This is Tooltip",
-					id: faker.random.alpha(5)
+					id: faker.random.alpha(5),
+					onClick(_event, element) {
+						if (popoverRef.value) {
+							popoverRef.value.open = true;
+							if (element) popoverRef.value.target = element;
+						}
+					}
 				},
 				{
 					icon: "i-mail",

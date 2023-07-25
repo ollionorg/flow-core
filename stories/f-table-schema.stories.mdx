@@ -1,7 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import getFakeUsers from "./utils/mock-users-data.ts";
+import getFakeUsers, { popoverRef } from "./utils/mock-users-data.ts";
 import { createRef, ref } from "lit/directives/ref.js";
 
 <Meta
@@ -99,7 +99,22 @@ Schema based Table component includes rows and cells.
 			const onHeaderSelect = event => {
 				console.log("on header selected", event.detail);
 			};
+			const handleOverlayClick = () => {
+				if (popoverRef.value) {
+					popoverRef.value.open = false;
+				}
+			};
 			return html`
+				<f-popover ${ref(popoverRef)} @overlay-click=${handleOverlayClick}>
+					<f-div padding="large" state="secondary">
+						<f-text
+							>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+							Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+							unknown printer took a galley of type and scrambled it to make a type specimen
+							book.</f-text
+						>
+					</f-div>
+				</f-popover>
 				<f-table-schema
 					.data=${args.data}
 					.highlightSelected=${args["highlight-selected"]}

@@ -17,6 +17,19 @@ export type FPictogramVariant = (typeof variants)[number];
 export type FPictogramSize = (typeof sizes)[number];
 export type FPictogramState = (typeof states)[number];
 
+let colors = [
+	"#FFB900",
+	"#D83B01",
+	"#B50E0E",
+	"#E81123",
+	"#B4009E",
+	"#5C2D91",
+	"#0078D7",
+	"#00B4FF",
+	"#008272",
+	"#107C10"
+];
+
 @flowElement("f-pictogram")
 export class FPictogram extends FRoot {
 	/**
@@ -74,19 +87,6 @@ export class FPictogram extends FRoot {
 
 	isText = false;
 
-	colors = [
-		"#FFB900",
-		"#D83B01",
-		"#B50E0E",
-		"#E81123",
-		"#B4009E",
-		"#5C2D91",
-		"#0078D7",
-		"#00B4FF",
-		"#008272",
-		"#107C10"
-	];
-
 	get getLetters() {
 		const acronym = this.source
 			.split(/\s/)
@@ -121,8 +121,8 @@ export class FPictogram extends FRoot {
 	}
 
 	get textColor() {
-		if (!this.hashCode(this.source).includes("#")) {
-			const hsla = this.hashCode(this.source)
+		if (!this.hashCode.includes("#")) {
+			const hsla = this.hashCode
 				.replace("hsla", "")
 				.replace(/\(|\)/g, "")
 				.split("%")
@@ -132,7 +132,7 @@ export class FPictogram extends FRoot {
 			const hex = this.hslToHex(Number(hsla[0]), Number(hsla[1]), Number(hsla[2]));
 			return getTextContrast(hex) === "dark-text" ? "#202a36" : "#fcfcfd";
 		} else {
-			return getTextContrast(this.hashCode(this.source)) === "dark-text" ? "#202a36" : "#fcfcfd";
+			return getTextContrast(this.hashCode) === "dark-text" ? "#202a36" : "#fcfcfd";
 		}
 	}
 
@@ -182,12 +182,12 @@ export class FPictogram extends FRoot {
 		}
 	}
 
-	hashCode(str: string) {
+	get hashCode() {
 		let sum = 0;
-		for (let i = 0; i < str.length; i++) {
-			sum += str.charCodeAt(i);
+		for (let i = 0; i < this.source.length; i++) {
+			sum += this.source.charCodeAt(i);
 		}
-		return this.colors[sum % this.colors.length];
+		return colors[sum % colors.length];
 	}
 
 	stringReplaceAtIndex(str: string, index: number, chr: number) {
@@ -195,12 +195,12 @@ export class FPictogram extends FRoot {
 		return str.substring(0, index) + chr + str.substring(index + 1);
 	}
 
-	hashCodeHover(str: string) {
+	get hashCodeHover() {
 		let sum = 0;
-		for (let i = 0; i < str.length; i++) {
-			sum += str.charCodeAt(i);
+		for (let i = 0; i < this.source.length; i++) {
+			sum += this.source.charCodeAt(i);
 		}
-		const color = this.colors[sum % this.colors.length];
+		const color = colors[sum % colors.length];
 		return this.stringReplaceAtIndex(color, color.length - 2, 0.7);
 	}
 
@@ -222,7 +222,6 @@ export class FPictogram extends FRoot {
 	}
 
 	render() {
-		this.colors = this.generateHslaColors(50, 60, 1.0, 10);
 		this.validateProperties();
 		const hasShimmer = (getComputedStyle(this, "::before") as any)["animation-name"] === "shimmer";
 		if (hasShimmer) {
@@ -262,20 +261,15 @@ export class FPictogram extends FRoot {
 		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
 	): Promise<void> {
 		super.updated(changedProperties);
+		colors = this.generateHslaColors(50, 60, 1.0, 10);
 		if (this.fPicorgramWrapper && this.autoBg && this.isText) {
 			// Modify the background-color property
-			this.fPicorgramWrapper.style.setProperty(
-				"--after-background-color",
-				this.hashCode(this.source)
-			);
+			this.fPicorgramWrapper.style.setProperty("--after-background-color", this.hashCode);
 			this.fPicorgramWrapper.style.setProperty(
 				"--after-background-color-hover",
-				this.hashCodeHover(this.source)
+				this.hashCodeHover
 			);
-			this.fPicorgramWrapper.style.setProperty(
-				"--before-background-color",
-				this.hashCode(this.source)
-			);
+			this.fPicorgramWrapper.style.setProperty("--before-background-color", this.hashCode);
 		} else {
 			this.fPicorgramWrapper.style.setProperty(
 				"--after-background-color",

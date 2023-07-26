@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.19.0] - 2023-07-26
+
+### Features
+
+- `f-pictogram`: `auto-bg` flag where it auto assigns a color based on characters of `source` string.
+
 ## [1.18.0] - 2023-07-26
 
 ### Features

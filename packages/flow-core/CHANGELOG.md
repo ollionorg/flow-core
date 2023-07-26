@@ -4,6 +4,14 @@
 
 # Change Log
 
+## [1.18.0] - 2023-07-26
+### Features
+
+- `--color-input-default` color token introduced and used in all inputs.
+
+### Bug Fixes
+- `f-tag` not rendering if `counter="0"`
+
 ## [1.17.9] - 2023-07-25
 ### Improvements
 

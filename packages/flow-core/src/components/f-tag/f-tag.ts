@@ -78,7 +78,7 @@ export class FTag extends FRoot {
 	 * @attribute Counter property enables a counter on the tag.
 	 */
 	@property({ reflect: true, type: Number })
-	counter?: string;
+	counter?: number;
 
 	/**
 	 * @attribute Loader icon replaces the content of the tag .
@@ -257,15 +257,16 @@ export class FTag extends FRoot {
 			"fill-button-surface-dark":
 				this.fill && getTextContrast(this.fill) === "dark-text" ? true : false
 		};
-		const counter = this.counter
-			? html`<f-counter
-					data-qa-counter
-					.state=${this.state}
-					.size=${this.size}
-					.label=${Number(this.counter)}
-					class=${classMap(counterClasses)}
-			  ></f-counter>`
-			: "";
+		const counter =
+			this.counter !== undefined
+				? html`<f-counter
+						data-qa-counter
+						.state=${this.state}
+						.size=${this.size}
+						.label=${Number(this.counter)}
+						class=${classMap(counterClasses)}
+				  ></f-counter>`
+				: "";
 		/**
 		 * render loading if required
 		 */

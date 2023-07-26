@@ -69,7 +69,7 @@ export class FCounter extends FRoot {
 	readonly required = ["label"];
 
 	validateProperties() {
-		if (!this.label) {
+		if (this.label === undefined) {
 			throw new Error("f-counter : label is mandatory field");
 		}
 		if (

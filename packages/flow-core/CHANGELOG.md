@@ -4,11 +4,15 @@
 
 # Change Log
 
-## [1.18.0] - 2023-07-25
+## [1.18.0] - 2023-07-26
 
-### Improvements
+### Features
 
-- `f-pictogram` have an `auto-bg` flag where it auto assigns a dynamic color based on characters.
+- `--color-input-default` color token introduced and used in all inputs.
+
+### Bug Fixes
+
+- `f-tag` not rendering if `counter="0"`
 
 ## [1.17.9] - 2023-07-25
 

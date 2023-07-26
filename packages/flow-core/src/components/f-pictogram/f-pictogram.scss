@@ -139,6 +139,9 @@ $hexagon-clip-path: polygon(
 
 :host {
 	.f-pictogram {
+		--after-background-color: var(--color-neutral-subtle);
+		--after-background-color-hover: var(--color-neutral-subtle-hover);
+
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
@@ -183,14 +186,14 @@ $hexagon-clip-path: polygon(
 		}
 
 		&:after {
-			background-color: var(--color-neutral-subtle);
+			background-color: var(--after-background-color);
 		}
 
 		@each $state, $color in $states {
 			&[state="#{$state}"]:not([loading]):not(.hasShimmer) {
 				&:before {
 					content: "";
-					background: map-get($color, "background");
+					background: var(--before-background-color, map-get($color, "background"));
 				}
 				&:after {
 					content: "";
@@ -210,12 +213,25 @@ $hexagon-clip-path: polygon(
 			}
 		}
 
-		&[clickable]:not([disabled]) {
+		&[clickable]:not([disabled]):not([auto-bg]) {
 			cursor: pointer;
 
 			&:hover {
 				&::after {
-					background-color: var(--color-neutral-subtle-hover);
+					background-color: var(--after-background-color-hover);
+				}
+			}
+		}
+
+		&[clickable]:not([disabled])[auto-bg] {
+			cursor: pointer;
+
+			&:hover {
+				&::after {
+					background-color: var(--after-background-color-hover);
+				}
+				&::before {
+					background-color: var(--after-background-color-hover);
 				}
 			}
 		}

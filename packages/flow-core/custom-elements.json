@@ -6282,6 +6282,13 @@
             },
             {
               "kind": "field",
+              "name": "fPicorgramWrapper",
+              "type": {
+                "text": "HTMLDivElement"
+              }
+            },
+            {
+              "kind": "field",
               "name": "clickable",
               "type": {
                 "text": "boolean | undefined"
@@ -6292,12 +6299,124 @@
             },
             {
               "kind": "field",
+              "name": "autoBg",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "auto-bg",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "isText",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "getLetters",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "capitalizeFirstLetter",
+              "parameters": [
+                {
+                  "name": "string",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "textSource",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "hslToHex",
+              "parameters": [
+                {
+                  "name": "h",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "s",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "l",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "textColor",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "textColorStyling",
+              "readonly": true
+            },
+            {
+              "kind": "field",
               "name": "renderedHtml",
               "readonly": true
             },
             {
               "kind": "method",
               "name": "sourceSize"
+            },
+            {
+              "kind": "field",
+              "name": "hashCode",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "stringReplaceAtIndex",
+              "parameters": [
+                {
+                  "name": "str",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "chr",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "hashCodeHover",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "validateProperties"
             },
             {
               "kind": "field",
@@ -6401,6 +6520,14 @@
               },
               "default": "false",
               "fieldName": "clickable"
+            },
+            {
+              "name": "auto-bg",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "autoBg"
             },
             {
               "name": "tooltip",
@@ -9661,6 +9788,232 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-tab/f-tab.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTab",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tabSection",
+              "type": {
+                "text": "FDiv"
+              },
+              "description": "id selecteor for f-tab-section"
+            },
+            {
+              "kind": "field",
+              "name": "showScrollIcons",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "local state for showing and vanishing scroll-icons"
+            },
+            {
+              "kind": "field",
+              "name": "isOverflowing",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "localState to check whether on overflow, scroll exists or not"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"fill\" | \"transparent\" | undefined"
+              },
+              "default": "\"transparent\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "\"horizontal\" | \"vertical\""
+              },
+              "default": "\"horizontal\"",
+              "attribute": "direction",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "alignment",
+              "type": {
+                "text": "\"left\" | \"right\" | \"center\" | \"top\" | \"bottom\" | \"middle\" | undefined"
+              },
+              "default": "\"left\"",
+              "attribute": "alignment",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "nodeWidth",
+              "type": {
+                "text": "FTabNodeWidthProp | undefined"
+              },
+              "default": "\"hug-content\"",
+              "attribute": "node-width",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tabsAlignment",
+              "description": "return alignment of the tabs according to the scroll-bar and directions+alignment conditions.",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "handleScroll",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  },
+                  "description": "MouseEvtn"
+                },
+                {
+                  "name": "position",
+                  "type": {
+                    "text": "\"left\" | \"top\""
+                  },
+                  "description": "name of the position"
+                },
+                {
+                  "name": "positionValue",
+                  "type": {
+                    "text": "number"
+                  },
+                  "description": "value of the position"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "checkOverflowing",
+              "return": {
+                "type": {
+                  "text": ""
+                }
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseEnter",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseLeave",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"fill\" | \"transparent\" | undefined"
+              },
+              "default": "\"transparent\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "direction",
+              "type": {
+                "text": "\"horizontal\" | \"vertical\""
+              },
+              "default": "\"horizontal\"",
+              "fieldName": "direction"
+            },
+            {
+              "name": "alignment",
+              "type": {
+                "text": "\"left\" | \"right\" | \"center\" | \"top\" | \"bottom\" | \"middle\" | undefined"
+              },
+              "default": "\"left\"",
+              "fieldName": "alignment"
+            },
+            {
+              "name": "node-width",
+              "type": {
+                "text": "FTabNodeWidthProp | undefined"
+              },
+              "default": "\"hug-content\"",
+              "fieldName": "nodeWidth"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTab",
+          "declaration": {
+            "name": "FTab",
+            "module": "src/components/f-tab/f-tab.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-tab-content/f-tab-content.ts",
       "declarations": [
         {
@@ -11312,232 +11665,6 @@
           "declaration": {
             "name": "FToast",
             "module": "src/components/f-toast/f-toast.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-tab/f-tab.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTab",
-          "members": [
-            {
-              "kind": "field",
-              "name": "tabSection",
-              "type": {
-                "text": "FDiv"
-              },
-              "description": "id selecteor for f-tab-section"
-            },
-            {
-              "kind": "field",
-              "name": "showScrollIcons",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "local state for showing and vanishing scroll-icons"
-            },
-            {
-              "kind": "field",
-              "name": "isOverflowing",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "localState to check whether on overflow, scroll exists or not"
-            },
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "\"fill\" | \"transparent\" | undefined"
-              },
-              "default": "\"transparent\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "direction",
-              "type": {
-                "text": "\"horizontal\" | \"vertical\""
-              },
-              "default": "\"horizontal\"",
-              "attribute": "direction",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "alignment",
-              "type": {
-                "text": "\"left\" | \"right\" | \"center\" | \"top\" | \"bottom\" | \"middle\" | undefined"
-              },
-              "default": "\"left\"",
-              "attribute": "alignment",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "nodeWidth",
-              "type": {
-                "text": "FTabNodeWidthProp | undefined"
-              },
-              "default": "\"hug-content\"",
-              "attribute": "node-width",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "tabsAlignment",
-              "description": "return alignment of the tabs according to the scroll-bar and directions+alignment conditions.",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "handleScroll",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  },
-                  "description": "MouseEvtn"
-                },
-                {
-                  "name": "position",
-                  "type": {
-                    "text": "\"left\" | \"top\""
-                  },
-                  "description": "name of the position"
-                },
-                {
-                  "name": "positionValue",
-                  "type": {
-                    "text": "number"
-                  },
-                  "description": "value of the position"
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "checkOverflowing",
-              "return": {
-                "type": {
-                  "text": ""
-                }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseEnter",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseLeave",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "\"fill\" | \"transparent\" | undefined"
-              },
-              "default": "\"transparent\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "direction",
-              "type": {
-                "text": "\"horizontal\" | \"vertical\""
-              },
-              "default": "\"horizontal\"",
-              "fieldName": "direction"
-            },
-            {
-              "name": "alignment",
-              "type": {
-                "text": "\"left\" | \"right\" | \"center\" | \"top\" | \"bottom\" | \"middle\" | undefined"
-              },
-              "default": "\"left\"",
-              "fieldName": "alignment"
-            },
-            {
-              "name": "node-width",
-              "type": {
-                "text": "FTabNodeWidthProp | undefined"
-              },
-              "default": "\"hug-content\"",
-              "fieldName": "nodeWidth"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTab",
-          "declaration": {
-            "name": "FTab",
-            "module": "src/components/f-tab/f-tab.ts"
           }
         }
       ]

@@ -119,9 +119,6 @@ export class FText extends FRoot {
 	@state()
 	isTextInput = false;
 
-	@state()
-	isSpanEmpty = false;
-
 	get iconSize() {
 		return this.size === "x-small" ? "x-small" : "small";
 	}
@@ -150,12 +147,7 @@ export class FText extends FRoot {
 			bubbles: true,
 			composed: true
 		});
-
-		if (this.spanEditable?.textContent?.trim()) {
-			this.isSpanEmpty = false;
-		} else {
-			this.isSpanEmpty = true;
-		}
+		this.showEmptyPlaceholder();
 
 		this.dispatchEvent(event);
 	}
@@ -171,6 +163,12 @@ export class FText extends FRoot {
 	editOnHover(display: "flex" | "none") {
 		if (this.editTextIcon) {
 			this.editTextIcon.style.display = display;
+		}
+	}
+
+	showEmptyPlaceholder() {
+		if (this.isTextInput) {
+			this.spanEditable.dataset.isEmpty = String(this.spanEditable?.textContent?.trim() === "");
 		}
 	}
 
@@ -224,7 +222,6 @@ export class FText extends FRoot {
 				.weight=${this.weight}
 				@input=${this.handleInput}
 				data-placeholder="Enter Your Text here"
-				data-is-empty=${this.isSpanEmpty}
 			>
 				<div class="slot-text">${this.textContent ?? ""}</div>
 			</span>
@@ -271,21 +268,13 @@ export class FText extends FRoot {
 		 */
 		return html`<slot></slot>`;
 	}
-	protected firstUpdated(
-		_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): void {
-		if (this.spanEditable?.textContent?.trim() || this.textContent?.trim()) {
-			this.isSpanEmpty = false;
-		} else {
-			this.isSpanEmpty = true;
-		}
-	}
+
 	protected async updated(
 		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
 	): Promise<void> {
 		super.updated(changedProperties);
 		await this.updateComplete;
-
+		this.showEmptyPlaceholder();
 		if (this.highlight && this.highlight.trim() && !this.highlightedText) {
 			let content = this.textContent;
 			content = this.removeMarkTag(content ?? "");

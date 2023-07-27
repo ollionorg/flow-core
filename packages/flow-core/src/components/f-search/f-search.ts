@@ -266,6 +266,7 @@ export class FSearch extends FRoot {
 			direction="column"
 			gap="x-small"
 			height="hug-content"
+			class="f-search-wrapper"
 		>
 			<f-div padding="none" direction="column" width="fill-container" id="header-section">
 				<f-div padding="none" gap="auto" direction="row" height="hug-content">
@@ -288,18 +289,19 @@ export class FSearch extends FRoot {
 			</f-div>
 			<f-div direction="row" height="hug-content">
 				${this.scope !== "none" && (this.scope as string[])?.length > 0
-					? html` <f-select
-							class="f-search-border"
-							.options=${this.scope ?? []}
-							.variant=${this.variant}
-							.category=${this.category}
-							placeholder="Search by"
-							width="140"
-							.state=${this.state}
-							.size=${this.size}
-							.value=${this["selected-scope"]}
-							@input=${this.handleScopeSelection}
-					  ></f-select>`
+					? html` <f-div width="hug-content" style="min-width:150px">
+							<f-select
+								class="f-search-border"
+								.options=${this.scope ?? []}
+								.variant=${this.variant}
+								.category=${this.category}
+								placeholder="Search by"
+								.state=${this.state}
+								.size=${this.size}
+								.value=${this["selected-scope"]}
+								@input=${this.handleScopeSelection}
+							></f-select
+					  ></f-div>`
 					: ""}
 				<f-div>
 					<f-suggest

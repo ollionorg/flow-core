@@ -30,6 +30,19 @@ let colors = [
 	"#107C10"
 ];
 
+function generateHslaColors(saturation: number, lightness: number, alpha: number, amount: number) {
+	const colors = [];
+	const huedelta = Math.trunc(360 / amount);
+
+	for (let i = 0; i < amount; i++) {
+		const hue = i * huedelta;
+		colors.push(`hsla(${hue},${saturation}%,${lightness}%,${alpha})`);
+	}
+	return colors;
+}
+
+colors = generateHslaColors(50, 60, 1.0, 10);
+
 @flowElement("f-pictogram")
 export class FPictogram extends FRoot {
 	/**
@@ -204,17 +217,6 @@ export class FPictogram extends FRoot {
 		return this.stringReplaceAtIndex(color, color.length - 2, 0.7);
 	}
 
-	generateHslaColors(saturation: number, lightness: number, alpha: number, amount: number) {
-		const colors = [];
-		const huedelta = Math.trunc(360 / amount);
-
-		for (let i = 0; i < amount; i++) {
-			const hue = i * huedelta;
-			colors.push(`hsla(${hue},${saturation}%,${lightness}%,${alpha})`);
-		}
-		return colors;
-	}
-
 	validateProperties() {
 		if (!this.source) {
 			throw new Error("f-pictogram : source is mandatory field");
@@ -261,7 +263,6 @@ export class FPictogram extends FRoot {
 		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
 	): Promise<void> {
 		super.updated(changedProperties);
-		colors = this.generateHslaColors(50, 60, 1.0, 10);
 		if (this.fPicorgramWrapper && this.autoBg && this.isText) {
 			// Modify the background-color property
 			this.fPicorgramWrapper.style.setProperty("--after-background-color", this.hashCode);

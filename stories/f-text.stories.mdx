@@ -2,6 +2,7 @@ import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
 
 <Meta
 	title="Components/f-text"
@@ -78,6 +79,9 @@ Text component includes Headings, titles, body texts and links.
 				control: { type: "boolean" },
 				if: { arg: "loading", eq: false }
 			},
+			editable: {
+				control: { type: "boolean" }
+			},
 			text: {
 				control: "text"
 			}
@@ -91,36 +95,61 @@ Text component includes Headings, titles, body texts and links.
 			loading: false,
 			disabled: false,
 			ellipsis: false,
+			editable: false,
 			highlight: undefined,
-			text: undefined
+			text: undefined,
+			text2: `This is text demo for editable-text section`
 		}}
 	>
-		{args => html`<f-div direction="column">
-			<f-text
-				.variant=${args.variant}
-				.size=${args.size}
-				.state=${args.state}
-				.align=${args.align}
-				.loading=${args.loading}
-				.disabled=${args.disabled}
-				.ellipsis=${args.ellipsis}
-				.highlight=${args.highlight}
-				?inline=${args.inline}
-				>This is ${args.variant} with ${args.size} and "${args.state}" state. Alignment is ${args.align}.
-			</f-text>
-			<f-text
-				.variant=${args.variant}
-				.size=${args.size}
-				.state=${args.state}
-				.align=${args.align}
-				.loading=${args.loading}
-				.disabled=${args.disabled}
-				.ellipsis=${args.ellipsis}
-				.highlight=${args.highlight}
-				?inline=${args.inline}
-				>${unsafeHTML(args.text)}</f-text
-			>
-		</f-div> `}
+		{args => {
+			const [_, updateArgs] = useArgs();
+			const handleEdit = e => {
+				console.log("story edited", e.detail.value);
+				updateArgs({ text2: e.detail.value });
+			};
+			return html`<f-div direction="column" gap="large">
+				<f-text
+					.variant=${args.variant}
+					.size=${args.size}
+					.state=${args.state}
+					.align=${args.align}
+					.loading=${args.loading}
+					.disabled=${args.disabled}
+					.ellipsis=${args.ellipsis}
+					.highlight=${args.highlight}
+					?inline=${args.inline}
+					>This is ${args.variant} with ${args.size} and "${args.state}" state. Alignment is ${args.align}
+				</f-text>
+				<f-div>
+					<f-text
+						.variant=${args.variant}
+						.size=${args.size}
+						.state=${args.state}
+						.align=${args.align}
+						.loading=${args.loading}
+						.disabled=${args.disabled}
+						.ellipsis=${args.ellipsis}
+						.highlight=${args.highlight}
+						?inline=${args.inline}
+						?editable=${args.editable}
+						@input=${handleEdit}
+						>${unsafeHTML(args.text2)}
+					</f-text>
+				</f-div>
+				<f-text
+					.variant=${args.variant}
+					.size=${args.size}
+					.state=${args.state}
+					.align=${args.align}
+					.loading=${args.loading}
+					.disabled=${args.disabled}
+					.ellipsis=${args.ellipsis}
+					.highlight=${args.highlight}
+					?inline=${args.inline}
+					>${unsafeHTML(args.text)}</f-text
+				>
+			</f-div> `;
+		}}
 	</Story>
 </Canvas>
 

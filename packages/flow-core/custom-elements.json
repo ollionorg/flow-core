@@ -10742,6 +10742,16 @@
             },
             {
               "kind": "field",
+              "name": "editable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "editable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "loading",
               "type": {
                 "text": "boolean | undefined"
@@ -10779,6 +10789,27 @@
             },
             {
               "kind": "field",
+              "name": "innerTextValue",
+              "type": {
+                "text": "HTMLDivElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "spanEditable",
+              "type": {
+                "text": "HTMLSpanElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "editTextIcon",
+              "type": {
+                "text": "HTMLDivElement"
+              }
+            },
+            {
+              "kind": "field",
               "name": "highlightedText",
               "type": {
                 "text": "string | null"
@@ -10786,9 +10817,58 @@
               "default": "null"
             },
             {
+              "kind": "field",
+              "name": "isTextInput",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "iconSize",
+              "readonly": true
+            },
+            {
               "kind": "method",
               "name": "validateProperties",
               "description": "validation for all atrributes"
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "InputEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleEdit"
+            },
+            {
+              "kind": "method",
+              "name": "handleSubmit"
+            },
+            {
+              "kind": "method",
+              "name": "editOnHover",
+              "parameters": [
+                {
+                  "name": "display",
+                  "type": {
+                    "text": "\"flex\" | \"none\""
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "showEmptyPlaceholder"
             },
             {
               "kind": "method",
@@ -10907,6 +10987,14 @@
               },
               "default": "false",
               "fieldName": "inline"
+            },
+            {
+              "name": "editable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "editable"
             },
             {
               "name": "loading",

@@ -7,6 +7,7 @@ import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
 import { flowElement } from "./../../utils";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import { FIcon } from "../f-icon/f-icon";
 
 export type FTextStateProp =
 	| "default"
@@ -27,7 +28,7 @@ export class FText extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle), ...FIcon.styles];
 
 	/**
 	 * @attribute local state for managing custom fill.
@@ -77,6 +78,12 @@ export class FText extends FRoot {
 	inline?: boolean = false;
 
 	/**
+	 * @attribute f-text converts into an editable section .
+	 */
+	@property({ reflect: true, type: Boolean })
+	editable?: boolean = false;
+
+	/**
 	 * @attribute Loader icon replaces the content of the button .
 	 */
 	@property({ reflect: true, type: Boolean })
@@ -97,8 +104,24 @@ export class FText extends FRoot {
 	@query("slot")
 	defaultSlot!: HTMLSlotElement;
 
+	@query(".slot-text")
+	innerTextValue!: HTMLDivElement;
+
+	@query(".textarea")
+	spanEditable!: HTMLSpanElement;
+
+	@query(".pseudo-edit-text")
+	editTextIcon!: HTMLDivElement;
+
 	@state()
 	highlightedText: string | null = null;
+
+	@state()
+	isTextInput = false;
+
+	get iconSize() {
+		return this.size === "x-small" ? "x-small" : "small";
+	}
 
 	/**
 	 * validation for all atrributes
@@ -111,6 +134,41 @@ export class FText extends FRoot {
 			!validateHTMLColorName(this.fill)
 		) {
 			throw new Error("f-text : enter correct color-name or color-code");
+		}
+	}
+
+	handleInput(e: InputEvent) {
+		e.stopPropagation();
+
+		const event = new CustomEvent("input", {
+			detail: {
+				value: this.spanEditable?.textContent?.trim()
+			},
+			bubbles: true,
+			composed: true
+		});
+		this.showEmptyPlaceholder();
+
+		this.dispatchEvent(event);
+	}
+
+	handleEdit() {
+		this.isTextInput = true;
+	}
+
+	handleSubmit() {
+		this.isTextInput = false;
+	}
+
+	editOnHover(display: "flex" | "none") {
+		if (this.editTextIcon) {
+			this.editTextIcon.style.display = display;
+		}
+	}
+
+	showEmptyPlaceholder() {
+		if (this.isTextInput) {
+			this.spanEditable.dataset.isEmpty = String(this.spanEditable?.textContent?.trim() === "");
 		}
 	}
 
@@ -148,12 +206,63 @@ export class FText extends FRoot {
 				this.weight = "regular";
 			}
 		}
-		if (this.highlightedText) {
-			return html`${unsafeHTML(this.highlightedText)}<slot
-					@slotchange=${this.handleSlotChange}
-					style="display:none"
-				></slot>`;
+
+		const highlightSnippet = html`${unsafeHTML(this.highlightedText)}<slot
+				@slotchange=${this.handleSlotChange}
+				style="display:none"
+			></slot>`;
+
+		const textareaSnippet = html` <div class="textarea-wrapper">
+			<span
+				class="textarea"
+				role="textbox"
+				contenteditable=${true}
+				.variant=${this.variant}
+				.size=${this.size}
+				.weight=${this.weight}
+				@input=${this.handleInput}
+				data-placeholder="Enter Your Text here"
+			>
+				<div class="slot-text">${this.textContent ?? ""}</div>
+			</span>
+			<div class="pseudo-submit-text">
+				<f-icon
+					source="i-tick"
+					.size=${this.iconSize}
+					state="success"
+					clickable
+					@click=${this.handleSubmit}
+				></f-icon>
+			</div>
+		</div>`;
+
+		const editableSnippet = html`<div class="non-editable-slot">
+				${this.highlightedText ? highlightSnippet : html`<slot></slot>`}
+			</div>
+			<div class="pseudo-edit-text">
+				<f-icon
+					source="i-edit"
+					state="primary"
+					.size=${this.iconSize}
+					clickable
+					@click=${this.handleEdit}
+				></f-icon>
+			</div>`;
+
+		if (this.editable) {
+			return html`
+				<div
+					class="f-text-editable"
+					@mouseenter=${() => this.editOnHover("flex")}
+					@mouseleave=${() => this.editOnHover("none")}
+				>
+					${this.isTextInput ? textareaSnippet : editableSnippet}
+				</div>
+			`;
+		} else if (this.highlightedText) {
+			return highlightSnippet;
 		}
+
 		/**
 		 * Final html to render
 		 */
@@ -165,6 +274,7 @@ export class FText extends FRoot {
 	): Promise<void> {
 		super.updated(changedProperties);
 		await this.updateComplete;
+		this.showEmptyPlaceholder();
 		if (this.highlight && this.highlight.trim() && !this.highlightedText) {
 			let content = this.textContent;
 			content = this.removeMarkTag(content ?? "");

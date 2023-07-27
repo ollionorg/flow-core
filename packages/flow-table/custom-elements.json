@@ -278,347 +278,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-tcell/f-tcell.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTcell",
-          "members": [
-            {
-              "kind": "field",
-              "name": "actions",
-              "type": {
-                "text": "FTcellActions | undefined"
-              },
-              "attribute": "actions"
-            },
-            {
-              "kind": "field",
-              "name": "selected",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "selected",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "width",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "width",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "selectable",
-              "type": {
-                "text": "FTableSelectable | undefined"
-              },
-              "default": "\"none\""
-            },
-            {
-              "kind": "field",
-              "name": "isDisabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "expandIcon",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "expandIconPosition",
-              "type": {
-                "text": "FTrowChevronPosition"
-              },
-              "default": "\"right\""
-            },
-            {
-              "kind": "field",
-              "name": "checkbox",
-              "type": {
-                "text": "FCheckbox | undefined"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "radio",
-              "type": {
-                "text": "FRadio | undefined"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "chevron",
-              "type": {
-                "text": "FIconButton | undefined"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "renderActions"
-            },
-            {
-              "kind": "method",
-              "name": "setSelection",
-              "parameters": [
-                {
-                  "name": "value",
-                  "default": "false"
-                },
-                {
-                  "name": "isDisabled",
-                  "default": "false"
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleSelection",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "toggleDetails"
-            },
-            {
-              "kind": "method",
-              "name": "toggleColumnSelection"
-            },
-            {
-              "kind": "method",
-              "name": "toggleColumnHighlight",
-              "parameters": [
-                {
-                  "name": "type",
-                  "type": {
-                    "text": "\"add\" | \"remove\""
-                  }
-                }
-              ]
-            }
-          ],
-          "attributes": [
-            {
-              "name": "actions",
-              "type": {
-                "text": "FTcellActions | undefined"
-              },
-              "fieldName": "actions"
-            },
-            {
-              "name": "selected",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "selected"
-            },
-            {
-              "name": "width",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "width"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTcell",
-          "declaration": {
-            "name": "FTcell",
-            "module": "src/components/f-tcell/f-tcell.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-trow/f-trow.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTrow",
-          "members": [
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FTrowState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "selected",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "attribute": "selected",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "expandIconPosition",
-              "type": {
-                "text": "FTrowChevronPosition | undefined"
-              },
-              "default": "\"right\"",
-              "attribute": "expand-icon-position",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disableSelection",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "attribute": "disable-selection",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "expndablePanel",
-              "type": {
-                "text": "FTcell | undefined"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "detailsSlotElement",
-              "type": {
-                "text": "HTMLSlotElement"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "propogateProps",
-              "description": "propogate props related to chevron and checkbox and radio boxes"
-            },
-            {
-              "kind": "method",
-              "name": "toggleDetails",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleInput",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleDetailsSlot"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "state",
-              "type": {
-                "text": "FTrowState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "fieldName": "open"
-            },
-            {
-              "name": "selected",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "fieldName": "selected"
-            },
-            {
-              "name": "expand-icon-position",
-              "type": {
-                "text": "FTrowChevronPosition | undefined"
-              },
-              "default": "\"right\"",
-              "fieldName": "expandIconPosition"
-            },
-            {
-              "name": "disable-selection",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "fieldName": "disableSelection"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTrow",
-          "declaration": {
-            "name": "FTrow",
-            "module": "src/components/f-trow/f-trow.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-table-schema/f-table-schema.ts",
       "declarations": [
         {
@@ -1068,6 +727,347 @@
           "declaration": {
             "name": "FTableSchema",
             "module": "src/components/f-table-schema/f-table-schema.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-trow/f-trow.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTrow",
+          "members": [
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FTrowState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "expandIconPosition",
+              "type": {
+                "text": "FTrowChevronPosition | undefined"
+              },
+              "default": "\"right\"",
+              "attribute": "expand-icon-position",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disableSelection",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "attribute": "disable-selection",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "expndablePanel",
+              "type": {
+                "text": "FTcell | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "detailsSlotElement",
+              "type": {
+                "text": "HTMLSlotElement"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "propogateProps",
+              "description": "propogate props related to chevron and checkbox and radio boxes"
+            },
+            {
+              "kind": "method",
+              "name": "toggleDetails",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleDetailsSlot"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "state",
+              "type": {
+                "text": "FTrowState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "fieldName": "open"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "fieldName": "selected"
+            },
+            {
+              "name": "expand-icon-position",
+              "type": {
+                "text": "FTrowChevronPosition | undefined"
+              },
+              "default": "\"right\"",
+              "fieldName": "expandIconPosition"
+            },
+            {
+              "name": "disable-selection",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "fieldName": "disableSelection"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTrow",
+          "declaration": {
+            "name": "FTrow",
+            "module": "src/components/f-trow/f-trow.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-tcell/f-tcell.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTcell",
+          "members": [
+            {
+              "kind": "field",
+              "name": "actions",
+              "type": {
+                "text": "FTcellActions | undefined"
+              },
+              "attribute": "actions"
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "width",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selectable",
+              "type": {
+                "text": "FTableSelectable | undefined"
+              },
+              "default": "\"none\""
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "expandIcon",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "expandIconPosition",
+              "type": {
+                "text": "FTrowChevronPosition"
+              },
+              "default": "\"right\""
+            },
+            {
+              "kind": "field",
+              "name": "checkbox",
+              "type": {
+                "text": "FCheckbox | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "radio",
+              "type": {
+                "text": "FRadio | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "chevron",
+              "type": {
+                "text": "FIconButton | undefined"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderActions"
+            },
+            {
+              "kind": "method",
+              "name": "setSelection",
+              "parameters": [
+                {
+                  "name": "value",
+                  "default": "false"
+                },
+                {
+                  "name": "isDisabled",
+                  "default": "false"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleSelection",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "toggleDetails"
+            },
+            {
+              "kind": "method",
+              "name": "toggleColumnSelection"
+            },
+            {
+              "kind": "method",
+              "name": "toggleColumnHighlight",
+              "parameters": [
+                {
+                  "name": "type",
+                  "type": {
+                    "text": "\"add\" | \"remove\""
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "actions",
+              "type": {
+                "text": "FTcellActions | undefined"
+              },
+              "fieldName": "actions"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "selected"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "width"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTcell",
+          "declaration": {
+            "name": "FTcell",
+            "module": "src/components/f-tcell/f-tcell.ts"
           }
         }
       ]

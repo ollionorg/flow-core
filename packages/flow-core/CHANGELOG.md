@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.20.0] - 2023-07-27
+
+### Features
+
+- `f-text`: `editable` feature added to edit the text inside f-text.
 ## [1.19.0] - 2023-07-26
 
 ### Features

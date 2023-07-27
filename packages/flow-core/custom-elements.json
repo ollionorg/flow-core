@@ -2166,6 +2166,360 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-div/f-div.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "END :  constant values required for `f-div`",
+          "name": "FDiv",
+          "members": [
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"block\" | \"curved\" | \"round\" | undefined"
+              },
+              "default": "\"block\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "\"row\" | \"column\" | undefined"
+              },
+              "default": "\"row\"",
+              "attribute": "direction",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FDivStateProp | undefined"
+              },
+              "default": "\"transparent\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "border",
+              "type": {
+                "text": "FDivBorderProp | undefined"
+              },
+              "attribute": "border",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "padding",
+              "type": {
+                "text": "FDivPaddingProp | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "padding",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "| \"top-left\"\n\t\t| \"top-center\"\n\t\t| \"top-right\"\n\t\t| \"middle-left\"\n\t\t| \"middle-center\"\n\t\t| \"middle-right\"\n\t\t| \"bottom-left\"\n\t\t| \"bottom-center\"\n\t\t| \"bottom-right\" | undefined"
+              },
+              "default": "\"top-left\"",
+              "attribute": "align",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "FDivWidthProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "attribute": "width",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "FDivHeightProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "attribute": "height",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "\"skeleton\" | \"loader\" | undefined"
+              },
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "clickable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "overflow",
+              "type": {
+                "text": "\"wrap\" | \"scroll\" | \"hidden\" | \"visible\" | undefined"
+              },
+              "default": "\"wrap\"",
+              "attribute": "overflow",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "sticky",
+              "type": {
+                "text": "\"none\" | \"top\" | \"bottom\" | \"left\" | \"right\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "sticky",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "applyBorder",
+              "description": "Applying border related style, based on value"
+            },
+            {
+              "kind": "method",
+              "name": "applyPadding",
+              "description": "Applying padding related style, based on value"
+            },
+            {
+              "kind": "method",
+              "name": "applySize",
+              "description": "Applying height,width related style, based on value"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"block\" | \"curved\" | \"round\" | undefined"
+              },
+              "default": "\"block\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "direction",
+              "type": {
+                "text": "\"row\" | \"column\" | undefined"
+              },
+              "default": "\"row\"",
+              "fieldName": "direction"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FDivStateProp | undefined"
+              },
+              "default": "\"transparent\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "border",
+              "type": {
+                "text": "FDivBorderProp | undefined"
+              },
+              "fieldName": "border"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "gap"
+            },
+            {
+              "name": "padding",
+              "type": {
+                "text": "FDivPaddingProp | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "padding"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "| \"top-left\"\n\t\t| \"top-center\"\n\t\t| \"top-right\"\n\t\t| \"middle-left\"\n\t\t| \"middle-center\"\n\t\t| \"middle-right\"\n\t\t| \"bottom-left\"\n\t\t| \"bottom-center\"\n\t\t| \"bottom-right\" | undefined"
+              },
+              "default": "\"top-left\"",
+              "fieldName": "align"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "FDivWidthProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "FDivHeightProp | undefined"
+              },
+              "default": "\"fill-container\"",
+              "fieldName": "height"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "\"skeleton\" | \"loader\" | undefined"
+              },
+              "fieldName": "loading"
+            },
+            {
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "clickable"
+            },
+            {
+              "name": "overflow",
+              "type": {
+                "text": "\"wrap\" | \"scroll\" | \"hidden\" | \"visible\" | undefined"
+              },
+              "default": "\"wrap\"",
+              "fieldName": "overflow"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "selected"
+            },
+            {
+              "name": "sticky",
+              "type": {
+                "text": "\"none\" | \"top\" | \"bottom\" | \"left\" | \"right\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "sticky"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "summary": "F-div is used as a container for HTML elements."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FDiv",
+          "declaration": {
+            "name": "FDiv",
+            "module": "src/components/f-div/f-div.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-date-time-picker/f-date-time-picker.ts",
       "declarations": [
         {
@@ -2653,486 +3007,6 @@
           "declaration": {
             "name": "FDateTimePicker",
             "module": "src/components/f-date-time-picker/f-date-time-picker.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-div/f-div.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "END :  constant values required for `f-div`",
-          "name": "FDiv",
-          "members": [
-            {
-              "kind": "field",
-              "name": "fill",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"\""
-            },
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "\"block\" | \"curved\" | \"round\" | undefined"
-              },
-              "default": "\"block\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "direction",
-              "type": {
-                "text": "\"row\" | \"column\" | undefined"
-              },
-              "default": "\"row\"",
-              "attribute": "direction",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FDivStateProp | undefined"
-              },
-              "default": "\"transparent\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "border",
-              "type": {
-                "text": "FDivBorderProp | undefined"
-              },
-              "attribute": "border",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "gap",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "padding",
-              "type": {
-                "text": "FDivPaddingProp | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "padding",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "align",
-              "type": {
-                "text": "| \"top-left\"\n\t\t| \"top-center\"\n\t\t| \"top-right\"\n\t\t| \"middle-left\"\n\t\t| \"middle-center\"\n\t\t| \"middle-right\"\n\t\t| \"bottom-left\"\n\t\t| \"bottom-center\"\n\t\t| \"bottom-right\" | undefined"
-              },
-              "default": "\"top-left\"",
-              "attribute": "align",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "width",
-              "type": {
-                "text": "FDivWidthProp | undefined"
-              },
-              "default": "\"fill-container\"",
-              "attribute": "width",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "height",
-              "type": {
-                "text": "FDivHeightProp | undefined"
-              },
-              "default": "\"fill-container\"",
-              "attribute": "height",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "loading",
-              "type": {
-                "text": "\"skeleton\" | \"loader\" | undefined"
-              },
-              "attribute": "loading",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "clickable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "clickable",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "overflow",
-              "type": {
-                "text": "\"wrap\" | \"scroll\" | \"hidden\" | \"visible\" | undefined"
-              },
-              "default": "\"wrap\"",
-              "attribute": "overflow",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "selected",
-              "type": {
-                "text": "\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "selected",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "sticky",
-              "type": {
-                "text": "\"none\" | \"top\" | \"bottom\" | \"left\" | \"right\" | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "sticky",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "applyBorder",
-              "description": "Applying border related style, based on value"
-            },
-            {
-              "kind": "method",
-              "name": "applyPadding",
-              "description": "Applying padding related style, based on value"
-            },
-            {
-              "kind": "method",
-              "name": "applySize",
-              "description": "Applying height,width related style, based on value"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "\"block\" | \"curved\" | \"round\" | undefined"
-              },
-              "default": "\"block\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "direction",
-              "type": {
-                "text": "\"row\" | \"column\" | undefined"
-              },
-              "default": "\"row\"",
-              "fieldName": "direction"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FDivStateProp | undefined"
-              },
-              "default": "\"transparent\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "border",
-              "type": {
-                "text": "FDivBorderProp | undefined"
-              },
-              "fieldName": "border"
-            },
-            {
-              "name": "gap",
-              "type": {
-                "text": "\"auto\" | \"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | \"none\" | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "gap"
-            },
-            {
-              "name": "padding",
-              "type": {
-                "text": "FDivPaddingProp | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "padding"
-            },
-            {
-              "name": "align",
-              "type": {
-                "text": "| \"top-left\"\n\t\t| \"top-center\"\n\t\t| \"top-right\"\n\t\t| \"middle-left\"\n\t\t| \"middle-center\"\n\t\t| \"middle-right\"\n\t\t| \"bottom-left\"\n\t\t| \"bottom-center\"\n\t\t| \"bottom-right\" | undefined"
-              },
-              "default": "\"top-left\"",
-              "fieldName": "align"
-            },
-            {
-              "name": "width",
-              "type": {
-                "text": "FDivWidthProp | undefined"
-              },
-              "default": "\"fill-container\"",
-              "fieldName": "width"
-            },
-            {
-              "name": "height",
-              "type": {
-                "text": "FDivHeightProp | undefined"
-              },
-              "default": "\"fill-container\"",
-              "fieldName": "height"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "loading",
-              "type": {
-                "text": "\"skeleton\" | \"loader\" | undefined"
-              },
-              "fieldName": "loading"
-            },
-            {
-              "name": "clickable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "clickable"
-            },
-            {
-              "name": "overflow",
-              "type": {
-                "text": "\"wrap\" | \"scroll\" | \"hidden\" | \"visible\" | undefined"
-              },
-              "default": "\"wrap\"",
-              "fieldName": "overflow"
-            },
-            {
-              "name": "selected",
-              "type": {
-                "text": "\"none\" | \"background\" | \"border\" | \"notch-right\" | \"notch-left\" | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "selected"
-            },
-            {
-              "name": "sticky",
-              "type": {
-                "text": "\"none\" | \"top\" | \"bottom\" | \"left\" | \"right\" | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "sticky"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "summary": "F-div is used as a container for HTML elements."
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FDiv",
-          "declaration": {
-            "name": "FDiv",
-            "module": "src/components/f-div/f-div.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-divider/f-divider.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FDivider",
-          "members": [
-            {
-              "kind": "field",
-              "name": "fill",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"\""
-            },
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
-              },
-              "default": "\"solid\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FDividerState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
-              },
-              "default": "\"solid\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FDividerState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FDivider",
-          "declaration": {
-            "name": "FDivider",
-            "module": "src/components/f-divider/f-divider.ts"
           }
         }
       ]
@@ -3657,6 +3531,132 @@
           "declaration": {
             "name": "FEmojiPicker",
             "module": "src/components/f-emoji-picker/f-emoji-picker.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-divider/f-divider.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FDivider",
+          "members": [
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
+              },
+              "default": "\"solid\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FDividerState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
+              },
+              "default": "\"solid\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FDividerState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FDivider",
+          "declaration": {
+            "name": "FDivider",
+            "module": "src/components/f-divider/f-divider.ts"
           }
         }
       ]
@@ -5790,481 +5790,6 @@
           "declaration": {
             "name": "FInput",
             "module": "src/components/f-input/f-input.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-pictogram/f-pictogram.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FPictogram",
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "FPictogramVariant | undefined"
-              },
-              "default": "\"squircle\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "source",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "source",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "FPictogramSize | undefined"
-              },
-              "default": "\"large\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FPictogramState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "loading",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "clickable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "clickable",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "renderedHtml",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "sourceSize"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "FPictogramVariant | undefined"
-              },
-              "default": "\"squircle\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "source",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "source"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "FPictogramSize | undefined"
-              },
-              "default": "\"large\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FPictogramState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "loading"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "clickable",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "clickable"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FPictogram",
-          "declaration": {
-            "name": "FPictogram",
-            "module": "src/components/f-pictogram/f-pictogram.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-popover/f-popover.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FPopover",
-          "members": [
-            {
-              "kind": "field",
-              "name": "placement",
-              "type": {
-                "text": "FPopoverPlacement | undefined"
-              },
-              "default": "\"auto\"",
-              "attribute": "placement",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "FPopoverSize | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "overlay",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "true",
-              "attribute": "overlay",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "autoHeight",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "auto-height",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "closeOnEscape",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "true",
-              "attribute": "close-on-escape",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "target",
-              "type": {
-                "text": "string | HTMLElement"
-              },
-              "attribute": "target",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "cleanup",
-              "type": {
-                "text": "() => void"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isEscapeClicked",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "isTooltip",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "offset",
-              "type": {
-                "text": "FPopOverOffset | null"
-              },
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "targetElement",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "stringToHTML",
-              "parameters": [
-                {
-                  "name": "str",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "computePlacement"
-            },
-            {
-              "kind": "method",
-              "name": "computePosition",
-              "parameters": [
-                {
-                  "name": "isTooltip",
-                  "type": {
-                    "text": "boolean"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "dispatchEsc"
-            },
-            {
-              "kind": "method",
-              "name": "escapekeyHandle",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "KeyboardEvent"
-                  }
-                },
-                {
-                  "name": "el",
-                  "type": {
-                    "text": "HTMLElement"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "overlayClick"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "placement",
-              "type": {
-                "text": "FPopoverPlacement | undefined"
-              },
-              "default": "\"auto\"",
-              "fieldName": "placement"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "FPopoverSize | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "open"
-            },
-            {
-              "name": "overlay",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "true",
-              "fieldName": "overlay"
-            },
-            {
-              "name": "auto-height",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "autoHeight"
-            },
-            {
-              "name": "close-on-escape",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "true",
-              "fieldName": "closeOnEscape"
-            },
-            {
-              "name": "target",
-              "type": {
-                "text": "string | HTMLElement"
-              },
-              "fieldName": "target"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FPopover",
-          "declaration": {
-            "name": "FPopover",
-            "module": "src/components/f-popover/f-popover.ts"
           }
         }
       ]
@@ -9465,44 +8990,39 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-tag/f-tag.ts",
+      "path": "src/components/f-pictogram/f-pictogram.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "FTag",
+          "name": "FPictogram",
           "members": [
             {
               "kind": "field",
-              "name": "tagSystemIcon",
+              "name": "variant",
               "type": {
-                "text": "boolean"
+                "text": "FPictogramVariant | undefined"
               },
-              "default": "false"
+              "default": "\"squircle\"",
+              "attribute": "variant",
+              "reflects": true
             },
             {
               "kind": "field",
-              "name": "fill",
+              "name": "source",
               "type": {
                 "text": "string"
               },
-              "default": "\"\""
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "label"
+              "attribute": "source",
+              "reflects": true
             },
             {
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+                "text": "FPictogramSize | undefined"
               },
-              "default": "\"medium\"",
+              "default": "\"large\"",
               "attribute": "size",
               "reflects": true
             },
@@ -9510,37 +9030,10 @@
               "kind": "field",
               "name": "state",
               "type": {
-                "text": "FTagStateProp | undefined"
+                "text": "FPictogramState | undefined"
               },
-              "default": "\"neutral\"",
+              "default": "\"default\"",
               "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "iconLeft",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "icon-left",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "iconRight",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "icon-right",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "counter",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "counter",
               "reflects": true
             },
             {
@@ -9551,16 +9044,6 @@
               },
               "default": "false",
               "attribute": "loading",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "selected",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "selected",
               "reflects": true
             },
             {
@@ -9580,35 +9063,17 @@
                 "text": "boolean | undefined"
               },
               "default": "false",
-              "attribute": "clickable"
+              "attribute": "clickable",
+              "reflects": true
             },
             {
               "kind": "field",
-              "name": "iconSize",
-              "description": "compute icon size based on tag size",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "textColor",
-              "description": "compute textColor when custom color of tag is defined.",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "loaderColor",
-              "description": "compute loaderColor when custom color of tag is defined.",
+              "name": "renderedHtml",
               "readonly": true
             },
             {
               "kind": "method",
-              "name": "applyStyles",
-              "description": "apply inline styles to shadow-dom for custom fill."
-            },
-            {
-              "kind": "method",
-              "name": "validateProperties",
-              "description": "validation for all atrributes"
+              "name": "sourceSize"
             },
             {
               "kind": "field",
@@ -9637,48 +9102,35 @@
           ],
           "attributes": [
             {
-              "name": "label",
+              "name": "variant",
+              "type": {
+                "text": "FPictogramVariant | undefined"
+              },
+              "default": "\"squircle\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "source",
               "type": {
                 "text": "string"
               },
-              "fieldName": "label"
+              "fieldName": "source"
             },
             {
               "name": "size",
               "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+                "text": "FPictogramSize | undefined"
               },
-              "default": "\"medium\"",
+              "default": "\"large\"",
               "fieldName": "size"
             },
             {
               "name": "state",
               "type": {
-                "text": "FTagStateProp | undefined"
+                "text": "FPictogramState | undefined"
               },
-              "default": "\"neutral\"",
+              "default": "\"default\"",
               "fieldName": "state"
-            },
-            {
-              "name": "icon-left",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "iconLeft"
-            },
-            {
-              "name": "icon-right",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "iconRight"
-            },
-            {
-              "name": "counter",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "counter"
             },
             {
               "name": "loading",
@@ -9687,14 +9139,6 @@
               },
               "default": "false",
               "fieldName": "loading"
-            },
-            {
-              "name": "selected",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "selected"
             },
             {
               "name": "disabled",
@@ -9727,17 +9171,294 @@
           "superclass": {
             "name": "FRoot",
             "module": "/src/mixins/components/f-root/f-root"
-          },
-          "summary": "Tags allow users to categorize the content. They can be used to add metadata to an element such as category, or property or show a status."
+          }
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "FTag",
+          "name": "FPictogram",
           "declaration": {
-            "name": "FTag",
-            "module": "src/components/f-tag/f-tag.ts"
+            "name": "FPictogram",
+            "module": "src/components/f-pictogram/f-pictogram.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-popover/f-popover.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FPopover",
+          "members": [
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "FPopoverPlacement | undefined"
+              },
+              "default": "\"auto\"",
+              "attribute": "placement",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "FPopoverSize | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "overlay",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "attribute": "overlay",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "autoHeight",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "auto-height",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "closeOnEscape",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "attribute": "close-on-escape",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": {
+                "text": "string | HTMLElement"
+              },
+              "attribute": "target",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "cleanup",
+              "type": {
+                "text": "() => void"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isEscapeClicked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "isTooltip",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "offset",
+              "type": {
+                "text": "FPopOverOffset | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "targetElement",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "stringToHTML",
+              "parameters": [
+                {
+                  "name": "str",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "computePlacement"
+            },
+            {
+              "kind": "method",
+              "name": "computePosition",
+              "parameters": [
+                {
+                  "name": "isTooltip",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "dispatchEsc"
+            },
+            {
+              "kind": "method",
+              "name": "escapekeyHandle",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                },
+                {
+                  "name": "el",
+                  "type": {
+                    "text": "HTMLElement"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "overlayClick"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "placement",
+              "type": {
+                "text": "FPopoverPlacement | undefined"
+              },
+              "default": "\"auto\"",
+              "fieldName": "placement"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "FPopoverSize | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "overlay",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "fieldName": "overlay"
+            },
+            {
+              "name": "auto-height",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "autoHeight"
+            },
+            {
+              "name": "close-on-escape",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "fieldName": "closeOnEscape"
+            },
+            {
+              "name": "target",
+              "type": {
+                "text": "string | HTMLElement"
+              },
+              "fieldName": "target"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FPopover",
+          "declaration": {
+            "name": "FPopover",
+            "module": "src/components/f-popover/f-popover.ts"
           }
         }
       ]
@@ -9947,6 +9668,13 @@
             },
             {
               "kind": "field",
+              "name": "spanEditable",
+              "type": {
+                "text": "HTMLSpanElement"
+              }
+            },
+            {
+              "kind": "field",
               "name": "editTextIcon",
               "type": {
                 "text": "HTMLDivElement"
@@ -9963,6 +9691,14 @@
             {
               "kind": "field",
               "name": "isTextInput",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "isSpanEmpty",
               "type": {
                 "text": "boolean"
               },
@@ -10821,6 +10557,285 @@
           "declaration": {
             "name": "FTooltip",
             "module": "src/components/f-tooltip/f-tooltip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-tag/f-tag.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTag",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tagSystemIcon",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FTagStateProp | undefined"
+              },
+              "default": "\"neutral\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconLeft",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "icon-left",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconRight",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "icon-right",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "counter",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "counter",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "clickable"
+            },
+            {
+              "kind": "field",
+              "name": "iconSize",
+              "description": "compute icon size based on tag size",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "textColor",
+              "description": "compute textColor when custom color of tag is defined.",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "loaderColor",
+              "description": "compute loaderColor when custom color of tag is defined.",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "applyStyles",
+              "description": "apply inline styles to shadow-dom for custom fill."
+            },
+            {
+              "kind": "method",
+              "name": "validateProperties",
+              "description": "validation for all atrributes"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "label"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FTagStateProp | undefined"
+              },
+              "default": "\"neutral\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "icon-left",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "iconLeft"
+            },
+            {
+              "name": "icon-right",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "iconRight"
+            },
+            {
+              "name": "counter",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "counter"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "selected"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "clickable",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "clickable"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "summary": "Tags allow users to categorize the content. They can be used to add metadata to an element such as category, or property or show a status."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTag",
+          "declaration": {
+            "name": "FTag",
+            "module": "src/components/f-tag/f-tag.ts"
           }
         }
       ]

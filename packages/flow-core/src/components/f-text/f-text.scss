@@ -229,6 +229,10 @@ f-div[direction="row"] {
 	.non-editable-slot {
 		width: calc(100% - 16px);
 	}
+	.textarea-wrapper {
+		display: flex;
+		width: 100%;
+	}
 	.textarea {
 		display: block;
 		width: 100%;
@@ -266,7 +270,7 @@ f-div[direction="row"] {
 		}
 	}
 
-	.textarea[contenteditable]:empty::before {
+	.textarea[data-is-empty="true"]::before {
 		@include base();
 		font-size: 12px;
 		content: attr(data-placeholder);

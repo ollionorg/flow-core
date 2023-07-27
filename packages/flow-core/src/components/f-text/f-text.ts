@@ -107,6 +107,9 @@ export class FText extends FRoot {
 	@query(".slot-text")
 	innerTextValue!: HTMLDivElement;
 
+	@query(".textarea")
+	spanEditable!: HTMLSpanElement;
+
 	@query(".pseudo-edit-text")
 	editTextIcon!: HTMLDivElement;
 
@@ -115,6 +118,9 @@ export class FText extends FRoot {
 
 	@state()
 	isTextInput = false;
+
+	@state()
+	isSpanEmpty = false;
 
 	get iconSize() {
 		return this.size === "x-small" ? "x-small" : "small";
@@ -136,13 +142,20 @@ export class FText extends FRoot {
 
 	handleInput(e: InputEvent) {
 		e.stopPropagation();
+
 		const event = new CustomEvent("input", {
 			detail: {
-				value: this.innerTextValue.textContent
+				value: this.spanEditable?.textContent?.trim()
 			},
 			bubbles: true,
 			composed: true
 		});
+
+		if (this.spanEditable?.textContent?.trim()) {
+			this.isSpanEmpty = false;
+		} else {
+			this.isSpanEmpty = true;
+		}
 
 		this.dispatchEvent(event);
 	}
@@ -201,16 +214,20 @@ export class FText extends FRoot {
 				style="display:none"
 			></slot>`;
 
-		const textareaSnippet = html`<span
-			class="textarea"
-			role="textbox"
-			contenteditable=${true}
-			.variant=${this.variant}
-			.size=${this.size}
-			.weight=${this.weight}
-			@input=${this.handleInput}
-			data-placeholder="Enter Your Text here"
-			><div class="slot-text">${this.textContent ?? ""}</div>
+		const textareaSnippet = html` <div class="textarea-wrapper">
+			<span
+				class="textarea"
+				role="textbox"
+				contenteditable=${true}
+				.variant=${this.variant}
+				.size=${this.size}
+				.weight=${this.weight}
+				@input=${this.handleInput}
+				data-placeholder="Enter Your Text here"
+				data-is-empty=${this.isSpanEmpty}
+			>
+				<div class="slot-text">${this.textContent ?? ""}</div>
+			</span>
 			<div class="pseudo-submit-text">
 				<f-icon
 					source="i-tick"
@@ -218,8 +235,9 @@ export class FText extends FRoot {
 					state="success"
 					clickable
 					@click=${this.handleSubmit}
-				></f-icon></div
-		></span>`;
+				></f-icon>
+			</div>
+		</div>`;
 
 		const editableSnippet = html`<div class="non-editable-slot">
 				${this.highlightedText ? highlightSnippet : html`<slot></slot>`}
@@ -253,12 +271,21 @@ export class FText extends FRoot {
 		 */
 		return html`<slot></slot>`;
 	}
-
+	protected firstUpdated(
+		_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): void {
+		if (this.spanEditable?.textContent?.trim() || this.textContent?.trim()) {
+			this.isSpanEmpty = false;
+		} else {
+			this.isSpanEmpty = true;
+		}
+	}
 	protected async updated(
 		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
 	): Promise<void> {
 		super.updated(changedProperties);
 		await this.updateComplete;
+
 		if (this.highlight && this.highlight.trim() && !this.highlightedText) {
 			let content = this.textContent;
 			content = this.removeMarkTag(content ?? "");

@@ -239,7 +239,7 @@ export function handleInput(this: FSelect, e: InputEvent) {
 	if (this.searchable) {
 		this.searchValue = (e.target as HTMLInputElement)?.value;
 
-		const event = new CustomEvent<FSelectCustomEvent>("search-input", {
+		const event = new CustomEvent("search-input", {
 			detail: {
 				value: (e.target as HTMLInputElement)?.value
 			},

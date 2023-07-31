@@ -4,11 +4,26 @@
 
 # Change Log
 
+## [1.21.0] - 2023-07-31
+
+### Features
+
+- `f-div`: `highlight` property added to highlight a particular f-div and others would be in overlay.
+
+### Improvements
+
+- `f-tag`: added ellipsis according to the width of parent and on its own.
+
+### Bug Fixes
+
+- `f-tag`: emoji wasn't taking the correct size according to the f-tag size.
+
 ## [1.20.0] - 2023-07-27
 
 ### Features
 
 - `f-text`: `editable` feature added to edit the text inside f-text.
+
 ## [1.19.0] - 2023-07-26
 
 ### Features

@@ -238,6 +238,16 @@ export function handleInput(this: FSelect, e: InputEvent) {
 	this.openDropdown = true;
 	if (this.searchable) {
 		this.searchValue = (e.target as HTMLInputElement)?.value;
+
+		const event = new CustomEvent("search-input", {
+			detail: {
+				value: (e.target as HTMLInputElement)?.value
+			},
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(event);
+
 		if (Array.isArray(this.options)) {
 			this.filteredOptions = (this.options as FSelectArrayOfObjects)?.filter(
 				(item: FSelectSingleOption) =>

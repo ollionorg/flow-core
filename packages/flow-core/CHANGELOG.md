@@ -18,6 +18,13 @@
 
 - `f-tag`: emoji wasn't taking the correct size according to the f-tag size.
 
+
+## [1.20.1] - 2023-07-31
+
+### Improvements
+
+- `search-input` event emitted when user changes search value in `f-select`.
+
 ## [1.20.0] - 2023-07-27
 
 ### Features

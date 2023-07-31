@@ -1,0 +1,23 @@
+$gaps: (
+	"x-large": 24px,
+	"large": 16px,
+	"medium": 12px,
+	"small": 8px,
+	"x-small": 4px
+);
+
+f-grid {
+	display: grid;
+	flex: 1 0 auto;
+	@each $gap, $value in $gaps {
+		&[gap="#{$gap}"] {
+			gap: $value;
+		}
+	}
+}
+
+f-div[direction="column"] {
+	> f-grid {
+		width: 100%;
+	}
+}

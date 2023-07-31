@@ -1,0 +1,177 @@
+@use "sass:map";
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+
+/**
+$states map will have state specific inner maps.
+**/
+$states: (
+	"primary": (
+		"background": var(--color-primary-default),
+		"border": var(--color-primary-default),
+		"hover": var(--color-primary-default-hover),
+		"hover-border": var(--color-primary-default-hover)
+	),
+	"default": (
+		"background": var(--color-primary-default),
+		"border": var(--color-text-default),
+		"hover": var(--color-primary-default-hover),
+		"hover-border": var(--color-text-default-hover)
+	),
+	"success": (
+		"background": var(--color-success-default),
+		"border": var(--color-success-default),
+		"hover": var(--color-success-default-hover),
+		"hover-border": var(--color-success-default-hover)
+	),
+	"warning": (
+		"background": var(--color-warning-default),
+		"border": var(--color-warning-default),
+		"hover": var(--color-warning-default-hover),
+		"hover-border": var(--color-warning-default-hover)
+	),
+	"danger": (
+		"background": var(--color-danger-default),
+		"border": var(--color-danger-default),
+		"hover": var(--color-danger-default-hover),
+		"hover-border": var(--color-danger-default-hover)
+	),
+	"inherit": (
+		"background": var(--color-checkbox-default),
+		"border": var(--color-radio-outline-default),
+		"hover": var(--color-switch-default-hover),
+		"hover-border": var(--color-radio-border-hover)
+	)
+);
+
+/**
+$sizes map will have state specific inner maps.
+**/
+$sizes: (
+	"small": (
+		"height": 12px,
+		"inner-height": 6px
+	),
+	"medium": (
+		"height": 16px,
+		"inner-height": 8px
+	)
+);
+
+:host {
+	.f-radio-wrapper {
+		slot[name="description"]::slotted(*) {
+			padding-left: calc(var(--form-radio-size) + 12px) !important;
+		}
+		@each $size, $value in $sizes {
+			&[size="#{$size}"] {
+				slot[name="description"]::slotted(*) {
+					padding-left: calc(map.get($value, "height") + 12px) !important;
+				}
+			}
+		}
+		slot[name="help"]::slotted(*) {
+			padding-left: calc(var(--form-radio-size) + 12px) !important;
+		}
+		@each $size, $value in $sizes {
+			&[size="#{$size}"] {
+				slot[name="help"]::slotted(*) {
+					padding-left: calc(map.get($value, "height") + 12px) !important;
+				}
+			}
+		}
+
+		.f-radio-section {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			gap: 12px;
+			.f-radio {
+				@include base();
+				&[type="radio"] {
+					appearance: none;
+					margin: 0;
+					font: inherit;
+					color: currentColor;
+					border-radius: 50%;
+					display: grid;
+					place-content: center;
+					cursor: pointer;
+					width: var(--form-radio-size);
+					height: var(--form-radio-size);
+					@each $size, $value in $sizes {
+						&[size="#{$size}"] {
+							width: map.get($value, "height");
+							height: map.get($value, "height");
+						}
+					}
+				}
+
+				@each $state, $color in $states {
+					&[state="#{$state}"] {
+						border: 1px solid map.get($color, "border");
+						&:hover {
+							border: 1px solid map.get($color, "hover-border");
+						}
+						&[type="radio"]::before {
+							content: "";
+							border-radius: 50%;
+							transform: scale(0);
+							transition: var(--transition-time-rapid) transform ease-in-out;
+							box-shadow: inset 1em 1em map.get($color, "background");
+							background-color: map.get($color, "background");
+						}
+						&[type="radio"][checked="true"]:hover::before {
+							content: "";
+							border-radius: 50%;
+							transform: scale(1);
+							transition: var(--transition-time-rapid) transform ease-in-out;
+							box-shadow: inset 1em 1em map.get($color, "hover");
+							background-color: map.get($color, "hover") !important;
+						}
+					}
+				}
+
+				@each $size, $value in $sizes {
+					&[size="#{$size}"] {
+						&[type="radio"]::before {
+							width: map.get($value, "inner-height");
+							height: map.get($value, "inner-height");
+						}
+					}
+				}
+
+				&[type="radio"]::before {
+					width: var(--form-radio-mark-size);
+					height: var(--form-radio-mark-size);
+				}
+
+				&[type="radio"][checked="true"]::before {
+					transform: scale(1);
+				}
+			}
+		}
+	}
+	f-div.f-radio-wrapper[disabled] {
+		@include disabled();
+		pointer-events: none;
+		opacity: 1;
+	}
+	slot[name="label"] {
+		cursor: pointer;
+	}
+}
+
+f-radio {
+	display: flex;
+	height: fit-content;
+	flex: 0 0 fit-content;
+	&[disabled] {
+		@include disabled();
+	}
+	@each $state, $color in $states {
+		&[state="#{$state}"] {
+			@include input-color($state);
+		}
+	}
+}

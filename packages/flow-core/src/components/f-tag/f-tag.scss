@@ -1,0 +1,211 @@
+@use "sass:map";
+@use "sass:math";
+@import "./../../mixins/scss/mixins";
+
+/**
+$states map created to hold values of different states
+**/
+$states: (
+	"primary": (
+		"background": var(--color-primary-default),
+		"selected": var(--color-primary-default-selected),
+		"loading": var(--color-primary-surface),
+		"hover": var(--color-primary-default-hover)
+	),
+	"neutral": (
+		"background": var(--color-neutral-default),
+		"selected": var(--color-neutral-default-selected),
+		"loading": var(--color-surface-tertiary),
+		"hover": var(--color-neutral-default-hover)
+	),
+	"success": (
+		"background": var(--color-success-default),
+		"selected": var(--color-success-default-selected),
+		"loading": var(--color-success-surface),
+		"hover": var(--color-success-default-hover)
+	),
+	"warning": (
+		"background": var(--color-warning-default),
+		"selected": var(--color-warning-default-selected),
+		"loading": var(--color-warning-surface),
+		"hover": var(--color-warning-default-hover)
+	),
+	"danger": (
+		"background": var(--color-danger-default),
+		"selected": var(--color-danger-default-selected),
+		"loading": var(--color-danger-surface),
+		"hover": var(--color-danger-default-hover)
+	),
+	"inherit": (
+		"background": var(--color-inherit-button),
+		"selected": var(--color-inherit-button-selected),
+		"loading": var(--color-inherit-button-loader),
+		"hover": var(--color-inherit-button-hover)
+	)
+);
+
+// $sizes will all values related to different sizes
+$sizes: (
+	"small": (
+		"height": 16px,
+		"padding": 2px 4px,
+		"fontSize": 10px,
+		"gap": 4px,
+		"loaderSize": 8px
+	),
+	"medium": (
+		"height": 24px,
+		"padding": 4px 8px,
+		"fontSize": 12px,
+		"gap": 6px,
+		"loaderSize": 16px
+	),
+	"large": (
+		"height": 32px,
+		"padding": 7px 12px,
+		"fontSize": 14px,
+		"gap": 8px,
+		"loaderSize": 20px
+	)
+);
+/**
+:host selects the host element.
+in this case it is `f-tag`
+**/
+:host {
+	// inner element used to apply all styles
+	.f-tag {
+		@include base();
+		// cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: bold;
+		color: var(--color-surface-default);
+		flex: 1 0 auto;
+		vertical-align: top;
+		width: fit-content;
+		border-radius: 4px;
+		.text-content {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			max-width: 100px;
+		}
+
+		// class to appply shimmer . This class is applied through javascript please check f-tag.ts
+		&.hasShimmer {
+			@include shimmer-self();
+		}
+
+		&.custom-loader {
+			&[loading] {
+				svg {
+					fill: inherit !important;
+					stroke: none;
+					*[fill^="var(--color-primary-default)"] {
+						fill: inherit !important;
+					}
+				}
+			}
+		}
+
+		@each $state, $color in $states {
+			&[state="#{$state}"] {
+				background-color: map.get($color, "background") !important;
+				border: 1px
+					solid
+					map.get($color, "background") !important; // added to match width of outline category
+				// hover changes background
+				&[selected] {
+					background-color: map.get($color, "selected") !important;
+					border: 1px solid map.get($color, "selected") !important;
+				}
+				// if loading attribute specified then change background, border, color and svg
+				&[loading] {
+					background-color: map.get($color, "loading") !important;
+					border: 1px solid map.get($color, "loading") !important;
+					color: transparent !important;
+					svg path.loader-fill {
+						fill: map.get($color, "background") !important;
+					}
+				}
+				// adding clickable behavior
+				&[clickable]:not([selected]) {
+					cursor: pointer;
+					&:hover {
+						background-color: map.get($color, "hover") !important;
+					}
+				}
+			}
+		}
+		/**
+  * Iterating over sizes with padding, fontsize, height
+  **/
+		@each $size, $value in $sizes {
+			&[size="#{$size}"] {
+				height: map.get($value, "height");
+				padding: map.get($value, "padding");
+				font-size: map.get($value, "fontSize");
+
+				f-counter {
+					margin-left: map.get($value, "gap");
+				}
+
+				&[label] {
+					> .left-icon {
+						margin-right: map.get($value, "gap");
+					}
+				}
+				> .right-icon {
+					margin-left: map.get($value, "gap");
+				}
+
+				&[loading] {
+					svg {
+						height: map.get($value, "loaderSize");
+					}
+				}
+			}
+		}
+
+		// disabled button will use `disabled()` mixins
+		&[disabled] {
+			@include disabled();
+		}
+		// loading use `rotate` mixins
+		&[loading] {
+			@include rotate("svg");
+			pointer-events: none;
+
+			svg {
+				position: absolute;
+			}
+		}
+	}
+	&:focus-visible,
+	&:focus,
+	div:focus-visible,
+	div:focus {
+		outline: none;
+	}
+}
+
+// applies styles to only f-tag element.
+f-tag {
+	height: fit-content;
+	display: inline-flex;
+	flex: 0 0 auto;
+	vertical-align: top;
+	overflow: hidden;
+	&[disabled] {
+		@include disabled();
+	}
+
+	&.hasShimmer[state] {
+		&::before {
+			content: unset;
+		}
+		background: transparent !important;
+	}
+}

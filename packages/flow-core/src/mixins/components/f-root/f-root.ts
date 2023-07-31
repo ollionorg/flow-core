@@ -113,7 +113,7 @@ export class FRoot extends LitElement {
 				this.addEventListener("mouseenter", this.mouseEnter);
 				this.addEventListener("mouseleave", this.mouseLeave);
 			} else {
-				if (this.mouseLeave && tooltipElement && tooltipElement.target === this) {
+				if (this.mouseLeave !== undefined && tooltipElement && tooltipElement.target === this) {
 					this.mouseLeave();
 				}
 				this.removeEventListener("mouseenter", this.mouseEnter);

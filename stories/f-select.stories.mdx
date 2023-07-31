@@ -136,6 +136,9 @@ Select allows users to choose one or multiple options from a list of values.
 				array.push(e.detail.value);
 				updateArgs({ options: array });
 			};
+			const handleSearchInput = e => {
+				console.log("search input : ", e.detail.value);
+			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large">
 					<f-div
@@ -167,6 +170,7 @@ Select allows users to choose one or multiple options from a list of values.
 							icon-left=${args["icon-left"]}
 							.size=${args.size}
 							@create-option=${handleCreateOption}
+							@search-input=${handleSearchInput}
 						>
 							${unsafeHTML(args.slot)}
 						</f-select></f-div

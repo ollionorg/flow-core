@@ -40,17 +40,27 @@ f-code-editor used to edit content/code.
 					"scss",
 					"less",
 					"html",
+					"yaml",
 					"javascript",
 					"typescript"
 				]
 			}
 		}}
 		args={{
-			code: `object ScalaExample{  
-    def main(args:Array[String]){  
-        println "Hello Scala"  
-    }  
-}  `,
+			code: `%TAG ! tag:clarkevans.com,2002:
+--- !shape
+  # Use the ! handle for presenting
+  # tag:clarkevans.com,2002:circle
+- !circle
+  center: &ORIGIN {x: 73, y: 129}
+  radius: 7
+- !line
+  start: *ORIGIN
+  finish: { x: 89, y: 102 }
+- !label
+  start: *ORIGIN
+  color: 0xFFEEBB
+  text: Pretty vector drawing.`,
 			language: "scala"
 		}}
 	>

@@ -1,0 +1,568 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
+
+<Meta
+	title="Components/f-text"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
+/>
+
+# f-text
+
+<br />
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+Text component includes Headings, titles, body texts and links.
+
+<br />
+
+### [Playground](/story/components-f-text--playground)
+
+<Canvas>
+	<Story
+		name="Playground"
+		argTypes={{
+			variant: {
+				control: "radio",
+				options: ["para", "heading", "code"]
+			},
+			size: {
+				control: "select",
+				options: ["x-large", "large", "medium", "small", "x-small"]
+			},
+			state: {
+				control: "select",
+				options: [
+					"default",
+					"secondary",
+					"subtle",
+					"primary",
+					"success",
+					"warning",
+					"danger",
+					"inherit",
+					"custom, #0000FF",
+					"custom, gray",
+					"custom, #fff",
+					"custom, white",
+					"custom, black",
+					"custom, #607B9F"
+				]
+			},
+			align: {
+				control: "radio",
+				options: ["left", "right", "center"]
+			},
+			highlight: {
+				control: "text"
+			},
+			inline: {
+				control: "boolean"
+			},
+			loading: {
+				control: { type: "boolean" },
+				if: { arg: "disabled", eq: false }
+			},
+			disabled: {
+				control: { type: "boolean" },
+				if: { arg: "loading", eq: false }
+			},
+			ellipsis: {
+				control: { type: "boolean" },
+				if: { arg: "loading", eq: false }
+			},
+			editable: {
+				control: { type: "boolean" }
+			},
+			text: {
+				control: "text"
+			}
+		}}
+		args={{
+			variant: "para",
+			size: "medium",
+			state: "default",
+			align: "left",
+			inline: false,
+			loading: false,
+			disabled: false,
+			ellipsis: false,
+			editable: false,
+			highlight: undefined,
+			text: undefined,
+			text2: `This is text demo for editable-text section`
+		}}
+	>
+		{args => {
+			const [_, updateArgs] = useArgs();
+			const handleEdit = e => {
+				console.log("story edited", e.detail.value);
+				updateArgs({ text2: e.detail.value });
+			};
+			return html`<f-div direction="column" gap="large">
+				<f-text
+					.variant=${args.variant}
+					.size=${args.size}
+					.state=${args.state}
+					.align=${args.align}
+					.loading=${args.loading}
+					.disabled=${args.disabled}
+					.ellipsis=${args.ellipsis}
+					.highlight=${args.highlight}
+					?inline=${args.inline}
+					>This is ${args.variant} with ${args.size} and "${args.state}" state. Alignment is ${args.align}
+				</f-text>
+				<f-div>
+					<f-text
+						.variant=${args.variant}
+						.size=${args.size}
+						.state=${args.state}
+						.align=${args.align}
+						.loading=${args.loading}
+						.disabled=${args.disabled}
+						.ellipsis=${args.ellipsis}
+						.highlight=${args.highlight}
+						?inline=${args.inline}
+						?editable=${args.editable}
+						@input=${handleEdit}
+						>${unsafeHTML(args.text2)}
+					</f-text>
+				</f-div>
+				<f-text
+					.variant=${args.variant}
+					.size=${args.size}
+					.state=${args.state}
+					.align=${args.align}
+					.loading=${args.loading}
+					.disabled=${args.disabled}
+					.ellipsis=${args.ellipsis}
+					.highlight=${args.highlight}
+					?inline=${args.inline}
+					>${unsafeHTML(args.text)}</f-text
+				>
+			</f-div> `;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## variant
+
+<f-divider></f-divider>
+
+variants of text component are use cases such as Heading, paragraph, and code.
+
+<Canvas>
+	<Story name="variant">
+		{args => html`<f-div gap="x-large" padding="x-large" align="middle-center">
+			<f-text variant="heading">heading</f-text>
+			<f-text variant="para">para</f-text>
+			<f-text variant="code">code</f-text>
+		</f-div>`}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>heading</td>
+			<td>used for headings</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>para</td>
+			<td>used for paragraphs</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>code</td>
+			<td>for demonstrating a code example</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## size
+
+Each variant has various sizes. By default medium is the default size.
+
+<Canvas>
+	<Story name="size">
+		{args => html`<f-div gap="medium" padding="x-large" direction="column">
+			<f-text variant="para" size="large" weight="medium">size of variant="heading"</f-text>
+			<f-divider></f-divider>
+			<f-div gap="medium" padding="medium" align="middle-center">
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="heading" size="x-large" weight="medium">x-large</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="heading" size="large" weight="medium">large</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="heading" size="medium" weight="medium">medium</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="heading" size="small" weight="medium">small</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="heading" size="x-small" weight="medium">x-small</f-text>
+				</f-div>
+			</f-div>
+			<f-text variant="para" size="large" weight="medium">size of variant="para"</f-text>
+			<f-divider></f-divider>
+			<f-div gap="medium" padding="medium" align="middle-center">
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="large" weight="medium">large</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="medium" weight="medium">medium</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="small" weight="medium">small</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="x-small" weight="medium">x-small</f-text>
+				</f-div>
+			</f-div>
+			<f-text variant="para" size="large" weight="medium">size of variant="code"</f-text>
+			<f-divider></f-divider>
+			<f-div gap="medium" padding="medium" align="middle-center">
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="code" size="large" weight="medium">large</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="code" size="medium" weight="medium">medium</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="code" size="small" weight="medium">small</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="code" size="x-small" weight="medium">x-small</f-text>
+				</f-div>
+			</f-div>
+		</f-div>`}
+	</Story>
+</Canvas>
+
+<br />
+
+### sizes for `variant="heading"`
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>x-large</td>
+			<td>Extra Large - 24px</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>large</td>
+			<td>Large - 20px</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>medium</td>
+			<td>Medium - 16px</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>small</td>
+			<td>Small - 14px</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>x-small</td>
+			<td>Extra Small - 12px</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+### sizes for `variant="para"`
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>large</td>
+			<td>Large - 16px</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>medium</td>
+			<td>Medium - 14px</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>small</td>
+			<td>Small - 12px</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>x-small</td>
+			<td>Extra Small - 10px</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+### sizes for `variant="code"`
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>large</td>
+			<td>Large - 16px</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>medium</td>
+			<td>Medium - 14px</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>small</td>
+			<td>Small - 12px</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>x-small</td>
+			<td>Extra Small - 10px</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider></f-divider>
+
+States on texts are used to communicate purpose and it’s connotation. For example, a red color
+connotes danger, whereas a green color connotes success and so on.
+
+<Canvas>
+	<Story name="state">
+		{args => html`<f-div gap="medium" padding="x-large" direction="column" state="primary">
+			<f-text variant="para" size="large" weight="medium" state="default"
+				>This is a default state. This is a default state.</f-text
+			>
+			<f-text variant="para" size="large" weight="medium" state="secondary"
+				>This is a secondary state. This is a secondary state.</f-text
+			>
+			<f-text variant="para" size="large" weight="medium" state="subtle"
+				>This is a subtle state. This is a subtle state.</f-text
+			>
+			<f-text variant="para" size="large" weight="medium" state="primary"
+				>This is a primary state. This is a primary state.</f-text
+			>
+			<f-text variant="para" size="large" weight="medium" state="success"
+				>This is a success state. This is a success state.</f-text
+			>
+			<f-text variant="para" size="large" weight="medium" state="danger"
+				>This is a danger state. This is a danger state.</f-text
+			>
+			<f-text variant="para" size="large" weight="medium" state="warning"
+				>This is a warning state. This is a warning state.</f-text
+			>
+			<f-text variant="para" size="large" weight="medium" state="inherit"
+				>This is a inherit state. Inherit color from parent f-div.</f-text
+			>
+			<f-text variant="para" size="large" weight="medium" state="custom,pink"
+				>This is a "custom, pink" state. This is a "custom, pink" state.</f-text
+			>
+		</f-div>`}
+	</Story>
+</Canvas>
+
+<br />
+
+## align
+
+<f-divider></f-divider>
+
+Sets the alignment of the text. Can take 3 values: left, center, and right.
+
+<Canvas>
+	<Story name="align">
+		{args => html`
+			<br />
+			<f-text variant="para" size="large" weight="medium" align="left">This is left aligned.</f-text
+			><br />
+			<f-text variant="para" size="large" weight="medium" align="center"
+				>This is center aligned.</f-text
+			><br />
+			<f-text variant="para" size="large" weight="medium" align="right"
+				>This is right aligned.</f-text
+			><br />
+		`}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>left</td>
+			<td>text aligned towards left side</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>center</td>
+			<td>text aligned at the center</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>right</td>
+			<td>text aligned towards right side</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## highlight
+
+<f-divider></f-divider>
+
+Highlight's sub-text inside f-text
+
+<Canvas>
+	<Story name="highlight">
+		{args => html`
+			<br />
+			<f-text variant="para" size="large" weight="medium" align="left" highlight="left"
+				>This is left aligned.</f-text
+			><br />
+		`}
+	</Story>
+</Canvas>
+
+<br />
+
+## Flags
+
+<f-divider></f-divider>
+
+Flag properties change visually and/or programmatically depending on user interaction or a
+predetermined state.
+
+<Canvas>
+	<Story name="Flags">
+		{args => html`<f-div gap="large" padding="x-large" direction="column">
+			<f-div padding="none" direction="row" gap="x-large" overflow="hidden" height="hug-content">
+				<f-text variant="para" weight="regular" ?inline=${false}>Normal Text</f-text>
+				<f-text variant="para" weight="regular" ?inline=${true}>Inline Text</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large" overflow="hidden" height="hug-content">
+				<f-div width="hug-content" padding="none">
+					<f-text variant="para" weight="regular">Loading</f-text>
+				</f-div>
+				<f-div width="hug-content" padding="none">
+					<f-text variant="para" weight="regular" loading=${true}>Loading</f-text>
+				</f-div>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large" overflow="hidden" height="hug-content">
+				<f-div width="hug-content" padding="none">
+					<f-text variant="para" weight="regular">Not Disabled</f-text>
+				</f-div>
+				<f-div width="hug-content" padding="none">
+					<f-text variant="para" weight="regular" disabled=${true}>Disabled</f-text>
+				</f-div>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large" overflow="hidden" height="hug-content">
+				<f-div width="300px" padding="none">
+					<f-text variant="para" weight="regular"
+						>We can see the ellipis happening here when ellipsis="true"</f-text
+					>
+				</f-div>
+				<f-div width="200px" padding="none">
+					<f-text variant="para" weight="regular" ellipsis=${true}
+						>We can see the ellipis happening here when ellipsis="true"</f-text
+					>
+				</f-div>
+			</f-div>
+		</f-div>`}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Name</td>
+			<td>Description</td>
+			<td>Default</td>
+		</tr>
+		<tr>
+			<td>inline</td>
+			<td>width of text would be fit-content</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>loading</td>
+			<td>skeleton will replace the text</td>
+			<td>false</td>
+		</tr>
+		<tr>
+			<td>disabled</td>
+			<td>Opacity is set to 50% in disabled state.</td>
+			<td>false </td>
+		</tr>
+		<tr>
+			<td>ellipsis</td>
+			<td>
+				By default no. of rows is to 1. Ellipsis will crop the text after one line w.r.t the outer
+				div
+			</td>
+			<td>false</td>
+		</tr>
+	</tbody>
+</table>
+
+<ArgsTable of={"f-text"} />

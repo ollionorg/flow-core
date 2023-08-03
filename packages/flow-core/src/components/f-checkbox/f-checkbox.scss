@@ -1,0 +1,202 @@
+@use "sass:map";
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+
+/**
+$states map created to hold values of different states
+**/
+$states: (
+	"primary": (
+		"background": var(--color-primary-default),
+		"hover": var(--color-primary-default-hover)
+	),
+	"default": (
+		"background": var(--color-primary-default),
+		"hover": var(--color-primary-default-hover)
+	),
+	"success": (
+		"background": var(--color-success-default),
+		"hover": var(--color-success-default-hover)
+	),
+	"warning": (
+		"background": var(--color-warning-default),
+		"hover": var(--color-warning-default-hover)
+	),
+	"danger": (
+		"background": var(--color-danger-default),
+		"hover": var(--color-danger-default-hover)
+	),
+	"inherit": (
+		"background": var(--color-checkbox-default),
+		"hover": var(--color-switch-default-hover)
+	)
+);
+
+/**
+$sizes map created to hold values of different sizes
+**/
+$sizes: (
+	"small": (
+		"height": 10px,
+		"svg-width": 9px,
+		"svg-height": 11px
+	),
+	"medium": (
+		"height": 14px,
+		"svg-width": 12px,
+		"svg-height": 16px
+	)
+);
+
+:host {
+	.f-checkbox-wrapper {
+		@include base();
+		slot[name="description"]::slotted(*) {
+			padding-left: calc(var(--form-checkbox-size) + 14px) !important;
+		}
+		@each $size, $value in $sizes {
+			&[size="#{$size}"] {
+				slot[name="description"]::slotted(*) {
+					padding-left: calc(map.get($value, "height") + 14px) !important;
+				}
+			}
+		}
+		slot[name="help"]::slotted(*) {
+			padding-left: calc(var(--form-checkbox-size) + 14px) !important;
+		}
+		@each $size, $value in $sizes {
+			&[size="#{$size}"] {
+				slot[name="help"]::slotted(*) {
+					padding-left: calc(map.get($value, "height") + 14px) !important;
+				}
+			}
+		}
+		.f-checkbox-section {
+			input[checked="true"] + label > svg {
+				height: var(--form-checkbox-height);
+				animation: draw-checkbox ease-in-out 0.4s forwards;
+				-webkit-animation: draw-checkbox ease-in-out 0.4s forwards;
+			}
+
+			@each $size, $value in $sizes {
+				&[size="#{$size}"] {
+					input[checked="true"] + label > svg {
+						height: map.get($value, "svg-height");
+					}
+				}
+			}
+
+			label {
+				color: var(--color-text-default);
+				line-height: 40px;
+				cursor: pointer;
+				position: relative;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				&:after {
+					content: "";
+					height: var(--form-checkbox-size);
+					width: var(--form-checkbox-size);
+					float: left;
+					border: 1px solid var(--color-text-default);
+					border-radius: 2px;
+				}
+				&:hover::after {
+					border: 1px solid var(--color-text-default-hover);
+				}
+
+				@each $size, $value in $sizes {
+					&[size="#{$size}"] {
+						&:after {
+							height: map.get($value, "height");
+							width: map.get($value, "height");
+						}
+					}
+				}
+
+				@each $state, $color in $states {
+					&[state="#{$state}"][value="checked"] {
+						&:after {
+							border: 1px solid map.get($color, "background");
+							transition: var(--transition-time-rapid) all ease-out;
+							background-color: map.get($color, "background");
+						}
+						&:hover::after {
+							border: 1px solid map.get($color, "hover");
+							background-color: map.get($color, "hover");
+						}
+					}
+					&[state="#{$state}"][value="indeterminate"] {
+						&:after {
+							border: 1px solid map.get($color, "background");
+							transition: var(--transition-time-rapid) all ease-out;
+							background-color: map.get($color, "background");
+						}
+						&:hover::after {
+							border: 1px solid map.get($color, "hover");
+							background-color: map.get($color, "hover");
+						}
+					}
+				}
+			}
+
+			svg {
+				stroke: var(--color-surface-default);
+				stroke-width: 3px;
+				height: 0px;
+				width: var(--form-checkbox-width);
+				position: absolute;
+				stroke-dasharray: 33;
+			}
+			@each $size, $value in $sizes {
+				&[size="#{$size}"] {
+					svg {
+						width: map.get($value, "svg-width");
+					}
+				}
+			}
+		}
+		.f-checkbox {
+			border: 0px;
+			height: 0px;
+			width: 0px;
+			overflow: hidden;
+			padding: 0px;
+			position: absolute;
+			visibility: none;
+		}
+	}
+
+	@keyframes draw-checkbox {
+		0% {
+			stroke-dashoffset: 33;
+		}
+		100% {
+			stroke-dashoffset: 0;
+		}
+	}
+
+	slot[name="label"] {
+		cursor: pointer;
+	}
+	f-div.f-checkbox-wrapper[disabled] {
+		@include disabled();
+		pointer-events: none;
+		opacity: 1;
+	}
+}
+
+f-checkbox {
+	display: flex;
+	height: fit-content;
+	flex: 0 0 fit-content;
+	&[disabled] {
+		@include disabled();
+	}
+	@each $state, $color in $states {
+		&[state="#{$state}"] {
+			@include input-color($state);
+		}
+	}
+}

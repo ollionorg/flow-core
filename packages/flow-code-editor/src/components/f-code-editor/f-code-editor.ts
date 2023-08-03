@@ -110,6 +110,22 @@ export class FCodeEditor extends FRoot {
 		return this.title ? "hug-content" : "100%";
 	}
 
+	multiLineStart(startIndex: number, endIndex: number, line: string) {
+		if (startIndex >= 0 && endIndex >= 0) {
+			return line.substring(0, startIndex) + line.substring(endIndex + 2);
+		} else {
+			return line.substring(0, startIndex);
+		}
+	}
+
+	multiLineEnd(endIndex: number, line: string) {
+		if (endIndex >= 0) {
+			return { code: line.substring(endIndex + 2), insideMultiLine: false };
+		} else {
+			return { code: "", insideMultiLine: true };
+		}
+	}
+
 	toggleComments() {
 		if (!this.editor) return;
 		const code = this.editor.getValue();
@@ -130,13 +146,7 @@ export class FCodeEditor extends FRoot {
 				insideMultiLineComment = true;
 				const startIndex = line.indexOf(startPattern);
 				const endIndex = line.indexOf(endPattern);
-
-				if (startIndex >= 0 && endIndex >= 0) {
-					modifiedLine = line.substring(0, startIndex) + line.substring(endIndex + 2);
-				} else {
-					modifiedLine = line.substring(0, startIndex);
-				}
-
+				modifiedLine = this.multiLineStart(startIndex, endIndex, line);
 				// Save the multi-line comment in the map
 				removedCommentsMap.set(index, line);
 			}
@@ -144,12 +154,9 @@ export class FCodeEditor extends FRoot {
 			// Check for multi-line comments end
 			if (endPattern && insideMultiLineComment) {
 				const endIndex = line.indexOf(endPattern);
-				if (endIndex >= 0) {
-					insideMultiLineComment = false;
-					modifiedLine = line.substring(endIndex + 2);
-				} else {
-					modifiedLine = "";
-				}
+				const { code, insideMultiLine } = this.multiLineEnd(endIndex, line);
+				modifiedLine = code;
+				insideMultiLineComment = insideMultiLine ?? true;
 				removedCommentsMap.set(index, line);
 			}
 

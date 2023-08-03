@@ -110,6 +110,10 @@ export class FCodeEditor extends FRoot {
 		return this.title ? "hug-content" : "100%";
 	}
 
+	get fixedLang() {
+		return this.language ?? "javascript";
+	}
+
 	multiLineStart(startIndex: number, endIndex: number, line: string) {
 		if (startIndex >= 0 && endIndex >= 0) {
 			return line.substring(0, startIndex) + line.substring(endIndex + 2);
@@ -126,17 +130,22 @@ export class FCodeEditor extends FRoot {
 		}
 	}
 
+	addNewLine(modifiedLine: string, newLines: string[]) {
+		if (modifiedLine.trim() !== "") {
+			newLines.push(modifiedLine);
+		}
+	}
+
 	toggleComments() {
 		if (!this.editor) return;
 		const code = this.editor.getValue();
 		const lines = code.split("\n");
-		const newLines = [];
-		const language = this.language ?? "javascript";
+		const newLines: string[] = [];
 		let insideMultiLineComment = false;
 		const removedCommentsMap = new Map();
-		const startPattern = languageCommentsMap.get(language)?.multiLine?.start;
-		const endPattern = languageCommentsMap.get(language)?.multiLine?.end;
-		const singleLinePattern = languageCommentsMap.get(language)?.singleLine;
+		const startPattern = languageCommentsMap.get(this.fixedLang)?.multiLine?.start;
+		const endPattern = languageCommentsMap.get(this.fixedLang)?.multiLine?.end;
+		const singleLinePattern = languageCommentsMap.get(this.fixedLang)?.singleLine;
 
 		for (const [index, line] of lines.entries()) {
 			let modifiedLine = line;
@@ -168,11 +177,8 @@ export class FCodeEditor extends FRoot {
 					// Save the single-line comment in the map
 					removedCommentsMap.set(index, line);
 				}
-
+				this.addNewLine(modifiedLine, newLines);
 				// Only add the line if it's not an empty line after removing the comments
-				if (modifiedLine.trim() !== "") {
-					newLines.push(modifiedLine);
-				}
 			}
 		}
 		this.editor.setValue(newLines.join("\n"));

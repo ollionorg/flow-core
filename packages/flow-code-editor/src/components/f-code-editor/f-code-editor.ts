@@ -106,16 +106,21 @@ export class FCodeEditor extends FRoot {
 
 	removedCommentsMap = new Map();
 
+	get dymanicWidth() {
+		return this.title ? "hug-content" : "100%";
+	}
+
 	toggleComments() {
 		if (!this.editor) return;
 		const code = this.editor.getValue();
 		const lines = code.split("\n");
 		const newLines = [];
+		const language = this.language ?? "javascript";
 		let insideMultiLineComment = false;
 		const removedCommentsMap = new Map();
-		const startPattern = languageCommentsMap.get(this.language ?? "javascript")?.multiLine?.start;
-		const endPattern = languageCommentsMap.get(this.language ?? "javascript")?.multiLine?.end;
-		const singleLinePattern = languageCommentsMap.get(this.language ?? "javascript")?.singleLine;
+		const startPattern = languageCommentsMap.get(language)?.multiLine?.start;
+		const endPattern = languageCommentsMap.get(language)?.multiLine?.end;
+		const singleLinePattern = languageCommentsMap.get(language)?.singleLine;
 
 		for (const [index, line] of lines.entries()) {
 			let modifiedLine = line;
@@ -286,11 +291,7 @@ export class FCodeEditor extends FRoot {
 
 		const actionSection =
 			this.copyButton || this.comments
-				? html` <f-div
-						gap="medium"
-						align="middle-right"
-						width=${this.title ? "hug-content" : "100%"}
-				  >
+				? html` <f-div gap="medium" align="middle-right" width=${this.dymanicWidth}>
 						${commentsToggleSection} ${copyButtonSection}
 				  </f-div>`
 				: null;

@@ -5,7 +5,6 @@ import * as monaco from "monaco-editor";
 
 import { property, query } from "lit/decorators.js";
 import { languageCommentsMap } from "../../utils/lang-comments-map";
-import _ from "lodash";
 
 export type FCodeEditorLanguage =
 	| "scala"
@@ -256,53 +255,53 @@ export class FCodeEditor extends FRoot {
 	}
 
 	render() {
-		return html`
-			${this.comments || this.copyButton || this.title
-				? html` <f-div state="secondary" class="f-code-editor-header" padding="medium">
-						${this.title
-							? html` <f-div gap="medium" align="middle-left">
-									<f-icon source="i-code" state="default" size="x-small"></f-icon>
-									<f-text variant="code" size="small" weight="regular" state="secondary"
-										>${this.title}</f-text
-									>
-							  </f-div>`
-							: null}
-						${this.copyButton || this.comments
-							? html` <f-div
-									gap="medium"
-									align="middle-right"
-									width=${this.title ? "hug-content" : "100%"}
-							  >
-									${this.comments
-										? html` <f-div gap="small" align="middle-left" width="hug-content">
-												<f-text variant="heading" size="x-small" weight="regular" state="subtle"
-													>Comments</f-text
-												>
-												<f-div width="hug-content" overflow="hidden">
-													<f-switch
-														size="small"
-														@input=${this.handleChange}
-														.value=${true}
-													></f-switch>
-												</f-div>
-										  </f-div>`
-										: null}
-									${this.copyButton
-										? html` <f-button
-												class="copy-button"
-												variant="curved"
-												category="fill"
-												size="x-small"
-												label="COPY"
-												icon-left="i-copy"
-												@click=${this.copyCodeToClipboard}
-										  ></f-button>`
-										: null}
-							  </f-div>`
-							: null}
+		const titleSection = this.title
+			? html` <f-div gap="medium" align="middle-left">
+					<f-icon source="i-code" state="default" size="x-small"></f-icon>
+					<f-text variant="code" size="small" weight="regular" state="secondary"
+						>${this.title}</f-text
+					>
+			  </f-div>`
+			: null;
+
+		const copyButtonSection = this.copyButton
+			? html` <f-button
+					class="copy-button"
+					variant="curved"
+					category="fill"
+					size="x-small"
+					label="COPY"
+					icon-left="i-copy"
+					@click=${this.copyCodeToClipboard}
+			  ></f-button>`
+			: null;
+		const commentsToggleSection = this.comments
+			? html` <f-div gap="small" align="middle-left" width="hug-content">
+					<f-text variant="heading" size="x-small" weight="regular" state="subtle">Comments</f-text>
+					<f-div width="hug-content" overflow="hidden">
+						<f-switch size="small" @input=${this.handleChange} .value=${true}></f-switch>
+					</f-div>
+			  </f-div>`
+			: null;
+
+		const actionSection =
+			this.copyButton || this.comments
+				? html` <f-div
+						gap="medium"
+						align="middle-right"
+						width=${this.title ? "hug-content" : "100%"}
+				  >
+						${commentsToggleSection} ${copyButtonSection}
 				  </f-div>`
-				: null}
-		`;
+				: null;
+
+		if (this.comments || this.copyButton || this.title) {
+			return html` <f-div state="secondary" class="f-code-editor-header" padding="medium">
+				${titleSection} ${actionSection}
+			</f-div>`;
+		} else {
+			return "";
+		}
 	}
 
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {

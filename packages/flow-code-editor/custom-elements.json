@@ -63,11 +63,6 @@
           "kind": "variable",
           "name": "languageCommentsMap",
           "default": "new Map([\n\t// JavaScript\n\t[\n\t\t\"javascript\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: { start: \"/*\", end: \"*/\" }\n\t\t}\n\t],\n\n\t// TypeScript\n\t[\n\t\t\"typescript\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: { start: \"/*\", end: \"*/\" }\n\t\t}\n\t],\n\n\t// Python\n\t[\n\t\t\"python\",\n\t\t{\n\t\t\tsingleLine: \"#\",\n\t\t\tmultiLine: { start: \"'''\", end: \"'''\" }\n\t\t}\n\t],\n\n\t// Java\n\t[\n\t\t\"java\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: { start: \"/*\", end: \"*/\" }\n\t\t}\n\t],\n\n\t// C++\n\t[\n\t\t\"cpp\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: { start: \"/*\", end: \"*/\" }\n\t\t}\n\t],\n\n\t// C#\n\t[\n\t\t\"csharp\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: { start: \"/*\", end: \"*/\" }\n\t\t}\n\t],\n\n\t// PHP\n\t[\n\t\t\"php\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: { start: \"/*\", end: \"*/\" }\n\t\t}\n\t],\n\n\t// Ruby\n\t[\n\t\t\"ruby\",\n\t\t{\n\t\t\tsingleLine: \"#\",\n\t\t\tmultiLine: { start: \"=begin\", end: \"=end\" }\n\t\t}\n\t],\n\n\t// Swift\n\t[\n\t\t\"swift\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: { start: \"/*\", end: \"*/\" }\n\t\t}\n\t],\n\n\t// Go\n\t[\n\t\t\"go\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: { start: \"/*\", end: \"*/\" }\n\t\t}\n\t],\n\n\t// Rust\n\t[\n\t\t\"rust\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: { start: \"/*\", end: \"*/\" }\n\t\t}\n\t],\n\n\t// Kotlin\n\t[\n\t\t\"kotlin\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: { start: \"/*\", end: \"*/\" }\n\t\t}\n\t],\n\n\t// Dart\n\t[\n\t\t\"dart\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: { start: \"/*\", end: \"*/\" }\n\t\t}\n\t],\n\n\t// HTML (HTML does not support multi-line comments)\n\t[\n\t\t\"html\",\n\t\t{\n\t\t\tsingleLine: \"<!--\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// CSS (CSS does not support multi-line comments)\n\t[\n\t\t\"css\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// SCSS (SCSS does not support multi-line comments)\n\t[\n\t\t\"scss\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// Less (Less does not support multi-line comments)\n\t[\n\t\t\"less\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// JSON (JSON does not support multi-line comments)\n\t[\n\t\t\"json\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// YAML (YAML does not support multi-line comments)\n\t[\n\t\t\"yaml\",\n\t\t{\n\t\t\tsingleLine: \"#\",\n\t\t\tmultiLine: null\n\t\t}\n\t]\n])"
-        },
-        {
-          "kind": "variable",
-          "name": "languageCommentsRegexMap",
-          "default": "new Map([\n\t// JavaScript (single-line comments start with //, and multi-line comments are enclosed between /* and */)\n\t[\n\t\t\"javascript\",\n\t\t{\n\t\t\tsingleLine: /\\/\\/(.*)/,\n\t\t\tmultiLine: /\\/\\*([\\s\\S]*?)\\*\\//\n\t\t}\n\t],\n\n\t// TypeScript (single-line comments start with //, and multi-line comments are enclosed between /* and */)\n\t[\n\t\t\"typescript\",\n\t\t{\n\t\t\tsingleLine: /\\/\\/(.*)/,\n\t\t\tmultiLine: /\\/\\*([\\s\\S]*?)\\*\\//\n\t\t}\n\t],\n\n\t// Python (single-line comments start with #, and multi-line comments are enclosed between ''' or \"\"\")\n\t[\n\t\t\"python\",\n\t\t{\n\t\t\tsingleLine: /#(.*)/,\n\t\t\tmultiLine: /(['\"]{3})([\\s\\S]*?)\\1/\n\t\t}\n\t],\n\n\t// Java (single-line comments start with //, and multi-line comments are enclosed between /* and */)\n\t[\n\t\t\"java\",\n\t\t{\n\t\t\tsingleLine: /\\/\\/(.*)/,\n\t\t\tmultiLine: /\\/\\*([\\s\\S]*?)\\*\\//\n\t\t}\n\t],\n\n\t// C++ (single-line comments start with //, and multi-line comments are enclosed between /* and */)\n\t[\n\t\t\"cpp\",\n\t\t{\n\t\t\tsingleLine: /\\/\\/(.*)/,\n\t\t\tmultiLine: /\\/\\*([\\s\\S]*?)\\*\\//\n\t\t}\n\t],\n\n\t// C# (single-line comments start with //, and multi-line comments are enclosed between /* and */)\n\t[\n\t\t\"csharp\",\n\t\t{\n\t\t\tsingleLine: /\\/\\/(.*)/,\n\t\t\tmultiLine: /\\/\\*([\\s\\S]*?)\\*\\//\n\t\t}\n\t],\n\n\t// PHP (single-line comments start with // or #, and multi-line comments are enclosed between /* and */)\n\t[\n\t\t\"php\",\n\t\t{\n\t\t\tsingleLine: /(\\/\\/|#)(.*)/,\n\t\t\tmultiLine: /\\/\\*([\\s\\S]*?)\\*\\//\n\t\t}\n\t],\n\n\t// Ruby (single-line comments start with #, and multi-line comments are enclosed between =begin and =end)\n\t[\n\t\t\"ruby\",\n\t\t{\n\t\t\tsingleLine: /#(.*)/,\n\t\t\tmultiLine: /(?<=^=begin)([\\s\\S]*?)(?=^=end)/m\n\t\t}\n\t],\n\n\t// Swift (single-line comments start with //, and multi-line comments are enclosed between /* and */)\n\t[\n\t\t\"swift\",\n\t\t{\n\t\t\tsingleLine: /\\/\\/(.*)/,\n\t\t\tmultiLine: /\\/\\*([\\s\\S]*?)\\*\\//\n\t\t}\n\t],\n\n\t// Go (single-line comments start with //, and multi-line comments are enclosed between /* and */)\n\t[\n\t\t\"go\",\n\t\t{\n\t\t\tsingleLine: /\\/\\/(.*)/,\n\t\t\tmultiLine: /\\/\\*([\\s\\S]*?)\\*\\//\n\t\t}\n\t],\n\n\t// Rust (single-line comments start with //, and multi-line comments are enclosed between /* and */)\n\t[\n\t\t\"rust\",\n\t\t{\n\t\t\tsingleLine: /\\/\\/(.*)/,\n\t\t\tmultiLine: /\\/\\*([\\s\\S]*?)\\*\\//\n\t\t}\n\t],\n\n\t// Kotlin (single-line comments start with //, and multi-line comments are enclosed between /* and */)\n\t[\n\t\t\"kotlin\",\n\t\t{\n\t\t\tsingleLine: /\\/\\/(.*)/,\n\t\t\tmultiLine: /\\/\\*([\\s\\S]*?)\\*\\//\n\t\t}\n\t],\n\n\t// Dart (single-line comments start with //, and multi-line comments are enclosed between /* and */)\n\t[\n\t\t\"dart\",\n\t\t{\n\t\t\tsingleLine: /\\/\\/(.*)/,\n\t\t\tmultiLine: /\\/\\*([\\s\\S]*?)\\*\\//\n\t\t}\n\t],\n\n\t// HTML (single-line comments start with <!--, and multi-line comments are not supported)\n\t[\n\t\t\"html\",\n\t\t{\n\t\t\tsingleLine: /<!--(.*?)-->/,\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// CSS (single-line comments start with /* or //, and multi-line comments are not supported)\n\t[\n\t\t\"css\",\n\t\t{\n\t\t\tsingleLine: /\\/\\*([\\s\\S]*?)\\*\\/|\\/\\/(.*)/,\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// SCSS (single-line comments start with /* or //, and multi-line comments are not supported)\n\t[\n\t\t\"scss\",\n\t\t{\n\t\t\tsingleLine: /\\/\\*([\\s\\S]*?)\\*\\/|\\/\\/(.*)/,\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// Less (single-line comments start with //, and multi-line comments are not supported)\n\t[\n\t\t\"less\",\n\t\t{\n\t\t\tsingleLine: /\\/\\/(.*)/,\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// JSON (single-line comments start with // or /* or #, and multi-line comments are not supported)\n\t[\n\t\t\"json\",\n\t\t{\n\t\t\tsingleLine: /(\\/\\/|#)[^\\n\\r]*|\\/\\*[\\s\\S]*?\\*\\//,\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// YAML (single-line comments start with #, and multi-line comments are not supported)\n\t[\n\t\t\"yaml\",\n\t\t{\n\t\t\tsingleLine: /#(.*)/,\n\t\t\tmultiLine: null\n\t\t}\n\t]\n])"
         }
       ],
       "exports": [
@@ -76,14 +71,6 @@
           "name": "languageCommentsMap",
           "declaration": {
             "name": "languageCommentsMap",
-            "module": "src/utils/lang-comments-map.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "languageCommentsRegexMap",
-          "declaration": {
-            "name": "languageCommentsRegexMap",
             "module": "src/utils/lang-comments-map.ts"
           }
         }
@@ -114,6 +101,26 @@
               },
               "description": "actual code to display in editor",
               "attribute": "code"
+            },
+            {
+              "kind": "field",
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "attribute": "title",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FCodeEditorStateProp | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
             },
             {
               "kind": "field",
@@ -166,24 +173,50 @@
             },
             {
               "kind": "field",
-              "name": "hiddenDecorations",
+              "name": "comments",
               "type": {
-                "text": "string[]"
+                "text": "boolean | undefined"
               },
-              "default": "[]"
+              "default": "false",
+              "attribute": "comments",
+              "reflects": true
             },
             {
               "kind": "field",
-              "name": "commentLineDecorations",
+              "name": "copyButton",
               "type": {
-                "text": "string[]"
+                "text": "boolean | undefined"
               },
-              "default": "[]"
+              "default": "false",
+              "attribute": "copy-button",
+              "reflects": true
             },
             {
               "kind": "field",
-              "name": "commentsMap",
-              "default": "new Map()"
+              "name": "showLineNumbers",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "attribute": "show-line-numbers",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "readOnly",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "read-only",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "copyCodeButton",
+              "type": {
+                "text": "FButton | undefined"
+              }
             },
             {
               "kind": "field",
@@ -200,6 +233,30 @@
             },
             {
               "kind": "method",
+              "name": "errorMessageOnCopy"
+            },
+            {
+              "kind": "method",
+              "name": "successMessageOnCopy"
+            },
+            {
+              "kind": "method",
+              "name": "copyCodeToClipboard"
+            },
+            {
+              "kind": "method",
+              "name": "handleChange",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
               "name": "createRenderRoot",
               "description": "monoco editor never works in shadow dom"
             }
@@ -212,6 +269,22 @@
               },
               "description": "actual code to display in editor",
               "fieldName": "code"
+            },
+            {
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "fieldName": "title"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FCodeEditorStateProp | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
             },
             {
               "name": "language",
@@ -255,6 +328,38 @@
               },
               "default": "{}",
               "fieldName": "services"
+            },
+            {
+              "name": "comments",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "comments"
+            },
+            {
+              "name": "copy-button",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "copyButton"
+            },
+            {
+              "name": "show-line-numbers",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "fieldName": "showLineNumbers"
+            },
+            {
+              "name": "read-only",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "readOnly"
             }
           ],
           "superclass": {

@@ -1,10 +1,11 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { FRoot, flowElement } from "@cldcvr/flow-core";
+import { FRoot, flowElement, FButton } from "@cldcvr/flow-core";
 import eleStyle from "./f-code-editor.scss";
 import * as monaco from "monaco-editor";
 
-import { property } from "lit/decorators.js";
-import { languageCommentsMap, languageCommentsRegexMap } from "../../utils/lang-comments-map";
+import { property, query } from "lit/decorators.js";
+import { languageCommentsMap } from "../../utils/lang-comments-map";
+import _ from "lodash";
 
 export type FCodeEditorLanguage =
 	| "scala"
@@ -20,6 +21,9 @@ export type FCodeEditorLanguage =
 
 export type FCodeEditorSettings = monaco.editor.IStandaloneEditorConstructionOptions;
 export type FCodeEditorServices = monaco.editor.IStandaloneEditorConstructionOptions;
+
+export type FCodeEditorStateProp = "subtle" | "default" | "secondary";
+
 @flowElement("f-code-editor")
 export class FCodeEditor extends FRoot {
 	/**
@@ -37,6 +41,18 @@ export class FCodeEditor extends FRoot {
 	 */
 	@property({ type: String })
 	code?: string;
+
+	/**
+	 * @attribute header title
+	 */
+	@property({ reflect: true, type: String })
+	title = "";
+
+	/**
+	 * @attribute state property defines the background color.
+	 */
+	@property({ reflect: true, type: String })
+	state?: FCodeEditorStateProp = "default";
 
 	/**
 	 * language of code
@@ -62,131 +78,174 @@ export class FCodeEditor extends FRoot {
 	@property({ type: Object })
 	services?: FCodeEditorServices = {};
 
-	hiddenDecorations: string[] = [];
+	/**
+	 * @attribute comments toggle actions
+	 */
+	@property({ type: Boolean, reflect: true })
+	comments?: boolean = false;
 
-	commentLineDecorations: string[] = [];
+	/**
+	 * @attribute copy on click action
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "copy-button" })
+	copyButton?: boolean = false;
 
-	commentsMap = new Map();
+	/**
+	 * @attribute show/hide line no.
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "show-line-numbers" })
+	showLineNumbers?: boolean = true;
+
+	/**
+	 * @attribute read-only-mode
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "read-only" })
+	readOnly?: boolean = false;
+
+	@query(".copy-button")
+	copyCodeButton?: FButton;
 
 	removedCommentsMap = new Map();
 
-	// toggleComments() {
-	// 	const model = this.editor?.getModel();
-	// 	if (!model) return;
-
-	// 	const lineCount = model.getLineCount();
-	// 	const hiddenLines: number[] = [];
-
-	// 	for (let lineNumber = 1; lineNumber <= lineCount; lineNumber++) {
-	// 		const lineContent = model.getLineContent(lineNumber);
-	// 		console.log(lineContent.trim());
-	// 		if (
-	// 			lineContent
-	// 				.trim()
-	// 				.startsWith(languageCommentsMap.get(this.language ?? "javascript") ?? "//")
-	// 		) {
-	// 			// Check if the line is a comment
-	// 			hiddenLines.push(lineNumber);
-	// 		}
-
-	// 		if (
-	// 			lineContent
-	// 				.trim()
-	// 				.includes(" " + languageCommentsMap.get(this.language ?? "javascript") ?? " //")
-	// 		) {
-	// 			console.log("inline-comment");
-	// 		}
-	// 	}
-
-	// 	// Hide or show the comment lines using overlay decoration
-	// 	this.commentLineDecorations = model.deltaDecorations(
-	// 		this.commentLineDecorations,
-	// 		hiddenLines.map(line => ({
-	// 			range: new monaco.Range(line, 1, line, 1),
-	// 			options: {
-	// 				isWholeLine: true,
-	// 				className: "hidden-comment-line" // CSS class name to apply styling for hidden comment lines
-	// 			}
-	// 		}))
-	// 	);
-
-	// 	// Shift the main code to occupy the space of hidden lines
-	// 	if (this.code) {
-	// 		const modifiedCode = this.code
-	// 			.split("\n")
-	// 			.filter((_, index) => !hiddenLines.includes(index + 1))
-	// 			.join("\n");
-	// 		this.editor?.setValue(modifiedCode);
-	// 	}
-	// }
-
 	toggleComments() {
 		if (!this.editor) return;
-
-		const model = this.editor.getModel();
-		if (!model) return;
-
 		const code = this.editor.getValue();
 		const lines = code.split("\n");
-		const commentPatternSingle =
-			languageCommentsRegexMap.get(this.language ?? "javascript")?.singleLine ?? "//";
-		const commentPatternMultiple =
-			languageCommentsRegexMap.get(this.language ?? "javascript")?.multiLine ?? "//";
+		const newLines = [];
+		let insideMultiLineComment = false;
+		const removedCommentsMap = new Map();
+		const startPattern = languageCommentsMap.get(this.language ?? "javascript")?.multiLine?.start;
+		const endPattern = languageCommentsMap.get(this.language ?? "javascript")?.multiLine?.end;
+		const singleLinePattern = languageCommentsMap.get(this.language ?? "javascript")?.singleLine;
 
-		let newCode = "";
-		const removedCommentsMap = new Map(); // To store the removed comment lines
+		for (const [index, line] of lines.entries()) {
+			let modifiedLine = line;
 
-		// Remove comments and construct the new code without comments while storing the removed comments
-		lines.forEach((line, lineNumber) => {
-			const commentIndex = line.indexOf(
-				languageCommentsMap.get(this.language ?? "javascript")?.singleLine ??
-					("//" || languageCommentsMap.get(this.language ?? "javascript")?.multiLine?.start) ??
-					"//"
-			);
-			if (
-				(commentIndex !== -1 && line.slice(commentIndex).trim().match(commentPatternSingle)) ||
-				line.slice(commentIndex).trim().match(commentPatternMultiple)
-			) {
-				// Same-line comment found, remove it
-				const comment = line.slice(commentIndex);
-				if (line.slice(0, commentIndex).trim() === "") {
-					// Entire line is a comment, remove the line
-					removedCommentsMap.set(lineNumber + 1, line);
-					return; // Skip adding the line to newCode
+			// Check for multi-line comments start
+			if (startPattern && endPattern && !insideMultiLineComment && line.includes(startPattern)) {
+				insideMultiLineComment = true;
+				const startIndex = line.indexOf(startPattern);
+				const endIndex = line.indexOf(endPattern);
+
+				if (startIndex >= 0 && endIndex >= 0) {
+					modifiedLine = line.substring(0, startIndex) + line.substring(endIndex + 2);
+				} else {
+					modifiedLine = line.substring(0, startIndex);
 				}
-				line = line.slice(0, commentIndex);
-				removedCommentsMap.set(lineNumber + 1, comment); // Adding 1 to lineNumber since Monaco uses 1-based line numbering
+
+				// Save the multi-line comment in the map
+				removedCommentsMap.set(index, line);
 			}
-			newCode += line + "\n";
-		});
 
-		// Update the editor with code without comments
-		this.editor.setValue(newCode);
+			// Check for multi-line comments end
+			if (endPattern && insideMultiLineComment) {
+				const endIndex = line.indexOf(endPattern);
+				if (endIndex >= 0) {
+					insideMultiLineComment = false;
+					modifiedLine = line.substring(endIndex + 2);
+				} else {
+					modifiedLine = "";
+				}
+				removedCommentsMap.set(index, line);
+			}
 
-		// Store the removed comments in the component
+			// Check for single-line comments
+			if (singleLinePattern) {
+				const commentIndex = modifiedLine.indexOf(singleLinePattern);
+				if (commentIndex >= 0 && !insideMultiLineComment) {
+					modifiedLine = modifiedLine.substring(0, commentIndex);
+					// Save the single-line comment in the map
+					removedCommentsMap.set(index, line);
+				}
+
+				// Only add the line if it's not an empty line after removing the comments
+				if (modifiedLine.trim() !== "") {
+					newLines.push(modifiedLine);
+				}
+			}
+		}
+		this.editor.setValue(newLines.join("\n"));
 		this.removedCommentsMap = removedCommentsMap;
 	}
 
 	restoreComments() {
-		if (!this.editor || !this.removedCommentsMap) return;
+		if (!this.editor) return;
+		const modifiedLines = this.editor.getValue().split("\n");
+		const lines = modifiedLines.slice();
+		const restoredLines = modifiedLines.slice();
 
-		const model = this.editor.getModel();
-		if (!model) return;
+		for (const [_index, removedComment] of this.removedCommentsMap.entries()) {
+			lines.forEach((item, lineIndex) => {
+				if (removedComment.trim().includes(item.trim())) {
+					restoredLines.splice(lineIndex, 1);
+				}
+			});
+		}
 
-		const code = this.editor.getValue();
-		const lines = code.split("\n");
+		for (const [index, removedComment] of this.removedCommentsMap.entries()) {
+			// Restore the removed comment to its original position
+			restoredLines.splice(index, 0, removedComment);
+		}
 
-		// Add the removed comments back to the respective line numbers
-		this.removedCommentsMap.forEach((comment, lineNumber) => {
-			lines.splice(lineNumber - 1, 0, comment); // Subtracting 1 from lineNumber to convert to 0-based index
-		});
+		const code = restoredLines.join("\n");
 
-		// Reconstruct the code with comments and update the editor
-		const codeWithComments = lines.join("\n");
-		this.editor.setValue(codeWithComments);
-
-		// Clear the removedCommentsMap since the comments are restored
+		this.editor?.setValue(code);
 		this.removedCommentsMap.clear();
+	}
+
+	errorMessageOnCopy() {
+		if (this.copyCodeButton) {
+			this.copyCodeButton.state = "danger";
+			this.copyCodeButton.label = "ERROR!";
+			this.copyCodeButton.iconLeft = "i-close";
+		}
+		setTimeout(() => {
+			if (this.copyCodeButton) {
+				this.copyCodeButton.state = "primary";
+				this.copyCodeButton.label = "COPY";
+				this.copyCodeButton.iconLeft = "i-copy";
+			}
+		}, 2000);
+	}
+
+	successMessageOnCopy() {
+		if (this.copyCodeButton) {
+			this.copyCodeButton.state = "success";
+			this.copyCodeButton.label = "COPIED!";
+			this.copyCodeButton.iconLeft = "i-tick";
+		}
+		setTimeout(() => {
+			if (this.copyCodeButton) {
+				this.copyCodeButton.state = "primary";
+				this.copyCodeButton.label = "COPY";
+				this.copyCodeButton.iconLeft = "i-copy";
+			}
+		}, 2000);
+	}
+
+	// Function to copy the code inside the editor to the clipboard
+	copyCodeToClipboard() {
+		if (this.editor) {
+			const code = this.editor?.getValue();
+
+			// Copy the entire code to the clipboard
+			navigator.clipboard
+				.writeText(code)
+				.then(() => {
+					this.successMessageOnCopy();
+				})
+				.catch(() => {
+					this.errorMessageOnCopy();
+				});
+		}
+	}
+
+	handleChange(e: CustomEvent) {
+		if (!e.detail.value) {
+			this.toggleComments();
+		} else {
+			this.restoreComments();
+		}
 	}
 
 	/**
@@ -198,13 +257,51 @@ export class FCodeEditor extends FRoot {
 
 	render() {
 		return html`
-			<style>
-				.hidden-comment-line {
-					display: none;
-				}
-			</style>
-			<f-div @click=${() => this.toggleComments()}>YAML</f-div>
-			<f-div @click=${() => this.restoreComments()}>YAML</f-div>
+			${this.comments || this.copyButton || this.title
+				? html` <f-div state="secondary" class="f-code-editor-header" padding="medium">
+						${this.title
+							? html` <f-div gap="medium" align="middle-left">
+									<f-icon source="i-code" state="default" size="x-small"></f-icon>
+									<f-text variant="code" size="small" weight="regular" state="secondary"
+										>${this.title}</f-text
+									>
+							  </f-div>`
+							: null}
+						${this.copyButton || this.comments
+							? html` <f-div
+									gap="medium"
+									align="middle-right"
+									width=${this.title ? "hug-content" : "100%"}
+							  >
+									${this.comments
+										? html` <f-div gap="small" align="middle-left" width="hug-content">
+												<f-text variant="heading" size="x-small" weight="regular" state="subtle"
+													>Comments</f-text
+												>
+												<f-div width="hug-content" overflow="hidden">
+													<f-switch
+														size="small"
+														@input=${this.handleChange}
+														.value=${true}
+													></f-switch>
+												</f-div>
+										  </f-div>`
+										: null}
+									${this.copyButton
+										? html` <f-button
+												class="copy-button"
+												variant="curved"
+												category="fill"
+												size="x-small"
+												label="COPY"
+												icon-left="i-copy"
+												@click=${this.copyCodeToClipboard}
+										  ></f-button>`
+										: null}
+							  </f-div>`
+							: null}
+				  </f-div>`
+				: null}
 		`;
 	}
 
@@ -228,7 +325,7 @@ export class FCodeEditor extends FRoot {
 					language: this.language,
 					automaticLayout: true,
 					autoDetectHighContrast: false,
-					readOnly: false,
+					readOnly: this.readOnly,
 					fontSize: 16,
 					padding: {
 						top: 16
@@ -243,6 +340,12 @@ export class FCodeEditor extends FRoot {
 				this.services
 			);
 
+			if (this.showLineNumbers) {
+				this.editor.updateOptions({ lineNumbers: "on" });
+			} else {
+				this.editor.updateOptions({ lineNumbers: "off" });
+			}
+
 			this.editor?.getModel()?.onDidChangeContent(() => {
 				const inputEvent = new CustomEvent("content-change", {
 					detail: {
@@ -254,6 +357,8 @@ export class FCodeEditor extends FRoot {
 
 				this.dispatchEvent(inputEvent);
 			});
+
+			this.querySelector(".monaco-editor")?.setAttribute("state", this.state ?? "default");
 		}
 	}
 }

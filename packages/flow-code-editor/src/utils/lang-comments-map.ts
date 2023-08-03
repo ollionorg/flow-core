@@ -1,21 +1,19 @@
-export const languageCommentsMap = new Map([
+interface CommentItem {
+	singleLine: string;
+	multiLine: { start: string; end: string } | null;
+}
+
+const commonItem: CommentItem = {
+	singleLine: "//",
+	multiLine: { start: "/*", end: "*/" }
+};
+
+export const languageCommentsMap: Map<string, CommentItem> = new Map([
 	// JavaScript
-	[
-		"javascript",
-		{
-			singleLine: "//",
-			multiLine: { start: "/*", end: "*/" }
-		}
-	],
+	["javascript", commonItem],
 
 	// TypeScript
-	[
-		"typescript",
-		{
-			singleLine: "//",
-			multiLine: { start: "/*", end: "*/" }
-		}
-	],
+	["typescript", commonItem],
 
 	// Python
 	[
@@ -27,40 +25,16 @@ export const languageCommentsMap = new Map([
 	],
 
 	// Java
-	[
-		"java",
-		{
-			singleLine: "//",
-			multiLine: { start: "/*", end: "*/" }
-		}
-	],
+	["java", commonItem],
 
 	// C++
-	[
-		"cpp",
-		{
-			singleLine: "//",
-			multiLine: { start: "/*", end: "*/" }
-		}
-	],
+	["cpp", commonItem],
 
 	// C#
-	[
-		"csharp",
-		{
-			singleLine: "//",
-			multiLine: { start: "/*", end: "*/" }
-		}
-	],
+	["csharp", commonItem],
 
 	// PHP
-	[
-		"php",
-		{
-			singleLine: "//",
-			multiLine: { start: "/*", end: "*/" }
-		}
-	],
+	["php", commonItem],
 
 	// Ruby
 	[
@@ -72,49 +46,19 @@ export const languageCommentsMap = new Map([
 	],
 
 	// Swift
-	[
-		"swift",
-		{
-			singleLine: "//",
-			multiLine: { start: "/*", end: "*/" }
-		}
-	],
+	["swift", commonItem],
 
 	// Go
-	[
-		"go",
-		{
-			singleLine: "//",
-			multiLine: { start: "/*", end: "*/" }
-		}
-	],
+	["go", commonItem],
 
 	// Rust
-	[
-		"rust",
-		{
-			singleLine: "//",
-			multiLine: { start: "/*", end: "*/" }
-		}
-	],
+	["rust", commonItem],
 
 	// Kotlin
-	[
-		"kotlin",
-		{
-			singleLine: "//",
-			multiLine: { start: "/*", end: "*/" }
-		}
-	],
+	["kotlin", commonItem],
 
 	// Dart
-	[
-		"dart",
-		{
-			singleLine: "//",
-			multiLine: { start: "/*", end: "*/" }
-		}
-	],
+	["dart", commonItem],
 
 	// HTML (HTML does not support multi-line comments)
 	[

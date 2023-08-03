@@ -1,5 +1,5 @@
 import { html, nothing, unsafeCSS } from "lit";
-import { property, query } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 import eleStyle from "./f-suggest.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
@@ -100,7 +100,7 @@ export class FSuggest extends FRoot {
 	/**
 	 * @attribute Suffix property enables a string on the right side of the input box.
 	 */
-	@property({ reflect: true, type: String})
+	@property({ reflect: true, type: String })
 	suffix?: string;
 
 	/**
@@ -148,12 +148,16 @@ export class FSuggest extends FRoot {
 	@query("f-popover")
 	popOverElement!: FPopover;
 
+	@query(".f-select-options-clickable")
+	FSelectOptions?: FDiv;
+
 	/**
 	 * emit input custom event
 	 */
 	handleInput(e: CustomEvent) {
 		e.stopPropagation();
 		this.value = e.detail.value;
+		this.handleFocus();
 		this.dispatchInputEvent(e.detail.value);
 	}
 
@@ -223,6 +227,116 @@ export class FSuggest extends FRoot {
 		return this.getAttribute("data-suggest") === "search";
 	}
 
+	@state()
+	currentIndex = -1;
+
+	@state()
+	currentCategoryIndex = 0;
+
+	handleKeyDown(event: KeyboardEvent) {
+		console.log(event.key, "inside");
+		switch (event.key) {
+			case "ArrowUp":
+				event.preventDefault();
+				this.navigateOptions(-1);
+				break;
+			case "ArrowDown":
+				event.preventDefault();
+				this.navigateOptions(1);
+				break;
+			case "Enter":
+				event.preventDefault();
+				this.selectOption();
+				break;
+			case "Escape":
+				event.preventDefault();
+				this.popOverElement.open = false;
+				break;
+		}
+	}
+
+	navigateOptions(direction: number) {
+		if (this.isSuggestionArray) {
+			const totalOptions = this.filteredSuggestions?.length;
+			if (totalOptions === 0) return;
+
+			// Calculate the next index based on the direction
+			const newIndex = this.currentIndex + direction;
+
+			// Ensure the new index stays within bounds
+			this.currentIndex =
+				((newIndex as number) + (totalOptions as number)) % (totalOptions as number);
+
+			// Optionally, you can scroll the dropdown to bring the selected option into view if it's outside the viewport.
+			this.scrollFocusedOptionIntoView();
+		} else {
+			if (this.filteredSuggestions) {
+				const totalCategories = Object.keys(this.filteredSuggestions).length;
+				if (totalCategories === 0) return;
+
+				const currentCategory = Object.keys(this.filteredSuggestions)[this.currentCategoryIndex];
+				const totalOptions = (this.filteredSuggestions as FSuggestSuggestionsCategory)[
+					currentCategory
+				].length;
+
+				// Calculate the next option index based on the direction
+				const newIndex = this.currentIndex + direction;
+
+				// Handle navigation within the current category
+				if (newIndex >= 0 && newIndex < totalOptions) {
+					this.currentIndex = newIndex;
+				} else if (newIndex >= totalOptions) {
+					// Move to the next category
+					this.currentCategoryIndex = (this.currentCategoryIndex + 1) % totalCategories;
+					this.currentIndex = 0; // Set the first option of the new category as focused
+				} else {
+					// Move to the previous category
+					this.currentCategoryIndex =
+						(this.currentCategoryIndex - 1 + totalCategories) % totalCategories;
+					this.currentIndex =
+						(this.filteredSuggestions as FSuggestSuggestionsCategory)[currentCategory].length - 1; // Set the last option of the new category as focused
+				}
+
+				// Optionally, you can scroll the dropdown to bring the selected option into view if it's outside the viewport.
+				this.scrollFocusedOptionIntoView();
+			}
+		}
+	}
+
+	scrollFocusedOptionIntoView() {
+		const optionElements = this.shadowRoot?.querySelectorAll(".f-select-options-clickable");
+		if (optionElements) {
+			if (optionElements.length > this.currentIndex) {
+				optionElements[this.currentIndex].scrollIntoView({
+					behavior: "auto", // 'auto' or 'smooth' for scrolling behavior
+					block: "nearest" // Scroll to the nearest edge of the container
+				});
+			}
+		}
+	}
+
+	selectOption() {
+		if (this.isSuggestionArray) {
+			if (this.filteredSuggestions) {
+				if (this.currentIndex >= 0 && this.currentIndex < this.filteredSuggestions.length) {
+					const selectedOption = (this.filteredSuggestions as string[])[this.currentIndex];
+					this.dispatchInputEvent(selectedOption as string);
+					this.handleBlur(false);
+				}
+			}
+		} else {
+			if (this.currentCategoryIndex >= 0 && this.currentIndex >= 0 && this.filteredSuggestions) {
+				const selectedCategory = Object.keys(this.filteredSuggestions)[this.currentCategoryIndex];
+				const selectedOption = (this.filteredSuggestions as FSuggestSuggestionsCategory)[
+					selectedCategory
+				][this.currentIndex];
+
+				this.dispatchInputEvent(selectedOption as string);
+				this.handleBlur(false);
+			}
+		}
+	}
+
 	render() {
 		// classes to apply on inner element
 		const classes: Record<string, boolean> = {};
@@ -240,6 +354,7 @@ export class FSuggest extends FRoot {
 				@input=${this.handleInput}
 				@focus=${this.handleFocus}
 				@blur=${this.handleBlur}
+				@keydown=${this.handleKeyDown}
 				type="text"
 				data-qa-element-id=${this.getAttribute("data-qa-element-id")}
 				icon-left=${this.iconLeft}
@@ -274,17 +389,20 @@ export class FSuggest extends FRoot {
 		if (this.isSuggestionArray) {
 			if (this.anySuggestions) {
 				return html`<f-div height="hug-content" direction="column"
-					>${(suggestions as string[]).map(sg => {
+					>${(suggestions as string[]).map((sg, index) => {
 						return html`<f-div
 							class="f-select-options-clickable"
 							height="hug-content"
 							@click=${this.handleSuggest}
 							clickable
 							padding="medium"
+							.selected=${index === this.currentIndex ? "background" : "none"}
 						>
 							<f-div direction="row" gap="medium">
 								${this.isSearchComponent ? html` <f-icon source="i-search"></f-icon>` : ""}
-								<f-text variant="para" size="small" weight="regular"> ${unsafeHTML(sg)} </f-text>
+								<f-text variant="para" size="small" weight="regular" .highlight=${this.value}>
+									${unsafeHTML(sg)}
+								</f-text>
 							</f-div>
 						</f-div>`;
 					})}</f-div
@@ -293,7 +411,7 @@ export class FSuggest extends FRoot {
 			return nothing;
 		} else {
 			return Object.entries(suggestions as FSuggestSuggestionsCategory).map(
-				([objName, objValue]) => {
+				([objName, objValue], categoryIndex) => {
 					return html`<f-div
 						padding="none"
 						height="hug-content"
@@ -307,11 +425,16 @@ export class FSuggest extends FRoot {
 							width="fill-container"
 							align="middle-left"
 							direction="row"
-							><f-text variant="para" size="small" weight="regular" state="secondary"
+							><f-text
+								variant="para"
+								size="small"
+								weight="regular"
+								state="secondary"
+								.highlight=${this.value}
 								>${objName}</f-text
 							></f-div
 						>
-						${objValue.map(item => {
+						${objValue.map((item, index) => {
 							return html`<f-div
 								class="f-select-options-clickable"
 								padding="medium"
@@ -322,10 +445,14 @@ export class FSuggest extends FRoot {
 								align="middle-left"
 								gap="small"
 								@click=${this.handleSuggest}
+								.selected=${categoryIndex === this.currentCategoryIndex &&
+								index === this.currentIndex
+									? "background"
+									: "none"}
 							>
 								<f-div direction="row" gap="medium">
 									${this.isSearchComponent ? html` <f-icon source="i-search"></f-icon>` : ""}
-									<f-text variant="para" size="small" weight="regular">
+									<f-text variant="para" size="small" weight="regular" .highlight=${this.value}>
 										${unsafeHTML(item)}
 									</f-text>
 								</f-div>

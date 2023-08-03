@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.20.2] - 2023-08-04
+
+### Improvements
+
+- `f-suggest` added text-highlight on type and keyboard navigation in `suggestions` is possible now.
+
 ## [1.20.1] - 2023-07-31
 
 ### Improvements
@@ -15,6 +21,7 @@
 ### Features
 
 - `f-text`: `editable` feature added to edit the text inside f-text.
+
 ## [1.19.0] - 2023-07-26
 
 ### Features

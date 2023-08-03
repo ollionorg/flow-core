@@ -57,6 +57,30 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/utils/lang-comments-map.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "languageCommentsMap",
+          "type": {
+            "text": "Map<string, CommentItem>"
+          },
+          "default": "new Map([\n\t// JavaScript\n\t[\"javascript\", commonItem],\n\n\t// TypeScript\n\t[\"typescript\", commonItem],\n\n\t// Python\n\t[\n\t\t\"python\",\n\t\t{\n\t\t\tsingleLine: \"#\",\n\t\t\tmultiLine: { start: \"'''\", end: \"'''\" }\n\t\t}\n\t],\n\n\t// Java\n\t[\"java\", commonItem],\n\n\t// C++\n\t[\"cpp\", commonItem],\n\n\t// C#\n\t[\"csharp\", commonItem],\n\n\t// PHP\n\t[\"php\", commonItem],\n\n\t// Ruby\n\t[\n\t\t\"ruby\",\n\t\t{\n\t\t\tsingleLine: \"#\",\n\t\t\tmultiLine: { start: \"=begin\", end: \"=end\" }\n\t\t}\n\t],\n\n\t// Swift\n\t[\"swift\", commonItem],\n\n\t// Go\n\t[\"go\", commonItem],\n\n\t// Rust\n\t[\"rust\", commonItem],\n\n\t// Kotlin\n\t[\"kotlin\", commonItem],\n\n\t// Dart\n\t[\"dart\", commonItem],\n\n\t// HTML (HTML does not support multi-line comments)\n\t[\n\t\t\"html\",\n\t\t{\n\t\t\tsingleLine: \"<!--\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// CSS (CSS does not support multi-line comments)\n\t[\n\t\t\"css\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// SCSS (SCSS does not support multi-line comments)\n\t[\n\t\t\"scss\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// Less (Less does not support multi-line comments)\n\t[\n\t\t\"less\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// JSON (JSON does not support multi-line comments)\n\t[\n\t\t\"json\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// YAML (YAML does not support multi-line comments)\n\t[\n\t\t\"yaml\",\n\t\t{\n\t\t\tsingleLine: \"#\",\n\t\t\tmultiLine: null\n\t\t}\n\t]\n])"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "languageCommentsMap",
+          "declaration": {
+            "name": "languageCommentsMap",
+            "module": "src/utils/lang-comments-map.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-code-editor/f-code-editor.ts",
       "declarations": [
         {
@@ -80,6 +104,26 @@
               },
               "description": "actual code to display in editor",
               "attribute": "code"
+            },
+            {
+              "kind": "field",
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "attribute": "title",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FCodeEditorStateProp | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
             },
             {
               "kind": "field",
@@ -131,6 +175,158 @@
               "attribute": "services"
             },
             {
+              "kind": "field",
+              "name": "comments",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "comments",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "copyButton",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "copy-button",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "showLineNumbers",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "attribute": "show-line-numbers",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "readOnly",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "read-only",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "copyCodeButton",
+              "type": {
+                "text": "FButton | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "removedCommentsMap",
+              "default": "new Map()"
+            },
+            {
+              "kind": "field",
+              "name": "dymanicWidth"
+            },
+            {
+              "kind": "field",
+              "name": "fixedLang"
+            },
+            {
+              "kind": "method",
+              "name": "multiLineStart",
+              "parameters": [
+                {
+                  "name": "startIndex",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "endIndex",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "line",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "multiLineEnd",
+              "parameters": [
+                {
+                  "name": "endIndex",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "line",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "addNewLine",
+              "parameters": [
+                {
+                  "name": "modifiedLine",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "newLines",
+                  "type": {
+                    "text": "string[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "toggleComments"
+            },
+            {
+              "kind": "method",
+              "name": "restoreComments"
+            },
+            {
+              "kind": "method",
+              "name": "errorMessageOnCopy"
+            },
+            {
+              "kind": "method",
+              "name": "successMessageOnCopy"
+            },
+            {
+              "kind": "method",
+              "name": "copyCodeToClipboard"
+            },
+            {
+              "kind": "method",
+              "name": "handleChange",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ]
+            },
+            {
               "kind": "method",
               "name": "createRenderRoot",
               "description": "monoco editor never works in shadow dom"
@@ -144,6 +340,22 @@
               },
               "description": "actual code to display in editor",
               "fieldName": "code"
+            },
+            {
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "fieldName": "title"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FCodeEditorStateProp | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
             },
             {
               "name": "language",
@@ -187,6 +399,38 @@
               },
               "default": "{}",
               "fieldName": "services"
+            },
+            {
+              "name": "comments",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "comments"
+            },
+            {
+              "name": "copy-button",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "copyButton"
+            },
+            {
+              "name": "show-line-numbers",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "fieldName": "showLineNumbers"
+            },
+            {
+              "name": "read-only",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "readOnly"
             }
           ],
           "superclass": {

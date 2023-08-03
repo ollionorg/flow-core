@@ -2,6 +2,7 @@ import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import fDividerAnatomy from "./svg/i-fdivider-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useState } from "@storybook/client-api";
 
 <Meta
 	title="@cldcvr/flow-code-editor/Components/f-code-editor"
@@ -30,6 +31,11 @@ f-code-editor used to edit content/code.
 		name="Playground"
 		argTypes={{
 			code: { control: "text" },
+			title: { control: "text" },
+			comments: { control: "boolean" },
+			["copy-button"]: { control: "boolean" },
+			state: { control: "select", options: ["default", "secondary", "subtle"] },
+			["show-line-numbers"]: { control: "boolean" },
 			language: {
 				control: "select",
 				options: [
@@ -40,28 +46,53 @@ f-code-editor used to edit content/code.
 					"scss",
 					"less",
 					"html",
+					"yaml",
 					"javascript",
 					"typescript"
 				]
-			}
+			},
+			["read-only"]: { control: "boolean" }
 		}}
 		args={{
-			code: `object ScalaExample{  
-    def main(args:Array[String]){  
-        println "Hello Scala"  
-    }  
-}  `,
-			language: "scala"
+			code: `%TAG ! tag:clarkevans.com,2002:
+--- !shape
+  # Use the ! handle for presenting
+  # tag:clarkevans.com,2002:circle
+- !circle
+  center: &ORIGIN {x: 73, y: 129}
+  radius: 7
+- !line
+  start: *ORIGIN
+  finish: { x: 89, y: 102 }
+- !label
+  start: *ORIGIN
+  color: 0xFFEEBB
+  text: Pretty vector drawing.`,
+			title: "",
+			comments: false,
+			["copy-button"]: false,
+			["show-line-numbers"]: false,
+			state: "default",
+			language: "scala",
+			["read-only"]: false
 		}}
 	>
 		{args => {
+			const [_, updateArgs] = useArgs();
 			const handleInput = function (ev) {
 				console.log(ev);
+				// updateArgs({ code: ev.detail.value });
 			};
 			return html`<f-div padding="x-large" height="100%">
 				<f-code-editor
 					.code=${args.code}
 					.language=${args.language}
+					.state=${args.state}
+					.comments=${args.comments}
+					?copy-button=${args["copy-button"]}
+					.title=${args.title}
+					?show-line-numbers=${args["show-line-numbers"]}
+					?read-only=${args["read-only"]}
 					@content-change=${handleInput}
 				></f-code-editor>
 			</f-div>`;
@@ -103,6 +134,272 @@ code to display in `f-code-editor` for sepcified language
 	</Story>
 </Canvas>
 
+## title
+
+<f-divider></f-divider>
+
+title of the header in code-editor
+
+<Canvas>
+	<Story
+		name="title"
+		argTypes={{
+			code: { control: false },
+			language: { control: false }
+		}}
+		args={{
+			code: `object ScalaExample{  
+    def main(args:Array[String]){  
+        println "Hello Scala"  
+    }  
+}  `,
+			language: "scala"
+		}}
+	>
+		{args => {
+			const [value, setValue] = useState("");
+			const handleInput = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div padding="x-large" height="100%" gap="x-large" direction="column">
+					<f-div width="200px" height="hug-content">
+						<f-input
+							.value=${value}
+							@input=${handleInput}
+							placeholder="Enter your title here"
+						></f-input>
+					</f-div>
+					<f-text
+						>Now, on the basis of title header gets shown on code-editor, "title='This is a
+						title'"</f-text
+					>
+					<f-div overflow="hidden">
+						<f-code-editor
+							.code=${args.code}
+							.language=${args.language}
+							.title=${value}
+						></f-code-editor>
+					</f-div>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+## comments
+
+<f-divider></f-divider>
+
+Add Comments Toggle button to the header
+
+<Canvas>
+	<Story
+		name="comments"
+		argTypes={{
+			code: { control: false },
+			language: { control: false }
+		}}
+		args={{
+			code: `/**
+ * dce
+ * ewcer
+ */
+function add(a, b) {
+  // This function adds two numbers
+  return a + b; // Return the sum
+}`,
+			language: "javascript"
+		}}
+	>
+		{args => {
+			const [value, setValue] = useState(true);
+			const handleInput = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div padding="x-large" height="100%" gap="x-large" direction="column">
+					<f-div height="hug-content">
+						<f-switch .value=${value} @input=${handleInput}>
+							<f-text slot="label">Add Comments Toggle button to header</f-text>
+						</f-switch>
+					</f-div>
+					<f-text
+						>Now, on the basis of comments, header gets shown on code-editor,
+						"comments=true"</f-text
+					>
+					<f-div overflow="hidden">
+						<f-code-editor
+							.code=${args.code}
+							.language=${args.language}
+							title="JAVASCRIPT"
+							?comments=${value}
+						></f-code-editor>
+					</f-div>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+## copy-button
+
+<f-divider></f-divider>
+
+Add Copy button to the header
+
+<Canvas>
+	<Story
+		name="copy-button"
+		argTypes={{
+			code: { control: false },
+			language: { control: false }
+		}}
+		args={{
+			code: `/**
+ * dce
+ * ewcer
+ */
+function add(a, b) {
+  // This function adds two numbers
+  return a + b; // Return the sum
+}`,
+			language: "javascript"
+		}}
+	>
+		{args => {
+			const [value, setValue] = useState(true);
+			const handleInput = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div padding="x-large" height="100%" gap="x-large" direction="column">
+					<f-div height="hug-content">
+						<f-switch .value=${value} @input=${handleInput}>
+							<f-text slot="label">Add Copy button button to header</f-text>
+						</f-switch>
+					</f-div>
+					<f-text
+						>Now, on the basis of copy-button, header gets shown on code-editor,
+						"copy-button=true"</f-text
+					>
+					<f-div overflow="hidden">
+						<f-code-editor
+							.code=${args.code}
+							.language=${args.language}
+							title="JAVASCRIPT"
+							?copy-button=${value}
+						></f-code-editor>
+					</f-div>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+## show-line-numbers
+
+<f-divider></f-divider>
+
+Toggle Line no.'s on/off
+
+<Canvas>
+	<Story
+		name="show-line-numbers"
+		argTypes={{
+			code: { control: false },
+			language: { control: false }
+		}}
+		args={{
+			code: `/**
+ * dce
+ * ewcer
+ */
+function add(a, b) {
+  // This function adds two numbers
+  return a + b; // Return the sum
+}`,
+			language: "javascript"
+		}}
+	>
+		{args => {
+			const [value, setValue] = useState(true);
+			const handleInput = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div padding="x-large" height="100%" gap="x-large" direction="column">
+					<f-div height="hug-content">
+						<f-switch .value=${value} @input=${handleInput}>
+							<f-text slot="label">Toggle Line No.'s</f-text>
+						</f-switch>
+					</f-div>
+					<f-text>show-line-numbers=${value}</f-text>
+					<f-div overflow="hidden">
+						<f-code-editor
+							.code=${args.code}
+							.language=${args.language}
+							title="JAVASCRIPT"
+							?show-line-numbers=${value}
+						></f-code-editor>
+					</f-div>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+## state
+
+<f-divider></f-divider>
+
+state of the code-editor
+
+<Canvas>
+	<Story
+		name="state"
+		argTypes={{
+			code: { control: false },
+			language: { control: false }
+		}}
+		args={{
+			code: `/**
+ * dce
+ * ewcer
+ */
+function add(a, b) {
+  // This function adds two numbers
+  return a + b; // Return the sum
+}`,
+			language: "javascript"
+		}}
+	>
+		{args => {
+			const [value, setValue] = useState("default");
+			const options = ["default", "secondary", "subtle"];
+			const handleInput = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div padding="x-large" height="100%" gap="x-large" direction="column">
+					<f-div width="200px" height="hug-content">
+						<f-select .value=${value} @input=${handleInput} .options=${options}></f-select>
+					</f-div>
+					<f-text> "state=${value}"</f-text>
+					<f-div overflow="hidden">
+						<f-code-editor
+							.code=${args.code}
+							.language=${args.language}
+							title="JAVASCRIPT"
+							.state=${value}
+						></f-code-editor>
+					</f-div>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
 ## language
 
 <f-divider></f-divider>
@@ -129,6 +426,61 @@ language is used to display code in correct synatx highlighting
 			return html`
 				<f-div padding="x-large" height="100%">
 					<f-code-editor .code=${args.code} .language=${args.language}></f-code-editor>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+## read-only
+
+<f-divider></f-divider>
+
+Toggle Line no.'s on/off
+
+<Canvas>
+	<Story
+		name="read-only"
+		argTypes={{
+			code: { control: false },
+			language: { control: false }
+		}}
+		args={{
+			code: `/**
+ * dce
+ * ewcer
+ */
+function add(a, b) {
+  // This function adds two numbers
+  return a + b; // Return the sum
+}`,
+			language: "javascript"
+		}}
+	>
+		{args => {
+			const [value, setValue] = useState(false);
+			const handleInput = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div padding="x-large" height="100%" gap="x-large" direction="column">
+					<f-div height="hug-content">
+						<f-switch .value=${value} @input=${handleInput}>
+							<f-text slot="label">Toggle read-only mode</f-text>
+						</f-switch>
+					</f-div>
+					<f-text>read-only=${value}</f-text>
+					<f-div overflow="hidden">
+						<f-code-editor
+							.code=${args.code}
+							.language=${args.language}
+							title="JAVASCRIPT"
+							?read-only=${value}
+							state="subtle"
+							?copy-button=${true}
+							?comments=${true}
+						></f-code-editor>
+					</f-div>
 				</f-div>
 			`;
 		}}

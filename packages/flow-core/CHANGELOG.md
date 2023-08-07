@@ -8,7 +8,7 @@
 
 ### Improvements
 
-- `f-suggest` added text-highlight on type and keyboard navigation in `suggestions` is possible now.
+- `f-suggest` added text-highlight on type and keyboard navigation in `suggestions` is possible now, and custom template could be given for the options.
 
 ## [1.20.1] - 2023-07-31
 

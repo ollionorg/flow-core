@@ -1,4 +1,4 @@
-import { html, nothing, unsafeCSS } from "lit";
+import { html, HTMLTemplateResult, nothing, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import eleStyle from "./f-suggest.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -11,18 +11,25 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 import { classMap } from "lit-html/directives/class-map.js";
 import _ from "lodash";
 import { flowElement } from "./../../utils";
+import getComputedHTML from "../../utils/get-computed-html";
 
 export type FSuggestState = "primary" | "default" | "success" | "warning" | "danger";
 
 export type FSuggestCustomEvent = {
-	value: string;
+	value: string | FSuggestTemplate;
 };
 
 export type FSuggestSuffixWhen = (value: string) => boolean;
 
 export type FSuggestSuggestionsCategory = Record<string, string[]>;
 
-export type FSuggestSuggestions = string[] | FSuggestSuggestionsCategory;
+export type FSuggestTemplate = {
+	value: any;
+	template: (value?: string) => HTMLTemplateResult;
+	toString: () => string;
+};
+
+export type FSuggestSuggestions = string[] | FSuggestSuggestionsCategory | FSuggestTemplate[];
 
 @flowElement("f-suggest")
 export class FSuggest extends FRoot {
@@ -151,6 +158,12 @@ export class FSuggest extends FRoot {
 	@query(".f-select-options-clickable")
 	FSelectOptions?: FDiv;
 
+	@state()
+	currentIndex = -1;
+
+	@state()
+	currentCategoryIndex = 0;
+
 	/**
 	 * emit input custom event
 	 */
@@ -169,7 +182,7 @@ export class FSuggest extends FRoot {
 		this.dispatchInputEvent("");
 	}
 
-	dispatchInputEvent(value: string) {
+	dispatchInputEvent(value: string | FSuggestTemplate) {
 		const event = new CustomEvent<FSuggestCustomEvent>("input", {
 			detail: {
 				value
@@ -186,6 +199,8 @@ export class FSuggest extends FRoot {
 			await new Promise(resolve => setTimeout(resolve, 200));
 		}
 		this.popOverElement.open = false;
+		this.currentIndex = -1;
+		this.currentCategoryIndex = 0;
 	}
 	handleFocus() {
 		this.popOverElement.target = this.fInput.inputWrapperElement;
@@ -205,10 +220,23 @@ export class FSuggest extends FRoot {
 		return Array.isArray(this.suggestions);
 	}
 
+	get isSuggestionObjects() {
+		return (
+			this.isSuggestionArray &&
+			(this.suggestions as FSuggestTemplate[])?.every(
+				item => typeof item === "object" && item !== null && !Array.isArray(item)
+			)
+		);
+	}
+
 	get filteredSuggestions() {
 		if (this.value) {
-			if (this.isSuggestionArray) {
+			if (this.isSuggestionArray && !this.isSuggestionObjects) {
 				return (this.suggestions as string[])?.filter(sg => sg.includes(this.value as string));
+			} else if (this.isSuggestionObjects) {
+				return (this.suggestions as FSuggestTemplate[])?.filter(sg =>
+					sg.toString().includes(this.value as string)
+				);
 			} else {
 				const filtered = _.cloneDeep(this.suggestions) as FSuggestSuggestionsCategory;
 				Object.entries(filtered).forEach(([objName, objValue]) => {
@@ -227,14 +255,7 @@ export class FSuggest extends FRoot {
 		return this.getAttribute("data-suggest") === "search";
 	}
 
-	@state()
-	currentIndex = -1;
-
-	@state()
-	currentCategoryIndex = 0;
-
 	handleKeyDown(event: KeyboardEvent) {
-		console.log(event.key, "inside");
 		switch (event.key) {
 			case "ArrowUp":
 				event.preventDefault();
@@ -319,8 +340,15 @@ export class FSuggest extends FRoot {
 		if (this.isSuggestionArray) {
 			if (this.filteredSuggestions) {
 				if (this.currentIndex >= 0 && this.currentIndex < this.filteredSuggestions.length) {
-					const selectedOption = (this.filteredSuggestions as string[])[this.currentIndex];
-					this.dispatchInputEvent(selectedOption as string);
+					const selectedOption = (this.filteredSuggestions as string[] | FSuggestTemplate[])[
+						this.currentIndex
+					];
+					if (this.isSuggestionObjects) {
+						this.value = (selectedOption as FSuggestTemplate).value;
+					} else {
+						this.value = selectedOption as string;
+					}
+					this.dispatchInputEvent(selectedOption);
 					this.handleBlur(false);
 				}
 			}
@@ -386,7 +414,7 @@ export class FSuggest extends FRoot {
 	}
 
 	getSuggestionHtml(suggestions: FSuggestSuggestions) {
-		if (this.isSuggestionArray) {
+		if (this.isSuggestionArray && !this.isSuggestionObjects) {
 			if (this.anySuggestions) {
 				return html`<f-div height="hug-content" direction="column"
 					>${(suggestions as string[]).map((sg, index) => {
@@ -404,6 +432,23 @@ export class FSuggest extends FRoot {
 									${unsafeHTML(sg)}
 								</f-text>
 							</f-div>
+						</f-div>`;
+					})}</f-div
+				>`;
+			}
+			return nothing;
+		} else if (this.isSuggestionObjects) {
+			if (this.anySuggestions) {
+				return html`<f-div height="hug-content" direction="column"
+					>${(suggestions as FSuggestTemplate[]).map((sg, index) => {
+						return html`<f-div
+							class="f-select-options-clickable"
+							height="hug-content"
+							@click=${() => this.handleSelect(sg)}
+							clickable
+							.selected=${index === this.currentIndex ? "background" : "none"}
+						>
+							${unsafeHTML(getComputedHTML(sg.template(this.value)))}
 						</f-div>`;
 					})}</f-div
 				>`;
@@ -467,9 +512,15 @@ export class FSuggest extends FRoot {
 	async handleSuggest(event: PointerEvent) {
 		if (event.target && (event.target as FDiv).textContent) {
 			this.value = (event.target as FDiv).textContent?.trim();
-
 			this.dispatchInputEvent(this.value as string);
 		}
+		await this.handleBlur(false);
+	}
+
+	async handleSelect(sg: FSuggestTemplate) {
+		this.value = sg.value;
+		this.dispatchInputEvent(sg);
+
 		await this.handleBlur(false);
 	}
 }

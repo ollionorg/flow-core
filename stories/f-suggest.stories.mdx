@@ -649,6 +649,32 @@ Provides the search suggestions in the form of an array of strings.
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};
+			const template = [
+				{
+					value: "Hello",
+					template: function (value) {
+						return html`<f-div gap="medium" direction="column"
+							><f-text inline highlight=${value}>${this.value}</f-text
+							><f-text inline highlight=${value}>subtitle</f-text></f-div
+						>`;
+					},
+					toString: function () {
+						return "Hello";
+					}
+				},
+				{
+					value: "Hello123",
+					template: function (value) {
+						return html`<f-div gap="medium" direction="column"
+							><f-text inline highlight=${value}>${this.value}</f-text
+							><f-text inline highlight=${value}>subtitle</f-text></f-div
+						>`;
+					},
+					toString: function () {
+						return "Hello123";
+					}
+				}
+			];
 			return html`
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
 					<f-div align="middle-center">
@@ -701,6 +727,23 @@ Provides the search suggestions in the form of an array of strings.
 							<f-div slot="label" padding="none" gap="none">Label</f-div>
 							<f-div slot="description" padding="none" gap="none"
 								>This is a demo for categorized search result</f-div
+							>
+							<f-text slot="help" variant="para" size="small"
+								>This is a Subtext (Helper Text)</f-text
+							>
+						</f-suggest></f-div
+					>
+					<f-div align="middle-center">
+						<f-suggest
+							value=${value}
+							placeholder="Write here"
+							@input=${handleValue}
+							size="medium"
+							.suggestions=${template}
+						>
+							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-div slot="description" padding="none" gap="none"
+								>This is a demo for custom template search result</f-div
 							>
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text

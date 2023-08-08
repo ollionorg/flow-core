@@ -1,4 +1,4 @@
-import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { html, HTMLTemplateResult, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-search.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -18,7 +18,15 @@ export type FSearchCustomEvent = {
 
 export type FSearchSuffixWhen = (value: string) => boolean;
 
-export type FSearchSuggestions = string[];
+export type FSearchSuggestionsCategory = Record<string, string[]>;
+
+export type FSearchOptionTemplate = {
+	value: any;
+	template: (value?: string) => HTMLTemplateResult;
+	toString: () => string;
+};
+
+export type FSearchSuggestions = string[] | FSearchSuggestionsCategory | FSearchOptionTemplate[];
 
 export type FSearchScope = string[] | "none";
 

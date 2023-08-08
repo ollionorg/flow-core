@@ -1,0 +1,308 @@
+@use "sass:map";
+@use "sass:math";
+@import "./../../mixins/scss/mixins";
+
+$sizes: (
+	"small": (
+		"height": 20px,
+		"width": 20px,
+		"svg-size": 8px,
+		"font-size": 8px
+	),
+	"medium": (
+		"height": 28px,
+		"width": 28px,
+		"svg-size": 12px,
+		"font-size": 12px
+	),
+	"large": (
+		"height": 36px,
+		"width": 36px,
+		"svg-size": 16px,
+		"font-size": 14px
+	),
+	"x-large": (
+		"height": 44px,
+		"width": 44px,
+		"svg-size": 20px,
+		"font-size": 16px
+	)
+);
+
+$states: (
+	"primary": (
+		"background": var(--color-primary-default)
+	),
+	"default": (
+		"background": var(--color-neutral-subtle)
+	),
+	"success": (
+		"background": var(--color-success-default)
+	),
+	"warning": (
+		"background": var(--color-warning-default)
+	),
+	"danger": (
+		"background": var(--color-danger-default)
+	),
+	"inherit": (
+		"background": var(--color-inherit-pictogram)
+	)
+);
+
+$loadingStates: (
+	"primary":
+		linear-gradient(
+			var(--color-primary-subtle),
+			var(--color-primary-default),
+			var(--color-primary-secondary),
+			var(--color-primary-text),
+			#fff
+		),
+	"default":
+		linear-gradient(
+			var(--color-neutral-surface),
+			var(--color-neutral-default),
+			var(--color-neutral-secondary),
+			var(--color-neutral-text)
+		),
+	"success":
+		linear-gradient(
+			var(--color-success-subtle),
+			var(--color-success-default),
+			var(--color-success-secondary),
+			var(--color-success-text),
+			#fff
+		),
+	"warning":
+		linear-gradient(
+			var(--color-warning-subtle),
+			var(--color-warning-default),
+			var(--color-warning-secondary),
+			var(--color-warning-text),
+			#fff
+		),
+	"danger":
+		linear-gradient(
+			var(--color-danger-subtle),
+			var(--color-danger-default),
+			var(--color-danger-secondary),
+			var(--color-danger-text),
+			#fff
+		)
+);
+
+$hexagon-clip-path: polygon(
+	98.66025% 45%,
+	99.39693% 46.5798%,
+	99.84808% 48.26352%,
+	100% 50%,
+	99.84808% 51.73648%,
+	99.39693% 53.4202%,
+	98.66025% 55%,
+	78.66025% 89.64102%,
+	77.66044% 91.06889%,
+	76.42788% 92.30146%,
+	75% 93.30127%,
+	73.4202% 94.03794%,
+	71.73648% 94.48909%,
+	70% 94.64102%,
+	30% 94.64102%,
+	28.26352% 94.48909%,
+	26.5798% 94.03794%,
+	25% 93.30127%,
+	23.57212% 92.30146%,
+	22.33956% 91.06889%,
+	21.33975% 89.64102%,
+	1.33975% 55%,
+	0.60307% 53.4202%,
+	0.15192% 51.73648%,
+	0% 50%,
+	0.15192% 48.26352%,
+	0.60307% 46.5798%,
+	1.33975% 45%,
+	21.33975% 10.35898%,
+	22.33956% 8.93111%,
+	23.57212% 7.69854%,
+	25% 6.69873%,
+	26.5798% 5.96206%,
+	28.26352% 5.51091%,
+	30% 5.35898%,
+	70% 5.35898%,
+	71.73648% 5.51091%,
+	73.4202% 5.96206%,
+	75% 6.69873%,
+	76.42788% 7.69854%,
+	77.66044% 8.93111%,
+	78.66025% 10.35898%
+);
+
+:host {
+	.f-pictogram {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		cursor: default;
+		flex-shrink: 0;
+		outline: none;
+		position: relative;
+		overflow: hidden;
+		&[disabled] {
+			@include disabled();
+		}
+
+		&.hasShimmer {
+			@include shimmer-self();
+		}
+
+		img {
+			height: 90%;
+			width: 90%;
+		}
+
+		@each $size, $value in $sizes {
+			&[size="#{$size}"] {
+				height: map-get($value, "height");
+				width: map-get($value, "width");
+				.svg-styling {
+					width: map-get($value, "svg-size");
+					align-items: center;
+					justify-content: center;
+					display: flex;
+				}
+				.text-styling {
+					font-size: map-get($value, "font-size");
+					font-style: normal;
+					font-weight: 400;
+					line-height: 18px;
+					color: var(--color-text-default);
+				}
+			}
+		}
+
+		&:after {
+			background-color: var(--color-neutral-subtle);
+		}
+
+		@each $state, $color in $states {
+			&[state="#{$state}"]:not([loading]):not(.hasShimmer) {
+				&:before {
+					content: "";
+					background: map-get($color, "background");
+				}
+				&:after {
+					content: "";
+				}
+			}
+		}
+
+		@each $state, $color in $loadingStates {
+			&[state="#{$state}"][loading]:not(.hasShimmer) {
+				&:before {
+					content: "";
+					background: $color;
+				}
+				&:after {
+					content: "";
+				}
+			}
+		}
+
+		&[clickable]:not([disabled]) {
+			cursor: pointer;
+
+			&:hover {
+				&::after {
+					background-color: var(--color-neutral-subtle-hover);
+				}
+			}
+		}
+
+		> *:not(.picto-shape) {
+			z-index: 2;
+		}
+
+		&[variant="hexagon"] {
+			&:not(.hasShimmer) {
+				clip-path: $hexagon-clip-path;
+			}
+			&:after {
+				clip-path: $hexagon-clip-path;
+			}
+			img {
+				clip-path: $hexagon-clip-path;
+			}
+		}
+		&[variant="squircle"] {
+			&:not(.hasShimmer) {
+				clip-path: url(#squircle);
+			}
+			&:after {
+				clip-path: url(#squircle);
+			}
+			img {
+				clip-path: url(#squircle);
+			}
+		}
+		&[variant="circle"] {
+			&:not(.hasShimmer) {
+				clip-path: circle(50%);
+			}
+			&:after {
+				clip-path: circle(50%);
+			}
+			img {
+				clip-path: circle(50%);
+			}
+		}
+		&[variant="square"] {
+			&:not(.hasShimmer) {
+				clip-path: inset(0px 0px 0px round 4px);
+			}
+			&:after {
+				clip-path: inset(0px 0px 0px round 4px);
+			}
+			img {
+				clip-path: inset(0px 0px 0px round 4px);
+			}
+		}
+
+		&:before {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			transform-origin: 50% 50%;
+			transform: rotate(0deg) scale(1.4);
+		}
+		&:after {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			transform: scale(0.9);
+			transform-origin: 50% 50%;
+			pointer-events: none;
+		}
+
+		&[loading] {
+			&::before {
+				animation: 3s rotate linear infinite;
+			}
+		}
+
+		@keyframes rotate {
+			to {
+				transform: rotate(360deg) scale(1.4);
+			}
+		}
+	}
+}
+
+f-pictogram {
+	@include base();
+	&.hasShimmer {
+		&::before {
+			content: unset;
+		}
+		background: transparent !important;
+	}
+}

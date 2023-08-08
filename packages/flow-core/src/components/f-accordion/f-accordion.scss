@@ -1,0 +1,32 @@
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+
+:host {
+	.f-accordion-header {
+		@include base();
+		.f-accordion-icon {
+			transform: rotate(0deg);
+			transition: transform var(--transition-time-default) linear;
+		}
+
+		.f-accordion-icon[data-accordion-open] {
+			transform: rotate(180deg);
+			transition: transform var(--transition-time-default) linear;
+		}
+	}
+	.f-accordion {
+		&:not([data-accordion-open]) {
+			max-height: 0 !important;
+			transition: max-height var(--transition-time-default) ease-out;
+		}
+		&[data-accordion-open] {
+			max-height: 100vh !important;
+			transition: max-height var(--transition-time-default) ease-in;
+		}
+	}
+}
+
+f-accordion {
+	display: flex;
+	flex: 1 0 auto;
+}

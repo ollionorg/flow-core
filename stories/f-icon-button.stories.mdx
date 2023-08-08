@@ -1,0 +1,494 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import fIconButtonAnatomy from "./svg/i-ficon-button-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+
+<Meta
+  title="Components/f-icon-button"
+  parameters={{
+    controls: { hideNoControlsWarning: true },
+  }}
+/>
+
+# f-icon-button
+
+<br />
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+### Used for this
+
+- To simplify appearance of repeated actions
+- To enable actions in compact spaces.
+
+### Not for this
+
+- Do not use the Icon button for primary actions. Use button instead
+
+<br />
+
+### [Playground](/story/components-f-icon-button--playground)
+
+<Canvas>
+  <Story
+    name="Playground"
+    argTypes={{
+      variant: {
+        control: "select",
+        options: ["round", "curved", "block"],
+      },
+      type: {
+        control: "select",
+        options: ["fill", "outline", "transparent", "packed"],
+      },
+      size: {
+        control: "select",
+        options: ["large", "medium", "small", "x-small"],
+      },
+      state: {
+        control: "select",
+        options: [
+          "primary",
+          "success",
+          "danger",
+          "warning",
+          "neutral",
+          "inherit",
+          "custom, #0000FF",
+          "custom, gray",
+          "custom, #fff",
+          "custom, white",
+          "custom, black",
+          "custom, #607B9F",
+        ],
+      },
+      loading: {
+        control: { type: "boolean" },
+        if: { arg: "disabled", eq: false },
+      },
+      disabled: {
+        control: { type: "boolean" },
+        if: { arg: "loading", eq: false },
+      },
+    }}
+    args={{
+      variant: "round",
+      type: "fill",
+      size: "medium",
+      icon: "i-plus",
+      state: "primary",
+      counter: "",
+      loading: false,
+      disabled: false,
+    }}
+  >
+    {(args) => html`<f-div direction="column" padding="x-large">
+      <f-icon-button
+        icon=${args.icon}
+        .variant=${args.variant}
+        .type=${args.type}
+        .size=${args.size}
+        .state=${args.state}
+        counter=${args.counter}
+        .loading=${args.loading}
+        .disabled=${args.disabled}
+      ></f-icon-button>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider></f-divider>
+
+<Story name="Anatomy">
+  {() => html`<div class="align-center">${unsafeSVG(fIconButtonAnatomy)}</div>`}
+</Story>
+
+<br />
+
+## variant
+
+<f-divider></f-divider>
+
+Variants are various representations of an icon button. For example an icon button can be round,
+curved or block.
+
+<Canvas>
+  <Story name="variant">
+    {(args) => html`<f-div gap="x-large" padding="x-large" align="middle-center">
+      <f-icon-button icon="i-plus" variant="round"></f-icon-button>
+      <f-icon-button icon="i-plus" variant="curved"></f-icon-button>
+      <f-icon-button icon="i-plus" variant="block"></f-icon-button>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>round</td>
+      <td>Round border edges</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>curved</td>
+      <td>Curved edges with border radius of 4px</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>block</td>
+      <td>A block button takes up the entire available parent width.</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## type
+
+<f-divider></f-divider>
+
+<Canvas>
+  <Story name="type">
+    {(args) => html`<f-div gap="x-large" padding="x-large" align="middle-center">
+      <f-icon-button icon="i-plus" type="fill"></f-icon-button>
+      <f-icon-button icon="i-plus" type="outline"></f-icon-button>
+      <f-icon-button icon="i-plus" type="transparent"></f-icon-button>
+      <f-icon-button icon="i-plus" type="packed"></f-icon-button>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<p class="note-section margin-btm-24 margin-tp-16">
+  Note: A transparent button can only have block shape.
+</p>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>fill</td>
+      <td>background-color present</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>outline</td>
+      <td>only outer border outline color present along with icon color </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>transparent</td>
+      <td>just icon is visible with padding around it</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>packed</td>
+      <td>just icon is visible with no padding around it i.e completely packed</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## size
+
+<f-divider></f-divider>
+
+The medium size is the default and recommended option.
+
+<Canvas>
+  <Story name="size">
+    {(args) => html`<f-div gap="x-large" padding="x-large" align="middle-center">
+      <f-div padding="none" gap="large" direction="column" align="middle-center">
+        <f-text variant="para" weight="regular" size="medium">large</f-text>
+        <f-icon-button icon="i-plus" size="large"></f-icon-button>
+      </f-div>
+      <f-div padding="none" gap="large" direction="column" align="middle-center">
+        <f-text variant="para" weight="regular" size="medium">medium</f-text>
+        <f-icon-button icon="i-plus" size="medium"></f-icon-button>
+      </f-div>
+      <f-div padding="none" gap="large" direction="column" align="middle-center">
+        <f-text variant="para" weight="regular" size="medium">small</f-text>
+        <f-icon-button icon="i-plus" size="small"></f-icon-button>
+      </f-div>
+      <f-div padding="none" gap="large" direction="column" align="middle-center">
+        <f-text variant="para" weight="regular" size="medium">x-small</f-text>
+        <f-icon-button icon="i-plus" size="x-small"></f-icon-button>
+      </f-div>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>large</td>
+      <td>Icon Button Size is 44px</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>medium</td>
+      <td>Icon Button Size is 36px</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>small</td>
+      <td>Icon Button Size is 28px</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>x-small</td>
+      <td>Icon Button Size is 20px</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider></f-divider>
+
+The states on buttons are to indicate various degrees of emphasis of the action.
+
+<Canvas>
+  <Story name="state">
+    {(args) => html`<f-div gap="large" padding="x-large" direction="column">
+      <f-text variant="para" weight="regular" size="medium">state="primary"</f-text>
+      <f-div padding="none" gap="x-large">
+        <f-icon-button icon="i-plus" type="fill" state="primary"></f-icon-button>
+        <f-icon-button icon="i-plus" type="outline" state="primary"></f-icon-button>
+        <f-icon-button icon="i-plus" type="transparent" state="primary"></f-icon-button>
+      </f-div>
+      <f-text variant="para" weight="regular" size="medium">state="neutral"</f-text>
+      <f-div padding="none" gap="x-large">
+        <f-icon-button icon="i-plus" type="fill" state="neutral"></f-icon-button>
+        <f-icon-button icon="i-plus" type="outline" state="neutral"></f-icon-button>
+        <f-icon-button icon="i-plus" type="transparent" state="neutral"></f-icon-button>
+      </f-div>
+      <f-text variant="para" weight="regular" size="medium">state="success"</f-text>
+      <f-div padding="none" gap="x-large">
+        <f-icon-button icon="i-plus" type="fill" state="success"></f-icon-button>
+        <f-icon-button icon="i-plus" type="outline" state="success"></f-icon-button>
+        <f-icon-button icon="i-plus" type="transparent" state="success"></f-icon-button>
+      </f-div>
+      <f-text variant="para" weight="regular" size="medium">state="warning"</f-text>
+      <f-div padding="none" gap="x-large">
+        <f-icon-button icon="i-plus" type="fill" state="warning"></f-icon-button>
+        <f-icon-button icon="i-plus" type="outline" state="warning"></f-icon-button>
+        <f-icon-button icon="i-plus" type="transparent" state="warning"></f-icon-button>
+      </f-div>
+      <f-text variant="para" weight="regular" size="medium">state="danger"</f-text>
+      <f-div padding="none" gap="x-large">
+        <f-icon-button icon="i-plus" type="fill" state="danger"></f-icon-button>
+        <f-icon-button icon="i-plus" type="outline" state="danger"></f-icon-button>
+        <f-icon-button icon="i-plus" type="transparent" state="danger"></f-icon-button>
+      </f-div>
+      <f-text variant="para" weight="regular" size="medium">state="inherit"</f-text>
+      <f-div padding="none" gap="x-large" state="warning">
+        <f-icon-button icon="i-plus" type="fill" state="inherit"></f-icon-button>
+        <f-icon-button icon="i-plus" type="outline" state="inherit"></f-icon-button>
+        <f-icon-button icon="i-plus" type="transparent" state="inherit"></f-icon-button>
+      </f-div>
+      <f-text variant="para" weight="regular" size="medium">state="custom,pink"</f-text>
+      <f-div padding="none" gap="x-large">
+        <f-icon-button icon="i-plus" type="fill" state="custom, pink"></f-icon-button>
+        <f-icon-button icon="i-plus" type="outline" state="custom, pink"></f-icon-button>
+        <f-icon-button icon="i-plus" type="transparent" state="custom, pink"></f-icon-button>
+      </f-div>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>primary</td>
+      <td>Reserved for essential actions</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>neutral</td>
+      <td>Requires less prominence, Multiple actions of the same importance</td>
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+    <tr>
+      <td>success</td>
+      <td>Actions Indicating success, Positive results</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>warning</td>
+      <td>Discouraged action, Not always destructive</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>danger</td>
+      <td>Destructive actions, Negative consequences</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>inherit</td>
+      <td>inherit the color according to parent f-div</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>custom</td>
+      <td>can enter custom color in color-name or hex-codes</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## icon
+
+<f-divider></f-divider>
+
+Icon property defines what icon will be displayed on the icon. It can take the icon name from a
+library , any inline SVG or any URL for the image.
+
+<Canvas>
+  <Story name="icon">
+    {(args) => html`<f-div gap="large" padding="x-large" direction="column" align="middle-center">
+      <f-icon-button icon="i-plus"></f-icon-button>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<br />
+
+## counter
+
+<f-divider></f-divider>
+
+Counter property enables a counter on the icon button.
+
+<Canvas>
+  <Story name="counter">
+    {(args) => html`<f-div gap="large" padding="x-large" direction="column" align="middle-center">
+      <f-icon-button icon="i-plus" counter="88"></f-icon-button>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<h4 class="margin-btm-8 margin-tp-36">Flags</h4>
+<hr class="margin-btm-24" />
+
+<Canvas>
+  <Story name="Flags">
+    {(args) => html`<f-div gap="large" padding="x-large" direction="column">
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">Loading</f-text>
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large">
+        <f-icon-button icon="i-plus"></f-icon-button>
+        <f-icon-button icon="i-plus" loading=${true}></f-icon-button>
+      </f-div>
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium">Disabled</f-text>
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large">
+        <f-icon-button icon="i-plus"></f-icon-button>
+        <f-icon-button icon="i-plus" disabled=${true}></f-icon-button>
+      </f-div>
+      <f-div height="hug-content" padding="none">
+        <f-text variant="para" size="large" weight="medium"
+          >Clickable (Icon Button is always clickable)</f-text
+        >
+      </f-div>
+      <f-div padding="none" direction="row" gap="x-large">
+        <f-icon-button icon="i-plus"></f-icon-button>
+      </f-div>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+      <td>Default</td>
+    </tr>
+    <tr>
+      <td>loading</td>
+      <td>Loader replaces the content of the button. Width of the button remains the same.</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>disabled</td>
+      <td>Opacity of button is set to 50% in disabled state.</td>
+      <td>false </td>
+    </tr>
+    <tr>
+      <td>clickable</td>
+      <td>
+        f-icon-button is always clickable. On hover: lightened/darkened by 15%. On press:
+        lightened/darkened by 30%
+      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## Native Framework Directives
+
+<f-divider></f-divider>
+
+<br />
+
+### Tooltip
+
+<f-divider></f-divider>
+
+Always use the tooltip directive on the button component.
+
+<Canvas>
+  <Story name="tooltip">
+    {(args) => html`<f-div gap="large" padding="x-large" align="middle-center">
+      <f-icon-button icon="i-plus" tooltip="This is a tooltip"></f-icon-button>
+    </f-div>`}
+  </Story>
+</Canvas>
+
+<ArgsTable of={"f-icon-button"} />

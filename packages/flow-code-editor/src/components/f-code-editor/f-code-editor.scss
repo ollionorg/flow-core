@@ -1,0 +1,53 @@
+@import "@cldcvr/flow-core/src/mixins/scss/mixins";
+
+f-code-editor {
+	@include base();
+	display: block;
+	min-height: 100px;
+	overflow: visible;
+	text-align: initial;
+
+	[class^="codicon-"],
+	[class*="codicon-"] {
+		font-family: codicon, Arial, Helvetica, sans-serif !important;
+	}
+
+	.f-code-editor-header {
+		border-radius: 4px 4px 0px 0px !important;
+	}
+	.monaco-editor {
+		&[state="default"] {
+			--vscode-editor-background: var(--color-surface-default);
+			--vscode-editorStickyScroll-background: var(--color-surface-default);
+			--vscode-breadcrumb-background: var(--color-surface-default);
+			--vscode-editorGutter-background: var(--color-surface-default);
+			--vscode-editorMarkerNavigation-background: var(--color-surface-default);
+		}
+		&[state="secondary"] {
+			--vscode-editor-background: var(--color-surface-secondary);
+			--vscode-editorStickyScroll-background: var(--color-surface-secondary);
+			--vscode-breadcrumb-background: var(--color-surface-secondary);
+			--vscode-editorGutter-background: var(--color-surface-secondary);
+			--vscode-editorMarkerNavigation-background: var(--color-surface-secondary);
+		}
+
+		&[state="subtle"] {
+			--vscode-editor-background: var(--color-surface-subtle);
+			--vscode-editorStickyScroll-background: var(--color-surface-subtle);
+			--vscode-breadcrumb-background: var(--color-surface-subtle);
+			--vscode-editorGutter-background: var(--color-surface-subtle);
+			--vscode-editorMarkerNavigation-background: var(--color-surface-subtle);
+		}
+
+		--vscode-editor-foreground: var(--color-text-default);
+		--vscode-editorSuggestWidget-foreground: var(--color-text-default);
+	}
+
+	.monaco-editor .margin-view-overlays .line-numbers {
+		font-size: 12px;
+	}
+
+	.mtk1 {
+		color: var(--color-text-default);
+	}
+}

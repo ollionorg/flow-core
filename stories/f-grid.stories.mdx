@@ -1,0 +1,422 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import fGridAnatomy from "./svg/i-fgrid-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useState } from "@storybook/client-api";
+
+<Meta
+	title="Components/f-grid"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
+/>
+
+# f-grid
+
+<br />
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+f-grid is a wrapper component to arrange data as a grid of cells. The f-divs wrapped inside f-grid are called cells.
+
+<br />
+
+### [Playground](/story/components-f-grid--playground)
+
+<Canvas>
+	<Story
+		name="Playground"
+		argTypes={{
+			["min-cell-width"]: { control: "number" },
+			["max-cell-width"]: { control: "number" },
+			["cell-height"]: { control: "number" },
+			gap: {
+				control: "select",
+				options: ["x-large", "large", "medium", "small", "x-small"]
+			}
+		}}
+		args={{
+			["min-cell-width"]: undefined,
+			["max-cell-width"]: undefined,
+			["cell-height"]: undefined,
+			gap: "small"
+		}}
+	>
+		{args => {
+			const [selectedCard, setSelectedCard] = useState(1);
+			const data = [
+				{ id: 1, title: "AWS IoT Core", subTitle: "stream", icon: "aws-storage-S3" },
+				{ id: 2, title: "PostgresSQL", subTitle: "RDBMS", icon: "p-postgresql" },
+				{ id: 3, title: "Oracle", subTitle: "RDBMS", icon: "p-oracle" },
+				{ id: 4, title: "SQLServer", subTitle: "RDBMS", icon: "p-sql-server" },
+				{ id: 5, title: "MySQL", subTitle: "RDBMS", icon: "p-mysql" },
+				{ id: 6, title: "S3 Bucket", subTitle: "File", icon: "aws-storage-S3" },
+				{ id: 7, title: "GCS", subTitle: "File", icon: "gcp-storage-gcs" },
+				{ id: 8, title: "CSV", subTitle: "File", icon: "i-file-csv" },
+				{ id: 9, title: "Rest", subTitle: "API", icon: "aws-storage-S3" },
+				{ id: 10, title: "SFTP", subTitle: "SFTP", icon: "i-file-SFTP" }
+			];
+			const selectCard = id => {
+				setSelectedCard(id);
+			};
+			return html` <f-div padding="small">
+				<f-grid
+					min-cell-width=${args["min-cell-width"]}
+					max-cell-width=${args["max-cell-width"]}
+					cell-height=${args["cell-height"]}
+					.gap=${args.gap}
+				>
+					${data.map(
+						item => html`
+							<f-div
+								.id=${item.id}
+								state="secondary"
+								variant="curved"
+								padding="medium"
+								gap="small"
+								.selected=${item.id === selectedCard ? "background" : "none"}
+								.clickable=${item.id === selectedCard ? false : true}
+								@click=${() => selectCard(item.id)}
+							>
+								<f-icon .source=${item.icon} size="large"></f-icon>
+								<f-div direction="column">
+									<f-text variant="para" size="small" weight="medium">${item.title}</f-text>
+									<f-text variant="para" size="x-small" weight="regular" state="secondary"
+										>${item.subTitle}</f-text
+									>
+								</f-div>
+							</f-div>
+						`
+					)}
+				</f-grid>
+			</f-div>`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider></f-divider>
+
+<Story name="Anatomy">
+	{() => html`<div class="align-center">${unsafeSVG(fGridAnatomy)}</div>`}
+</Story>
+
+<br />
+
+### min-cell-width
+
+<f-divider></f-divider>
+
+Defines the minimum value of width of each cell. A cell can not be smaller than this in any viewport.
+
+<p class="note-section">Note: The min-cell-width can not take value in fraction or percent.</p>
+
+<br />
+
+<Canvas>
+	<Story name="min-cell-width">
+		{args => {
+			const [selectedCard, setSelectedCard] = useState(1);
+			const data = [
+				{ id: 1, title: "AWS IoT Core", subTitle: "stream", icon: "aws-storage-S3" },
+				{ id: 2, title: "PostgresSQL", subTitle: "RDBMS", icon: "p-postgresql" },
+				{ id: 3, title: "Oracle", subTitle: "RDBMS", icon: "p-oracle" },
+				{ id: 4, title: "SQLServer", subTitle: "RDBMS", icon: "p-sql-server" },
+				{ id: 5, title: "MySQL", subTitle: "RDBMS", icon: "p-mysql" },
+				{ id: 6, title: "S3 Bucket", subTitle: "File", icon: "aws-storage-S3" },
+				{ id: 7, title: "GCS", subTitle: "File", icon: "gcp-storage-gcs" },
+				{ id: 8, title: "CSV", subTitle: "File", icon: "i-file-csv" },
+				{ id: 9, title: "Rest", subTitle: "API", icon: "aws-storage-S3" },
+				{ id: 10, title: "SFTP", subTitle: "SFTP", icon: "i-file-SFTP" }
+			];
+			const selectCard = id => {
+				setSelectedCard(id);
+			};
+			return html` <f-div width="100%" direction="column" padding="small">
+				<f-div padding="small">
+					<f-text>min-cell-width="150"</f-text>
+				</f-div>
+				<f-grid min-cell-width=${150}>
+					${data.map(
+						item => html`
+							<f-div
+								.id=${item.id}
+								state="secondary"
+								variant="curved"
+								padding="medium"
+								gap="small"
+								.selected=${item.id === selectedCard ? "background" : "none"}
+								.clickable=${item.id === selectedCard ? false : true}
+								@click=${() => selectCard(item.id)}
+							>
+								<f-icon .source=${item.icon} size="large"></f-icon>
+								<f-div direction="column">
+									<f-text variant="para" size="small" weight="medium">${item.title}</f-text>
+									<f-text variant="para" size="x-small" weight="regular" state="secondary"
+										>${item.subTitle}</f-text
+									>
+								</f-div>
+							</f-div>
+						`
+					)}
+				</f-grid>
+			</f-div>`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+### max-cell-width
+
+<f-divider></f-divider>
+
+Defines the maximum width of each cell.
+
+<p class="note-section">Note: max-cell-width accept number, percentage, or fraction as values.</p>
+
+<br />
+
+<Canvas>
+	<Story name="max-cell-width">
+		{args => {
+			const [selectedCard, setSelectedCard] = useState(1);
+			const data = [
+				{ id: 1, title: "AWS IoT Core", subTitle: "stream", icon: "aws-storage-S3" },
+				{ id: 2, title: "PostgresSQL", subTitle: "RDBMS", icon: "p-postgresql" },
+				{ id: 3, title: "Oracle", subTitle: "RDBMS", icon: "p-oracle" },
+				{ id: 4, title: "SQLServer", subTitle: "RDBMS", icon: "p-sql-server" },
+				{ id: 5, title: "MySQL", subTitle: "RDBMS", icon: "p-mysql" },
+				{ id: 6, title: "S3 Bucket", subTitle: "File", icon: "aws-storage-S3" },
+				{ id: 7, title: "GCS", subTitle: "File", icon: "gcp-storage-gcs" },
+				{ id: 8, title: "CSV", subTitle: "File", icon: "i-file-csv" },
+				{ id: 9, title: "Rest", subTitle: "API", icon: "aws-storage-S3" },
+				{ id: 10, title: "SFTP", subTitle: "SFTP", icon: "i-file-SFTP" }
+			];
+			const selectCard = id => {
+				setSelectedCard(id);
+			};
+			return html` <f-div width="100%" direction="column" padding="small">
+				<f-div padding="small">
+					<f-text>max-cell-width="350"</f-text>
+				</f-div>
+				<f-grid max-cell-width=${350}>
+					${data.map(
+						item => html`
+							<f-div
+								.id=${item.id}
+								state="secondary"
+								variant="curved"
+								padding="medium"
+								gap="small"
+								.selected=${item.id === selectedCard ? "background" : "none"}
+								.clickable=${item.id === selectedCard ? false : true}
+								@click=${() => selectCard(item.id)}
+							>
+								<f-icon .source=${item.icon} size="large"></f-icon>
+								<f-div direction="column">
+									<f-text variant="para" size="small" weight="medium">${item.title}</f-text>
+									<f-text variant="para" size="x-small" weight="regular" state="secondary"
+										>${item.subTitle}</f-text
+									>
+								</f-div>
+							</f-div>
+						`
+					)}
+				</f-grid>
+			</f-div>`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+### cell-height
+
+<f-divider></f-divider>
+
+Defines the height of each cell
+
+<p class="note-section">Note: max-cell-width accept number, percentage, or fraction as values.</p>
+
+<br />
+
+<Canvas>
+	<Story name="cell-height">
+		{args => {
+			const [selectedCard, setSelectedCard] = useState(1);
+			const data = [
+				{ id: 1, title: "AWS IoT Core", subTitle: "stream", icon: "aws-storage-S3" },
+				{ id: 2, title: "PostgresSQL", subTitle: "RDBMS", icon: "p-postgresql" },
+				{ id: 3, title: "Oracle", subTitle: "RDBMS", icon: "p-oracle" },
+				{ id: 4, title: "SQLServer", subTitle: "RDBMS", icon: "p-sql-server" },
+				{ id: 5, title: "MySQL", subTitle: "RDBMS", icon: "p-mysql" },
+				{ id: 6, title: "S3 Bucket", subTitle: "File", icon: "aws-storage-S3" },
+				{ id: 7, title: "GCS", subTitle: "File", icon: "gcp-storage-gcs" },
+				{ id: 8, title: "CSV", subTitle: "File", icon: "i-file-csv" },
+				{ id: 9, title: "Rest", subTitle: "API", icon: "aws-storage-S3" },
+				{ id: 10, title: "SFTP", subTitle: "SFTP", icon: "i-file-SFTP" }
+			];
+			const selectCard = id => {
+				setSelectedCard(id);
+			};
+			return html` <f-div width="100%" direction="column" padding="small">
+				<f-div padding="small">
+					<f-text>cell-height="180"</f-text>
+				</f-div>
+				<f-grid cell-height="180">
+					${data.map(
+						item => html`
+							<f-div
+								.id=${item.id}
+								state="secondary"
+								variant="curved"
+								padding="medium"
+								gap="small"
+								.selected=${item.id === selectedCard ? "background" : "none"}
+								.clickable=${item.id === selectedCard ? false : true}
+								@click=${() => selectCard(item.id)}
+							>
+								<f-icon .source=${item.icon} size="large"></f-icon>
+								<f-div direction="column">
+									<f-text variant="para" size="small" weight="medium">${item.title}</f-text>
+									<f-text variant="para" size="x-small" weight="regular" state="secondary"
+										>${item.subTitle}</f-text
+									>
+								</f-div>
+							</f-div>
+						`
+					)}
+				</f-grid>
+			</f-div>`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+### gap
+
+<f-divider></f-divider>
+
+Defines the gap between the cells. By default it is set to small.
+
+<p class="note-section">Note: gap property defines horizontal as well as vertical gap.</p>
+
+<br />
+
+<Canvas>
+	<Story
+		name="gap"
+		parameters={{
+			docs: {
+				inlineStories: false,
+				iframeHeight: 300
+			}
+		}}
+	>
+		{args => {
+			const [selectedCard, setSelectedCard] = useState(1);
+			const data = [
+				{ id: 1, title: "AWS IoT Core", subTitle: "stream", icon: "aws-storage-S3" },
+				{ id: 2, title: "PostgresSQL", subTitle: "RDBMS", icon: "p-postgresql" },
+				{ id: 3, title: "Oracle", subTitle: "RDBMS", icon: "p-oracle" },
+				{ id: 4, title: "SQLServer", subTitle: "RDBMS", icon: "p-sql-server" },
+				{ id: 5, title: "MySQL", subTitle: "RDBMS", icon: "p-mysql" },
+				{ id: 6, title: "S3 Bucket", subTitle: "File", icon: "aws-storage-S3" },
+				{ id: 7, title: "GCS", subTitle: "File", icon: "gcp-storage-gcs" },
+				{ id: 8, title: "CSV", subTitle: "File", icon: "i-file-csv" },
+				{ id: 9, title: "Rest", subTitle: "API", icon: "aws-storage-S3" },
+				{ id: 10, title: "SFTP", subTitle: "SFTP", icon: "i-file-SFTP" }
+			];
+			const gaps = ["x-large", "large", "medium", "small", "x-small"];
+			const [currentGap, setCurrentGap] = useState("large");
+			const selectCard = id => {
+				setSelectedCard(id);
+			};
+			return html` <f-div width="100%" direction="column" padding="small">
+				<f-div padding="small" gap="small">
+					${gaps.map(
+						item =>
+							html` <f-button
+								.label=${item}
+								@click=${() => setCurrentGap(item)}
+								.disabled=${currentGap === item}
+							></f-button>`
+					)}
+				</f-div>
+				<f-grid .gap=${currentGap}>
+					${data.map(
+						item => html`
+							<f-div
+								.id=${item.id}
+								state="secondary"
+								variant="curved"
+								padding="medium"
+								gap="small"
+								.selected=${item.id === selectedCard ? "background" : "none"}
+								.clickable=${item.id === selectedCard ? false : true}
+								@click=${() => selectCard(item.id)}
+							>
+								<f-icon .source=${item.icon} size="large"></f-icon>
+								<f-div direction="column">
+									<f-text variant="para" size="small" weight="medium">${item.title}</f-text>
+									<f-text variant="para" size="x-small" weight="regular" state="secondary"
+										>${item.subTitle}</f-text
+									>
+								</f-div>
+							</f-div>
+						`
+					)}
+				</f-grid>
+			</f-div>`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>x-large</td>
+			<td>Items take a space gap of 32px in between</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>large</td>
+			<td>Items take a space gap of 24px in between</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>medium</td>
+			<td>Items take a space gap of 16px in between</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>small</td>
+			<td>Items take a space gap of 12px in between</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>x-small</td>
+			<td>Items take a space gap of 8px in between</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+<ArgsTable of={"f-grid"} />

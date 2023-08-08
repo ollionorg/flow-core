@@ -1,0 +1,210 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useState } from "@storybook/client-api";
+
+<Meta
+	title="Components/f-breadcrumb"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
+/>
+
+# f-breadcrumb
+
+<br />
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+Breadcrumbs are secondary navigations which shows hierarchy for a user’s location within an app/product.
+
+<br />
+
+### [Playground](/story/components-f-breadcrumb--playground)
+
+<Canvas>
+	<Story
+		name="Playground"
+		argTypes={{
+			size: {
+				control: "radio",
+				options: ["medium", "small"]
+			},
+			crumbs: {
+				control: "object"
+			},
+			disabled: {
+				control: "boolean"
+			}
+		}}
+		args={{
+			size: "medium",
+			crumbs: [
+				{ tabIndex: 0, title: "Label 1 New Label Demo test" },
+				{ tabIndex: 1, title: "Label 2" },
+				{ tabIndex: 2, title: "Label 3" },
+				{ tabIndex: 3, title: "Label 4" },
+				{ tabIndex: 4, title: "Label 5" }
+			],
+			disabled: false
+		}}
+	>
+		{args => {
+			const handleClick = e => {
+				console.log(e.detail.value);
+			};
+			return html` <f-div padding="small">
+				<f-breadcrumb
+					.crumbs=${args.crumbs}
+					.size=${args.size}
+					?disabled=${args.disabled}
+					@click=${handleClick}
+				></f-breadcrumb>
+			</f-div>`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+### size
+
+<f-divider></f-divider>
+
+The medium size is the default.
+
+<br />
+
+<Canvas>
+	<Story name="size">
+		{args => {
+			const data = ["medium", "small"];
+			const crumbs = [
+				{ tabIndex: 0, title: "Label 1 New Label Demo test" },
+				{ tabIndex: 1, title: "Label 2" },
+				{ tabIndex: 2, title: "Label 3" },
+				{ tabIndex: 3, title: "Label 4" }
+			];
+			return html`<f-div padding="small" gap="x-large">
+				${data.map(
+					item =>
+						html` <f-div direction="column" gap="large"
+							><f-text>size=${item}</f-text
+							><f-breadcrumb .crumbs=${crumbs} .size=${item}></f-breadcrumb
+						></f-div>`
+				)}
+			</f-div>`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>medium</td>
+			<td>f-text size would be small</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>small</td>
+			<td>f-text size would be x-small</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+### crumbs
+
+<f-divider></f-divider>
+
+Crumbs property represents the array of crumbs in a breadcrumb.
+
+<br />
+
+<Canvas>
+	<Story name="crumbs">
+		{args => {
+			const data = [
+				[
+					{ tabIndex: 0, title: "Label 1 New Label Demo test" },
+					{ tabIndex: 1, title: "Label 2" },
+					{ tabIndex: 2, title: "Label 3" },
+					{ tabIndex: 3, title: "Label 4" }
+				],
+				[
+					{ tabIndex: 0, title: "Label 1" },
+					{ tabIndex: 1, title: "Label 2" },
+					{ tabIndex: 2, title: "Label 3" },
+					{ tabIndex: 3, title: "Label 4" },
+					{ tabIndex: 4, title: "Label 5" }
+				]
+			];
+			return html`<f-div padding="small" gap="x-large">
+				${data.map(
+					item =>
+						html` <f-div direction="column" gap="large"
+							><f-text>${item.length > 4 ? "Crumbs length > 4" : "Crumbs length < 4"}</f-text
+							><f-breadcrumb .crumbs=${item}></f-breadcrumb
+						></f-div>`
+				)}
+			</f-div>`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## Flags
+
+<f-divider></f-divider>
+
+<br />
+
+<Canvas>
+	<Story name="Flags">
+		{args => {
+			const crumbs = [
+				{ tabIndex: 0, title: "Label 1 New Label Demo test" },
+				{ tabIndex: 1, title: "Label 2" },
+				{ tabIndex: 2, title: "Label 3" },
+				{ tabIndex: 3, title: "Label 4" }
+			];
+			return html` <f-div padding="small" gap="x-large">
+				<f-div direction="column" gap="large"
+					><f-text>disabled</f-text><f-breadcrumb .crumbs=${crumbs} ?disabled=${true}></f-breadcrumb
+				></f-div>
+			</f-div>`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Name</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>disabled</td>
+			<td>Opacity is set to 50% in disabled state in disabled mode.</td>
+			<td>
+				<code>false</code>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<ArgsTable of={"f-breadcrumb"} />

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-force-graph/f-force-graph\""
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shims.d.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "content",
+          "type": {
+            "text": "Record<string, string>"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "content",
+            "module": "src/shims.d.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "content",
+            "module": "src/shims.d.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-force-graph/f-force-graph.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FForceGraph",
+          "members": [
+            {
+              "kind": "field",
+              "name": "svg",
+              "type": {
+                "text": "SVGSVGElement"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-force-graph",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FForceGraph",
+          "declaration": {
+            "name": "FForceGraph",
+            "module": "src/components/f-force-graph/f-force-graph.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-force-graph",
+          "declaration": {
+            "name": "FForceGraph",
+            "module": "src/components/f-force-graph/f-force-graph.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

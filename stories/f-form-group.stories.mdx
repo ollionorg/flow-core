@@ -1,0 +1,463 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import FDivAnatomy from "./svg/i-fdiv-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+
+<Meta
+	title="Components/f-form-group"
+	parameters={{
+		controls: { hideNoControlsWarning: true }
+	}}
+/>
+
+# f-form-group
+
+<br />
+<br />
+
+## Overview
+
+<hr />
+
+Use f-form-group to create logical sections within the form.
+
+f-form-group is used to group multiple instances of an input element.
+
+<br />
+
+### [Playground](/story/components-f-form-group--playground)
+
+<Canvas>
+	<Story
+		name="Playground"
+		argTypes={{
+			variant: {
+				control: "radio",
+				options: ["normal", "compact"]
+			},
+			direction: {
+				control: "radio",
+				options: ["vertical", "horizontal"]
+			},
+			gap: {
+				control: "select",
+				options: ["large", "medium", "small", "x-small"]
+			},
+			collapse: {
+				control: "select",
+				options: ["none", "accordion", "text"]
+			},
+			["is-collapsed"]: {
+				control: "boolean"
+			},
+			["can-duplicate"]: {
+				control: { type: "boolean" }
+			}
+		}}
+		args={{
+			variant: "block",
+			direction: "vertical",
+			gap: "small",
+			collapse: "none",
+			["is-collapsed"]: false,
+			["can-duplicate"]: false
+		}}
+	>
+		{args => html`
+			<f-form>
+				<f-form-group
+					data-qa-id="testQaId"
+					variant=${args.variant}
+					.label=${{ title: "Test for Variant 1", description: "This is a description" }}
+					direction="horizontal"
+					.gap=${args.gap}
+					.collapse=${args.collapse}
+					?is-collapsed=${args["is-collapsed"]}
+					?can-duplicate=${args["can-duplicate"]}
+				>
+					<f-input placeholder="This is an input field"></f-input>
+					<f-divider></f-divider>
+					<f-button label="submit" variant="curved"></f-button>
+				</f-form-group>
+				<f-divider></f-divider>
+				<f-form-group
+					variant=${args.variant}
+					.label=${{ title: "Test for Variant 2", description: "This is a description" }}
+					direction="horizontal"
+					.gap=${args.gap}
+					?can-duplicate=${args["can-duplicate"]}
+				>
+					<f-select
+						.value=${"+91"}
+						.options=${["+91", "+92", "+93"]}
+						width="150"
+						.clear=${false}
+					></f-select>
+					<f-divider></f-divider>
+					<f-input placeholder="This is an input field"></f-input>
+				</f-form-group>
+				<f-divider></f-divider>
+				<f-form-group
+					.label=${{ title: "Test for direction (f-input)", description: "This is a description" }}
+					direction=${args.direction}
+					.gap=${args.gap}
+					.collapse=${args.collapse}
+					?is-collapsed=${args["is-collapsed"]}
+				>
+					<f-input placeholder="This is an input field"></f-input>
+					<f-divider></f-divider>
+					<f-input placeholder="This is an input field"></f-input>
+				</f-form-group>
+				<f-divider></f-divider>
+				<f-form-group
+					.label=${{
+						title: "Test for direction (f-checkbox)",
+						description: "This is a description"
+					}}
+					direction=${args.direction}
+					.gap=${args.gap}
+					.collapse=${args.collapse}
+					?is-collapsed=${args["is-collapsed"]}
+				>
+					<f-checkbox>
+						<f-div slot="label">Apple</f-div>
+					</f-checkbox>
+					<f-checkbox>
+						<f-div slot="label">Banana</f-div>
+					</f-checkbox>
+					<f-checkbox>
+						<f-div slot="label">Radio</f-div>
+					</f-checkbox>
+				</f-form-group>
+				<f-divider></f-divider>
+				<f-form-group
+					.label=${{
+						title: "Test for direction (f-radio)",
+						description: "This is a description"
+					}}
+					direction=${args.direction}
+					.gap=${args.gap}
+					.collapse=${args.collapse}
+					?is-collapsed=${args["is-collapsed"]}
+				>
+					<f-radio>
+						<f-div slot="label">Apple</f-div>
+					</f-radio>
+					<f-radio>
+						<f-div slot="label">Banana</f-div>
+					</f-radio>
+					<f-radio>
+						<f-div slot="label">Radio</f-div>
+					</f-radio>
+				</f-form-group>
+			</f-form>
+		`}
+	</Story>
+</Canvas>
+
+<br />
+
+## variant
+
+<hr />
+
+Variant decides whether the input elements in a group have some gap or not when they are aligned horizontally.
+
+<p class="note-section">
+	Note: If variant is normal then the gap between elements is controlled by the parent group.
+</p>
+
+<Canvas>
+	<Story name="variant">
+		{args => html` <f-form>
+			<f-form-group
+				variant="normal"
+				.label=${{ title: "Test for Variant-Normal", description: "This is a description" }}
+				direction="horizontal"
+				gap="small"
+			>
+				<f-input placeholder="This is an input field"></f-input>
+				<f-button label="submit" variant="curved"></f-button>
+			</f-form-group>
+			<f-divider></f-divider>
+			<f-form-group
+				variant="compact"
+				.label=${{ title: "Test for Variant-Normal", description: "This is a description" }}
+				direction="horizontal"
+				gap="small"
+			>
+				<f-input placeholder="This is an input field"></f-input>
+				<f-button label="submit" variant="curved"></f-button> </f-form-group
+		></f-form>`}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>normal</td>
+			<td></td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>compact</td>
+			<td>gap between elements is 0</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## direction
+
+<hr />
+
+Decides the direction of the input elements within the group.
+
+<Canvas>
+	<Story name="direction">
+		{args => html`<f-form>
+      <f-form-group
+        variant="normal"
+        .label=${{ title: "Horizontally aligned", description: "This is a description" }}
+        direction="horizontal"
+        gap="large"
+      >
+        <f-checkbox>
+            <f-div slot="label">Apple</f-div>
+          </f-checkbox>
+          <f-checkbox>
+            <f-div slot="label">Banana</f-div>
+          </f-checkbox>
+          <f-checkbox>
+            <f-div slot="label">Radio</f-div>
+          </f-checkbox>
+      </f-form-group>
+      <f-divider></f-divider>
+      <f-form-group
+        variant="compact"
+        .label=${{ title: "Verically aligned", description: "This is a description" }}
+        direction="vertical"
+        gap="large"
+      >
+         <f-checkbox>
+            <f-div slot="label">Apple</f-div>
+          </f-checkbox>
+          <f-checkbox>
+            <f-div slot="label">Banana</f-div>
+          </f-checkbox>
+          <f-checkbox>
+            <f-div slot="label">Radio</f-div>
+          </f-checkbox>
+    </f-form>`}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>vertical</td>
+			<td></td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>horizontal</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## gap
+
+<hr />
+
+decides the gap between elements of a group
+
+<Canvas>
+	<Story name="gap">
+		{args => {
+			const gaps = ["x-small", "small", "medium", "large"];
+			return html`
+				<f-form>
+					${gaps.map(
+						gap => html`
+							<f-form-group variant="normal" .label=${{ title: `gap=${gap}` }} .gap=${gap}>
+								<f-input placeholder="This is an input field"></f-input>
+								<f-input placeholder="This is an input field"></f-input>
+							</f-form-group>
+							<f-divider></f-divider>
+						`
+					)}
+				</f-form>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>large</td>
+			<td>Items take a space gap of 16px in between</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>medium</td>
+			<td>Items take a space gap of 12px in between</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>small</td>
+			<td>Items take a space gap of 8px in between</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>x-small</td>
+			<td>Items take a space gap of 4px in between</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## collapse
+
+<hr />
+
+Defines whether the group will be collapsed as an accordion or as text.
+
+<Canvas>
+	<Story name="collapse">
+		{args => {
+			const collapses = ["none", "accordion", "text"];
+			return html`
+				<f-form>
+					${collapses.map(
+						item => html`
+							<f-form-group
+								variant="normal"
+								.label=${{ title: `collapse=${item}` }}
+								.collapse=${item}
+							>
+								<f-input placeholder="This is an input field"></f-input>
+								<f-input placeholder="This is an input field"></f-input>
+							</f-form-group>
+							<f-divider></f-divider>
+						`
+					)}
+				</f-form>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Value</td>
+			<td>Description</td>
+			<td>
+				<code>default</code>
+			</td>
+		</tr>
+		<tr>
+			<td>none</td>
+			<td>padding of 24px</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>accordion</td>
+			<td>padding of 16px</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>text</td>
+			<td>padding of 12px</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## Flags
+
+<br />
+
+<Canvas>
+	<Story name="Flags">
+		{args => html`<f-form ?separator=${true}>
+			<f-form-group
+				variant="normal"
+				.label=${{ title: "Group Title (can-duplicate)", description: "This is a description" }}
+				?can-duplicate=${true}
+			>
+				<f-input placeholder="This is an input field">
+					<f-div slot="label">Input title</f-div>
+				</f-input>
+				<f-input placeholder="This is an input field">
+					<f-div slot="label">Input title</f-div>
+				</f-input>
+			</f-form-group>
+			<f-form-group
+				variant="normal"
+				.label=${{ title: "Group Title (is-collapsed)", description: "This is a description" }}
+				?is-collapsed=${false}
+				collapse="accordion"
+			>
+				<f-input placeholder="This is an input field">
+					<f-div slot="label">is-collpased (false)</f-div>
+				</f-input>
+				<f-input placeholder="This is an input field">
+					<f-div slot="label">Input title</f-div>
+				</f-input>
+			</f-form-group>
+			<f-form> </f-form
+		></f-form> `}
+	</Story>
+</Canvas>
+
+<table class="custom-table">
+	<tbody>
+		<tr>
+			<td>Name</td>
+			<td>Description</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>can-duplicate</td>
+			<td>Present if user wants to duplicate the group. Clicking on this button emits an event</td>
+			<td>
+				<code>false</code>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<ArgsTable of={"f-form-group"} />

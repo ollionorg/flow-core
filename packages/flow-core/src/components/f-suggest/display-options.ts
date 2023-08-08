@@ -1,7 +1,6 @@
 import { FSuggest, FSuggestSuggestionsCategory, FSuggestTemplate } from "./f-suggest";
 import { html } from "lit";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
-import getComputedHTML from "../../utils/get-computed-html";
 
 export function displayOptions(this: FSuggest, suggestions: string[]) {
 	return html`<f-div height="hug-content" direction="column"
@@ -35,7 +34,7 @@ export function displayCustomTemplate(this: FSuggest, suggestions: FSuggestTempl
 				clickable
 				.selected=${index === this.currentIndex ? "background" : "none"}
 			>
-				${unsafeHTML(getComputedHTML(sg.template(this.value)))}
+				${sg.template(this.value)}
 			</f-div>`;
 		})}</f-div
 	>`;

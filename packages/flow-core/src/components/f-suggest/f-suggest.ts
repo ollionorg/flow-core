@@ -6,12 +6,11 @@ import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { FPopover } from "../f-popover/f-popover";
 import { FInput } from "../f-input/f-input";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { classMap } from "lit-html/directives/class-map.js";
 import _ from "lodash";
 import { flowElement } from "./../../utils";
-import getComputedHTML from "../../utils/get-computed-html";
+import { displayCustomTemplate, displayOptions, displayCategories } from "./display-options";
 
 export type FSuggestState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -216,13 +215,13 @@ export class FSuggest extends FRoot {
 		return suggestionsCount > 0;
 	}
 
-	get isSuggestionArray() {
+	get isStringArraySuggestions() {
 		return Array.isArray(this.suggestions);
 	}
 
-	get isSuggestionObjects() {
+	get isTemplateArraySuggestions() {
 		return (
-			this.isSuggestionArray &&
+			this.isStringArraySuggestions &&
 			(this.suggestions as FSuggestTemplate[])?.every(
 				item => typeof item === "object" && item !== null && !Array.isArray(item)
 			)
@@ -231,9 +230,9 @@ export class FSuggest extends FRoot {
 
 	get filteredSuggestions() {
 		if (this.value) {
-			if (this.isSuggestionArray && !this.isSuggestionObjects) {
+			if (this.isStringArraySuggestions && !this.isTemplateArraySuggestions) {
 				return (this.suggestions as string[])?.filter(sg => sg.includes(this.value as string));
-			} else if (this.isSuggestionObjects) {
+			} else if (this.isTemplateArraySuggestions) {
 				return (this.suggestions as FSuggestTemplate[])?.filter(sg =>
 					sg.toString().includes(this.value as string)
 				);
@@ -277,7 +276,7 @@ export class FSuggest extends FRoot {
 	}
 
 	navigateOptions(direction: number) {
-		if (this.isSuggestionArray) {
+		if (this.isStringArraySuggestions) {
 			const totalOptions = this.filteredSuggestions?.length;
 			if (totalOptions === 0) return;
 
@@ -337,13 +336,13 @@ export class FSuggest extends FRoot {
 	}
 
 	selectOption() {
-		if (this.isSuggestionArray) {
+		if (this.isStringArraySuggestions) {
 			if (this.filteredSuggestions) {
 				if (this.currentIndex >= 0 && this.currentIndex < this.filteredSuggestions.length) {
 					const selectedOption = (this.filteredSuggestions as string[] | FSuggestTemplate[])[
 						this.currentIndex
 					];
-					if (this.isSuggestionObjects) {
+					if (this.isTemplateArraySuggestions) {
 						this.value = (selectedOption as FSuggestTemplate).value;
 					} else {
 						this.value = selectedOption as string;
@@ -364,6 +363,10 @@ export class FSuggest extends FRoot {
 			}
 		}
 	}
+
+	displayOptions = displayOptions;
+	displayCategories = displayCategories;
+	displayCustomTemplate = displayCustomTemplate;
 
 	render() {
 		// classes to apply on inner element
@@ -414,98 +417,18 @@ export class FSuggest extends FRoot {
 	}
 
 	getSuggestionHtml(suggestions: FSuggestSuggestions) {
-		if (this.isSuggestionArray && !this.isSuggestionObjects) {
+		if (this.isStringArraySuggestions && !this.isTemplateArraySuggestions) {
 			if (this.anySuggestions) {
-				return html`<f-div height="hug-content" direction="column"
-					>${(suggestions as string[]).map((sg, index) => {
-						return html`<f-div
-							class="f-select-options-clickable"
-							height="hug-content"
-							@click=${this.handleSuggest}
-							clickable
-							padding="medium"
-							.selected=${index === this.currentIndex ? "background" : "none"}
-						>
-							<f-div direction="row" gap="medium">
-								${this.isSearchComponent ? html` <f-icon source="i-search"></f-icon>` : ""}
-								<f-text variant="para" size="small" weight="regular" .highlight=${this.value}>
-									${unsafeHTML(sg)}
-								</f-text>
-							</f-div>
-						</f-div>`;
-					})}</f-div
-				>`;
+				return this.displayOptions(suggestions as string[]);
 			}
 			return nothing;
-		} else if (this.isSuggestionObjects) {
+		} else if (this.isTemplateArraySuggestions) {
 			if (this.anySuggestions) {
-				return html`<f-div height="hug-content" direction="column"
-					>${(suggestions as FSuggestTemplate[]).map((sg, index) => {
-						return html`<f-div
-							class="f-select-options-clickable"
-							height="hug-content"
-							@click=${() => this.handleSelect(sg)}
-							clickable
-							.selected=${index === this.currentIndex ? "background" : "none"}
-						>
-							${unsafeHTML(getComputedHTML(sg.template(this.value)))}
-						</f-div>`;
-					})}</f-div
-				>`;
+				return this.displayCustomTemplate(suggestions as FSuggestTemplate[]);
 			}
 			return nothing;
 		} else {
-			return Object.entries(suggestions as FSuggestSuggestionsCategory).map(
-				([objName, objValue], categoryIndex) => {
-					return html`<f-div
-						padding="none"
-						height="hug-content"
-						width="fill-container"
-						direction="column"
-						align="middle-left"
-						border="small solid default bottom"
-						><f-div
-							padding="medium"
-							height="hug-content"
-							width="fill-container"
-							align="middle-left"
-							direction="row"
-							><f-text
-								variant="para"
-								size="small"
-								weight="regular"
-								state="secondary"
-								.highlight=${this.value}
-								>${objName}</f-text
-							></f-div
-						>
-						${objValue.map((item, index) => {
-							return html`<f-div
-								class="f-select-options-clickable"
-								padding="medium"
-								height="hug-content"
-								width="fill-container"
-								direction="row"
-								?clickable=${true}
-								align="middle-left"
-								gap="small"
-								@click=${this.handleSuggest}
-								.selected=${categoryIndex === this.currentCategoryIndex &&
-								index === this.currentIndex
-									? "background"
-									: "none"}
-							>
-								<f-div direction="row" gap="medium">
-									${this.isSearchComponent ? html` <f-icon source="i-search"></f-icon>` : ""}
-									<f-text variant="para" size="small" weight="regular" .highlight=${this.value}>
-										${unsafeHTML(item)}
-									</f-text>
-								</f-div>
-							</f-div>`;
-						})}
-					</f-div>`;
-				}
-			);
+			return this.displayCategories(suggestions as FSuggestSuggestionsCategory);
 		}
 	}
 

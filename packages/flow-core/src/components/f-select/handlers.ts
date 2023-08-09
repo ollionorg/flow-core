@@ -13,10 +13,11 @@ import _ from "lodash";
  * open options menu
  */
 export function handleDropDownOpen(this: FSelect, e: MouseEvent) {
-	this.openDropdown = true;
-	this?.inputElement?.focus();
-	this.updateDimentions();
-
+	if (!this.loading) {
+		this.openDropdown = true;
+		this?.inputElement?.focus();
+		this.updateDimentions();
+	}
 	e.stopPropagation();
 }
 

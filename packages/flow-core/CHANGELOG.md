@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.20.4] - 2023-08-09
+
+### Bug Fixes
+
+- `f-text` : `:host` style is affecting in form-builder, hence applied to `f-text` selelector only.
+
 ## [1.20.3] - 2023-08-09
 
 ### Bug Fixes

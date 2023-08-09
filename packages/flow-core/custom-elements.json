@@ -11461,25 +11461,27 @@
 						{
 							"name": "[\"close-button\"]",
 							"type": {
-								"text": "FTooltipPlacement | undefined"
+								"text": "boolean | undefined"
 							},
 							"default": "true",
 							"fieldName": "[\"close-button\"]"
 						},
 						{
-							"name": "closable",
+							"name": "tooltip",
 							"type": {
-								"text": "boolean | undefined"
+								"text": "string | undefined"
 							},
-							"default": "false",
-							"fieldName": "closable"
+							"fieldName": "tooltip",
+							"inheritedFrom": {
+								"name": "FRoot",
+								"module": "src/mixins/components/f-root/f-root.ts"
+							}
 						}
 					],
 					"superclass": {
-						"name": "LitElement",
-						"package": "lit"
-					},
-					"customElement": true
+						"name": "FRoot",
+						"module": "/src/mixins/components/f-root/f-root"
+					}
 				}
 			],
 			"exports": [
@@ -11786,7 +11788,7 @@
 						{
 							"name": "clear",
 							"type": {
-								"text": "\"small\" | \"medium\" | undefined"
+								"text": "boolean | undefined"
 							},
 							"default": "true",
 							"fieldName": "clear"
@@ -11816,7 +11818,7 @@
 							"fieldName": "maskValue"
 						},
 						{
-							"name": "rows",
+							"name": "tooltip",
 							"type": {
 								"text": "string | undefined"
 							},

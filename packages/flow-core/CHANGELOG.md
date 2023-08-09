@@ -8,7 +8,7 @@
 
 ### Bug Fixes
 
-- `f-select` loading icon alignment.
+- `f-select` loading icon alignment and loading behavior fix.
 
 ## [1.20.2] - 2023-08-04
 

@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.20.3] - 2023-08-09
+
+### Bug Fixes
+
+- `f-select` loading icon alignment.
+
 ## [1.20.2] - 2023-08-04
 
 ### Improvements

@@ -59,6 +59,9 @@ Select allows users to choose one or multiple options from a list of values.
 			disabled: {
 				control: "boolean"
 			},
+			loading: {
+				control: "boolean"
+			},
 			clear: {
 				control: "boolean"
 			},
@@ -119,6 +122,7 @@ Select allows users to choose one or multiple options from a list of values.
 			width: "fill-container",
 			searchable: true,
 			disabled: false,
+			loading: false,
 			clear: false,
 			checkbox: false,
 			["selection-limit"]: 2,
@@ -164,6 +168,7 @@ Select allows users to choose one or multiple options from a list of values.
 							.width=${args.width}
 							.height=${args.height}
 							?disabled=${args.disabled}
+							?loading=${args.loading}
 							selection-limit=${args["selection-limit"]}
 							?create-option=${args["create-option"]}
 							.option-template=${args["option-template"]}
@@ -1388,6 +1393,44 @@ a ‘close’ icon button appear on right of the select to clear the input value
 						>
 							<f-div slot="label" padding="none" gap="none"
 								>Label for f-select (disabled=true)</f-div
+							>
+							<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+						</f-select></f-div
+					>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+## loading
+
+<Canvas>
+	<Story name="loading">
+		{args => {
+			const [value, setValue] = useState("");
+			const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large" gap="medium">
+					<f-div>
+						<f-select
+							placeholder="Select Option"
+							@input=${handleValue}
+							.options=${options}
+							.value=${value}
+							icon-left=${"i-app"}
+							type="multiple"
+							?searchable=${true}
+							?clear=${true}
+							?loading=${true}
+						>
+							<f-div slot="label" padding="none" gap="none"
+								>Label for f-select (loading=true)</f-div
 							>
 							<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
 						</f-select></f-div

@@ -74,210 +74,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-table/f-table.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTable",
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "FTableVariant | undefined"
-              },
-              "default": "\"stripped\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "FTableSize | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "selectable",
-              "type": {
-                "text": "FTableSelectable | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "selectable",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "highlightSelected",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "highlight-selected",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "highlightHover",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "highlight-hover",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "propogateProps"
-            },
-            {
-              "kind": "method",
-              "name": "updateGridTemplateColumns"
-            },
-            {
-              "kind": "method",
-              "name": "applySelectable",
-              "description": "apply checkbox or radio based on selection property"
-            },
-            {
-              "kind": "method",
-              "name": "handleHeaderRowSelection",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ],
-              "description": "if checkbox from header got clicked"
-            },
-            {
-              "kind": "method",
-              "name": "handleRowSelection",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ],
-              "description": "if checkbox or radio clicked in row"
-            },
-            {
-              "kind": "method",
-              "name": "dispatchSelectedRowEvent"
-            },
-            {
-              "kind": "method",
-              "name": "updateRadioChecks",
-              "parameters": [
-                {
-                  "name": "element",
-                  "type": {
-                    "text": "HTMLElement"
-                  }
-                }
-              ],
-              "description": "only one radio should be selected"
-            },
-            {
-              "kind": "method",
-              "name": "updateHeaderSelectionCheckboxState",
-              "description": "update header checkbox based on rest of the selection"
-            },
-            {
-              "kind": "method",
-              "name": "toggleColumnHighlight",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "toggleColumnSelected",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "CustomEvent"
-                  }
-                }
-              ]
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "type": {
-                "text": "FTableVariant | undefined"
-              },
-              "default": "\"stripped\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "FTableSize | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "selectable",
-              "type": {
-                "text": "FTableSelectable | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "selectable"
-            },
-            {
-              "name": "highlight-selected",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "highlightSelected"
-            },
-            {
-              "name": "highlight-hover",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "highlightHover"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTable",
-          "declaration": {
-            "name": "FTable",
-            "module": "src/components/f-table/f-table.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-table-schema/f-table-schema.ts",
       "declarations": [
         {
@@ -908,6 +704,210 @@
           "declaration": {
             "name": "FTcell",
             "module": "src/components/f-tcell/f-tcell.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-table/f-table.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTable",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "FTableVariant | undefined"
+              },
+              "default": "\"stripped\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "FTableSize | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selectable",
+              "type": {
+                "text": "FTableSelectable | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "selectable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "highlightSelected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "highlight-selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "highlightHover",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "highlight-hover",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "propogateProps"
+            },
+            {
+              "kind": "method",
+              "name": "updateGridTemplateColumns"
+            },
+            {
+              "kind": "method",
+              "name": "applySelectable",
+              "description": "apply checkbox or radio based on selection property"
+            },
+            {
+              "kind": "method",
+              "name": "handleHeaderRowSelection",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ],
+              "description": "if checkbox from header got clicked"
+            },
+            {
+              "kind": "method",
+              "name": "handleRowSelection",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ],
+              "description": "if checkbox or radio clicked in row"
+            },
+            {
+              "kind": "method",
+              "name": "dispatchSelectedRowEvent"
+            },
+            {
+              "kind": "method",
+              "name": "updateRadioChecks",
+              "parameters": [
+                {
+                  "name": "element",
+                  "type": {
+                    "text": "HTMLElement"
+                  }
+                }
+              ],
+              "description": "only one radio should be selected"
+            },
+            {
+              "kind": "method",
+              "name": "updateHeaderSelectionCheckboxState",
+              "description": "update header checkbox based on rest of the selection"
+            },
+            {
+              "kind": "method",
+              "name": "toggleColumnHighlight",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "toggleColumnSelected",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "FTableVariant | undefined"
+              },
+              "default": "\"stripped\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "FTableSize | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "selectable",
+              "type": {
+                "text": "FTableSelectable | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "selectable"
+            },
+            {
+              "name": "highlight-selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "highlightSelected"
+            },
+            {
+              "name": "highlight-hover",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "highlightHover"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTable",
+          "declaration": {
+            "name": "FTable",
+            "module": "src/components/f-table/f-table.ts"
           }
         }
       ]

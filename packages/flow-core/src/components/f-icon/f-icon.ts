@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValues, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import eleStyle from "./f-icon.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -129,6 +129,7 @@ export class FIcon extends FRoot {
 	}
 
 	disconnectedCallback(): void {
+		super.disconnectedCallback();
 		this._themeSubscription?.unsubscribe();
 		this._configSubscription?.unsubscribe();
 	}
@@ -212,6 +213,10 @@ export class FIcon extends FRoot {
 				? html`${unsafeSVG(loader)}`
 				: html`${this.isURLSource ? unsafeHTML(this.source) : unsafeSVG(this.source)}`}
 		</div>`;
+	}
+
+	protected updated(changedProperties: PropertyValues) {
+		super.updated(changedProperties);
 	}
 }
 

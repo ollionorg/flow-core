@@ -4,6 +4,13 @@
 
 # Change Log
 
+## [1.20.5] - 2023-08-14
+
+### Bug Fixes
+
+- If `f-popover` used as tooltip then causing z-index issue.
+- The tooltip is not removed from the DOM for the f-icon when the element is removed.
+
 ## [1.20.4] - 2023-08-09
 
 ### Bug Fixes

@@ -120,7 +120,9 @@ export class FPopover extends FRoot {
 	computePosition(isTooltip: boolean) {
 		let target = document.body;
 		if (this.targetElement && this.open) {
-			this.targetElement.style.zIndex = "201";
+			if (!isTooltip) {
+				this.targetElement.style.zIndex = "201";
+			}
 			target = this.targetElement;
 		}
 		if (this.open) {

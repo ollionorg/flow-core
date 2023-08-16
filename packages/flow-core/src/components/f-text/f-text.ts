@@ -279,7 +279,7 @@ export class FText extends FRoot {
 			let content = this.textContent;
 			content = this.removeMarkTag(content ?? "");
 
-			const regex = new RegExp(this.highlight, "gi");
+			const regex = new RegExp(this.highlight.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), "gi");
 			content = content.replace(regex, "<mark>$&</mark>");
 
 			this.highlightedText = content;

@@ -11,8 +11,8 @@ import { flowElement } from "./../../utils";
 
 export type FSearchState = "primary" | "default" | "success" | "warning" | "danger";
 
-export type FSearchCustomEvent = {
-	value: string;
+export type FSearchCustomEvent<Type = unknown> = {
+	value: Type;
 	scope: string;
 };
 
@@ -20,11 +20,15 @@ export type FSearchSuffixWhen = (value: string) => boolean;
 
 export type FSearchSuggestionsCategory = Record<string, string[]>;
 
-export type FSearchOptionTemplate = {
-	value: any;
+export type FSearchOptionTemplate<Type = unknown> = {
+	value: Type;
 	template: (value?: string) => HTMLTemplateResult;
 	toString: () => string;
 };
+export type FSearchResultWhen = (
+	suggestion: string | FSearchOptionTemplate,
+	value?: string
+) => boolean;
 
 export type FSearchSuggestions = string[] | FSearchSuggestionsCategory | FSearchOptionTemplate[];
 
@@ -116,6 +120,30 @@ export class FSearch extends FRoot {
 	@property({ reflect: true, type: Boolean })
 	["search-button"]?: boolean = false;
 
+	/**
+	 * @attribute Loader icon .
+	 */
+	@property({ reflect: true, type: Boolean })
+	loading?: boolean = false;
+
+	/**
+	 * to customize result
+	 */
+	@property({ reflect: false, type: Function, attribute: "result-when" })
+	resultWhen: FSearchResultWhen = (sg, value) => {
+		if (typeof sg === "object") {
+			return sg
+				.toString()
+				.toLocaleLowerCase()
+				.includes(value?.toLocaleLowerCase() ?? "");
+		}
+		return sg.toLocaleLowerCase().includes(value?.toLocaleLowerCase() ?? "");
+	};
+
+	set ["result-when"](val: FSearchResultWhen) {
+		this.resultWhen = val;
+	}
+
 	@query("slot[name='label']")
 	labelSlot!: HTMLElement;
 
@@ -174,7 +202,11 @@ export class FSearch extends FRoot {
 	 */
 	handleInput(e: CustomEvent) {
 		e.stopPropagation();
-		this.value = e.detail.value;
+		if (typeof e.detail.value === "object") {
+			this.value = e.detail.value.toString();
+		} else {
+			this.value = e.detail.value;
+		}
 		this.dispatchInputEvent(e.detail.value, this["selected-scope"]);
 	}
 
@@ -217,7 +249,7 @@ export class FSearch extends FRoot {
 	 * @param value string for value
 	 * @param scope string for scope value
 	 */
-	dispatchInputEvent(value: string, scope = "") {
+	dispatchInputEvent(value: any, scope = "") {
 		const event = new CustomEvent<FSearchCustomEvent>("input", {
 			detail: {
 				value: value,
@@ -323,9 +355,12 @@ export class FSearch extends FRoot {
 						icon-left=${this["search-button"] ? "" : "i-search"}
 						.state=${this.state}
 						?clear=${this.clear}
+						?loading=${this.loading}
 						.size=${this.size}
+						.suggestWhen=${this.resultWhen}
 						@input=${this.handleInput}
 					>
+						<slot name="no-data" slot="no-data"> </slot>
 					</f-suggest>
 				</f-div>
 				${this["search-button"]

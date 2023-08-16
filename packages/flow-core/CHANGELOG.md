@@ -4,6 +4,18 @@
 
 # Change Log
 
+## [1.21.0] - 2023-08-16
+
+### Features
+
+- `resultWhen` property of type predicate function added on `f-search` to customize results.
+- `suggestWhen` property of type predicate function added on `f-suggest` to customize results.
+- `no-data` slot added in `f-search` and `f-suggest` to display when no result found.
+
+### Improvements
+- `loading` attribute added in `f-search`
+- Default behavior of search/suggest results are now case-insensitive in `f-search` ,`f-suggest`.
+
 ## [1.20.5] - 2023-08-14
 
 ### Bug Fixes

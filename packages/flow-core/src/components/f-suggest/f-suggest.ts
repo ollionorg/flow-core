@@ -22,11 +22,13 @@ export type FSuggestSuffixWhen = (value: string) => boolean;
 
 export type FSuggestSuggestionsCategory = Record<string, string[]>;
 
-export type FSuggestTemplate = {
-	value: any;
+export type FSuggestTemplate<Type = unknown> = {
+	value: Type;
 	template: (value?: string) => HTMLTemplateResult;
 	toString: () => string;
 };
+
+export type FSuggestWhen = (suggestion: string | FSuggestTemplate, value?: string) => boolean;
 
 export type FSuggestSuggestions = string[] | FSuggestSuggestionsCategory | FSuggestTemplate[];
 
@@ -142,6 +144,20 @@ export class FSuggest extends FRoot {
 	@property({ reflect: false, type: Function })
 	suffixWhen?: FSuggestSuffixWhen;
 
+	@property({ reflect: false, type: Function, attribute: "suggest-when" })
+	suggestWhen: FSuggestWhen = (sg, value) => {
+		if (typeof sg === "object") {
+			return sg
+				.toString()
+				.toLocaleLowerCase()
+				.includes(value?.toLocaleLowerCase() ?? "");
+		}
+		return sg.toLocaleLowerCase().includes(value?.toLocaleLowerCase() ?? "");
+	};
+
+	set ["suggest-when"](val: FSuggestWhen) {
+		this.suggestWhen = val;
+	}
 	/**
 	 * input element reference
 	 */
@@ -208,7 +224,9 @@ export class FSuggest extends FRoot {
 		};
 		this.popOverElement.style.width = this.offsetWidth + "px";
 		this.popOverElement.style.maxHeight = "300px";
-		this.popOverElement.open = true;
+		if (!this.loading) {
+			this.popOverElement.open = true;
+		}
 	}
 	get anySuggestions() {
 		const suggestionsCount = this.filteredSuggestions?.length ?? 0;
@@ -231,15 +249,15 @@ export class FSuggest extends FRoot {
 	get filteredSuggestions() {
 		if (this.value) {
 			if (this.isStringArraySuggestions && !this.isTemplateArraySuggestions) {
-				return (this.suggestions as string[])?.filter(sg => sg.includes(this.value as string));
+				return (this.suggestions as string[])?.filter(sg => this.suggestWhen(sg, this.value));
 			} else if (this.isTemplateArraySuggestions) {
 				return (this.suggestions as FSuggestTemplate[])?.filter(sg =>
-					sg.toString().includes(this.value as string)
+					this.suggestWhen(sg, this.value)
 				);
 			} else {
 				const filtered = _.cloneDeep(this.suggestions) as FSuggestSuggestionsCategory;
 				Object.entries(filtered).forEach(([objName, objValue]) => {
-					filtered[objName] = objValue.filter(item => item.includes(this.value as string));
+					filtered[objName] = objValue.filter(item => this.suggestWhen(item, this.value));
 				});
 				for (const key in filtered) {
 					if (Array.isArray(filtered[key]) && !filtered[key].length) delete filtered[key];
@@ -343,7 +361,7 @@ export class FSuggest extends FRoot {
 						this.currentIndex
 					];
 					if (this.isTemplateArraySuggestions) {
-						this.value = (selectedOption as FSuggestTemplate).value;
+						this.value = (selectedOption as FSuggestTemplate).toString();
 					} else {
 						this.value = selectedOption as string;
 					}
@@ -410,7 +428,9 @@ export class FSuggest extends FRoot {
 			</f-input>
 			<f-popover .overlay=${false} .placement=${"bottom-start"} class="f-suggest-popover">
 				<f-div direction="column" state="secondary">
-					${this.getSuggestionHtml(this.filteredSuggestions ?? [])}
+					${this.filteredSuggestions && this.filteredSuggestions.length > 0
+						? this.getSuggestionHtml(this.filteredSuggestions)
+						: html`<slot name="no-data"></slot>`}
 				</f-div>
 			</f-popover>
 		</f-div>`;
@@ -441,7 +461,7 @@ export class FSuggest extends FRoot {
 	}
 
 	async handleSelect(sg: FSuggestTemplate) {
-		this.value = sg.value;
+		this.value = sg.toString();
 		this.dispatchInputEvent(sg);
 
 		await this.handleBlur(false);

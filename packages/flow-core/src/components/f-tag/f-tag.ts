@@ -140,6 +140,10 @@ export class FTag extends FRoot {
 		return getTextContrast(this.fill) === "dark-text" ? "#202a36" : "#808080";
 	}
 
+	get labelCount() {
+		return this.label?.length >= 12;
+	}
+
 	/**
 	 * apply inline styles to shadow-dom for custom fill.
 	 */
@@ -320,7 +324,7 @@ export class FTag extends FRoot {
 			?clickable=${this.clickable}
 		>
 			${iconLeft}
-			<f-div class="text-content">${this.label}</f-div>
+			<f-div class="text-content" ?data-label-count=${this.labelCount}>${this.label}</f-div>
 			${counter}${iconRight}
 		</div>`;
 	}
@@ -329,25 +333,14 @@ export class FTag extends FRoot {
 		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
 	): Promise<void> {
 		super.updated(changedProperties);
-		requestAnimationFrame(() => {
-			const parentElement = this.parentElement;
-
-			if (parentElement) {
-				const parentWidth = parentElement.clientWidth;
-				if (parentWidth < 100 && this.fTagTextContent) {
-					if (this.fTagElement && this.label) {
-						this.fTagElement.style.width = `${parentElement.clientWidth}px`;
-						this.fTagTextContent.tooltip = this.label;
-					}
-				}
-			}
-
-			if (this.fTagTextContent && this.fTagTextContent?.offsetWidth >= 100) {
+		if (this.fTagTextContent) {
+			if (this.labelCount) {
 				this.fTagTextContent.tooltip = this.label;
 			} else {
+				this.fTagTextContent.tooltip = "";
 				this.fTagTextContent?.removeAttribute("tooltip");
 			}
-		});
+		}
 	}
 }
 

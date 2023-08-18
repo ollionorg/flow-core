@@ -119,6 +119,9 @@ f-div is used as a container for HTML elements.
 				control: "select",
 				options: ["background", "border", "notch-right", "notch-left", "None"]
 			},
+			highlight: {
+				control: { type: "boolean" }
+			},
 			loading: {
 				control: "radio",
 				options: ["loader", "skeleton", "None"]
@@ -146,6 +149,7 @@ f-div is used as a container for HTML elements.
 			sticky: "none",
 			selected: "",
 			loading: "",
+			highlight: false,
 			disabled: false,
 			clickable: false
 		}}
@@ -232,6 +236,8 @@ f-div is used as a container for HTML elements.
 							height="hug-content"
 							padding="x-large"
 							state="secondary"
+							id="abc-1"
+							?highlight=${args.highlight}
 						>
 							<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
 						</f-div>

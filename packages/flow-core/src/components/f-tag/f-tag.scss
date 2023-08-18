@@ -87,6 +87,13 @@ in this case it is `f-tag`
 		width: fit-content;
 		border-radius: 4px;
 
+		.text-content[data-label-count] {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			max-width: 80px;
+		}
+
 		// class to appply shimmer . This class is applied through javascript please check f-tag.ts
 		&.hasShimmer {
 			@include shimmer-self();

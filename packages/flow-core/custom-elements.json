@@ -1169,6 +1169,338 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-button/f-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FButton",
+          "members": [
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "category",
+              "type": {
+                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
+              },
+              "default": "\"fill\"",
+              "attribute": "category",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FButtonState | undefined"
+              },
+              "default": "\"primary\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "\"round\" | \"curved\" | \"block\" | undefined"
+              },
+              "default": "\"round\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconLeft",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "icon-left",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconRight",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "icon-right",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "counter",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "counter",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "labelWrap",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "label-wrap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "iconElement",
+              "type": {
+                "text": "FIcon"
+              },
+              "description": "icon element reference"
+            },
+            {
+              "kind": "field",
+              "name": "counterElement",
+              "type": {
+                "text": "FCounter | undefined"
+              },
+              "description": "counter element reference"
+            },
+            {
+              "kind": "field",
+              "name": "counterSize",
+              "description": "compute counter size based on button size",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "textColor",
+              "description": "compute textColor when custom color of tag is defined.",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "array"
+              },
+              "readonly": true,
+              "default": "[\"label\"]",
+              "description": "mention required fields here for generating vue types"
+            },
+            {
+              "kind": "method",
+              "name": "validateProperties",
+              "description": "validation for all atrributes"
+            },
+            {
+              "kind": "method",
+              "name": "applyStyles",
+              "description": "apply inline styles to shadow-dom for custom fill."
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseEnter",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseLeave",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "label"
+            },
+            {
+              "name": "category",
+              "type": {
+                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
+              },
+              "default": "\"fill\"",
+              "fieldName": "category"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FButtonState | undefined"
+              },
+              "default": "\"primary\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "\"round\" | \"curved\" | \"block\" | undefined"
+              },
+              "default": "\"round\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "icon-left",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "iconLeft"
+            },
+            {
+              "name": "icon-right",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "iconRight"
+            },
+            {
+              "name": "counter",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "counter"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "label-wrap",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "labelWrap"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          },
+          "summary": "Buttons allow users to perform an action or to initiate a new function."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FButton",
+          "declaration": {
+            "name": "FButton",
+            "module": "src/components/f-button/f-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-carousel/f-carousel.ts",
       "declarations": [
         {
@@ -1571,338 +1903,6 @@
           "declaration": {
             "name": "FCarouselContent",
             "module": "src/components/f-carousel-content/f-carousel-content.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-button/f-button.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FButton",
-          "members": [
-            {
-              "kind": "field",
-              "name": "fill",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"\""
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "category",
-              "type": {
-                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
-              },
-              "default": "\"fill\"",
-              "attribute": "category",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FButtonState | undefined"
-              },
-              "default": "\"primary\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "\"round\" | \"curved\" | \"block\" | undefined"
-              },
-              "default": "\"round\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "iconLeft",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "icon-left",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "iconRight",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "icon-right",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "counter",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "counter",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "loading",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "labelWrap",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "label-wrap",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "iconElement",
-              "type": {
-                "text": "FIcon"
-              },
-              "description": "icon element reference"
-            },
-            {
-              "kind": "field",
-              "name": "counterElement",
-              "type": {
-                "text": "FCounter | undefined"
-              },
-              "description": "counter element reference"
-            },
-            {
-              "kind": "field",
-              "name": "counterSize",
-              "description": "compute counter size based on button size",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "textColor",
-              "description": "compute textColor when custom color of tag is defined.",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "required",
-              "type": {
-                "text": "array"
-              },
-              "readonly": true,
-              "default": "[\"label\"]",
-              "description": "mention required fields here for generating vue types"
-            },
-            {
-              "kind": "method",
-              "name": "validateProperties",
-              "description": "validation for all atrributes"
-            },
-            {
-              "kind": "method",
-              "name": "applyStyles",
-              "description": "apply inline styles to shadow-dom for custom fill."
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseEnter",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseLeave",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "label"
-            },
-            {
-              "name": "category",
-              "type": {
-                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
-              },
-              "default": "\"fill\"",
-              "fieldName": "category"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FButtonState | undefined"
-              },
-              "default": "\"primary\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "variant",
-              "type": {
-                "text": "\"round\" | \"curved\" | \"block\" | undefined"
-              },
-              "default": "\"round\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "icon-left",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "iconLeft"
-            },
-            {
-              "name": "icon-right",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "iconRight"
-            },
-            {
-              "name": "counter",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "counter"
-            },
-            {
-              "name": "loading",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "loading"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "label-wrap",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "labelWrap"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          },
-          "summary": "Buttons allow users to perform an action or to initiate a new function."
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FButton",
-          "declaration": {
-            "name": "FButton",
-            "module": "src/components/f-button/f-button.ts"
           }
         }
       ]
@@ -2970,6 +2970,16 @@
             },
             {
               "kind": "field",
+              "name": "highlight",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "highlight",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "overflow",
               "type": {
                 "text": "\"wrap\" | \"scroll\" | \"hidden\" | \"visible\" | undefined"
@@ -3012,6 +3022,10 @@
               "kind": "method",
               "name": "applySize",
               "description": "Applying height,width related style, based on value"
+            },
+            {
+              "kind": "method",
+              "name": "checkHighlight"
             },
             {
               "kind": "field",
@@ -3154,6 +3168,14 @@
               },
               "default": "false",
               "fieldName": "clickable"
+            },
+            {
+              "name": "highlight",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "highlight"
             },
             {
               "name": "overflow",
@@ -5037,169 +5059,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-grid/f-grid.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FGrid",
-          "members": [
-            {
-              "kind": "field",
-              "name": "minCellWidth",
-              "type": {
-                "text": "number | undefined"
-              },
-              "attribute": "min-cell-width",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "maxCellWidth",
-              "type": {
-                "text": "number | undefined"
-              },
-              "attribute": "max-cell-width",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "cellHeight",
-              "type": {
-                "text": "number | undefined"
-              },
-              "attribute": "cell-height",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "\"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"small\"",
-              "attribute": "gap",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "gridTemplateColumns",
-              "description": "grid-template-columns to assign cell-width",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "applyGridStyles",
-              "description": "styling for grid"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseEnter",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseLeave",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "min-cell-width",
-              "type": {
-                "text": "number | undefined"
-              },
-              "fieldName": "minCellWidth"
-            },
-            {
-              "name": "max-cell-width",
-              "type": {
-                "text": "number | undefined"
-              },
-              "fieldName": "maxCellWidth"
-            },
-            {
-              "name": "cell-height",
-              "type": {
-                "text": "number | undefined"
-              },
-              "fieldName": "cellHeight"
-            },
-            {
-              "name": "gap",
-              "type": {
-                "text": "\"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"small\"",
-              "fieldName": "gap"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FGrid",
-          "declaration": {
-            "name": "FGrid",
-            "module": "src/components/f-grid/f-grid.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-icon/f-icon.ts",
       "declarations": [
         {
@@ -5452,6 +5311,169 @@
           "declaration": {
             "name": "FIcon",
             "module": "src/components/f-icon/f-icon.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-grid/f-grid.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FGrid",
+          "members": [
+            {
+              "kind": "field",
+              "name": "minCellWidth",
+              "type": {
+                "text": "number | undefined"
+              },
+              "attribute": "min-cell-width",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "maxCellWidth",
+              "type": {
+                "text": "number | undefined"
+              },
+              "attribute": "max-cell-width",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "cellHeight",
+              "type": {
+                "text": "number | undefined"
+              },
+              "attribute": "cell-height",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gridTemplateColumns",
+              "description": "grid-template-columns to assign cell-width",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "applyGridStyles",
+              "description": "styling for grid"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseEnter",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseLeave",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "min-cell-width",
+              "type": {
+                "text": "number | undefined"
+              },
+              "fieldName": "minCellWidth"
+            },
+            {
+              "name": "max-cell-width",
+              "type": {
+                "text": "number | undefined"
+              },
+              "fieldName": "maxCellWidth"
+            },
+            {
+              "name": "cell-height",
+              "type": {
+                "text": "number | undefined"
+              },
+              "fieldName": "cellHeight"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"x-large\" | \"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "fieldName": "gap"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FGrid",
+          "declaration": {
+            "name": "FGrid",
+            "module": "src/components/f-grid/f-grid.ts"
           }
         }
       ]
@@ -6860,6 +6882,186 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-radio/f-radio.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FRadio",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "\"selected\" | \"unselected\" | undefined"
+              },
+              "default": "\"unselected\"",
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FRadioState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "slotWrapper",
+              "type": {
+                "text": "FDiv"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleClick",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
+              "description": "emit event on click"
+            },
+            {
+              "kind": "method",
+              "name": "checkSlots"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseEnter",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseLeave",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "\"selected\" | \"unselected\" | undefined"
+              },
+              "default": "\"unselected\"",
+              "fieldName": "value"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FRadioState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "fieldName": "size"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FRadio",
+          "declaration": {
+            "name": "FRadio",
+            "module": "src/components/f-radio/f-radio.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-progress-bar/f-progress-bar.ts",
       "declarations": [
         {
@@ -7061,186 +7263,6 @@
           "declaration": {
             "name": "FProgressBar",
             "module": "src/components/f-progress-bar/f-progress-bar.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-radio/f-radio.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FRadio",
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "\"selected\" | \"unselected\" | undefined"
-              },
-              "default": "\"unselected\"",
-              "attribute": "value",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FRadioState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"small\" | \"medium\" | undefined"
-              },
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "slotWrapper",
-              "type": {
-                "text": "FDiv"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "handleClick",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "emit event on click"
-            },
-            {
-              "kind": "method",
-              "name": "checkSlots"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseEnter",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseLeave",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "type": {
-                "text": "\"selected\" | \"unselected\" | undefined"
-              },
-              "default": "\"unselected\"",
-              "fieldName": "value"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FRadioState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "\"small\" | \"medium\" | undefined"
-              },
-              "fieldName": "size"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FRadio",
-          "declaration": {
-            "name": "FRadio",
-            "module": "src/components/f-radio/f-radio.ts"
           }
         }
       ]
@@ -10023,6 +10045,128 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-tab-content/f-tab-content.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTabContent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "transition",
+              "type": {
+                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "attribute": "transition",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "200",
+              "attribute": "duration",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseEnter",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseLeave",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "transition",
+              "type": {
+                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
+              },
+              "default": "\"none\"",
+              "fieldName": "transition"
+            },
+            {
+              "name": "duration",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "200",
+              "fieldName": "duration"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTabContent",
+          "declaration": {
+            "name": "FTabContent",
+            "module": "src/components/f-tab-content/f-tab-content.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-tab/f-tab.ts",
       "declarations": [
         {
@@ -10249,262 +10393,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-tab-node/f-tab-node.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTabNode",
-          "members": [
-            {
-              "kind": "field",
-              "name": "width",
-              "type": {
-                "text": "FTabNodeWidthProp | undefined"
-              },
-              "default": "\"hug-content\""
-            },
-            {
-              "kind": "field",
-              "name": "contentId",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "content-id",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "active",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "active",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "tabWidth",
-              "description": "tab-width",
-              "readonly": true
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseEnter",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseLeave",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "content-id",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "contentId"
-            },
-            {
-              "name": "active",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "active"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTabNode",
-          "declaration": {
-            "name": "FTabNode",
-            "module": "src/components/f-tab-node/f-tab-node.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-tab-content/f-tab-content.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FTabContent",
-          "members": [
-            {
-              "kind": "field",
-              "name": "transition",
-              "type": {
-                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
-              },
-              "default": "\"none\"",
-              "attribute": "transition",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "duration",
-              "type": {
-                "text": "number | undefined"
-              },
-              "default": "200",
-              "attribute": "duration",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseEnter",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseLeave",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "transition",
-              "type": {
-                "text": "\"fade\" | \"slide\" | \"none\" | undefined"
-              },
-              "default": "\"none\"",
-              "fieldName": "transition"
-            },
-            {
-              "name": "duration",
-              "type": {
-                "text": "number | undefined"
-              },
-              "default": "200",
-              "fieldName": "duration"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FTabContent",
-          "declaration": {
-            "name": "FTabContent",
-            "module": "src/components/f-tab-content/f-tab-content.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-tag/f-tag.ts",
       "declarations": [
         {
@@ -10624,6 +10512,20 @@
             },
             {
               "kind": "field",
+              "name": "fTagTextContent",
+              "type": {
+                "text": "FDiv | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "fTagElement",
+              "type": {
+                "text": "FDiv | undefined"
+              }
+            },
+            {
+              "kind": "field",
               "name": "iconSize",
               "description": "compute icon size based on tag size",
               "readonly": true
@@ -10638,6 +10540,11 @@
               "kind": "field",
               "name": "loaderColor",
               "description": "compute loaderColor when custom color of tag is defined.",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "labelCount",
               "readonly": true
             },
             {
@@ -10800,6 +10707,140 @@
           "declaration": {
             "name": "FTag",
             "module": "src/components/f-tag/f-tag.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-tab-node/f-tab-node.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FTabNode",
+          "members": [
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "FTabNodeWidthProp | undefined"
+              },
+              "default": "\"hug-content\""
+            },
+            {
+              "kind": "field",
+              "name": "contentId",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "content-id",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tabWidth",
+              "description": "tab-width",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseEnter",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseLeave",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "content-id",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "contentId"
+            },
+            {
+              "name": "active",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "active"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FTabNode",
+          "declaration": {
+            "name": "FTabNode",
+            "module": "src/components/f-tab-node/f-tab-node.ts"
           }
         }
       ]
@@ -11287,6 +11328,274 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-toast/f-toast-queue.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/components/f-toast/f-toast-queue.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-toast/f-toast.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FToast",
+          "members": [
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "\"auto-hide\" | \"persists\" | undefined"
+              },
+              "default": "\"auto-hide\"",
+              "attribute": "type",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "5000",
+              "attribute": "duration",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FToastState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "[\"close-button\"]",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "attribute": "[\"close-button\"]",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "mouseover",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "removeTimeout",
+              "type": {
+                "text": "ReturnType<typeof setTimeout>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "toasterRef",
+              "type": {
+                "text": "Ref<HTMLDivElement>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "uid",
+              "description": "get current uid",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "generateId",
+              "description": "generating uid for toast queue",
+              "parameters": [
+                {
+                  "description": "length of uid",
+                  "name": "length"
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": ""
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "remove",
+              "description": "remove the toast on click of remove icon"
+            },
+            {
+              "kind": "method",
+              "name": "autoRemoveConfig",
+              "description": "checks for whether or not the toast auto-hides or persists",
+              "return": {
+                "type": {
+                  "text": ""
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setPosition",
+              "parameters": [
+                {
+                  "name": "top",
+                  "type": {
+                    "text": "string"
+                  },
+                  "description": "top position string in px"
+                },
+                {
+                  "name": "right",
+                  "type": {
+                    "text": "string"
+                  },
+                  "description": "rigjt position string in px"
+                }
+              ],
+              "description": "set position of resepective toast"
+            },
+            {
+              "kind": "method",
+              "name": "dispatchOnRemove",
+              "description": "dispatch remove event",
+              "parameters": [
+                {
+                  "description": "Event",
+                  "name": "e"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "addToastToQueue",
+              "description": "add toast to queue"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseEnter",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseLeave",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "type",
+              "type": {
+                "text": "\"auto-hide\" | \"persists\" | undefined"
+              },
+              "default": "\"auto-hide\"",
+              "fieldName": "type"
+            },
+            {
+              "name": "duration",
+              "type": {
+                "text": "number | undefined"
+              },
+              "default": "5000",
+              "fieldName": "duration"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FToastState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "[\"close-button\"]",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "true",
+              "fieldName": "[\"close-button\"]"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FToast",
+          "declaration": {
+            "name": "FToast",
+            "module": "src/components/f-toast/f-toast.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-text-area/f-text-area.ts",
       "declarations": [
         {
@@ -11632,274 +11941,6 @@
           "declaration": {
             "name": "FTextArea",
             "module": "src/components/f-text-area/f-text-area.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-toast/f-toast-queue.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "module": "src/components/f-toast/f-toast-queue.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-toast/f-toast.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FToast",
-          "members": [
-            {
-              "kind": "field",
-              "name": "type",
-              "type": {
-                "text": "\"auto-hide\" | \"persists\" | undefined"
-              },
-              "default": "\"auto-hide\"",
-              "attribute": "type",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "duration",
-              "type": {
-                "text": "number | undefined"
-              },
-              "default": "5000",
-              "attribute": "duration",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FToastState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "[\"close-button\"]",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "true",
-              "attribute": "[\"close-button\"]",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "mouseover",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "removeTimeout",
-              "type": {
-                "text": "ReturnType<typeof setTimeout>"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "toasterRef",
-              "type": {
-                "text": "Ref<HTMLDivElement>"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "uid",
-              "description": "get current uid",
-              "readonly": true
-            },
-            {
-              "kind": "method",
-              "name": "generateId",
-              "description": "generating uid for toast queue",
-              "parameters": [
-                {
-                  "description": "length of uid",
-                  "name": "length"
-                }
-              ],
-              "return": {
-                "type": {
-                  "text": ""
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "remove",
-              "description": "remove the toast on click of remove icon"
-            },
-            {
-              "kind": "method",
-              "name": "autoRemoveConfig",
-              "description": "checks for whether or not the toast auto-hides or persists",
-              "return": {
-                "type": {
-                  "text": ""
-                }
-              }
-            },
-            {
-              "kind": "method",
-              "name": "setPosition",
-              "parameters": [
-                {
-                  "name": "top",
-                  "type": {
-                    "text": "string"
-                  },
-                  "description": "top position string in px"
-                },
-                {
-                  "name": "right",
-                  "type": {
-                    "text": "string"
-                  },
-                  "description": "rigjt position string in px"
-                }
-              ],
-              "description": "set position of resepective toast"
-            },
-            {
-              "kind": "method",
-              "name": "dispatchOnRemove",
-              "description": "dispatch remove event",
-              "parameters": [
-                {
-                  "description": "Event",
-                  "name": "e"
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "addToastToQueue",
-              "description": "add toast to queue"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseEnter",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseLeave",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "type",
-              "type": {
-                "text": "\"auto-hide\" | \"persists\" | undefined"
-              },
-              "default": "\"auto-hide\"",
-              "fieldName": "type"
-            },
-            {
-              "name": "duration",
-              "type": {
-                "text": "number | undefined"
-              },
-              "default": "5000",
-              "fieldName": "duration"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FToastState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "[\"close-button\"]",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "true",
-              "fieldName": "[\"close-button\"]"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FToast",
-          "declaration": {
-            "name": "FToast",
-            "module": "src/components/f-toast/f-toast.ts"
           }
         }
       ]

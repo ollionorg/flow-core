@@ -3,6 +3,7 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import getFakeUsers, { popoverRef } from "./utils/mock-users-data.ts";
 import { createRef, ref } from "lit/directives/ref.js";
+import downloadFile from "./donwloadFile.ts";
 
 <Meta
 	title="@cldcvr/flow-table/Components/f-table-schema"
@@ -115,25 +116,28 @@ Schema based Table component includes rows and cells.
 						>
 					</f-div>
 				</f-popover>
-				<f-table-schema
-					.data=${args.data}
-					.highlightSelected=${args["highlight-selected"]}
-					.highlightHover=${args["highlight-hover"]}
-					.selectable=${args.selectable}
-					.variant=${args.variant}
-					.size=${args.size}
-					.stickyHeader=${args["sticky-header"]}
-					.rowsPerPage=${args["rows-per-page"]}
-					.sortBy=${args["sort-by"]}
-					.sortOrder=${args["sort-order"]}
-					.searchTerm=${args["search-term"]}
-					.showSearchBar=${args["show-search-bar"]}
-					@next=${handleNext}
-					@toggle-row-details=${toggleRowDetails}
-					@row-input=${onRowInput}
-					@header-selected=${onHeaderSelect}
-				>
-				</f-table-schema>
+				<f-button style="display:none" label="download" @click=${downloadFile}></f-button>
+				<f-div state="default" id="reportTemplate">
+					<f-table-schema
+						.data=${args.data}
+						.highlightSelected=${args["highlight-selected"]}
+						.highlightHover=${args["highlight-hover"]}
+						.selectable=${args.selectable}
+						.variant=${args.variant}
+						.size=${args.size}
+						.stickyHeader=${args["sticky-header"]}
+						.rowsPerPage=${args["rows-per-page"]}
+						.sortBy=${args["sort-by"]}
+						.sortOrder=${args["sort-order"]}
+						.searchTerm=${args["search-term"]}
+						.showSearchBar=${args["show-search-bar"]}
+						@next=${handleNext}
+						@toggle-row-details=${toggleRowDetails}
+						@row-input=${onRowInput}
+						@header-selected=${onHeaderSelect}
+					>
+					</f-table-schema>
+				</f-div>
 			`;
 		}}
 	</Story>

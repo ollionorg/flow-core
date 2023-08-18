@@ -2,6 +2,7 @@ import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { createRef, ref } from "lit/directives/ref.js";
+import downloadFile from "./donwloadFile.ts";
 
 <Meta
 	title="@cldcvr/flow-table/Components/f-table"
@@ -64,32 +65,35 @@ Table component includes rows and cells.
 				console.log("clicked", event);
 			};
 			return html`
-				<f-table
-					.highlightSelected=${args["highlight-selected"]}
-					.highlightHover=${args["highlight-hover"]}
-					.selectable=${args.selectable}
-					.variant=${args.variant}
-					.size=${args.size}
-					@selected-rows=${handleSelectedRows}
-				>
-					<f-trow slot="header">
-						${[1, 2, 3, 4, 5].map(cellNumber => {
-							return html`<f-tcell @click=${testOverrideClick}> Header ${cellNumber} </f-tcell>`;
-						})}
-					</f-trow>
-					${[1, 2, 3, 4, 5].map(rowNumber => {
-						return html`<f-trow>
-							<f-div padding="large" slot="details">
-								<f-text variant="heading" size="x-large">This is details slot</f-text>
-							</f-div>
+				<f-button style="display:none" label="download" @click=${downloadFile}></f-button>
+				<f-div state="default" id="reportTemplate">
+					<f-table
+						.highlightSelected=${args["highlight-selected"]}
+						.highlightHover=${args["highlight-hover"]}
+						.selectable=${args.selectable}
+						.variant=${args.variant}
+						.size=${args.size}
+						@selected-rows=${handleSelectedRows}
+					>
+						<f-trow slot="header">
 							${[1, 2, 3, 4, 5].map(cellNumber => {
-								return html`<f-tcell>
-									<f-text> Column ${cellNumber} </f-text>
-								</f-tcell>`;
+								return html`<f-tcell @click=${testOverrideClick}> Header ${cellNumber} </f-tcell>`;
 							})}
-						</f-trow>`;
-					})}
-				</f-table>
+						</f-trow>
+						${[1, 2, 3, 4, 5].map(rowNumber => {
+							return html`<f-trow>
+								<f-div padding="large" slot="details">
+									<f-text variant="heading" size="x-large">This is details slot</f-text>
+								</f-div>
+								${[1, 2, 3, 4, 5].map(cellNumber => {
+									return html`<f-tcell>
+										<f-text> Column ${cellNumber} </f-text>
+									</f-tcell>`;
+								})}
+							</f-trow>`;
+						})}
+					</f-table>
+				</f-div>
 			`;
 		}}
 	</Story>

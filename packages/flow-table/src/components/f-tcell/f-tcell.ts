@@ -99,8 +99,8 @@ export class FTcell extends FRoot {
 	}
 
 	render() {
-		return html`<f-div aling="middle-left" width="100%" gap="medium"
-			>${this.selectable === "multiple"
+		return html`<div class="f-tcell-wrapper">
+			${this.selectable === "multiple"
 				? html`<f-checkbox
 						?disabled=${this.isDisabled}
 						@input=${this.handleSelection}
@@ -140,7 +140,7 @@ export class FTcell extends FRoot {
 					  `
 					: nothing}
 			</f-div>
-		</f-div>`;
+		</div>`;
 	}
 
 	setSelection(value = false, isDisabled = false) {

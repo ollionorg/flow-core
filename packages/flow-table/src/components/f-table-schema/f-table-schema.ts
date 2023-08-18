@@ -64,7 +64,7 @@ export class FTableSchema extends FRoot {
 	/**
 	 * @attribute data to display in table
 	 */
-	@property({ type: Object })
+	@property({ type: Object, reflect: true })
 	data!: FTableSchemaData;
 
 	@property({ type: String, reflect: true })

@@ -3,6 +3,11 @@
 
 # Change Log
 
+## [1.2.3] - 2023-08-18
+
+### Bug Fixes
+- `f-tcell` : text and content not rendering while exporting using `jspdf`.
+
 ## [1.2.2] - 2023-07-20
 
 ### Improvements

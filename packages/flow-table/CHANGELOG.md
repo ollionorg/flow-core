@@ -3,6 +3,11 @@
 
 # Change Log
 
+## [1.2.4] - 2023-08-21
+
+### Bug Fixes
+- `f-table-schema` : When a cell contains a large amount of text content and is used without a template, the table will display a scrollbar.
+
 ## [1.2.3] - 2023-08-18
 
 ### Bug Fixes

@@ -1,5 +1,5 @@
-import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { property, query, state } from "lit/decorators.js";
+import { html, unsafeCSS } from "lit";
+import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-tag.scss";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
@@ -12,7 +12,6 @@ import LightenDarkenColor from "../../utils/get-lighten-darken-color";
 import { FIcon } from "../f-icon/f-icon";
 import { FCounter } from "../f-counter/f-counter";
 import { flowElement } from "./../../utils";
-import { FDiv } from "../f-div/f-div";
 
 export type FTagStateProp =
 	| "primary"
@@ -105,12 +104,6 @@ export class FTag extends FRoot {
 	@property({ type: Boolean })
 	clickable?: boolean = false;
 
-	@query(".text-content")
-	fTagTextContent?: FDiv;
-
-	@query(".f-tag")
-	fTagElement?: FDiv;
-
 	/**
 	 * compute icon size based on tag size
 	 */
@@ -140,7 +133,7 @@ export class FTag extends FRoot {
 		return getTextContrast(this.fill) === "dark-text" ? "#202a36" : "#808080";
 	}
 
-	get labelCount() {
+	get isLabelOverflown() {
 		return this.label?.length >= 12;
 	}
 
@@ -324,23 +317,14 @@ export class FTag extends FRoot {
 			?clickable=${this.clickable}
 		>
 			${iconLeft}
-			<f-div class="text-content" ?data-label-count=${this.labelCount}>${this.label}</f-div>
+			<f-div
+				class="text-content"
+				?data-label-count=${this.isLabelOverflown}
+				.tooltip=${this.isLabelOverflown ? this.label : undefined}
+				>${this.label}</f-div
+			>
 			${counter}${iconRight}
 		</div>`;
-	}
-
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
-		super.updated(changedProperties);
-		if (this.fTagTextContent) {
-			if (this.labelCount) {
-				this.fTagTextContent.tooltip = this.label;
-			} else {
-				this.fTagTextContent.tooltip = "";
-				this.fTagTextContent?.removeAttribute("tooltip");
-			}
-		}
 	}
 }
 

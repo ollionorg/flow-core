@@ -64,7 +64,7 @@ export class FTableSchema extends FRoot {
 	/**
 	 * @attribute data to display in table
 	 */
-	@property({ type: Object })
+	@property({ type: Object, reflect: true })
 	data!: FTableSchemaData;
 
 	@property({ type: String, reflect: true })
@@ -233,7 +233,7 @@ export class FTableSchema extends FRoot {
 							.width=${width}
 							.actions=${actions}
 							?sticky-left=${ifDefined(sticky)}
-							><f-text style="height:100%" inline .highlight=${highlightTerm}
+							><f-text style="height:100%" .highlight=${highlightTerm}
 								>${this.getCellTemplate(row.data[columnHeader[0]])}</f-text
 							></f-tcell
 						>`;
@@ -356,7 +356,7 @@ export class FTableSchema extends FRoot {
 			return html`<f-text state="warning"> Warning: The 'data' property is required.</f-text>`;
 		}
 		return html`
-			<div>
+			<div class="f-table-schema-wrapper">
 				<slot name="search">
 					${this.showSearchBar
 						? html`<f-div padding="medium none">

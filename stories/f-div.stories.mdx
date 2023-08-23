@@ -2,6 +2,7 @@ import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import FDivAnatomy from "./svg/i-fdiv-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
 
 <Meta
 	title="Components/f-div"
@@ -119,6 +120,9 @@ f-div is used as a container for HTML elements.
 				control: "select",
 				options: ["background", "border", "notch-right", "notch-left", "None"]
 			},
+			highlight: {
+				control: { type: "boolean" }
+			},
 			loading: {
 				control: "radio",
 				options: ["loader", "skeleton", "None"]
@@ -146,6 +150,7 @@ f-div is used as a container for HTML elements.
 			sticky: "none",
 			selected: "",
 			loading: "",
+			highlight: false,
 			disabled: false,
 			clickable: false
 		}}
@@ -232,6 +237,8 @@ f-div is used as a container for HTML elements.
 							height="hug-content"
 							padding="x-large"
 							state="secondary"
+							id="abc-1"
+							?highlight=${args.highlight}
 						>
 							<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
 						</f-div>
@@ -2016,11 +2023,90 @@ Defines the behavior of f-div in loading state. A user can select between a load
 
 <Canvas>
 	<Story name="Flags">
-		{args => html`<f-div gap="medium" padding="x-large" direction="column">
-			<f-div padding="none" width="hug-content" align="middle-center"
-				><f-text variant="para" size="medium" weight="regular" align="center">Disabled</f-text>
-			</f-div>
-			<f-div padding="none" direction="row" gap="large">
+		{args => {
+			const [highlight, setHighlight] = useState(false);
+			const toggleHighlight = () => {
+				setHighlight(!highlight);
+				setTimeout(() => {
+					setHighlight(false);
+				}, 2000);
+			};
+			return html`<f-div gap="medium" padding="x-large" direction="column">
+				<f-div padding="none" width="hug-content" align="middle-center"
+					><f-text variant="para" size="medium" weight="regular" align="center">Disabled</f-text>
+				</f-div>
+				<f-div padding="none" direction="row" gap="large">
+					<f-div
+						gap="medium"
+						padding="large"
+						width="hug-content"
+						height="hug-content"
+						state="subtle"
+						variant="curved"
+					>
+						<f-div
+							gap="medium"
+							padding="large"
+							width="100px"
+							height="hug-content"
+							state="primary"
+							variant="curved"
+						></f-div>
+						<f-div
+							gap="medium"
+							padding="large"
+							width="100px"
+							height="hug-content"
+							state="primary"
+							variant="curved"
+						></f-div>
+						<f-div
+							gap="medium"
+							padding="large"
+							width="100px"
+							height="hug-content"
+							state="primary"
+							variant="curved"
+						></f-div>
+					</f-div>
+					<f-div
+						gap="medium"
+						padding="large"
+						width="hug-content"
+						height="hug-content"
+						state="subtle"
+						variant="curved"
+						disabled=${true}
+					>
+						<f-div
+							gap="medium"
+							padding="large"
+							width="100px"
+							height="hug-content"
+							state="primary"
+							variant="curved"
+						></f-div>
+						<f-div
+							gap="medium"
+							padding="large"
+							width="100px"
+							height="hug-content"
+							state="primary"
+							variant="curved"
+						></f-div>
+						<f-div
+							gap="medium"
+							padding="large"
+							width="100px"
+							height="hug-content"
+							state="primary"
+							variant="curved"
+						></f-div>
+					</f-div>
+				</f-div>
+				<f-div padding="none" width="hug-content" align="middle-center"
+					><f-text variant="para" size="medium" weight="regular" align="center">Clickable</f-text>
+				</f-div>
 				<f-div
 					gap="medium"
 					padding="large"
@@ -2028,6 +2114,7 @@ Defines the behavior of f-div in loading state. A user can select between a load
 					height="hug-content"
 					state="subtle"
 					variant="curved"
+					clickable=${true}
 				>
 					<f-div
 						gap="medium"
@@ -2054,6 +2141,10 @@ Defines the behavior of f-div in loading state. A user can select between a load
 						variant="curved"
 					></f-div>
 				</f-div>
+				<f-div padding="none" width="hug-content" align="middle-center"
+					><f-text variant="para" size="medium" weight="regular" align="center">Higlight</f-text>
+				</f-div>
+				<f-button label="Highlight Toggle" @click=${toggleHighlight}></f-button>
 				<f-div
 					gap="medium"
 					padding="large"
@@ -2061,7 +2152,7 @@ Defines the behavior of f-div in loading state. A user can select between a load
 					height="hug-content"
 					state="subtle"
 					variant="curved"
-					disabled=${true}
+					?highlight=${highlight}
 				>
 					<f-div
 						gap="medium"
@@ -2088,45 +2179,8 @@ Defines the behavior of f-div in loading state. A user can select between a load
 						variant="curved"
 					></f-div>
 				</f-div>
-			</f-div>
-			<f-div padding="none" width="hug-content" align="middle-center"
-				><f-text variant="para" size="medium" weight="regular" align="center">Clickable</f-text>
-			</f-div>
-			<f-div
-				gap="medium"
-				padding="large"
-				width="hug-content"
-				height="hug-content"
-				state="subtle"
-				variant="curved"
-				clickable=${true}
-			>
-				<f-div
-					gap="medium"
-					padding="large"
-					width="100px"
-					height="hug-content"
-					state="primary"
-					variant="curved"
-				></f-div>
-				<f-div
-					gap="medium"
-					padding="large"
-					width="100px"
-					height="hug-content"
-					state="primary"
-					variant="curved"
-				></f-div>
-				<f-div
-					gap="medium"
-					padding="large"
-					width="100px"
-					height="hug-content"
-					state="primary"
-					variant="curved"
-				></f-div>
-			</f-div>
-		</f-div>`}
+			</f-div>`;
+		}}
 	</Story>
 </Canvas>
 

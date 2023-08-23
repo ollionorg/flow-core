@@ -238,17 +238,8 @@ export class FText extends FRoot {
 		</div>`;
 
 		const editableSnippet = html`<div class="non-editable-slot">
-				${this.highlightedText ? highlightSnippet : html`<slot></slot>`}
-			</div>
-			<div class="pseudo-edit-text">
-				<f-icon
-					source="i-edit"
-					state="primary"
-					.size=${this.iconSize}
-					clickable
-					@click=${this.handleEdit}
-				></f-icon>
-			</div>`;
+			${this.highlightedText ? highlightSnippet : html`<slot></slot>`}
+		</div>`;
 
 		if (this.editable) {
 			return html`

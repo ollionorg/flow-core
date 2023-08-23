@@ -211,6 +211,12 @@ export class FDiv extends FRoot {
 	clickable?: boolean = false;
 
 	/**
+	 * @attribute is highlighted
+	 */
+	@property({ reflect: true, type: Boolean })
+	highlight?: boolean = false;
+
+	/**
 	 * @attribute Overflow property defines the behavior of the overflowing elements inside a f-div
 	 */
 	@property({ reflect: true, type: String })
@@ -291,6 +297,23 @@ export class FDiv extends FRoot {
 		}
 	}
 
+	checkHighlight() {
+		const highlights = document.querySelectorAll("f-div[highlight]");
+		const overlayEl = document.querySelector(".f-div-highlight-overlay");
+		if (highlights.length > 0 && !overlayEl) {
+			const overlay = `<div class="f-div-highlight-overlay"></div>`;
+			document.body?.insertAdjacentHTML("afterbegin", overlay);
+		}
+		if (highlights.length === 0) {
+			overlayEl?.remove();
+		}
+	}
+
+	disconnectedCallback() {
+		this.checkHighlight();
+		super.disconnectedCallback();
+	}
+
 	render() {
 		/**
 		 * creating local fill variable out of state prop.
@@ -309,6 +332,7 @@ export class FDiv extends FRoot {
 		this.applyBorder();
 		this.applyPadding();
 		this.applySize();
+
 		/**
 		 * END :  apply inline styles based on attribute values
 		 */
@@ -316,12 +340,19 @@ export class FDiv extends FRoot {
 		/**
 		 * Final html to render
 		 */
-		return html`<slot></slot>${this.loading === "loader" ? html`${unsafeSVG(loader)}` : ""}`;
+		return html` <slot></slot>${this.loading === "loader" ? html`${unsafeSVG(loader)}` : ""}`;
 	}
 	protected async updated(
 		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
 	): Promise<void> {
 		super.updated(changedProperties);
+		if (
+			changedProperties.has("highlight") &&
+			(changedProperties.get("highlight") === true || this.highlight)
+		) {
+			this.checkHighlight();
+		}
+
 		if (this.variant === "round") {
 			this.style.borderRadius = `${this.offsetHeight / 2}px`;
 		} else if (this.variant === "curved") {

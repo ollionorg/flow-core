@@ -51,12 +51,6 @@ export class FTag extends FRoot {
 	label!: string;
 
 	/**
-	 * @attribute max-label-length.
-	 */
-	@property({ type: Number, reflect: true, attribute: "max-label-length" })
-	maxLabelLength?: number = 12;
-
-	/**
 	 * @attribute The medium size is the default and recommended option.
 	 */
 	@property({ reflect: true, type: String })
@@ -137,14 +131,6 @@ export class FTag extends FRoot {
 	 */
 	get loaderColor() {
 		return getTextContrast(this.fill) === "dark-text" ? "#202a36" : "#808080";
-	}
-
-	get isLabelOverflown() {
-		if (this.maxLabelLength) {
-			return this.label?.length >= this.maxLabelLength;
-		} else {
-			return this.label?.length >= 12;
-		}
 	}
 
 	/**
@@ -327,12 +313,7 @@ export class FTag extends FRoot {
 			?clickable=${this.clickable}
 		>
 			${iconLeft}
-			<f-div
-				class="text-content"
-				?data-label-count=${this.isLabelOverflown}
-				.tooltip=${this.isLabelOverflown ? this.label : undefined}
-				>${this.label}</f-div
-			>
+			<f-div class="text-content" .tooltip=${this.label}>${this.label}</f-div>
 			${counter}${iconRight}
 		</div>`;
 	}

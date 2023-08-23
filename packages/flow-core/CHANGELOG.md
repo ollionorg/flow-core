@@ -12,7 +12,7 @@
 
 ### Improvements
 
-- `f-tag`: added ellipsis according to the count of label.
+- `f-tag`: added ellipsis according to width of f-tag.
 
 ### Bug Fixes
 

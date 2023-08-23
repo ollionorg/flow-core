@@ -51,6 +51,12 @@ export class FTag extends FRoot {
 	label!: string;
 
 	/**
+	 * @attribute max-label-length.
+	 */
+	@property({ type: Number, reflect: true, attribute: "max-label-length" })
+	maxLabelLength?: number = 12;
+
+	/**
 	 * @attribute The medium size is the default and recommended option.
 	 */
 	@property({ reflect: true, type: String })
@@ -134,7 +140,11 @@ export class FTag extends FRoot {
 	}
 
 	get isLabelOverflown() {
-		return this.label?.length >= 12;
+		if (this.maxLabelLength) {
+			return this.label?.length >= this.maxLabelLength;
+		} else {
+			return this.label?.length >= 12;
+		}
 	}
 
 	/**

@@ -4,6 +4,16 @@
 
 # Change Log
 
+## [1.22.1] - 2023-08-23
+
+### Bug Fixes
+
+- `f-suggest`: `resultWhen` called mutliple time.
+### Improvements
+
+- `f-suggest`: `@selected` event emitted when suggested option selected.
+
+
 ## [1.22.0] - 2023-08-16
 
 ### Features

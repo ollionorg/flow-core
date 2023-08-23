@@ -1,4 +1,4 @@
-import { html, HTMLTemplateResult, nothing, unsafeCSS } from "lit";
+import { html, HTMLTemplateResult, nothing, PropertyValues, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import eleStyle from "./f-suggest.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -179,6 +179,8 @@ export class FSuggest extends FRoot {
 	@state()
 	currentCategoryIndex = 0;
 
+	filteredSuggestions?: FSuggestSuggestions;
+
 	/**
 	 * emit input custom event
 	 */
@@ -244,28 +246,6 @@ export class FSuggest extends FRoot {
 				item => typeof item === "object" && item !== null && !Array.isArray(item)
 			)
 		);
-	}
-
-	get filteredSuggestions() {
-		if (this.value) {
-			if (this.isStringArraySuggestions && !this.isTemplateArraySuggestions) {
-				return (this.suggestions as string[])?.filter(sg => this.suggestWhen(sg, this.value));
-			} else if (this.isTemplateArraySuggestions) {
-				return (this.suggestions as FSuggestTemplate[])?.filter(sg =>
-					this.suggestWhen(sg, this.value)
-				);
-			} else {
-				const filtered = _.cloneDeep(this.suggestions) as FSuggestSuggestionsCategory;
-				Object.entries(filtered).forEach(([objName, objValue]) => {
-					filtered[objName] = objValue.filter(item => this.suggestWhen(item, this.value));
-				});
-				for (const key in filtered) {
-					if (Array.isArray(filtered[key]) && !filtered[key].length) delete filtered[key];
-				}
-				return filtered;
-			}
-		}
-		return this.suggestions;
 	}
 
 	get isSearchComponent() {
@@ -386,6 +366,35 @@ export class FSuggest extends FRoot {
 	displayCategories = displayCategories;
 	displayCustomTemplate = displayCustomTemplate;
 
+	willUpdate(changedProperties: PropertyValues<this>) {
+		if (changedProperties.has("value")) {
+			if (this.value) {
+				if (this.isStringArraySuggestions && !this.isTemplateArraySuggestions) {
+					this.filteredSuggestions = (this.suggestions as string[])?.filter(sg =>
+						this.suggestWhen(sg, this.value)
+					);
+				} else if (this.isTemplateArraySuggestions) {
+					this.filteredSuggestions = (this.suggestions as FSuggestTemplate[])?.filter(sg =>
+						this.suggestWhen(sg, this.value)
+					);
+				} else {
+					const filtered = _.cloneDeep(this.suggestions) as FSuggestSuggestionsCategory;
+					Object.entries(filtered).forEach(([objName, objValue]) => {
+						filtered[objName] = objValue.filter(item => this.suggestWhen(item, this.value));
+					});
+					for (const key in filtered) {
+						if (Array.isArray(filtered[key]) && !filtered[key].length) delete filtered[key];
+					}
+					this.filteredSuggestions = filtered;
+				}
+			} else {
+				this.filteredSuggestions = this.suggestions;
+			}
+		} else if (this.value === undefined) {
+			this.filteredSuggestions = this.suggestions;
+		}
+		super.willUpdate(changedProperties);
+	}
 	render() {
 		// classes to apply on inner element
 		const classes: Record<string, boolean> = {};
@@ -456,15 +465,28 @@ export class FSuggest extends FRoot {
 		if (event.target && (event.target as FDiv).textContent) {
 			this.value = (event.target as FDiv).textContent?.trim();
 			this.dispatchInputEvent(this.value as string);
+			this.dispatchSelectedEvent(this.value as string);
 		}
 		await this.handleBlur(false);
 	}
 
 	async handleSelect(sg: FSuggestTemplate) {
 		this.value = sg.toString();
-		this.dispatchInputEvent(sg);
-
+		this.dispatchInputEvent(sg.toString());
+		this.dispatchSelectedEvent(sg);
 		await this.handleBlur(false);
+	}
+
+	dispatchSelectedEvent(value: string | FSuggestTemplate) {
+		const event = new CustomEvent<FSuggestCustomEvent>("selected", {
+			detail: {
+				value
+			},
+			bubbles: true,
+			composed: true
+		});
+
+		this.dispatchEvent(event);
 	}
 }
 

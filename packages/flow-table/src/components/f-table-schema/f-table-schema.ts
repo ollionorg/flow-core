@@ -142,7 +142,7 @@ export class FTableSchema extends FRoot {
 	/**
 	 * @attribute header-template
 	 */
-	@property({ reflect: false, type: Object, attribute: "header-template" })
+	@property({ reflect: false, type: Function, attribute: "header-template" })
 	headerTemplate?: FTableHeaderTemplate;
 
 	set ["header-template"](val: FTableHeaderTemplate | undefined) {

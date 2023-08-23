@@ -39,6 +39,10 @@ export type FDivHeightProp =
 	| `${number}%`
 	| `${number}vh`;
 
+export type FDivMaxWidthProp = `${number}px` | `${number}%` | `${number}vw`;
+
+export type FDivMaxHeightProp = `${number}px` | `${number}%` | `${number}vh`;
+
 export type FDivStateProp =
 	| "subtle"
 	| "default"
@@ -178,6 +182,17 @@ export class FDiv extends FRoot {
 	height?: FDivHeightProp = "fill-container";
 
 	/**
+	 * @attribute width of `f-div`
+	 */
+	@property({ type: String, reflect: true, attribute: "max-width" })
+	maxWidth?: FDivWidthProp;
+	/**
+	 * @attribute height of `f-div`
+	 */
+	@property({ type: String, reflect: true, attribute: "max-height" })
+	maxHeight?: FDivHeightProp;
+
+	/**
 	 * @attribute The disabled attribute can be set to keep a user from clicking on the f-icon.
 	 */
 	@property({ reflect: true, type: Boolean })
@@ -263,6 +278,16 @@ export class FDiv extends FRoot {
 		}
 		if (this.height && !fixedValues.includes(this.height)) {
 			this.style.height = this.height;
+		}
+		if (this.maxWidth) {
+			this.style.maxWidth = this.maxWidth;
+		} else {
+			this.style.removeProperty("max-width");
+		}
+		if (this.maxHeight) {
+			this.style.maxHeight = this.maxHeight;
+		} else {
+			this.style.removeProperty("max-height");
 		}
 	}
 

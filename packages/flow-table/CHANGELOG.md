@@ -3,54 +3,74 @@
 
 # Change Log
 
+## [1.3.0] - 2023-08-23
+
+### Features
+
+- `f-table-schema` : `header-template` prop added for a common header-cell template.
+
 ## [1.2.4] - 2023-08-21
 
 ### Bug Fixes
+
 - `f-table-schema` : When a cell contains a large amount of text content and is used without a template, the table will display a scrollbar.
 
 ## [1.2.3] - 2023-08-18
 
 ### Bug Fixes
+
 - `f-tcell` : text and content not rendering while exporting using `jspdf`.
 
 ## [1.2.2] - 2023-07-20
 
 ### Improvements
+
 - `f-tcell` : In actions callback, passing additional parameter as element for further implementation (like opening popover).
+
 ## [1.2.1] - 2023-07-20
 
 ### Improvements
+
 - `f-table-schema` : `@row-click` event emitted with row object
 
 ### Bug Fixes
+
 - `f-table-schema` : `show-search-bar` not working in vue
 
 ## [1.2.0] - 2023-07-18
 
 ### Features
+
 - `f-table-schema` : expandIconPosition position made configurable.
 - `f-trow` now supports `expand-icon-position` attribute.
 - `f-tcell` actions now supports tooltip
 
 ### Improvements
+
 - `part="cell"` added `f-table-schema` to support external styles.
 
 ### Bug fixes
+
 - `f-table-schema` : external template alignment fixed.
 
 ## [1.1.1] - 2023-07-13
 
 ### Bug Fixes
+
 - `f-table-schema` : details slot width issue fixed.
 
 ## [1.1.0] - 2023-07-11
 
 ### Features
+
 - `f-table-schema` : Search on a specific column
+
 ### Improvements
+
 - Action in the cell requires id (in case of displaying popover)
 - Disable row selection for a specific rows
 - Hide sort on a specific columns
+
 ### Bug Fixes
 
 - Sort doesn’t work if we have the search term

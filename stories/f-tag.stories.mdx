@@ -29,7 +29,6 @@ Tags allow users to categorize the content. They can be used to add metadata to 
 		name="Playground"
 		argTypes={{
 			label: { control: "text" },
-			["max-label-length"]: { control: "number" },
 			size: {
 				control: "select",
 				options: ["large", "medium", "small"]
@@ -78,7 +77,6 @@ Tags allow users to categorize the content. They can be used to add metadata to 
 		}}
 		args={{
 			label: "label",
-			["max-label-length"]: 12,
 			size: "medium",
 			state: "neutral",
 			["icon-left"]: undefined,
@@ -102,7 +100,6 @@ Tags allow users to categorize the content. They can be used to add metadata to 
 					.loading=${args.loading}
 					.disabled=${args.disabled}
 					.selected=${args.selected}
-					max-label-length=${args["max-label-length"]}
 					?clickable=${args.clickable}
 				></f-tag
 			></f-div>`

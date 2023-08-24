@@ -84,7 +84,13 @@ Schema based Table component includes rows and cells.
 			["sort-by"]: "firstName",
 			["sort-order"]: "asc",
 			["search-term"]: "",
-			["show-search-bar"]: true
+			["show-search-bar"]: true,
+			["header-cell-template"]: val => {
+				return html`<f-div gap="small" align="middle-center">
+					<f-icon source="i-icon"></f-icon>
+					<f-text>${val}</f-text></f-div
+				>`;
+			}
 		}}
 	>
 		{args => {
@@ -125,6 +131,7 @@ Schema based Table component includes rows and cells.
 						.selectable=${args.selectable}
 						.variant=${args.variant}
 						.size=${args.size}
+						.headerCellTemplate=${args["header-cell-template"]}
 						.stickyHeader=${args["sticky-header"]}
 						.rowsPerPage=${args["rows-per-page"]}
 						.sortBy=${args["sort-by"]}
@@ -154,6 +161,43 @@ Schema based Table component includes rows and cells.
 			return html`
 				<f-div gap="small" height="100%">
 					<f-table-schema .data=${data}> </f-table-schema>
+					<f-divider></f-divider>
+					<f-div direction="column" gap="medium" padding="small">
+						<f-text
+							>Sample data used to display table.
+							<a
+								href="https://github.com/cldcvr/flow-core/blob/main/packages/flow-table/f-table-schema.doc.md"
+								>Learn more</a
+							></f-text
+						>
+						<f-divider></f-divider>
+						<f-div>
+							<pre>${JSON.stringify(data, undefined, 8)}</pre>
+						</f-div>
+					</f-div>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+<br />
+
+### header-cell-template
+
+<Canvas>
+	<Story name="header-cell-template">
+		{args => {
+			const data = getFakeUsers(5, 5);
+			const headerCellTemplate = val => {
+				return html`<f-div gap="small" align="middle-center">
+					<f-icon source="i-icon"></f-icon>
+					<f-text>${val}</f-text></f-div
+				>`;
+			};
+			return html`
+				<f-div gap="small" height="100%">
+					<f-table-schema .data=${data} .headerCellTemplate=${headerCellTemplate}> </f-table-schema>
 					<f-divider></f-divider>
 					<f-div direction="column" gap="medium" padding="small">
 						<f-text

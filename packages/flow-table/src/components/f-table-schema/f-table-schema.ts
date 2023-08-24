@@ -45,6 +45,8 @@ export type FTableSchemaVariant = FTableVariant;
 export type FTableSchemaSize = FTableSize;
 export type FTableSchemaSelectable = FTableSelectable;
 
+export type FTableSchemaHeaderCellemplate = (value: any) => HTMLTemplateResult;
+
 @flowElement("f-table-schema")
 export class FTableSchema extends FRoot {
 	/**
@@ -135,6 +137,16 @@ export class FTableSchema extends FRoot {
 
 	set ["show-search-bar"](val: boolean) {
 		this.showSearchBar = val;
+	}
+
+	/**
+	 * @attribute header-cell-template
+	 */
+	@property({ reflect: false, type: Function, attribute: "header-cell-template" })
+	headerCellTemplate?: FTableSchemaHeaderCellemplate;
+
+	set ["header-cell-template"](val: FTableSchemaHeaderCellemplate | undefined) {
+		this.headerCellTemplate = val;
 	}
 
 	@state()
@@ -532,6 +544,8 @@ export class FTableSchema extends FRoot {
 	getHeaderCellTemplate(cell: FTableSchemaHeaderCell) {
 		if (cell && typeof cell === "object" && cell.value && cell.template) {
 			return cell.template();
+		} else if (cell && typeof cell === "object" && cell.value && this.headerCellTemplate) {
+			return this.headerCellTemplate(cell.value);
 		} else if (cell && typeof cell === "object" && cell.value) {
 			return html`<f-text>${cell.value}</f-text>`;
 		}

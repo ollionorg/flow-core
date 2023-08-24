@@ -45,6 +45,8 @@ export * from "./components/f-progress-bar/f-progress-bar";
 export * from "./components/f-breadcrumb/f-breadcrumb";
 export * from "./mixins/components/f-root/f-root";
 
+export { html } from "lit";
+
 if (document.readyState !== "loading") {
 	ConfigUtil.initTheme();
 } else {

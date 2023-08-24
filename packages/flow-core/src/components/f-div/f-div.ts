@@ -286,14 +286,18 @@ export class FDiv extends FRoot {
 			this.style.height = this.height;
 		}
 		if (this.maxWidth) {
-			this.style.maxWidth = this.maxWidth;
+			this.classList.add("f-div-custom-width");
+			this.style.setProperty("--max-width", this.maxWidth);
 		} else {
-			this.style.removeProperty("max-width");
+			this.style.removeProperty("--max-width");
+			this.classList.remove("f-div-custom-width");
 		}
 		if (this.maxHeight) {
-			this.style.maxHeight = this.maxHeight;
+			this.classList.add("f-div-custom-height");
+			this.style.setProperty("--max-height", this.maxHeight);
 		} else {
-			this.style.removeProperty("max-height");
+			this.style.removeProperty("--max-height");
+			this.classList.remove("f-div-custom-height");
 		}
 	}
 
@@ -346,6 +350,7 @@ export class FDiv extends FRoot {
 		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
 	): Promise<void> {
 		super.updated(changedProperties);
+
 		if (
 			changedProperties.has("highlight") &&
 			(changedProperties.get("highlight") === true || this.highlight)

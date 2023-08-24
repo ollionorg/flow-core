@@ -140,12 +140,12 @@ export class FTableSchema extends FRoot {
 	}
 
 	/**
-	 * @attribute header-template
+	 * @attribute header-cell-template
 	 */
 	@property({ reflect: false, type: Function, attribute: "header-cell-template" })
 	headerCellTemplate?: FTableSchemaHeaderCellemplate;
 
-	set ["header-template"](val: FTableSchemaHeaderCellemplate | undefined) {
+	set ["header-cell-template"](val: FTableSchemaHeaderCellemplate | undefined) {
 		this.headerCellTemplate = val;
 	}
 

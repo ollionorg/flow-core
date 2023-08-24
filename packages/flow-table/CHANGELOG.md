@@ -7,7 +7,7 @@
 
 ### Features
 
-- `f-table-schema` : `header-template` prop added for a common header-cell template.
+- `f-table-schema` : `header-cell-template` prop added for a common header-cell template.
 
 ## [1.2.4] - 2023-08-21
 

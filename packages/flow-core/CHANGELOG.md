@@ -4,7 +4,7 @@
 
 # Change Log
 
-## [1.23.0] - 2023-08-23
+## [1.23.0] - 2023-08-24
 
 ### Features
 
@@ -13,6 +13,17 @@
 ### Improvements
 
 - `f-text`: UX for f-text editable feature improved. On hover and clicking on f-text the editable box opens now.
+
+
+## [1.22.1] - 2023-08-23
+
+### Bug Fixes
+
+- `f-suggest`: `resultWhen` called mutliple time.
+### Improvements
+
+- `f-suggest`: `@selected` event emitted when suggested option selected.
+
 
 ## [1.22.0] - 2023-08-16
 

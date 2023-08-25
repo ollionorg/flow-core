@@ -4,6 +4,46 @@
 
 # Change Log
 
+## [1.23.0] - 2023-08-24
+
+### Features
+
+- `f-div`: `max-height` and `max-width` properties added.
+
+### Improvements
+
+- `f-text`: UX for f-text editable feature improved. On hover and clicking on f-text the editable box opens now.
+
+## [1.22.2] - 2023-08-23
+
+### Bug Fixes
+
+- lit `html` exported from `flow-core` now.
+
+## [1.22.1] - 2023-08-23
+
+### Bug Fixes
+
+- `f-suggest`: `resultWhen` called mutliple time.
+
+### Improvements
+
+- `f-suggest`: `@selected` event emitted when suggested option selected.
+
+## [1.22.0] - 2023-08-16
+
+### Features
+
+- `f-div`: highlight property added to highlight a particular f-div and others would be in overlay.
+
+### Improvements
+
+- `f-tag`: added ellipsis according to width of f-tag.
+
+### Bug Fixes
+
+- `f-tag`: emoji wasn't taking the correct size according to the f-tag size.
+
 ## [1.21.0] - 2023-08-16
 
 ### Features
@@ -13,6 +53,7 @@
 - `no-data` slot added in `f-search` and `f-suggest` to display when no result found.
 
 ### Improvements
+
 - `loading` attribute added in `f-search`
 - Default behavior of search/suggest results are now case-insensitive in `f-search` ,`f-suggest`.
 

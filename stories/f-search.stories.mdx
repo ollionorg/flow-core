@@ -604,9 +604,13 @@ Provides the search result in the form of an array of strings.
 <Canvas>
 	<Story name="result">
 		{args => {
-			const [value, setValue] = useState("");
+			const [value, setValue] = useState("jane");
 			const handleValue = e => {
+				console.log("in input", e);
 				setValue(e.detail.value);
+			};
+			const handleSelected = e => {
+				console.log("in selected", e);
 			};
 			const template = [
 				{
@@ -643,6 +647,7 @@ Provides the search result in the form of an array of strings.
 				}
 			];
 			const resultWhen = (result, value) => {
+				console.log("in result when");
 				if (value === "*" || value === "$") {
 					return true;
 				} else if (typeof result === "object") {
@@ -659,7 +664,6 @@ Provides the search result in the form of an array of strings.
 						<f-search
 							value=${value}
 							placeholder="Write here"
-							.resultWhen=${resultWhen}
 							@input=${handleValue}
 							size="medium"
 							.result=${[
@@ -697,7 +701,6 @@ Provides the search result in the form of an array of strings.
 					<f-div align="middle-center">
 						<f-search
 							value=${value}
-							.resultWhen=${resultWhen}
 							placeholder="Write here"
 							@input=${handleValue}
 							size="medium"
@@ -724,6 +727,7 @@ Provides the search result in the form of an array of strings.
 							@input=${handleValue}
 							size="medium"
 							.result=${template}
+							@selected=${handleSelected}
 						>
 							<f-div slot="label" padding="none" gap="none">Label</f-div>
 							<f-div slot="description" padding="none" gap="none"

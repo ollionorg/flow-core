@@ -112,6 +112,8 @@ export class FTag extends FRoot {
 			return "small";
 		} else if (this.size === "medium") {
 			return "x-small";
+		} else if (this.size === "small") {
+			return "x-small";
 		} else {
 			return "medium";
 		}
@@ -222,7 +224,8 @@ export class FTag extends FRoot {
 						"left-icon": true,
 						...iconClasses,
 						"f-tag-system-icon": this.tagSystemIcon ? true : false,
-						"system-icon-size": this.size === "small" ? true : false
+						"system-icon-size": this.size === "small" ? true : false,
+						"f-tag-small-emoji": this.size === "small" ? true : false
 					})}
 					.size=${this.iconSize}
 					?clickable=${true}
@@ -240,7 +243,8 @@ export class FTag extends FRoot {
 						"right-icon": true,
 						...iconClasses,
 						"f-tag-system-icon": this.tagSystemIcon ? true : false,
-						"system-icon-size": this.size === "small" ? true : false
+						"system-icon-size": this.size === "small" ? true : false,
+						"f-tag-small-emoji": this.size === "small" ? true : false
 					})}
 					.size=${this.iconSize}
 					?clickable=${true}
@@ -308,7 +312,9 @@ export class FTag extends FRoot {
 			?selected=${this.selected}
 			?clickable=${this.clickable}
 		>
-			${iconLeft}${this.label}${counter}${iconRight}
+			${iconLeft}
+			<f-div class="text-content" .tooltip=${this.label}>${this.label}</f-div>
+			${counter}${iconRight}
 		</div>`;
 	}
 }

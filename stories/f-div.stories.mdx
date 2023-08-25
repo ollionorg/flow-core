@@ -2,6 +2,7 @@ import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import FDivAnatomy from "./svg/i-fdiv-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
 
 <Meta
 	title="Components/f-div"
@@ -93,6 +94,12 @@ f-div is used as a container for HTML elements.
 				control: "select",
 				options: ["hug-content", "fill-container"]
 			},
+			["max-width"]: {
+				control: "text"
+			},
+			["max-height"]: {
+				control: "text"
+			},
 			overflow: {
 				control: "radio",
 				options: ["wrap", "scroll", "hidden", "visible"]
@@ -119,6 +126,9 @@ f-div is used as a container for HTML elements.
 				control: "select",
 				options: ["background", "border", "notch-right", "notch-left", "None"]
 			},
+			highlight: {
+				control: { type: "boolean" }
+			},
 			loading: {
 				control: "radio",
 				options: ["loader", "skeleton", "None"]
@@ -141,11 +151,14 @@ f-div is used as a container for HTML elements.
 			padding: "medium",
 			width: "hug-content",
 			height: "hug-content",
+			["max-width"]: undefined,
+			["max-height"]: undefined,
 			overflow: "wrap",
 			align: "top-left",
 			sticky: "none",
 			selected: "",
 			loading: "",
+			highlight: false,
 			disabled: false,
 			clickable: false
 		}}
@@ -177,6 +190,8 @@ f-div is used as a container for HTML elements.
 						.disabled=${args.disabled}
 						.clickable=${args.clickable}
 						.loading=${args.loading}
+						max-width=${args["max-width"]}
+						max-height=${args["max-height"]}
 						@click=${handleClick}
 					>
 						<f-div
@@ -232,6 +247,8 @@ f-div is used as a container for HTML elements.
 							height="hug-content"
 							padding="x-large"
 							state="secondary"
+							id="abc-1"
+							?highlight=${args.highlight}
 						>
 							<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
 						</f-div>
@@ -1236,6 +1253,84 @@ Height of a layout can be defined in 3 ways:
 
 <br />
 
+## max-width
+
+<hr />
+
+Defines maximum width of the f-div.
+
+<Canvas>
+	<Story name="max-width">
+		{args => html`<f-div gap="medium" padding="none" direction="column">
+			<f-div
+				width="fill-container"
+				padding="large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				align="middle-center"
+			>
+				<f-div width="hug-content" height="hug-content" padding="x-large">
+					<f-text variant="para" size="large" weight="medium">div without max-width</f-text>
+				</f-div>
+			</f-div>
+			<f-div
+				width="fill-container"
+				padding="large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				align="middle-center"
+				max-width="200px"
+			>
+				<f-div width="hug-content" height="hug-content" padding="x-large">
+					<f-text variant="para" size="large" weight="medium">max-width="200px"</f-text>
+				</f-div>
+			</f-div>
+		</f-div>`}
+	</Story>
+</Canvas>
+
+<br />
+
+## max-height
+
+<hr />
+
+Defines maximum height of the f-div.
+
+<Canvas>
+	<Story name="max-height">
+		{args => html`<f-div gap="medium" padding="none" direction="row" height="100%">
+			<f-div
+				height="fill-container"
+				padding="large"
+				gap="x-large"
+				state="subtle"
+				align="middle-center"
+			>
+				<f-div width="hug-content" height="hug-content" padding="x-large">
+					<f-text variant="para" size="large" weight="medium">div without max-height</f-text>
+				</f-div>
+			</f-div>
+			<f-div
+				height="fill-container"
+				padding="large"
+				gap="x-large"
+				state="subtle"
+				align="middle-center"
+				max-height="200px"
+			>
+				<f-div width="hug-content" height="hug-content" padding="x-large">
+					<f-text variant="para" size="large" weight="medium">max-height="200px"</f-text>
+				</f-div>
+			</f-div>
+		</f-div>`}
+	</Story>
+</Canvas>
+
+<br />
+
 ## tooltip
 
 <hr />
@@ -2016,11 +2111,90 @@ Defines the behavior of f-div in loading state. A user can select between a load
 
 <Canvas>
 	<Story name="Flags">
-		{args => html`<f-div gap="medium" padding="x-large" direction="column">
-			<f-div padding="none" width="hug-content" align="middle-center"
-				><f-text variant="para" size="medium" weight="regular" align="center">Disabled</f-text>
-			</f-div>
-			<f-div padding="none" direction="row" gap="large">
+		{args => {
+			const [highlight, setHighlight] = useState(false);
+			const toggleHighlight = () => {
+				setHighlight(!highlight);
+				setTimeout(() => {
+					setHighlight(false);
+				}, 2000);
+			};
+			return html`<f-div gap="medium" padding="x-large" direction="column">
+				<f-div padding="none" width="hug-content" align="middle-center"
+					><f-text variant="para" size="medium" weight="regular" align="center">Disabled</f-text>
+				</f-div>
+				<f-div padding="none" direction="row" gap="large">
+					<f-div
+						gap="medium"
+						padding="large"
+						width="hug-content"
+						height="hug-content"
+						state="subtle"
+						variant="curved"
+					>
+						<f-div
+							gap="medium"
+							padding="large"
+							width="100px"
+							height="hug-content"
+							state="primary"
+							variant="curved"
+						></f-div>
+						<f-div
+							gap="medium"
+							padding="large"
+							width="100px"
+							height="hug-content"
+							state="primary"
+							variant="curved"
+						></f-div>
+						<f-div
+							gap="medium"
+							padding="large"
+							width="100px"
+							height="hug-content"
+							state="primary"
+							variant="curved"
+						></f-div>
+					</f-div>
+					<f-div
+						gap="medium"
+						padding="large"
+						width="hug-content"
+						height="hug-content"
+						state="subtle"
+						variant="curved"
+						disabled=${true}
+					>
+						<f-div
+							gap="medium"
+							padding="large"
+							width="100px"
+							height="hug-content"
+							state="primary"
+							variant="curved"
+						></f-div>
+						<f-div
+							gap="medium"
+							padding="large"
+							width="100px"
+							height="hug-content"
+							state="primary"
+							variant="curved"
+						></f-div>
+						<f-div
+							gap="medium"
+							padding="large"
+							width="100px"
+							height="hug-content"
+							state="primary"
+							variant="curved"
+						></f-div>
+					</f-div>
+				</f-div>
+				<f-div padding="none" width="hug-content" align="middle-center"
+					><f-text variant="para" size="medium" weight="regular" align="center">Clickable</f-text>
+				</f-div>
 				<f-div
 					gap="medium"
 					padding="large"
@@ -2028,6 +2202,7 @@ Defines the behavior of f-div in loading state. A user can select between a load
 					height="hug-content"
 					state="subtle"
 					variant="curved"
+					clickable=${true}
 				>
 					<f-div
 						gap="medium"
@@ -2054,6 +2229,10 @@ Defines the behavior of f-div in loading state. A user can select between a load
 						variant="curved"
 					></f-div>
 				</f-div>
+				<f-div padding="none" width="hug-content" align="middle-center"
+					><f-text variant="para" size="medium" weight="regular" align="center">Higlight</f-text>
+				</f-div>
+				<f-button label="Highlight Toggle" @click=${toggleHighlight}></f-button>
 				<f-div
 					gap="medium"
 					padding="large"
@@ -2061,7 +2240,7 @@ Defines the behavior of f-div in loading state. A user can select between a load
 					height="hug-content"
 					state="subtle"
 					variant="curved"
-					disabled=${true}
+					?highlight=${highlight}
 				>
 					<f-div
 						gap="medium"
@@ -2088,45 +2267,8 @@ Defines the behavior of f-div in loading state. A user can select between a load
 						variant="curved"
 					></f-div>
 				</f-div>
-			</f-div>
-			<f-div padding="none" width="hug-content" align="middle-center"
-				><f-text variant="para" size="medium" weight="regular" align="center">Clickable</f-text>
-			</f-div>
-			<f-div
-				gap="medium"
-				padding="large"
-				width="hug-content"
-				height="hug-content"
-				state="subtle"
-				variant="curved"
-				clickable=${true}
-			>
-				<f-div
-					gap="medium"
-					padding="large"
-					width="100px"
-					height="hug-content"
-					state="primary"
-					variant="curved"
-				></f-div>
-				<f-div
-					gap="medium"
-					padding="large"
-					width="100px"
-					height="hug-content"
-					state="primary"
-					variant="curved"
-				></f-div>
-				<f-div
-					gap="medium"
-					padding="large"
-					width="100px"
-					height="hug-content"
-					state="primary"
-					variant="curved"
-				></f-div>
-			</f-div>
-		</f-div>`}
+			</f-div>`;
+		}}
 	</Story>
 </Canvas>
 

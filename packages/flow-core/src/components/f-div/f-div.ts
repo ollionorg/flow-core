@@ -39,6 +39,10 @@ export type FDivHeightProp =
 	| `${number}%`
 	| `${number}vh`;
 
+export type FDivMaxWidthProp = `${number}px` | `${number}%` | `${number}vw`;
+
+export type FDivMaxHeightProp = `${number}px` | `${number}%` | `${number}vh`;
+
 export type FDivStateProp =
 	| "subtle"
 	| "default"
@@ -178,6 +182,17 @@ export class FDiv extends FRoot {
 	height?: FDivHeightProp = "fill-container";
 
 	/**
+	 * @attribute width of `f-div`
+	 */
+	@property({ type: String, reflect: true, attribute: "max-width" })
+	maxWidth?: FDivWidthProp;
+	/**
+	 * @attribute height of `f-div`
+	 */
+	@property({ type: String, reflect: true, attribute: "max-height" })
+	maxHeight?: FDivHeightProp;
+
+	/**
 	 * @attribute The disabled attribute can be set to keep a user from clicking on the f-icon.
 	 */
 	@property({ reflect: true, type: Boolean })
@@ -194,6 +209,12 @@ export class FDiv extends FRoot {
 	 */
 	@property({ reflect: true, type: Boolean })
 	clickable?: boolean = false;
+
+	/**
+	 * @attribute is highlighted
+	 */
+	@property({ reflect: true, type: Boolean })
+	highlight?: boolean = false;
 
 	/**
 	 * @attribute Overflow property defines the behavior of the overflowing elements inside a f-div
@@ -264,6 +285,37 @@ export class FDiv extends FRoot {
 		if (this.height && !fixedValues.includes(this.height)) {
 			this.style.height = this.height;
 		}
+		if (this.maxWidth) {
+			this.classList.add("f-div-custom-width");
+			this.style.setProperty("--max-width", this.maxWidth);
+		} else {
+			this.style.removeProperty("--max-width");
+			this.classList.remove("f-div-custom-width");
+		}
+		if (this.maxHeight) {
+			this.classList.add("f-div-custom-height");
+			this.style.setProperty("--max-height", this.maxHeight);
+		} else {
+			this.style.removeProperty("--max-height");
+			this.classList.remove("f-div-custom-height");
+		}
+	}
+
+	checkHighlight() {
+		const highlights = document.querySelectorAll("f-div[highlight]");
+		const overlayEl = document.querySelector(".f-div-highlight-overlay");
+		if (highlights.length > 0 && !overlayEl) {
+			const overlay = `<div class="f-div-highlight-overlay"></div>`;
+			document.body?.insertAdjacentHTML("afterbegin", overlay);
+		}
+		if (highlights.length === 0) {
+			overlayEl?.remove();
+		}
+	}
+
+	disconnectedCallback() {
+		this.checkHighlight();
+		super.disconnectedCallback();
 	}
 
 	render() {
@@ -284,6 +336,7 @@ export class FDiv extends FRoot {
 		this.applyBorder();
 		this.applyPadding();
 		this.applySize();
+
 		/**
 		 * END :  apply inline styles based on attribute values
 		 */
@@ -291,12 +344,20 @@ export class FDiv extends FRoot {
 		/**
 		 * Final html to render
 		 */
-		return html`<slot></slot>${this.loading === "loader" ? html`${unsafeSVG(loader)}` : ""}`;
+		return html` <slot></slot>${this.loading === "loader" ? html`${unsafeSVG(loader)}` : ""}`;
 	}
 	protected async updated(
 		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
 	): Promise<void> {
 		super.updated(changedProperties);
+
+		if (
+			changedProperties.has("highlight") &&
+			(changedProperties.get("highlight") === true || this.highlight)
+		) {
+			this.checkHighlight();
+		}
+
 		if (this.variant === "round") {
 			this.style.borderRadius = `${this.offsetHeight / 2}px`;
 		} else if (this.variant === "curved") {

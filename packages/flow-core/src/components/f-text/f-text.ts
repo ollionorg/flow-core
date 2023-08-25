@@ -156,7 +156,8 @@ export class FText extends FRoot {
 		this.isTextInput = true;
 	}
 
-	handleSubmit() {
+	handleSubmit(e: MouseEvent) {
+		e.stopPropagation();
 		this.isTextInput = false;
 	}
 
@@ -237,22 +238,16 @@ export class FText extends FRoot {
 		</div>`;
 
 		const editableSnippet = html`<div class="non-editable-slot">
-				${this.highlightedText ? highlightSnippet : html`<slot></slot>`}
-			</div>
-			<div class="pseudo-edit-text">
-				<f-icon
-					source="i-edit"
-					state="primary"
-					.size=${this.iconSize}
-					clickable
-					@click=${this.handleEdit}
-				></f-icon>
-			</div>`;
+			${this.highlightedText ? highlightSnippet : html`<slot></slot>`}
+		</div>`;
 
 		if (this.editable) {
 			return html`
 				<div
 					class="f-text-editable"
+					?data-hover=${!this.isTextInput}
+					@click=${this.handleEdit}
+					@focusout=${this.handleSubmit}
 					@mouseenter=${() => this.editOnHover("flex")}
 					@mouseleave=${() => this.editOnHover("none")}
 				>
@@ -284,7 +279,12 @@ export class FText extends FRoot {
 
 			this.highlightedText = content;
 		}
+		if (this.isTextInput) {
+			this.spanEditable?.focus();
+			this.moveCursorToEnd(this.spanEditable);
+		}
 	}
+
 	removeMarkTag(str: string) {
 		return str.replace(/<\/?mark>/g, "");
 	}
@@ -292,6 +292,17 @@ export class FText extends FRoot {
 	handleSlotChange() {
 		this.highlightedText = null;
 		this.requestUpdate();
+	}
+
+	moveCursorToEnd(el: HTMLSpanElement) {
+		if (typeof window.getSelection != "undefined" && typeof document.createRange != "undefined") {
+			const range = document.createRange();
+			range.selectNodeContents(el);
+			range.collapse(false);
+			const sel = window.getSelection();
+			sel?.removeAllRanges();
+			sel?.addRange(range);
+		}
 	}
 }
 

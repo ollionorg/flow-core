@@ -533,6 +533,7 @@ export function renderMultipleSelectionTag(this: FSelect, option: FSelectSingleO
 			class="f-tag-system-icon"
 			icon-right="i-close"
 			size="small"
+			style="max-width:${this.offsetWidth - this.rightOffset}px"
 			label=${(option as FSelectOptionObject)?.title ?? option}
 			state="neutral"
 			@click=${(e: MouseEvent) => {
@@ -545,7 +546,7 @@ export function renderMultipleSelectionTag(this: FSelect, option: FSelectSingleO
 		return this.optionTemplate
 			? html`<f-div
 					variant="curved"
-					style="max-width:${this.offsetWidth - 72}px"
+					style="max-width:${this.offsetWidth - this.rightOffset}px"
 					gap="small"
 					state="secondary"
 					padding="small"

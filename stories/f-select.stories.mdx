@@ -209,7 +209,12 @@ The type attribute specifies whether a user can select a single option or multip
 		{args => {
 			const types = ["single", "multiple"];
 			const [value, setValue] = useState([]);
-			const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+			const [options, setOptions] = useState([
+				"thisIsBigOptiontoTest 1",
+				"Hour",
+				"option 3",
+				"option 4"
+			]);
 			const handleValue = e => {
 				setValue(e.detail.value);
 			};

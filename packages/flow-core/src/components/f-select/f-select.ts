@@ -580,7 +580,10 @@ export class FSelect extends FRoot {
 	}
 
 	get singleSelectionStyle() {
-		return `max-width:${`${this.offsetWidth - 90}px`}`;
+		return `max-width:${`${this.offsetWidth - this.rightOffset}px`}`;
+	}
+	get rightOffset() {
+		return this.clear ? 74 : 54;
 	}
 
 	protected updated(changedProperties: PropertyValues) {

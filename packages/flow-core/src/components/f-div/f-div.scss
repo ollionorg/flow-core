@@ -106,6 +106,21 @@ f-div {
 			gap: $value;
 		}
 	}
+
+	&.f-div-custom-width {
+    --max-width: none; /* Define a CSS variable */
+    max-width: var(--max-width);
+	}
+
+	&.f-div-custom-height {
+    --max-height: none; /* Define a CSS variable */
+    max-height: var(--max-height);
+	}
+
+	&[highlight] {
+      position: relative;
+      z-index: 1001; /* set a higher z-index for the highlighted div to place it above the overlay */
+    }
 	// iterating over states and appyling respective css
 	@each $state, $value in $states {
 		&[state^="#{$state}"] {
@@ -119,6 +134,12 @@ f-div {
 			&[clickable] {
 				&:hover {
 					background-color: map.get($value, "hover");
+					> f-div {
+						&[state="inherit"] {
+							--color-inherit-background :var(--color-inherit-background-hover)
+							background-color: var(--color-inherit-background-hover);
+						}
+					}
 				}
 			}
 			&.f-select-options-clickable {
@@ -177,23 +198,34 @@ f-div {
 		font-size: 12px;
 		line-height: 18px;
 		color: var(--color-text-default);
+		width: fit-content;
 	}
 	&[slot="description"] {
 		font-weight: 350;
 		font-size: 12px;
 		line-height: 18px;
 		color: var(--color-text-secondary);
+		width: fit-content;
 	}
 	&[slot="help"] {
 		font-weight: 350;
 		font-size: 12px;
 		line-height: 18px;
 		color: var(--color-help-text);
+		width: fit-content;
 	}
 
 	&[state="inherit"] {
 		background-color: var(--color-inherit-background);
 		color: var(--color-inherit-text);
+		&:hover {
+			> f-div {
+				&[state="inherit"] {
+					--color-inherit-background: var(--color-inherit-background-hover);
+					background-color: var(--color-inherit-background-hover);
+				}
+			}
+		}
 		&[clickable] {
 			&:hover {
 				background-color: var(--color-inherit-background-hover);
@@ -266,6 +298,12 @@ f-div {
 		}
 		> f-div[width="fill-container"] {
 			width: 100%;
+		}
+		> f-form-builder,> f-accordion{
+			width: 100%;
+		}
+		> f-accordion{
+			flex: 0 0  auto;
 		}
 	}
 
@@ -494,11 +532,5 @@ f-div {
 			flex: 1 1 auto;
 			width: auto;
 		}
-	}
-}
-
-f-div[slot="help"] {
-	> f-text {
-		color: var(--color-help-text) !important;
 	}
 }

@@ -1,10 +1,11 @@
 /// <reference types="vite/client" />
 
-import { ConfigUtil } from "./modules/config";
+import { ConfigUtil } from "@cldcvr/flow-core-config";
 import { version } from "./../package.json";
 
-export * from "./modules/config";
+export { flowElement } from "./utils";
 
+export * from "@cldcvr/flow-core-config";
 export * from "./components/f-button/f-button";
 export * from "./components/f-icon/f-icon";
 export * from "./components/f-divider/f-divider";
@@ -35,7 +36,16 @@ export * from "./components/f-file-upload/f-file-upload";
 export * from "./components/f-suggest/f-suggest";
 export * from "./components/f-toast/f-toast";
 export * from "./components/f-search/f-search";
+export * from "./components/f-date-time-picker/f-date-time-picker";
+export * from "./components/f-accordion/f-accordion";
+export * from "./components/f-grid/f-grid";
+export * from "./components/f-carousel/f-carousel";
+export * from "./components/f-carousel-content/f-carousel-content";
+export * from "./components/f-progress-bar/f-progress-bar";
+export * from "./components/f-breadcrumb/f-breadcrumb";
 export * from "./mixins/components/f-root/f-root";
+
+export { html } from "lit";
 
 if (document.readyState !== "loading") {
 	ConfigUtil.initTheme();

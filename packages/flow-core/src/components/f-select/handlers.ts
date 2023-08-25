@@ -13,24 +13,36 @@ import _ from "lodash";
  * open options menu
  */
 export function handleDropDownOpen(this: FSelect, e: MouseEvent) {
-	this.openDropdown = true;
-	this?.inputElement?.focus();
-	this.updateDimentions();
-
+	if (!this.loading) {
+		this.openDropdown = true;
+		this?.inputElement?.focus();
+		this.updateDimentions();
+	}
 	e.stopPropagation();
 }
 
 /**
  * close options menu
  */
-export function handleDropDownClose(this: FSelect, e: MouseEvent) {
+export function handleDropDownClose(this: FSelect, e: MouseEvent, clearSearch = true) {
 	this.openDropdown = false;
-	this.clearFilterSearchString();
+	if (clearSearch) {
+		this.clearFilterSearchString();
+	}
 	this.currentCursor = -1;
 	this.currentGroupCursor = -1;
 	this.currentGroupOptionCursor = -1;
 	this.requestUpdate();
 	e.stopPropagation();
+
+	const event = new CustomEvent("blur", {
+		detail: {
+			value: this.value
+		},
+		bubbles: true,
+		composed: true
+	});
+	this.dispatchEvent(event);
 }
 
 /**
@@ -42,9 +54,11 @@ export function handleOptionSelection(this: FSelect, option: FSelectSingleOption
 
 	if (Array.isArray(this.options)) {
 		if (this.type === "single") {
-			!this.isSelected(option)
-				? ((this.selectedOptions as FSelectArrayOfObjects) = [option as FSelectOptionObject])
-				: (this.selectedOptions as FSelectArrayOfObjects).splice(this.getIndex(option), 1);
+			if (!this.isSelected(option)) {
+				(this.selectedOptions as FSelectArrayOfObjects) = [option as FSelectOptionObject];
+			} else if (this.clear) {
+				(this.selectedOptions as FSelectArrayOfObjects).splice(this.getIndex(option), 1);
+			}
 			this.handleDropDownClose(e);
 		} else {
 			!this.isSelected(option)
@@ -225,6 +239,16 @@ export function handleInput(this: FSelect, e: InputEvent) {
 	this.openDropdown = true;
 	if (this.searchable) {
 		this.searchValue = (e.target as HTMLInputElement)?.value;
+
+		const event = new CustomEvent("search-input", {
+			detail: {
+				value: (e.target as HTMLInputElement)?.value
+			},
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(event);
+
 		if (Array.isArray(this.options)) {
 			this.filteredOptions = (this.options as FSelectArrayOfObjects)?.filter(
 				(item: FSelectSingleOption) =>
@@ -251,4 +275,9 @@ export function handleInput(this: FSelect, e: InputEvent) {
 		}
 		this.requestUpdate();
 	}
+}
+
+export function handleBlur(this: FSelect, e: FocusEvent) {
+	e.stopImmediatePropagation();
+	e.stopPropagation();
 }

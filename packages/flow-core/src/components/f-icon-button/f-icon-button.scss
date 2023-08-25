@@ -104,7 +104,7 @@ in this case it is `f-icon-button`
 				&[variant="curved"] {
 					border-radius: var(--input-border-radius-curved);
 				}
-				&[type="packed"] {
+				&[category="packed"] {
 					height: fit-content;
 					min-width: fit-content;
 				}
@@ -139,7 +139,7 @@ in this case it is `f-icon-button`
 		}
 		// iterating over states and appying respective css
 		@each $state, $color in $states {
-			&[state="#{$state}"][type="fill"] {
+			&[state="#{$state}"][category="fill"] {
 				&.f-input-duplicate {
 					background-color: var(--color-surface-subtle) !important;
 					border: 1px
@@ -168,7 +168,7 @@ in this case it is `f-icon-button`
 					}
 				}
 			}
-			&[state="#{$state}"][type="outline"] {
+			&[state="#{$state}"][category="outline"] {
 				background-color: transparent !important;
 				border: 1px
 					solid
@@ -185,8 +185,8 @@ in this case it is `f-icon-button`
 					}
 				}
 			}
-			&[state="#{$state}"][type="transparent"],
-			&[state="#{$state}"][type="packed"],
+			&[state="#{$state}"][category="transparent"],
+			&[state="#{$state}"][category="packed"],
 			&[state="#{$state}"][variant="block"] {
 				background-color: transparent !important;
 				border: 1px solid transparent !important; // added to match width of outline category
@@ -205,6 +205,9 @@ in this case it is `f-icon-button`
 		&[disabled] {
 			@include disabled();
 		}
+		&.datepicker-arrow-icon {
+			pointer-events: none !important;
+		}
 		&[loading] {
 			@include rotate("svg");
 			pointer-events: none;
@@ -215,6 +218,11 @@ in this case it is `f-icon-button`
 				position: absolute;
 			}
 		}
+	}
+	button.f-icon-button[disabled] {
+		@include disabled();
+		pointer-events: none;
+		opacity: 1 !important;
 	}
 }
 
@@ -254,6 +262,9 @@ f-icon-button {
 	}
 	&[size="large"] {
 		--input-border-radius-round: 22px;
+	}
+	&[disabled] {
+		@include disabled();
 	}
 }
 

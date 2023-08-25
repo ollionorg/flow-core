@@ -1,9 +1,10 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import eleStyle from "./f-text-area.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
+import { flowElement } from "./../../utils";
 
 export type FTextAreaState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -11,7 +12,7 @@ export type FTextAreaCustomEvent = {
 	value: string;
 };
 
-@customElement("f-text-area")
+@flowElement("f-text-area")
 export class FTextArea extends FRoot {
 	/**
 	 * css loaded from scss file
@@ -85,19 +86,61 @@ export class FTextArea extends FRoot {
 	readOnly?: boolean = false;
 
 	/**
+	 * @attribute mask value of text area
+	 */
+	@property({ reflect: true, type: Boolean, attribute: "mask-value" })
+	maskValue?: boolean = false;
+
+	/**
 	 * emit event
 	 */
 	handleInput(e: InputEvent) {
 		e.stopPropagation();
-		const event = new CustomEvent<FTextAreaCustomEvent>("input", {
-			detail: {
-				value: (e.target as HTMLInputElement)?.value
-			},
-			bubbles: true,
-			composed: true
-		});
-		this.value = (e.target as HTMLInputElement)?.value;
-		this.dispatchEvent(event);
+		if (this.maskValue) {
+			let currentvalue = this.value ?? "";
+			if (e.data === null && e.inputType === "insertLineBreak") {
+				currentvalue += "\n";
+			} else if (e.data === null && e.inputType === "deleteContentBackward") {
+				currentvalue = currentvalue.substring(0, currentvalue.length - 1);
+			} else if (e.data === null && e.inputType === "insertFromPaste") {
+				let val = (e.target as HTMLInputElement)?.value;
+
+				if (this.value) {
+					for (let i = 0; i < this.value.length; i++) {
+						const idx = val.indexOf("·");
+						if (idx >= 0) {
+							val = this.replaceCharacter(val, idx, this.value.charAt(i));
+						}
+					}
+				}
+				currentvalue = val;
+			} else if (e.data !== null) {
+				currentvalue += e.data;
+			}
+			const event = new CustomEvent<FTextAreaCustomEvent>("input", {
+				detail: {
+					value: currentvalue
+				},
+				bubbles: true,
+				composed: true
+			});
+			this.value = currentvalue;
+			this.dispatchEvent(event);
+		} else {
+			const event = new CustomEvent<FTextAreaCustomEvent>("input", {
+				detail: {
+					value: (e.target as HTMLInputElement)?.value
+				},
+				bubbles: true,
+				composed: true
+			});
+			this.value = (e.target as HTMLInputElement)?.value;
+			this.dispatchEvent(event);
+		}
+	}
+
+	replaceCharacter(string: string, index: number, replacement: string) {
+		return string.slice(0, index) + replacement + string.slice(index + replacement.length);
 	}
 
 	/**
@@ -134,20 +177,30 @@ export class FTextArea extends FRoot {
 		 */
 
 		return html`
-			<f-div padding="none" gap="x-small" direction="column" width="100%">
+			<f-div
+				padding="none"
+				class="f-text-area-root"
+				?disabled=${this.disabled}
+				gap="x-small"
+				direction="column"
+				width="100%"
+			>
 				<f-div padding="none" gap="none" align="bottom-left">
 					<f-div padding="none" direction="column" width="fill-container">
-						<f-div
-							padding="none"
-							gap="small"
-							direction="row"
-							width="hug-content"
-							height="hug-content"
-						>
-							<f-div padding="none" direction="row" width="hug-content" height="hug-content">
+						<f-div padding="none" gap="auto" direction="row" height="hug-content">
+							<f-div
+								padding="none"
+								gap="small"
+								direction="row"
+								width="hug-content"
+								height="hug-content"
+							>
 								<slot name="label"></slot>
+								<slot name="icon-tooltip"></slot>
 							</f-div>
-							<slot name="icon-tooltip"></slot>
+							<f-div width="hug-content">
+								<slot name="subtitle"></slot>
+							</f-div>
 						</f-div>
 						<slot name="description"></slot>
 					</f-div>
@@ -172,8 +225,10 @@ export class FTextArea extends FRoot {
 						maxlength=${this.maxLength}
 						?resizable=${this.resizable}
 						?readonly=${this.readOnly}
+						?mask-value=${this.maskValue}
+						spellcheck=${this.maskValue ? "false" : "true"}
 						@input=${this.handleInput}
-						.value=${this.value ?? ""}
+						.value=${this.maskValue ? this.getDots() : this.value ?? ""}
 					></textarea>
 					${this.clear && this.value
 						? html` <f-icon
@@ -188,6 +243,10 @@ export class FTextArea extends FRoot {
 				<slot name="help"></slot>
 			</f-div>
 		`;
+	}
+
+	getDots() {
+		return this.value?.replace(/[^\n]/g, "·");
 	}
 }
 

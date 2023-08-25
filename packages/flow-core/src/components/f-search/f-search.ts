@@ -1,5 +1,5 @@
-import { html, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
+import { html, HTMLTemplateResult, PropertyValueMap, unsafeCSS } from "lit";
+import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-search.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
@@ -7,21 +7,34 @@ import { FDiv } from "../f-div/f-div";
 import { FSelect } from "../f-select/f-select";
 import { FSuggest } from "../f-suggest/f-suggest";
 import { FIconButton } from "../f-icon-button/f-icon-button";
+import { flowElement } from "./../../utils";
 
 export type FSearchState = "primary" | "default" | "success" | "warning" | "danger";
 
-export type FSearchCustomEvent = {
-	value: string;
+export type FSearchCustomEvent<Type = unknown> = {
+	value: Type;
 	scope: string;
 };
 
 export type FSearchSuffixWhen = (value: string) => boolean;
 
-export type FSearchSuggestions = string[];
+export type FSearchSuggestionsCategory = Record<string, string[]>;
+
+export type FSearchOptionTemplate<Type = unknown> = {
+	value: Type;
+	template: (value?: string) => HTMLTemplateResult;
+	toString: () => string;
+};
+export type FSearchResultWhen = (
+	suggestion: string | FSearchOptionTemplate,
+	value?: string
+) => boolean;
+
+export type FSearchSuggestions = string[] | FSearchSuggestionsCategory | FSearchOptionTemplate[];
 
 export type FSearchScope = string[] | "none";
 
-@customElement("f-search")
+@flowElement("f-search")
 export class FSearch extends FRoot {
 	/**
 	 * css loaded from scss file
@@ -107,6 +120,30 @@ export class FSearch extends FRoot {
 	@property({ reflect: true, type: Boolean })
 	["search-button"]?: boolean = false;
 
+	/**
+	 * @attribute Loader icon .
+	 */
+	@property({ reflect: true, type: Boolean })
+	loading?: boolean = false;
+
+	/**
+	 * to customize result
+	 */
+	@property({ reflect: false, type: Function, attribute: "result-when" })
+	resultWhen: FSearchResultWhen = (sg, value) => {
+		if (typeof sg === "object") {
+			return sg
+				.toString()
+				.toLocaleLowerCase()
+				.includes(value?.toLocaleLowerCase() ?? "");
+		}
+		return sg.toLocaleLowerCase().includes(value?.toLocaleLowerCase() ?? "");
+	};
+
+	set ["result-when"](val: FSearchResultWhen) {
+		this.resultWhen = val;
+	}
+
 	@query("slot[name='label']")
 	labelSlot!: HTMLElement;
 
@@ -165,7 +202,11 @@ export class FSearch extends FRoot {
 	 */
 	handleInput(e: CustomEvent) {
 		e.stopPropagation();
-		this.value = e.detail.value;
+		if (typeof e.detail.value === "object") {
+			this.value = e.detail.value.toString();
+		} else {
+			this.value = e.detail.value;
+		}
 		this.dispatchInputEvent(e.detail.value, this["selected-scope"]);
 	}
 
@@ -208,7 +249,7 @@ export class FSearch extends FRoot {
 	 * @param value string for value
 	 * @param scope string for scope value
 	 */
-	dispatchInputEvent(value: string, scope = "") {
+	dispatchInputEvent(value: any, scope = "") {
 		const event = new CustomEvent<FSearchCustomEvent>("input", {
 			detail: {
 				value: value,
@@ -259,43 +300,48 @@ export class FSearch extends FRoot {
 		}
 	}
 	render() {
-		return html` <f-div width="100%" direction="column" gap="x-small" height="hug-content">
-			<f-div
-				padding="none"
-				direction="column"
-				width="fill-container"
-				gap="x-small"
-				id="header-section"
-			>
-				<f-div
-					padding="none"
-					gap="small"
-					direction="row"
-					width="hug-content"
-					height="hug-content"
-					id="label-slot"
-				>
-					<f-div padding="none" direction="row" width="hug-content" height="hug-content">
+		return html` <f-div
+			width="100%"
+			?disabled=${this.disabled}
+			direction="column"
+			gap="x-small"
+			height="hug-content"
+			class="f-search-wrapper"
+		>
+			<f-div padding="none" direction="column" width="fill-container" id="header-section">
+				<f-div padding="none" gap="auto" direction="row" height="hug-content">
+					<f-div
+						padding="none"
+						gap="small"
+						direction="row"
+						width="hug-content"
+						height="hug-content"
+						id="label-slot"
+					>
 						<slot name="label"></slot>
+						<slot name="icon-tooltip"></slot>
 					</f-div>
-					<slot name="icon-tooltip"></slot>
+					<f-div width="hug-content">
+						<slot name="subtitle"></slot>
+					</f-div>
 				</f-div>
 				<slot name="description"></slot>
 			</f-div>
 			<f-div direction="row" height="hug-content">
 				${this.scope !== "none" && (this.scope as string[])?.length > 0
-					? html` <f-select
-							class="f-search-border"
-							.options=${this.scope ?? []}
-							.variant=${this.variant}
-							.category=${this.category}
-							placeholder="Search by"
-							width="140"
-							.state=${this.state}
-							.size=${this.size}
-							.value=${this["selected-scope"]}
-							@input=${this.handleScopeSelection}
-					  ></f-select>`
+					? html` <f-div width="hug-content" style="min-width:150px">
+							<f-select
+								class="f-search-border"
+								.options=${this.scope ?? []}
+								.variant=${this.variant}
+								.category=${this.category}
+								placeholder="Search by"
+								.state=${this.state}
+								.size=${this.size}
+								.value=${this["selected-scope"]}
+								@input=${this.handleScopeSelection}
+							></f-select
+					  ></f-div>`
 					: ""}
 				<f-div>
 					<f-suggest
@@ -309,9 +355,12 @@ export class FSearch extends FRoot {
 						icon-left=${this["search-button"] ? "" : "i-search"}
 						.state=${this.state}
 						?clear=${this.clear}
+						?loading=${this.loading}
 						.size=${this.size}
+						.suggestWhen=${this.resultWhen}
 						@input=${this.handleInput}
 					>
+						<slot name="no-data" slot="no-data"> </slot>
 					</f-suggest>
 				</f-div>
 				${this["search-button"]
@@ -328,7 +377,10 @@ export class FSearch extends FRoot {
 			<f-div direction="column" id="helper-text-section"><slot name="help"></slot> </f-div>
 		</f-div>`;
 	}
-	updated() {
+	protected async updated(
+		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
+		super.updated(changedProperties);
 		this.displayHelpSection();
 		this.displayHeaderSection();
 	}

@@ -19,11 +19,17 @@
 	&::-webkit-scrollbar-thumb {
 		background-color: var(--color-neutral-default);
 	}
+	&::-webkit-scrollbar-corner {
+		background-color: transparent;
+	}
 }
 
 @mixin disabled {
-	pointer-events: none;
+	cursor: not-allowed;
 	opacity: 0.5;
+	&:active {
+		pointer-events: none;
+	}
 }
 
 @mixin rotate($tag) {
@@ -52,7 +58,7 @@
 @mixin shimmer-keyframe {
 	@keyframes shimmer {
 		0% {
-			background-position: -1500pxx 0;
+			background-position: -1500px 0;
 		}
 		100% {
 			background-position: 1500px 0;

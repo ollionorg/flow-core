@@ -176,10 +176,21 @@ $sizes: (
 			stroke-dashoffset: 0;
 		}
 	}
+
+	slot[name="label"] {
+		cursor: pointer;
+	}
+	f-div.f-checkbox-wrapper[disabled] {
+		@include disabled();
+		pointer-events: none;
+		opacity: 1;
+	}
 }
 
 f-checkbox {
+	display: flex;
 	height: fit-content;
+	flex: 0 0 fit-content;
 	&[disabled] {
 		@include disabled();
 	}

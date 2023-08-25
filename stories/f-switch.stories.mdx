@@ -54,7 +54,8 @@ f-switch allows a user to turn an individual option true/false. The change in se
             </f-div>
             <f-div padding="none" align="middle-center" slot="help">
               <f-text variant="para" size="small">This is helper text</f-text>
-            </f-div>`,
+            </f-div><f-text slot="subtitle" align="right" state="secondary" variant="para" size="small">Optional</f-text>
+			<f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>`,
 			disabled: false
 		}}
 	>
@@ -64,15 +65,17 @@ f-switch allows a user to turn an individual option true/false. The change in se
 				updateArgs({ value: e.detail.value });
 			};
 			return html`
-				<f-switch
-					size=${args.size}
-					value=${args.value}
-					state=${args.state}
-					?disabled=${args.disabled}
-					@input=${handleInput}
-				>
-					${unsafeHTML(args.slot)}
-				</f-switch>
+				<f-div width="hug-content">
+					<f-switch
+						size=${args.size}
+						value=${args.value}
+						state=${args.state}
+						?disabled=${args.disabled}
+						tooltip="This is switch"
+						@input=${handleInput}
+					>
+					</f-switch>
+				</f-div>
 			`;
 		}}
 	</Story>

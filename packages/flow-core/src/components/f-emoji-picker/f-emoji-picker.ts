@@ -1,5 +1,5 @@
-import { html, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-emoji-picker.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import data, { Category, EmojiMartData } from "@emoji-mart/data";
@@ -8,6 +8,7 @@ import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import { FIcon } from "../f-icon/f-icon";
 import { FPopover } from "../f-popover/f-popover";
+import { flowElement } from "./../../utils";
 
 export type FEmojiPickerState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -52,7 +53,7 @@ export type FEmojiPickerCustomEmojiData = FEmojiPickerCustomEmoji[];
 export type RecentEmojis = string[];
 export type ExcludeEmojis = string[];
 
-@customElement("f-emoji-picker")
+@flowElement("f-emoji-picker")
 export class FEmojiPicker extends FRoot {
 	/**
 	 * css loaded from scss file
@@ -371,42 +372,49 @@ export class FEmojiPicker extends FRoot {
 		}
 	}
 
-	/**
-	 * disconnected callback for removing event listener
-	 */
-	disconnectedCallback() {
-		window.removeEventListener("click", e => this.closeEmojiPicker(e, this));
-		super.disconnectedCallback();
-	}
+	outsideClick = (e: MouseEvent) => {
+		this.closeEmojiPicker(e, this);
+	};
 
+	connectedCallback(): void {
+		super.connectedCallback();
+		/**
+		 * click outside the f-select wrapper area
+		 */
+		window.addEventListener("mouseup", this.outsideClick);
+	}
+	disconnectedCallback(): void {
+		super.disconnectedCallback();
+
+		window.removeEventListener("mouseup", this.outsideClick);
+	}
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		if (!changedProperties.has("value") || !this.picker) {
+			/**
+			 * initiate picker component
+			 */
+
+			this.picker = new Picker({
+				data,
+				onEmojiSelect: (e: Emoji) => {
+					this.handleSelectEmoji(e);
+				},
+				icons: "solid",
+				skinTonePosition: "none",
+				categories: this.categroiesToDisplay,
+				custom: this.custom,
+				autoFocus: true,
+				exceptEmojis: this["exclude-emojis"]
+			});
+
+			/**
+			 * assign styling to picker component
+			 */
+			this.picker?.injectStyles(unsafeCSS(eleStyle));
+		}
+	}
 	render() {
 		this.validateProperties();
-
-		/**
-		 * click outside the f-emoji wrapper area
-		 */
-		window.addEventListener("click", e => this.closeEmojiPicker(e, this));
-
-		/**
-		 * initiate picker component
-		 */
-		this.picker = new Picker({
-			data,
-			onEmojiSelect: (e: Emoji) => {
-				this.handleSelectEmoji(e);
-			},
-			icons: "solid",
-			skinTonePosition: "none",
-			categories: this.categroiesToDisplay,
-			custom: this.custom,
-			autoFocus: true,
-			exceptEmojis: this["exclude-emojis"]
-		});
-
-		/**
-		 * assign styling to picker component
-		 */
-		this.picker?.injectStyles(unsafeCSS(eleStyle));
 
 		/**
 		 * clear conditional display
@@ -415,7 +423,13 @@ export class FEmojiPicker extends FRoot {
 			? html`
 					${this.value
 						? html`<f-div align="middle-center" overflow="hidden">
-								<f-icon source="i-close" size="x-small" clickable @click=${this.clearValue}></f-icon
+								<f-icon
+									source="i-close"
+									data-qa-remove-emoji=${this.getAttribute("data-qa-element-id")}
+									size="x-small"
+									clickable
+									@click=${this.clearValue}
+								></f-icon
 						  ></f-div>`
 						: ""}
 			  `
@@ -462,6 +476,7 @@ export class FEmojiPicker extends FRoot {
 					variant=${this.variant}
 					clear=${this.value && this.clear ? true : false}
 					tabindex="1"
+					?disabled=${this.disabled}
 					@click=${(e: MouseEvent) => {
 						e.stopPropagation();
 						this.toggleEmojiPicker(true);
@@ -490,7 +505,10 @@ export class FEmojiPicker extends FRoot {
 			>
 		`;
 	}
-	updated() {
+	protected async updated(
+		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
+		super.updated(changedProperties);
 		// header section-slot display
 		this.headerSectionDisplay();
 

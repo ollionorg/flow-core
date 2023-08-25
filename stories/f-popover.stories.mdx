@@ -3,7 +3,8 @@ import { html } from "lit-html";
 import fPopoverAnatomy from "./svg/i-fpopover-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useState } from "@storybook/client-api";
-import { ConfigUtil } from "@cldcvr/flow-core/src/modules/config";
+import { ConfigUtil } from "@cldcvr/flow-core-config";
+import { createRef, ref } from "lit/directives/ref.js";
 
 <Meta
 	title="Components/f-popover"
@@ -67,20 +68,28 @@ be used to show short-lived information such as menus, options, additional actio
 			},
 			overlay: {
 				control: "boolean"
+			},
+			["auto-height"]: {
+				control: "boolean"
+			},
+			["close-on-escape"]: {
+				control: "boolean"
 			}
 		}}
 		args={{
 			open: false,
 			overlay: true,
 			size: "small",
-			placement: "auto"
+			placement: "auto",
+			["auto-height"]: false,
+			["close-on-escape"]: true
 		}}
 	>
 		{args => {
 			const [_, updateArgs] = useArgs();
 			const handlePopover = (e, f) => {
 				console.log(e, f);
-				updateArgs({ open: !args.open });
+				// updateArgs({ open: !args.open });
 			};
 			return html` <f-div height="100px" align="middle-center">
 				<f-popover
@@ -90,6 +99,8 @@ be used to show short-lived information such as menus, options, additional actio
 					.placement=${args.placement}
 					@overlay-click=${handlePopover}
 					target="#popoverTarget"
+					?auto-height=${args["auto-height"]}
+					?close-on-escape=${args["close-on-escape"]}
 				>
 					<f-div state="tertiary" padding="medium">
 						<f-text>
@@ -477,6 +488,8 @@ popover and if the max height is attained, the body contents will scroll.
 			const [openFlag, setOpenFlag] = useState(false);
 			const [openFlagForOverlay, setOpenFlagForOverlay] = useState(false);
 			const [openFlagForNoOverlay, setOpenFlagForNoOverlay] = useState(false);
+			const [openHeightStretch, setOpenHeightStretch] = useState(false);
+			const [openEscape, setOpenEscape] = useState(false);
 			return html` <f-div height="hug-content" gap="large" direction="column">
 				<f-div height="hug-content" gap="large" direction="row">
 					<f-popover
@@ -551,6 +564,52 @@ popover and if the max height is attained, the body contents will scroll.
 					>
 					</f-button>
 				</f-div>
+				<f-div gap="medium">
+					<f-popover
+						?open=${openHeightStretch}
+						.overlay=${true}
+						size="stretch"
+						target="#popover-height-stretch"
+						@overlay-click=${() => setOpenHeightStretch(!openHeightStretch)}
+						?auto-height=${true}
+					>
+						<f-div state="tertiary" padding="medium">
+							<f-text>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+								mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+								tristique.
+							</f-text>
+						</f-div>
+					</f-popover>
+					<f-button
+						id="popover-height-stretch"
+						label="auto-height='true'"
+						@click=${() => setOpenHeightStretch(!openHeightStretch)}
+					>
+					</f-button>
+					<f-popover
+						?open=${openEscape}
+						.overlay=${true}
+						size="stretch"
+						target="#popover-height-stretch"
+						@overlay-click=${() => setOpenEscape(!openEscape)}
+						close-on-escape=${false}
+					>
+						<f-div state="tertiary" padding="medium">
+							<f-text>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+								mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+								tristique.
+							</f-text>
+						</f-div>
+					</f-popover>
+					<f-button
+						id="popover-height-stretch"
+						label="close-on-escape='false'"
+						@click=${() => setOpenEscape(!openEscape)}
+					>
+					</f-button>
+				</f-div>
 			</f-div>`;
 		}}
 	</Story>
@@ -597,10 +656,16 @@ popover and if the max height is attained, the body contents will scroll.
 		}}
 	>
 		{args => {
+			const innerPopover = createRef();
+			const handleInnerClose = () => {
+				if (innerPopover.value) {
+					innerPopover.value.open = !innerPopover.value.open;
+				}
+			};
 			return html`
 				<f-popover ?open=${true} ?overlay=${true} size="medium">
 					<f-div id="mainPopoverContent" state="tertiary" height="500px" padding="medium">
-						<f-text> Main Popover </f-text>
+						<f-text @click=${handleInnerClose}> Main Popover </f-text>
 					</f-div>
 					<f-popover
 						?open=${true}
@@ -608,9 +673,11 @@ popover and if the max height is attained, the body contents will scroll.
 						target="#mainPopoverContent"
 						placement="left-start"
 						size="small"
+						${ref(innerPopover)}
 					>
-						<f-div state="tertiary" height="200px" padding="medium">
+						<f-div state="tertiary" gap="auto" height="200px" padding="medium">
 							<f-text> Chota Popover </f-text>
+							<f-icon source="i-close" @click=${handleInnerClose}></f-icon>
 						</f-div>
 					</f-popover>
 				</f-popover>

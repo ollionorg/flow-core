@@ -2,7 +2,7 @@
 export const snapshots = {};
 
 snapshots["f-table-schema should display rows and column based on data"] = 
-`<div>
+`<div class="f-table-schema-wrapper">
   <slot name="search">
     <f-div
       align="top-left"
@@ -359,7 +359,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       >
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"
@@ -372,7 +371,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       <f-tcell part="cell">
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"
@@ -385,7 +383,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       <f-tcell part="cell">
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"
@@ -398,7 +395,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       <f-tcell part="cell">
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"
@@ -437,7 +433,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       <f-tcell part="cell">
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"
@@ -479,7 +474,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       <f-tcell part="cell">
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"
@@ -492,7 +486,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       <f-tcell part="cell">
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"
@@ -511,7 +504,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       >
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"
@@ -573,7 +565,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       >
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"
@@ -586,7 +577,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       <f-tcell part="cell">
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"
@@ -599,7 +589,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       <f-tcell part="cell">
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"
@@ -612,7 +601,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       <f-tcell part="cell">
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"
@@ -651,7 +639,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       <f-tcell part="cell">
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"
@@ -693,7 +680,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       <f-tcell part="cell">
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"
@@ -706,7 +692,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       <f-tcell part="cell">
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"
@@ -725,7 +710,6 @@ snapshots["f-table-schema should display rows and column based on data"] =
       >
         <f-text
           align="left"
-          inline=""
           size="medium"
           state="default"
           style="height:100%"

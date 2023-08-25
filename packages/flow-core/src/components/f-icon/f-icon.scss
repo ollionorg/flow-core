@@ -180,6 +180,16 @@ in this case it is `f-icon`
   * Iterating over sizes with padding, fontsize, height
   **/
 
+		&.system-icon-size {
+			width: 8px !important;
+			height: 8px !important;
+			svg,
+			img {
+				width: 8px !important;
+				height: 8px !important;
+			}
+		}
+
 		@each $size, $value in $sizes {
 			&[size="#{$size}"] {
 				font-size: $value;
@@ -235,6 +245,12 @@ in this case it is `f-icon`
 					width: 10px;
 					height: 10px;
 				}
+				&.f-tag-small-emoji {
+					font-size: 8px;
+					line-height: 8px;
+					width: 8px;
+					height: 8px;
+				}
 			}
 		}
 		&.f-input-icons-size {
@@ -251,6 +267,7 @@ in this case it is `f-icon`
 		// applying disabled mixins
 		&[disabled] {
 			@include disabled();
+			opacity: 1;
 		}
 
 		// applying loading mixins
@@ -267,4 +284,7 @@ in this case it is `f-icon`
 f-icon {
 	display: inline-flex;
 	vertical-align: top;
+	&[disabled] {
+		@include disabled();
+	}
 }

@@ -1,13 +1,13 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { PropertyValues, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { HTMLTemplateResult, PropertyValues, unsafeCSS } from "lit";
+import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import eleStyle from "./f-select.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { FIcon } from "../f-icon/f-icon";
 import _ from "lodash";
-import render from "./render";
+import render, { renderSingleSelection, renderMultipleSelectionTag } from "./render";
 import {
 	handleDropDownOpen,
 	handleDropDownClose,
@@ -18,8 +18,11 @@ import {
 	handleCheckboxGroup,
 	handleSelectAll,
 	handleViewMoreTags,
-	handleInput
+	handleInput,
+	handleBlur
 } from "./handlers";
+import { FIconButton } from "../f-icon-button/f-icon-button";
+import { flowElement } from "./../../utils";
 
 export type FSelectState = "primary" | "default" | "success" | "warning" | "danger";
 export type FSelectHeightProp = number;
@@ -29,6 +32,8 @@ export type FSelectOptionObject = {
 	icon?: string;
 	title: string;
 	data?: Record<string, unknown>;
+	qaId?: string;
+	disabled?: boolean;
 };
 export type FSelectOptionsGroup = { [key: string]: FSelectOptionsProp };
 export type FSelectArrayOfObjects = FSelectOptionObject[];
@@ -36,18 +41,33 @@ export type FSelectArray = FSelectSingleOption[];
 export type FSelectOptionsProp = FSelectSingleOption[];
 export type FSelectSingleOption = FSelectOptionObject | string;
 export type FSelectOptions = FSelectOptionsProp | FSelectOptionsGroup;
+export type FSelectOptionTemplate = (
+	option: FSelectSingleOption,
+	isSelected?: boolean
+) => HTMLTemplateResult;
 
 export type FSelectCustomEvent = {
 	value: unknown;
 	searchValue?: string;
 };
 
-@customElement("f-select")
+export type FSelectCreateOptionEvent = {
+	value: string;
+	options?: FSelectOptions;
+};
+
+@flowElement("f-select")
 export class FSelect extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles, ...FIcon.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		...FText.styles,
+		...FDiv.styles,
+		...FIcon.styles,
+		...FIconButton.styles
+	];
 
 	@queryAssignedElements({ slot: "label" })
 	_labelNodes!: NodeListOf<HTMLElement>;
@@ -103,12 +123,6 @@ export class FSelect extends FRoot {
 	@state({})
 	currentGroupCursor = -1;
 
-	/**
-	 * @attribute wrapper offset height
-	 */
-	@state({})
-	fSelectWrapperHeight = 0;
-
 	@state({})
 	optimizedHeight = 0;
 
@@ -117,6 +131,9 @@ export class FSelect extends FRoot {
 
 	@state({})
 	optionsTop = "";
+
+	@state({})
+	optionsBottom = "";
 
 	/**
 	 * @attribute keyboard hover for options in group for objects consisting groups
@@ -184,8 +201,12 @@ export class FSelect extends FRoot {
 	/**
 	 * @attribute Defines the placeholder text for f-text-input
 	 */
-	@property({ reflect: true, type: String, attribute: "option-template" })
-	optionTemplate?: string;
+	@property({ reflect: false, type: Function, attribute: "option-template" })
+	optionTemplate?: FSelectOptionTemplate;
+
+	set ["option-template"](val: FSelectOptionTemplate | undefined) {
+		this.optionTemplate = val;
+	}
 
 	/**
 	 * @attribute Icon-left enables an icon on the left of the input value.
@@ -227,7 +248,7 @@ export class FSelect extends FRoot {
 	 * @attribute  a ‘close’ icon button appear on right of the select to clear the input value(s).
 	 */
 	@property({ reflect: true, type: Boolean })
-	clear?: boolean = true;
+	clear?: boolean = false;
 
 	/**
 	 * @attribute options with checkboxes.
@@ -257,7 +278,7 @@ export class FSelect extends FRoot {
 	}
 	outsideClick = (e: MouseEvent) => {
 		if (!this.contains(e.target as HTMLInputElement) && this.openDropdown) {
-			this.handleDropDownClose(e);
+			this.handleDropDownClose(e, false);
 		}
 	};
 	containerScroll = () => {
@@ -278,6 +299,8 @@ export class FSelect extends FRoot {
 		window.addEventListener("scroll", this.containerScroll, {
 			capture: true
 		});
+
+		window.addEventListener("resize", this.updateDimentions);
 	}
 	disconnectedCallback(): void {
 		super.disconnectedCallback();
@@ -287,6 +310,7 @@ export class FSelect extends FRoot {
 		window.removeEventListener("scroll", this.containerScroll, {
 			capture: true
 		});
+		window.removeEventListener("resize", this.updateDimentions);
 	}
 
 	/**
@@ -295,14 +319,14 @@ export class FSelect extends FRoot {
 	applyOptionsStyle(width: number) {
 		if (this.openDropdown)
 			if (this.classList.contains("f-search-border")) {
-				return `max-height:${this.optimizedHeight}px; transition: max-height var(--transition-time-rapid) ease-in 0s;  min-width:240px; max-width:fit-content; top:${this.optionsTop}`;
+				return `max-height:${this.optimizedHeight}px; transition: max-height var(--transition-time-rapid) ease-in 0s;  min-width:240px; max-width:fit-content; top:${this.optionsTop};bottom:${this.optionsBottom}`;
 			} else {
-				return `max-height:${this.optimizedHeight}px; transition: max-height var(--transition-time-rapid) ease-in 0s;  width:${width}px; top:${this.optionsTop}`;
+				return `max-height:${this.optimizedHeight}px; transition: max-height var(--transition-time-rapid) ease-in 0s;  width:${width}px; top:${this.optionsTop};bottom:${this.optionsBottom}`;
 			}
 		else if (this.classList.contains("f-search-border")) {
-			return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s;  min-width:240px; max-width:fit-content; top:${this.optionsTop}`;
+			return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s;  min-width:240px; max-width:fit-content; top:${this.optionsTop};bottom:${this.optionsBottom}`;
 		} else {
-			return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s;  width:${width}px; top:${this.optionsTop}`;
+			return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s;  width:${width}px; top:${this.optionsTop};bottom:${this.optionsBottom}`;
 		}
 	}
 
@@ -353,9 +377,13 @@ export class FSelect extends FRoot {
 			)
 				? true
 				: false;
-		} else {
-			return false;
+		} else if (
+			this.type === "single" &&
+			JSON.stringify((this.selectedOptions as FSelectOptionsProp)[0]) === JSON.stringify(option)
+		) {
+			return true;
 		}
+		return false;
 	}
 
 	/**
@@ -462,7 +490,7 @@ export class FSelect extends FRoot {
 		this.requestUpdate();
 	}
 
-	isStringsArray(arr: string[]) {
+	isStringsArray(arr: unknown[]) {
 		return arr.every(i => typeof i === "string");
 	}
 
@@ -470,26 +498,39 @@ export class FSelect extends FRoot {
 	 * Create New Option when option not present
 	 */
 	createNewOption(e: MouseEvent) {
-		const event = new CustomEvent<FSelectCustomEvent>("input", {
+		e.stopPropagation();
+		e.stopImmediatePropagation();
+		const event = new CustomEvent<FSelectCreateOptionEvent>("add-option", {
 			detail: {
-				value: Array.isArray(this.options)
-					? this.type === "single"
-						? (this.selectedOptions as FSelectArray)[0]
-						: this.selectedOptions
-					: this.selectedOptions,
-				searchValue: this.searchValue
+				value: this.searchValue,
+				options: this.options
 			},
 			bubbles: true,
 			composed: true
 		});
-		(this.value as unknown) = Array.isArray(this.options)
-			? this.type === "single"
-				? (this.selectedOptions as FSelectArray)[0]
-				: this.selectedOptions
-			: this.selectedOptions;
+		if (this.isStringsArray(this.options as unknown[])) {
+			const event = new CustomEvent<FSelectCustomEvent>("input", {
+				detail: {
+					value: this.searchValue
+				},
+				bubbles: true,
+				composed: true
+			});
+			this.dispatchEvent(event);
+
+			if (this.type === "single") {
+				(this.selectedOptions as string[]) = [this.searchValue];
+				this.value = this.searchValue;
+			} else {
+				(this.selectedOptions as string[]).push(this.searchValue);
+				this.value = this.selectedOptions;
+			}
+			(this.options as string[]).push(this.searchValue);
+
+			this.openDropdown = false;
+			this.clearFilterSearchString();
+		}
 		this.dispatchEvent(event);
-		this.requestUpdate();
-		this.handleDropDownClose(e);
 	}
 
 	/**
@@ -508,28 +549,26 @@ export class FSelect extends FRoot {
 	 * options wrapper dimentions update on the basis of window screen
 	 */
 	updateDimentions() {
-		const spaceAbove = this.wrapperElement.getBoundingClientRect().top;
-		const spaceBelow = window.innerHeight - this.wrapperElement.getBoundingClientRect().bottom;
-		const hasEnoughSpaceBelow = spaceBelow > this.height;
-		const optionsHeight = this.optionElement.offsetHeight;
-		const heightToApply = Math.min(optionsHeight, this.height);
-		if (hasEnoughSpaceBelow || spaceBelow > spaceAbove) {
-			this.preferredOpenDirection = "below";
-			this.optimizedHeight = +Math.min(spaceBelow - 40, this.height).toFixed(0);
-			this.optionsTop = `${(
-				this.wrapperElement.getBoundingClientRect().top +
-				this.wrapperElement.offsetHeight +
-				4
-			).toFixed(0)}px`;
-		} else {
-			this.preferredOpenDirection = "above";
-			this.optimizedHeight = +Math.min(spaceAbove - 40, this.height).toFixed(0);
+		if (this.wrapperElement) {
+			const spaceAbove = this.wrapperElement.getBoundingClientRect().top;
+			const spaceBelow = window.innerHeight - this.wrapperElement.getBoundingClientRect().bottom;
+			const hasEnoughSpaceBelow = spaceBelow > this.height;
 
-			this.optionsTop = `${(
-				this.wrapperElement.getBoundingClientRect().top -
-				heightToApply -
-				4
-			).toFixed(0)}px`;
+			if (hasEnoughSpaceBelow || spaceBelow > spaceAbove) {
+				this.preferredOpenDirection = "below";
+				this.optimizedHeight = +Math.min(spaceBelow - 40, this.height).toFixed(0);
+				this.optionsBottom = "";
+				this.optionsTop = `${(
+					this.wrapperElement.getBoundingClientRect().top +
+					this.wrapperElement.offsetHeight +
+					4
+				).toFixed(0)}px`;
+			} else {
+				this.preferredOpenDirection = "above";
+				this.optimizedHeight = +Math.min(spaceAbove - 40, this.height).toFixed(0);
+				this.optionsTop = "";
+				this.optionsBottom = `${(spaceBelow + this.wrapperElement.offsetHeight - 4).toFixed(0)}px`;
+			}
 		}
 	}
 
@@ -546,7 +585,7 @@ export class FSelect extends FRoot {
 
 	protected updated(changedProperties: PropertyValues) {
 		super.updated(changedProperties);
-		this.fSelectWrapperHeight = changedProperties.get("fSelectWrapperHeight");
+
 		this.updateDimentions();
 
 		if (changedProperties.has("value")) {
@@ -563,6 +602,13 @@ export class FSelect extends FRoot {
 			this.filteredOptions = this.options;
 		}
 	}
+	getOptionQaId(option: FSelectSingleOption) {
+		if (typeof option === "string") {
+			return option;
+		} else {
+			return option.qaId ?? option.title;
+		}
+	}
 
 	handleDropDownOpen = handleDropDownOpen;
 	handleDropDownClose = handleDropDownClose;
@@ -574,7 +620,10 @@ export class FSelect extends FRoot {
 	handleSelectAll = handleSelectAll;
 	handleViewMoreTags = handleViewMoreTags;
 	handleInput = handleInput;
+	handleBlur = handleBlur;
 	render = render;
+	renderSingleSelection = renderSingleSelection;
+	renderMultipleSelectionTag = renderMultipleSelectionTag;
 }
 
 /**

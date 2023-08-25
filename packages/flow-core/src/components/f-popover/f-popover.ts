@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { html, LitElement, unsafeCSS } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { html, LitElement, PropertyValueMap, unsafeCSS } from "lit";
+import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-popover.scss";
 import {
@@ -12,6 +12,7 @@ import {
 	autoUpdate,
 	Placement
 } from "@floating-ui/dom";
+import { flowElement } from "./../../utils";
 
 // export type FPopoverVariant = "relative" | "absolute";
 export type FPopoverPlacement =
@@ -35,7 +36,7 @@ export type FPopOverOffset = {
 	crossAxis?: number;
 	alignmentAxis?: number;
 };
-@customElement("f-popover")
+@flowElement("f-popover")
 export class FPopover extends FRoot {
 	/**
 	 * css loaded from scss file
@@ -74,6 +75,18 @@ export class FPopover extends FRoot {
 	overlay?: boolean = true;
 
 	/**
+	 * @attribute stretch the height to auto
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "auto-height" })
+	autoHeight?: boolean = false;
+
+	/**
+	 * @attribute conditional closing popover on escape key press
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "close-on-escape" })
+	closeOnEscape?: boolean = true;
+
+	/**
 	 * @attribute query selector of target
 	 */
 	@property({ type: [String, Object], reflect: true })
@@ -107,7 +120,9 @@ export class FPopover extends FRoot {
 	computePosition(isTooltip: boolean) {
 		let target = document.body;
 		if (this.targetElement && this.open) {
-			this.targetElement.style.zIndex = "200";
+			if (!isTooltip) {
+				this.targetElement.style.zIndex = "201";
+			}
 			target = this.targetElement;
 		}
 		if (this.open) {
@@ -168,6 +183,10 @@ export class FPopover extends FRoot {
 		document.removeEventListener("keydown", e => this.escapekeyHandle(e, this));
 		this.removeEventListener("click", this.dispatchEsc);
 		super.disconnectedCallback();
+
+		if (this.targetElement) {
+			this.targetElement.style.removeProperty("z-index");
+		}
 	}
 
 	connectedCallback() {
@@ -176,7 +195,7 @@ export class FPopover extends FRoot {
 		this.addEventListener("click", this.dispatchEsc);
 	}
 	dispatchEsc() {
-		if (this.isEscapeClicked) {
+		if (this.isEscapeClicked && this.closeOnEscape) {
 			const event = new CustomEvent("esc", {
 				detail: {
 					message: "Popover close on escape key"
@@ -222,9 +241,26 @@ export class FPopover extends FRoot {
 			return html`<slot></slot>${overlay} `;
 		} else {
 			if (this.targetElement) {
-				this.targetElement.style.zIndex = "unset";
+				this.targetElement.style.removeProperty("z-index");
 			}
 		}
 		return ``;
+	}
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.updated(changedProperties);
+		/**
+		 * method that is executed before every repaint
+		 */
+		requestAnimationFrame(() => {
+			if (this.autoHeight) {
+				const topPosition = Number(this.style.top.replace("px", "")) + 16;
+				this.style.height = `calc(100vh - ${topPosition}px)`;
+				this.style.maxHeight = `calc(100vh - ${topPosition}px)`;
+			} else {
+				this.style.removeProperty("height");
+				this.style.removeProperty("max-height");
+			}
+		});
 	}
 }

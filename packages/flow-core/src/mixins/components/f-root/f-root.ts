@@ -5,9 +5,9 @@ import eleStyle from "./f-root.scss";
 
 // to avoid recursive tye check
 type TooltipElement = HTMLElement & {
-  target: unknown;
-  open: boolean;
-  closable: boolean;
+	target: unknown;
+	open: boolean;
+	closable: boolean;
 };
 
 /**
@@ -15,99 +15,110 @@ type TooltipElement = HTMLElement & {
  *
  */
 export class FRoot extends LitElement {
-  static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle)];
 
-  @query("f-popover")
-  tooltipElement!: HTMLElement;
+	@query("f-popover")
+	tooltipElement!: HTMLElement;
 
-  /**
-   * @attribute Value of a switch defines if it is on or off.
-   */
-  @property({ reflect: true, type: String })
-  tooltip?: string;
+	/**
+	 * @attribute Value of a switch defines if it is on or off.
+	 */
+	@property({ reflect: true, type: String })
+	tooltip?: string;
 
-  disconnectedCallback() {
-    const tooltipElement = document.querySelector<TooltipElement>("#flow-tooltip");
-    if (this.tooltip && tooltipElement?.target === this && tooltipElement) {
-      tooltipElement.open = false;
-    }
-    super.disconnectedCallback();
-  }
+	mouseEnter?: () => void;
 
-  protected updated(changedProperties: PropertyValues) {
-    super.updated(changedProperties);
-    /**
-     * check if changed properties has tooltip
-     */
-    if (changedProperties.has("tooltip")) {
-      /**
-       * get global tooltip component
-       */
-      let tooltipElement = document.querySelector<TooltipElement>("#flow-tooltip");
-      /**
-       * is tooltip external
-       */
-      let isExternalTooltip = false;
+	mouseLeave?: () => void;
 
-      /**
-       * mouse enter behaviour
-       */
-      const mouseEnter = () => {
-        if (tooltipElement) {
-          tooltipElement.target = this;
-          if (!isExternalTooltip) {
-            const tooltipText = tooltipElement?.querySelector("#tooltip-text");
-            if (tooltipText) {
-              tooltipText.innerHTML = this.tooltip as string;
-            }
-          }
-          tooltipElement.open = true;
-        }
-      };
+	disconnectedCallback() {
+		const tooltipElement = document.querySelector<TooltipElement>("#flow-tooltip");
+		if (this.tooltip && tooltipElement?.target === this && tooltipElement) {
+			tooltipElement.open = false;
+		}
+		super.disconnectedCallback();
+	}
 
-      /**
-       * mouse leave behavior
-       */
-      const mouseLeave = () => {
-        if (tooltipElement && !tooltipElement?.closable) {
-          tooltipElement.open = false;
-        }
-      };
+	protected updated(changedProperties: PropertyValues) {
+		super.updated(changedProperties);
+		/**
+		 * check if changed properties has tooltip
+		 */
+		if (changedProperties.has("tooltip")) {
+			/**
+			 * get global tooltip component
+			 */
+			let tooltipElement = document.querySelector<TooltipElement>("#flow-tooltip");
+			/**
+			 * is tooltip external
+			 */
+			let isExternalTooltip = false;
 
-      /**
-       * If tooltip is specified by user
-       */
-      if (this.tooltip) {
-        /**
-         * check if tooltip contains id
-         */
-        if (this.tooltip.startsWith("#")) {
-          tooltipElement = document.querySelector<TooltipElement>(this.tooltip);
-          isExternalTooltip = true;
-          if (!tooltipElement) {
-            console.warn(`${this.tooltip} tooltip not found`);
-          }
-        }
-        /**
-         * if global tooltip not present
-         */
-        if (!tooltipElement && !isExternalTooltip) {
-          const tooltipDefine = `<f-tooltip placement="auto" id="flow-tooltip">
+			/**
+			 * mouse enter behaviour
+			 */
+			if (!this.mouseEnter) {
+				this.mouseEnter = () => {
+					if (tooltipElement) {
+						tooltipElement.target = this;
+						if (!isExternalTooltip) {
+							const tooltipText = tooltipElement?.querySelector("#tooltip-text");
+							if (tooltipText) {
+								tooltipText.innerHTML = this.tooltip as string;
+							}
+						}
+						tooltipElement.open = true;
+					}
+				};
+			}
+
+			/**
+			 * mouse leave behavior
+			 */
+			if (!this.mouseLeave) {
+				this.mouseLeave = () => {
+					if (tooltipElement && !tooltipElement?.closable) {
+						tooltipElement.open = false;
+					}
+				};
+			}
+
+			/**
+			 * If tooltip is specified by user
+			 */
+			if (this.tooltip) {
+				/**
+				 * check if tooltip contains id
+				 */
+				if (this.tooltip.startsWith("#")) {
+					tooltipElement = document.querySelector<TooltipElement>(this.tooltip);
+					isExternalTooltip = true;
+					if (!tooltipElement) {
+						console.warn(`${this.tooltip} tooltip not found`);
+					}
+				}
+				/**
+				 * if global tooltip not present
+				 */
+				if (!tooltipElement && !isExternalTooltip) {
+					const tooltipDefine = `<f-tooltip placement="auto" id="flow-tooltip">
         <f-text variant="para" size="small" id="tooltip-text">
         </f-text>
 </f-tooltip>`;
-          document.body?.insertAdjacentHTML("beforeend", tooltipDefine);
+					document.body?.insertAdjacentHTML("beforeend", tooltipDefine);
 
-          // if tooltip present with particular id `flow-tooltip`
-          tooltipElement = document.querySelector("#flow-tooltip");
-        }
+					// if tooltip present with particular id `flow-tooltip`
+					tooltipElement = document.querySelector("#flow-tooltip");
+				}
 
-        this.addEventListener("mouseenter", mouseEnter);
-        this.addEventListener("mouseleave", mouseLeave);
-      } else {
-        this.removeEventListener("mouseenter", mouseEnter);
-        this.removeEventListener("mouseleave", mouseLeave);
-      }
-    }
-  }
+				this.addEventListener("mouseenter", this.mouseEnter);
+				this.addEventListener("mouseleave", this.mouseLeave);
+			} else {
+				if (this.mouseLeave !== undefined && tooltipElement && tooltipElement.target === this) {
+					this.mouseLeave();
+				}
+				this.removeEventListener("mouseenter", this.mouseEnter);
+				this.removeEventListener("mouseleave", this.mouseLeave);
+			}
+		}
+	}
 }

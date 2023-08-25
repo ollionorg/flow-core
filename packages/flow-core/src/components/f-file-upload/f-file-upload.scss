@@ -23,15 +23,20 @@ $sizes: (
 		@include base();
 		display: flex;
 		border: 1px dashed var(--color-border-default);
-		background-color: var(--color-surface-tertiary);
+		background-color: var(--color-input-default);
 		&:not([loading]) {
 			cursor: pointer;
 			&:hover {
-				background-color: var(--color-surface-tertiary-hover);
+				background-color: var(--color-input-default-hover);
 			}
 		}
 		&[loading] {
 			cursor: no-drop;
+		}
+		&[disabled] {
+			@include disabled();
+			pointer-events: none;
+			opacity: 1;
 		}
 		justify-content: space-between;
 		align-items: center;

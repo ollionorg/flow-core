@@ -45,6 +45,8 @@ export type FTableSchemaVariant = FTableVariant;
 export type FTableSchemaSize = FTableSize;
 export type FTableSchemaSelectable = FTableSelectable;
 
+export type FTableSchemaHeaderCellemplate = (value: any) => HTMLTemplateResult;
+
 @flowElement("f-table-schema")
 export class FTableSchema extends FRoot {
 	/**
@@ -64,7 +66,7 @@ export class FTableSchema extends FRoot {
 	/**
 	 * @attribute data to display in table
 	 */
-	@property({ type: Object })
+	@property({ type: Object, reflect: true })
 	data!: FTableSchemaData;
 
 	@property({ type: String, reflect: true })
@@ -135,6 +137,16 @@ export class FTableSchema extends FRoot {
 
 	set ["show-search-bar"](val: boolean) {
 		this.showSearchBar = val;
+	}
+
+	/**
+	 * @attribute header-cell-template
+	 */
+	@property({ reflect: false, type: Function, attribute: "header-cell-template" })
+	headerCellTemplate?: FTableSchemaHeaderCellemplate;
+
+	set ["header-cell-template"](val: FTableSchemaHeaderCellemplate | undefined) {
+		this.headerCellTemplate = val;
 	}
 
 	@state()
@@ -233,7 +245,7 @@ export class FTableSchema extends FRoot {
 							.width=${width}
 							.actions=${actions}
 							?sticky-left=${ifDefined(sticky)}
-							><f-text style="height:100%" inline .highlight=${highlightTerm}
+							><f-text style="height:100%" .highlight=${highlightTerm}
 								>${this.getCellTemplate(row.data[columnHeader[0]])}</f-text
 							></f-tcell
 						>`;
@@ -356,7 +368,7 @@ export class FTableSchema extends FRoot {
 			return html`<f-text state="warning"> Warning: The 'data' property is required.</f-text>`;
 		}
 		return html`
-			<div>
+			<div class="f-table-schema-wrapper">
 				<slot name="search">
 					${this.showSearchBar
 						? html`<f-div padding="medium none">
@@ -532,6 +544,8 @@ export class FTableSchema extends FRoot {
 	getHeaderCellTemplate(cell: FTableSchemaHeaderCell) {
 		if (cell && typeof cell === "object" && cell.value && cell.template) {
 			return cell.template();
+		} else if (cell && typeof cell === "object" && cell.value && this.headerCellTemplate) {
+			return this.headerCellTemplate(cell.value);
 		} else if (cell && typeof cell === "object" && cell.value) {
 			return html`<f-text>${cell.value}</f-text>`;
 		}

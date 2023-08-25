@@ -1,15 +1,16 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import eleStyle from "./f-toast.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import toastQueue from "./f-toast-queue";
 import { FDiv } from "../f-div/f-div";
 import { FIcon } from "../f-icon/f-icon";
+import { flowElement } from "./../../utils";
 
 export type FToastState = "default" | "primary" | "success" | "warning" | "danger";
 
-@customElement("f-toast")
+@flowElement("f-toast")
 export class FToast extends FRoot {
 	/**
 	 * css loaded from scss file
@@ -58,14 +59,11 @@ export class FToast extends FRoot {
 	 * @param length length of uid
 	 * @returns uid
 	 */
-	generateId(length = 5) {
-		let result = "";
-		const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-		const charactersLength = characters.length;
-		for (let i = 0; i < length; i++) {
-			result += characters.charAt(Math.floor(Math.random() * charactersLength));
-		}
-		return result;
+	generateId() {
+		const crypto = window.crypto || window.Crypto;
+		const array = new Uint32Array(1);
+
+		return `${crypto.getRandomValues(array)[0]}`;
 	}
 
 	/**

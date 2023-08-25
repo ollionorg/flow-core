@@ -152,10 +152,20 @@ $sizes: (
 			}
 		}
 	}
+	f-div.f-radio-wrapper[disabled] {
+		@include disabled();
+		pointer-events: none;
+		opacity: 1;
+	}
+	slot[name="label"] {
+		cursor: pointer;
+	}
 }
 
 f-radio {
+	display: flex;
 	height: fit-content;
+	flex: 0 0 fit-content;
 	&[disabled] {
 		@include disabled();
 	}

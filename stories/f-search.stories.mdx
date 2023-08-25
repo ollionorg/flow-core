@@ -69,9 +69,10 @@ Search enables users to specify a word or a phrase to find relevant pieces of co
 			category: "fill",
 			state: "default",
 			size: "medium",
-			slot: `              <f-div slot="label" padding="none" gap="none">Label</f-div>
-			<f-div slot="description">this is a description</f-div>
-              <f-div width="100%" slot="help"><f-text  variant="para" size="small">This is a Subtext</f-text></f-div>`,
+			slot: `<f-div slot="label" padding="none" gap="none">Label</f-div>
+              <f-div width="100%" slot="help"><f-text  variant="para" size="small">This is a Subtext</f-text></f-div>
+			  <f-text slot="subtitle" state="secondary" variant="para" size="small">Optional</f-text>
+			<f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>`,
 			disabled: false,
 			clear: false,
 			["search-button"]: false,
@@ -603,9 +604,59 @@ Provides the search result in the form of an array of strings.
 <Canvas>
 	<Story name="result">
 		{args => {
-			const [value, setValue] = useState("");
+			const [value, setValue] = useState("jane");
 			const handleValue = e => {
+				console.log("in input", e);
 				setValue(e.detail.value);
+			};
+			const handleSelected = e => {
+				console.log("in selected", e);
+			};
+			const template = [
+				{
+					value: {
+						firstname: "henry",
+						lastname: "jane"
+					},
+					template: function (value) {
+						return html`<f-div gap="medium" direction="column"
+							><f-text inline highlight=${value}
+								>${this.value.firstname} ${this.value.lastname}</f-text
+							><f-text inline highlight=${value}>subtitle</f-text></f-div
+						>`;
+					},
+					toString: function () {
+						return this.value.firstname + " " + this.value.lastname;
+					}
+				},
+				{
+					value: {
+						firstname: "tony",
+						lastname: "stark"
+					},
+					template: function (value) {
+						return html`<f-div gap="medium" direction="column"
+							><f-text inline highlight=${value}
+								>${this.value.firstname} ${this.value.lastname}</f-text
+							><f-text inline highlight=${value}>subtitle</f-text></f-div
+						>`;
+					},
+					toString: function () {
+						return this.value.firstname + " " + this.value.lastname;
+					}
+				}
+			];
+			const resultWhen = (result, value) => {
+				console.log("in result when");
+				if (value === "*" || value === "$") {
+					return true;
+				} else if (typeof result === "object") {
+					return result
+						.toString()
+						.toLocaleLowerCase()
+						.includes(value?.toLocaleLowerCase() ?? "");
+				}
+				return result.toLocaleLowerCase().includes(value?.toLocaleLowerCase() ?? "");
 			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
@@ -642,6 +693,9 @@ Provides the search result in the form of an array of strings.
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
+							<f-div slot="no-data" padding="medium">
+								<f-text variant="para" size="small">This is no-data slot.</f-text>
+							</f-div>
 						</f-search></f-div
 					>
 					<f-div align="middle-center">
@@ -659,6 +713,25 @@ Provides the search result in the form of an array of strings.
 							<f-div slot="label" padding="none" gap="none">Label</f-div>
 							<f-div slot="description" padding="none" gap="none"
 								>This is a demo for categorized search result</f-div
+							>
+							<f-text slot="help" variant="para" size="small"
+								>This is a Subtext (Helper Text)</f-text
+							>
+						</f-search></f-div
+					>
+					<f-div align="middle-center">
+						<f-search
+							value=${value}
+							.resultWhen=${resultWhen}
+							placeholder="Write here"
+							@input=${handleValue}
+							size="medium"
+							.result=${template}
+							@selected=${handleSelected}
+						>
+							<f-div slot="label" padding="none" gap="none">Label</f-div>
+							<f-div slot="description" padding="none" gap="none"
+								>This is a demo for custom template search result</f-div
 							>
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
@@ -785,7 +858,7 @@ Provides a select dropdown on the left to filter the search query.
 			};
 			return html`
 				<f-div width="100%" align="top-center" padding="large" gap="medium">
-					${[0, 1, 2].map(
+					${[0, 1, 2, 3].map(
 						item => html`<f-div>
           <f-search
             value=${value}
@@ -795,6 +868,7 @@ Provides a select dropdown on the left to filter the search query.
             ?search-button=${item === 0 ? true : false}
             ?disabled=${item === 1 ? true : false}
             ?clear=${item === 2 ? true : false}
+			?loading=${item === 3 ? true : false}
           >
             <f-div slot="label" padding="none" gap="none">${
 							item === 0 ? "search-button" : item === 1 ? "Disabled" : "Clear Icon on Type"

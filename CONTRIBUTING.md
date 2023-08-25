@@ -4,7 +4,7 @@ Thank you for your interest in contributing! 🎉👍
 
 Flow is a framework that is made up of multiple dependencies / templates. Visit the [about.md](https://github.com/cldcvr/flow-core/blob/main/ABOUT.md) on the [flow-core repo](https://github.com/cldcvr/flow-core/) to learn more.  
 
-When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the [owners](https://github.com/cldcvr/flow-core/blob/main/CODEOWNERS) of this repository before making a change. You can expect a response from a maintainer within a week. If you haven’t heard anything by then, feel free to ping on the slack channel or write to flow@cldcvr.com.
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the [owners](https://github.com/cldcvr/flow-core/blob/main/CODEOWNERS) of this repository before making a change. You can expect a response from a maintainer within a week. If you haven’t heard anything by then, write to flow@cldcvr.com.
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
@@ -44,7 +44,7 @@ All issues as tracked here. Once you have resolved an issue,
 
 ### Flow Documentation
 * Guidlines coming soon
-* If you would like to contribute to this document and guidlines, write into flow@cldcvr.com or join this slack channel.
+* If you would like to contribute to this document and guidlines, write into flow@cldcvr.com
 
 
 ## Pull Request Process

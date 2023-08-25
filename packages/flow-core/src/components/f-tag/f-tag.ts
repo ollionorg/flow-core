@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-tag.scss";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
@@ -11,6 +11,7 @@ import getCustomFillColor from "../../utils/get-custom-fill-color";
 import LightenDarkenColor from "../../utils/get-lighten-darken-color";
 import { FIcon } from "../f-icon/f-icon";
 import { FCounter } from "../f-counter/f-counter";
+import { flowElement } from "./../../utils";
 
 export type FTagStateProp =
 	| "primary"
@@ -24,7 +25,7 @@ export type FTagStateProp =
 /**
  * @summary Tags allow users to categorize the content. They can be used to add metadata to an element such as category, or property or show a status.
  */
-@customElement("f-tag")
+@flowElement("f-tag")
 export class FTag extends FRoot {
 	/**
 	 * css loaded from scss file
@@ -77,7 +78,7 @@ export class FTag extends FRoot {
 	 * @attribute Counter property enables a counter on the tag.
 	 */
 	@property({ reflect: true, type: Number })
-	counter?: string;
+	counter?: number;
 
 	/**
 	 * @attribute Loader icon replaces the content of the tag .
@@ -108,11 +109,13 @@ export class FTag extends FRoot {
 	 */
 	get iconSize() {
 		if (this.size === "large") {
-			return "medium";
-		} else if (this.size === "medium") {
 			return "small";
-		} else {
+		} else if (this.size === "medium") {
 			return "x-small";
+		} else if (this.size === "small") {
+			return "x-small";
+		} else {
+			return "medium";
 		}
 	}
 
@@ -220,7 +223,9 @@ export class FTag extends FRoot {
 					class=${classMap({
 						"left-icon": true,
 						...iconClasses,
-						"f-tag-system-icon": this.tagSystemIcon ? true : false
+						"f-tag-system-icon": this.tagSystemIcon ? true : false,
+						"system-icon-size": this.size === "small" ? true : false,
+						"f-tag-small-emoji": this.size === "small" ? true : false
 					})}
 					.size=${this.iconSize}
 					?clickable=${true}
@@ -237,7 +242,9 @@ export class FTag extends FRoot {
 					class=${classMap({
 						"right-icon": true,
 						...iconClasses,
-						"f-tag-system-icon": this.tagSystemIcon ? true : false
+						"f-tag-system-icon": this.tagSystemIcon ? true : false,
+						"system-icon-size": this.size === "small" ? true : false,
+						"f-tag-small-emoji": this.size === "small" ? true : false
 					})}
 					.size=${this.iconSize}
 					?clickable=${true}
@@ -254,15 +261,16 @@ export class FTag extends FRoot {
 			"fill-button-surface-dark":
 				this.fill && getTextContrast(this.fill) === "dark-text" ? true : false
 		};
-		const counter = this.counter
-			? html`<f-counter
-					data-qa-counter
-					.state=${this.state}
-					.size=${this.size}
-					.label=${Number(this.counter)}
-					class=${classMap(counterClasses)}
-			  ></f-counter>`
-			: "";
+		const counter =
+			this.counter !== undefined
+				? html`<f-counter
+						data-qa-counter
+						.state=${this.state}
+						.size=${this.size}
+						.label=${Number(this.counter)}
+						class=${classMap(counterClasses)}
+				  ></f-counter>`
+				: "";
 		/**
 		 * render loading if required
 		 */
@@ -304,7 +312,9 @@ export class FTag extends FRoot {
 			?selected=${this.selected}
 			?clickable=${this.clickable}
 		>
-			${iconLeft}${this.label}${counter}${iconRight}
+			${iconLeft}
+			<f-div class="text-content" .tooltip=${this.label}>${this.label}</f-div>
+			${counter}${iconRight}
 		</div>`;
 	}
 }

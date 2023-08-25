@@ -7,8 +7,8 @@ $categories map will have state specific inner maps.
 **/
 $categories: (
 	"fill": (
-		"background": var(--color-surface-tertiary),
-		"hover": var(--color-surface-tertiary-hover)
+		"background": var(--color-input-default),
+		"hover": var(--color-input-default-hover)
 	),
 	"transparent": (
 		"background": transparent,
@@ -48,7 +48,7 @@ $states: (
 		"focus": var(--color-primary-default)
 	),
 	"default": (
-		"input": var(--color-surface-tertiary),
+		"input": var(--color-input-default),
 		"border": var(--color-border-default),
 		"focus": var(--color-primary-default)
 	),
@@ -88,7 +88,7 @@ applies styles on f-select
 		}
 		.f-select-options {
 			position: fixed;
-			z-index: 2;
+			z-index: 200;
 			background-color: var(--color-surface-secondary);
 			border-radius: 0px 0px 4px 4px;
 			overflow: auto;
@@ -219,7 +219,7 @@ applies styles on f-select
 				padding: 0px 0px 0px 12px;
 				gap: 12px;
 				align-items: center;
-				width: 100%;
+				flex-grow: 1;
 				.icon-left-padding {
 					align-items: center;
 					display: flex;
@@ -254,7 +254,6 @@ applies styles on f-select
 				position: relative;
 				display: flex;
 				gap: 12px;
-				align-items: center;
 				@include rotate("svg");
 				pointer-events: none;
 				padding: 0px 12px 0px 0px;
@@ -336,10 +335,17 @@ applies styles on f-select
 			}
 		}
 	}
+	div.f-select-field[disabled] {
+		@include disabled();
+		pointer-events: none;
+		opacity: 1;
+	}
+	f-div.f-select-options-clickable[disabled] {
+		@include disabled();
+	}
 }
 
 f-select {
-	width: 100%;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -382,5 +388,21 @@ f-select.f-search-border {
 	--input-border-radius-round: 22px 0px 0px 22px;
 	&[category="fill"][state="default"] {
 		border-right: 1px solid var(--color-border-default);
+	}
+}
+
+f-div[direction="column"] {
+	> f-select {
+		flex: 1 1;
+		max-height: 100%;
+		width: 100%;
+	}
+}
+
+f-div[direction="row"] {
+	> f-select {
+		flex: 1 1;
+		max-width: 100%;
+		height: 100%;
 	}
 }

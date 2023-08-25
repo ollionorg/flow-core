@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import eleStyle from "./f-input.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -9,16 +9,18 @@ import { FIcon } from "../f-icon/f-icon";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { ifDefined } from "lit-html/directives/if-defined.js";
+import { flowElement } from "./../../utils";
 
 export type FInputState = "primary" | "default" | "success" | "warning" | "danger";
 
 export type FInputCustomEvent = {
 	value: string | number;
+	type: "clear" | "input";
 };
 
 export type FInputSuffixWhen = (value: string) => boolean;
 
-@customElement("f-input")
+@flowElement("f-input")
 export class FInput extends FRoot {
 	/**
 	 * css loaded from scss file
@@ -100,14 +102,13 @@ export class FInput extends FRoot {
 	/**
 	 * @attribute Prefix property enables a string before the input value.
 	 */
-	@property({ reflect: true, type: String, attribute: "prefix" })
-	fInputPrefix?: string;
-
+	@property({ reflect: true, type: String })
+	prefix: string | null = null;
 	/**
 	 * @attribute Suffix property enables a string on the right side of the input box.
 	 */
-	@property({ reflect: true, type: String, attribute: "suffix" })
-	fInputSuffix?: string;
+	@property({ reflect: true, type: String })
+	suffix?: string;
 
 	/**
 	 * @attribute This shows the character count while typing and auto limits after reaching the max length.
@@ -161,7 +162,7 @@ export class FInput extends FRoot {
 		e.stopPropagation();
 		const val = (e.target as HTMLInputElement)?.value;
 		this.value = this.type === "number" ? Number(val) : val;
-		this.dispatchInputEvent(this.value);
+		this.dispatchInputEvent(this.value, "input");
 	}
 
 	/**
@@ -169,13 +170,14 @@ export class FInput extends FRoot {
 	 */
 	clearInputValue() {
 		this.value = "";
-		this.dispatchInputEvent("");
+		this.dispatchInputEvent("", "clear");
 	}
 
-	dispatchInputEvent(value: string | number) {
+	dispatchInputEvent(value: string | number, type: "clear" | "input") {
 		const event = new CustomEvent<FInputCustomEvent>("input", {
 			detail: {
-				value
+				value: value,
+				type: type
 			},
 			bubbles: true,
 			composed: true
@@ -237,9 +239,9 @@ export class FInput extends FRoot {
 		 * append prefix
 		 */
 		const prefixAppend =
-			this.fInputPrefix || this.iconLeft
+			this.prefix || this.iconLeft
 				? html` <div class="f-input-prefix">
-						${this.fInputPrefix
+						${this.prefix
 							? html`
 									<f-div
 										height="hug-content"
@@ -249,7 +251,7 @@ export class FInput extends FRoot {
 										border="small solid default right"
 									>
 										<f-text variant="para" size="small" weight="regular" class="word-break"
-											>${this.fInputPrefix}</f-text
+											>${this.prefix}</f-text
 										>
 									</f-div>
 							  `
@@ -276,13 +278,13 @@ export class FInput extends FRoot {
 		 * main suffix
 		 */
 		const mainSuffix =
-			this.fInputSuffix || this.iconRight
+			this.suffix || this.iconRight
 				? html`
-						${this.fInputSuffix && (this.suffixWhen ? this.suffixWhen(this.value as string) : true)
+						${this.suffix && (this.suffixWhen ? this.suffixWhen(this.value as string) : true)
 							? html`
 									<f-div height="hug-content" width="hug-content" padding="none" direction="row">
 										<f-text variant="para" size="x-small" weight="regular" class="word-break"
-											>${this.fInputSuffix}</f-text
+											>${this.suffix}</f-text
 										>
 									</f-div>
 							  `
@@ -324,17 +326,20 @@ export class FInput extends FRoot {
 			>
 				<f-div padding="none" gap="none" align="bottom-left">
 					<f-div padding="none" direction="column" width="fill-container">
-						<f-div
-							padding="none"
-							gap="small"
-							direction="row"
-							width="hug-content"
-							height="hug-content"
-						>
-							<f-div padding="none" direction="row" width="hug-content" height="hug-content">
+						<f-div padding="none" gap="auto" direction="row" height="hug-content">
+							<f-div
+								padding="none"
+								gap="small"
+								direction="row"
+								width="hug-content"
+								height="hug-content"
+							>
 								<slot name="label" @slotchange=${this._onLabelSlotChange}></slot>
+								<slot name="icon-tooltip"></slot>
 							</f-div>
-							<slot name="icon-tooltip"></slot>
+							<f-div width="hug-content">
+								<slot name="subtitle"></slot>
+							</f-div>
 						</f-div>
 						<slot name="description"></slot>
 					</f-div>
@@ -365,6 +370,7 @@ export class FInput extends FRoot {
 						category=${this.category}
 						state=${this.state}
 						size=${this.size}
+						?disabled=${this.disabled}
 					>
 						${prefixAppend}
 						<input
@@ -378,6 +384,8 @@ export class FInput extends FRoot {
 							.value="${this.value || ""}"
 							size=${this.size}
 							?readonly=${this.readOnly}
+							autofocus=${ifDefined(this.getAttribute("autofocus"))}
+							autocomplete=${ifDefined(this.getAttribute("autocomplete"))}
 							maxlength="${ifDefined(this.maxLength)}"
 							@input=${this.handleInput}
 						/>

@@ -1,5 +1,5 @@
 import { html, PropertyValues, unsafeCSS } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-button.scss";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
@@ -12,6 +12,7 @@ import getCustomFillColor from "../../utils/get-custom-fill-color";
 import getTextContrast from "../../utils/get-text-contrast";
 import { FIcon } from "../f-icon/f-icon";
 import { FCounter } from "../f-counter/f-counter";
+import { flowElement } from "./../../utils";
 
 export type FButtonState =
 	| "primary"
@@ -25,7 +26,7 @@ export type FButtonState =
 /**
  * @summary Buttons allow users to perform an action or to initiate a new function.
  */
-@customElement("f-button")
+@flowElement("f-button")
 export class FButton extends FRoot {
 	/**
 	 * css loaded from scss file

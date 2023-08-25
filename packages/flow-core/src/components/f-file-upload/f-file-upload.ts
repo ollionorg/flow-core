@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { html, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-file-upload.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
@@ -10,6 +10,7 @@ import { FIcon } from "../f-icon/f-icon";
 import { getFormattedBytes } from "../../utils/index";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
+import { flowElement } from "./../../utils";
 
 export type FFileUploadState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -24,7 +25,7 @@ export type FFileUploadSizeProp =
 	| `${number} GB`
 	| `${number} TB`;
 
-@customElement("f-file-upload")
+@flowElement("f-file-upload")
 export class FFileUpload extends FRoot {
 	/**
 	 * css loaded from scss file
@@ -423,18 +424,21 @@ export class FFileUpload extends FRoot {
 			<f-div direction="column" gap="x-small">
 				<f-div padding="none" gap="x-small" align="bottom-left" id="f-file-upload-header">
 					<f-div padding="none" direction="column" width="fill-container">
-						<f-div
-							padding="none"
-							gap="small"
-							direction="row"
-							width="hug-content"
-							height="hug-content"
-							id="label-slot"
-						>
-							<f-div padding="none" direction="row" width="hug-content" height="hug-content">
+						<f-div padding="none" gap="auto" direction="row" height="hug-content">
+							<f-div
+								padding="none"
+								gap="small"
+								direction="row"
+								width="hug-content"
+								height="hug-content"
+								id="label-slot"
+							>
 								<slot name="label"></slot>
+								<slot name="icon-tooltip"></slot>
 							</f-div>
-							<slot name="icon-tooltip"></slot>
+							<f-div width="hug-content">
+								<slot name="subtitle"></slot>
+							</f-div>
 						</f-div>
 						<slot name="description"></slot>
 					</f-div>
@@ -454,6 +458,7 @@ export class FFileUpload extends FRoot {
 						state=${this.state}
 						size=${this.size}
 						?loading=${this.loading}
+						?disabled=${this.disabled}
 						@click=${this.handleClick}
 						@drop=${this.dropFile}
 						@dragover=${(e: DragEvent) => {
@@ -541,7 +546,10 @@ export class FFileUpload extends FRoot {
 			</f-div>
 		`;
 	}
-	updated() {
+	protected async updated(
+		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
+		super.updated(changedProperties);
 		//update the selectedFiles as per the value being fetched
 		this.updateSelectedValues();
 

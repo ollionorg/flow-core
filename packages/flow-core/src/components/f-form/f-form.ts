@@ -1,16 +1,17 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import eleStyle from "./f-form.scss";
 import { FDiv } from "../f-div/f-div";
+import { flowElement } from "./../../utils";
 
 // import { ref, createRef } from "lit/directives/ref.js";
 
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
-@customElement("f-form")
+@flowElement("f-form")
 export class FForm extends FRoot {
 	/**
 	 * css loaded from scss file

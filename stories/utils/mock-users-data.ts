@@ -100,7 +100,7 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 		mobile: { value: "Mobile" },
 		email: { value: "Email" },
 		sex: { value: "Sex", disableSort: true },
-		address: { value: "Address", width: "300px", selected: true, sticky: true }
+		address: { value: "Address", width: "300px", selected: false, sticky: true }
 	};
 
 	return {

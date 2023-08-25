@@ -57,6 +57,30 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/utils/lang-comments-map.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "languageCommentsMap",
+          "type": {
+            "text": "Map<string, CommentItem>"
+          },
+          "default": "new Map([\n\t// JavaScript\n\t[\"javascript\", commonItem],\n\n\t// TypeScript\n\t[\"typescript\", commonItem],\n\n\t// Python\n\t[\n\t\t\"python\",\n\t\t{\n\t\t\tsingleLine: \"#\",\n\t\t\tmultiLine: { start: \"'''\", end: \"'''\" }\n\t\t}\n\t],\n\n\t// Java\n\t[\"java\", commonItem],\n\n\t// C++\n\t[\"cpp\", commonItem],\n\n\t// C#\n\t[\"csharp\", commonItem],\n\n\t// PHP\n\t[\"php\", commonItem],\n\n\t// Ruby\n\t[\n\t\t\"ruby\",\n\t\t{\n\t\t\tsingleLine: \"#\",\n\t\t\tmultiLine: { start: \"=begin\", end: \"=end\" }\n\t\t}\n\t],\n\n\t// Swift\n\t[\"swift\", commonItem],\n\n\t// Go\n\t[\"go\", commonItem],\n\n\t// Rust\n\t[\"rust\", commonItem],\n\n\t// Kotlin\n\t[\"kotlin\", commonItem],\n\n\t// Dart\n\t[\"dart\", commonItem],\n\n\t// HTML (HTML does not support multi-line comments)\n\t[\n\t\t\"html\",\n\t\t{\n\t\t\tsingleLine: \"<!--\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// CSS (CSS does not support multi-line comments)\n\t[\n\t\t\"css\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// SCSS (SCSS does not support multi-line comments)\n\t[\n\t\t\"scss\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// Less (Less does not support multi-line comments)\n\t[\n\t\t\"less\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// JSON (JSON does not support multi-line comments)\n\t[\n\t\t\"json\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// YAML (YAML does not support multi-line comments)\n\t[\n\t\t\"yaml\",\n\t\t{\n\t\t\tsingleLine: \"#\",\n\t\t\tmultiLine: null\n\t\t}\n\t]\n])"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "languageCommentsMap",
+          "declaration": {
+            "name": "languageCommentsMap",
+            "module": "src/utils/lang-comments-map.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-code-editor/f-code-editor.ts",
       "declarations": [
         {
@@ -422,30 +446,6 @@
           "declaration": {
             "name": "FCodeEditor",
             "module": "src/components/f-code-editor/f-code-editor.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/utils/lang-comments-map.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "languageCommentsMap",
-          "type": {
-            "text": "Map<string, CommentItem>"
-          },
-          "default": "new Map([\n\t// JavaScript\n\t[\"javascript\", commonItem],\n\n\t// TypeScript\n\t[\"typescript\", commonItem],\n\n\t// Python\n\t[\n\t\t\"python\",\n\t\t{\n\t\t\tsingleLine: \"#\",\n\t\t\tmultiLine: { start: \"'''\", end: \"'''\" }\n\t\t}\n\t],\n\n\t// Java\n\t[\"java\", commonItem],\n\n\t// C++\n\t[\"cpp\", commonItem],\n\n\t// C#\n\t[\"csharp\", commonItem],\n\n\t// PHP\n\t[\"php\", commonItem],\n\n\t// Ruby\n\t[\n\t\t\"ruby\",\n\t\t{\n\t\t\tsingleLine: \"#\",\n\t\t\tmultiLine: { start: \"=begin\", end: \"=end\" }\n\t\t}\n\t],\n\n\t// Swift\n\t[\"swift\", commonItem],\n\n\t// Go\n\t[\"go\", commonItem],\n\n\t// Rust\n\t[\"rust\", commonItem],\n\n\t// Kotlin\n\t[\"kotlin\", commonItem],\n\n\t// Dart\n\t[\"dart\", commonItem],\n\n\t// HTML (HTML does not support multi-line comments)\n\t[\n\t\t\"html\",\n\t\t{\n\t\t\tsingleLine: \"<!--\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// CSS (CSS does not support multi-line comments)\n\t[\n\t\t\"css\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// SCSS (SCSS does not support multi-line comments)\n\t[\n\t\t\"scss\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// Less (Less does not support multi-line comments)\n\t[\n\t\t\"less\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// JSON (JSON does not support multi-line comments)\n\t[\n\t\t\"json\",\n\t\t{\n\t\t\tsingleLine: \"//\",\n\t\t\tmultiLine: null\n\t\t}\n\t],\n\n\t// YAML (YAML does not support multi-line comments)\n\t[\n\t\t\"yaml\",\n\t\t{\n\t\t\tsingleLine: \"#\",\n\t\t\tmultiLine: null\n\t\t}\n\t]\n])"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "languageCommentsMap",
-          "declaration": {
-            "name": "languageCommentsMap",
-            "module": "src/utils/lang-comments-map.ts"
           }
         }
       ]

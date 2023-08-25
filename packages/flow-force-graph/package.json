@@ -1,0 +1,74 @@
+{
+  "name": "@cldcvr/flow-force-graph",
+  "version": "0.0.1",
+  "description": "Force chart web component based on d3",
+  "module": "dist/flow-force-graph.es.js",
+  "main": "dist/flow-force-graph.cjs.js",
+  "types": "dist/types/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "./compile.sh",
+    "compile": "./compile.sh",
+    "meta-build": "./meta-build.sh",
+    "build": "vite build --emptyOutDir && tsc -emitDeclarationOnly",
+    "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
+    "lint:eslint": "eslint 'src/**/*.ts' './custom-elements.vue.ts'",
+    "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
+    "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
+    "test-build": "web-test-runner ./src/**/*.test.ts --node-resolve",
+    "test": "yarn build && web-test-runner ./src/**/*.test.ts --node-resolve",
+    "test:file": "yarn build && web-test-runner --node-resolve",
+    "test:watch": "yarn build && web-test-runner ./src/**/*.test.ts --node-resolve --watch"
+  },
+  "keywords": [
+    "web-components",
+    "lit-element",
+    "typescript",
+    "lit"
+  ],
+  "dependencies": {
+    "d3": "^7.8.2",
+    "lit": "^2.2.4"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.5.7",
+    "@open-wc/testing": "^3.1.5",
+    "@types/d3": "^7.4.0",
+    "@types/eslint": "^8.4.3",
+    "@types/jest": "28.1.3",
+    "@types/prettier": "^2.6.3",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
+    "@web/dev-server-esbuild": "^0.3.0",
+    "@web/dev-server-rollup": "0.3.18",
+    "@web/test-runner": "^0.13.30",
+    "concurrently": "^7.3.0",
+    "esbuild-sass-plugin": "2.2.6",
+    "eslint": "^8.17.0",
+    "lit-html": "^2.2.5",
+    "prettier": "^2.6.2",
+    "rollup-plugin-postcss-lit": "^2.0.0",
+    "rollup-plugin-scss": "3.0.0",
+    "sass": "^1.52.3",
+    "typescript": "^4.5.4",
+    "vite": "^2.9.9",
+    "vue": "2.6.14",
+    "web-component-analyzer": "^2.0.0-next.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://github.com/cldcvr/flow-core.git",
+    "directory": "packages/flow-force-graph"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "customElements": "custom-elements.json",
+  "bugs": {
+    "url": "https://github.com/cldcvr/flow-core/issues"
+  },
+  "homepage": "https://github.com/cldcvr/flow-force-graph#readme",
+  "author": "@cldcvr",
+  "license": "MIT"
+}

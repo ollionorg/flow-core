@@ -19,8 +19,9 @@
     "build-flow-code-editor": "cd packages/flow-code-editor && yarn compile",
     "build-flow-md-editor": "cd packages/flow-md-editor && yarn compile",
     "build-flow-table": "cd packages/flow-table && yarn compile",
+    "build-flow-force-graph": "cd packages/flow-force-graph && yarn compile",
     "build-types-generator": "cd packages/custom-elements-manifest-to-types && yarn build",
-    "build-packages": "yarn build-types-generator && yarn build-flow-core-config && yarn build-flow-core && yarn build-flow-code-editor && yarn build-flow-log && yarn build-flow-table && yarn build-flow-md-editor",
+    "build-packages": "yarn build-types-generator && yarn build-flow-core-config && yarn build-flow-core && yarn build-flow-code-editor && yarn build-flow-log && yarn build-flow-table && yarn build-flow-md-editor && yarn build-flow-force-graph",
     "release": "cp README.md packages/flow-core && yarn build-packages && yarn changeset publish",
     "prepare": "husky install",
     "test": "yarn loki test"

@@ -108,5 +108,4 @@ const slides = ref(["slide-1", "slide-2", "slide-3", "slide-4", "slide-5"]);
 
 The `f-form-builder` component accepts `field` and `values` as an `Object`. If you need support for server-side rendering (SSR), you'll have to wrap it inside a `client-only` tag for now.
 
-**Note:** Enabling `reflect: true` for every object property in the Flow component can potentially increase the DOM size for client-side applications. This solution is still a proof of concept and needs further exploration.
 

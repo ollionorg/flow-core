@@ -46,7 +46,7 @@ jobs:
               "@cldcvr/flow-code-editor":"packages/flow-code-editor/CHANGELOG.md",
               "@cldcvr/flow-md-editor":"packages/flow-md-editor/CHANGELOG.md",
               "@cldcvr/flow-core":"packages/flow-core/CHANGELOG.md",
-              "@cldcvr/flow-table":"packages/flow-table/CHANGELOG.md",
+              "@cldcvr/flow-table":"packages/flow-table/CHANGELOG.md", "@cldcvr/flow-force-graph":"packages/flow-force-graph/CHANGELOG.md",
               "@cldcvr/flow-core-config":"packages/flow-core-config/CHANGELOG.md"
             }
       - name: Send Slack Notification
@@ -136,6 +136,10 @@ jobs:
       - uses: sergeysova/jq-action@v2
         with:
           cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/flow-table/package.json`" > packages/flow-table/package.json
+
+      - uses: sergeysova/jq-action@v2
+        with:
+          cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/flow-force-graph/package.json`" > packages/flow-force-graph/package.json
 
       - uses: actions/setup-node@v2
         with:

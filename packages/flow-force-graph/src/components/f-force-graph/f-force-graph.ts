@@ -60,7 +60,7 @@ export class FForceGraph extends FRoot {
 				d3
 					.forceLink(dataset.links)
 					.id(d => (d as ForceNode).id)
-					.distance(200)
+					.distance(150)
 					.strength(0.5)
 			)
 			.force("charge", d3.forceManyBody().distanceMin(200).strength(-3000))

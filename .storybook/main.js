@@ -41,6 +41,10 @@ module.exports = {
 				{
 					find: "@cldcvr/flow-table/src",
 					replacement: path.resolve(__dirname, "../packages/flow-table/src")
+				},
+				{
+					find: "@cldcvr/flow-force-graph/src",
+					replacement: path.resolve(__dirname, "../packages/flow-force-graph/src")
 				}
 			];
 		}

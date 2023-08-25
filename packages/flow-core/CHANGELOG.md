@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.23.1] - 2023-08-25
+
+### Bug Fixes
+
+- `f-select`: selected value not visible for small width.
+
 ## [1.23.0] - 2023-08-24
 
 ### Features

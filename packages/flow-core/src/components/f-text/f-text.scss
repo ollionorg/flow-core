@@ -214,23 +214,22 @@ f-div[direction="row"] {
 		flex-direction: row;
 		width: 100%;
 	}
-	.pseudo-edit-text {
-		display: none;
-		position: absolute;
-		top: 0;
-		right: 0;
+	.f-text-editable[data-hover] {
+		&:hover {
+			background-color: var(--color-surface-default-hover);
+		}
 	}
 	.pseudo-submit-text {
 		position: absolute;
 		top: 5px;
 		right: 6px;
 	}
-	.non-editable-slot {
-		width: calc(100% - 16px);
-	}
 	.textarea-wrapper {
 		display: flex;
 		width: 100%;
+	}
+	.non-editable-slot {
+		padding: 3px 6px;
 	}
 	.textarea {
 		display: block;

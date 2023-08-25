@@ -4,6 +4,16 @@
 
 # Change Log
 
+## [1.23.0] - 2023-08-24
+
+### Features
+
+- `f-div`: `max-height` and `max-width` properties added.
+
+### Improvements
+
+- `f-text`: UX for f-text editable feature improved. On hover and clicking on f-text the editable box opens now.
+
 ## [1.22.2] - 2023-08-23
 
 ### Bug Fixes

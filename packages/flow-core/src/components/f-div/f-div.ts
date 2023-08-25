@@ -39,6 +39,10 @@ export type FDivHeightProp =
 	| `${number}%`
 	| `${number}vh`;
 
+export type FDivMaxWidthProp = `${number}px` | `${number}%` | `${number}vw`;
+
+export type FDivMaxHeightProp = `${number}px` | `${number}%` | `${number}vh`;
+
 export type FDivStateProp =
 	| "subtle"
 	| "default"
@@ -178,6 +182,17 @@ export class FDiv extends FRoot {
 	height?: FDivHeightProp = "fill-container";
 
 	/**
+	 * @attribute width of `f-div`
+	 */
+	@property({ type: String, reflect: true, attribute: "max-width" })
+	maxWidth?: FDivWidthProp;
+	/**
+	 * @attribute height of `f-div`
+	 */
+	@property({ type: String, reflect: true, attribute: "max-height" })
+	maxHeight?: FDivHeightProp;
+
+	/**
 	 * @attribute The disabled attribute can be set to keep a user from clicking on the f-icon.
 	 */
 	@property({ reflect: true, type: Boolean })
@@ -270,6 +285,20 @@ export class FDiv extends FRoot {
 		if (this.height && !fixedValues.includes(this.height)) {
 			this.style.height = this.height;
 		}
+		if (this.maxWidth) {
+			this.classList.add("f-div-custom-width");
+			this.style.setProperty("--max-width", this.maxWidth);
+		} else {
+			this.style.removeProperty("--max-width");
+			this.classList.remove("f-div-custom-width");
+		}
+		if (this.maxHeight) {
+			this.classList.add("f-div-custom-height");
+			this.style.setProperty("--max-height", this.maxHeight);
+		} else {
+			this.style.removeProperty("--max-height");
+			this.classList.remove("f-div-custom-height");
+		}
 	}
 
 	checkHighlight() {
@@ -321,6 +350,7 @@ export class FDiv extends FRoot {
 		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
 	): Promise<void> {
 		super.updated(changedProperties);
+
 		if (
 			changedProperties.has("highlight") &&
 			(changedProperties.get("highlight") === true || this.highlight)

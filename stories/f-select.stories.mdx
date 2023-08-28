@@ -131,7 +131,7 @@ Select allows users to choose one or multiple options from a list of values.
 			checkbox: false,
 			["selection-limit"]: 2,
 			["create-option"]: false,
-			["auto-add-option"]: false
+			["auto-add-option"]: true
 		}}
 	>
 		{args => {
@@ -1487,6 +1487,7 @@ if true, shows a ‘create’ button when no query is found. On click of button,
 							width="200"
 							?create-option=${true}
 							@add-option=${handleCreateOption}
+							?auto-add-option=${false}
 						>
 							<f-div slot="label" padding="none" gap="none"
 								>Label for f-select (create-option=true)</f-div
@@ -1505,6 +1506,7 @@ if true, shows a ‘create’ button when no query is found. On click of button,
 							type="multiple"
 							?searchable=${true}
 							?create-option=${true}
+							?auto-add-option=${false}
 						>
 							<f-div slot="label" padding="none" gap="none"
 								>Label for f-select (create-option=true)</f-div

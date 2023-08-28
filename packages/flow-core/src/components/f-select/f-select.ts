@@ -266,7 +266,7 @@ export class FSelect extends FRoot {
 	 * @attribute when on search no option is presnt, and on click of create-button, for array of strings, auto-addition of option toggle
 	 */
 	@property({ reflect: true, type: Boolean, attribute: "auto-add-option" })
-	autoAddOption?: boolean = false;
+	autoAddOption?: boolean = true;
 
 	/**
 	 * @attribute limit to show the selection tags inside f-select.

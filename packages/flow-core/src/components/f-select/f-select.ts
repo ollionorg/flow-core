@@ -263,6 +263,12 @@ export class FSelect extends FRoot {
 	createOption?: boolean = false;
 
 	/**
+	 * @attribute when on search no option is presnt, and on click of create-button, for array of strings, auto-addition of option toggle
+	 */
+	@property({ reflect: true, type: Boolean, attribute: "auto-add-option" })
+	autoAddOption?: boolean = false;
+
+	/**
 	 * @attribute limit to show the selection tags inside f-select.
 	 */
 	@property({ reflect: true, type: Number, attribute: "selection-limit" })
@@ -508,7 +514,7 @@ export class FSelect extends FRoot {
 			bubbles: true,
 			composed: true
 		});
-		if (this.isStringsArray(this.options as unknown[])) {
+		if (this.autoAddOption && this.isStringsArray(this.options as unknown[])) {
 			const event = new CustomEvent<FSelectCustomEvent>("input", {
 				detail: {
 					value: this.searchValue

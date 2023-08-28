@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.24.0] - 2023-08-28
+
+### Features
+
+- `f-select`: `auto-add-option` property is added to give the control to the developer of not available option getting automatically added in the list of options, or not. This could option could be used for options which is array of strings, and when `create-option=true`.
+
 ## [1.23.1] - 2023-08-25
 
 ### Bug Fixes

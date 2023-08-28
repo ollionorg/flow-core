@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.23.2] - 2023-08-28
+
+### Bug Fixes
+
+- External `f-tooltip` with `closable` should force close whenever tooltip attribute changes.
 ## [1.23.1] - 2023-08-25
 
 ### Bug Fixes

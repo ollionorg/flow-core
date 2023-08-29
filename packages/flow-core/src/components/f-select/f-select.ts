@@ -28,10 +28,10 @@ export type FSelectState = "primary" | "default" | "success" | "warning" | "dang
 export type FSelectHeightProp = number;
 export type FSelectWidthProp = "fill-container" | `${number}`;
 export type FSelectArrayOfStrings = string[];
-export type FSelectOptionObject<Type = Record<string, unknown>> = {
+export type FSelectOptionObject<T extends Record<string, unknown> = Record<string, unknown>> = {
 	icon?: string;
 	title: string;
-	data?: Type;
+	data?: T;
 	qaId?: string;
 	disabled?: boolean;
 };

@@ -14,6 +14,10 @@
 
 - `f-text` editable mode bug resolved of tick-submit icon positioning outside textbox, in f-text inline true mode.
 
+### Improvements
+
+- `f-select` typescript enhancement for options-object.
+
 ## [1.23.2] - 2023-08-28
 
 ### Bug Fixes

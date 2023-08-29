@@ -10,11 +10,16 @@
 
 - `f-select`: `auto-add-option` property is added to give the control to the developer of not available option getting automatically added in the list of options, or not. This could option could be used for options which is array of strings, and when `create-option=true`.
 
+### Bug Fixes
+
+- `f-text` editable mode bug resolved of tick-submit icon positioning outside textbox, in f-text inline true mode.
+
 ## [1.23.2] - 2023-08-28
 
 ### Bug Fixes
 
 - External `f-tooltip` with `closable` should force close whenever tooltip attribute changes.
+
 ## [1.23.1] - 2023-08-25
 
 ### Bug Fixes

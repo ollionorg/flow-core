@@ -92,6 +92,10 @@ Select allows users to choose one or multiple options from a list of values.
 			},
 			["create-option"]: {
 				control: "boolean"
+			},
+			["auto-add-option"]: {
+				control: "boolean",
+				if: { arg: "create-option", eq: true }
 			}
 		}}
 		args={{
@@ -126,7 +130,8 @@ Select allows users to choose one or multiple options from a list of values.
 			clear: false,
 			checkbox: false,
 			["selection-limit"]: 2,
-			["create-option"]: false
+			["create-option"]: false,
+			["auto-add-option"]: true
 		}}
 	>
 		{args => {
@@ -174,6 +179,7 @@ Select allows users to choose one or multiple options from a list of values.
 							.option-template=${args["option-template"]}
 							icon-left=${args["icon-left"]}
 							.size=${args.size}
+							?auto-add-option=${args["auto-add-option"]}
 							@create-option=${handleCreateOption}
 							@search-input=${handleSearchInput}
 						>
@@ -1481,6 +1487,7 @@ if true, shows a ‘create’ button when no query is found. On click of button,
 							width="200"
 							?create-option=${true}
 							@add-option=${handleCreateOption}
+							?auto-add-option=${false}
 						>
 							<f-div slot="label" padding="none" gap="none"
 								>Label for f-select (create-option=true)</f-div
@@ -1499,9 +1506,53 @@ if true, shows a ‘create’ button when no query is found. On click of button,
 							type="multiple"
 							?searchable=${true}
 							?create-option=${true}
+							?auto-add-option=${false}
 						>
 							<f-div slot="label" padding="none" gap="none"
 								>Label for f-select (create-option=true)</f-div
+							>
+							<f-div slot="description" padding="none" gap="none">normal width</f-div>
+							<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+						</f-select></f-div
+					>
+				</f-div>
+			`;
+		}}
+	</Story>
+</Canvas>
+
+## auto-add-option
+
+This could only be used when <code>create-option=true</code>.
+If true, it allows user to see entered value, to get automatically added in the list of options.
+
+<Canvas>
+	<Story name="auto-add-option">
+		{args => {
+			const [value, setValue] = useState("");
+			const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+			const handleValue = e => {
+				setValue(e.detail.value);
+			};
+			const handleCreateOption = e => {
+				console.log(e.detail);
+			};
+			return html`
+				<f-div width="100%" align="middle-center" padding="large" gap="medium">
+					<f-div>
+						<f-select
+							placeholder="Select Option"
+							@input=${handleValue}
+							.options=${options}
+							.value=${value}
+							icon-left=${"i-app"}
+							type="multiple"
+							?searchable=${true}
+							?create-option=${true}
+							?auto-add-option=${true}
+						>
+							<f-div slot="label" padding="none" gap="none"
+								>Label for f-select (auto-add-option=true)</f-div
 							>
 							<f-div slot="description" padding="none" gap="none">normal width</f-div>
 							<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>

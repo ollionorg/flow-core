@@ -100,6 +100,8 @@ export class FPopover extends FRoot {
 
 	isTooltip = false;
 
+	reqAniFrame?: number;
+
 	offset: FPopOverOffset | null = null;
 
 	get targetElement() {
@@ -183,7 +185,10 @@ export class FPopover extends FRoot {
 		document.removeEventListener("keydown", e => this.escapekeyHandle(e, this));
 		this.removeEventListener("click", this.dispatchEsc);
 		super.disconnectedCallback();
-
+		// clear request animation frame if any
+		if (this.reqAniFrame) {
+			cancelAnimationFrame(this.reqAniFrame);
+		}
 		if (this.targetElement) {
 			this.targetElement.style.removeProperty("z-index");
 		}
@@ -252,8 +257,12 @@ export class FPopover extends FRoot {
 		/**
 		 * method that is executed before every repaint
 		 */
-		requestAnimationFrame(() => {
-			if (this.autoHeight) {
+		// clear request animation frame if any
+		if (this.reqAniFrame) {
+			cancelAnimationFrame(this.reqAniFrame);
+		}
+		this.reqAniFrame = requestAnimationFrame(() => {
+			if (this.autoHeight && this.open) {
 				const topPosition = Number(this.style.top.replace("px", "")) + 16;
 				this.style.height = `calc(100vh - ${topPosition}px)`;
 				this.style.maxHeight = `calc(100vh - ${topPosition}px)`;

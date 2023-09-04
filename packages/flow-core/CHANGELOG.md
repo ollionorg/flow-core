@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.24.1] - 2023-09-04
+
+### Bug Fixes
+
+- `f-suggest` options overflow issue fixed, max-height will be adjusted based on position on screen.
+- The `not-allowed` cursor now has the highest CSS specificity.
 ## [1.24.0] - 2023-08-28
 
 ### Features

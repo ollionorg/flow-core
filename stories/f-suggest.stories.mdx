@@ -76,6 +76,9 @@ f-suggest is an input element.
 			},
 			["max-length"]: {
 				control: "text"
+			},
+			["options-max-height"]: {
+				control: "text"
 			}
 		}}
 		args={{
@@ -150,6 +153,7 @@ f-suggest is an input element.
 						?clear=${args.clear}
 						?read-only=${args.readOnly}
 						.size=${args.size}
+						.optionsMaxHeight=${args["options-max-height"]}
 						@keydown=${handleKeydown}
 					>
 						${unsafeHTML(args.slot)}

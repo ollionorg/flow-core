@@ -144,6 +144,12 @@ export class FSearch extends FRoot {
 		this.resultWhen = val;
 	}
 
+	/**
+	 * @attribute max height for options
+	 */
+	@property({ reflect: true, type: String, attribute: "result-max-height" })
+	resultMaxHeight?: string;
+
 	@query("slot[name='label']")
 	labelSlot!: HTMLElement;
 
@@ -358,6 +364,7 @@ export class FSearch extends FRoot {
 						?loading=${this.loading}
 						.size=${this.size}
 						.suggestWhen=${this.resultWhen}
+						.optionsMaxHeight=${this.resultMaxHeight}
 						@input=${this.handleInput}
 					>
 						<slot name="no-data" slot="no-data"> </slot>

@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.24.2] - 2023-09-04
+### Improvements
+
+- `f-suggest` `options-max-height` property added to control max height of options.
+- `f-search` `result-max-height`  property added to control max height of search result.
 ## [1.24.1] - 2023-09-04
 
 ### Bug Fixes

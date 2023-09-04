@@ -59,6 +59,9 @@ Search enables users to specify a word or a phrase to find relevant pieces of co
 			},
 			["search-button"]: {
 				control: "boolean"
+			},
+			["result-max-height"]: {
+				control: "text"
 			}
 		}}
 		args={{
@@ -127,6 +130,7 @@ Search enables users to specify a word or a phrase to find relevant pieces of co
 						?clear=${args.clear}
 						?search-button=${args["search-button"]}
 						.size=${args.size}
+						.resultMaxHeight=${args["result-max-height"]}
 						@search=${handleSearch}
 					>
 						${unsafeHTML(args.slot)}
@@ -685,6 +689,7 @@ Provides the search result in the form of an array of strings.
 								"Suggestion 17",
 								"Suggestion 18"
 							]}
+							.resultMaxHeight=${"150px"}
 						>
 							<f-div slot="label" padding="none" gap="none">Label</f-div>
 							<f-div slot="description" padding="none" gap="none"

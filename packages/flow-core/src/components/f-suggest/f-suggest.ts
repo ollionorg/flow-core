@@ -158,6 +158,12 @@ export class FSuggest extends FRoot {
 	set ["suggest-when"](val: FSuggestWhen) {
 		this.suggestWhen = val;
 	}
+
+	/**
+	 * @attribute max height for options
+	 */
+	@property({ reflect: true, type: String, attribute: "options-max-height" })
+	optionsMaxHeight?: string;
 	/**
 	 * input element reference
 	 */
@@ -435,13 +441,8 @@ export class FSuggest extends FRoot {
 							<f-div slot="icon-tooltip"><slot name="icon-tooltip"></slot></f-div
 							><f-div slot="subtitle"><slot name="subtitle"></slot></f-div>`}
 			</f-input>
-			<f-popover
-				auto-height
-				.overlay=${false}
-				.placement=${"bottom-start"}
-				class="f-suggest-popover"
-			>
-				<f-div direction="column" state="secondary">
+			<f-popover .overlay=${false} .placement=${"bottom-start"} class="f-suggest-popover">
+				<f-div direction="column" .maxHeight=${this.optionsMaxHeight ?? "600px"} state="secondary">
 					${this.filteredSuggestions && this.filteredSuggestions.length > 0
 						? this.getSuggestionHtml(this.filteredSuggestions)
 						: html`<slot name="no-data"></slot>`}

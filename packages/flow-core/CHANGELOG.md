@@ -4,11 +4,18 @@
 
 # Change Log
 
+## [1.24.0] - 2023-09-04
+
+### Features
+
+- `f-counter`: category added `fill`, `outline` & `transparent`.
+
 ## [1.23.2] - 2023-08-28
 
 ### Bug Fixes
 
 - External `f-tooltip` with `closable` should force close whenever tooltip attribute changes.
+
 ## [1.23.1] - 2023-08-25
 
 ### Bug Fixes

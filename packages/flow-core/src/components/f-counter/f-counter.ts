@@ -34,6 +34,12 @@ export class FCounter extends FRoot {
 	fill = "";
 
 	/**
+	 * @attribute category of COUNTER
+	 */
+	@property({ reflect: true, type: String })
+	category?: "fill" | "outline" | "transparent" = "fill";
+
+	/**
 	 * @attribute A counter label denotes the numeric count of the entity associated with it
 	 */
 	@property({ type: Number })
@@ -141,7 +147,13 @@ export class FCounter extends FRoot {
 			if (this.loading) {
 				return `background-color: var(--color-primary-surface)`;
 			} else {
-				return `background: ${this.fill}; color: ${this.textColor};`;
+				if (this.category === "fill") {
+					return `background: ${this.fill}; color: ${this.textColor};`;
+				} else if (this.category === "outline") {
+					return `background: transparent; color: ${this.fill}; border: 1px solid ${this.fill}`;
+				} else {
+					return `background:transparent; color: ${this.fill}`;
+				}
 			}
 		}
 		return "";
@@ -171,6 +183,7 @@ export class FCounter extends FRoot {
 			style=${this.applyStyles()}
 			size=${this.size}
 			state=${this.state}
+			category=${this.category}
 			?loading=${this.loading}
 			?disabled=${this.disabled}
 		>

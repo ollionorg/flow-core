@@ -4,11 +4,36 @@
 
 # Change Log
 
-## [1.24.0] - 2023-09-04
+## [1.24.3] - 2023-09-06
+
+### Improvements
+
+- `f-counter`: category added `fill`, `outline` & `transparent`.
+
+## [1.24.2] - 2023-09-04
+### Improvements
+
+- `f-suggest` `options-max-height` property added to control max height of options.
+- `f-search` `result-max-height`  property added to control max height of search result.
+## [1.24.1] - 2023-09-04
+
+### Bug Fixes
+
+- `f-suggest` options overflow issue fixed, max-height will be adjusted based on position on screen.
+- The `not-allowed` cursor now has the highest CSS specificity.
+## [1.24.0] - 2023-08-28
 
 ### Features
 
-- `f-counter`: category added `fill`, `outline` & `transparent`.
+- `f-select`: `auto-add-option` property is added to give the control to the developer of not available option getting automatically added in the list of options, or not. This could option could be used for options which is array of strings, and when `create-option=true`.
+
+### Bug Fixes
+
+- `f-text` editable mode bug resolved of tick-submit icon positioning outside textbox, in f-text inline true mode.
+
+### Improvements
+
+- `f-select` typescript enhancement for options-object.
 
 ## [1.23.2] - 2023-08-28
 

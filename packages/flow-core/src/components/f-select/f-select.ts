@@ -28,10 +28,10 @@ export type FSelectState = "primary" | "default" | "success" | "warning" | "dang
 export type FSelectHeightProp = number;
 export type FSelectWidthProp = "fill-container" | `${number}`;
 export type FSelectArrayOfStrings = string[];
-export type FSelectOptionObject = {
+export type FSelectOptionObject<T extends Record<string, unknown> = Record<string, unknown>> = {
 	icon?: string;
 	title: string;
-	data?: Record<string, unknown>;
+	data?: T;
 	qaId?: string;
 	disabled?: boolean;
 };
@@ -261,6 +261,12 @@ export class FSelect extends FRoot {
 	 */
 	@property({ reflect: true, type: Boolean, attribute: "create-option" })
 	createOption?: boolean = false;
+
+	/**
+	 * @attribute when on search no option is presnt, and on click of create-button, for array of strings, auto-addition of option toggle
+	 */
+	@property({ reflect: true, type: Boolean, attribute: "auto-add-option" })
+	autoAddOption?: boolean = true;
 
 	/**
 	 * @attribute limit to show the selection tags inside f-select.
@@ -508,7 +514,7 @@ export class FSelect extends FRoot {
 			bubbles: true,
 			composed: true
 		});
-		if (this.isStringsArray(this.options as unknown[])) {
+		if (this.autoAddOption && this.isStringsArray(this.options as unknown[])) {
 			const event = new CustomEvent<FSelectCustomEvent>("input", {
 				detail: {
 					value: this.searchValue

@@ -4,6 +4,13 @@
 
 # Change Log
 
+## [1.24.5] - 2023-09-06
+
+### Bug Fixes
+
+- `f-accordion`: slotted `f-div[width="fill-container"]` not taking full width.
+- `f-accordion` : `header-padding` and `body-padding` properties added to modify default padding of header and body slots.
+- `f-form-group` : lengthy object description adds scrollbar
 ## [1.24.4] - 2023-09-06
 
 ### Bug Fixes

@@ -34,14 +34,18 @@ Accordion is a wrapper component which reveals or hide the content on click of h
 			icon: { control: "radio", options: ["chevron", "caret", "plus", "none"] },
 			["icon-size"]: { control: "radio", options: ["x-small", "small", "medium", "large"] },
 			["icon-placement"]: { control: "radio", options: ["right", "left"] },
-			["max-height"]: { control: "text" }
+			["max-height"]: { control: "text" },
+			["header-padding"]: { control: "text" },
+			["body-padding"]: { control: "text" }
 		}}
 		args={{
 			open: false,
 			icon: "chevron",
 			["icon-size"]: "small",
 			["icon-placement"]: "right",
-			["max-height"]: "180px"
+			["max-height"]: "180px",
+			["header-padding"]: "medium",
+			["body-padding"]: "none medium"
 		}}
 	>
 		{args => {
@@ -71,12 +75,14 @@ Accordion is a wrapper component which reveals or hide the content on click of h
 					icon-size=${args["icon-size"]}
 					icon-placement=${args["icon-placement"]}
 					max-height=${args["max-height"]}
+					header-padding=${args["header-padding"]}
+					body-padding=${args["body-padding"]}
 					@toggle=${handleToggle}
 				>
 					<f-div
 						><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
 					>
-					<f-div slot="body" direction="column" width="400px">
+					<f-div slot="body" direction="column">
 						${Object.entries(metaData).map(
 							([name, value]) => html`
 								<f-div direction="row" padding="small none" height="hug-content">

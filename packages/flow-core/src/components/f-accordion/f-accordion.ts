@@ -2,7 +2,7 @@ import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-accordion.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import { FDiv } from "../f-div/f-div";
+import { FDiv, FDivPaddingProp } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
 
 export type FAccordionBodyHeightProp = `${number}px` | `${number}%` | `${number}vh`;
@@ -47,6 +47,26 @@ export class FAccordion extends FRoot {
 	 */
 	@property({ reflect: true, type: String, attribute: "max-height" })
 	maxHeight?: FAccordionBodyHeightProp;
+
+	/**
+	 * @attribute padding applies on header slot container.
+	 */
+	@property({
+		type: String,
+		reflect: true,
+		attribute: "header-padding"
+	})
+	headerPadding?: FDivPaddingProp = "medium";
+
+	/**
+	 * @attribute padding applies on body slot container.
+	 */
+	@property({
+		type: String,
+		reflect: true,
+		attribute: "body-padding"
+	})
+	bodyPadding?: FDivPaddingProp = "none medium";
 
 	@query(".f-accordion")
 	fAccordionBody?: FDiv;
@@ -148,7 +168,7 @@ export class FAccordion extends FRoot {
 					.gap=${this.iconPlacement === "left" ? "medium" : "auto"}
 					width="100%"
 					class="f-accordion-header"
-					padding="medium"
+					.padding=${this.headerPadding}
 					clickable
 					@mouseenter=${() => this.stateChange("enter")}
 					@mouseleave=${() => this.stateChange("leave")}
@@ -163,7 +183,7 @@ export class FAccordion extends FRoot {
 					class="f-accordion"
 					?data-accordion-open=${this.open}
 					direction="column"
-					padding="none medium"
+					.padding=${this.bodyPadding}
 					overflow="hidden"
 				>
 					<slot name="body"></slot>

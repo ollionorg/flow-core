@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.24.3] - 2023-09-06
+
+### Improvements
+
+- `f-counter`: category added `fill`, `outline` & `transparent`.
+
 ## [1.24.2] - 2023-09-04
 ### Improvements
 

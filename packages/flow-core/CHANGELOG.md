@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.24.4] - 2023-09-06
+
+### Bug Fixes
+
+- `f-accordion`: `100%` header width causing scrollbar.
+
 ## [1.24.3] - 2023-09-06
 
 ### Improvements

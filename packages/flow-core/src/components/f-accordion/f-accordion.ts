@@ -122,7 +122,12 @@ export class FAccordion extends FRoot {
 
 	render() {
 		// render accordion-icon
-		const accordionIcon = html` <f-div height="hug-content" width="hug-content" overflow="hidden">
+		const accordionIcon = html` <f-div
+			padding="none none none small"
+			height="hug-content"
+			width="hug-content"
+			overflow="hidden"
+		>
 			<f-icon-button
 				icon=${this.iconName}
 				class=${this.icon === "caret" || this.icon === "chevron" ? "f-accordion-icon" : ""}
@@ -149,7 +154,9 @@ export class FAccordion extends FRoot {
 					@mouseleave=${() => this.stateChange("leave")}
 				>
 					${this.icon !== "none" && this.iconPlacement === "left" ? accordionIcon : ""}
-					<slot></slot>
+					<f-div>
+						<slot></slot>
+					</f-div>
 					${this.icon !== "none" && this.iconPlacement === "right" ? accordionIcon : ""}
 				</f-div>
 				<f-div

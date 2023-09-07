@@ -156,6 +156,20 @@ export class FPopover extends FRoot {
 						shift({ padding: isTooltip ? 0 : 16 })
 					]
 				}).then(({ x, y }) => {
+					if (x < 0) {
+						console.warn(
+							"The popover is overflowing horizontally because of the large target element. Therefore, we are removing the z-index from the target to prevent any z-index-related issues."
+						);
+						target.style.removeProperty("z-index");
+						x = 0;
+					}
+					if (y < 0) {
+						console.warn(
+							"The popover is overflowing vertically because of the large target element. Therefore, we are removing the z-index from the target to prevent any z-index-related issues."
+						);
+						target.style.removeProperty("z-index");
+						y = 0;
+					}
 					if (target.nodeName.toLowerCase() !== "body") {
 						Object.assign(this.style, {
 							top: `${y}px`,

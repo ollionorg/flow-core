@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.24.7] - 2023-09-07
+
+### Bug Fixes
+
+- large `f-popover` overflows from screen when target is also big.
+
 ## [1.24.6] - 2023-09-07
 
 ### Bug Fixes

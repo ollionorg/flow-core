@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.24.6] - 2023-09-07
+
+### Bug Fixes
+
+- Duplicate typescript type export  bug fixed.
+
 ## [1.24.5] - 2023-09-06
 
 ### Bug Fixes

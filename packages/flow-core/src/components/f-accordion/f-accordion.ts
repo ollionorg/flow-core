@@ -11,6 +11,7 @@ export type FAccordionCustomEvent = {
 	value: boolean;
 };
 
+export type FAccordionPadding = FDivPaddingProp;
 @flowElement("f-accordion")
 export class FAccordion extends FRoot {
 	/**
@@ -56,7 +57,7 @@ export class FAccordion extends FRoot {
 		reflect: true,
 		attribute: "header-padding"
 	})
-	headerPadding?: FDivPaddingProp = "medium";
+	headerPadding?: FAccordionPadding = "medium";
 
 	/**
 	 * @attribute padding applies on body slot container.
@@ -66,7 +67,7 @@ export class FAccordion extends FRoot {
 		reflect: true,
 		attribute: "body-padding"
 	})
-	bodyPadding?: FDivPaddingProp = "none medium";
+	bodyPadding?: FAccordionPadding = "none medium";
 
 	@query(".f-accordion")
 	fAccordionBody?: FDiv;

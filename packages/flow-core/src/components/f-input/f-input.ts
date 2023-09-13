@@ -14,11 +14,11 @@ import { flowElement } from "./../../utils";
 export type FInputState = "primary" | "default" | "success" | "warning" | "danger";
 
 export type FInputCustomEvent = {
-	value: string | number;
+	value?: string | number;
 	type: "clear" | "input";
 };
 
-export type FInputSuffixWhen = (value: string) => boolean;
+export type FInputSuffixWhen = (value?: string | number) => boolean;
 
 @flowElement("f-input")
 export class FInput extends FRoot {
@@ -169,11 +169,11 @@ export class FInput extends FRoot {
 	 * clear input value on clear icon clicked
 	 */
 	clearInputValue() {
-		this.value = "";
-		this.dispatchInputEvent("", "clear");
+		this.value = undefined;
+		this.dispatchInputEvent(undefined, "clear");
 	}
 
-	dispatchInputEvent(value: string | number, type: "clear" | "input") {
+	dispatchInputEvent(value: string | number | undefined, type: "clear" | "input") {
 		const event = new CustomEvent<FInputCustomEvent>("input", {
 			detail: {
 				value: value,
@@ -280,7 +280,7 @@ export class FInput extends FRoot {
 		const mainSuffix =
 			this.suffix || this.iconRight
 				? html`
-						${this.suffix && (this.suffixWhen ? this.suffixWhen(this.value as string) : true)
+						${this.suffix && (this.suffixWhen ? this.suffixWhen(this.value) : true)
 							? html`
 									<f-div height="hug-content" width="hug-content" padding="none" direction="row">
 										<f-text variant="para" size="x-small" weight="regular" class="word-break"
@@ -296,7 +296,7 @@ export class FInput extends FRoot {
 		 * append suffix
 		 */
 		const suffixAppend = !this.loading
-			? this.value && this.clear
+			? this.value !== undefined && this.value !== null && this.clear
 				? html`<div class="f-input-suffix">
 						${passwordToggle}
 						<f-icon
@@ -381,7 +381,7 @@ export class FInput extends FRoot {
 							state=${this.state}
 							data-qa-id=${this.getAttribute("data-qa-element-id")}
 							placeholder=${this.placeholder}
-							.value="${this.value || ""}"
+							.value="${this.value === undefined ? null : this.value}"
 							size=${this.size}
 							?readonly=${this.readOnly}
 							autofocus=${ifDefined(this.getAttribute("autofocus"))}

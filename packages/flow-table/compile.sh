@@ -11,6 +11,6 @@ yarn build
 cd .. && cd "./flow-table"
 
 echo "building library..."
-vite build --emptyOutDir & vite build --emptyOutDir --config vite.umd.config.ts && tsc -emitDeclarationOnly
+vite build --emptyOutDir && vite build --emptyOutDir --config vite.umd.config.ts && tsc -emitDeclarationOnly
 echo "generating types..."
 node generate-types.js 

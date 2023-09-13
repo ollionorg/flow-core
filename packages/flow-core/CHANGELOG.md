@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.24.8] - 2023-09-13
+
+### Bug Fixes
+
+- f-input of type number converts zero to blank string.
 ## [1.24.7] - 2023-09-07
 
 ### Bug Fixes

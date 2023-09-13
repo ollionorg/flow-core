@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.24.9] - 2023-09-13
+
+### Bug Fixes
+
+- `f-date-time-picker` : clear property not working fixed.
 ## [1.24.8] - 2023-09-13
 
 ### Bug Fixes

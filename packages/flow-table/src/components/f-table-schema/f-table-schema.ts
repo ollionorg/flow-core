@@ -25,15 +25,15 @@ export type FTableSchemaData = {
 	rows: FTableSchemaDataRow[];
 };
 
-export type FTableSchemaCell = {
-	value: any;
+export type FTableSchemaCell<T = any> = {
+	value: T;
 	actions?: FTcellActions;
 	template?: () => HTMLTemplateResult;
 	toString?: () => string;
 };
 
-export type FTableSchemaHeaderCell = {
-	value: any;
+export type FTableSchemaHeaderCell<T = any> = {
+	value: T;
 	template?: () => HTMLTemplateResult;
 	width?: string;
 	selected?: boolean;
@@ -45,7 +45,7 @@ export type FTableSchemaVariant = FTableVariant;
 export type FTableSchemaSize = FTableSize;
 export type FTableSchemaSelectable = FTableSelectable;
 
-export type FTableSchemaHeaderCellemplate = (value: any) => HTMLTemplateResult;
+export type FTableSchemaHeaderCellemplate<T = any> = (value: T) => HTMLTemplateResult;
 
 @flowElement("f-table-schema")
 export class FTableSchema extends FRoot {

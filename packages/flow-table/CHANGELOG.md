@@ -3,6 +3,12 @@
 
 # Change Log
 
+## [1.3.1] - 2023-09-13
+
+### Improvements
+
+- `f-table-schema` generics added in types.
+
 ## [1.3.0] - 2023-08-23
 
 ### Features

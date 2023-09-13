@@ -310,7 +310,7 @@ export class FDateTimePicker extends FRoot {
 				.state=${this.state}
 				.variant=${this.variant}
 				.category=${this.category}
-				?clear=${this.clear}
+				.clear=${this.clear}
 				?loading=${this.loading}
 				?disabled=${this.disabled}
 				class="f-date-input-picker"

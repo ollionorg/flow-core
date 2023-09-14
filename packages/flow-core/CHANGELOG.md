@@ -4,6 +4,14 @@
 
 # Change Log
 
+## [1.25.0] - 2023-09-14
+
+### Features
+
+- `f-popover` size property now supports custom size .Ex `size="custom(500px,100vh)"`
+- `f-popover` can open without target with custom placements. Ex. `size="custom(500px,100vh)" placement="right"` this will open popover on extreme right like slideout.
+### Bug Fixes
+- `f-popover` : `@overlay-click` not emitted when `:overlay="false"`
 ## [1.24.9] - 2023-09-13
 
 ### Bug Fixes

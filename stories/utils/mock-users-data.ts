@@ -16,7 +16,14 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 
 	for (let i = 0; i < rowCount; i++) {
 		const firstName = { value: faker.name.firstName() };
-		const lastName = { value: faker.name.lastName() };
+		const lastName = {
+			value: faker.name.lastName(),
+			template: function () {
+				return html`<f-div gap="x-small" align="middle-center" width="100%" height="100%"
+					><f-text inline state="success">${this.value}</f-text></f-div
+				>`;
+			}
+		};
 		const email: FTableSchemaCell & { value: string } = {
 			value: faker.internet.email(),
 			template: function () {

@@ -4,6 +4,15 @@
 
 # Change Log
 
+## [1.25.0] - 2023-09-14
+
+### Features
+
+- `f-popover`: Introduced `size="hug-content"` to support popover sizing based on inner content.
+- `f-popover` now supports a custom size using the size property. For example, `size="custom(500px, 100vh)"` where the first parameter is width and the second is height.
+- `f-popover` can open without a target and with custom placements. For instance, `size="custom(500px, 100vh)" placement="right"` will open the popover on the extreme right, similar to a slideout.
+### Bug Fixes
+- `f-popover` : `@overlay-click` not emitted when `:overlay="false"`
 ## [1.24.9] - 2023-09-13
 
 ### Bug Fixes

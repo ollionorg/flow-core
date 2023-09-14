@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { html, LitElement, PropertyValueMap, unsafeCSS } from "lit";
+import { html, LitElement, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-popover.scss";
@@ -29,7 +29,29 @@ export type FPopoverPlacement =
 	| "left-start"
 	| "left-end"
 	| "auto";
-export type FPopoverSize = "stretch" | "large" | "medium" | "small";
+export type FPopoverSize =
+	| "stretch"
+	| "large"
+	| "medium"
+	| "small"
+	| "hug-content"
+	| FPopoverCustomSize;
+
+export type FPopoverCustomWidth =
+	| `${number}px`
+	| `${number}%`
+	| `${number}vw`
+	| `auto`
+	| `fit-content`;
+
+export type FPopoverCustomHeight =
+	| `${number}px`
+	| `${number}%`
+	| `${number}vh`
+	| `auto`
+	| `fit-content`;
+
+export type FPopoverCustomSize = `custom(${FPopoverCustomWidth},${FPopoverCustomHeight})`;
 
 export type FPopOverOffset = {
 	mainAxis: number;
@@ -98,6 +120,8 @@ export class FPopover extends FRoot {
 	@state()
 	isEscapeClicked = false;
 
+	escapeHandler = (e: KeyboardEvent) => this.escapekeyHandle(e, this);
+
 	isTooltip = false;
 
 	reqAniFrame?: number;
@@ -128,6 +152,16 @@ export class FPopover extends FRoot {
 			target = this.targetElement;
 		}
 		if (this.open) {
+			if (this.size && this.size?.startsWith("custom")) {
+				const regex = /custom\((.*?)\)/i;
+				const matches = this.size.match(regex);
+				if (matches) {
+					const [width, height] = matches[1].split(",");
+					this.classList.add("f-popover-custom-size");
+					this.style.setProperty("--custom-width", width);
+					this.style.setProperty("--custom-height", height);
+				}
+			}
 			this.cleanup = autoUpdate(target, this, () => {
 				computePosition(target, this, {
 					placement: this.computePlacement(),
@@ -176,13 +210,7 @@ export class FPopover extends FRoot {
 							left: `${x}px`
 						});
 					} else {
-						const left = (document.body.offsetWidth - this.offsetWidth) / 2;
-						const top = (document.body.offsetHeight - this.offsetHeight) / 2;
-
-						Object.assign(this.style, {
-							top: `${top}px`,
-							left: `${left}px`
-						});
+						Object.assign(this.style, this.getBodyTargetPlacementCords());
 					}
 
 					this.querySelectorAll("f-popover").forEach(async pop => {
@@ -192,11 +220,91 @@ export class FPopover extends FRoot {
 			});
 		}
 	}
+
+	getBodyTargetPlacementCords() {
+		if (this.placement?.includes("top")) {
+			let left: number | undefined = (document.body.offsetWidth - this.offsetWidth) / 2;
+			const top = 0;
+			let right = undefined;
+			if (this.placement?.includes("start")) {
+				left = 0;
+				right = undefined;
+			}
+			if (this.placement?.includes("end")) {
+				right = 0;
+				left = undefined;
+			}
+			return {
+				top: `${top}px`,
+				left: left ? `${left}px` : left,
+				right: right ? `${right}px` : right
+			};
+		} else if (this.placement?.includes("bottom")) {
+			let left: number | undefined = (document.body.offsetWidth - this.offsetWidth) / 2;
+			const bottom = 0;
+			let right = undefined;
+			if (this.placement?.includes("start")) {
+				left = 0;
+				right = undefined;
+			}
+			if (this.placement?.includes("end")) {
+				right = 0;
+				left = undefined;
+			}
+			return {
+				bottom: `${bottom}px`,
+				left: left ? `${left}px` : left,
+				right: right ? `${right}px` : right
+			};
+		} else if (this.placement?.includes("right")) {
+			let bottom: number | undefined = undefined;
+			let top: number | undefined = (document.body.offsetHeight - this.offsetHeight) / 2;
+			const right = 0;
+			if (this.placement?.includes("start")) {
+				top = 0;
+				bottom = undefined;
+			}
+			if (this.placement?.includes("end")) {
+				bottom = 0;
+				top = undefined;
+			}
+			return {
+				right: `${right}px`,
+				bottom: bottom ? `${bottom}px` : bottom,
+				top: top ? `${top}px` : top
+			};
+		} else if (this.placement?.includes("left")) {
+			let bottom: number | undefined = undefined;
+			let top: number | undefined = (document.body.offsetHeight - this.offsetHeight) / 2;
+			const left = 0;
+			if (this.placement?.includes("start")) {
+				top = 0;
+				bottom = undefined;
+			}
+			if (this.placement?.includes("end")) {
+				bottom = 0;
+				top = undefined;
+			}
+			return {
+				left: `${left}px`,
+				bottom: bottom ? `${bottom}px` : bottom,
+				top: top ? `${top}px` : top
+			};
+		} else {
+			const left = (document.body.offsetWidth - this.offsetWidth) / 2;
+			const top = (document.body.offsetHeight - this.offsetHeight) / 2;
+
+			return {
+				top: `${top}px`,
+				left: `${left}px`
+			};
+		}
+	}
 	disconnectedCallback() {
 		if (this.cleanup) {
 			this.cleanup();
 		}
-		document.removeEventListener("keydown", e => this.escapekeyHandle(e, this));
+		document.removeEventListener("keydown", this.escapeHandler);
 		this.removeEventListener("click", this.dispatchEsc);
 		super.disconnectedCallback();
 		// clear request animation frame if any
@@ -210,7 +318,7 @@ export class FPopover extends FRoot {
 
 	connectedCallback() {
 		super.connectedCallback();
-		document.addEventListener("keydown", e => this.escapekeyHandle(e, this));
+		document.addEventListener("keydown", this.escapeHandler);
 		this.addEventListener("click", this.dispatchEsc);
 	}
 	dispatchEsc() {
@@ -227,6 +335,7 @@ export class FPopover extends FRoot {
 			this.dispatchEvent(event);
 		}
 	}
+
 	escapekeyHandle(e: KeyboardEvent, el: HTMLElement) {
 		if (e.key === "Escape") {
 			this.isEscapeClicked = true;
@@ -253,14 +362,24 @@ export class FPopover extends FRoot {
 			}
 		});
 		if (this.open) {
-			const overlay = this.overlay
-				? html`<div class="f-overlay" data-qa-overlay @click=${this.overlayClick}></div>`
-				: "";
+			const overlay = this.isTooltip
+				? nothing
+				: html`<div
+						class="f-overlay"
+						data-transparent=${!this.overlay}
+						data-qa-overlay
+						@click=${this.overlayClick}
+				  ></div>`;
 			this.computePosition(this.isTooltip);
 			return html`<slot></slot>${overlay} `;
 		} else {
 			if (this.targetElement) {
 				this.targetElement.style.removeProperty("z-index");
+			}
+			if (this.size && this.size?.includes("custom")) {
+				this.classList.remove("f-popover-custom-size");
+				this.style.setProperty("--custom-width", null);
+				this.style.setProperty("--custom-height", null);
 			}
 		}
 		return ``;
@@ -276,13 +395,15 @@ export class FPopover extends FRoot {
 			cancelAnimationFrame(this.reqAniFrame);
 		}
 		this.reqAniFrame = requestAnimationFrame(() => {
-			if (this.autoHeight && this.open) {
-				const topPosition = Number(this.style.top.replace("px", "")) + 16;
-				this.style.height = `calc(100vh - ${topPosition}px)`;
-				this.style.maxHeight = `calc(100vh - ${topPosition}px)`;
-			} else {
-				this.style.removeProperty("height");
-				this.style.removeProperty("max-height");
+			if (!this.size?.includes("custom")) {
+				if (this.autoHeight && this.open) {
+					const topPosition = Number(this.style.top.replace("px", "")) + 16;
+					this.style.height = `calc(100vh - ${topPosition}px)`;
+					this.style.maxHeight = `calc(100vh - ${topPosition}px)`;
+				} else {
+					this.style.removeProperty("height");
+					this.style.removeProperty("max-height");
+				}
 			}
 		});
 	}

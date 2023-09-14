@@ -28,7 +28,7 @@ export type FTableSchemaData = {
 export type FTableSchemaCell<T = any> = {
 	value: T;
 	actions?: FTcellActions;
-	template?: () => HTMLTemplateResult;
+	template?: (highlightText?: string | null) => HTMLTemplateResult;
 	toString?: () => string;
 };
 
@@ -245,10 +245,8 @@ export class FTableSchema extends FRoot {
 							.width=${width}
 							.actions=${actions}
 							?sticky-left=${ifDefined(sticky)}
-							><f-text style="height:100%" .highlight=${highlightTerm}
-								>${this.getCellTemplate(row.data[columnHeader[0]])}</f-text
-							></f-tcell
-						>`;
+							>${this.getCellTemplate(row.data[columnHeader[0]], highlightTerm)}
+						</f-tcell>`;
 					})}
 				</f-trow>`;
 			}
@@ -504,12 +502,12 @@ export class FTableSchema extends FRoot {
 		this.dispatchEvent(rowInputEvent);
 	}
 
-	getCellTemplate(cell: FTableSchemaCell) {
+	getCellTemplate(cell: FTableSchemaCell, highlightTerm: string | null) {
 		if (cell?.template) {
-			return cell.template();
+			return cell.template(highlightTerm);
 		}
 
-		return cell.value;
+		return html`<f-text style="height:100%" .highlight=${highlightTerm}>${cell.value}</f-text>`;
 	}
 
 	handleColumnSelection(e: CustomEvent) {

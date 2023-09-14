@@ -382,36 +382,66 @@ popover and if the max height is attained, the body contents will scroll.
 		{args => {
 			const [dummySizeArray, setDummySizeArray] = useState([
 				{
-					popoverId: "stretchSize",
+					target: "#stretchSize",
 					open: false,
-					title: "Stretch Size",
-					size: "stretch"
+					title: `size="stretch"`,
+					size: "stretch",
+					placement: "auto"
 				},
-				{ popoverId: "large", open: false, title: "Large Size", size: "large" },
+				{ target: "#large", open: false, title: `size="large"`, size: "large", placement: "auto" },
 				{
-					popoverId: "medium",
+					target: "#medium",
 					open: false,
-					title: "Medium Size",
-					size: "medium"
+					title: `size="medium"`,
+					size: "medium",
+					placement: "auto"
 				},
-				{ popoverId: "small", open: false, title: "Small Size", size: "small" }
+				{ target: "#small", open: false, title: `size="medium"`, size: "small", placement: "auto" },
+				{
+					target: "#hug-content",
+					open: false,
+					title: `size="hug-content" placement="right"`,
+					size: "hug-content",
+					placement: "auto",
+					width: "700px"
+				},
+				{
+					target: undefined,
+					open: false,
+					title: `size="custom(500px,100vh)" placement="right" target="undefined"`,
+					size: "custom(500px,100vh)",
+					placement: "right"
+				}
 			]);
 			const handlePopover = (item, index) => {
 				const array = [...dummySizeArray];
 				array[index].open = !dummySizeArray[index].open;
 				setDummySizeArray(array);
 			};
-			return html` <f-div height="hug-content" gap="large">
+			return html` <f-div height="hug-content" direction="column" gap="large">
 				${dummySizeArray.map((item, index) => {
 					return html`
 						<f-popover
 							?open=${item.open}
-							?overlay=${true}
+							.overlay=${false}
 							size=${item.size}
-							target=${`#${item.popoverId}`}
+							.target=${item.target}
+							placement=${item.placement}
 							@overlay-click=${() => handlePopover(item, index)}
 						>
-							<f-div state="tertiary" padding="medium">
+							<f-div
+								state="tertiary"
+								gap="auto"
+								direction="column"
+								align="bottom-left"
+								padding="medium"
+								.width=${item.width ?? "fill-container"}
+							>
+								<f-text>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim
+									ut mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex
+									vehicula tristique.
+								</f-text>
 								<f-text>
 									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim
 									ut mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex
@@ -419,12 +449,17 @@ popover and if the max height is attained, the body contents will scroll.
 								</f-text>
 							</f-div>
 						</f-popover>
-						<f-button
-							id=${item.popoverId}
-							label=${item.title}
+						<f-div
+							id=${item.target?.substring(1)}
+							state="primary"
+							padding="large"
+							variant="curved"
+							width="hug-content"
+							clickable
 							@click=${() => handlePopover(item, index)}
 						>
-						</f-button>
+							<f-text size="large">${item.title}</f-text>
+						</f-div>
 					`;
 				})}
 			</f-div>`;

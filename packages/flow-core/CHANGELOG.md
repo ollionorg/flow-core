@@ -4,16 +4,24 @@
 
 # Change Log
 
+## [1.25.0] - 2023-09-14
+
+### Bug Fixes
+
+- `f-tag` : counter suraface color visibility fixed.
+
 ## [1.24.9] - 2023-09-13
 
 ### Bug Fixes
 
 - `f-date-time-picker` : clear property not working fixed.
+
 ## [1.24.8] - 2023-09-13
 
 ### Bug Fixes
 
 - f-input of type number converts zero to blank string.
+
 ## [1.24.7] - 2023-09-07
 
 ### Bug Fixes
@@ -24,7 +32,7 @@
 
 ### Bug Fixes
 
-- Duplicate typescript type export  bug fixed.
+- Duplicate typescript type export bug fixed.
 
 ## [1.24.5] - 2023-09-06
 
@@ -33,6 +41,7 @@
 - `f-accordion`: slotted `f-div[width="fill-container"]` not taking full width.
 - `f-accordion` : `header-padding` and `body-padding` properties added to modify default padding of header and body slots.
 - `f-form-group` : lengthy object description adds scrollbar
+
 ## [1.24.4] - 2023-09-06
 
 ### Bug Fixes
@@ -46,16 +55,19 @@
 - `f-counter`: category added `fill`, `outline` & `transparent`.
 
 ## [1.24.2] - 2023-09-04
+
 ### Improvements
 
 - `f-suggest` `options-max-height` property added to control max height of options.
-- `f-search` `result-max-height`  property added to control max height of search result.
+- `f-search` `result-max-height` property added to control max height of search result.
+
 ## [1.24.1] - 2023-09-04
 
 ### Bug Fixes
 
 - `f-suggest` options overflow issue fixed, max-height will be adjusted based on position on screen.
 - The `not-allowed` cursor now has the highest CSS specificity.
+
 ## [1.24.0] - 2023-08-28
 
 ### Features

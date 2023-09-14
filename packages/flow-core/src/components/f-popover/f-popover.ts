@@ -29,7 +29,13 @@ export type FPopoverPlacement =
 	| "left-start"
 	| "left-end"
 	| "auto";
-export type FPopoverSize = "stretch" | "large" | "medium" | "small" | FPopoverCustomSize;
+export type FPopoverSize =
+	| "stretch"
+	| "large"
+	| "medium"
+	| "small"
+	| "hug-content"
+	| FPopoverCustomSize;
 
 export type FPopoverCustomWidth =
 	| `${number}px`
@@ -146,7 +152,7 @@ export class FPopover extends FRoot {
 			target = this.targetElement;
 		}
 		if (this.open) {
-			if (this.size && this.size?.includes("custom")) {
+			if (this.size && this.size?.startsWith("custom")) {
 				const regex = /custom\((.*?)\)/i;
 				const matches = this.size.match(regex);
 				if (matches) {

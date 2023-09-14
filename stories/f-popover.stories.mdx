@@ -398,6 +398,14 @@ popover and if the max height is attained, the body contents will scroll.
 				},
 				{ target: "#small", open: false, title: `size="medium"`, size: "small", placement: "auto" },
 				{
+					target: "#hug-content",
+					open: false,
+					title: `size="hug-content" placement="right"`,
+					size: "hug-content",
+					placement: "auto",
+					width: "700px"
+				},
+				{
 					target: undefined,
 					open: false,
 					title: `size="custom(500px,100vh)" placement="right" target="undefined"`,
@@ -427,6 +435,7 @@ popover and if the max height is attained, the body contents will scroll.
 								direction="column"
 								align="bottom-left"
 								padding="medium"
+								.width=${item.width ?? "fill-container"}
 							>
 								<f-text>
 									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim

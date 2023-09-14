@@ -147,7 +147,7 @@ export class FPopover extends FRoot {
 		}
 		if (this.open) {
 			if (this.size && this.size?.includes("custom")) {
-				const regex = /\((.*)\)/i;
+				const regex = /custom\((.*?)\)/i;
 				const matches = this.size.match(regex);
 				if (matches) {
 					const [width, height] = matches[1].split(",");

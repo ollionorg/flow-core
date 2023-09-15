@@ -393,83 +393,65 @@ snapshots["f-table-schema should display rows and column based on data"] =
         </f-text>
       </f-tcell>
       <f-tcell part="cell">
-        <f-text
-          align="left"
-          size="medium"
-          state="default"
-          style="height:100%"
-          variant="para"
-          weight="regular"
+        <f-div
+          align="top-left"
+          direction="row"
+          gap="small"
+          height="fill-container"
+          overflow="wrap"
+          padding="none"
+          selected="none"
+          state="transparent"
+          sticky="none"
+          style="padding: 0px; border-radius: 0px;"
+          variant="block"
+          width="hug-content"
         >
-          <f-div
-            align="top-left"
-            direction="row"
-            gap="small"
-            height="fill-container"
-            overflow="wrap"
-            padding="none"
-            selected="none"
-            state="transparent"
-            sticky="none"
-            style="padding: 0px; border-radius: 0px;"
-            variant="block"
-            width="hug-content"
+          <f-icon source="i-date-time">
+          </f-icon>
+          <f-text
+            align="left"
+            inline=""
+            size="medium"
+            state="default"
+            variant="para"
+            weight="regular"
           >
-            <f-icon source="i-date-time">
-            </f-icon>
-            <f-text
-              align="left"
-              inline=""
-              size="medium"
-              state="default"
-              variant="para"
-              weight="regular"
-            >
-              17-11-1995
-            </f-text>
-          </f-div>
-        </f-text>
+            17-11-1995
+          </f-text>
+        </f-div>
       </f-tcell>
       <f-tcell part="cell">
-        <f-text
-          align="left"
-          size="medium"
-          state="default"
-          style="height:100%"
-          variant="para"
-          weight="regular"
+        <f-div
+          align="top-left"
+          direction="row"
+          gap="x-small"
+          height="fill-container"
+          overflow="wrap"
+          padding="none"
+          selected="none"
+          state="transparent"
+          sticky="none"
+          style="padding: 0px; border-radius: 0px;"
+          variant="block"
+          width="fill-container"
         >
-          <f-div
-            align="top-left"
-            direction="row"
-            gap="x-small"
-            height="fill-container"
-            overflow="wrap"
-            padding="none"
-            selected="none"
-            state="transparent"
-            sticky="none"
-            style="padding: 0px; border-radius: 0px;"
-            variant="block"
-            width="fill-container"
+          <f-icon
+            source="i-hashtag"
+            state="warning"
           >
-            <f-icon
-              source="i-hashtag"
-              state="warning"
-            >
-            </f-icon>
-            <f-text
-              align="left"
-              inline=""
-              size="medium"
-              state="warning"
-              variant="para"
-              weight="regular"
-            >
-              vikas0@cldcvr.com
-            </f-text>
-          </f-div>
-        </f-text>
+          </f-icon>
+          <f-text
+            align="left"
+            inline=""
+            size="medium"
+            state="warning"
+            variant="para"
+            weight="regular"
+          >
+            vikas0@cldcvr.com
+          </f-text>
+        </f-div>
       </f-tcell>
       <f-tcell part="cell">
         <f-text
@@ -599,83 +581,65 @@ snapshots["f-table-schema should display rows and column based on data"] =
         </f-text>
       </f-tcell>
       <f-tcell part="cell">
-        <f-text
-          align="left"
-          size="medium"
-          state="default"
-          style="height:100%"
-          variant="para"
-          weight="regular"
+        <f-div
+          align="top-left"
+          direction="row"
+          gap="small"
+          height="fill-container"
+          overflow="wrap"
+          padding="none"
+          selected="none"
+          state="transparent"
+          sticky="none"
+          style="padding: 0px; border-radius: 0px;"
+          variant="block"
+          width="hug-content"
         >
-          <f-div
-            align="top-left"
-            direction="row"
-            gap="small"
-            height="fill-container"
-            overflow="wrap"
-            padding="none"
-            selected="none"
-            state="transparent"
-            sticky="none"
-            style="padding: 0px; border-radius: 0px;"
-            variant="block"
-            width="hug-content"
+          <f-icon source="i-date-time">
+          </f-icon>
+          <f-text
+            align="left"
+            inline=""
+            size="medium"
+            state="default"
+            variant="para"
+            weight="regular"
           >
-            <f-icon source="i-date-time">
-            </f-icon>
-            <f-text
-              align="left"
-              inline=""
-              size="medium"
-              state="default"
-              variant="para"
-              weight="regular"
-            >
-              17-11-1995
-            </f-text>
-          </f-div>
-        </f-text>
+            17-11-1995
+          </f-text>
+        </f-div>
       </f-tcell>
       <f-tcell part="cell">
-        <f-text
-          align="left"
-          size="medium"
-          state="default"
-          style="height:100%"
-          variant="para"
-          weight="regular"
+        <f-div
+          align="top-left"
+          direction="row"
+          gap="x-small"
+          height="fill-container"
+          overflow="wrap"
+          padding="none"
+          selected="none"
+          state="transparent"
+          sticky="none"
+          style="padding: 0px; border-radius: 0px;"
+          variant="block"
+          width="fill-container"
         >
-          <f-div
-            align="top-left"
-            direction="row"
-            gap="x-small"
-            height="fill-container"
-            overflow="wrap"
-            padding="none"
-            selected="none"
-            state="transparent"
-            sticky="none"
-            style="padding: 0px; border-radius: 0px;"
-            variant="block"
-            width="fill-container"
+          <f-icon
+            source="i-hashtag"
+            state="warning"
           >
-            <f-icon
-              source="i-hashtag"
-              state="warning"
-            >
-            </f-icon>
-            <f-text
-              align="left"
-              inline=""
-              size="medium"
-              state="warning"
-              variant="para"
-              weight="regular"
-            >
-              vikas1@cldcvr.com
-            </f-text>
-          </f-div>
-        </f-text>
+          </f-icon>
+          <f-text
+            align="left"
+            inline=""
+            size="medium"
+            state="warning"
+            variant="para"
+            weight="regular"
+          >
+            vikas1@cldcvr.com
+          </f-text>
+        </f-div>
       </f-tcell>
       <f-tcell part="cell">
         <f-text

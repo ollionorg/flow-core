@@ -68,23 +68,6 @@ in this case it is `f-counter`
 :host {
 	// inner element to apply styles on
 	div.f-counter {
-		// edge if it is used in `f-button` component
-		&.fill-button-surface-dark {
-			background-color: #202a36 !important;
-			color: #fcfcfd !important;
-		}
-		&.fill-button-surface-light {
-			background-color: #fcfcfd !important;
-			color: #202a36 !important;
-		}
-		&.fill-button-surface[state] {
-			background-color: var(--color-surface-default) !important;
-			color: var(--color-text-default) !important;
-		}
-		// used in `f-icon-button` for special case
-		&.absolute-counter {
-			position: absolute;
-		}
 		// Important :  always include base mixins
 		@include base();
 		display: flex;
@@ -180,6 +163,24 @@ in this case it is `f-counter`
 		// including ratate mixins
 		&[loading] {
 			@include rotate("svg");
+		}
+
+		// edge if it is used in `f-button` component
+		&.fill-button-surface-dark {
+			background-color: #202a36 !important;
+			color: #fcfcfd !important;
+		}
+		&.fill-button-surface-light {
+			background-color: #fcfcfd !important;
+			color: #202a36 !important;
+		}
+		&.fill-button-surface[state] {
+			background-color: var(--color-surface-default) !important;
+			color: var(--color-text-default) !important;
+		}
+		// used in `f-icon-button` for special case
+		&.absolute-counter {
+			position: absolute;
 		}
 	}
 }

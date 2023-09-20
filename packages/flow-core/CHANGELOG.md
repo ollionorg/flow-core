@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.25.2] - 2023-09-20
+
+### Bug Fixes
+
+- `f-select` : fixed creation new datasets when we click on “No Options”, when create-new-option is `false`.
+
 ## [1.25.1] - 2023-09-15
 
 ### Bug Fixes

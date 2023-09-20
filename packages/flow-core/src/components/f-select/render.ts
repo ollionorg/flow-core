@@ -229,7 +229,6 @@ export default function render(this: FSelect) {
 			e.stopImmediatePropagation();
 			e.stopPropagation();
 		}}
-		@click=${(e: MouseEvent) => this.createNewOption(e)}
 	>
 		<f-div width="fill-container" height="hug-content" padding="none"
 			><f-text data-qa-empty variant="para" size="small" weight="regular"
@@ -238,7 +237,12 @@ export default function render(this: FSelect) {
 		>
 		${this.createOption && this.searchValue && this.searchable
 			? html`
-					<f-div width="hug-content" height="hug-content" padding="none">
+					<f-div
+						width="hug-content"
+						height="hug-content"
+						padding="none"
+						@click=${(e: MouseEvent) => this.createNewOption(e)}
+					>
 						${this.offsetWidth > 200
 							? html` <f-button
 									data-qa-create

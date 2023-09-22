@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.25.3] - 2023-09-22
+
+### Bug Fixes
+
+- `f-file-upload` : mapping `MIME Type` with its extensions, and displaying extension (.docx, .ppt) instead of whole `MIME Type` being displayed.
+
 ## [1.25.2] - 2023-09-20
 
 ### Bug Fixes

@@ -7,7 +7,7 @@ import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import { FIcon } from "../f-icon/f-icon";
-import { getFormattedBytes } from "../../utils/index";
+import { getExtensionsFromMimeType, getFormattedBytes } from "../../utils/index";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { flowElement } from "./../../utils";
@@ -484,7 +484,7 @@ export class FFileUpload extends FRoot {
 										<f-text variant="para" size="small" weight="regular" state="secondary"
 											>${this.fileType === "all"
 												? `(All formats supported)`
-												: `(${this.fileType})`}</f-text
+												: `(${getExtensionsFromMimeType(this.fileType ?? "")})`}</f-text
 										>
 								  </div>`
 							: html`<div class="f-file-upload-placeholder" size=${this.size}>
@@ -492,7 +492,7 @@ export class FFileUpload extends FRoot {
 									<f-text variant="para" size="small" weight="regular" state="secondary"
 										>${this.fileType === "all"
 											? `(All formats supported)`
-											: `(${this.fileType})`}</f-text
+											: `(${getExtensionsFromMimeType(this.fileType ?? "")})`}</f-text
 									>
 							  </div>`}
 						${this.loading

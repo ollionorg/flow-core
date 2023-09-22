@@ -6,6 +6,7 @@ import getCustomFillColor from "./get-custom-fill-color";
 import LightenDarkenColor from "./get-lighten-darken-color";
 import getFormattedBytes from "./get-formatted-bytes";
 import flowElement from "./flow-element";
+import getExtensionsFromMimeType from "./mime-extension-map";
 export {
 	isValidHttpUrl,
 	getTextContrast,
@@ -14,5 +15,6 @@ export {
 	getCustomFillColor,
 	LightenDarkenColor,
 	getFormattedBytes,
-	flowElement
+	flowElement,
+	getExtensionsFromMimeType
 };

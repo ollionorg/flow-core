@@ -9,6 +9,7 @@
 ### Bug Fixes
 
 - `f-file-upload` : mapping `MIME Type` with its extensions, and displaying extension (.docx, .ppt) instead of whole `MIME Type` being displayed.
+- `f-search`: `data-qa-element-id` added.
 
 ## [1.25.2] - 2023-09-20
 

@@ -353,6 +353,7 @@ export class FSearch extends FRoot {
 					<f-suggest
 						class=${this.applyStyling}
 						data-suggest="search"
+						data-qa-element-id=${this.getAttribute("data-qa-element-id")}
 						.value=${this.value}
 						.variant=${this.variant}
 						.category=${this.category}

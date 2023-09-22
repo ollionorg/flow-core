@@ -81,7 +81,6 @@ export default function render(this: FSelect) {
 			  >`
 			: ""}
 		<input
-			tabindex="0"
 			class=${classMap({ "f-select": true })}
 			id="f-select"
 			data-qa-input
@@ -301,6 +300,7 @@ export default function render(this: FSelect) {
 			<div
 				class="f-select-wrapper"
 				id="f-select-wrapper"
+				tabindex="0"
 				variant=${this.variant}
 				category=${this.category}
 				state=${this.state}
@@ -310,6 +310,7 @@ export default function render(this: FSelect) {
 				?allow-gap=${this._hasLabel && !this._hasHelperText ? true : false}
 				data-qa-id=${this.getAttribute("data-qa-element-id")}
 				@click=${this.handleDropDownOpen}
+				@keydown=${this.handleKeyDown}
 			>
 				${prefixAppend} ${suffixAppend}
 				<div
@@ -335,7 +336,7 @@ export default function render(this: FSelect) {
 												gap="small"
 												.selected=${this.isSelected(option) || this.currentCursor === index
 													? "background"
-													: undefined}
+													: "none"}
 												@click=${(e: MouseEvent) => {
 													this.handleOptionSelection(option, e);
 												}}
@@ -431,6 +432,7 @@ export default function render(this: FSelect) {
 						(option, optionIndex) =>
 							html`
 								<f-div
+									id="id-${groupIndex}-${optionIndex}"
 									class="f-select-options-clickable"
 									data-qa-option=${this.getOptionQaId(option)}
 									padding="medium x-large"
@@ -441,8 +443,7 @@ export default function render(this: FSelect) {
 									align="middle-left"
 									gap="small"
 									.selected=${this.isGroupSelection(option, group) ||
-									(this.currentGroupOptionCursor === optionIndex &&
-										this.currentGroupCursor === groupIndex)
+									(this.currentGroupCursor === groupIndex && this.currentCursor === optionIndex)
 										? "background"
 										: undefined}
 									@click=${(e: MouseEvent) => {

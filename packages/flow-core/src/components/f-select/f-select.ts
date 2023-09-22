@@ -19,7 +19,11 @@ import {
 	handleSelectAll,
 	handleViewMoreTags,
 	handleInput,
-	handleBlur
+	handleBlur,
+	handleKeyDown,
+	scrollFocusedOptionIntoView,
+	navigateOptions,
+	selectOptionWithKeyboard
 } from "./handlers";
 import { FIconButton } from "../f-icon-button/f-icon-button";
 import { flowElement } from "./../../utils";
@@ -121,7 +125,7 @@ export class FSelect extends FRoot {
 	 * @attribute keyboard hover for group for objects consisting groups
 	 */
 	@state({})
-	currentGroupCursor = -1;
+	currentGroupCursor = 0;
 
 	@state({})
 	optimizedHeight = 0;
@@ -134,12 +138,6 @@ export class FSelect extends FRoot {
 
 	@state({})
 	optionsBottom = "";
-
-	/**
-	 * @attribute keyboard hover for options in group for objects consisting groups
-	 */
-	@state({})
-	currentGroupOptionCursor = -1;
 
 	@query("#f-select")
 	inputElement!: HTMLInputElement;
@@ -628,8 +626,12 @@ export class FSelect extends FRoot {
 	handleCheckboxGroup = handleCheckboxGroup;
 	handleSelectAll = handleSelectAll;
 	handleViewMoreTags = handleViewMoreTags;
+	selectOptionWithKeyboard = selectOptionWithKeyboard;
 	handleInput = handleInput;
 	handleBlur = handleBlur;
+	handleKeyDown = handleKeyDown;
+	navigateOptions = navigateOptions;
+	scrollFocusedOptionIntoView = scrollFocusedOptionIntoView;
 	render = render;
 	renderSingleSelection = renderSingleSelection;
 	renderMultipleSelectionTag = renderMultipleSelectionTag;

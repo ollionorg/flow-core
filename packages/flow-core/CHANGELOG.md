@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.25.4] - 2023-09-22
+
+### Improvements
+
+- `f-select` : options naviagtion through arrow keys possible now.
+
 ## [1.25.2] - 2023-09-20
 
 ### Bug Fixes

@@ -24,14 +24,18 @@ export function handleDropDownOpen(this: FSelect, e: MouseEvent) {
 /**
  * close options menu
  */
-export function handleDropDownClose(this: FSelect, e: MouseEvent, clearSearch = true) {
+export function handleDropDownClose(
+	this: FSelect,
+	e: MouseEvent | KeyboardEvent,
+	clearSearch = true
+) {
 	this.openDropdown = false;
 	if (clearSearch) {
 		this.clearFilterSearchString();
 	}
 	this.currentCursor = -1;
-	this.currentGroupCursor = -1;
-	this.currentGroupOptionCursor = -1;
+	this.currentGroupCursor = 0;
+
 	this.requestUpdate();
 	e.stopPropagation();
 
@@ -48,7 +52,11 @@ export function handleDropDownClose(this: FSelect, e: MouseEvent, clearSearch = 
 /**
  * action for selection of options if the options is in the form of array
  */
-export function handleOptionSelection(this: FSelect, option: FSelectSingleOption, e: MouseEvent) {
+export function handleOptionSelection(
+	this: FSelect,
+	option: FSelectSingleOption,
+	e: MouseEvent | KeyboardEvent
+) {
 	e.preventDefault();
 	e.stopPropagation();
 
@@ -82,6 +90,7 @@ export function handleOptionSelection(this: FSelect, option: FSelectSingleOption
 			: (this.selectedOptions as FSelectArrayOfObjects)[0];
 	this.dispatchEvent(event);
 	this.requestUpdate();
+	this?.wrapperElement?.focus();
 }
 
 /**
@@ -91,7 +100,7 @@ export function handleSelectionGroup(
 	this: FSelect,
 	option: FSelectSingleOption,
 	group: string,
-	e: MouseEvent
+	e: MouseEvent | KeyboardEvent
 ) {
 	e.stopPropagation();
 	e.preventDefault();
@@ -280,4 +289,131 @@ export function handleInput(this: FSelect, e: InputEvent) {
 export function handleBlur(this: FSelect, e: FocusEvent) {
 	e.stopImmediatePropagation();
 	e.stopPropagation();
+}
+
+export function handleKeyDown(this: FSelect, event: KeyboardEvent) {
+	switch (event.key) {
+		case "ArrowUp":
+			event.preventDefault();
+			this.navigateOptions(-1);
+			break;
+		case "ArrowDown":
+			event.preventDefault();
+			if (!this.openDropdown) {
+				this.openDropdown = true;
+			}
+			this.navigateOptions(1);
+			break;
+		case "Enter":
+			event.preventDefault();
+			this.selectOptionWithKeyboard(event);
+			break;
+		case "Escape":
+			event.preventDefault();
+			this.handleDropDownClose(event);
+			break;
+	}
+}
+
+export function navigateOptions(this: FSelect, direction: number) {
+	if (Array.isArray(this.options)) {
+		const totalOptions = this.filteredOptions?.length;
+		if (totalOptions === 0) return;
+
+		// Calculate the next index based on the direction
+		const newIndex = this.currentCursor + direction;
+
+		// Ensure the new index stays within bounds
+		this.currentCursor =
+			((newIndex as number) + (totalOptions as number)) % (totalOptions as number);
+
+		// Optionally, you can scroll the dropdown to bring the selected option into view if it's outside the viewport.
+		this.scrollFocusedOptionIntoView();
+	} else {
+		if (this.filteredOptions) {
+			const totalCategories = Object.keys(this.filteredOptions).length;
+			if (totalCategories === 0) return;
+
+			const currentCategory = Object.keys(this.filteredOptions)[this.currentGroupCursor];
+			const totalOptions = (this.filteredOptions as FSelectOptionsGroup)[currentCategory].length;
+
+			// Calculate the next option index based on the direction
+			const newIndex = this.currentCursor + direction;
+
+			// Handle navigation within the current category
+			if (newIndex >= 0 && newIndex < totalOptions) {
+				this.currentCursor = newIndex;
+			} else if (newIndex >= totalOptions) {
+				// Move to the next category
+				this.currentGroupCursor = (this.currentGroupCursor + 1) % totalCategories;
+				this.currentCursor = 0; // Set the first option of the new category as focused
+			} else {
+				// Move to the previous category
+				this.currentGroupCursor = (this.currentGroupCursor - 1 + totalCategories) % totalCategories;
+				this.currentCursor =
+					(this.filteredOptions as FSelectOptionsGroup)[currentCategory].length - 1; // Set the last option of the new category as focused
+			}
+
+			// Optionally, you can scroll the dropdown to bring the selected option into view if it's outside the viewport.
+			this.scrollFocusedOptionIntoView();
+		}
+	}
+}
+
+export function scrollFocusedOptionIntoView(this: FSelect) {
+	const optionElements = this.shadowRoot?.querySelectorAll(".f-select-options-clickable");
+	if (optionElements) {
+		if (optionElements.length > this.currentCursor) {
+			if (Array.isArray(this.options)) {
+				optionElements[this.currentCursor].scrollIntoView({
+					behavior: "auto", // 'auto' or 'smooth' for scrolling behavior
+					block: "nearest" // Scroll to the nearest edge of the container
+				});
+			} else {
+				let index = 0;
+				optionElements.forEach((item, i) => {
+					if (item.getAttribute("id") === `id-${this.currentGroupCursor}-${this.currentCursor}`) {
+						index = i;
+					}
+				});
+				optionElements[index].scrollIntoView({
+					behavior: "auto", // 'auto' or 'smooth' for scrolling behavior
+					block: "nearest" // Scroll to the nearest edge of the container
+				});
+			}
+		}
+	}
+}
+
+export function selectOptionWithKeyboard(this: FSelect, e: KeyboardEvent) {
+	if (Array.isArray(this.options)) {
+		if (this.filteredOptions) {
+			if (this.currentCursor >= 0 && this.currentCursor < this.filteredOptions.length) {
+				const selectedOption = (this.filteredOptions as string[] | FSelectArrayOfObjects)[
+					this.currentCursor
+				];
+				if (typeof selectedOption !== "string") {
+					if (!selectedOption?.disabled) {
+						this.handleOptionSelection(selectedOption, e);
+					}
+				} else {
+					this.handleOptionSelection(selectedOption, e);
+				}
+			}
+		}
+	} else {
+		if (this.currentGroupCursor >= 0 && this.currentCursor >= 0 && this.filteredOptions) {
+			const selectedCategory = Object.keys(this.filteredOptions)[this.currentGroupCursor];
+			const selectedOption = (this.filteredOptions as FSelectOptionsGroup)[selectedCategory][
+				this.currentCursor
+			];
+			if (typeof selectedOption !== "string") {
+				if (!selectedOption?.disabled) {
+					this.handleSelectionGroup(selectedOption, selectedCategory, e);
+				}
+			} else {
+				this.handleSelectionGroup(selectedOption, selectedCategory, e);
+			}
+		}
+	}
 }

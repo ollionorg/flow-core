@@ -611,6 +611,14 @@
             "name": "flowElement",
             "module": "src/utils/index.ts"
           }
+        },
+        {
+          "kind": "js",
+          "name": "getExtensionsFromMimeType",
+          "declaration": {
+            "name": "getExtensionsFromMimeType",
+            "module": "src/utils/index.ts"
+          }
         }
       ]
     },
@@ -666,6 +674,50 @@
           "declaration": {
             "name": "isValidHttpUrl",
             "module": "src/utils/is-valid-http-url.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/utils/mime-extension-map.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "mimeToExtensionsMap",
+          "type": {
+            "text": "Record<string, string[]>"
+          },
+          "default": "{\n\t\"application/msword\": [\".doc\", \".dot\"],\n\t\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\": [\".docx\"],\n\t\"application/vnd.openxmlformats-officedocument.wordprocessingml.template\": [\".dotx\"],\n\t\"application/vnd.ms-word.document.macroEnabled.12\": [\".docm\"],\n\t\"application/vnd.ms-word.template.macroEnabled.12\": [\".dotm\"],\n\t\"application/vnd.ms-excel\": [\".xls\", \".xlt\", \".xla\"],\n\t\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\": [\".xlsx\"],\n\t\"application/vnd.openxmlformats-officedocument.spreadsheetml.template\": [\".xltx\"],\n\t\"application/vnd.ms-excel.sheet.macroEnabled.12\": [\".xlsm\"],\n\t\"application/vnd.ms-excel.template.macroEnabled.12\": [\".xltm\"],\n\t\"application/vnd.ms-excel.addin.macroEnabled.12\": [\".xlam\"],\n\t\"application/vnd.ms-excel.sheet.binary.macroEnabled.12\": [\".xlsb\"],\n\t\"application/vnd.ms-powerpoint\": [\".ppt\", \".pot\", \".pps\", \".ppa\"],\n\t\"application/vnd.openxmlformats-officedocument.presentationml.presentation\": [\".pptx\"],\n\t\"application/vnd.openxmlformats-officedocument.presentationml.template\": [\".potx\"],\n\t\"application/vnd.openxmlformats-officedocument.presentationml.slideshow\": [\".ppsx\"],\n\t\"application/vnd.ms-powerpoint.addin.macroEnabled.12\": [\".ppam\"],\n\t\"application/vnd.ms-powerpoint.presentation.macroEnabled.12\": [\".pptm\"],\n\t\"application/vnd.ms-powerpoint.template.macroEnabled.12\": [\".potm\"],\n\t\"application/vnd.ms-powerpoint.slideshow.macroEnabled.12\": [\".ppsm\"],\n\t\"application/vnd.ms-access\": [\".mdb\"]\n}"
+        },
+        {
+          "kind": "function",
+          "name": "getExtensionsFromMimeType",
+          "parameters": [
+            {
+              "name": "mimeType",
+              "type": {
+                "text": "string | undefined"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "mimeToExtensionsMap",
+          "declaration": {
+            "name": "mimeToExtensionsMap",
+            "module": "src/utils/mime-extension-map.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "getExtensionsFromMimeType",
+            "module": "src/utils/mime-extension-map.ts"
           }
         }
       ]
@@ -7462,198 +7514,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-radio/f-radio.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FRadio",
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "\"selected\" | \"unselected\" | undefined"
-              },
-              "default": "\"unselected\"",
-              "attribute": "value",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FRadioState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"small\" | \"medium\" | undefined"
-              },
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "slotWrapper",
-              "type": {
-                "text": "FDiv"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "handleClick",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "emit event on click"
-            },
-            {
-              "kind": "method",
-              "name": "checkSlots"
-            },
-            {
-              "kind": "field",
-              "name": "tooltipElement",
-              "type": {
-                "text": "HTMLElement"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "tooltip",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseEnter",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mouseLeave",
-              "type": {
-                "text": "() => void | undefined"
-              },
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isMouseOver",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "type": {
-                "text": "\"selected\" | \"unselected\" | undefined"
-              },
-              "default": "\"unselected\"",
-              "fieldName": "value"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FRadioState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "\"small\" | \"medium\" | undefined"
-              },
-              "fieldName": "size"
-            },
-            {
-              "name": "disabled",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "tooltip",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "tooltip",
-              "inheritedFrom": {
-                "name": "FRoot",
-                "module": "src/mixins/components/f-root/f-root.ts"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "module": "/src/mixins/components/f-root/f-root"
-          }
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FRadio",
-          "declaration": {
-            "name": "FRadio",
-            "module": "src/components/f-radio/f-radio.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-search/f-search.ts",
       "declarations": [
         {
@@ -11494,6 +11354,198 @@
           "declaration": {
             "name": "FTag",
             "module": "src/components/f-tag/f-tag.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-radio/f-radio.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FRadio",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "\"selected\" | \"unselected\" | undefined"
+              },
+              "default": "\"unselected\"",
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FRadioState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "slotWrapper",
+              "type": {
+                "text": "FDiv"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleClick",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
+              "description": "emit event on click"
+            },
+            {
+              "kind": "method",
+              "name": "checkSlots"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipElement",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "tooltip",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseEnter",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mouseLeave",
+              "type": {
+                "text": "() => void | undefined"
+              },
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isMouseOver",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "\"selected\" | \"unselected\" | undefined"
+              },
+              "default": "\"unselected\"",
+              "fieldName": "value"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FRadioState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"small\" | \"medium\" | undefined"
+              },
+              "fieldName": "size"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "tooltip",
+              "inheritedFrom": {
+                "name": "FRoot",
+                "module": "src/mixins/components/f-root/f-root.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "module": "/src/mixins/components/f-root/f-root"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FRadio",
+          "declaration": {
+            "name": "FRadio",
+            "module": "src/components/f-radio/f-radio.ts"
           }
         }
       ]

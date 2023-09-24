@@ -492,7 +492,7 @@ export class FFileUpload extends FRoot {
 									<f-text variant="para" size="small" weight="regular" state="secondary"
 										>${this.fileType === "all"
 											? `(All formats supported)`
-											: `(${getExtensionsFromMimeType(this.fileType ?? "")})`}</f-text
+											: `(${getExtensionsFromMimeType(this.fileType)})`}</f-text
 									>
 							  </div>`}
 						${this.loading

@@ -41,6 +41,7 @@ export type FSelectArray = FSelectSingleOption[];
 export type FSelectOptionsProp = FSelectSingleOption[];
 export type FSelectSingleOption = FSelectOptionObject | string;
 export type FSelectOptions = FSelectOptionsProp | FSelectOptionsGroup;
+export type FSelectValue = FSelectOptions | FSelectSingleOption;
 export type FSelectOptionTemplate = (
 	option: FSelectSingleOption,
 	isSelected?: boolean
@@ -184,7 +185,7 @@ export class FSelect extends FRoot {
 	 * @attribute Defines the value of an f-select. Validation rules are applied on the value depending on the type property of the f-text-input.
 	 */
 	@property({ reflect: true, type: Object })
-	value?: FSelectOptions | string;
+	value?: FSelectValue;
 
 	/**
 	 * @attribute Defines the placeholder text for f-text-input

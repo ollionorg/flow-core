@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.25.4] - 2023-09-25
+
+### Bug Fixes
+
+- `f-select` value type fixed.
+- `f-select` value rendering fixed if user pass value as array for single selection.
 ## [1.25.3] - 2023-09-22
 
 ### Bug Fixes

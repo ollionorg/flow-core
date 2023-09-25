@@ -373,7 +373,7 @@ export class FSuggest extends FRoot {
 	displayCustomTemplate = displayCustomTemplate;
 
 	willUpdate(changedProperties: PropertyValues<this>) {
-		if (changedProperties.has("value")) {
+		if (changedProperties.has("value") || changedProperties.has("suggestions")) {
 			if (this.value) {
 				if (this.isStringArraySuggestions && !this.isTemplateArraySuggestions) {
 					this.filteredSuggestions = (this.suggestions as string[])?.filter(sg =>

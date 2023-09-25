@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.25.5] - 2023-09-25
+
+### Bug Fixes
+
+- `f-search` result reactivity issue
+
 ## [1.25.4] - 2023-09-25
 
 ### Bug Fixes

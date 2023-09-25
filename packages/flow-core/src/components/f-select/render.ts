@@ -512,6 +512,10 @@ export default function render(this: FSelect) {
 }
 
 export function renderSingleSelection(this: FSelect, option: FSelectSingleOption) {
+	// when user accidently pass array of options in single selection
+	if (Array.isArray(option)) {
+		option = option[0];
+	}
 	const withoutTemplate = () => {
 		return html` <f-text
 			data-qa-selected-option=${option}

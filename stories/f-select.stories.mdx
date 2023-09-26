@@ -99,7 +99,7 @@ Select allows users to choose one or multiple options from a list of values.
 			}
 		}}
 		args={{
-			type: "multiple",
+			type: "single",
 			placeholder: "Select Option",
 			variant: "curved",
 			category: "fill",
@@ -124,7 +124,7 @@ Select allows users to choose one or multiple options from a list of values.
 			["icon-left"]: undefined,
 			height: 180,
 			width: "fill-container",
-			searchable: true,
+			searchable: false,
 			disabled: false,
 			loading: false,
 			clear: false,
@@ -1237,10 +1237,10 @@ checkboxes apper in front of every option in menu. By default its <code>false</c
 				]
 			});
 			const handleValue = e => {
-				setValue(e.detail.value);
+				//setValue(e.detail.value);
 			};
 			const handleValueGroup = e => {
-				setValueObjects(e.detail.value);
+				//setValueObjects(e.detail.value);
 			};
 			return html`
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
@@ -1249,7 +1249,6 @@ checkboxes apper in front of every option in menu. By default its <code>false</c
 							placeholder="Select Option"
 							@input=${handleValue}
 							.options=${options}
-							.value=${value}
 							?searchable=${true}
 							?checkbox=${true}
 							type="multiple"
@@ -1266,7 +1265,6 @@ checkboxes apper in front of every option in menu. By default its <code>false</c
 							placeholder="Select Option"
 							@input=${handleValue}
 							.options=${optionsObjects}
-							.value=${value}
 							?searchable=${true}
 							?checkbox=${true}
 							type="multiple"
@@ -1285,7 +1283,6 @@ checkboxes apper in front of every option in menu. By default its <code>false</c
 							placeholder="Select Option"
 							@input=${handleValueGroup}
 							.options=${groupOptions}
-							.value=${valueObjects}
 							?searchable=${true}
 							?checkbox=${true}
 							type="multiple"
@@ -1304,7 +1301,6 @@ checkboxes apper in front of every option in menu. By default its <code>false</c
 							placeholder="Select Option"
 							@input=${handleValueGroup}
 							.options=${groupOtionsObjects}
-							.value=${valueObjects}
 							?searchable=${true}
 							?checkbox=${true}
 							type="multiple"

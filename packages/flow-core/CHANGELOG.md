@@ -4,6 +4,13 @@
 
 # Change Log
 
+## [1.26.0] - 2023-09-26
+
+### Features
+
+- `f-select` : options navigation through arrow keys.
+- `f-select` : `Enter` key to select option 
+- `f-select` : `Esc` to close f-select.
 ## [1.25.5] - 2023-09-25
 
 ### Bug Fixes

@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { HTMLTemplateResult, PropertyValues, unsafeCSS } from "lit";
-import { property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { property, query, queryAll, queryAssignedElements, state } from "lit/decorators.js";
 import eleStyle from "./f-select.scss";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
@@ -19,7 +19,9 @@ import {
 	handleSelectAll,
 	handleViewMoreTags,
 	handleInput,
-	handleBlur
+	handleBlur,
+	handleKeyDown,
+	handleOptionMouseOver
 } from "./handlers";
 import { FIconButton } from "../f-icon-button/f-icon-button";
 import { flowElement } from "./../../utils";
@@ -112,18 +114,6 @@ export class FSelect extends FRoot {
 	@state({})
 	filteredOptions: FSelectOptions = [];
 
-	/**
-	 * @attribute keyboard hover for array of objects
-	 */
-	@state({})
-	currentCursor = -1;
-
-	/**
-	 * @attribute keyboard hover for group for objects consisting groups
-	 */
-	@state({})
-	currentGroupCursor = -1;
-
 	@state({})
 	optimizedHeight = 0;
 
@@ -136,12 +126,6 @@ export class FSelect extends FRoot {
 	@state({})
 	optionsBottom = "";
 
-	/**
-	 * @attribute keyboard hover for options in group for objects consisting groups
-	 */
-	@state({})
-	currentGroupOptionCursor = -1;
-
 	@query("#f-select")
 	inputElement!: HTMLInputElement;
 
@@ -150,6 +134,9 @@ export class FSelect extends FRoot {
 
 	@query("#f-select-options")
 	optionElement!: HTMLDivElement;
+
+	@queryAll(".f-select-options-clickable")
+	allOptions?: NodeListOf<HTMLElement>;
 
 	/**
 	 * @attribute Categories are various visual representations of an input field.
@@ -631,6 +618,8 @@ export class FSelect extends FRoot {
 	handleViewMoreTags = handleViewMoreTags;
 	handleInput = handleInput;
 	handleBlur = handleBlur;
+	handleKeyDown = handleKeyDown;
+	handleOptionMouseOver = handleOptionMouseOver;
 	render = render;
 	renderSingleSelection = renderSingleSelection;
 	renderMultipleSelectionTag = renderMultipleSelectionTag;

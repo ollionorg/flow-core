@@ -310,6 +310,7 @@ export default function render(this: FSelect) {
 				?allow-gap=${this._hasLabel && !this._hasHelperText ? true : false}
 				data-qa-id=${this.getAttribute("data-qa-element-id")}
 				@click=${this.handleDropDownOpen}
+				@keydown=${this.handleKeyDown}
 			>
 				${prefixAppend} ${suffixAppend}
 				<div
@@ -322,7 +323,7 @@ export default function render(this: FSelect) {
 						${Array.isArray(this.options)
 							? this.filteredOptions.length > 0
 								? (this.filteredOptions as FSelectArray)?.map(
-										(option, index) =>
+										option =>
 											html`<f-div
 												class="f-select-options-clickable"
 												padding="medium"
@@ -330,14 +331,14 @@ export default function render(this: FSelect) {
 												height="hug-content"
 												width="fill-container"
 												direction="row"
-												?clickable=${true}
 												align="middle-left"
 												gap="small"
-												.selected=${this.isSelected(option) || this.currentCursor === index
-													? "background"
-													: undefined}
+												.selected=${this.isSelected(option) ? "background" : undefined}
 												@click=${(e: MouseEvent) => {
 													this.handleOptionSelection(option, e);
+												}}
+												@mouseover=${(e: MouseEvent) => {
+													this.handleOptionMouseOver(e);
 												}}
 												.disabled=${typeof option === "object" && option.disabled}
 											>
@@ -391,7 +392,7 @@ export default function render(this: FSelect) {
 							  Object.keys(this.filteredOptions)?.every(
 									groupName => (this.filteredOptions as FSelectOptionsGroup)[groupName].length > 0
 							  )
-							? Object.keys(this.filteredOptions)?.map((group, groupIndex) =>
+							? Object.keys(this.filteredOptions)?.map(group =>
 									(this.filteredOptions as FSelectOptionsGroup)[group].length > 0
 										? html`<f-div
 				padding="none"
@@ -408,6 +409,7 @@ export default function render(this: FSelect) {
 				  height="hug-content"
 				  width="fill-container"
 				  align="middle-left"
+				  gap="small"
 				  direction="row"
 				  ?clickable=${true}
 				  .selected=${this.getCheckedValue(group) === "checked" ? "background" : undefined}
@@ -428,7 +430,7 @@ export default function render(this: FSelect) {
 							>
 				  </f-div>
 				  ${(this.filteredOptions as FSelectOptionsGroup)[group].map(
-						(option, optionIndex) =>
+						option =>
 							html`
 								<f-div
 									class="f-select-options-clickable"
@@ -437,16 +439,14 @@ export default function render(this: FSelect) {
 									height="hug-content"
 									width="fill-container"
 									direction="row"
-									?clickable=${true}
 									align="middle-left"
 									gap="small"
-									.selected=${this.isGroupSelection(option, group) ||
-									(this.currentGroupOptionCursor === optionIndex &&
-										this.currentGroupCursor === groupIndex)
-										? "background"
-										: undefined}
+									.selected=${this.isGroupSelection(option, group) ? "background" : undefined}
 									@click=${(e: MouseEvent) => {
 										this.handleSelectionGroup(option, group, e);
+									}}
+									@mouseover=${(e: MouseEvent) => {
+										this.handleOptionMouseOver(e);
 									}}
 									.disabled=${typeof option === "object" && option.disabled}
 								>

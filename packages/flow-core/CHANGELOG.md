@@ -8,7 +8,7 @@
 
 ### Improvements
 
-f-popover: Added a `shadow` flag to `f-popover` for displaying shadows (Note: it functions only when `overlay="false"`).
+`f-popover`: Added a `shadow` flag for displaying shadows (Note: it functions only when `overlay="false"`).
 
 ## [1.26.0] - 2023-09-26
 

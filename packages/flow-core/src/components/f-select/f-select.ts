@@ -135,7 +135,7 @@ export class FSelect extends FRoot {
 	@query("#f-select-options")
 	optionElement!: HTMLDivElement;
 
-	@queryAll(".f-select-options-clickable")
+	@queryAll(".f-select-options-clickable:not([disabled])")
 	allOptions?: NodeListOf<HTMLElement>;
 
 	/**
@@ -171,7 +171,7 @@ export class FSelect extends FRoot {
 	/**
 	 * @attribute Defines the value of an f-select. Validation rules are applied on the value depending on the type property of the f-text-input.
 	 */
-	@property({ reflect: true, type: Object })
+	@property({ reflect: true, type: [Object, String] })
 	value?: FSelectValue;
 
 	/**

@@ -12,7 +12,7 @@ import _ from "lodash";
 /**
  * open options menu
  */
-export function handleDropDownOpen(this: FSelect, e: MouseEvent) {
+export function handleDropDownOpen(this: FSelect, e: MouseEvent | KeyboardEvent) {
 	if (!this.loading) {
 		this.openDropdown = true;
 		this?.inputElement?.focus();
@@ -284,20 +284,28 @@ export function handleBlur(this: FSelect, e: FocusEvent) {
 }
 
 export function handleKeyDown(this: FSelect, e: KeyboardEvent) {
-	if (e.code === "ArrowDown" || e.code === "ArrowUp") {
-		let nextToHover: Element | undefined = undefined;
-		const allOptionsArray = Array.prototype.slice.call(this.allOptions) as HTMLElement[];
-		const currentHoverIndex = allOptionsArray?.findIndex(op => op.classList.contains("hover"));
+	if (this.openDropdown) {
+		if (e.code === "ArrowDown" || e.code === "ArrowUp") {
+			let nextToHover: Element | undefined = undefined;
+			const allOptionsArray = Array.prototype.slice.call(this.allOptions) as HTMLElement[];
+			const currentHoverIndex = allOptionsArray?.findIndex(op => op.classList.contains("hover"));
 
-		const currentHover = allOptionsArray[currentHoverIndex];
-		if (currentHover) {
-			currentHover.classList.remove("hover");
-			if (allOptionsArray[currentHoverIndex + 1] && e.code === "ArrowDown") {
-				allOptionsArray[currentHoverIndex + 1].classList.add("hover");
-				nextToHover = allOptionsArray[currentHoverIndex + 1];
-			} else if (allOptionsArray[currentHoverIndex - 1] && e.code === "ArrowUp") {
-				allOptionsArray[currentHoverIndex - 1].classList.add("hover");
-				nextToHover = allOptionsArray[currentHoverIndex - 1];
+			const currentHover = allOptionsArray[currentHoverIndex];
+			if (currentHover) {
+				currentHover.classList.remove("hover");
+				if (allOptionsArray[currentHoverIndex + 1] && e.code === "ArrowDown") {
+					allOptionsArray[currentHoverIndex + 1].classList.add("hover");
+					nextToHover = allOptionsArray[currentHoverIndex + 1];
+				} else if (allOptionsArray[currentHoverIndex - 1] && e.code === "ArrowUp") {
+					allOptionsArray[currentHoverIndex - 1].classList.add("hover");
+					nextToHover = allOptionsArray[currentHoverIndex - 1];
+				} else if (this.allOptions && e.code === "ArrowDown") {
+					this.allOptions[0].classList.add("hover");
+					nextToHover = this.allOptions[0];
+				} else if (this.allOptions && e.code === "ArrowUp") {
+					this.allOptions[this.allOptions.length - 1].classList.add("hover");
+					nextToHover = this.allOptions[this.allOptions.length - 1];
+				}
 			} else if (this.allOptions && e.code === "ArrowDown") {
 				this.allOptions[0].classList.add("hover");
 				nextToHover = this.allOptions[0];
@@ -305,27 +313,23 @@ export function handleKeyDown(this: FSelect, e: KeyboardEvent) {
 				this.allOptions[this.allOptions.length - 1].classList.add("hover");
 				nextToHover = this.allOptions[this.allOptions.length - 1];
 			}
-		} else if (this.allOptions && e.code === "ArrowDown") {
-			this.allOptions[0].classList.add("hover");
-			nextToHover = this.allOptions[0];
-		} else if (this.allOptions && e.code === "ArrowUp") {
-			this.allOptions[this.allOptions.length - 1].classList.add("hover");
-			nextToHover = this.allOptions[this.allOptions.length - 1];
-		}
 
-		nextToHover?.scrollIntoView({
-			behavior: "auto",
-			block: "nearest"
-		});
-	} else if (e.code === "Enter") {
-		const currentHover = (Array.prototype.slice.call(this.allOptions) as HTMLElement[])?.find(op =>
-			op.classList.contains("hover")
-		);
-		if (currentHover) {
-			currentHover.click();
+			nextToHover?.scrollIntoView({
+				behavior: "auto",
+				block: "nearest"
+			});
+		} else if (e.code === "Enter") {
+			const currentHover = (Array.prototype.slice.call(this.allOptions) as HTMLElement[])?.find(
+				op => op.classList.contains("hover")
+			);
+			if (currentHover) {
+				currentHover.click();
+			}
+		} else if (e.code === "Escape") {
+			this.handleDropDownClose(e);
 		}
-	} else if (e.code === "Escape") {
-		this.handleDropDownClose(e);
+	} else if (!this.openDropdown && (e.code === "ArrowDown" || e.code === "ArrowUp")) {
+		this.handleDropDownOpen(e);
 	}
 }
 

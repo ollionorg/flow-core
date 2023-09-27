@@ -69,6 +69,9 @@ be used to show short-lived information such as menus, options, additional actio
 			overlay: {
 				control: "boolean"
 			},
+			shadow: {
+				control: "boolean"
+			},
 			["auto-height"]: {
 				control: "boolean"
 			},
@@ -79,6 +82,7 @@ be used to show short-lived information such as menus, options, additional actio
 		args={{
 			open: false,
 			overlay: true,
+			shadow: false,
 			size: "small",
 			placement: "auto",
 			["auto-height"]: false,
@@ -97,6 +101,7 @@ be used to show short-lived information such as menus, options, additional actio
 					.overlay=${args.overlay}
 					.size=${args.size}
 					.placement=${args.placement}
+					.shadow=${args.shadow}
 					@overlay-click=${handlePopover}
 					target="#popoverTarget"
 					?auto-height=${args["auto-height"]}
@@ -525,6 +530,7 @@ popover and if the max height is attained, the body contents will scroll.
 			const [openFlagForNoOverlay, setOpenFlagForNoOverlay] = useState(false);
 			const [openHeightStretch, setOpenHeightStretch] = useState(false);
 			const [openEscape, setOpenEscape] = useState(false);
+			const [openFlagShadow, setOpenFlagShadow] = useState(false);
 			return html` <f-div height="hug-content" gap="large" direction="column">
 				<f-div height="hug-content" gap="large" direction="row">
 					<f-popover
@@ -580,6 +586,7 @@ popover and if the max height is attained, the body contents will scroll.
 					<f-popover
 						?open=${openFlagForNoOverlay}
 						.overlay=${false}
+						?shadow=${true}
 						size="small"
 						target="#openFlagForNoOverlay2"
 						@overlay-click=${() => setOpenFlagForNoOverlay(!openFlagForNoOverlay)}
@@ -642,6 +649,30 @@ popover and if the max height is attained, the body contents will scroll.
 						id="popover-height-stretch"
 						label="close-on-escape='false'"
 						@click=${() => setOpenEscape(!openEscape)}
+					>
+					</f-button>
+				</f-div>
+				<f-div height="hug-content" gap="large" direction="row">
+					<f-popover
+						?open=${openFlagShadow}
+						.overlay=${false}
+						?shadow=${true}
+						size="small"
+						target="#openFlagShadow"
+						@overlay-click=${() => setOpenFlagShadow(!openFlagShadow)}
+					>
+						<f-div state="tertiary" padding="medium">
+							<f-text>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+								mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+								tristique.
+							</f-text>
+						</f-div>
+					</f-popover>
+					<f-button
+						id="openFlagShadow"
+						label="shadow='true'"
+						@click=${() => setOpenFlagShadow(!openFlagShadow)}
 					>
 					</f-button>
 				</f-div>

@@ -4,13 +4,20 @@
 
 # Change Log
 
+## [1.26.1] - 2023-09-27
+
+### Improvements
+
+`f-popover`: Added a `shadow` flag for displaying shadows (Note: it functions only when `overlay="false"`).
+
 ## [1.26.0] - 2023-09-26
 
 ### Features
 
 - `f-select` : options navigation through arrow keys.
-- `f-select` : `Enter` key to select option 
+- `f-select` : `Enter` key to select option
 - `f-select` : `Esc` to close f-select.
+
 ## [1.25.5] - 2023-09-25
 
 ### Bug Fixes
@@ -23,6 +30,7 @@
 
 - `f-select` value type fixed.
 - `f-select` value rendering fixed if user pass value as array for single selection.
+
 ## [1.25.3] - 2023-09-22
 
 ### Bug Fixes

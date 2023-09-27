@@ -8,7 +8,7 @@
 
 ### Improvements
 
-- `f-popover`: for `overlay=false` aned `shadow=true` box-shadow appers in f-popover.
+- `f-popover`: for `shadow=true` and only if `overlay=false` box-shadow appers in f-popover.
 
 ## [1.26.0] - 2023-09-26
 

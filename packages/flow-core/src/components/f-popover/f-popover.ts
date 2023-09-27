@@ -97,6 +97,12 @@ export class FPopover extends FRoot {
 	overlay?: boolean = true;
 
 	/**
+	 * @attribute display box-shadow
+	 */
+	@property({ type: Boolean, reflect: true })
+	shadow?: boolean = false;
+
+	/**
 	 * @attribute stretch the height to auto
 	 */
 	@property({ type: Boolean, reflect: true, attribute: "auto-height" })

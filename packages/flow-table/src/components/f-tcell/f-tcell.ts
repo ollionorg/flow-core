@@ -118,7 +118,7 @@ export class FTcell extends FRoot {
 						<f-icon-button
 							size="medium"
 							category="packed"
-							class="row-toggler"
+							class="row-toggler left"
 							state="neutral"
 							@click=${this.toggleDetails}
 							icon="i-chevron-down"

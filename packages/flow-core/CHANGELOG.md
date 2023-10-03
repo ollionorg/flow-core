@@ -4,11 +4,19 @@
 
 # Change Log
 
+
+## [1.26.2] - 2023-10-03
+
+### Improvements
+- `f-popover` placement warning removed since it is not necessary for user to know.
+### Bug Fixes
+- `f-select` : setting object to `value` has an issue with vue2.
+
 ## [1.26.1] - 2023-09-27
 
 ### Improvements
 
-`f-popover`: Added a `shadow` flag for displaying shadows (Note: it functions only when `overlay="false"`).
+- `f-popover`: Added a `shadow` flag for displaying shadows (Note: it functions only when `overlay="false"`).
 
 ## [1.26.0] - 2023-09-26
 

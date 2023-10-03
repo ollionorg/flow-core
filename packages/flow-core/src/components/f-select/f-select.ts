@@ -175,13 +175,6 @@ export class FSelect extends FRoot {
 	value?: FSelectValue;
 
 	/**
-	 * @attribute in vue2 object setting to value attibute has an issue, so created this to set value
-	 */
-	@property({ reflect: false, type: Object, attribute: false })
-	set ["set-value"](val: FSelectValue | undefined) {
-		this.value = val;
-	}
-	/**
 	 * @attribute Defines the placeholder text for f-text-input
 	 */
 	@property({ reflect: true, type: Object })

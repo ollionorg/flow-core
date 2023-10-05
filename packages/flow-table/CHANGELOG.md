@@ -3,7 +3,12 @@
 
 # Change Log
 
+## [1.3.4] - 2023-10-05
 
+### Bug Fixes
+
+- `f-tcell` : options are aligned in middle.
+- `f-table-schema` : string sort issue fixed.
 ## [1.3.3] - 2023-09-29
 
 ### Bug Fixes

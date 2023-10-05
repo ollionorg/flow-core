@@ -125,7 +125,13 @@ export class FTcell extends FRoot {
 						></f-icon-button>
 				  `
 				: nothing}<slot></slot>
-			<f-div class="details-toggle" width="hug-content" gap="medium" align="top-right">
+			<f-div
+				class="details-toggle"
+				height="100%"
+				width="hug-content"
+				gap="medium"
+				align="middle-right"
+			>
 				${this.renderActions()}
 				${this.expandIcon && this.expandIconPosition === "right"
 					? html`

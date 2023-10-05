@@ -329,10 +329,10 @@ export class FTableSchema extends FRoot {
 				}
 
 				if (typeof columnA === "string" && typeof columnB === "string") {
-					if (columnA < columnB) {
+					if (columnA.trim().toLocaleLowerCase() < columnB.trim().toLocaleLowerCase()) {
 						return this.sortOrder === "asc" ? -1 : 1;
 					}
-					if (columnA > columnB) {
+					if (columnA.trim().toLocaleLowerCase() > columnB.trim().toLocaleLowerCase()) {
 						return this.sortOrder === "asc" ? 1 : -1;
 					}
 					return 0;

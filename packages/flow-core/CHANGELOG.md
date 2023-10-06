@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.26.4] - 2023-10-06
+
+### Improvements
+- `f-tag` displays a tooltip only when it has an ellipsis.
 ## [1.26.3] - 2023-10-03
 
 ### Bug Fixes

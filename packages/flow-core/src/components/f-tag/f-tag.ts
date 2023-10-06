@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-tag.scss";
@@ -12,6 +12,8 @@ import LightenDarkenColor from "../../utils/get-lighten-darken-color";
 import { FIcon } from "../f-icon/f-icon";
 import { FCounter } from "../f-counter/f-counter";
 import { flowElement } from "./../../utils";
+import { createRef, ref, Ref } from "lit/directives/ref.js";
+import type { FDiv } from "../f-div/f-div";
 
 export type FTagStateProp =
 	| "primary"
@@ -103,6 +105,8 @@ export class FTag extends FRoot {
 	 */
 	@property({ type: Boolean })
 	clickable?: boolean = false;
+
+	labelDiv: Ref<FDiv> = createRef();
 
 	/**
 	 * compute icon size based on tag size
@@ -313,9 +317,23 @@ export class FTag extends FRoot {
 			?clickable=${this.clickable}
 		>
 			${iconLeft}
-			<f-div class="text-content" .tooltip=${this.label}>${this.label}</f-div>
+			<f-div class="text-content" ${ref(this.labelDiv)}>${this.label}</f-div>
 			${counter}${iconRight}
 		</div>`;
+	}
+	protected async updated(
+		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
+		super.updated(changedProperties);
+		await this.updateComplete;
+		if (this.labelDiv.value) {
+			const isEllipsis = this.labelDiv.value.offsetWidth < this.labelDiv.value.scrollWidth;
+			if (isEllipsis) {
+				this.labelDiv.value.tooltip = this.label;
+			} else {
+				this.labelDiv.value.tooltip = undefined;
+			}
+		}
 	}
 }
 

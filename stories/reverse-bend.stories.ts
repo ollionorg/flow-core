@@ -1,20 +1,20 @@
-import { Story } from "@storybook/web-components";
+import { Story,Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 import { LineageNodeLinks } from "@cldcvr/flow-lineage/src";
 import nodes from "./nodes";
 import { nodeTemplate, childrenNodeTemplate } from "./nodeTemplates";
 
-// export default {
-//   title: "Debug/Reverse-bend",
-//   argTypes: {
-//     ["node-template"]: {
-//       control: false,
-//     },
-//     ["children-node-template"]: {
-//       control: false,
-//     },
-//   },
-// } as Meta;
+export default {
+  title: "Debug/Reverse-bend",
+  argTypes: {
+    ["node-template"]: {
+      control: false,
+    },
+    ["children-node-template"]: {
+      control: false,
+    },
+  },
+} as Meta;
 
 const links: LineageNodeLinks = [
 	{

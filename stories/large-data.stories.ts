@@ -1,15 +1,15 @@
-import { Story } from "@storybook/web-components";
+import { Story,Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 import { LineageNodeElement, LineageNodeLinks, LineageNodes } from "@cldcvr/flow-lineage/src";
 
-// export default {
-//   title: "Examples/Large Data",
-//   argTypes: {
-//     ["node-template"]: {
-//       control: false,
-//     },
-//   },
-// } as Meta;
+export default {
+  title: "Examples/Large Data",
+  argTypes: {
+    ["node-template"]: {
+      control: false,
+    },
+  },
+} as Meta;
 
 const makeid = () => {
 	const crypto = window.crypto;

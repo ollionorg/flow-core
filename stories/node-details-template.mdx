@@ -1,0 +1,40 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useState, useEffect } from "@storybook/client-api";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import NodeDetailsTemplateAnatomy from "./svg/i-node-details-anatomy.js";
+import * as NodeDetailsTemplateStories from './node-details-template.stories';
+
+<Meta of={NodeDetailsTemplateStories} />
+
+# Node-details Popover
+
+<br />
+
+<br />
+
+# Overview
+
+In flow-lineage, node-details popover template provides meta information of a node.
+A user can open node-details popover by a double-click on a node.
+
+This template uses f-popover.
+
+## Anatomy
+
+<f-divider />
+
+<Story of={NodeDetailsTemplateStories.Anatomy} />
+
+<br />
+
+# Available Templates
+
+## node-details
+
+<f-divider />
+
+<Canvas>
+  <Story of={NodeDetailsTemplateStories.NodeDetails} />
+</Canvas>

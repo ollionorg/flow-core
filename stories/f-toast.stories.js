@@ -146,23 +146,24 @@ export const Type = {
 					<f-button label="add toast" icon-right="i-plus" @click=${() => add()}></f-button>
 				</f-div>
 				${values.map(
-					item => html`<f-div>
-						<f-toast .type=${item} .close-button=${true}
-							><f-div direction="column" gap="medium">
-								<f-div direction="column" gap="x-small">
-									<f-text variant="heading" size="small" weight="bold"
-										>Toast Message Header ${item}</f-text
+					item =>
+						html`<f-div>
+							<f-toast .type=${item} .close-button=${true}
+								><f-div direction="column" gap="medium">
+									<f-div direction="column" gap="x-small">
+										<f-text variant="heading" size="small" weight="bold"
+											>Toast Message Header ${item}</f-text
+										>
+										<f-text variant="para" size="small" weight="regular"
+											>Detailed description of the activity goes here</f-text
+										>
+									</f-div>
+									<f-text variant="para" size="small" weight="regular" state="secondary"
+										>Just now</f-text
 									>
-									<f-text variant="para" size="small" weight="regular"
-										>Detailed description of the activity goes here</f-text
-									>
-								</f-div>
-								<f-text variant="para" size="small" weight="regular" state="secondary"
-									>Just now</f-text
-								>
-							</f-div></f-toast
-						>
-					</f-div>`
+								</f-div></f-toast
+							>
+						</f-div>`
 				)}
 			</f-div>
 		`;
@@ -198,23 +199,24 @@ export const Duration = {
 					></f-button>
 				</f-div>
 				${values.map(
-					item => html`<f-div>
-						<f-toast .type=${item} .close-button=${true} .duration=${2000}
-							><f-div direction="column" gap="medium">
-								<f-div direction="column" gap="x-small">
-									<f-text variant="heading" size="small" weight="bold"
-										>Toast Message Header ${item}</f-text
+					item =>
+						html`<f-div>
+							<f-toast .type=${item} .close-button=${true} .duration=${2000}
+								><f-div direction="column" gap="medium">
+									<f-div direction="column" gap="x-small">
+										<f-text variant="heading" size="small" weight="bold"
+											>Toast Message Header ${item}</f-text
+										>
+										<f-text variant="para" size="small" weight="regular"
+											>Detailed description of the activity goes here</f-text
+										>
+									</f-div>
+									<f-text variant="para" size="small" weight="regular" state="secondary"
+										>Just now</f-text
 									>
-									<f-text variant="para" size="small" weight="regular"
-										>Detailed description of the activity goes here</f-text
-									>
-								</f-div>
-								<f-text variant="para" size="small" weight="regular" state="secondary"
-									>Just now</f-text
-								>
-							</f-div></f-toast
-						>
-					</f-div>`
+								</f-div></f-toast
+							>
+						</f-div>`
 				)}
 			</f-div>
 		`;
@@ -250,23 +252,24 @@ export const State = {
 					></f-button>
 				</f-div>
 				${values.map(
-					item => html`<f-div>
-						<f-toast .type=${item} .close-button=${true} .duration=${5000} .state=${item}
-							><f-div direction="column" gap="medium">
-								<f-div direction="column" gap="x-small">
-									<f-text variant="heading" size="small" weight="bold"
-										>Toast Message Header ${item}</f-text
+					item =>
+						html`<f-div>
+							<f-toast .type=${item} .close-button=${true} .duration=${5000} .state=${item}
+								><f-div direction="column" gap="medium">
+									<f-div direction="column" gap="x-small">
+										<f-text variant="heading" size="small" weight="bold"
+											>Toast Message Header ${item}</f-text
+										>
+										<f-text variant="para" size="small" weight="regular"
+											>Detailed description of the activity goes here</f-text
+										>
+									</f-div>
+									<f-text variant="para" size="small" weight="regular" state="secondary"
+										>Just now</f-text
 									>
-									<f-text variant="para" size="small" weight="regular"
-										>Detailed description of the activity goes here</f-text
-									>
-								</f-div>
-								<f-text variant="para" size="small" weight="regular" state="secondary"
-									>Just now</f-text
-								>
-							</f-div></f-toast
-						>
-					</f-div>`
+								</f-div></f-toast
+							>
+						</f-div>`
 				)}
 			</f-div>
 		`;
@@ -302,23 +305,24 @@ export const Flags = {
 					></f-button>
 				</f-div>
 				${values.map(
-					item => html`<f-div>
-						<f-toast .close-button=${item} .duration=${5000} state="primary" type="persists"
-							><f-div direction="column" gap="medium">
-								<f-div direction="column" gap="x-small">
-									<f-text variant="heading" size="small" weight="bold"
-										>Toast Message Header (close-button=${item})</f-text
+					item =>
+						html`<f-div>
+							<f-toast .close-button=${item} .duration=${5000} state="primary" type="persists"
+								><f-div direction="column" gap="medium">
+									<f-div direction="column" gap="x-small">
+										<f-text variant="heading" size="small" weight="bold"
+											>Toast Message Header (close-button=${item})</f-text
+										>
+										<f-text variant="para" size="small" weight="regular"
+											>Detailed description of the activity goes here</f-text
+										>
+									</f-div>
+									<f-text variant="para" size="small" weight="regular" state="secondary"
+										>Just now</f-text
 									>
-									<f-text variant="para" size="small" weight="regular"
-										>Detailed description of the activity goes here</f-text
-									>
-								</f-div>
-								<f-text variant="para" size="small" weight="regular" state="secondary"
-									>Just now</f-text
-								>
-							</f-div></f-toast
-						>
-					</f-div>`
+								</f-div></f-toast
+							>
+						</f-div>`
 				)}
 			</f-div>
 		`;

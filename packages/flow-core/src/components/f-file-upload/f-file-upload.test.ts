@@ -27,11 +27,9 @@ describe("f-file-upload", () => {
 	});
 
 	it("should render with placeholder", async () => {
-		const el = await fixture(
-			html`
-				<f-file-upload placeholder="Drag and Drop Files or Click here to upload"></f-file-upload>
-			`
-		);
+		const el = await fixture(html`
+			<f-file-upload placeholder="Drag and Drop Files or Click here to upload"></f-file-upload>
+		`);
 		const descendant = el.shadowRoot!.querySelector(".f-file-upload-placeholder")!;
 		const ftext = descendant.children[0];
 		expect(ftext).instanceOf(FText);
@@ -39,9 +37,9 @@ describe("f-file-upload", () => {
 	});
 
 	it("should render with value for single file selection type", async () => {
-		const el = await fixture(
-			html` <f-file-upload .value=${new File(["test"], "test.pdf")}></f-file-upload> `
-		);
+		const el = await fixture(html`
+			<f-file-upload .value=${new File(["test"], "test.pdf")}></f-file-upload>
+		`);
 		const descendant = el.shadowRoot!.querySelector("#overflow-text")!;
 		const ftext = descendant.innerHTML;
 		expect(descendant).instanceOf(FText);
@@ -49,11 +47,9 @@ describe("f-file-upload", () => {
 	});
 
 	it("should render with value array for multiple file selection type", async () => {
-		const el = await fixture(
-			html`
-				<f-file-upload .value=${[new File(["test"], "test.pdf")]} type="multiple"></f-file-upload>
-			`
-		);
+		const el = await fixture(html`
+			<f-file-upload .value=${[new File(["test"], "test.pdf")]} type="multiple"></f-file-upload>
+		`);
 		const descendant = el.shadowRoot!.querySelectorAll("#multiple-file-selection")!;
 		expect(descendant[0]).instanceOf(FDiv);
 		expect(descendant).length(1);
@@ -61,9 +57,9 @@ describe("f-file-upload", () => {
 	});
 
 	it("should render with file type mentioned in selection area", async () => {
-		const el = await fixture(
-			html` <f-file-upload type="multiple" file-type=".pdf"></f-file-upload> `
-		);
+		const el = await fixture(html`
+			<f-file-upload type="multiple" file-type=".pdf"></f-file-upload>
+		`);
 		const descendant = el.shadowRoot!.querySelector(".f-file-upload-placeholder")!;
 		const ftext = descendant.children[1];
 		expect(ftext).instanceOf(FText);

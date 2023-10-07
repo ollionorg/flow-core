@@ -157,32 +157,33 @@ export const Playground = {
 };
 
 export const Variant = {
-	render: args => html` <f-form>
-		<f-form-group
-			variant="normal"
-			.label=${{
-				title: "Test for Variant-Normal",
-				description: "This is a description"
-			}}
-			direction="horizontal"
-			gap="small"
-		>
-			<f-input placeholder="This is an input field"></f-input>
-			<f-button label="submit" variant="curved"></f-button>
-		</f-form-group>
-		<f-divider></f-divider>
-		<f-form-group
-			variant="compact"
-			.label=${{
-				title: "Test for Variant-Normal",
-				description: "This is a description"
-			}}
-			direction="horizontal"
-			gap="small"
-		>
-			<f-input placeholder="This is an input field"></f-input>
-			<f-button label="submit" variant="curved"></f-button> </f-form-group
-	></f-form>`,
+	render: args =>
+		html` <f-form>
+			<f-form-group
+				variant="normal"
+				.label=${{
+					title: "Test for Variant-Normal",
+					description: "This is a description"
+				}}
+				direction="horizontal"
+				gap="small"
+			>
+				<f-input placeholder="This is an input field"></f-input>
+				<f-button label="submit" variant="curved"></f-button>
+			</f-form-group>
+			<f-divider></f-divider>
+			<f-form-group
+				variant="compact"
+				.label=${{
+					title: "Test for Variant-Normal",
+					description: "This is a description"
+				}}
+				direction="horizontal"
+				gap="small"
+			>
+				<f-input placeholder="This is an input field"></f-input>
+				<f-button label="submit" variant="curved"></f-button> </f-form-group
+		></f-form>`,
 
 	name: "variant"
 };
@@ -289,40 +290,41 @@ export const Collapse = {
 };
 
 export const Flags = {
-	render: args => html`<f-form ?separator=${true}>
-		<f-form-group
-			variant="normal"
-			.label=${{
-				title: "Group Title (can-duplicate)",
-				description: "This is a description"
-			}}
-			?can-duplicate=${true}
-		>
-			<f-input placeholder="This is an input field">
-				<f-div slot="label">Input title</f-div>
-			</f-input>
-			<f-input placeholder="This is an input field">
-				<f-div slot="label">Input title</f-div>
-			</f-input>
-		</f-form-group>
-		<f-form-group
-			variant="normal"
-			.label=${{
-				title: "Group Title (is-collapsed)",
-				description: "This is a description"
-			}}
-			?is-collapsed=${false}
-			collapse="accordion"
-		>
-			<f-input placeholder="This is an input field">
-				<f-div slot="label">is-collpased (false)</f-div>
-			</f-input>
-			<f-input placeholder="This is an input field">
-				<f-div slot="label">Input title</f-div>
-			</f-input>
-		</f-form-group>
-		<f-form> </f-form
-	></f-form> `,
+	render: args =>
+		html`<f-form ?separator=${true}>
+			<f-form-group
+				variant="normal"
+				.label=${{
+					title: "Group Title (can-duplicate)",
+					description: "This is a description"
+				}}
+				?can-duplicate=${true}
+			>
+				<f-input placeholder="This is an input field">
+					<f-div slot="label">Input title</f-div>
+				</f-input>
+				<f-input placeholder="This is an input field">
+					<f-div slot="label">Input title</f-div>
+				</f-input>
+			</f-form-group>
+			<f-form-group
+				variant="normal"
+				.label=${{
+					title: "Group Title (is-collapsed)",
+					description: "This is a description"
+				}}
+				?is-collapsed=${false}
+				collapse="accordion"
+			>
+				<f-input placeholder="This is an input field">
+					<f-div slot="label">is-collpased (false)</f-div>
+				</f-input>
+				<f-input placeholder="This is an input field">
+					<f-div slot="label">Input title</f-div>
+				</f-input>
+			</f-form-group>
+			<f-form> </f-form
+		></f-form> `,
 
 	name: "Flags"
 };

@@ -22,6 +22,7 @@
     "build-types-generator": "cd packages/custom-elements-manifest-to-types && pnpm run build",
     "build-packages": "pnpm run build-types-generator && pnpm run build-flow-core-config && pnpm run build-flow-core && pnpm run build-flow-code-editor && pnpm run build-flow-log && pnpm run build-flow-table && pnpm run build-flow-md-editor",
     "release": "cp README.md packages/flow-core && pnpm run build-packages && pnpm run changeset publish",
+    "prettify": "prettier --config .prettierrc.cjs --write './**/*.{js,ts,vue,md,mdx}'",
     "prepare": "husky install",
     "test": "pnpm run loki test"
   },

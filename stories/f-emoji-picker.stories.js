@@ -319,16 +319,23 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-					item => html` <f-div align="middle-center" padding="large" gap="medium">
-						${item.map(
-							state => html`<f-div width="hug-content"
-								><f-emoji-picker value=${value} @input=${handleValue} size="medium" state=${state}>
-									<f-div slot="label" padding="none" gap="none">Label</f-div>
-									<f-text slot="help" variant="para" size="small">Help!</f-text>
-								</f-emoji-picker></f-div
-							>`
-						)}
-					</f-div>`
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
+							${item.map(
+								state =>
+									html`<f-div width="hug-content"
+										><f-emoji-picker
+											value=${value}
+											@input=${handleValue}
+											size="medium"
+											state=${state}
+										>
+											<f-div slot="label" padding="none" gap="none">Label</f-div>
+											<f-text slot="help" variant="para" size="small">Help!</f-text>
+										</f-emoji-picker></f-div
+									>`
+							)}
+						</f-div>`
 				)}
 			</f-div>
 		`;

@@ -91,85 +91,91 @@ export const Anatomy = {
 };
 
 export const State = {
-	render: args => html`<f-div direction="column" state="subtle" padding="small" gap="large"
-		>${["primary", "neutral", "success", "warning", "danger", "inherit", "default"].map(
-			state => html`<f-text>state="${state}"</f-text
-				><f-table>
-					<f-trow slot="header">
-						${[1, 2, 3, 4, 5].map(cellNumber => {
-							return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
-						})}
-					</f-trow>
-					${[1, 2, 3, 4, 5].map(rowNumber => {
-						return html`<f-trow .state=${state}>
-							${[1, 2, 3, 4, 5].map(cellNumber => {
-								return html`<f-tcell>
-									<f-text> Column ${cellNumber} </f-text>
-								</f-tcell>`;
-							})}
-						</f-trow>`;
-					})} </f-table
-				><f-divider></f-divider>`
-		)}</f-div
-	>`,
+	render: args =>
+		html`<f-div direction="column" state="subtle" padding="small" gap="large"
+			>${["primary", "neutral", "success", "warning", "danger", "inherit", "default"].map(
+				state =>
+					html`<f-text>state="${state}"</f-text
+						><f-table>
+							<f-trow slot="header">
+								${[1, 2, 3, 4, 5].map(cellNumber => {
+									return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+								})}
+							</f-trow>
+							${[1, 2, 3, 4, 5].map(rowNumber => {
+								return html`<f-trow .state=${state}>
+									${[1, 2, 3, 4, 5].map(cellNumber => {
+										return html`<f-tcell>
+											<f-text> Column ${cellNumber} </f-text>
+										</f-tcell>`;
+									})}
+								</f-trow>`;
+							})} </f-table
+						><f-divider></f-divider>`
+			)}</f-div
+		>`,
 
 	name: "state"
 };
 
 export const Open = {
-	render: args => html`<f-div direction="column" state="subtle" padding="small" gap="large"
-		>${[true, false].map(
-			open => html`<f-text>${open ? "open" : "--"}</f-text
-				><f-table>
-					<f-trow slot="header">
-						${[1, 2, 3, 4, 5].map(cellNumber => {
-							return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
-						})}
-					</f-trow>
-					${[1, 2, 3, 4, 5].map(rowNumber => {
-						return html`<f-trow .open=${open}>
-							<f-div padding="large" slot="details">
-								<f-text variant="heading" size="x-large">This is details slot</f-text>
-							</f-div>
-							${[1, 2, 3, 4, 5].map(cellNumber => {
-								return html`<f-tcell>
-									<f-text> Column ${cellNumber} </f-text>
-								</f-tcell>`;
-							})}
-						</f-trow>`;
-					})} </f-table
-				><f-divider></f-divider>`
-		)}</f-div
-	>`,
+	render: args =>
+		html`<f-div direction="column" state="subtle" padding="small" gap="large"
+			>${[true, false].map(
+				open =>
+					html`<f-text>${open ? "open" : "--"}</f-text
+						><f-table>
+							<f-trow slot="header">
+								${[1, 2, 3, 4, 5].map(cellNumber => {
+									return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+								})}
+							</f-trow>
+							${[1, 2, 3, 4, 5].map(rowNumber => {
+								return html`<f-trow .open=${open}>
+									<f-div padding="large" slot="details">
+										<f-text variant="heading" size="x-large">This is details slot</f-text>
+									</f-div>
+									${[1, 2, 3, 4, 5].map(cellNumber => {
+										return html`<f-tcell>
+											<f-text> Column ${cellNumber} </f-text>
+										</f-tcell>`;
+									})}
+								</f-trow>`;
+							})} </f-table
+						><f-divider></f-divider>`
+			)}</f-div
+		>`,
 
 	name: "open"
 };
 
 export const Selected = {
-	render: args => html`<f-div direction="column" state="subtle" padding="small" gap="large"
-		>${[true, false].map(
-			selected => html`<f-text>${selected ? "selected" : "--"}</f-text
-				><f-table selectable="multiple">
-					<f-trow slot="header">
-						${[1, 2, 3, 4, 5].map(cellNumber => {
-							return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
-						})}
-					</f-trow>
-					${[1, 2, 3, 4, 5].map(rowNumber => {
-						return html`<f-trow .selected=${selected}>
-							<f-div padding="large" slot="details">
-								<f-text variant="heading" size="x-large">This is details slot</f-text>
-							</f-div>
-							${[1, 2, 3, 4, 5].map(cellNumber => {
-								return html`<f-tcell>
-									<f-text> Column ${cellNumber} </f-text>
-								</f-tcell>`;
-							})}
-						</f-trow>`;
-					})} </f-table
-				><f-divider></f-divider>`
-		)}</f-div
-	>`,
+	render: args =>
+		html`<f-div direction="column" state="subtle" padding="small" gap="large"
+			>${[true, false].map(
+				selected =>
+					html`<f-text>${selected ? "selected" : "--"}</f-text
+						><f-table selectable="multiple">
+							<f-trow slot="header">
+								${[1, 2, 3, 4, 5].map(cellNumber => {
+									return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+								})}
+							</f-trow>
+							${[1, 2, 3, 4, 5].map(rowNumber => {
+								return html`<f-trow .selected=${selected}>
+									<f-div padding="large" slot="details">
+										<f-text variant="heading" size="x-large">This is details slot</f-text>
+									</f-div>
+									${[1, 2, 3, 4, 5].map(cellNumber => {
+										return html`<f-tcell>
+											<f-text> Column ${cellNumber} </f-text>
+										</f-tcell>`;
+									})}
+								</f-trow>`;
+							})} </f-table
+						><f-divider></f-divider>`
+			)}</f-div
+		>`,
 
 	name: "selected"
 };

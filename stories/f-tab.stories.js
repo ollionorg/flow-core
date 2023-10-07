@@ -35,18 +35,19 @@ export const Playground = {
 					node-width=${args["node-width"]}
 				>
 					${array.map(
-						item => html` <f-tab-node
-							?active=${selected === item ? true : false}
-							content-id=${`tab-${item}`}
-							@click=${() => handleChange(item)}
-							><f-div width="100%" height="100%" align="middle-center" direction="column"
-								><f-div align="middle-center" height="hug-content" width="hug-content"
-									>Tab ${item}</f-div
-								><f-div align="middle-center" height="hug-content" width="hug-content"
-									>Description</f-div
-								></f-div
-							></f-tab-node
-						>`
+						item =>
+							html` <f-tab-node
+								?active=${selected === item ? true : false}
+								content-id=${`tab-${item}`}
+								@click=${() => handleChange(item)}
+								><f-div width="100%" height="100%" align="middle-center" direction="column"
+									><f-div align="middle-center" height="hug-content" width="hug-content"
+										>Tab ${item}</f-div
+									><f-div align="middle-center" height="hug-content" width="hug-content"
+										>Description</f-div
+									></f-div
+								></f-tab-node
+							>`
 					)}</f-tab
 				>
 				${array.map(
@@ -143,49 +144,51 @@ export const Variant = {
 
 		return html`<f-div direction="column">
 			${variants.map(
-				variant => html` <f-div direction="column" height="fill-container" overflow="visible">
-					<f-tab .variant=${variant} node-width="fill">
+				variant =>
+					html` <f-div direction="column" height="fill-container" overflow="visible">
+						<f-tab .variant=${variant} node-width="fill">
+							${array.map(
+								item =>
+									html` <f-tab-node
+										?active=${selected === item ? true : false}
+										content-id=${`tab-${variant}-${item}`}
+										@click=${() => handleChange(item)}
+										><f-div width="100%" height="100%" align="middle-center" direction="column"
+											><f-div align="middle-center" height="hug-content" width="hug-content"
+												>Tab ${item}</f-div
+											><f-div align="middle-center" height="hug-content" width="hug-content"
+												>Description</f-div
+											></f-div
+										></f-tab-node
+									>`
+							)}</f-tab
+						>
 						${array.map(
-							item => html` <f-tab-node
-								?active=${selected === item ? true : false}
-								content-id=${`tab-${variant}-${item}`}
-								@click=${() => handleChange(item)}
-								><f-div width="100%" height="100%" align="middle-center" direction="column"
-									><f-div align="middle-center" height="hug-content" width="hug-content"
-										>Tab ${item}</f-div
-									><f-div align="middle-center" height="hug-content" width="hug-content"
-										>Description</f-div
-									></f-div
-								></f-tab-node
-							>`
-						)}</f-tab
-					>
-					${array.map(
-						item => html`
-							<f-tab-content id=${`tab-${variant}-${item}`}
-								><f-div direction="column" width="100%" padding="large"
-									><f-div
-										><f-text variant="heading" size="x-large" weight="bold"
-											>Tab ${item}</f-text
+							item => html`
+								<f-tab-content id=${`tab-${variant}-${item}`}
+									><f-div direction="column" width="100%" padding="large"
+										><f-div
+											><f-text variant="heading" size="x-large" weight="bold"
+												>Tab ${item}</f-text
+											></f-div
+										>
+										<f-div>
+											<f-text
+												>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+												Lorem Ipsum has been the industry's standard dummy text ever since the
+												1500s, when an unknown printer took a galley of type and scrambled it to
+												make a type specimen book. It has survived not only five centuries, but also
+												the leap into electronic typesetting, remaining essentially unchanged. It
+												was popularised in the 1960s with the release of Letraset sheets containing
+												Lorem Ipsum passages, and more recently with desktop publishing software
+												like Aldus PageMaker including versions of Lorem Ipsum.</f-text
+											></f-div
 										></f-div
-									>
-									<f-div>
-										<f-text
-											>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-											Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-											when an unknown printer took a galley of type and scrambled it to make a type
-											specimen book. It has survived not only five centuries, but also the leap into
-											electronic typesetting, remaining essentially unchanged. It was popularised in
-											the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-											and more recently with desktop publishing software like Aldus PageMaker
-											including versions of Lorem Ipsum.</f-text
-										></f-div
-									></f-div
-								></f-tab-content
-							>
-						`
-					)}
-				</f-div>`
+									></f-tab-content
+								>
+							`
+						)}
+					</f-div>`
 			)}</f-div
 		> `;
 	},
@@ -231,18 +234,19 @@ export const Direction = {
 			>
 				<f-tab .direction=${selectedDirection} node-width="fill">
 					${array.map(
-						item => html` <f-tab-node
-							?active=${selected === item ? true : false}
-							content-id=${`tab-${selectedDirection}-${item}`}
-							@click=${() => handleChange(item)}
-							><f-div width="100%" height="100%" align="middle-center" direction="column"
-								><f-div align="middle-center" height="hug-content" width="hug-content"
-									>Tab ${item}</f-div
-								><f-div align="middle-center" height="hug-content" width="hug-content"
-									>Description</f-div
-								></f-div
-							></f-tab-node
-						>`
+						item =>
+							html` <f-tab-node
+								?active=${selected === item ? true : false}
+								content-id=${`tab-${selectedDirection}-${item}`}
+								@click=${() => handleChange(item)}
+								><f-div width="100%" height="100%" align="middle-center" direction="column"
+									><f-div align="middle-center" height="hug-content" width="hug-content"
+										>Tab ${item}</f-div
+									><f-div align="middle-center" height="hug-content" width="hug-content"
+										>Description</f-div
+									></f-div
+								></f-tab-node
+							>`
 					)}</f-tab
 				>
 				${array.map(
@@ -316,18 +320,19 @@ export const NodeWidth = {
 			<f-div direction="column" height="fill-container" overflow="visible">
 				<f-tab node-width=${selectedWidth}>
 					${array.map(
-						item => html` <f-tab-node
-							?active=${selected === item ? true : false}
-							content-id=${`tab-${selectedWidth}-${item}`}
-							@click=${() => handleChange(item)}
-							><f-div width="100%" height="100%" align="middle-center" direction="column"
-								><f-div align="middle-center" height="hug-content" width="hug-content"
-									>Tab ${item}</f-div
-								><f-div align="middle-center" height="hug-content" width="hug-content"
-									>Description</f-div
-								></f-div
-							></f-tab-node
-						>`
+						item =>
+							html` <f-tab-node
+								?active=${selected === item ? true : false}
+								content-id=${`tab-${selectedWidth}-${item}`}
+								@click=${() => handleChange(item)}
+								><f-div width="100%" height="100%" align="middle-center" direction="column"
+									><f-div align="middle-center" height="hug-content" width="hug-content"
+										>Tab ${item}</f-div
+									><f-div align="middle-center" height="hug-content" width="hug-content"
+										>Description</f-div
+									></f-div
+								></f-tab-node
+							>`
 					)}</f-tab
 				>
 				${array.map(
@@ -435,18 +440,19 @@ export const Alignment = {
 			>
 				<f-tab .alignment=${selectedAlignment} .direction=${selectedDirection}>
 					${array.map(
-						item => html` <f-tab-node
-							?active=${selected === item ? true : false}
-							content-id=${`tab-${selectedAlignment}-${item}`}
-							@click=${() => handleChange(item)}
-							><f-div width="100%" height="100%" align="middle-center" direction="column"
-								><f-div align="middle-center" height="hug-content" width="hug-content"
-									>Tab ${item}</f-div
-								><f-div align="middle-center" height="hug-content" width="hug-content"
-									>Description</f-div
-								></f-div
-							></f-tab-node
-						>`
+						item =>
+							html` <f-tab-node
+								?active=${selected === item ? true : false}
+								content-id=${`tab-${selectedAlignment}-${item}`}
+								@click=${() => handleChange(item)}
+								><f-div width="100%" height="100%" align="middle-center" direction="column"
+									><f-div align="middle-center" height="hug-content" width="hug-content"
+										>Tab ${item}</f-div
+									><f-div align="middle-center" height="hug-content" width="hug-content"
+										>Description</f-div
+									></f-div
+								></f-tab-node
+							>`
 					)}</f-tab
 				>
 				${array.map(

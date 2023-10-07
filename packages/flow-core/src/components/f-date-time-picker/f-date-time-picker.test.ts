@@ -30,17 +30,17 @@ describe("f-date-time-picker", () => {
 		expect(flatpickr?.classList.contains("open")).equals(false);
 	});
 	it("check if mode date-time both are present", async () => {
-		await fixture<FDateTimePicker>(
-			html` <f-date-time-picker mode="date-time"></f-date-time-picker> `
-		);
+		await fixture<FDateTimePicker>(html`
+			<f-date-time-picker mode="date-time"></f-date-time-picker>
+		`);
 		const flatpickr = document.body.querySelector(".flatpickr-calendar");
 		expect(flatpickr?.classList.contains("hasTime")).equals(true);
 	});
 
 	it("check if value selected in calendar", async () => {
-		await fixture<FDateTimePicker>(
-			html` <f-date-time-picker .value=${new Date()}></f-date-time-picker> `
-		);
+		await fixture<FDateTimePicker>(html`
+			<f-date-time-picker .value=${new Date()}></f-date-time-picker>
+		`);
 		const flatpickrToday = document.body.querySelector(".today");
 		const months = [
 			"January",

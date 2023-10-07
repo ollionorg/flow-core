@@ -3,7 +3,7 @@ import { html } from "lit-html";
 import FDivAnatomy from "./svg/i-fdiv-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useState, useEffect } from "@storybook/client-api";
-import * as FTabContentStories from './f-tab-content.stories';
+import * as FTabContentStories from "./f-tab-content.stories";
 
 <Meta of={FTabContentStories} />
 
@@ -24,7 +24,7 @@ Tab content is part of the tabs component. Each Tab node “content-id” needs 
 ### [Playground](/story/components-f-tab-content--playground)
 
 <Canvas>
-  <Story of={FTabContentStories.Playground} />
+	<Story of={FTabContentStories.Playground} />
 </Canvas>
 
 ## id
@@ -34,7 +34,7 @@ Tab content is part of the tabs component. Each Tab node “content-id” needs 
 `id` to match up with `f-tab` `content-id`.
 
 <Canvas>
-  <Story of={FTabContentStories.Id} />
+	<Story of={FTabContentStories.Id} />
 </Canvas>
 
 <br />
@@ -46,7 +46,7 @@ Tab content is part of the tabs component. Each Tab node “content-id” needs 
 Defines the transition to show the next tab content.
 
 <Canvas>
-  <Story of={FTabContentStories.Transition} />
+	<Story of={FTabContentStories.Transition} />
 </Canvas>
 
 <table className="custom-table">
@@ -80,6 +80,7 @@ Defines the transition to show the next tab content.
 
       <td />
     </tr>
+
   </tbody>
 </table>
 
@@ -93,7 +94,7 @@ Defines the duration of the transition. It accepts a value in ms(milli-seconds).
 Default value is 200 ms.
 
 <Canvas>
-  <Story of={FTabContentStories.Duration} />
+	<Story of={FTabContentStories.Duration} />
 </Canvas>
 
 <ArgsTable of={"f-tab-content"} />

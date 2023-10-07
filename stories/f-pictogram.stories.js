@@ -13,18 +13,19 @@ export default {
 };
 
 export const Playground = {
-	render: args => html`<f-div direction="column" padding="x-large">
-		<f-pictogram
-			.variant=${args.variant}
-			source=${args.source}
-			.size=${args.size}
-			.state=${args.state}
-			.loading=${args.loading}
-			.disabled=${args.disabled}
-			.clickable=${args.clickable}
-			?auto-bg=${args["auto-bg"]}
-		></f-pictogram>
-	</f-div>`,
+	render: args =>
+		html`<f-div direction="column" padding="x-large">
+			<f-pictogram
+				.variant=${args.variant}
+				source=${args.source}
+				.size=${args.size}
+				.state=${args.state}
+				.loading=${args.loading}
+				.disabled=${args.disabled}
+				.clickable=${args.clickable}
+				?auto-bg=${args["auto-bg"]}
+			></f-pictogram>
+		</f-div>`,
 
 	name: "Playground",
 
@@ -102,24 +103,49 @@ export const Anatomy = {
 };
 
 export const Variant = {
-	render: args => html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
-		<f-div height="hug-content" align="middle-center" padding="none" gap="large" direction="column">
-			<f-text variant="para" size="large" weight="medium">squircle</f-text>
-			<f-pictogram source="💬"></f-pictogram>
-		</f-div>
-		<f-div height="hug-content" align="middle-center" padding="none" gap="large" direction="column">
-			<f-text variant="para" size="large" weight="medium">square</f-text>
-			<f-pictogram source="🎲" variant="square"></f-pictogram>
-		</f-div>
-		<f-div height="hug-content" align="middle-center" padding="none" gap="large" direction="column">
-			<f-text variant="para" size="large" weight="medium">hexagon</f-text>
-			<f-pictogram source="🚀" variant="hexagon"></f-pictogram>
-		</f-div>
-		<f-div height="hug-content" align="middle-center" padding="none" gap="large" direction="column">
-			<f-text variant="para" size="large" weight="medium">circle</f-text>
-			<f-pictogram source="🚗" variant="circle"></f-pictogram>
-		</f-div>
-	</f-div>`,
+	render: args =>
+		html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
+			<f-div
+				height="hug-content"
+				align="middle-center"
+				padding="none"
+				gap="large"
+				direction="column"
+			>
+				<f-text variant="para" size="large" weight="medium">squircle</f-text>
+				<f-pictogram source="💬"></f-pictogram>
+			</f-div>
+			<f-div
+				height="hug-content"
+				align="middle-center"
+				padding="none"
+				gap="large"
+				direction="column"
+			>
+				<f-text variant="para" size="large" weight="medium">square</f-text>
+				<f-pictogram source="🎲" variant="square"></f-pictogram>
+			</f-div>
+			<f-div
+				height="hug-content"
+				align="middle-center"
+				padding="none"
+				gap="large"
+				direction="column"
+			>
+				<f-text variant="para" size="large" weight="medium">hexagon</f-text>
+				<f-pictogram source="🚀" variant="hexagon"></f-pictogram>
+			</f-div>
+			<f-div
+				height="hug-content"
+				align="middle-center"
+				padding="none"
+				gap="large"
+				direction="column"
+			>
+				<f-text variant="para" size="large" weight="medium">circle</f-text>
+				<f-pictogram source="🚗" variant="circle"></f-pictogram>
+			</f-div>
+		</f-div>`,
 
 	name: "variant",
 
@@ -132,42 +158,43 @@ export const Variant = {
 };
 
 export const Source = {
-	render: args => html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
-		<f-div padding="large" gap="medium" direction="column" width="hug-content">
-			<f-div height="hug-content" padding="none" align="middle-center">
-				<f-text variant="para" size="large" weight="medium">Icon from library</f-text>
+	render: args =>
+		html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
+			<f-div padding="large" gap="medium" direction="column" width="hug-content">
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="large" weight="medium">Icon from library</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-pictogram source="i-app"></f-pictogram>
+				</f-div>
 			</f-div>
-			<f-div height="hug-content" padding="none" align="middle-center">
-				<f-pictogram source="i-app"></f-pictogram>
+			<f-div padding="large" gap="medium" direction="column" width="hug-content">
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="large" weight="medium">Emoji as a source</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
+					<f-pictogram source="💬"></f-pictogram>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div padding="large" gap="medium" direction="column" width="hug-content">
-			<f-div height="hug-content" padding="none" align="middle-center">
-				<f-text variant="para" size="large" weight="medium">Emoji as a source</f-text>
+			<f-div padding="large" gap="medium" direction="column" width="hug-content">
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="large" weight="medium">Text as a source</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
+					<f-pictogram source="A1"></f-pictogram>
+				</f-div>
 			</f-div>
-			<f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
-				<f-pictogram source="💬"></f-pictogram>
+			<f-div padding="large" gap="medium" direction="column" width="hug-content">
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="large" weight="medium">Image from URL</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
+					<f-pictogram
+						source="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80"
+					></f-pictogram>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div padding="large" gap="medium" direction="column" width="hug-content">
-			<f-div height="hug-content" padding="none" align="middle-center">
-				<f-text variant="para" size="large" weight="medium">Text as a source</f-text>
-			</f-div>
-			<f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
-				<f-pictogram source="A1"></f-pictogram>
-			</f-div>
-		</f-div>
-		<f-div padding="large" gap="medium" direction="column" width="hug-content">
-			<f-div height="hug-content" padding="none" align="middle-center">
-				<f-text variant="para" size="large" weight="medium">Image from URL</f-text>
-			</f-div>
-			<f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
-				<f-pictogram
-					source="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80"
-				></f-pictogram>
-			</f-div>
-		</f-div>
-	</f-div>`,
+		</f-div>`,
 
 	name: "source",
 
@@ -280,34 +307,35 @@ export const State = {
 };
 
 export const Flags = {
-	render: args => html`<f-div gap="large" padding="x-large" direction="column">
-		<f-div height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">Loading</f-text>
-		</f-div>
-		<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
-			<f-pictogram source="💬" size="x-large"></f-pictogram>
-			<f-pictogram source="💬" size="x-large" loading=${true}></f-pictogram>
-		</f-div>
-		<f-div height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">Disabled</f-text>
-		</f-div>
-		<f-div padding="none" direction="row" gap="x-large">
-			<f-pictogram source="💬" size="x-large"></f-pictogram>
-			<f-pictogram source="💬" size="x-large" disabled=${true}></f-pictogram>
-		</f-div>
-		<f-div height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">Clickable</f-text>
-		</f-div>
-		<f-div padding="none" direction="row" gap="x-large">
-			<f-pictogram source="💬" size="x-large" clickable=${true}></f-pictogram>
-		</f-div>
-		<f-div height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">auto-bg</f-text>
-		</f-div>
-		<f-div padding="none" direction="row" gap="x-large">
-			<f-pictogram variant="circle" source="AN" size="x-large" auto-bg=${true}></f-pictogram>
-		</f-div>
-	</f-div>`,
+	render: args =>
+		html`<f-div gap="large" padding="x-large" direction="column">
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">Loading</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
+				<f-pictogram source="💬" size="x-large"></f-pictogram>
+				<f-pictogram source="💬" size="x-large" loading=${true}></f-pictogram>
+			</f-div>
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">Disabled</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large">
+				<f-pictogram source="💬" size="x-large"></f-pictogram>
+				<f-pictogram source="💬" size="x-large" disabled=${true}></f-pictogram>
+			</f-div>
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">Clickable</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large">
+				<f-pictogram source="💬" size="x-large" clickable=${true}></f-pictogram>
+			</f-div>
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">auto-bg</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large">
+				<f-pictogram variant="circle" source="AN" size="x-large" auto-bg=${true}></f-pictogram>
+			</f-div>
+		</f-div>`,
 
 	name: "Flags",
 

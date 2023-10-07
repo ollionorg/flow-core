@@ -243,23 +243,25 @@ export const Mode = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${types.map(
-					item => html` <f-div align="middle-center" padding="large" gap="medium">
-						${item.map(
-							type => html`<f-div
-								><f-date-time-picker
-									value=${value}
-									@input=${handleValue}
-									mode=${type}
-									size="medium"
-								>
-									<f-div slot="label" padding="none" gap="none">Label (mode="${type}")</f-div>
-									<f-text slot="help" variant="para" size="small"
-										>This is a Subtext (Helper Text)</f-text
-									>
-								</f-date-time-picker></f-div
-							>`
-						)}
-					</f-div>`
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
+							${item.map(
+								type =>
+									html`<f-div
+										><f-date-time-picker
+											value=${value}
+											@input=${handleValue}
+											mode=${type}
+											size="medium"
+										>
+											<f-div slot="label" padding="none" gap="none">Label (mode="${type}")</f-div>
+											<f-text slot="help" variant="para" size="small"
+												>This is a Subtext (Helper Text)</f-text
+											>
+										</f-date-time-picker></f-div
+									>`
+							)}
+						</f-div>`
 				)}
 			</f-div>
 		`;
@@ -365,23 +367,25 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-					item => html` <f-div align="middle-center" padding="large" gap="medium">
-						${item.map(
-							state => html`<f-div
-								><f-date-time-picker
-									value=${value}
-									@input=${handleValue}
-									size="medium"
-									state=${state}
-								>
-									<f-div slot="label" padding="none" gap="none">Label (state="${state}")</f-div>
-									<f-text slot="help" variant="para" size="small"
-										>This is a Subtext (Helper Text)</f-text
-									>
-								</f-date-time-picker></f-div
-							>`
-						)}
-					</f-div>`
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
+							${item.map(
+								state =>
+									html`<f-div
+										><f-date-time-picker
+											value=${value}
+											@input=${handleValue}
+											size="medium"
+											state=${state}
+										>
+											<f-div slot="label" padding="none" gap="none">Label (state="${state}")</f-div>
+											<f-text slot="help" variant="para" size="small"
+												>This is a Subtext (Helper Text)</f-text
+											>
+										</f-date-time-picker></f-div
+									>`
+							)}
+						</f-div>`
 				)}
 			</f-div>
 		`;
@@ -535,9 +539,10 @@ export const Flags = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="large" direction="column">
 				${array.map(
-					row => html`<f-div gap="medium"
-						>${row.map(item => {
-							return html`<f-div>
+					row =>
+						html`<f-div gap="medium"
+							>${row.map(item => {
+								return html`<f-div>
           <f-date-time-picker
             value=${value}
             @input=${handleValue}
@@ -566,8 +571,8 @@ export const Flags = {
           </f-date-time-picker></f-div
         ></f-div
       >`;
-						})}</f-div
-					>`
+							})}</f-div
+						>`
 				)}
 			</f-div>
 		`;

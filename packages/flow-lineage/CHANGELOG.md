@@ -7,42 +7,53 @@
 ## [2.0.1] - 2023-09-11
 
 ### Improvements
+
 - `ResizeObserver` used instead of window's `resize` event for better accuracy.
 - Re-size debounce timeout updated for better user experience.
+
 ## [2.0.0] - 2023-07-05
 
-### BREAKING CHANGES :alert:  :alert:
+### BREAKING CHANGES :alert: :alert:
+
 - We have recently addressed a security hotspot that had the potential for Code Injection. In our previous implementation, we were utilizing eval for the node template functionality. As a result, we strongly recommend that you update your existing node template APIs to the latest version.
 - By updating to the latest version, you will benefit from the security improvements we have implemented, mitigating the risk of Code Injection vulnerabilities. Please refer (here)[https://github.com/cldcvr/flow-lineage#script] to update `node-template`.
+
 ## [1.4.6] - 2023-07-04
 
 ### Improvements
+
 - Debugging console.log removed.
 - Snapshot test added.
-###  Bug fixes
+
+### Bug fixes
 
 - Typescript error in `curve-steps.js`.
 - Empty links not plotting lineage.
 
 ## [1.4.5] - 2023-06-19
 
-###  Bug fixes
+### Bug fixes
 
 - `flow-core` css duplication fixed.
+
 ## [1.4.3] - 2023-06-19
 
 ### Improvements
+
 - `flow-core` css updated.
 
 ## [1.4.2] - 2023-05-18
 
 ### Improvements
+
 - Slack notifications integrated
+
 ## [1.4.1] - 2023-05-16
 
 ### Improvements
 
 - Sonar scan fixes
+
 ## [1.4.0] - 2023-03-09
 
 ### Improvements

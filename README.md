@@ -60,7 +60,7 @@ Paste the below snippet _after the closing `<template>`_ in your `App.vue`
 
 ```html
 <style>
- @import "@cldcvr/flow-core/dist/style.css";
+	@import "@cldcvr/flow-core/dist/style.css";
 </style>
 ```
 
@@ -131,7 +131,7 @@ npm i --save @cldcvr/flow-system-icon
 
 ```javascript
 Promise.all([import("@cldcvr/flow-core"), import("@cldcvr/flow-system-icon")]).then(() => {
- // add your application startup code here
+	// add your application startup code here
 });
 ```
 

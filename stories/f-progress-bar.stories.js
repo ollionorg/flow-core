@@ -13,15 +13,16 @@ export default {
 };
 
 export const Playground = {
-	render: args => html`<f-div direction="row" padding="x-large" gap="medium"
-		><f-progress-bar
-			.value=${args.value}
-			.variant=${args.variant}
-			.size=${args.size}
-			.state=${args.state}
-			.width=${args.width}
-		></f-progress-bar>
-	</f-div>`,
+	render: args =>
+		html`<f-div direction="row" padding="x-large" gap="medium"
+			><f-progress-bar
+				.value=${args.value}
+				.variant=${args.variant}
+				.size=${args.size}
+				.state=${args.state}
+				.width=${args.width}
+			></f-progress-bar>
+		</f-div>`,
 
 	name: "Playground",
 
@@ -97,14 +98,15 @@ export const Variant = {
 
 		return html`<f-div direction="row" gap="medium"
 			>${variants.map(
-				item => html`<f-div direction="row" padding="x-large" gap="medium"
-					><f-progress-bar value="30%" .variant=${item}></f-progress-bar>
-					<f-div width="hug-content"
-						><f-text variant="para" size="small" .state=${args.state}
-							>variant="${item}"</f-text
-						></f-div
-					>
-				</f-div>`
+				item =>
+					html`<f-div direction="row" padding="x-large" gap="medium"
+						><f-progress-bar value="30%" .variant=${item}></f-progress-bar>
+						<f-div width="hug-content"
+							><f-text variant="para" size="small" .state=${args.state}
+								>variant="${item}"</f-text
+							></f-div
+						>
+					</f-div>`
 			)}</f-div
 		>`;
 	},
@@ -118,17 +120,20 @@ export const Size = {
 
 		return html`<f-div direction="column" gap="medium"
 			>${sizes.map(
-				item => html`<f-div direction="row" padding="x-large" gap="medium"
-					><f-progress-bar
-						value="30%"
-						.size=${item}
-						variant="curved"
-						state="primary"
-					></f-progress-bar>
-					<f-div width="20%"
-						><f-text variant="para" size="small" .state=${args.state}>size="${item}"</f-text></f-div
-					>
-				</f-div>`
+				item =>
+					html`<f-div direction="row" padding="x-large" gap="medium"
+						><f-progress-bar
+							value="30%"
+							.size=${item}
+							variant="curved"
+							state="primary"
+						></f-progress-bar>
+						<f-div width="20%"
+							><f-text variant="para" size="small" .state=${args.state}
+								>size="${item}"</f-text
+							></f-div
+						>
+					</f-div>`
 			)}</f-div
 		>`;
 	},
@@ -142,14 +147,15 @@ export const State = {
 
 		return html`<f-div direction="column" gap="medium"
 			>${states.map(
-				item => html`<f-div direction="row" padding="x-large" gap="medium"
-					><f-progress-bar value="30%" .state=${item} variant="curved"></f-progress-bar>
-					<f-div width="20%"
-						><f-text variant="para" size="small" .state=${args.state}
-							>state="${item}"</f-text
-						></f-div
-					>
-				</f-div>`
+				item =>
+					html`<f-div direction="row" padding="x-large" gap="medium"
+						><f-progress-bar value="30%" .state=${item} variant="curved"></f-progress-bar>
+						<f-div width="20%"
+							><f-text variant="para" size="small" .state=${args.state}
+								>state="${item}"</f-text
+							></f-div
+						>
+					</f-div>`
 			)}</f-div
 		>`;
 	},
@@ -163,19 +169,20 @@ export const Width = {
 
 		return html`<f-div direction="column" gap="medium"
 			>${widths.map(
-				item => html`<f-div direction="row" padding="x-large" gap="medium"
-					><f-progress-bar
-						value="30%"
-						.width=${item}
-						variant="curved"
-						state="primary"
-					></f-progress-bar>
-					<f-div width="20%"
-						><f-text variant="para" size="small" .state=${args.state}
-							>width="${item}"</f-text
-						></f-div
-					>
-				</f-div>`
+				item =>
+					html`<f-div direction="row" padding="x-large" gap="medium"
+						><f-progress-bar
+							value="30%"
+							.width=${item}
+							variant="curved"
+							state="primary"
+						></f-progress-bar>
+						<f-div width="20%"
+							><f-text variant="para" size="small" .state=${args.state}
+								>width="${item}"</f-text
+							></f-div
+						>
+					</f-div>`
 			)}</f-div
 		>`;
 	},

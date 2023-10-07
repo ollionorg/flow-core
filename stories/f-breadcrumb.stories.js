@@ -100,9 +100,11 @@ export const Size = {
 
 		return html`<f-div padding="small" gap="x-large">
 			${data.map(
-				item => html` <f-div direction="column" gap="large"
-					><f-text>size=${item}</f-text><f-breadcrumb .crumbs=${crumbs} .size=${item}></f-breadcrumb
-				></f-div>`
+				item =>
+					html` <f-div direction="column" gap="large"
+						><f-text>size=${item}</f-text
+						><f-breadcrumb .crumbs=${crumbs} .size=${item}></f-breadcrumb
+					></f-div>`
 			)}
 		</f-div>`;
 	},
@@ -157,10 +159,11 @@ export const Crumbs = {
 
 		return html`<f-div padding="small" gap="x-large">
 			${data.map(
-				item => html` <f-div direction="column" gap="large"
-					><f-text>${item.length > 4 ? "Crumbs length > 4" : "Crumbs length < 4"}</f-text
-					><f-breadcrumb .crumbs=${item}></f-breadcrumb
-				></f-div>`
+				item =>
+					html` <f-div direction="column" gap="large"
+						><f-text>${item.length > 4 ? "Crumbs length > 4" : "Crumbs length < 4"}</f-text
+						><f-breadcrumb .crumbs=${item}></f-breadcrumb
+					></f-div>`
 			)}
 		</f-div>`;
 	},

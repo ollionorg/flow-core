@@ -7,16 +7,23 @@
 ## [1.26.4] - 2023-10-06
 
 ### Improvements
+
 - `f-tag` displays a tooltip only when it has an ellipsis.
+
 ## [1.26.3] - 2023-10-03
 
 ### Bug Fixes
-- `f-select`  incrorrect vue2 types generation fixed.
+
+- `f-select` incrorrect vue2 types generation fixed.
+
 ## [1.26.2] - 2023-10-03
 
 ### Improvements
+
 - `f-popover` placement warning removed since it is not necessary for user to know.
+
 ### Bug Fixes
+
 - `f-select` : setting object to `value` has an issue with vue2.
 
 ## [1.26.1] - 2023-09-27

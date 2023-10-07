@@ -176,29 +176,33 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-					item => html` <f-div align="middle-center" padding="large" gap="medium">
-						${item.map(
-							state => html`<f-div
-								><f-radio size="medium" .value=${value} .state=${state} @input=${handleValue}>
-									<f-div slot="label" padding="none">
-										<f-text variant="para" size="small">This is a radio (state="${state}")</f-text>
-									</f-div>
-									<<<<<<< HEAD =======
-									<f-div slot="description" gap="none" padding="none">
-										<f-text variant="para" size="small" state="secondary"
-											>States are used to communicate purpose and connotations.
-										</f-text>
-									</f-div>
-									>>>>>>> main
-									<f-div slot="help" gap="none" padding="none">
-										<f-text variant="para" size="small" state="secondary"
-											>This is a subtext
-										</f-text>
-									</f-div>
-								</f-radio></f-div
-							>`
-						)}
-					</f-div>`
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
+							${item.map(
+								state =>
+									html`<f-div
+										><f-radio size="medium" .value=${value} .state=${state} @input=${handleValue}>
+											<f-div slot="label" padding="none">
+												<f-text variant="para" size="small"
+													>This is a radio (state="${state}")</f-text
+												>
+											</f-div>
+											<<<<<<< HEAD =======
+											<f-div slot="description" gap="none" padding="none">
+												<f-text variant="para" size="small" state="secondary"
+													>States are used to communicate purpose and connotations.
+												</f-text>
+											</f-div>
+											>>>>>>> main
+											<f-div slot="help" gap="none" padding="none">
+												<f-text variant="para" size="small" state="secondary"
+													>This is a subtext
+												</f-text>
+											</f-div>
+										</f-radio></f-div
+									>`
+							)}
+						</f-div>`
 				)}
 			</f-div>
 		`;

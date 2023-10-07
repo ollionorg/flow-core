@@ -3,7 +3,7 @@ import { html } from "lit-html";
 import fGridAnatomy from "./svg/i-fgrid-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useState } from "@storybook/client-api";
-import * as FGridStories from './f-grid.stories';
+import * as FGridStories from "./f-grid.stories";
 
 <Meta of={FGridStories} />
 
@@ -24,7 +24,7 @@ f-grid is a wrapper component to arrange data as a grid of cells. The f-divs wra
 ### [Playground](/story/components-f-grid--playground)
 
 <Canvas>
-  <Story of={FGridStories.Playground} />
+	<Story of={FGridStories.Playground} />
 </Canvas>
 
 <br />
@@ -48,7 +48,7 @@ Defines the minimum value of width of each cell. A cell can not be smaller than 
 <br />
 
 <Canvas>
-  <Story of={FGridStories.MinCellWidth} />
+	<Story of={FGridStories.MinCellWidth} />
 </Canvas>
 
 <br />
@@ -59,12 +59,14 @@ Defines the minimum value of width of each cell. A cell can not be smaller than 
 
 Defines the maximum width of each cell.
 
-<p className="note-section">Note: max-cell-width accept number, percentage, or fraction as values.</p>
+<p className="note-section">
+	Note: max-cell-width accept number, percentage, or fraction as values.
+</p>
 
 <br />
 
 <Canvas>
-  <Story of={FGridStories.MaxCellWidth} />
+	<Story of={FGridStories.MaxCellWidth} />
 </Canvas>
 
 <br />
@@ -75,12 +77,14 @@ Defines the maximum width of each cell.
 
 Defines the height of each cell
 
-<p className="note-section">Note: max-cell-width accept number, percentage, or fraction as values.</p>
+<p className="note-section">
+	Note: max-cell-width accept number, percentage, or fraction as values.
+</p>
 
 <br />
 
 <Canvas>
-  <Story of={FGridStories.CellHeight} />
+	<Story of={FGridStories.CellHeight} />
 </Canvas>
 
 <br />
@@ -96,7 +100,7 @@ Defines the gap between the cells. By default it is set to small.
 <br />
 
 <Canvas>
-  <Story of={FGridStories.Gap} />
+	<Story of={FGridStories.Gap} />
 </Canvas>
 
 <table className="custom-table">
@@ -144,6 +148,7 @@ Defines the gap between the cells. By default it is set to small.
 
       <td />
     </tr>
+
   </tbody>
 </table>
 

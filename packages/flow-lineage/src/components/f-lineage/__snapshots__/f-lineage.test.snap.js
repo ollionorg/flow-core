@@ -1,8 +1,7 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["f-lineage should match snpashot"] = 
-`<g>
+snapshots["f-lineage should match snpashot"] = `<g>
   <g
     class="links"
     data-page="1"
@@ -997,4 +996,3 @@ snapshots["f-lineage should match snpashot"] =
 </g>
 `;
 /* end snapshot f-lineage should match snpashot */
-

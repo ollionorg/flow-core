@@ -130,15 +130,16 @@ export const Category = {
 };
 
 export const Label = {
-	render: args => html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
-		<f-counter label="8" size="large"></f-counter>
-		<f-counter label="88" size="large"></f-counter>
-		<f-counter label="8888" size="large"></f-counter>
-		<f-counter label="88888" size="large"></f-counter>
-		<f-counter label="888888" size="large"></f-counter>
-		<f-counter label="8888888" size="large"></f-counter>
-		<f-counter label="88888888" size="large"></f-counter>
-	</f-div> `,
+	render: args =>
+		html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
+			<f-counter label="8" size="large"></f-counter>
+			<f-counter label="88" size="large"></f-counter>
+			<f-counter label="8888" size="large"></f-counter>
+			<f-counter label="88888" size="large"></f-counter>
+			<f-counter label="888888" size="large"></f-counter>
+			<f-counter label="8888888" size="large"></f-counter>
+			<f-counter label="88888888" size="large"></f-counter>
+		</f-div> `,
 
 	name: "label"
 };
@@ -238,26 +239,32 @@ export const State = {
 };
 
 export const Flags = {
-	render: args => html`<f-div gap="large" padding="x-large" direction="column">
-		<f-div height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">Loading</f-text>
-		</f-div>
-		<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
-			<f-counter label="888888" size="large" state="neutral"></f-counter>
-			<f-counter label="888888" size="large" state="neutral" loading=${true}></f-counter>
-		</f-div>
-		<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
-			<f-counter label="888888" size="large" state="custom,deepskyblue"></f-counter>
-			<f-counter label="888888" size="large" state="custom,deepskyblue" loading=${true}></f-counter>
-		</f-div>
-		<f-div height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">Disabled</f-text>
-		</f-div>
-		<f-div padding="none" direction="row" gap="x-large">
-			<f-counter label="888888" size="large" state="neutral"></f-counter>
-			<f-counter label="888888" size="large" state="neutral" disabled=${true}></f-counter>
-		</f-div>
-	</f-div>`,
+	render: args =>
+		html`<f-div gap="large" padding="x-large" direction="column">
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">Loading</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
+				<f-counter label="888888" size="large" state="neutral"></f-counter>
+				<f-counter label="888888" size="large" state="neutral" loading=${true}></f-counter>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
+				<f-counter label="888888" size="large" state="custom,deepskyblue"></f-counter>
+				<f-counter
+					label="888888"
+					size="large"
+					state="custom,deepskyblue"
+					loading=${true}
+				></f-counter>
+			</f-div>
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">Disabled</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large">
+				<f-counter label="888888" size="large" state="neutral"></f-counter>
+				<f-counter label="888888" size="large" state="neutral" disabled=${true}></f-counter>
+			</f-div>
+		</f-div>`,
 
 	name: "Flags"
 };

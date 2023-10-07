@@ -108,12 +108,13 @@ export const Playground = {
 									  >`
 									: html` <f-div direction="column" gap="small" align="middle-center">
 											${value.value.map(
-												item => html` <f-div gap="x-small">
-													<f-icon .source=${item.icon} size="small" clickable></f-icon>
-													<f-text ?inline=${true} variant="para" size="small" weight="medium"
-														>${item.name}</f-text
-													>
-												</f-div>`
+												item =>
+													html` <f-div gap="x-small">
+														<f-icon .source=${item.icon} size="small" clickable></f-icon>
+														<f-text ?inline=${true} variant="para" size="small" weight="medium"
+															>${item.name}</f-text
+														>
+													</f-div>`
 											)}
 									  </f-div>`}
 							</f-div>
@@ -181,21 +182,22 @@ export const Icon = {
 
 		return html`<f-div direction="column"
 			>${icons.map(
-				item => html`<f-accordion .open=${true} .icon=${item}>
-						<f-div
-							><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
-						>
-						<f-div slot="body" direction="column" padding="small none">
-							<f-text variant="para" size="small" weight="regular" state="secondary">
-								In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to
-								demonstrate the visual form. In publishing and graphic design, Lorem ipsum is a
-								placeholder text commonly used to demonstrate the visual form. In publishing and
-								graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the
-								visual form.
-							</f-text>
-						</f-div>
-					</f-accordion>
-					<f-divider></f-divider> `
+				item =>
+					html`<f-accordion .open=${true} .icon=${item}>
+							<f-div
+								><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
+							>
+							<f-div slot="body" direction="column" padding="small none">
+								<f-text variant="para" size="small" weight="regular" state="secondary">
+									In publishing and graphic design, Lorem ipsum is a placeholder text commonly used
+									to demonstrate the visual form. In publishing and graphic design, Lorem ipsum is a
+									placeholder text commonly used to demonstrate the visual form. In publishing and
+									graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the
+									visual form.
+								</f-text>
+							</f-div>
+						</f-accordion>
+						<f-divider></f-divider> `
 			)}</f-div
 		>`;
 	},
@@ -209,19 +211,20 @@ export const IconSize = {
 
 		return html`<f-div
 			>${icons.map(
-				item => html`<f-div direction="column" padding="x-large"
-					><f-accordion .open=${true} icon-size=${item}>
-						<f-div
-							><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
-						>
-						<f-div slot="body" direction="column" padding="medium none">
-							<f-text variant="para" size="small" weight="regular" state="secondary">
-								In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to
-								demonstrate the visual form.</f-text
+				item =>
+					html`<f-div direction="column" padding="x-large"
+						><f-accordion .open=${true} icon-size=${item}>
+							<f-div
+								><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
 							>
-						</f-div>
-					</f-accordion></f-div
-				>`
+							<f-div slot="body" direction="column" padding="medium none">
+								<f-text variant="para" size="small" weight="regular" state="secondary">
+									In publishing and graphic design, Lorem ipsum is a placeholder text commonly used
+									to demonstrate the visual form.</f-text
+								>
+							</f-div>
+						</f-accordion></f-div
+					>`
 			)}</f-div
 		>`;
 	},
@@ -235,19 +238,20 @@ export const IconPlacement = {
 
 		return html`<f-div
 			>${icons.map(
-				item => html`<f-div direction="column" padding="x-large"
-					><f-accordion .open=${true} icon-placement=${item}>
-						<f-div
-							><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
-						>
-						<f-div slot="body" direction="column" padding="medium none">
-							<f-text variant="para" size="small" weight="regular" state="secondary">
-								In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to
-								demonstrate the visual form.</f-text
+				item =>
+					html`<f-div direction="column" padding="x-large"
+						><f-accordion .open=${true} icon-placement=${item}>
+							<f-div
+								><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
 							>
-						</f-div>
-					</f-accordion></f-div
-				>`
+							<f-div slot="body" direction="column" padding="medium none">
+								<f-text variant="para" size="small" weight="regular" state="secondary">
+									In publishing and graphic design, Lorem ipsum is a placeholder text commonly used
+									to demonstrate the visual form.</f-text
+								>
+							</f-div>
+						</f-accordion></f-div
+					>`
 			)}</f-div
 		>`;
 	},
@@ -283,21 +287,22 @@ export const Flags = {
 
 		return html`<f-div
 			>${icons.map(
-				item => html`<f-div direction="column" padding="x-large"
-					><f-accordion .open=${item}>
-						<f-div
-							><f-text variant="para" size="small" weight="bold"
-								>Accordion (open=${item})</f-text
-							></f-div
-						>
-						<f-div slot="body" direction="column" padding="medium none">
-							<f-text variant="para" size="small" weight="regular" state="secondary">
-								In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to
-								demonstrate the visual form.</f-text
+				item =>
+					html`<f-div direction="column" padding="x-large"
+						><f-accordion .open=${item}>
+							<f-div
+								><f-text variant="para" size="small" weight="bold"
+									>Accordion (open=${item})</f-text
+								></f-div
 							>
-						</f-div>
-					</f-accordion></f-div
-				>`
+							<f-div slot="body" direction="column" padding="medium none">
+								<f-text variant="para" size="small" weight="regular" state="secondary">
+									In publishing and graphic design, Lorem ipsum is a placeholder text commonly used
+									to demonstrate the visual form.</f-text
+								>
+							</f-div>
+						</f-accordion></f-div
+					>`
 			)}</f-div
 		>`;
 	},

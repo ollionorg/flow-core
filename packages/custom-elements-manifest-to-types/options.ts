@@ -13,7 +13,7 @@ export function vaidateOptions(options?: UserOptions): ProtoGenOptions {
 		options.prettierConfig = prettier.resolveConfig.sync(options.cwd) ?? {
 			printWidth: 100,
 			singleQuote: true,
-			tabWidth: 4,
+			tabWidth: 4
 		};
 	}
 

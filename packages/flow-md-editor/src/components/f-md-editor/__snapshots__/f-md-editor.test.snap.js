@@ -1,8 +1,7 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["f-md-editor should match view mode snapshot"] = 
-`<div class="markdown-body">
+snapshots["f-md-editor should match view mode snapshot"] = `<div class="markdown-body">
   <h1 id="heading-1">
     Heading 1
   </h1>
@@ -107,8 +106,7 @@ snapshots["f-md-editor should match view mode snapshot"] =
 `;
 /* end snapshot f-md-editor should match view mode snapshot */
 
-snapshots["f-md-editor should match edit mode snapshot"] = 
-`<div
+snapshots["f-md-editor should match edit mode snapshot"] = `<div
   class="flow-editable"
   contenteditable="true"
 >
@@ -158,4 +156,3 @@ Ordered list:
 </div>
 `;
 /* end snapshot f-md-editor should match edit mode snapshot */
-

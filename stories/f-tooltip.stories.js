@@ -14,14 +14,15 @@ export default {
 };
 
 export const PlaygroundDirectiveTooltip = {
-	render: args => html`<f-div padding="large" height="200px" align="middle-center" gap="auto">
-		<f-icon source="i-question-filled" size="medium" .tooltip=${args.tooltip} clickable></f-icon>
-		<f-button label="Submit" .tooltip=${args.tooltip}></f-button>
-		<f-tag label="Environment" .tooltip=${args.tooltip}></f-tag>
-		<f-icon-button icon="i-plus" .tooltip=${args.tooltip}></f-icon-button>
-		<f-counter size="large" label="88" .tooltip=${args.tooltip}></f-counter>
-		<f-pictogram size="large" source="i-app" .tooltip=${args.tooltip}></f-pictogram>
-	</f-div>`,
+	render: args =>
+		html`<f-div padding="large" height="200px" align="middle-center" gap="auto">
+			<f-icon source="i-question-filled" size="medium" .tooltip=${args.tooltip} clickable></f-icon>
+			<f-button label="Submit" .tooltip=${args.tooltip}></f-button>
+			<f-tag label="Environment" .tooltip=${args.tooltip}></f-tag>
+			<f-icon-button icon="i-plus" .tooltip=${args.tooltip}></f-icon-button>
+			<f-counter size="large" label="88" .tooltip=${args.tooltip}></f-counter>
+			<f-pictogram size="large" source="i-app" .tooltip=${args.tooltip}></f-pictogram>
+		</f-div>`,
 
 	name: "Playground - Directive Tooltip",
 
@@ -240,20 +241,21 @@ export const Placement = {
 };
 
 export const Flags = {
-	render: args => html`<f-div gap="large" padding="x-large" direction="column">
-		<f-div height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">closable="true"</f-text>
-		</f-div>
-		<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
-			<f-button label="Closable Tooltip" tooltip="#tooltipTarget2"></f-button>
-		</f-div>
-		<f-tooltip id="tooltipTarget2" ?closable=${true}
-			><f-div direction="column" width="hug-content">
-				<f-text variant="para" size="small"> This is a tooltip </f-text>
-				<f-text variant="para" size="small" state="primary"> Learn More </f-text>
-			</f-div></f-tooltip
-		>
-	</f-div>`,
+	render: args =>
+		html`<f-div gap="large" padding="x-large" direction="column">
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">closable="true"</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
+				<f-button label="Closable Tooltip" tooltip="#tooltipTarget2"></f-button>
+			</f-div>
+			<f-tooltip id="tooltipTarget2" ?closable=${true}
+				><f-div direction="column" width="hug-content">
+					<f-text variant="para" size="small"> This is a tooltip </f-text>
+					<f-text variant="para" size="small" state="primary"> Learn More </f-text>
+				</f-div></f-tooltip
+			>
+		</f-div>`,
 
 	name: "Flags"
 };

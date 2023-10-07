@@ -458,44 +458,46 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-					item => html` <f-div align="middle-center" padding="large" gap="medium">
-						${item.map(
-							state => html`<f-div
-								><f-suggest
-									value=${value}
-									placeholder="Write here"
-									@input=${handleValue}
-									size="medium"
-									state=${state}
-									.suggestions=${[
-										"Suggestion 1",
-										"Suggestion 2",
-										"Suggestion 3",
-										"Suggestion 4",
-										"Suggestion 5",
-										"Suggestion 6",
-										"Suggestion 7",
-										"Suggestion 8",
-										"Suggestion 9",
-										"Suggestion 10",
-										"Suggestion 11",
-										"Suggestion 12",
-										"Suggestion 13",
-										"Suggestion 14",
-										"Suggestion 15",
-										"Suggestion 16",
-										"Suggestion 17",
-										"Suggestion 18"
-									]}
-								>
-									<f-div slot="label" padding="none" gap="none">Label (state="${state}")</f-div>
-									<f-text slot="help" variant="para" size="small"
-										>This is a Subtext (Helper Text)</f-text
-									>
-								</f-suggest></f-div
-							>`
-						)}
-					</f-div>`
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
+							${item.map(
+								state =>
+									html`<f-div
+										><f-suggest
+											value=${value}
+											placeholder="Write here"
+											@input=${handleValue}
+											size="medium"
+											state=${state}
+											.suggestions=${[
+												"Suggestion 1",
+												"Suggestion 2",
+												"Suggestion 3",
+												"Suggestion 4",
+												"Suggestion 5",
+												"Suggestion 6",
+												"Suggestion 7",
+												"Suggestion 8",
+												"Suggestion 9",
+												"Suggestion 10",
+												"Suggestion 11",
+												"Suggestion 12",
+												"Suggestion 13",
+												"Suggestion 14",
+												"Suggestion 15",
+												"Suggestion 16",
+												"Suggestion 17",
+												"Suggestion 18"
+											]}
+										>
+											<f-div slot="label" padding="none" gap="none">Label (state="${state}")</f-div>
+											<f-text slot="help" variant="para" size="small"
+												>This is a Subtext (Helper Text)</f-text
+											>
+										</f-suggest></f-div
+									>`
+							)}
+						</f-div>`
 				)}
 			</f-div>
 		`;

@@ -16,13 +16,11 @@ describe("f-search", () => {
 		expect(el).instanceOf(FSearch);
 	});
 	it("it should display results on focus", async () => {
-		const el = await fixture<FSearch>(
-			html`
-				<f-search
-					.result=${["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]}
-				></f-search>
-			`
-		);
+		const el = await fixture<FSearch>(html`
+			<f-search
+				.result=${["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]}
+			></f-search>
+		`);
 		const suggest = el.shadowRoot?.querySelector("f-suggest");
 		await suggest?.updateComplete;
 		const listner = oneEvent((suggest as FSuggest)?.fInput, "focus");
@@ -32,13 +30,11 @@ describe("f-search", () => {
 		expect(suggest?.popOverElement.open).equals(true);
 	});
 	it("it should select result on click", async () => {
-		const el = await fixture<FSearch>(
-			html`
-				<f-search
-					.result=${["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]}
-				></f-search>
-			`
-		);
+		const el = await fixture<FSearch>(html`
+			<f-search
+				.result=${["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]}
+			></f-search>
+		`);
 		const suggest = el.shadowRoot?.querySelector<FSuggest>("f-suggest");
 		await suggest?.updateComplete;
 		const listner = oneEvent(suggest?.fInput, "focus");
@@ -60,14 +56,12 @@ describe("f-search", () => {
 	});
 
 	it("it should filter result based on value", async () => {
-		const el = await fixture<FSearch>(
-			html`
-				<f-search
-					.result=${["Suggestion 1", "Suggestion 2", "filter 3", "filter 4"]}
-					value="filter"
-				></f-search>
-			`
-		);
+		const el = await fixture<FSearch>(html`
+			<f-search
+				.result=${["Suggestion 1", "Suggestion 2", "filter 3", "filter 4"]}
+				value="filter"
+			></f-search>
+		`);
 		const suggest = el.shadowRoot?.querySelector<FSuggest>("f-suggest");
 
 		await suggest?.updateComplete;

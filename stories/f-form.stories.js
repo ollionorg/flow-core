@@ -111,20 +111,21 @@ export const Gap = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${gaps.map(
-					item => html`<f-form gap=${item}>
-						<f-input value=${value} placeholder="Write here" @input=${handleValue}>
-							<f-div slot="label" padding="none" gap="none">Label (gap="${item}")</f-div>
-							<f-text slot="help" variant="para" size="small"
-								>This is a Subtext (Helper Text)</f-text
-							>
-						</f-input>
-						<f-input value=${value} placeholder="Write here" @input=${handleValue}>
-							<f-div slot="label" padding="none" gap="none">Label (gap="${item}")</f-div>
-							<f-text slot="help" variant="para" size="small"
-								>This is a Subtext (Helper Text)</f-text
-							>
-						</f-input>
-					</f-form>`
+					item =>
+						html`<f-form gap=${item}>
+							<f-input value=${value} placeholder="Write here" @input=${handleValue}>
+								<f-div slot="label" padding="none" gap="none">Label (gap="${item}")</f-div>
+								<f-text slot="help" variant="para" size="small"
+									>This is a Subtext (Helper Text)</f-text
+								>
+							</f-input>
+							<f-input value=${value} placeholder="Write here" @input=${handleValue}>
+								<f-div slot="label" padding="none" gap="none">Label (gap="${item}")</f-div>
+								<f-text slot="help" variant="para" size="small"
+									>This is a Subtext (Helper Text)</f-text
+								>
+							</f-input>
+						</f-form>`
 				)}
 			</f-div>
 		`;

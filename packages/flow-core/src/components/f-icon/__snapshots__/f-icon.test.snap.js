@@ -1,8 +1,7 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["f-icon should render deferred icon sets"] = 
-`<div
+snapshots["f-icon should render deferred icon sets"] = `<div
   class="f-icon"
   size="small"
   state="default"
@@ -11,4 +10,3 @@ snapshots["f-icon should render deferred icon sets"] =
 </div>
 `;
 /* end snapshot f-icon should render deferred icon sets */
-

@@ -314,1045 +314,1076 @@ export const Anatomy = {
 };
 
 export const Variant = {
-	render: args => html`<f-div gap="medium" padding="none">
-		<f-div
-			state="subtle"
-			height="180px"
-			variant="block"
-			direction="column"
-			padding="medium"
-			gap="medium"
-		>
-			<f-div padding="none" height="hug-content">
-				<f-text variant="para" weight="medium" size="large"
-					>An f-div with no corner radius.
-				</f-text>
+	render: args =>
+		html`<f-div gap="medium" padding="none">
+			<f-div
+				state="subtle"
+				height="180px"
+				variant="block"
+				direction="column"
+				padding="medium"
+				gap="medium"
+			>
+				<f-div padding="none" height="hug-content">
+					<f-text variant="para" weight="medium" size="large"
+						>An f-div with no corner radius.
+					</f-text>
+				</f-div>
+				<f-div padding="none" height="hug-content">
+					<f-text variant="code" weight="medium" size="large">variant="block" </f-text>
+				</f-div>
 			</f-div>
-			<f-div padding="none" height="hug-content">
-				<f-text variant="code" weight="medium" size="large">variant="block" </f-text>
+			<f-div
+				state="subtle"
+				height="180px"
+				variant="curved"
+				direction="column"
+				padding="medium"
+				gap="medium"
+			>
+				<f-div padding="none" height="hug-content">
+					<f-text variant="para" weight="medium" size="large"
+						>f-div with with corner radius of 4px.
+					</f-text>
+				</f-div>
+				<f-div padding="none" height="hug-content">
+					<f-text variant="code" weight="medium" size="large">variant=”curved” </f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div
-			state="subtle"
-			height="180px"
-			variant="curved"
-			direction="column"
-			padding="medium"
-			gap="medium"
-		>
-			<f-div padding="none" height="hug-content">
-				<f-text variant="para" weight="medium" size="large"
-					>f-div with with corner radius of 4px.
-				</f-text>
+			<f-div
+				state="subtle"
+				height="180px"
+				variant="round"
+				direction="column"
+				padding="x-large"
+				gap="medium"
+			>
+				<f-div padding="none" height="hug-content">
+					<f-text variant="para" weight="medium" size="large"
+						>An f-div with height/2 px corner radius.
+					</f-text>
+				</f-div>
+				<f-div padding="none" height="hug-content">
+					<f-text variant="code" weight="medium" size="large">variant="round" </f-text>
+				</f-div>
 			</f-div>
-			<f-div padding="none" height="hug-content">
-				<f-text variant="code" weight="medium" size="large">variant=”curved” </f-text>
-			</f-div>
-		</f-div>
-		<f-div
-			state="subtle"
-			height="180px"
-			variant="round"
-			direction="column"
-			padding="x-large"
-			gap="medium"
-		>
-			<f-div padding="none" height="hug-content">
-				<f-text variant="para" weight="medium" size="large"
-					>An f-div with height/2 px corner radius.
-				</f-text>
-			</f-div>
-			<f-div padding="none" height="hug-content">
-				<f-text variant="code" weight="medium" size="large">variant="round" </f-text>
-			</f-div>
-		</f-div>
-	</f-div>`,
+		</f-div>`,
 
 	name: "variant"
 };
 
 export const Direction = {
-	render: args => html`<f-div gap="medium" padding="none" direction="column">
-		<f-div width="100%" padding="large" direction="row" gap="medium" state="subtle">
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+	render: args =>
+		html`<f-div gap="medium" padding="none" direction="column">
+			<f-div width="100%" padding="large" direction="row" gap="medium" state="subtle">
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div
+				width="hug-content"
+				height="hug-content"
+				padding="large"
+				direction="column"
+				gap="medium"
+				state="subtle"
+			>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-		</f-div>
-		<f-div
-			width="hug-content"
-			height="hug-content"
-			padding="large"
-			direction="column"
-			gap="medium"
-			state="subtle"
-		>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-		</f-div>
-	</f-div>`,
+		</f-div>`,
 
 	name: "direction"
 };
 
 export const State = {
-	render: args => html`<f-div gap="medium" padding="none" direction="column">
-		<f-div gap="medium" padding="large" state="transparent" width="100%" height="hug-content">
-			<f-text variant="para" size="large" weight="medium">transparent state</f-text>
-		</f-div>
-		<f-div gap="medium" padding="large" state="default" width="100%" height="hug-content">
-			<f-text variant="para" size="large" weight="medium">default state</f-text>
-		</f-div>
-		<f-div gap="medium" padding="large" state="subtle" width="100%" height="hug-content">
-			<f-text variant="para" size="large" weight="medium">subtle state</f-text>
-		</f-div>
-		<f-div gap="medium" padding="large" state="secondary" width="100%" height="hug-content">
-			<f-text variant="para" size="large" weight="medium">secondary state</f-text>
-		</f-div>
-		<f-div gap="medium" padding="large" state="tertiary" width="100%" height="hug-content">
-			<f-text variant="para" size="large" weight="medium">tertiary state</f-text>
-		</f-div>
-		<f-div gap="medium" padding="large" state="primary" width="100%" height="hug-content">
-			<f-text variant="para" size="large" weight="medium">primary state</f-text>
-		</f-div>
-		<f-div gap="medium" padding="large" state="success" width="100%" height="hug-content">
-			<f-text variant="para" size="large" weight="medium">success state</f-text>
-		</f-div>
-		<f-div gap="medium" padding="large" state="warning" width="100%" height="hug-content">
-			<f-text variant="para" size="large" weight="medium">warning state</f-text>
-		</f-div>
-		<f-div gap="medium" padding="large" state="danger" width="100%" height="hug-content">
-			<f-text variant="para" size="large" weight="medium">danger state</f-text>
-		</f-div>
-	</f-div>`,
+	render: args =>
+		html`<f-div gap="medium" padding="none" direction="column">
+			<f-div gap="medium" padding="large" state="transparent" width="100%" height="hug-content">
+				<f-text variant="para" size="large" weight="medium">transparent state</f-text>
+			</f-div>
+			<f-div gap="medium" padding="large" state="default" width="100%" height="hug-content">
+				<f-text variant="para" size="large" weight="medium">default state</f-text>
+			</f-div>
+			<f-div gap="medium" padding="large" state="subtle" width="100%" height="hug-content">
+				<f-text variant="para" size="large" weight="medium">subtle state</f-text>
+			</f-div>
+			<f-div gap="medium" padding="large" state="secondary" width="100%" height="hug-content">
+				<f-text variant="para" size="large" weight="medium">secondary state</f-text>
+			</f-div>
+			<f-div gap="medium" padding="large" state="tertiary" width="100%" height="hug-content">
+				<f-text variant="para" size="large" weight="medium">tertiary state</f-text>
+			</f-div>
+			<f-div gap="medium" padding="large" state="primary" width="100%" height="hug-content">
+				<f-text variant="para" size="large" weight="medium">primary state</f-text>
+			</f-div>
+			<f-div gap="medium" padding="large" state="success" width="100%" height="hug-content">
+				<f-text variant="para" size="large" weight="medium">success state</f-text>
+			</f-div>
+			<f-div gap="medium" padding="large" state="warning" width="100%" height="hug-content">
+				<f-text variant="para" size="large" weight="medium">warning state</f-text>
+			</f-div>
+			<f-div gap="medium" padding="large" state="danger" width="100%" height="hug-content">
+				<f-text variant="para" size="large" weight="medium">danger state</f-text>
+			</f-div>
+		</f-div>`,
 
 	name: "state"
 };
 
 export const Border = {
-	render: args => html` <f-div gap="medium" padding="none" direction="column">
-		<f-div padding="medium" gap="large" width="100%" height="hug-content" state="default">
-			<f-div padding="medium" height="hug-content" border="large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">border-width=large</f-text>
+	render: args =>
+		html` <f-div gap="medium" padding="none" direction="column">
+			<f-div padding="medium" gap="large" width="100%" height="hug-content" state="default">
+				<f-div padding="medium" height="hug-content" border="large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">border-width=large</f-text>
+				</f-div>
+				<f-div padding="medium" height="hug-content" border="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">border-width=medium</f-text>
+				</f-div>
+				<f-div padding="medium" height="hug-content" border="small" state="secondary">
+					<f-text variant="para" size="large" weight="medium">border-width=small</f-text>
+				</f-div>
 			</f-div>
-			<f-div padding="medium" height="hug-content" border="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">border-width=medium</f-text>
+			<f-div padding="medium" gap="large" width="100%" height="hug-content" state="default">
+				<f-div padding="medium" height="hug-content" border="large solid" state="secondary">
+					<f-text variant="para" size="large" weight="medium">border-style=solid</f-text>
+				</f-div>
+				<f-div padding="medium" height="hug-content" border="large dashed" state="secondary">
+					<f-text variant="para" size="large" weight="medium">border-style=dashed</f-text>
+				</f-div>
+				<f-div padding="medium" height="hug-content" border="large dotted" state="secondary">
+					<f-text variant="para" size="large" weight="medium">border-style=dotted</f-text>
+				</f-div>
 			</f-div>
-			<f-div padding="medium" height="hug-content" border="small" state="secondary">
-				<f-text variant="para" size="large" weight="medium">border-width=small</f-text>
+			<f-div padding="medium" gap="large" width="100%" height="hug-content" state="default">
+				<f-div
+					padding="medium"
+					height="hug-content"
+					border="medium solid default"
+					state="secondary"
+				>
+					<f-text variant="para" size="large" weight="medium">border-color=default</f-text>
+				</f-div>
+				<f-div
+					padding="medium"
+					height="hug-content"
+					border="medium solid secondary"
+					state="secondary"
+				>
+					<f-text variant="para" size="large" weight="medium">border-color=secondary</f-text>
+				</f-div>
+				<f-div padding="medium" height="hug-content" border="medium solid subtle" state="secondary">
+					<f-text variant="para" size="large" weight="medium">border-color=subtle</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div padding="medium" gap="large" width="100%" height="hug-content" state="default">
-			<f-div padding="medium" height="hug-content" border="large solid" state="secondary">
-				<f-text variant="para" size="large" weight="medium">border-style=solid</f-text>
+			<f-div padding="medium" gap="large" width="100%" height="hug-content" state="default">
+				<f-div
+					padding="medium"
+					height="hug-content"
+					border="medium solid default top"
+					state="secondary"
+				>
+					<f-text variant="para" size="large" weight="medium">border-position=bottom</f-text>
+				</f-div>
+				<f-div
+					padding="medium"
+					height="hug-content"
+					border="medium solid default bottom"
+					state="secondary"
+				>
+					<f-text variant="para" size="large" weight="medium">border-position=top</f-text>
+				</f-div>
+				<f-div
+					padding="medium"
+					height="hug-content"
+					border="medium solid default left"
+					state="secondary"
+				>
+					<f-text variant="para" size="large" weight="medium">border-position=left</f-text>
+				</f-div>
+				<f-div
+					padding="medium"
+					height="hug-content"
+					border="medium solid default right"
+					state="secondary"
+				>
+					<f-text variant="para" size="large" weight="medium">border-position=right</f-text>
+				</f-div>
+				<f-div
+					padding="medium"
+					height="hug-content"
+					border="medium solid default around"
+					state="secondary"
+				>
+					<f-text variant="para" size="large" weight="medium">border-position=around</f-text>
+				</f-div>
 			</f-div>
-			<f-div padding="medium" height="hug-content" border="large dashed" state="secondary">
-				<f-text variant="para" size="large" weight="medium">border-style=dashed</f-text>
-			</f-div>
-			<f-div padding="medium" height="hug-content" border="large dotted" state="secondary">
-				<f-text variant="para" size="large" weight="medium">border-style=dotted</f-text>
-			</f-div>
-		</f-div>
-		<f-div padding="medium" gap="large" width="100%" height="hug-content" state="default">
-			<f-div padding="medium" height="hug-content" border="medium solid default" state="secondary">
-				<f-text variant="para" size="large" weight="medium">border-color=default</f-text>
-			</f-div>
-			<f-div
-				padding="medium"
-				height="hug-content"
-				border="medium solid secondary"
-				state="secondary"
-			>
-				<f-text variant="para" size="large" weight="medium">border-color=secondary</f-text>
-			</f-div>
-			<f-div padding="medium" height="hug-content" border="medium solid subtle" state="secondary">
-				<f-text variant="para" size="large" weight="medium">border-color=subtle</f-text>
-			</f-div>
-		</f-div>
-		<f-div padding="medium" gap="large" width="100%" height="hug-content" state="default">
-			<f-div
-				padding="medium"
-				height="hug-content"
-				border="medium solid default top"
-				state="secondary"
-			>
-				<f-text variant="para" size="large" weight="medium">border-position=bottom</f-text>
-			</f-div>
-			<f-div
-				padding="medium"
-				height="hug-content"
-				border="medium solid default bottom"
-				state="secondary"
-			>
-				<f-text variant="para" size="large" weight="medium">border-position=top</f-text>
-			</f-div>
-			<f-div
-				padding="medium"
-				height="hug-content"
-				border="medium solid default left"
-				state="secondary"
-			>
-				<f-text variant="para" size="large" weight="medium">border-position=left</f-text>
-			</f-div>
-			<f-div
-				padding="medium"
-				height="hug-content"
-				border="medium solid default right"
-				state="secondary"
-			>
-				<f-text variant="para" size="large" weight="medium">border-position=right</f-text>
-			</f-div>
-			<f-div
-				padding="medium"
-				height="hug-content"
-				border="medium solid default around"
-				state="secondary"
-			>
-				<f-text variant="para" size="large" weight="medium">border-position=around</f-text>
-			</f-div>
-		</f-div>
-	</f-div>`,
+		</f-div>`,
 
 	name: "border"
 };
 
 export const Gap = {
-	render: args => html`<f-div gap="medium" padding="none" direction="column">
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">gap="auto"</f-text>
-		</f-div>
-		<f-div width="100%" padding="large" direction="row" gap="auto" state="subtle">
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+	render: args =>
+		html`<f-div gap="medium" padding="none" direction="column">
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">gap="auto"</f-text>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="100%" padding="large" direction="row" gap="auto" state="subtle">
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">gap="x-large"</f-text>
 			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">gap="x-large"</f-text>
-		</f-div>
-		<f-div width="100%" padding="large" direction="row" gap="x-large" state="subtle">
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="100%" padding="large" direction="row" gap="x-large" state="subtle">
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">gap="large"</f-text>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="100%" padding="large" direction="row" gap="large" state="subtle">
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">gap="large"</f-text>
-		</f-div>
-		<f-div width="100%" padding="large" direction="row" gap="large" state="subtle">
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">gap="medium"</f-text>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="100%" padding="large" direction="row" gap="medium" state="subtle">
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">gap="small"</f-text>
 			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">gap="medium"</f-text>
-		</f-div>
-		<f-div width="100%" padding="large" direction="row" gap="medium" state="subtle">
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="100%" padding="large" direction="row" gap="small" state="subtle">
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">gap="x-small"</f-text>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="100%" padding="large" direction="row" gap="x-small" state="subtle">
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">gap="small"</f-text>
-		</f-div>
-		<f-div width="100%" padding="large" direction="row" gap="small" state="subtle">
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">gap="none"</f-text>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="100%" padding="large" direction="row" gap="none" state="subtle">
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="tertiary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">gap="x-small"</f-text>
-		</f-div>
-		<f-div width="100%" padding="large" direction="row" gap="x-small" state="subtle">
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">gap="none"</f-text>
-		</f-div>
-		<f-div width="100%" padding="large" direction="row" gap="none" state="subtle">
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="tertiary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-		</f-div>
-	</f-div>`,
+		</f-div>`,
 
 	name: "gap"
 };
 
 export const Padding = {
-	render: args => html`<f-div gap="medium" padding="none" direction="column">
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">padding="x-large"</f-text>
-		</f-div>
-		<f-div width="100%" padding="x-large" direction="row" gap="x-large" state="subtle">
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+	render: args =>
+		html`<f-div gap="medium" padding="none" direction="column">
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">padding="x-large"</f-text>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="100%" padding="x-large" direction="row" gap="x-large" state="subtle">
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">padding="large"</f-text>
 			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">padding="large"</f-text>
-		</f-div>
-		<f-div width="100%" padding="large" direction="row" gap="x-large" state="subtle">
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="100%" padding="large" direction="row" gap="x-large" state="subtle">
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">padding="medium"</f-text>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="100%" padding="medium" direction="row" gap="x-large" state="subtle">
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">padding="medium"</f-text>
-		</f-div>
-		<f-div width="100%" padding="medium" direction="row" gap="x-large" state="subtle">
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">padding="small"</f-text>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="100%" padding="small" direction="row" gap="x-large" state="subtle">
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">padding="x-small"</f-text>
 			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">padding="small"</f-text>
-		</f-div>
-		<f-div width="100%" padding="small" direction="row" gap="x-large" state="subtle">
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="100%" padding="x-small" direction="row" gap="x-large" state="subtle">
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">padding="none"</f-text>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="100%" padding="none" direction="row" gap="x-large" state="subtle">
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="tertiary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">padding="x-small"</f-text>
-		</f-div>
-		<f-div width="100%" padding="x-small" direction="row" gap="x-large" state="subtle">
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">padding="none"</f-text>
-		</f-div>
-		<f-div width="100%" padding="none" direction="row" gap="x-large" state="subtle">
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="tertiary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-		</f-div>
-	</f-div>`,
+		</f-div>`,
 
 	name: "padding"
 };
 
 export const Width = {
-	render: args => html`<f-div gap="medium" padding="none" direction="column">
-		<f-div
-			width="fill-container"
-			padding="large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			align="middle-center"
-		>
-			<f-div width="hug-content" height="hug-content" padding="x-large">
-				<f-text variant="para" size="large" weight="medium">width="fill-container"</f-text>
+	render: args =>
+		html`<f-div gap="medium" padding="none" direction="column">
+			<f-div
+				width="fill-container"
+				padding="large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				align="middle-center"
+			>
+				<f-div width="hug-content" height="hug-content" padding="x-large">
+					<f-text variant="para" size="large" weight="medium">width="fill-container"</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div
-			width="hug-content"
-			padding="large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			align="middle-center"
-		>
-			<f-div width="hug-content" height="hug-content" padding="x-large">
-				<f-text variant="para" size="large" weight="medium">width="hug-content"</f-text>
+			<f-div
+				width="hug-content"
+				padding="large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				align="middle-center"
+			>
+				<f-div width="hug-content" height="hug-content" padding="x-large">
+					<f-text variant="para" size="large" weight="medium">width="hug-content"</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div
-			width="500px"
-			padding="large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			align="middle-center"
-		>
-			<f-div width="hug-content" height="hug-content" padding="x-large">
-				<f-text variant="para" size="large" weight="medium"
-					>width="{num-value}" (e.g. 240px, 100%)</f-text
-				>
+			<f-div
+				width="500px"
+				padding="large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				align="middle-center"
+			>
+				<f-div width="hug-content" height="hug-content" padding="x-large">
+					<f-text variant="para" size="large" weight="medium"
+						>width="{num-value}" (e.g. 240px, 100%)</f-text
+					>
+				</f-div>
 			</f-div>
-		</f-div>
-	</f-div>`,
+		</f-div>`,
 
 	name: "width"
 };
 
 export const Height = {
-	render: args => html`<f-div gap="medium" padding="none" direction="row" height="100%">
-		<f-div
-			height="fill-container"
-			padding="large"
-			gap="x-large"
-			state="subtle"
-			align="middle-center"
-		>
-			<f-div width="hug-content" height="hug-content" padding="x-large">
-				<f-text variant="para" size="large" weight="medium">width="fill-container"</f-text>
+	render: args =>
+		html`<f-div gap="medium" padding="none" direction="row" height="100%">
+			<f-div
+				height="fill-container"
+				padding="large"
+				gap="x-large"
+				state="subtle"
+				align="middle-center"
+			>
+				<f-div width="hug-content" height="hug-content" padding="x-large">
+					<f-text variant="para" size="large" weight="medium">width="fill-container"</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div height="hug-content" padding="large" gap="x-large" state="subtle" align="middle-center">
-			<f-div width="hug-content" height="hug-content" padding="x-large">
-				<f-text variant="para" size="large" weight="medium">width="hug-content"</f-text>
+			<f-div
+				height="hug-content"
+				padding="large"
+				gap="x-large"
+				state="subtle"
+				align="middle-center"
+			>
+				<f-div width="hug-content" height="hug-content" padding="x-large">
+					<f-text variant="para" size="large" weight="medium">width="hug-content"</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div height="500px" padding="large" gap="x-large" state="subtle" align="middle-center">
-			<f-div width="hug-content" height="hug-content" padding="x-large">
-				<f-text variant="para" size="large" weight="medium">width=500px (e.g. 240px, 100%)</f-text>
+			<f-div height="500px" padding="large" gap="x-large" state="subtle" align="middle-center">
+				<f-div width="hug-content" height="hug-content" padding="x-large">
+					<f-text variant="para" size="large" weight="medium"
+						>width=500px (e.g. 240px, 100%)</f-text
+					>
+				</f-div>
 			</f-div>
-		</f-div>
-	</f-div>`,
+		</f-div>`,
 
 	name: "height"
 };
 
 export const MaxWidth = {
-	render: args => html`<f-div gap="medium" padding="none" direction="column">
-		<f-div
-			width="fill-container"
-			padding="large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			align="middle-center"
-		>
-			<f-div width="hug-content" height="hug-content" padding="x-large">
-				<f-text variant="para" size="large" weight="medium">div without max-width</f-text>
+	render: args =>
+		html`<f-div gap="medium" padding="none" direction="column">
+			<f-div
+				width="fill-container"
+				padding="large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				align="middle-center"
+			>
+				<f-div width="hug-content" height="hug-content" padding="x-large">
+					<f-text variant="para" size="large" weight="medium">div without max-width</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div
-			width="fill-container"
-			padding="large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			align="middle-center"
-			max-width="200px"
-		>
-			<f-div width="hug-content" height="hug-content" padding="x-large">
-				<f-text variant="para" size="large" weight="medium">max-width="200px"</f-text>
+			<f-div
+				width="fill-container"
+				padding="large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				align="middle-center"
+				max-width="200px"
+			>
+				<f-div width="hug-content" height="hug-content" padding="x-large">
+					<f-text variant="para" size="large" weight="medium">max-width="200px"</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-	</f-div>`,
+		</f-div>`,
 
 	name: "max-width"
 };
 
 export const MaxHeight = {
-	render: args => html`<f-div gap="medium" padding="none" direction="row" height="100%">
-		<f-div
-			height="fill-container"
-			padding="large"
-			gap="x-large"
-			state="subtle"
-			align="middle-center"
-		>
-			<f-div width="hug-content" height="hug-content" padding="x-large">
-				<f-text variant="para" size="large" weight="medium">div without max-height</f-text>
+	render: args =>
+		html`<f-div gap="medium" padding="none" direction="row" height="100%">
+			<f-div
+				height="fill-container"
+				padding="large"
+				gap="x-large"
+				state="subtle"
+				align="middle-center"
+			>
+				<f-div width="hug-content" height="hug-content" padding="x-large">
+					<f-text variant="para" size="large" weight="medium">div without max-height</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div
-			height="fill-container"
-			padding="large"
-			gap="x-large"
-			state="subtle"
-			align="middle-center"
-			max-height="200px"
-		>
-			<f-div width="hug-content" height="hug-content" padding="x-large">
-				<f-text variant="para" size="large" weight="medium">max-height="200px"</f-text>
+			<f-div
+				height="fill-container"
+				padding="large"
+				gap="x-large"
+				state="subtle"
+				align="middle-center"
+				max-height="200px"
+			>
+				<f-div width="hug-content" height="hug-content" padding="x-large">
+					<f-text variant="para" size="large" weight="medium">max-height="200px"</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-	</f-div>`,
+		</f-div>`,
 
 	name: "max-height"
 };
 
 export const Tooltip = {
-	render: args => html`<f-div gap="medium" padding="none" direction="column">
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">Tooltip as a directive</f-text>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			tooltip="Tooltip content"
-		>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+	render: args =>
+		html`<f-div gap="medium" padding="none" direction="column">
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">Tooltip as a directive</f-text>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				tooltip="Tooltip content"
+			>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">Rich Tooltip</f-text>
 			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">Rich Tooltip</f-text>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			tooltip="#Tooltip-ID"
-		>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				tooltip="#Tooltip-ID"
+			>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-		</f-div>
-		<f-tooltip id="Tolltip-ID">
-			<f-row><f-text>Tooltip content</f-text></f-row>
-		</f-tooltip>
-	</f-div>`,
+			<f-tooltip id="Tolltip-ID">
+				<f-row><f-text>Tooltip content</f-text></f-row>
+			</f-tooltip>
+		</f-div>`,
 
 	name: "tooltip"
 };
 
 export const Overflow = {
-	render: args => html`<f-div gap="medium" padding="none" direction="column">
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">overflow="wrap"</f-text>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			overflow="wrap"
-		>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+	render: args =>
+		html`<f-div gap="medium" padding="none" direction="column">
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">overflow="wrap"</f-text>
 			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				overflow="wrap"
+			>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">overflow="scroll"</f-text>
 			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				overflow="scroll"
+			>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">overflow="hidden"</f-text>
 			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">overflow="scroll"</f-text>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			overflow="scroll"
-		>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				overflow="hidden"
+			>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">overflow="visible"</f-text>
 			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div
+				width="100%"
+				height="100px"
+				padding="x-large"
+				direction="column"
+				gap="x-large"
+				state="subtle"
+				overflow="visible"
+			>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">overflow="hidden"</f-text>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			overflow="hidden"
-		>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">overflow="visible"</f-text>
-		</f-div>
-		<f-div
-			width="100%"
-			height="100px"
-			padding="x-large"
-			direction="column"
-			gap="x-large"
-			state="subtle"
-			overflow="visible"
-		>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-		</f-div>
-	</f-div>`,
+		</f-div>`,
 
 	name: "overflow"
 };
 
 export const Align = {
-	render: args => html`<f-div gap="medium" padding="none" direction="column">
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			height="150px"
-			align="top-left"
-		>
-			<f-div width="200px" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">align="top-left"</f-text>
+	render: args =>
+		html`<f-div gap="medium" padding="none" direction="column">
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				height="150px"
+				align="top-left"
+			>
+				<f-div width="200px" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">align="top-left"</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			height="150px"
-			align="top-center"
-		>
-			<f-div width="200px" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">align="top-center"</f-text>
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				height="150px"
+				align="top-center"
+			>
+				<f-div width="200px" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">align="top-center"</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			height="150px"
-			align="top-right"
-		>
-			<f-div width="200px" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">align="top-right"</f-text>
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				height="150px"
+				align="top-right"
+			>
+				<f-div width="200px" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">align="top-right"</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			height="150px"
-			align="middle-left"
-		>
-			<f-div width="200px" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">align="middle-left"</f-text>
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				height="150px"
+				align="middle-left"
+			>
+				<f-div width="200px" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">align="middle-left"</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			height="150px"
-			align="middle-center"
-		>
-			<f-div width="200px" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">align="middle-center"</f-text>
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				height="150px"
+				align="middle-center"
+			>
+				<f-div width="200px" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">align="middle-center"</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			height="150px"
-			align="middle-right"
-		>
-			<f-div width="200px" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">align="middle-right"</f-text>
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				height="150px"
+				align="middle-right"
+			>
+				<f-div width="200px" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">align="middle-right"</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			height="150px"
-			align="bottom-left"
-		>
-			<f-div width="200px" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">align="bottom-left"</f-text>
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				height="150px"
+				align="bottom-left"
+			>
+				<f-div width="200px" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">align="bottom-left"</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			height="150px"
-			align="bottom-center"
-		>
-			<f-div width="200px" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">align="bottom-center"</f-text>
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				height="150px"
+				align="bottom-center"
+			>
+				<f-div width="200px" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">align="bottom-center"</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			height="150px"
-			align="bottom-right"
-		>
-			<f-div width="200px" height="hug-content" padding="medium" state="secondary">
-				<f-text variant="para" size="large" weight="medium">align="bottom-right"</f-text>
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				height="150px"
+				align="bottom-right"
+			>
+				<f-div width="200px" height="hug-content" padding="medium" state="secondary">
+					<f-text variant="para" size="large" weight="medium">align="bottom-right"</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-	</f-div>`,
+		</f-div>`,
 
 	name: "align"
 };
 
 export const Sticky = {
-	render: args => html`<f-div gap="medium" padding="large" direction="column">
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">sticky="none"</f-text>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			overflow="scroll"
-		>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary" sticky="none">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">sticky="top"</f-text>
-		</f-div>
-		<f-div
-			height="200px"
-			padding="x-large"
-			direction="column"
-			gap="x-large"
-			state="subtle"
-			overflow="scroll"
-		>
-			<f-div
-				width="300px"
-				height="hug-content"
-				padding="x-large"
-				state="secondary"
-				sticky="top"
-				border="medium solid default around"
-			>
-				<f-text variant="para" size="large" weight="medium">sticky-top f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">sticky="bottom"</f-text>
-		</f-div>
-		<f-div
-			height="200px"
-			padding="x-large"
-			direction="column"
-			gap="x-large"
-			state="subtle"
-			overflow="scroll"
-		>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+	render: args =>
+		html`<f-div gap="medium" padding="large" direction="column">
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">sticky="none"</f-text>
 			</f-div>
 			<f-div
-				width="300px"
-				height="hug-content"
+				width="100%"
 				padding="x-large"
-				state="secondary"
-				sticky="bottom"
-				border="medium solid default around"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				overflow="scroll"
 			>
-				<f-text variant="para" size="large" weight="medium">sticky-bottom f-div</f-text>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary" sticky="none">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">sticky="right"</f-text>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			overflow="scroll"
-		>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
-			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">sticky="top"</f-text>
 			</f-div>
 			<f-div
-				width="300px"
-				height="hug-content"
+				height="200px"
 				padding="x-large"
-				state="secondary"
-				sticky="right"
-				border="medium solid default around"
+				direction="column"
+				gap="x-large"
+				state="subtle"
+				overflow="scroll"
 			>
-				<f-text variant="para" size="large" weight="medium">sticky-right f-div</f-text>
+				<f-div
+					width="300px"
+					height="hug-content"
+					padding="x-large"
+					state="secondary"
+					sticky="top"
+					border="medium solid default around"
+				>
+					<f-text variant="para" size="large" weight="medium">sticky-top f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div width="hug-content" height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">sticky="left"</f-text>
-		</f-div>
-		<f-div
-			width="100%"
-			padding="x-large"
-			direction="row"
-			gap="x-large"
-			state="subtle"
-			overflow="scroll"
-		>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">sticky="bottom"</f-text>
+			</f-div>
 			<f-div
-				width="300px"
-				height="hug-content"
+				height="200px"
 				padding="x-large"
-				state="secondary"
-				sticky="left"
-				border="medium solid default around"
+				direction="column"
+				gap="x-large"
+				state="subtle"
+				overflow="scroll"
 			>
-				<f-text variant="para" size="large" weight="medium">sticky-left f-div</f-text>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div
+					width="300px"
+					height="hug-content"
+					padding="x-large"
+					state="secondary"
+					sticky="bottom"
+					border="medium solid default around"
+				>
+					<f-text variant="para" size="large" weight="medium">sticky-bottom f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">sticky="right"</f-text>
 			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				overflow="scroll"
+			>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div
+					width="300px"
+					height="hug-content"
+					padding="x-large"
+					state="secondary"
+					sticky="right"
+					border="medium solid default around"
+				>
+					<f-text variant="para" size="large" weight="medium">sticky-right f-div</f-text>
+				</f-div>
 			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div width="hug-content" height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">sticky="left"</f-text>
 			</f-div>
-			<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
-				<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+			<f-div
+				width="100%"
+				padding="x-large"
+				direction="row"
+				gap="x-large"
+				state="subtle"
+				overflow="scroll"
+			>
+				<f-div
+					width="300px"
+					height="hug-content"
+					padding="x-large"
+					state="secondary"
+					sticky="left"
+					border="medium solid default around"
+				>
+					<f-text variant="para" size="large" weight="medium">sticky-left f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
+				<f-div width="300px" height="hug-content" padding="x-large" state="secondary">
+					<f-text variant="para" size="large" weight="medium">Child f-div</f-text>
+				</f-div>
 			</f-div>
-		</f-div>
-	</f-div>`,
+		</f-div>`,
 
 	name: "sticky"
 };
 
 export const Selected = {
-	render: args => html`<f-div gap="medium" padding="x-large" direction="row">
-		<f-div padding="x-large" state="subtle" width="hug-content" selected="background"
-			><f-text variant="para" size="medium" weight="regular">selected="background"</f-text>
-		</f-div>
-		<f-div padding="x-large" state="subtle" width="hug-content" selected="border"
-			><f-text variant="para" size="medium" weight="regular">selected="border"</f-text></f-div
-		>
-		<f-div padding="x-large" state="subtle" width="hug-content" selected="notch-right"
-			><f-text variant="para" size="medium" weight="regular">selected="notch-right"</f-text></f-div
-		>
-		<f-div padding="x-large" state="subtle" width="hug-content" selected="notch-left"
-			><f-text variant="para" size="medium" weight="regular">selected="notch-left"</f-text></f-div
-		>
-	</f-div>`,
+	render: args =>
+		html`<f-div gap="medium" padding="x-large" direction="row">
+			<f-div padding="x-large" state="subtle" width="hug-content" selected="background"
+				><f-text variant="para" size="medium" weight="regular">selected="background"</f-text>
+			</f-div>
+			<f-div padding="x-large" state="subtle" width="hug-content" selected="border"
+				><f-text variant="para" size="medium" weight="regular">selected="border"</f-text></f-div
+			>
+			<f-div padding="x-large" state="subtle" width="hug-content" selected="notch-right"
+				><f-text variant="para" size="medium" weight="regular"
+					>selected="notch-right"</f-text
+				></f-div
+			>
+			<f-div padding="x-large" state="subtle" width="hug-content" selected="notch-left"
+				><f-text variant="para" size="medium" weight="regular">selected="notch-left"</f-text></f-div
+			>
+		</f-div>`,
 
 	name: "selected"
 };
 
 export const Loading = {
-	render: args => html`<f-div gap="medium" padding="x-large" direction="row">
-		<f-div padding="none" direction="column" align="middle-center" gap="large">
-			<f-div padding="none" width="hug-content" align="middle-center"
-				><f-text variant="para" size="medium" weight="regular" align="center"
-					>loading="loader"</f-text
+	render: args =>
+		html`<f-div gap="medium" padding="x-large" direction="row">
+			<f-div padding="none" direction="column" align="middle-center" gap="large">
+				<f-div padding="none" width="hug-content" align="middle-center"
+					><f-text variant="para" size="medium" weight="regular" align="center"
+						>loading="loader"</f-text
+					>
+				</f-div>
+				<f-div padding="small" state="subtle" width="200px" loading="loader" align="middle-center"
+					><f-text variant="para" size="medium" weight="regular">loader</f-text></f-div
 				>
 			</f-div>
-			<f-div padding="small" state="subtle" width="200px" loading="loader" align="middle-center"
-				><f-text variant="para" size="medium" weight="regular">loader</f-text></f-div
-			>
-		</f-div>
-		<f-div padding="none" direction="column" align="middle-center" gap="large">
-			<f-div padding="none" width="hug-content" align="middle-center"
-				><f-text variant="para" size="medium" weight="regular" align="center"
-					>loading="skeleton"</f-text
-				>
+			<f-div padding="none" direction="column" align="middle-center" gap="large">
+				<f-div padding="none" width="hug-content" align="middle-center"
+					><f-text variant="para" size="medium" weight="regular" align="center"
+						>loading="skeleton"</f-text
+					>
+				</f-div>
+				<f-div
+					padding="small"
+					state="subtle"
+					width="200px"
+					gap="large"
+					loading="skeleton"
+					align="middle-center"
+					><f-text variant="para" size="medium" weight="regular">loader</f-text>
+					<f-pictogram source="i-plus"></f-pictogram>
+					<f-icon source="i-plus"></f-icon>
+					<f-icon-button icon="i-plus"></f-icon-button>
+					<f-button label="TEst"></f-button>
+					<f-counter label="7889"></f-counter>
+				</f-div>
 			</f-div>
-			<f-div
-				padding="small"
-				state="subtle"
-				width="200px"
-				gap="large"
-				loading="skeleton"
-				align="middle-center"
-				><f-text variant="para" size="medium" weight="regular">loader</f-text>
-				<f-pictogram source="i-plus"></f-pictogram>
-				<f-icon source="i-plus"></f-icon>
-				<f-icon-button icon="i-plus"></f-icon-button>
-				<f-button label="TEst"></f-button>
-				<f-counter label="7889"></f-counter>
-			</f-div>
-		</f-div>
-	</f-div>`,
+		</f-div>`,
 
 	name: "loading"
 };

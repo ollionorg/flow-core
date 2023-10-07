@@ -543,11 +543,12 @@ export const Gap = {
 		return html` <f-div width="100%" direction="column" padding="small">
 			<f-div padding="small" gap="small">
 				${gaps.map(
-					item => html` <f-button
-						.label=${item}
-						@click=${() => setCurrentGap(item)}
-						.disabled=${currentGap === item}
-					></f-button>`
+					item =>
+						html` <f-button
+							.label=${item}
+							@click=${() => setCurrentGap(item)}
+							.disabled=${currentGap === item}
+						></f-button>`
 				)}
 			</f-div>
 			<f-grid .gap=${currentGap}>

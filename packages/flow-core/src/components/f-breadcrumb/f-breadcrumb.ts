@@ -186,22 +186,23 @@ export class FBreadcrumb extends FRoot {
 								@mouseleave=${() => this.toggleBreadcrumbPopover("close")}
 							>
 								${this.middlePopoverCrumbs?.map(
-									(crumb, index) => html` <f-div
-										class="popover-crumb-list"
-										padding="medium"
-										.border=${this.middlePopoverCrumbs.length - 1 === index
-											? "none"
-											: "small solid secondary bottom"}
-										clickable
-										@click=${(event: MouseEvent) => this.handleDispatchEvent(event, crumb)}
-										><f-text
-											class="popover-text-hover"
-											variant="para"
-											size="medium"
-											weight="regular"
-											>${crumb?.title}</f-text
-										></f-div
-									>`
+									(crumb, index) =>
+										html` <f-div
+											class="popover-crumb-list"
+											padding="medium"
+											.border=${this.middlePopoverCrumbs.length - 1 === index
+												? "none"
+												: "small solid secondary bottom"}
+											clickable
+											@click=${(event: MouseEvent) => this.handleDispatchEvent(event, crumb)}
+											><f-text
+												class="popover-text-hover"
+												variant="para"
+												size="medium"
+												weight="regular"
+												>${crumb?.title}</f-text
+											></f-div
+										>`
 								)}
 							</f-div>
 						</f-popover>

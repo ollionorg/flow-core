@@ -110,34 +110,35 @@ export const Anatomy = {
 };
 
 export const Source = {
-	render: args => html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
-		<f-div padding="large" gap="medium" direction="column" width="hug-content">
-			<f-div height="hug-content" padding="none" align="middle-center">
-				<f-text variant="para" size="large" weight="medium">Icon from library</f-text>
+	render: args =>
+		html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
+			<f-div padding="large" gap="medium" direction="column" width="hug-content">
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="large" weight="medium">Icon from library</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-icon source="i-plus"></f-icon>
+				</f-div>
 			</f-div>
-			<f-div height="hug-content" padding="none" align="middle-center">
-				<f-icon source="i-plus"></f-icon>
+			<f-div padding="large" gap="medium" direction="column" width="hug-content">
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="large" weight="medium">Emoji as a source</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
+					<f-icon source="😃"></f-icon>
+				</f-div>
 			</f-div>
-		</f-div>
-		<f-div padding="large" gap="medium" direction="column" width="hug-content">
-			<f-div height="hug-content" padding="none" align="middle-center">
-				<f-text variant="para" size="large" weight="medium">Emoji as a source</f-text>
+			<f-div padding="large" gap="medium" direction="column" width="hug-content">
+				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="large" weight="medium">Icon from URL</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
+					<f-icon
+						source="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/1024px-Information_icon.svg.png"
+					></f-icon>
+				</f-div>
 			</f-div>
-			<f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
-				<f-icon source="😃"></f-icon>
-			</f-div>
-		</f-div>
-		<f-div padding="large" gap="medium" direction="column" width="hug-content">
-			<f-div height="hug-content" padding="none" align="middle-center">
-				<f-text variant="para" size="large" weight="medium">Icon from URL</f-text>
-			</f-div>
-			<f-div height="hug-content" padding="none" align="middle-center" overflow="hidden">
-				<f-icon
-					source="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Information_icon.svg/1024px-Information_icon.svg.png"
-				></f-icon>
-			</f-div>
-		</f-div>
-	</f-div>`,
+		</f-div>`,
 
 	name: "source"
 };
@@ -269,35 +270,36 @@ export const State = {
 };
 
 export const Flags = {
-	render: args => html`<f-div gap="large" padding="x-large" direction="column">
-		<f-div height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">Loading</f-text>
-		</f-div>
-		<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
-			<f-icon source="i-plus" state="primary" size="x-large"></f-icon>
-			<f-icon source="i-plus" state="primary" size="x-large" loading=${true}></f-icon>
-		</f-div>
-		<f-div height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">Disabled</f-text>
-		</f-div>
-		<f-div padding="none" direction="row" gap="x-large">
-			<f-icon source="i-plus" state="primary" size="x-large"></f-icon>
-			<f-icon source="i-plus" state="primary" size="x-large" disabled=${true}></f-icon>
-		</f-div>
-		<f-div height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">Clickable</f-text>
-		</f-div>
-		<f-div padding="none" direction="row" gap="x-large">
-			<f-icon source="i-plus" state="primary" size="x-large" clickable=${true}></f-icon>
-		</f-div>
-		<f-div height="hug-content" padding="none">
-			<f-text variant="para" size="large" weight="medium">Focused</f-text>
-		</f-div>
-		<f-div padding="none" direction="row" gap="x-large">
-			<f-icon source="i-plus" state="primary" size="x-large"></f-icon>
-			<f-icon source="i-plus" state="primary" size="x-large" focused=${true}></f-icon>
-		</f-div>
-	</f-div>`,
+	render: args =>
+		html`<f-div gap="large" padding="x-large" direction="column">
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">Loading</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
+				<f-icon source="i-plus" state="primary" size="x-large"></f-icon>
+				<f-icon source="i-plus" state="primary" size="x-large" loading=${true}></f-icon>
+			</f-div>
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">Disabled</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large">
+				<f-icon source="i-plus" state="primary" size="x-large"></f-icon>
+				<f-icon source="i-plus" state="primary" size="x-large" disabled=${true}></f-icon>
+			</f-div>
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">Clickable</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large">
+				<f-icon source="i-plus" state="primary" size="x-large" clickable=${true}></f-icon>
+			</f-div>
+			<f-div height="hug-content" padding="none">
+				<f-text variant="para" size="large" weight="medium">Focused</f-text>
+			</f-div>
+			<f-div padding="none" direction="row" gap="x-large">
+				<f-icon source="i-plus" state="primary" size="x-large"></f-icon>
+				<f-icon source="i-plus" state="primary" size="x-large" focused=${true}></f-icon>
+			</f-div>
+		</f-div>`,
 
 	name: "Flags"
 };

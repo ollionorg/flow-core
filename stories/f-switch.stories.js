@@ -172,20 +172,22 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-					item => html` <f-div align="middle-center" padding="large" gap="medium">
-						${item.map(
-							state => html`<f-div padding="small"
-								><f-switch size="medium" .value=${value} .state=${state} @input=${handleValue}>
-									<f-div padding="none" align="middle-center" slot="label">
-										<f-text variant="para" size="small">Switch (state="${state}")</f-text>
-									</f-div>
-									<f-div padding="none" align="middle-center" slot="help">
-										<f-text variant="para" size="small">This is helper text</f-text>
-									</f-div>
-								</f-switch></f-div
-							>`
-						)}
-					</f-div>`
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
+							${item.map(
+								state =>
+									html`<f-div padding="small"
+										><f-switch size="medium" .value=${value} .state=${state} @input=${handleValue}>
+											<f-div padding="none" align="middle-center" slot="label">
+												<f-text variant="para" size="small">Switch (state="${state}")</f-text>
+											</f-div>
+											<f-div padding="none" align="middle-center" slot="help">
+												<f-text variant="para" size="small">This is helper text</f-text>
+											</f-div>
+										</f-switch></f-div
+									>`
+							)}
+						</f-div>`
 				)}
 			</f-div>
 		`;

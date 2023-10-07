@@ -252,24 +252,26 @@ export const Type = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${types.map(
-					item => html` <f-div align="middle-center" padding="large" gap="medium">
-						${item.map(
-							type => html`<f-div
-								><f-input
-									value=${value}
-									placeholder="Write here"
-									@input=${handleValue}
-									type=${type}
-									size="medium"
-								>
-									<f-div slot="label" padding="none" gap="none">Label (type="${type}")</f-div>
-									<f-text slot="help" variant="para" size="small"
-										>This is a Subtext (Helper Text)</f-text
-									>
-								</f-input></f-div
-							>`
-						)}
-					</f-div>`
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
+							${item.map(
+								type =>
+									html`<f-div
+										><f-input
+											value=${value}
+											placeholder="Write here"
+											@input=${handleValue}
+											type=${type}
+											size="medium"
+										>
+											<f-div slot="label" padding="none" gap="none">Label (type="${type}")</f-div>
+											<f-text slot="help" variant="para" size="small"
+												>This is a Subtext (Helper Text)</f-text
+											>
+										</f-input></f-div
+									>`
+							)}
+						</f-div>`
 				)}
 			</f-div>
 		`;
@@ -376,24 +378,26 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-					item => html` <f-div align="middle-center" padding="large" gap="medium">
-						${item.map(
-							state => html`<f-div
-								><f-input
-									value=${value}
-									placeholder="Write here"
-									@input=${handleValue}
-									size="medium"
-									state=${state}
-								>
-									<f-div slot="label" padding="none" gap="none">Label (state="${state}")</f-div>
-									<f-text slot="help" variant="para" size="small"
-										>This is a Subtext (Helper Text)</f-text
-									>
-								</f-input></f-div
-							>`
-						)}
-					</f-div>`
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
+							${item.map(
+								state =>
+									html`<f-div
+										><f-input
+											value=${value}
+											placeholder="Write here"
+											@input=${handleValue}
+											size="medium"
+											state=${state}
+										>
+											<f-div slot="label" padding="none" gap="none">Label (state="${state}")</f-div>
+											<f-text slot="help" variant="para" size="small"
+												>This is a Subtext (Helper Text)</f-text
+											>
+										</f-input></f-div
+									>`
+							)}
+						</f-div>`
 				)}
 			</f-div>
 		`;

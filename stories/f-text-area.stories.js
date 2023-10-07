@@ -272,22 +272,26 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-					item => html` <f-div align="middle-center" padding="large" gap="medium">
-						${item.map(
-							state => html`<f-div>
-								<f-text-area
-									placeholder="This is a textarea"
-									size="medium"
-									state=${state}
-									value=${value}
-									@input=${handleValue}
-								>
-									<f-text slot="label" variant="para" size="small">Label (state="${state}")</f-text>
-									<f-text slot="help" variant="para" size="small">This is subtext</f-text>
-								</f-text-area></f-div
-							>`
-						)}
-					</f-div>`
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
+							${item.map(
+								state =>
+									html`<f-div>
+										<f-text-area
+											placeholder="This is a textarea"
+											size="medium"
+											state=${state}
+											value=${value}
+											@input=${handleValue}
+										>
+											<f-text slot="label" variant="para" size="small"
+												>Label (state="${state}")</f-text
+											>
+											<f-text slot="help" variant="para" size="small">This is subtext</f-text>
+										</f-text-area></f-div
+									>`
+							)}
+						</f-div>`
 				)}
 			</f-div>
 		`;

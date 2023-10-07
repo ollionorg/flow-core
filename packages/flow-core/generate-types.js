@@ -13,12 +13,12 @@ const vue3Types = transformSchema(customElementsJSON, "vue3", "./src/index");
 const reactTypes = transformSchema(customElementsJSON, "react", "./src/index");
 
 try {
-  fs.writeFileSync(vue2TypesFileName, vue2Types);
-  console.log(`\x1b[32m \r ${vue2TypesFileName} generated  \u2705 \x1b[0m`);
-  fs.writeFileSync(vue3TypesFileName, vue3Types);
-  console.log(`\x1b[32m \r ${vue3TypesFileName} generated  \u2705 \x1b[0m`);
-  fs.writeFileSync(reactTypesFileName, reactTypes);
-  console.log(`\x1b[32m \r ${reactTypesFileName} generated  \u2705 \x1b[0m`);
+	fs.writeFileSync(vue2TypesFileName, vue2Types);
+	console.log(`\x1b[32m \r ${vue2TypesFileName} generated  \u2705 \x1b[0m`);
+	fs.writeFileSync(vue3TypesFileName, vue3Types);
+	console.log(`\x1b[32m \r ${vue3TypesFileName} generated  \u2705 \x1b[0m`);
+	fs.writeFileSync(reactTypesFileName, reactTypes);
+	console.log(`\x1b[32m \r ${reactTypesFileName} generated  \u2705 \x1b[0m`);
 } catch (e) {
-  console.log(e);
+	console.log(e);
 }

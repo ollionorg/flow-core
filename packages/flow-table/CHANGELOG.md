@@ -9,11 +9,13 @@
 
 - `f-tcell` : options are aligned in middle.
 - `f-table-schema` : string sort issue fixed.
+
 ## [1.3.3] - 2023-09-29
 
 ### Bug Fixes
 
 - `f-tcell` : gap and aligment issue fixed.
+
 ## [1.3.2] - 2023-09-13
 
 ### Bug Fixes

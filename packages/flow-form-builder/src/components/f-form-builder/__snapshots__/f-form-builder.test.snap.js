@@ -1,8 +1,7 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["f-form-builder should render object field with all default properties"] = 
-`<f-div
+snapshots["f-form-builder should render object field with all default properties"] = `<f-div
   align="top-left"
   direction="column"
   gap="small"
@@ -88,8 +87,7 @@ snapshots["f-form-builder should render object field with all default properties
 `;
 /* end snapshot f-form-builder should render object field with all default properties */
 
-snapshots["f-form-builder should emit state-change with validation messages"] = 
-`<f-div
+snapshots["f-form-builder should emit state-change with validation messages"] = `<f-div
   align="top-left"
   direction="column"
   gap="small"
@@ -175,8 +173,7 @@ snapshots["f-form-builder should emit state-change with validation messages"] =
 `;
 /* end snapshot f-form-builder should emit state-change with validation messages */
 
-snapshots["f-form-builder should display array fields"] = 
-`<f-div
+snapshots["f-form-builder should display array fields"] = `<f-div
   align="top-left"
   direction="column"
   gap="small"
@@ -285,8 +282,7 @@ snapshots["f-form-builder should display array fields"] =
 `;
 /* end snapshot f-form-builder should display array fields */
 
-snapshots["f-form-builder should add/delete field in array"] = 
-`<f-div
+snapshots["f-form-builder should add/delete field in array"] = `<f-div
   align="top-left"
   direction="column"
   gap="small"
@@ -395,8 +391,7 @@ snapshots["f-form-builder should add/delete field in array"] =
 `;
 /* end snapshot f-form-builder should add/delete field in array */
 
-snapshots["f-form-builder should test snapshot of all fields"] = 
-`<f-div
+snapshots["f-form-builder should test snapshot of all fields"] = `<f-div
   align="top-left"
   direction="column"
   gap="small"
@@ -780,4 +775,3 @@ snapshots["f-form-builder should test snapshot of all fields"] =
 </f-div>
 `;
 /* end snapshot f-form-builder should test snapshot of all fields */
-

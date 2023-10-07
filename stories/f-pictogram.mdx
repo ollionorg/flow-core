@@ -1,0 +1,308 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fPictogramAnatomy from "./svg/i-fpictogram-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import * as FPictogramStories from './f-pictogram.stories';
+
+<Meta of={FPictogramStories} />
+
+# f-pictogram
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+f-pictogram is a visual representation of a content like label, header or objects. Pictograms are
+illustrative and expressive. They simplify complex ideas and aid to clearly communicate the
+content.
+
+<br />
+
+### [Playground](/story/components-f-pictogram--playground)
+
+<Canvas>
+  <Story of={FPictogramStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider />
+
+<Story of={FPictogramStories.Anatomy} />
+
+<br />
+
+## variant
+
+<f-divider />
+
+Variants are various representations of a pictogram . For example a pictogram can be hexagon,
+square or squircle.
+
+<Canvas>
+  <Story of={FPictogramStories.Variant} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>squircle</td>
+      <td>a shape mixup of sqaure and circle</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>square</td>
+      <td>square shaped pictogram with border-radius of 4px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>hexagon</td>
+      <td>hexagon shaped pictogram</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>circle</td>
+      <td>circular shaped pictogram</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## source
+
+<f-divider />
+
+Source property defines what will be displayed on the pictogram. This could be an icon emoji, any
+inline SVG or image.
+
+<Canvas>
+  <Story of={FPictogramStories.Source} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>Icon from library</td>
+      <td>e.g i-plus</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>Emoji as source</td>
+      <td>e.g. 😃</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>Text as source</td>
+      <td>e.g. A1</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>URL as source</td>
+      <td>url to be entered as source to see the image</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## size
+
+<f-divider />
+
+The large size is the default.
+
+<Canvas>
+  <Story of={FPictogramStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-large</td>
+      <td>Extra large size - 44px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>Large size - 36px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>Medium size - 28px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>Small size - 20px</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider />
+
+States on pictograms are used to communicate purpose and it’s connotation. For example, a red
+color connotes danger, whereas a green color connotes success and so on.
+
+<Canvas>
+  <Story of={FPictogramStories.State} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>default</td>
+
+      <td />
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>primary</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>success</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>danger</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>warning</td>
+
+      <td />
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## Flags
+
+<f-divider />
+
+<Canvas>
+  <Story of={FPictogramStories.Flags} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+      <td>Default</td>
+    </tr>
+
+    <tr>
+      <td>loading</td>
+      <td>Loading flag enables a transition on the border.</td>
+      <td>false</td>
+    </tr>
+
+    <tr>
+      <td>disabled</td>
+      <td>Opacity of pictogram is set to 50% in disabled state.</td>
+      <td>false </td>
+    </tr>
+
+    <tr>
+      <td>clickable</td>
+      <td>Color change on hover</td>
+      <td>false</td>
+    </tr>
+
+    <tr>
+      <td>auto-bg</td>
+      <td>background color change according to the text dynamically</td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+<ArgsTable of={"f-pictogram"} />

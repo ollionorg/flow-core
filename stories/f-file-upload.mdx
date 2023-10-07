@@ -1,0 +1,277 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
+import fFileUploadAnatomy from "./svg/i-ffile-upload-anatomy.js";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import * as FFileUploadStories from './f-file-upload.stories';
+
+<Meta of={FFileUploadStories} />
+
+# f-file-upload
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+File upload allows users to select one or more files to upload to a specific location.
+
+<br />
+
+### [Playground](/story/components-f-file-upload--playground)
+
+<Canvas>
+  <Story of={FFileUploadStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider />
+
+<Story of={FFileUploadStories.Anatomy} />
+
+<br />
+
+## type
+
+f-file-upload has 2 type of modes: single and multiple.
+
+*   When type is single, a user can select only one file and the filename appears inline to the file uploader.
+
+*   When type is multiple, a user can select multiple files and each filename stacks under the file uploader.
+
+<Canvas>
+  <Story of={FFileUploadStories.Type} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>single</td>
+      <td>single file selection</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>multiple</td>
+      <td>multiple file selection</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+<br />
+
+## value
+
+Defines the return value of f-file-uploader.
+When type is single, return value is single file object instance.
+When type is multiple, return value is an array of file object instances.
+
+<Canvas>
+  <Story of={FFileUploadStories.Value} />
+</Canvas>
+
+<br />
+
+## placeholder
+
+Defines the placeholder text for f-file-upload.
+
+<p className="note-section">Note: Placeholder is replaced by file name when type is single.</p>
+
+<Canvas>
+  <Story of={FFileUploadStories.Placeholder} />
+</Canvas>
+
+<br />
+
+## file-type
+
+Users can limit the file types by setting the file-type property to a string containing the allowed file type(s). To specify more than one type, separate the values with a comma.
+
+Acceptable file formats are displayed in brackets under description.
+
+<Canvas>
+  <Story of={FFileUploadStories.FileType} />
+</Canvas>
+
+<br />
+
+## size
+
+<f-divider />
+
+f-switch can have 2 sizes.
+
+<Canvas>
+  <Story of={FFileUploadStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>padding and gap 8px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>padding and gap 12px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider />
+
+States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
+
+<Canvas>
+  <Story of={FFileUploadStories.State} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>default</td>
+
+      <td />
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>primary</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>success</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>danger</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>warning</td>
+
+      <td />
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## max-size
+
+<f-divider />
+
+This shows the maximum file size allowed per file
+
+<p className="note-section">Note: max-size appears on the right of the label.</p>
+
+<Canvas>
+  <Story of={FFileUploadStories.MaxSize} />
+</Canvas>
+
+<br />
+
+## Flags
+
+<f-divider />
+
+<br />
+
+<Canvas>
+  <Story of={FFileUploadStories.Flags} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>disabled</td>
+      <td>Opacity is set to 50% in disabled state in disabled mode.</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>loading</td>
+      <td>Sets the file-upload to loading state.</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ArgsTable of={"f-file-upload"} />

@@ -1,0 +1,412 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fInputAnatomy from "./svg/i-finput-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import * as FSuggestStories from './f-suggest.stories';
+
+<Meta of={FSuggestStories} />
+
+# f-suggest
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+f-suggest is an input element.
+
+<br />
+
+### [Playground](/story/components-f-suggest--playground)
+
+<Canvas>
+  <Story of={FSuggestStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider />
+
+<Story of={FSuggestStories.Anatomy} />
+
+<br />
+
+## variant
+
+<f-divider />
+
+Variants are various visual representations of this field.
+
+<Canvas>
+  <Story of={FSuggestStories.Variant} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>curved</td>
+      <td>border radius of 4px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>round</td>
+      <td>border radius of 22px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>block</td>
+      <td>works well with cateogry="transparent"</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## category
+
+<f-divider />
+
+Category decides the background of f-suggest
+
+<Canvas>
+  <Story of={FSuggestStories.Category} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>fill</td>
+      <td>background is filled</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>outline</td>
+      <td>empty background with border</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>transparent</td>
+
+      <td />
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## value
+
+Defines the value of an f-suggest. Validation rules are applied on the value depending on the type property of the f-text-input.
+
+<Canvas>
+  <Story of={FSuggestStories.Value} />
+</Canvas>
+
+<br />
+
+## placeholder
+
+Defines the placeholder text for f-text-input
+
+<Canvas>
+  <Story of={FSuggestStories.Placeholder} />
+</Canvas>
+
+<br />
+
+## size
+
+<f-divider />
+
+f-suggest can have 2 sizes.
+
+<p className="note-section">Note: By default size is inherited by the parent f-form.</p>
+
+<Canvas>
+  <Story of={FSuggestStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>height="28px"</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>eheight="36px"</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider />
+
+States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
+
+<Canvas>
+  <Story of={FSuggestStories.State} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>default</td>
+
+      <td />
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>primary</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>success</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>danger</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>warning</td>
+
+      <td />
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## suggestions
+
+Provides the search suggestions in the form of an array of strings.
+
+<Canvas>
+  <Story of={FSuggestStories.Suggestions} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>object of categories</td>
+      <td>for eg. category1:\["option1", "option2"]</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>array os string values</td>
+      <td>for e.g. \["option1", "option2"]</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## icon-left
+
+Icon-left enables an icon on the left of the input value.
+
+<p className="note-section">
+  Note: If f-suggest has a prefix also, then icon-left is placed on the left of the prefix.
+</p>
+
+<Canvas>
+  <Story of={FSuggestStories.IconLeft} />
+</Canvas>
+
+<br />
+
+## icon-right
+
+Icon-right enables an icon on the right of the input value.
+
+<p className="note-section">
+  Note: If f-suggest has a suffix also, then icon-right is placed on the right of the suffix.
+</p>
+
+<Canvas>
+  <Story of={FSuggestStories.IconRight} />
+</Canvas>
+
+<br />
+
+## prefix
+
+Prefix property enables a string before the input value.
+
+<Canvas>
+  <Story of={FSuggestStories.Prefix} />
+</Canvas>
+
+<br />
+
+## suffix
+
+Suffix property enables a string on the right side of the input box.
+
+<Canvas>
+  <Story of={FSuggestStories.Suffix} />
+</Canvas>
+
+<br />
+
+## max-length
+
+This shows the character count while typing and auto limits after reaching the max length.
+
+<Canvas>
+  <Story of={FSuggestStories.MaxLength} />
+</Canvas>
+
+<br />
+
+## Flags
+
+<f-divider />
+
+<br />
+
+<Canvas>
+  <Story of={FSuggestStories.Flags} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>loading</td>
+      <td>Loader appears on right ride of input box.</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>disabled</td>
+      <td>Opacity is set to 50% in disabled state in disabled mode.</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>clear</td>
+
+      <td>
+        Displays a close icon-button on the right side of the input that allows the user to clear
+        the input value
+      </td>
+
+      <td>
+        <code>true</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>read-only</td>
+      <td>Only Text could be read, can't be edited</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ArgsTable of={"f-suggest"} />

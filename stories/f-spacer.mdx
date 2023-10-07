@@ -1,0 +1,125 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fSpacerAnatomy from "./svg/i-fspacer-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import * as FSpacerStories from './f-spacer.stories';
+
+<Meta of={FSpacerStories} />
+
+# f-spacer
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+f-spacer is used to create a pseudo space in the layout.
+
+<br />
+
+### [Playground](/story/components-f-spacer--playground)
+
+<Canvas>
+  <Story of={FSpacerStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<Story of={FSpacerStories.Anatomy} />
+
+<br />
+
+### Specifications
+
+<f-divider />
+
+A spacer can grow horizontally or vertically depending on its parent’s layout.
+
+In a row layout a spacer grows vertically and takes the height of the parent component.
+
+In a column layout a spacer grows horizontally and takes the width of the parent component.
+
+<br />
+
+<Story of={FSpacerStories.Specifications} />
+
+<br />
+
+## size
+
+<f-divider />
+
+Spacer is used to create a pseudo space in the layout.
+
+<Canvas>
+  <Story of={FSpacerStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>fill-container</td>
+      <td>spacer fills the remaining height/width of the container</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-large</td>
+      <td>spacer fills the remaining height/width of 44px the container</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>spacer fills the remaining height/width of 36px the container</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>spacer fills the remaining height/width of 24px the container</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>spacer fills the remaining height/width of 16px the container</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-small</td>
+      <td>spacer fills the remaining height/width of 8px the container</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>any-num-value</td>
+      <td>spacer fills the remaining height/width of any num value given</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<ArgsTable of={"f-spacer"} />

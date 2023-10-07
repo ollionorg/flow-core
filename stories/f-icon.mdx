@@ -1,0 +1,285 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fIconAnatomy from "./svg/i-ficon-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import * as FIconStories from './f-icon.stories';
+
+<Meta of={FIconStories} />
+
+# f-icon
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+Icons are used to provide visual context where written text is not required and enhance usability.
+
+<br />
+
+### [Playground](/story/components-f-icon--playground)
+
+<Canvas>
+  <Story of={FIconStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider />
+
+<Story of={FIconStories.Anatomy} />
+
+<br />
+
+## source
+
+<f-divider />
+
+Source property defines what will be displayed on the icon. This could be an icon name from a
+library , any inline SVG or any URL for the image.
+
+<Canvas>
+  <Story of={FIconStories.Source} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>Icon from library</td>
+      <td>e.g i-plus</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>Emoji as source</td>
+      <td>e.g. 😃</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>URL as source</td>
+      <td>url to be entered as source to see the icon image</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## size
+
+<f-divider />
+
+The small size is the default.
+
+<Canvas>
+  <Story of={FIconStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-large</td>
+      <td>Extra large size - 36px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>Large size - 28px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>Medium size - 20px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>Small size - 16px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-small</td>
+      <td>Extra Small size - 12px</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider />
+
+States on buttons are used to communicate purpose and it’s connotation.
+
+<Canvas>
+  <Story of={FIconStories.State} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>default</td>
+
+      <td>
+        <a>$color-icon-default</a>
+      </td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>secondary</td>
+
+      <td>
+        <a>$color-icon-secondary</a>
+      </td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>subtle</td>
+
+      <td>
+        <a>$color-icon-sublte</a>
+      </td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>primary</td>
+
+      <td>
+        <a>$color-success-default</a>
+      </td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>danger</td>
+
+      <td>
+        <a>$color-danger-default</a>
+      </td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>warning</td>
+
+      <td>
+        <a>$color-warning-default</a>
+      </td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>inherit</td>
+      <td>inherit color according to parent f-div</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>custom</td>
+      <td>custom color can be given to the f-icon</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## Flags
+
+<f-divider />
+
+<Canvas>
+  <Story of={FIconStories.Flags} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+      <td>Default</td>
+    </tr>
+
+    <tr>
+      <td>loading</td>
+      <td>Loader replaces the source</td>
+      <td>false</td>
+    </tr>
+
+    <tr>
+      <td>disabled</td>
+      <td>Icon gets darker to demonstrate it's disability</td>
+      <td>false </td>
+    </tr>
+
+    <tr>
+      <td>clickable</td>
+      <td>Icon on clickable="true" shows cursor:pointer and darkens a bit</td>
+      <td>false</td>
+    </tr>
+
+    <tr>
+      <td>focused</td>
+      <td>Focused is a browser native property.</td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+<ArgsTable of={"f-icon"} />

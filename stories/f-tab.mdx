@@ -1,0 +1,171 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import FDivAnatomy from "./svg/i-fdiv-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useState } from "@storybook/client-api";
+import * as FTabStories from './f-tab.stories';
+
+<Meta of={FTabStories} />
+
+# f-tab
+
+<br />
+
+<br />
+
+## Overview
+
+<hr />
+
+Tabs are broken into two parts. They are connected by a matching content-\[id] for example. Tab node (tab-node-1) : Tab content (tab-content-1)
+
+<br />
+
+### [Playground](/story/components-f-tab--playground)
+
+<Canvas>
+  <Story of={FTabStories.Playground} />
+</Canvas>
+
+<br />
+
+## variant
+
+<f-divider />
+
+variant of every tab node
+
+<Canvas>
+  <Story of={FTabStories.Variant} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>fill</td>
+      <td>takes up $surface-secondary color as background</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>transparent</td>
+      <td>transparent background</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## direction
+
+<f-divider />
+
+Vertical tabs can be enabled using direction property. By default tabs are horizontal.
+
+<Canvas>
+  <Story of={FTabStories.Direction} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>horizontal</td>
+      <td>horizontally aligned tabs</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>vertical</td>
+      <td>vertic aligned tabs</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## node-width
+
+<f-divider />
+
+Defines the width of the tab nodes.
+
+<Canvas>
+  <Story of={FTabStories.NodeWidth} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>fill</td>
+      <td>Equal width, filling parent container</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>hug-content</td>
+      <td>Variable width</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>num value</td>
+      <td>Fixed width, user defined </td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## alignment
+
+<f-divider />
+
+The alignment property aligns a f-tab bar with respect to the parent container.
+
+*   For horizontal f-tabs, content can align to left, center, or right.
+*   For vertical f-tabs, content can align to top, middle, or bottom.
+
+<Canvas>
+  <Story of={FTabStories.Alignment} />
+</Canvas>
+
+<br />
+
+<ArgsTable of={"f-tab"} />

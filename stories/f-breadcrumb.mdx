@@ -1,0 +1,116 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useState } from "@storybook/client-api";
+import * as FBreadcrumbStories from './f-breadcrumb.stories';
+
+<Meta of={FBreadcrumbStories} />
+
+# f-breadcrumb
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+Breadcrumbs are secondary navigations which shows hierarchy for a user’s location within an app/product.
+
+<br />
+
+### [Playground](/story/components-f-breadcrumb--playground)
+
+<Canvas>
+  <Story of={FBreadcrumbStories.Playground} />
+</Canvas>
+
+<br />
+
+### size
+
+<f-divider />
+
+The medium size is the default.
+
+<br />
+
+<Canvas>
+  <Story of={FBreadcrumbStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>f-text size would be small</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>f-text size would be x-small</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+### crumbs
+
+<f-divider />
+
+Crumbs property represents the array of crumbs in a breadcrumb.
+
+<br />
+
+<Canvas>
+  <Story of={FBreadcrumbStories.Crumbs} />
+</Canvas>
+
+<br />
+
+## Flags
+
+<f-divider />
+
+<br />
+
+<Canvas>
+  <Story of={FBreadcrumbStories.Flags} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>disabled</td>
+      <td>Opacity is set to 50% in disabled state in disabled mode.</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ArgsTable of={"f-breadcrumb"} />

@@ -1,0 +1,125 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import getFakeUsers, { popoverRef } from "./utils/mock-users-data.ts";
+import { createRef, ref } from "lit/directives/ref.js";
+import downloadFile from "./donwloadFile.ts";
+import * as FTableSchemaStories from './f-table-schema.stories';
+
+<Meta of={FTableSchemaStories} />
+
+# f-table
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+Schema based Table component includes rows and cells.
+
+<br />
+
+### [Playground](/story/components-f-table-schema--playground)
+
+<Canvas>
+  <Story of={FTableSchemaStories.Playground} />
+</Canvas>
+
+<br />
+
+### data
+
+<Canvas>
+  <Story of={FTableSchemaStories.Data} />
+</Canvas>
+
+<br />
+
+### header-cell-template
+
+<Canvas>
+  <Story of={FTableSchemaStories.HeaderCellTemplate} />
+</Canvas>
+
+<br />
+
+### sticky-header
+
+<Canvas>
+  <Story of={FTableSchemaStories.StickyHeader} />
+</Canvas>
+
+<br />
+
+### rows-per-page
+
+<Canvas>
+  <Story of={FTableSchemaStories.RowsPerPage} />
+</Canvas>
+
+<br />
+
+### sort-by
+
+<Canvas>
+  <Story of={FTableSchemaStories.SortBy} />
+</Canvas>
+
+<br />
+
+### sort-order
+
+<Canvas>
+  <Story of={FTableSchemaStories.SortOrder} />
+</Canvas>
+
+<br />
+
+### search-term
+
+<Canvas>
+  <Story of={FTableSchemaStories.SearchTerm} />
+</Canvas>
+
+<br />
+
+### show-search-bar
+
+<Canvas>
+  <Story of={FTableSchemaStories.ShowSearchBar} />
+</Canvas>
+
+<br />
+
+### @toggle-row-details
+
+<Canvas>
+  <Story of={FTableSchemaStories.ToggleRowDetails} />
+</Canvas>
+
+<br />
+
+### @row-input
+
+<Canvas>
+  <Story of={FTableSchemaStories.RowInput} />
+</Canvas>
+
+<br />
+
+### @header-selected
+
+<Canvas>
+  <Story of={FTableSchemaStories.HeaderSelected} />
+</Canvas>
+
+<br />
+
+### @next
+
+<Canvas>
+  <Story of={FTableSchemaStories.Next} />
+</Canvas>

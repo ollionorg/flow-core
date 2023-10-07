@@ -1,0 +1,245 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import FDivAnatomy from "./svg/i-fdiv-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import * as FFormGroupStories from './f-form-group.stories';
+
+<Meta of={FFormGroupStories} />
+
+# f-form-group
+
+<br />
+
+<br />
+
+## Overview
+
+<hr />
+
+Use f-form-group to create logical sections within the form.
+
+f-form-group is used to group multiple instances of an input element.
+
+<br />
+
+### [Playground](/story/components-f-form-group--playground)
+
+<Canvas>
+  <Story of={FFormGroupStories.Playground} />
+</Canvas>
+
+<br />
+
+## variant
+
+<hr />
+
+Variant decides whether the input elements in a group have some gap or not when they are aligned horizontally.
+
+<p className="note-section">
+  Note: If variant is normal then the gap between elements is controlled by the parent group.
+</p>
+
+<Canvas>
+  <Story of={FFormGroupStories.Variant} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>normal</td>
+
+      <td />
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>compact</td>
+      <td>gap between elements is 0</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## direction
+
+<hr />
+
+Decides the direction of the input elements within the group.
+
+<Canvas>
+  <Story of={FFormGroupStories.Direction} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>vertical</td>
+
+      <td />
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>horizontal</td>
+
+      <td />
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## gap
+
+<hr />
+
+decides the gap between elements of a group
+
+<Canvas>
+  <Story of={FFormGroupStories.Gap} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>Items take a space gap of 16px in between</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>Items take a space gap of 12px in between</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>Items take a space gap of 8px in between</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>x-small</td>
+      <td>Items take a space gap of 4px in between</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## collapse
+
+<hr />
+
+Defines whether the group will be collapsed as an accordion or as text.
+
+<Canvas>
+  <Story of={FFormGroupStories.Collapse} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>none</td>
+      <td>padding of 24px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>accordion</td>
+      <td>padding of 16px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>text</td>
+      <td>padding of 12px</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## Flags
+
+<br />
+
+<Canvas>
+  <Story of={FFormGroupStories.Flags} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>can-duplicate</td>
+      <td>Present if user wants to duplicate the group. Clicking on this button emits an event</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ArgsTable of={"f-form-group"} />

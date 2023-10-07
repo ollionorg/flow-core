@@ -1,0 +1,191 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
+import fToastAnatomy from "./svg/i-ftoast-anatomy.js";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import * as FToastStories from './f-toast.stories';
+
+<Meta of={FToastStories} />
+
+# f-toast
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+Toasts are time-based window elements used to display short messages; they usually appear at the top of the screen and disappear after a few seconds.
+
+f-toast act as the wrapper component for toast templates.
+
+<br />
+
+### [Playground](/story/components-f-toast--playground)
+
+<Canvas>
+  <Story of={FToastStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider />
+
+<Story of={FToastStories.Anatomy} />
+
+<br />
+
+## type
+
+Flow 2 provides two types of toast:
+
+*   auto-hide: toast disappears after the definite amount of time, and
+
+*   persist: toast remains on screen until the user interacts with it.
+
+<Canvas>
+  <Story of={FToastStories.Type} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>auto-hide</td>
+      <td>toast disappears after the definite amount of time</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>persists</td>
+      <td>toast remains on screen until the user interacts with it</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## duration
+
+<f-divider />
+
+When type is auto-hide, duration property defines the time in milliseconds after which toast disappears. By default it is 5000 ms
+
+<Canvas>
+  <Story of={FToastStories.Duration} />
+</Canvas>
+
+<br />
+
+## state
+
+<f-divider />
+
+States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
+
+<Canvas>
+  <Story of={FToastStories.State} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>default</td>
+
+      <td />
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>primary</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>success</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>danger</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>warning</td>
+
+      <td />
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## Flags
+
+<f-divider />
+
+<br />
+
+<Canvas>
+  <Story of={FToastStories.Flags} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>close-button</td>
+      <td>Enables a ‘close’ icon-button on top left of the toast </td>
+
+      <td>
+        <code>true</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ArgsTable of={"f-toast"} />

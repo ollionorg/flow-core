@@ -1,0 +1,438 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fDateTimePickerAnatomy from "./svg/i-fdate-time-picker-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import * as FDateTimePickerStories from './f-date-time-picker.stories';
+
+<Meta of={FDateTimePickerStories} />
+
+# f-date-time-picker
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+Date time picker is an input field with a popover from which a user can easily select date and time.
+
+<br />
+
+### [Playground](/story/components-f-date-time-picker--playground)
+
+<Canvas>
+  <Story of={FDateTimePickerStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider />
+
+<Story of={FDateTimePickerStories.Anatomy} />
+
+<br />
+
+## variant
+
+<f-divider />
+
+Variants are various visual representations of a date-time-picker field.
+
+<Canvas>
+  <Story of={FDateTimePickerStories.Variant} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>curved</td>
+      <td>border radius of 4px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>round</td>
+      <td>border radius of 22px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>block</td>
+      <td>works well with cateogry="transparent"</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## category
+
+<f-divider />
+
+Category decides the background of f-date-time-picker
+
+<Canvas>
+  <Story of={FDateTimePickerStories.Category} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>fill</td>
+      <td>background is filled</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>outline</td>
+      <td>empty background with border</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>transparent</td>
+
+      <td />
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## mode
+
+<f-divider />
+
+The type attribute specifies the type of `<f-date-time-picker>` element to display.
+
+<Canvas>
+  <Story of={FDateTimePickerStories.Mode} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>date-time</td>
+      <td>selection for both date and time together </td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>date-only</td>
+      <td>selection for only date</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>time-only</td>
+      <td>selection for only time</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## value
+
+Defines the value of an f-date-time-picker.
+
+You may specify those dates in a variety of formats:
+
+*   Date Objects are always accepted <code>new Date(2015, 0, 10)</code>
+*   Timestamps are always accepted e.g. 1488136398547
+*   ISO Date Strings are always accepted e.g. "2017-02-26T19:40:03.243Z"
+*   Date Strings, which must match the dateFormat chronologically - This means that "2016" "2016-10", "2016-10-20", "2016-10-20 15", "2016-10-20 15:30" are all valid date strings
+
+<Canvas>
+  <Story of={FDateTimePickerStories.Value} />
+</Canvas>
+
+<br />
+
+## placeholder
+
+Defines the placeholder text for f-date-time-picker
+
+<Canvas>
+  <Story of={FDateTimePickerStories.Placeholder} />
+</Canvas>
+
+<br />
+
+## size
+
+<f-divider />
+
+f-date-time-picker can have 2 sizes.
+
+<Canvas>
+  <Story of={FDateTimePickerStories.Size} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>height="28px"</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>eheight="36px"</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider />
+
+States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
+
+<Canvas>
+  <Story of={FDateTimePickerStories.State} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>default</td>
+
+      <td />
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>primary</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>success</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>danger</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>warning</td>
+
+      <td />
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## min-date
+
+Sets the minimum value of the date allowed in the picker
+
+You may specify those dates in a variety of formats:
+
+*   Date Objects are always accepted <code>new Date(2015, 0, 10)</code>
+*   Timestamps are always accepted e.g. 1488136398547
+*   ISO Date Strings are always accepted e.g. "2017-02-26T19:40:03.243Z"
+*   Date Strings, which must match the dateFormat chronologically - This means that "2016" "2016-10", "2016-10-20", "2016-10-20 15", "2016-10-20 15:30" are all valid date strings
+*   The shortcut "today"
+
+<Canvas>
+  <Story of={FDateTimePickerStories.MinDate} />
+</Canvas>
+
+<br />
+
+## max-date
+
+Sets the maximum value of the date allowed in the picker
+
+You may specify those dates in a variety of formats:
+
+*   Date Objects are always accepted <code>new Date(2015, 0, 10)</code>
+*   Timestamps are always accepted e.g. 1488136398547
+*   ISO Date Strings are always accepted e.g. "2017-02-26T19:40:03.243Z"
+*   Date Strings, which must match the dateFormat chronologically - This means that "2016" "2016-10", "2016-10-20", "2016-10-20 15", "2016-10-20 15:30" are all valid date strings
+*   The shortcut "today"
+
+<Canvas>
+  <Story of={FDateTimePickerStories.MaxDate} />
+</Canvas>
+
+<br />
+
+## disable-date
+
+Sets the certain dates unavailable. There can be multiple options:
+
+1.  Disabling specific date(s), format - dd/mm/YY
+2.  Disabling range of dates
+3.  Disabling dates using a function
+
+<Canvas>
+  <Story of={FDateTimePickerStories.DisableDate} />
+</Canvas>
+
+<br />
+
+## Flags
+
+<f-divider />
+
+<br />
+
+<Canvas>
+  <Story of={FDateTimePickerStories.Flags} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>loading</td>
+      <td>Loader appears on right ride of input box.</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>disabled</td>
+      <td>Opacity is set to 50% in disabled state in disabled mode.</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>clear</td>
+
+      <td>
+        Displays a close icon-button on the right side of the input that allows the user to clear
+        the input value
+      </td>
+
+      <td>
+        <code>true</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>is-range</td>
+      <td>for range calnedar</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>week-number</td>
+      <td>Displays the week number inside calendar</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>inline</td>
+      <td>calnedar always open without popover mode</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ArgsTable of={"f-date-time-picker"} />

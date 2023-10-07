@@ -1,0 +1,376 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fInputAnatomy from "./svg/i-finput-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import * as FSearchStories from './f-search.stories';
+
+<Meta of={FSearchStories} />
+
+# f-search
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+Search enables users to specify a word or a phrase to find relevant pieces of content.
+
+<br />
+
+### [Playground](/story/components-f-search--playground)
+
+<Canvas>
+  <Story of={FSearchStories.Playground} />
+</Canvas>
+
+<br />
+
+## variant
+
+<f-divider />
+
+Variants are various visual representations of an input field.
+
+<Canvas>
+  <Story of={FSearchStories.Variant} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>curved</td>
+      <td>border radius of 4px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>round</td>
+      <td>border radius of 22px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>block</td>
+      <td>works well with cateogry="transparent"</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## category
+
+<f-divider />
+
+Category decides the background of f-search
+
+<Canvas>
+  <Story of={FSearchStories.Category} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>fill</td>
+      <td>background is filled</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>outline</td>
+      <td>empty background with border</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>transparent</td>
+
+      <td />
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## value
+
+Defines the value of an f-search. Validation rules are applied on the value depending on the type property of the f-text-input.
+
+<Canvas>
+  <Story of={FSearchStories.Value} />
+</Canvas>
+
+<br />
+
+## placeholder
+
+Defines the placeholder text for f-text-input
+
+<Canvas>
+  <Story of={FSearchStories.Placeholder} />
+</Canvas>
+
+<br />
+
+## size
+
+<f-divider />
+
+f-search can have 2 sizes.
+
+<Canvas>
+  <Story of={FSearchStories.Size} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>height="28px"</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>eheight="36px"</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider />
+
+States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
+
+<Canvas>
+  <Story of={FSearchStories.State} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>default</td>
+
+      <td />
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>primary</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>success</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>danger</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>warning</td>
+
+      <td />
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## result
+
+Provides the search result in the form of an array of strings.
+
+<Canvas>
+  <Story of={FSearchStories.Result} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>object of categories</td>
+      <td>for eg. category1:\["option1", "option2"]</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>array os string values</td>
+      <td>for e.g. \["option1", "option2"]</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## scope
+
+Provides a select dropdown on the left to filter the search query.
+
+<Canvas>
+  <Story of={FSearchStories.Scope} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>none</td>
+      <td>no scope</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>array os string values</td>
+      <td>for e.g. \["option1", "option2"]</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## Flags
+
+<f-divider />
+
+<br />
+
+<Canvas>
+  <Story of={FSearchStories.Flags} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>search-button</td>
+
+      <td>
+        Note: Provides an icon button to trigger the search query. Note: Search icon on left is not
+        shown if search-button is true
+      </td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>disabled</td>
+      <td>Opacity is set to 50% in disabled state in disabled mode.</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>clear</td>
+
+      <td>
+        Displays a close icon-button on the right side of the search that allows the user to clear
+        the input value
+      </td>
+
+      <td>
+        <code>true</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ArgsTable of={"f-search"} />

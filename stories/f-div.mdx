@@ -1,0 +1,1050 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import FDivAnatomy from "./svg/i-fdiv-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
+import * as FDivStories from './f-div.stories';
+
+<Meta of={FDivStories} />
+
+# f-div
+
+<br />
+
+<br />
+
+## Overview
+
+<hr />
+
+f-div is used as a container for HTML elements.
+
+<br />
+
+### [Playground](/story/components-f-div--playground)
+
+<Canvas>
+  <Story of={FDivStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<hr />
+
+<br />
+
+<Story of={FDivStories.Anatomy} />
+
+## variant
+
+<hr />
+
+variant are representations of a f-div with different corner radius. A f-div can be
+curved or block.
+
+<Canvas>
+  <Story of={FDivStories.Variant} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>block</td>
+      <td>Sets the corner radius to 0px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>curved</td>
+      <td>Sets the corner radius to 4px</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## direction
+
+<hr />
+
+Defines the orientation of f-div as either row or column.
+
+<Canvas>
+  <Story of={FDivStories.Direction} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>row</td>
+      <td>Sets f-div as a row</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>column</td>
+      <td>Sets f-div as a column</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<hr />
+
+States on f-div are used to communicate purpose and its connotation. For example, a red color
+connotes danger, whereas a green color connotes success and so on.
+
+<p class="note-section">
+  Note: In case of nested f-div, all children f-div inherit the state from parent f-div until
+  specified.
+</p>
+
+<Canvas>
+  <Story of={FDivStories.State} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>transparent</td>
+      <td>Sets the background-color of f-div to transparent</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>default</td>
+      <td>Sets the background-color of f-div to default</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>subtle</td>
+      <td>Sets the background-color of f-div to subtle</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>secondary</td>
+      <td>Sets the background-color of f-div to secondary</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>tertiary</td>
+      <td>Sets the background-color of f-div to tertiary</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>primary</td>
+      <td>Sets the background-color of f-div to primary</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>success</td>
+      <td>Sets the background-color of f-div to success</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>warning</td>
+      <td>Sets the background-color of f-div to warning</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>danger</td>
+      <td>Sets the background-color of f-div to danger</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## border
+
+<hr />
+
+Border property enables a border for f-div. You can combine border properties to achieve a desired
+result.
+
+<Canvas>
+  <Story of={FDivStories.Border} />
+</Canvas>
+
+### border width
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>Sets the border width - 4px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>Sets the border width - 2px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>Sets the border width - 1px</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+### border style
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>solid</td>
+      <td>border style changes to solid line</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>dashed</td>
+      <td>border style changes to dashed line</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>dotted</td>
+      <td>border style changes to dotted line</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+### border color
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>default</td>
+      <td>default border color</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>secondary</td>
+      <td>secondary border color</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>subtle</td>
+      <td>subtle border color</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+### border position
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>bottom</td>
+      <td>border is at the bottom</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>top</td>
+      <td>border is at the top</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>left</td>
+      <td>border is at the left</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>right</td>
+      <td>border is at the right</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>around</td>
+      <td>border is all around f-div</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## gap
+
+<hr />
+
+Gap defines the space between the items of a layout
+
+<Canvas>
+  <Story of={FDivStories.Gap} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>auto</td>
+      <td>Items are evenly distributed to the width of the row.</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-large</td>
+      <td>Items take a space gap of 32px in between</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>Items take a space gap of 24px in between</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>Items take a space gap of 16px in between</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>Items take a space gap of 12px in between</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-small</td>
+      <td>Items take a space gap of 8px in between</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>none</td>
+      <td>Items take a space gap of 0px in between</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## padding
+
+<hr />
+
+Padding defines extra space between the elements and the container. Gap is used for spacing
+between elements.
+
+<Canvas>
+  <Story of={FDivStories.Padding} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-large</td>
+      <td>padding of 24px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>padding of 16px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>padding of 12px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>padding of 8px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-small</td>
+      <td>padding of 4px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>none</td>
+      <td>padding of 0px</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## width
+
+<hr />
+
+Width of a layout can be defined in 3 ways:
+
+*   Fill container: width is set to the parent container’s width.
+*   Hug contents: width is a sum of the width of all elements inside it and left and right
+    padding.
+*   Fixed: width is set to the numerical value passed to the width property.
+
+<p class="note-section">Note: Column variant always has width set to hug content.</p>
+
+<Canvas>
+  <Story of={FDivStories.Width} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>fill-container</td>
+      <td>width is set to the parent container’s width</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>hug-content</td>
+      <td>width is a sum of the width of all elements inside it and left and right padding</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>any num-value</td>
+      <td>width is set to the numerical value passed to the width property</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## height
+
+<hr />
+
+Height of a layout can be defined in 3 ways:
+
+*   Fill container: height is set to the parent container’s height.
+*   Hug content: height is a sum of the height of all elements inside it and left and right padding.
+*   Fixed: width is set to the numerical value passed to the height property.
+
+<p class="note-section margin-btm-24">Note: Row variant always has height set to Hug content.</p>
+
+<Canvas>
+  <Story of={FDivStories.Height} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>fill-container</td>
+      <td>height is set to the parent container’s height</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>hug-content</td>
+      <td>height is a sum of the height of all elements inside it and left and right padding</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>any num-value</td>
+      <td>height is set to the numerical value passed to the height property</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## max-width
+
+<hr />
+
+Defines maximum width of the f-div.
+
+<Canvas>
+  <Story of={FDivStories.MaxWidth} />
+</Canvas>
+
+<br />
+
+## max-height
+
+<hr />
+
+Defines maximum height of the f-div.
+
+<Canvas>
+  <Story of={FDivStories.MaxHeight} />
+</Canvas>
+
+<br />
+
+## tooltip
+
+<hr />
+
+A tooltip property enables a tooltip on the f-div. A tooltip can be a native directive or a rich
+tooltip.
+
+<Canvas>
+  <Story of={FDivStories.Tooltip} />
+</Canvas>
+
+<br />
+
+## overflow
+
+<hr />
+
+Overflow property defines the behavior of the overflowing elements inside a f-div. It can happen
+either if layout is overflowing from the parent container or layout has fixed width/height and the
+elements are overflowing.
+
+<br />
+
+Elements can behave in 3 ways in this situation:
+
+*   Wrap: Overflowing elements are wrapped to the next row/column. This is the default behavior.
+*   Scroll: Layout becomes a scrollable component and the overflowing elements are accessible on scroll.
+*   Hidden: Overflowing elements are clipped and remain hidden.
+
+<Canvas>
+  <Story of={FDivStories.Overflow} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>wrap</td>
+      <td>Overflowing elements are wrapped to the next row/column. This is the default behavior</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>scroll</td>
+
+      <td>
+        Layout becomes a scrollable component and the overflowing elements are accessible on scroll
+      </td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>hidden</td>
+      <td>Overflowing elements are clipped and remain hidden</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## align
+
+<hr />
+
+Align property places the elements of a layout in particular positions with respect to the f-div.
+
+<Canvas>
+  <Story of={FDivStories.Align} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>top-left</td>
+      <td>Align Vertically-top, Horizontally-left</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>top-center</td>
+      <td>Align Vertically-top, Horizontally-center</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>top-right</td>
+      <td>Align Vertically-top, Horizontally-right</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>middle-left</td>
+      <td>Align Vertically-middle, Horizontally-left</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>middle-center</td>
+      <td>Align Vertically-middle, Horizontally-center</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>middle-right</td>
+      <td>Align Vertically-middle, Horizontally-right</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>bottom-left</td>
+      <td>Align Vertically-bottom, Horizontally-left</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>bottom-center</td>
+      <td>Align Vertically-bottom, Horizontally-center</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>bottom-right</td>
+      <td>Align Vertically-bottom, Horizontally-right</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## sticky
+
+<hr />
+
+Sticky property defines a f-div’s position based on the scroll position of the user. By default it is set to none and a layout moves with the parent component.
+
+<br />
+
+To preserve the scroll position, sticky property can be set to: left, right, top, bottom.
+
+<br />
+
+<Canvas>
+  <Story of={FDivStories.Sticky} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>none</td>
+      <td>Nothing happens</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>top</td>
+      <td>div sticks to the top, even while scrolling the page</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>bottom</td>
+      <td>div remains sticked to the bottom of the page, even while scrolling the page</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>right</td>
+      <td>div remains sticked to the right of the page, even while scrolling</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>left</td>
+      <td>div remains sticked to the left of the page, even while scrolling</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>middle-right</td>
+      <td>Align Vertically-middle, Horizontally-right</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>bottom-left</td>
+      <td>Align Vertically-bottom, Horizontally-left</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>bottom-center</td>
+      <td>Align Vertically-bottom, Horizontally-center</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>bottom-right</td>
+      <td>Align Vertically-bottom, Horizontally-right</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## selected
+
+<hr />
+
+Sets the f-div to a selected state. Select between border, background, or notch based on your use case.
+
+<br />
+
+<p class="note-section">
+  Note: Selected is optional property and if not mentioned, f-div does not have any selected state.
+</p>
+
+<br />
+
+<Canvas>
+  <Story of={FDivStories.Selected} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>background</td>
+      <td>Lightened/darkened by 10%</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>border</td>
+      <td>a border appears</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>notch-right</td>
+      <td>Lightened/darkened by 10%, Notch has a maximum height of 48px.</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>notch-left</td>
+      <td>Lightened/darkened by 15%, Notch has a maximum height of 48px</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## loading
+
+<hr />
+
+Defines the behavior of f-div in loading state. A user can select between a loader or a skeleton.
+
+<br />
+
+<Canvas>
+  <Story of={FDivStories.Loading} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>loader</td>
+      <td>Loader appears</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>skeleton</td>
+      <td>skeleton appears</td>
+
+      <td />
+    </tr>
+  </tbody>
+</table>
+
+<br />
+
+## Flags
+
+<hr />
+
+Defines the behavior of f-div in loading state. A user can select between a loader or a skeleton.
+
+<br />
+
+<Canvas>
+  <Story of={FDivStories.Flags} />
+</Canvas>
+
+<table class="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>disabled</td>
+      <td>Opacity is set to 50% in disabled state in disabled mode.</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>clickable</td>
+      <td>Lightened/darkened by 15% on hover</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ArgsTable of={"f-div"} />

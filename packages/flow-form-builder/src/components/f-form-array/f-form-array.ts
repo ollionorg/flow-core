@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property, queryAll } from "lit/decorators.js";
-import { FRoot } from "@cldcvr/flow-core/mixins/components/f-root/f-root";
+import { FRoot } from "@cldcvr/flow-core";
 import eleStyle from "./f-form-array.scss?inline";
-import flowCoreCSS from "@cldcvr/flow-core/dist/style.css?inline";
 import {
 	CanValidateFields,
 	FFormInputElements,
@@ -34,7 +33,7 @@ export class FFormArray extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(flowCoreCSS), unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle)];
 
 	/**
 	 * @attribute comments baout title

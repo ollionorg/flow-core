@@ -7,6 +7,7 @@ cd "$HERE"
 pnpm run analyze
 
 echo "building library..."
-vite build --emptyOutDir && vite build --emptyOutDir --config vite.umd.config.ts && tsc -emitDeclarationOnly
+pnpm run build
+
 echo "generating types..."
 node generate-types.js

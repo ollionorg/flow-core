@@ -1,4 +1,4 @@
-import { LineageNodeChildren } from "src/components/f-lineage/lineage-types";
+import { LineageNodeChildren } from "../components/f-lineage/lineage-types";
 import getComputedHTML from "./get-computed-html";
 
 function isEmpty(obj: Object) {

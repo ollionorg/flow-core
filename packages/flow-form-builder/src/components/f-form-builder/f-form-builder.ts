@@ -16,8 +16,7 @@ import {
 } from "../../types";
 import eleStyle from "./f-form-builder.scss?inline";
 
-import { FRoot } from "@cldcvr/flow-core/mixins/components/f-root/f-root";
-import flowCoreCSS from "@cldcvr/flow-core/dist/style.css?inline";
+import { FRoot } from "@cldcvr/flow-core";
 import { Ref, createRef } from "lit/directives/ref.js";
 import fieldRenderer from "./fields";
 import { extractValidationState, validateField } from "../../modules/validation/validator";
@@ -31,7 +30,7 @@ export class FFormBuilder extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(flowCoreCSS), unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle)];
 
 	/**
 	 * @attribute formbuilder name

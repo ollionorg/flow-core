@@ -1,8 +1,7 @@
 import { html, PropertyValueMap, TemplateResult, unsafeCSS } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
-import { FRoot } from "@cldcvr/flow-core/mixins/components/f-root/f-root";
+import { FRoot } from "@cldcvr/flow-core";
 import eleStyle from "./f-form-object.scss?inline";
-import flowCoreCSS from "@cldcvr/flow-core/dist/style.css?inline";
 
 import fieldRenderer from "../f-form-builder/fields";
 import { createRef, Ref } from "lit/directives/ref.js";
@@ -31,7 +30,6 @@ export class FFormObject extends FRoot {
 	 * css loaded from scss file
 	 */
 	static styles = [
-		unsafeCSS(flowCoreCSS),
 		unsafeCSS(eleStyle),
 		...FFieldSeparator.styles,
 		unsafeCSS(radioGroupStyles),

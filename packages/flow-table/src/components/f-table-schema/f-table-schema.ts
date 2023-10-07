@@ -512,7 +512,7 @@ export class FTableSchema extends FRoot {
 
 	handleColumnSelection(e: CustomEvent) {
 		if (this.data?.header) {
-			const cellToToggleEntry = Object.entries(this.data.header).at(e.detail.columnIndex);
+			const cellToToggleEntry = Object.entries(this.data.header)[e.detail.columnIndex];
 			let cellToToggle: string;
 			if (cellToToggleEntry) {
 				cellToToggle = cellToToggleEntry[0];

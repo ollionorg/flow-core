@@ -15,11 +15,10 @@ import {
 } from "./lineage-types";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import drawLineage from "./draw/draw-lineage";
-import flowCoreCSS from "@cldcvr/flow-core/dist/style.css?inline";
 import lowlightPath from "./highlight/lowlight-path";
 import createHierarchy from "./create/create-hierarchy";
 import { FButton, FDiv, FPopover } from "@cldcvr/flow-core";
-import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
+import { FRoot } from "@cldcvr/flow-core";
 import { debounce, getComputedHTML } from "../../utils";
 import getProxies from "./draw/hot-reload-proxies";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
@@ -30,7 +29,7 @@ export class FLineage extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), unsafeCSS(flowCoreCSS)];
+	static styles = [unsafeCSS(eleStyle)];
 
 	@query("svg")
 	svg!: SVGSVGElement;

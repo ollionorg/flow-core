@@ -1,6 +1,6 @@
 import { html, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
-import eleStyle from "./f-text-area.scss";
+import eleStyle from "./f-text-area.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";

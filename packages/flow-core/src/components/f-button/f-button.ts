@@ -1,7 +1,8 @@
 import { html, PropertyValues, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import eleStyle from "./f-button.scss";
+import eleStyle from "./f-button.scss?inline";
+import globalStyle from "./f-button-global.scss?inline";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -13,6 +14,7 @@ import getTextContrast from "../../utils/get-text-contrast";
 import { FIcon } from "../f-icon/f-icon";
 import { FCounter } from "../f-counter/f-counter";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
 
 export type FButtonState =
 	| "primary"
@@ -22,6 +24,8 @@ export type FButtonState =
 	| "danger"
 	| "inherit"
 	| `custom, ${string}`;
+
+injectCss(globalStyle);
 
 /**
  * @summary Buttons allow users to perform an action or to initiate a new function.

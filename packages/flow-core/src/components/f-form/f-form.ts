@@ -2,7 +2,7 @@ import { html, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
-import eleStyle from "./f-form.scss";
+import eleStyle from "./f-form.scss?inline";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
 

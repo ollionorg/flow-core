@@ -1,6 +1,6 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
-import eleStyle from "./f-accordion.scss";
+import eleStyle from "./f-accordion.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv, FDivPaddingProp } from "../f-div/f-div";
 import { flowElement } from "./../../utils";

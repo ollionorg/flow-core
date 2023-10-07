@@ -1,6 +1,6 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
-import eleStyle from "./f-pictogram.scss";
+import eleStyle from "./f-pictogram.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ConfigUtil } from "@cldcvr/flow-core-config";
 import { getTextContrast, isValidHttpUrl } from "./../../utils";

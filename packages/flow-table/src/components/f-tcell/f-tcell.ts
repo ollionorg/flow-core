@@ -2,7 +2,7 @@ import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { FCheckbox, FDiv, FIconButton, FIcon, FRadio, FRoot, flowElement } from "@cldcvr/flow-core";
 import { FTableSelectable } from "../f-table/f-table";
-import eleStyle from "./f-tcell.scss";
+import eleStyle from "./f-tcell.scss?inline";
 import { FTrowChevronPosition } from "../f-trow/f-trow";
 import { createRef, ref } from "lit/directives/ref.js";
 

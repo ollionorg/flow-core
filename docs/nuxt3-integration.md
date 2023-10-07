@@ -13,11 +13,7 @@ Before we dive into the integration process, make sure you have a basic understa
 To get started, install the Flow Web Component library in your Nuxt project using your preferred package manager:
 
 ```bash
-npm install @cldcvr/flow-core
-
-# or
-
-yarn add @cldcvr/flow-core
+npm i --save @cldcvr/flow-core
 ```
 
 ### Step 2: Register Flow components through a Nuxt plugin

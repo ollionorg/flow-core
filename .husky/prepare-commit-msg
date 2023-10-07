@@ -1,0 +1,16 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Extract issue number from branch name.
+branch_issue_number=$(git symbolic-ref HEAD | sed -Ee 's|^refs/heads/||' | sed -Ee 's|^[A-Za-z]+/||')
+message=$(cat $1)
+
+if [ -n "$branch_issue_number" ]; then
+	# Check for existing ticket number in git commit message
+    message_issue_number=$(echo "$message" | grep -Eo -m 1 '^([^ ]*)')
+
+    if [ "$message_issue_number" != "$branch_issue_number" ]; then
+		# Prepend issue number extracted from branch name.
+        echo "$branch_issue_number $message" > $1
+    fi
+fi

@@ -1,0 +1,59 @@
+@use "sass:map";
+// common mixins imported from this file
+@import "@cldcvr/flow-core/mixins/scss/mixins";
+@import "./../../mixins";
+
+:host {
+	@include base();
+	display: flex;
+	flex: 1 0 auto;
+	width: unset;
+	align-items: flex-start;
+	[data-hidden="true"] {
+		display: none !important;
+	}
+	@include infoIcon();
+}
+f-div[direction="column"],
+f-form-group[direction="vertical"] {
+	> f-form-object {
+		width: 100%;
+	}
+	> f-form-array {
+		width: 100%;
+	}
+	> f-form-group {
+		width: 100%;
+	}
+	> f-suggest {
+		width: 100%;
+	}
+	> f-field-separator {
+		width: 100%;
+	}
+	> f-radio-group {
+		width: 100%;
+	}
+	> f-checkbox-group {
+		width: 100%;
+	}
+	> f-select {
+		width: 100%;
+	}
+	> f-date-time-picker {
+		width: 100%;
+	}
+}
+
+f-div[direction="row"],
+f-form-group[direction="horizontal"] {
+	> f-field-separator {
+		height: 100%;
+	}
+	> f-select,
+	> f-suggest,
+	> f-date-time-picker {
+		width: 100%;
+		flex: initial;
+	}
+}

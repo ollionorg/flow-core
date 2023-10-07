@@ -1,6 +1,6 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
-import eleStyle from "./f-emoji-picker.scss";
+import eleStyle from "./f-emoji-picker.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import data, { Category, EmojiMartData } from "@emoji-mart/data";
 import { Picker } from "emoji-mart";

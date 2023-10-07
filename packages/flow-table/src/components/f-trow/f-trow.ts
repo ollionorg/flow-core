@@ -3,7 +3,7 @@ import { property, query } from "lit/decorators.js";
 
 import { FDiv, FIcon, FRoot, flowElement } from "@cldcvr/flow-core";
 import { FTcell } from "../f-tcell/f-tcell";
-import eleStyle from "./f-trow.scss";
+import eleStyle from "./f-trow.scss?inline";
 
 export type FTrowState =
 	| "primary"

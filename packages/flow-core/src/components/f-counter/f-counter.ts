@@ -1,6 +1,6 @@
 import { html, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
-import eleStyle from "./f-counter.scss";
+import eleStyle from "./f-counter.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";

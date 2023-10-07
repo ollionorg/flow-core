@@ -1,6 +1,6 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
-import eleStyle from "./f-switch.scss";
+import eleStyle from "./f-switch.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "./../../utils";

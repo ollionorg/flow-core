@@ -1,0 +1,2877 @@
+{
+	"schemaVersion": "1.0.0",
+	"readme": "",
+	"modules": [
+		{
+			"kind": "javascript-module",
+			"path": "src/index.ts",
+			"declarations": [],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "*",
+					"declaration": {
+						"name": "*",
+						"package": "\"./components/f-form-builder/f-form-builder\""
+					}
+				},
+				{
+					"kind": "js",
+					"name": "*",
+					"declaration": {
+						"name": "*",
+						"package": "\"./types\""
+					}
+				},
+				{
+					"kind": "js",
+					"name": "*",
+					"declaration": {
+						"name": "*",
+						"package": "\"./components/f-checkbox-group/f-checkbox-group\""
+					}
+				},
+				{
+					"kind": "js",
+					"name": "*",
+					"declaration": {
+						"name": "*",
+						"package": "\"./components/f-radio-group/f-radio-group\""
+					}
+				},
+				{
+					"kind": "js",
+					"name": "*",
+					"declaration": {
+						"name": "*",
+						"package": "\"./components/f-form-array/f-form-array\""
+					}
+				},
+				{
+					"kind": "js",
+					"name": "*",
+					"declaration": {
+						"name": "*",
+						"package": "\"./components/f-form-object/f-form-object\""
+					}
+				},
+				{
+					"kind": "js",
+					"name": "*",
+					"declaration": {
+						"name": "*",
+						"package": "\"./components/f-field-separator/f-field-separator\""
+					}
+				},
+				{
+					"kind": "js",
+					"name": "html",
+					"declaration": {
+						"name": "html",
+						"module": "\"lit\""
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/shims.d.ts",
+			"declarations": [
+				{
+					"kind": "variable",
+					"name": "content",
+					"type": {
+						"text": "Record<string, string>"
+					}
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "content",
+						"module": "src/shims.d.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "content",
+						"module": "src/shims.d.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "content",
+						"module": "src/shims.d.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/types.ts",
+			"declarations": [],
+			"exports": []
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/modules/helpers.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "propogateProperties",
+					"parameters": [
+						{
+							"name": "element",
+							"type": {
+								"text": "FFormArray | FFormObject | FFormBuilder"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": "getSubTitle",
+					"parameters": [
+						{
+							"name": "field",
+							"type": {
+								"text": "Exclude<\n\t\tFormBuilderField,\n\t\tFormBuilderSeparatorField | FormBuilderHiddenField | FormBuilderButtonField\n\t>"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": "getSlots",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "field",
+							"type": {
+								"text": "Exclude<\n\t\tFormBuilderField,\n\t\tFormBuilderSeparatorField | FormBuilderHiddenField | FormBuilderButtonField\n\t>"
+							}
+						}
+					]
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "propogateProperties",
+					"declaration": {
+						"name": "propogateProperties",
+						"module": "src/modules/helpers.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "getSubTitle",
+					"declaration": {
+						"name": "getSubTitle",
+						"module": "src/modules/helpers.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "getSlots",
+					"declaration": {
+						"name": "getSlots",
+						"module": "src/modules/helpers.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/modules/utils.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "isEmptyObject",
+					"parameters": [
+						{
+							"name": "obj",
+							"type": {
+								"text": "Object"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": "isNullOrUndefined",
+					"return": {
+						"type": {
+							"text": "value is undefined | null"
+						}
+					},
+					"parameters": [
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": "isEmptyArray",
+					"return": {
+						"type": {
+							"text": "boolean"
+						}
+					},
+					"parameters": [
+						{
+							"name": "arr",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": "isValidEmail",
+					"parameters": [
+						{
+							"name": "email",
+							"type": {
+								"text": "string"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": "isValidHttpUrl",
+					"parameters": [
+						{
+							"name": "stringurl",
+							"type": {
+								"text": "string"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": "isValidUrl",
+					"parameters": [
+						{
+							"name": "stringurl",
+							"type": {
+								"text": "string"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": "getSingleParam",
+					"parameters": [
+						{
+							"name": "params",
+							"type": {
+								"text": "[TParam] | Record<string, TParam>"
+							}
+						},
+						{
+							"name": "paramName",
+							"type": {
+								"text": "string"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": "isEmpty",
+					"return": {
+						"type": {
+							"text": "boolean"
+						}
+					},
+					"parameters": [
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": "isAllNullOrUndefined",
+					"parameters": [
+						{
+							"name": "value",
+							"type": {
+								"text": "Array<unknown>"
+							}
+						}
+					]
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "isEmptyObject",
+					"declaration": {
+						"name": "isEmptyObject",
+						"module": "src/modules/utils.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "isNullOrUndefined",
+					"declaration": {
+						"name": "isNullOrUndefined",
+						"module": "src/modules/utils.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "isEmptyArray",
+					"declaration": {
+						"name": "isEmptyArray",
+						"module": "src/modules/utils.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "isValidEmail",
+					"declaration": {
+						"name": "isValidEmail",
+						"module": "src/modules/utils.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "isValidHttpUrl",
+					"declaration": {
+						"name": "isValidHttpUrl",
+						"module": "src/modules/utils.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "isValidUrl",
+					"declaration": {
+						"name": "isValidUrl",
+						"module": "src/modules/utils.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "getSingleParam",
+					"declaration": {
+						"name": "getSingleParam",
+						"module": "src/modules/utils.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "isEmpty",
+					"declaration": {
+						"name": "isEmpty",
+						"module": "src/modules/utils.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "isAllNullOrUndefined",
+					"declaration": {
+						"name": "isAllNullOrUndefined",
+						"module": "src/modules/utils.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-checkbox-group/f-checkbox-group.ts",
+			"declarations": [
+				{
+					"kind": "variable",
+					"name": "checkboxGroupStyles",
+					"default": "eleStyle"
+				},
+				{
+					"kind": "class",
+					"description": "",
+					"name": "FCheckboxGroup",
+					"members": [
+						{
+							"kind": "field",
+							"name": "options",
+							"type": {
+								"text": "CheckboxOptions"
+							},
+							"default": "[]",
+							"attribute": "options"
+						},
+						{
+							"kind": "field",
+							"name": "state",
+							"type": {
+								"text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+							},
+							"default": "\"default\"",
+							"attribute": "state",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "value",
+							"type": {
+								"text": "CheckboxOptions | undefined"
+							},
+							"attribute": "value",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "direction",
+							"type": {
+								"text": "\"vertical\" | \"horizontal\" | undefined"
+							},
+							"default": "\"vertical\"",
+							"attribute": "direction",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "gap",
+							"type": {
+								"text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+							},
+							"default": "\"small\"",
+							"attribute": "gap",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "helperText",
+							"type": {
+								"text": "string | undefined"
+							},
+							"attribute": "helperText",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "disabled",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"attribute": "disabled",
+							"reflects": true
+						},
+						{
+							"kind": "method",
+							"name": "handleChange",
+							"parameters": [
+								{
+									"name": "e",
+									"type": {
+										"text": "CustomEvent"
+									}
+								},
+								{
+									"name": "option",
+									"type": {
+										"text": "CheckboxOption"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "isChecked",
+							"parameters": [
+								{
+									"name": "option",
+									"type": {
+										"text": "CheckboxOption"
+									}
+								}
+							]
+						}
+					],
+					"attributes": [
+						{
+							"name": "options",
+							"type": {
+								"text": "CheckboxOptions"
+							},
+							"default": "[]",
+							"fieldName": "options"
+						},
+						{
+							"name": "state",
+							"type": {
+								"text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+							},
+							"default": "\"default\"",
+							"fieldName": "state"
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "CheckboxOptions | undefined"
+							},
+							"fieldName": "value"
+						},
+						{
+							"name": "direction",
+							"type": {
+								"text": "\"vertical\" | \"horizontal\" | undefined"
+							},
+							"default": "\"vertical\"",
+							"fieldName": "direction"
+						},
+						{
+							"name": "gap",
+							"type": {
+								"text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+							},
+							"default": "\"small\"",
+							"fieldName": "gap"
+						},
+						{
+							"name": "helperText",
+							"type": {
+								"text": "string | undefined"
+							},
+							"fieldName": "helperText"
+						},
+						{
+							"name": "disabled",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"fieldName": "disabled"
+						}
+					],
+					"superclass": {
+						"name": "FRoot",
+						"package": "@cldcvr/flow-core"
+					},
+					"tagName": "f-checkbox-group",
+					"customElement": true
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "checkboxGroupStyles",
+					"declaration": {
+						"name": "checkboxGroupStyles",
+						"module": "src/components/f-checkbox-group/f-checkbox-group.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "FCheckboxGroup",
+					"declaration": {
+						"name": "FCheckboxGroup",
+						"module": "src/components/f-checkbox-group/f-checkbox-group.ts"
+					}
+				},
+				{
+					"kind": "custom-element-definition",
+					"name": "f-checkbox-group",
+					"declaration": {
+						"name": "FCheckboxGroup",
+						"module": "src/components/f-checkbox-group/f-checkbox-group.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-field-separator/f-field-separator.ts",
+			"declarations": [
+				{
+					"kind": "class",
+					"description": "",
+					"name": "FFieldSeparator",
+					"members": [
+						{
+							"kind": "field",
+							"name": "label",
+							"type": {
+								"text": "string | undefined"
+							},
+							"attribute": "label"
+						},
+						{
+							"kind": "field",
+							"name": "type",
+							"type": {
+								"text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
+							},
+							"default": "\"solid\"",
+							"attribute": "type",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "size",
+							"type": {
+								"text": "\"large\" | \"medium\" | undefined"
+							},
+							"default": "\"medium\"",
+							"attribute": "size",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "state",
+							"type": {
+								"text": "FFieldSeparatorState | undefined"
+							},
+							"default": "\"default\"",
+							"attribute": "state",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "direction",
+							"type": {
+								"text": "\"vertical\" | \"horizontal\" | undefined"
+							},
+							"default": "\"vertical\"",
+							"attribute": "direction",
+							"reflects": true
+						}
+					],
+					"attributes": [
+						{
+							"name": "label",
+							"type": {
+								"text": "string | undefined"
+							},
+							"fieldName": "label"
+						},
+						{
+							"name": "type",
+							"type": {
+								"text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
+							},
+							"default": "\"solid\"",
+							"fieldName": "type"
+						},
+						{
+							"name": "size",
+							"type": {
+								"text": "\"large\" | \"medium\" | undefined"
+							},
+							"default": "\"medium\"",
+							"fieldName": "size"
+						},
+						{
+							"name": "state",
+							"type": {
+								"text": "FFieldSeparatorState | undefined"
+							},
+							"default": "\"default\"",
+							"fieldName": "state"
+						},
+						{
+							"name": "direction",
+							"type": {
+								"text": "\"vertical\" | \"horizontal\" | undefined"
+							},
+							"default": "\"vertical\"",
+							"fieldName": "direction"
+						}
+					],
+					"superclass": {
+						"name": "FRoot",
+						"package": "@cldcvr/flow-core"
+					},
+					"tagName": "f-field-separator",
+					"customElement": true
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "FFieldSeparator",
+					"declaration": {
+						"name": "FFieldSeparator",
+						"module": "src/components/f-field-separator/f-field-separator.ts"
+					}
+				},
+				{
+					"kind": "custom-element-definition",
+					"name": "f-field-separator",
+					"declaration": {
+						"name": "FFieldSeparator",
+						"module": "src/components/f-field-separator/f-field-separator.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-array/f-form-array.ts",
+			"declarations": [
+				{
+					"kind": "class",
+					"description": "",
+					"name": "FFormArray",
+					"members": [
+						{
+							"kind": "field",
+							"name": "config",
+							"type": {
+								"text": "FormBuilderArrayField"
+							},
+							"attribute": "config"
+						},
+						{
+							"kind": "field",
+							"name": "value",
+							"type": {
+								"text": "ArrayValueType"
+							},
+							"attribute": "value"
+						},
+						{
+							"kind": "field",
+							"name": "state",
+							"type": {
+								"text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+							},
+							"default": "\"default\"",
+							"attribute": "state",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "gap",
+							"type": {
+								"text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+							},
+							"default": "\"medium\"",
+							"attribute": "gap",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "actions",
+							"type": {
+								"text": "NodeListOf<FIconButton> | undefined"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "fieldRefs",
+							"type": {
+								"text": "Ref<FFormInputElements>[]"
+							},
+							"default": "[]"
+						},
+						{
+							"kind": "field",
+							"name": "showWhenSubject",
+							"type": {
+								"text": "Subject<FormBuilderValues>"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "isRequired"
+						},
+						{
+							"kind": "method",
+							"name": "getFieldValue",
+							"parameters": [
+								{
+									"name": "index",
+									"type": {
+										"text": "number"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "buildFields",
+							"parameters": [
+								{
+									"name": "valueCount",
+									"type": {
+										"text": "number"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "validate",
+							"parameters": [
+								{
+									"name": "silent",
+									"default": "false"
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "applyLabelOffSet",
+							"parameters": [
+								{
+									"name": "element",
+									"type": {
+										"text": "HTMLElement"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "addField"
+						},
+						{
+							"kind": "method",
+							"name": "removeField",
+							"parameters": [
+								{
+									"name": "idx",
+									"type": {
+										"text": "number"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "dispatchShowWhenEvent",
+							"description": "dispatch showWhen event so that root will publish new form values"
+						},
+						{
+							"kind": "method",
+							"name": "dispatchInputEvent"
+						},
+						{
+							"kind": "method",
+							"name": "dispatchShowWhenExeEvent",
+							"description": "dispatch showWhen event so that root will publish new form values"
+						}
+					],
+					"attributes": [
+						{
+							"name": "config",
+							"type": {
+								"text": "FormBuilderArrayField"
+							},
+							"fieldName": "config"
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "ArrayValueType"
+							},
+							"fieldName": "value"
+						},
+						{
+							"name": "state",
+							"type": {
+								"text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+							},
+							"default": "\"default\"",
+							"fieldName": "state"
+						},
+						{
+							"name": "gap",
+							"type": {
+								"text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+							},
+							"default": "\"medium\"",
+							"fieldName": "gap"
+						}
+					],
+					"superclass": {
+						"name": "FRoot",
+						"package": "@cldcvr/flow-core/mixins/components/f-root/f-root"
+					},
+					"tagName": "f-form-array",
+					"customElement": true
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "FFormArray",
+					"declaration": {
+						"name": "FFormArray",
+						"module": "src/components/f-form-array/f-form-array.ts"
+					}
+				},
+				{
+					"kind": "custom-element-definition",
+					"name": "f-form-array",
+					"declaration": {
+						"name": "FFormArray",
+						"module": "src/components/f-form-array/f-form-array.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/f-form-builder.ts",
+			"declarations": [
+				{
+					"kind": "class",
+					"description": "",
+					"name": "FFormBuilder",
+					"members": [
+						{
+							"kind": "field",
+							"name": "name",
+							"type": {
+								"text": "string"
+							},
+							"attribute": "name",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "label",
+							"type": {
+								"text": "FormBuilderLabel | undefined"
+							},
+							"attribute": "label"
+						},
+						{
+							"kind": "field",
+							"name": "field",
+							"type": {
+								"text": "FormBuilderField | undefined"
+							},
+							"attribute": "field"
+						},
+						{
+							"kind": "field",
+							"name": "values",
+							"type": {
+								"text": "FormBuilderValues | undefined"
+							},
+							"attribute": "values"
+						},
+						{
+							"kind": "field",
+							"name": "size",
+							"type": {
+								"text": "FormBuilderSize | undefined"
+							},
+							"default": "\"medium\"",
+							"attribute": "size",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "variant",
+							"type": {
+								"text": "FormBuilderVariant | undefined"
+							},
+							"default": "\"curved\"",
+							"attribute": "variant",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "category",
+							"type": {
+								"text": "FormBuilderCategory | undefined"
+							},
+							"default": "\"fill\"",
+							"attribute": "category",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "gap",
+							"type": {
+								"text": "FormBuilderGap | undefined"
+							},
+							"default": "\"medium\"",
+							"attribute": "gap",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "separator",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"attribute": "separator",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "state",
+							"type": {
+								"text": "FormBuilderState"
+							},
+							"default": "{\n\t\tget isValid() {\n\t\t\treturn this.errors?.length === 0;\n\t\t},\n\t\tisChanged: false\n\t}"
+						},
+						{
+							"kind": "field",
+							"name": "lastState",
+							"type": {
+								"text": "FormBuilderState | undefined"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "showWhenSubject",
+							"type": {
+								"text": "Subject<FormBuilderValues>"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "inputTimeout",
+							"type": {
+								"text": "ReturnType<typeof setTimeout>"
+							}
+						},
+						{
+							"kind": "method",
+							"name": "checkSubmit",
+							"parameters": [
+								{
+									"name": "event",
+									"type": {
+										"text": "MouseEvent"
+									}
+								}
+							],
+							"description": "Check if submit is triggerred by external element"
+						},
+						{
+							"kind": "method",
+							"name": "handleKeyUp",
+							"parameters": [
+								{
+									"name": "event",
+									"type": {
+										"text": "KeyboardEvent"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "onSubmit",
+							"parameters": [
+								{
+									"name": "event",
+									"type": {
+										"text": "SubmitEvent"
+									}
+								}
+							],
+							"description": "Form's submit event handler"
+						},
+						{
+							"kind": "method",
+							"name": "submit",
+							"description": "Emit submit event with data if validaiton is successful"
+						},
+						{
+							"kind": "method",
+							"name": "updateValidaitonState",
+							"parameters": [
+								{
+									"name": "all",
+									"type": {
+										"text": "ValidationResults"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "onShowWhen",
+							"description": "showWhen handler"
+						},
+						{
+							"kind": "method",
+							"name": "onShowWhenExecution"
+						},
+						{
+							"kind": "method",
+							"name": "validateForm",
+							"parameters": [
+								{
+									"name": "silent",
+									"default": "false",
+									"description": "whether to display validaiton message or not"
+								}
+							],
+							"description": "Validation of whole form"
+						},
+						{
+							"kind": "method",
+							"name": "dispatchInputEvent",
+							"description": "dispatching form-builder input event"
+						},
+						{
+							"kind": "method",
+							"name": "dispatchStateChangeEvent",
+							"description": "dispatching `state-change` event for consumer"
+						},
+						{
+							"kind": "method",
+							"name": "dispatchShowWhenEvent",
+							"description": "dispatch showWhen event so that root will publish new form values"
+						}
+					],
+					"attributes": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							},
+							"fieldName": "name"
+						},
+						{
+							"name": "label",
+							"type": {
+								"text": "FormBuilderLabel | undefined"
+							},
+							"fieldName": "label"
+						},
+						{
+							"name": "field",
+							"type": {
+								"text": "FormBuilderField | undefined"
+							},
+							"fieldName": "field"
+						},
+						{
+							"name": "values",
+							"type": {
+								"text": "FormBuilderValues | undefined"
+							},
+							"fieldName": "values"
+						},
+						{
+							"name": "size",
+							"type": {
+								"text": "FormBuilderSize | undefined"
+							},
+							"default": "\"medium\"",
+							"fieldName": "size"
+						},
+						{
+							"name": "variant",
+							"type": {
+								"text": "FormBuilderVariant | undefined"
+							},
+							"default": "\"curved\"",
+							"fieldName": "variant"
+						},
+						{
+							"name": "category",
+							"type": {
+								"text": "FormBuilderCategory | undefined"
+							},
+							"default": "\"fill\"",
+							"fieldName": "category"
+						},
+						{
+							"name": "gap",
+							"type": {
+								"text": "FormBuilderGap | undefined"
+							},
+							"default": "\"medium\"",
+							"fieldName": "gap"
+						},
+						{
+							"name": "separator",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"fieldName": "separator"
+						}
+					],
+					"superclass": {
+						"name": "FRoot",
+						"package": "@cldcvr/flow-core/mixins/components/f-root/f-root"
+					},
+					"tagName": "f-form-builder",
+					"customElement": true
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "FFormBuilder",
+					"declaration": {
+						"name": "FFormBuilder",
+						"module": "src/components/f-form-builder/f-form-builder.ts"
+					}
+				},
+				{
+					"kind": "custom-element-definition",
+					"name": "f-form-builder",
+					"declaration": {
+						"name": "FFormBuilder",
+						"module": "src/components/f-form-builder/f-form-builder.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-object/f-form-object.ts",
+			"declarations": [
+				{
+					"kind": "class",
+					"description": "",
+					"name": "FFormObject",
+					"members": [
+						{
+							"kind": "field",
+							"name": "config",
+							"type": {
+								"text": "FormBuilderObjectField"
+							},
+							"attribute": "config"
+						},
+						{
+							"kind": "field",
+							"name": "value",
+							"type": {
+								"text": "ObjectValueType"
+							},
+							"attribute": "value"
+						},
+						{
+							"kind": "field",
+							"name": "state",
+							"type": {
+								"text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+							},
+							"default": "\"default\"",
+							"attribute": "state",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "gap",
+							"type": {
+								"text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+							},
+							"default": "\"medium\"",
+							"attribute": "gap",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "formGroupElement",
+							"type": {
+								"text": "FFormGroup | undefined"
+							}
+						},
+						{
+							"kind": "field",
+							"name": "fieldRefs",
+							"type": {
+								"text": "Record<string, Ref<FFormInputElements>>"
+							},
+							"default": "{}"
+						},
+						{
+							"kind": "field",
+							"name": "showWhenSubject",
+							"type": {
+								"text": "Subject<FormBuilderValues>"
+							}
+						},
+						{
+							"kind": "method",
+							"name": "getFieldValue",
+							"parameters": [
+								{
+									"name": "fieldname",
+									"type": {
+										"text": "string"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "getLabelOffSet"
+						},
+						{
+							"kind": "method",
+							"name": "buildFields"
+						},
+						{
+							"kind": "method",
+							"name": "validate",
+							"parameters": [
+								{
+									"name": "silent",
+									"default": "false"
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "dispatchInputEvent"
+						},
+						{
+							"kind": "method",
+							"name": "dispatchShowWhenEvent",
+							"description": "dispatch showWhen event so that root will publish new form values"
+						},
+						{
+							"kind": "method",
+							"name": "dispatchShowWhenExeEvent",
+							"description": "dispatch showWhen event so that root will publish new form values"
+						}
+					],
+					"attributes": [
+						{
+							"name": "config",
+							"type": {
+								"text": "FormBuilderObjectField"
+							},
+							"fieldName": "config"
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "ObjectValueType"
+							},
+							"fieldName": "value"
+						},
+						{
+							"name": "state",
+							"type": {
+								"text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+							},
+							"default": "\"default\"",
+							"fieldName": "state"
+						},
+						{
+							"name": "gap",
+							"type": {
+								"text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+							},
+							"default": "\"medium\"",
+							"fieldName": "gap"
+						}
+					],
+					"superclass": {
+						"name": "FRoot",
+						"package": "@cldcvr/flow-core/mixins/components/f-root/f-root"
+					},
+					"tagName": "f-form-object",
+					"customElement": true
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "FFormObject",
+					"declaration": {
+						"name": "FFormObject",
+						"module": "src/components/f-form-object/f-form-object.ts"
+					}
+				},
+				{
+					"kind": "custom-element-definition",
+					"name": "f-form-object",
+					"declaration": {
+						"name": "FFormObject",
+						"module": "src/components/f-form-object/f-form-object.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-radio-group/f-radio-group.ts",
+			"declarations": [
+				{
+					"kind": "variable",
+					"name": "radioGroupStyles",
+					"default": "eleStyle"
+				},
+				{
+					"kind": "class",
+					"description": "",
+					"name": "FRadioGroup",
+					"members": [
+						{
+							"kind": "field",
+							"name": "options",
+							"type": {
+								"text": "RadioOptions"
+							},
+							"default": "[]",
+							"attribute": "options"
+						},
+						{
+							"kind": "field",
+							"name": "state",
+							"type": {
+								"text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+							},
+							"default": "\"default\"",
+							"attribute": "state",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "value",
+							"type": {
+								"text": "RadioOption | undefined"
+							},
+							"attribute": "value",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "direction",
+							"type": {
+								"text": "\"vertical\" | \"horizontal\" | undefined"
+							},
+							"default": "\"vertical\"",
+							"attribute": "direction",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "gap",
+							"type": {
+								"text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+							},
+							"default": "\"small\"",
+							"attribute": "gap",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "helperText",
+							"type": {
+								"text": "string | undefined"
+							},
+							"attribute": "helperText",
+							"reflects": true
+						},
+						{
+							"kind": "field",
+							"name": "disabled",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"attribute": "disabled",
+							"reflects": true
+						},
+						{
+							"kind": "method",
+							"name": "handleChange",
+							"parameters": [
+								{
+									"name": "option",
+									"type": {
+										"text": "RadioOption"
+									}
+								}
+							]
+						},
+						{
+							"kind": "method",
+							"name": "isChecked",
+							"parameters": [
+								{
+									"name": "option",
+									"type": {
+										"text": "RadioOption"
+									}
+								}
+							]
+						}
+					],
+					"attributes": [
+						{
+							"name": "options",
+							"type": {
+								"text": "RadioOptions"
+							},
+							"default": "[]",
+							"fieldName": "options"
+						},
+						{
+							"name": "state",
+							"type": {
+								"text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+							},
+							"default": "\"default\"",
+							"fieldName": "state"
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "RadioOption | undefined"
+							},
+							"fieldName": "value"
+						},
+						{
+							"name": "direction",
+							"type": {
+								"text": "\"vertical\" | \"horizontal\" | undefined"
+							},
+							"default": "\"vertical\"",
+							"fieldName": "direction"
+						},
+						{
+							"name": "gap",
+							"type": {
+								"text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+							},
+							"default": "\"small\"",
+							"fieldName": "gap"
+						},
+						{
+							"name": "helperText",
+							"type": {
+								"text": "string | undefined"
+							},
+							"fieldName": "helperText"
+						},
+						{
+							"name": "disabled",
+							"type": {
+								"text": "boolean | undefined"
+							},
+							"default": "false",
+							"fieldName": "disabled"
+						}
+					],
+					"superclass": {
+						"name": "FRoot",
+						"package": "@cldcvr/flow-core"
+					},
+					"summary": "Text component includes Headings, titles, body texts and links.",
+					"tagName": "f-radio-group",
+					"customElement": true
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "radioGroupStyles",
+					"declaration": {
+						"name": "radioGroupStyles",
+						"module": "src/components/f-radio-group/f-radio-group.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "FRadioGroup",
+					"declaration": {
+						"name": "FRadioGroup",
+						"module": "src/components/f-radio-group/f-radio-group.ts"
+					}
+				},
+				{
+					"kind": "custom-element-definition",
+					"name": "f-radio-group",
+					"declaration": {
+						"name": "FRadioGroup",
+						"module": "src/components/f-radio-group/f-radio-group.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/modules/validation/validator.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "validate",
+					"parameters": [
+						{
+							"name": "value",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "elementRules",
+							"type": {
+								"text": "FormBuilderValidationRules"
+							}
+						},
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "element",
+							"type": {
+								"text": "FFormInputElements | undefined"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": "validateField",
+					"return": {
+						"type": {
+							"text": "FormBuilderValidationPromise"
+						}
+					},
+					"parameters": [
+						{
+							"name": "field",
+							"type": {
+								"text": "CanValidateFields"
+							}
+						},
+						{
+							"name": "element",
+							"type": {
+								"text": "FFormInputElements | undefined"
+							}
+						},
+						{
+							"name": "silent",
+							"default": "false"
+						},
+						{
+							"name": "filter",
+							"optional": true,
+							"type": {
+								"text": "(r: FormBuilderGenericValidationRule) => boolean"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": "extractValidationState",
+					"parameters": [
+						{
+							"name": "allResults",
+							"type": {
+								"text": "ValidationResults"
+							}
+						}
+					]
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "validate",
+						"module": "src/modules/validation/validator.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "validateField",
+					"declaration": {
+						"name": "validateField",
+						"module": "src/modules/validation/validator.ts"
+					}
+				},
+				{
+					"kind": "js",
+					"name": "extractValidationState",
+					"declaration": {
+						"name": "extractValidationState",
+						"module": "src/modules/validation/validator.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/array.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/array.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/button.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/button.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/checkbox.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/checkbox.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/datetime.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/datetime.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/emoji.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/emoji.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/file.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/file.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/hidden.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/hidden.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/icon-button.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/icon-button.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/index.ts",
+			"declarations": [
+				{
+					"kind": "variable",
+					"name": "all",
+					"type": {
+						"text": "Record<string, FormBuilderFieldRenderFunction>"
+					},
+					"default": "{\n\ttext,\n\tcheckbox,\n\ttextarea,\n\tradio,\n\tswitchButton,\n\tselect,\n\tbutton,\n\tarray,\n\tobject,\n\t[\"icon-button\"]: iconButton,\n\ttel: text,\n\tnumber: text,\n\temail: text,\n\turl: text,\n\tpassword: text,\n\tfile,\n\tsuggest,\n\tseparator,\n\temoji,\n\thidden,\n\tdatetime\n}"
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "all",
+						"module": "src/components/f-form-builder/fields/index.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/object.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/object.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/radio.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/radio.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/select.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/select.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/separator.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/separator.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/suggest.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/suggest.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/switch.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/switch.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/text.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/text.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/components/f-form-builder/fields/textarea.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "",
+					"parameters": [
+						{
+							"name": "name",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "_field",
+							"type": {
+								"text": "FormBuilderField"
+							}
+						},
+						{
+							"name": "fieldRef",
+							"type": {
+								"text": "Ref<FFormInputElements>"
+							}
+						},
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				},
+				{
+					"kind": "function",
+					"name": ""
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "",
+						"module": "src/components/f-form-builder/fields/textarea.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/modules/validation/default-validation-messages/index.ts",
+			"declarations": [
+				{
+					"kind": "variable",
+					"name": "messages",
+					"type": {
+						"text": "Record<string, string>"
+					},
+					"default": "{\n\trequired: \"{{name}} is a required field\",\n\temail: \"{{name}} is not a valid email address\",\n\tbetween: \"{{name}} must be between {{min}} and {{max}}\",\n\tmin: \"{{name}} must be at least {{length}} characters long\",\n\tmax: \"{{name}} can be max {{length}} characters long\",\n\t[\"min-value\"]: \"{{name}} must be greater than {{min}}\",\n\t[\"max-value\"]: \"{{name}} must be less than {{max}}\",\n\tregex: \"{{name}} is not matching with {{regex}}\"\n}"
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "messages",
+						"module": "src/modules/validation/default-validation-messages/index.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/modules/validation/default-validations/index.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "defaultValidations",
+					"parameters": [
+						{
+							"name": "fieldType",
+							"type": {
+								"text": "string"
+							}
+						},
+						{
+							"name": "validations",
+							"type": {
+								"text": "FormBuilderValidationRules"
+							}
+						}
+					]
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "defaultValidations",
+						"module": "src/modules/validation/default-validations/index.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/modules/validation/rules/between.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "betweenValidator",
+					"return": {
+						"type": {
+							"text": "boolean"
+						}
+					},
+					"parameters": [
+						{
+							"name": "value"
+						},
+						{
+							"name": "params"
+						}
+					]
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "betweenValidator",
+						"module": "src/modules/validation/rules/between.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/modules/validation/rules/email.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "emailValidator",
+					"parameters": [
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "emailValidator",
+						"module": "src/modules/validation/rules/email.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/modules/validation/rules/index.ts",
+			"declarations": [
+				{
+					"kind": "variable",
+					"name": "all",
+					"type": {
+						"text": "Record<string, FormBuilderValidatorFunction<unknown, any>>"
+					},
+					"default": "{\n\trequired,\n\temail,\n\tbetween,\n\tmax,\n\tmin,\n\t[\"min-value\"]: minValue,\n\t[\"max-value\"]: maxValue,\n\tregex\n}"
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "all",
+						"module": "src/modules/validation/rules/index.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/modules/validation/rules/max-value.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "maxValueValidator",
+					"return": {
+						"type": {
+							"text": "boolean"
+						}
+					},
+					"parameters": [
+						{
+							"name": "value"
+						},
+						{
+							"name": "params"
+						}
+					]
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "maxValueValidator",
+						"module": "src/modules/validation/rules/max-value.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/modules/validation/rules/max.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "maxLengthValidator",
+					"return": {
+						"type": {
+							"text": "boolean"
+						}
+					},
+					"parameters": [
+						{
+							"name": "value"
+						},
+						{
+							"name": "params"
+						}
+					]
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "maxLengthValidator",
+						"module": "src/modules/validation/rules/max.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/modules/validation/rules/min-value.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "minValueValidator",
+					"return": {
+						"type": {
+							"text": "boolean"
+						}
+					},
+					"parameters": [
+						{
+							"name": "value"
+						},
+						{
+							"name": "params"
+						}
+					]
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "minValueValidator",
+						"module": "src/modules/validation/rules/min-value.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/modules/validation/rules/min.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "minValidator",
+					"return": {
+						"type": {
+							"text": "boolean"
+						}
+					},
+					"parameters": [
+						{
+							"name": "value"
+						},
+						{
+							"name": "params"
+						}
+					]
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "minValidator",
+						"module": "src/modules/validation/rules/min.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/modules/validation/rules/regex.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "regexValidator",
+					"return": {
+						"type": {
+							"text": "boolean"
+						}
+					},
+					"parameters": [
+						{
+							"name": "value"
+						},
+						{
+							"name": "params"
+						}
+					]
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "regexValidator",
+						"module": "src/modules/validation/rules/regex.ts"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "src/modules/validation/rules/required.ts",
+			"declarations": [
+				{
+					"kind": "function",
+					"name": "requiredValidator",
+					"parameters": [
+						{
+							"name": "value",
+							"type": {
+								"text": "unknown"
+							}
+						}
+					]
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "default",
+					"declaration": {
+						"name": "requiredValidator",
+						"module": "src/modules/validation/rules/required.ts"
+					}
+				}
+			]
+		}
+	]
+}

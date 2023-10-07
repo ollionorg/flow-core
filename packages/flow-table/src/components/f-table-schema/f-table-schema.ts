@@ -7,7 +7,7 @@ import { property, query, state } from "lit/decorators.js";
 import { FTable, FTableSelectable, FTableSize, FTableVariant } from "../f-table/f-table";
 import { FTcell, FTcellActions } from "../f-tcell/f-tcell";
 import { FTrow, FTrowChevronPosition, FTrowState } from "../f-trow/f-trow";
-import eleStyle from "./f-table-schema.scss";
+import eleStyle from "./f-table-schema.scss?inline";
 import { repeat } from "lit/directives/repeat.js";
 
 export type FTableSchemaDataRow = {

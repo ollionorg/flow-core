@@ -1,6 +1,6 @@
 import { html, PropertyValues, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
-import eleStyle from "./f-icon.scss";
+import eleStyle from "./f-icon.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 // themeSubject will used to listen theme update

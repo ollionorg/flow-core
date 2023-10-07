@@ -1,6 +1,6 @@
 import { html, HTMLTemplateResult, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
-import eleStyle from "./f-search.scss";
+import eleStyle from "./f-search.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";

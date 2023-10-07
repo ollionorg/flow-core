@@ -1,0 +1,45 @@
+// common mixins imported from this file
+@import "@cldcvr/flow-core/mixins/scss/mixins";
+@import "./../../mixins";
+
+:host {
+	// Important :  always include base mixins
+
+	[data-hidden="true"] {
+		display: none !important;
+	}
+
+	f-form {
+		display: flex;
+		align-items: flex-start;
+		justify-content: flex-start;
+		flex: 1 0 auto;
+	}
+
+	@include infoIcon();
+}
+
+f-form-builder {
+	@include base();
+	@include input-color("danger");
+	width: fit-content;
+	flex: 1 0 auto;
+	flex-direction: column;
+	align-items: stretch;
+	overflow: auto;
+}
+
+f-form-group {
+	f-button[name="remove_"] {
+		align-self: center;
+	}
+}
+
+f-div[direction="row"] {
+	> f-form-builder {
+		height: 100%;
+	}
+}
+#tooltip-text {
+	max-width: 500px;
+}

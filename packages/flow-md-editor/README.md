@@ -5,19 +5,19 @@ The Flow md editor is built on the Flow design framework ([website](https://flow
 
 ### 1️⃣ Install flow code editor dependency
 ```
-yarn add @cldcvr/flow-md-editor
+npm i --save @cldcvr/flow-md-editor
 ```
 **Note:** after installation, re-start your application.
 
 <br>
 
-### 2️⃣ Import styles/CSS 
-For **Vue JS:** 
+### 2️⃣ Import styles/CSS
+For **Vue JS:**
 Paste the below snippet after the closing `<template>` tag in your `App.vue` file
 ```html
 <style>
  @import "@cldcvr/flow-md-editor/dist/style.css";
-</style> 
+</style>
 ```
 <details>
 <summary>For React</summary>
@@ -41,11 +41,11 @@ import "@cldcvr/flow-md-editor/dist/style.css";
 
 ### 3️⃣ Import flow-md-editor into your project
 
-Paste the below snippet in your project and add your application startup/runtime code to it. 
+Paste the below snippet in your project and add your application startup/runtime code to it.
 
 **Note:** This is required to register Flow elements error-free. We achieve this by importing all flow packages asynchronously and then starting up your application.
 
-For **Vue JS:** 
+For **Vue JS:**
 Paste the below snippet in your project, for `src/main.ts` or `main.js`
 ```javascript
 import("@cldcvr/flow-core").then(async () => {

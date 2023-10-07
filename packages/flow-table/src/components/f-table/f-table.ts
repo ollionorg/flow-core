@@ -3,7 +3,7 @@ import { property } from "lit/decorators.js";
 import { FTcell } from "../f-tcell/f-tcell";
 import { FTrow } from "../f-trow/f-trow";
 import { FRoot, flowElement } from "@cldcvr/flow-core";
-import eleStyle from "./f-table.scss";
+import eleStyle from "./f-table.scss?inline";
 
 export type FTableVariant = "stripped" | "outlined" | "underlined" | "bordered";
 export type FTableSize = "medium" | "small";

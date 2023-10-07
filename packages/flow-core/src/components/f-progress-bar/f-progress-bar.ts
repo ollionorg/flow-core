@@ -1,6 +1,6 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
-import eleStyle from "./f-progress-bar.scss";
+import eleStyle from "./f-progress-bar.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import getCustomFillColor from "../../utils/get-custom-fill-color";

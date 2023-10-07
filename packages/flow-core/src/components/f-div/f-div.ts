@@ -1,11 +1,13 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import eleStyle from "./f-div.scss";
+import eleStyle from "./f-div.scss?inline";
+import globalStyle from "./f-div-global.scss?inline";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
 
 export type FDivBorderWidth = "small" | "medium" | "large";
 export type FDivBorderStyle = "solid" | "dashed" | "dotted";
@@ -97,6 +99,8 @@ const BORDER_POSITION_CSS = {
 /**
  * END :  constant values required for `f-div`
  */
+
+injectCss(globalStyle);
 
 /**
  * @summary F-div is used as a container for HTML elements.

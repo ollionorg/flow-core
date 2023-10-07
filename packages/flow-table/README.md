@@ -1,23 +1,23 @@
 # Flow Table
-The Flow table is built on the Flow design framework ([website](https://flow.cldcvr.com/) / [github](https://github.com/cldcvr/flow-core)) 
+The Flow table is built on the Flow design framework ([website](https://flow.cldcvr.com/) / [github](https://github.com/cldcvr/flow-core))
 
 # Installation
 
 ### 1️⃣ Install flow table dependency
 ```
-yarn add @cldcvr/flow-table
+npm i --save @cldcvr/flow-table
 ```
 **Note:** after installation, re-start your application.
 
 <br>
 
-### 2️⃣ Import styles/CSS 
-For **Vue JS:** 
+### 2️⃣ Import styles/CSS
+For **Vue JS:**
 Paste the below snippet after the closing `<template>` tag in your `App.vue` file
 ```html
 <style>
  @import "@cldcvr/flow-table/dist/style.css";
-</style> 
+</style>
 ```
 <details>
 <summary>For React</summary>
@@ -41,11 +41,11 @@ import "@cldcvr/flow-table/dist/style.css";
 
 ### 3️⃣ Import flow-table into your project
 
-Paste the below snippet in your project and add your application startup/runtime code to it. 
+Paste the below snippet in your project and add your application startup/runtime code to it.
 
 **Note:** This is required to register Flow elements error-free. We achieve this by importing all flow packages asynchronously and then starting up your application.
 
-For **Vue JS:** 
+For **Vue JS:**
 Paste the below snippet in your project, for `src/main.ts` or `main.js`
 ```javascript
 import("@cldcvr/flow-core").then(async () => {

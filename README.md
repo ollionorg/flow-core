@@ -47,7 +47,7 @@ If you would like to contribute to an existing starter kit or write a new one fo
 
 #### 1️⃣ Install flow core
 
-`yarn add @cldcvr/flow-core`
+`npm i --save @cldcvr/flow-core`
 
 _Note:_ after installation re-start your application.
 
@@ -124,7 +124,7 @@ Icons are not packaged with Flow core to allow more flexibility and customizatio
 ### 1️⃣ Install the icon pack
 
 ```sh
-yarn add @cldcvr/flow-system-icon
+npm i --save @cldcvr/flow-system-icon
 ```
 
 ### 2️⃣ Import the icon pack

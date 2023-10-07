@@ -1,7 +1,9 @@
 import { LitElement, PropertyValueMap, PropertyValues, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 
-import eleStyle from "./f-root.scss";
+import eleStyle from "./f-root.scss?inline";
+import globalStyle from "./f-root-global.scss?inline";
+import { injectCss } from "@cldcvr/flow-core-config";
 
 // to avoid recursive tye check
 type TooltipElement = HTMLElement & {
@@ -9,6 +11,8 @@ type TooltipElement = HTMLElement & {
 	open: boolean;
 	closable: boolean;
 };
+
+injectCss(globalStyle);
 
 /**
  * @summary Every component must extent this class to consume gbobal styles , such as css reset, font family,...

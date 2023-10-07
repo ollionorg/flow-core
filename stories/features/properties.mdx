@@ -1,0 +1,179 @@
+##  Form Builder  properties
+###### Note: Click on the property name to learn about each property.
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Options</th>
+			<th>Default</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><a href="#name">name</a></td>
+			<td>string</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td><a href="#label">label</a></td>
+			<td>object</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td><a href="#field">field</a></td>
+			<td>object</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td><a href="#values">values</a></td>
+			<td>object</td>
+			<td>-</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td><a href="#size">size</a></td>
+			<td>string</td>
+			<td><b>"medium" | "small"</b></td>
+			<td>"medium"</td>
+		</tr>
+		<tr>
+			<td><a href="#variant">variant</a></td>
+			<td>string</td>
+			<td><b>"curved" | "round" | "block"</b></td>
+			<td>"curved"</td>
+		</tr>
+		<tr>
+			<td><a href="#category">category</a></td>
+			<td>string</td>
+			<td><b>"fill" | "outline" | "transparent"</b></td>
+			<td>"fill"</td>
+		</tr>
+		<tr>
+			<td><a href="#gap">gap</a></td>
+			<td>string</td>
+			<td><b>"large" | "medium" | "small" | "x-small"</b></td>
+			<td>"medium"</td>
+		</tr>
+		<tr>
+			<td><a href="#separator">separator</a></td>
+			<td>boolean</td>
+			<td><b>true|false</b></td>
+			<td>false</td>
+		</tr>
+	</tbody>
+</table>
+
+###### Note: Above properties are written in VueJS syntax. Refer Angular and React for respective syntax.
+
+<br />
+
+<h2 id="name">name</h2>
+
+Sets name attribute on form.
+
+<table>
+	<thead>
+		<tr>
+			<th >Value</th>
+			<th width="400">Description</th>
+		</tr>
+		</thead>
+	<tbody>
+		<tr>
+			<td><strong>any-string-value</strong></td>
+			<td>Used to set `name` on inner `f-form`</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+<h2 id="label">label</h2>
+
+Label is used display `title`, `description` and `iconTooltip`.
+
+E.g. 
+<img src="images/form-label.png"/>
+
+<table>
+<thead>
+	<tr>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Default</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>title</td>
+		<td>string</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>description</td>
+		<td>string</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>iconTooltip</td>
+		<td>string</td>
+		<td>-</td>
+	</tr>
+</tbody>
+</table>
+
+<br />
+
+<h2 id="gap">field</h2>
+
+Field config to render form. 
+
+<table>
+<thead>
+	<tr>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Options</th>
+		<th>Default</th>
+	</tr>
+</thead>
+<tbody>
+<tr>
+		<td>id</td>
+		<td>string</td>
+		<td>(Optional)</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>type</td>
+		<td>string</td>
+		<td>"object" | "array" | "text" | "email" | "password" | "url" | "tel" | "number" | "suggest"|   "file" | "checkbox" | "radio" | "switchButton" | "select" | "textarea" | "button" | "icon-button"</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>state</td>
+		<td>string</td>
+		<td>"default" | "success" | "danger" | "warning" | "primary"</td>
+		<td>"default"</td>
+	</tr>
+	<tr>
+		<td>qaId</td>
+		<td>string</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td><a href="#label">label</a></td>
+			<td>object</td>
+			<td>-</td>
+			<td>-</td>
+	</tr>
+</tbody>
+</table>
+
+<br />

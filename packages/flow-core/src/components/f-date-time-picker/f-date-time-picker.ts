@@ -1,6 +1,6 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
-import eleStyle from "./f-date-time-picker.scss";
+import eleStyle from "./f-date-time-picker.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import flatpickr from "flatpickr";
 import { Instance } from "flatpickr/dist/types/instance";

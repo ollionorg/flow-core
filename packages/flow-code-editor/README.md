@@ -5,19 +5,19 @@ The Flow code editor is built on the Flow design framework ([website](https://fl
 
 ### 1️⃣ Install flow code editor dependency
 ```
-yarn add @cldcvr/flow-code-editor
+npm i --save @cldcvr/flow-code-editor
 ```
 **Note:** after installation, re-start your application.
 
 <br>
 
-### 2️⃣ Import styles/CSS 
-For **Vue JS:** 
+### 2️⃣ Import styles/CSS
+For **Vue JS:**
 Paste the below snippet after the closing `<template>` tag in your `App.vue` file
 ```html
 <style>
  @import "@cldcvr/flow-code-editor/dist/style.css";
-</style> 
+</style>
 ```
 <details>
 <summary>For React</summary>
@@ -41,11 +41,11 @@ import "@cldcvr/flow-code-editor/dist/style.css";
 
 ### 3️⃣ Import flow-code-editor into your project
 
-Paste the below snippet in your project and add your application startup/runtime code to it. 
+Paste the below snippet in your project and add your application startup/runtime code to it.
 
 **Note:** This is required to register Flow elements error-free. We achieve this by importing all flow packages asynchronously and then starting up your application.
 
-For **Vue JS:** 
+For **Vue JS:**
 Paste the below snippet in your project, for `src/main.ts` or `main.js`
 ```javascript
 import("@cldcvr/flow-core").then(async () => {
@@ -159,7 +159,7 @@ For example
 export default defineConfig({
   plugins: [vue()],
   base: "",
-  // `assets` folder specified here 👇 
+  // `assets` folder specified here 👇
   assetsInclude: ["assets"],
 });
 ```

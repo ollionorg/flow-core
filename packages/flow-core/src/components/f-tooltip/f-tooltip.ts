@@ -1,6 +1,6 @@
 import { html, LitElement, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
-import eleStyle from "./f-tooltip.scss";
+import eleStyle from "./f-tooltip.scss?inline";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import { FPopover } from "../f-popover/f-popover";

@@ -1,6 +1,6 @@
 import { html, HTMLTemplateResult, nothing, PropertyValues, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
-import eleStyle from "./f-suggest.scss";
+import eleStyle from "./f-suggest.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
@@ -8,7 +8,7 @@ import { FPopover } from "../f-popover/f-popover";
 import { FInput } from "../f-input/f-input";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { classMap } from "lit-html/directives/class-map.js";
-import _ from "lodash";
+import { cloneDeep } from "lodash-es";
 import { flowElement } from "./../../utils";
 import { displayCustomTemplate, displayOptions, displayCategories } from "./display-options";
 
@@ -384,7 +384,7 @@ export class FSuggest extends FRoot {
 						this.suggestWhen(sg, this.value)
 					);
 				} else {
-					const filtered = _.cloneDeep(this.suggestions) as FSuggestSuggestionsCategory;
+					const filtered = cloneDeep(this.suggestions) as FSuggestSuggestionsCategory;
 					Object.entries(filtered).forEach(([objName, objValue]) => {
 						filtered[objName] = objValue.filter(item => this.suggestWhen(item, this.value));
 					});

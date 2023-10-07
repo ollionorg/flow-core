@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
-import eleStyle from "./f-file-upload.scss";
+import eleStyle from "./f-file-upload.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { FDiv } from "../f-div/f-div";

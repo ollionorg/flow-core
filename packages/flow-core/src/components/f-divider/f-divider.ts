@@ -1,6 +1,6 @@
 import { html, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
-import eleStyle from "./f-divider.scss";
+import eleStyle from "./f-divider.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor } from "validate-color";

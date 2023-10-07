@@ -1,0 +1,32 @@
+@use "sass:map";
+// common mixins imported from this file
+@import "@cldcvr/flow-core/mixins/scss/mixins";
+
+f-field-separator {
+	@include base();
+	display: flex;
+	flex: 1 0 auto;
+	width: unset;
+	text-align: center;
+	align-items: center;
+
+	[data-hidden="true"] {
+		display: none !important;
+	}
+}
+:host {
+	f-div {
+		width: inherit;
+		height: inherit;
+	}
+	f-div[direction="row"] {
+		.f-field-separator-label {
+			padding: 0px 8px;
+		}
+	}
+	f-div[direction="column"] {
+		.f-field-separator-label {
+			padding: 8px 0px;
+		}
+	}
+}

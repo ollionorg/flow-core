@@ -1,6 +1,6 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
-import eleStyle from "./f-toast.scss";
+import eleStyle from "./f-toast.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import toastQueue from "./f-toast-queue";

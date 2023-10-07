@@ -1,6 +1,6 @@
 import { unsafeCSS, html } from "lit";
 import { FRoot, flowElement } from "@cldcvr/flow-core";
-import eleStyle from "./f-md-editor.scss";
+import eleStyle from "./f-md-editor.scss?inline";
 import { FTextArea } from "@cldcvr/flow-core";
 import * as showdown from "showdown";
 import { property, query } from "lit/decorators.js";

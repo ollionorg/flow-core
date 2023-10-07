@@ -7,7 +7,7 @@ import {
 	FSelectOptionsGroup,
 	FSelectSingleOption
 } from "./f-select";
-import _ from "lodash";
+import { cloneDeep } from "lodash-es";
 
 /**
  * open options menu
@@ -260,7 +260,7 @@ export function handleInput(this: FSelect, e: InputEvent) {
 								.includes((e.target as HTMLInputElement)?.value.toLowerCase())
 			);
 		} else {
-			const filteredOptionsCloned = _.cloneDeep(this.filteredOptions);
+			const filteredOptionsCloned = cloneDeep(this.filteredOptions);
 			Object.keys(this.options).forEach(item => {
 				(filteredOptionsCloned as FSelectOptionsGroup)[item] = (
 					(this.options as FSelectOptionsGroup)[item] as FSelectArrayOfObjects

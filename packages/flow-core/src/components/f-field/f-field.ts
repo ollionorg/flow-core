@@ -3,7 +3,7 @@ import { property } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
-import eleStyle from "./f-field.scss";
+import eleStyle from "./f-field.scss?inline";
 import { flowElement } from "./../../utils";
 
 export type FFieldStateProp = "default" | "primary" | "success" | "danger" | "warning";

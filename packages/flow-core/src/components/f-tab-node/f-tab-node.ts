@@ -1,6 +1,6 @@
 import { html, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
-import eleStyle from "./f-tab-node.scss";
+import eleStyle from "./f-tab-node.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { FTabNodeWidthProp } from "../f-tab/f-tab";

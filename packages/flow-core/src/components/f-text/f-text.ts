@@ -1,7 +1,7 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import eleStyle from "./f-text.scss";
+import eleStyle from "./f-text.scss?inline";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";

@@ -1,7 +1,7 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import eleStyle from "./f-tag.scss";
+import eleStyle from "./f-tag.scss?inline";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { classMap } from "lit-html/directives/class-map.js";

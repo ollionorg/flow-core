@@ -1,6 +1,6 @@
 import { html, PropertyValues, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
-import eleStyle from "./f-icon-button.scss";
+import eleStyle from "./f-icon-button.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";

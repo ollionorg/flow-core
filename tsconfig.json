@@ -29,7 +29,17 @@
 					"no-unknown-event": "warn"
 				}
 			}
-		]
+		],
+		"paths": {
+			"@cldcvr/flow-core": ["./packages/flow-core/src"],
+			"@cldcvr/flow-core-config": ["./packages/flow-core-config/src"],
+			"@cldcvr/flow-log": ["./packages/flow-log/src"],
+			"@cldcvr/flow-code-editor": ["./packages/flow-code-editor/src"],
+			"@cldcvr/flow-table": ["./packages/flow-table/src"],
+			"@cldcvr/flow-md-editor": ["./packages/flow-md-editor/src"]
+		},
+		"types": ["vite/client"]
 	},
-	"references": [{ "path": "./packages/flow-core/tsconfig.node.json" }]
+	"exclude": ["**/src/**/*.test.ts", "**/dist", "dist"],
+	"references": [{ "path": "./tsconfig.node.json" }]
 }

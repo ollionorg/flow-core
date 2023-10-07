@@ -128,3 +128,12 @@ const Template: Story<unknown> = () => {
 };
 
 export const basic = Template.bind({});
+
+export default {
+	title: "F Theme"
+	// argTypes: {
+	// 	field: {
+	// 		control: false
+	// 	}
+	// }
+} as Meta;

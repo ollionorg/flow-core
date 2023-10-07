@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import eleStyle from "./f-template.scss";
+import eleStyle from "./f-template.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { flowElement } from "./../../utils";
 

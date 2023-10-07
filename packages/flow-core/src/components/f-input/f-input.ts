@@ -1,6 +1,6 @@
 import { html, unsafeCSS } from "lit";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
-import eleStyle from "./f-input.scss";
+import eleStyle from "./f-input.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
 import { FText } from "../f-text/f-text";

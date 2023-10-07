@@ -1,12 +1,12 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { HTMLTemplateResult, PropertyValues, unsafeCSS } from "lit";
 import { property, query, queryAll, queryAssignedElements, state } from "lit/decorators.js";
-import eleStyle from "./f-select.scss";
+import eleStyle from "./f-select.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { FIcon } from "../f-icon/f-icon";
-import _ from "lodash";
+import { cloneDeep } from "lodash-es";
 import render, { renderSingleSelection, renderMultipleSelectionTag } from "./render";
 import {
 	handleDropDownOpen,
@@ -469,7 +469,7 @@ export class FSelect extends FRoot {
 	 * get concatinated array from groups
 	 */
 	getConcaticateGroupOptions(array: FSelectOptionsGroup) {
-		const selectedOptions = _.cloneDeep(array);
+		const selectedOptions = cloneDeep(array);
 		return Object.keys(array).reduce(function (arr: FSelectArrayOfObjects, key: string) {
 			return arr.concat((selectedOptions as any)[key]);
 		}, []);

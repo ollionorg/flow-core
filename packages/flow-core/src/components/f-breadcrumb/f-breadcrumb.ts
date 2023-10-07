@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { html, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
-import eleStyle from "./f-breadcrumb.scss";
+import eleStyle from "./f-breadcrumb.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "../../utils";
@@ -117,7 +117,7 @@ export class FBreadcrumb extends FRoot {
 	 *
 	 * @param action action whether to close or open popover
 	 */
-	togglePopover(action: "open" | "close") {
+	toggleBreadcrumbPopover(action: "open" | "close") {
 		this.popOverElement.open = action === "open" ? true : false;
 		this.popOverElement.target = this.breadCrumbPopover;
 	}
@@ -172,7 +172,7 @@ export class FBreadcrumb extends FRoot {
 						<f-div
 							clickable
 							?disabled=${this.disabled}
-							@mouseenter=${() => this.togglePopover("open")}
+							@mouseenter=${() => this.toggleBreadcrumbPopover("open")}
 							id="breadcrumb-popover"
 						>
 							<f-text class="toggle-popover-hover" variant="heading" state="secondary" size="small"
@@ -183,7 +183,7 @@ export class FBreadcrumb extends FRoot {
 							<f-div
 								state="secondary"
 								direction="column"
-								@mouseleave=${() => this.togglePopover("close")}
+								@mouseleave=${() => this.toggleBreadcrumbPopover("close")}
 							>
 								${this.middlePopoverCrumbs?.map(
 									(crumb, index) => html` <f-div

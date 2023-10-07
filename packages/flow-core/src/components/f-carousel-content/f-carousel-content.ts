@@ -1,7 +1,7 @@
 import { html, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import { FRoot } from "./../../mixins/components/f-root/f-root";
-import eleStyle from "./f-carousel-content.scss";
+import eleStyle from "./f-carousel-content.scss?inline";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
 

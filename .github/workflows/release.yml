@@ -21,13 +21,13 @@ jobs:
           node-version: 18.x
 
       - name: Install Dependencies
-        run: yarn
+        run: pnpm i
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: yarn release
+          publish: pnpm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -110,7 +110,7 @@ jobs:
           node-version: 16.x
 
       - name: Install Dependencies
-        run: yarn
+        run: pnpm i
 
       # Remove original publishConfig in packages/flow-core/package.json
       - uses: sergeysova/jq-action@v2
@@ -154,7 +154,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: yarn release --no-git-tag
+          publish: pnpm run release --no-git-tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}

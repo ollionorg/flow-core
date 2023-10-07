@@ -1,6 +1,6 @@
 import { html, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
-import eleStyle from "./f-tab-content.scss";
+import eleStyle from "./f-tab-content.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { flowElement } from "./../../utils";
 

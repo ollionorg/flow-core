@@ -236,9 +236,19 @@ export class FSuggest extends FRoot {
 			this.popOverElement.open = true;
 		}
 	}
+
+	get filteredSuggestionsLength() {
+		if (Array.isArray(this.filteredSuggestions)) {
+			return this.filteredSuggestions.length;
+		} else if (this.filteredSuggestions) {
+			return Object.keys(this.filteredSuggestions).length;
+		}
+
+		return 0;
+	}
+
 	get anySuggestions() {
-		const suggestionsCount = this.filteredSuggestions?.length ?? 0;
-		return suggestionsCount > 0;
+		return this.filteredSuggestionsLength > 0;
 	}
 
 	get isStringArraySuggestions() {
@@ -342,7 +352,7 @@ export class FSuggest extends FRoot {
 	selectOption() {
 		if (this.isStringArraySuggestions) {
 			if (this.filteredSuggestions) {
-				if (this.currentIndex >= 0 && this.currentIndex < this.filteredSuggestions.length) {
+				if (this.currentIndex >= 0 && this.currentIndex < this.filteredSuggestionsLength) {
 					const selectedOption = (this.filteredSuggestions as string[] | FSuggestTemplate[])[
 						this.currentIndex
 					];
@@ -443,7 +453,7 @@ export class FSuggest extends FRoot {
 			</f-input>
 			<f-popover .overlay=${false} .placement=${"bottom-start"} class="f-suggest-popover">
 				<f-div direction="column" .maxHeight=${this.optionsMaxHeight ?? "600px"} state="secondary">
-					${this.filteredSuggestions && this.filteredSuggestions.length > 0
+					${this.filteredSuggestions && this.filteredSuggestionsLength > 0
 						? this.getSuggestionHtml(this.filteredSuggestions)
 						: html`<slot name="no-data"></slot>`}
 				</f-div>

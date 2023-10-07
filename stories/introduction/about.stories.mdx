@@ -1,0 +1,77 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta
+  title="Introduction/About"
+  parameters={{
+    controls: { hideNoControlsWarning: true },
+  }}
+></Meta>
+
+## Flow Lineage
+
+A lineage chart is a graphical representation of a node's ancestors, showing the relationships among nodes. It is often used in analytics to show the relations and to trace their ancestry. Lineage charts can be in the form of a hierarchy data, showing the relationships between parents and children, or they can be more complex and show the relationships between more distant nodes. Lineage charts can be useful for investigating the hierarchy of a data.
+
+### Prerequisites
+
+If you have an existing front-end project, you need to install [Flow core](https://github.com/cldcvr/flow-core) into that project before continuing with Flow lineage.
+If you do not have an existing front-end project, you can easily create one from a [flow starter kit](https://github.com/cldcvr/flow-core#starter-kits).
+
+### Getting started
+
+#### Step 1: Install flow lineage
+
+`yarn add @cldcvr/flow-lineage`
+_Note:_ after installation, re-start your application.
+
+#### Step 2 : Import styles/CSS
+
+**Vue JS:** Paste the below snippet \*after the closing `<template>` tag in your `App.vue` file
+
+```
+<style>
+  @import "@cldcvr/flow-lineage/dist/style.css";
+</style>
+```
+
+**React:** Paste the below snippet in `src/index.tsx` or `index.jsx` file
+
+```
+import "@cldcvr/flow-lineage/dist/style.css";
+```
+
+**Angular:** Add css file path in `angular.json` in `styles` property array.
+
+```
+"styles": ["@cldcvr/flow-lineage/dist/style.css"],
+```
+
+#### Step 3: Import flow-lineage into your project
+
+`import` lineage after `@cldcvr/flow-core` like below. In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
+
+```
+import("@cldcvr/flow-core").then(async () => {
+	await import('@cldcvr/flow-lineage');
+  //your application startup code
+});
+```
+
+#### Step 4 : If your project is typescript enabled then you will need to include import types
+
+**Vue JS 2 or 3:** Copy paste below line in your `main.ts` file.
+
+```
+import "@cldcvr/flow-lineage/dist/types/vue2";
+```
+
+```
+import "@cldcvr/flow-lineage/dist/types/vue3";
+```
+
+**React**: Include react type in `tsconfig.json` file like below.
+
+```
+"include": ["src", "./node_modules/@cldcvr/flow-lineage/dist/types/react.ts"]
+```
+
+**Note:** after adding the snippets, re-start your application.

@@ -1,5 +1,4 @@
 import { defineConfig } from "vite";
-import litcss from "rollup-plugin-postcss-lit";
 import path from "path";
 
 export default defineConfig({

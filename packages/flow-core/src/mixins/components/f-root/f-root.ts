@@ -12,7 +12,7 @@ type TooltipElement = HTMLElement & {
 	closable: boolean;
 };
 
-injectCss(globalStyle);
+injectCss("f-root", globalStyle);
 
 /**
  * @summary Every component must extent this class to consume gbobal styles , such as css reset, font family,...

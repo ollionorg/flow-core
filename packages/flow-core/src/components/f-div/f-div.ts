@@ -100,7 +100,7 @@ const BORDER_POSITION_CSS = {
  * END :  constant values required for `f-div`
  */
 
-injectCss(globalStyle);
+injectCss("f-div", globalStyle);
 
 /**
  * @summary F-div is used as a container for HTML elements.

@@ -1,0 +1,70 @@
+{
+  "name": "@cldcvr/flow-lineage",
+  "version": "2.0.1",
+  "description": "Lineage dependency for flow design system",
+  "module": "dist/flow-lineage.es.js",
+  "main": "dist/flow-lineage.cjs.js",
+  "types": "dist/types/src/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "./compile.sh",
+    "compile": "./compile.sh",
+    "meta-build": "./meta-build.sh",
+    "build": "vite build --emptyOutDir && tsc -emitDeclarationOnly",
+    "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
+    "lint:eslint": "eslint 'src/**/*.ts'",
+    "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
+    "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
+    "test-build": "web-test-runner ./src/**/*.test.ts --node-resolve",
+    "test": "yarn build && web-test-runner ./src/**/*.test.ts --node-resolve",
+    "test:watch": "yarn build && web-test-runner ./src/**/*.test.ts --node-resolve --watch"
+  },
+  "keywords": [
+    "web-components",
+    "lit-element",
+    "typescript",
+    "lit"
+  ],
+  "dependencies": {
+    "d3": "^7.6.1",
+    "lit": "^2.2.4"
+  },
+  "devDependencies": {
+    "@cldcvr/custom-elements-manifest-to-types": "workspace:*",
+    "@custom-elements-manifest/analyzer": "^0.5.7",
+    "@open-wc/testing": "^3.1.5",
+    "@types/d3": "^7.4.0",
+    "@types/jest": "28.1.3",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
+    "@web/dev-server-esbuild": "^0.3.0",
+    "@web/test-runner": "^0.13.30",
+    "concurrently": "^7.3.0",
+    "esbuild-sass-plugin": "2.2.6",
+    "lit-html": "^2.2.5",
+    "sass": "^1.52.3",
+    "typescript": "^4.5.4",
+    "vite": "^2.9.9",
+    "vue": "2.6.14",
+    "web-component-analyzer": "^2.0.0-next.4"
+  },
+  "peerDependencies": {
+    "@cldcvr/flow-core": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://github.com/cldcvr/flow-core.git",
+    "directory": "packages/@cldcvr/flow-lineage"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "customElements": "custom-elements.json",
+  "bugs": {
+    "url": "https://github.com/cldcvr/flow-lineage/issues"
+  },
+  "homepage": "https://github.com/cldcvr/flow-lineage#readme",
+  "author": "@cldcvr",
+  "license": "MIT"
+}

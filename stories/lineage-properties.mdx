@@ -1,0 +1,618 @@
+##  Lineage  properties
+###### Note: Click on the property name to learn about each property.
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Options</th>
+			<th>Default</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><a href="#node-properties">nodes</a></td>
+			<td>object</td>
+			<td>-</td>
+			<td>{}</td>
+		</tr>
+		<tr>
+			<td><a href="#link-properties">links</a></td>
+			<td>array</td>
+			<td>-</td>
+			<td>[]</td>
+		</tr>
+		<tr>
+			<td><a href="#direction">direction</a></td>
+			<td>string</td>
+			<td><b>horizontal | vertical</b></td>
+			<td>horizontal</td>
+		</tr>
+		<tr>
+			<td><a href="#padding">padding</a></td>
+			<td>number</td>
+			<td><b>"any-num-value"</b></td>
+			<td>16</td>
+		</tr>
+		<tr>
+			<td><a href="#gap">gap</a></td>
+			<td>number</td>
+			<td><b>"any-num-value"</b></td>
+			<td>100</td>
+		</tr>
+		<tr>
+			<td><a href="#node-size">node-size</a></td>
+			<td>object</td>
+			<td><b>width: num, height: num</b></td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td><a href="#node-size">children-node-size</a></td>
+			<td>object</td>
+			<td><b>width: num height: num</b></td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td><a href="#node-size">center-node</a></td>
+			<td>string</td>
+			<td><b>“your-node-id”</b></td>
+			<td>root node</td>
+		</tr>
+		<tr>
+			<td><a href="#stagger-load">stagger-load</a></td>
+			<td>number</td>
+			<td><b>“any-num-value”</b></td>
+			<td>10</td>
+		</tr>
+		<tr>
+			<td><a href="#stagger-load">max-children</a></td>
+			<td>number</td>
+			<td><b>“any-num-value”</b></td>
+			<td>8</td>
+		</tr>
+		<tr>
+			<td><a href="#stagger-load">node-template</a></td>
+			<td>string</td>
+			<td><b>“template-id/object-name”</b></td>
+			<td>default template</td>
+		</tr>
+		<tr>
+			<td><a href="#children-node-template">children-node-template</a></td>
+			<td>string</td>
+			<td><b>“template-id/object-name”</b></td>
+			<td>default template</td>
+		</tr>
+	</tbody>
+</table>
+
+###### Note: Above properties are written in VueJS syntax. Refer Angular and React for respective syntax.
+
+<br />
+
+<h2 id="direction">direction</h2>
+
+Defines the orientation of the lineage.
+
+<table>
+	<thead>
+		<tr>
+			<th >Value</th>
+			<th width="400">Description</th>
+		</tr>
+		</thead>
+	<tbody>
+		<tr>
+			<td><strong>horizontal</strong></td>
+			<td>Nodes will be plotted from left to right.</td>
+			<td>default</td>
+		</tr>
+		<tr>
+			<td><strong>vertical</strong></td>
+			<td>Nodes will be plotted from top to bottom.</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+<h2 id="padding">padding</h2>
+
+Define the padding of the lineage component in pixels (px)
+
+<table>
+	<thead>
+		<tr>
+			<th >Value</th>
+			<th width="400">Description</th>
+			<th>Default</th>
+		</tr>
+		</thead>
+	<tbody>
+		<tr>
+			<td><strong>any-num-value</strong></td>
+			<td>Padding around the content of lineage component</td>
+			<td>16</td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+<h2 id="gap">gap</h2>
+
+Define the gap between nodes in pixels (px). 
+
+<table>
+	<thead>
+		<tr>
+			<th >Value</th>
+			<th width="400">Description</th>
+			<th>Default</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><strong>any-num-value</strong></td>
+			<td>Padding around the content of lineage component</td>
+			<td>100</td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+<h2 id="node-size">node-size</h2>
+
+Defines the dimensions of the node template.  
+
+<table>
+	<thead>
+		<tr>
+			<th >Value</th>
+			<th width="400">Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td width="200"><strong>width: num, height: num</strong></td>
+			<td>width and height of the node template to render the node correctly</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+<h2 id="children-node-size">children-node-size</h2>
+
+Defines the dimensions of the children node template. 
+
+<table>
+	<thead>
+		<tr>
+			<th >Value</th>
+			<th width="400">Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><strong>width: num, height: num</strong></td>
+			<td>width and height of the children node template to render the node correctly</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+<h2 id="center-node">center-node</h2>
+
+Sets which node ID is the main/center node for the entire lineage
+
+<table>
+	<thead>
+		<tr>
+			<th >Value</th>
+			<th width="400">Description</th>
+			<th>Default</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><strong>your-node-id</strong></td>
+			<td>Sets this node id as center node. By default root node is center node.</td>
+			<td>‘root node id’</td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+<h2 id="stagger-load">stagger-load</h2>
+
+Choose how many levels or degrees of nodes you would like to draw at the same time, this helps in reducing the load on the browser for larger datasets. 
+
+<table>
+	<thead>
+		<tr>
+			<th >Value</th>
+			<th width="400">Description</th>
+			<th>Default</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><strong>any-num-value</strong></td>
+			<td>degree of connections to plot in single render</td>
+			<td>10</td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+<h2 id="max-children">max-children</h2>
+
+Defines the number of child nodes visible at a time when a node is expanded. If a node has child nodes beyond this number, a scroll bar appears.
+
+<table>
+	<thead>
+		<tr>
+			<th >Value</th>
+			<th width="400">Description</th>
+			<th>Default</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><strong>any-num-value</strong></td>
+			<td>maximum number of child nodes before a scrollbar appears</td>
+			<td>8</td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+<h2 id="node-template">node-template</h2>
+
+Nodes are represented through templates in lineage, you can define your own node template. Node templates are defined on a gloabl lineage level and can be defined on an indiviual node level. 
+
+<table>
+	<thead>
+		<tr>
+			<th >Value</th>
+			<th width="400">Description</th>
+			<th>Default</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><strong>template-id/object-name</strong></td>
+			<td>Add node template</td>
+			<td><a href="#node-template-default">defaultTemplate</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+<h2 id="children-node-template">children-node-template</h2>
+
+Same as nodes, child nodes are  also represented through templates.
+
+<table>
+	<thead>
+		<tr>
+			<th >Value</th>
+			<th width="400">Description</th>
+			<th>Default</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><strong>template-id/object-name</strong></td>
+			<td>Add node template</td>
+			<td><a href="#node-template-children">defaultTemplate</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<br /><br />
+
+<h1 id="node-properties">Node properties</h1>
+
+## API
+###### Note: Click on the name to learn more about each oject.
+
+<table>
+<thead>
+	<tr>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Default</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td><a href="#node-id">node-id</a></td>
+		<td>string</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td><a href="#fNodeTemplate">fNodeTemplate</a></td>
+		<td>string</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td><a href="#fData">fData</a></td>
+		<td>object</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td><a href="#fChildren">fChildren</a></td>
+		<td>array</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td><a href="#fHideChildren">fHideChildren</a></td>
+		<td>boolean</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td><a href="#fClick">fClick</a></td>
+		<td>function</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td><a href="#fRightClick">fRightClick</a></td>
+		<td>function</td>
+		<td>-</td>
+	</tr>
+</tbody>
+</table>
+
+<br />
+
+## Sample
+
+<br/>
+
+```
+node-id-1: { //Unique node id for each node
+  fData: { 
+		fullName: "Robert Downey Jr.",
+		description: "Movies",
+		state: "secondary",
+	},
+	fChildren: [                  
+	{
+		child-id-1: {   //Unique node id for each child node
+			fData: {
+				icon: "i-hashtag",
+				title: "Node child 1",
+			},
+    }, 
+  ] 
+}
+```
+
+<br />
+
+<h2 id="node-id">Node ID</h2>
+
+Each node is identified by a unique ID. 
+	
+<div class="split">
+	<div>
+		<div class="title">Node example</div>
+		<img src="images/node-id.png"/>
+	</div>
+	<div>
+		<div class="title">Node data example</div>
+		<pre><code>{`tony: {                       //Unique node ID
+	fData: {
+		name: "Tony stark",
+		email: "ironman1200@stark.com",
+	},
+},`}</code></pre>
+	</div>
+</div>
+
+<br />
+
+<h2 id="fNodeTemplate">fNodeTemplate</h2>
+
+Nodes are represented through templates, you can pass custom markup to create a custom nodes.
+	
+<div class="split">
+	<div>
+		<div class="title">Node example</div>
+		<img src="images/nodeTemplate.png"/>
+	</div>
+	<div>
+		<div class="title">Node data example</div>
+		<pre><code>{`tony: {
+	fNodeTemplate:\`<f-div direction="secondary" width="100%" height="hug-content" align="top-left">
+		<f-text size="large">\${node.data.name}</f-text>
+		<f-text size="small">\${node.data.email}</f-text>
+		<f-text size="small">\${node.data.phone}</f-text>
+		</f-div>\`
+	}
+}`}</code></pre>
+	</div>
+</div>
+
+<br />
+
+<h2 id="fData">fData</h2>
+
+The data required by each node needs to be present in the node schema. 
+	
+###### Note: Use “\${node.data.key}” to access fData in your node template. 
+
+<div class="split">
+	<div>
+		<div class="title">Node example</div>
+		<img src="images/templateData.png"/>
+	</div>
+	<div>
+		<div class="title">Node data example</div>
+		<pre><code>{`tony: {                       
+	fData: {	//Data goes here
+		name: "Tony stark",
+		email: "ironman1200@stark.com",
+		phone: "+91 99999 99999",
+	},
+},`}</code></pre>
+	</div>
+</div>
+
+<br />
+
+<h2 id="fChildren">fChildren</h2>
+
+Each node can have fChildren. 
+
+<div class="split">
+	<div>
+		<div class="title">Node example</div>
+		<img src="images/children.png"/>
+	</div>
+	<div>
+		<div class="title">Node data example</div>
+		<pre><code>
+{`tony: {                       //Unique node ID
+	fData: {
+		name: "Tony stark",
+		email: "ironman1200@stark.com",
+	},
+	fChildren: {
+		steve: {            //unique ID for node child
+			fData: {   //data
+			title: "Steve Rogers",
+			},
+		},
+	}
+}
+`}</code></pre>
+	</div>
+</div>
+
+
+<br />
+
+<h2 id="fHideChildren">fHideChildren</h2>
+
+Boolean that defines whether node children will be visible on load or not.
+	
+###### Note: On load, all node children are collpased/hidden. Clicking on a node will reveal its children
+
+<div class="split">
+	<div>
+		<div class="title">Node example</div>
+	</div>
+	<div>
+		<div class="title">Node data example</div>
+		<pre>add code here</pre>
+	</div>
+</div>
+
+<br />
+
+<h2 id="fClick">fClick</h2>
+
+A callback function for when a node is clicked. Eg:	
+
+```
+fClick: function (event, node) {
+	console.log("Node Clicked", event, node);
+},
+```
+
+<br />
+
+<h2 id="fRightClick">fRightClick</h2>
+
+A callback function for when a node is right clicked. Eg:
+
+```
+fRightClick: function (event, node) {
+	console.log("Node is right clicked", event, node);
+},
+```
+
+<h1 id="link-properties">Link properties</h1>
+
+## API
+###### Note: Click on the name to learn more about each oject.
+
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Default</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><a href="#to">to</a></td>
+			<td>string</td>
+			<td>-</td>
+		</tr>
+		<tr>
+			<td><a href="#from">from</a></td>
+			<td>string</td>
+			<td>-</td>
+		</tr>
+	</tbody>
+</table>
+
+<br />
+
+## Sample
+
+Links are connections between the nodes. Example:
+
+```
+links: [ 
+	{
+		from: "node1",	// node to node link
+		to: "node2", 
+	}, 
+	{
+		from: "node1",  // node to child link
+		to: "child2",
+	}, 
+	{
+		from: "child1", // child to child link
+		to: "child3",
+	},
+],
+```
+
+<br />
+
+<h2 id="to">to</h2>
+
+Unique identifier of the node  where connection line will end. For example:
+
+```
+[{ from: 'A', to :'B'}]
+```
+
+<br />
+
+<h2 id="from">from</h2>
+
+Unique identifier of the node from where connection line will start. For example:
+
+```
+[{ from: 'A', to :'B'}]
+```
+
+
+<br />
+

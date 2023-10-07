@@ -15,6 +15,20 @@ import loader from "../../mixins/svg/loader";
 export default function render(this: FSelect) {
 	this.validateProperties();
 
+	let selectedOptionsLength = 0;
+	if (Array.isArray(this.selectedOptions)) {
+		selectedOptionsLength = this.selectedOptions.length;
+	} else if (this.selectedOptions) {
+		selectedOptionsLength = Object.keys(this.selectedOptions).length;
+	}
+
+	let filteredOptionsLength = 0;
+	if (Array.isArray(this.filteredOptions)) {
+		filteredOptionsLength = this.filteredOptions.length;
+	} else if (this.selectedOptions) {
+		filteredOptionsLength = Object.keys(this.filteredOptions).length;
+	}
+
 	/**
 	 * apply width according to the prop
 	 */
@@ -67,9 +81,7 @@ export default function render(this: FSelect) {
 	 * input text area with alternate f-text placeholder when not searchable
 	 */
 	const inputAppend = html`
-		${this.selectedOptions?.length === 0 &&
-		concatinatedSelectedOptions?.length === 0 &&
-		!this.searchable
+		${selectedOptionsLength === 0 && concatinatedSelectedOptions?.length === 0 && !this.searchable
 			? html`<f-text
 					data-qa-placeholder
 					class="placeholder-text"
@@ -88,7 +100,7 @@ export default function render(this: FSelect) {
 			variant=${this.variant}
 			category=${this.category}
 			state=${this.state}
-			placeholder=${this.selectedOptions?.length > 0 || concatinatedSelectedOptions?.length > 0
+			placeholder=${selectedOptionsLength > 0 || concatinatedSelectedOptions?.length > 0
 				? this.searchable && this.openDropdown
 					? this.placeholder
 					: ""
@@ -107,7 +119,7 @@ export default function render(this: FSelect) {
 	 */
 	const prefixAppend = html`<div class="f-select-prefix">
 		${this.iconLeft ? html` ${iconLeft}` : ""}
-		${Array.isArray(this.selectedOptions) && this.selectedOptions?.length > 0
+		${Array.isArray(this.selectedOptions) && selectedOptionsLength > 0
 			? html` <div class="f-select-searchable">
 					${this.type === "single"
 						? (this.selectedOptions as FSelectOptionsProp).map(option =>
@@ -193,8 +205,7 @@ export default function render(this: FSelect) {
 	 */
 	const suffixAppend = !this.loading
 		? html`<div class="f-select-suffix">
-				${(this.selectedOptions?.length > 0 || concatinatedSelectedOptions?.length > 0) &&
-				this.clear
+				${(selectedOptionsLength > 0 || concatinatedSelectedOptions?.length > 0) && this.clear
 					? html`
 							<f-icon
 								data-qa-clear
@@ -321,7 +332,7 @@ export default function render(this: FSelect) {
 				>
 					<f-div padding="none" gap="none" direction="column">
 						${Array.isArray(this.options)
-							? this.filteredOptions.length > 0
+							? filteredOptionsLength > 0
 								? (this.filteredOptions as FSelectArray)?.map(
 										option =>
 											html`<f-div
@@ -430,71 +441,62 @@ export default function render(this: FSelect) {
 							>
 				  </f-div>
 				  ${(this.filteredOptions as FSelectOptionsGroup)[group].map(
-						option =>
-							html`
-								<f-div
-									class="f-select-options-clickable"
-									data-qa-option=${this.getOptionQaId(option)}
-									padding="medium x-large"
-									height="hug-content"
-									width="fill-container"
-									direction="row"
-									align="middle-left"
-									gap="small"
-									.selected=${this.isGroupSelection(option, group) ? "background" : undefined}
-									@click=${(e: MouseEvent) => {
-										this.handleSelectionGroup(option, group, e);
-									}}
-									@mouseover=${(e: MouseEvent) => {
-										this.handleOptionMouseOver(e);
-									}}
-									.disabled=${typeof option === "object" && option.disabled}
-								>
-									${this.checkbox
-										? html` <f-checkbox
-												state=${this.state}
-												size=${this.size}
-												value=${this.isGroupSelection(option, group) ? "checked" : "unchecked"}
-												@input=${(e: MouseEvent) => {
-													this.handleCheckboxGroup(option, group, e);
-												}}
-										  ></f-checkbox>`
-										: ""}
-									${(option as FSelectOptionObject)?.icon && !this.optionTemplate
-										? html` <f-div
-												padding="none"
-												gap="none"
-												height="hug-content"
-												width="hug-content"
-												><f-icon
-													size="medium"
-													source=${(option as FSelectOptionObject)?.icon}
-												></f-icon
-										  ></f-div>`
-										: ""}
-									${this.optionTemplate ? this.optionTemplate(option) : ""}
-									${!this.optionTemplate
-										? html` <f-div
-												padding="none"
-												gap="none"
-												height="hug-content"
-												width="fill-container"
-												><f-text variant="para" size="small" weight="regular"
-													>${(option as FSelectOptionObject)?.title ?? option}</f-text
-												></f-div
-										  >`
-										: ""}
-									${this.isGroupSelection(option, group) && !this.checkbox
-										? html` <f-div
-												padding="none"
-												gap="none"
-												height="hug-content"
-												width="hug-content"
-												><f-icon size="small" source="i-tick"></f-icon
-										  ></f-div>`
-										: ""}
-								</f-div>
-							`
+						option => html`
+							<f-div
+								class="f-select-options-clickable"
+								data-qa-option=${this.getOptionQaId(option)}
+								padding="medium x-large"
+								height="hug-content"
+								width="fill-container"
+								direction="row"
+								align="middle-left"
+								gap="small"
+								.selected=${this.isGroupSelection(option, group) ? "background" : undefined}
+								@click=${(e: MouseEvent) => {
+									this.handleSelectionGroup(option, group, e);
+								}}
+								@mouseover=${(e: MouseEvent) => {
+									this.handleOptionMouseOver(e);
+								}}
+								.disabled=${typeof option === "object" && option.disabled}
+							>
+								${this.checkbox
+									? html` <f-checkbox
+											state=${this.state}
+											size=${this.size}
+											value=${this.isGroupSelection(option, group) ? "checked" : "unchecked"}
+											@input=${(e: MouseEvent) => {
+												this.handleCheckboxGroup(option, group, e);
+											}}
+									  ></f-checkbox>`
+									: ""}
+								${(option as FSelectOptionObject)?.icon && !this.optionTemplate
+									? html` <f-div padding="none" gap="none" height="hug-content" width="hug-content"
+											><f-icon
+												size="medium"
+												source=${(option as FSelectOptionObject)?.icon}
+											></f-icon
+									  ></f-div>`
+									: ""}
+								${this.optionTemplate ? this.optionTemplate(option) : ""}
+								${!this.optionTemplate
+									? html` <f-div
+											padding="none"
+											gap="none"
+											height="hug-content"
+											width="fill-container"
+											><f-text variant="para" size="small" weight="regular"
+												>${(option as FSelectOptionObject)?.title ?? option}</f-text
+											></f-div
+									  >`
+									: ""}
+								${this.isGroupSelection(option, group) && !this.checkbox
+									? html` <f-div padding="none" gap="none" height="hug-content" width="hug-content"
+											><f-icon size="small" source="i-tick"></f-icon
+									  ></f-div>`
+									: ""}
+							</f-div>
+						`
 					)}
 				</f-div></f-div
 			  >`

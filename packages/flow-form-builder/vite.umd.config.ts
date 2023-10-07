@@ -1,5 +1,4 @@
 import { defineConfig } from "vite";
-import litcss from "rollup-plugin-postcss-lit";
 import path from "path";
 
 export default defineConfig({
@@ -24,6 +23,5 @@ export default defineConfig({
 		alias: {
 			"~": path.resolve(__dirname, "./src/index.ts")
 		}
-	},
-	plugins: [litcss()]
+	}
 });

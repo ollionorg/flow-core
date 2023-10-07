@@ -25,7 +25,7 @@ export type FButtonState =
 	| "inherit"
 	| `custom, ${string}`;
 
-injectCss(globalStyle);
+injectCss("f-button", globalStyle);
 
 /**
  * @summary Buttons allow users to perform an action or to initiate a new function.

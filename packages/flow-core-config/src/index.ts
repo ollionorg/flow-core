@@ -32,11 +32,12 @@ export const ConfigUtil = {
 
 const cssSet = new Set<string>();
 
-export function injectCss(css: string) {
-	if (cssSet.has(css)) {
+export function injectCss(id: string, css: string) {
+	if (cssSet.has(id) || !document) {
 		return;
 	}
 
+	cssSet.add(id);
 	const style = document.createElement("style");
 	style.innerHTML = css;
 	document.head.appendChild(style);

@@ -1,0 +1,85 @@
+f-lineage {
+  display: flex;
+  height: auto;
+  overflow: auto;
+  flex-direction: column;
+  align-items: flex-end;
+
+  foreignObject {
+    overflow: visible;
+  }
+}
+
+f-div[direction="column"] {
+  > f-lineage {
+    width: 100%;
+    flex: 1 0 auto;
+  }
+}
+
+f-div[direction="row"] {
+  > f-lineage {
+    flex: 1 0;
+    max-width: 100%;
+  }
+}
+
+:host {
+  position: relative;
+  > svg {
+    animation: none !important;
+  }
+  > f-popover {
+    .f-lineage-popover-close {
+      position: absolute;
+      z-index: 10;
+      right: 0;
+      transform: translateY(21px) translateX(-12px);
+    }
+  }
+
+  foreignObject {
+    cursor: pointer;
+    overflow: visible;
+    > * {
+      position: fixed !important;
+    }
+    * {
+      transform-origin: 0% 0%;
+    }
+  }
+  .highlight {
+    opacity: 1;
+    stroke-opacity: 1;
+    fill-opacity: 1;
+  }
+  .lowlight {
+    opacity: 0.3;
+    stroke-opacity: 0.3;
+    fill-opacity: 0.3;
+  }
+
+  .child-link {
+    opacity: 0;
+    stroke-opacity: 0;
+    fill-opacity: 0;
+    &.highlight {
+      opacity: 1;
+      stroke-opacity: 1;
+      fill-opacity: 1;
+    }
+  }
+
+  .degree-selector {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+
+  .selected {
+    filter: drop-shadow(1px 0 0 var(--color-primary-default))
+      drop-shadow(-1px 0 0 var(--color-primary-default))
+      drop-shadow(0 -1px 0 var(--color-primary-default))
+      drop-shadow(0 1px 0 var(--color-primary-default));
+  }
+}

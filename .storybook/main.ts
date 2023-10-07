@@ -2,12 +2,14 @@ import { mergeConfig } from "vite";
 import path from "path";
 
 const alias = [
-	"flow-core",
-	"flow-core-config",
-	"flow-log",
 	"flow-code-editor",
-	"flow-table",
-	"flow-md-editor"
+	"flow-core-config",
+	"flow-core",
+	"flow-form-builder",
+	"flow-lineage",
+	"flow-log",
+	"flow-md-editor",
+	"flow-table"
 ].map(pkg => ({
 	find: `@cldcvr/${pkg}`,
 	replacement: path.resolve(__dirname, "../packages", pkg, "src")

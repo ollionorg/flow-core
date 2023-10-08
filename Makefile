@@ -14,8 +14,10 @@ install:
 
 .PHONY: build
 build: install
+	pnpm -C packages/custom-elements-manifest-to-types build
 	pnpm run -r build
 	pnpm tsc
 
-test: install
+.PHONY: test
+test: install build
 	pnpm run -r test

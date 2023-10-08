@@ -1,11 +1,16 @@
 import { html, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-breadcrumb.scss?inline";
+import globalStyle from "./f-breadcrumb-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "../../utils";
 import { FText } from "../f-text/f-text";
 import { FPopover } from "../f-popover/f-popover";
+
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-breadcrumb", globalStyle);
 
 export type FBreadCrumbsProp = { tabIndex: number; title: string };
 export type FBreadcrumbs = FBreadCrumbsProp[];

@@ -39,6 +39,7 @@ export function injectCss(id: string, css: string) {
 
 	cssSet.add(id);
 	const style = document.createElement("style");
+	style.id = id;
 	style.innerHTML = css;
 	document.head.appendChild(style);
 }

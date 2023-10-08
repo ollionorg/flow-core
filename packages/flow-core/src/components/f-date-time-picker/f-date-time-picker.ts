@@ -1,6 +1,7 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-date-time-picker.scss?inline";
+import globalStyle from "./f-date-time-picker-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import flatpickr from "flatpickr";
 import { Instance } from "flatpickr/dist/types/instance";
@@ -9,6 +10,10 @@ import { FInput } from "../f-input/f-input";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import { flowElement } from "./../../utils";
+
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-date-time-picker", globalStyle);
 
 export type FDateTimePickerState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -23,7 +28,13 @@ export class FDateTimePicker extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles, ...FInput.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
+		...FDiv.styles,
+		...FText.styles,
+		...FInput.styles
+	];
 
 	/**
 	 * @attribute Variants are various visual representations of a date-time-picker field.

@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 import { HTMLTemplateResult, PropertyValues, unsafeCSS } from "lit";
 import { property, query, queryAll, queryAssignedElements, state } from "lit/decorators.js";
 import eleStyle from "./f-select.scss?inline";

@@ -75,10 +75,6 @@ export const Playground = {
 			options: ["date-time", "date-only", "time-only"]
 		},
 
-		value: {
-			control: "text"
-		},
-
 		variant: {
 			control: "select",
 			options: ["curved", "round", "block"]
@@ -137,7 +133,6 @@ export const Playground = {
 	},
 
 	args: {
-		value: "",
 		placeholder: "Enter your text here",
 		variant: "round",
 		mode: "date-time",

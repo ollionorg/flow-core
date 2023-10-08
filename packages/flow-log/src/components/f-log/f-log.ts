@@ -97,7 +97,7 @@ export class FLog extends FRoot {
 			.replace(/\[WARN\]/g, "\x1b[38;2;254;164;1m[WARN]\x1b[0m")
 			.replace(/\[ERROR\]/g, "\x1b[38;2;242;66;66m[ERROR]\x1b[0m")
 			.replace(/\[DEBUG\]/g, "\x1b[38;2;211;153;255m[DEBUG]\x1b[0m")
-			.replace(/\d{4}[-\/][01]\d[-\/][0-3]\d.[0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?Z?/g, date => {
+			.replace(/\d{4}[-/][01]\d[-/][0-3]\d.[0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?Z?/g, date => {
 				return `\x1b[38;2;123;147;178m${date}\x1b[0m`;
 			})
 			.replace(termRegex, key => {

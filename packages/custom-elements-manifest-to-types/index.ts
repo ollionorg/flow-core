@@ -4,29 +4,31 @@ import {
 	PropertyLike,
 	MixinDeclaration
 } from "custom-elements-manifest/schema";
-import { vaidateOptions } from "./options";
-import prettier from "prettier";
+import { UserOptions, validateOptions } from "./options";
+import * as prettier from "prettier";
+
 const camelToSnakeCase = (str: string) =>
 	str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 
-const options = vaidateOptions({});
-export function transformSchema(
+export async function transformSchema(
 	schema: Package,
 	framework: "vue2" | "react" | "vue3",
 	modulePath?: string
 ) {
+	const options = await validateOptions({});
+
 	if (framework === "vue2") {
-		return transformSchemaVue2(schema, modulePath);
+		return transformSchemaVue2(schema, options, modulePath);
 	} else if (framework === "vue3") {
-		return transformSchemaVue3(schema, modulePath);
+		return transformSchemaVue3(schema, options, modulePath);
 	} else if (framework === "react") {
-		return transformSchemaReact(schema, modulePath);
+		return transformSchemaReact(schema, options, modulePath);
 	}
 
 	return null;
 }
 
-function transformSchemaReact(schema: Package, modulePath?: string) {
+function transformSchemaReact(schema: Package, options: UserOptions, modulePath?: string) {
 	const components: string[] = [];
 
 	schema.modules.forEach(module => {
@@ -45,7 +47,7 @@ function transformSchemaReact(schema: Package, modulePath?: string) {
 declare global {
 	namespace JSX {
 	   interface IntrinsicElements {
-    
+
                 ${components.join("\n")}
             }
         }
@@ -56,7 +58,7 @@ declare global {
 
 	return output;
 }
-function transformSchemaVue2(schema: Package, modulePath?: string) {
+function transformSchemaVue2(schema: Package, options: UserOptions, modulePath?: string) {
 	const components: string[] = [];
 
 	schema.modules.forEach(module => {
@@ -85,7 +87,7 @@ function transformSchemaVue2(schema: Package, modulePath?: string) {
 
 	return output;
 }
-function transformSchemaVue3(schema: Package, modulePath?: string) {
+function transformSchemaVue3(schema: Package, options: UserOptions, modulePath?: string) {
 	const components: string[] = [];
 
 	schema.modules.forEach(module => {
@@ -168,7 +170,7 @@ function getComponentCodeFromDeclarationVue3(declaration: MixinDeclaration) {
 	let componentDeclaration = `
         ["${camelToSnakeCase(declaration.name).substring(1)}"]: DefineComponent<
             {
-				
+
     `;
 	let requiredAttributes: string[] = [];
 	if (declaration.members) {
@@ -191,7 +193,7 @@ function getComponentCodeFromDeclarationVue3(declaration: MixinDeclaration) {
 	}
 
 	componentDeclaration = `${componentDeclaration}
-	
+
  } >;`;
 
 	return componentDeclaration;
@@ -260,13 +262,14 @@ function getComponentPropTypeImports(schema: Package, modulePath?: string): stri
 
 		module.declarations?.forEach(declaration => {
 			declaration = declaration as MixinDeclaration;
+
 			if (
 				!(
 					declaration.superclass &&
 					(declaration.superclass.name === "FRoot" || declaration.superclass.name === "LitElement")
 				)
 			) {
-				return null;
+				return;
 			}
 
 			if (declaration.attributes) {

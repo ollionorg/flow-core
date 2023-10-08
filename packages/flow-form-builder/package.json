@@ -10,7 +10,7 @@
     "prepublishOnly": "./compile.sh",
     "compile": "./compile.sh",
     "meta-build": "./meta-build.sh",
-    "build": "vite build --emptyOutDir && vite build --emptyOutDir --config vite.umd.config.ts && tsc -emitDeclarationOnly",
+    "build": "vite build --emptyOutDir && vite build --emptyOutDir --config vite.umd.config.ts && tsc",
     "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
     "lint:eslint": "eslint 'src/**/*.ts'",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
@@ -32,10 +32,9 @@
     "rxjs": "^7.8.0"
   },
   "devDependencies": {
-    "@cldcvr/custom-elements-manifest-to-types": "workspace:*",
     "@custom-elements-manifest/analyzer": "^0.5.7",
     "@open-wc/testing": "^3.1.5",
-    "@types/jest": "28.1.3",
+    "@types/jest": "29.5.5",
     "@types/lodash-es": "^4.17.6",
     "@web/dev-server-esbuild": "^0.4.1",
     "@web/test-runner": "^0.17.1",

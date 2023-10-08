@@ -1,99 +1,99 @@
 {
-  "version": 1,
-  "tags": [
-    {
-      "name": "f-lineage",
-      "description": "Events:\n\n  * `ready` {`CustomEvent<{ [x: number]: LineageNode; length: number; toString(): string; toLocaleString(): string; pop(): LineageNode | undefined; push(...items: LineageNode[]): number; ... 29 more ...; at(index: number): LineageNode | undefined; }>`} - \n\n  * `f-resize` {`CustomEvent<unknown>`} - \n\n  * `node-meta` {`CustomEvent<{ node: LineageNodeElement; isChildNode: boolean; }>`} - \n\nAttributes:\n\n  * `direction` {`LineageDirection | undefined`} - \n\n  * `background` {`string | undefined`} - \n\n  * `nodes` - \n\n  * `links` {`LineageNodeLinks`} - \n\n  * `padding` {`number | undefined`} - \n\n  * `gap` {`number | undefined`} - \n\n  * `[\"node-size\"]` {`LineageNodeSize | undefined`} - \n\n  * `[\"center-node\"]` {`string | undefined`} - \n\n  * `[\"stagger-load\"]` {`number`} - \n\n  * `[\"children-node-size\"]` {`LineageNodeSize | undefined`} - \n\n  * `[\"max-children\"]` {`number | undefined`} - \n\n  * `[\"node-template\"]` - \n\n  * `[\"children-node-template\"]` - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `svg` {`SVGSVGElement`} - \n\n  * `direction` {`LineageDirection | undefined`} - \n\n  * `background` {`string | undefined`} - \n\n  * `nodes` - \n\n  * `links` {`LineageNodeLinks`} - \n\n  * `padding` {`number | undefined`} - \n\n  * `gap` {`number | undefined`} - \n\n  * `[\"node-size\"]` {`LineageNodeSize | undefined`} - \n\n  * `nodeSize` {`LineageNodeSize | undefined`} - Workaround for vue 2 for property name with hyphen\n\n  * `[\"center-node\"]` {`string | undefined`} - \n\n  * `centerNode` {`string | undefined`} - Workaround for vue 2 for property name with hyphen\n\n  * `[\"stagger-load\"]` {`number`} - \n\n  * `stagerLoad` {`number`} - Workaround for vue 2 for property name with hyphen\n\n  * `[\"children-node-size\"]` {`LineageNodeSize | undefined`} - \n\n  * `childrenNodeSize` {`LineageNodeSize | undefined`} - Workaround for vue 2 for property name with hyphen\n\n  * `[\"max-children\"]` {`number | undefined`} - \n\n  * `maxChildren` {`number | undefined`} - Workaround for vue 2 for property name with hyphen\n\n  * `[\"node-template\"]` - \n\n  * `nodeTemplate` - Workaround for vue 2 for property name with hyphen\n\n  * `[\"children-node-template\"]` - \n\n  * `childrenNodeTemplate` - Workaround for vue 2 for property name with hyphen\n\n  * `pageNumberElement` - \n\n  * `progressElement` - \n\n  * `_metaNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_hasMetaNodes` {`boolean`} - \n\n  * `maxAvailableLevels` {`number`} - holds maximum available level count\n\n  * `centerNodeElement` {`LineageNodeElement | undefined`} - \n\n  * `biDirectionalLinks` {`string[]`} - \n\n  * `data` {`LineageData`} - \n\n  * `foreignObjects` {`Selection<SVGForeignObjectElement, LineageNodeElement, SVGGElement, unknown>`} - \n\n  * `levelsToPlot` {`number[]`} - holds which levels to display\n\n  * `pageToLevels` - page to levels map\n\n  * `lineageDrawParams` {`DrawLineageParams`} - \n\n  * `page` {`number`} - \n\n  * `timeout` {`Timeout`} - \n\n  * `renderCount` {`number`} - \n\n  * `currentTransform` {`null`} - \n\n  * `popoverRef` - \n\n  * `debounceUpdate` - To debounce requestUpdate\n\n  * `resizeObserver` {`ResizeObserver | undefined`} - For obeserving size changes\n\n  * `activateResizeObserver` {`boolean`} - To avoid first resize observer call when connected to DOM\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
-      "attributes": [
-        {
-          "name": "direction",
-          "description": "`direction` {`LineageDirection | undefined`} - \n\nProperty: direction\n\nDefault: horizontal",
-          "values": [
-            {
-              "name": "horizontal"
-            },
-            {
-              "name": "vertical"
-            }
-          ]
-        },
-        {
-          "name": "background",
-          "description": "`background` {`string | undefined`} - \n\nProperty: background\n\nDefault: var(--color-surface-default)",
-          "values": []
-        },
-        {
-          "name": "nodes",
-          "description": "`nodes` - \n\nProperty: nodes"
-        },
-        {
-          "name": "links",
-          "description": "`links` {`LineageNodeLinks`} - \n\nProperty: links"
-        },
-        {
-          "name": "padding",
-          "description": "`padding` {`number | undefined`} - \n\nProperty: padding\n\nDefault: 16",
-          "values": []
-        },
-        {
-          "name": "gap",
-          "description": "`gap` {`number | undefined`} - \n\nProperty: gap\n\nDefault: 100",
-          "values": []
-        },
-        {
-          "name": "[\"node-size\"]",
-          "description": "`[\"node-size\"]` {`LineageNodeSize | undefined`} - \n\nProperty: [\"node-size\"]",
-          "values": []
-        },
-        {
-          "name": "[\"center-node\"]",
-          "description": "`[\"center-node\"]` {`string | undefined`} - \n\nProperty: [\"center-node\"]",
-          "values": []
-        },
-        {
-          "name": "[\"stagger-load\"]",
-          "description": "`[\"stagger-load\"]` {`number`} - \n\nProperty: [\"stagger-load\"]\n\nDefault: 10"
-        },
-        {
-          "name": "[\"children-node-size\"]",
-          "description": "`[\"children-node-size\"]` {`LineageNodeSize | undefined`} - \n\nProperty: [\"children-node-size\"]",
-          "values": []
-        },
-        {
-          "name": "[\"max-children\"]",
-          "description": "`[\"max-children\"]` {`number | undefined`} - \n\nProperty: [\"max-children\"]",
-          "values": []
-        },
-        {
-          "name": "[\"node-template\"]",
-          "description": "`[\"node-template\"]` - \n\nProperty: [\"node-template\"]",
-          "values": []
-        },
-        {
-          "name": "[\"children-node-template\"]",
-          "description": "`[\"children-node-template\"]` - \n\nProperty: [\"children-node-template\"]",
-          "values": []
-        },
-        {
-          "name": "tooltip",
-          "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
-          "values": []
-        },
-        {
-          "name": "onready",
-          "description": "`ready` {`CustomEvent<{ [x: number]: LineageNode; length: number; toString(): string; toLocaleString(): string; pop(): LineageNode | undefined; push(...items: LineageNode[]): number; ... 29 more ...; at(index: number): LineageNode | undefined; }>`} - "
-        },
-        {
-          "name": "onf-resize",
-          "description": "`f-resize` {`CustomEvent<unknown>`} - "
-        },
-        {
-          "name": "onnode-meta",
-          "description": "`node-meta` {`CustomEvent<{ node: LineageNodeElement; isChildNode: boolean; }>`} - "
-        }
-      ]
-    }
-  ],
-  "globalAttributes": [],
-  "valueSets": []
+	"version": 1,
+	"tags": [
+		{
+			"name": "f-lineage",
+			"description": "Events:\n\n  * `ready` {`CustomEvent<{ [x: number]: LineageNode; length: number; toString(): string; toLocaleString(): string; pop(): LineageNode | undefined; push(...items: LineageNode[]): number; ... 28 more ...; [Symbol.unscopables](): { ...; }; }>`} - \n\n  * `f-resize` {`CustomEvent<unknown>`} - \n\n  * `node-meta` {`CustomEvent<{ node: LineageNodeElement; isChildNode: boolean; }>`} - \n\nAttributes:\n\n  * `direction` {`LineageDirection | undefined`} - \n\n  * `background` {`string | undefined`} - \n\n  * `nodes` - \n\n  * `links` {`LineageNodeLinks`} - \n\n  * `padding` {`number | undefined`} - \n\n  * `gap` {`number | undefined`} - \n\n  * `[\"node-size\"]` {`LineageNodeSize | undefined`} - \n\n  * `[\"center-node\"]` {`string | undefined`} - \n\n  * `[\"stagger-load\"]` {`number`} - \n\n  * `[\"children-node-size\"]` {`LineageNodeSize | undefined`} - \n\n  * `[\"max-children\"]` {`number | undefined`} - \n\n  * `[\"node-template\"]` - \n\n  * `[\"children-node-template\"]` - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `svg` {`SVGSVGElement`} - \n\n  * `direction` {`LineageDirection | undefined`} - \n\n  * `background` {`string | undefined`} - \n\n  * `nodes` - \n\n  * `links` {`LineageNodeLinks`} - \n\n  * `padding` {`number | undefined`} - \n\n  * `gap` {`number | undefined`} - \n\n  * `[\"node-size\"]` {`LineageNodeSize | undefined`} - \n\n  * `nodeSize` {`LineageNodeSize | undefined`} - Workaround for vue 2 for property name with hyphen\n\n  * `[\"center-node\"]` {`string | undefined`} - \n\n  * `centerNode` {`string | undefined`} - Workaround for vue 2 for property name with hyphen\n\n  * `[\"stagger-load\"]` {`number`} - \n\n  * `stagerLoad` {`number`} - Workaround for vue 2 for property name with hyphen\n\n  * `[\"children-node-size\"]` {`LineageNodeSize | undefined`} - \n\n  * `childrenNodeSize` {`LineageNodeSize | undefined`} - Workaround for vue 2 for property name with hyphen\n\n  * `[\"max-children\"]` {`number | undefined`} - \n\n  * `maxChildren` {`number | undefined`} - Workaround for vue 2 for property name with hyphen\n\n  * `[\"node-template\"]` - \n\n  * `nodeTemplate` - Workaround for vue 2 for property name with hyphen\n\n  * `[\"children-node-template\"]` - \n\n  * `childrenNodeTemplate` - Workaround for vue 2 for property name with hyphen\n\n  * `pageNumberElement` - \n\n  * `progressElement` - \n\n  * `_metaNodes` {`NodeListOf<HTMLElement>`} - \n\n  * `_hasMetaNodes` {`boolean`} - \n\n  * `maxAvailableLevels` {`number`} - holds maximum available level count\n\n  * `centerNodeElement` {`LineageNodeElement | undefined`} - \n\n  * `biDirectionalLinks` {`string[]`} - \n\n  * `data` {`LineageData`} - \n\n  * `foreignObjects` {`Selection<SVGForeignObjectElement, LineageNodeElement, SVGGElement, unknown>`} - \n\n  * `levelsToPlot` {`number[]`} - holds which levels to display\n\n  * `pageToLevels` - page to levels map\n\n  * `lineageDrawParams` {`DrawLineageParams`} - \n\n  * `page` {`number`} - \n\n  * `timeout` {`number`} - \n\n  * `renderCount` {`number`} - \n\n  * `currentTransform` {`null`} - \n\n  * `popoverRef` - \n\n  * `debounceUpdate` - To debounce requestUpdate\n\n  * `resizeObserver` {`ResizeObserver | undefined`} - For obeserving size changes\n\n  * `activateResizeObserver` {`boolean`} - To avoid first resize observer call when connected to DOM\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - \n\n  * `mouseEnter` - \n\n  * `mouseLeave` - \n\n  * `isMouseOver` {`boolean`} - ",
+			"attributes": [
+				{
+					"name": "direction",
+					"description": "`direction` {`LineageDirection | undefined`} - \n\nProperty: direction\n\nDefault: horizontal",
+					"values": [
+						{
+							"name": "horizontal"
+						},
+						{
+							"name": "vertical"
+						}
+					]
+				},
+				{
+					"name": "background",
+					"description": "`background` {`string | undefined`} - \n\nProperty: background\n\nDefault: var(--color-surface-default)",
+					"values": []
+				},
+				{
+					"name": "nodes",
+					"description": "`nodes` - \n\nProperty: nodes"
+				},
+				{
+					"name": "links",
+					"description": "`links` {`LineageNodeLinks`} - \n\nProperty: links"
+				},
+				{
+					"name": "padding",
+					"description": "`padding` {`number | undefined`} - \n\nProperty: padding\n\nDefault: 16",
+					"values": []
+				},
+				{
+					"name": "gap",
+					"description": "`gap` {`number | undefined`} - \n\nProperty: gap\n\nDefault: 100",
+					"values": []
+				},
+				{
+					"name": "[\"node-size\"]",
+					"description": "`[\"node-size\"]` {`LineageNodeSize | undefined`} - \n\nProperty: [\"node-size\"]",
+					"values": []
+				},
+				{
+					"name": "[\"center-node\"]",
+					"description": "`[\"center-node\"]` {`string | undefined`} - \n\nProperty: [\"center-node\"]",
+					"values": []
+				},
+				{
+					"name": "[\"stagger-load\"]",
+					"description": "`[\"stagger-load\"]` {`number`} - \n\nProperty: [\"stagger-load\"]\n\nDefault: 10"
+				},
+				{
+					"name": "[\"children-node-size\"]",
+					"description": "`[\"children-node-size\"]` {`LineageNodeSize | undefined`} - \n\nProperty: [\"children-node-size\"]",
+					"values": []
+				},
+				{
+					"name": "[\"max-children\"]",
+					"description": "`[\"max-children\"]` {`number | undefined`} - \n\nProperty: [\"max-children\"]",
+					"values": []
+				},
+				{
+					"name": "[\"node-template\"]",
+					"description": "`[\"node-template\"]` - \n\nProperty: [\"node-template\"]",
+					"values": []
+				},
+				{
+					"name": "[\"children-node-template\"]",
+					"description": "`[\"children-node-template\"]` - \n\nProperty: [\"children-node-template\"]",
+					"values": []
+				},
+				{
+					"name": "tooltip",
+					"description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
+					"values": []
+				},
+				{
+					"name": "onready",
+					"description": "`ready` {`CustomEvent<{ [x: number]: LineageNode; length: number; toString(): string; toLocaleString(): string; pop(): LineageNode | undefined; push(...items: LineageNode[]): number; ... 28 more ...; [Symbol.unscopables](): { ...; }; }>`} - "
+				},
+				{
+					"name": "onf-resize",
+					"description": "`f-resize` {`CustomEvent<unknown>`} - "
+				},
+				{
+					"name": "onnode-meta",
+					"description": "`node-meta` {`CustomEvent<{ node: LineageNodeElement; isChildNode: boolean; }>`} - "
+				}
+			]
+		}
+	],
+	"globalAttributes": [],
+	"valueSets": []
 }

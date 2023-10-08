@@ -14,13 +14,14 @@ install:
 
 .PHONY: build
 build: install
-	# pnpm -C packages/flow-core-config run build
-	# pnpm -C packages/flow-core run build
-	pnpm concurrently --kill-others \
-		"pnpm -C packages/flow-form-builder run build" \
-		"pnpm -C packages/flow-lineage run build" \
-		"pnpm -C packages/flow-code-editor run build" \
-		"pnpm -C packages/flow-log run build" \
-		"pnpm -C packages/flow-md-editor run build" \
-		"pnpm -C packages/flow-table run build"
+	pnpm -C packages/custom-elements-manifest-to-types run build
+	pnpm -C packages/flow-core-config run build
+	pnpm -C packages/flow-core run compile
+	pnpm concurrently --kill-others-on-fail \
+		"pnpm -C packages/flow-form-builder run compile" \
+		"pnpm -C packages/flow-lineage run compile" \
+		"pnpm -C packages/flow-code-editor run compile" \
+		"pnpm -C packages/flow-log run compile" \
+		"pnpm -C packages/flow-md-editor run compile" \
+		"pnpm -C packages/flow-table run compile"
 

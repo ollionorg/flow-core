@@ -18,7 +18,7 @@ export const Playground = {
 			console.log("in next callback", e);
 		};
 
-		const handlePrev = () => {
+		const handlePrev = e => {
 			console.log("in previous callback", e);
 		};
 

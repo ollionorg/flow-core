@@ -426,7 +426,7 @@ export const ExcludeEmojis = {
 			setValue(e.detail.value);
 		};
 
-		const exclude = ["office"];
+		const excludeEmojis = ["office"];
 
 		return html`
 			<f-div width="100%" align="middle-center" padding="large">
@@ -493,13 +493,13 @@ export const Custom = {
   [{
   "id": "github",
   "name": "GitHub",
-  "emojis": 
+  "emojis":
   [
     {
       "id": "octocat",
       "name": "Octocat",
       "keywords": ["github"],
-      "skins": [{"src": 
+      "skins": [{"src":
       "https://octodex.github.com/images/snowoctocat.png"
       }]
     }

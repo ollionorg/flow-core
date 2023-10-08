@@ -2,46 +2,46 @@
 @import "./../../mixins/scss/mixins";
 
 f-tab-node {
-  cursor: pointer;
-  background-color: var(--color-tab-background);
-  display: flex;
-  flex-direction: column;
+	cursor: pointer;
+	background-color: var(--color-tab-background);
+	display: flex;
+	flex-direction: column;
 
-  &[width="fill"] {
-    flex: 1 0 auto;
-  }
-  &[direction="vertical"] {
-    flex-direction: row;
-  }
-  &[active]:after {
-    display: block;
-    content: "";
-    border-bottom: solid 3px var(--color-primary-default);
-    transform: scaleX(1);
-    z-index: 100;
-  }
-  &[active][direction="vertical"]:after {
-    display: block;
-    content: "";
-    border-right: solid 3px var(--color-primary-default);
-    transform: scaleX(1);
-    z-index: 100;
-  }
-  &[direction="vertical"]:after {
-    display: block;
-    content: "";
-    border-right: solid 3px var(--color-surface-tertiary-hover);
-    transform: scaleX(0);
-    transition: transform 250ms ease-in-out;
-  }
-  &:after {
-    display: block;
-    content: "";
-    border-bottom: solid 3px var(--color-surface-tertiary-hover);
-    transform: scaleX(0);
-    transition: transform 250ms ease-in-out;
-  }
-  &:hover:after {
-    transform: scaleX(1);
-  }
+	&[width="fill"] {
+		flex: 1 0 auto;
+	}
+	&[direction="vertical"] {
+		flex-direction: row;
+	}
+	&[active]:after {
+		display: block;
+		content: "";
+		border-bottom: solid 3px var(--color-primary-default);
+		transform: scaleX(1);
+		z-index: 100;
+	}
+	&[active][direction="vertical"]:after {
+		display: block;
+		content: "";
+		border-right: solid 3px var(--color-primary-default);
+		transform: scaleX(1);
+		z-index: 100;
+	}
+	&[direction="vertical"]:after {
+		display: block;
+		content: "";
+		border-right: solid 3px var(--color-surface-tertiary-hover);
+		transform: scaleX(0);
+		transition: transform 250ms ease-in-out;
+	}
+	&:after {
+		display: block;
+		content: "";
+		border-bottom: solid 3px var(--color-surface-tertiary-hover);
+		transform: scaleX(0);
+		transition: transform 250ms ease-in-out;
+	}
+	&:hover:after {
+		transform: scaleX(1);
+	}
 }

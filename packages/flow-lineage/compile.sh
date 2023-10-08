@@ -7,6 +7,7 @@ cd "$HERE"
 pnpm run analyze
 
 echo "building library..."
-vite build --emptyOutDir && tsc -emitDeclarationOnly
+pnpm build
+
 echo "generating types..."
-node generate-types.js
+node ../../generate-types.js

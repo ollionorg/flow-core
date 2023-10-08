@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 import { HTMLTemplateResult, LitElement, TemplateResult } from "lit";
 import { Ref } from "lit-html/directives/ref.js";
 import {

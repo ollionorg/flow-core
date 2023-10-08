@@ -1,5 +1,4 @@
 import { html } from "lit-html";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { createRef, ref } from "lit/directives/ref.js";
 import downloadFile from "./donwloadFile.ts";
 
@@ -257,13 +256,11 @@ export const SelectedRows = {
 			}
 		};
 
+		// .highlightHover=${highlightHover}
+
 		return html`<f-div direction="column" state="subtle" padding="small" gap="large">
 				<f-text>'selected-rows' event emitted whenever any row is selected or de-selected</f-text>
-				<f-table
-					.highlightHover=${highlightHover}
-					selectable="multiple"
-					@selected-rows=${selectedRowsHandler}
-				>
+				<f-table selectable="multiple" @selected-rows=${selectedRowsHandler}>
 					<f-trow slot="header">
 						${[1, 2, 3, 4, 5].map(cellNumber => {
 							return html`<f-tcell> Header ${cellNumber} </f-tcell>`;

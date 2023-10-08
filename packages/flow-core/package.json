@@ -14,9 +14,9 @@
     "sync-md-file": "node ./figma/sync-md-file.js",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
     "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
-    "test": "web-test-runner ./src/**/*.test.ts --node-resolve",
-    "test:file": "web-test-runner --node-resolve",
-    "test:watch": "web-test-runner ./src/**/*.test.ts --node-resolve --watch"
+    "test": "web-test-runner ./src/**/*.test.ts --node-resolve --port 8090 --concurrency 1",
+    "test:file": "pnpm run build && web-test-runner --node-resolve --port 8090 --concurrency 1",
+    "test:watch": "pnpm run build && web-test-runner ./src/**/*.test.ts --node-resolve --watch --port 8090 --concurrency 1"
   },
   "keywords": [
     "web-components",

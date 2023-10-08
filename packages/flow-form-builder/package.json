@@ -4,20 +4,16 @@
   "description": "Form builder for the flow design system",
   "module": "dist/flow-form-builder.es.js",
   "main": "dist/flow-form-builder.cjs.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "prepublishOnly": "./compile.sh",
-    "compile": "./compile.sh",
-    "meta-build": "./meta-build.sh",
-    "build": "vite build --emptyOutDir && vite build --emptyOutDir --config vite.umd.config.ts && tsc",
+    "prepublishOnly": "pnpm run build",
+    "build": "./compile.sh",
     "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
-    "lint:eslint": "eslint 'src/**/*.ts'",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
     "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
-    "test-build": "web-test-runner ./src/**/*.test.ts --node-resolve",
-    "test": "pnpm run build && web-test-runner ./src/**/*.test.ts --node-resolve ",
-    "test:watch": "pnpm run build && web-test-runner ./src/**/*.test.ts --node-resolve --watch"
+    "test": "web-test-runner ./src/**/*.test.ts --node-resolve",
+    "test:watch": "web-test-runner ./src/**/*.test.ts --node-resolve --watch"
   },
   "keywords": [
     "web-components",

@@ -8,7 +8,7 @@ cd "$HERE"
 pnpm run analyze
 
 echo "building library..."
-pnpm run build
+pnpm vite build --emptyOutDir
 
 echo "generating types..."
 node ../../generate-types.js

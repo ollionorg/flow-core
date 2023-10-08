@@ -19,8 +19,8 @@
     "typescript": "^5.2.2"
   },
   "scripts": {
-    "test": "jest --clearCache",
-    "build": "rm -rf dist && esbuild index.ts --outdir=dist --platform=node --packages=external --bundle && tsc",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "build": "rm -rf dist && esbuild index.ts --outdir=dist --platform=node --packages=external --bundle",
     "prepublishOnly": "pnpm run build"
   },
   "repository": {

@@ -1,42 +1,37 @@
 {
+	"extends": "./tsconfig.base.json",
+	"files": [],
 	"compilerOptions": {
-		"module": "esnext",
-		"target": "ESNext",
-		"lib": ["es2017", "dom", "dom.iterable"],
-		"baseUrl": ".",
-		"strict": true,
-		"noUnusedLocals": false,
-		"noUnusedParameters": true,
-		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true,
-		"moduleResolution": "node",
-		"isolatedModules": true,
-		"allowSyntheticDefaultImports": true,
-		"experimentalDecorators": true,
-		"forceConsistentCasingInFileNames": true,
-		"useDefineForClassFields": false,
-		"skipLibCheck": true,
-		"resolveJsonModule": true,
-		"plugins": [
-			{
-				"name": "ts-lit-plugin",
-				"strict": true,
-				"rules": {
-					"no-unknown-tag-name": "off",
-					"no-unknown-event": "warn"
-				}
-			}
-		],
-		"paths": {
-			"@cldcvr/flow-core": ["./packages/flow-core/src"],
-			"@cldcvr/flow-core-config": ["./packages/flow-core-config/src"],
-			"@cldcvr/flow-log": ["./packages/flow-log/src"],
-			"@cldcvr/flow-code-editor": ["./packages/flow-code-editor/src"],
-			"@cldcvr/flow-table": ["./packages/flow-table/src"],
-			"@cldcvr/flow-md-editor": ["./packages/flow-md-editor/src"]
-		},
-		"types": ["vite/client"]
+		"composite": true
 	},
-	"exclude": ["**/src/**/*.test.ts", "**/dist", "dist"],
-	"references": [{ "path": "./tsconfig.node.json" }]
+	"references": [
+		{
+			"path": "./packages/custom-elements-manifest-to-types"
+		},
+		{
+			"path": "./packages/flow-core"
+		},
+		{
+			"path": "./packages/flow-core-config"
+		},
+		{
+			"path": "./packages/flow-log"
+		},
+		{
+			"path": "./packages/flow-code-editor"
+		},
+		{
+			"path": "./packages/flow-form-builder"
+		},
+		{
+			"path": "./packages/flow-lineage"
+		},
+		{
+			"path": "./packages/flow-table"
+		},
+		{
+			"path": "./packages/flow-md-editor"
+		}
+	],
+	"exclude": ["**/src/**/*.test.ts", "**/dist", "dist"]
 }

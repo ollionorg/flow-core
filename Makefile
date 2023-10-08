@@ -14,14 +14,8 @@ install:
 
 .PHONY: build
 build: install
-	pnpm -C packages/custom-elements-manifest-to-types run build
-	pnpm -C packages/flow-core-config run build
-	pnpm -C packages/flow-core run compile
-	pnpm concurrently --kill-others-on-fail \
-		"pnpm -C packages/flow-form-builder run compile" \
-		"pnpm -C packages/flow-lineage run compile" \
-		"pnpm -C packages/flow-code-editor run compile" \
-		"pnpm -C packages/flow-log run compile" \
-		"pnpm -C packages/flow-md-editor run compile" \
-		"pnpm -C packages/flow-table run compile"
+	pnpm run -r build
+	pnpm tsc
 
+test: install
+	pnpm run -r test

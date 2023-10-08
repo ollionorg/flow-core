@@ -4,19 +4,16 @@
   "description": "Code editor component for flow library",
   "module": "dist/flow-log.es.js",
   "main": "dist/flow-log.es.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "prepublishOnly": "bash ./compile.sh",
-    "compile": "bash ./compile.sh",
-    "build": "vite build --emptyOutDir && tsc",
+    "prepublishOnly": "pnpm run build",
+    "build": "bash ./compile.sh",
     "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
-    "lint:eslint": "eslint 'src/**/*.ts' './custom-elements.vue.ts'",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
     "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
     "test-build": "web-test-runner ./src/**/*.test.ts --node-resolve",
-    "test": "pnpm run build && web-test-runner ./src/**/*.test.ts --node-resolve",
-    "test:file": "pnpm run build && web-test-runner --node-resolve",
+    "test": "web-test-runner ./src/**/*.test.ts --node-resolve",
     "test:watch": "pnpm run build && web-test-runner ./src/**/*.test.ts --node-resolve --watch"
   },
   "keywords": [

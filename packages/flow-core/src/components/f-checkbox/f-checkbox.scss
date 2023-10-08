@@ -1,37 +1,7 @@
 @use "sass:map";
 // common mixins imported from this file
 @import "./../../mixins/scss/mixins";
-
-/**
-$states map created to hold values of different states
-**/
-$states: (
-	"primary": (
-		"background": var(--color-primary-default),
-		"hover": var(--color-primary-default-hover)
-	),
-	"default": (
-		"background": var(--color-primary-default),
-		"hover": var(--color-primary-default-hover)
-	),
-	"success": (
-		"background": var(--color-success-default),
-		"hover": var(--color-success-default-hover)
-	),
-	"warning": (
-		"background": var(--color-warning-default),
-		"hover": var(--color-warning-default-hover)
-	),
-	"danger": (
-		"background": var(--color-danger-default),
-		"hover": var(--color-danger-default-hover)
-	),
-	"inherit": (
-		"background": var(--color-checkbox-default),
-		"hover": var(--color-switch-default-hover)
-	)
-);
-
+@import "./f-checkbox-variables";
 /**
 $sizes map created to hold values of different sizes
 **/
@@ -184,19 +154,5 @@ $sizes: (
 		@include disabled();
 		pointer-events: none;
 		opacity: 1;
-	}
-}
-
-f-checkbox {
-	display: flex;
-	height: fit-content;
-	flex: 0 0 fit-content;
-	&[disabled] {
-		@include disabled();
-	}
-	@each $state, $color in $states {
-		&[state="#{$state}"] {
-			@include input-color($state);
-		}
 	}
 }

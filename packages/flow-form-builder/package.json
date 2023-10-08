@@ -15,9 +15,9 @@
     "lint:eslint": "eslint 'src/**/*.ts'",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
     "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
-    "test-build": "web-test-runner ./src/**/*.test.ts --node-resolve",
-    "test": "pnpm run build && web-test-runner ./src/**/*.test.ts --node-resolve ",
-    "test:watch": "pnpm run build && web-test-runner ./src/**/*.test.ts --node-resolve --watch"
+    "test-build": "web-test-runner ./src/**/*.test.ts --node-resolve --port 8091",
+    "test": "pnpm run build && web-test-runner ./src/**/*.test.ts --node-resolve --port 8091",
+    "test:watch": "pnpm run build && web-test-runner ./src/**/*.test.ts --node-resolve --watch --port 8091" 
   },
   "keywords": [
     "web-components",

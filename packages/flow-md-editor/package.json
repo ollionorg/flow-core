@@ -14,8 +14,8 @@
     "lint:eslint": "eslint 'src/**/*.ts' './custom-elements.vue.ts'",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
     "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
-    "test": "pnpm run build && web-test-runner ./src/**/*.test.ts --node-resolve",
-    "test-build": "web-test-runner ./src/**/*.test.ts --node-resolve"
+    "test": " web-test-runner ./src/**/*.test.ts --node-resolve --port 8094",
+    "test-build": "web-test-runner ./src/**/*.test.ts --node-resolve --port 8094"
   },
   "keywords": [
     "web-components",
@@ -24,6 +24,7 @@
     "lit"
   ],
   "dependencies": {
+	"@cldcvr/flow-core": "workspace:*",
     "lit": "^2.2.4",
     "showdown": "^2.1.0"
   },

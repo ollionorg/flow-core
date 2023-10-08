@@ -1,0 +1,12 @@
+@import "./../../mixins/scss/mixins";
+
+f-field {
+	width: 100%;
+	&[variant="inline"] {
+		flex: 0 0 auto;
+		width: fit-content;
+	}
+	&[disabled] {
+		@include disabled();
+	}
+}

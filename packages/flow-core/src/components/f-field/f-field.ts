@@ -4,7 +4,10 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import eleStyle from "./f-field.scss?inline";
+import globalStyle from "./f-field-global.scss?inline";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-field", globalStyle);
 
 export type FFieldStateProp = "default" | "primary" | "success" | "danger" | "warning";
 /**
@@ -15,7 +18,7 @@ export class FField extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FDiv.styles, ...FText.styles];
 
 	/**
 	 * @attribute States on f-field are used to communicate purpose and it’s connotation.

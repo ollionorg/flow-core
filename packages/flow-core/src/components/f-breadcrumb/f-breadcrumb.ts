@@ -20,7 +20,13 @@ export class FBreadcrumb extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles, ...FPopover.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
+		...FDiv.styles,
+		...FText.styles,
+		...FPopover.styles
+	];
 
 	/**
 	 * @attribute The medium size is the default.

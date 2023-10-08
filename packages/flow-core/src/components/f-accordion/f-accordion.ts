@@ -21,7 +21,7 @@ export class FAccordion extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FDiv.styles];
 
 	/**
 	 * @attribute toggle accordion

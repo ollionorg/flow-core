@@ -1,0 +1,33 @@
+@import "./../../mixins/scss/mixins";
+
+f-carousel {
+	display: flex;
+	flex: 1 0 fit-content;
+	flex-wrap: wrap;
+	overflow-y: auto;
+	align-items: flex-start;
+	justify-content: flex-start;
+	@include base();
+
+	f-carousel-content {
+		// width: 100%;
+		flex: 0 0 auto;
+		display: inline-flex;
+	}
+}
+
+f-div[direction="column"] {
+	> f-carousel {
+		flex: 1 1;
+		max-height: 100%;
+		width: 100%;
+	}
+}
+
+f-div[direction="row"] {
+	> f-carousel {
+		flex: 1 1;
+		max-width: 100%;
+		height: 100%;
+	}
+}

@@ -110,7 +110,7 @@ export class FDiv extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle)];
 
 	/**
 	 * @attribute local state for managing custom fill.

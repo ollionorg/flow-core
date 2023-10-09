@@ -12,7 +12,7 @@ export default defineConfig({
 		},
 		// outDir: "dist",
 		rollupOptions: {
-			external: ["@cldcvr/flow-core", /^lit/],
+			external: ["@cldcvr/flow-core-config", "@cldcvr/flow-core", /^lit/],
 			output: {
 				globals: {
 					"@cldcvr/flow-core": "@cldcvr/flow-core"

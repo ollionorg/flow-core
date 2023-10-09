@@ -11,7 +11,7 @@ export default defineConfig({
 		},
 		outDir: "umd",
 		rollupOptions: {
-			external: ["@cldcvr/flow-core"],
+			external: ["@cldcvr/flow-core-config", "@cldcvr/flow-core"],
 			output: {
 				globals: {
 					"@cldcvr/flow-core": "flowCore"

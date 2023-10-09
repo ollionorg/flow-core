@@ -2,6 +2,7 @@ import { html, PropertyValueMap, TemplateResult, unsafeCSS } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 import { FRoot } from "@cldcvr/flow-core";
 import eleStyle from "./f-form-object.scss?inline";
+import globalStyle from "./f-form-object-global.scss?inline";
 
 import fieldRenderer from "../f-form-builder/fields";
 import { createRef, Ref } from "lit/directives/ref.js";
@@ -14,7 +15,7 @@ import {
 } from "../../types";
 import { validateField } from "../../modules/validation/validator";
 import { Subject } from "rxjs";
-import { propogateProperties } from "../../modules/helpers";
+import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/helpers";
 import { FFormGroup } from "@cldcvr/flow-core";
 import { FFieldSeparator } from "../f-field-separator/f-field-separator";
 import { radioGroupStyles } from "../f-radio-group/f-radio-group";
@@ -33,7 +34,9 @@ export class FFormObject extends FRoot {
 		unsafeCSS(eleStyle),
 		...FFieldSeparator.styles,
 		unsafeCSS(radioGroupStyles),
-		unsafeCSS(checkboxGroupStyles)
+		unsafeCSS(checkboxGroupStyles),
+		...getEssentialFlowCoreStyles(),
+		unsafeCSS(globalStyle)
 	];
 
 	/**

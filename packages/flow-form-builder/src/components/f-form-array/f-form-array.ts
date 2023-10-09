@@ -15,7 +15,7 @@ import { createRef, Ref } from "lit/directives/ref.js";
 import { isEmptyArray } from "../../modules/utils";
 import { validateField } from "../../modules/validation/validator";
 import { Subject } from "rxjs";
-import { propogateProperties } from "../../modules/helpers";
+import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/helpers";
 import { FFormObject } from "../f-form-object/f-form-object";
 import { FIconButton } from "@cldcvr/flow-core";
 
@@ -33,7 +33,7 @@ export class FFormArray extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle), ...getEssentialFlowCoreStyles()];
 
 	/**
 	 * @attribute comments baout title

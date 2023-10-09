@@ -1,7 +1,7 @@
 import { FFormArray } from "../components/f-form-array/f-form-array";
 import { FFormObject } from "../components/f-form-object/f-form-object";
 import { FFormBuilder } from "../components/f-form-builder/f-form-builder";
-import { LitElement, nothing, html } from "lit";
+import { LitElement, nothing, html, CSSResult, unsafeCSS } from "lit";
 
 import {
 	FormBuilderButtonField,
@@ -10,6 +10,30 @@ import {
 	FormBuilderSeparatorField
 } from "./../types";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
+import {
+	FDiv,
+	FText,
+	FForm,
+	FInput,
+	FCheckbox,
+	FFormGroup,
+	FRadio,
+	FButton,
+	FDateTimePicker,
+	FEmojiPicker,
+	FDivider,
+	FFileUpload,
+	FIconButton,
+	FSelect,
+	FSuggest,
+	FSwitch,
+	FTextArea
+} from "@cldcvr/flow-core";
+
+import checkboxGroupGlobalStyles from "./../components/f-checkbox-group/f-checkbox-group-global.scss?inline";
+import radioGroupGlobalStyles from "./../components/f-radio-group/f-radio-group-global.scss?inline";
+import fieldSeparatorGlobalStyles from "./../components/f-field-separator/f-field-separator-global.scss?inline";
+import formObjectGlobalStyles from "./../components/f-form-object/f-form-object-global.scss?inline";
 
 export function propogateProperties(element: FFormArray | FFormObject | FFormBuilder) {
 	const inputElements = element.shadowRoot?.querySelectorAll<LitElement>(
@@ -115,4 +139,30 @@ export function getSlots(
 		  `
 		: ""}
 	${getSubTitle(field)}`;
+}
+
+export function getEssentialFlowCoreStyles(): CSSResult[] {
+	return [
+		...FDiv.styles,
+		...FText.styles,
+		...FForm.styles,
+		...FInput.styles,
+		...FCheckbox.styles,
+		...FFormGroup.styles,
+		...FRadio.styles,
+		...FButton.styles,
+		...FDateTimePicker.styles,
+		...FEmojiPicker.styles,
+		...FDivider.styles,
+		...FFileUpload.styles,
+		...FIconButton.styles,
+		...FSelect.styles,
+		...FSuggest.styles,
+		...FSwitch.styles,
+		...FTextArea.styles,
+		unsafeCSS(checkboxGroupGlobalStyles),
+		unsafeCSS(radioGroupGlobalStyles),
+		unsafeCSS(fieldSeparatorGlobalStyles),
+		unsafeCSS(formObjectGlobalStyles)
+	];
 }

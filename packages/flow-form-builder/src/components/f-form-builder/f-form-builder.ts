@@ -15,6 +15,7 @@ import {
 	CanValidateFields
 } from "../../types";
 import eleStyle from "./f-form-builder.scss?inline";
+import globalStyle from "./f-form-builder-global.scss?inline";
 
 import { FRoot } from "@cldcvr/flow-core";
 import { Ref, createRef } from "lit/directives/ref.js";
@@ -22,15 +23,18 @@ import fieldRenderer from "./fields";
 import { extractValidationState, validateField } from "../../modules/validation/validator";
 
 import { Subject } from "rxjs";
-import { propogateProperties } from "../../modules/helpers";
+import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/helpers";
 import { cloneDeep, isEqual } from "lodash-es";
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-form-builder", globalStyle);
 
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...getEssentialFlowCoreStyles()];
 
 	/**
 	 * @attribute formbuilder name

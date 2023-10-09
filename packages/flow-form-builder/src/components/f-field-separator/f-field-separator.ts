@@ -2,6 +2,11 @@ import { html, nothing, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { FRoot, FDivider, FDividerState, FText, FDiv } from "@cldcvr/flow-core";
 import eleStyle from "./f-field-separator.scss?inline";
+import globalStyle from "./f-field-separator-global.scss?inline";
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-field-separator", globalStyle);
+
 export type FFieldSeparatorState = FDividerState;
 
 @customElement("f-field-separator")
@@ -9,7 +14,13 @@ export class FFieldSeparator extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDivider.styles, ...FText.styles, ...FDiv.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
+		...FDivider.styles,
+		...FText.styles,
+		...FDiv.styles
+	];
 
 	/**
 	 * @attribute comments baout title

@@ -2,18 +2,27 @@ import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { CheckboxOption, CheckboxOptions } from "../../types";
 import eleStyle from "./f-checkbox-group.scss?inline";
+import globalStyle from "./f-checkbox-group-global.scss?inline";
 import { FRoot, FDiv, FText, FCheckbox } from "@cldcvr/flow-core";
 import { isEqual } from "lodash-es";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 export type FCheckboxGroupValue = string[];
 export const checkboxGroupStyles = eleStyle;
+import { injectCss } from "@cldcvr/flow-core-config";
 
+injectCss("f-checkbox-group", globalStyle);
 @customElement("f-checkbox-group")
 export class FCheckboxGroup extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [...FText.styles, unsafeCSS(eleStyle), ...FDiv.styles, ...FCheckbox.styles];
+	static styles = [
+		...FText.styles,
+		unsafeCSS(globalStyle),
+		unsafeCSS(eleStyle),
+		...FDiv.styles,
+		...FCheckbox.styles
+	];
 
 	/**
 	 * @attribute Controls size of all input elements within the form

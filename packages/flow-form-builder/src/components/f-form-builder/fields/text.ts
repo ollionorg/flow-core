@@ -10,7 +10,6 @@ export default function (
 	value: unknown
 ) {
 	const field = _field as FormBuilderTextInputField;
-	console.log(value);
 	return html`
 		<f-input
 			id=${ifDefined(field.id)}

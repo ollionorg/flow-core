@@ -3,9 +3,13 @@ import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { RadioOption, RadioOptions } from "../../types";
 import eleStyle from "./f-radio-group.scss?inline";
+import globalStyle from "./f-radio-group-global.scss?inline";
 import { FDiv, FRadio, FRoot, FText } from "@cldcvr/flow-core";
 import { isEqual } from "lodash-es";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-checkbox-group", globalStyle);
 
 export const radioGroupStyles = eleStyle;
 /**
@@ -16,7 +20,13 @@ export class FRadioGroup extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles, ...FRadio.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
+		...FDiv.styles,
+		...FText.styles,
+		...FRadio.styles
+	];
 
 	/**
 	 * @attribute Controls size of all input elements within the form

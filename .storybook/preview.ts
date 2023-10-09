@@ -11,6 +11,7 @@ import "@cldcvr/flow-log";
 import "@cldcvr/flow-code-editor";
 import "@cldcvr/flow-table";
 import "@cldcvr/flow-md-editor";
+import "@cldcvr/flow-form-builder";
 import { setCustomElementsManifest, setCustomElements } from "@storybook/web-components";
 import "./storybook.css";
 

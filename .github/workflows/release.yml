@@ -21,7 +21,7 @@ jobs:
           node-version: 18.x
 
       - name: Install pnpm
-        run: corepack enable && corepack prepare pnpm@7.26.3 --activate
+        run: corepack enable && corepack prepare pnpm@8.9.0 --activate
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
@@ -114,7 +114,7 @@ jobs:
           node-version: 18.x
 
       - name: Install pnpm
-        run: corepack enable && corepack prepare pnpm@7.26.3 --activate
+        run: corepack enable && corepack prepare pnpm@8.9.0 --activate
 
       - name: Replace publish URL
         run: node replace-publish-config.js https://npm.pkg.github.com

@@ -5,7 +5,7 @@ $(error NodeJS is not installed. Please make sure you have NodeJS > 18.12 instal
 endif
 
 ifeq ($(shell which pnpm),)
-$(error pnpm is not installed. Please make sure you install it by corepack enable && corepack prepare pnpm@7.26.3 --activate.)
+$(error pnpm is not installed. Please make sure you install it by corepack enable && corepack prepare pnpm@8.9.0 --activate.)
 endif
 
 .PHONY: install

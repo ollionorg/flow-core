@@ -2,6 +2,7 @@ import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-tag.scss?inline";
+import globalStyle from "./f-tag-global.scss?inline";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -14,6 +15,8 @@ import { FCounter } from "../f-counter/f-counter";
 import { flowElement } from "./../../utils";
 import { createRef, ref, Ref } from "lit/directives/ref.js";
 import type { FDiv } from "../f-div/f-div";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-tag", globalStyle);
 
 export type FTagStateProp =
 	| "primary"
@@ -32,7 +35,12 @@ export class FTag extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FIcon.styles, ...FCounter.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
+		...FIcon.styles,
+		...FCounter.styles
+	];
 
 	/**
 	 * @attribute boolean for inherited class

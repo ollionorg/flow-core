@@ -1,5 +1,4 @@
 @use "sass:map";
-@use "sass:math";
 @import "./../../mixins/scss/mixins";
 
 /**
@@ -189,24 +188,5 @@ in this case it is `f-tag`
 	div:focus-visible,
 	div:focus {
 		outline: none;
-	}
-}
-
-// applies styles to only f-tag element.
-f-tag {
-	height: fit-content;
-	display: inline-flex;
-	flex: 0 0 auto;
-	vertical-align: top;
-	overflow: hidden;
-	&[disabled] {
-		@include disabled();
-	}
-
-	&.hasShimmer[state] {
-		&::before {
-			content: unset;
-		}
-		background: transparent !important;
 	}
 }

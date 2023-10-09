@@ -1,0 +1,14 @@
+@import "./../../mixins/scss/mixins";
+
+f-pictogram {
+	@include base();
+	&.hasShimmer {
+		&::before {
+			content: unset;
+		}
+		background: transparent !important;
+	}
+	&[disabled] {
+		@include disabled();
+	}
+}

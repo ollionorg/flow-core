@@ -1,6 +1,7 @@
 import { html, HTMLTemplateResult, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-search.scss?inline";
+import globalStyle from "./f-search-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
@@ -8,6 +9,8 @@ import { FSelect } from "../f-select/f-select";
 import { FSuggest } from "../f-suggest/f-suggest";
 import { FIconButton } from "../f-icon-button/f-icon-button";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-search", globalStyle);
 
 export type FSearchState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -41,6 +44,7 @@ export class FSearch extends FRoot {
 	 */
 	static styles = [
 		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
 		...FText.styles,
 		...FDiv.styles,
 		...FSuggest.styles,

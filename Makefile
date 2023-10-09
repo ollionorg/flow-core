@@ -16,7 +16,7 @@ install:
 build: install
 	pnpm -C packages/custom-elements-manifest-to-types build
 	pnpm run -r build
-	pnpm tsc
+	pnpm tsc -b
 	node generate-types.cjs
 
 .PHONY: test

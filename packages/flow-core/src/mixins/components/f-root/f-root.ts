@@ -1,7 +1,6 @@
 import { LitElement, PropertyValueMap, PropertyValues, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 
-import eleStyle from "./f-root.scss?inline";
 import globalStyle from "./f-root-global.scss?inline";
 import { injectCss } from "@cldcvr/flow-core-config";
 
@@ -19,7 +18,7 @@ injectCss("f-root", globalStyle);
  *
  */
 export class FRoot extends LitElement {
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(globalStyle)];
 
 	@query("f-popover")
 	tooltipElement!: HTMLElement;

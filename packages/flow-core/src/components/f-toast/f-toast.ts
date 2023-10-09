@@ -1,12 +1,15 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import eleStyle from "./f-toast.scss?inline";
+import globalStyle from "./f-toast-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import toastQueue from "./f-toast-queue";
 import { FDiv } from "../f-div/f-div";
 import { FIcon } from "../f-icon/f-icon";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-toast", globalStyle);
 
 export type FToastState = "default" | "primary" | "success" | "warning" | "danger";
 
@@ -15,7 +18,7 @@ export class FToast extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FIcon.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FDiv.styles, ...FIcon.styles];
 
 	/**
 	 * @attribute Flow 2 provides two types of toast: auto-hide: toast disappears after the definite amount of time, and persist: toast remains on screen until the user interacts with it.

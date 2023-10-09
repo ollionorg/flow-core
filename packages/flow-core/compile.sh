@@ -12,6 +12,3 @@ pnpm run analyze
 echo "building library..."
 pnpm vite build --emptyOutDir
 pnpm vite build --emptyOutDir --config vite.umd.config.ts
-
-echo "generating types..."
-node ../../generate-types.js

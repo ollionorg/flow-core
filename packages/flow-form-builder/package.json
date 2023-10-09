@@ -7,7 +7,6 @@
   "types": "dist/src/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "prepublishOnly": "pnpm run build",
     "build": "./compile.sh",
     "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",

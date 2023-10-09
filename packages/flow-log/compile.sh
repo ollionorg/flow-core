@@ -9,6 +9,3 @@ pnpm run analyze
 
 echo "building library..."
 pnpm vite build --emptyOutDir
-
-echo "generating types..."
-node ../../generate-types.js

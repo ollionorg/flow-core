@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 import { FormBuilderField } from "@cldcvr/flow-form-builder/src/types";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
-import { FFormBuilder } from "packages/@cldcvr/flow-form-builder/src";
+import { FFormBuilder } from "@cldcvr/flow-form-builder/src";
 
 export default {
 	title: "Features/Test Inner Buttons",

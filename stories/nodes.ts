@@ -1,4 +1,4 @@
-import { LineageNodes } from "packages/@cldcvr/flow-lineage/src";
+import { LineageNodes } from "@cldcvr/flow-lineage/src";
 
 const nodes: LineageNodes = {
 	node1: {

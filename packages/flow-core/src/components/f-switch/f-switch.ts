@@ -1,9 +1,12 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-switch.scss?inline";
+import globalStyle from "./f-switch-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-switch", globalStyle);
 
 export type FSwitchState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -16,7 +19,7 @@ export class FSwitch extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FDiv.styles];
 
 	/**
 	 * @attribute Value of a switch defines if it is on or off.

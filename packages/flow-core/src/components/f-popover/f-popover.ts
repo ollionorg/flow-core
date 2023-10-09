@@ -2,6 +2,7 @@ import { html, LitElement, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-popover.scss?inline";
+import globalStyle from "./f-popover-global.scss?inline";
 import {
 	computePosition,
 	autoPlacement,
@@ -12,6 +13,8 @@ import {
 	Placement
 } from "@floating-ui/dom";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-popover", globalStyle);
 
 // export type FPopoverVariant = "relative" | "absolute";
 export type FPopoverPlacement =
@@ -62,7 +65,7 @@ export class FPopover extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle)];
 
 	//   /**
 	//    * @attribute variant defines the position of a popover. A popover can be either relative to the source or absolute to the viewport.

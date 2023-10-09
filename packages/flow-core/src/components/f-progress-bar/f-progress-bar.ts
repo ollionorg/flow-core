@@ -1,12 +1,15 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-progress-bar.scss?inline";
+import globalStyle from "./f-progress-bar-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
 import { flowElement } from "../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-progress-bar", globalStyle);
 
 export type FProgressBarState =
 	| "primary"
@@ -25,7 +28,7 @@ export class FProgressBar extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FDiv.styles];
 
 	/**
 	 * @attribute value of the fill section in progress-bar

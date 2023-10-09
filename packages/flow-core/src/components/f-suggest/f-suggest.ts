@@ -1,6 +1,7 @@
 import { html, HTMLTemplateResult, nothing, PropertyValues, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import eleStyle from "./f-suggest.scss?inline";
+import globalStyle from "./f-suggest-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
@@ -11,6 +12,8 @@ import { classMap } from "lit-html/directives/class-map.js";
 import { cloneDeep } from "lodash-es";
 import { flowElement } from "./../../utils";
 import { displayCustomTemplate, displayOptions, displayCategories } from "./display-options";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-suggest", globalStyle);
 
 export type FSuggestState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -39,6 +42,7 @@ export class FSuggest extends FRoot {
 	 */
 	static styles = [
 		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
 		...FText.styles,
 		...FDiv.styles,
 		...FPopover.styles,

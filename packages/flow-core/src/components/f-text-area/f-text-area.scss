@@ -1,65 +1,7 @@
 @use "sass:map";
 // common mixins imported from this file
 @import "./../../mixins/scss/mixins";
-
-$categories: (
-	"fill": (
-		"background": var(--color-input-default),
-		"hover": var(--color-input-default-hover)
-	),
-	"transparent": (
-		"background": transparent,
-		"hover": var(--color-surface-default-hover)
-	),
-	"outline": (
-		"background": transparent,
-		"hover": var(--color-surface-default-hover)
-	)
-);
-
-$sizes: (
-	"medium": (
-		"padding-top-bottom": 9px,
-		"padding-left-right": 12px
-	),
-	"small": (
-		"padding-top-bottom": 5px,
-		"padding-left-right": 8px
-	)
-);
-
-$states: (
-	"primary": (
-		"input": var(--color-primary-default),
-		"border": var(--color-primary-default),
-		"focus": var(--color-primary-default)
-	),
-	"default": (
-		"input": var(--color-input-default),
-		"border": var(--color-border-default),
-		"focus": var(--color-primary-default)
-	),
-	"success": (
-		"input": var(--color-success-default),
-		"border": var(--color-success-default),
-		"focus": var(--color-success-default)
-	),
-	"warning": (
-		"input": var(--color-warning-default),
-		"border": var(--color-warning-default),
-		"focus": var(--color-warning-default)
-	),
-	"danger": (
-		"input": var(--color-danger-default),
-		"border": var(--color-danger-default),
-		"focus": var(--color-danger-default)
-	),
-	"inherit": (
-		"input": var(--color-input-default),
-		"border": var(--color-input-border-default),
-		"focus": var(--color-input-focus)
-	)
-);
+@import "./f-text-area-variables";
 
 :host {
 	.f-text-area-wrapper {
@@ -152,16 +94,5 @@ $states: (
 		@include disabled();
 		pointer-events: none;
 		opacity: 1;
-	}
-}
-f-text-area {
-	width: 100%;
-	&[disabled] {
-		@include disabled();
-	}
-	@each $state, $color in $states {
-		&[state="#{$state}"] {
-			@include input-color($state);
-		}
 	}
 }

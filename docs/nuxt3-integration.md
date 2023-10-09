@@ -28,9 +28,7 @@ export default defineNuxtPlugin({
 		await Promise.all([
 			import("@cldcvr/flow-core"),
 			import("@cldcvr/flow-form-builder"),
-			import("@cldcvr/flow-system-icon"),
-			import("@cldcvr/flow-core/dist/style.css"),
-			import("@cldcvr/flow-form-builder/dist/style.css")
+			import("@cldcvr/flow-system-icon")
 		]).then(() => {
 			console.log("Flow components loaded");
 		});

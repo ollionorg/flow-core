@@ -7,16 +7,13 @@ Flow-core is the base library required by any flow dependecies. It consists most
 - [Website](https://flow.cldcvr.com/)
 - [Learn More](https://github.com/cldcvr/flow-core/blob/main/ABOUT.md)
 
-**Table of contents**
+## Table of contents
 
 - [Starter-kits](#starter-kits)
 - [Install for an existing project](#existing-project)
 - [VScode Plugin and debuggers](#vscode-plugin-and-debuggers)
 - [Components](https://flow.cldcvr.com/v2/index.html)
 - [Templates](https://flow.cldcvr.com/templates/index.html)
-- [Dependencies](#dependencies)
-  - [Lineage](https://github.com/cldcvr/flow-lineage)
-  - [Form builder](https://github.com/cldcvr/flow-form-builder)
 - [Resources](#resources)
 - [Figma for designers](https://www.figma.com/community/file/1240565037876928288/Flow-UI-Kit)
 - [Get in touch](#get-in-touch)
@@ -53,33 +50,7 @@ _Note:_ after installation re-start your application.
 
 <br>
 
-#### 2️⃣ Import CSS
-
-**Vue:**
-Paste the below snippet _after the closing `<template>`_ in your `App.vue`
-
-```html
-<style>
-	@import "@cldcvr/flow-core/dist/style.css";
-</style>
-```
-
-**React:** Paste the below snippet in `src/index.tsx` or `index.jsx`
-
-```JavaScript
-import "@cldcvr/flow-core/dist/style.css";
-```
-
-**Angular:** Add css file path in `angular.json` in `styles` property array.
-
-```JSON
-"styles": ["@cldcvr/flow-core/dist/style.css"],
-
-```
-
-<br>
-
-#### 3️⃣ Import flow-core into your project
+#### 2️⃣ Import flow-core into your project
 
 Copy and import the below snippet into your startup file. In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
 
@@ -91,9 +62,7 @@ import("@cldcvr/flow-core").then(async () => {
 
 <br>
 
-#### 4️⃣ If your project is typescript enabled please include import types to
-
-**Note:** For Typescript, make sure you are using version >4.5
+#### 3️⃣ If your project uses Typescript (>4.5) please include import types
 
 **Vue:**
 Copy paste below line in your `main.ts` file.
@@ -154,8 +123,6 @@ Visit the [Flow templates Storybook](https://flow.cldcvr.com/templates/index.htm
 
 ## Dependencies
 
-- [Lineage](https://github.com/cldcvr/flow-lineage)
-- [Form builder](https://github.com/cldcvr/flow-form-builder)
 - Tables (In development)
 - Logs (coming soon)
 - Force graph (coming soon)

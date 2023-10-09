@@ -14,41 +14,7 @@ npm i --save @cldcvr/flow-md-editor
 
 <br>
 
-### 2️⃣ Import styles/CSS
-
-For **Vue JS:**
-Paste the below snippet after the closing `<template>` tag in your `App.vue` file
-
-```html
-<style>
-	@import "@cldcvr/flow-md-editor/dist/style.css";
-</style>
-```
-
-<details>
-<summary>For React</summary>
-
-**React:** Paste the below snippet in `src/index.tsx` or `index.jsx` file
-
-```Javascript
-import "@cldcvr/flow-md-editor/dist/style.css";
-```
-
-</details>
-
-<details><summary>For Angular</summary>
-
-**Angular:** Add css file path in `angular.json` in `styles` property array.
-
-```json
-"styles": ["@cldcvr/flow-md-editor/dist/style.css"],
-```
-
-</details>
-
-<br>
-
-### 3️⃣ Import flow-md-editor into your project
+### 2️⃣ Import flow-md-editor into your project
 
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
@@ -86,7 +52,7 @@ Paste the below snippet in your project, for `src/index.tsx` or `index.jsx`
 
 <br>
 
-### 4️⃣ For a typescript enabled project (optional)
+### 3️⃣ For a typescript enabled project (optional)
 
 **Note:** After adding, re-start your application. Make sure you are using version >4.5
 

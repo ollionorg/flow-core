@@ -28,7 +28,7 @@ build-storybook: install
 build: build-lib build-storybook
 
 .PHONY: test
-test: build
+test: build-lib
 	pnpm run -r test
 
 .PHONY: publish

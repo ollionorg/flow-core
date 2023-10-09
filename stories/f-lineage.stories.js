@@ -16,208 +16,57 @@ export default {
 };
 
 export const Playground = {
-	//   setInterval(()=> {
-	render:
-		//  if(divRef.value && divRef.value.style.display==="flex"){
-		//    divRef.value.style.display="none";
-		//    }else{
-		//      divRef.value.style.display="flex";
-		//    }
-		//    },2000);
-		// const data = lineageDataGenerator();
-		args => {
-			const [meta, setMeta] = useState(null);
-			const [tabNodeData, setTabNodeData] = useState([]);
-			const [tabData, setTabData] = useState(null);
-			const [selected, setSelected] = useState("Table Details");
+	render: args => {
+		const [meta, setMeta] = useState(null);
+		const [tabNodeData, setTabNodeData] = useState([]);
+		const [tabData, setTabData] = useState(null);
+		const [selected, setSelected] = useState("Table Details");
 
-			const handleReady = e => {
-				console.log("Got ready event", e);
-			};
+		const handleReady = e => {
+			console.log("Got ready event", e);
+		};
 
-			const handleNodeMeta = e => {
-				setMeta(e.detail.node.fNodeMeta);
-				console.log(e?.detail);
+		const handleNodeMeta = e => {
+			setMeta(e.detail.node.fNodeMeta);
+			console.log(e?.detail);
 
-				if (e.detail.node.fNodeMeta?.tabSections) {
-					setTabNodeData(Object.keys(e.detail.node.fNodeMeta?.tabSections));
-					setTabData(e.detail.node.fNodeMeta?.tabSections);
-				} else {
-					setTabNodeData([]);
-					setTabData(null);
-				}
-			};
+			if (e.detail.node.fNodeMeta?.tabSections) {
+				setTabNodeData(Object.keys(e.detail.node.fNodeMeta?.tabSections));
+				setTabData(e.detail.node.fNodeMeta?.tabSections);
+			} else {
+				setTabNodeData([]);
+				setTabData(null);
+			}
+		};
 
-			const handleChangeTab = id => {
-				setSelected(id);
-			};
+		const handleChangeTab = id => {
+			setSelected(id);
+		};
 
-			const divRef = createRef();
+		const divRef = createRef();
 
-			return html`<f-div ${ref(divRef)} height="100%"
-				><f-div
-					><f-lineage
-						.direction=${args.direction}
-						.padding=${args.padding}
-						.gap=${args.gap}
-						.node-size=${args["node-size"]}
-						.children-node-size=${args["children-node-size"]}
-						.max-children=${args["max-children"]}
-						.node-template=${args["node-template"]}
-						.children-node-template=${args["children-node-template"]}
-						.links=${args.links}
-						.nodes=${args.nodes}
-						stagger-load="1"
-						@ready=${handleReady}
-						@node-meta=${handleNodeMeta}
-					>
-						<!--Start : node-details popover content  -->
-						<f-div
-							data-f-id="popover-content"
-							state="secondary"
-							width="100%"
-							height="540px"
-							align="top-left"
-							variant="curved"
-							direction="column"
-							slot="node-meta"
-						>
-							<!--Start : node-details header section  -->
-							<f-div
-								data-f-id="header-section"
-								gap="medium"
-								align="middle-center"
-								padding="medium"
-								height="hug-content"
-								width="95%"
-							>
-								<f-icon-button
-									icon="i-table-1"
-									size="medium"
-									category="fill"
-									variant="round"
-									state="neutral"
-								></f-icon-button>
-								<f-div direction="column" gap="x-small" height="hug-content">
-									<f-text variant="heading" size="x-small" weight="medium">${meta?.title}</f-text>
-									<f-text variant="para" size="x-small" weight="regular">${meta?.subTitle}</f-text>
-								</f-div>
-								<f-div width="hug-content" align="middle-center" height="hug-content" gap="x-small">
-									<f-icon-button
-										icon="i-tick-double"
-										state="success"
-										size="small"
-										variant="block"
-										type="packed"
-									></f-icon-button>
-									<f-icon-button
-										icon="i-shield"
-										size="small"
-										variant="block"
-										type="packed"
-									></f-icon-button>
-								</f-div>
-							</f-div>
-							<!--End : node-details header section  -->
-							<!--Start : node-details tab-bar section  -->
-							${tabNodeData?.length > 0
-								? html` <f-tab data-f-id="Tab bar - regular">
-										${tabNodeData.map(
-											item =>
-												html` <f-tab-node
-													?active=${selected === item ? true : false}
-													content-id=${`tab-${item}`}
-													@click=${() => handleChangeTab(item)}
-													><f-div
-														width="100%"
-														height="100%"
-														align="middle-center"
-														direction="column"
-													>
-														<f-text>${item}</f-text>
-													</f-div></f-tab-node
-												>`
-										)}</f-tab
-								  >`
-								: ""}
-							<!--End : node-details tab-bar section  -->
-							<!--Start : node-details content section  -->
-							<f-div data-f-id="content-section" direction="column" overflow="scroll">
-								${tabData &&
-								Object.entries(tabData).map(
-									([name, config], idx) =>
-										html` <f-tab-content id=${`tab-${name}`}>
-											${name === "Table Details"
-												? html` <f-div padding="medium" direction="column">
-														${Object.entries(config).map(
-															([configName, configValue], idx) => html`
-																<f-div width="fill-container" direction="row" padding="medium none">
-																	<f-div width="30%"
-																		><f-text variant="para" size="small" weight="bold"
-																			>${configName}</f-text
-																		></f-div
-																	>
-																	<f-div width="fill-container">
-																		${configValue?.type === "text"
-																			? html` <f-text variant="para" size="small" weight="regular"
-																					>${configValue?.value}</f-text
-																			  >`
-																			: configValue?.type === "tag"
-																			? html`<f-tag size="small" label=${configValue?.value} state="primary" icon-left=${configValue?.iconLeft}></f-tab>`
-																			: html`<f-text variant="para" size="small" weight="regular"
-																					><a>${configValue?.value} +8 more</a></f-text
-																			  >`}</f-div
-																	>
-																</f-div>
-															`
-														)}</f-div
-												  >`
-												: html`
-														<f-div padding="medium" direction="column">
-															${Object.entries(config).map(
-																([configName, configValue], idx) =>
-																	html` <f-div
-																		width="fill-container"
-																		direction="row"
-																		padding="medium none"
-																	>
-																		${configName !== "codeSnippet"
-																			? html` <f-div width="30%"
-																					><f-text variant="para" size="small" weight="bold"
-																						>${configName}</f-text
-																					></f-div
-																			  >`
-																			: ""}
-																		<f-div width="fill-container">
-																			${configValue?.type === "text"
-																				? html` <f-text variant="para" size="small" weight="regular"
-																						>${configValue?.value}</f-text
-																				  >`
-																				: configValue?.type === "tag"
-																				? html`<f-tag size="small" label=${configValue?.value} state="primary" icon-left=${configValue?.iconLeft}></f-tab>`
-																				: configValue?.type === "code"
-																				? html`${unsafeHTML(configValue?.value)}`
-																				: html`<f-text variant="para" size="small" weight="regular"
-																						><a>${configValue?.value} +8 more</a></f-text
-																				  >`}</f-div
-																		>
-																	</f-div>`
-															)}
-														</f-div>
-												  `}
-										</f-tab-content>`
-								)}
-							</f-div>
-							<!--End : node-details content section  -->
-						</f-div>
-					</f-lineage></f-div
-				></f-div
-			>`;
-		},
-
+		return html`<f-div ${ref(divRef)} height="100%"
+			><f-div
+				><f-lineage
+					.direction=${args.direction}
+					.padding=${args.padding}
+					.gap=${args.gap}
+					.node-size=${args["node-size"]}
+					.children-node-size=${args["children-node-size"]}
+					.max-children=${args["max-children"]}
+					.node-template=${args["node-template"]}
+					.children-node-template=${args["children-node-template"]}
+					.links=${args.links}
+					.nodes=${args.nodes}
+					stagger-load="1"
+					@ready=${handleReady}
+					@node-meta=${handleNodeMeta}
+				>
+				</f-lineage> </f-div
+		></f-div>`;
+	},
 	name: "Playground",
 	height: "500px",
-
 	argTypes: {
 		direction: {
 			control: "select",

@@ -1,14 +1,15 @@
-// common mixins imported from this file
 @import "./../../mixins/scss/mixins";
-@import "./f-input-variables";
+@import "./f-select-variables";
 
 :root {
 	--input-border-radius-curved: 4px;
 	--input-border-radius-round: 22px;
 }
 
-f-input {
-	width: 100%;
+f-select {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	&[disabled] {
 		@include disabled();
 	}
@@ -21,7 +22,7 @@ f-input {
 
 f-form-group {
 	&[variant="compact"][direction="horizontal"] {
-		f-input {
+		f-select {
 			&:first-child {
 				--input-border-radius-curved: 4px 0px 0px 4px;
 				--input-border-radius-round: 22px 0px 0px 22px;
@@ -38,17 +39,26 @@ f-form-group {
 	}
 }
 
-f-input.f-search-border {
-	--input-border-radius-curved: 0px 4px 4px 0px;
-	--input-border-radius-round: 0px 22px 22px 0px;
-}
-
-f-input.f-search-border-button {
-	--input-border-radius-curved: 0px 0px 0px 0px;
-	--input-border-radius-round: 0px 0px 0px 0px;
-}
-
-f-input.f-search-suggest-button {
+f-select.f-search-border {
 	--input-border-radius-curved: 4px 0px 0px 4px;
 	--input-border-radius-round: 22px 0px 0px 22px;
+	&[category="fill"][state="default"] {
+		border-right: 1px solid var(--color-border-default);
+	}
+}
+
+f-div[direction="column"] {
+	> f-select {
+		flex: 1 1;
+		max-height: 100%;
+		width: 100%;
+	}
+}
+
+f-div[direction="row"] {
+	> f-select {
+		flex: 1 1;
+		max-width: 100%;
+		height: 100%;
+	}
 }

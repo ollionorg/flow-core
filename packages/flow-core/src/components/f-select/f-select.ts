@@ -1,6 +1,7 @@
 import { HTMLTemplateResult, PropertyValues, unsafeCSS } from "lit";
 import { property, query, queryAll, queryAssignedElements, state } from "lit/decorators.js";
 import eleStyle from "./f-select.scss?inline";
+import globalStyle from "./f-select-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
@@ -24,6 +25,8 @@ import {
 } from "./handlers";
 import { FIconButton } from "../f-icon-button/f-icon-button";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-select", globalStyle);
 
 export type FSelectState = "primary" | "default" | "success" | "warning" | "danger";
 export type FSelectHeightProp = number;
@@ -65,6 +68,7 @@ export class FSelect extends FRoot {
 	 */
 	static styles = [
 		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
 		...FText.styles,
 		...FDiv.styles,
 		...FIcon.styles,

@@ -1,9 +1,11 @@
 import { html, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
-import eleStyle from "./f-grid.scss?inline";
+import globalStyle from "./f-grid-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-grid", globalStyle);
 
 export type FGridBodyHeightProp = `${number}px` | `${number}%` | `${number}vh`;
 
@@ -12,7 +14,7 @@ export class FGrid extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
+	static styles = [unsafeCSS(globalStyle), ...FDiv.styles];
 
 	/**
 	 * @attribute Defines the minimum value of width of each cell. A cell can not be smaller than this in any viewport.

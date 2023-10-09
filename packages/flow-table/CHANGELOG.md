@@ -1,5 +1,16 @@
 <h4 class="margin-btm-8">Release Notes</h4>
-<hr class="margin-btm-32" />
+
+## 2.0.0
+
+### Major Changes
+
+- Migrated to monorepo structure and removed the need for custom CSS
+
+### Patch Changes
+
+- Updated dependencies
+  - @cldcvr/flow-core@2.0.0
+  <hr class="margin-btm-32" />
 
 # Change Log
 

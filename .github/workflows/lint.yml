@@ -29,8 +29,8 @@ jobs:
       - name: Install pnpm
         run: corepack enable && corepack prepare pnpm@7.26.3 --activate
 
-      - name: Test build
-        run: make build
+      - name: Unit tests
+        run: make test
 
       - name: ESlint
         run: pnpm run lint

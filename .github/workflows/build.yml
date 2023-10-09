@@ -1,18 +1,22 @@
 name: Build
+
 on:
   push:
     branches:
       - main
+
 defaults:
   run:
     shell: bash
     working-directory: .
+
 env:
   DISTRIBUTION_ID: E1JYXHU7GFQMKF
   BUCKET_NAME: flow.cldcvr.com
   AWS_REGION: us-east-1
   ROLE_NAME: flow.cldcvr.com-role
   ACCOUNT_ID: 679519065279
+
 jobs:
   build:
     name: Build and upload to amazon s3
@@ -24,13 +28,16 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Setup Node.js 16.x
+      - name: Setup Node.js 18.x
         uses: actions/setup-node@v2
         with:
-          node-version: 16.x
+          node-version: 18.x
+
+      - name: Install pnpm
+        run: corepack enable && corepack prepare pnpm@7.26.3 --activate
 
       - name: Install Dependencies and Build
-        run: export NODE_OPTIONS="--max_old_space_size=8192" && pnpm i && pnpm run build-packages && pnpm run build-storybook
+        run: make build
 
       - name: Configure AWS credentials from Test account
         uses: aws-actions/configure-aws-credentials@v1

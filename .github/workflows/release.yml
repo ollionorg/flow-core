@@ -20,8 +20,8 @@ jobs:
         with:
           node-version: 18.x
 
-      - name: Install Dependencies
-        run: pnpm i
+      - name: Install pnpm
+        run: corepack enable && corepack prepare pnpm@7.26.3 --activate
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
@@ -31,9 +31,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%B %d, %Y')"
+
       - name: extract-changelogs
         if: steps.changesets.outputs.published == 'true'
         id: change-logs
@@ -49,6 +51,7 @@ jobs:
               "@cldcvr/flow-table":"packages/flow-table/CHANGELOG.md",
               "@cldcvr/flow-core-config":"packages/flow-core-config/CHANGELOG.md"
             }
+
       - name: Send Slack Notification
         if: steps.changesets.outputs.published == 'true'
         id: slack
@@ -97,6 +100,7 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
   publish_to_github:
     name: Publishing to github registry
     runs-on: ubuntu-latest
@@ -104,45 +108,17 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
-      - name: Setup Node.js 16.x
-        uses: actions/setup-node@v2
+      - name: Setup Node.js 18.x
+        uses: actions/setup-node@v2.5.2
         with:
-          node-version: 16.x
+          node-version: 18.x
 
-      - name: Install Dependencies
-        run: pnpm i
+      - name: Install pnpm
+        run: corepack enable && corepack prepare pnpm@7.26.3 --activate
 
-      # Remove original publishConfig in packages/flow-core/package.json
-      - uses: sergeysova/jq-action@v2
-        with:
-          cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/flow-core/package.json`" > packages/flow-core/package.json
+      - name: Replace publish URL
+        run: node replace-publish-config.js https://npm.pkg.github.com
 
-      - uses: sergeysova/jq-action@v2
-        with:
-          cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/flow-log/package.json`" > packages/flow-log/package.json
-
-      - uses: sergeysova/jq-action@v2
-        with:
-          cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/flow-code-editor/package.json`" > packages/flow-code-editor/package.json
-
-      - uses: sergeysova/jq-action@v2
-        with:
-          cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/custom-elements-manifest-to-types/package.json`" > packages/custom-elements-manifest-to-types/package.json
-
-      - uses: sergeysova/jq-action@v2
-        with:
-          cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/flow-core-config/package.json`" > packages/flow-core-config/package.json
-
-      - uses: sergeysova/jq-action@v2
-        with:
-          cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/flow-table/package.json`" > packages/flow-table/package.json
-
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "16.x"
-          registry-url: "https://npm.pkg.github.com"
-          always-auth: true
-          scope: "@cldcvr"
       - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
@@ -150,6 +126,7 @@ jobs:
           EOF
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create Release Pull Request or Publish to github
         id: changesets
         uses: changesets/action@v1

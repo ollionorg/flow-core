@@ -16,7 +16,7 @@
     "lint": "pnpm lint:files .",
     "lint:fix": "env TIMING=1 eslint --ext .js,.ts --fix .",
     "lint:files": "env TIMING=1 eslint --ext .js,.ts --quiet --cache --cache-location .cache/ --",
-    "release": "cp README.md packages/flow-core && pnpm run build-packages && pnpm run changeset publish",
+    "release": "make build-lib && pnpm changeset publish",
     "prettify": "prettier --config .prettierrc.cjs --write './**/*.{js,ts,md,mdx,scss,json,mjs,cjs}'",
     "prettier:lint": "prettier --config .prettierrc.cjs --check",
     "prettier:lint-all": "prettier --config .prettierrc.cjs --check .",

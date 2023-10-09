@@ -1,10 +1,11 @@
 import { html, PropertyValues, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import eleStyle from "./f-icon.scss?inline";
+import globalStyle from "./f-icon-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 // themeSubject will used to listen theme update
-import { configSubject, themeSubject } from "@cldcvr/flow-core-config";
+import { configSubject, themeSubject, injectCss } from "@cldcvr/flow-core-config";
 import { classMap } from "lit-html/directives/class-map.js";
 import loader from "../../mixins/svg/loader";
 import notFound from "../../mixins/svg/not-found";
@@ -13,6 +14,8 @@ import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor, validateHTMLColorName } from "validate-color";
 import { Subscription } from "rxjs";
+
+injectCss("f-icon", globalStyle);
 
 export type FIconState =
 	| "default"
@@ -31,7 +34,7 @@ export class FIcon extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle)];
 
 	/**
 	 * @attribute local state for managing custom fill.

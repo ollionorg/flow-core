@@ -1,0 +1,91 @@
+@import "./../../mixins/scss/mixins";
+@import "./f-text-variables";
+
+f-text {
+	@include base();
+	&:not([inline]) {
+		flex: 1 1;
+		display: block;
+	}
+	&[editable] {
+		width: -webkit-fill-available;
+	}
+	white-space: normal;
+	word-break: break-word;
+	max-width: 100%;
+
+	@each $variant, $valmap in $variants {
+		&[variant="#{$variant}"] {
+			@each $size, $sizemap in $valmap {
+				&[size="#{$size}"] {
+					font-size: map-get($sizemap, "fontSize");
+					line-height: map-get($sizemap, "lineHeight");
+				}
+			}
+		}
+	}
+
+	@each $weight, $value in $weights {
+		&[weight="#{$weight}"] {
+			font-weight: $value;
+		}
+	}
+	@each $align in $aligns {
+		&[align="#{$align}"] {
+			text-align: $align;
+			justify-content: $align;
+		}
+	}
+
+	&[variant="code"] {
+		font-family: var(--flow-code-font);
+	}
+	@each $state, $color in $states {
+		&[state="#{$state}"] {
+			color: map-get($color, "default");
+		}
+	}
+
+	&[slot="help"][state="default"] {
+		color: var(--color-help-text);
+	}
+
+	&[loading] {
+		@include shimmer-self();
+	}
+
+	&[disabled] {
+		@include disabled();
+	}
+
+	&[ellipsis] {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	> a {
+		color: var(--color-primary-default);
+		text-decoration: none;
+	}
+}
+
+@each $state, $color in $states {
+	f-div[state="#{$state}"] {
+		> f-text[state="#{$state}"] {
+			color: map-get($color, "text");
+		}
+	}
+}
+
+f-div[direction="column"] {
+	> f-text {
+		height: fit-content;
+		flex: 0 1 auto;
+	}
+}
+f-div[direction="row"] {
+	> f-text {
+		width: fit-content;
+	}
+}

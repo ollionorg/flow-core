@@ -1,9 +1,12 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-radio.scss?inline";
+import globalStyle from "./f-radio-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-radio", globalStyle);
 
 export type FRadioState = "primary" | "default" | "success" | "warning" | "danger";
 export type FRadioCustomEvent = {
@@ -15,7 +18,7 @@ export class FRadio extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FDiv.styles];
 
 	/**
 	 * @attribute Value of a radio defines if it is selected or not

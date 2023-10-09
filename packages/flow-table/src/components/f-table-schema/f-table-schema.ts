@@ -8,7 +8,11 @@ import { FTable, FTableSelectable, FTableSize, FTableVariant } from "../f-table/
 import { FTcell, FTcellActions } from "../f-tcell/f-tcell";
 import { FTrow, FTrowChevronPosition, FTrowState } from "../f-trow/f-trow";
 import eleStyle from "./f-table-schema.scss?inline";
+import globalStyle from "./f-table-schema-global.scss?inline";
 import { repeat } from "lit/directives/repeat.js";
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-table-schema", globalStyle);
 
 export type FTableSchemaDataRow = {
 	selected?: boolean;
@@ -54,6 +58,7 @@ export class FTableSchema extends FRoot {
 	 */
 	static styles = [
 		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
 		...FTable.styles,
 		...FTcell.styles,
 		...FTrow.styles,

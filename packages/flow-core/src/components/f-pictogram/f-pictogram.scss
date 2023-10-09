@@ -1,5 +1,4 @@
 @use "sass:map";
-@use "sass:math";
 @import "./../../mixins/scss/mixins";
 
 $sizes: (
@@ -312,18 +311,5 @@ $hexagon-clip-path: polygon(
 				transform: rotate(360deg) scale(1.4);
 			}
 		}
-	}
-}
-
-f-pictogram {
-	@include base();
-	&.hasShimmer {
-		&::before {
-			content: unset;
-		}
-		background: transparent !important;
-	}
-	&[disabled] {
-		@include disabled();
 	}
 }

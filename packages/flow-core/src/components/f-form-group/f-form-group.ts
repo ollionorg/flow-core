@@ -4,7 +4,11 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import eleStyle from "./f-form-group.scss?inline";
+import globalStyle from "./f-form-group-global.scss?inline";
 import { flowElement } from "./../../utils";
+
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-form-group", globalStyle);
 
 export type FGroupLabel = {
 	title: string;
@@ -20,7 +24,7 @@ export class FFormGroup extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FDiv.styles, ...FText.styles];
 
 	/**
 	 * @attribute Label for showing group label

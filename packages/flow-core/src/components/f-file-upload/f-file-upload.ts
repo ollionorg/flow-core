@@ -1,6 +1,7 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-file-upload.scss?inline";
+import globalStyle from "./f-file-upload-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { FDiv } from "../f-div/f-div";
@@ -10,6 +11,8 @@ import { getExtensionsFromMimeType, getFormattedBytes } from "../../utils/index"
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-file-upload", globalStyle);
 
 export type FFileUploadState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -29,7 +32,13 @@ export class FFileUpload extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles, ...FIcon.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
+		...FDiv.styles,
+		...FText.styles,
+		...FIcon.styles
+	];
 
 	/**
 	 * @attribute f-file-upload has 2 type of modes: single and multiple. When type is single, a user can select only one file and the filename appears inline to the file uploader.  When type is multiple, a user can select multiple files and each filename stacks under the file uploader.

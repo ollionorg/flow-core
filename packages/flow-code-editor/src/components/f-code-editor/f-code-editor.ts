@@ -1,10 +1,13 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { FRoot, flowElement, FButton } from "@cldcvr/flow-core";
-import eleStyle from "./f-code-editor.scss?inline";
+import globalStyle from "./f-code-editor-global.scss?inline";
 import * as monaco from "monaco-editor";
 
 import { property, query } from "lit/decorators.js";
 import { languageCommentsMap } from "../../utils/lang-comments-map";
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-code-editor", globalStyle);
 
 export type FCodeEditorLanguage =
 	| "scala"
@@ -28,7 +31,7 @@ export class FCodeEditor extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(globalStyle)];
 
 	/**
 	 * editor instance

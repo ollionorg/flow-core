@@ -1,17 +1,19 @@
 import { unsafeCSS, html } from "lit";
 import { FRoot, flowElement } from "@cldcvr/flow-core";
-import eleStyle from "./f-md-editor.scss?inline";
+import globalStyle from "./f-md-editor-global.scss?inline";
 import { FTextArea } from "@cldcvr/flow-core";
 import * as showdown from "showdown";
 import { property, query } from "lit/decorators.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
+import { injectCss } from "@cldcvr/flow-core-config";
 
+injectCss("f-md-editor", globalStyle);
 @flowElement("f-md-editor")
 export class FMDEditor extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FTextArea.styles];
+	static styles = [unsafeCSS(globalStyle), ...FTextArea.styles];
 
 	/**
 	 * @attribute value to be inserted in text-area.

@@ -1,6 +1,7 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import eleStyle from "./f-log.scss?inline";
+import globalStyle from "./f-log-global.scss?inline";
 
 import { FRoot, flowElement } from "@cldcvr/flow-core";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
@@ -10,7 +11,9 @@ import { SearchAddon } from "xterm-addon-search";
 import { SearchBarAddon } from "xterm-addon-search-bar";
 import { WebLinksAddon } from "xterm-addon-web-links";
 import xtermCSS from "xterm/css/xterm.css?inline";
+import { injectCss } from "@cldcvr/flow-core-config";
 
+injectCss("f-log", globalStyle);
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
@@ -19,7 +22,7 @@ export class FLog extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), unsafeCSS(xtermCSS)];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(xtermCSS), unsafeCSS(globalStyle)];
 
 	/**
 	 * @attribute logs to be displayed on screen

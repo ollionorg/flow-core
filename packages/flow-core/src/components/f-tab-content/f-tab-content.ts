@@ -1,15 +1,17 @@
 import { html, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
-import eleStyle from "./f-tab-content.scss?inline";
+import globalStyle from "./f-tab-content-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-tab-content", globalStyle);
 
 @flowElement("f-tab-content")
 export class FTabContent extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(globalStyle)];
 
 	/**
 	 * @attribute Defines the transition to show the next tab content

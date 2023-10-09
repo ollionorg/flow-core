@@ -1,11 +1,14 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import eleStyle from "./f-tab.scss?inline";
+import globalStyle from "./f-tab-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { FTabNode } from "../f-tab-node/f-tab-node";
 import { FIconButton } from "../f-icon-button/f-icon-button";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-tab", globalStyle);
 
 export type FTabNodeWidthProp = "fill" | "hug-content" | `${number}`;
 
@@ -14,7 +17,12 @@ export class FTab extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FIconButton.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
+		...FDiv.styles,
+		...FIconButton.styles
+	];
 
 	/**
 	 * id selecteor for f-tab-section

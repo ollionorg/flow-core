@@ -1,9 +1,9 @@
 import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
-import downloadFile from "../donwloadFile.js";
+import downloadFile from "./donwloadFile";
 
 export default {
-	title: "@cldcvr/flow-table/@cldcvr/flow-core/f-table",
+	title: "@cldcvr/flow-table/f-table",
 
 	parameters: {
 		controls: {

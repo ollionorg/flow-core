@@ -5,7 +5,7 @@ import nodes from "./nodes";
 import { nodeTemplate, childrenNodeTemplate } from "./nodeTemplates";
 
 export default {
-	title: "Debug/Reverse-bend",
+	title: "@cldcvr/flow-lineage/Debug/Reverse-bend",
 	argTypes: {
 		["node-template"]: {
 			control: false

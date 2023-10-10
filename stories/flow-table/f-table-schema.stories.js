@@ -1,11 +1,11 @@
 import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import getFakeUsers, { popoverRef } from "../utils/mock-users-data.js";
+import getFakeUsers, { popoverRef } from "../utils/mock-users-data";
 import { createRef, ref } from "lit/directives/ref.js";
-import downloadFile from "../donwloadFile.js";
+import downloadFile from "./donwloadFile";
 
 export default {
-	title: "@cldcvr/flow-table/@cldcvr/flow-core/f-table-schema",
+	title: "@cldcvr/flow-table/f-table-schema",
 
 	parameters: {
 		controls: {

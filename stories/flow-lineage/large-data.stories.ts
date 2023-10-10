@@ -3,7 +3,7 @@ import { html } from "lit-html";
 import { LineageNodeElement, LineageNodeLinks, LineageNodes } from "@cldcvr/flow-lineage/src";
 
 export default {
-	title: "Examples/Large Data",
+	title: "@cldcvr/flow-lineage/Examples/Large Data",
 	argTypes: {
 		["node-template"]: {
 			control: false

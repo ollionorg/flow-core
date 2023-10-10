@@ -5,7 +5,7 @@ import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import NodeDetailsTemplateAnatomy from "./svg/i-node-details-anatomy.js";
 
 export default {
-	title: "Templates/node-details popover",
+	title: "@cldcvr/flow-lineage/Templates/node-details popover",
 
 	parameters: {
 		controls: {

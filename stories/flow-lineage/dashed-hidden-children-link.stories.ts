@@ -1,11 +1,11 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 import { LineageNodeLinks } from "@cldcvr/flow-lineage/src";
-import nodes from "./nodes";
 import { nodeTemplate, childrenNodeTemplate } from "./nodeTemplates";
+import nodes from "./nodes";
 
 export default {
-	title: "Debug/Glitch",
+	title: "@cldcvr/flow-lineage/Debug/dashed-hidden-children-link",
 	argTypes: {
 		["node-template"]: {
 			control: false
@@ -18,17 +18,10 @@ export default {
 
 const links: LineageNodeLinks = [
 	{
-		from: "noede1",
+		from: "node1",
 		to: "node2"
 	},
-	{
-		from: "node1",
-		to: "node5"
-	},
-	{
-		from: "node1",
-		to: "node4"
-	},
+
 	{
 		from: "node2",
 		to: "node5"
@@ -38,12 +31,13 @@ const links: LineageNodeLinks = [
 		from: "node5"
 	},
 	{
-		from: "node5",
-		to: "node4"
-	},
-	{
 		from: "node6",
 		to: "node5"
+	},
+
+	{
+		from: "node5",
+		to: "node4"
 	},
 	{
 		from: "node4child1",
@@ -55,15 +49,7 @@ const links: LineageNodeLinks = [
 	},
 	{
 		from: "node1child1",
-		to: "node5child2"
-	},
-	{
-		from: "node1child1",
-		to: "node4child2"
-	},
-	{
-		from: "node6",
-		to: "node6"
+		to: "node5child6"
 	}
 ];
 
@@ -75,7 +61,7 @@ const Template: Story<unknown> = (args: any) => {
 			gap="75"
 			.node-size=${{ width: 240, height: 53 }}
 			.children-node-size=${{ width: 240, height: 32 }}
-			.max-children=${args["max-children"]}
+			.max-children=${4}
 			.node-template=${args["node-template"]}
 			.children-node-template=${args["children-node-template"]}
 			.links=${links}

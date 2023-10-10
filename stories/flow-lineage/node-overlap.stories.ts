@@ -5,7 +5,7 @@ import { LineageNodeLinks } from "@cldcvr/flow-lineage/src";
 import nodes from "./nodes";
 import { nodeTemplate, childrenNodeTemplate } from "./nodeTemplates";
 export default {
-	title: "Debug/node-overlap",
+	title: "@cldcvr/flow-lineage/Debug/node-overlap",
 	argTypes: {
 		["node-template"]: {
 			control: false

@@ -1,9 +1,8 @@
 import { html } from "lit-html";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { createRef, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@cldcvr/flow-table/@cldcvr/flow-core/f-trow",
+	title: "@cldcvr/flow-table/f-trow",
 
 	parameters: {
 		controls: {

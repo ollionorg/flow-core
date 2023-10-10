@@ -3,7 +3,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { createRef, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@cldcvr/flow-table/@cldcvr/flow-core/f-tcell",
+	title: "@cldcvr/flow-table/f-tcell",
 
 	parameters: {
 		controls: {

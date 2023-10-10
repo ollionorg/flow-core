@@ -4,7 +4,7 @@ import { LineageNodeLinks, LineageNodes } from "@cldcvr/flow-lineage/src";
 import { nodeTemplate, childrenNodeTemplate } from "./nodeTemplates";
 
 export default {
-	title: "Debug/Links",
+	title: "@cldcvr/flow-lineage/Debug/Links",
 	argTypes: {
 		["node-template"]: {
 			control: false

@@ -5,7 +5,7 @@ import nodes from "./nodes";
 import { nodeTemplate, childrenNodeTemplate } from "./nodeTemplates";
 
 export default {
-	title: "Debug/hidden-child",
+	title: "@cldcvr/flow-lineage/Debug/hidden-child",
 	argTypes: {
 		["node-template"]: {
 			control: false

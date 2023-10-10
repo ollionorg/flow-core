@@ -44,8 +44,8 @@ function generateBaseColorMdx(colorTokens) {
 
 `;
 
-	mdxFile += `<Preview>
-  <table class="custom-color-table">
+	mdxFile += `
+  <table className="custom-color-table">
   <tbody>
             <tr>
       <th>Token</th>
@@ -56,7 +56,7 @@ function generateBaseColorMdx(colorTokens) {
 		mdxFile += getPreviewColorTable(surfaceColors[i]);
 	}
 	mdxFile += `
-</tbody></table></Preview>
+</tbody></table>
 
 <br/>
 
@@ -66,8 +66,8 @@ function generateBaseColorMdx(colorTokens) {
 
 `;
 
-	mdxFile += `<Preview>
-  <table class="custom-color-table">
+	mdxFile += `
+  <table className="custom-color-table">
   <tbody>
             <tr>
       <th>Token</th>
@@ -78,7 +78,7 @@ function generateBaseColorMdx(colorTokens) {
 		mdxFile += getPreviewColorTable(textColors[i]);
 	}
 	mdxFile += `
-</tbody></table></Preview>
+</tbody></table>
 
 <br/>
 
@@ -88,8 +88,8 @@ function generateBaseColorMdx(colorTokens) {
 
 `;
 
-	mdxFile += `<Preview>
-  <table class="custom-color-table">
+	mdxFile += `
+  <table className="custom-color-table">
   <tbody>
             <tr>
       <th>Token</th>
@@ -100,7 +100,7 @@ function generateBaseColorMdx(colorTokens) {
 		mdxFile += getPreviewColorTable(iconColors[i]);
 	}
 	mdxFile += `
-</tbody></table></Preview>
+</tbody></table>
 
 <br/>
 
@@ -110,8 +110,8 @@ function generateBaseColorMdx(colorTokens) {
 
 `;
 
-	mdxFile += `<Preview>
-  <table class="custom-color-table">
+	mdxFile += `
+  <table className="custom-color-table">
   <tbody>
             <tr>
       <th>Token</th>
@@ -122,7 +122,7 @@ function generateBaseColorMdx(colorTokens) {
 		mdxFile += getPreviewColorTable(borderColors[i]);
 	}
 	mdxFile += `
-</tbody></table></Preview>`;
+</tbody></table>`;
 
 	try {
 		fs.writeFileSync(
@@ -185,8 +185,8 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-	mdxFile += `<Preview>
-  <table class="custom-color-table">
+	mdxFile += `
+  <table className="custom-color-table">
   <tbody>
             <tr>
       <th>Token</th>
@@ -197,7 +197,7 @@ function generateSystemColorMdx(colorTokens) {
 		mdxFile += getPreviewColorTable(primaryColors[i]);
 	}
 	mdxFile += `
-</tbody></table></Preview>
+</tbody></table>
 
 <br/>
 
@@ -205,15 +205,15 @@ function generateSystemColorMdx(colorTokens) {
 
 <f-divider></f-divider>
 
-<p class="margin-btm-24">
+<p className="margin-btm-24">
   These colors highlight or complement the primary color and are to be used sparingly to make
   secondary UI elements stand out.
 </p>
 
 `;
 
-	mdxFile += `<Preview>
-  <table class="custom-color-table">
+	mdxFile += `
+  <table className="custom-color-table">
   <tbody>
             <tr>
       <th>Token</th>
@@ -224,7 +224,7 @@ function generateSystemColorMdx(colorTokens) {
 		mdxFile += getPreviewColorTable(highlightColors[i]);
 	}
 	mdxFile += `
-</tbody></table></Preview>
+</tbody></table>
 
 <br/>
 
@@ -236,8 +236,8 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-	mdxFile += `<Preview>
-  <table class="custom-color-table">
+	mdxFile += `
+  <table className="custom-color-table">
   <tbody>
             <tr>
       <th>Token</th>
@@ -248,7 +248,7 @@ function generateSystemColorMdx(colorTokens) {
 		mdxFile += getPreviewColorTable(neutralColors[i]);
 	}
 	mdxFile += `
-</tbody></table></Preview>
+</tbody></table>
 
 <br/>
 
@@ -263,8 +263,8 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-	mdxFile += `<Preview>
-  <table class="custom-color-table">
+	mdxFile += `
+  <table className="custom-color-table">
   <tbody>
             <tr>
       <th>Token</th>
@@ -275,7 +275,7 @@ function generateSystemColorMdx(colorTokens) {
 		mdxFile += getPreviewColorTable(successColors[i]);
 	}
 	mdxFile += `
-</tbody></table></Preview>
+</tbody></table>
 
 <br/>
 
@@ -291,8 +291,8 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-	mdxFile += `<Preview>
-  <table class="custom-color-table">
+	mdxFile += `
+  <table className="custom-color-table">
   <tbody>
             <tr>
       <th>Token</th>
@@ -303,7 +303,7 @@ function generateSystemColorMdx(colorTokens) {
 		mdxFile += getPreviewColorTable(warningColors[i]);
 	}
 	mdxFile += `
-</tbody></table></Preview>
+</tbody></table>
 
 <br/>
 
@@ -319,8 +319,8 @@ function generateSystemColorMdx(colorTokens) {
 
 `;
 
-	mdxFile += `<Preview>
-  <table class="custom-color-table">
+	mdxFile += `
+  <table className="custom-color-table">
   <tbody>
             <tr>
       <th>Token</th>
@@ -331,7 +331,7 @@ function generateSystemColorMdx(colorTokens) {
 		mdxFile += getPreviewColorTable(dangerColors[i]);
 	}
 	mdxFile += `
-</tbody></table></Preview>`;
+</tbody></table>`;
 	try {
 		fs.writeFileSync(
 			tokenFileName,
@@ -395,11 +395,11 @@ function getPreviewColorTable(colorObject) {
 	mdx = `
     <tr>
       <td>
-        <p class="color-table-token">--${colorObject.variable}</p>
+        <p className="color-table-token">--${colorObject.variable}</p>
       </td>
       <td>
-        <div class="custom-table-flex">
-          <div class="width-set">
+        <div className="custom-table-flex">
+          <div className="width-set">
             <p>${colorObject.fLightValue ? colorObject.fLightValue : ""}</p>
           </div>
           <div style={{background: "${
@@ -408,8 +408,8 @@ function getPreviewColorTable(colorObject) {
         </div>
       </td>z
       <td>
-        <div class="custom-table-flex">
-          <div class="width-set">
+        <div className="custom-table-flex">
+          <div className="width-set">
             <p>${colorObject.fDarkValue ? colorObject.fDarkValue : ""}</p>
           </div>
           <div style={{background: "${

@@ -1,7 +1,8 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["f-lineage should match snpashot"] = `<g>
+snapshots["f-lineage should match snpashot"] = 
+`<g>
   <g
     class="links"
     data-page="1"
@@ -318,17 +319,25 @@ snapshots["f-lineage should match snpashot"] = `<g>
       >
         <f-div
           align="middle-left"
+          direction="row"
           gap="small"
           height="100%"
+          overflow="wrap"
           padding="none medium"
+          selected="none"
           state="secondary"
+          sticky="none"
+          style="padding: 0px 12px; width: 100%; height: 100%; border-radius: 4px;"
           variant="curved"
           width="100%"
         >
           <f-text
+            align="left"
             ellipsis=""
             size="large"
+            state="default"
             variant="code"
+            weight="regular"
           >
             noede1
           </f-text>
@@ -356,17 +365,25 @@ snapshots["f-lineage should match snpashot"] = `<g>
         <f-div
           align="middle-left"
           border="small solid default bottom"
+          direction="row"
           gap="small"
           height="100%"
+          overflow="wrap"
           padding="none medium"
+          selected="none"
           state="secondary"
+          sticky="none"
+          style="border-bottom: 1px solid var(--color-border-default); padding: 0px 12px; width: 100%; height: 100%; border-radius: 4px;"
           variant="curved"
           width="100%"
         >
           <f-text
+            align="left"
             ellipsis=""
             size="large"
+            state="default"
             variant="code"
+            weight="regular"
           >
             node2
           </f-text>
@@ -394,17 +411,25 @@ snapshots["f-lineage should match snpashot"] = `<g>
         <f-div
           align="middle-left"
           border="small solid default bottom"
+          direction="row"
           gap="small"
           height="100%"
+          overflow="wrap"
           padding="none medium"
+          selected="none"
           state="secondary"
+          sticky="none"
+          style="border-bottom: 1px solid var(--color-border-default); padding: 0px 12px; width: 100%; height: 100%; border-radius: 4px;"
           variant="curved"
           width="100%"
         >
           <f-text
+            align="left"
             ellipsis=""
             size="large"
+            state="default"
             variant="code"
+            weight="regular"
           >
             node5
           </f-text>
@@ -431,17 +456,25 @@ snapshots["f-lineage should match snpashot"] = `<g>
       >
         <f-div
           align="middle-left"
+          direction="row"
           gap="small"
           height="100%"
+          overflow="wrap"
           padding="none medium"
+          selected="none"
           state="secondary"
+          sticky="none"
+          style="padding: 0px 12px; width: 100%; height: 100%; border-radius: 4px;"
           variant="curved"
           width="100%"
         >
           <f-text
+            align="left"
             ellipsis=""
             size="large"
+            state="default"
             variant="code"
+            weight="regular"
           >
             node3
           </f-text>
@@ -461,17 +494,25 @@ snapshots["f-lineage should match snpashot"] = `<g>
         <f-div
           align="middle-left"
           border="small solid default bottom"
+          direction="row"
           gap="small"
           height="100%"
+          overflow="wrap"
           padding="none medium"
+          selected="none"
           state="secondary"
+          sticky="none"
+          style="border-bottom: 1px solid var(--color-border-default); padding: 0px 12px; width: 100%; height: 100%; border-radius: 4px;"
           variant="curved"
           width="100%"
         >
           <f-text
+            align="left"
             ellipsis=""
             size="large"
+            state="default"
             variant="code"
+            weight="regular"
           >
             node4
           </f-text>
@@ -498,17 +539,25 @@ snapshots["f-lineage should match snpashot"] = `<g>
       >
         <f-div
           align="middle-left"
+          direction="row"
           gap="small"
           height="100%"
+          overflow="wrap"
           padding="none medium"
+          selected="none"
           state="secondary"
+          sticky="none"
+          style="padding: 0px 12px; width: 100%; height: 100%; border-radius: 4px;"
           variant="curved"
           width="100%"
         >
           <f-text
+            align="left"
             ellipsis=""
             size="large"
+            state="default"
             variant="code"
+            weight="regular"
           >
             node6
           </f-text>
@@ -542,17 +591,25 @@ snapshots["f-lineage should match snpashot"] = `<g>
           <f-div
             align="middle-left"
             border="small solid default bottom"
+            direction="row"
             gap="small"
             height="100%"
+            overflow="wrap"
             padding="none medium"
+            selected="none"
             state="secondary"
+            sticky="none"
+            style="border-bottom: 1px solid var(--color-border-default); padding: 0px 12px; width: 100%; height: 100%; border-radius: 4px;"
             variant="curved"
             width="100%"
           >
             <f-text
+              align="left"
               ellipsis=""
               size="large"
+              state="default"
               variant="code"
+              weight="regular"
             >
               node2child1
             </f-text>
@@ -574,17 +631,25 @@ snapshots["f-lineage should match snpashot"] = `<g>
           <f-div
             align="middle-left"
             border="small solid default bottom"
+            direction="row"
             gap="small"
             height="100%"
+            overflow="wrap"
             padding="none medium"
+            selected="none"
             state="secondary"
+            sticky="none"
+            style="border-bottom: 1px solid var(--color-border-default); padding: 0px 12px; width: 100%; height: 100%; border-radius: 4px;"
             variant="curved"
             width="100%"
           >
             <f-text
+              align="left"
               ellipsis=""
               size="large"
+              state="default"
               variant="code"
+              weight="regular"
             >
               node2child2
             </f-text>
@@ -614,17 +679,25 @@ snapshots["f-lineage should match snpashot"] = `<g>
           <f-div
             align="middle-left"
             border="small solid default bottom"
+            direction="row"
             gap="small"
             height="100%"
+            overflow="wrap"
             padding="none medium"
+            selected="none"
             state="secondary"
+            sticky="none"
+            style="border-bottom: 1px solid var(--color-border-default); padding: 0px 12px; width: 100%; height: 100%; border-radius: 4px;"
             variant="curved"
             width="100%"
           >
             <f-text
+              align="left"
               ellipsis=""
               size="large"
+              state="default"
               variant="code"
+              weight="regular"
             >
               node5child1
             </f-text>
@@ -646,17 +719,25 @@ snapshots["f-lineage should match snpashot"] = `<g>
           <f-div
             align="middle-left"
             border="small solid default bottom"
+            direction="row"
             gap="small"
             height="100%"
+            overflow="wrap"
             padding="none medium"
+            selected="none"
             state="secondary"
+            sticky="none"
+            style="border-bottom: 1px solid var(--color-border-default); padding: 0px 12px; width: 100%; height: 100%; border-radius: 4px;"
             variant="curved"
             width="100%"
           >
             <f-text
+              align="left"
               ellipsis=""
               size="large"
+              state="default"
               variant="code"
+              weight="regular"
             >
               node5child3
             </f-text>
@@ -678,17 +759,25 @@ snapshots["f-lineage should match snpashot"] = `<g>
           <f-div
             align="middle-left"
             border="small solid default bottom"
+            direction="row"
             gap="small"
             height="100%"
+            overflow="wrap"
             padding="none medium"
+            selected="none"
             state="secondary"
+            sticky="none"
+            style="border-bottom: 1px solid var(--color-border-default); padding: 0px 12px; width: 100%; height: 100%; border-radius: 4px;"
             variant="curved"
             width="100%"
           >
             <f-text
+              align="left"
               ellipsis=""
               size="large"
+              state="default"
               variant="code"
+              weight="regular"
             >
               node5child2
             </f-text>
@@ -718,17 +807,25 @@ snapshots["f-lineage should match snpashot"] = `<g>
           <f-div
             align="middle-left"
             border="small solid default bottom"
+            direction="row"
             gap="small"
             height="100%"
+            overflow="wrap"
             padding="none medium"
+            selected="none"
             state="secondary"
+            sticky="none"
+            style="border-bottom: 1px solid var(--color-border-default); padding: 0px 12px; width: 100%; height: 100%; border-radius: 4px;"
             variant="curved"
             width="100%"
           >
             <f-text
+              align="left"
               ellipsis=""
               size="large"
+              state="default"
               variant="code"
+              weight="regular"
             >
               node4child1
             </f-text>
@@ -750,17 +847,25 @@ snapshots["f-lineage should match snpashot"] = `<g>
           <f-div
             align="middle-left"
             border="small solid default bottom"
+            direction="row"
             gap="small"
             height="100%"
+            overflow="wrap"
             padding="none medium"
+            selected="none"
             state="secondary"
+            sticky="none"
+            style="border-bottom: 1px solid var(--color-border-default); padding: 0px 12px; width: 100%; height: 100%; border-radius: 4px;"
             variant="curved"
             width="100%"
           >
             <f-text
+              align="left"
               ellipsis=""
               size="large"
+              state="default"
               variant="code"
+              weight="regular"
             >
               node4child2
             </f-text>
@@ -996,3 +1101,4 @@ snapshots["f-lineage should match snpashot"] = `<g>
 </g>
 `;
 /* end snapshot f-lineage should match snpashot */
+

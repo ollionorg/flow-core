@@ -2,7 +2,7 @@
 import { html, fixture, expect } from "@open-wc/testing";
 
 // import flow-core elements
-import "@cldcvr/flow-lineage";
+import "../../../";
 import { FLineage } from "../../../";
 
 describe("f-lineage", async () => {

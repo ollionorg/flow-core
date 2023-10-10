@@ -1,6 +1,6 @@
 import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
-import downloadFile from "./donwloadFile";
+import downloadFile from "./donwload-file";
 
 export default {
 	title: "@cldcvr/flow-table/f-table",

@@ -1,8 +1,10 @@
 import { defineConfig } from "vite";
-import path from "path";
 
 export default defineConfig({
 	build: {
+		// Disabling minification makes it easy to debug during development
+		// And all modern bundlers will consume the library and minify it anyway
+		minify: false,
 		sourcemap: true,
 		lib: {
 			entry: "src/index.ts",
@@ -10,7 +12,6 @@ export default defineConfig({
 			fileName: format => `flow-form-builder.${format}.js`,
 			formats: ["es", "cjs"]
 		},
-		// outDir: "dist",
 		rollupOptions: {
 			external: ["@cldcvr/flow-core-config", "@cldcvr/flow-core", /^lit/, "rxjs", "lodash-es"],
 			output: {
@@ -18,11 +19,6 @@ export default defineConfig({
 					"@cldcvr/flow-core": "@cldcvr/flow-core"
 				}
 			}
-		}
-	},
-	resolve: {
-		alias: {
-			"~": path.resolve(__dirname, "./src/index.ts")
 		}
 	}
 });

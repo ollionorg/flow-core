@@ -18,6 +18,7 @@ import { themes } from "@storybook/theming";
 import { Preview } from "@storybook/web-components";
 
 // Disable themes
+import "./storybook-v2.css";
 // import "./storybook.css";
 
 const preview: Preview = {

@@ -5,7 +5,7 @@ import type {
 	FTableSchemaDataRow,
 	FTableSchemaCell,
 	FTableSchemaHeaderCell
-} from "./../../packages/flow-table/src/@cldcvr/flow-core/f-table-schema/f-table-schema";
+} from "@cldcvr/flow-table/src/components/f-table-schema/f-table-schema";
 
 import { createRef } from "lit/directives/ref.js";
 import { FPopover } from "@cldcvr/flow-core";

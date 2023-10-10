@@ -1,11 +1,11 @@
 import { html } from "lit-html";
 import fDividerAnatomy from "../svg/i-fdivider-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import samplelogs from "../logs/logs.js";
+import samplelogs from "./logs/logs.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 
 export default {
-	title: "@cldcvr/flow-log/@cldcvr/flow-core/f-log",
+	title: "@cldcvr/flow-log/f-log",
 
 	parameters: {
 		controls: {

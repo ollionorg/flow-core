@@ -1,10 +1,8 @@
 import { html } from "lit-html";
-import fDividerAnatomy from "../svg/i-fdivider-anatomy.js";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useState } from "@storybook/client-api";
 
 export default {
-	title: "@cldcvr/flow-code-editor/@cldcvr/flow-core/f-code-editor",
+	title: "@cldcvr/flow-code-editor/f-code-editor",
 
 	parameters: {
 		controls: {

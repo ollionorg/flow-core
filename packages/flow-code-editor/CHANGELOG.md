@@ -1,4 +1,4 @@
-<h4 class="margin-btm-8">Release Notes</h4>
+<h4 className="margin-btm-8">Release Notes</h4>
 
 ## 1.0.0
 
@@ -10,7 +10,7 @@
 
 - Updated dependencies
   - @cldcvr/flow-core@2.0.0
-  <hr class="margin-btm-32" />
+  <hr className="margin-btm-32" />
 
 # Change Log
 

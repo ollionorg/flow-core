@@ -154,7 +154,7 @@ export const Playground = {
 		["highlight-hover"]: true,
 		["sticky-header"]: true,
 		["rows-per-page"]: 20,
-		data: getFakeUsers(50),
+		data: getFakeUsers(10),
 		["sort-by"]: "firstName",
 		["sort-order"]: "asc",
 		["search-term"]: "",
@@ -329,7 +329,7 @@ export const SortOrder = {
 
 export const SearchTerm = {
 	render: args => {
-		const data = getFakeUsers(50);
+		const data = getFakeUsers(10);
 
 		return html`
 			<f-div gap="small" height="100%" overflow="scroll" gap="auto" width="100%">

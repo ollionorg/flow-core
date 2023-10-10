@@ -4,9 +4,10 @@ import { html, fixture, expect, oneEvent } from "@open-wc/testing";
 import "@cldcvr/flow-core";
 import "@cldcvr/flow-system-icon";
 
-import { FFormArray, FFormBuilder, FFormObject } from "@cldcvr/flow-form-builder";
+import { FFormArray, FFormBuilder, FFormObject } from "../../../";
 import { FForm, FFormGroup, FIconButton, FInput } from "@cldcvr/flow-core";
 import { FormBuilderField } from "../../types";
+
 function getSampleFormBuilder() {
 	return fixture<FFormBuilder>(
 		html` <f-form-builder .field=${

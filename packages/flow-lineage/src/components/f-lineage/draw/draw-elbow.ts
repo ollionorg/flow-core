@@ -61,6 +61,7 @@ export default function drawElbow({
 		.line()
 		.x(p => (p as unknown as Point).x)
 		.y(p => (p as unknown as Point).y)
+		//@ts-expect-error @todo vikas to check
 		.curve(curveStep.angle(curveAngle));
 
 	// add point on node for connection

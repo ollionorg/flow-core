@@ -7,7 +7,7 @@
   "types": "dist/src/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "./compile.sh",
+    "build": "bash ./compile.sh",
     "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
     "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
@@ -31,8 +31,6 @@
     "@open-wc/testing": "^3.1.5",
     "@types/d3": "^7.4.0",
     "@types/jest": "29.5.5",
-    "@typescript-eslint/eslint-plugin": "^6.7.4",
-    "@typescript-eslint/parser": "^6.7.4",
     "@web/dev-server-esbuild": "^0.3.0",
     "@web/test-runner": "^0.13.30",
     "concurrently": "^8.2.1",

@@ -31,12 +31,15 @@ export default function getFakeUsers(count = 100): FTableSchemaData {
 			},
 			actions: [
 				{
+					id: "1",
 					icon: "i-chat"
 				},
 				{
+					id: "2",
 					icon: "i-mail"
 				},
 				{
+					id: "3",
 					icon: "i-star"
 				}
 			]
@@ -64,6 +67,7 @@ export default function getFakeUsers(count = 100): FTableSchemaData {
 		};
 
 		const userRow: FTableSchemaDataRow = {
+			id: "1",
 			data: { firstName, lastName, age, birthDate, email, mobile, sex, address },
 			selected: true,
 			details: function () {

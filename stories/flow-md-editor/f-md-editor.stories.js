@@ -1,10 +1,8 @@
 import { html } from "lit-html";
-import fDividerAnatomy from "../svg/i-fdivider-anatomy.js";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import sampleMd from "../utils/sample-md";
+import sampleMd from "./sample-md";
 
 export default {
-	title: "@cldcvr/flow-md-editor/@cldcvr/flow-core/f-md-editor",
+	title: "@cldcvr/flow-md-editor/f-md-editor",
 
 	parameters: {
 		controls: {

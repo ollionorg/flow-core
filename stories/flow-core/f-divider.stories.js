@@ -1,5 +1,5 @@
 import { html } from "lit-html";
-import fDividerAnatomy from "./svg/i-fdivider-anatomy.js";
+import fDividerAnatomy from "../svg/i-fdivider-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 export default {

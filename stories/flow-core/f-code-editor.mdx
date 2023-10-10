@@ -1,0 +1,110 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fDividerAnatomy from "../svg/i-fdivider-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useState } from "@storybook/client-api";
+import * as FCodeEditorStories from "./f-code-editor.stories";
+
+<Meta of={FCodeEditorStories} />
+
+# f-code-editor
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+f-code-editor used to edit content/code.
+
+<br />
+
+### [Playground](/story/cldcvr-flow-code-editor-components-f-code-editor--playground)
+
+<Canvas>
+	<Story of={FCodeEditorStories.Playground} />
+</Canvas>
+
+<br />
+
+## code
+
+<f-divider />
+
+code to display in `f-code-editor` for sepcified language
+
+<Canvas>
+	<Story of={FCodeEditorStories.Code} />
+</Canvas>
+
+## title
+
+<f-divider />
+
+title of the header in code-editor
+
+<Canvas>
+	<Story of={FCodeEditorStories.Title} />
+</Canvas>
+
+## comments
+
+<f-divider />
+
+Add Comments Toggle button to the header
+
+<Canvas>
+	<Story of={FCodeEditorStories.Comments} />
+</Canvas>
+
+## copy-button
+
+<f-divider />
+
+Add Copy button to the header
+
+<Canvas>
+	<Story of={FCodeEditorStories.CopyButton} />
+</Canvas>
+
+## show-line-numbers
+
+<f-divider />
+
+Toggle Line no.'s on/off
+
+<Canvas>
+	<Story of={FCodeEditorStories.ShowLineNumbers} />
+</Canvas>
+
+## state
+
+<f-divider />
+
+state of the code-editor
+
+<Canvas>
+	<Story of={FCodeEditorStories.State} />
+</Canvas>
+
+## language
+
+<f-divider />
+
+language is used to display code in correct synatx highlighting
+
+<Canvas>
+	<Story of={FCodeEditorStories.Language} />
+</Canvas>
+
+## read-only
+
+<f-divider />
+
+Toggle Line no.'s on/off
+
+<Canvas>
+	<Story of={FCodeEditorStories.ReadOnly} />
+</Canvas>

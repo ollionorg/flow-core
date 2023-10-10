@@ -1,0 +1,366 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fCounterAnatomy from "../svg/i-fcounter-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import * as FCounterStories from "./f-counter.stories";
+
+<Meta of={FCounterStories} />
+
+# f-counter
+
+<br />
+
+## Overview
+
+<f-divider />
+
+A counter is a visual indicator for numeric values.
+
+<br />
+
+### [Playground](/story/components-f-counter--playground)
+
+<Canvas>
+	<Story of={FCounterStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider />
+
+<Story of={FCounterStories.Anatomy} />
+
+<br />
+
+## category
+
+Category for f-counter.
+
+<f-divider />
+
+<br />
+
+<Canvas>
+	<Story of={FCounterStories.Category} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>fill</td>
+      <td>background is filled with respective state</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>outline</td>
+      <td>oulined counter with border</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>transparent</td>
+      <td>just showing the inner label, background and border are transparent</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+## label
+
+<f-divider />
+
+Label property defines the numeric count on the counter. For larger numeric values label truncates
+according to the rules mentioned below.
+
+<br />
+
+<table className="custom-color-table">
+  <tbody>
+    <tr>
+      <th>Number</th>
+      <th>Rule</th>
+      <th>Examples</th>
+    </tr>
+
+    <tr>
+      <td>Less than 10</td>
+      <td>zero gets appended before number.</td>
+      <td>01, 05, 09</td>
+    </tr>
+
+    <tr>
+      <td>Between 10 and 999</td>
+      <td>actual number gets displayed</td>
+      <td>12, 467, 899</td>
+    </tr>
+
+    <tr>
+      <td>Between 999 and 10,000</td>
+
+      <td>
+        Use of K to annotate Thousand
+
+        <br />
+
+        Note: Round of the number upto one place of decimal.
+      </td>
+
+      <td>
+        1732 -> 1.7K
+
+        <br />
+
+        8760 -> 8.8K
+      </td>
+    </tr>
+
+    <tr>
+      <td>Between 10,000 and 1 million</td>
+
+      <td>
+        Annotate with K and round off the number to the nearest thousand.
+
+        <br />
+
+        Note: Do not use decimals
+      </td>
+
+      <td>
+        34657 -> 35k
+
+        <br />
+
+        887650 -> 888K
+      </td>
+    </tr>
+
+    <tr>
+      <td>Between 1 million and 10 million</td>
+
+      <td>
+        Use M to annotate Million
+
+        <br />
+
+        Note: Round of the number upto one place of decimal.
+      </td>
+
+      <td>
+        1100000 -> 1.1M
+
+        <br />
+
+        2560000 -> 2.6M
+      </td>
+    </tr>
+
+    <tr>
+      <td>10 million and above</td>
+
+      <td>
+        Annotate with M and round off the number to the nearest thousand.
+
+        <br />
+
+        Note: Do not use decimals
+      </td>
+
+      <td>
+        5500000 -> 55M
+
+        <br />
+
+        1280000 -> 13M
+        <br /> 678000000 -> 678M
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<Canvas>
+	<Story of={FCounterStories.Label} />
+</Canvas>
+
+<br />
+
+## size
+
+The medium size is the default and recommended option.
+
+<f-divider />
+
+<br />
+
+<Canvas>
+	<Story of={FCounterStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>Large size - 20px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>Medium size - 16px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>Small size - 12px</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider />
+
+States on counters are used to communicate purpose and it’s connotation. For example, a red color
+connotes danger, whereas a green color connotes success and so on.
+
+<br />
+
+<Canvas>
+	<Story of={FCounterStories.State} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>neutral</td>
+
+      <td />
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>primary</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>success</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>danger</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>warning</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>inherit</td>
+      <td>inherit the color according to parent f-div state</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>custom</td>
+      <td>For adding custom color to counter</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## Flags
+
+<f-divider />
+
+<Canvas>
+	<Story of={FCounterStories.Flags} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+      <td>Default</td>
+    </tr>
+
+    <tr>
+      <td>loading</td>
+      <td>Loading flag makes a loader rotate inside counter</td>
+      <td>false</td>
+    </tr>
+
+    <tr>
+      <td>disabled</td>
+      <td>Opacity of pictogram is set to 50% in disabled state.</td>
+      <td>false </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<ArgsTable of={"f-counter"} />

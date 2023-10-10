@@ -14,7 +14,21 @@ import "@cldcvr/flow-md-editor";
 import "@cldcvr/flow-form-builder";
 import "@cldcvr/flow-lineage";
 import { setCustomElementsManifest, setCustomElements } from "@storybook/web-components";
-import "./storybook.css";
+import { themes } from "@storybook/theming";
+import { Preview } from "@storybook/web-components";
+
+// Disable themes
+// import "./storybook.css";
+
+const preview: Preview = {
+	parameters: {
+		docs: {
+			theme: themes.dark
+		}
+	}
+};
+
+export default preview;
 
 export const parameters = {
 	actions: { argTypesRegex: "^on[A-Z].*" },
@@ -154,4 +168,3 @@ if (el) {
 function changePath() {
 	changeRoute("ft-time-schedule-popover", "/story/foundation-introduction-about--page");
 }
-//404 error state --end--

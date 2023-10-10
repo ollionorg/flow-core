@@ -2,7 +2,7 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useState, useEffect } from "@storybook/client-api";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
-import NodeDetailsTemplateAnatomy from "./svg/i-node-details-anatomy.js";
+import NodeDetailsTemplateAnatomy from "../svg/i-node-details-anatomy.js";
 
 export default {
 	title: "@cldcvr/flow-lineage/Templates/node-details popover",

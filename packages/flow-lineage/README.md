@@ -20,7 +20,7 @@ Clone and install the [Flow Lineage demo](https://github.com/cldcvr/flow-lineage
 
 Flow Lineage is been built on [Flow](https://flow.cldcvr.com/), an open source design framework. To run lineage, please make sure that you have [Flow core](https://github.com/cldcvr/flow-core) as part of your project.
 
-While installation if you run into any issues, head over to our [known issues + solutions document](https://github.com/cldcvr/flow-lineage/blob/main/KNOWN_SOLUTIONS.md) to see if a solution already exists.
+While installation if you run into any issues, head over to our [known issues + solutions document](https://github.com/cldcvr/flow-core/blob/main/packages/flow-lineage/KNOWN_SOLUTIONS.md) to see if a solution already exists.
 
 **Note:** If you already have Flow packages installed, please update to the latest versions
 

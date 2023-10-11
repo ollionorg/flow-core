@@ -54,7 +54,7 @@
 ### BREAKING CHANGES :alert: :alert:
 
 - We have recently addressed a security hotspot that had the potential for Code Injection. In our previous implementation, we were utilizing eval for the node template functionality. As a result, we strongly recommend that you update your existing node template APIs to the latest version.
-- By updating to the latest version, you will benefit from the security improvements we have implemented, mitigating the risk of Code Injection vulnerabilities. Please refer (here)[https://github.com/cldcvr/flow-lineage#script] to update `node-template`.
+- By updating to the latest version, you will benefit from the security improvements we have implemented, mitigating the risk of Code Injection vulnerabilities. Please refer (here)[https://github.com/cldcvr/flow-core#script] to update `node-template`.
 
 ## [1.4.6] - 2023-07-04
 

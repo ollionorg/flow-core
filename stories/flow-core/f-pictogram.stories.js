@@ -164,6 +164,46 @@ export const Variant = {
 	}
 };
 
+export const Category = {
+	render: args =>
+		html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
+			<f-div
+				height="hug-content"
+				align="middle-center"
+				padding="none"
+				gap="large"
+				direction="column"
+			>
+				<f-text variant="para" size="large" weight="medium">outline</f-text>
+				<f-pictogram
+					source="i-tick"
+					size="x-large"
+					state="success"
+					category="outline"
+				></f-pictogram>
+			</f-div>
+			<f-div
+				height="hug-content"
+				align="middle-center"
+				padding="none"
+				gap="large"
+				direction="column"
+			>
+				<f-text variant="para" size="large" weight="medium">fill</f-text>
+				<f-pictogram source="i-tick" size="x-large" state="success" category="fill"></f-pictogram>
+			</f-div>
+		</f-div>`,
+
+	name: "category",
+
+	parameters: {
+		docs: {
+			inlineStories: false,
+			iframeHeight: 200
+		}
+	}
+};
+
 export const Source = {
 	render: args =>
 		html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">

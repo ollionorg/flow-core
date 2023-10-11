@@ -10,7 +10,7 @@ export default {
 			control: false
 		}
 	}
-} as Meta;
+} as Meta<SampleFormBuilder>;
 
 type SampleFormBuilder = {
 	field: FormBuilderField;

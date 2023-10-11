@@ -1,6 +1,6 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { LineageNodeElement, LineageNodeLinks, LineageNodes } from "@cldcvr/flow-lineage/src";
+import { LineageNodeElement, LineageNodeLinks, LineageNodes } from "@cldcvr/flow-lineage";
 
 export default {
 	title: "@cldcvr/flow-lineage/Examples/Large Data",
@@ -9,7 +9,7 @@ export default {
 			control: false
 		}
 	}
-} as Meta;
+} as Meta<Record<string, any>>;
 
 const makeid = () => {
 	const crypto = window.crypto;

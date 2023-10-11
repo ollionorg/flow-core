@@ -1,7 +1,7 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { LineageNodeLinks } from "@cldcvr/flow-lineage/src";
-import { nodeTemplate, childrenNodeTemplate } from "./nodeTemplates";
+import { LineageNodeLinks } from "@cldcvr/flow-lineage";
+import { nodeTemplate, childrenNodeTemplate } from "./node-templates";
 import nodes from "./nodes";
 
 export default {
@@ -14,7 +14,7 @@ export default {
 			control: false
 		}
 	}
-} as Meta;
+} as Meta<Record<string, any>>;
 
 const links: LineageNodeLinks = [
 	{

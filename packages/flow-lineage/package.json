@@ -11,7 +11,7 @@
     "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
     "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
-    "test": "web-test-runner ./src/**/*.test.ts --node-resolve --port 8092 --concurrency 1",
+    "test": "pnpm run build && web-test-runner ./src/**/*.test.ts --node-resolve --port 8092 --concurrency 1",
     "test:watch": "pnpm run build && web-test-runner ./src/**/*.test.ts --node-resolve --watch --port 8092 --concurrency 1"
   },
   "keywords": [

@@ -2,7 +2,6 @@ import { html } from "lit-html";
 import field from "./f-formbuilder-field";
 import { useArgs, useState } from "@storybook/client-api";
 import { createRef, ref } from "lit/directives/ref.js";
-import Properties from "./properties.mdx";
 
 export default {
 	title: "@cldcvr/flow-form-builder/f-form-builder",

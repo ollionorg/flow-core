@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 import { FormBuilderField } from "@cldcvr/flow-form-builder";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
-import { useArgs } from "@storybook/client-api";
+import { useArgs } from "@storybook/manager-api";
 import { FFormBuilder } from "@cldcvr/flow-form-builder/src";
 
 export default {
@@ -12,7 +12,7 @@ export default {
 			control: false
 		}
 	}
-} as Meta;
+} as Meta<SampleFormBuilder>;
 
 type SampleFormBuilder = {
 	field: FormBuilderField;

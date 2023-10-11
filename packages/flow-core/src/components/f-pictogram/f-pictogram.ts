@@ -12,10 +12,12 @@ import { flowElement } from "./../../utils";
 injectCss("f-pictogram", globalStyle);
 
 const variants = ["circle", "square", "hexagon", "squircle"] as const;
+const category = ["fill", "outline"] as const;
 const sizes = ["x-large", "large", "medium", "small"] as const;
 const states = ["primary", "danger", "warning", "success", "default", "inherit"] as const;
 
 export type FPictogramVariant = (typeof variants)[number];
+export type FPictogramCategory = (typeof category)[number];
 export type FPictogramSize = (typeof sizes)[number];
 export type FPictogramState = (typeof states)[number];
 
@@ -50,13 +52,19 @@ export class FPictogram extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FIcon.styles];
+	static styles = [unsafeCSS(eleStyle), ...FIcon.styles];
 
 	/**
 	 * @attribute Variants are various representations of Pictogram. For example Pictogram can be round, curved, square, or hexagon.
 	 */
 	@property({ type: String, reflect: true })
 	variant?: FPictogramVariant = "squircle";
+
+	/**
+	 * @attribute Variants are various representations of Pictogram. For example Pictogram can be round, curved, square, or hexagon.
+	 */
+	@property({ type: String, reflect: true })
+	category?: FPictogramCategory = "fill";
 
 	/**
 	 * @attribute source for f-pictogram, source could be icon name, url, raw SVG, text, emoji etc.
@@ -155,7 +163,47 @@ export class FPictogram extends FRoot {
 		if (this.autoBg) {
 			return `color:${this.textColor} !important`;
 		}
+
 		return "";
+	}
+
+	get statesBasedBackground() {
+		const defaultColor = {
+			background: "var(color-neutral-sublte)",
+			hover: "var(color-neutral-sublte-hover)"
+		};
+		if (this.state) {
+			const mapper = {
+				default: {
+					background: "var(color-neutral-sublte)",
+					hover: "var(color-neutral-sublte-hover)"
+				},
+				primary: {
+					background: "var(color-primary-surface)",
+					hover: "var(color-primary-surface-hover)"
+				},
+				danger: {
+					background: "var(color-danger-surface)",
+					hover: "var(color-danger-surface-hover)"
+				},
+				success: {
+					background: "var(color-success-surface)",
+					hover: "var(color-success-surface-hover)"
+				},
+				warning: {
+					background: "var(color-warning-surface)",
+					hover: "var(color-warning-surface-hover)"
+				},
+				inherit: {
+					background: "var(color-neutral-sublte)",
+					hover: "var(color-neutral-sublte-hover)"
+				}
+			};
+
+			return this.category === "fill" ? mapper[this.state] ?? defaultColor : defaultColor;
+		} else {
+			return defaultColor;
+		}
 	}
 
 	// returns html where source is being as input
@@ -175,14 +223,14 @@ export class FPictogram extends FRoot {
 			if (IconPack) {
 				const svg = IconPack[this.source];
 				if (svg) {
-					return `<f-icon  class="${"f-pictogram-" + this.size}" source="${
-						this.source
-					}" size="${this.sourceSize()}"></f-icon>`;
+					return `<f-icon state=${this.category === "fill" ? this.state : "default"}  class="${
+						"f-pictogram-" + this.size
+					}" source="${this.source}" size="${this.sourceSize()}"></f-icon>`;
 				}
 			}
 		}
 		this.isText = true;
-		return `<p class="text-styling" style=${this.textColorStyling}>${this.textSource}</p>`;
+		return `<p class="text-styling" state=${this.state} style=${this.textColorStyling} >${this.textSource}</p>`;
 	}
 	// calculating computed source size according to the user input size
 	sourceSize() {
@@ -240,6 +288,7 @@ export class FPictogram extends FRoot {
 				class=${classMap({ "f-pictogram": true, hasShimmer })}
 				variant=${this.variant}
 				state=${this.state}
+				category=${this.category}
 				size=${this.size}
 				?disabled=${this.disabled}
 				?loading=${this.loading}
@@ -261,7 +310,9 @@ export class FPictogram extends FRoot {
 			</div>
 		`;
 	}
-	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
+	protected async updated(
+		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
 		super.updated(changedProperties);
 		if (this.fPicorgramWrapper && this.autoBg && this.isText) {
 			// Modify the background-color property
@@ -274,11 +325,11 @@ export class FPictogram extends FRoot {
 		} else {
 			this.fPicorgramWrapper.style.setProperty(
 				"--after-background-color",
-				"var(--color-neutral-subtle)"
+				this.statesBasedBackground?.background
 			);
 			this.fPicorgramWrapper.style.setProperty(
 				"--after-background-color-hover",
-				"var(--color-neutral-subtle-hover)"
+				this.statesBasedBackground?.hover
 			);
 			this.fPicorgramWrapper.style.setProperty("--before-background-color", "");
 		}

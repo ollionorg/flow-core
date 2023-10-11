@@ -24,6 +24,7 @@ export const Playground = {
 				.disabled=${args.disabled}
 				.clickable=${args.clickable}
 				?auto-bg=${args["auto-bg"]}
+				.category=${args.category}
 			></f-pictogram>
 		</f-div>`,
 
@@ -33,6 +34,11 @@ export const Playground = {
 		variant: {
 			control: "select",
 			options: ["squircle", "sqaure", "circle", "hexagon"]
+		},
+
+		category: {
+			control: "radio",
+			options: ["fill", "outline"]
 		},
 
 		size: {
@@ -87,6 +93,7 @@ export const Playground = {
 
 	args: {
 		variant: "squircle",
+		category: "fill",
 		source: "i-app",
 		size: "medium",
 		state: "default",

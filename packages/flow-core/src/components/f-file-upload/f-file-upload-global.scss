@@ -1,0 +1,15 @@
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+@import "./f-file-upload-variables";
+
+f-file-upload {
+	width: 100%;
+	&[disabled] {
+		@include disabled();
+	}
+	@each $state, $color in $state-colors {
+		&[state="#{$state}"] {
+			@include input-color($state);
+		}
+	}
+}

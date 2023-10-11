@@ -1,0 +1,98 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fFormAnatomy from "../svg/i-fform-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useState } from "@storybook/client-api";
+import * as FFormStories from "./f-form.stories";
+
+<Meta of={FFormStories} />
+
+# f-form
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+f-from component helps to systematically layout and build forms in Flow 2
+
+<br />
+
+### [Playground](/story/components-f-form--playground)
+
+<Canvas>
+	<Story of={FFormStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider />
+
+<Story of={FFormStories.Anatomy} />
+
+<br />
+
+## gap
+
+<f-divider />
+
+Controls gap between all input elements within the form
+
+<Canvas>
+	<Story of={FFormStories.Gap} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-small</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>small</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+
+      <td />
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>large</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+<ArgsTable of={"f-form"} />

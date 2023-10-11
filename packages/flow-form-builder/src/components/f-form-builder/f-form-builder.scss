@@ -1,0 +1,20 @@
+// common mixins imported from this file
+@import "../../../../flow-core/src/mixins/scss/mixins";
+@import "./../../mixins";
+
+:host {
+	// Important :  always include base mixins
+
+	[data-hidden="true"] {
+		display: none !important;
+	}
+
+	f-form {
+		display: flex;
+		align-items: flex-start;
+		justify-content: flex-start;
+		flex: 1 0 auto;
+	}
+
+	@include infoIcon();
+}

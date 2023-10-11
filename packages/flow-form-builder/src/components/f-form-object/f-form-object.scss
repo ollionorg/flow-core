@@ -1,0 +1,16 @@
+@use "sass:map";
+// common mixins imported from this file
+@import "../../../../flow-core/src/mixins/scss/mixins";
+@import "./../../mixins";
+
+:host {
+	@include base();
+	display: flex;
+	flex: 1 0 auto;
+	width: unset;
+	align-items: flex-start;
+	[data-hidden="true"] {
+		display: none !important;
+	}
+	@include infoIcon();
+}

@@ -3,7 +3,10 @@ import { property } from "lit/decorators.js";
 import { FTcell } from "../f-tcell/f-tcell";
 import { FTrow } from "../f-trow/f-trow";
 import { FRoot, flowElement } from "@cldcvr/flow-core";
-import eleStyle from "./f-table.scss";
+import globalStyle from "./f-table-global.scss?inline";
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-table", globalStyle);
 
 export type FTableVariant = "stripped" | "outlined" | "underlined" | "bordered";
 export type FTableSize = "medium" | "small";
@@ -14,7 +17,7 @@ export class FTable extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(globalStyle)];
 
 	/**
 	 * @attribute Variants are various representations of a table. For example a table can be stripped,outlined,underlined or bordered..
@@ -147,7 +150,7 @@ export class FTable extends FRoot {
 	 * if checkbox or radio clicked in row
 	 * @param event
 	 */
-	async handleRowSelection(event: CustomEvent) {
+	async handleRowSelection(event: CustomEvent<{ element: HTMLElement }>) {
 		event.stopPropagation();
 		this.updateRadioChecks(event.detail.element);
 		await this.updateHeaderSelectionCheckboxState();

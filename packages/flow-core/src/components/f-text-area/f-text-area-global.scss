@@ -1,0 +1,14 @@
+@import "./../../mixins/scss/mixins";
+@import "./f-text-area-variables";
+
+f-text-area {
+	width: 100%;
+	&[disabled] {
+		@include disabled();
+	}
+	@each $state, $color in $states {
+		&[state="#{$state}"] {
+			@include input-color($state);
+		}
+	}
+}

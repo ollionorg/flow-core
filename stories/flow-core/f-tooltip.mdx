@@ -1,0 +1,198 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import { useArgs, useState } from "@storybook/client-api";
+import * as FTooltipStories from "./f-tooltip.stories";
+
+<Meta of={FTooltipStories} />
+
+# f-tooltip
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+Tooltips appear when a user hovers, focuses, clicks on any element. They provide contextual information about any element they are paired with.
+
+<br />
+
+### [Playground - Directive Tooltip](/story/components-f-tooltip--playground-directive-tooltip)
+
+<Canvas>
+	<Story of={FTooltipStories.PlaygroundDirectiveTooltip} />
+</Canvas>
+
+<br />
+
+### [Playground - Rich Tooltip Component](/story/components-f-tooltip--playground-rich-tooltip-component)
+
+<Canvas>
+	<Story of={FTooltipStories.PlaygroundRichTooltipComponent} />
+</Canvas>
+
+<br />
+
+## id
+
+<hr />
+
+id property specifies a name or a keyword that indicates to which component the tooltip must be assigned, given the resepective component should have `tooltip=#<same-id>`.
+
+<br />
+
+<Canvas>
+	<Story of={FTooltipStories.Id} />
+</Canvas>
+
+<br />
+
+## placement
+
+<hr />
+
+Placement property defines the placement of a tooltip with respect to the element. By default it is in the center, above the element.
+
+<br />
+
+<Canvas>
+	<Story of={FTooltipStories.Placement} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>auto</td>
+      <td>Sets the placement of popover automatically according to the screen size</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>top</td>
+      <td>placed at top-middle part w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>top-start</td>
+      <td>placed at top-start position w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>top-end</td>
+      <td>placed at top-end position w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>bottom</td>
+      <td>placed at bottom-middle position w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>bottom-start</td>
+      <td>placed at bottom-start position w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>bottom-end</td>
+      <td>placed at bottom-end position w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>right</td>
+      <td>placed at right-center position w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>right-start</td>
+      <td>starting from top to downwards on right side wrt to the button opening popup</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>right-end</td>
+      <td>starting from bottom to upwards on right side wrt to the button opening popup</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>left</td>
+      <td>placed at left-center position w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>left-start</td>
+      <td>starting from top to downwards on left side wrt to the button opening popup</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>left-end</td>
+      <td>starting from bottom to upwards on left side wrt to the button opening popup</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## Flags
+
+<f-divider />
+
+<Canvas>
+	<Story of={FTooltipStories.Flags} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+      <td>Default</td>
+    </tr>
+
+    <tr>
+      <td>closable</td>
+      <td>It enables/disables a close icon on top right of the tooltip.</td>
+      <td>false</td>
+    </tr>
+
+  </tbody>
+</table>
+
+<ArgsTable of={"f-tooltip"} />

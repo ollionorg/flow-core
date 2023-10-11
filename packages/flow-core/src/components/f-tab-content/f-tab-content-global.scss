@@ -1,0 +1,29 @@
+f-tab-content {
+	width: 100%;
+	display: block;
+	&.fade-effect-animation {
+		animation: fadeInAnimation ease;
+		animation-iteration-count: 1;
+		animation-fill-mode: forwards;
+		@keyframes fadeInAnimation {
+			0% {
+				opacity: 0;
+			}
+			100% {
+				opacity: 1;
+			}
+		}
+	}
+	&.slide-effect-animation {
+		animation-name: slidein;
+	}
+
+	@keyframes slidein {
+		from {
+			margin-left: 90%;
+		}
+		to {
+			margin-left: 0%;
+		}
+	}
+}

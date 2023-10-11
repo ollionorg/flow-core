@@ -1,0 +1,495 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
+import fSelectAnatomy from "../svg/i-fselect-anatomy.js";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import * as FSelectStories from "./f-select.stories";
+
+<Meta of={FSelectStories} />
+
+# f-select
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+Select allows users to choose one or multiple options from a list of values.
+
+<br />
+
+### [Playground](/story/components-f-select--playground)
+
+<Canvas>
+	<Story of={FSelectStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider />
+
+<Story of={FSelectStories.Anatomy} />
+
+<br />
+
+## type
+
+<f-divider />
+
+The type attribute specifies whether a user can select a single option or multiple options from the list
+
+<Canvas>
+	<Story of={FSelectStories.Type} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>single</td>
+      <td>single option selection</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>multiple</td>
+      <td>multiple option selection</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## variant
+
+<f-divider />
+
+Variants are various visual representations of an input field.
+
+<Canvas>
+	<Story of={FSelectStories.Variant} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>curved</td>
+      <td>border radius of 4px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>round</td>
+      <td>border radius of 22px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>block</td>
+      <td>works well with cateogry="transparent"</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## category
+
+<f-divider />
+
+Category decides the background of f-select
+
+<Canvas>
+	<Story of={FSelectStories.Category} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>fill</td>
+      <td>background is filled</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>outline</td>
+      <td>empty background with border</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>transparent</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## value
+
+Defines the value of an f-select.
+
+<Canvas>
+	<Story of={FSelectStories.Value} />
+</Canvas>
+
+<br />
+
+## placeholder
+
+Defines the placeholder text for f-select
+
+<Canvas>
+	<Story of={FSelectStories.Placeholder} />
+</Canvas>
+
+<br />
+
+## options
+
+<f-divider />
+
+Provides the options to select in form of array of string or objects
+
+<Canvas>
+	<Story of={FSelectStories.Options} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>options as array of strings</td>
+      <td>eg. \["option1", "option2"]</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>options as array of objects</td>
+      <td>eg. ${`[{title:"option1", icon:"i-setting"},{title:"option2", icon:"i-app"}]`}</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>Group Categorization - where options are array of strings</td>
+
+      <td>
+        eg.
+
+        {`{Group1: ["option 1", "option 2", "option 3", "option 4"],Group2: ["option 5", "option 6", "option 7", "option "],}`}
+      </td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>Group Categorization - where options are array of objects</td>
+
+      <td>
+        eg.
+
+        {`{Group1: [{title:"option1", icon:"i-setting"},{title:"option2", icon:"i-app"}],Group2: [{title:"option3", icon:"i-setting"},{title:"option4", icon:"i-app"}],}`}
+      </td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## option-template
+
+<f-divider />
+
+Use to provide a custom template in option list
+
+<Canvas>
+	<Story of={FSelectStories.OptionTemplate} />
+</Canvas>
+
+<br />
+
+## size
+
+<f-divider />
+
+f-select can have 2 sizes.
+
+<p className="note-section">Note: By default size is inherited by the parent f-form</p>
+
+<Canvas>
+	<Story of={FSelectStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>height="28px"</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>height="36px"</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider />
+
+States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
+
+<Canvas>
+	<Story of={FSelectStories.State} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>default</td>
+
+      <td />
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>primary</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>success</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>danger</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>warning</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## icon-left
+
+Icon-left enables an icon on the left of the input value.
+
+<Canvas>
+	<Story of={FSelectStories.IconLeft} />
+</Canvas>
+
+<br />
+
+## width
+
+Defines width of the select component. It can take 2 values: fill-container and a number value(width in pixels)
+
+<Canvas>
+	<Story of={FSelectStories.Width} />
+</Canvas>
+
+<br />
+
+## height
+
+Defines the height of the dropdown in pixels. Default value is 180 .
+
+<Canvas>
+	<Story of={FSelectStories.Height} />
+</Canvas>
+
+<br />
+
+## selection-limit
+
+limits the no. of tags to be displayed on option selection.
+
+<p className="note-section">Note: Only use when type="multiple"</p>
+
+<Canvas>
+	<Story of={FSelectStories.SelectionLimit} />
+</Canvas>
+
+<br />
+
+# Flags
+
+<f-divider />
+
+<br />
+
+## searchable
+
+<f-divider />
+
+Can search by typing out the query. By default its <code>false</code>
+
+<Canvas>
+	<Story of={FSelectStories.Searchable} />
+</Canvas>
+
+<br />
+
+## checkbox
+
+<f-divider />
+
+checkboxes apper in front of every option in menu. By default its <code>false</code>
+
+<Canvas>
+	<Story of={FSelectStories.Checkbox} />
+</Canvas>
+
+<br />
+
+## clear
+
+a ‘close’ icon button appear on right of the select to clear the input value(s). By default its <code>false</code>
+
+<Canvas>
+	<Story of={FSelectStories.Clear} />
+</Canvas>
+
+<br />
+
+## disabled
+
+<Canvas>
+	<Story of={FSelectStories.Disabled} />
+</Canvas>
+
+<br />
+
+## loading
+
+<Canvas>
+	<Story of={FSelectStories.Loading} />
+</Canvas>
+
+<br />
+
+## create-option
+
+if true, shows a ‘create’ button when no query is found. On click of button, an event is emitted sending back the searched value. By default its <code>false</code>
+
+<p className="note-section">
+	If the width is less than 200px, create button changes to icon button with a tooltip
+</p>
+
+<Canvas>
+	<Story of={FSelectStories.CreateOption} />
+</Canvas>
+
+## auto-add-option
+
+This could only be used when <code>create-option=true</code>.
+If true, it allows user to see entered value, to get automatically added in the list of options.
+
+<Canvas>
+	<Story of={FSelectStories.AutoAddOption} />
+</Canvas>
+
+<ArgsTable of={"f-select"} />

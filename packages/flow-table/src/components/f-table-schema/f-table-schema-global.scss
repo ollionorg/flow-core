@@ -1,0 +1,25 @@
+@import "../../../../flow-core/src/mixins/scss/mixins";
+
+f-table-schema {
+	@include base();
+	max-height: 100%;
+	max-width: 100%;
+	display: flex;
+	overflow: auto;
+}
+
+f-div[direction="column"] {
+	> f-table-schema {
+		flex: 1 1;
+		max-height: 100%;
+		width: 100%;
+	}
+}
+
+f-div[direction="row"] {
+	> f-table-schema {
+		flex: 1 1;
+		max-width: 100%;
+		height: fit-content;
+	}
+}

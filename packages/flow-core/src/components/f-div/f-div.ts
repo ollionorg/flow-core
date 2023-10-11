@@ -1,11 +1,13 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import eleStyle from "./f-div.scss";
+import eleStyle from "./f-div.scss?inline";
+import globalStyle from "./f-div-global.scss?inline";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
 
 export type FDivBorderWidth = "small" | "medium" | "large";
 export type FDivBorderStyle = "solid" | "dashed" | "dotted";
@@ -21,7 +23,6 @@ export type FDivBorderProp =
 
 export type FDivPaddingProp =
 	| FDivPadding
-	| `${FDivPadding} ${FDivPadding}`
 	| `${FDivPadding} ${FDivPadding}`
 	| `${FDivPadding} ${FDivPadding} ${FDivPadding} ${FDivPadding}`;
 
@@ -98,6 +99,8 @@ const BORDER_POSITION_CSS = {
  * END :  constant values required for `f-div`
  */
 
+injectCss("f-div", globalStyle);
+
 /**
  * @summary F-div is used as a container for HTML elements.
  */
@@ -106,7 +109,7 @@ export class FDiv extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle)];
 
 	/**
 	 * @attribute local state for managing custom fill.
@@ -346,9 +349,8 @@ export class FDiv extends FRoot {
 		 */
 		return html` <slot></slot>${this.loading === "loader" ? html`${unsafeSVG(loader)}` : ""}`;
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 
 		if (

@@ -1,17 +1,19 @@
 import { html, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
-import eleStyle from "./f-tab-node.scss";
+import globalStyle from "./f-tab-node-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { FTabNodeWidthProp } from "../f-tab/f-tab";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-tab-node", globalStyle);
 
 @flowElement("f-tab-node")
 export class FTabNode extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
+	static styles = [unsafeCSS(globalStyle), ...FDiv.styles];
 
 	/**
 	 * @attribute width of `f-tab-node`

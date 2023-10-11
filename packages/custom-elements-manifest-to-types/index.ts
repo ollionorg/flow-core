@@ -1,26 +1,38 @@
-import { Declaration, Package, PropertyLike, MixinDeclaration } from "custom-elements-manifest/schema";
-import { vaidateOptions } from "./options";
-import prettier from "prettier";
-const camelToSnakeCase = (str: string) => str.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
+import {
+	Declaration,
+	Package,
+	PropertyLike,
+	MixinDeclaration
+} from "custom-elements-manifest/schema";
+import { UserOptions, validateOptions } from "./options";
+import * as prettier from "prettier";
 
-const options = vaidateOptions({});
-export function transformSchema(schema: Package, framework: "vue2" | "react" | "vue3", modulePath?: string) {
+const camelToSnakeCase = (str: string) =>
+	str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
+
+export async function transformSchema(
+	schema: Package,
+	framework: "vue2" | "react" | "vue3",
+	modulePath?: string
+) {
+	const options = await validateOptions({});
+
 	if (framework === "vue2") {
-		return transformSchemaVue2(schema, modulePath);
+		return transformSchemaVue2(schema, options, modulePath);
 	} else if (framework === "vue3") {
-		return transformSchemaVue3(schema, modulePath);
+		return transformSchemaVue3(schema, options, modulePath);
 	} else if (framework === "react") {
-		return transformSchemaReact(schema, modulePath);
+		return transformSchemaReact(schema, options, modulePath);
 	}
 
 	return null;
 }
 
-function transformSchemaReact(schema: Package, modulePath?: string) {
+function transformSchemaReact(schema: Package, options: UserOptions, modulePath?: string) {
 	const components: string[] = [];
 
-	schema.modules.forEach((module) => {
-		module.declarations?.forEach((declaration) => {
+	schema.modules.forEach(module => {
+		module.declarations?.forEach(declaration => {
 			const component = getComponentCodeFromDeclarationReact(declaration);
 
 			if (component) {
@@ -35,7 +47,7 @@ function transformSchemaReact(schema: Package, modulePath?: string) {
 declare global {
 	namespace JSX {
 	   interface IntrinsicElements {
-    
+
                 ${components.join("\n")}
             }
         }
@@ -46,11 +58,11 @@ declare global {
 
 	return output;
 }
-function transformSchemaVue2(schema: Package, modulePath?: string) {
+function transformSchemaVue2(schema: Package, options: UserOptions, modulePath?: string) {
 	const components: string[] = [];
 
-	schema.modules.forEach((module) => {
-		module.declarations?.forEach((declaration) => {
+	schema.modules.forEach(module => {
+		module.declarations?.forEach(declaration => {
 			const component = getComponentCodeFromDeclarationVue2(declaration);
 
 			if (component) {
@@ -75,11 +87,11 @@ function transformSchemaVue2(schema: Package, modulePath?: string) {
 
 	return output;
 }
-function transformSchemaVue3(schema: Package, modulePath?: string) {
+function transformSchemaVue3(schema: Package, options: UserOptions, modulePath?: string) {
 	const components: string[] = [];
 
-	schema.modules.forEach((module) => {
-		module.declarations?.forEach((declaration) => {
+	schema.modules.forEach(module => {
+		module.declarations?.forEach(declaration => {
 			const component = getComponentCodeFromDeclarationVue3(declaration as MixinDeclaration);
 
 			if (component) {
@@ -120,18 +132,21 @@ function getComponentCodeFromDeclarationReact(declaration: Declaration) {
     `;
 	let requiredAttributes: string[] = [];
 	if (declaration.members) {
-		const requiredDeclaration = declaration.members.find((d) => d.name === "required") as PropertyLike;
+		const requiredDeclaration = declaration.members.find(
+			d => d.name === "required"
+		) as PropertyLike;
 		if (requiredDeclaration && requiredDeclaration.default) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			requiredAttributes = JSON.parse(requiredDeclaration.default);
 		}
 	}
 	if (declaration.attributes) {
-		declaration.attributes.forEach((attribute) => {
+		declaration.attributes.forEach(attribute => {
 			componentDeclaration = `
                 ${componentDeclaration}
                 ${attribute.name.includes("-") ? attribute.fieldName : attribute.name}${
-				requiredAttributes.includes(attribute.name) ? "" : "?"
-			}: ${attribute.type?.text};
+									requiredAttributes.includes(attribute.name) ? "" : "?"
+								}: ${attribute.type?.text};
             `;
 		});
 	}
@@ -156,28 +171,31 @@ function getComponentCodeFromDeclarationVue3(declaration: MixinDeclaration) {
 	let componentDeclaration = `
         ["${camelToSnakeCase(declaration.name).substring(1)}"]: DefineComponent<
             {
-				
+
     `;
 	let requiredAttributes: string[] = [];
 	if (declaration.members) {
-		const requiredDeclaration = declaration.members.find((d) => d.name === "required") as PropertyLike;
+		const requiredDeclaration = declaration.members.find(
+			d => d.name === "required"
+		) as PropertyLike;
 		if (requiredDeclaration && requiredDeclaration.default) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			requiredAttributes = JSON.parse(requiredDeclaration.default);
 		}
 	}
 	if (declaration.attributes) {
-		declaration.attributes.forEach((attribute) => {
+		declaration.attributes.forEach(attribute => {
 			componentDeclaration = `
                 ${componentDeclaration}
                 ${attribute.name.includes("-") ? attribute.fieldName : attribute.name}${
-				requiredAttributes.includes(attribute.name) ? "" : "?"
-			}: ${attribute.type?.text};
+									requiredAttributes.includes(attribute.name) ? "" : "?"
+								}: ${attribute.type?.text};
             `;
 		});
 	}
 
 	componentDeclaration = `${componentDeclaration}
-	
+
  } >;`;
 
 	return componentDeclaration;
@@ -200,18 +218,21 @@ function getComponentCodeFromDeclarationVue2(declaration: Declaration) {
     `;
 	let requiredAttributes: string[] = [];
 	if (declaration.members) {
-		const requiredDeclaration = declaration.members.find((d) => d.name === "required") as PropertyLike;
+		const requiredDeclaration = declaration.members.find(
+			d => d.name === "required"
+		) as PropertyLike;
 		if (requiredDeclaration && requiredDeclaration.default) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			requiredAttributes = JSON.parse(requiredDeclaration.default);
 		}
 	}
 	if (declaration.attributes) {
-		declaration.attributes.forEach((attribute) => {
+		declaration.attributes.forEach(attribute => {
 			componentDeclaration = `
                 ${componentDeclaration}
                 ${attribute.name.includes("-") ? attribute.fieldName : attribute.name}${
-				requiredAttributes.includes(attribute.name) ? "" : "?"
-			}: ${attribute.type?.text};
+									requiredAttributes.includes(attribute.name) ? "" : "?"
+								}: ${attribute.type?.text};
             `;
 		});
 	}
@@ -236,29 +257,30 @@ function getComponentPropTypeImports(schema: Package, modulePath?: string): stri
 		"{}",
 		"unknown",
 		"void",
-		"HTMLElement",
+		"HTMLElement"
 	];
 	const moduleTypeImports: string[] = [];
-	schema.modules.forEach((module) => {
+	schema.modules.forEach(module => {
 		const moduleName = modulePath || "./src";
 
-		module.declarations?.forEach((declaration) => {
+		module.declarations?.forEach(declaration => {
 			declaration = declaration as MixinDeclaration;
+
 			if (
 				!(
 					declaration.superclass &&
 					(declaration.superclass.name === "FRoot" || declaration.superclass.name === "LitElement")
 				)
 			) {
-				return null;
+				return;
 			}
 
 			if (declaration.attributes) {
 				const extractedTypes: Set<string> = new Set();
-				declaration.attributes.forEach((attribute) => {
+				declaration.attributes.forEach(attribute => {
 					if (attribute.type?.text) {
 						const typesToImport: string[] = attribute.type.text.split(" ");
-						typesToImport.forEach((t) => {
+						typesToImport.forEach(t => {
 							if (!builtInTypes.includes(t) && t.charAt(0) !== "'" && t.charAt(0) !== '"' && t) {
 								extractedTypes.add(t);
 							}

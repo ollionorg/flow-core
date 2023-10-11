@@ -7,8 +7,12 @@ import { property, query, state } from "lit/decorators.js";
 import { FTable, FTableSelectable, FTableSize, FTableVariant } from "../f-table/f-table";
 import { FTcell, FTcellActions } from "../f-tcell/f-tcell";
 import { FTrow, FTrowChevronPosition, FTrowState } from "../f-trow/f-trow";
-import eleStyle from "./f-table-schema.scss";
+import eleStyle from "./f-table-schema.scss?inline";
+import globalStyle from "./f-table-schema-global.scss?inline";
 import { repeat } from "lit/directives/repeat.js";
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-table-schema", globalStyle);
 
 export type FTableSchemaDataRow = {
 	selected?: boolean;
@@ -54,6 +58,7 @@ export class FTableSchema extends FRoot {
 	 */
 	static styles = [
 		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
 		...FTable.styles,
 		...FTcell.styles,
 		...FTrow.styles,
@@ -270,8 +275,7 @@ export class FTableSchema extends FRoot {
 										.toLocaleLowerCase()
 										.includes(this.searchTerm.toLocaleLowerCase());
 								} else {
-									return v.value
-										.toString()
+									return String(v.value)
 										.toLocaleLowerCase()
 										.includes(this.searchTerm.toLocaleLowerCase());
 								}
@@ -291,8 +295,7 @@ export class FTableSchema extends FRoot {
 						if (typeof v.value === "object" && v.toString) {
 							return v.toString().toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase());
 						} else {
-							return v.value
-								.toString()
+							return String(v.value)
 								.toLocaleLowerCase()
 								.includes(this.searchTerm.toLocaleLowerCase());
 						}
@@ -512,7 +515,7 @@ export class FTableSchema extends FRoot {
 
 	handleColumnSelection(e: CustomEvent) {
 		if (this.data?.header) {
-			const cellToToggleEntry = Object.entries(this.data.header).at(e.detail.columnIndex);
+			const cellToToggleEntry = Object.entries(this.data.header)[e.detail.columnIndex];
 			let cellToToggle: string;
 			if (cellToToggleEntry) {
 				cellToToggle = cellToToggleEntry[0];

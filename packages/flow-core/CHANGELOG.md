@@ -1,22 +1,56 @@
-<h4 class="margin-btm-8">Release Notes</h4>
-<hr class="margin-btm-32" />
-<p class="margin-btm-24">All notable changes to this project will be documented in this file. See <a>Conventional Commits</a> for commit guidelines. </p>
+<h4 className="margin-btm-8">Release Notes</h4>
+
+## 2.0.1
+
+### Patch Changes
+
+- a2de106: Fix platform types
+- Updated dependencies [a2de106]
+  - @cldcvr/flow-core-config@1.1.1
+
+## 2.0.1-beta.0
+
+### Patch Changes
+
+- Fix platform types
+- Updated dependencies
+  - @cldcvr/flow-core-config@1.1.1-beta.0
+
+## 2.0.0
+
+### Major Changes
+
+- Migrated to monorepo structure and removed the need for custom CSS
+
+### Patch Changes
+
+- Updated dependencies
+  - @cldcvr/flow-core-config@1.1.0
+  <hr className="margin-btm-32" />
+  <p className="margin-btm-24">All notable changes to this project will be documented in this file. See <a>Conventional Commits</a> for commit guidelines. </p>
 
 # Change Log
 
 ## [1.26.4] - 2023-10-06
 
 ### Improvements
+
 - `f-tag` displays a tooltip only when it has an ellipsis.
+
 ## [1.26.3] - 2023-10-03
 
 ### Bug Fixes
-- `f-select`  incrorrect vue2 types generation fixed.
+
+- `f-select` incrorrect vue2 types generation fixed.
+
 ## [1.26.2] - 2023-10-03
 
 ### Improvements
+
 - `f-popover` placement warning removed since it is not necessary for user to know.
+
 ### Bug Fixes
+
 - `f-select` : setting object to `value` has an issue with vue2.
 
 ## [1.26.1] - 2023-09-27

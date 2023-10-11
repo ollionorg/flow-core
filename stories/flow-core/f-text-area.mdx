@@ -1,0 +1,323 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
+import fTextAreaAnatomy from "../svg/i-ftextarea-anatomy.js";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import * as FTextAreaStories from "./f-text-area.stories";
+
+<Meta of={FTextAreaStories} />
+
+# f-text-area
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+f-text-area allows the user to input a longer amount of text than f-input. It is commonly useful for descriptions and user feedback.
+
+<br />
+
+### [Playground](/story/components-f-text-area--playground)
+
+<Canvas>
+	<Story of={FTextAreaStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider />
+
+<Story of={FTextAreaStories.Anatomy} />
+
+<br />
+
+## category
+
+<f-divider />
+
+Category decides the background of f-text-area
+
+<Canvas>
+	<Story of={FTextAreaStories.Category} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>fill</td>
+      <td>background is filled</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>outline</td>
+      <td>empty background with border</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>transparent</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## value
+
+Defines the value of an f-text-area.
+
+<Canvas>
+	<Story of={FTextAreaStories.Value} />
+</Canvas>
+
+<br />
+
+## placeholder
+
+Defines the placeholder text for f-text-area
+
+<Canvas>
+	<Story of={FTextAreaStories.Placeholder} />
+</Canvas>
+
+<br />
+
+## size
+
+<f-divider />
+
+f-text-area can have 2 sizes.
+
+<p className="note-section">
+	Note: Font styles are same in both sizes. Only paddings and gaps are different. By default size is
+	inherited by the parent f-form.
+</p>
+
+<Canvas>
+	<Story of={FTextAreaStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>small</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider />
+
+States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
+
+<Canvas>
+	<Story of={FTextAreaStories.State} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>default</td>
+
+      <td />
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>primary</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>success</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>danger</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>warning</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## max-length
+
+This shows the character count while typing and auto limits after reaching the max length.
+
+<Canvas>
+	<Story of={FTextAreaStories.MaxLength} />
+</Canvas>
+
+<br />
+
+## rows
+
+Defines the no. of rows to display. By default f-text-area provides 3 rows. After 3 rows text area becomes scrollable.
+
+<p className="note-section">
+	Note: row property controls height. Width of text-area is always fill-container
+</p>
+
+<Canvas>
+	<Story of={FTextAreaStories.Rows} />
+</Canvas>
+
+<br />
+
+## Flags
+
+<f-divider />
+
+<br />
+
+<Canvas>
+	<Story of={FTextAreaStories.Flags} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>resizable</td>
+
+      <td>
+        Provides a resize handle on the bottom right of text-area which enables a user to resize the
+        text-area within the parents scope. Note: text-area can be resized only vertically.
+      </td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>disabled</td>
+      <td>Opacity is set to 50% in disabled state in disabled mode.</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>clear</td>
+
+      <td>
+        Displays a close icon-button on the right side of the input that allows the user to clear
+        the input value
+      </td>
+
+      <td>
+        <code>true</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>read-only</td>
+      <td>Only Text could be read, can't be edited</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>mask-value</td>
+      <td>text will be masked with dots</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+<br />
+
+<ArgsTable of={"f-text-area"} />

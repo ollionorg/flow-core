@@ -28,9 +28,9 @@ describe("f-accordion", () => {
 	});
 
 	it("should render icon at left position", async () => {
-		const el = await fixture(
-			html` <f-accordion icon="caret" ?open=${true} icon-placement="left"></f-accordion> `
-		);
+		const el = await fixture(html`
+			<f-accordion icon="caret" ?open=${true} icon-placement="left"></f-accordion>
+		`);
 		const descendant = el.shadowRoot!.querySelector(".f-accordion-header")!;
 		const icon = descendant.children[0].children[0];
 		expect(icon).instanceOf(FIconButton);

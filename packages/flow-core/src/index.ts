@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 import { ConfigUtil } from "@cldcvr/flow-core-config";
-import { version } from "./../package.json";
+import { version } from "../package.json";
 
 export { flowElement } from "./utils";
 

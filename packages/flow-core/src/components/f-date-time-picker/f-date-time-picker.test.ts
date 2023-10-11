@@ -1,10 +1,10 @@
-import { html, fixture, expect, oneEvent } from "@open-wc/testing";
 import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
+import { expect, fixture, html } from "@open-wc/testing";
 
 // importing flow-core components
 import "@cldcvr/flow-core";
 
-import { FDateTimePicker, ConfigUtil } from "@cldcvr/flow-core";
+import { ConfigUtil, FDateTimePicker } from "@cldcvr/flow-core";
 
 // setting icon pack for testing icon related test cases
 ConfigUtil.setConfig({ iconPack: IconPack });
@@ -26,21 +26,23 @@ describe("f-date-time-picker", () => {
 	});
 	it("check if date picker renders", async () => {
 		await fixture<FDateTimePicker>(html` <f-date-time-picker></f-date-time-picker> `);
+		//@todo - find a wayt to ensure flatpickr renders
+		await new Promise(resolve => setTimeout(resolve, 1000));
 		const flatpickr = document.body.querySelector(".flatpickr-calendar");
 		expect(flatpickr?.classList.contains("open")).equals(false);
 	});
 	it("check if mode date-time both are present", async () => {
-		await fixture<FDateTimePicker>(
-			html` <f-date-time-picker mode="date-time"></f-date-time-picker> `
-		);
+		await fixture<FDateTimePicker>(html`
+			<f-date-time-picker mode="date-time"></f-date-time-picker>
+		`);
 		const flatpickr = document.body.querySelector(".flatpickr-calendar");
 		expect(flatpickr?.classList.contains("hasTime")).equals(true);
 	});
 
 	it("check if value selected in calendar", async () => {
-		await fixture<FDateTimePicker>(
-			html` <f-date-time-picker .value=${new Date()}></f-date-time-picker> `
-		);
+		await fixture<FDateTimePicker>(html`
+			<f-date-time-picker .value=${new Date()}></f-date-time-picker>
+		`);
 		const flatpickrToday = document.body.querySelector(".today");
 		const months = [
 			"January",

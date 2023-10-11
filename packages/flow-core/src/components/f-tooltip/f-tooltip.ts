@@ -1,10 +1,12 @@
 import { html, LitElement, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
-import eleStyle from "./f-tooltip.scss";
+import globalStyle from "./f-tooltip-global.scss?inline";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import { FPopover } from "../f-popover/f-popover";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-tooltip", globalStyle);
 
 export type FTooltipPlacement =
 	| "top"
@@ -26,7 +28,7 @@ export class FTooltip extends LitElement {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles, ...FPopover.styles];
+	static styles = [unsafeCSS(globalStyle), ...FDiv.styles, ...FText.styles, ...FPopover.styles];
 
 	/**
 	 * local attribute for opem/close of tooltip

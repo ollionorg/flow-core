@@ -1,8 +1,10 @@
 import { html, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
-import eleStyle from "./f-spacer.scss";
+import globalStyle from "./f-spacer-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-spacer", globalStyle);
 
 export type FSpacerSizeProp =
 	| "fill-container"
@@ -20,7 +22,7 @@ export class FSpacer extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(globalStyle)];
 
 	/**
 	 * @attribute width of `f-spacer`

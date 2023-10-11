@@ -1,12 +1,12 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 import { HTMLTemplateResult, PropertyValues, unsafeCSS } from "lit";
 import { property, query, queryAll, queryAssignedElements, state } from "lit/decorators.js";
-import eleStyle from "./f-select.scss";
+import eleStyle from "./f-select.scss?inline";
+import globalStyle from "./f-select-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { FIcon } from "../f-icon/f-icon";
-import _ from "lodash";
+import { cloneDeep } from "lodash-es";
 import render, { renderSingleSelection, renderMultipleSelectionTag } from "./render";
 import {
 	handleDropDownOpen,
@@ -25,6 +25,8 @@ import {
 } from "./handlers";
 import { FIconButton } from "../f-icon-button/f-icon-button";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-select", globalStyle);
 
 export type FSelectState = "primary" | "default" | "success" | "warning" | "danger";
 export type FSelectHeightProp = number;
@@ -66,6 +68,7 @@ export class FSelect extends FRoot {
 	 */
 	static styles = [
 		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
 		...FText.styles,
 		...FDiv.styles,
 		...FIcon.styles,
@@ -332,7 +335,7 @@ export class FSelect extends FRoot {
 			return (this.selectedOptions as FSelectArrayOfStrings).indexOf(option);
 		} else {
 			return (this.selectedOptions as FSelectOptionsProp).findIndex(
-				item => (item as FSelectOptionObject)?.title === (option as FSelectOptionObject)?.title
+				item => (item as FSelectOptionObject)?.title === option?.title
 			);
 		}
 	}
@@ -469,10 +472,11 @@ export class FSelect extends FRoot {
 	 * get concatinated array from groups
 	 */
 	getConcaticateGroupOptions(array: FSelectOptionsGroup) {
-		const selectedOptions = _.cloneDeep(array);
-		return Object.keys(array).reduce(function (arr: FSelectArrayOfObjects, key: string) {
-			return arr.concat((selectedOptions as any)[key]);
-		}, []);
+		const selectedOptions = cloneDeep(array);
+
+		return Object.keys(array).reduce(function (arr, key) {
+			return arr.concat(selectedOptions[key]);
+		}, [] as FSelectSingleOption[]);
 	}
 
 	/**

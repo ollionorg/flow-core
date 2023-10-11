@@ -1,0 +1,97 @@
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+/**
+START : scss maps to hold repsective attribute values
+**/
+$variants: (
+	"dotted": dotted,
+	"dashed": dashed,
+	"solid": solid
+);
+
+$sizes: (
+	"medium": 1px,
+	"large": 2px
+);
+
+$states: (
+	"default": var(--color-border-default),
+	"secondary": var(--color-border-secondary),
+	"subtle": var(--color-border-subtle)
+);
+/**
+END : scss maps to hold repsective attribute values
+**/
+
+f-divider {
+	// Important :  always include base mixins
+	@include base();
+	display: flex;
+	flex: 0 0 auto;
+	width: 100%;
+	overflow: hidden;
+
+	// iterating over sizes and creating css
+	@each $size, $value in $sizes {
+		&[size="#{$size}"] {
+			height: $value;
+			border-top-width: $value;
+			border-left-width: 0px;
+			border-right-width: 0px;
+			border-bottom-width: 0px;
+		}
+	}
+
+	// iterating over variants and creating css
+	@each $variant, $value in $variants {
+		&[variant="#{$variant}"] {
+			border-style: $value;
+		}
+	}
+
+	// iterating over states and creating css
+	@each $state, $color in $states {
+		&[state="#{$state}"] {
+			border-color: $color;
+		}
+	}
+}
+
+//styling divider vertically or horizontally according to the immediate parent f-div
+f-div,
+f-form-group {
+	&[direction="row"],
+	&[direction="horizontal"] {
+		> f-divider {
+			height: 100%;
+		}
+		> f-divider {
+			@each $size, $value in $sizes {
+				&[size="#{$size}"] {
+					width: $value;
+					border-left-width: $value;
+					border-top-width: 0px;
+					border-right-width: 0px;
+					border-bottom-width: 0px;
+				}
+			}
+		}
+	}
+	&[direction="column"],
+	&[direction="vertical"] {
+		> f-divider {
+			width: 100%;
+		}
+		> f-divider {
+			@each $size, $value in $sizes {
+				&[size="#{$size}"] {
+					height: $value;
+					border-top-width: $value;
+					border-left-width: 0px;
+					border-right-width: 0px;
+					border-bottom-width: 0px;
+				}
+			}
+		}
+	}
+}

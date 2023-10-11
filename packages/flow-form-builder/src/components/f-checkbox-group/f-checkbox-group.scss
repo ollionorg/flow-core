@@ -1,0 +1,41 @@
+@use "sass:map";
+// common mixins imported from this file
+@import "../../../../flow-core/src/mixins/scss/mixins";
+@import "./../../mixins";
+/**
+$gaps map hold gap attribute related values
+**/
+$gaps: (
+	"none": 0px,
+	"x-large": 24px,
+	"large": 16px,
+	"medium": 12px,
+	"small": 8px,
+	"x-small": 4px
+);
+
+:host {
+	.f-checkbox-group {
+		@include base();
+		display: flex;
+		// iterating over gaps and appying respective css
+		@each $gap, $value in $gaps {
+			&[gap="#{$gap}"] {
+				gap: $value;
+			}
+		}
+		&[direction="vertical"] {
+			flex-direction: column;
+		}
+		&[direction="horizontal"] {
+			flex-direction: row;
+		}
+	}
+	@include infoIcon();
+
+	f-div.f-checkbox-group-wrapper[disabled] {
+		@include disabled();
+		pointer-events: none;
+		opacity: 1;
+	}
+}

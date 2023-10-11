@@ -1,0 +1,220 @@
+@use "sass:map";
+@import "../../../../flow-core/src/mixins/scss/mixins";
+
+$sizes: (
+	"medium": (
+		"padding": 16px
+	),
+	"small": (
+		"padding": 12px
+	)
+);
+$states: (
+	"primary": (
+		"background": var(--color-primary-surface),
+		"hover": var(--color-primary-surface-hover),
+		"selected": var(--color-primary-surface-selected)
+	),
+	"danger": (
+		"background": var(--color-danger-surface),
+		"hover": var(--color-danger-surface-hover),
+		"selected": var(--color-danger-surface-selected)
+	),
+	"warning": (
+		"background": var(--color-warning-surface),
+		"hover": var(--color-warning-surface-hover),
+		"selected": var(--color-warning-surface-selected)
+	),
+	"success": (
+		"background": var(--color-success-surface),
+		"hover": var(--color-success-surface-hover),
+		"selected": var(--color-success-surface-selected)
+	),
+	"neutral": (
+		"background": var(--color-neutral-surface),
+		"hover": var(--color-neutral-surface-hover),
+		"selected": var(--color-neutral-surface-selected)
+	),
+	"inherit": (
+		"background": var(--color-inherit-background),
+		"hover": var(--color-inherit-background-hover),
+		"selected": var(--color-inherit-background-selected)
+	)
+);
+
+f-table {
+	display: grid;
+	flex: 1 0 fit-content;
+	@include base();
+	--color-background-row: transparent;
+
+	> f-trow {
+		> f-tcell {
+			&[sticky-left],
+			&[sticky-top] {
+				z-index: 1;
+			}
+			&[sticky-left][sticky-top] {
+				z-index: 2;
+			}
+		}
+	}
+
+	&:not([variant="stripped"]) {
+		> f-trow {
+			> f-tcell {
+				background-color: var(--color-background-row);
+				&[sticky-left],
+				&[sticky-top] {
+					--color-background-row: var(--color-surface-default);
+				}
+			}
+			&:hover {
+				> f-tcell {
+					&[sticky-left],
+					&[sticky-top] {
+						--color-background-row: var(--color-surface-default-hover);
+					}
+				}
+			}
+		}
+	}
+
+	&[highlight-hover] {
+		&[variant="stripped"] {
+			> f-trow:nth-child(odd) {
+				&:hover {
+					--color-background-row: var(--color-surface-default-hover);
+				}
+			}
+			> f-trow:nth-child(even) {
+				&:hover {
+					--color-background-row: var(--color-surface-subtle-hover);
+				}
+			}
+		}
+		&[variant="outlined"],
+		&[variant="underlined"],
+		&[variant="bordered"] {
+			> f-trow {
+				&:hover {
+					--color-background-row: var(--color-surface-default-hover);
+				}
+			}
+		}
+		&[variant] {
+			> f-trow {
+				@each $state, $value in $states {
+					&[state="#{$state}"] {
+						&:hover {
+							--color-background-row: #{map.get($value, "hover")} !important;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	&[highlight-selected] {
+		&[variant="stripped"] {
+			> f-trow:nth-child(odd) {
+				--color-background-row-selected: var(--color-surface-default-selected);
+			}
+			> f-trow:nth-child(even) {
+				--color-background-row-selected: var(--color-surface-subtle-selected);
+			}
+		}
+		&[variant="outlined"],
+		&[variant="underlined"],
+		&[variant="bordered"] {
+			> f-trow {
+				--color-background-row-selected: var(--color-surface-default-selected);
+			}
+		}
+		&[variant] {
+			> f-trow {
+				@each $state, $value in $states {
+					&[state="#{$state}"] {
+						--color-background-row-selected: #{map.get($value, "selected")};
+					}
+				}
+			}
+		}
+	}
+	&[variant] {
+		> f-trow {
+			@each $state, $value in $states {
+				&[state="#{$state}"],
+				&[state="#{$state}"] > f-tcell {
+					--color-background-row: #{map.get($value, "background")} !important;
+				}
+			}
+		}
+	}
+	&[variant="stripped"] {
+		> f-trow:nth-child(odd) {
+			--color-background-row: var(--color-surface-default);
+			> f-tcell {
+				background-color: var(--color-background-row);
+			}
+		}
+		> f-trow:nth-child(even) {
+			--color-background-row: var(--color-surface-subtle);
+			> f-tcell {
+				background-color: var(--color-background-row);
+			}
+		}
+	}
+
+	&[variant="outlined"] {
+		border: 1px solid var(--color-border-default);
+	}
+
+	&[variant="underlined"] {
+		> f-trow {
+			--border-bottom: 1px solid var(--color-border-default);
+			> f-tcell {
+				border-bottom: var(--border-bottom);
+			}
+		}
+	}
+
+	&[variant="bordered"] {
+		border-top: 1px solid var(--color-border-default);
+		border-left: 1px solid var(--color-border-default);
+		border-right: 1px solid var(--color-border-default);
+
+		> f-trow {
+			--border-bottom: 1px solid var(--color-border-default);
+			--border-left: 1px solid var(--color-border-default);
+			> f-tcell {
+				&:not(:last-child) {
+					border-right: 1px solid var(--color-border-default);
+				}
+				border-bottom: 1px solid var(--color-border-default);
+			}
+		}
+	}
+	@each $size, $value in $sizes {
+		&[size="#{$size}"] {
+			> f-trow > f-tcell {
+				padding: map.get($value, "padding");
+			}
+		}
+	}
+}
+f-div[direction="column"] {
+	> f-table {
+		flex: 1 1;
+		max-height: 100%;
+		width: 100%;
+	}
+}
+
+f-div[direction="row"] {
+	> f-table {
+		flex: 1 1;
+		max-width: 100%;
+		height: fit-content;
+	}
+}

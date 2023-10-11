@@ -1,12 +1,16 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 import { html, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
-import eleStyle from "./f-breadcrumb.scss";
+import eleStyle from "./f-breadcrumb.scss?inline";
+import globalStyle from "./f-breadcrumb-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "../../utils";
 import { FText } from "../f-text/f-text";
 import { FPopover } from "../f-popover/f-popover";
+
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-breadcrumb", globalStyle);
 
 export type FBreadCrumbsProp = { tabIndex: number; title: string };
 export type FBreadcrumbs = FBreadCrumbsProp[];
@@ -16,7 +20,13 @@ export class FBreadcrumb extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles, ...FPopover.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
+		...FDiv.styles,
+		...FText.styles,
+		...FPopover.styles
+	];
 
 	/**
 	 * @attribute The medium size is the default.
@@ -117,7 +127,7 @@ export class FBreadcrumb extends FRoot {
 	 *
 	 * @param action action whether to close or open popover
 	 */
-	togglePopover(action: "open" | "close") {
+	toggleBreadcrumbPopover(action: "open" | "close") {
 		this.popOverElement.open = action === "open" ? true : false;
 		this.popOverElement.target = this.breadCrumbPopover;
 	}
@@ -172,7 +182,7 @@ export class FBreadcrumb extends FRoot {
 						<f-div
 							clickable
 							?disabled=${this.disabled}
-							@mouseenter=${() => this.togglePopover("open")}
+							@mouseenter=${() => this.toggleBreadcrumbPopover("open")}
 							id="breadcrumb-popover"
 						>
 							<f-text class="toggle-popover-hover" variant="heading" state="secondary" size="small"
@@ -183,25 +193,26 @@ export class FBreadcrumb extends FRoot {
 							<f-div
 								state="secondary"
 								direction="column"
-								@mouseleave=${() => this.togglePopover("close")}
+								@mouseleave=${() => this.toggleBreadcrumbPopover("close")}
 							>
 								${this.middlePopoverCrumbs?.map(
-									(crumb, index) => html` <f-div
-										class="popover-crumb-list"
-										padding="medium"
-										.border=${this.middlePopoverCrumbs.length - 1 === index
-											? "none"
-											: "small solid secondary bottom"}
-										clickable
-										@click=${(event: MouseEvent) => this.handleDispatchEvent(event, crumb)}
-										><f-text
-											class="popover-text-hover"
-											variant="para"
-											size="medium"
-											weight="regular"
-											>${crumb?.title}</f-text
-										></f-div
-									>`
+									(crumb, index) =>
+										html` <f-div
+											class="popover-crumb-list"
+											padding="medium"
+											.border=${this.middlePopoverCrumbs.length - 1 === index
+												? "none"
+												: "small solid secondary bottom"}
+											clickable
+											@click=${(event: MouseEvent) => this.handleDispatchEvent(event, crumb)}
+											><f-text
+												class="popover-text-hover"
+												variant="para"
+												size="medium"
+												weight="regular"
+												>${crumb?.title}</f-text
+											></f-div
+										>`
 								)}
 							</f-div>
 						</f-popover>

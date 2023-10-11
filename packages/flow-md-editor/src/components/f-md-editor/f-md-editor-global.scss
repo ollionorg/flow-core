@@ -1,0 +1,166 @@
+@import "../../../../flow-core/src/mixins/scss/mixins";
+
+f-md-editor {
+	@include base();
+	display: block;
+	flex: 1 0 auto;
+	max-width: 100%;
+	max-height: 100%;
+	overflow: auto;
+	border-radius: 4px;
+}
+
+f-md-editor {
+	div.flow-editable {
+		@include scrollbar();
+		outline: none;
+		word-break: break-all;
+		width: minmax(100%, max-content);
+		border: 1px solid transparent;
+		padding: 8px;
+		white-space: pre-line;
+		background-color: var(--color-surface-tertiary);
+
+		&:focus {
+			border: 1px solid var(--color-primary-default);
+		}
+	}
+	a {
+		color: var(--color-primary-default);
+	}
+	.markdown-body code {
+		box-sizing: border-box;
+	}
+	.markdown-body pre {
+		background-color: var(--color-surface-tertiary);
+		display: block;
+		box-sizing: border-box;
+		padding: 8px;
+		border-radius: 4px;
+	}
+
+	/* GitHub Markdown CSS */
+	.markdown-body {
+		font-size: 14px;
+		line-height: 1.5;
+	}
+
+	.markdown-body h1,
+	.markdown-body h2,
+	.markdown-body h3,
+	.markdown-body h4,
+	.markdown-body h5,
+	.markdown-body h6 {
+		margin-top: 1.3em;
+		margin-bottom: 0.6em;
+		font-weight: bold;
+	}
+
+	.markdown-body h1 {
+		font-size: 2em;
+		border-bottom: 1px solid var(--color-border-default);
+	}
+
+	.markdown-body h2 {
+		font-size: 1.8em;
+	}
+
+	.markdown-body h3 {
+		font-size: 1.6em;
+	}
+
+	.markdown-body h4 {
+		font-size: 1.4em;
+	}
+
+	.markdown-body h5 {
+		font-size: 1.2em;
+	}
+
+	.markdown-body h6 {
+		font-size: 1em;
+	}
+
+	.markdown-body p {
+		margin: 1em 0;
+	}
+
+	.markdown-body a {
+		color: var(--color-primary-default);
+		text-decoration: none;
+	}
+
+	.markdown-body a:hover {
+		text-decoration: underline;
+	}
+
+	.markdown-body code,
+	.markdown-body pre {
+		font-family: var(--flow-code-font) !important;
+		font-size: 0.9em;
+	}
+
+	.markdown-body code {
+		padding: 0.15em 0.2em;
+		background-color: var(--color-surface-tertiary) !important;
+		border-radius: 4px;
+	}
+
+	.markdown-body pre {
+		margin: 1.5em 0;
+		padding: 0.75em;
+		overflow: auto;
+		background-color: var(--color-surface-tertiary);
+		border-radius: 4px;
+	}
+
+	.markdown-body pre code {
+		display: inline;
+		padding: 0;
+		background-color: transparent;
+		border: none;
+	}
+
+	.markdown-body ul,
+	.markdown-body ol {
+		margin: 1em 0;
+		padding: 0 0 0 2em;
+	}
+
+	.markdown-body li {
+		margin: 0.5em 0;
+	}
+
+	.markdown-body hr {
+		height: 2px;
+		margin: 1.5em 0;
+		background-color: var(--color-border-default);
+		border: none;
+	}
+
+	.markdown-body blockquote {
+		margin: 1em 0;
+		padding: 0.5em 1em;
+		background-color: var(--color-surface-tertiary);
+		border-left: 4px solid var(--color-border-default);
+	}
+
+	.markdown-body table {
+		border-collapse: collapse;
+		margin: 1em 0;
+		width: 100%;
+	}
+
+	.markdown-body table th,
+	.markdown-body table td {
+		padding: 0.5em 1em;
+		border: 1px solid var(--color-border-default);
+	}
+
+	.markdown-body img {
+		max-width: 100%;
+		box-sizing: border-box;
+		margin: 1em 0;
+		padding: 0;
+	}
+}

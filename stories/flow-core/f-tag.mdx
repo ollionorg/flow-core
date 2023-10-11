@@ -1,0 +1,273 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fTagAnatomy from "../svg/i-ftag-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import * as FTagStories from "./f-tag.stories";
+
+<Meta of={FTagStories} />
+
+# f-tag
+
+<br />
+
+## Overview
+
+<f-divider />
+
+Tags allow users to categorize the content. They can be used to add metadata to an element such as category, or property or show a status.
+
+<br />
+
+### [Playground](/story/components-f-tag--playground)
+
+<Canvas>
+	<Story of={FTagStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider />
+
+<br />
+
+<Story of={FTagStories.Anatomy} />
+
+<br />
+
+## size
+
+<f-divider />
+
+The medium size is the default and recommended option.
+
+<br />
+
+<Canvas>
+	<Story of={FTagStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>Button Size is 32px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>Button Size is 24px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>Button Size is 16px</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider />
+
+States on Tags are used to communicate purpose and it’s connotation. For example, a red color connotes danger,
+whereas a green color connotes success and so on.
+
+<br />
+
+<p className="note-section">
+	Note: To use a tag of different color other than the state colors, use fill property.
+</p>
+
+<br />
+
+<Canvas>
+	<Story of={FTagStories.State} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>primary</td>
+      <td>Reserved for essential actions</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>neutral</td>
+      <td>Requires less prominence, Multiple actions of the same importance</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>success</td>
+      <td>Actions Indicating success, Positive results</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>warning</td>
+      <td>Discouraged action, Not always destructive</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>danger</td>
+      <td>Destructive actions, Negative consequences</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>inherit</td>
+      <td>background inherited according to the parent element</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>custom</td>
+      <td>user can specify custom color for tag</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## label
+
+<f-divider />
+
+Label property defines the text label on a tag. Label on the tag is always bold in weight.
+
+<Canvas>
+	<Story of={FTagStories.Label} />
+</Canvas>
+
+<br />
+
+## icon-left
+
+<f-divider />
+
+Icon-left enables an icon on the left of the label of a tag.
+
+<br />
+
+<Canvas>
+	<Story of={FTagStories.IconLeft} />
+</Canvas>
+
+<br />
+
+## icon-right
+
+<f-divider />
+
+Icon-right enables an icon on the right of the label of a tag.
+
+<br />
+
+<Canvas>
+	<Story of={FTagStories.IconRight} />
+</Canvas>
+
+<br />
+
+## counter
+
+<f-divider />
+
+Counter property enables a counter on the tag.
+
+The counter component by default abbreviates the value (1000 = 1k). You can learn more about the counter
+[here](/docs/components-f-counter--anatomy).
+
+<br />
+
+<p className="note-section">
+	Note: Counter is always on the right end of the button, except if icon-right=”i-close”. In that
+	case counter comes on the left of the close icon.
+</p>
+
+<br />
+
+<Canvas>
+	<Story of={FTagStories.Counter} />
+</Canvas>
+
+<br />
+
+## Flags
+
+<f-divider />
+
+<br />
+
+<Canvas>
+	<Story of={FTagStories.Flags} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+      <td>Default</td>
+    </tr>
+
+    <tr>
+      <td>loading</td>
+      <td>Loader replaces the content of the f-tag. Width of the f-tag remains the same.</td>
+      <td>false</td>
+    </tr>
+
+    <tr>
+      <td>disabled</td>
+      <td>Opacity of f-tag is set to 50% in disabled state.</td>
+      <td>false </td>
+    </tr>
+
+    <tr>
+      <td>selected</td>
+      <td>Set selected to true to make a f-tag toggle Interaction: lightened/darkened by 30%</td>
+      <td>false</td>
+    </tr>
+
+  </tbody>
+</table>
+
+<ArgsTable of={"f-tag"} />

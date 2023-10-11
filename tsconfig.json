@@ -1,35 +1,34 @@
 {
-	"compilerOptions": {
-		"module": "esnext",
-		"target": "ESNext",
-		"lib": ["es2017", "dom", "dom.iterable"],
-		"declaration": true,
-		"emitDeclarationOnly": true,
-		"outDir": "dist/types",
-		"baseUrl": ".",
-		"strict": true,
-		"noUnusedLocals": false,
-		"noUnusedParameters": true,
-		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true,
-		"moduleResolution": "node",
-		"isolatedModules": true,
-		"allowSyntheticDefaultImports": true,
-		"experimentalDecorators": true,
-		"forceConsistentCasingInFileNames": true,
-		"useDefineForClassFields": false,
-		"skipLibCheck": true,
-		"resolveJsonModule": true,
-		"plugins": [
-			{
-				"name": "ts-lit-plugin",
-				"strict": true,
-				"rules": {
-					"no-unknown-tag-name": "off",
-					"no-unknown-event": "warn"
-				}
-			}
-		]
-	},
-	"references": [{ "path": "./packages/flow-core/tsconfig.node.json" }]
+	"extends": "./tsconfig.base.json",
+	"files": [],
+	"exclude": ["**/*.test.ts", "**/dist", "dist"],
+	"references": [
+		{
+			"path": "./packages/custom-elements-manifest-to-types"
+		},
+		{
+			"path": "./packages/flow-core-config"
+		},
+		{
+			"path": "./packages/flow-core"
+		},
+		{
+			"path": "./packages/flow-log"
+		},
+		{
+			"path": "./packages/flow-code-editor"
+		},
+		{
+			"path": "./packages/flow-form-builder"
+		},
+		{
+			"path": "./packages/flow-lineage"
+		},
+		{
+			"path": "./packages/flow-table"
+		},
+		{
+			"path": "./packages/flow-md-editor"
+		}
+	]
 }

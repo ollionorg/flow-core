@@ -1,10 +1,13 @@
 import { html, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
-import eleStyle from "./f-text-area.scss";
+import eleStyle from "./f-text-area.scss?inline";
+import globalStyle from "./f-text-area-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-text-area", globalStyle);
 
 export type FTextAreaState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -17,7 +20,7 @@ export class FTextArea extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FText.styles, ...FDiv.styles];
 
 	/**
 	 * @attribute value to be inserted in text-area.

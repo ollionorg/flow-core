@@ -2,9 +2,12 @@ import { html, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
-import eleStyle from "./f-form.scss";
+import eleStyle from "./f-form.scss?inline";
+import globalStyle from "./f-form-global.scss?inline";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-form", globalStyle);
 
 // import { ref, createRef } from "lit/directives/ref.js";
 
@@ -16,7 +19,7 @@ export class FForm extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FText.styles, ...FDiv.styles];
 
 	/**
 	 * @attribute Gap is used to define the gap between the elements

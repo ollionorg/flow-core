@@ -1,6 +1,7 @@
 import { html, unsafeCSS } from "lit";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
-import eleStyle from "./f-input.scss";
+import eleStyle from "./f-input.scss?inline";
+import globalStyle from "./f-input-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
 import { FText } from "../f-text/f-text";
@@ -10,6 +11,8 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-input", globalStyle);
 
 export type FInputState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -25,7 +28,13 @@ export class FInput extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FText.styles, ...FDiv.styles, ...FIcon.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
+		...FText.styles,
+		...FDiv.styles,
+		...FIcon.styles
+	];
 
 	/**
 	 * @attribute local state for password to text toggling and vice versa.

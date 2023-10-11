@@ -1,0 +1,206 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fDividerAnatomy from "../svg/i-fdivider-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import * as FDividerStories from "./f-divider.stories";
+
+<Meta of={FDividerStories} />
+
+# f-divider
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+f-divider is a line used to separate the content of a layout.
+
+<br />
+
+### [Playground](/story/components-f-divider--playground)
+
+<Canvas>
+	<Story of={FDividerStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider />
+
+<Story of={FDividerStories.Anatomy} />
+
+<br />
+
+### Specifications
+
+<f-divider />
+
+A divider can be horizontal or vertical depending on its parent’s layout. In a row layout a
+divider is vertical. In a column layout it is horizontal.
+
+<br />
+
+<Story of={FDividerStories.Specifications} />
+
+<br />
+
+## variant
+
+<f-divider />
+
+f-divider can have 3 variants which are visual styles: solid, dashed, dotted
+
+<br />
+
+<Canvas>
+	<Story of={FDividerStories.Variant} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>solid</td>
+      <td>solid visual style</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>dotted</td>
+      <td>dotted visual style</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>dashed</td>
+      <td>dashed visual style</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+## size
+
+<f-divider />
+
+Size property defines the thickness of the divider.
+
+<br />
+
+<Canvas>
+	<Story of={FDividerStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>size is set to be 2px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>size is set to be 1px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider />
+
+States on buttons are used to communicate purpose and it’s connotation.
+
+<br />
+
+<Canvas>
+	<Story of={FDividerStories.State} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>default</td>
+
+      <td>
+        <a>$color-border-default</a>
+      </td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>secondary</td>
+
+      <td>
+        <a>$color-border-secondary</a>
+      </td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>subtle</td>
+
+      <td>
+        <a>$color-border-subtle</a>
+      </td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>custom</td>
+      <td>custom color can be given to the f-divider</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<ArgsTable of={"f-divider"} />

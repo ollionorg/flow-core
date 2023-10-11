@@ -1,35 +1,35 @@
 export default function LightenDarkenColor(col: string, amt: number) {
-  let usePound = false;
+	let usePound = false;
 
-  if (col[0] == "#") {
-    col = col.slice(1);
-    usePound = true;
-  }
+	if (col[0] == "#") {
+		col = col.slice(1);
+		usePound = true;
+	}
 
-  if (col.length === 3) {
-    col = col
-      .split("")
-      .map((item) => {
-        return item + item;
-      })
-      .join("");
-  }
+	if (col.length === 3) {
+		col = col
+			.split("")
+			.map(item => {
+				return item + item;
+			})
+			.join("");
+	}
 
-  const num = parseInt(col, 16);
+	const num = parseInt(col, 16);
 
-  let r = (num >> 16) + amt;
+	let r = (num >> 16) + amt;
 
-  if (r > 255) r = 255;
-  else if (r < 0) r = 0;
+	if (r > 255) r = 255;
+	else if (r < 0) r = 0;
 
-  let b = ((num >> 8) & 0x00ff) + amt;
+	let b = ((num >> 8) & 0x00ff) + amt;
 
-  if (b > 255) b = 255;
-  else if (b < 0) b = 0;
+	if (b > 255) b = 255;
+	else if (b < 0) b = 0;
 
-  let g = (num & 0x0000ff) + amt;
+	let g = (num & 0x0000ff) + amt;
 
-  if (g > 255) g = 255;
-  else if (g < 0) g = 0;
-  return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16).padStart(6, "0");
+	if (g > 255) g = 255;
+	else if (g < 0) g = 0;
+	return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16).padStart(6, "0");
 }

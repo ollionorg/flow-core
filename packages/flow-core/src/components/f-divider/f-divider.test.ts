@@ -5,16 +5,16 @@ import "@cldcvr/flow-core";
 import { FDivider } from "@cldcvr/flow-core";
 
 describe("f-divider", () => {
-  it("is defined", () => {
-    const el = document.createElement("f-divider");
-    expect(el).instanceOf(FDivider);
-  });
+	it("is defined", () => {
+		const el = document.createElement("f-divider");
+		expect(el).instanceOf(FDivider);
+	});
 
-  it("should render with all default properties", async () => {
-    const el = await fixture(html` <f-divider></f-divider> `);
+	it("should render with all default properties", async () => {
+		const el = await fixture(html` <f-divider></f-divider> `);
 
-    expect(el.getAttribute("variant")).to.equal("solid");
-    expect(el.getAttribute("size")).to.equal("medium");
-    expect(el.getAttribute("state")).to.equal("default");
-  });
+		expect(el.getAttribute("variant")).to.equal("solid");
+		expect(el.getAttribute("size")).to.equal("medium");
+		expect(el.getAttribute("state")).to.equal("default");
+	});
 });

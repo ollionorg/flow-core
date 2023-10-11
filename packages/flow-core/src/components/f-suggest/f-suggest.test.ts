@@ -16,13 +16,11 @@ describe("f-suggest", () => {
 		expect(el).instanceOf(FSuggest);
 	});
 	it("it should display suggestions on focus", async () => {
-		const el = await fixture<FSuggest>(
-			html`
-				<f-suggest
-					.suggestions=${["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]}
-				></f-suggest>
-			`
-		);
+		const el = await fixture<FSuggest>(html`
+			<f-suggest
+				.suggestions=${["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]}
+			></f-suggest>
+		`);
 		await el.updateComplete;
 		const listner = oneEvent(el.fInput, "focus");
 		el.fInput.dispatchEvent(new FocusEvent("focus"));
@@ -31,13 +29,11 @@ describe("f-suggest", () => {
 		expect(el.popOverElement.open).equals(true);
 	});
 	it("it should select suggestion on click", async () => {
-		const el = await fixture<FSuggest>(
-			html`
-				<f-suggest
-					.suggestions=${["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]}
-				></f-suggest>
-			`
-		);
+		const el = await fixture<FSuggest>(html`
+			<f-suggest
+				.suggestions=${["Suggestion 1", "Suggestion 2", "Suggestion 3", "Suggestion 4"]}
+			></f-suggest>
+		`);
 		await el.updateComplete;
 		const listner = oneEvent(el.fInput, "focus");
 		el.fInput.dispatchEvent(new FocusEvent("focus"));
@@ -59,14 +55,12 @@ describe("f-suggest", () => {
 	});
 
 	it("it should filter suggestions based on value", async () => {
-		const el = await fixture<FSuggest>(
-			html`
-				<f-suggest
-					.suggestions=${["Suggestion 1", "Suggestion 2", "filter 3", "filter 4"]}
-					value="filter"
-				></f-suggest>
-			`
-		);
+		const el = await fixture<FSuggest>(html`
+			<f-suggest
+				.suggestions=${["Suggestion 1", "Suggestion 2", "filter 3", "filter 4"]}
+				value="filter"
+			></f-suggest>
+		`);
 
 		await el.updateComplete;
 		const listner = oneEvent(el.fInput, "focus");

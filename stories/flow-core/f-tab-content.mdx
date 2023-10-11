@@ -1,0 +1,100 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import FDivAnatomy from "../svg/i-fdiv-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useState, useEffect } from "@storybook/client-api";
+import * as FTabContentStories from "./f-tab-content.stories";
+
+<Meta of={FTabContentStories} />
+
+# f-tab-content
+
+<br />
+
+<br />
+
+## Overview
+
+<hr />
+
+Tab content is part of the tabs component. Each Tab node “content-id” needs to map to “f-tab-content's id”. Tab content acts as a wrapper for the content within each tab node.
+
+<br />
+
+### [Playground](/story/components-f-tab-content--playground)
+
+<Canvas>
+	<Story of={FTabContentStories.Playground} />
+</Canvas>
+
+## id
+
+<f-divider />
+
+`id` to match up with `f-tab` `content-id`.
+
+<Canvas>
+	<Story of={FTabContentStories.Id} />
+</Canvas>
+
+<br />
+
+## transition
+
+<f-divider />
+
+Defines the transition to show the next tab content.
+
+<Canvas>
+	<Story of={FTabContentStories.Transition} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>none</td>
+      <td>Tab content switch is instant</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>fade</td>
+      <td>Content fades in and out at 200ms</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>slide</td>
+      <td>Direction of slide - right to left</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## duration
+
+<f-divider />
+
+Defines the duration of the transition. It accepts a value in ms(milli-seconds).
+Default value is 200 ms.
+
+<Canvas>
+	<Story of={FTabContentStories.Duration} />
+</Canvas>
+
+<ArgsTable of={"f-tab-content"} />

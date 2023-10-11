@@ -1,6 +1,7 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
-import eleStyle from "./f-emoji-picker.scss";
+import eleStyle from "./f-emoji-picker.scss?inline";
+import globalStyle from "./f-emoji-picker-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import data, { Category, EmojiMartData } from "@emoji-mart/data";
 import { Picker } from "emoji-mart";
@@ -9,6 +10,8 @@ import { FText } from "../f-text/f-text";
 import { FIcon } from "../f-icon/f-icon";
 import { FPopover } from "../f-popover/f-popover";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-emoji-picker", globalStyle);
 
 export type FEmojiPickerState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -60,6 +63,7 @@ export class FEmojiPicker extends FRoot {
 	 */
 	static styles = [
 		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
 		...FDiv.styles,
 		...FText.styles,
 		...FPopover.styles,
@@ -505,9 +509,8 @@ export class FEmojiPicker extends FRoot {
 			>
 		`;
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 		// header section-slot display
 		this.headerSectionDisplay();

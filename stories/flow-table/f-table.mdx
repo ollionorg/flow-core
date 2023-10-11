@@ -1,0 +1,217 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { createRef, ref } from "lit/directives/ref.js";
+import downloadFile from "./donwload-file.ts";
+import * as FTableStories from "./f-table.stories";
+
+<Meta of={FTableStories} />
+
+# f-table
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+Table component includes rows and cells.
+
+<br />
+
+### [Playground](/story/components-f-table--playground)
+
+<Canvas>
+	<Story of={FTableStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<hr />
+
+<br />
+
+<Story of={FTableStories.Anatomy} />
+
+<br />
+
+## variant
+
+<hr />
+
+variant are representations of a f-table with different row background and borders.
+
+<Canvas>
+	<Story of={FTableStories.Variant} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>stripped</td>
+      <td>Sets aletrnate background on each row</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>outlined</td>
+      <td>Sets border around table</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>underlined</td>
+      <td>Sets border at bottom of each row</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>bordered</td>
+      <td>Sets border around each cell</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## size
+
+<hr />
+
+size sets differrent padding on each cell of table
+
+<Canvas>
+	<Story of={FTableStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>Sets 16px padding on each cell</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>Sets 12px padding on each cell</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## selectable
+
+<hr />
+
+selectable sets checkbox or radio for row selection.
+
+<Canvas>
+	<Story of={FTableStories.Selectable} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>none</td>
+      <td>Sets no selection on rows</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>single</td>
+      <td>radio available for selection on rows</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>multiple</td>
+      <td>checkbox available for selection on rows</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## highlight-selected
+
+<hr />
+
+Sets background for selected rows
+
+<Canvas>
+	<Story of={FTableStories.HighlightSelected} />
+</Canvas>
+
+<br />
+
+## highlight-hover
+
+<hr />
+
+Sets background on row hover
+
+<Canvas>
+	<Story of={FTableStories.HighlightHover} />
+</Canvas>
+
+<br />
+
+## @selected-rows
+
+<hr />
+
+`selected-rows` event
+
+<Canvas>
+	<Story of={FTableStories.SelectedRows} />
+</Canvas>
+
+<br />

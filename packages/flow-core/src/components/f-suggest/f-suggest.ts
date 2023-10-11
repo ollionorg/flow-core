@@ -1,6 +1,7 @@
 import { html, HTMLTemplateResult, nothing, PropertyValues, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
-import eleStyle from "./f-suggest.scss";
+import eleStyle from "./f-suggest.scss?inline";
+import globalStyle from "./f-suggest-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
@@ -8,9 +9,11 @@ import { FPopover } from "../f-popover/f-popover";
 import { FInput } from "../f-input/f-input";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { classMap } from "lit-html/directives/class-map.js";
-import _ from "lodash";
+import { cloneDeep } from "lodash-es";
 import { flowElement } from "./../../utils";
 import { displayCustomTemplate, displayOptions, displayCategories } from "./display-options";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-suggest", globalStyle);
 
 export type FSuggestState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -39,6 +42,7 @@ export class FSuggest extends FRoot {
 	 */
 	static styles = [
 		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
 		...FText.styles,
 		...FDiv.styles,
 		...FPopover.styles,
@@ -190,7 +194,7 @@ export class FSuggest extends FRoot {
 	/**
 	 * emit input custom event
 	 */
-	handleInput(e: CustomEvent) {
+	handleInput(e: CustomEvent<{ value: string }>) {
 		e.stopPropagation();
 		this.value = e.detail.value;
 		this.handleFocus();
@@ -236,9 +240,19 @@ export class FSuggest extends FRoot {
 			this.popOverElement.open = true;
 		}
 	}
+
+	get filteredSuggestionsLength() {
+		if (Array.isArray(this.filteredSuggestions)) {
+			return this.filteredSuggestions.length;
+		} else if (this.filteredSuggestions) {
+			return Object.keys(this.filteredSuggestions).length;
+		}
+
+		return 0;
+	}
+
 	get anySuggestions() {
-		const suggestionsCount = this.filteredSuggestions?.length ?? 0;
-		return suggestionsCount > 0;
+		return this.filteredSuggestionsLength > 0;
 	}
 
 	get isStringArraySuggestions() {
@@ -288,8 +302,7 @@ export class FSuggest extends FRoot {
 			const newIndex = this.currentIndex + direction;
 
 			// Ensure the new index stays within bounds
-			this.currentIndex =
-				((newIndex as number) + (totalOptions as number)) % (totalOptions as number);
+			this.currentIndex = (newIndex + (totalOptions as number)) % (totalOptions as number);
 
 			// Optionally, you can scroll the dropdown to bring the selected option into view if it's outside the viewport.
 			this.scrollFocusedOptionIntoView();
@@ -342,7 +355,7 @@ export class FSuggest extends FRoot {
 	selectOption() {
 		if (this.isStringArraySuggestions) {
 			if (this.filteredSuggestions) {
-				if (this.currentIndex >= 0 && this.currentIndex < this.filteredSuggestions.length) {
+				if (this.currentIndex >= 0 && this.currentIndex < this.filteredSuggestionsLength) {
 					const selectedOption = (this.filteredSuggestions as string[] | FSuggestTemplate[])[
 						this.currentIndex
 					];
@@ -352,7 +365,7 @@ export class FSuggest extends FRoot {
 						this.value = selectedOption as string;
 					}
 					this.dispatchInputEvent(selectedOption);
-					this.handleBlur(false);
+					void this.handleBlur(false);
 				}
 			}
 		} else {
@@ -362,8 +375,8 @@ export class FSuggest extends FRoot {
 					selectedCategory
 				][this.currentIndex];
 
-				this.dispatchInputEvent(selectedOption as string);
-				this.handleBlur(false);
+				this.dispatchInputEvent(selectedOption);
+				void this.handleBlur(false);
 			}
 		}
 	}
@@ -384,7 +397,7 @@ export class FSuggest extends FRoot {
 						this.suggestWhen(sg, this.value)
 					);
 				} else {
-					const filtered = _.cloneDeep(this.suggestions) as FSuggestSuggestionsCategory;
+					const filtered = cloneDeep(this.suggestions) as FSuggestSuggestionsCategory;
 					Object.entries(filtered).forEach(([objName, objValue]) => {
 						filtered[objName] = objValue.filter(item => this.suggestWhen(item, this.value));
 					});
@@ -443,7 +456,7 @@ export class FSuggest extends FRoot {
 			</f-input>
 			<f-popover .overlay=${false} .placement=${"bottom-start"} class="f-suggest-popover">
 				<f-div direction="column" .maxHeight=${this.optionsMaxHeight ?? "600px"} state="secondary">
-					${this.filteredSuggestions && this.filteredSuggestions.length > 0
+					${this.filteredSuggestions && this.filteredSuggestionsLength > 0
 						? this.getSuggestionHtml(this.filteredSuggestions)
 						: html`<slot name="no-data"></slot>`}
 				</f-div>

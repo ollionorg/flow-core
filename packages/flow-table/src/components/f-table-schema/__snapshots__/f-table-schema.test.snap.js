@@ -310,6 +310,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
     </f-trow>
     <f-trow
       expand-icon-position="right"
+      id="1"
       selected=""
       state="default"
     >
@@ -498,6 +499,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
     </f-trow>
     <f-trow
       expand-icon-position="right"
+      id="1"
       selected=""
       state="default"
     >

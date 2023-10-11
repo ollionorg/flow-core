@@ -1,0 +1,28 @@
+@use "sass:map";
+
+@import "./../../mixins/scss/mixins";
+@import "./f-form-variables";
+
+f-form {
+	@include base();
+	display: flex;
+	overflow: auto;
+	flex: 1 0 auto;
+	@each $size, $value in $sizes {
+		&[size="#{$size}"] {
+			@include inherit-size($size);
+		}
+	}
+	&[separator] {
+		@each $gap, $value in $gaps {
+			&[gap="#{$gap}"] {
+				> f-form-group {
+					&:not(:first-child) {
+						border-top: 1px solid var(--color-border-default);
+						padding-top: map.get($value, "gap");
+					}
+				}
+			}
+		}
+	}
+}

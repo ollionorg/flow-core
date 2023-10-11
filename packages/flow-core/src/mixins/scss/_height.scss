@@ -1,25 +1,25 @@
 @use "sass:math";
 
-$heights: 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700,
-  750, 800, 850, 900, 950;
+$heights: 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900,
+	950;
 @each $height in $heights {
-  .height-#{$height} {
-    height: $height + px !important;
-  }
-  .max-height-#{$height} {
-    max-height: $height + px !important;
-  }
-  .min-height-#{$height} {
-    min-height: $height + px !important;
-  }
+	.height-#{$height} {
+		height: $height + px !important;
+	}
+	.max-height-#{$height} {
+		max-height: $height + px !important;
+	}
+	.min-height-#{$height} {
+		min-height: $height + px !important;
+	}
 }
 $per-heights: 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1;
 
 @each $height in $per-heights {
-  .height-#{$height*100}-per {
-    height: math.percentage($height) !important;
-  }
-  .height-#{$height*100}-vh {
-    height: $height * 100 + vh !important;
-  }
+	.height-#{$height*100}-per {
+		height: math.percentage($height) !important;
+	}
+	.height-#{$height*100}-vh {
+		height: $height * 100 + vh !important;
+	}
 }

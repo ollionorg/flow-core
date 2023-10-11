@@ -1,6 +1,6 @@
-import prettier from "prettier";
+import * as prettier from "prettier";
 
-export function vaidateOptions(options?: UserOptions): ProtoGenOptions {
+export async function validateOptions(options?: UserOptions): Promise<ProtoGenOptions> {
 	if (!options) {
 		throw new Error("Options must be provided");
 	}
@@ -10,10 +10,10 @@ export function vaidateOptions(options?: UserOptions): ProtoGenOptions {
 	}
 
 	if (!options.prettierConfig) {
-		options.prettierConfig = prettier.resolveConfig.sync(options.cwd) ?? {
+		options.prettierConfig = (await prettier.resolveConfig(options.cwd)) ?? {
 			printWidth: 100,
 			singleQuote: true,
-			tabWidth: 4,
+			tabWidth: 4
 		};
 	}
 

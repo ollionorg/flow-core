@@ -1,13 +1,15 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
-import eleStyle from "./f-pictogram.scss";
+import eleStyle from "./f-pictogram.scss?inline";
+import globalStyle from "./f-pictogram-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import { ConfigUtil } from "@cldcvr/flow-core-config";
+import { ConfigUtil, injectCss } from "@cldcvr/flow-core-config";
 import { getTextContrast, isValidHttpUrl } from "./../../utils";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import { classMap } from "lit-html/directives/class-map.js";
 import { FIcon } from "../f-icon/f-icon";
 import { flowElement } from "./../../utils";
+injectCss("f-pictogram", globalStyle);
 
 const variants = ["circle", "square", "hexagon", "squircle"] as const;
 const sizes = ["x-large", "large", "medium", "small"] as const;
@@ -48,7 +50,7 @@ export class FPictogram extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FIcon.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FIcon.styles];
 
 	/**
 	 * @attribute Variants are various representations of Pictogram. For example Pictogram can be round, curved, square, or hexagon.
@@ -259,9 +261,7 @@ export class FPictogram extends FRoot {
 			</div>
 		`;
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 		if (this.fPicorgramWrapper && this.autoBg && this.isText) {
 			// Modify the background-color property

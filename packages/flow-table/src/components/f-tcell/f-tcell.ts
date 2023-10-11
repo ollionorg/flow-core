@@ -2,9 +2,13 @@ import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { FCheckbox, FDiv, FIconButton, FIcon, FRadio, FRoot, flowElement } from "@cldcvr/flow-core";
 import { FTableSelectable } from "../f-table/f-table";
-import eleStyle from "./f-tcell.scss";
+import eleStyle from "./f-tcell.scss?inline";
+import globalStyle from "./f-tcell-global.scss?inline";
 import { FTrowChevronPosition } from "../f-trow/f-trow";
 import { createRef, ref } from "lit/directives/ref.js";
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-tcell", globalStyle);
 
 export type FTcellAction = {
 	icon: string;
@@ -24,6 +28,7 @@ export class FTcell extends FRoot {
 	 */
 	static styles = [
 		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
 		...FDiv.styles,
 		...FCheckbox.styles,
 		...FRadio.styles,
@@ -184,9 +189,8 @@ export class FTcell extends FRoot {
 		});
 		this.dispatchEvent(toggle);
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 
 		this.onmouseover = () => this.toggleColumnHighlight("add");

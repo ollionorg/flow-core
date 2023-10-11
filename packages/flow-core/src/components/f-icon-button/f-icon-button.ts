@@ -1,6 +1,7 @@
 import { html, PropertyValues, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
-import eleStyle from "./f-icon-button.scss";
+import eleStyle from "./f-icon-button.scss?inline";
+import globalStyle from "./f-icon-button-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
@@ -13,6 +14,8 @@ import getTextContrast from "../../utils/get-text-contrast";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import LightenDarkenColor from "../../utils/get-lighten-darken-color";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-icon-button", globalStyle);
 
 const variants = ["round", "curved", "block"] as const;
 const categories = ["fill", "outline", "transparent", "packed"] as const;
@@ -35,7 +38,7 @@ export class FIconButton extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FIcon.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FIcon.styles];
 
 	/**
 	 * @attribute local state for managing custom fill.

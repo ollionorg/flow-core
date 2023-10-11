@@ -5,12 +5,8 @@ HERE=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 cd "$HERE"
 
-yarn analyze
-cd "../custom-elements-manifest-to-types"
-yarn build
-cd .. && cd "./flow-table"
+pnpm run analyze
 
 echo "building library..."
-vite build --emptyOutDir && vite build --emptyOutDir --config vite.umd.config.ts && tsc -emitDeclarationOnly
-echo "generating types..."
-node generate-types.js 
+pnpm vite build --emptyOutDir
+pnpm vite build --emptyOutDir --config vite.umd.config.ts

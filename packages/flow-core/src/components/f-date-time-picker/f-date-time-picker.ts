@@ -1,6 +1,7 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
-import eleStyle from "./f-date-time-picker.scss";
+import eleStyle from "./f-date-time-picker.scss?inline";
+import globalStyle from "./f-date-time-picker-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import flatpickr from "flatpickr";
 import { Instance } from "flatpickr/dist/types/instance";
@@ -9,6 +10,10 @@ import { FInput } from "../f-input/f-input";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import { flowElement } from "./../../utils";
+
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-date-time-picker", globalStyle);
 
 export type FDateTimePickerState = "primary" | "default" | "success" | "warning" | "danger";
 
@@ -23,7 +28,13 @@ export class FDateTimePicker extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles, ...FInput.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
+		...FDiv.styles,
+		...FText.styles,
+		...FInput.styles
+	];
 
 	/**
 	 * @attribute Variants are various visual representations of a date-time-picker field.
@@ -221,11 +232,17 @@ export class FDateTimePicker extends FRoot {
 	 * @param e custom-event value having date string
 	 * @returns date object formed from string
 	 */
-	dateObjectFromString(e: CustomEvent) {
+	dateObjectFromString(e: CustomEvent<{ value: string }>) {
 		const dateTime = e.detail.value.split(" ");
 		const date = dateTime[0].split("/");
 		const time = dateTime[1].split(":");
-		const dateObjFormation = new Date(date[2], date[1], date[0], time[0], time[1]);
+		const dateObjFormation = new Date(
+			Number(date[2]),
+			Number(date[1]),
+			Number(date[0]),
+			Number(time[0]),
+			Number(time[1])
+		);
 		return dateObjFormation;
 	}
 
@@ -233,11 +250,15 @@ export class FDateTimePicker extends FRoot {
 	 *
 	 * @param e custom-event value having date string
 	 */
-	handleKeyboardInput(e: CustomEvent) {
+	handleKeyboardInput(
+		e: CustomEvent<{ value: string | number | undefined; type: "clear" | "input" }>
+	) {
 		e.stopPropagation();
-		if (e.detail?.value) {
-			if (e.detail.value.match(this.regexDateTime)) {
-				this.handleInput([this.dateObjectFromString(e)], e.detail.value);
+
+		if (e.detail.value) {
+			if (String(e.detail.value).match(this.regexDateTime)) {
+				//@ts-expect-error value is confirmed to be a string
+				this.handleInput([this.dateObjectFromString(e)], String(e.detail.value));
 			} else {
 				this.helpSlotElement.innerHTML = this.dateValidationMessage;
 				this.dateTimePickerElement.state = "danger";
@@ -328,9 +349,8 @@ export class FDateTimePicker extends FRoot {
 				<f-div slot="icon-tooltip"><slot name="icon-tooltip"></slot></f-div> </f-input
 		></f-div>`;
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 		if (!this.inline) {
 			requestAnimationFrame(() => {

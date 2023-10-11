@@ -1,9 +1,13 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
-import eleStyle from "./f-accordion.scss";
+import eleStyle from "./f-accordion.scss?inline";
+import globalStyle from "./f-accordion-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv, FDivPaddingProp } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-accordion", globalStyle);
 
 export type FAccordionBodyHeightProp = `${number}px` | `${number}%` | `${number}vh`;
 
@@ -17,7 +21,7 @@ export class FAccordion extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FDiv.styles];
 
 	/**
 	 * @attribute toggle accordion
@@ -192,9 +196,8 @@ export class FAccordion extends FRoot {
 			</f-div>
 		`;
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 		this.handleAccordionBody();
 	}

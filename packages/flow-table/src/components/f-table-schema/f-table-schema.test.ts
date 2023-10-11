@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 import { html, fixture, expect } from "@open-wc/testing";
 import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 // import flow-core elements
@@ -17,7 +16,7 @@ ConfigUtil.setConfig({ iconPack: IconPack });
 import { HTMLTemplateResult } from "lit";
 
 export default function getFakeUsers(count = 100): FTableSchemaData {
-	const users = [];
+	const users: FTableSchemaDataRow[] = [];
 
 	for (let i = 0; i < count; i++) {
 		const firstName = { value: `Vikas ${i}` };
@@ -32,12 +31,15 @@ export default function getFakeUsers(count = 100): FTableSchemaData {
 			},
 			actions: [
 				{
+					id: "1",
 					icon: "i-chat"
 				},
 				{
+					id: "2",
 					icon: "i-mail"
 				},
 				{
+					id: "3",
 					icon: "i-star"
 				}
 			]
@@ -45,7 +47,7 @@ export default function getFakeUsers(count = 100): FTableSchemaData {
 		const mobile = { value: `8989899981` };
 		const sex = { value: `male` };
 		const age = { value: `33` };
-		const birthDate: FTableSchemaCell & { value: Date } = {
+		const birthDate: FTableSchemaCell<Date> = {
 			value: new Date("December 17, 1995 03:24:00"),
 			template: function () {
 				return html`<f-div gap="small" width="hug-content">
@@ -65,6 +67,7 @@ export default function getFakeUsers(count = 100): FTableSchemaData {
 		};
 
 		const userRow: FTableSchemaDataRow = {
+			id: "1",
 			data: { firstName, lastName, age, birthDate, email, mobile, sex, address },
 			selected: true,
 			details: function () {
@@ -101,7 +104,6 @@ describe("f-table-schema", () => {
 			html`<f-table-schema .data=${getFakeUsers(2)}></f-table-schema>`
 		);
 		await el.updateComplete;
-
-		await expect(el).shadowDom.to.equalSnapshot();
+		expect(el).shadowDom.to.equalSnapshot();
 	});
 });

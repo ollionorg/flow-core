@@ -1,7 +1,8 @@
 import { html, PropertyValues, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import eleStyle from "./f-button.scss";
+import eleStyle from "./f-button.scss?inline";
+import globalStyle from "./f-button-global.scss?inline";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { classMap } from "lit-html/directives/class-map.js";
@@ -13,6 +14,7 @@ import getTextContrast from "../../utils/get-text-contrast";
 import { FIcon } from "../f-icon/f-icon";
 import { FCounter } from "../f-counter/f-counter";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
 
 export type FButtonState =
 	| "primary"
@@ -23,6 +25,8 @@ export type FButtonState =
 	| "inherit"
 	| `custom, ${string}`;
 
+injectCss("f-button", globalStyle);
+
 /**
  * @summary Buttons allow users to perform an action or to initiate a new function.
  */
@@ -31,7 +35,12 @@ export class FButton extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FIcon.styles, ...FCounter.styles];
+	static styles = [
+		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
+		...FIcon.styles,
+		...FCounter.styles
+	];
 
 	/**
 	 * @attribute local state for managing custom fill.

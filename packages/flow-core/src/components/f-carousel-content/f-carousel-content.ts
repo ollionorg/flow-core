@@ -1,16 +1,19 @@
 import { html, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import { FRoot } from "./../../mixins/components/f-root/f-root";
-import eleStyle from "./f-carousel-content.scss";
+import globalStyle from "./f-carousel-content-global.scss?inline";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
 
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-carousel-content", globalStyle);
 @flowElement("f-carousel-content")
 export class FCarouselContent extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
+	static styles = [unsafeCSS(globalStyle), ...FDiv.styles];
 
 	/**
 	 * @attribute mandatory content-id to uniquely identify content

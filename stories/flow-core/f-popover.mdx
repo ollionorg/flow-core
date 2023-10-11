@@ -1,0 +1,302 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fPopoverAnatomy from "../svg/i-fpopover-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useState } from "@storybook/client-api";
+import { ConfigUtil } from "@cldcvr/flow-core-config";
+import { createRef, ref } from "lit/directives/ref.js";
+import * as FPopoverStories from "./f-popover.stories";
+
+<Meta of={FPopoverStories} />
+
+<br />
+
+# f-popover
+
+<br />
+
+<br />
+
+## Overview
+
+<hr />
+
+Popovers are containers that float on top of the interface with an overlay behind them. They can
+be used to show short-lived information such as menus, options, additional actions.
+
+<br />
+
+### [Playground](/story/components-f-popover--playground)
+
+<Canvas>
+	<Story of={FPopoverStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<hr />
+
+<br />
+
+<Story of={FPopoverStories.Anatomy} />
+
+<br />
+
+## target
+
+<hr />
+
+Target property specifies a name or a keyword that indicates where to display the popover
+(source).
+
+<br />
+
+<Canvas>
+	<Story of={FPopoverStories.Target} />
+</Canvas>
+
+<br />
+
+## placement
+
+<hr />
+
+A popover can have placements relative to the source or auto aligned. There are 12 possible placements relative to the source.
+By default the popover is auto aligned to the center of the viewport.
+
+<br />
+
+<Canvas>
+	<Story of={FPopoverStories.Placement} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>auto</td>
+      <td>Sets the placement of popover automatically according to the screen size</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>top</td>
+      <td>placed at top-middle part w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>top-start</td>
+      <td>placed at top-start position w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>top-end</td>
+      <td>placed at top-end position w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>bottom</td>
+      <td>placed at bottom-middle position w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>bottom-start</td>
+      <td>placed at bottom-start position w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>bottom-end</td>
+      <td>placed at bottom-end position w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>right</td>
+      <td>placed at right-center position w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>right-start</td>
+      <td>starting from top to downwards on right side wrt to the button opening popup</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>right-end</td>
+      <td>starting from bottom to upwards on right side wrt to the button opening popup</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>left</td>
+      <td>placed at left-center position w.r.t the opening button</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>left-start</td>
+      <td>starting from top to downwards on left side wrt to the button opening popup</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>left-end</td>
+      <td>starting from bottom to upwards on left side wrt to the button opening popup</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## size
+
+<hr />
+
+A popover can have different sizes depending on the use case from the range: small, medium, large, stretch.
+
+<br />
+
+Each size defines a width and a maximum height. By default the height will adjust to the content of the
+popover and if the max height is attained, the body contents will scroll.
+
+<br />
+
+<p className="note-section">
+	Note: Popover will be constrained with viewport and can not go beyond it.
+</p>
+
+<br />
+
+<Canvas>
+	<Story of={FPopoverStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>stretch</td>
+
+      <td>
+        Viewport width with a 16px gutter/padding and Viewport height with a 16px gutter/padding
+      </td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>width: 864px. max-height: 600px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>width: 432px. max-height: 600px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>top-end</td>
+      <td>width: 320px. max-height: 432px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## Flags
+
+<hr />
+
+<br />
+
+<Canvas>
+	<Story of={FPopoverStories.Flags} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>overlay</td>
+      <td>If we need black with 50% opacity background ot not when open the popover</td>
+
+      <td>
+        <code>true</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>open</td>
+      <td>To open and close popover</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+## Child Popovers
+
+<hr />
+
+<br />
+
+<Canvas>
+	<Story of={FPopoverStories.ChildPopover} />
+</Canvas>
+
+<ArgsTable of={"f-popover"} />

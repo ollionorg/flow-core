@@ -1,12 +1,11 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-import { html, fixture, expect } from "@open-wc/testing";
 import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
+import { expect, fixture, html } from "@open-wc/testing";
 import sampleMd from "./sample-md";
 
 // import flow-core elements
 import "@cldcvr/flow-core";
 
-import { ConfigUtil, FIconButton } from "@cldcvr/flow-core";
+import { ConfigUtil } from "@cldcvr/flow-core";
 import { FMDEditor } from "@cldcvr/flow-md-editor";
 ConfigUtil.setConfig({ iconPack: IconPack });
 
@@ -20,13 +19,13 @@ describe("f-md-editor", () => {
 			html` <f-md-editor .value=${sampleMd} mode="view"></f-md-editor>`
 		);
 		await el.updateComplete;
-		await expect(el).lightDom.to.equalSnapshot();
+		expect(el).lightDom.to.equalSnapshot();
 	});
 	it("should match edit mode snapshot", async () => {
 		const el = await fixture<FMDEditor>(
 			html` <f-md-editor .value=${sampleMd} mode="edit"></f-md-editor>`
 		);
 		await el.updateComplete;
-		await expect(el).lightDom.to.equalSnapshot();
+		expect(el).lightDom.to.equalSnapshot();
 	});
 });

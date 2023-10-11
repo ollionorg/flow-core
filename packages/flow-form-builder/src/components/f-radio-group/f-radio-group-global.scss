@@ -1,0 +1,22 @@
+@import "../../../../flow-core/src/mixins/scss/mixins";
+@import "./../../mixins";
+
+$states: (
+	"primary": "primary",
+	"default": "default",
+	"success": "success",
+	"warning": "warning",
+	"danger": "danger"
+);
+f-radio-group {
+	display: flex;
+	flex: 1 0 fit-content;
+	@each $state, $color in $states {
+		&[state="#{$state}"] {
+			@include input-color($state);
+		}
+	}
+	&[disabled] {
+		@include disabled();
+	}
+}

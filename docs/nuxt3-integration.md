@@ -1,5 +1,3 @@
-
-
 # Integration of Flow in Nuxt 3
 
 ## Prerequisites
@@ -13,11 +11,7 @@ Before we dive into the integration process, make sure you have a basic understa
 To get started, install the Flow Web Component library in your Nuxt project using your preferred package manager:
 
 ```bash
-npm install @cldcvr/flow-core
-
-# or
-
-yarn add @cldcvr/flow-core
+npm i --save @cldcvr/flow-core
 ```
 
 ### Step 2: Register Flow components through a Nuxt plugin
@@ -25,22 +19,20 @@ yarn add @cldcvr/flow-core
 To register all Flow components, we need to create a plugin in the `plugins` folder. Create a file named `flow.ts` and paste the following content:
 
 ```typescript
-import { defineNuxtPlugin } from 'nuxt';
+import { defineNuxtPlugin } from "nuxt";
 
 export default defineNuxtPlugin({
-  name: 'flow',
-  enforce: 'pre',
-  async setup(_nuxtApp) {
-    await Promise.all([
-      import('@cldcvr/flow-core'),
-      import('@cldcvr/flow-form-builder'),
-      import('@cldcvr/flow-system-icon'),
-      import('@cldcvr/flow-core/dist/style.css'),
-      import('@cldcvr/flow-form-builder/dist/style.css'),
-    ]).then(() => {
-      console.log('Flow components loaded');
-    });
-  },
+	name: "flow",
+	enforce: "pre",
+	async setup(_nuxtApp) {
+		await Promise.all([
+			import("@cldcvr/flow-core"),
+			import("@cldcvr/flow-form-builder"),
+			import("@cldcvr/flow-system-icon")
+		]).then(() => {
+			console.log("Flow components loaded");
+		});
+	}
 });
 ```
 
@@ -51,20 +43,20 @@ export default defineNuxtPlugin({
 We need to inform Vite about the web components and the location of the Flow plugin. Update your `nuxt.config.ts` with the following configuration:
 
 ```typescript
-import { defineNuxtConfig } from 'nuxt';
+import { defineNuxtConfig } from "nuxt";
 
 export default defineNuxtConfig({
-  vue: {
-    compilerOptions: {
-      isCustomElement: (tag) => tag.startsWith('f-'),
-    },
-  },
-  plugins: [
-    {
-      src: '~/plugins/flow',
-      mode: 'client',
-    },
-  ],
+	vue: {
+		compilerOptions: {
+			isCustomElement: tag => tag.startsWith("f-")
+		}
+	},
+	plugins: [
+		{
+			src: "~/plugins/flow",
+			mode: "client"
+		}
+	]
 });
 ```
 
@@ -76,36 +68,34 @@ Some components require the `window` or `document` object to function properly. 
 
 ```html
 <template>
-  <client-only fallback="Loading...">
-    <f-div height="500px">
-      <f-carousel :auto-play="true">
-        <f-carousel-content v-for="slide in slides" :content-id="slide">
-          <f-div
-            height="300px"
-            width="100%"
-            padding="large"
-            gap="large"
-            variant="curved"
-            state="secondary"
-            align="middle-center"
-            overflow="hidden"
-          >
-            <f-text size="x-large" variant="heading" align="center">
-              This is client only component {{ slide }}
-            </f-text>
-          </f-div>
-        </f-carousel-content>
-      </f-carousel>
-    </f-div>
-  </client-only>
+	<client-only fallback="Loading...">
+		<f-div height="500px">
+			<f-carousel :auto-play="true">
+				<f-carousel-content v-for="slide in slides" :content-id="slide">
+					<f-div
+						height="300px"
+						width="100%"
+						padding="large"
+						gap="large"
+						variant="curved"
+						state="secondary"
+						align="middle-center"
+						overflow="hidden"
+					>
+						<f-text size="x-large" variant="heading" align="center">
+							This is client only component {{ slide }}
+						</f-text>
+					</f-div>
+				</f-carousel-content>
+			</f-carousel>
+		</f-div>
+	</client-only>
 </template>
 <script setup>
-const slides = ref(["slide-1", "slide-2", "slide-3", "slide-4", "slide-5"]);
+	const slides = ref(["slide-1", "slide-2", "slide-3", "slide-4", "slide-5"]);
 </script>
 ```
 
 ### 2: `f-form-builder`
 
 The `f-form-builder` component accepts `field` and `values` as an `Object`. If you need support for server-side rendering (SSR), you'll have to wrap it inside a `client-only` tag for now.
-
-

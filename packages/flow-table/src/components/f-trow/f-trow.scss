@@ -1,5 +1,3 @@
-@import "@cldcvr/flow-core/src/mixins/scss/mixins";
-
 :host {
 	.expandable {
 		grid-column-start: 1;
@@ -19,27 +17,5 @@
 	}
 	.closed {
 		display: none;
-	}
-}
-
-f-trow {
-	display: contents;
-	vertical-align: middle;
-	@include base();
-	--display-cell-radio: flex;
-
-	&[slot="header"] {
-		--display-cell-radio: none;
-	}
-}
-
-f-table[highlight-selected] {
-	f-trow {
-		&[selected]:not(:hover) {
-			--color-background-row: var(--color-background-row-selected);
-			> f-tcell {
-				background-color: var(--color-background-row-selected) !important;
-			}
-		}
 	}
 }

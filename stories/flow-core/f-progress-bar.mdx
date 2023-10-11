@@ -1,0 +1,278 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fProgressBarAnatomy from "../svg/i-fprogress-bar-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import * as FProgressBarStories from "./f-progress-bar.stories";
+
+<Meta of={FProgressBarStories} />
+
+# f-progress-bar
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+Progress bar is a visual representation of completion of a specific process.
+
+<br />
+
+### [Playground](/story/components-f-progress-bar--playground)
+
+<Canvas>
+	<Story of={FProgressBarStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider />
+
+<Story of={FProgressBarStories.Anatomy} />
+
+<br />
+
+## value
+
+<f-divider />
+
+value of progress-bar
+
+<br />
+
+<Canvas>
+	<Story of={FProgressBarStories.Value} />
+</Canvas>
+
+<br />
+
+## variant
+
+<f-divider />
+
+Variants are visual representations of progress bar. A progress bar can be round or block.
+
+<br />
+
+<Canvas>
+	<Story of={FProgressBarStories.Variant} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>block</td>
+      <td>no border-radius present</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>curved</td>
+      <td>border-radius of 12px present</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+## size
+
+<f-divider />
+
+The medium size is the default and recommended option.
+
+<br />
+
+<Canvas>
+	<Story of={FProgressBarStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>height of 16px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>height of 12px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>height of 8px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-small</td>
+      <td>height of 4px</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider />
+
+States are used to communicate purpose and it’s connotation. For example, a red color connotes danger, whereas a green color connotes success and so on.
+
+<br />
+
+<Canvas>
+	<Story of={FProgressBarStories.State} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>default</td>
+
+      <td>
+        <a>$color-neutral-default</a>
+      </td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>primary</td>
+
+      <td>
+        <a>$color-primary-default</a>
+      </td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>success</td>
+
+      <td>
+        <a>$color-success-default</a>
+      </td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>danger</td>
+
+      <td>
+        <a>$color-danger-default</a>
+      </td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>warning</td>
+
+      <td>
+        <a>$color-warning-default</a>
+      </td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>custom</td>
+      <td>custom color can be given</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+## width
+
+<f-divider />
+
+By default progress bar takes full width of the parent container. User can change it using width property.
+
+<br />
+
+<Canvas>
+	<Story of={FProgressBarStories.Width} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>fill-container</td>
+
+      <td>
+        <a>taking the width of parent container</a>
+      </td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>in pixels</td>
+
+      <td>
+        <a />
+      </td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<ArgsTable of={"f-progress-bar"} />

@@ -1,0 +1,218 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
+import fSwitchAnatomy from "../svg/i-fswitch-anatomy.js";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import * as FSwitchStories from "./f-switch.stories";
+
+<Meta of={FSwitchStories} />
+
+# f-switch
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+f-switch allows a user to turn an individual option true/false. The change in selection takes place immediately unlike checkboxes and radio buttons.
+
+<br />
+
+### [Playground](/story/components-f-switch--playground)
+
+<Canvas>
+	<Story of={FSwitchStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider />
+
+<Story of={FSwitchStories.Anatomy} />
+
+<br />
+
+## value
+
+Value of a radio defines if it is selected, unselected.
+
+<Canvas>
+	<Story of={FSwitchStories.Value} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>true</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>false</td>
+
+      <td />
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## size
+
+<f-divider />
+
+f-radio can have 2 sizes.
+
+<Canvas>
+	<Story of={FSwitchStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>small</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider />
+
+States are used to communicate purpose and connotations. For example, a red color connotes danger, whereas a green color connotes success and so on.
+
+<Canvas>
+	<Story of={FSwitchStories.State} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>default</td>
+
+      <td />
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>primary</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>success</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>danger</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>warning</td>
+
+      <td />
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## Flags
+
+<f-divider />
+
+<br />
+
+<Canvas>
+	<Story of={FSwitchStories.Flags} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>disabled</td>
+      <td>Opacity is set to 50% in disabled state in disabled mode.</td>
+
+      <td>
+        <code>false</code>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<ArgsTable of={"f-switch"} />

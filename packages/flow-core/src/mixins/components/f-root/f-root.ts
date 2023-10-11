@@ -1,7 +1,8 @@
 import { LitElement, PropertyValueMap, PropertyValues, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 
-import eleStyle from "./f-root.scss";
+import globalStyle from "./f-root-global.scss?inline";
+import { injectCss } from "@cldcvr/flow-core-config";
 
 // to avoid recursive tye check
 type TooltipElement = HTMLElement & {
@@ -10,12 +11,14 @@ type TooltipElement = HTMLElement & {
 	closable: boolean;
 };
 
+injectCss("f-root", globalStyle);
+
 /**
  * @summary Every component must extent this class to consume gbobal styles , such as css reset, font family,...
  *
  */
 export class FRoot extends LitElement {
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(globalStyle)];
 
 	@query("f-popover")
 	tooltipElement!: HTMLElement;
@@ -65,11 +68,13 @@ export class FRoot extends LitElement {
 			 */
 			let tooltipElement = document.querySelector<TooltipElement>("#flow-tooltip");
 
+			const changedTooltip = changedProperties.get("tooltip");
+
 			/**
 			 * close tooltip if it is open by mouse over
 			 */
-			if (changedProperties.get("tooltip")?.startsWith("#")) {
-				const extTooltip = document.querySelector<TooltipElement>(changedProperties.get("tooltip"));
+			if (typeof changedTooltip === "string" && changedTooltip.startsWith("#")) {
+				const extTooltip = document.querySelector<TooltipElement>(changedTooltip);
 				if (extTooltip) {
 					extTooltip.open = false;
 				}

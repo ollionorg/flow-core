@@ -1,14 +1,16 @@
 import { html, unsafeCSS } from "lit";
-import eleStyle from "./f-template.scss";
+import globalStyle from "./f-template-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-template", globalStyle);
 
 @flowElement("f-template")
 export class FTemplate extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(globalStyle)];
 
 	render() {
 		return html`<slot></slot>`;

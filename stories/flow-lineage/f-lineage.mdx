@@ -1,0 +1,30 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import Properties from "./lineage-properties.mdx";
+import { useState, useEffect } from "@storybook/client-api";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import { createRef, ref } from "lit/directives/ref.js";
+import * as FLineageStories from "./f-lineage.stories";
+
+<Meta of={FLineageStories} />
+
+# f-lineage
+
+<br />
+
+<br />
+
+## Overview | [Demo](/story/components-f-lineage--playground) | <a href="#lineage-sample">Sample schema</a>
+
+The lineage component is broken down into three parts : nodes, node children, and links. Checkout the properties below to configure them.
+
+<br />
+
+<Canvas>
+	<Story of={FLineageStories.Playground} />
+</Canvas>
+
+<br />
+
+<Properties />

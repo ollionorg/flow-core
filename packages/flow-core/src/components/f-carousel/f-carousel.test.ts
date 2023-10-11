@@ -18,19 +18,17 @@ describe("f-suggest", () => {
 		expect(el).instanceOf(FCarousel);
 	});
 	it("it should go to next slide", async () => {
-		const el = await fixture<FCarousel>(
-			html`
-				<f-carousel active-content-id="slide-3">
-					${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(
-						idx =>
-							html`<f-carousel-content content-id=${"slide-" + idx}>
-								<f-div> ${unsafeSVG(FCarouselExample)} </f-div>
-								<f-text>${"slide-" + idx}</f-text>
-							</f-carousel-content>`
-					)}
-				</f-carousel>
-			`
-		);
+		const el = await fixture<FCarousel>(html`
+			<f-carousel active-content-id="slide-3">
+				${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(
+					idx =>
+						html`<f-carousel-content content-id=${"slide-" + idx}>
+							<f-div> ${unsafeSVG(FCarouselExample)} </f-div>
+							<f-text>${"slide-" + idx}</f-text>
+						</f-carousel-content>`
+				)}
+			</f-carousel>
+		`);
 		await el.updateComplete;
 
 		const listner = oneEvent(el, "next");
@@ -44,19 +42,17 @@ describe("f-suggest", () => {
 		expect(allDots.item(3).classList.contains("active")).equals(true);
 	});
 	it("it should go to prev slide", async () => {
-		const el = await fixture<FCarousel>(
-			html`
-				<f-carousel active-content-id="slide-3">
-					${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(
-						idx =>
-							html`<f-carousel-content content-id=${"slide-" + idx}>
-								<f-div> ${unsafeSVG(FCarouselExample)} </f-div>
-								<f-text>${"slide-" + idx}</f-text>
-							</f-carousel-content>`
-					)}
-				</f-carousel>
-			`
-		);
+		const el = await fixture<FCarousel>(html`
+			<f-carousel active-content-id="slide-3">
+				${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(
+					idx =>
+						html`<f-carousel-content content-id=${"slide-" + idx}>
+							<f-div> ${unsafeSVG(FCarouselExample)} </f-div>
+							<f-text>${"slide-" + idx}</f-text>
+						</f-carousel-content>`
+				)}
+			</f-carousel>
+		`);
 
 		await el.updateComplete;
 

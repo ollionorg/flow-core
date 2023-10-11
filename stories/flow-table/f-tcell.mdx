@@ -1,0 +1,85 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { createRef, ref } from "lit/directives/ref.js";
+import * as FTcellStories from "./f-tcell.stories";
+
+<Meta of={FTcellStories} />
+
+# f-tcell
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+Cell component for f-trow.
+
+<br />
+
+### [Playground](/story/components-f-tcell--playground)
+
+<Canvas>
+	<Story of={FTcellStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<hr />
+
+<br />
+
+<Story of={FTcellStories.Anatomy} />
+
+<br />
+
+## actions
+
+<hr />
+
+It will be used to display set of icons in column.
+
+<Canvas>
+	<Story of={FTcellStories.Actions} />
+</Canvas>
+
+<br />
+
+## selected
+
+<hr />
+
+It will be used to select column, set on cell inside slot="header".
+
+<Canvas>
+	<Story of={FTcellStories.Selected} />
+</Canvas>
+
+<br />
+
+## @highlight-column
+
+<hr />
+
+It will be used to select column, set on cell inside slot="header".
+
+<Canvas>
+	<Story of={FTcellStories.HighlightColumn} />
+</Canvas>
+
+<br />
+
+## @selected-column
+
+<hr />
+
+It will be used to select column, set on cell inside slot="header".
+
+<Canvas>
+	<Story of={FTcellStories.SelectedColumn} />
+</Canvas>

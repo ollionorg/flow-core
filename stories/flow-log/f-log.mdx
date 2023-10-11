@@ -1,0 +1,65 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fDividerAnatomy from "../svg/i-fdivider-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import samplelogs from "./logs/logs.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
+import * as FLogStories from "./f-log.stories";
+
+<Meta of={FLogStories} />
+
+# f-log
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+f-log is used for terminal purpose.
+
+<br />
+
+### [Playground](/story/cldcvr-flow-log-components-f-log--playground)
+
+<Canvas>
+	<Story of={FLogStories.Playground} />
+</Canvas>
+
+<br />
+
+## logs
+
+<f-divider />
+
+logs is the stringied form of data to be inserted into the terminal `f-log`
+
+<Canvas>
+	<Story of={FLogStories.Logs} />
+</Canvas>
+
+<br />
+
+## show-search
+
+<f-divider />
+
+f-log would have search box to find any key name
+
+<Canvas>
+	<Story of={FLogStories.ShowSearch} />
+</Canvas>
+
+<br />
+
+## show-scrollbar
+
+<f-divider />
+
+f-log would have scrollbar
+
+<Canvas>
+	<Story of={FLogStories.ShowScrollbar} />
+</Canvas>

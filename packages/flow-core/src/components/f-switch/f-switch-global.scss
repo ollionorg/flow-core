@@ -1,0 +1,14 @@
+@import "./../../mixins/scss/mixins";
+@import "./f-switch-variables";
+
+f-switch {
+	flex: 1 0 fit-content;
+	&[disabled] {
+		@include disabled();
+	}
+	@each $state, $color in $states {
+		&[state="#{$state}"] {
+			@include input-color($state);
+		}
+	}
+}

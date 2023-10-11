@@ -1,0 +1,353 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import { useArgs, useEffect, useState } from "@storybook/client-api";
+import * as FTextStories from "./f-text.stories";
+
+<Meta of={FTextStories} />
+
+# f-text
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+Text component includes Headings, titles, body texts and links.
+
+<br />
+
+### [Playground](/story/components-f-text--playground)
+
+<Canvas>
+	<Story of={FTextStories.Playground} />
+</Canvas>
+
+<br />
+
+## variant
+
+<f-divider />
+
+variants of text component are use cases such as Heading, paragraph, and code.
+
+<Canvas>
+	<Story of={FTextStories.Variant} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>heading</td>
+      <td>used for headings</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>para</td>
+      <td>used for paragraphs</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>code</td>
+      <td>for demonstrating a code example</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## size
+
+Each variant has various sizes. By default medium is the default size.
+
+<Canvas>
+	<Story of={FTextStories.Size} />
+</Canvas>
+
+<br />
+
+### sizes for `variant="heading"`
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-large</td>
+      <td>Extra Large - 24px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>Large - 20px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>Medium - 16px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>Small - 14px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-small</td>
+      <td>Extra Small - 12px</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+### sizes for `variant="para"`
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>Large - 16px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>Medium - 14px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>Small - 12px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-small</td>
+      <td>Extra Small - 10px</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+### sizes for `variant="code"`
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>Large - 16px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>Medium - 14px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>Small - 12px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-small</td>
+      <td>Extra Small - 10px</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider />
+
+States on texts are used to communicate purpose and it’s connotation. For example, a red color
+connotes danger, whereas a green color connotes success and so on.
+
+<Canvas>
+	<Story of={FTextStories.State} />
+</Canvas>
+
+<br />
+
+## align
+
+<f-divider />
+
+Sets the alignment of the text. Can take 3 values: left, center, and right.
+
+<Canvas>
+	<Story of={FTextStories.Align} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>left</td>
+      <td>text aligned towards left side</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>center</td>
+      <td>text aligned at the center</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>right</td>
+      <td>text aligned towards right side</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## highlight
+
+<f-divider />
+
+Highlight's sub-text inside f-text
+
+<Canvas>
+	<Story of={FTextStories.Highlight} />
+</Canvas>
+
+<br />
+
+## Flags
+
+<f-divider />
+
+Flag properties change visually and/or programmatically depending on user interaction or a
+predetermined state.
+
+<Canvas>
+	<Story of={FTextStories.Flags} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+      <td>Default</td>
+    </tr>
+
+    <tr>
+      <td>inline</td>
+      <td>width of text would be fit-content</td>
+      <td>false</td>
+    </tr>
+
+    <tr>
+      <td>loading</td>
+      <td>skeleton will replace the text</td>
+      <td>false</td>
+    </tr>
+
+    <tr>
+      <td>disabled</td>
+      <td>Opacity is set to 50% in disabled state.</td>
+      <td>false </td>
+    </tr>
+
+    <tr>
+      <td>ellipsis</td>
+
+      <td>
+        By default no. of rows is to 1. Ellipsis will crop the text after one line w.r.t the outer
+        div
+      </td>
+
+      <td>false</td>
+    </tr>
+
+  </tbody>
+</table>
+
+<ArgsTable of={"f-text"} />

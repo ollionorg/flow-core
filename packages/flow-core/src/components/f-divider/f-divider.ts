@@ -1,11 +1,13 @@
 import { html, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
-import eleStyle from "./f-divider.scss";
+import globalStyle from "./f-divider-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
 import { flowElement } from "./../../utils";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-divider", globalStyle);
 
 export type FDividerState = "default" | "secondary" | "subtle" | `custom, ${string}`;
 
@@ -14,7 +16,7 @@ export class FDivider extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(globalStyle)];
 
 	/**
 	 * @attribute local state for managing custom fill.

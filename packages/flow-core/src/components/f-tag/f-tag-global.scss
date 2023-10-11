@@ -1,0 +1,20 @@
+@import "./../../mixins/scss/mixins";
+
+// applies styles to only f-tag element.
+f-tag {
+	height: fit-content;
+	display: inline-flex;
+	flex: 0 0 auto;
+	vertical-align: top;
+	overflow: hidden;
+	&[disabled] {
+		@include disabled();
+	}
+
+	&.hasShimmer[state] {
+		&::before {
+			content: unset;
+		}
+		background: transparent !important;
+	}
+}

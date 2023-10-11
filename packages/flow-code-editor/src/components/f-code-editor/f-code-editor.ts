@@ -1,10 +1,13 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { FRoot, flowElement, FButton } from "@cldcvr/flow-core";
-import eleStyle from "./f-code-editor.scss";
+import globalStyle from "./f-code-editor-global.scss?inline";
 import * as monaco from "monaco-editor";
 
 import { property, query } from "lit/decorators.js";
 import { languageCommentsMap } from "../../utils/lang-comments-map";
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-code-editor", globalStyle);
 
 export type FCodeEditorLanguage =
 	| "scala"
@@ -28,7 +31,7 @@ export class FCodeEditor extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(globalStyle)];
 
 	/**
 	 * editor instance
@@ -104,7 +107,7 @@ export class FCodeEditor extends FRoot {
 	@query(".copy-button")
 	copyCodeButton?: FButton;
 
-	removedCommentsMap = new Map();
+	removedCommentsMap = new Map<number, string>();
 
 	get dymanicWidth() {
 		return this.title ? "hug-content" : "100%";
@@ -142,7 +145,7 @@ export class FCodeEditor extends FRoot {
 		const lines = code.split("\n");
 		const newLines: string[] = [];
 		let insideMultiLineComment = false;
-		const removedCommentsMap = new Map();
+		const removedCommentsMap = new Map<number, string>();
 		const startPattern = languageCommentsMap.get(this.fixedLang)?.multiLine?.start;
 		const endPattern = languageCommentsMap.get(this.fixedLang)?.multiLine?.end;
 		const singleLinePattern = languageCommentsMap.get(this.fixedLang)?.singleLine;
@@ -257,7 +260,7 @@ export class FCodeEditor extends FRoot {
 		}
 	}
 
-	handleChange(e: CustomEvent) {
+	handleChange(e: CustomEvent<{ value: unknown }>) {
 		if (!e.detail.value) {
 			this.toggleComments();
 		} else {

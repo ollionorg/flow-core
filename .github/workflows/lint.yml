@@ -1,13 +1,16 @@
 name: Lint checks
+
 on:
   workflow_dispatch:
   pull_request:
     branches:
-    - main
+      - main
+
 defaults:
   run:
     shell: bash
     working-directory: .
+
 jobs:
   lint:
     name: Run lint checks
@@ -24,13 +27,13 @@ jobs:
           node-version: 18.x
 
       - name: Install pnpm
-        run: corepack enable && corepack prepare pnpm@7.26.3 --activate
+        run: corepack enable && corepack prepare pnpm@8.9.0 --activate
 
-      - name: Test build
-        run: make build
+      - name: Unit tests
+        run: make test
 
       - name: ESlint
         run: pnpm run lint
-        
+
       - name: Storybook
         run: pnpm run build-storybook

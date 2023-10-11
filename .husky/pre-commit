@@ -1,9 +1,0 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-yarn workspace @cldcvr/flow-core compile && yarn workspace @cldcvr/flow-core test-build \
-&& yarn workspace @cldcvr/flow-log compile && yarn workspace @cldcvr/flow-log test-build \
-&& yarn workspace @cldcvr/flow-code-editor compile \
-&& yarn workspace @cldcvr/flow-table compile && yarn workspace @cldcvr/flow-table test-build \
-&& yarn workspace @cldcvr/flow-md-editor compile && yarn workspace @cldcvr/flow-md-editor test-build \
-&& git add -A

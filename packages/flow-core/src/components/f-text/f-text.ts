@@ -1,13 +1,16 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import eleStyle from "./f-text.scss";
+import eleStyle from "./f-text.scss?inline";
+import globalStyle from "./f-text-global.scss?inline";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
 import { flowElement } from "./../../utils";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import { FIcon } from "../f-icon/f-icon";
+import { injectCss } from "@cldcvr/flow-core-config";
+injectCss("f-text", globalStyle);
 
 export type FTextStateProp =
 	| "default"
@@ -28,7 +31,7 @@ export class FText extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FIcon.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FIcon.styles];
 
 	/**
 	 * @attribute local state for managing custom fill.

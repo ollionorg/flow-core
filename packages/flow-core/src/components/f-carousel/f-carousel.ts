@@ -1,18 +1,23 @@
 import { html, PropertyValueMap, render, unsafeCSS, svg, nothing } from "lit";
 import { property, query } from "lit/decorators.js";
 import { FRoot } from "./../../mixins/components/f-root/f-root";
-import eleStyle from "./f-carousel.scss";
+import eleStyle from "./f-carousel.scss?inline";
+import globalStyle from "./f-carousel-global.scss?inline";
 import { FDiv } from "../f-div/f-div";
 import { FCarouselContent } from "../f-carousel-content/f-carousel-content";
 import { FIcon } from "../f-icon/f-icon";
 import { flowElement } from "./../../utils";
+
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-carousel", globalStyle);
 
 @flowElement("f-carousel")
 export class FCarousel extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FDiv.styles];
 
 	/**
 	 * @attribute  provide `f-corousel-content` content-id for activation
@@ -171,7 +176,7 @@ export class FCarousel extends FRoot {
 		}
 
 		/**
-		 clone last slide for looping 
+		 clone last slide for looping
 		 */
 		const lastNode = this.slideElements
 			?.item(this.slideElements.length - 1)
@@ -180,7 +185,7 @@ export class FCarousel extends FRoot {
 		this.prepend(lastNode);
 
 		/**
-		 clone first slide for looping 
+		 clone first slide for looping
 		 */
 		const firstNode = this.slideElements?.item(0).cloneNode(true) as HTMLElement;
 		firstNode.id = "firstNode";

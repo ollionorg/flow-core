@@ -1,6 +1,7 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
-import eleStyle from "./f-log.scss";
+import eleStyle from "./f-log.scss?inline";
+import globalStyle from "./f-log-global.scss?inline";
 
 import { FRoot, flowElement } from "@cldcvr/flow-core";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
@@ -9,8 +10,10 @@ import { FitAddon } from "xterm-addon-fit";
 import { SearchAddon } from "xterm-addon-search";
 import { SearchBarAddon } from "xterm-addon-search-bar";
 import { WebLinksAddon } from "xterm-addon-web-links";
-import xtermCSS from "xterm/css/xterm.css";
+import xtermCSS from "xterm/css/xterm.css?inline";
+import { injectCss } from "@cldcvr/flow-core-config";
 
+injectCss("f-log", globalStyle);
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
@@ -19,7 +22,7 @@ export class FLog extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), unsafeCSS(xtermCSS)];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(xtermCSS), unsafeCSS(globalStyle)];
 
 	/**
 	 * @attribute logs to be displayed on screen
@@ -97,7 +100,7 @@ export class FLog extends FRoot {
 			.replace(/\[WARN\]/g, "\x1b[38;2;254;164;1m[WARN]\x1b[0m")
 			.replace(/\[ERROR\]/g, "\x1b[38;2;242;66;66m[ERROR]\x1b[0m")
 			.replace(/\[DEBUG\]/g, "\x1b[38;2;211;153;255m[DEBUG]\x1b[0m")
-			.replace(/\d{4}[-\/][01]\d[-\/][0-3]\d.[0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?Z?/g, date => {
+			.replace(/\d{4}[-/][01]\d[-/][0-3]\d.[0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?Z?/g, date => {
 				return `\x1b[38;2;123;147;178m${date}\x1b[0m`;
 			})
 			.replace(termRegex, key => {

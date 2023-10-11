@@ -1,12 +1,17 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
-import eleStyle from "./f-checkbox.scss";
+import eleStyle from "./f-checkbox.scss?inline";
+import globalStyle from "./f-checkbox-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import checkedMark from "../../mixins/svg/checked-mark";
 import indeterminateMark from "../../mixins/svg/indeterminate-mark";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
+
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-checkbox", globalStyle);
 
 export type FCheckboxState = "primary" | "default" | "success" | "warning" | "danger";
 export type FCheckboxCustomEvent = {
@@ -18,7 +23,7 @@ export class FCheckbox extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FDiv.styles];
 	/**
 	 * @attribute Value of a checkbox defines if it is selected, unselected or indeterminate.
 	 */

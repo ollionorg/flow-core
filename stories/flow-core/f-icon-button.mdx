@@ -1,0 +1,362 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fIconButtonAnatomy from "../svg/i-ficon-button-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import * as FIconButtonStories from "./f-icon-button.stories";
+
+<Meta of={FIconButtonStories} />
+
+# f-icon-button
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+### Used for this
+
+- To simplify appearance of repeated actions
+- To enable actions in compact spaces.
+
+### Not for this
+
+- Do not use the Icon button for primary actions. Use button instead
+
+<br />
+
+### [Playground](/story/components-f-icon-button--playground)
+
+<Canvas>
+	<Story of={FIconButtonStories.Playground} />
+</Canvas>
+
+<br />
+
+### Anatomy
+
+<f-divider />
+
+<Story of={FIconButtonStories.Anatomy} />
+
+<br />
+
+## variant
+
+<f-divider />
+
+Variants are various representations of an icon button. For example an icon button can be round,
+curved or block.
+
+<Canvas>
+	<Story of={FIconButtonStories.Variant} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>round</td>
+      <td>Round border edges</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>curved</td>
+      <td>Curved edges with border radius of 4px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>block</td>
+      <td>A block button takes up the entire available parent width.</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## category
+
+<f-divider />
+
+<Canvas>
+	<Story of={FIconButtonStories.Category} />
+</Canvas>
+
+<p className="note-section margin-btm-24 margin-tp-16">
+	Note: A transparent button can only have block shape.
+</p>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>fill</td>
+      <td>background-color present</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>outline</td>
+      <td>only outer border outline color present along with icon color </td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>transparent</td>
+      <td>just icon is visible with padding around it</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>packed</td>
+      <td>just icon is visible with no padding around it i.e completely packed</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## size
+
+<f-divider />
+
+The medium size is the default and recommended option.
+
+<Canvas>
+	<Story of={FIconButtonStories.Size} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>large</td>
+      <td>Icon Button Size is 44px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>medium</td>
+      <td>Icon Button Size is 36px</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>small</td>
+      <td>Icon Button Size is 28px</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>x-small</td>
+      <td>Icon Button Size is 20px</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## state
+
+<f-divider />
+
+The states on buttons are to indicate various degrees of emphasis of the action.
+
+<Canvas>
+	<Story of={FIconButtonStories.State} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>primary</td>
+      <td>Reserved for essential actions</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>neutral</td>
+      <td>Requires less prominence, Multiple actions of the same importance</td>
+
+      <td>
+        <code>default</code>
+      </td>
+    </tr>
+
+    <tr>
+      <td>success</td>
+      <td>Actions Indicating success, Positive results</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>warning</td>
+      <td>Discouraged action, Not always destructive</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>danger</td>
+      <td>Destructive actions, Negative consequences</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>inherit</td>
+      <td>inherit the color according to parent f-div</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>custom</td>
+      <td>can enter custom color in color-name or hex-codes</td>
+
+      <td />
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## icon
+
+<f-divider />
+
+Icon property defines what icon will be displayed on the icon. It can take the icon name from a
+library , any inline SVG or any URL for the image.
+
+<Canvas>
+	<Story of={FIconButtonStories.Icon} />
+</Canvas>
+
+<br />
+
+## counter
+
+<f-divider />
+
+Counter property enables a counter on the icon button.
+
+<Canvas>
+	<Story of={FIconButtonStories.Counter} />
+</Canvas>
+
+<h4 className="margin-btm-8 margin-tp-36">Flags</h4>
+
+<hr className="margin-btm-24" />
+
+<Canvas>
+	<Story of={FIconButtonStories.Flags} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td>Description</td>
+      <td>Default</td>
+    </tr>
+
+    <tr>
+      <td>loading</td>
+      <td>Loader replaces the content of the button. Width of the button remains the same.</td>
+      <td>false</td>
+    </tr>
+
+    <tr>
+      <td>disabled</td>
+      <td>Opacity of button is set to 50% in disabled state.</td>
+      <td>false </td>
+    </tr>
+
+    <tr>
+      <td>clickable</td>
+
+      <td>
+        f-icon-button is always clickable. On hover: lightened/darkened by 15%. On press:
+        lightened/darkened by 30%
+      </td>
+
+      <td>true</td>
+    </tr>
+
+  </tbody>
+</table>
+
+<br />
+
+## Native Framework Directives
+
+<f-divider />
+
+<br />
+
+### Tooltip
+
+<f-divider />
+
+Always use the tooltip directive on the button component.
+
+<Canvas>
+	<Story of={FIconButtonStories.Tooltip} />
+</Canvas>
+
+<ArgsTable of={"f-icon-button"} />

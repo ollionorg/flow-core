@@ -1,5 +1,14 @@
 <h4 className="margin-btm-8">Release Notes</h4>
 
+## 2.0.1
+
+### Patch Changes
+
+- a2de106: Fix platform types
+- Updated dependencies [a2de106]
+  - @cldcvr/flow-core-config@1.1.1
+  - @cldcvr/flow-core@2.0.1
+
 ## 2.0.1-beta.0
 
 ### Patch Changes

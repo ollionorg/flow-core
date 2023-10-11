@@ -1,5 +1,11 @@
 <h4 class="margin-btm-8">Release Notes</h4>
 
+## 1.1.3
+
+### Patch Changes
+
+- Remove sideEffects because the components require registration via import
+
 ## 1.1.2
 
 ### Patch Changes

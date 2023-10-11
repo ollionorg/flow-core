@@ -1,5 +1,14 @@
 <h4 className="margin-btm-8">Release Notes</h4>
 
+## 2.0.3
+
+### Patch Changes
+
+- Remove sideEffects because the components require registration via import
+- Updated dependencies
+  - @cldcvr/flow-core-config@1.1.3
+  - @cldcvr/flow-core@2.0.3
+
 ## 2.0.2
 
 ### Patch Changes

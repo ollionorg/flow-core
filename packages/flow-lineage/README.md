@@ -44,51 +44,22 @@ npm i --save @cldcvr/flow-lineage
 
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
-**Note:** This is required to register Flow elements error-free. We achieve this by importing all flow packages asynchronously and then starting up your application.
-
-For **Vue JS:**
-Paste the below snippet in your project, for `src/main.ts` or `main.js`
-
 ```javascript
-import("@cldcvr/flow-core").then(async () => {
-	await import("@cldcvr/flow-lineage");
-	//add your application startup/runtime code here **
-});
+import "@cldcvr/flow-core";
+import "@cldcvr/flow-lineage";
 ```
-
-<details>
-<summary>For React</summary>
-
-Paste the below snippet in your project, for `src/main.ts`
-
-```javascript
-import("@cldcvr/flow-core").then(async () => {
-	await import("@cldcvr/flow-lineage");
-	//add your application startup/runtime code here **
-});
-```
-
-</details>
-
-<details><summary>For Angular</summary>
-
-Paste the below snippet in your project, for `src/index.tsx` or `index.jsx`
-
-</details>
-
-<br>
 
 <details><summary>Example</summary>
 
 **VueJS:** In the following example, I imported `@cldcvr/flow-core` and then imported the rest of the flow packages including `@cldcvr/flow-lineage` and after that startup code was added for VueJs `createApp(App).use(router).mount(“#app”);`.
 
 ```javascript
-import("@cldcvr/flow-core").then(async () => {
-	await import("@cldcvr/flow-system-icon");
-	await import("@cldcvr/flow-product-icon");
-	await import("@cldcvr/flow-lineage");
-	createApp(App).use(router).mount("#app"); //runtime
-});
+import "@cldcvr/flow-core";
+import "@cldcvr/flow-system-icon";
+import "@cldcvr/flow-product-icon";
+import "@cldcvr/flow-lineage";
+
+createApp(App).use(router).mount("#app"); //runtime
 ```
 
 </details>

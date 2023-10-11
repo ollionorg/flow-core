@@ -55,9 +55,7 @@ _Note:_ after installation re-start your application.
 Copy and import the below snippet into your startup file. In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
 
 ```JavaScript
-import("@cldcvr/flow-core").then(async () => {
-  //your application startup code
-});
+import "@cldcvr/flow-core";
 ```
 
 <br>
@@ -99,9 +97,8 @@ npm i --save @cldcvr/flow-system-icon
 ### 2️⃣ Import the icon pack
 
 ```javascript
-Promise.all([import("@cldcvr/flow-core"), import("@cldcvr/flow-system-icon")]).then(() => {
-	// add your application startup code here
-});
+import "@cldcvr/flow-core";
+import "@cldcvr/flow-system-icon";
 ```
 
 - [Icons Github repo](https://github.com/cldcvr/flow-icon)

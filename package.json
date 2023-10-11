@@ -10,7 +10,7 @@
     "preinstall": "npx only-allow pnpm",
     "storybook": "storybook dev -p 6007",
     "start": "NODE_OPTIONS=--openssl-legacy-provider pnpm run storybook",
-    "build-storybook": "storybook build",
+    "build-storybook": "export NODE_OPTIONS='--max_old_space_size=8192' && storybook build",
     "build-packages": "make build",
     "lint": "pnpm lint:files .",
     "lint:fix": "env TIMING=1 eslint --ext .js,.ts --fix .",

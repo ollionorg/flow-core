@@ -18,37 +18,10 @@ npm i --save @cldcvr/flow-code-editor
 
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
-**Note:** This is required to register Flow elements error-free. We achieve this by importing all flow packages asynchronously and then starting up your application.
-
-For **Vue JS:**
-Paste the below snippet in your project, for `src/main.ts` or `main.js`
-
 ```javascript
-import("@cldcvr/flow-core").then(async () => {
-	await import("@cldcvr/flow-code-editor");
-	//add your application startup/runtime code here **
-});
+import "@cldcvr/flow-core";
+import "@cldcvr/flow-code-editor";
 ```
-
-<details>
-<summary>For React</summary>
-
-Paste the below snippet in your project, for `src/main.ts`
-
-```javascript
-import("@cldcvr/flow-core").then(async () => {
-	await import("@cldcvr/flow-code-editor");
-	//add your application startup/runtime code here **
-});
-```
-
-</details>
-
-<details><summary>For Angular</summary>
-
-Paste the below snippet in your project, for `src/index.tsx` or `index.jsx`
-
-</details>
 
 <br>
 

@@ -26,6 +26,8 @@ describe("f-date-time-picker", () => {
 	});
 	it("check if date picker renders", async () => {
 		await fixture<FDateTimePicker>(html` <f-date-time-picker></f-date-time-picker> `);
+		//@todo - find a wayt to ensure flatpickr renders
+		await new Promise(resolve => setTimeout(resolve, 1000));
 		const flatpickr = document.body.querySelector(".flatpickr-calendar");
 		expect(flatpickr?.classList.contains("open")).equals(false);
 	});

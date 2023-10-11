@@ -1,6 +1,5 @@
 <h4 class="margin-btm-8">Release Notes</h4>
 
-
 # Change Log
 
 ## [3.0.3] - 2023-10-12
@@ -42,7 +41,6 @@
 - `@cldcvr/flow-core@2.0.0`
 <hr class="margin-btm-32" />
 <p class="margin-btm-24">All notable changes to this project will be documented in this file. See <a>Conventional Commits</a> for commit guidelines. </p>
-
 
 ## [2.0.1] - 2023-09-11
 

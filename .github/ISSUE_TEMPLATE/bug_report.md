@@ -1,27 +1,29 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: ""
-labels: ""
-assignees: ""
+title: ''
+labels: bug
+assignees: ''
+
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+## Bug description
 
-**To Reproduce**
-Steps to reproduce the behavior:
+<!--
+    A clear and concise description of what the bug is.
+    Ideally you should provide a working Stackblitz example
+-->
 
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+## Reproduction steps
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+<!--
+    If you want the bug to be fixed faster provide a working stackblitz example
+    or
+    Provide the steps to reproduce and expected behavior.
+    If applicable, add screenshots to help explain your problem.
+ -->
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**Reproducible example:** [flow2-vue-starter-kit](https://stackblitz.com/edit/vitejs-vite-npjkab?file=src%2FApp.vue)
 
 **Desktop (please complete the following information):**
 
@@ -36,5 +38,6 @@ If applicable, add screenshots to help explain your problem.
 - Browser [e.g. stock browser, safari]
 - Version [e.g. 22]
 
-**Additional context**
-Add any other context about the problem here.
+## Additional context
+
+<!-- Add any other context about the problem here. -->

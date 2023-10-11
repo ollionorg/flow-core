@@ -29,9 +29,5 @@ export default {
 				alias
 			}
 		});
-	},
-
-	docs: {
-		autodocs: true
 	}
 };

@@ -1,6 +1,6 @@
 <h4 class="margin-btm-8">Release Notes</h4>
 
-## 1.1.1
+## 1.1.2
 
 ### Patch Changes
 

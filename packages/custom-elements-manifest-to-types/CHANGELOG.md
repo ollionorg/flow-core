@@ -1,6 +1,6 @@
 # @cldcvr/custom-elements-manifest-to-types
 
-## 2.0.1
+## 2.0.2
 
 ### Patch Changes
 

@@ -4,6 +4,7 @@ import { BehaviorSubject, Subject } from "rxjs";
  * TODO :include font-family, icons
  */
 export type FlowCoreConfig = {
+	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 	theme: "f-dark" | "f-light" | string;
 	iconPack: Record<string, string> | null;
 };

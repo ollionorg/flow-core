@@ -68,11 +68,13 @@ export class FRoot extends LitElement {
 			 */
 			let tooltipElement = document.querySelector<TooltipElement>("#flow-tooltip");
 
+			const changedTooltip = changedProperties.get("tooltip");
+
 			/**
 			 * close tooltip if it is open by mouse over
 			 */
-			if (changedProperties.get("tooltip")?.startsWith("#")) {
-				const extTooltip = document.querySelector<TooltipElement>(changedProperties.get("tooltip"));
+			if (typeof changedTooltip === "string" && changedTooltip.startsWith("#")) {
+				const extTooltip = document.querySelector<TooltipElement>(changedTooltip);
 				if (extTooltip) {
 					extTooltip.open = false;
 				}

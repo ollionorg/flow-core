@@ -5,7 +5,7 @@ import { html, fixture, expect } from "@open-wc/testing";
 import "../../../";
 import { FLineage } from "../../../";
 
-describe("f-lineage", async () => {
+describe("f-lineage", () => {
 	it("is defined", () => {
 		const el = document.createElement("f-lineage");
 		expect(el).instanceOf(FLineage);
@@ -174,7 +174,7 @@ describe("f-lineage", async () => {
 
 		if (el.shadowRoot) {
 			const svg = el.shadowRoot.querySelector("svg");
-			await expect(svg).lightDom.to.equalSnapshot();
+			expect(svg).lightDom.to.equalSnapshot();
 		}
 		//@ts-ignore
 	}).timeout(15000);

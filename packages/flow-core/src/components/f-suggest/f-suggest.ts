@@ -194,7 +194,7 @@ export class FSuggest extends FRoot {
 	/**
 	 * emit input custom event
 	 */
-	handleInput(e: CustomEvent) {
+	handleInput(e: CustomEvent<{ value: string }>) {
 		e.stopPropagation();
 		this.value = e.detail.value;
 		this.handleFocus();
@@ -302,8 +302,7 @@ export class FSuggest extends FRoot {
 			const newIndex = this.currentIndex + direction;
 
 			// Ensure the new index stays within bounds
-			this.currentIndex =
-				((newIndex as number) + (totalOptions as number)) % (totalOptions as number);
+			this.currentIndex = (newIndex + (totalOptions as number)) % (totalOptions as number);
 
 			// Optionally, you can scroll the dropdown to bring the selected option into view if it's outside the viewport.
 			this.scrollFocusedOptionIntoView();
@@ -366,7 +365,7 @@ export class FSuggest extends FRoot {
 						this.value = selectedOption as string;
 					}
 					this.dispatchInputEvent(selectedOption);
-					this.handleBlur(false);
+					void this.handleBlur(false);
 				}
 			}
 		} else {
@@ -376,8 +375,8 @@ export class FSuggest extends FRoot {
 					selectedCategory
 				][this.currentIndex];
 
-				this.dispatchInputEvent(selectedOption as string);
-				this.handleBlur(false);
+				this.dispatchInputEvent(selectedOption);
+				void this.handleBlur(false);
 			}
 		}
 	}

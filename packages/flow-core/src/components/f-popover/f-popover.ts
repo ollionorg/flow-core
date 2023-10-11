@@ -197,28 +197,30 @@ export class FPopover extends FRoot {
 							  }),
 						shift({ padding: isTooltip ? 0 : 16 })
 					]
-				}).then(({ x, y }) => {
-					if (x < 0) {
-						target.style.removeProperty("z-index");
-						x = 0;
-					}
-					if (y < 0) {
-						target.style.removeProperty("z-index");
-						y = 0;
-					}
-					if (target.nodeName.toLowerCase() !== "body") {
-						Object.assign(this.style, {
-							top: `${y}px`,
-							left: `${x}px`
-						});
-					} else {
-						Object.assign(this.style, this.getBodyTargetPlacementCords());
-					}
+				})
+					.then(({ x, y }) => {
+						if (x < 0) {
+							target.style.removeProperty("z-index");
+							x = 0;
+						}
+						if (y < 0) {
+							target.style.removeProperty("z-index");
+							y = 0;
+						}
+						if (target.nodeName.toLowerCase() !== "body") {
+							Object.assign(this.style, {
+								top: `${y}px`,
+								left: `${x}px`
+							});
+						} else {
+							Object.assign(this.style, this.getBodyTargetPlacementCords());
+						}
 
-					this.querySelectorAll("f-popover").forEach(async pop => {
-						(pop as LitElement).requestUpdate();
-					});
-				});
+						this.querySelectorAll("f-popover").forEach(pop => {
+							(pop as LitElement).requestUpdate();
+						});
+					})
+					.catch(_err => {});
 			});
 		}
 	}

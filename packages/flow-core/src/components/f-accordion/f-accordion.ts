@@ -196,9 +196,8 @@ export class FAccordion extends FRoot {
 			</f-div>
 		`;
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 		this.handleAccordionBody();
 	}

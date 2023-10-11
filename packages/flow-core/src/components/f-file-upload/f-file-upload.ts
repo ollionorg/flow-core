@@ -18,6 +18,7 @@ export type FFileUploadState = "primary" | "default" | "success" | "warning" | "
 
 export type FFileUploadValueType = File | File[];
 
+// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 export type FFileUploadFileType = string | "all";
 
 export type FFileUploadSizeProp =
@@ -554,9 +555,8 @@ export class FFileUpload extends FRoot {
 			</f-div>
 		`;
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 		//update the selectedFiles as per the value being fetched
 		this.updateSelectedValues();

@@ -235,6 +235,7 @@ export class FLineage extends FRoot {
 			this.pageNumberElement.innerText = `${((maxLevel * 100) / this.maxAvailableLevels).toFixed(
 				0
 			)}%`;
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 			drawLineage({
 				...this.lineageDrawParams,
 				levelsToPlot: this.levelsToPlot,
@@ -580,6 +581,7 @@ export class FLineage extends FRoot {
 				 * store transform and it is used to apply on update
 				 */
 				this.currentTransform = e.transform;
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 				lineageContainer.attr("transform", e.transform);
 				if (this.isSafari()) {
 					const scale = e.transform.k;
@@ -596,6 +598,7 @@ export class FLineage extends FRoot {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			const zoom = d3.zoom().scaleExtent([0.3, 4]).on("zoom", handleZoom) as any;
 
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 			svgElement.call(zoom).on("dblclick.zoom", null);
 
 			svgElement.on("click", (event: MouseEvent) => {

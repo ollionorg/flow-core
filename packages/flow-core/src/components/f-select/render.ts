@@ -121,10 +121,8 @@ export default function render(this: FSelect) {
 		${Array.isArray(this.selectedOptions) && selectedOptionsLength > 0
 			? html` <div class="f-select-searchable">
 					${this.type === "single"
-						? (this.selectedOptions as FSelectOptionsProp).map(option =>
-								this.renderSingleSelection(option)
-						  )
-						: html`${(this.selectedOptions as FSelectOptionsProp)
+						? this.selectedOptions.map(option => this.renderSingleSelection(option))
+						: html`${this.selectedOptions
 								.slice(0, this.getSlicedSelections(this.selectedOptions))
 								.map(option => this.renderMultipleSelectionTag(option))}
 						  ${this.selectedOptions.length > this.selectionLimit

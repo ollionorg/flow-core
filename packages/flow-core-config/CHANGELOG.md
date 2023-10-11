@@ -1,5 +1,11 @@
 <h4 class="margin-btm-8">Release Notes</h4>
 
+## 1.1.1-beta.0
+
+### Patch Changes
+
+- Fix platform types
+
 ## 1.1.0
 
 ### Minor Changes

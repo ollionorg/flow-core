@@ -335,7 +335,7 @@ export class FSelect extends FRoot {
 			return (this.selectedOptions as FSelectArrayOfStrings).indexOf(option);
 		} else {
 			return (this.selectedOptions as FSelectOptionsProp).findIndex(
-				item => (item as FSelectOptionObject)?.title === (option as FSelectOptionObject)?.title
+				item => (item as FSelectOptionObject)?.title === option?.title
 			);
 		}
 	}
@@ -473,9 +473,10 @@ export class FSelect extends FRoot {
 	 */
 	getConcaticateGroupOptions(array: FSelectOptionsGroup) {
 		const selectedOptions = cloneDeep(array);
-		return Object.keys(array).reduce(function (arr: FSelectArrayOfObjects, key: string) {
-			return arr.concat((selectedOptions as any)[key]);
-		}, []);
+
+		return Object.keys(array).reduce(function (arr, key) {
+			return arr.concat(selectedOptions[key]);
+		}, [] as FSelectSingleOption[]);
 	}
 
 	/**

@@ -23,6 +23,7 @@ import { checkboxGroupStyles } from "../f-checkbox-group/f-checkbox-group";
 
 export type ObjectValueType = Record<
 	string,
+	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 	string | string[] | number | number[] | unknown | unknown[] | undefined
 >;
 @customElement("f-form-object")
@@ -152,7 +153,7 @@ export class FFormObject extends FRoot {
 	async validate(silent = false) {
 		await this.updateComplete;
 		const allValidations: FormBuilderValidationPromise[] = [];
-		Object.entries(this.config.fields).forEach(async ([fieldname, fieldConfig]) => {
+		Object.entries(this.config.fields).forEach(([fieldname, fieldConfig]) => {
 			if (
 				(fieldConfig.type === "object" || fieldConfig.type === "array") &&
 				this.fieldRefs[fieldname].value
@@ -239,7 +240,7 @@ export class FFormObject extends FRoot {
 			}
 		});
 
-		propogateProperties(this);
+		await propogateProperties(this);
 	}
 
 	dispatchInputEvent() {

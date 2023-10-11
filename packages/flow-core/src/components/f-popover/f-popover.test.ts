@@ -1,4 +1,4 @@
-import { html, fixture, expect, nextFrame } from "@open-wc/testing";
+import { expect, fixture, html } from "@open-wc/testing";
 
 import "@cldcvr/flow-core";
 import { FPopover } from "@cldcvr/flow-core";

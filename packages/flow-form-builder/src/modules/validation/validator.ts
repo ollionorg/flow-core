@@ -1,12 +1,14 @@
 import {
 	CanValidateFields,
 	FFormInputElements,
+	FormBuilderAsyncValidatorFunction,
 	FormBuilderCustomValidationRule,
 	FormBuilderField,
 	FormBuilderGenericValidationRule,
 	FormBuilderLabel,
 	FormBuilderValidationPromise,
 	FormBuilderValidationRules,
+	FormBuilderValidatorFunction,
 	ValidationResult,
 	ValidationResults
 } from "../../types";
@@ -221,7 +223,7 @@ export function extractValidationState(allResults: ValidationResults) {
 	return errors;
 }
 
-function isAsync(func: Function) {
+function isAsync(func: FormBuilderValidatorFunction | FormBuilderAsyncValidatorFunction) {
 	if (func.constructor && func.constructor.name === "AsyncFunction") {
 		return true;
 	}

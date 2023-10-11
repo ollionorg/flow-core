@@ -187,7 +187,7 @@ export class FFormBuilder extends FRoot {
 	submit() {
 		this.validateForm()
 			.then(all => {
-				this.updateValidaitonState(all);
+				this.updateValidationState(all);
 				if (this.state.errors?.length === 0) {
 					const event = new CustomEvent("submit", {
 						detail: this.values,
@@ -202,7 +202,7 @@ export class FFormBuilder extends FRoot {
 			});
 	}
 
-	updateValidaitonState(all: ValidationResults) {
+	updateValidationState(all: ValidationResults) {
 		this.state.errors = extractValidationState(all);
 		this.dispatchStateChangeEvent();
 	}
@@ -242,7 +242,10 @@ export class FFormBuilder extends FRoot {
 						...((ref.value as FFormInputElements).value as [])
 					);
 				} else if (this.values && this.field && this.field.type === "object") {
-					Object.assign(this.values, (ref.value as FFormInputElements).value as Object);
+					Object.assign(
+						this.values,
+						(ref.value as FFormInputElements).value as Record<string, unknown>
+					);
 				} else {
 					this.values = ref.value?.value as FormBuilderValues;
 				}
@@ -272,7 +275,7 @@ export class FFormBuilder extends FRoot {
 				 * if current field is of type array or object then then also validate form anyway
 				 */
 				await this.validateForm(true).then(all => {
-					this.updateValidaitonState(all);
+					this.updateValidationState(all);
 				});
 			};
 			ref.value.oninput = fieldValidation;
@@ -301,11 +304,11 @@ export class FFormBuilder extends FRoot {
 		/**
 		 * silent validation and store in state
 		 */
-		this.validateForm(true).then(all => {
-			this.updateValidaitonState(all);
+		void this.validateForm(true).then(all => {
+			this.updateValidationState(all);
 		});
 
-		propogateProperties(this);
+		await propogateProperties(this);
 	}
 
 	/**
@@ -318,7 +321,7 @@ export class FFormBuilder extends FRoot {
 	onShowWhenExecution() {
 		this.validateForm(true)
 			.then(all => {
-				this.updateValidaitonState(all);
+				this.updateValidationState(all);
 			})
 			.catch(error => {
 				console.error("Error validating form", error);

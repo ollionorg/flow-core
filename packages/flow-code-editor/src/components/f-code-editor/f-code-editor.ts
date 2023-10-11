@@ -107,7 +107,7 @@ export class FCodeEditor extends FRoot {
 	@query(".copy-button")
 	copyCodeButton?: FButton;
 
-	removedCommentsMap = new Map();
+	removedCommentsMap = new Map<number, string>();
 
 	get dymanicWidth() {
 		return this.title ? "hug-content" : "100%";
@@ -145,7 +145,7 @@ export class FCodeEditor extends FRoot {
 		const lines = code.split("\n");
 		const newLines: string[] = [];
 		let insideMultiLineComment = false;
-		const removedCommentsMap = new Map();
+		const removedCommentsMap = new Map<number, string>();
 		const startPattern = languageCommentsMap.get(this.fixedLang)?.multiLine?.start;
 		const endPattern = languageCommentsMap.get(this.fixedLang)?.multiLine?.end;
 		const singleLinePattern = languageCommentsMap.get(this.fixedLang)?.singleLine;
@@ -260,7 +260,7 @@ export class FCodeEditor extends FRoot {
 		}
 	}
 
-	handleChange(e: CustomEvent) {
+	handleChange(e: CustomEvent<{ value: unknown }>) {
 		if (!e.detail.value) {
 			this.toggleComments();
 		} else {

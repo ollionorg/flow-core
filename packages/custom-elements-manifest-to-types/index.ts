@@ -136,6 +136,7 @@ function getComponentCodeFromDeclarationReact(declaration: Declaration) {
 			d => d.name === "required"
 		) as PropertyLike;
 		if (requiredDeclaration && requiredDeclaration.default) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			requiredAttributes = JSON.parse(requiredDeclaration.default);
 		}
 	}
@@ -178,6 +179,7 @@ function getComponentCodeFromDeclarationVue3(declaration: MixinDeclaration) {
 			d => d.name === "required"
 		) as PropertyLike;
 		if (requiredDeclaration && requiredDeclaration.default) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			requiredAttributes = JSON.parse(requiredDeclaration.default);
 		}
 	}
@@ -220,6 +222,7 @@ function getComponentCodeFromDeclarationVue2(declaration: Declaration) {
 			d => d.name === "required"
 		) as PropertyLike;
 		if (requiredDeclaration && requiredDeclaration.default) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 			requiredAttributes = JSON.parse(requiredDeclaration.default);
 		}
 	}

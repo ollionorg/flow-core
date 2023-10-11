@@ -223,6 +223,7 @@ export default function createNodeElements(
 		level: number,
 		isChildren?: boolean,
 		parent?: LineageNodeElement
+		// eslint-disable-next-line @typescript-eslint/require-await
 	) => {
 		/**
 		 * Interate through nodes and calculate co-ordinates

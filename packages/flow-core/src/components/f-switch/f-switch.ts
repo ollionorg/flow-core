@@ -148,9 +148,8 @@ export class FSwitch extends FRoot {
 			<slot name="help"></slot>
 		</f-div>`;
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 		if (!this.hasLabel && !this.hasIconTooltip && !this.hasSubtitle) {
 			this.switchSlots.style.display = "none";

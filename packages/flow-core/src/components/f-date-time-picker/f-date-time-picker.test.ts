@@ -1,10 +1,10 @@
-import { html, fixture, expect, oneEvent } from "@open-wc/testing";
 import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
+import { expect, fixture, html } from "@open-wc/testing";
 
 // importing flow-core components
 import "@cldcvr/flow-core";
 
-import { FDateTimePicker, ConfigUtil } from "@cldcvr/flow-core";
+import { ConfigUtil, FDateTimePicker } from "@cldcvr/flow-core";
 
 // setting icon pack for testing icon related test cases
 ConfigUtil.setConfig({ iconPack: IconPack });

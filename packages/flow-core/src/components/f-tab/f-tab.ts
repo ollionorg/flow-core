@@ -221,9 +221,7 @@ For vertical f-tab, content can align to top, middle, or bottom.
 			${lastScrollButton}
 		</f-div>`;
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 		/**
 		 * on every update check if scroll is present or not

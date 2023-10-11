@@ -1,5 +1,14 @@
 <h4 className="margin-btm-8">Release Notes</h4>
 
+## 1.0.1-beta.0
+
+### Patch Changes
+
+- Fix platform types
+- Updated dependencies
+  - @cldcvr/flow-core-config@1.1.1-beta.0
+  - @cldcvr/flow-core@2.0.1-beta.0
+
 ## 1.0.0
 
 ### Minor Changes

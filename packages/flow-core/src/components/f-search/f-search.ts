@@ -210,12 +210,12 @@ export class FSearch extends FRoot {
 	/**
 	 * emit input custom event
 	 */
-	handleInput(e: CustomEvent) {
+	handleInput(e: CustomEvent<{ value: unknown }>) {
 		e.stopPropagation();
 		if (typeof e.detail.value === "object") {
-			this.value = e.detail.value.toString();
+			this.value = e.detail.value?.toString();
 		} else {
-			this.value = e.detail.value;
+			this.value = String(e.detail.value);
 		}
 		this.dispatchInputEvent(e.detail.value, this["selected-scope"]);
 	}
@@ -223,7 +223,7 @@ export class FSearch extends FRoot {
 	/**
 	 * emit input custom event for scope
 	 */
-	handleScopeSelection(e: CustomEvent) {
+	handleScopeSelection(e: CustomEvent<{ value: string }>) {
 		e.stopPropagation();
 		this["selected-scope"] = e.detail.value;
 		this.dispatchInputEvent(this.value ?? "", e.detail.value);
@@ -389,9 +389,8 @@ export class FSearch extends FRoot {
 			<f-div direction="column" id="helper-text-section"><slot name="help"></slot> </f-div>
 		</f-div>`;
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 		this.displayHelpSection();
 		this.displayHeaderSection();

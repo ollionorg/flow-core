@@ -1,7 +1,7 @@
 import { LineageNodeChildren } from "../components/f-lineage/lineage-types";
 import getComputedHTML from "./get-computed-html";
 
-function isEmpty(obj: Object) {
+function isEmpty(obj: Record<string, unknown>) {
 	if (obj) {
 		return Object.keys(obj).length === 0;
 	}
@@ -29,7 +29,7 @@ function getChildCount(children: Record<string, LineageNodeChildren> | undefined
 	return 0;
 }
 
-function debounce(func: Function) {
+function debounce(func: () => void) {
 	let timer: number;
 	return function (event: Event) {
 		if (timer) clearTimeout(timer);

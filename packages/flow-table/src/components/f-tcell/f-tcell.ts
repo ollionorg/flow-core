@@ -189,9 +189,8 @@ export class FTcell extends FRoot {
 		});
 		this.dispatchEvent(toggle);
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 
 		this.onmouseover = () => this.toggleColumnHighlight("add");

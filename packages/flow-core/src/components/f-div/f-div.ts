@@ -24,7 +24,6 @@ export type FDivBorderProp =
 export type FDivPaddingProp =
 	| FDivPadding
 	| `${FDivPadding} ${FDivPadding}`
-	| `${FDivPadding} ${FDivPadding}`
 	| `${FDivPadding} ${FDivPadding} ${FDivPadding} ${FDivPadding}`;
 
 export type FDivWidthProp =
@@ -350,9 +349,8 @@ export class FDiv extends FRoot {
 		 */
 		return html` <slot></slot>${this.loading === "loader" ? html`${unsafeSVG(loader)}` : ""}`;
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 
 		if (

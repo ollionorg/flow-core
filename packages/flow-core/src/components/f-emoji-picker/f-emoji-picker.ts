@@ -509,9 +509,8 @@ export class FEmojiPicker extends FRoot {
 			>
 		`;
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 		// header section-slot display
 		this.headerSectionDisplay();

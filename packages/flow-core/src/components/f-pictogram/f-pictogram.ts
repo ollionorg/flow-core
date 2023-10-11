@@ -261,9 +261,7 @@ export class FPictogram extends FRoot {
 			</div>
 		`;
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 		if (this.fPicorgramWrapper && this.autoBg && this.isText) {
 			// Modify the background-color property

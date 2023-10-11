@@ -24,6 +24,7 @@ export type ArrayValueType = (
 	| string[]
 	| number
 	| number[]
+	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 	| unknown
 	| unknown[]
 	| undefined
@@ -210,9 +211,10 @@ export class FFormArray extends FRoot {
 		await this.updateComplete;
 		const fieldConfig = this.config.field;
 		const allValidations: FormBuilderValidationPromise[] = [];
-		this.fieldRefs.forEach(async fieldRef => {
+
+		this.fieldRefs.forEach(fieldRef => {
 			if ((fieldConfig.type === "object" || fieldConfig.type === "array") && fieldRef.value) {
-				allValidations.push((fieldRef.value as FFormInputElements).validate(silent));
+				allValidations.push(fieldRef.value.validate(silent));
 			} else {
 				allValidations.push(
 					validateField(
@@ -310,7 +312,7 @@ export class FFormArray extends FRoot {
 				}
 			}
 		});
-		propogateProperties(this);
+		await propogateProperties(this);
 	}
 
 	addField() {

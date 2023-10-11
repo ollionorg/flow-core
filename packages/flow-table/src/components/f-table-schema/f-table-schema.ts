@@ -275,8 +275,7 @@ export class FTableSchema extends FRoot {
 										.toLocaleLowerCase()
 										.includes(this.searchTerm.toLocaleLowerCase());
 								} else {
-									return v.value
-										.toString()
+									return String(v.value)
 										.toLocaleLowerCase()
 										.includes(this.searchTerm.toLocaleLowerCase());
 								}
@@ -296,8 +295,7 @@ export class FTableSchema extends FRoot {
 						if (typeof v.value === "object" && v.toString) {
 							return v.toString().toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase());
 						} else {
-							return v.value
-								.toString()
+							return String(v.value)
 								.toLocaleLowerCase()
 								.includes(this.searchTerm.toLocaleLowerCase());
 						}

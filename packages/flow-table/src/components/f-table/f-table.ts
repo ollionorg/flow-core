@@ -150,7 +150,7 @@ export class FTable extends FRoot {
 	 * if checkbox or radio clicked in row
 	 * @param event
 	 */
-	async handleRowSelection(event: CustomEvent) {
+	async handleRowSelection(event: CustomEvent<{ element: HTMLElement }>) {
 		event.stopPropagation();
 		this.updateRadioChecks(event.detail.element);
 		await this.updateHeaderSelectionCheckboxState();

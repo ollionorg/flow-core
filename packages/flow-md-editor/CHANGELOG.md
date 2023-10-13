@@ -1,33 +1,36 @@
 <h4 className="margin-btm-8">Release Notes</h4>
 
-## 2.0.3
+
+# Change Log
+
+## [2.0.3] - 2023-10-12
 
 ### Patch Changes
 
 - Remove sideEffects because the components require registration via import
 - Updated dependencies
-  - @cldcvr/flow-core-config@1.1.3
-  - @cldcvr/flow-core@2.0.3
+- `@cldcvr/flow-core-config@1.1.3`
+- `@cldcvr/flow-core@2.0.3`
 
-## 2.0.2
+## [2.0.2] - 2023-10-10
 
 ### Patch Changes
 
 - a2de106: Fix platform types
 - Updated dependencies [a2de106]
-  - @cldcvr/flow-core-config@1.1.1
-  - @cldcvr/flow-core@2.0.1
+- `@cldcvr/flow-core-config@1.1.1`
+- `@cldcvr/flow-core@2.0.1`
 
-## 2.0.1-beta.0
+## [2.0.1-beta.0] - 2023-10-10
 
 ### Patch Changes
 
 - Fix platform types
 - Updated dependencies
-  - @cldcvr/flow-core-config@1.1.1-beta.0
-  - @cldcvr/flow-core@2.0.1-beta.0
+- `@cldcvr/flow-core-config@1.1.1-beta.0`
+- `@cldcvr/flow-core@2.0.1-beta.0`
 
-## 2.0.0
+## [2.0.0] - 2023-10-10
 
 ### Major Changes
 
@@ -36,10 +39,8 @@
 ### Patch Changes
 
 - Updated dependencies
-  - @cldcvr/flow-core@2.0.0
-  <hr className="margin-btm-32" />
-
-# Change Log
+- `@cldcvr/flow-core@2.0.0`
+<hr className="margin-btm-32" />
 
 ## [1.0.0] - 2023-07-20
 

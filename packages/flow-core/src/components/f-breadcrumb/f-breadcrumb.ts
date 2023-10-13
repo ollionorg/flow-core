@@ -12,8 +12,14 @@ import { injectCss } from "@cldcvr/flow-core-config";
 
 injectCss("f-breadcrumb", globalStyle);
 
+const variants = ["text", "icon"] as const;
+const sizes = ["medium", "small"] as const;
+ 
 export type FBreadCrumbsProp = { tabIndex: number; title: string; icon?: string };
 export type FBreadcrumbs = FBreadCrumbsProp[];
+export type FBreadcrumbSize = (typeof sizes)[number];
+export type FBreadcrumbVariant = (typeof variants)[number];
+
 
 @flowElement("f-breadcrumb")
 export class FBreadcrumb extends FRoot {
@@ -32,13 +38,13 @@ export class FBreadcrumb extends FRoot {
 	 * @attribute The medium size is the default.
 	 */
 	@property({ reflect: true, type: String })
-	size?: "medium" | "small" = "medium";
+	size?: FBreadcrumbSize = "medium";
 
 	/**
 	 * @attribute variant defines the type of brundcrumbs.
 	 */
 	@property({ reflect: true, type: String })
-	variant?: "text" | "icon" = "text";
+	variant?: FBreadcrumbVariant = "text";
 
 	/**
 	 * @attribute The medium size is the default.
@@ -168,8 +174,9 @@ export class FBreadcrumb extends FRoot {
 
 	render() {
 		this.createSeperateCrumbs();
-		return this.variant === "text"
-			? html` <f-div gap="x-small" align="middle-left">
+
+
+		const textBreadcrumb = html` <f-div gap="x-small" align="middle-left">
 					${this.crumbs?.length <= 4
 						? this.crumbs?.map((crumb, index) => this.crumbLoop(crumb, index, this.crumbs))
 						: html`
@@ -249,7 +256,8 @@ export class FBreadcrumb extends FRoot {
 								)}
 						  `}
 			  </f-div>`
-			: html`<f-div class="f-breadcrumbs" overflow="visible">
+
+			  const iconBreadcrumb = html`<f-div class="f-breadcrumbs" overflow="visible">
 					${this.crumbs.map((item, index) =>
 						index !== this.crumbs.length - 1
 							? html`<f-div
@@ -285,7 +293,10 @@ export class FBreadcrumb extends FRoot {
 									</f-div>
 							  `
 					)}
-			  </f-div>`;
+			  </f-div>`
+		return this.variant === "text"
+			? textBreadcrumb
+			: iconBreadcrumb;
 	}
 }
 

@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.1.0] - 2023-10-16
+
+### Features
+
+- `f-breadcrumb`: added `variant` property which includes `text` and `icon` to display breadcrumbs in two different variants.
+
 ## [2.0.5] - 2023-10-16
 
 ### Bug fixes

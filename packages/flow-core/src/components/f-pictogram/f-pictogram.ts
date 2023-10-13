@@ -52,7 +52,7 @@ export class FPictogram extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FIcon.styles];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FIcon.styles];
 
 	/**
 	 * @attribute Variants are various representations of Pictogram. For example Pictogram can be round, curved, square, or hexagon.

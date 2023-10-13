@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "sass:math";
 @import "./../../mixins/scss/mixins";
 
 $sizes: (
@@ -30,22 +31,28 @@ $sizes: (
 
 $states: (
 	"primary": (
-		"background": var(--color-primary-default)
+		"background": var(--color-primary-default),
+		"text": var(--color-primary-text)
 	),
 	"default": (
-		"background": var(--color-neutral-subtle)
+		"background": var(--color-neutral-subtle),
+		"text": var(--color-text-default)
 	),
 	"success": (
-		"background": var(--color-success-default)
+		"background": var(--color-success-default),
+		"text": var(--color-success-text)
 	),
 	"warning": (
-		"background": var(--color-warning-default)
+		"background": var(--color-warning-default),
+		"text": var(--color-warning-text)
 	),
 	"danger": (
-		"background": var(--color-danger-default)
+		"background": var(--color-danger-default),
+		"text": var(--color-danger-text)
 	),
 	"inherit": (
-		"background": var(--color-inherit-pictogram)
+		"background": var(--color-inherit-pictogram),
+		"text": var(--color-text-default)
 	)
 );
 
@@ -138,8 +145,34 @@ $hexagon-clip-path: polygon(
 
 :host {
 	.f-pictogram {
-		--after-background-color: var(--color-neutral-subtle);
-		--after-background-color-hover: var(--color-neutral-subtle-hover);
+		&[category="fill"] {
+			@each $state, $color in $states {
+				&[state="default"] {
+					--after-background-color: var(--color-neutral-subtle);
+					--after-background-color-hover: var(--color-neutral-subtle-hover);
+				}
+				&[state="success"] {
+					--after-background-color: var(--color-success-surface);
+					--after-background-color-hover: var(--color-success-surface-hover);
+				}
+				&[state="primary"] {
+					--after-background-color: var(--color-primary-surface);
+					--after-background-color-hover: var(--color-primary-surface-hover);
+				}
+				&[state="danger"] {
+					--after-background-color: var(--color-danger-surface);
+					--after-background-color-hover: var(--color-danger-surface-hover);
+				}
+				&[state="warning"] {
+					--after-background-color: var(--color-warning-surface);
+					--after-background-color-hover: var(--color-warning-surface-hover);
+				}
+			}
+		}
+		&[category="outline"] {
+			--after-background-color: var(--color-neutral-subtle);
+			--after-background-color-hover: var(--color-neutral-subtle-hover);
+		}
 
 		display: inline-flex;
 		justify-content: center;
@@ -179,7 +212,11 @@ $hexagon-clip-path: polygon(
 					font-style: normal;
 					font-weight: 400;
 					line-height: 18px;
-					color: var(--color-text-default);
+					@each $state, $color in $states {
+						&[state="#{$state}"] {
+							color: map-get($color, "text");
+						}
+					}
 				}
 			}
 		}

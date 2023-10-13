@@ -1,6 +1,7 @@
 import { html } from "lit-html";
 import fPictogramAnatomy from "../svg/i-fpictogram-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { FPictogramVariant, FPictogramCategory, FPictogramSize, FPictogramState } from "@cldcvr/flow-core";
 
 export default {
 	title: "@cldcvr/flow-core/f-pictogram",
@@ -12,8 +13,21 @@ export default {
 	}
 };
 
+
+export type PictogramArgs = {
+	source:string,
+	variant: FPictogramVariant,
+	category: FPictogramCategory,
+	size: FPictogramSize,
+	state: FPictogramState,
+	'auto-bg': boolean,
+	disabled:boolean,
+	clickable: boolean,
+	loading:boolean,
+}
+
 export const Playground = {
-	render: args =>
+	render: (args:PictogramArgs) =>
 		html`<f-div direction="column" padding="x-large">
 			<f-pictogram
 				.variant=${args.variant}
@@ -24,6 +38,7 @@ export const Playground = {
 				.disabled=${args.disabled}
 				.clickable=${args.clickable}
 				?auto-bg=${args["auto-bg"]}
+				.category=${args.category}
 			></f-pictogram>
 		</f-div>`,
 
@@ -33,6 +48,11 @@ export const Playground = {
 		variant: {
 			control: "select",
 			options: ["squircle", "sqaure", "circle", "hexagon"]
+		},
+
+		category: {
+			control: "radio",
+			options: ["fill", "outline"]
 		},
 
 		size: {
@@ -87,6 +107,7 @@ export const Playground = {
 
 	args: {
 		variant: "squircle",
+		category: "fill",
 		source: "i-app",
 		size: "medium",
 		state: "default",
@@ -103,7 +124,7 @@ export const Anatomy = {
 };
 
 export const Variant = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
 			<f-div
 				height="hug-content"
@@ -157,8 +178,48 @@ export const Variant = {
 	}
 };
 
+export const Category = {
+	render: () =>
+		html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
+			<f-div
+				height="hug-content"
+				align="middle-center"
+				padding="none"
+				gap="large"
+				direction="column"
+			>
+				<f-text variant="para" size="large" weight="medium">outline</f-text>
+				<f-pictogram
+					source="i-tick"
+					size="x-large"
+					state="success"
+					category="outline"
+				></f-pictogram>
+			</f-div>
+			<f-div
+				height="hug-content"
+				align="middle-center"
+				padding="none"
+				gap="large"
+				direction="column"
+			>
+				<f-text variant="para" size="large" weight="medium">fill</f-text>
+				<f-pictogram source="i-tick" size="x-large" state="success" category="fill"></f-pictogram>
+			</f-div>
+		</f-div>`,
+
+	name: "category",
+
+	parameters: {
+		docs: {
+			inlineStories: false,
+			iframeHeight: 200
+		}
+	}
+};
+
 export const Source = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="x-large" direction="row" align="middle-center">
 			<f-div padding="large" gap="medium" direction="column" width="hug-content">
 				<f-div height="hug-content" padding="none" align="middle-center">
@@ -207,7 +268,7 @@ export const Source = {
 };
 
 export const Size = {
-	render: args => html`<f-div gap="medium" padding="x-large" align="middle-center">
+	render: () => html`<f-div gap="medium" padding="x-large" align="middle-center">
       <f-div padding="large" gap="medium" direction="column" width="hug-content">
         <f-div height="hug-content" padding="none" align="middle-center">
           <f-text variant="para" size="large" weight="medium">x-large</f-text>
@@ -253,7 +314,7 @@ export const Size = {
 };
 
 export const State = {
-	render: args => html`<f-div gap="medium" padding="x-large" align="middle-center">
+	render: () => html`<f-div gap="medium" padding="x-large" align="middle-center">
       <f-div padding="large" gap="medium" direction="column" width="hug-content">
         <f-div height="hug-content" padding="none" align="middle-center">
           <f-text variant="para" size="large" weight="medium">default</f-text>
@@ -307,27 +368,27 @@ export const State = {
 };
 
 export const Flags = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="column">
 			<f-div height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">Loading</f-text>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
 				<f-pictogram source="💬" size="x-large"></f-pictogram>
-				<f-pictogram source="💬" size="x-large" loading=${true}></f-pictogram>
+				<f-pictogram source="💬" size="x-large" ?loading=${true}></f-pictogram>
 			</f-div>
 			<f-div height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">Disabled</f-text>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large">
 				<f-pictogram source="💬" size="x-large"></f-pictogram>
-				<f-pictogram source="💬" size="x-large" disabled=${true}></f-pictogram>
+				<f-pictogram source="💬" size="x-large" ?disabled=${true}></f-pictogram>
 			</f-div>
 			<f-div height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">Clickable</f-text>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large">
-				<f-pictogram source="💬" size="x-large" clickable=${true}></f-pictogram>
+				<f-pictogram source="💬" size="x-large" ?clickable=${true}></f-pictogram>
 			</f-div>
 			<f-div height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">auto-bg</f-text>

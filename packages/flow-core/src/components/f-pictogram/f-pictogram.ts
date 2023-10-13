@@ -1,4 +1,4 @@
-import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { html, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-pictogram.scss?inline";
 import globalStyle from "./f-pictogram-global.scss?inline";
@@ -12,10 +12,12 @@ import { flowElement } from "./../../utils";
 injectCss("f-pictogram", globalStyle);
 
 const variants = ["circle", "square", "hexagon", "squircle"] as const;
+const category = ["fill", "outline"] as const;
 const sizes = ["x-large", "large", "medium", "small"] as const;
 const states = ["primary", "danger", "warning", "success", "default", "inherit"] as const;
 
 export type FPictogramVariant = (typeof variants)[number];
+export type FPictogramCategory = (typeof category)[number];
 export type FPictogramSize = (typeof sizes)[number];
 export type FPictogramState = (typeof states)[number];
 
@@ -57,6 +59,12 @@ export class FPictogram extends FRoot {
 	 */
 	@property({ type: String, reflect: true })
 	variant?: FPictogramVariant = "squircle";
+
+	/**
+	 * @attribute Variants are various representations of Pictogram. For example Pictogram can be round, curved, square, or hexagon.
+	 */
+	@property({ type: String, reflect: true })
+	category?: FPictogramCategory = "fill";
 
 	/**
 	 * @attribute source for f-pictogram, source could be icon name, url, raw SVG, text, emoji etc.
@@ -155,6 +163,7 @@ export class FPictogram extends FRoot {
 		if (this.autoBg) {
 			return `color:${this.textColor} !important`;
 		}
+
 		return "";
 	}
 
@@ -175,14 +184,14 @@ export class FPictogram extends FRoot {
 			if (IconPack) {
 				const svg = IconPack[this.source];
 				if (svg) {
-					return `<f-icon  class="${"f-pictogram-" + this.size}" source="${
-						this.source
-					}" size="${this.sourceSize()}"></f-icon>`;
+					return `<f-icon state=${this.category === "fill" ? this.state : "default"}  class="${
+						"f-pictogram-" + this.size
+					}" source="${this.source}" size="${this.sourceSize()}"></f-icon>`;
 				}
 			}
 		}
 		this.isText = true;
-		return `<p class="text-styling" style=${this.textColorStyling}>${this.textSource}</p>`;
+		return `<p class="text-styling" state=${this.state} style=${this.textColorStyling} >${this.textSource}</p>`;
 	}
 	// calculating computed source size according to the user input size
 	sourceSize() {
@@ -219,6 +228,15 @@ export class FPictogram extends FRoot {
 		return this.stringReplaceAtIndex(color, color.length - 2, 0.7);
 	}
 
+	applyStyles() {
+		if (this.fPicorgramWrapper && this.autoBg && this.isText) {
+			// Modify the background-color property
+			return `--after-background-color: ${this.hashCode}; --after-background-color-hover: ${this.hashCodeHover}; --before-background-color:${this.hashCode}`;
+		} else {
+			return ``;
+		}
+	}
+
 	validateProperties() {
 		if (!this.source) {
 			throw new Error("f-pictogram : source is mandatory field");
@@ -240,11 +258,13 @@ export class FPictogram extends FRoot {
 				class=${classMap({ "f-pictogram": true, hasShimmer })}
 				variant=${this.variant}
 				state=${this.state}
+				category=${this.category}
 				size=${this.size}
 				?disabled=${this.disabled}
 				?loading=${this.loading}
 				?clickable=${this.clickable}
 				?auto-bg=${this.autoBg}
+				style=${this.applyStyles()}
 			>
 				${unsafeHTML(this.renderedHtml)}
 				${this.variant === "squircle"
@@ -260,28 +280,6 @@ export class FPictogram extends FRoot {
 					: null}
 			</div>
 		`;
-	}
-	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
-		super.updated(changedProperties);
-		if (this.fPicorgramWrapper && this.autoBg && this.isText) {
-			// Modify the background-color property
-			this.fPicorgramWrapper.style.setProperty("--after-background-color", this.hashCode);
-			this.fPicorgramWrapper.style.setProperty(
-				"--after-background-color-hover",
-				this.hashCodeHover
-			);
-			this.fPicorgramWrapper.style.setProperty("--before-background-color", this.hashCode);
-		} else {
-			this.fPicorgramWrapper.style.setProperty(
-				"--after-background-color",
-				"var(--color-neutral-subtle)"
-			);
-			this.fPicorgramWrapper.style.setProperty(
-				"--after-background-color-hover",
-				"var(--color-neutral-subtle-hover)"
-			);
-			this.fPicorgramWrapper.style.setProperty("--before-background-color", "");
-		}
 	}
 }
 

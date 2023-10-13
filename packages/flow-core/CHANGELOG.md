@@ -47,7 +47,6 @@
 <hr className="margin-btm-32" />
 <p className="margin-btm-24">All notable changes to this project will be documented in this file. See <a>Conventional Commits</a> for commit guidelines. </p>
 
-# Change Log
 
 ## [1.26.4] - 2023-10-06
 

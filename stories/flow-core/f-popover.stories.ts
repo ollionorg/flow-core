@@ -1,9 +1,10 @@
 import { html } from "lit-html";
 import fPopoverAnatomy from "../svg/i-fpopover-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import { useArgs, useState } from "@storybook/client-api";
-import { ConfigUtil } from "@cldcvr/flow-core-config";
+import { useArgs } from "@storybook/manager-api";
+import { useState } from "@storybook/preview-api";
 import { createRef, ref } from "lit/directives/ref.js";
+import { FPopover, FPopoverPlacement, FPopoverSize } from "@cldcvr/flow-core";
 
 export default {
 	title: "@cldcvr/flow-core/f-popover",
@@ -15,20 +16,28 @@ export default {
 	}
 };
 
+export type PopOverStoryArgs = {
+	open: boolean;
+	overlay: boolean;
+	size: FPopoverSize;
+	placement: FPopoverPlacement;
+	shadow: boolean;
+	["auto-height"]: boolean;
+	["close-on-escape"]: boolean;
+};
+
 export const Playground = {
-	render: args => {
+	render: (args: PopOverStoryArgs) => {
 		const [_, updateArgs] = useArgs();
 
-		const handlePopover = (e, f) => {
-			console.log(e, f);
-
+		const handlePopover = (_e: CustomEvent) => {
 			updateArgs({
 				open: !args.open
 			});
 		};
 
 		return html` <f-div height="hug-content" direction="column" align="middle-center">
-			<f-div height="500px"></f-div>
+			<f-div height="200px"></f-div>
 			<f-popover
 				.open=${args.open}
 				.overlay=${args.overlay}
@@ -46,7 +55,7 @@ export const Playground = {
 						egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
 						tristique.
 					</f-text>
-					<f-select .options=${["option1", "option2", "option3"]}></f-select>
+					<f-select placeholder="Dropdown" .options=${["option1", "option2", "option3"]}></f-select>
 				</f-div>
 			</f-popover>
 			<f-button id="popoverTarget" label="Open" @click=${handlePopover}></f-button>
@@ -126,16 +135,16 @@ export const Anatomy = {
 };
 
 export const Target = {
-	render: args => {
+	render: (args: PopOverStoryArgs) => {
 		const [_, updateArgs] = useArgs();
 
-		const handlePopover = (e, f) => {
+		const handlePopover = () => {
 			updateArgs({
 				open: !args.open
 			});
 		};
 
-		const escapePopover = (e, f) => {
+		const escapePopover = () => {
 			updateArgs({
 				open: !args.open
 			});
@@ -179,7 +188,7 @@ export const Target = {
 };
 
 export const Placement = {
-	render: args => {
+	render: () => {
 		const [dummyPlacementArray, setDummyPlacementArray] = useState([
 			[
 				{
@@ -258,7 +267,7 @@ export const Placement = {
 			]
 		]);
 
-		const handlePopover = (main_index, index) => {
+		const handlePopover = (main_index: number, index: number) => {
 			const array = [...dummyPlacementArray];
 			array[index][main_index].open = !dummyPlacementArray[index][main_index].open;
 			setDummyPlacementArray(array);
@@ -310,7 +319,7 @@ export const Placement = {
 };
 
 export const Size = {
-	render: args => {
+	render: () => {
 		const [dummySizeArray, setDummySizeArray] = useState([
 			{
 				target: "#stretchSize",
@@ -357,7 +366,7 @@ export const Size = {
 			}
 		]);
 
-		const handlePopover = (item, index) => {
+		const handlePopover = (_item: unknown, index: number) => {
 			const array = [...dummySizeArray];
 			array[index].open = !dummySizeArray[index].open;
 			setDummySizeArray(array);
@@ -421,7 +430,7 @@ export const Size = {
 };
 
 export const Flags = {
-	render: args => {
+	render: () => {
 		const [openFlag, setOpenFlag] = useState(false);
 		const [openFlagForOverlay, setOpenFlagForOverlay] = useState(false);
 		const [openFlagForNoOverlay, setOpenFlagForNoOverlay] = useState(false);
@@ -588,8 +597,8 @@ export const Flags = {
 };
 
 export const ChildPopover = {
-	render: args => {
-		const innerPopover = createRef();
+	render: () => {
+		const innerPopover = createRef<FPopover>();
 
 		const handleInnerClose = () => {
 			if (innerPopover.value) {

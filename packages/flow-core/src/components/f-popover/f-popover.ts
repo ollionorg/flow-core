@@ -1,4 +1,4 @@
-import { html, LitElement, nothing, PropertyValueMap, unsafeCSS } from "lit";
+import { html, LitElement, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-popover.scss?inline";
@@ -15,10 +15,6 @@ import {
 import { flowElement } from "./../../utils";
 import { injectCss } from "@cldcvr/flow-core-config";
 injectCss("f-popover", globalStyle);
-
-const overlay = document.createElement("div");
-overlay.classList.add("f-overlay");
-overlay.dataset.qaOverlay = "true";
 
 // export type FPopoverVariant = "relative" | "absolute";
 export type FPopoverPlacement =
@@ -135,6 +131,8 @@ export class FPopover extends FRoot {
 	escapeHandler = (e: KeyboardEvent) => this.escapekeyHandle(e, this);
 
 	isTooltip = false;
+
+	overlayElement?: HTMLDivElement;
 
 	reqAniFrame?: number;
 
@@ -322,6 +320,10 @@ export class FPopover extends FRoot {
 		if (this.targetElement) {
 			this.targetElement.style.removeProperty("z-index");
 		}
+		if (this.overlayElement) {
+			this.overlayElement.remove();
+			this.overlayElement = undefined;
+		}
 	}
 
 	connectedCallback() {
@@ -371,25 +373,29 @@ export class FPopover extends FRoot {
 		});
 		if (this.open) {
 			if (!this.isTooltip) {
+				if (!this.overlayElement) {
+					this.overlayElement = document.createElement("div");
+					this.overlayElement.classList.add("f-overlay");
+					this.overlayElement.dataset.qaOverlay = "true";
+					document.body.append(this.overlayElement);
+					this.overlayElement.onclick = this.overlayClick;
+				}
+
 				if (!this.overlay) {
-					overlay.dataset.transparent = "true";
+					this.overlayElement.dataset.transparent = "true";
 				} else {
-					delete overlay.dataset.transparent;
+					delete this.overlayElement.dataset.transparent;
 				}
 			}
-			// const overlay = this.isTooltip
-			// 	? nothing
-			// 	: html`<div
-			// 			class="f-overlay"
-			// 			data-transparent=${!this.overlay}
-			// 			data-qa-overlay
-			// 			@click=${this.overlayClick}
-			// 	  ></div>`;
 			this.computePosition(this.isTooltip);
 			return html`<slot></slot>`;
 		} else {
 			if (this.targetElement) {
 				this.targetElement.style.removeProperty("z-index");
+			}
+			if (this.overlayElement) {
+				this.overlayElement.remove();
+				this.overlayElement = undefined;
 			}
 			if (this.size && this.size?.includes("custom")) {
 				this.classList.remove("f-popover-custom-size");

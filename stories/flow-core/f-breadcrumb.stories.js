@@ -21,6 +21,7 @@ export const Playground = {
 		return html` <f-div padding="small">
 			<f-breadcrumb
 				.crumbs=${args.crumbs}
+				.variant=${args.variant}
 				.size=${args.size}
 				?disabled=${args.disabled}
 				@click=${handleClick}
@@ -36,6 +37,11 @@ export const Playground = {
 			options: ["medium", "small"]
 		},
 
+		variant: {
+			control: "radio",
+			options: ["text", "icon"]
+		},
+
 		crumbs: {
 			control: "object"
 		},
@@ -47,27 +53,32 @@ export const Playground = {
 
 	args: {
 		size: "medium",
-
+		variant: "text",
 		crumbs: [
 			{
 				tabIndex: 0,
-				title: "Label 1 New Label Demo test"
+				title: "Label 1 New Label Demo test",
+				icon: "i-home"
 			},
 			{
 				tabIndex: 1,
-				title: "Label 2"
+				title: "Label 2",
+				icon: "i-pipe"
 			},
 			{
 				tabIndex: 2,
-				title: "Label 3"
+				title: "Label 3",
+				icon: "i-info-fill"
 			},
 			{
 				tabIndex: 3,
-				title: "Label 4"
+				title: "Label 4",
+				icon: "i-app"
 			},
 			{
 				tabIndex: 4,
-				title: "Label 5"
+				title: "Label 5",
+				icon: "i-download"
 			}
 		],
 

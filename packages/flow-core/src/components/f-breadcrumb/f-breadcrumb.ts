@@ -12,7 +12,7 @@ import { injectCss } from "@cldcvr/flow-core-config";
 
 injectCss("f-breadcrumb", globalStyle);
 
-export type FBreadCrumbsProp = { tabIndex: number; title: string };
+export type FBreadCrumbsProp = { tabIndex: number; title: string; icon?: string };
 export type FBreadcrumbs = FBreadCrumbsProp[];
 
 @flowElement("f-breadcrumb")
@@ -33,6 +33,12 @@ export class FBreadcrumb extends FRoot {
 	 */
 	@property({ reflect: true, type: String })
 	size?: "medium" | "small" = "medium";
+
+	/**
+	 * @attribute variant defines the type of brundcrumbs.
+	 */
+	@property({ reflect: true, type: String })
+	variant?: "text" | "icon" = "text";
 
 	/**
 	 * @attribute The medium size is the default.
@@ -64,6 +70,14 @@ export class FBreadcrumb extends FRoot {
 	 */
 	get textSize() {
 		return this.size === "medium" ? "small" : "x-small";
+	}
+
+	get iconSize() {
+		return this.size === "medium" ? "small" : "x-small";
+	}
+
+	get crumbSize() {
+		return this.size === "medium" ? "32px" : "28px";
 	}
 
 	/**
@@ -146,87 +160,132 @@ export class FBreadcrumb extends FRoot {
 			bubbles: true,
 			composed: true
 		});
-		this.popOverElement.open = false;
+		if (this.variant === "text") {
+			this.popOverElement.open = false;
+		}
 		this.dispatchEvent(event);
 	}
 
 	render() {
 		this.createSeperateCrumbs();
-		return html` <f-div gap="x-small" align="middle-left">
-			${this.crumbs?.length <= 4
-				? this.crumbs?.map((crumb, index) => this.crumbLoop(crumb, index, this.crumbs))
-				: html`
-						<f-div
-							width="hug-content"
-							align="middle-left"
-							class="f-breadcrumb-content"
-							?disabled=${this.disabled}
-							@click=${(event: MouseEvent) => this.handleDispatchEvent(event, this.initialCrumbs)}
-						>
-							<f-text
-								.size=${this.textSize}
-								variant="para"
-								weight="regular"
-								class="f-breadcrumb-text-hover"
-								.tooltip=${this.initialCrumbs?.title}
-								?ellipsis=${true}
-								>${this.initialCrumbs?.title}</f-text
-							>
-						</f-div>
-						<f-icon
-							source="i-chevron-right"
-							size="x-small"
-							state="secondary"
-							class="system-icon-size"
-						></f-icon>
-						<f-div
-							clickable
-							?disabled=${this.disabled}
-							@mouseenter=${() => this.toggleBreadcrumbPopover("open")}
-							id="breadcrumb-popover"
-						>
-							<f-text class="toggle-popover-hover" variant="heading" state="secondary" size="small"
-								>...</f-text
-							>
-						</f-div>
-						<f-popover .overlay=${false} size="small">
-							<f-div
-								state="secondary"
-								direction="column"
-								@mouseleave=${() => this.toggleBreadcrumbPopover("close")}
-							>
-								${this.middlePopoverCrumbs?.map(
-									(crumb, index) =>
-										html` <f-div
-											class="popover-crumb-list"
-											padding="medium"
-											.border=${this.middlePopoverCrumbs.length - 1 === index
-												? "none"
-												: "small solid secondary bottom"}
-											clickable
-											@click=${(event: MouseEvent) => this.handleDispatchEvent(event, crumb)}
-											><f-text
-												class="popover-text-hover"
-												variant="para"
-												size="medium"
-												weight="regular"
-												>${crumb?.title}</f-text
-											></f-div
-										>`
+		return this.variant === "text"
+			? html` <f-div gap="x-small" align="middle-left">
+					${this.crumbs?.length <= 4
+						? this.crumbs?.map((crumb, index) => this.crumbLoop(crumb, index, this.crumbs))
+						: html`
+								<f-div
+									width="hug-content"
+									align="middle-left"
+									class="f-breadcrumb-content"
+									?disabled=${this.disabled}
+									@click=${(event: MouseEvent) =>
+										this.handleDispatchEvent(event, this.initialCrumbs)}
+								>
+									<f-text
+										.size=${this.textSize}
+										variant="para"
+										weight="regular"
+										class="f-breadcrumb-text-hover"
+										.tooltip=${this.initialCrumbs?.title}
+										?ellipsis=${true}
+										>${this.initialCrumbs?.title}</f-text
+									>
+								</f-div>
+								<f-icon
+									source="i-chevron-right"
+									size="x-small"
+									state="secondary"
+									class="system-icon-size"
+								></f-icon>
+								<f-div
+									clickable
+									?disabled=${this.disabled}
+									@mouseenter=${() => this.toggleBreadcrumbPopover("open")}
+									id="breadcrumb-popover"
+								>
+									<f-text
+										class="toggle-popover-hover"
+										variant="heading"
+										state="secondary"
+										size="small"
+										>...</f-text
+									>
+								</f-div>
+								<f-popover .overlay=${false} size="small">
+									<f-div
+										state="secondary"
+										direction="column"
+										@mouseleave=${() => this.toggleBreadcrumbPopover("close")}
+									>
+										${this.middlePopoverCrumbs?.map(
+											(crumb, index) =>
+												html` <f-div
+													class="popover-crumb-list"
+													padding="medium"
+													.border=${this.middlePopoverCrumbs.length - 1 === index
+														? "none"
+														: "small solid secondary bottom"}
+													clickable
+													@click=${(event: MouseEvent) => this.handleDispatchEvent(event, crumb)}
+													><f-text
+														class="popover-text-hover"
+														variant="para"
+														size="medium"
+														weight="regular"
+														>${crumb?.title}</f-text
+													></f-div
+												>`
+										)}
+									</f-div>
+								</f-popover>
+								<f-icon
+									source="i-chevron-right"
+									size="x-small"
+									state="secondary"
+									class="system-icon-size"
+								></f-icon>
+								${this.endingCrumbs?.map((crumb, index) =>
+									this.crumbLoop(crumb, index, this.endingCrumbs)
 								)}
-							</f-div>
-						</f-popover>
-						<f-icon
-							source="i-chevron-right"
-							size="x-small"
-							state="secondary"
-							class="system-icon-size"
-						></f-icon>
-						${this.endingCrumbs?.map((crumb, index) =>
-							this.crumbLoop(crumb, index, this.endingCrumbs)
-						)}
-				  `}
-		</f-div>`;
+						  `}
+			  </f-div>`
+			: html`<f-div class="f-breadcrumbs" overflow="visible">
+					${this.crumbs.map((item, index) =>
+						index !== this.crumbs.length - 1
+							? html`<f-div
+									class="f-breadcrumb"
+									state="secondary"
+									width=${this.crumbSize}
+									height=${this.crumbSize}
+									padding="small"
+									align="middle-center"
+									variant="curved"
+									tooltip=${item.title}
+									clickable
+									@click=${(event: MouseEvent) => this.handleDispatchEvent(event, item)}
+							  >
+									<f-icon source=${item.icon} .size=${this.iconSize}></f-icon>
+							  </f-div>`
+							: html`
+									<f-div gap="large" align="middle-center">
+										<div
+											class="f-breadcrumb-primary"
+											size=${this.size}
+											@click=${(event: MouseEvent) => this.handleDispatchEvent(event, item)}
+										>
+											<f-icon
+												source=${item.icon}
+												.size=${this.iconSize}
+												class="f-breadcrumb-primary-icon"
+											></f-icon>
+										</div>
+										<f-text inline variant="para" .size=${this.textSize} weight="medium">
+											${item.title}</f-text
+										>
+									</f-div>
+							  `
+					)}
+			  </f-div>`;
 	}
 }
 

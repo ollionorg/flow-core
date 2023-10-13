@@ -1,4 +1,4 @@
-import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { html, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-pictogram.scss?inline";
 import globalStyle from "./f-pictogram-global.scss?inline";
@@ -167,45 +167,6 @@ export class FPictogram extends FRoot {
 		return "";
 	}
 
-	get statesBasedBackground() {
-		const defaultColor = {
-			background: "var(color-neutral-sublte)",
-			hover: "var(color-neutral-sublte-hover)"
-		};
-		if (this.state) {
-			const mapper = {
-				default: {
-					background: "var(color-neutral-sublte)",
-					hover: "var(color-neutral-sublte-hover)"
-				},
-				primary: {
-					background: "var(color-primary-surface)",
-					hover: "var(color-primary-surface-hover)"
-				},
-				danger: {
-					background: "var(color-danger-surface)",
-					hover: "var(color-danger-surface-hover)"
-				},
-				success: {
-					background: "var(color-success-surface)",
-					hover: "var(color-success-surface-hover)"
-				},
-				warning: {
-					background: "var(color-warning-surface)",
-					hover: "var(color-warning-surface-hover)"
-				},
-				inherit: {
-					background: "var(color-neutral-sublte)",
-					hover: "var(color-neutral-sublte-hover)"
-				}
-			};
-
-			return this.category === "fill" ? mapper[this.state] ?? defaultColor : defaultColor;
-		} else {
-			return defaultColor;
-		}
-	}
-
 	// returns html where source is being as input
 	get renderedHtml() {
 		const emojiRegex = /\p{Extended_Pictographic}/u;
@@ -267,6 +228,15 @@ export class FPictogram extends FRoot {
 		return this.stringReplaceAtIndex(color, color.length - 2, 0.7);
 	}
 
+	applyStyles() {
+		if (this.fPicorgramWrapper && this.autoBg && this.isText) {
+			// Modify the background-color property
+			return `--after-background-color: ${this.hashCode}; --after-background-color-hover: ${this.hashCodeHover}; --before-background-color:${this.hashCode}`;
+		} else {
+			return ``;
+		}
+	}
+
 	validateProperties() {
 		if (!this.source) {
 			throw new Error("f-pictogram : source is mandatory field");
@@ -294,6 +264,7 @@ export class FPictogram extends FRoot {
 				?loading=${this.loading}
 				?clickable=${this.clickable}
 				?auto-bg=${this.autoBg}
+				style=${this.applyStyles()}
 			>
 				${unsafeHTML(this.renderedHtml)}
 				${this.variant === "squircle"
@@ -309,28 +280,6 @@ export class FPictogram extends FRoot {
 					: null}
 			</div>
 		`;
-	}
-	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-		super.updated(changedProperties);
-		if (this.fPicorgramWrapper && this.autoBg && this.isText) {
-			// Modify the background-color property
-			this.fPicorgramWrapper.style.setProperty("--after-background-color", this.hashCode);
-			this.fPicorgramWrapper.style.setProperty(
-				"--after-background-color-hover",
-				this.hashCodeHover
-			);
-			this.fPicorgramWrapper.style.setProperty("--before-background-color", this.hashCode);
-		} else {
-			this.fPicorgramWrapper.style.setProperty(
-				"--after-background-color",
-				this.statesBasedBackground?.background
-			);
-			this.fPicorgramWrapper.style.setProperty(
-				"--after-background-color-hover",
-				this.statesBasedBackground?.hover
-			);
-			this.fPicorgramWrapper.style.setProperty("--before-background-color", "");
-		}
 	}
 }
 

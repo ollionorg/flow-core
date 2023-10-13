@@ -16,6 +16,10 @@ import { flowElement } from "./../../utils";
 import { injectCss } from "@cldcvr/flow-core-config";
 injectCss("f-popover", globalStyle);
 
+const overlay = document.createElement("div");
+overlay.classList.add("f-overlay");
+overlay.dataset.qaOverlay = "true";
+
 // export type FPopoverVariant = "relative" | "absolute";
 export type FPopoverPlacement =
 	| "top"
@@ -366,16 +370,23 @@ export class FPopover extends FRoot {
 			}
 		});
 		if (this.open) {
-			const overlay = this.isTooltip
-				? nothing
-				: html`<div
-						class="f-overlay"
-						data-transparent=${!this.overlay}
-						data-qa-overlay
-						@click=${this.overlayClick}
-				  ></div>`;
+			if (!this.isTooltip) {
+				if (!this.overlay) {
+					overlay.dataset.transparent = "true";
+				} else {
+					delete overlay.dataset.transparent;
+				}
+			}
+			// const overlay = this.isTooltip
+			// 	? nothing
+			// 	: html`<div
+			// 			class="f-overlay"
+			// 			data-transparent=${!this.overlay}
+			// 			data-qa-overlay
+			// 			@click=${this.overlayClick}
+			// 	  ></div>`;
 			this.computePosition(this.isTooltip);
-			return html`<slot></slot>${overlay} `;
+			return html`<slot></slot>`;
 		} else {
 			if (this.targetElement) {
 				this.targetElement.style.removeProperty("z-index");

@@ -27,7 +27,8 @@ export const Playground = {
 			});
 		};
 
-		return html` <f-div height="100px" align="middle-center">
+		return html` <f-div height="hug-content" direction="column" align="middle-center">
+			<f-div height="500px"></f-div>
 			<f-popover
 				.open=${args.open}
 				.overlay=${args.overlay}
@@ -39,12 +40,13 @@ export const Playground = {
 				?auto-height=${args["auto-height"]}
 				?close-on-escape=${args["close-on-escape"]}
 			>
-				<f-div state="tertiary" padding="medium">
+				<f-div state="tertiary" direction="column" gap="small" padding="medium">
 					<f-text>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut mi
 						egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
 						tristique.
 					</f-text>
+					<f-select .options=${["option1", "option2", "option3"]}></f-select>
 				</f-div>
 			</f-popover>
 			<f-button id="popoverTarget" label="Open" @click=${handlePopover}></f-button>

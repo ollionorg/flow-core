@@ -24,7 +24,7 @@
 
 - a2de106: Fix platform types
 - Updated dependencies [a2de106]
-- @cldcvr/flow-core-config@1.1.1
+- `@cldcvr/flow-core-config@1.1.1`
 
 ## [2.0.1-beta.0] - 2023-10-10
 
@@ -47,6 +47,7 @@
 <hr className="margin-btm-32" />
 <p className="margin-btm-24">All notable changes to this project will be documented in this file. See <a>Conventional Commits</a> for commit guidelines. </p>
 
+# Change Log
 
 ## [1.26.4] - 2023-10-06
 

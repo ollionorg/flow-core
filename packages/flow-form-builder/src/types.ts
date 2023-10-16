@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { HTMLTemplateResult, LitElement, TemplateResult } from "lit";
 import { Ref } from "lit-html/directives/ref.js";
 import {
@@ -286,9 +287,10 @@ export type FormBuilderValidationRuleTriggers =
 	| "focus"
 	| "input"
 	| "change";
+export type FormBuilderValidationMessage<Type = unknown> = (name: string, value: Type) => string;
 export type FormBuilderValidationRule = {
 	when?: FormBuilderValidationRuleTriggers[]; // if not specified then validation triggers on @input event.
-	message?: string; // custom message by using variables in message e.x. {{name}} is required field.
+	message?: string | FormBuilderValidationMessage; // custom message by using variables in message e.x. {{name}} is required field.
 	params?: Record<string, unknown>;
 };
 export type FormBuilderValidationRequiredRule = FormBuilderValidationRule & {

@@ -14,6 +14,7 @@ export type FTcellAction = {
 	icon: string;
 	id: string;
 	tooltip?: string;
+	disabled?: boolean;
 	onClick?: (event: PointerEvent, element?: FIconButton) => void;
 	onMouseOver?: (event: MouseEvent, element?: FIconButton) => void;
 	onMouseLeave?: (event: MouseEvent, element?: FIconButton) => void;
@@ -80,6 +81,7 @@ export class FTcell extends FRoot {
 					size="medium"
 					category="packed"
 					state="neutral"
+					?disabled=${ac.disabled}
 					.icon=${ac.icon}
 					.tooltip=${ac.tooltip ?? undefined}
 					@click=${(event: PointerEvent) => {

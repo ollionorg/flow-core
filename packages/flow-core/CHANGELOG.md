@@ -1,7 +1,12 @@
 <h4 className="margin-btm-8">Release Notes</h4>
 
-
 # Change Log
+
+## [2.0.5] - 2023-10-16
+
+### Bug fixes
+
+- `f-tag`: width inherting issue fixed.
 
 ## [2.0.4] - 2023-10-13
 
@@ -17,8 +22,7 @@
 - Updated dependencies
 - `@cldcvr/flow-core-config@1.1.3`
 
-
-## [2.0.2] - 2023-10-10 
+## [2.0.2] - 2023-10-10
 
 ### Patch Changes
 
@@ -46,7 +50,6 @@
 - `@cldcvr/flow-core-config@1.1.0`
 <hr className="margin-btm-32" />
 <p className="margin-btm-24">All notable changes to this project will be documented in this file. See <a>Conventional Commits</a> for commit guidelines. </p>
-
 
 ## [1.26.4] - 2023-10-06
 

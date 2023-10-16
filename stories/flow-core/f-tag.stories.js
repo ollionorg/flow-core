@@ -14,7 +14,7 @@ export default {
 
 export const Playground = {
 	render: args =>
-		html` <f-div padding="large">
+		html` <f-div padding="large" width="150px">
 			<f-tag
 				.label=${args.label}
 				.size=${args.size}
@@ -107,7 +107,7 @@ export const Playground = {
 	},
 
 	args: {
-		label: "label",
+		label: "labelsdjkhfsjhgmndf sdfgjdf sgdfhsd dghgfjhsdgfgjsdfnmsgdfjhgsdjfjsdgfhegfjehwgjfgwegj",
 		size: "medium",
 		state: "neutral",
 		["icon-left"]: undefined,

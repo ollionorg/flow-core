@@ -3,6 +3,12 @@
 
 # Change Log
 
+## [2.0.4] - 2023-10-16
+
+### Improvements
+
+- `disabled` added for f-table-cell actions.
+
 ## [2.0.3] - 2023-10-12
 
 ### Patch Changes

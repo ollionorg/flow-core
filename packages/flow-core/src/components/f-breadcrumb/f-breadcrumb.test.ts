@@ -88,18 +88,18 @@ describe("f-breadcrumb", () => {
 	it("should render with icon variant and the last crumb should be in active primary mode", async () => {
 		const el = await fixture(html`
 			<f-breadcrumb 
-			.variant=${"icon"} 
+			variant="icon"
 			.crumbs=${[
-					{ tabIndex: 0, title: "Label 1", icon:"i-app" },
-					{ tabIndex: 1, title: "Label 2", icon:"i-app" },
-					{ tabIndex: 2, title: "Label 3", icon: "i-home" },
-					{ tabIndex: 3, title: "Label 4", icon:"i-info-fill" },
+					{ tabIndex: 0, title: "Home", icon:"i-app" },
+					{ tabIndex: 1, title: "New Label", icon:"i-app" },
+					{ tabIndex: 2, title: "Pipeline", icon: "i-home" },
+					{ tabIndex: 3, title: "Working", icon:"i-info-fill" },
 					{ tabIndex: 4, title: "Active", icon:"i-app" }
 				]}
 			></f-breadcrumb>
 		`);
-		const descendant = el.shadowRoot!.querySelector(".f-breadcrumbs")!;
-		const selected = descendant.children[descendant.children.length-1];
+		const descendants = el.shadowRoot!.querySelector(".f-breadcrumbs")!;
+		const selected = descendants.children[descendants.children.length-1];
 		const text = selected.querySelector("f-text")!
 		expect(text.innerHTML).includes("Active");
 	});

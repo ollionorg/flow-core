@@ -108,8 +108,12 @@ function processCustomMessage(message: string, params: Record<string, string>) {
 function getValidationMessage(
 	r: FormBuilderGenericValidationRule,
 	{ name, value }: Record<string, string>
-) {
+): string {
 	if (r.message) {
+		if (typeof r.message === "function") {
+			return r.message(name, value);
+		}
+
 		return processCustomMessage(r.message, {
 			name,
 			value,

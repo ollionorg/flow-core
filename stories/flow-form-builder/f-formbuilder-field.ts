@@ -293,7 +293,8 @@ const field: FormBuilderField = {
 			fields: {
 				username: {
 					qaId: "nestedUsernameQA",
-					type: "text",
+					type: "number",
+					placeholder: "Numbers only",
 					validationRules: [{ name: "required" }],
 					label: {
 						title: "Username"
@@ -310,7 +311,8 @@ const field: FormBuilderField = {
 			type: "array",
 			allowEmpty: true,
 			label: {
-				title: "Optional Array"
+				title: "Optional Array",
+				description: "Description of array"
 			},
 			field: {
 				qaId: "nestedArrayText",

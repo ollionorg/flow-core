@@ -185,7 +185,7 @@ export class FFormArray extends FRoot {
 						</f-div>
 						<!--field description-->
 						${this.config.label?.description
-							? html` <f-text variant="para" size="medium" weight="regular"
+							? html` <f-text variant="para" state="secondary" size="small" weight="regular"
 									>${this.config.label?.description}</f-text
 							  >`
 							: ""}

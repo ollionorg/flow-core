@@ -24,6 +24,7 @@ describe("f-breadcrumb", () => {
 			></f-breadcrumb>
 		`);
 		expect(el.getAttribute("size")).to.equal("medium");
+		expect(el.getAttribute("variant")).to.equal("text");
 	});
 	it("should render with x-small text-size when size is small", async () => {
 		const el = await fixture(html`
@@ -65,5 +66,41 @@ describe("f-breadcrumb", () => {
 		`);
 		const descendant = el.shadowRoot!.querySelectorAll(".popover-crumb-list")!;
 		expect(descendant.length).to.equal(2);
+	});
+
+	it("should render with icon variant crumbs", async () => {
+		const el = await fixture(html`
+			<f-breadcrumb 
+			.variant=${"icon"} 
+			.crumbs=${[
+					{ tabIndex: 0, title: "Label 1", icon:"i-app" },
+					{ tabIndex: 1, title: "Label 2", icon:"i-app" },
+					{ tabIndex: 2, title: "Label 3", icon: "i-home" },
+					{ tabIndex: 3, title: "Label 4", icon:"i-info-fill" },
+					{ tabIndex: 4, title: "Label 5", icon:"i-app" }
+				]}
+			></f-breadcrumb>
+		`);
+		const descendant = el.shadowRoot!.querySelector(".f-breadcrumbs")!;
+		expect(descendant.children.length).to.equal(5);
+	});
+
+	it("should render with icon variant and the last crumb should be in active primary mode", async () => {
+		const el = await fixture(html`
+			<f-breadcrumb 
+			variant="icon"
+			.crumbs=${[
+					{ tabIndex: 0, title: "Home", icon:"i-app" },
+					{ tabIndex: 1, title: "New Label", icon:"i-app" },
+					{ tabIndex: 2, title: "Pipeline", icon: "i-home" },
+					{ tabIndex: 3, title: "Working", icon:"i-info-fill" },
+					{ tabIndex: 4, title: "Active", icon:"i-app" }
+				]}
+			></f-breadcrumb>
+		`);
+		const descendants = el.shadowRoot!.querySelector(".f-breadcrumbs")!;
+		const selected = descendants.children[descendants.children.length-1];
+		const text = selected.querySelector("f-text")!
+		expect(text.innerHTML).includes("Active");
 	});
 });

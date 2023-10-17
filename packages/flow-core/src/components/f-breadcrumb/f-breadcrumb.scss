@@ -1,6 +1,78 @@
 @import "./../../mixins/scss/mixins";
 
 :host {
+	.f-breadcrumbs {
+		gap: 2px !important;
+		.f-breadcrumb {
+			border-radius: 2px !important;
+		}
+		.f-breadcrumb-primary {
+			display: flex;
+			background-color: var(--color-primary-default);
+			position: relative;
+
+			justify-content: center;
+			align-items: center;
+			border-radius: 2px;
+
+			&[size="medium"] {
+				width: 27px;
+				height: 32px;
+				&::after {
+					position: absolute;
+					right: -10px;
+					content: "";
+					width: 0px;
+					height: 0px;
+					border-top: 15px solid transparent;
+					border-bottom: 15px solid transparent;
+					border-left: 10px solid var(--color-primary-default);
+				}
+
+				.f-breadcrumb-primary-icon {
+					position: absolute;
+					top: 8px;
+					left: 7px;
+				}
+
+				&:hover {
+					background-color: var(--color-primary-default-hover);
+					cursor: pointer;
+					&::after {
+						border-left: 10px solid var(--color-primary-default-hover);
+					}
+				}
+			}
+			&[size="small"] {
+				width: 25px;
+				height: 28px;
+				&::after {
+					position: absolute;
+					right: -8px;
+					content: "";
+					width: 0px;
+					height: 0px;
+					border-top: 13px solid transparent;
+					border-bottom: 13px solid transparent;
+					border-left: 8px solid var(--color-primary-default);
+				}
+
+				&:hover {
+					background-color: var(--color-primary-default-hover);
+					cursor: pointer;
+					&::after {
+						border-left: 8px solid var(--color-primary-default-hover);
+					}
+				}
+
+				.f-breadcrumb-primary-icon {
+					position: absolute;
+					top: 8px;
+					left: 8px;
+				}
+			}
+		}
+	}
 	.f-breadcrumb-content {
 		max-width: 100px !important;
 		.f-breadcrumb-text-hover {

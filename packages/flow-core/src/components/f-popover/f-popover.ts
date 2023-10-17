@@ -1,7 +1,6 @@
 import { html, LitElement, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import eleStyle from "./f-popover.scss?inline";
 import globalStyle from "./f-popover-global.scss?inline";
 import {
 	computePosition,
@@ -65,7 +64,7 @@ export class FPopover extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle)];
+	static styles = [unsafeCSS(globalStyle)];
 
 	//   /**
 	//    * @attribute variant defines the position of a popover. A popover can be either relative to the source or absolute to the viewport.

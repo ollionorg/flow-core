@@ -1,7 +1,6 @@
-import { html, LitElement, nothing, PropertyValueMap, unsafeCSS } from "lit";
+import { html, LitElement, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import eleStyle from "./f-popover.scss?inline";
 import globalStyle from "./f-popover-global.scss?inline";
 import {
 	computePosition,
@@ -65,7 +64,7 @@ export class FPopover extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle)];
+	static styles = [unsafeCSS(globalStyle)];
 
 	//   /**
 	//    * @attribute variant defines the position of a popover. A popover can be either relative to the source or absolute to the viewport.
@@ -131,6 +130,8 @@ export class FPopover extends FRoot {
 	escapeHandler = (e: KeyboardEvent) => this.escapekeyHandle(e, this);
 
 	isTooltip = false;
+
+	overlayElement?: HTMLDivElement;
 
 	reqAniFrame?: number;
 
@@ -318,6 +319,10 @@ export class FPopover extends FRoot {
 		if (this.targetElement) {
 			this.targetElement.style.removeProperty("z-index");
 		}
+		if (this.overlayElement) {
+			this.overlayElement.remove();
+			this.overlayElement = undefined;
+		}
 	}
 
 	connectedCallback() {
@@ -366,19 +371,30 @@ export class FPopover extends FRoot {
 			}
 		});
 		if (this.open) {
-			const overlay = this.isTooltip
-				? nothing
-				: html`<div
-						class="f-overlay"
-						data-transparent=${!this.overlay}
-						data-qa-overlay
-						@click=${this.overlayClick}
-				  ></div>`;
+			if (!this.isTooltip) {
+				if (!this.overlayElement) {
+					this.overlayElement = document.createElement("div");
+					this.overlayElement.classList.add("f-overlay");
+					this.overlayElement.dataset.qaOverlay = "true";
+					document.body.append(this.overlayElement);
+					this.overlayElement.onclick = this.overlayClick;
+				}
+
+				if (!this.overlay) {
+					this.overlayElement.dataset.transparent = "true";
+				} else {
+					delete this.overlayElement.dataset.transparent;
+				}
+			}
 			this.computePosition(this.isTooltip);
-			return html`<slot></slot>${overlay} `;
+			return html`<slot></slot>`;
 		} else {
 			if (this.targetElement) {
 				this.targetElement.style.removeProperty("z-index");
+			}
+			if (this.overlayElement) {
+				this.overlayElement.remove();
+				this.overlayElement = undefined;
 			}
 			if (this.size && this.size?.includes("custom")) {
 				this.classList.remove("f-popover-custom-size");

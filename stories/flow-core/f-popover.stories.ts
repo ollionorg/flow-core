@@ -1,9 +1,9 @@
 import { html } from "lit-html";
 import fPopoverAnatomy from "../svg/i-fpopover-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import { useArgs, useState } from "@storybook/client-api";
-import { ConfigUtil } from "@cldcvr/flow-core-config";
+import { useState } from "@storybook/preview-api";
 import { createRef, ref } from "lit/directives/ref.js";
+import { FPopover, FPopoverPlacement, FPopoverSize } from "@cldcvr/flow-core";
 
 export default {
 	title: "@cldcvr/flow-core/f-popover",
@@ -15,20 +15,29 @@ export default {
 	}
 };
 
+export type PopOverStoryArgs = {
+	open: boolean;
+	overlay: boolean;
+	size: FPopoverSize;
+	placement: FPopoverPlacement;
+	shadow: boolean;
+	["auto-height"]: boolean;
+	["close-on-escape"]: boolean;
+};
+
 export const Playground = {
-	render: args => {
-		const [_, updateArgs] = useArgs();
-
-		const handlePopover = (e, f) => {
-			console.log(e, f);
-
-			updateArgs({
-				open: !args.open
-			});
+	render: (args: PopOverStoryArgs) => {
+		const popoverRef = createRef<FPopover>();
+		const handlePopover = (_e: CustomEvent) => {
+			if (popoverRef.value) {
+				popoverRef.value.open = !popoverRef.value.open;
+			}
 		};
 
-		return html` <f-div height="100px" align="middle-center">
+		return html` <f-div height="hug-content" direction="column" align="middle-center">
+			<f-div height="200px"></f-div>
 			<f-popover
+				${ref(popoverRef)}
 				.open=${args.open}
 				.overlay=${args.overlay}
 				.size=${args.size}
@@ -39,12 +48,13 @@ export const Playground = {
 				?auto-height=${args["auto-height"]}
 				?close-on-escape=${args["close-on-escape"]}
 			>
-				<f-div state="tertiary" padding="medium">
+				<f-div state="tertiary" direction="column" gap="small" padding="medium">
 					<f-text>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut mi
 						egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
 						tristique.
 					</f-text>
+					<f-select placeholder="Dropdown" .options=${["option1", "option2", "option3"]}></f-select>
 				</f-div>
 			</f-popover>
 			<f-button id="popoverTarget" label="Open" @click=${handlePopover}></f-button>
@@ -124,24 +134,24 @@ export const Anatomy = {
 };
 
 export const Target = {
-	render: args => {
-		const [_, updateArgs] = useArgs();
-
-		const handlePopover = (e, f) => {
-			updateArgs({
-				open: !args.open
-			});
+	render: (args: PopOverStoryArgs) => {
+		const popoverRef = createRef<FPopover>();
+		const handlePopover = (_e: CustomEvent) => {
+			if (popoverRef.value) {
+				popoverRef.value.open = !popoverRef.value.open;
+			}
 		};
 
-		const escapePopover = (e, f) => {
-			updateArgs({
-				open: !args.open
-			});
+		const escapePopover = () => {
+			if (popoverRef.value) {
+				popoverRef.value.open = !popoverRef.value.open;
+			}
 		};
 
 		return html`
 			<f-div height="hug-content" align="middle-center">
 				<f-popover
+					${ref(popoverRef)}
 					?open=${args.open}
 					?overlay=${true}
 					@overlay-click=${handlePopover}
@@ -177,7 +187,7 @@ export const Target = {
 };
 
 export const Placement = {
-	render: args => {
+	render: () => {
 		const [dummyPlacementArray, setDummyPlacementArray] = useState([
 			[
 				{
@@ -256,7 +266,7 @@ export const Placement = {
 			]
 		]);
 
-		const handlePopover = (main_index, index) => {
+		const handlePopover = (main_index: number, index: number) => {
 			const array = [...dummyPlacementArray];
 			array[index][main_index].open = !dummyPlacementArray[index][main_index].open;
 			setDummyPlacementArray(array);
@@ -308,7 +318,7 @@ export const Placement = {
 };
 
 export const Size = {
-	render: args => {
+	render: () => {
 		const [dummySizeArray, setDummySizeArray] = useState([
 			{
 				target: "#stretchSize",
@@ -355,7 +365,7 @@ export const Size = {
 			}
 		]);
 
-		const handlePopover = (item, index) => {
+		const handlePopover = (_item: unknown, index: number) => {
 			const array = [...dummySizeArray];
 			array[index].open = !dummySizeArray[index].open;
 			setDummySizeArray(array);
@@ -419,7 +429,7 @@ export const Size = {
 };
 
 export const Flags = {
-	render: args => {
+	render: () => {
 		const [openFlag, setOpenFlag] = useState(false);
 		const [openFlagForOverlay, setOpenFlagForOverlay] = useState(false);
 		const [openFlagForNoOverlay, setOpenFlagForNoOverlay] = useState(false);
@@ -586,8 +596,8 @@ export const Flags = {
 };
 
 export const ChildPopover = {
-	render: args => {
-		const innerPopover = createRef();
+	render: () => {
+		const innerPopover = createRef<FPopover>();
 
 		const handleInnerClose = () => {
 			if (innerPopover.value) {

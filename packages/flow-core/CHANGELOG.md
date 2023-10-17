@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.1.1] - 2023-10-17
+
+### Bug Fixes
+
+- `f-popover`: z-index issue with target , overlay and popover fixed.
+
 ## [2.1.0] - 2023-10-16
 
 ### Features

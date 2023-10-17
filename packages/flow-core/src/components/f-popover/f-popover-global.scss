@@ -29,7 +29,7 @@ f-popover {
 	background-color: var(--color-surface-tertiary);
 	border-radius: 4px;
 	overflow: auto;
-	z-index: 200;
+	z-index: 202;
 	&[shadow]:not([overlay]) {
 		box-shadow: var(--flow-box-shadow);
 	}
@@ -72,5 +72,19 @@ f-popover {
 
 	> * {
 		z-index: 2;
+	}
+}
+
+.f-overlay {
+	background-color: #000;
+	opacity: 0.5;
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+	z-index: 200;
+	&[data-transparent="true"] {
+		background-color: transparent;
 	}
 }

@@ -1,7 +1,6 @@
 import { html } from "lit-html";
 import fPopoverAnatomy from "../svg/i-fpopover-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import { useArgs } from "@storybook/manager-api";
 import { useState } from "@storybook/preview-api";
 import { createRef, ref } from "lit/directives/ref.js";
 import { FPopover, FPopoverPlacement, FPopoverSize } from "@cldcvr/flow-core";
@@ -28,17 +27,17 @@ export type PopOverStoryArgs = {
 
 export const Playground = {
 	render: (args: PopOverStoryArgs) => {
-		const [_, updateArgs] = useArgs();
-
+		const popoverRef = createRef<FPopover>();
 		const handlePopover = (_e: CustomEvent) => {
-			updateArgs({
-				open: !args.open
-			});
+			if (popoverRef.value) {
+				popoverRef.value.open = !popoverRef.value.open;
+			}
 		};
 
 		return html` <f-div height="hug-content" direction="column" align="middle-center">
 			<f-div height="200px"></f-div>
 			<f-popover
+				${ref(popoverRef)}
 				.open=${args.open}
 				.overlay=${args.overlay}
 				.size=${args.size}
@@ -136,23 +135,23 @@ export const Anatomy = {
 
 export const Target = {
 	render: (args: PopOverStoryArgs) => {
-		const [_, updateArgs] = useArgs();
-
-		const handlePopover = () => {
-			updateArgs({
-				open: !args.open
-			});
+		const popoverRef = createRef<FPopover>();
+		const handlePopover = (_e: CustomEvent) => {
+			if (popoverRef.value) {
+				popoverRef.value.open = !popoverRef.value.open;
+			}
 		};
 
 		const escapePopover = () => {
-			updateArgs({
-				open: !args.open
-			});
+			if (popoverRef.value) {
+				popoverRef.value.open = !popoverRef.value.open;
+			}
 		};
 
 		return html`
 			<f-div height="hug-content" align="middle-center">
 				<f-popover
+					${ref(popoverRef)}
 					?open=${args.open}
 					?overlay=${true}
 					@overlay-click=${handlePopover}

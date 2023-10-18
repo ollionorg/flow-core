@@ -40,7 +40,7 @@ export class FRoot extends LitElement {
 	tooltip?: FRootTooltip;
 
 	get tooltipText() {
-		if (typeof this.tooltip === "object") {
+		if (this.tooltip !== null && typeof this.tooltip === "object") {
 			return this.tooltip.text;
 		}
 		return this.tooltip;
@@ -122,7 +122,7 @@ export class FRoot extends LitElement {
 						}
 					}
 
-					if (typeof this.tooltip === "object") {
+					if (this.tooltip !== null && typeof this.tooltip === "object") {
 						tooltipElement.closable = this.tooltip.closable ?? false;
 						tooltipElement.placement = this.tooltip.placement ?? "auto";
 					} else {

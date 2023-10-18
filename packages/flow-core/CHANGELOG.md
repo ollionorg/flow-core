@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.1.2] - 2023-10-18
+
+### Bug Fixes
+
+- `f-picotgram`: `auto-bg` dynamic colors for text source fixed.
+
 ## [2.1.1] - 2023-10-17
 
 ### Bug Fixes

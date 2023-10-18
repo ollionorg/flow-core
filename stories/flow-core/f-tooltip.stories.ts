@@ -1,7 +1,7 @@
 import { html } from "lit-html";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
-import { useArgs, useState } from "@storybook/client-api";
+import { useState } from "@storybook/preview-api";
+import { FTooltipObject, FTooltipPlacement } from "@cldcvr/flow-core";
 
 export default {
 	title: "@cldcvr/flow-core/f-tooltip",
@@ -13,8 +13,16 @@ export default {
 	}
 };
 
+type TooltipStoryArgs = {
+	tooltip: string | FTooltipObject;
+	closable: boolean;
+	open: boolean;
+	placement: FTooltipPlacement;
+	["Custom Tooltip Template"]: string;
+};
+
 export const PlaygroundDirectiveTooltip = {
-	render: args =>
+	render: (args: TooltipStoryArgs) =>
 		html`<f-div padding="large" height="200px" align="middle-center" gap="auto">
 			<f-icon source="i-question-filled" size="medium" .tooltip=${args.tooltip} clickable></f-icon>
 			<f-button label="Submit" .tooltip=${args.tooltip}></f-button>
@@ -33,13 +41,17 @@ export const PlaygroundDirectiveTooltip = {
 	},
 
 	args: {
-		tooltip: "This is a tooltip!"
+		tooltip: {
+			text: "This is object tooltip",
+			placement: "bottom",
+			closable: true
+		}
 	}
 };
 
 export const PlaygroundRichTooltipComponent = {
-	render: args =>
-		html`${args.tooltip.startsWith("#")
+	render: (args: TooltipStoryArgs) =>
+		html`${typeof args.tooltip === "string" && args.tooltip.startsWith("#")
 			? html`<f-div padding="large" height="200px" align="middle-center" gap="large">
 						<f-icon-button icon="i-plus" .tooltip=${args.tooltip}></f-icon-button>
 						<f-button label="Submit" .tooltip=${args.tooltip}></f-button>
@@ -103,7 +115,7 @@ export const PlaygroundRichTooltipComponent = {
 };
 
 export const Id = {
-	render: args => {
+	render: () => {
 		return html`
 			<f-div gap="large" padding="x-large" direction="column">
 				<f-div height="hug-content" padding="none">
@@ -142,7 +154,7 @@ export const Id = {
 };
 
 export const Placement = {
-	render: args => {
+	render: () => {
 		const [dummyPlacementArray, setDummyPlacementArray] = useState([
 			[
 				{
@@ -210,10 +222,10 @@ export const Placement = {
 
 		return html`
 			<f-div height="hug-content" gap="large" direction="column">
-				${dummyPlacementArray.map((item, index) => {
+				${dummyPlacementArray.map(item => {
 					return html`
 						<f-div height="hug-content" gap="auto" direction="row">
-							${item.map((main, main_index) => {
+							${item.map(main => {
 								return html`
 									<f-tooltip placement=${main.placement} id=${main.placement}>
 										<f-text variant="para" size="small" id="tooltip-text">
@@ -241,7 +253,7 @@ export const Placement = {
 };
 
 export const Flags = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="column">
 			<f-div height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">closable="true"</f-text>

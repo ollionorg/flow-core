@@ -244,6 +244,12 @@ function getComponentCodeFromDeclarationVue2(declaration: Declaration) {
 
 	return componentDeclaration;
 }
+function isSuperClassDeclaration(declaration: MixinDeclaration) {
+	return (
+		declaration.superclass &&
+		(declaration.superclass.name === "FRoot" || declaration.superclass.name === "LitElement")
+	);
+}
 
 function getComponentPropTypeImports(schema: Package, modulePath?: string): string[] {
 	const builtInTypes = [
@@ -266,12 +272,7 @@ function getComponentPropTypeImports(schema: Package, modulePath?: string): stri
 		module.declarations?.forEach(declaration => {
 			declaration = declaration as MixinDeclaration;
 
-			if (
-				!(
-					declaration.superclass &&
-					(declaration.superclass.name === "FRoot" || declaration.superclass.name === "LitElement")
-				)
-			) {
+			if (!isSuperClassDeclaration(declaration)) {
 				return;
 			}
 

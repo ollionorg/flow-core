@@ -1,10 +1,10 @@
 # @cldcvr/custom-elements-manifest-to-types
 
-## 2.0.2
+## [2.0.3] - 2023-10-18
 
-### Patch Changes
+### Bug fixes
 
-- a2de106: Fix platform types
+- Duplicate type import fixed.
 
 ## 2.0.1-beta.0
 

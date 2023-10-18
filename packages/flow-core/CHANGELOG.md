@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.1.4] - 2023-10-18
+
+### Patch Changes
+
+- Duplicate type import fixed
+
 ## [2.1.3] - 2023-10-18
 
 ### Improvements

@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { property, query } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import eleStyle from "./f-pictogram.scss?inline";
 import globalStyle from "./f-pictogram-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -95,9 +95,6 @@ export class FPictogram extends FRoot {
 	 */
 	@property({ reflect: true, type: Boolean })
 	disabled?: boolean = false;
-
-	@query(".f-pictogram")
-	fPicorgramWrapper!: HTMLDivElement;
 
 	/**
 	 * @attribute The hover attribute to change background on hovering on pictogram.

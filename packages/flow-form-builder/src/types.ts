@@ -18,7 +18,8 @@ import {
 	FSelectOptionTemplate,
 	FDateTimePickerState,
 	FDateOption,
-	DateDisableType
+	DateDisableType,
+	FRootTooltip
 } from "@cldcvr/flow-core";
 import { BetweenParams } from "./modules/validation/rules/between";
 import { Subject } from "rxjs";
@@ -242,7 +243,7 @@ export type CheckboxOption = {
 	qaId?: string;
 	title?: string | HTMLTemplateResult;
 	description?: string;
-	iconTooltip?: string;
+	iconTooltip?: FRootTooltip;
 	subTitle?: string;
 	disabled?: boolean;
 };
@@ -275,7 +276,7 @@ export type FormBuilderSuffixCondition = (value: string) => boolean;
 export type FormBuilderLabel = {
 	title: string | HTMLTemplateResult; // title of field/group/form
 	description?: string; // more info about title (displayed at bottom of label)
-	iconTooltip?: string; //icon to display besides title
+	iconTooltip?: FRootTooltip; //icon to display besides title
 	subTitle?: string | HTMLTemplateResult;
 };
 

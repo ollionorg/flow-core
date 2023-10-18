@@ -3,15 +3,25 @@ import { property, query } from "lit/decorators.js";
 
 import globalStyle from "./f-root-global.scss?inline";
 import { injectCss } from "@cldcvr/flow-core-config";
+import { FTooltipPlacement } from "../../../components/f-tooltip/f-tooltip";
 
 // to avoid recursive tye check
 type TooltipElement = HTMLElement & {
 	target: unknown;
 	open: boolean;
 	closable: boolean;
+	placement?: FTooltipPlacement;
 };
 
 injectCss("f-root", globalStyle);
+
+export type FTooltipObject = {
+	text: string;
+	closable?: boolean;
+	placement?: FTooltipPlacement;
+};
+
+export type FRootTooltip = string | FTooltipObject;
 
 /**
  * @summary Every component must extent this class to consume gbobal styles , such as css reset, font family,...
@@ -27,7 +37,14 @@ export class FRoot extends LitElement {
 	 * @attribute Value of a switch defines if it is on or off.
 	 */
 	@property({ reflect: true, type: String })
-	tooltip?: string;
+	tooltip?: FRootTooltip;
+
+	get tooltipText() {
+		if (this.tooltip !== null && typeof this.tooltip === "object") {
+			return this.tooltip.text;
+		}
+		return this.tooltip;
+	}
 
 	mouseEnter?: () => void;
 
@@ -101,8 +118,17 @@ export class FRoot extends LitElement {
 					if (!isExternalTooltip) {
 						const tooltipText = tooltipElement?.querySelector("#tooltip-text");
 						if (tooltipText) {
-							tooltipText.innerHTML = this.tooltip as string;
+							tooltipText.innerHTML = this.tooltipText as string;
 						}
+					}
+
+					if (this.tooltip !== null && typeof this.tooltip === "object") {
+						tooltipElement.closable = this.tooltip.closable ?? false;
+						tooltipElement.placement = this.tooltip.placement ?? "auto";
+					} else {
+						//reset to original
+						tooltipElement.closable = false;
+						tooltipElement.placement = "auto";
 					}
 					tooltipElement.open = true;
 				}
@@ -121,15 +147,15 @@ export class FRoot extends LitElement {
 			/**
 			 * If tooltip is specified by user
 			 */
-			if (this.tooltip) {
+			if (this.tooltipText) {
 				/**
 				 * check if tooltip contains id
 				 */
-				if (this.tooltip.startsWith("#")) {
-					tooltipElement = document.querySelector<TooltipElement>(this.tooltip);
+				if (this.tooltipText.startsWith("#")) {
+					tooltipElement = document.querySelector<TooltipElement>(this.tooltipText);
 					isExternalTooltip = true;
 					if (!tooltipElement) {
-						console.warn(`${this.tooltip} tooltip not found`);
+						console.warn(`${this.tooltipText} tooltip not found`);
 					}
 				}
 				/**

@@ -2,6 +2,13 @@
 
 # Change Log
 
+## [2.0.5] - 2023-10-18
+
+### Patch Changes
+
+- `iconTooltip` type changed.
+- `min-value` and `max-value` default messages updated.
+
 ## [2.0.4] - 2023-10-16
 
 ### Patch Changes

@@ -14,7 +14,15 @@ const field: FormBuilderField = {
 	},
 	fields: {
 		number: {
-			type: "number"
+			type: "number",
+			validationRules: [
+				{
+					name: "max-value",
+					params: {
+						max: 5
+					}
+				}
+			]
 		},
 		hiddenField: {
 			type: "hidden",
@@ -192,7 +200,11 @@ const field: FormBuilderField = {
 			label: {
 				title: html`<f-text state="warning" weight="bold">Radios</f-text>`,
 				subTitle: "Optional",
-				iconTooltip: "Test Radio tooltip"
+				iconTooltip: {
+					text: "Test Radio tooltip",
+					closable: true,
+					placement: "right"
+				}
 			},
 			helperText: html`<f-text size="small" state="subtle">Checking helper text</f-text>`,
 			options: [

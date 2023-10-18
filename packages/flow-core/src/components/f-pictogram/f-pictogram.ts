@@ -108,8 +108,6 @@ export class FPictogram extends FRoot {
 	@property({ reflect: true, type: Boolean, attribute: "auto-bg" })
 	autoBg = false;
 
-	isText = false;
-
 	get getLetters() {
 		const acronym = this.source
 			.split(/\s/)
@@ -171,15 +169,12 @@ export class FPictogram extends FRoot {
 	get renderedHtml() {
 		const emojiRegex = /\p{Extended_Pictographic}/u;
 		if (isValidHttpUrl(this.source)) {
-			this.isText = false;
 			return `<img src="${this.source}" />`;
 		} else if (emojiRegex.test(this.source)) {
-			this.isText = false;
 			return `<f-icon class="${"f-pictogram-" + this.size + "-emoji"}" source="${
 				this.source
 			}" size="${this.sourceSize()}"></f-icon>`;
 		} else {
-			this.isText = false;
 			const IconPack = ConfigUtil.getConfig().iconPack;
 			if (IconPack) {
 				const svg = IconPack[this.source];
@@ -190,8 +185,27 @@ export class FPictogram extends FRoot {
 				}
 			}
 		}
-		this.isText = true;
 		return `<p class="text-styling" state=${this.state} style=${this.textColorStyling} >${this.textSource}</p>`;
+	}
+
+	// check for if source is a normal text
+	get isSourceText() {
+		const emojiRegex = /\p{Extended_Pictographic}/u;
+		const IconPack = ConfigUtil.getConfig().iconPack;
+		let svg;
+		if (IconPack) {
+			svg = IconPack[this.source];
+		}
+		if (isValidHttpUrl(this.source)) {
+			return false;
+		}
+		if (emojiRegex.test(this.source)) {
+			return false;
+		}
+		if (svg) {
+			return false;
+		}
+		return true;
 	}
 	// calculating computed source size according to the user input size
 	sourceSize() {
@@ -229,7 +243,7 @@ export class FPictogram extends FRoot {
 	}
 
 	applyStyles() {
-		if (this.fPicorgramWrapper && this.autoBg && this.isText) {
+		if (this.autoBg && this.isSourceText) {
 			// Modify the background-color property
 			return `--after-background-color: ${this.hashCode}; --after-background-color-hover: ${this.hashCodeHover}; --before-background-color:${this.hashCode}`;
 		} else {

@@ -260,9 +260,9 @@ function getComponentPropTypeImports(schema: Package, modulePath?: string): stri
 		"HTMLElement"
 	];
 	const moduleTypeImports: string[] = [];
+	const extractedTypes: Set<string> = new Set();
+	const moduleName = modulePath || "./src";
 	schema.modules.forEach(module => {
-		const moduleName = modulePath || "./src";
-
 		module.declarations?.forEach(declaration => {
 			declaration = declaration as MixinDeclaration;
 
@@ -276,7 +276,6 @@ function getComponentPropTypeImports(schema: Package, modulePath?: string): stri
 			}
 
 			if (declaration.attributes) {
-				const extractedTypes: Set<string> = new Set();
 				declaration.attributes.forEach(attribute => {
 					if (attribute.type?.text) {
 						const typesToImport: string[] = attribute.type.text.split(" ");
@@ -287,18 +286,17 @@ function getComponentPropTypeImports(schema: Package, modulePath?: string): stri
 						});
 					}
 				});
-
-				if (extractedTypes.size > 0) {
-					let importStatement = `import type { `;
-					Array.from(extractedTypes).forEach((et, idx) => {
-						importStatement += `${et}${idx < extractedTypes.size - 1 ? "," : ""}`;
-					});
-					importStatement += `} from '${moduleName}';`;
-					moduleTypeImports.push(importStatement);
-				}
 			}
 		});
 	});
 
+	if (extractedTypes.size > 0) {
+		let importStatement = `import type { `;
+		Array.from(extractedTypes).forEach((et, idx) => {
+			importStatement += `${et}${idx < extractedTypes.size - 1 ? "," : ""}`;
+		});
+		importStatement += `} from '${moduleName}';`;
+		moduleTypeImports.push(importStatement);
+	}
 	return moduleTypeImports;
 }

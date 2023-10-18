@@ -2,6 +2,20 @@
 
 # Change Log
 
+## [2.1.3] - 2023-10-18
+
+### Improvements
+
+- `tooltip` property now accepts object
+
+```
+{
+    text: string;
+    closable?: boolean;
+    placement?: FTooltipPlacement;
+}
+```
+
 ## [2.1.2] - 2023-10-18
 
 ### Bug Fixes

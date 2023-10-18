@@ -21,6 +21,8 @@ export type FTooltipObject = {
 	placement?: FTooltipPlacement;
 };
 
+export type FRootTooltip = string | FTooltipObject;
+
 /**
  * @summary Every component must extent this class to consume gbobal styles , such as css reset, font family,...
  *
@@ -35,7 +37,7 @@ export class FRoot extends LitElement {
 	 * @attribute Value of a switch defines if it is on or off.
 	 */
 	@property({ reflect: true, type: String })
-	tooltip?: string | FTooltipObject;
+	tooltip?: FRootTooltip;
 
 	get tooltipText() {
 		if (typeof this.tooltip === "object") {

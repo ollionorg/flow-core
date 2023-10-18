@@ -19,7 +19,7 @@ import {
 	FDateTimePickerState,
 	FDateOption,
 	DateDisableType,
-	FTooltipObject
+	FRootTooltip
 } from "@cldcvr/flow-core";
 import { BetweenParams } from "./modules/validation/rules/between";
 import { Subject } from "rxjs";
@@ -243,8 +243,7 @@ export type CheckboxOption = {
 	qaId?: string;
 	title?: string | HTMLTemplateResult;
 	description?: string;
-	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-	iconTooltip?: string | FTooltipObject;
+	iconTooltip?: FRootTooltip;
 	subTitle?: string;
 	disabled?: boolean;
 };
@@ -277,8 +276,7 @@ export type FormBuilderSuffixCondition = (value: string) => boolean;
 export type FormBuilderLabel = {
 	title: string | HTMLTemplateResult; // title of field/group/form
 	description?: string; // more info about title (displayed at bottom of label)
-	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-	iconTooltip?: string | FTooltipObject; //icon to display besides title
+	iconTooltip?: FRootTooltip; //icon to display besides title
 	subTitle?: string | HTMLTemplateResult;
 };
 

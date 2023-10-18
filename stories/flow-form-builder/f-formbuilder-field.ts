@@ -14,7 +14,15 @@ const field: FormBuilderField = {
 	},
 	fields: {
 		number: {
-			type: "number"
+			type: "number",
+			validationRules: [
+				{
+					name: "max-value",
+					params: {
+						max: 5
+					}
+				}
+			]
 		},
 		hiddenField: {
 			type: "hidden",

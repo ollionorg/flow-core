@@ -18,7 +18,7 @@ injectCss("f-suggest", globalStyle);
 export type FSuggestState = "primary" | "default" | "success" | "warning" | "danger";
 
 export type FSuggestCustomEvent = {
-	value: string | FSuggestTemplate;
+	value?: string | FSuggestTemplate;
 };
 
 export type FSuggestSuffixWhen = (value: string) => boolean;
@@ -201,15 +201,7 @@ export class FSuggest extends FRoot {
 		this.dispatchInputEvent(e.detail.value);
 	}
 
-	/**
-	 * clear input value on clear icon clicked
-	 */
-	clearInputValue() {
-		this.value = "";
-		this.dispatchInputEvent("");
-	}
-
-	dispatchInputEvent(value: string | FSuggestTemplate) {
+	dispatchInputEvent(value?: string | FSuggestTemplate) {
 		const event = new CustomEvent<FSuggestCustomEvent>("input", {
 			detail: {
 				value
@@ -235,7 +227,7 @@ export class FSuggest extends FRoot {
 			mainAxis: 4
 		};
 		this.popOverElement.style.width = this.offsetWidth + "px";
-		this.popOverElement.style.maxHeight = "300px";
+		this.popOverElement.style.maxHeight = this.optionsMaxHeight ?? "600px";
 		if (!this.loading) {
 			this.popOverElement.open = true;
 		}
@@ -442,7 +434,7 @@ export class FSuggest extends FRoot {
 				.maxLength=${ifDefined(this.maxLength)}
 				?loading=${this.loading}
 				?disabled=${this.disabled}
-				?clear=${this.clear}
+				.clear=${this.clear}
 				?read-only=${this.readOnly}
 				.size=${this.size}
 			>
@@ -455,7 +447,7 @@ export class FSuggest extends FRoot {
 							><f-div slot="subtitle"><slot name="subtitle"></slot></f-div>`}
 			</f-input>
 			<f-popover .overlay=${false} .placement=${"bottom-start"} class="f-suggest-popover">
-				<f-div direction="column" .maxHeight=${this.optionsMaxHeight ?? "600px"} state="secondary">
+				<f-div direction="column" state="secondary">
 					${this.filteredSuggestions && this.filteredSuggestionsLength > 0
 						? this.getSuggestionHtml(this.filteredSuggestions)
 						: html`<slot name="no-data"></slot>`}

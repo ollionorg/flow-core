@@ -305,7 +305,7 @@ export class FInput extends FRoot {
 		 * append suffix
 		 */
 		const suffixAppend = !this.loading
-			? this.value !== undefined && this.value !== null && this.clear
+			? this.value !== undefined && this.value !== null && this.value !== "" && this.clear
 				? html`<div class="f-input-suffix">
 						${passwordToggle}
 						<f-icon
@@ -390,7 +390,7 @@ export class FInput extends FRoot {
 							state=${this.state}
 							data-qa-id=${this.getAttribute("data-qa-element-id")}
 							placeholder=${this.placeholder}
-							.value="${this.value === undefined ? null : this.value}"
+							.value=${this.value === undefined ? null : this.value}
 							size=${this.size}
 							?readonly=${this.readOnly}
 							autofocus=${ifDefined(this.getAttribute("autofocus"))}

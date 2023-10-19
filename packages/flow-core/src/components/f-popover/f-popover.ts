@@ -171,6 +171,9 @@ export class FPopover extends FRoot {
 					this.style.setProperty("--custom-height", height);
 				}
 			}
+			if (this.cleanup) {
+				this.cleanup();
+			}
 			this.cleanup = autoUpdate(target, this, () => {
 				computePosition(target, this, {
 					placement: this.computePlacement(),
@@ -377,7 +380,9 @@ export class FPopover extends FRoot {
 					this.overlayElement.classList.add("f-overlay");
 					this.overlayElement.dataset.qaOverlay = "true";
 					document.body.append(this.overlayElement);
-					this.overlayElement.onclick = this.overlayClick;
+					this.overlayElement.onclick = () => {
+						this.overlayClick();
+					};
 				}
 
 				if (!this.overlay) {

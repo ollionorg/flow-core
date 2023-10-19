@@ -212,10 +212,12 @@ export class FSearch extends FRoot {
 	 */
 	handleInput(e: CustomEvent<{ value: unknown }>) {
 		e.stopPropagation();
-		if (typeof e.detail.value === "object") {
-			this.value = e.detail.value?.toString();
-		} else {
-			this.value = String(e.detail.value);
+		if (e.detail.value) {
+			if (typeof e.detail.value === "object") {
+				this.value = (e.detail.value as FSearchOptionTemplate)?.toString();
+			} else {
+				this.value = String(e.detail.value);
+			}
 		}
 		this.dispatchInputEvent(e.detail.value, this["selected-scope"]);
 	}

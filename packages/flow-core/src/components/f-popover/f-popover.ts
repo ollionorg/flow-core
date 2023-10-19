@@ -171,6 +171,9 @@ export class FPopover extends FRoot {
 					this.style.setProperty("--custom-height", height);
 				}
 			}
+			if (this.cleanup) {
+				this.cleanup();
+			}
 			this.cleanup = autoUpdate(target, this, () => {
 				computePosition(target, this, {
 					placement: this.computePlacement(),

@@ -2,6 +2,13 @@
 
 # Change Log
 
+## [2.1.6] - 2023-10-19
+
+### Patch Changes
+
+- `f-popover` : `overlay-click` event not working.
+- `f-search` : clear icon adding undefined in input box.
+
 ## [2.1.5] - 2023-10-19
 
 ### Bug Fixes

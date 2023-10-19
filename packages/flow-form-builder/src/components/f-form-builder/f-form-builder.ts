@@ -250,7 +250,6 @@ export class FFormBuilder extends FRoot {
 					this.values = ref.value?.value as FormBuilderValues;
 				}
 
-				console.log(this.values);
 				/**
 				 * update isChanged prop in state to let user know that form is changed
 				 */

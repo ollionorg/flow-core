@@ -150,7 +150,9 @@ export class FDateTimePicker extends FRoot {
 	/**
 	 * flatpickr instance
 	 */
-	flatPickerElement!: Instance;
+	flatPickerElement?: Instance;
+
+	reqAniFrame?: number;
 
 	/**
 	 * conditional placeholder
@@ -196,13 +198,17 @@ export class FDateTimePicker extends FRoot {
 	 */
 	disconnectedCallback() {
 		this.flatPickerElement?.close();
+		// clear request animation frame if any
+		if (this.reqAniFrame) {
+			cancelAnimationFrame(this.reqAniFrame);
+		}
 		super.disconnectedCallback();
 	}
 
 	/**
 	 * emit input custom event
 	 */
-	handleInput(dateObj: object, dateStr: string) {
+	handleInput(dateObj: object, dateStr?: string) {
 		this.helpSlotElement.innerHTML = `<slot name="help"></slot>`;
 		this.dateTimePickerElement.state = this.state;
 		this.value = dateStr;
@@ -214,7 +220,7 @@ export class FDateTimePicker extends FRoot {
 	 * @param dateObj Date as an object
 	 * @param dateStr Date oin string format
 	 */
-	dispatchInputEvent(dateObj: object, dateStr: string) {
+	dispatchInputEvent(dateObj: object, dateStr?: string) {
 		const event = new CustomEvent("input", {
 			detail: {
 				value: dateObj,
@@ -255,7 +261,10 @@ export class FDateTimePicker extends FRoot {
 	) {
 		e.stopPropagation();
 
-		if (e.detail.value) {
+		if (e.detail?.type === "clear") {
+			this.handleInput([], undefined);
+			this.flatPickerElement?.clear();
+		} else {
 			if (String(e.detail.value).match(this.regexDateTime)) {
 				//@ts-expect-error value is confirmed to be a string
 				this.handleInput([this.dateObjectFromString(e)], String(e.detail.value));
@@ -264,9 +273,6 @@ export class FDateTimePicker extends FRoot {
 				this.dateTimePickerElement.state = "danger";
 			}
 			this.dateTimePickerElement.inputElement.focus();
-		}
-		if (e.detail?.type === "clear") {
-			this.handleInput([], "");
 		}
 	}
 
@@ -290,6 +296,11 @@ export class FDateTimePicker extends FRoot {
 	 * @param element element w.r.t which creation of date picker takes place
 	 */
 	createDateTimePicker(element: HTMLElement) {
+		//destroy if it is present
+		if (this.flatPickerElement) {
+			this.flatPickerElement.destroy();
+			this.flatPickerElement = undefined;
+		}
 		this.flatPickerElement = flatpickr(element, {
 			dateFormat:
 				this.mode === "date-time" ? "d/m/Y H:i" : this.mode === "date-only" ? "d/m/Y" : "H:i",
@@ -317,7 +328,7 @@ export class FDateTimePicker extends FRoot {
 	 */
 	addWeekNoStyle() {
 		if (this["week-number"]) {
-			(this.flatPickerElement.rContainer as HTMLDivElement).style.borderLeft =
+			(this.flatPickerElement?.rContainer as HTMLDivElement).style.borderLeft =
 				"1px solid var(--color-border-secondary";
 		}
 	}
@@ -337,7 +348,7 @@ export class FDateTimePicker extends FRoot {
 				class="f-date-input-picker"
 				data-qa-element-id=${this.getAttribute("data-qa-element-id")}
 				@keydown=${() => {
-					this.flatPickerElement.close();
+					this.flatPickerElement?.close();
 					this.dateTimePickerElement.inputElement.focus();
 				}}
 				@input=${this.handleKeyboardInput}
@@ -353,9 +364,13 @@ export class FDateTimePicker extends FRoot {
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 		if (!this.inline) {
-			requestAnimationFrame(() => {
+			// clear request animation frame if any
+			if (this.reqAniFrame) {
+				cancelAnimationFrame(this.reqAniFrame);
+			}
+			this.reqAniFrame = requestAnimationFrame(() => {
 				this.createDateTimePicker(this.dateTimePickerElement.inputWrapperElement);
-				this.dateTimePickerElement.value = this.flatPickerElement.input.value;
+				this.dateTimePickerElement.value = this.flatPickerElement?.input.value;
 				this.addWeekNoStyle();
 			});
 		} else {

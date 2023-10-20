@@ -136,13 +136,13 @@ export class FDateTimePicker extends FRoot {
 	loading?: boolean = false;
 
 	/**
-	 * @attribute query selector for input field
+	 *  query selector for input field
 	 */
 	@query("f-input")
 	dateTimePickerElement!: FInput;
 
 	/**
-	 * @attribute query selector for help slot
+	 *  query selector for help slot
 	 */
 	@query("f-div[slot='help']")
 	helpSlotElement!: FDiv;

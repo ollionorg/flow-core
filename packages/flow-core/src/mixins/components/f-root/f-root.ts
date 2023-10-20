@@ -125,7 +125,7 @@ export class FRoot extends LitElement {
 					if (this.tooltip !== null && typeof this.tooltip === "object") {
 						tooltipElement.closable = this.tooltip.closable ?? false;
 						tooltipElement.placement = this.tooltip.placement ?? "auto";
-					} else {
+					} else if (!isExternalTooltip) {
 						//reset to original
 						tooltipElement.closable = false;
 						tooltipElement.placement = "auto";

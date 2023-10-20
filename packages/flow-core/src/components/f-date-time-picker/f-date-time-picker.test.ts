@@ -1,5 +1,5 @@
 import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
-import { expect, fixture, html } from "@open-wc/testing";
+import { expect, fixture, html, oneEvent } from "@open-wc/testing";
 
 // importing flow-core components
 import "@cldcvr/flow-core";
@@ -61,5 +61,19 @@ describe("f-date-time-picker", () => {
 		const dateFormat =
 			months[new Date().getMonth()] + " " + new Date().getDate() + ", " + new Date().getFullYear();
 		expect(flatpickrToday?.getAttribute("aria-label")).to.equal(dateFormat);
+	});
+	it("should clear date value", async () => {
+		const el = await fixture<FDateTimePicker>(html`
+			<f-date-time-picker .value=${new Date()} .clear=${true}></f-date-time-picker>
+		`);
+		// wait till date picker is ready
+		await new Promise(resolve => setTimeout(resolve, 1000));
+
+		const listner = oneEvent(el, "input") as Promise<CustomEvent>;
+		el.dateTimePickerElement.clearIcon.click();
+
+		const ev = await listner;
+
+		expect(ev.detail.date).to.equal(undefined);
 	});
 });

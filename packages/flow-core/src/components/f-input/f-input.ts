@@ -165,6 +165,12 @@ export class FInput extends FRoot {
 	inputWrapperElement!: HTMLInputElement;
 
 	/**
+	 * clear icon
+	 */
+	@query(".clear-icon")
+	clearIcon?: FIcon;
+
+	/**
 	 * emit input custom event
 	 */
 	handleInput(e: InputEvent) {
@@ -313,7 +319,7 @@ export class FInput extends FRoot {
 							source="i-close"
 							size="x-small"
 							@click=${this.clearInputValue}
-							class=${!this.size ? "f-input-icons-size" : ""}
+							class=${!this.size ? "f-input-icons-size clear-icon" : "clear-icon"}
 						></f-icon>
 						${mainSuffix}
 				  </div>`

@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.0.7] - 2023-10-20
+
+### Patch Changes
+
+- `console.log` removed
+
 ## [2.0.6] - 2023-10-18
 
 ### Patch Changes

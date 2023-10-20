@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.1.8] - 2023-10-20
+
+### Patch Changes
+
+- `f-tooltip` : `closable="true"` not working
+
 ## [2.1.7] - 2023-10-20
 
 ### Patch Changes

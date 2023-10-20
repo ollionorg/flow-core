@@ -262,7 +262,6 @@ export class FDateTimePicker extends FRoot {
 		e.stopPropagation();
 
 		if (e.detail?.type === "clear") {
-			this.handleInput([], undefined);
 			this.flatPickerElement?.clear();
 		} else {
 			if (String(e.detail.value).match(this.regexDateTime)) {
@@ -286,8 +285,10 @@ export class FDateTimePicker extends FRoot {
 			if (selectedDates.length === 2) {
 				this.handleInput(selectedDates, dateStr);
 			}
-		} else {
+		} else if (dateStr !== "") {
 			this.handleInput(selectedDates, dateStr);
+		} else if (dateStr === "") {
+			this.handleInput([], undefined);
 		}
 	}
 

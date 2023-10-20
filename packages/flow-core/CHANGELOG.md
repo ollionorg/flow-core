@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.1.7] - 2023-10-20
+
+### Patch Changes
+
+- `f-date-time-picker` : clear icon taking 2 clicks to clear date value.
+
 ## [2.1.6] - 2023-10-19
 
 ### Patch Changes

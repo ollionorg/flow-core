@@ -21,7 +21,8 @@
     "prettier:lint-all": "prettier --config .prettierrc.cjs --check .",
     "prepare": "husky install",
     "test": "pnpm run loki test",
-    "postinstall": "tsc -b"
+    "postinstall": "tsc -b",
+    "chromatic": "NODE_ENV=chromatic npx chromatic --exit-zero-on-changes --only-changed"
   },
   "engines": {
     "node": "^18.12.0",
@@ -52,6 +53,7 @@
     "@types/prettier": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
+    "chromatic": "^7.4.0",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-storybook": "^0.6.14",
@@ -93,5 +95,7 @@
         "mobile": false
       }
     }
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "flow-core-storybook@1.0.0"
 }

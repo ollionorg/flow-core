@@ -1383,7 +1383,10 @@ export const Loading = {
 			</f-div>
 		</f-div>`,
 
-	name: "loading"
+	name: "loading",
+	parameters: {
+		chromatic: { disableSnapshot: false }
+	}
 };
 
 export const Flags = {

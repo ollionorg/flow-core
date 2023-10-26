@@ -437,6 +437,7 @@ export const Flags = {
 						placeholder="Drag and Drop Files or Click here to upload"
 						max-size="100 MB"
 						@input=${e => handleValue(e)}
+						data-chromatic="ignore"
 						?loading=${true}
 					>
 						<f-div slot="label" padding="none" gap="none">Loading Flag</f-div>

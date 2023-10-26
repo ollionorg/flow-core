@@ -277,7 +277,13 @@ export const Flags = {
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
 				<f-icon source="i-plus" state="primary" size="x-large"></f-icon>
-				<f-icon source="i-plus" state="primary" size="x-large" loading=${true}></f-icon>
+				<f-icon
+					source="i-plus"
+					state="primary"
+					size="x-large"
+					data-chromatic="ignore"
+					loading=${true}
+				></f-icon>
 			</f-div>
 			<f-div height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">Disabled</f-text>

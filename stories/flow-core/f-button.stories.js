@@ -257,15 +257,25 @@ export const Flags = {
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large">
 				<f-button label="label"></f-button>
-				<f-button label="label" loading=${true}></f-button>
+				<f-button label="label" data-chromatic="ignore" loading=${true}></f-button>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large">
 				<f-button label="label" icon-left="i-plus"></f-button>
-				<f-button label="label" loading=${true} icon-left="i-plus"></f-button>
+				<f-button
+					label="label"
+					data-chromatic="ignore"
+					loading=${true}
+					icon-left="i-plus"
+				></f-button>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large">
 				<f-button label="label" icon-right="i-plus"></f-button>
-				<f-button label="label" loading=${true} icon-right="i-plus"></f-button>
+				<f-button
+					label="label"
+					data-chromatic="ignore"
+					loading=${true}
+					icon-right="i-plus"
+				></f-button>
 			</f-div>
 			<f-div height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">Disabled</f-text>

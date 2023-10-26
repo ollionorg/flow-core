@@ -246,7 +246,13 @@ export const Flags = {
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
 				<f-counter label="888888" size="large" state="neutral"></f-counter>
-				<f-counter label="888888" size="large" state="neutral" loading=${true}></f-counter>
+				<f-counter
+					label="888888"
+					size="large"
+					state="neutral"
+					data-chromatic="ignore"
+					loading=${true}
+				></f-counter>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large" overflow="hidden">
 				<f-counter label="888888" size="large" state="custom,deepskyblue"></f-counter>
@@ -254,6 +260,7 @@ export const Flags = {
 					label="888888"
 					size="large"
 					state="custom,deepskyblue"
+					data-chromatic="ignore"
 					loading=${true}
 				></f-counter>
 			</f-div>

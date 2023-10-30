@@ -129,6 +129,32 @@ export class FDocumentViewer extends FRoot {
 
 	/**
 	 *
+	 * @param type para or heading
+	 * @returns text state color
+	 */
+	getState(type?: FDocTextType) {
+		const mapper = {
+			para: "secondary",
+			heading: "default"
+		};
+		return type ? mapper[type] : "secondary";
+	}
+
+	/**
+	 *
+	 * @param type para or heading
+	 * @returns text weight
+	 */
+	getTextWeight(type?: FDocTextType) {
+		const mapper = {
+			para: "regular",
+			heading: "bold"
+		};
+		return type ? mapper[type] : "regular";
+	}
+
+	/**
+	 *
 	 * @param obj complete json object for doc creation
 	 * @returns deepest level of nesting present
 	 */
@@ -152,6 +178,93 @@ export class FDocumentViewer extends FRoot {
 
 	/**
 	 *
+	 * @param key string for key
+	 * @param value string for value inside key could be an object or a string
+	 * @param innerHtml result in html to be rendered
+	 * @returns accordion panel template
+	 */
+	getAccordionPanel(key: string, value: FDocumentStatement, innerHtml: HTMLTemplateResult) {
+		return html` <f-accordion
+			icon-placement="left"
+			icon-size="x-small"
+			id=${this.refName(key)}
+			class="doc-preview-accordion"
+			?open=${value.open}
+			@toggle=${() => {
+				value.open = !value.open;
+			}}
+		>
+			${value.template
+				? html`<f-div height="100%">${value.template(this.searchValue)}</f-div>`
+				: html` <f-div gap="medium">
+						<f-div width="hug-content">
+							<f-text
+								variant="para"
+								size="small"
+								.weight=${this.getTextWeight(value.type)}
+								.state=${this.getState(value.type)}
+								id="doc-text"
+								.highlight=${this.searchValue}
+							>
+								${key}</f-text
+							></f-div
+						>
+						<f-div>
+							<f-text
+								variant="para"
+								size="small"
+								.weight=${this.getTextWeight(value.type)}
+								.state=${this.getState(value.type)}
+								id="doc-text"
+								.highlight=${this.searchValue}
+							>
+								${value.title}</f-text
+							></f-div
+						>
+				  </f-div>`}
+
+			<f-div slot="body" direction="column" width="100%">${innerHtml}</f-div>
+		</f-accordion>`;
+	}
+
+	/**
+	 *
+	 * @param key string for key
+	 * @param value string for value inside key
+	 * @returns html template
+	 */
+	getTextPanel(key: string, value: FDocumentStatement) {
+		return html` <f-div class="custom-body-padding" height="hug-content">
+			${value.template
+				? html`${value.template(this.searchValue)}`
+				: html` <f-div gap="medium" height="hug-content" gap="medium">
+						<f-div width="hug-content"
+							><f-text
+								variant="para"
+								size="small"
+								.weight=${this.getTextWeight(value.type)}
+								.state=${this.getState(value.type)}
+								id="doc-text"
+								.highlight=${this.searchValue}
+								>${key}</f-text
+							></f-div
+						>
+						<f-div
+							><f-text
+								variant="para"
+								size="small"
+								.state=${this.getState(value.type)}
+								id="doc-text"
+								.highlight=${this.searchValue}
+								>${value.title || value}</f-text
+							></f-div
+						>
+				  </f-div>`}
+		</f-div>`;
+	}
+
+	/**
+	 *
 	 * @param obj complete json object for doc creation
 	 * @returns template for the data given
 	 */
@@ -161,87 +274,9 @@ export class FDocumentViewer extends FRoot {
 			if (typeof value === "object" && value !== null && value.data) {
 				// Recursive call for nested objects
 				const innerHtml = this.traverse(value.data);
-				htmlTemp = html`
-					${htmlTemp}
-					<f-accordion
-						icon-placement="left"
-						icon-size="x-small"
-						id=${this.refName(key)}
-						class="doc-preview-accordion"
-						?open=${value.open}
-						@toggle=${() => {
-							value.open = !value.open;
-						}}
-					>
-						${value.template
-							? html`<f-div height="100%">${value.template(this.searchValue)}</f-div>`
-							: html` <f-div gap="medium">
-									<f-div width="hug-content">
-										<f-text
-											variant="para"
-											size="small"
-											.weight=${value.type === "heading" ? "bold" : "regular"}
-											.state=${value.type === "heading" ? "default" : "secondary"}
-											id="doc-text"
-											.highlight=${this.searchValue}
-										>
-											${key}</f-text
-										></f-div
-									>
-									<f-div>
-										<f-text
-											variant="para"
-											size="small"
-											.weight=${value.type === "heading" ? "bold" : "regular"}
-											.state=${value.type === "heading" ? "default" : "secondary"}
-											id="doc-text"
-											.highlight=${this.searchValue}
-										>
-											${value.title}</f-text
-										></f-div
-									>
-							  </f-div>`}
-
-						<f-div slot="body" direction="column" width="100%">${innerHtml}</f-div>
-					</f-accordion>
-				`;
+				htmlTemp = html` ${htmlTemp} ${this.getAccordionPanel(key, value, innerHtml)} `;
 			} else {
-				htmlTemp = html`
-					${htmlTemp}
-					<f-div class="custom-body-padding" height="hug-content">
-						${(value as FDocumentStatement).template
-							? html`${(value as FDocumentStatement).template!(this.searchValue)}`
-							: html` <f-div gap="medium" height="hug-content" gap="medium">
-									<f-div width="hug-content"
-										><f-text
-											variant="para"
-											size="small"
-											.weight=${(value as FDocumentStatement)?.type === "heading"
-												? "bold"
-												: "regular"}
-											.state=${(value as FDocumentStatement)?.type === "heading"
-												? "default"
-												: "secondary"}
-											id="doc-text"
-											.highlight=${this.searchValue}
-											>${key}</f-text
-										></f-div
-									>
-									<f-div
-										><f-text
-											variant="para"
-											size="small"
-											.state=${(value as FDocumentStatement)?.type === "heading"
-												? "default"
-												: "secondary"}
-											id="doc-text"
-											.highlight=${this.searchValue}
-											>${(value as FDocumentStatement).title || value}</f-text
-										></f-div
-									>
-							  </f-div>`}
-					</f-div>
-				`;
+				htmlTemp = html` ${htmlTemp} ${this.getTextPanel(key, value as FDocumentStatement)} `;
 			}
 		});
 		return htmlTemp;
@@ -351,8 +386,7 @@ export class FDocumentViewer extends FRoot {
 	}
 
 	toggleLeftColumn() {
-		const previousState =
-			this.leftColumn.getAttribute("data-column-open") === "true" ? true : false;
+		const previousState = this.leftColumn.getAttribute("data-column-open") === "true";
 
 		if (!previousState) {
 			this.leftColumnWrapper.width = "300px";
@@ -404,6 +438,29 @@ export class FDocumentViewer extends FRoot {
 			</f-div>
 		`;
 
+		//notch
+		const collapsibleJumpLinks = this.collapsibleJumpLinks
+			? html` <f-div
+					class="notch"
+					data-column-open=${true}
+					width="16px"
+					height="76px"
+					align="middle-center"
+					state="secondary"
+					clickable
+					@click=${this.toggleLeftColumn}
+					overflow="hidden"
+			  >
+					<f-icon
+						source="i-notch-left"
+						size="small"
+						state="default"
+						class="notch-icon"
+						data-column-open=${true}
+					></f-icon>
+			  </f-div>`
+			: "";
+
 		//sidebar jump-links
 		const jumpLinksSection = this.jumpLinks
 			? html` <f-div
@@ -421,27 +478,7 @@ export class FDocumentViewer extends FRoot {
 							${sidebarMenuItems}
 						</f-div>
 					</f-div>
-					${this.collapsibleJumpLinks
-						? html` <f-div
-								class="notch"
-								data-column-open=${true}
-								width="16px"
-								height="76px"
-								align="middle-center"
-								state="secondary"
-								clickable
-								@click=${this.toggleLeftColumn}
-								overflow="hidden"
-						  >
-								<f-icon
-									source="i-notch-left"
-									size="small"
-									state="default"
-									class="notch-icon"
-									data-column-open=${true}
-								></f-icon>
-						  </f-div>`
-						: ""}`
+					${collapsibleJumpLinks}`
 			: "";
 
 		const contentSectionHeader = html`<f-div

@@ -1,6 +1,4 @@
 import { html } from "lit-html";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import { useArgs } from "@storybook/manager-api";
 import { useState } from "@storybook/preview-api";
 import { FDocViewerContent } from "@cldcvr/flow-core";
 import getFakeDocContent from "../utils/mock-doc-content";

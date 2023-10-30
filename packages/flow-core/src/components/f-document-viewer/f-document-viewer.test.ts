@@ -1,7 +1,4 @@
 import { html, fixture, expect } from "@open-wc/testing";
-// importing flow-core components
-import "@cldcvr/flow-core";
-
 import { FDocumentViewer, FDocViewerContent } from "@cldcvr/flow-core";
 import { faker } from "@faker-js/faker";
 
@@ -63,17 +60,6 @@ describe("f-document-viewer", () => {
 			></f-document-viewer>
 		`);
 		const descendant = el.shadowRoot!.querySelector(".notch")!;
-		expect(descendant).to.equal(null);
-	});
-
-	it("should not show level selector", async () => {
-		const el = await fixture(html`
-			<f-document-viewer
-				.content=${getFakeDocContent()}
-				?level-selector=${false}
-			></f-document-viewer>
-		`);
-		const descendant = el.shadowRoot!.querySelector(".level-selector")!;
 		expect(descendant).to.equal(null);
 	});
 

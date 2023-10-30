@@ -1,5 +1,12 @@
 import { html, fixture, expect } from "@open-wc/testing";
+<<<<<<< HEAD
 import { FDocumentViewer, FDocViewerContent, FDocumentStatement } from "@cldcvr/flow-core";
+=======
+// importing flow-core components
+import "@cldcvr/flow-core";
+
+import { FDocumentViewer, FDocViewerContent } from "@cldcvr/flow-core";
+>>>>>>> 347c29c (FLOW-947 f-document-viewer test cases)
 import { faker } from "@faker-js/faker";
 
 export default function getFakeDocumentContent(items = 2, levels = 2): FDocViewerContent {
@@ -101,8 +108,51 @@ describe("f-document-viewer", () => {
 			<f-document-viewer .content=${getFakeDocContent()} .jump-links=${false}></f-document-viewer>
 		`);
 		const descendant = el.shadowRoot!.querySelector(".jumplinks-wrapper")!;
-		console.log(descendant);
 		expect(descendant).to.equal(null);
 	});
+<<<<<<< HEAD
 >>>>>>> 34944ee (FLOW-947 f-document-viewer)
+=======
+
+	it("should not show notch for collapsing jump-links", async () => {
+		const el = await fixture(html`
+			<f-document-viewer
+				.content=${getFakeDocContent()}
+				?jump-links=${true}
+				?collapsible-jump-links=${false}
+			></f-document-viewer>
+		`);
+		const descendant = el.shadowRoot!.querySelector(".notch")!;
+		expect(descendant).to.equal(null);
+	});
+
+	it("should not show level selector", async () => {
+		const el = await fixture(html`
+			<f-document-viewer
+				.content=${getFakeDocContent()}
+				?level-selector=${false}
+			></f-document-viewer>
+		`);
+		const descendant = el.shadowRoot!.querySelector(".level-selector")!;
+		expect(descendant).to.equal(null);
+	});
+
+	it("should render content", async () => {
+		const el = await fixture(html`
+			<f-document-viewer .content=${getFakeDocContent(3)}></f-document-viewer>
+		`);
+		const descendant = el.shadowRoot!.querySelector(".preview-scrollable")!;
+		const content = descendant.children[0].children;
+		expect(descendant.children.length).to.equal(3 + 1);
+		expect(content.length).to.equal(2);
+	});
+
+	it("should render jumplinks section", async () => {
+		const el = await fixture(html`
+			<f-document-viewer .content=${getFakeDocContent(3)}></f-document-viewer>
+		`);
+		const descendant = el.shadowRoot!.querySelector(".jump-links")!;
+		expect(descendant.children.length).to.equal(3);
+	});
+>>>>>>> 347c29c (FLOW-947 f-document-viewer test cases)
 });

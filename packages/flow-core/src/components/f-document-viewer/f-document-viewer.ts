@@ -25,7 +25,7 @@ export type FDocumentStatement = {
 	title: string;
 	data?: FDocumentData;
 	type?: FDocTextType;
-	open?: boolean;
+	open: boolean;
 	template?: (highlightText?: string | null) => HTMLTemplateResult;
 };
 
@@ -371,7 +371,6 @@ export class FDocumentViewer extends FRoot {
 
 	render() {
 		const renderedHTML = this.traverse(this.filteredContents ?? this.content);
-
 		// listing the sidebar items on the basis of json
 		const sidebarMenuItems = Object.entries(this.content).map(
 			([key, value], index) => html`
@@ -394,7 +393,7 @@ export class FDocumentViewer extends FRoot {
 
 		// popover which displayes levels, that filter data on its basis
 		const indexingPopover = html`
-			<f-div width="140px">
+			<f-div width="140px" class="level-selector">
 				<f-select
 					.options=${this.inndexingArray}
 					@input=${this.handleSelection}

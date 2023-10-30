@@ -3,10 +3,36 @@ import { faker } from "@faker-js/faker";
 
 import { FDocumentStatement, FDocViewerContent } from "@cldcvr/flow-core";
 
-export default function getFakeDocContent(items = 2, levels = 2): FDocViewerContent {
+export default function getFakeDocContent(
+	items = 2,
+	levels = 2,
+	isTemplate = false
+): FDocViewerContent {
 	const obj = {} as FDocViewerContent;
 	for (let i = 0; i < items; i++) {
 		obj[`${i + 1}.`] = createContentObject(levels, i + 1, "heading");
+		if (isTemplate) {
+			(obj[`${i + 1}.`] as FDocumentStatement).template = function (
+				highlight: string | null | undefined
+			) {
+				return html`
+					<f-div gap="medium">
+						<f-div gap="medium">
+							<f-text inline size="small" weight="bold" .highlight=${highlight}>1. </f-text>
+							<f-div>
+								<f-text inline size="small" weight="bold" .highlight=${highlight}
+									>${(obj[`${i + 1}.`] as FDocumentStatement).title}</f-text
+								>
+							</f-div>
+						</f-div>
+						<f-divider state="secondary"></f-divider>
+						<f-div width="150px" padding="none large"
+							><f-tag label="Required" size="small" state="custom,#C29270"></f-tag
+						></f-div>
+					</f-div>
+				`;
+			};
+		}
 	}
 	return obj;
 }

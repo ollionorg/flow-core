@@ -1,12 +1,9 @@
 import { html, fixture, expect } from "@open-wc/testing";
 // importing flow-core components
 import "@cldcvr/flow-core";
-import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
-// setting icon pack for testing icon related test cases
 
 import { FDocumentViewer, FDocViewerContent } from "@cldcvr/flow-core";
 import { faker } from "@faker-js/faker";
-ConfigUtil.setConfig({ iconPack: IconPack });
 
 export default function getFakeDocContent(items = 2, levels = 2): FDocViewerContent {
 	const obj = {} as FDocViewerContent;
@@ -54,7 +51,47 @@ describe("f-document-viewer", () => {
 			<f-document-viewer .content=${getFakeDocContent()} .jump-links=${false}></f-document-viewer>
 		`);
 		const descendant = el.shadowRoot!.querySelector(".jumplinks-wrapper")!;
-		console.log(descendant);
 		expect(descendant).to.equal(null);
+	});
+
+	it("should not show notch for collapsing jump-links", async () => {
+		const el = await fixture(html`
+			<f-document-viewer
+				.content=${getFakeDocContent()}
+				?jump-links=${true}
+				?collapsible-jump-links=${false}
+			></f-document-viewer>
+		`);
+		const descendant = el.shadowRoot!.querySelector(".notch")!;
+		expect(descendant).to.equal(null);
+	});
+
+	it("should not show level selector", async () => {
+		const el = await fixture(html`
+			<f-document-viewer
+				.content=${getFakeDocContent()}
+				?level-selector=${false}
+			></f-document-viewer>
+		`);
+		const descendant = el.shadowRoot!.querySelector(".level-selector")!;
+		expect(descendant).to.equal(null);
+	});
+
+	it("should render content", async () => {
+		const el = await fixture(html`
+			<f-document-viewer .content=${getFakeDocContent(3)}></f-document-viewer>
+		`);
+		const descendant = el.shadowRoot!.querySelector(".preview-scrollable")!;
+		const content = descendant.children[0].children;
+		expect(descendant.children.length).to.equal(3 + 1);
+		expect(content.length).to.equal(2);
+	});
+
+	it("should render jumplinks section", async () => {
+		const el = await fixture(html`
+			<f-document-viewer .content=${getFakeDocContent(3)}></f-document-viewer>
+		`);
+		const descendant = el.shadowRoot!.querySelector(".jump-links")!;
+		expect(descendant.children.length).to.equal(3);
 	});
 });

@@ -6,6 +6,7 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv, FDivPaddingProp } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
 import { injectCss } from "@cldcvr/flow-core-config";
+import { classMap } from "lit-html/directives/class-map.js";
 
 injectCss("f-accordion", globalStyle);
 
@@ -146,6 +147,25 @@ export class FAccordion extends FRoot {
 	}
 
 	render() {
+		// classes to apply on inner element
+		const classes: Record<string, boolean> = {
+			"f-accordion": true
+		};
+
+		// classes to apply on inner element
+		const classesHeader: Record<string, boolean> = {
+			"f-accordion-header": true
+		};
+		// merging host classes
+		this.classList.forEach(cl => {
+			classes[cl] = true;
+		});
+
+		// merging host classes
+		this.classList.forEach(cl => {
+			classesHeader[cl] = true;
+		});
+
 		// render accordion-icon
 		const accordionIcon = html` <f-div
 			padding="none none none small"
@@ -169,7 +189,7 @@ export class FAccordion extends FRoot {
 				<f-div
 					height="hug-content"
 					@click=${this.toggleAccordion}
-					align="middle-left"
+					align="top-left"
 					.gap=${this.iconPlacement === "left" ? "medium" : "auto"}
 					width="100%"
 					class="f-accordion-header"

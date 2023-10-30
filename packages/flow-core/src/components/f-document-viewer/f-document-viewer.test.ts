@@ -25,6 +25,7 @@ function createDocContentObject(
 	if (levels > 0) {
 		for (let i = 0; i < 2; i++) {
 			if (i === 1) {
+<<<<<<< HEAD
 				content[`${index}.${i + 1}.`] = createDocContentObject(levels - 1, `${index}.${i + 1}`);
 			} else {
 				content[`${index}.${i + 1}.`] = faker.lorem.sentence(100);
@@ -35,6 +36,18 @@ function createDocContentObject(
 		doc.data = content;
 	}
 	return doc;
+=======
+				data[`${index}.${i + 1}.`] = createContentObject(levels - 1, `${index}.${i + 1}`);
+			} else {
+				data[`${index}.${i + 1}.`] = faker.lorem.sentence(100);
+			}
+		}
+	}
+	if (data && Object.keys(data).length > 0) {
+		obj.data = data;
+	}
+	return obj;
+>>>>>>> 34944ee (FLOW-947 f-document-viewer)
 }
 
 describe("f-document-viewer", () => {
@@ -45,6 +58,7 @@ describe("f-document-viewer", () => {
 
 	it("should not show jumplinks on the basis of prop `jump-links`", async () => {
 		const el = await fixture(html`
+<<<<<<< HEAD
 			<f-document-viewer
 				.content=${getFakeDocumentContent()}
 				.jump-links=${false}
@@ -83,4 +97,12 @@ describe("f-document-viewer", () => {
 		const descendant = el.shadowRoot!.querySelector(".jump-links")!;
 		expect(descendant.children.length).to.equal(3);
 	});
+=======
+			<f-document-viewer .content=${getFakeDocContent()} .jump-links=${false}></f-document-viewer>
+		`);
+		const descendant = el.shadowRoot!.querySelector(".jumplinks-wrapper")!;
+		console.log(descendant);
+		expect(descendant).to.equal(null);
+	});
+>>>>>>> 34944ee (FLOW-947 f-document-viewer)
 });

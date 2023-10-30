@@ -18,9 +18,9 @@ export default function getFakeDocContent(
 				return html`
 					<f-div gap="medium">
 						<f-div gap="medium">
-							<f-text inline size="small" weight="bold" .highlight=${highlight}>1. </f-text>
+							<f-text inline size="small" weight="bold" .highlight=${highlight ?? ""}>1. </f-text>
 							<f-div>
-								<f-text inline size="small" weight="bold" .highlight=${highlight}
+								<f-text inline size="small" weight="bold" .highlight=${highlight ?? ""}
 									>${(obj[`${i + 1}.`] as FDocumentStatement).title}</f-text
 								>
 							</f-div>

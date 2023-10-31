@@ -33,31 +33,46 @@ export const Playground = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large">
 				<f-div width="80%" align="middle-center">
-					<f-input
-						.value=${args.value}
-						.variant=${args.variant}
-						.category=${args.category}
-						.placeholder=${args.placeholder}
-						data-qa-element-id="testId"
-						@input=${handleInput}
-						.type=${args.type}
-						icon-left=${args["icon-left"]}
-						icon-right=${args["icon-right"]}
-						prefix=${args["prefix"]}
-						suffix=${args["suffix"]}
-						state=${args.state}
-						max-length=${args["max-length"]}
-						?loading=${args.loading}
-						?disabled=${args.disabled}
-						.clear=${args.clear}
-						?read-only=${args.readOnly}
-						.size=${args.size}
-						autofocus
-						autocomplete="on"
-					>
-						${unsafeHTML(args.slot)}
-					</f-input></f-div
-				></f-div
+					<form style="width:100%">
+						<f-div width="100%" direction="column" padding="medium" gap="medium">
+							<input type="text" name="username" />
+							<input type="password" name="password" />
+							<f-input
+								id="username"
+								name="username"
+								data-authuser
+								data-email
+								aria-label="username"
+								.value=${args.value}
+								.variant=${args.variant}
+								.category=${args.category}
+								.placeholder=${args.placeholder}
+								data-qa-element-id="testId"
+								@input=${handleInput}
+								.type=${args.type}
+								icon-left=${args["icon-left"]}
+								icon-right=${args["icon-right"]}
+								prefix=${args["prefix"]}
+								suffix=${args["suffix"]}
+								state=${args.state}
+								max-length=${args["max-length"]}
+								?loading=${args.loading}
+								?disabled=${args.disabled}
+								.clear=${args.clear}
+								?read-only=${args.readOnly}
+								.size=${args.size}
+								autofocus
+								autocomplete="username"
+							>
+								<input slot="input" />
+								${unsafeHTML(args.slot)}
+							</f-input>
+							<f-input id="password" type="password" name="password" autocomplete="password">
+								<f-text slot="help">This is password help</f-text>
+							</f-input>
+						</f-div>
+					</form>
+				</f-div></f-div
 			>
 		`;
 	},

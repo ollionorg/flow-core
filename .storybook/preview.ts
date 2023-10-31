@@ -48,7 +48,7 @@ export const parameters = {
 	},
 	options: {
 		storySort: {
-			order: ["About", "Foundation", "@cldcvr"]
+			order: ["@cldcvr", "*", "Icons", "Templates", "*", "About"]
 		}
 	},
 	previewTabs: {

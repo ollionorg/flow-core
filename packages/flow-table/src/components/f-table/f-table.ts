@@ -55,6 +55,7 @@ export class FTable extends FRoot {
 				@selected-column=${this.toggleColumnSelected}
 				@highlight-column=${this.toggleColumnHighlight}
 				@selected-row=${this.handleHeaderRowSelection}
+				@slotchange=${this.updateGridTemplateColumns}
 			></slot>
 			<slot @slotchange=${this.propogateProps} @selected-row=${this.handleRowSelection}></slot>`;
 	}
@@ -90,19 +91,25 @@ export class FTable extends FRoot {
 
 	updateGridTemplateColumns() {
 		const firstRow = this.querySelector(":scope > f-trow");
-		const firstRowCells = firstRow?.querySelectorAll<FTcell>(":scope > f-tcell");
-		const noOfCells = firstRowCells?.length ?? 0;
-		let gridColumnTemplate = ``;
-		for (let i = 0; i < noOfCells; i++) {
-			const cellElement = firstRowCells?.item(i);
-			if (cellElement?.width) {
-				gridColumnTemplate += `${cellElement?.width} `;
-			} else {
-				gridColumnTemplate += `auto `;
+		if (firstRow !== null) {
+			/**
+			 * following query is not working vue app so replaced with firstRow.children
+			 * firstRow?.querySelectorAll<FTcell>(":scope > f-tcell");
+			 * */
+			const firstRowCells = firstRow.children;
+			const noOfCells = firstRowCells.length;
+			let gridColumnTemplate = ``;
+			for (let i = 0; i < noOfCells; i++) {
+				const cellElement = firstRowCells.item(i) as FTcell;
+				if (cellElement.width) {
+					gridColumnTemplate += `${cellElement?.width} `;
+				} else {
+					gridColumnTemplate += `auto `;
+				}
 			}
-		}
 
-		this.style.gridTemplateColumns = gridColumnTemplate;
+			this.style.gridTemplateColumns = gridColumnTemplate;
+		}
 	}
 
 	/**

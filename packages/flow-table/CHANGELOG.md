@@ -1,7 +1,12 @@
 <h4 className="margin-btm-8">Release Notes</h4>
 
-
 # Change Log
+
+## [2.0.5] - 2023-11-01
+
+### Bug Fixes
+
+- Vue : `f-table` gridTemplate creation fixed
 
 ## [2.0.4] - 2023-10-16
 

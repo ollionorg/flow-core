@@ -55,6 +55,7 @@ export class FTable extends FRoot {
 				@selected-column=${this.toggleColumnSelected}
 				@highlight-column=${this.toggleColumnHighlight}
 				@selected-row=${this.handleHeaderRowSelection}
+				@slotchange=${this.updateGridTemplateColumns}
 			></slot>
 			<slot @slotchange=${this.propogateProps} @selected-row=${this.handleRowSelection}></slot>`;
 	}

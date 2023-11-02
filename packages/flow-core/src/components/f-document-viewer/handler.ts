@@ -1,6 +1,7 @@
 import { html, HTMLTemplateResult } from "lit-html";
 import { FDocumentStatement, FDocumentViewer, FDocViewerContent } from "./f-document-viewer";
-import { FAccordion, FDiv } from "@cldcvr/flow-core";
+import { FAccordion } from "./../f-accordion/f-accordion";
+import { FDiv } from "./../f-div/f-div";
 import { cloneDeep } from "lodash-es";
 import { repeat } from "lit/directives/repeat.js";
 

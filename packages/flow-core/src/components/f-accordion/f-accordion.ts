@@ -6,7 +6,6 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv, FDivPaddingProp } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
 import { injectCss } from "@cldcvr/flow-core-config";
-import { classMap } from "lit-html/directives/class-map.js";
 
 injectCss("f-accordion", globalStyle);
 

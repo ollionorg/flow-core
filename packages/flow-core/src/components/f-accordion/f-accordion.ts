@@ -169,7 +169,7 @@ export class FAccordion extends FRoot {
 				<f-div
 					height="hug-content"
 					@click=${this.toggleAccordion}
-					align="top-left"
+					align="middle-left"
 					.gap=${this.iconPlacement === "left" ? "medium" : "auto"}
 					width="100%"
 					class="f-accordion-header"

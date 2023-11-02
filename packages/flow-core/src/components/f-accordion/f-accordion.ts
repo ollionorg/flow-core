@@ -146,25 +146,6 @@ export class FAccordion extends FRoot {
 	}
 
 	render() {
-		// classes to apply on inner element
-		const classes: Record<string, boolean> = {
-			"f-accordion": true
-		};
-
-		// classes to apply on inner element
-		const classesHeader: Record<string, boolean> = {
-			"f-accordion-header": true
-		};
-		// merging host classes
-		this.classList.forEach(cl => {
-			classes[cl] = true;
-		});
-
-		// merging host classes
-		this.classList.forEach(cl => {
-			classesHeader[cl] = true;
-		});
-
 		// render accordion-icon
 		const accordionIcon = html` <f-div
 			padding="none none none small"

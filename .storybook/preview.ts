@@ -13,6 +13,8 @@ import "@ollion/flow-table";
 import "@ollion/flow-md-editor";
 import "@ollion/flow-form-builder";
 import "@ollion/flow-lineage";
+import "@cldcvr/flow-dashboard";
+
 import { setCustomElementsManifest, setCustomElements } from "@storybook/web-components";
 import { themes } from "@storybook/theming";
 import { Preview } from "@storybook/web-components";
@@ -123,6 +125,9 @@ async function run() {
 	const tableCustomElements = await (
 		await fetch(new URL("../packages/flow-table/custom-elements.json", import.meta.url))
 	).json();
+	const dashboardCustomElements = await (
+		await fetch(new URL("../packages/flow-dashboard/custom-elements.json", import.meta.url))
+	).json();
 
 	const mdEditorCustomElements = await (
 		await fetch(new URL("../packages/flow-md-editor/custom-elements.json", import.meta.url))
@@ -140,6 +145,8 @@ async function run() {
 
 	setCustomElementsManifest(mdEditorCustomElements);
 	setCustomElements(mdEditorCustomElements);
+	setCustomElementsManifest(dashboardCustomElements);
+	setCustomElements(dashboardCustomElements);
 }
 
 run();

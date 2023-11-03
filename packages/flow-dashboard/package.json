@@ -1,0 +1,62 @@
+{
+  "name": "@cldcvr/flow-dashboard",
+  "version": "0.0.1",
+  "description": "Dashboard as code",
+  "module": "dist/flow-dashboard.es.js",
+  "main": "dist/flow-dashboard.cjs.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "build": "bash ./compile.sh",
+    "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
+    "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
+    "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
+    "test": "web-test-runner ./src/**/*.test.ts --node-resolve --port 8095",
+    "test:file": "pnpm run build && web-test-runner --node-resolve --port 8095",
+    "test:watch": "pnpm run build && web-test-runner ./src/**/*.test.ts --node-resolve --watch --port 8095"
+  },
+  "keywords": [
+    "web-components",
+    "lit-element",
+    "typescript",
+    "lit"
+  ],
+  "dependencies": {
+    "@cldcvr/flow-core": "workspace:*",
+    "@cldcvr/flow-core-config": "workspace:*",
+    "lit": "^2.2.4"
+  },
+  "peerDependencies": {
+    "@cldcvr/flow-core": "^*",
+    "@cldcvr/flow-core-config": "^*"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.5.7",
+    "@open-wc/testing": "^3.1.5",
+    "@types/jest": "29.5.5",
+    "@web/dev-server-esbuild": "^0.4.1",
+    "@web/test-runner": "^0.17.1",
+    "concurrently": "^8.2.1",
+    "esbuild-sass-plugin": "2.2.6",
+    "lit-html": "^2.2.5",
+    "sass": "^1.52.3",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.11",
+    "web-component-analyzer": "^2.0.0-next.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cldcvr/flow-core.git",
+    "directory": "packages/flow-dashboard"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "customElements": "custom-elements.json",
+  "bugs": {
+    "url": "https://github.com/cldcvr/flow-core/issues"
+  },
+  "homepage": "https://github.com/cldcvr/flow-core/packages/flow-dashboard#readme",
+  "author": "@cldcvr",
+  "license": "MIT"
+}

@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 
 export default {
-	title: "@cldcvr/flow-dashboard/Auto fill",
+	title: "@cldcvr/flow-dashboard/f-dashboard",
 	argTypes: {
 		field: {
 			control: false
@@ -11,7 +11,7 @@ export default {
 } as Meta<any>;
 
 const Template: Story<unknown> = (args: any) => {
-	return html` <f-dashboard></f-dashboard> `;
+	return html` <f-dashboard> </f-dashboard> `;
 };
 
 export const basic = Template.bind({});

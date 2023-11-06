@@ -66,6 +66,8 @@ export class FDocumentViewer extends FRoot {
 	 */
 	@property({ reflect: false, type: Object })
 	content!: FDocViewerContent;
+	/** * mention required fields here for generating vue types */
+	readonly required = ["content"];
 
 	/**
 	 * @attribute toggle jump-links

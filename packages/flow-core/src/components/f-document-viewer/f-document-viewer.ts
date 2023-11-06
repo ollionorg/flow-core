@@ -18,7 +18,6 @@ import { FIcon } from "../f-icon/f-icon";
 import render, { contentSectionHeader, jumplinksItems, jumplinksSection } from "./render";
 import {
 	checkInView,
-	filterObjectByLevel,
 	getAccordionPanel,
 	getTextPanel,
 	handleSearch,
@@ -171,7 +170,6 @@ export class FDocumentViewer extends FRoot {
 	traverse = traverse;
 	scrollToSectionMethod = scrollToSectionMethod;
 	checkInView = checkInView;
-	filterObjectByLevel = filterObjectByLevel;
 	handleSelection = handleSelection;
 	handleSearch = handleSearch;
 	toggleLeftColumn = toggleLeftColumn;

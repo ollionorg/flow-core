@@ -187,34 +187,6 @@ export function checkInView(this: FDocumentViewer) {
 }
 
 /**
- * @param this comppnent
- * @param obj complete json object for doc creation
- * @param level until which level of nesting the data must be displayed
- * @returns the filtered data to a particular level
- */
-export function filterObjectByLevel(this: FDocumentViewer, obj: FDocViewerContent, level: number) {
-	const filteredObj = cloneDeep(obj);
-	function traverse(obj: FDocViewerContent, currentLevel: number) {
-		if (currentLevel === level) {
-			for (const key in obj) {
-				if (typeof obj[key] === "object" && obj[key] !== null) {
-					obj[key] = (obj[key] as FDocumentStatement).title;
-					delete (obj[key] as FDocumentStatement).data;
-				}
-			}
-		} else {
-			for (const key in obj) {
-				if (typeof obj[key] === "object" && obj[key] !== null) {
-					traverse((obj[key] as FDocumentStatement).data ?? {}, currentLevel + 1);
-				}
-			}
-		}
-	}
-	traverse(filteredObj, 0);
-	return filteredObj;
-}
-
-/**
  *
  * @param this comppnent
  * @param level level to be selected

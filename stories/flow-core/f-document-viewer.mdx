@@ -1,0 +1,78 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
+import { html } from "lit-html";
+import fAccordionAnatomy from "../svg/i-faccordion-anatomy.js";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { useArgs, useState } from "@storybook/client-api";
+import * as FDocumentViewer from "./f-document-viewer.stories";
+
+<Meta of={FDocumentViewer} />
+
+# f-document-viewer
+
+<br />
+
+<br />
+
+## Overview
+
+<f-divider />
+
+Accordion is a wrapper component which reveals or hide the content on click of header of the component.
+
+<br />
+
+### [Playground](/story/cldcvr-flow-core-f-document-viewer--playground)
+
+<Canvas>
+	<Story of={FDocumentViewer.Playground} />
+</Canvas>
+
+<br />
+
+## content
+
+<f-divider />
+
+Content represents the json schema provided to dispaly contents in viewer.
+
+<Canvas>
+	<Story of={FDocumentViewer.Content} />
+</Canvas>
+
+<br />
+
+# Flags
+
+## jump-links
+
+<f-divider />
+
+Flag to toggle the display of jump-links
+
+<Canvas>
+	<Story of={FDocumentViewer.JumpLinks} />
+</Canvas>
+
+<br />
+
+## collapsible-jump-links
+
+<f-divider />
+
+Flag to toggle the notch present to toggle jump-links
+
+<Canvas>
+	<Story of={FDocumentViewer.CollapsibleJumpLinks} />
+</Canvas>
+
+<br />
+
+## level-selector
+
+<f-divider />
+
+Flag to toggle the level-selector
+
+<Canvas>
+	<Story of={FDocumentViewer.LevelSelector} />
+</Canvas>

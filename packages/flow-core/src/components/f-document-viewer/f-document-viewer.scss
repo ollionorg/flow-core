@@ -1,0 +1,137 @@
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+
+:host {
+	@keyframes slide-notch-right {
+		from {
+			left: 0px;
+		}
+		to {
+			left: 300px;
+		}
+	}
+
+	@keyframes slide-notch-left {
+		from {
+			left: 300px;
+		}
+		to {
+			left: 0px;
+		}
+	}
+
+	@keyframes slide-right {
+		from {
+			width: 0px;
+		}
+		to {
+			width: 300px;
+		}
+	}
+
+	@keyframes slide-left {
+		from {
+			width: 300px;
+		}
+		to {
+			width: 0px;
+		}
+	}
+
+	f-accordion::part(accordion-header) {
+		padding: 12px 4px 12px 12px !important;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
+	f-accordion[icon="none"]::part(accordion-header) {
+		padding: 12px 4px 12px 46px !important;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
+	f-accordion::part(accordion-body) {
+		padding: 0px 0px 0px 12px !important;
+	}
+	#jumplinks-wrapper {
+		overflow-x: hidden !important;
+	}
+	.jump-links {
+		overflow-x: hidden !important;
+	}
+	.custom-body-padding {
+		padding: 4px 4px 4px 46px !important;
+	}
+
+	.notch {
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.16);
+		border-radius: 0px 8px 8px 0px !important;
+		margin-top: 12px;
+		background-color: var(--color-neutral-subtle) !important;
+	}
+
+	.notch-icon[data-column-open="true"] {
+		transform: rotate(0deg);
+		transition: transform 0.25s linear;
+	}
+
+	.notch-icon[data-column-open="false"] {
+		transform: rotate(180deg);
+		transition: transform 0.25s linear;
+	}
+	.jumplinks-expanded {
+		width: inherit;
+	}
+
+	.jumplinks-collapsed {
+		width: inherit;
+	}
+
+	@media (min-width: 768px) {
+		.jumplinks-expanded {
+			animation: 0.25s ease-out 0s 1 slide-right;
+		}
+		.jumplinks-collapsed {
+			width: inherit;
+			animation: 0.25s ease-out 0s 1 slide-left;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.jumplinks-collapsed {
+			position: fixed !important;
+			width: inherit;
+			animation: 0.25s ease-out 0s 1 slide-left;
+			z-index: 1000;
+		}
+		.jumplinks-expanded {
+			position: fixed !important;
+			animation: 0.25s ease-out 0s 1 slide-right;
+			z-index: 1000;
+			border-radius: 0px 8px 8px 0px;
+			height: -webkit-fill-available !important;
+		}
+		.notch {
+			position: relative;
+			z-index: 1000;
+		}
+		.notch[data-column-open="true"] {
+			left: 300px;
+			animation: 0.25s ease-out 0s 1 slide-notch-right;
+		}
+		.notch[data-column-open="false"] {
+			left: 0px;
+			animation: 0.25s ease-out 0s 1 slide-notch-left;
+		}
+		.jumplinks-highlight[data-column-open="true"][data-jump-links="true"] {
+			&::before {
+				content: "";
+				position: fixed;
+				width: 100vw;
+				height: 100vh;
+				background-color: rgba(0, 0, 0, 0.5);
+				z-index: 10;
+				top: 0;
+				left: 0;
+			}
+		}
+	}
+}

@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.2.0] - 2023-10-30
+
+### Features
+
+- `f-document-viewer` : component designed for document viewing, accepting JSON schema as input.
+
 ## [2.1.8] - 2023-10-20
 
 ### Patch Changes

@@ -173,6 +173,7 @@ export class FAccordion extends FRoot {
 					.gap=${this.iconPlacement === "left" ? "medium" : "auto"}
 					width="100%"
 					class="f-accordion-header"
+					part="accordion-header"
 					.padding=${this.headerPadding}
 					clickable
 					@mouseenter=${() => this.stateChange("enter")}
@@ -186,6 +187,7 @@ export class FAccordion extends FRoot {
 				</f-div>
 				<f-div
 					class="f-accordion"
+					part="accordion-body"
 					?data-accordion-open=${this.open}
 					direction="column"
 					.padding=${this.bodyPadding}

@@ -5,7 +5,9 @@ import {
 	FDocumentStatement,
 	FSelect,
 	FAccordion,
-	FDiv
+	FDiv,
+	FText,
+	FSearch
 } from "@cldcvr/flow-core";
 import { faker } from "@faker-js/faker";
 
@@ -114,5 +116,28 @@ describe("f-document-viewer", () => {
 		const descendants = el.shadowRoot!.querySelectorAll<FAccordion | FDiv>(`[data-level="2"]`);
 
 		expect(descendants[0].style.display).to.equal("none");
+	});
+
+	it("should highlight the text searched", async () => {
+		const el = await fixture<FDocumentViewer>(html`
+			<f-document-viewer .content=${getFakeDocumentContent()}></f-document-viewer>
+		`);
+		const highlight = el.shadowRoot!.querySelector<FSearch>(".f-search-text-highlight")!;
+
+		const listner = oneEvent(highlight, "input");
+		highlight.value = "The";
+		const event = new CustomEvent("input", {
+			detail: {
+				value: "The"
+			},
+			bubbles: true,
+			composed: true
+		});
+		highlight.dispatchEvent(event);
+		await listner;
+		await el.updateComplete;
+
+		const descendants = el.shadowRoot!.querySelectorAll<FText>("#doc-text");
+		expect(descendants[0].highlight).to.equal("The");
 	});
 });

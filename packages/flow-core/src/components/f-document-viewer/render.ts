@@ -95,6 +95,7 @@ export function jumplinksSection(this: FDocumentViewer) {
 export function contentSectionHeader(this: FDocumentViewer) {
 	return html`<f-div padding="medium" gap="medium" align="middle-center" height="hug-content">
 		<f-search
+			class="f-search-text-highlight"
 			variant="round"
 			.size=${"small"}
 			id="search-doc"

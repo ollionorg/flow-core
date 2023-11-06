@@ -1,4 +1,4 @@
-import { html, fixture, expect } from "@open-wc/testing";
+import { html, fixture, expect, oneEvent } from "@open-wc/testing";
 import {
 	FDocumentViewer,
 	FDocViewerContent,
@@ -92,13 +92,27 @@ describe("f-document-viewer", () => {
 	});
 
 	it("should filter according to level selected", async () => {
-		const el = await fixture(html`
+		const el = await fixture<FDocumentViewer>(html`
 			<f-document-viewer .content=${getFakeDocumentContent()}></f-document-viewer>
 		`);
 		const filter = el.shadowRoot!.querySelector<FSelect>(".f-select-level-selector")!;
-		filter.setAttribute("value", "Only L1");
-		await filter.updateComplete;
-		const descendants = el.shadowRoot!.querySelectorAll<FAccordion | FDiv>(`[data-level="2"]`)!;
+
+		const listner = oneEvent(filter, "input");
+
+		filter.value = "Only L1";
+		const event = new CustomEvent("input", {
+			detail: {
+				value: "Only L1"
+			},
+			bubbles: true,
+			composed: true
+		});
+		filter.dispatchEvent(event);
+		await listner;
+		await el.updateComplete;
+
+		const descendants = el.shadowRoot!.querySelectorAll<FAccordion | FDiv>(`[data-level="2"]`);
+
 		expect(descendants[0].style.display).to.equal("none");
 	});
 });

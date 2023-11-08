@@ -447,6 +447,18 @@ export class FTableSchema extends FRoot {
 			this.sortBy = columnKey;
 			this.sortOrder = "asc";
 		}
+		/**
+		 * emitting sort event with latest sortBy and sortOrder value
+		 */
+		const sortEvent = new CustomEvent("sort", {
+			detail: {
+				sortBy: this.sortBy,
+				sortOrder: this.sortOrder
+			},
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(sortEvent);
 	}
 
 	getSortIcon(columnKey: string) {

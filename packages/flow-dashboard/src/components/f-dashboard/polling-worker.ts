@@ -1,5 +1,5 @@
 import { FDashboardWidget } from "../../types";
-import axios from "axios";
+// import axios from "axios";
 
 type WidgetRegistryConfig = {
 	widget: FDashboardWidget;

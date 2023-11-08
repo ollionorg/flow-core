@@ -3,7 +3,7 @@ import fPopoverAnatomy from "../svg/i-fpopover-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useState } from "@storybook/preview-api";
 import { createRef, ref } from "lit/directives/ref.js";
-import { FPopover, FPopoverPlacement, FPopoverSize } from "@cldcvr/flow-core";
+import { FPopover, FPopoverPlacement, FPopoverSize, FPopoverState } from "@cldcvr/flow-core";
 
 export default {
 	title: "@cldcvr/flow-core/f-popover",
@@ -20,6 +20,7 @@ export type PopOverStoryArgs = {
 	overlay: boolean;
 	size: FPopoverSize;
 	placement: FPopoverPlacement;
+	state: FPopoverState;
 	shadow: boolean;
 	["auto-height"]: boolean;
 	["close-on-escape"]: boolean;
@@ -41,6 +42,7 @@ export const Playground = {
 				.open=${args.open}
 				.overlay=${args.overlay}
 				.size=${args.size}
+				.state=${args.state}
 				.placement=${args.placement}
 				.shadow=${args.shadow}
 				@overlay-click=${handlePopover}
@@ -48,7 +50,7 @@ export const Playground = {
 				?auto-height=${args["auto-height"]}
 				?close-on-escape=${args["close-on-escape"]}
 			>
-				<f-div state="tertiary" direction="column" gap="small" padding="medium">
+				<f-div direction="column" gap="small" padding="medium">
 					<f-text>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut mi
 						egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
@@ -75,7 +77,19 @@ export const Playground = {
 			control: "select",
 			options: ["stretch", "large", "medium", "small"]
 		},
-
+		state: {
+			control: "select",
+			options: [
+				"subtle",
+				"default",
+				"secondary",
+				"success",
+				"warning",
+				"danger",
+				"primary",
+				"transparent"
+			]
+		},
 		placement: {
 			control: "select",
 
@@ -122,6 +136,7 @@ export const Playground = {
 		overlay: true,
 		shadow: false,
 		size: "small",
+		state: "default",
 		placement: "auto",
 		["auto-height"]: false,
 		["close-on-escape"]: true
@@ -428,6 +443,131 @@ export const Size = {
 	}
 };
 
+export const State = {
+	render: () => {
+		const [dummySizeArray, setDummySizeArray] = useState([
+			{
+				target: "#default",
+				open: false,
+				state: "default",
+				title: `state="default"`,
+				size: "medium",
+				placement: "auto"
+			},
+			{
+				target: "#subtle",
+				open: false,
+				state: "subtle",
+				title: `state="subtle"`,
+				size: "medium",
+				placement: "auto"
+			},
+			{
+				target: "#secondary",
+				open: false,
+				state: "secondary",
+				title: `state="secondary"`,
+				size: "medium",
+				placement: "auto"
+			},
+			{
+				target: "#success",
+				open: false,
+				state: "success",
+				title: `state="success"`,
+				size: "medium",
+				placement: "auto"
+			},
+			{
+				target: "#warning",
+				open: false,
+				state: "warning",
+				title: `state="warning"`,
+				size: "medium",
+				placement: "auto"
+			},
+			{
+				target: "#danger",
+				open: false,
+				state: "danger",
+				title: `state="danger"`,
+				size: "medium",
+				placement: "auto"
+			},
+			{
+				target: "#primary",
+				open: false,
+				state: "primary",
+				title: `state="primary"`,
+				size: "medium",
+				placement: "auto"
+			},
+			{
+				target: "#transparent",
+				open: false,
+				state: "transparent",
+				title: `state="transparent"`,
+				size: "medium",
+				placement: "auto"
+			}
+		]);
+
+		const handlePopover = (_item: unknown, index: number) => {
+			const array = [...dummySizeArray];
+			array[index].open = !dummySizeArray[index].open;
+			setDummySizeArray(array);
+		};
+
+		return html` <f-div height="hug-content" direction="column" gap="large">
+			${dummySizeArray.map((item, index) => {
+				return html`
+					<f-popover
+						?open=${item.open}
+						.overlay=${true}
+						.size=${item.size}
+						.state=${item.state}
+						.target=${item.target}
+						placement=${item.placement}
+						@overlay-click=${() => handlePopover(item, index)}
+					>
+						<f-div padding="large">
+							<f-text>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+								mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+								tristique.
+							</f-text>
+							<f-text>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet enim ut
+								mi egestas, non efficitur odio varius. Phasellus accumsan pellentesque ex vehicula
+								tristique.
+							</f-text>
+						</f-div>
+					</f-popover>
+					<f-div
+						id=${item.target?.substring(1)}
+						state="primary"
+						padding="large"
+						variant="curved"
+						width="hug-content"
+						clickable
+						@click=${() => handlePopover(item, index)}
+					>
+						<f-text size="large">${item.title}</f-text>
+					</f-div>
+				`;
+			})}
+		</f-div>`;
+	},
+
+	name: "state",
+
+	parameters: {
+		docs: {
+			inlineStories: false,
+			iframeHeight: 300
+		}
+	}
+};
 export const Flags = {
 	render: () => {
 		const [openFlag, setOpenFlag] = useState(false);

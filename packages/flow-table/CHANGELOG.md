@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.0.6] - 2023-11-08
+
+### Improvements
+
+- `f-table-schema` : `@sort` event emitted when clicked on sort icon in header cell.
+
 ## [2.0.5] - 2023-11-01
 
 ### Bug Fixes

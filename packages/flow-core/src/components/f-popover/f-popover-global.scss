@@ -20,6 +20,33 @@ $sizes: (
 	)
 );
 
+$states: (
+	"transparent": (
+		"background": transparent
+	),
+	"subtle": (
+		"background": var(--color-surface-subtle)
+	),
+	"default": (
+		"background": var(--color-surface-tertiary)
+	),
+	"secondary": (
+		"background": var(--color-surface-secondary)
+	),
+	"success": (
+		"background": var(--color-success-surface)
+	),
+	"primary": (
+		"background": var(--color-primary-surface)
+	),
+	"warning": (
+		"background": var(--color-warning-surface)
+	),
+	"danger": (
+		"background": var(--color-danger-surface)
+	)
+);
+
 f-popover {
 	@include base();
 	position: fixed;
@@ -30,6 +57,14 @@ f-popover {
 	border-radius: 4px;
 	overflow: auto;
 	z-index: 202;
+	@each $state, $value in $states {
+		&[state^="#{$state}"] {
+			// include mixin for inheritance rules
+			@include inheirt-parent($state);
+
+			background-color: map.get($value, "background");
+		}
+	}
 	&[shadow]:not([overlay]) {
 		box-shadow: var(--flow-box-shadow);
 	}

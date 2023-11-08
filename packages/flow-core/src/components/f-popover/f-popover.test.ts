@@ -27,7 +27,19 @@ describe("f-popover", () => {
 		expect(descendant.dataset["transparent"]).to.equal("true");
 	});
 	it("should render with default size ", async () => {
-		const el = await fixture(html` <f-popover open>Test</f-popover> `);
+		const el = await fixture<FPopover>(html` <f-popover open>Test</f-popover> `);
 		expect(el.getAttribute("size")).to.equal("medium");
+		expect(el.offsetWidth).to.equal(432);
+	});
+	it("should render with default state ", async () => {
+		const el = await fixture(html` <f-popover open>Test</f-popover> `);
+		expect(el.getAttribute("state")).to.equal("default");
+	});
+	it("should render with correct size ", async () => {
+		const el = await fixture<FPopover>(html` <f-popover size="large" open>Test</f-popover> `);
+		expect(el.offsetWidth).to.equal(864);
+		el.size = "small";
+		await el.updateComplete;
+		expect(el.offsetWidth).to.equal(320);
 	});
 });

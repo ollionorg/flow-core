@@ -15,20 +15,20 @@ export default {
 };
 
 export const Playground = {
-	render: args => {
+	render: (args: Record<string, unknown>) => {
 		const handleNext = () => {
 			console.log("in next event");
 		};
 
-		const toggleRowDetails = event => {
+		const toggleRowDetails = (event: CustomEvent) => {
 			console.log("on row toggled", event.detail);
 		};
 
-		const onRowInput = event => {
+		const onRowInput = (event: CustomEvent) => {
 			console.log("on row input", event.detail);
 		};
 
-		const onHeaderSelect = event => {
+		const onHeaderSelect = (event: CustomEvent) => {
 			console.log("on header selected", event.detail);
 		};
 
@@ -160,7 +160,7 @@ export const Playground = {
 		["search-term"]: "",
 		["show-search-bar"]: true,
 
-		["header-cell-template"]: val => {
+		["header-cell-template"]: (val: string) => {
 			return html`<f-div gap="small" align="middle-center">
 				<f-icon source="i-icon"></f-icon>
 				<f-text>${val}</f-text></f-div
@@ -170,7 +170,7 @@ export const Playground = {
 };
 
 export const Data = {
-	render: args => {
+	render: () => {
 		const data = getFakeUsers(5, 5);
 
 		return html`
@@ -198,10 +198,10 @@ export const Data = {
 };
 
 export const HeaderCellTemplate = {
-	render: args => {
+	render: () => {
 		const data = getFakeUsers(5, 5);
 
-		const headerCellTemplate = val => {
+		const headerCellTemplate = (val: string) => {
 			return html`<f-div gap="small" align="middle-center">
 				<f-icon source="i-icon"></f-icon>
 				<f-text>${val}</f-text></f-div
@@ -233,7 +233,7 @@ export const HeaderCellTemplate = {
 };
 
 export const StickyHeader = {
-	render: args => {
+	render: () => {
 		const data = getFakeUsers(30, 5);
 
 		return html`
@@ -255,7 +255,7 @@ export const StickyHeader = {
 };
 
 export const RowsPerPage = {
-	render: args => {
+	render: () => {
 		const data = getFakeUsers(30, 5);
 
 		return html`
@@ -277,7 +277,7 @@ export const RowsPerPage = {
 };
 
 export const SortBy = {
-	render: args => {
+	render: () => {
 		const data = getFakeUsers(10, 5);
 
 		return html`
@@ -299,7 +299,7 @@ export const SortBy = {
 };
 
 export const SortOrder = {
-	render: args => {
+	render: () => {
 		const data = getFakeUsers(10, 5);
 
 		return html`
@@ -328,7 +328,7 @@ export const SortOrder = {
 };
 
 export const SearchTerm = {
-	render: args => {
+	render: () => {
 		const data = getFakeUsers(10);
 
 		return html`
@@ -346,7 +346,7 @@ export const SearchTerm = {
 };
 
 export const ShowSearchBar = {
-	render: args => {
+	render: () => {
 		const data = getFakeUsers(10, 5);
 
 		return html`
@@ -368,11 +368,11 @@ export const ShowSearchBar = {
 };
 
 export const ToggleRowDetails = {
-	render: args => {
+	render: () => {
 		const data = getFakeUsers(10, 5);
 		const fieldRef = createRef();
 
-		const toggleRowDetails = event => {
+		const toggleRowDetails = (event: CustomEvent) => {
 			if (fieldRef.value) {
 				fieldRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
 			}
@@ -394,11 +394,11 @@ export const ToggleRowDetails = {
 };
 
 export const RowInput = {
-	render: args => {
+	render: () => {
 		const data = getFakeUsers(10, 5);
 		const fieldRef = createRef();
 
-		const handleEvent = event => {
+		const handleEvent = (event: CustomEvent) => {
 			if (fieldRef.value) {
 				fieldRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
 			}
@@ -423,11 +423,11 @@ export const RowInput = {
 };
 
 export const HeaderSelected = {
-	render: args => {
+	render: () => {
 		const data = getFakeUsers(10, 5);
 		const fieldRef = createRef();
 
-		const handleEvent = event => {
+		const handleEvent = (event: CustomEvent) => {
 			if (fieldRef.value) {
 				fieldRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
 			}
@@ -452,12 +452,38 @@ export const HeaderSelected = {
 	name: "@header-selected"
 };
 
-export const Next = {
-	render: args => {
+export const Sort = {
+	render: () => {
 		const data = getFakeUsers(50, 5);
 		const fieldRef = createRef();
 
-		const handleEvent = event => {
+		const handleEvent = (event: CustomEvent) => {
+			if (fieldRef.value) {
+				fieldRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
+			}
+		};
+
+		return html`<f-div direction="column" state="subtle" padding="small" gap="large" height="50%">
+				<f-text>'sort' event emitted whenever user on sort icon in header cell.</f-text>
+				<f-table-schema .data=${data} rows-per-page="20" @sort=${handleEvent}> </f-table-schema>
+				<f-divider></f-divider>
+			</f-div>
+			<br />
+			<f-divider></f-divider>
+			<br />
+			<f-text state="secondary">'event.detail' will display here</f-text>
+			<pre ${ref(fieldRef)}></pre> `;
+	},
+
+	name: "@sort"
+};
+
+export const Next = {
+	render: () => {
+		const data = getFakeUsers(50, 5);
+		const fieldRef = createRef();
+
+		const handleEvent = (event: CustomEvent) => {
 			if (fieldRef.value) {
 				fieldRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
 			}

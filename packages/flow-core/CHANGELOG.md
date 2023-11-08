@@ -2,6 +2,16 @@
 
 # Change Log
 
+## [2.2.1] - 2023-10-30
+
+### Improvements
+
+- `f-popover` : state attribute introduced with `transparent` option.
+
+### Bug Fixes
+
+- `f-text` : `<a>` tag is not displaying cursor pointer.
+
 ## [2.2.0] - 2023-10-30
 
 ### Features

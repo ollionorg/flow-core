@@ -15,6 +15,16 @@ import { flowElement } from "./../../utils";
 import { injectCss } from "@cldcvr/flow-core-config";
 injectCss("f-popover", globalStyle);
 
+export type FPopoverState =
+	| "subtle"
+	| "default"
+	| "secondary"
+	| "success"
+	| "warning"
+	| "danger"
+	| "primary"
+	| "transparent";
+
 // export type FPopoverVariant = "relative" | "absolute";
 export type FPopoverPlacement =
 	| "top"
@@ -114,6 +124,12 @@ export class FPopover extends FRoot {
 	 */
 	@property({ type: Boolean, reflect: true, attribute: "close-on-escape" })
 	closeOnEscape?: boolean = true;
+
+	/**
+	 * @attribute state property defines the background color of a f-div. It can take only surface colors defined in the library.
+	 */
+	@property({ reflect: true, type: String })
+	state?: FPopoverState = "default";
 
 	/**
 	 * @attribute query selector of target

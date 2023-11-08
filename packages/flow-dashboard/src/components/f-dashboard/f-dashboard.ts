@@ -4,8 +4,11 @@ import { FRoot, flowElement } from "@cldcvr/flow-core";
 import globalStyle from "./f-dashboard-global.scss?inline";
 import { injectCss } from "@cldcvr/flow-core-config";
 import { GridStack } from "gridstack";
+import { FDashboardConfig, FDashboardWidget } from "../../types";
 
 injectCss("f-dashboard", globalStyle);
+
+const pollingWorker = new Worker(new URL("./polling-worker.ts", import.meta.url));
 @flowElement("f-dashboard")
 export class FDashboard extends FRoot {
 	/**
@@ -16,33 +19,68 @@ export class FDashboard extends FRoot {
 	/**
 	 * @attribute comments baout title
 	 */
-	@property({ type: String })
-	title!: string;
+	@property({ type: Object })
+	config!: FDashboardConfig;
+
+	/**
+	 * mention required fields here for generating vue types
+	 */
+	readonly required = ["config"];
 
 	createRenderRoot() {
 		return this;
 	}
 
 	render() {
-		return html`<div class="grid-stack">
-			<div class="grid-stack-item">
-				<div class="grid-stack-item-content">Widget 1</div>
+		console.log("rendering");
+		return html`
+			<div class="grid-stack">
+				${this.config.widgets.map(wgt => {
+					pollingWorker.postMessage(wgt);
+					return html`<div
+						class="grid-stack-item"
+						gs-w="${wgt.placement.w}"
+						gs-h="${wgt.placement.h}"
+					>
+						<div class="grid-stack-item-content">${wgt.data.toFixed(2)}</div>
+					</div>`;
+				})}
 			</div>
-			<div class="grid-stack-item" gs-w="2">
-				<div class="grid-stack-item-content">Widget 2</div>
-			</div>
-			<div class="grid-stack-item" gs-w="2" gs-h="6">
-				<div class="grid-stack-item-content">Widget 3</div>
-			</div>
-			<div class="grid-stack-item" gs-w="2" gs-h="2" gs-x="0" gs-y="2">
-				<div class="grid-stack-item-content">Widget 4</div>
-			</div>
-		</div>`;
+		`;
 	}
 
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
-		GridStack.init({ margin: "4px" });
+		const gridStack = GridStack.init({ margin: "4px" });
+		let timer: number = 0;
+		pollingWorker.onmessage = (e: MessageEvent<FDashboardWidget>) => {
+			const wgtIdx = this.config.widgets.findIndex(w => w.id === e.data.id);
+			this.config.widgets[wgtIdx] = e.data;
+			if (timer) {
+				clearTimeout(timer);
+			}
+			timer = setTimeout(() => {
+				this.requestUpdate();
+			}, 300);
+		};
+
+		this.updateWidgetFontSize();
+		gridStack.on("resizecontent", () => {
+			this.updateWidgetFontSize();
+		});
+		//console.log(gridStack);
+	}
+
+	updateWidgetFontSize() {
+		this.querySelectorAll<HTMLDivElement>(".grid-stack-item-content").forEach(widgetContainer => {
+			const wHeight = widgetContainer.offsetHeight;
+			const wWidth = widgetContainer.offsetWidth;
+			const fontSize = Math.min(wHeight, wWidth) * 0.3 + "px";
+			widgetContainer.style.fontSize = fontSize;
+			widgetContainer.style.display = "flex";
+			widgetContainer.style.alignItems = "center";
+			widgetContainer.style.justifyContent = "center";
+		});
 	}
 }
 

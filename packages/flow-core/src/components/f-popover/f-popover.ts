@@ -441,7 +441,7 @@ export class FPopover extends FRoot {
 					const topPosition = Number(this.style.top.replace("px", "")) + 16;
 					this.style.height = `calc(100vh - ${topPosition}px)`;
 					this.style.maxHeight = `calc(100vh - ${topPosition}px)`;
-				} else {
+				} else if (changedProperties.has("autoHeight") && !this.autoHeight) {
 					this.style.removeProperty("height");
 					this.style.removeProperty("max-height");
 				}

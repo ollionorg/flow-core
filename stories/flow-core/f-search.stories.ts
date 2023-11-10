@@ -1,8 +1,8 @@
 import { html } from "lit-html";
-import fInputAnatomy from "../svg/i-finput-anatomy.js";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import { useArgs, useEffect, useState } from "@storybook/client-api";
+import { useArgs } from "@storybook/manager-api";
+import { useState } from "@storybook/preview-api";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import { FSearchResultWhen } from "@cldcvr/flow-core";
 
 export default {
 	title: "@cldcvr/flow-core/f-search",
@@ -15,10 +15,10 @@ export default {
 };
 
 export const Playground = {
-	render: args => {
+	render: (args: Record<string, unknown>) => {
 		const [_, updateArgs] = useArgs();
 
-		const handleInput = e => {
+		const handleInput = (e: CustomEvent) => {
 			console.log(e.detail);
 
 			updateArgs({
@@ -27,7 +27,7 @@ export const Playground = {
 			});
 		};
 
-		const handleSearch = event => {
+		const handleSearch = (event: CustomEvent) => {
 			console.log(event.detail);
 		};
 
@@ -50,7 +50,7 @@ export const Playground = {
 					.resultMaxHeight=${args["result-max-height"]}
 					@search=${handleSearch}
 				>
-					${unsafeHTML(args.slot)}
+					${unsafeHTML(args.slot as string)}
 				</f-search>
 			</f-div>
 		`;
@@ -159,11 +159,11 @@ export const Playground = {
 };
 
 export const Variant = {
-	render: args => {
+	render: () => {
 		const variants = ["curved", "round", "block"];
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -213,11 +213,11 @@ export const Variant = {
 };
 
 export const Category = {
-	render: args => {
+	render: () => {
 		const categories = ["fill", "outline", "transparent"];
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -267,10 +267,10 @@ export const Category = {
 };
 
 export const Value = {
-	render: args => {
+	render: () => {
 		const [value, setValue] = useState("Suggestion 2");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -314,10 +314,10 @@ export const Value = {
 };
 
 export const Placeholder = {
-	render: args => {
+	render: () => {
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -361,11 +361,11 @@ export const Placeholder = {
 };
 
 export const Size = {
-	render: args => {
+	render: () => {
 		const sizes = ["small", "medium"];
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -411,14 +411,14 @@ export const Size = {
 };
 
 export const State = {
-	render: args => {
+	render: () => {
 		const states = [
 			["default", "primary", "success"],
 			["danger", "warning", "default"]
 		];
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -472,15 +472,15 @@ export const State = {
 };
 
 export const Result = {
-	render: args => {
+	render: () => {
 		const [value, setValue] = useState("jane");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			console.log("in input", e);
 			setValue(e.detail.value);
 		};
 
-		const handleSelected = e => {
+		const handleSelected = (e: CustomEvent) => {
 			console.log("in selected", e);
 		};
 
@@ -491,7 +491,7 @@ export const Result = {
 					lastname: "jane"
 				},
 
-				template: function (value) {
+				template: function (value: string) {
 					return html`<f-div gap="medium" direction="column"
 						><f-text inline highlight=${value}
 							>${this.value.firstname} ${this.value.lastname}</f-text
@@ -509,7 +509,7 @@ export const Result = {
 					lastname: "stark"
 				},
 
-				template: function (value) {
+				template: function (value: string) {
 					return html`<f-div gap="medium" direction="column"
 						><f-text inline highlight=${value}
 							>${this.value.firstname} ${this.value.lastname}</f-text
@@ -523,7 +523,7 @@ export const Result = {
 			}
 		];
 
-		const resultWhen = (result, value) => {
+		const resultWhen = (result: string | Record<string, unknown>, value: string) => {
 			console.log("in result when");
 
 			if (value === "*" || value === "$") {
@@ -535,7 +535,7 @@ export const Result = {
 					.includes(value?.toLocaleLowerCase() ?? "");
 			}
 
-			return result.toLocaleLowerCase().includes(value?.toLocaleLowerCase() ?? "");
+			return (result as string).toLocaleLowerCase().includes(value?.toLocaleLowerCase() ?? "");
 		};
 
 		return html`
@@ -621,10 +621,10 @@ export const Result = {
 };
 
 export const Scope = {
-	render: args => {
+	render: () => {
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -669,11 +669,190 @@ export const Scope = {
 	name: "scope"
 };
 
-export const Flags = {
-	render: args => {
+export const selectedScope = {
+	render: () => {
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
+			setValue(e.detail.value);
+		};
+
+		return html`
+			<f-div width="100%" align="middle-center" padding="large">
+				<f-div width="80%" align="middle-center">
+					<f-search
+						value=${value}
+						placeholder="Write here"
+						@input=${handleValue}
+						size="medium"
+						.result=${[
+							"Suggestion 2",
+							"Suggestion 3",
+							"Suggestion 4",
+							"Suggestion 5",
+							"Suggestion 6",
+							"Suggestion 7",
+							"Suggestion 8",
+							"Suggestion 9",
+							"Suggestion 10",
+							"Suggestion 11",
+							"Suggestion 12",
+							"Suggestion 13",
+							"Suggestion 14",
+							"Suggestion 15",
+							"Suggestion 16",
+							"Suggestion 17",
+							"Suggestion 18"
+						]}
+						.scope=${["scope 1", "scope 2", "scope 3"]}
+						.selectedScope=${"scope 2"}
+					>
+						<f-div slot="label" padding="none" gap="none">Label</f-div>
+						<f-div slot="description" padding="none" gap="none">'scope 2' is selected</f-div>
+						<f-text slot="help" variant="para" size="small"
+							>These 3 scopes are used above ["scope 1", "scope 2", "scope 3"]</f-text
+						>
+					</f-search></f-div
+				></f-div
+			>
+		`;
+	},
+
+	name: "selected-scope"
+};
+
+export const resultMaxHeight = {
+	render: () => {
+		const [value, setValue] = useState("");
+
+		const handleValue = (e: CustomEvent) => {
+			setValue(e.detail.value);
+		};
+
+		return html`
+			<f-div width="100%" align="middle-center" padding="large">
+				<f-div width="80%" align="middle-center">
+					<f-search
+						value=${value}
+						placeholder="Write here"
+						@input=${handleValue}
+						size="medium"
+						.result=${[
+							"Suggestion 2",
+							"Suggestion 3",
+							"Suggestion 4",
+							"Suggestion 5",
+							"Suggestion 6",
+							"Suggestion 7",
+							"Suggestion 8",
+							"Suggestion 9",
+							"Suggestion 10",
+							"Suggestion 11",
+							"Suggestion 12",
+							"Suggestion 13",
+							"Suggestion 14",
+							"Suggestion 15",
+							"Suggestion 16",
+							"Suggestion 17",
+							"Suggestion 18"
+						]}
+						.resultMaxHeight=${"150px"}
+					>
+						<f-div slot="label" padding="none" gap="none">Label</f-div>
+						<f-div slot="description" padding="none" gap="none"
+							>'result-max-height' set to 150px</f-div
+						>
+						<f-text slot="help" variant="para" size="small"
+							>Click in search box to see results/suggestions</f-text
+						>
+					</f-search></f-div
+				></f-div
+			>
+		`;
+	},
+
+	name: "result-max-height"
+};
+
+export const resultWhen = {
+	render: () => {
+		const [value, setValue] = useState("");
+
+		const handleValue = (e: CustomEvent) => {
+			setValue(e.detail.value);
+		};
+
+		const resWhen: FSearchResultWhen = (suggestion, value) => {
+			if (value === "*") {
+				return true;
+			}
+			return (suggestion as string).toLocaleLowerCase().includes(value?.toLocaleLowerCase() ?? "");
+		};
+
+		return html`
+			<f-div width="100%" align="middle-center" padding="large">
+				<f-div width="80%" align="middle-center">
+					<f-search
+						value=${value}
+						placeholder="Write here"
+						@input=${handleValue}
+						size="medium"
+						.result=${[
+							"Suggestion 2",
+							"Suggestion 3",
+							"Suggestion 4",
+							"Suggestion 5",
+							"Suggestion 6",
+							"Suggestion 7",
+							"Suggestion 8",
+							"Suggestion 9",
+							"Suggestion 10",
+							"Suggestion 11",
+							"Suggestion 12",
+							"Suggestion 13",
+							"Suggestion 14",
+							"Suggestion 15",
+							"Suggestion 16",
+							"Suggestion 17",
+							"Suggestion 18"
+						]}
+						.resultWhen=${resWhen}
+					>
+						<f-div slot="label" padding="none" gap="none">Label</f-div>
+						<f-div slot="description" padding="none" gap="none"
+							>'result-when' is used to customised behavior of showing results. (By default, it will
+							employ the '.includes' method on each result for filtering and display.)</f-div
+						>
+						<f-div slot="help" width="100%" direction="column" gap="small">
+							<f-text variant="code" size="small"
+								>E.g. type '*' in search box to see all result
+							</f-text>
+							<f-div width="100%" state="subtle">
+								<pre style="outline:none !important;">
+							const resWhen: FSearchResultWhen = (suggestion, value) => {
+								if (value === "*") {
+									return true;
+								}
+								return (suggestion as string).toLocaleLowerCase().includes(value?.toLocaleLowerCase() ?? "");
+							};
+							</pre
+								>
+							</f-div>
+						</f-div>
+					</f-search></f-div
+				></f-div
+			>
+		`;
+	},
+
+	name: "result-when"
+};
+
+export const Flags = {
+	render: () => {
+		const [value, setValue] = useState("");
+
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 

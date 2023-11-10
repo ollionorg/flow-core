@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.2.2] - 2023-11-10
+
+### Bug Fixes
+
+- `f-popover` : reset `max-height` issue fixed.
+
 ## [2.2.1] - 2023-11-08
 
 ### Improvements

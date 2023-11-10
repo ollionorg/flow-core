@@ -91,8 +91,15 @@ export class FSearch extends FRoot {
 	/**
 	 * @attribute sets the value of scope in use
 	 */
-	@property({ reflect: true, type: String })
-	["selected-scope"]?: string;
+	@property({ reflect: true, type: String, attribute: "selected-scope" })
+	selectedScope?: string;
+
+	/**
+	 * for vue2 camelcase support
+	 */
+	set ["selected-scope"](val: string) {
+		this.selectedScope = val;
+	}
 
 	/**
 	 * @attribute Defines the placeholder text
@@ -219,7 +226,7 @@ export class FSearch extends FRoot {
 				this.value = String(e.detail.value);
 			}
 		}
-		this.dispatchInputEvent(e.detail.value, this["selected-scope"]);
+		this.dispatchInputEvent(e.detail.value, this.selectedScope);
 	}
 
 	/**
@@ -227,7 +234,7 @@ export class FSearch extends FRoot {
 	 */
 	handleScopeSelection(e: CustomEvent<{ value: string }>) {
 		e.stopPropagation();
-		this["selected-scope"] = e.detail.value;
+		this.selectedScope = e.detail.value;
 		this.dispatchInputEvent(this.value ?? "", e.detail.value);
 	}
 
@@ -253,7 +260,7 @@ export class FSearch extends FRoot {
 	 */
 	clearInputValue() {
 		this.value = "";
-		this.dispatchInputEvent("", this["selected-scope"]);
+		this.dispatchInputEvent("", this.selectedScope);
 	}
 
 	/**
@@ -350,7 +357,7 @@ export class FSearch extends FRoot {
 								placeholder="Search by"
 								.state=${this.state}
 								.size=${this.size}
-								.value=${this["selected-scope"]}
+								.value=${this.selectedScope}
 								@input=${this.handleScopeSelection}
 							></f-select
 					  ></f-div>`

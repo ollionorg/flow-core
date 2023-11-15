@@ -43,11 +43,6 @@ const instanceImages = api.create({
 	headers
 });
 
-const instanceOllionImages = api.create({
-	baseURL: `https://api.figma.com/v1/images/${process.env.OLLION_FILE_KEY}`,
-	headers
-});
-
 /**
  * get Figma document info
  *

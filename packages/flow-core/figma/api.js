@@ -15,6 +15,11 @@ const instanceFiles = api.create({
 	baseURL: `https://api.figma.com/v1/files/${process.env.FILE_KEY}`,
 	headers
 });
+
+const instanceOllionFiles = api.create({
+	baseURL: `https://api.figma.com/v1/files/${process.env.OLLION_FILE_KEY}`,
+	headers
+});
 /**
  * api endpoint for styles
  *
@@ -23,6 +28,12 @@ const instanceStyles = api.create({
 	baseURL: `https://api.figma.com/v1/files/${process.env.FILE_KEY}/styles`,
 	headers
 });
+
+const instanceOllionStyles = api.create({
+	baseURL: `https://api.figma.com/v1/files/${process.env.OLLION_FILE_KEY}/styles`,
+	headers
+});
+
 /**
  * api endpoint for images
  *
@@ -31,6 +42,12 @@ const instanceImages = api.create({
 	baseURL: `https://api.figma.com/v1/images/${process.env.FILE_KEY}`,
 	headers
 });
+
+const instanceOllionImages = api.create({
+	baseURL: `https://api.figma.com/v1/images/${process.env.OLLION_FILE_KEY}`,
+	headers
+});
+
 /**
  * get Figma document info
  *
@@ -43,14 +60,19 @@ const getDocument = async () => instanceFiles.get("/");
  *
  * @return {Promise<Object>}
  */
-const getStyles = async () => instanceStyles.get("/");
+const getStyles = async type =>
+	type === "ollion" ? instanceOllionStyles.get("/") : instanceStyles.get("/");
+
 /**
  * get Figma node info
  *
  * @param {string} nodeId
  * @return {Promise<Object>}
  */
-const getNode = async nodeId => instanceFiles.get(`/nodes?ids=${decodeURIComponent(nodeId)}`);
+const getNode = async (nodeId, type) =>
+	type === "ollion"
+		? instanceOllionFiles.get(`/nodes?ids=${decodeURIComponent(nodeId)}`)
+		: instanceFiles.get(`/nodes?ids=${decodeURIComponent(nodeId)}`);
 /**
  * get Figma node children
  *

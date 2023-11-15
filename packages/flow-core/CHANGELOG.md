@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.3.0] - 2023-11-15
+
+### Features
+
+- Added themes for ollion named as `f-ollion-dark` & `f-ollion-light`.
+
 ## [2.2.4] - 2023-11-21
 
 ### Bug Fixes

@@ -298,7 +298,12 @@ const field: FormBuilderField = {
 			type: "datetime",
 			label: {
 				title: "This is date time field"
-			}
+			},
+			validationRules: [
+				{
+					name: "required"
+				}
+			]
 		},
 		nestedObject: {
 			type: "object",

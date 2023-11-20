@@ -352,6 +352,11 @@ export class FDateTimePicker extends FRoot {
 					this.flatPickerElement?.close();
 					this.dateTimePickerElement.inputElement.focus();
 				}}
+				@blur=${(e: FocusEvent) => {
+					if (this.flatPickerElement?.isOpen) {
+						e.stopPropagation();
+					}
+				}}
 				@input=${this.handleKeyboardInput}
 				?read-only=${this["is-range"]}
 			>

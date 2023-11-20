@@ -505,3 +505,26 @@ export const Next = {
 
 	name: "@next"
 };
+export const NoData = {
+	render: () => {
+		const data = getFakeUsers(0, 5);
+		const fieldRef = createRef();
+
+		const handleEvent = (event: CustomEvent) => {
+			if (fieldRef.value) {
+				fieldRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
+			}
+		};
+
+		return html`<f-div direction="column" padding="small" gap="large" height="50%">
+			<f-text>slot='no-data' is used to customize message when there are 0 rows to display</f-text>
+			<f-table-schema .data=${data} .showSearchBar=${false}>
+				<f-div slot="no-data" state="warning" variant="curved" width="100%" padding="medium">
+					<f-text state="warning">This is my custom no data meesage</f-text>
+				</f-div>
+			</f-table-schema>
+		</f-div> `;
+	},
+
+	name: "slot='no-data'"
+};

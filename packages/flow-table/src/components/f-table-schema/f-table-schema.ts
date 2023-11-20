@@ -361,6 +361,21 @@ export class FTableSchema extends FRoot {
 		this.searchScope = event.detail.scope;
 		this.searchTerm = event.detail.value;
 	}
+	get noDataTemplate() {
+		if (this.data.rows.length === 0 && this.data.header) {
+			return html`<f-div
+				style="grid-column-start:1;grid-column-end:${Object.keys(this.data.header).length + 1};"
+			>
+				<slot name="no-data">
+					<f-div padding="small" state="secondary" align="middle-center" width="100%">
+						<f-text inline>No data to display</f-text>
+					</f-div>
+				</slot>
+			</f-div>`;
+		}
+
+		return nothing;
+	}
 
 	render() {
 		this.nextEmitted = false;
@@ -390,7 +405,7 @@ export class FTableSchema extends FRoot {
 					.highlightSelected=${this.highlightSelected}
 					.highlightHover=${this.highlightHover}
 				>
-					${this.header} ${this.rowsHtml}
+					${this.header} ${this.rowsHtml} ${this.noDataTemplate}
 				</f-table>
 				<f-div class="load-more" style="display:none" align="middle-left" padding="medium none">
 					<f-button @click=${this.paginate} label="load more" category="outline"></f-button>

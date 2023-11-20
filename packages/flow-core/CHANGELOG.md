@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.2.3] - 2023-11-20
+
+### Bug Fixes
+
+- `f-date-time-picker` : prevent the blur event from propagating when the date picker is open and date is selected. (It was validating value before input event in f-form-builder)
+
 ## [2.2.2] - 2023-11-10
 
 ### Bug Fixes

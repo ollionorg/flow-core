@@ -3,7 +3,7 @@ import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 // import flow-core elements
 import "@cldcvr/flow-core";
 
-import { ConfigUtil } from "@cldcvr/flow-core";
+import { ConfigUtil, FDiv } from "@cldcvr/flow-core";
 import {
 	FTableSchema,
 	FTableSchemaData,
@@ -105,5 +105,14 @@ describe("f-table-schema", () => {
 		);
 		await el.updateComplete;
 		expect(el).shadowDom.to.equalSnapshot();
+	});
+
+	it("should display no data message", async () => {
+		const el = await fixture<FTableSchema>(
+			html`<f-table-schema .data=${getFakeUsers(0)}></f-table-schema>`
+		);
+		await el.updateComplete;
+		const noDataElement = el.shadowRoot?.querySelector<FDiv>("slot[name='no-data']");
+		expect(noDataElement.textContent.trim()).to.equal("No data to display");
 	});
 });

@@ -11,37 +11,39 @@ export default function (
 ) {
 	const field = _field as FormBuilderTextInputField;
 	return html`
-		<f-input
-			id=${ifDefined(field.id)}
-			class=${ifDefined(field.className)}
-			name=${name}
-			.type=${field.type}
-			${ref(fieldRef)}
-			.placeholder=${field.placeholder}
-			.value=${value}
-			data-qa-element-id=${field.qaId || field.id}
-			icon-left=${ifDefined(field.iconLeft)}
-			icon-right=${ifDefined(field.iconRight)}
-			prefix=${ifDefined(field.prefix)}
-			suffix=${ifDefined(field.suffix)}
-			state=${ifDefined(field.state)}
-			.suffixWhen=${field.suffixWhen}
-			max-length=${ifDefined(field.maxLength)}
-			?loading=${field.loading ?? false}
-			?disabled=${field.disabled ?? false}
-			?clear=${field.clear ?? true}
-			?read-only=${field.readonly ?? false}
-			@click=${ifDefined(field.onClick)}
-			@focus=${ifDefined(field.onFocus)}
-			@input=${ifDefined(field.onInput)}
-			@keypress=${ifDefined(field.onKeyPress)}
-			@keydown=${ifDefined(field.onKeyDown)}
-			@keyup=${ifDefined(field.onKeyUp)}
-			@mouseover=${ifDefined(field.onMouseOver)}
-			autofocus=${ifDefined(field.autofocus)}
-			autocomplete=${ifDefined(field.autocomplete)}
-		>
+		<f-form-field>
 			${getSlots(name, field)}
-		</f-input>
+			<f-input
+				id=${ifDefined(field.id)}
+				class=${ifDefined(field.className)}
+				name=${name}
+				.type=${field.type}
+				${ref(fieldRef)}
+				.placeholder=${field.placeholder}
+				.value=${value}
+				data-qa-element-id=${field.qaId || field.id}
+				icon-left=${ifDefined(field.iconLeft)}
+				icon-right=${ifDefined(field.iconRight)}
+				prefix=${ifDefined(field.prefix)}
+				suffix=${ifDefined(field.suffix)}
+				state=${ifDefined(field.state)}
+				.suffixWhen=${field.suffixWhen}
+				max-length=${ifDefined(field.maxLength)}
+				?loading=${field.loading ?? false}
+				?disabled=${field.disabled ?? false}
+				?clear=${field.clear ?? true}
+				?read-only=${field.readonly ?? false}
+				@click=${ifDefined(field.onClick)}
+				@focus=${ifDefined(field.onFocus)}
+				@input=${ifDefined(field.onInput)}
+				@keypress=${ifDefined(field.onKeyPress)}
+				@keydown=${ifDefined(field.onKeyDown)}
+				@keyup=${ifDefined(field.onKeyUp)}
+				@mouseover=${ifDefined(field.onMouseOver)}
+				autofocus=${ifDefined(field.autofocus)}
+				autocomplete=${ifDefined(field.autocomplete)}
+			>
+			</f-input>
+		</f-form-field>
 	`;
 }

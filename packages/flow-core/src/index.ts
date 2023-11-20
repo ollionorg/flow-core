@@ -45,6 +45,7 @@ export * from "./components/f-progress-bar/f-progress-bar";
 export * from "./components/f-breadcrumb/f-breadcrumb";
 export * from "./components/f-document-viewer/f-document-viewer";
 export * from "./mixins/components/f-root/f-root";
+export * from "./components/f-form-field/f-form-field";
 
 export { html } from "lit";
 

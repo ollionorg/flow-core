@@ -1,4 +1,4 @@
-import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
+import { html, nothing, PropertyValueMap } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import {
 	FormBuilderField,
@@ -14,7 +14,6 @@ import {
 	FormBuilderVariant,
 	CanValidateFields
 } from "../../types";
-import eleStyle from "./f-form-builder.scss?inline";
 import globalStyle from "./f-form-builder-global.scss?inline";
 
 import { FRoot } from "@cldcvr/flow-core";
@@ -23,7 +22,7 @@ import fieldRenderer from "./fields";
 import { extractValidationState, validateField } from "../../modules/validation/validator";
 
 import { Subject } from "rxjs";
-import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/helpers";
+import { propogateProperties } from "../../modules/helpers";
 import { cloneDeep, isEqual } from "lodash-es";
 import { injectCss } from "@cldcvr/flow-core-config";
 
@@ -31,11 +30,6 @@ injectCss("f-form-builder", globalStyle);
 
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
-	/**
-	 * css loaded from scss file
-	 */
-	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...getEssentialFlowCoreStyles()];
-
 	/**
 	 * @attribute formbuilder name
 	 */
@@ -108,6 +102,10 @@ export class FFormBuilder extends FRoot {
 
 	showWhenSubject!: Subject<FormBuilderValues>;
 	inputTimeout!: ReturnType<typeof setTimeout>;
+
+	createRenderRoot() {
+		return this;
+	}
 
 	/**
 	 * responsible for rendering form

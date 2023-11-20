@@ -13,16 +13,8 @@ const field: FormBuilderField = {
 		description: "following fields are used for demo purpose only"
 	},
 	fields: {
-		number: {
-			type: "number",
-			validationRules: [
-				{
-					name: "max-value",
-					params: {
-						max: 5
-					}
-				}
-			]
+		username: {
+			type: "text"
 		},
 		hiddenField: {
 			type: "hidden",

@@ -1,7 +1,6 @@
-import { html, PropertyValueMap, TemplateResult, unsafeCSS } from "lit";
+import { html, PropertyValueMap, TemplateResult } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 import { FRoot } from "@cldcvr/flow-core";
-import eleStyle from "./f-form-object.scss?inline";
 import globalStyle from "./f-form-object-global.scss?inline";
 
 import fieldRenderer from "../f-form-builder/fields";
@@ -15,31 +14,20 @@ import {
 } from "../../types";
 import { validateField } from "../../modules/validation/validator";
 import { Subject } from "rxjs";
-import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/helpers";
+import { propogateProperties } from "../../modules/helpers";
 import { FFormGroup } from "@cldcvr/flow-core";
-import { FFieldSeparator } from "../f-field-separator/f-field-separator";
-import { radioGroupStyles } from "../f-radio-group/f-radio-group";
-import { checkboxGroupStyles } from "../f-checkbox-group/f-checkbox-group";
 
 export type ObjectValueType = Record<
 	string,
 	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 	string | string[] | number | number[] | unknown | unknown[] | undefined
 >;
+
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-form-object", globalStyle);
 @customElement("f-form-object")
 export class FFormObject extends FRoot {
-	/**
-	 * css loaded from scss file
-	 */
-	static styles = [
-		unsafeCSS(eleStyle),
-		...FFieldSeparator.styles,
-		unsafeCSS(radioGroupStyles),
-		unsafeCSS(checkboxGroupStyles),
-		...getEssentialFlowCoreStyles(),
-		unsafeCSS(globalStyle)
-	];
-
 	/**
 	 * @attribute comments baout title
 	 */
@@ -72,6 +60,10 @@ export class FFormObject extends FRoot {
 	fieldRefs: Record<string, Ref<FFormInputElements>> = {};
 
 	showWhenSubject!: Subject<FormBuilderValues>;
+
+	createRenderRoot() {
+		return this;
+	}
 
 	render() {
 		return html`${this.buildFields()}`;

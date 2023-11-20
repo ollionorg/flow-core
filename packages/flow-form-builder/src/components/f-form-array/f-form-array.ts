@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { customElement, property, queryAll } from "lit/decorators.js";
 import { FRoot } from "@cldcvr/flow-core";
-import eleStyle from "./f-form-array.scss?inline";
+import globalStyle from "./f-form-array-global.scss?inline";
 import {
 	CanValidateFields,
 	FFormInputElements,
@@ -15,9 +15,12 @@ import { createRef, Ref } from "lit/directives/ref.js";
 import { isEmptyArray } from "../../modules/utils";
 import { validateField } from "../../modules/validation/validator";
 import { Subject } from "rxjs";
-import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/helpers";
+import { propogateProperties } from "../../modules/helpers";
 import { FFormObject } from "../f-form-object/f-form-object";
 import { FIconButton } from "@cldcvr/flow-core";
+import { injectCss } from "@cldcvr/flow-core-config";
+
+injectCss("f-form-array", globalStyle);
 
 export type ArrayValueType = (
 	| string
@@ -31,11 +34,6 @@ export type ArrayValueType = (
 )[];
 @customElement("f-form-array")
 export class FFormArray extends FRoot {
-	/**
-	 * css loaded from scss file
-	 */
-	static styles = [unsafeCSS(eleStyle), ...getEssentialFlowCoreStyles()];
-
 	/**
 	 * @attribute comments baout title
 	 */
@@ -73,6 +71,9 @@ export class FFormArray extends FRoot {
 		return !this.config.allowEmpty;
 	}
 
+	createRenderRoot() {
+		return this;
+	}
 	render() {
 		this.fieldRefs = [];
 

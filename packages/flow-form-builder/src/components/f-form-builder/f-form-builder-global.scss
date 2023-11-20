@@ -9,6 +9,21 @@ f-form-builder {
 	flex-direction: column;
 	align-items: stretch;
 	overflow: auto;
+
+	// Important :  always include base mixins
+
+	[data-hidden="true"] {
+		display: none !important;
+	}
+
+	f-form {
+		display: flex;
+		align-items: flex-start;
+		justify-content: flex-start;
+		flex: 1 0 auto;
+	}
+
+	@include infoIcon();
 }
 
 f-form-group {

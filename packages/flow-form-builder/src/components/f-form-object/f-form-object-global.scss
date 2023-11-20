@@ -1,3 +1,6 @@
+@import "../../../../flow-core/src/mixins/scss/mixins";
+@import "./../../mixins";
+
 f-div[direction="column"],
 f-form-group[direction="vertical"] {
 	> f-form-object {
@@ -24,6 +27,9 @@ f-form-group[direction="vertical"] {
 	> f-select {
 		width: 100%;
 	}
+	> f-form-field {
+		width: 100%;
+	}
 	> f-date-time-picker {
 		width: 100%;
 	}
@@ -36,8 +42,21 @@ f-form-group[direction="horizontal"] {
 	}
 	> f-select,
 	> f-suggest,
+	> f-form-field,
 	> f-date-time-picker {
 		width: 100%;
 		flex: initial;
 	}
+}
+
+f-form-object {
+	@include base();
+	display: flex;
+	flex: 1 0 auto;
+	width: unset;
+	align-items: flex-start;
+	[data-hidden="true"] {
+		display: none !important;
+	}
+	@include infoIcon();
 }

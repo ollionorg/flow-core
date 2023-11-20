@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.0.7] - 2023-11-20
+
+### Improvements
+
+- `f-table-schema` : `slot="no-data"` support added to customize message when there are 0 rows.
+
 ## [2.0.6] - 2023-11-08
 
 ### Improvements

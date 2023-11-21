@@ -1,5 +1,5 @@
-import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { property, query } from "lit/decorators.js";
+import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
+import { property, query, state } from "lit/decorators.js";
 import eleStyle from "./f-date-time-picker.scss?inline";
 import globalStyle from "./f-date-time-picker-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -144,8 +144,8 @@ export class FDateTimePicker extends FRoot {
 	/**
 	 *  query selector for help slot
 	 */
-	@query("f-div[slot='help']")
-	helpSlotElement!: FDiv;
+	@state()
+	dateParsingError: string | null = null;
 
 	/**
 	 * flatpickr instance
@@ -209,7 +209,6 @@ export class FDateTimePicker extends FRoot {
 	 * emit input custom event
 	 */
 	handleInput(dateObj: object, dateStr?: string) {
-		this.helpSlotElement.innerHTML = `<slot name="help"></slot>`;
 		this.dateTimePickerElement.state = this.state;
 		this.value = dateStr;
 		this.dispatchInputEvent(dateObj, dateStr);
@@ -267,8 +266,9 @@ export class FDateTimePicker extends FRoot {
 			if (String(e.detail.value).match(this.regexDateTime)) {
 				//@ts-expect-error value is confirmed to be a string
 				this.handleInput([this.dateObjectFromString(e)], String(e.detail.value));
+				this.dateParsingError = null;
 			} else {
-				this.helpSlotElement.innerHTML = this.dateValidationMessage;
+				this.dateParsingError = this.dateValidationMessage;
 				this.dateTimePickerElement.state = "danger";
 			}
 			this.dateTimePickerElement.inputElement.focus();
@@ -290,6 +290,7 @@ export class FDateTimePicker extends FRoot {
 		} else if (dateStr === "") {
 			this.handleInput([], undefined);
 		}
+		this.dateParsingError = null;
 	}
 
 	/**
@@ -335,8 +336,8 @@ export class FDateTimePicker extends FRoot {
 	}
 
 	render() {
-		return html`<f-div width="100%"
-			><f-input
+		return html`<f-div direction="column" gap="x-small" width="100%">
+			<f-input
 				icon-left=${this.mode === "time-only" ? "i-clock-fill" : "i-calendar"}
 				placeholder=${this.placeholder ?? this.placeholderText}
 				.size=${this.size}
@@ -362,9 +363,17 @@ export class FDateTimePicker extends FRoot {
 			>
 				<f-div slot="label"><slot name="label"></slot></f-div>
 				<f-div slot="description"><slot name="description"></slot></f-div>
-				<f-div slot="help"><slot name="help"></slot></f-div>
-				<f-div slot="icon-tooltip"><slot name="icon-tooltip"></slot></f-div> </f-input
-		></f-div>`;
+
+				<f-div slot="icon-tooltip"><slot name="icon-tooltip"></slot></f-div>
+			</f-input>
+			<!--Displays help and formbuilder validation messages-->
+			<slot name="help"></slot>
+			<!--To display date format errors, when user types date-->
+			${this.dateParsingError
+				? html`<f-text state="danger" size="small" id="dateParsingError">${this.dateParsingError}</f-text
+			></f-div>`
+				: nothing}</f-div
+		>`;
 	}
 
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {

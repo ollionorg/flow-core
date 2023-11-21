@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.2.4] - 2023-11-21
+
+### Bug Fixes
+
+- `f-date-time-picker` : date parsing error message logic updated.
+
 ## [2.2.3] - 2023-11-20
 
 ### Bug Fixes

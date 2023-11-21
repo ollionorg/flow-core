@@ -33,6 +33,33 @@ export const Playground = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large">
 				<f-div width="80%" align="middle-center">
+					<f-form-field>
+						<f-div slot="label" padding="none" gap="none">Label</f-div>
+						<f-text slot="help" variant="para" size="small">This is a Subtext</f-text>
+						<f-input-light
+							.value=${args.value}
+							.variant=${args.variant}
+							.category=${args.category}
+							.placeholder=${args.placeholder}
+							data-qa-element-id="testId"
+							@input=${handleInput}
+							.type=${args.type}
+							icon-left=${args["icon-left"]}
+							icon-right=${args["icon-right"]}
+							prefix=${args["prefix"]}
+							suffix=${args["suffix"]}
+							state=${args.state}
+							max-length=${args["max-length"]}
+							?loading=${args.loading}
+							?disabled=${args.disabled}
+							.clear=${args.clear}
+							?read-only=${args.readOnly}
+							.size=${args.size}
+							autofocus
+							name="username"
+							autocomplete="on"
+						></f-input-light>
+					</f-form-field>
 					<f-input
 						.value=${args.value}
 						.variant=${args.variant}

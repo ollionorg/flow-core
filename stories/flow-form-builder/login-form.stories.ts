@@ -1,6 +1,5 @@
-import { Story, Meta } from "@storybook/web-components";
+import { Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { FormBuilderField } from "@cldcvr/flow-form-builder";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
 
 export default {
@@ -14,9 +13,22 @@ export default {
 
 export const LoginForm = {
 	render: () => {
+		const formRef = createRef<HTMLFormElement>();
+		const login = () => {
+			if (formRef.value) {
+				const formData = new FormData(formRef.value);
+				// output as an object
+				console.log(Object.fromEntries(formData));
+			}
+		};
+		const checkSubmit = (e: KeyboardEvent) => {
+			if (e.key === "Enter") {
+				login();
+			}
+		};
 		return html`
 			<f-div align="middle-center" height="100%">
-				<form>
+				<form ${ref(formRef)} @keyup=${checkSubmit}>
 					<f-div
 						direction="column"
 						variant="curved"
@@ -27,7 +39,7 @@ export const LoginForm = {
 						height="hug-content"
 					>
 						<f-div align="middle-center" padding="none none large none">
-							<f-text variant="heading" inline weight="bold" size="medium">Log In</f-text>
+							<f-text variant="heading" inline weight="bold" size="large">Log In</f-text>
 						</f-div>
 						<f-form-field>
 							<f-div slot="label" padding="none" gap="none">Email</f-div>
@@ -57,7 +69,7 @@ export const LoginForm = {
 							></f-input-light>
 						</f-form-field>
 						<f-div padding="small" align="middle-center" gap="medium">
-							<f-button style="width:150px" label="log in"></f-button>
+							<f-button @click=${login} style="width:150px" label="log in"></f-button>
 							<f-button
 								style="width:150px"
 								label="sign up"

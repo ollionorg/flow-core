@@ -1,7 +1,8 @@
 import { Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { createRef, Ref, ref } from "lit/directives/ref.js";
-import { FFormInputElements, validateField } from "@cldcvr/flow-form-builder";
+import { createRef, ref } from "lit/directives/ref.js";
+import { FormBuilderTextInputField, validateField } from "@cldcvr/flow-form-builder";
+import { FInputLight } from "@cldcvr/flow-core";
 
 export default {
 	title: "@cldcvr/flow-form-builder",
@@ -15,62 +16,71 @@ export default {
 export const LoginForm = {
 	render: () => {
 		const formRef = createRef<HTMLFormElement>();
+		/**
+		 * Define username field with validation rules
+		 */
+		const usernameField: FormBuilderTextInputField = {
+			type: "text",
+			label: {
+				title: "Username"
+			},
+			validationRules: [
+				{
+					name: "required"
+				}
+			]
+		};
 
-		const login = () => {
+		/**
+		 * Define password field with validation rules
+		 */
+		const passwordField: FormBuilderTextInputField = {
+			type: "password",
+			label: {
+				title: "Password"
+			},
+			validationRules: [
+				{
+					name: "required"
+				},
+				{
+					name: "min",
+					params: {
+						length: 6
+					}
+				}
+			]
+		};
+		/**
+		 * validate and call login api
+		 */
+		const login = async () => {
 			if (formRef.value) {
-				const formData = new FormData(formRef.value);
-				// output as an object
-				console.log(Object.fromEntries(formData));
-				const usernameElement = formRef.value.querySelector(
-					"[name='username']"
-				) as FFormInputElements;
-				validateField(
-					{
-						type: "text",
-						label: {
-							title: "Username"
-						},
-						validationRules: [
-							{
-								name: "required"
-							}
-						]
-					},
-					usernameElement,
-					false
-				);
+				const usernameElement = formRef.value.querySelector("[name='username']") as FInputLight;
+				const passwordElement = formRef.value.querySelector("[name='password']") as FInputLight;
 
-				const passwordElement = formRef.value.querySelector(
-					"[name='password']"
-				) as FFormInputElements;
-				validateField(
-					{
-						type: "password",
-						label: {
-							title: "Password"
-						},
-						validationRules: [
-							{
-								name: "required"
-							},
-							{
-								name: "min",
-								params: {
-									length: 6
-								}
-							}
-						]
-					},
-					passwordElement,
-					false
-				);
+				const results = await Promise.all([
+					validateField(usernameField, usernameElement, false),
+					validateField(passwordField, passwordElement, false)
+				]);
+
+				if (results.every(r => r.result)) {
+					const formData = new FormData(formRef.value);
+					console.log("call login api with these values", Object.fromEntries(formData));
+				}
 			}
 		};
+		/**
+		 *  Check if Enter button is pressed
+		 */
 		const checkSubmit = (e: KeyboardEvent) => {
 			if (e.key === "Enter") {
 				login();
 			}
 		};
+		/**
+		 * Login template
+		 */
 		return html`
 			<f-div align="middle-center" height="100%">
 				<form ${ref(formRef)} @keyup=${checkSubmit}>
@@ -138,5 +148,5 @@ export const LoginForm = {
 		`;
 	},
 
-	name: "Login Form"
+	name: "Login Form Without Form Builder"
 };

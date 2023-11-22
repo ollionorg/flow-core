@@ -21,6 +21,7 @@ import {
 	FFileUpload,
 	FIconButton,
 	FInput,
+	FInputLight,
 	FSelect,
 	FSuggest
 } from "@cldcvr/flow-core";
@@ -31,7 +32,7 @@ export default async function validate(
 	value: string,
 	elementRules: FormBuilderValidationRules,
 	name: string,
-	element: FFormInputElements | undefined
+	element: FFormInputElements | FInputLight | undefined
 ) {
 	let result = true;
 	let message = null;
@@ -57,6 +58,7 @@ export default async function validate(
 					} else {
 						if (
 							element instanceof FInput ||
+							element instanceof FInputLight ||
 							element instanceof FSelect ||
 							element instanceof FDateTimePicker ||
 							element instanceof FFileUpload ||
@@ -70,6 +72,7 @@ export default async function validate(
 						asyncR._lastResult = result;
 						if (
 							element instanceof FInput ||
+							element instanceof FInputLight ||
 							element instanceof FSelect ||
 							element instanceof FDateTimePicker ||
 							element instanceof FFileUpload ||
@@ -132,7 +135,7 @@ function getValidationMessage(
 
 export async function validateField(
 	field: CanValidateFields,
-	element: FFormInputElements | undefined,
+	element: FFormInputElements | FInputLight | undefined,
 	silent = false,
 	filter?: (r: FormBuilderGenericValidationRule) => boolean
 ): FormBuilderValidationPromise {

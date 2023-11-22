@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.3.1] - 2023-11-22
+
+### Features
+
+- font-weights for `<f-text variant="heading"></f-text>` updated in text-tokens received from figma API.
+
 ## [2.3.0] - 2023-11-15
 
 ### Features

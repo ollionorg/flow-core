@@ -7,7 +7,7 @@ import { FIcon } from "../f-icon/f-icon";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { flowElement } from "./../../utils";
 import { injectCss } from "@cldcvr/flow-core-config";
-import { FInputBase } from "./f-input-base";
+import { FInputBase, FInputCustomEvent } from "./f-input-base";
 import { FInputLight } from "./f-input-light";
 injectCss("f-input", globalStyle);
 
@@ -59,6 +59,12 @@ export class FInput extends FInputBase {
 	}
 	_onHelpSlotChange() {
 		this._hasHelperText = this._helpNodes.length > 0;
+	}
+
+	updateValue(e: CustomEvent<FInputCustomEvent>) {
+		if (e.detail) {
+			this.value = e.detail.value;
+		}
 	}
 
 	render() {
@@ -133,6 +139,7 @@ export class FInput extends FInputBase {
 						autofocus=${ifDefined(this.getAttribute("autofocus"))}
 						autocomplete=${ifDefined(this.getAttribute("autocomplete"))}
 						.maxLength=${this.maxLength}
+						@input=${(e: CustomEvent<FInputCustomEvent>) => this.updateValue(e)}
 					></f-input-light>
 				</f-div>
 				<f-div

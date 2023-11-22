@@ -133,7 +133,6 @@ export class FInput extends FInputBase {
 						autofocus=${ifDefined(this.getAttribute("autofocus"))}
 						autocomplete=${ifDefined(this.getAttribute("autocomplete"))}
 						.maxLength=${this.maxLength}
-						@input=${this.handleInput}
 					></f-input-light>
 				</f-div>
 				<f-div

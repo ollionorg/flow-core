@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
+import { FFormInputElements, validateField } from "@cldcvr/flow-form-builder";
 
 export default {
 	title: "@cldcvr/flow-form-builder",
@@ -14,11 +15,55 @@ export default {
 export const LoginForm = {
 	render: () => {
 		const formRef = createRef<HTMLFormElement>();
+
 		const login = () => {
 			if (formRef.value) {
 				const formData = new FormData(formRef.value);
 				// output as an object
 				console.log(Object.fromEntries(formData));
+				const usernameElement = formRef.value.querySelector(
+					"[name='username']"
+				) as FFormInputElements;
+				validateField(
+					{
+						type: "text",
+						label: {
+							title: "Username"
+						},
+						validationRules: [
+							{
+								name: "required"
+							}
+						]
+					},
+					usernameElement,
+					false
+				);
+
+				const passwordElement = formRef.value.querySelector(
+					"[name='password']"
+				) as FFormInputElements;
+				validateField(
+					{
+						type: "password",
+						label: {
+							title: "Password"
+						},
+						validationRules: [
+							{
+								name: "required"
+							},
+							{
+								name: "min",
+								params: {
+									length: 6
+								}
+							}
+						]
+					},
+					passwordElement,
+					false
+				);
 			}
 		};
 		const checkSubmit = (e: KeyboardEvent) => {

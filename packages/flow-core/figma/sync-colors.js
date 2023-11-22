@@ -87,8 +87,11 @@ function generateTextScss(textTokens) {
 	let scss = "";
 
 	let scssContent = "";
+
 	scssContent += createVariablesSCSS(textTokens[THEME_FLOW_GEN]);
 	Object.keys(textTokens).forEach(theme => {
+		textTokens[theme].fontFamily.general = textTokens[theme].variants["para"]["medium"].fontFamily;
+		textTokens[theme].fontFamily.code = textTokens[theme].variants["code"]["medium"].fontFamily;
 		scss += createTokenSCSS(textTokens[theme], theme);
 	});
 
@@ -225,7 +228,9 @@ function createTokenSCSS(data, theme) {
 
 	const scssContent = `
   ${themeSelector} {
-    ${generateCategoryStyles(data.variants)}
+    ${generateCategoryStyles(data.variants, theme)};\t\n
+	--flow-font: ${createFontFamily("para", data.fontFamily.general)};\t\n
+	--flow-code-font: ${createFontFamily("code", data.fontFamily.code)};\t\n
   }\n`;
 
 	return scssContent;
@@ -236,9 +241,9 @@ function createTokenSCSS(data, theme) {
  * @param {*} variants json object for variants of text and their font-sizes
  * @returns stringified scss tokens for texts
  */
-function generateCategoryStyles(variants) {
+function generateCategoryStyles(variants, theme) {
 	return Object.keys(variants)
-		.map(category => generateSizeStyles(category, variants[category]))
+		.map(category => generateSizeStyles(category, variants[category], theme))
 		.join("");
 }
 
@@ -258,12 +263,16 @@ function createFontFamily(category, fontFamily) {
  * @param {*} sizes sizes values are different for every category
  * @returns stringified scss tokens for text variants
  */
-function generateSizeStyles(category, sizes) {
+function generateSizeStyles(category, sizes, theme) {
 	return Object.keys(sizes)
 		.map(size => {
 			const { fontSize, lineHeight, weight, fontFamily } = sizes[size];
 			return `${fontTokenString(category, size)}: ${fontSize}px;\t\n
-			${lineHeightTokenString(category, size)}: ${Math.round(lineHeight)}px;\t\n
+			${lineHeightTokenString(category, size)}: ${
+				theme === THEME_OLLION
+					? `${category === "heading" ? 1.2 : 1.4}`
+					: `${Math.ceil(lineHeight)}px`
+			};\t\n
 			${generateWeightStyles(weight, category, size)}
 			${fontFamilyTokenString(category, size)}: ${createFontFamily(category, fontFamily)};\t\n
 			`;

@@ -52,16 +52,17 @@
 					&[size="#{$size}"] {
 						font-size: map-get($sizemap, "fontSize");
 						line-height: map-get($sizemap, "lineHeight");
+						@each $weight, $val in map-get($sizemap, "weight") {
+							&[weight="#{$weight}"] {
+								font-weight: $val;
+							}
+						}
+						font-family: map-get($sizemap, "fontFamily") !important;
 					}
 				}
 			}
 		}
 
-		@each $weight, $value in $weights {
-			&[weight="#{$weight}"] {
-				font-weight: $value;
-			}
-		}
 		&:focus {
 			outline: none;
 			border: 1px solid var(--color-primary-default);

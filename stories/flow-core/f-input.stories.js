@@ -35,7 +35,9 @@ export const Playground = {
 				<f-div width="80%" align="middle-center">
 					<f-form-field>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
-						<f-text slot="help" variant="para" size="small">This is a Subtext</f-text>
+						<f-text slot="help" variant="para" state="secondary" size="small"
+							>This is a Help</f-text
+						>
 						<f-input-light
 							.value=${args.value}
 							.variant=${args.variant}
@@ -82,7 +84,10 @@ export const Playground = {
 						autofocus
 						autocomplete="on"
 					>
-						${unsafeHTML(args.slot)}
+						<f-div slot="label" padding="none" gap="none">Label</f-div>
+						<f-text slot="help" variant="para" state="secondary" size="small"
+							>This is a Help</f-text
+						>
 					</f-input></f-div
 				></f-div
 			>

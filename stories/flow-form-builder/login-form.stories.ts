@@ -52,19 +52,28 @@ export const LoginForm = {
 			]
 		};
 		/**
+		 * validates form
+		 */
+		const validateForm = async () => {
+			if (formRef.value) {
+				const usernameElement = formRef.value.querySelector("[name='username']") as FInputLight;
+				const passwordElement = formRef.value.querySelector("[name='password']") as FInputLight;
+				return Promise.all([
+					validateField(usernameField, usernameElement, false),
+					validateField(passwordField, passwordElement, false)
+				]);
+			}
+			return;
+		};
+
+		/**
 		 * validate and call login api
 		 */
 		const login = async () => {
 			if (formRef.value) {
-				const usernameElement = formRef.value.querySelector("[name='username']") as FInputLight;
-				const passwordElement = formRef.value.querySelector("[name='password']") as FInputLight;
+				const results = await validateForm();
 
-				const results = await Promise.all([
-					validateField(usernameField, usernameElement, false),
-					validateField(passwordField, passwordElement, false)
-				]);
-
-				if (results.every(r => r.result)) {
+				if (results && results.every(r => r.result)) {
 					const formData = new FormData(formRef.value);
 					console.log("call login api with these values", Object.fromEntries(formData));
 				}
@@ -83,7 +92,7 @@ export const LoginForm = {
 		 */
 		return html`
 			<f-div align="middle-center" height="100%">
-				<form ${ref(formRef)} @keyup=${checkSubmit}>
+				<form ${ref(formRef)} @input=${validateForm} @blur=${validateForm} @keyup=${checkSubmit}>
 					<f-div
 						direction="column"
 						variant="curved"

@@ -63,7 +63,7 @@ export const LoginForm = {
 					validateField(passwordField, passwordElement, false)
 				]);
 			}
-			return;
+			return [];
 		};
 
 		/**
@@ -73,7 +73,7 @@ export const LoginForm = {
 			if (formRef.value) {
 				const results = await validateForm();
 
-				if (results && results.every(r => r.result)) {
+				if (results.every(r => r.result)) {
 					const formData = new FormData(formRef.value);
 					console.log("call login api with these values", Object.fromEntries(formData));
 				}

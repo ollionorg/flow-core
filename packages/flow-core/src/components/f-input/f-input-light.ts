@@ -173,7 +173,7 @@ export class FInputLight extends FInputBase {
 					name=${this.getAttribute("name")}
 					data-qa-id=${this.getAttribute("data-qa-element-id")}
 					placeholder=${this.placeholder}
-					.value=${this.value === undefined ? null : this.value}
+					.value=${this.value ?? null}
 					size=${this.size}
 					?readonly=${this.readOnly}
 					autofocus=${ifDefined(this.getAttribute("autofocus"))}

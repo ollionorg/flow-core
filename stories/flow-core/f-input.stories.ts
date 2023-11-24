@@ -566,6 +566,12 @@ export const Flags = {
 		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
+		const flagNames: Record<number, string> = {
+			0: "Loader",
+			1: "Disabled",
+			2: "Clear Icon on Type",
+			3: "Readonly"
+		};
 
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
@@ -576,20 +582,12 @@ export const Flags = {
             placeholder="Write here"
             @input=${handleValue}
             size="medium"
-            ?loading=${item === 0 ? true : false}
-            ?disabled=${item === 1 ? true : false}
-            ?clear=${item === 2 ? true : false}
-            ?read-only=${item === 3 ? true : false}
+            ?loading=${item === 0}
+            ?disabled=${item === 1}
+            ?clear=${item === 2}
+            ?read-only=${item === 3}
           >
-            <f-div slot="label" padding="none" gap="none">${
-							item === 0
-								? "Loader"
-								: item === 1
-								? "Disabled"
-								: item === 2
-								? "Clear Icon on Type"
-								: "Readonly"
-						}</f-div>
+            <f-div slot="label" padding="none" gap="none">${flagNames[item]}</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-input></f-div
         ></f-div

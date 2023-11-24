@@ -20,19 +20,19 @@ export class FInputLight extends FInputBase {
 	static styles = [unsafeCSS(globalStyle)];
 
 	/**
-	 * input element reference
+	 * native input element reference
 	 */
 	@query("input")
 	inputElement!: HTMLInputElement;
 
 	/**
-	 * input element reference
+	 * native input element wrapper reference, (Used in f-suggest to display popover)
 	 */
 	@query(".f-input-wrapper")
 	inputWrapperElement!: HTMLInputElement;
 
 	/**
-	 * clear icon
+	 * clear icon reference
 	 */
 	@query(".clear-icon")
 	clearIcon?: FIcon;
@@ -86,31 +86,35 @@ export class FInputLight extends FInputBase {
 		if (this.suffix || this.iconRight) {
 			computedSuffix = html` ${this.suffixTextTemplate} ${this.iconRightTemplate} `;
 		}
+
+		let clearIcon: TemplateResult<1> | symbol = nothing;
+		let loadingIcon: TemplateResult<1> | symbol = nothing;
 		/**
-		 * check if loading is enabled
+		 * cheak if clear icon needs to be display
 		 */
-		if (!this.loading) {
-			if (this.value !== undefined && this.value !== null && this.value !== "" && this.clear) {
-				return html`<div class="f-input-suffix">
-					${this.passwordToggle}
-					<f-icon
-						?clickable=${true}
-						source="i-close"
-						size="x-small"
-						@click=${this.clearInputValue}
-						class=${!this.size ? "f-input-icons-size clear-icon" : "clear-icon"}
-					></f-icon>
-					${computedSuffix}
-				</div>`;
-			} else {
-				return html`<div class="f-input-suffix">${this.passwordToggle} ${computedSuffix}</div>`;
-			}
-		} else {
-			return html`
-				<div class="f-input-suffix">${this.passwordToggle}${computedSuffix}</div>
-				<div class="loader-suffix" state=${this.state}>${unsafeSVG(loader)}</div>
-			`;
+		if (
+			this.value !== undefined &&
+			this.value !== null &&
+			this.value !== "" &&
+			this.clear &&
+			!this.loading
+		) {
+			clearIcon = html`<f-icon
+				?clickable=${true}
+				source="i-close"
+				size="x-small"
+				@click=${this.clearInputValue}
+				class=${!this.size ? "f-input-icons-size clear-icon" : "clear-icon"}
+			></f-icon>`;
 		}
+
+		if (this.loading) {
+			loadingIcon = html`<div class="loader-suffix" state=${this.state}>${unsafeSVG(loader)}</div>`;
+		}
+		return html`<div class="f-input-suffix">
+				${this.passwordToggle}${clearIcon}${computedSuffix}
+			</div>
+			${loadingIcon}`;
 	}
 
 	get iconleftTemplate() {

@@ -53,42 +53,42 @@ export class FInputBase extends FRoot {
 	value?: string | number;
 
 	/**
-	 * @attribute Defines the placeholder text for f-text-input
+	 * @attribute Defines the placeholder text for f-input and f-input-light
 	 */
 	@property({ reflect: true, type: String })
 	placeholder?: string;
 
 	/**
-	 * @attribute Icon-left enables an icon on the left of the input value.
+	 * @attribute The icon-left property allows the placement of an icon to the left of the input value
 	 */
 	@property({ reflect: true, type: String, attribute: "icon-left" })
 	iconLeft?: string;
 
 	/**
-	 * @attribute Icon-right enables an icon on the right of the input value.
+	 * @attribute The icon-right property allows the placement of an icon to the right of the input value
 	 */
 	@property({ reflect: true, type: String, attribute: "icon-right" })
 	iconRight?: string;
 
 	/**
-	 * @attribute Prefix property enables a string before the input value.
+	 * @attribute The prefix property facilitates the addition of a string on the left side of the input box.
 	 */
 	@property({ reflect: true, type: String })
 	prefix: string | null = null;
 	/**
-	 * @attribute Suffix property enables a string on the right side of the input box.
+	 * @attribute The suffix property facilitates the addition of a string on the right side of the input box.
 	 */
 	@property({ reflect: true, type: String })
 	suffix?: string;
 
 	/**
-	 * @attribute This shows the character count while typing and auto limits after reaching the max length.
+	 * @attribute The maxLength property of an input box specifies the maximum number of characters that a user can input into the field.
 	 */
 	@property({ reflect: true, type: [Number, undefined], attribute: "max-length" })
 	maxLength?: number;
 
 	/**
-	 * @attribute Loader icon replaces the content of the button .
+	 * @attribute The loading property, when enabled, facilitates the display of a loading icon on the right side of the input box.
 	 */
 	@property({ reflect: true, type: Boolean })
 	loading?: boolean = false;

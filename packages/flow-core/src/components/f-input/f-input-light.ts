@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, nothing, TemplateResult, unsafeCSS } from "lit";
 import { query } from "lit/decorators.js";
 
 import globalStyle from "./f-input-light-global.scss?inline";
@@ -41,106 +41,116 @@ export class FInputLight extends FInputBase {
 		return this;
 	}
 
-	render() {
-		/**
-		 * create iconLeft if available
-		 */
-		const iconLeft = this.iconLeft
-			? html` <f-icon
-					.source=${this.iconLeft}
-					.size=${this.iconSize}
-					class=${!this.size ? "f-input-icons-size" : ""}
-			  ></f-icon>`
-			: "";
-		/**
-		 * create iconRight if available
-		 */
-		const iconRight = this.iconRight
-			? html`<f-icon
-					.source=${this.iconRight}
-					.size=${this.iconSize}
-					class=${!this.size ? "f-input-icons-size" : ""}
-			  ></f-icon>`
-			: "";
-		/**
-		 * append prefix
-		 */
-		const prefixAppend =
-			this.prefix || this.iconLeft
-				? html` <div class="f-input-prefix">
-						${this.prefix
-							? html`
-									<f-div
-										height="hug-content"
-										width="hug-content"
-										padding="none medium none none"
-										direction="row"
-										border="small solid default right"
-									>
-										<f-text variant="para" size="small" weight="regular" class="word-break"
-											>${this.prefix}</f-text
-										>
-									</f-div>
-							  `
-							: ""}
-						${iconLeft}
-				  </div>`
-				: "";
+	get iconRightTemplate() {
+		if (this.iconRight) {
+			return html`<f-icon
+				.source=${this.iconRight}
+				.size=${this.iconSize}
+				class=${!this.size ? "f-input-icons-size" : ""}
+			></f-icon>`;
+		}
+		return nothing;
+	}
 
+	get passwordToggle() {
+		if (this.type === "password" || this.showPassword) {
+			return html` <f-icon
+				?clickable=${true}
+				.source=${this.showPassword ? "i-view-off-fill" : "i-view-fill"}
+				.size=${this.iconSize}
+				@click=${this.togglePasswordView}
+				class=${!this.size ? "f-input-icons-size" : ""}
+			></f-icon>`;
+		}
+		return nothing;
+	}
+
+	get suffixTextTemplate() {
+		if (this.suffix && (this.suffixWhen ? this.suffixWhen(this.value) : true)) {
+			return html`
+				<f-div height="hug-content" width="hug-content" padding="none" direction="row">
+					<f-text variant="para" size="x-small" weight="regular" class="word-break"
+						>${this.suffix}</f-text
+					>
+				</f-div>
+			`;
+		}
+		return nothing;
+	}
+
+	get suffixTemplate() {
+		let computedSuffix: TemplateResult<1> | symbol = nothing;
 		/**
-		 * password view suffix
+		 * check if suffix available
 		 */
-		const passwordToggle =
-			this.type === "password" || this.showPassword
-				? html` <f-icon
+		if (this.suffix || this.iconRight) {
+			computedSuffix = html` ${this.suffixTextTemplate} ${this.iconRightTemplate} `;
+		}
+		/**
+		 * check if loading is enabled
+		 */
+		if (!this.loading) {
+			if (this.value !== undefined && this.value !== null && this.value !== "" && this.clear) {
+				return html`<div class="f-input-suffix">
+					${this.passwordToggle}
+					<f-icon
 						?clickable=${true}
-						.source=${this.showPassword ? "i-view-off-fill" : "i-view-fill"}
-						.size=${this.iconSize}
-						@click=${this.togglePasswordView}
-						class=${!this.size ? "f-input-icons-size" : ""}
-				  ></f-icon>`
-				: "";
+						source="i-close"
+						size="x-small"
+						@click=${this.clearInputValue}
+						class=${!this.size ? "f-input-icons-size clear-icon" : "clear-icon"}
+					></f-icon>
+					${computedSuffix}
+				</div>`;
+			} else {
+				return html`<div class="f-input-suffix">${this.passwordToggle} ${computedSuffix}</div>`;
+			}
+		} else {
+			return html`
+				<div class="f-input-suffix">${this.passwordToggle}${computedSuffix}</div>
+				<div class="loader-suffix" state=${this.state}>${unsafeSVG(loader)}</div>
+			`;
+		}
+	}
 
-		/**
-		 * main suffix
-		 */
-		const mainSuffix =
-			this.suffix || this.iconRight
-				? html`
-						${this.suffix && (this.suffixWhen ? this.suffixWhen(this.value) : true)
-							? html`
-									<f-div height="hug-content" width="hug-content" padding="none" direction="row">
-										<f-text variant="para" size="x-small" weight="regular" class="word-break"
-											>${this.suffix}</f-text
-										>
-									</f-div>
-							  `
-							: ""}
-						${iconRight}
-				  `
-				: "";
-		/**
-		 * append suffix
-		 */
-		const suffixAppend = !this.loading
-			? this.value !== undefined && this.value !== null && this.value !== "" && this.clear
-				? html`<div class="f-input-suffix">
-						${passwordToggle}
-						<f-icon
-							?clickable=${true}
-							source="i-close"
-							size="x-small"
-							@click=${this.clearInputValue}
-							class=${!this.size ? "f-input-icons-size clear-icon" : "clear-icon"}
-						></f-icon>
-						${mainSuffix}
-				  </div>`
-				: html`<div class="f-input-suffix">${passwordToggle} ${mainSuffix}</div>`
-			: html`
-					<div class="f-input-suffix">${passwordToggle}${mainSuffix}</div>
-					<div class="loader-suffix" state=${this.state}>${unsafeSVG(loader)}</div>
-			  `;
+	get iconleftTemplate() {
+		if (this.iconLeft) {
+			return html` <f-icon
+				.source=${this.iconLeft}
+				.size=${this.iconSize}
+				class=${!this.size ? "f-input-icons-size" : ""}
+			></f-icon>`;
+		}
+		return nothing;
+	}
 
+	get prefixTemplate() {
+		let textPrefixTemplate: TemplateResult<1> | symbol = nothing;
+
+		if (this.prefix) {
+			textPrefixTemplate = html`
+				<f-div
+					height="hug-content"
+					width="hug-content"
+					padding="none medium none none"
+					direction="row"
+					border="small solid default right"
+				>
+					<f-text variant="para" size="small" weight="regular" class="word-break"
+						>${this.prefix}</f-text
+					>
+				</f-div>
+			`;
+		}
+		if (this.prefix || this.iconLeft) {
+			return html` <div class="f-input-prefix">
+				${textPrefixTemplate} ${this.iconleftTemplate}
+			</div>`;
+		}
+		return nothing;
+	}
+
+	render() {
 		/**
 		 * Final html to render
 		 */
@@ -153,7 +163,7 @@ export class FInputLight extends FInputBase {
 				size=${this.size}
 				?disabled=${this.disabled}
 			>
-				${prefixAppend}
+				${this.prefixTemplate}
 				<input
 					class=${classMap({ "f-input": true })}
 					variant=${this.variant}
@@ -171,7 +181,7 @@ export class FInputLight extends FInputBase {
 					maxlength="${ifDefined(this.maxLength)}"
 					@input=${this.handleInput}
 				/>
-				${suffixAppend}
+				${this.suffixTemplate}
 			</div>
 		`;
 	}

@@ -144,11 +144,11 @@ export const LoginForm = {
 						<f-div direction="column" gap="medium" padding="small" align="middle-center">
 							<f-text size="small">Or, log in with</f-text>
 							<f-div align="middle-center" gap="medium" height="28px">
-								<f-icon source="p-google" size="large"></f-icon>
+								<f-icon source="p-google" clickable size="large"></f-icon>
 								<f-divider></f-divider>
-								<f-icon source="p-azure" size="large"></f-icon>
+								<f-icon source="p-azure" clickable size="large"></f-icon>
 								<f-divider></f-divider>
-								<f-icon source="p-github" size="large"></f-icon>
+								<f-icon source="p-github" clickable size="large"></f-icon>
 							</f-div>
 						</f-div>
 					</f-div>

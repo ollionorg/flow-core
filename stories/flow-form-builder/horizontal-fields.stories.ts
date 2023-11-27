@@ -4,7 +4,7 @@ import { FormBuilderField } from "@cldcvr/flow-form-builder";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@cldcvr/flow-form-builder/Horiontal fields",
+	title: "@cldcvr/flow-form-builder/Examples/Horiontal fields",
 	argTypes: {
 		field: {
 			control: false

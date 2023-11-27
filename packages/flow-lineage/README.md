@@ -8,7 +8,7 @@ A lineage chart is a graphical representation of a node's ancestors, showing the
 
 # Demo
 
-Head over to [Flow Lineage Storybook](https://flow.cldcvr.com/v2/index.html) for a demo.
+Head over to [Flow Lineage Storybook](https://flow.ollion.com/v2/index.html) for a demo.
 
 or
 
@@ -18,7 +18,7 @@ Clone and install the [Flow Lineage demo](https://github.com/cldcvr/flow-lineage
 
 # Getting started
 
-Flow Lineage is been built on [Flow](https://flow.cldcvr.com/), an open source design framework. To run lineage, please make sure that you have [Flow core](https://github.com/cldcvr/flow-core) as part of your project.
+Flow Lineage is been built on [Flow](https://flow.ollion.com/), an open source design framework. To run lineage, please make sure that you have [Flow core](https://github.com/cldcvr/flow-core) as part of your project.
 
 While installation if you run into any issues, head over to our [known issues + solutions document](https://github.com/cldcvr/flow-core/blob/main/packages/flow-lineage/KNOWN_SOLUTIONS.md) to see if a solution already exists.
 
@@ -233,7 +233,7 @@ Once it's running, you will see a lineage component like the image below.
 
 # Properties
 
-Head over to [Flow Lineage Storybook](https://flow.cldcvr.com/v2/index.html) for all properties and playground.
+Head over to [Flow Lineage Storybook](https://flow.ollion.com/v2/index.html) for all properties and playground.
 
 <br>
 
@@ -241,4 +241,4 @@ Head over to [Flow Lineage Storybook](https://flow.cldcvr.com/v2/index.html) for
 
 Flow nodes are represented through templates, this allow you to easily change, or write and use your own node template.
 
-Head over to [Flow Lineage templates](https://flow.cldcvr.com/v2/index.html) to view whats available.
+Head over to [Flow Lineage templates](https://flow.ollion.com/v2/index.html) to view whats available.

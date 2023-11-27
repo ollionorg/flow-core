@@ -6,7 +6,7 @@ import { useArgs } from "@storybook/manager-api";
 import { FFormBuilder } from "@cldcvr/flow-form-builder/src";
 
 export default {
-	title: "@cldcvr/flow-form-builder/Deep Reactivity",
+	title: "@cldcvr/flow-form-builder/Examples/Deep Reactivity",
 	argTypes: {
 		field: {
 			control: false

@@ -5,7 +5,7 @@ import { createRef, Ref, ref } from "lit/directives/ref.js";
 import { FButton, FSelectOptionObject } from "@cldcvr/flow-core";
 
 export default {
-	title: "@cldcvr/flow-form-builder/In PopOver",
+	title: "@cldcvr/flow-form-builder/Examples/In PopOver",
 	argTypes: {
 		field: {
 			control: false

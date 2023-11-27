@@ -1,26 +1,26 @@
-# Flow MD Editor
+# Flow Log
 
-The Flow md editor is built on the Flow design framework ([website](https://flow.ollion.com/) / [github](https://github.com/cldcvr/flow-core)) using [Monaco Editor](https://microsoft.github.io/monaco-editor/)
+The Flow Log is built on the Flow design framework ([website](https://flow.ollion.com/) / [github](https://github.com/cldcvr/flow-core)) using [Monaco Editor](https://microsoft.github.io/monaco-editor/)
 
 # Installation
 
 ### 1️⃣ Install flow code editor dependency
 
 ```
-npm i --save @cldcvr/flow-md-editor
+npm i --save @cldcvr/flow-log
 ```
 
 **Note:** after installation, re-start your application.
 
 <br>
 
-### 2️⃣ Import flow-md-editor into your project
+### 2️⃣ Import flow-log into your project
 
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
 import "@cldcvr/flow-core";
-import "@cldcvr/flow-md-editor";
+import "@cldcvr/flow-log";
 ```
 
 <br>
@@ -33,7 +33,7 @@ import "@cldcvr/flow-md-editor";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@cldcvr/flow-md-editor/dist/types/vue3";
+import "@cldcvr/flow-log/dist/types/vue3";
 ```
 
 <details>
@@ -42,7 +42,7 @@ import "@cldcvr/flow-md-editor/dist/types/vue3";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@cldcvr/flow-md-editor/dist/types/vue2";
+import "@cldcvr/flow-log/dist/types/vue2";
 ```
 
 </details>
@@ -53,7 +53,7 @@ import "@cldcvr/flow-md-editor/dist/types/vue2";
 **React**: Include react type in `tsconfig.json` file like below.
 
 ```json
-"include": ["src", "./node_modules/@cldcvr/flow-md-editor/dist/types/react.ts"]
+"include": ["src", "./node_modules/@cldcvr/flow-log/dist/types/react.ts"]
 ```
 
 </details>

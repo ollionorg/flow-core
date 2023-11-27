@@ -48,7 +48,29 @@ export const parameters = {
 	},
 	options: {
 		storySort: {
-			order: ["About", "Foundation", "@cldcvr"]
+			order: [
+				"About",
+				"foundation",
+				"@cldcvr",
+				[
+					"flow-core",
+					["About", "Release Notes"],
+					"flow-form-builder",
+					["About", "Release Notes", "Properties", "*", "Examples"],
+					"flow-table",
+					["About", "Release Notes"],
+					"flow-lineage",
+					["About", "Release Notes", "Properties", "*", "Examples", "Debug"],
+					"flow-code-editor",
+					["About", "Release Notes"],
+					"flow-md-editor",
+					["About", "Release Notes"],
+					"flow-log",
+					["About", "Release Notes"]
+				],
+				"templates",
+				"icons"
+			]
 		}
 	},
 	previewTabs: {

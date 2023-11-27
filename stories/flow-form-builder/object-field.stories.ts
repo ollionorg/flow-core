@@ -4,7 +4,7 @@ import { FormBuilderField } from "@cldcvr/flow-form-builder";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@cldcvr/flow-form-builder/Object field",
+	title: "@cldcvr/flow-form-builder/Examples/Object field",
 	argTypes: {
 		field: {
 			control: false

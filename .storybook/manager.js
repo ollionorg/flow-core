@@ -36,7 +36,7 @@ export const theme = create({
 
 	// Brand assets
 	brandTitle: "Flow",
-	brandUrl: "https://flow.cldcvr.com/v2/index.html"
+	brandUrl: "https://flow.ollion.com/v2/index.html"
 });
 
 addons.setConfig({

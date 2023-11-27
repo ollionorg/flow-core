@@ -4,7 +4,7 @@ import { useArgs, useState } from "@storybook/client-api";
 import { createRef, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@cldcvr/flow-form-builder/Validations",
+	title: "@cldcvr/flow-form-builder/Examples/Validations",
 
 	parameters: {
 		controls: {

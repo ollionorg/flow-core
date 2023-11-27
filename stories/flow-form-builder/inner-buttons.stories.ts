@@ -5,7 +5,7 @@ import { createRef, Ref, ref } from "lit/directives/ref.js";
 import { FFormBuilder } from "@cldcvr/flow-form-builder/src";
 
 export default {
-	title: "@cldcvr/flow-form-builder/Test Inner Buttons",
+	title: "@cldcvr/flow-form-builder/Examples/Test Inner Buttons",
 	argTypes: {
 		field: {
 			control: false

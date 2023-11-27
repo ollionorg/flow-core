@@ -5,7 +5,7 @@ import { createRef, Ref, ref } from "lit/directives/ref.js";
 import { FFormBuilder } from "@cldcvr/flow-form-builder/src";
 
 export default {
-	title: "@cldcvr/flow-form-builder/Multiple Async Custom Validator",
+	title: "@cldcvr/flow-form-builder/Examples/Multiple Async Custom Validator",
 	argTypes: {
 		field: {
 			control: false

@@ -4,7 +4,7 @@ import { FormBuilderField } from "@cldcvr/flow-form-builder/src/types";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@cldcvr/flow-form-builder/Dynamic Validation Message",
+	title: "@cldcvr/flow-form-builder/Examples/Dynamic Validation Message",
 	argTypes: {
 		field: {
 			control: false

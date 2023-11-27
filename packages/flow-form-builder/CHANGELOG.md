@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.0.8] - 2023-10-20
+
+### Patch Changes
+
+- The `validateField` function has been exported.
+
 ## [2.0.7] - 2023-10-20
 
 ### Patch Changes

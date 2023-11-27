@@ -1,8 +1,8 @@
 import { html } from "lit-html";
 import fInputAnatomy from "../svg/i-finput-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import { useArgs, useEffect, useState } from "@storybook/client-api";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
+import { useState } from "@storybook/preview-api";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 export default {
 	title: "@cldcvr/flow-core/f-input",
@@ -15,19 +15,9 @@ export default {
 };
 
 export const Playground = {
-	render: args => {
-		const [_, updateArgs] = useArgs();
-
-		const handleInput = e => {
-			updateArgs({
-				value: e.detail.value
-			});
-
-			if (args.type === "tel") {
-				updateArgs({
-					["calling-code"]: e.detail.callingCode
-				});
-			}
+	render: (args: Record<string, unknown>) => {
+		const handleInput = (e: CustomEvent) => {
+			console.log(e.detail);
 		};
 
 		return html`
@@ -55,7 +45,7 @@ export const Playground = {
 						autofocus
 						autocomplete="on"
 					>
-						${unsafeHTML(args.slot)}
+						${unsafeHTML(args.slot as string)}
 					</f-input></f-div
 				></f-div
 			>
@@ -169,11 +159,11 @@ export const Anatomy = {
 };
 
 export const Variant = {
-	render: args => {
+	render: () => {
 		const variants = ["curved", "round", "block"];
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -204,11 +194,11 @@ export const Variant = {
 };
 
 export const Category = {
-	render: args => {
+	render: () => {
 		const categories = ["fill", "outline", "transparent"];
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -238,14 +228,14 @@ export const Category = {
 };
 
 export const Type = {
-	render: args => {
+	render: () => {
 		const types = [
 			["text", "number", "email"],
 			["password", "tel", "url"]
 		];
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -281,10 +271,10 @@ export const Type = {
 };
 
 export const Value = {
-	render: args => {
+	render: () => {
 		const [value, setValue] = useState("Value Here");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -304,10 +294,10 @@ export const Value = {
 };
 
 export const Placeholder = {
-	render: args => {
+	render: () => {
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -332,11 +322,11 @@ export const Placeholder = {
 };
 
 export const Size = {
-	render: args => {
+	render: () => {
 		const sizes = ["small", "medium"];
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -364,14 +354,14 @@ export const Size = {
 };
 
 export const State = {
-	render: args => {
+	render: () => {
 		const states = [
 			["default", "primary", "success"],
 			["danger", "warning", "default"]
 		];
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -407,10 +397,10 @@ export const State = {
 };
 
 export const IconLeft = {
-	render: args => {
+	render: () => {
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -439,10 +429,10 @@ export const IconLeft = {
 };
 
 export const IconRight = {
-	render: args => {
+	render: () => {
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -472,10 +462,10 @@ export const IconRight = {
 };
 
 export const Prefix = {
-	render: args => {
+	render: () => {
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -504,10 +494,10 @@ export const Prefix = {
 };
 
 export const Suffix = {
-	render: args => {
+	render: () => {
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -537,10 +527,10 @@ export const Suffix = {
 };
 
 export const MaxLength = {
-	render: args => {
+	render: () => {
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
 		};
 
@@ -570,11 +560,17 @@ export const MaxLength = {
 };
 
 export const Flags = {
-	render: args => {
+	render: () => {
 		const [value, setValue] = useState("");
 
-		const handleValue = e => {
+		const handleValue = (e: CustomEvent) => {
 			setValue(e.detail.value);
+		};
+		const flagNames: Record<number, string> = {
+			0: "Loader",
+			1: "Disabled",
+			2: "Clear Icon on Type",
+			3: "Readonly"
 		};
 
 		return html`
@@ -586,20 +582,12 @@ export const Flags = {
             placeholder="Write here"
             @input=${handleValue}
             size="medium"
-            ?loading=${item === 0 ? true : false}
-            ?disabled=${item === 1 ? true : false}
-            ?clear=${item === 2 ? true : false}
-            ?read-only=${item === 3 ? true : false}
+            ?loading=${item === 0}
+            ?disabled=${item === 1}
+            ?clear=${item === 2}
+            ?read-only=${item === 3}
           >
-            <f-div slot="label" padding="none" gap="none">${
-							item === 0
-								? "Loader"
-								: item === 1
-								? "Disabled"
-								: item === 2
-								? "Clear Icon on Type"
-								: "Readonly"
-						}</f-div>
+            <f-div slot="label" padding="none" gap="none">${flagNames[item]}</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-input></f-div
         ></f-div

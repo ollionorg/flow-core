@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.5.0] - 2023-11-27
+
+### Minor Changes
+
+- `lit` upgraded to v3.
+
 ## [2.4.0] - 2023-11-22
 
 ### Improvements

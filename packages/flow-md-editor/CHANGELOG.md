@@ -1,7 +1,12 @@
 <h4 className="margin-btm-8">Release Notes</h4>
 
-
 # Change Log
+
+## [2.1.0] - 2023-11-27
+
+### Minor Changes
+
+- `lit` upgraded to v3.
 
 ## [2.0.3] - 2023-10-12
 

@@ -6,4 +6,6 @@ export * from "./components/f-form-object/f-form-object";
 export * from "./components/f-field-separator/f-field-separator";
 export * from "./components/f-form-builder/f-form-builder";
 
+export { validateField } from "./modules/validation/validator";
+
 export { html } from "lit";

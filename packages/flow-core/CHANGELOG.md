@@ -2,6 +2,15 @@
 
 # Change Log
 
+## [2.4.0] - 2023-11-22
+
+### Improvements
+
+- The 1Password manager does not currently support Shadow DOM for autofill, and a timeline for its implementation has not been provided. Consequently, we are introducing `f-input-light` as a light DOM alternative to `f-input`.
+- Login form story added [here](https://flow.ollion.com/v2/index.html?path=/story/cldcvr-flow-form-builder--login-form). It uses `f-input-light` and validation module from `@cldcvr/flow-form-builder`.
+- `f-form-field` wrapper elements added to support `lable`, `subtitle`,`help` slots.
+- **Note : `f-input-light` won't support `lable`, `subtitle`,`help` slots**.
+
 ## [2.3.1] - 2023-11-22
 
 ### Features

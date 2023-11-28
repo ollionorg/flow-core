@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.0.8] - 2023-11-28
+
+### Improvements
+
+- `f-trow` : `chevron` reference added to trigger click externally using JS.
+
 ## [2.0.7] - 2023-11-20
 
 ### Improvements

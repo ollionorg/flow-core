@@ -1,7 +1,7 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 
-import { FDiv, FIcon, FRoot, flowElement } from "@cldcvr/flow-core";
+import { FDiv, FIcon, FRoot, flowElement, FIconButton } from "@cldcvr/flow-core";
 import { FTcell } from "../f-tcell/f-tcell";
 import eleStyle from "./f-trow.scss?inline";
 import globalStyle from "./f-trow-global.scss?inline";
@@ -61,6 +61,8 @@ export class FTrow extends FRoot {
 
 	@query("slot[name='details']")
 	detailsSlotElement!: HTMLSlotElement;
+
+	chevron: FIconButton | undefined;
 
 	render() {
 		return html`<slot
@@ -132,12 +134,12 @@ export class FTrow extends FRoot {
 			}
 			chevronCell.expandIcon = true;
 			chevronCell.expandIconPosition = this.expandIconPosition as FTrowChevronPosition;
-			const chevron = chevronCell.chevron;
-			if (chevron) {
+			this.chevron = chevronCell.chevron;
+			if (this.chevron) {
 				if (this.open) {
-					chevron.icon = "i-chevron-up";
+					this.chevron.icon = "i-chevron-up";
 				} else {
-					chevron.icon = "i-chevron-down";
+					this.chevron.icon = "i-chevron-down";
 				}
 			}
 		}

@@ -13,7 +13,7 @@ export default {
 };
 
 export const Playground = {
-	render: args => {
+	render: (args: Record<string, unknown>) => {
 		return html`
 			<f-table>
 				<f-trow slot="header">
@@ -21,7 +21,7 @@ export const Playground = {
 						return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
 					})}
 				</f-trow>
-				${[1, 2, 3].map(rowNumber => {
+				${[1, 2, 3].map(() => {
 					return html`<f-trow>
 						${[1, 2, 3].map(cellNumber => {
 							return html`<f-tcell .actions=${args.actions}>
@@ -74,7 +74,7 @@ export const Anatomy = {
 };
 
 export const Actions = {
-	render: args =>
+	render: () =>
 		html`<f-div direction="column" state="subtle" padding="small" gap="large">
 			<f-text>3rd column has actions</f-text>
 			<f-table>
@@ -83,7 +83,7 @@ export const Actions = {
 						return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
 					})}
 				</f-trow>
-				${[1, 2, 3].map(rowNumber => {
+				${[1, 2, 3].map(() => {
 					return html`<f-trow>
 						${[1, 2, 3].map(cellNumber => {
 							return html`<f-tcell
@@ -116,10 +116,10 @@ export const Actions = {
 };
 
 export const Selected = {
-	render: args =>
+	render: () =>
 		html`<f-div direction="column" state="subtle" padding="small" gap="large"
 			>${[true].map(
-				selected =>
+				() =>
 					html`<f-text>2nd column is selected</f-text
 						><f-table>
 							<f-trow slot="header">
@@ -129,7 +129,7 @@ export const Selected = {
 									</f-tcell>`;
 								})}
 							</f-trow>
-							${[1, 2, 3].map(rowNumber => {
+							${[1, 2, 3].map(() => {
 								return html`<f-trow>
 									${[1, 2, 3].map(cellNumber => {
 										return html`<f-tcell .selected=${cellNumber === 2}>
@@ -145,11 +145,51 @@ export const Selected = {
 	name: "selected"
 };
 
+export const Align = {
+	render: () => {
+		const alignValues = [
+			"top-left",
+			"top-center",
+			"top-right",
+			"middle-left",
+			"middle-center",
+			"middle-right",
+			"bottom-left",
+			"bottom-center",
+			"bottom-right"
+		];
+		return html`<f-div padding="x-large"
+			><f-table variant="bordered">
+				<f-trow slot="header">
+					${alignValues.map(align => {
+						return html`<f-tcell width="300px" .align=${align}> ${align} </f-tcell>`;
+					})}
+					<f-tcell> Cell with height </f-tcell>
+				</f-trow>
+				${[1, 2, 3].map(() => {
+					return html`<f-trow>
+						${alignValues.map(align => {
+							return html`<f-tcell .align=${align}>
+								<f-text inline> align="${align}" </f-text>
+							</f-tcell>`;
+						})}
+						<f-tcell>
+							<f-div height="200px"></f-div>
+						</f-tcell>
+					</f-trow>`;
+				})}
+			</f-table></f-div
+		>`;
+	},
+
+	name: "align"
+};
+
 export const HighlightColumn = {
-	render: args => {
+	render: () => {
 		const fieldRef = createRef();
 
-		const highlightColumnHandler = event => {
+		const highlightColumnHandler = (event: CustomEvent) => {
 			if (fieldRef.value) {
 				fieldRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
 			}
@@ -157,7 +197,7 @@ export const HighlightColumn = {
 
 		return html`<f-div direction="column" state="subtle" padding="small" gap="large"
 				>${[true].map(
-					selected =>
+					() =>
 						html`<f-text>Hover on header cell, it will trigger 'highlight-column' event </f-text>
 							<f-table>
 								<f-trow slot="header">
@@ -170,7 +210,7 @@ export const HighlightColumn = {
 										</f-tcell>`;
 									})}
 								</f-trow>
-								${[1, 2, 3].map(rowNumber => {
+								${[1, 2, 3].map(() => {
 									return html`<f-trow>
 										${[1, 2, 3].map(cellNumber => {
 											return html`<f-tcell .selected=${cellNumber === 2}>
@@ -193,10 +233,10 @@ export const HighlightColumn = {
 };
 
 export const SelectedColumn = {
-	render: args => {
+	render: () => {
 		const fieldRef = createRef();
 
-		const selectedColumnHandler = event => {
+		const selectedColumnHandler = (event: CustomEvent) => {
 			if (fieldRef.value) {
 				fieldRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
 			}
@@ -204,7 +244,7 @@ export const SelectedColumn = {
 
 		return html`<f-div direction="column" state="subtle" padding="small" gap="large"
 				>${[true].map(
-					selected =>
+					() =>
 						html`<f-text>Click on header cell, it will trigger 'selected-column' event </f-text>
 							<f-table>
 								<f-trow slot="header">
@@ -217,7 +257,7 @@ export const SelectedColumn = {
 										</f-tcell>`;
 									})}
 								</f-trow>
-								${[1, 2, 3].map(rowNumber => {
+								${[1, 2, 3].map(() => {
 									return html`<f-trow>
 										${[1, 2, 3].map(cellNumber => {
 											return html`<f-tcell .selected=${cellNumber === 2}>

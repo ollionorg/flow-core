@@ -22,6 +22,17 @@ export type FTcellAction = {
 
 export type FTcellActions = FTcellAction[];
 
+export type FTcellAlign =
+	| "top-left"
+	| "top-center"
+	| "top-right"
+	| "middle-left"
+	| "middle-center"
+	| "middle-right"
+	| "bottom-left"
+	| "bottom-center"
+	| "bottom-right";
+
 @flowElement("f-tcell")
 export class FTcell extends FRoot {
 	/**
@@ -48,6 +59,9 @@ export class FTcell extends FRoot {
 
 	@property({ type: String, reflect: true })
 	width?: string;
+
+	@property({ type: String, reflect: true })
+	align?: FTcellAlign = "top-left";
 
 	@state()
 	selectable?: FTableSelectable = "none";
@@ -107,37 +121,39 @@ export class FTcell extends FRoot {
 
 	render() {
 		return html`<div class="f-tcell-wrapper">
-			${this.selectable === "multiple"
-				? html`<f-checkbox
-						?disabled=${this.isDisabled}
-						@input=${this.handleSelection}
-				  ></f-checkbox>`
-				: nothing}
-			${this.selectable === "single"
-				? html`<f-radio
-						?disabled=${this.isDisabled}
-						@input=${this.handleSelection}
-						class="cell-radio"
-				  ></f-radio>`
-				: nothing}
-			${this.expandIcon && this.expandIconPosition === "left"
-				? html`
-						<f-icon-button
-							size="medium"
-							category="packed"
-							class="row-toggler left"
-							state="neutral"
-							@click=${this.toggleDetails}
-							icon="i-chevron-down"
-						></f-icon-button>
-				  `
-				: nothing}<slot></slot>
+			<f-div .align=${this.align} height="100%" class="f-tcell-content">
+				${this.selectable === "multiple"
+					? html`<f-checkbox
+							?disabled=${this.isDisabled}
+							@input=${this.handleSelection}
+					  ></f-checkbox>`
+					: nothing}
+				${this.selectable === "single"
+					? html`<f-radio
+							?disabled=${this.isDisabled}
+							@input=${this.handleSelection}
+							class="cell-radio"
+					  ></f-radio>`
+					: nothing}
+				${this.expandIcon && this.expandIconPosition === "left"
+					? html`
+							<f-icon-button
+								size="medium"
+								category="packed"
+								class="row-toggler left"
+								state="neutral"
+								@click=${this.toggleDetails}
+								icon="i-chevron-down"
+							></f-icon-button>
+					  `
+					: nothing}<slot></slot>
+			</f-div>
 			<f-div
 				class="details-toggle"
 				height="100%"
 				width="hug-content"
 				gap="medium"
-				align="middle-right"
+				.align=${this.align ?? "middle-right"}
 			>
 				${this.renderActions()}
 				${this.expandIcon && this.expandIconPosition === "right"

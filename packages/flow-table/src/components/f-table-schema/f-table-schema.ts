@@ -5,7 +5,7 @@ import { html, HTMLTemplateResult, nothing, PropertyValueMap, unsafeCSS } from "
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { property, query, state } from "lit/decorators.js";
 import { FTable, FTableSelectable, FTableSize, FTableVariant } from "../f-table/f-table";
-import { FTcell, FTcellActions } from "../f-tcell/f-tcell";
+import { FTcell, FTcellActions, FTcellAlign } from "../f-tcell/f-tcell";
 import { FTrow, FTrowChevronPosition, FTrowState } from "../f-trow/f-trow";
 import eleStyle from "./f-table-schema.scss?inline";
 import globalStyle from "./f-table-schema-global.scss?inline";
@@ -32,6 +32,7 @@ export type FTableSchemaData = {
 export type FTableSchemaCell<T = any> = {
 	value: T;
 	actions?: FTcellActions;
+	align?: FTcellAlign;
 	template?: (highlightText?: string | null) => HTMLTemplateResult;
 	toString?: () => string;
 };
@@ -40,6 +41,7 @@ export type FTableSchemaHeaderCell<T = any> = {
 	value: T;
 	template?: () => HTMLTemplateResult;
 	width?: string;
+	align?: FTcellAlign;
 	selected?: boolean;
 	disableSort?: boolean;
 	sticky?: boolean;
@@ -185,6 +187,7 @@ export class FTableSchema extends FRoot {
 							part="cell"
 							.selected=${selected}
 							.width=${width}
+							.align=${columnHeader[1].align}
 							?sticky-left=${ifDefined(sticky)}
 							?sticky-top=${ifDefined(this.stickyHeader)}
 							@selected-column=${this.handleColumnSelection}
@@ -249,6 +252,7 @@ export class FTableSchema extends FRoot {
 							.selected=${selected}
 							.width=${width}
 							.actions=${actions}
+							.align=${cell.align}
 							?sticky-left=${ifDefined(sticky)}
 							>${this.getCellTemplate(row.data[columnHeader[0]], highlightTerm)}
 						</f-tcell>`;
@@ -537,7 +541,7 @@ export class FTableSchema extends FRoot {
 			return cell.template(highlightTerm);
 		}
 
-		return html`<f-text style="height:100%" .highlight=${highlightTerm}>${cell.value}</f-text>`;
+		return html`<f-text .highlight=${highlightTerm}>${cell.value}</f-text>`;
 	}
 
 	handleColumnSelection(e: CustomEvent) {

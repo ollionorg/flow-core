@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.2.0] - 2023-11-28
+
+### Minor Changes
+
+- `align` property introduced on `f-tcell`.
+
 ## [2.1.0] - 2023-11-28
 
 ### Minor Changes

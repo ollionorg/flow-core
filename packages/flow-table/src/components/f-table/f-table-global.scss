@@ -180,16 +180,19 @@ f-table {
 	}
 
 	&[variant="bordered"] {
-		border-top: 1px solid var(--color-border-default);
-		border-left: 1px solid var(--color-border-default);
-		border-right: 1px solid var(--color-border-default);
-
 		> f-trow {
 			--border-bottom: 1px solid var(--color-border-default);
 			--border-left: 1px solid var(--color-border-default);
+			&:first-child {
+				> f-tcell {
+					border-top: 1px solid var(--color-border-default);
+				}
+			}
 			> f-tcell {
-				&:not(:last-child) {
-					border-right: 1px solid var(--color-border-default);
+				border-right: 1px solid var(--color-border-default);
+
+				&:first-child {
+					border-left: 1px solid var(--color-border-default);
 				}
 				border-bottom: 1px solid var(--color-border-default);
 			}

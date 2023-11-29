@@ -30,7 +30,7 @@ For a new project, Flow has put together starter kits with basic dependencies to
 - [Aungular](https://github.com/cldcvr/flow-starterkit-angular)
 - [React](https://github.com/cldcvr/flow-starterkit-react)
 
-If you would like to contribute to an existing starter kit or write a new one for a different framework, write to <flow@cldcvr.com> or ping on our slack channel.
+If you would like to contribute to an existing starter kit or write a new one for a different framework, write to <flow@ollion.com> or ping on our slack channel.
 
 **VScode Plugin**: [Install Flow's Plugin](https://marketplace.visualstudio.com/items?itemName=dev-vikas.flow-intellisense-vscode) to access components, icons, values, etc, and documentation inside of VScode.
 

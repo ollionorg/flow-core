@@ -1,7 +1,12 @@
 <h4 className="margin-btm-8">Release Notes</h4>
 
-
 # Change Log
+
+## [1.1.0] - 2023-11-27
+
+### Minor Changes
+
+- `lit` upgraded to v3.
 
 ## [1.0.3] - 2023-10-12
 
@@ -11,7 +16,6 @@
 - Updated dependencies
 - `@cldcvr/flow-core-config@1.1.3`
 - `@cldcvr/flow-core@2.0.3`
-
 
 ## [1.0.2] - 2023-10-10
 
@@ -42,7 +46,6 @@
 - Updated dependencies
 - `@cldcvr/flow-core@2.0.0`
 <hr className="margin-btm-32" />
-
 
 ## [0.2.0] - 2023-08-03
 

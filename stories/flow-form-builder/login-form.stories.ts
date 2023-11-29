@@ -5,7 +5,7 @@ import { FormBuilderTextInputField, validateField } from "@cldcvr/flow-form-buil
 import { FInputLight } from "@cldcvr/flow-core";
 
 export default {
-	title: "@cldcvr/flow-form-builder",
+	title: "@cldcvr/flow-form-builder/Examples",
 	argTypes: {
 		field: {
 			control: false

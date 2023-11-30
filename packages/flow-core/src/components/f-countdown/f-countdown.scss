@@ -1,0 +1,144 @@
+// common mixins imported from this file
+@import "./../../mixins/scss/mixins";
+
+$sizes: (
+	"x-large": 48px,
+	"large": 36px,
+	"medium": 24px,
+	"small": 16px
+);
+
+$states: (
+	"primary": (
+		"background": var(--color-primary-default)
+	),
+	"default": (
+		"background": var(--color-neutral-secondary)
+	),
+	"success": (
+		"background": var(--color-success-default)
+	),
+	"warning": (
+		"background": var(--color-warning-default)
+	),
+	"danger": (
+		"background": var(--color-danger-default)
+	)
+);
+
+:host {
+	div.f-countdown-wrapper {
+		@include base();
+
+		display: inline-flex;
+
+		div.f-countdown-circle {
+			position: relative;
+			margin-left: 8px;
+			clip-path: circle(49%);
+			transform: rotate(180deg);
+			transform-origin: center;
+			@each $size, $value in $sizes {
+				&[size="#{$size}"] {
+					height: $value;
+					width: $value;
+				}
+			}
+
+			@each $state, $color in $states {
+				&[state="#{$state}"] {
+					background: map.get($color, "background");
+				}
+			}
+
+			.f-countdown-spinner {
+				@each $state, $color in $states {
+					&[state="#{$state}"] {
+						background: map.get($color, "background");
+					}
+				}
+			}
+		}
+		.f-countdown-label {
+			min-width: 32px;
+			display: inline-flex;
+			justify-content: flex-end;
+			align-items: center;
+		}
+	}
+
+	@mixin timer($duration, $item: ".f-countdown-circle", $border: none, $hover: running) {
+		#{$item},
+		#{$item} * {
+			box-sizing: border-box;
+		}
+
+		#{$item} .f-countdown-pie {
+			width: 50%;
+			height: 100%;
+			transform-origin: 100% 50%;
+			position: absolute;
+			border: #{$border};
+		}
+
+		#{$item} .f-countdown-spinner {
+			border-radius: 100% 0 0 100% / 50% 0 0 50%;
+			z-index: 2;
+			border-right: none;
+			animation-name: rota;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+
+		#{$item}:hover .f-countdown-spinner,
+		#{$item}:hover .f-countdown-filler,
+		#{$item}:hover .mask {
+			animation-play-state: $hover;
+		}
+
+		#{$item} .f-countdown-filler {
+			border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+			left: 50%;
+			opacity: 0;
+			z-index: 1;
+			border-left: none;
+			animation-name: opa;
+			animation-timing-function: steps(1, end);
+			animation-iteration-count: infinite;
+			animation-direction: reverse;
+		}
+
+		#{$item} .mask {
+			width: 50%;
+			height: 100%;
+			position: absolute;
+			background: inherit;
+			opacity: 1;
+			z-index: 3;
+			animation-name: opa;
+			animation-timing-function: steps(1, end);
+			animation-iteration-count: infinite;
+		}
+
+		@keyframes rota {
+			0% {
+				transform: rotate(360deg);
+			}
+			100% {
+				transform: rotate(0deg);
+			}
+		}
+
+		@keyframes opa {
+			0% {
+				opacity: 1;
+			}
+			50%,
+			100% {
+				opacity: 0;
+			}
+		}
+	}
+
+	@include timer(5);
+}

@@ -124,6 +124,23 @@ export class FColorPicker extends FRoot {
 		small: "28px",
 		medium: "36px"
 	};
+	get colorPickerTypeTemplate() {
+		return html`<hex-color-picker
+				style="width:100%;"
+				.color=${this.value ?? this.defaultHexColor}
+				@color-changed=${this.handleColorChange}
+			></hex-color-picker>
+			<f-div gap="small">
+				<f-input
+					prefix="HEX"
+					@input=${this.handleHexInput}
+					size="small"
+					.clear=${false}
+					.value=${this.value ?? this.defaultHexColor}
+				>
+				</f-input>
+			</f-div>`;
+	}
 
 	render() {
 		const classes = { focused: this.isOpen, "no-color": this.isValueEmpty };
@@ -137,6 +154,7 @@ export class FColorPicker extends FRoot {
 					border-state="${this.state}"
 					.variant=${this.variant}
 					.disabled=${this.disabled}
+					?read-only=${this.readOnly}
 					class=${classMap(classes)}
 					@click=${this.handleFocus}
 					id="f-color-picker-input"
@@ -157,21 +175,7 @@ export class FColorPicker extends FRoot {
 				size="small"
 			>
 				<f-div direction="column" state="secondary" padding="large" gap="medium" variant="curved">
-					<hex-color-picker
-						style="width:100%;"
-						.color=${this.value ?? this.defaultHexColor}
-						@color-changed=${this.handleColorChange}
-					></hex-color-picker>
-					<f-div gap="small">
-						<f-input
-							prefix="HEX"
-							@input=${this.handleHexInput}
-							size="small"
-							.clear=${false}
-							.value=${this.value ?? this.defaultHexColor}
-						>
-						</f-input>
-					</f-div>
+					${this.colorPickerTypeTemplate}
 				</f-div>
 			</f-popover>
 		</f-div>`;

@@ -27,7 +27,8 @@ import {
 	FSelect,
 	FSuggest,
 	FSwitch,
-	FTextArea
+	FTextArea,
+	FColorPicker
 } from "@cldcvr/flow-core";
 
 import checkboxGroupGlobalStyles from "./../components/f-checkbox-group/f-checkbox-group-global.scss?inline";
@@ -167,9 +168,10 @@ export function getEssentialFlowCoreStyles(): CSSResult[] {
 		...FSuggest.styles,
 		...FSwitch.styles,
 		...FTextArea.styles,
+		...FColorPicker.styles,
 		unsafeCSS(checkboxGroupGlobalStyles),
 		unsafeCSS(radioGroupGlobalStyles),
 		unsafeCSS(fieldSeparatorGlobalStyles),
 		unsafeCSS(formObjectGlobalStyles)
-	];
+	] as CSSResult[];
 }

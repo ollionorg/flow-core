@@ -7,8 +7,6 @@ import { flowElement } from "./../../utils";
 import { injectCss } from "@cldcvr/flow-core-config";
 
 import "vanilla-colorful";
-import "vanilla-colorful/hsl-color-picker.js";
-import "vanilla-colorful/rgb-color-picker.js";
 import { FPopover } from "../f-popover/f-popover";
 import { FDiv } from "../f-div/f-div";
 import { FInput } from "../f-input/f-input";
@@ -18,7 +16,7 @@ injectCss("f-color-picker", globalStyle);
 
 export type FColorPickerState = "primary" | "default" | "success" | "warning" | "danger";
 export type FColorPickerInputEvent = {
-	value: string;
+	value?: string;
 };
 
 @flowElement("f-color-picker")
@@ -83,6 +81,7 @@ export class FColorPicker extends FRoot {
 
 	handleColorChange(event: CustomEvent<{ value: string }>) {
 		this.value = event.detail.value;
+		this.dispatchInputEvent(this.value);
 	}
 	handleFocus(_event: FocusEvent) {
 		if (!this.readOnly) {
@@ -95,6 +94,7 @@ export class FColorPicker extends FRoot {
 
 	handleHexInput(event: CustomEvent) {
 		this.value = event.detail.value;
+		this.dispatchInputEvent(this.value);
 	}
 	handleKeydown(event: KeyboardEvent) {
 		if (event.key === "Enter") {
@@ -102,10 +102,10 @@ export class FColorPicker extends FRoot {
 		}
 	}
 
-	dispatchInputEvent(value: string) {
+	dispatchInputEvent(value?: string) {
 		const event = new CustomEvent<FColorPickerInputEvent>("input", {
 			detail: {
-				value: value
+				value
 			},
 			bubbles: true,
 			composed: true

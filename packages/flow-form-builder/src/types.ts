@@ -19,7 +19,8 @@ import {
 	FDateTimePickerState,
 	FDateOption,
 	DateDisableType,
-	FRootTooltip
+	FRootTooltip,
+	FColorPickerState
 } from "@cldcvr/flow-core";
 import { BetweenParams } from "./modules/validation/rules/between";
 import { Subject } from "rxjs";
@@ -55,6 +56,11 @@ export type FormBuilderArrayField = FormBuilderBaseField & {
 	field: FormBuilderField;
 	label: FormBuilderLabel;
 	allowEmpty?: boolean;
+};
+export type FormBuilderColorPickerField = FormBuilderBaseField & {
+	type: "color";
+	state?: FColorPickerState;
+	readOnly?: boolean;
 };
 export type FormBuilderSeparatorField = FormBuilderFieldEvents & {
 	id?: string; // id to uniquely identify in DOM
@@ -267,7 +273,8 @@ export type FormBuilderField =
 	| FormBuilderSeparatorField
 	| FormBuilderEmojiField
 	| FormBuilderHiddenField
-	| FormBuilderDatetimeField; // add other field types
+	| FormBuilderDatetimeField
+	| FormBuilderColorPickerField; // add other field types
 
 export type FormBuilderShowCondition<T = FormBuilderValues> = (value: T) => boolean;
 

@@ -15,6 +15,7 @@ import separator from "./separator";
 import emoji from "./emoji";
 import hidden from "./hidden";
 import datetime from "./datetime";
+import color from "./color";
 
 const all: Record<string, FormBuilderFieldRenderFunction> = {
 	text,
@@ -37,7 +38,8 @@ const all: Record<string, FormBuilderFieldRenderFunction> = {
 	separator,
 	emoji,
 	hidden,
-	datetime
+	datetime,
+	color
 };
 
 export default all;

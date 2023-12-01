@@ -1,8 +1,32 @@
+@use "sass:map";
+$states: (
+	"primary": (
+		"border": 1px solid var(--color-primary-default)
+	),
+	"default": (
+		"border": none
+	),
+	"success": (
+		"border": 1px solid var(--color-success-default)
+	),
+	"warning": (
+		"border": 1px solid var(--color-warning-default)
+	),
+	"danger": (
+		"border": 1px solid var(--color-danger-default)
+	)
+);
+
 :host {
 	#f-color-picker-input {
 		cursor: pointer;
 		&.focused {
 			border: 1px solid var(--color-primary-default);
+		}
+		@each $state, $color in $states {
+			&[border-state="#{$state}"]:not(.focused) {
+				border: map.get($color, "border");
+			}
 		}
 	}
 }

@@ -85,7 +85,9 @@ export class FColorPicker extends FRoot {
 		this.value = event.detail.value;
 	}
 	handleFocus(_event: FocusEvent) {
-		this.isOpen = true;
+		if (!this.readOnly) {
+			this.isOpen = true;
+		}
 	}
 	handleOverlayClick() {
 		this.isOpen = false;
@@ -118,16 +120,23 @@ export class FColorPicker extends FRoot {
 		);
 	}
 
+	sizeMap = {
+		small: "28px",
+		medium: "36px"
+	};
+
 	render() {
 		const classes = { focused: this.isOpen, "no-color": this.isValueEmpty };
 		// render empty string, since there no need of any child element
 		return html`<f-div direction="column" gap="x-small" width="hug-content">
 			<f-form-field>
 				<f-div
-					width="36px"
-					height="36px"
+					.width=${this.sizeMap[this.size ?? "medium"]}
+					.height=${this.sizeMap[this.size ?? "medium"]}
 					state="custom,${this.value ?? this.defaultHexColor}"
+					border-state="${this.state}"
 					.variant=${this.variant}
+					.disabled=${this.disabled}
 					class=${classMap(classes)}
 					@click=${this.handleFocus}
 					id="f-color-picker-input"

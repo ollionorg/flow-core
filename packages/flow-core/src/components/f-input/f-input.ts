@@ -11,6 +11,8 @@ import { FInputBase, FInputCustomEvent } from "./f-input-base";
 import { FInputLight } from "./f-input-light";
 injectCss("f-input", globalStyle);
 
+export type { FInputState, FInputCustomEvent, FInputSuffixWhen } from "./f-input-base";
+
 @flowElement("f-input")
 export class FInput extends FInputBase {
 	/**

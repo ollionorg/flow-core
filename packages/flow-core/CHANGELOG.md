@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.6.1] - 2023-12-04
+
+### Bug fixes
+
+- re-exporting types of `f-input-base` from `f-input`. (To fix component type generation bug).
+
 ## [2.6.0] - 2023-12-04
 
 ### Minor Changes

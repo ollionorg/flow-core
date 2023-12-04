@@ -360,13 +360,15 @@ export class FDiv extends FRoot {
 			this.checkHighlight();
 		}
 
-		if (this.variant === "round") {
-			this.style.borderRadius = `${this.offsetHeight / 2}px`;
-		} else if (this.variant === "curved") {
-			this.style.borderRadius = `4px`;
-		} else {
-			this.style.borderRadius = "0px";
-		}
+		void this.updateComplete.then(() => {
+			if (this.variant === "round") {
+				this.style.borderRadius = `${this.offsetHeight / 2}px`;
+			} else if (this.variant === "curved") {
+				this.style.borderRadius = `4px`;
+			} else {
+				this.style.borderRadius = "0px";
+			}
+		});
 	}
 }
 

@@ -33,14 +33,7 @@ export class FFormField extends FRoot {
 						<slot name="description"></slot>
 					</f-div>
 				</f-div>
-				<f-div
-					gap="x-small"
-					direction="row"
-					width="100%"
-					class="f-input-row"
-					align="middle-center"
-					overflow="hidden"
-				>
+				<f-div gap="x-small" direction="row" width="100%" class="f-input-row" overflow="hidden">
 					<slot></slot>
 				</f-div>
 				<f-div>

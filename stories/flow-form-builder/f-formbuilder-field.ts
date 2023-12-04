@@ -13,16 +13,27 @@ const field: FormBuilderField = {
 		description: "following fields are used for demo purpose only"
 	},
 	fields: {
-		number: {
-			type: "number",
-			validationRules: [
-				{
-					name: "max-value",
-					params: {
-						max: 5
+		paymentInfo: {
+			type: "object",
+			fields: {
+				cardNumber: {
+					type: "number",
+					validationRules: [
+						{
+							name: "max-value",
+							params: {
+								max: 5
+							}
+						}
+					]
+				},
+				color: {
+					type: "color",
+					label: {
+						title: "Color"
 					}
 				}
-			]
+			}
 		},
 		hiddenField: {
 			type: "hidden",
@@ -62,6 +73,7 @@ const field: FormBuilderField = {
 					state: "success",
 					suffix: "suggested"
 				},
+
 				logo: {
 					label: { title: "Logo" },
 					type: "emoji",

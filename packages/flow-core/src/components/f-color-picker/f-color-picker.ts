@@ -132,6 +132,7 @@ export class FColorPicker extends FRoot {
 			></hex-color-picker>
 			<f-div gap="small">
 				<f-input
+					id="hex-input"
 					prefix="HEX"
 					@input=${this.handleHexInput}
 					size="small"

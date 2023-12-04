@@ -350,7 +350,7 @@ export class FDiv extends FRoot {
 		return html` <slot></slot>${this.loading === "loader" ? html`${unsafeSVG(loader)}` : ""}`;
 	}
 
-	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
+	protected async updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
 
 		if (
@@ -359,7 +359,7 @@ export class FDiv extends FRoot {
 		) {
 			this.checkHighlight();
 		}
-
+		await this.updateComplete;
 		if (this.variant === "round") {
 			this.style.borderRadius = `${this.offsetHeight / 2}px`;
 		} else if (this.variant === "curved") {

@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.6.0] - 2023-12-04
+
+### Minor Changes
+
+- `f-color-picker` element added.
+
 ## [2.5.0] - 2023-11-27
 
 ### Minor Changes

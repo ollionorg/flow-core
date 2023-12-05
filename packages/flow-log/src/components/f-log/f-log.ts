@@ -1,19 +1,76 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
-import eleStyle from "./f-log.scss?inline";
 import globalStyle from "./f-log-global.scss?inline";
+import eleStyle from "./f-log.scss?inline";
 
-import { FRoot, flowElement } from "@cldcvr/flow-core";
-import { ref, createRef, Ref } from "lit/directives/ref.js";
-import { Terminal } from "xterm";
-import { FitAddon } from "xterm-addon-fit";
-import { SearchAddon } from "xterm-addon-search";
-import { SearchBarAddon } from "xterm-addon-search-bar";
-import { WebLinksAddon } from "xterm-addon-web-links";
-import xtermCSS from "xterm/css/xterm.css?inline";
+import { FRoot, flowElement, FDiv } from "@cldcvr/flow-core";
+
 import { injectCss } from "@cldcvr/flow-core-config";
+import { createRef, ref, Ref } from "lit/directives/ref.js";
+import { classMap } from "lit/directives/class-map.js";
+// Anser is used to highlight bash color codes
+import anser from "anser";
 
 injectCss("f-log", globalStyle);
+// The number of lines we process in one batch
+const DEFAULT_BATCH_SIZE = 1000;
+
+// The maximum character length we process in a line, this is to prevent overflows
+const MAXIMUM_LINE_LENGTH = 10000;
+
+// Adds some general formatting/highlighting to logs
+function formatLogLine(logLine: string): string {
+	// Highlight [xxx] with a greyed out version
+	let newLine = logLine
+		// Highlight quoted strings
+		//@ts-ignore
+		.replaceAll(/("[^"]*?"|'[^']*?')/g, '<span style="color: #bdab0f">$1</span>')
+
+		// Highlight bracket contents
+		// 100 is an arbitrary limit to prevent catastrophic backtracking in Regex
+		.replaceAll(
+			/(\[[^\]]{0,100}\])/g,
+			'<span style="color:var(--color-text-subtle); font-weight: bold;">$1</span>'
+		)
+
+		// Highlight potential dates (YYYY/MM/DD HH:MM:SS)
+		.replaceAll(
+			/(\d{1,4}\/\d{1,2}\/\d{1,4}(?: \d{1,2}:\d{1,2}:\d{1,2})?)/g,
+			'<span style="color: #68c9f2">$1</span>'
+		)
+
+		// Highlight potential dates (YYYY-MM-DD with timezone)
+		.replaceAll(
+			/(\d{1,4}-\d{1,2}-\d{1,4}(?:\s?T?\d{1,2}:\d{1,2}:[\d.]{1,10})?Z?)/g,
+			'<span style="color: #68c9f2">$1</span>'
+		)
+
+		// Highlight YAML keys
+		// 100 is an arbitrary limit to prevent catastrophic backtracking in Regex
+		.replaceAll(
+			/(^\s*[-\sa-z0-9_]{1,100}:\s)/gi,
+			'<span style="color:var(--color-primary-default)">$1</span>'
+		)
+
+		// Highlight urls
+		.replaceAll(
+			/((https?:\/\/)([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}(:[0-9]+)?(\/[^" ]*)?)/g,
+			'<a style="color: var(--color-primary-default); text-decoration: underline" href="$1" rel="noopener" target="_blank">$1</a>'
+		) as string;
+
+	if (/(ERROR|FAILED)/gi.test(newLine)) {
+		newLine = `<span style="background: var(--color-danger-default)">${newLine}</span>`;
+	}
+
+	return newLine;
+}
+
+function getUniqueStringId() {
+	return `${new Date().valueOf()}`;
+}
+
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
@@ -22,13 +79,13 @@ export class FLog extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), unsafeCSS(xtermCSS), unsafeCSS(globalStyle)];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FDiv.styles];
 
 	/**
 	 * @attribute logs to be displayed on screen
 	 */
 	@property({ type: String, reflect: false })
-	logs?: string;
+	logs!: string;
 
 	/**
 	 * @attribute show search bar
@@ -41,243 +98,104 @@ export class FLog extends FRoot {
 	 */
 	@property({ type: Boolean, reflect: true, attribute: "show-scrollbar" })
 	showScrollbar?: boolean = false;
-
-	terminal!: Terminal;
-
-	fitAddon!: FitAddon;
-
-	searchAddon!: SearchAddon;
-
-	searchAddonBar!: SearchBarAddon;
-
-	themeobserver!: MutationObserver;
-
-	lineNumber = 1;
-
-	fterminalRef: Ref<HTMLDivElement> = createRef();
-
 	/**
-	 *
-	 * @param logs string value
+	 * @attribute show scroll bar to scroll the terminal
 	 */
-	write(logs: string | undefined) {
-		if (logs) {
-			this.terminal.write(this.addLineNumbers(logs));
-		}
-	}
+	@property({ type: Boolean, reflect: true, attribute: "wrap-text" })
+	wrapText?: boolean = false;
 
-	/**
-	 * show and hide search
-	 */
-	toggleSearch() {
-		if (this.showSearch && this.fterminalRef.value) {
-			this.searchAddonBar.show();
-			const searchInput =
-				this.fterminalRef.value.querySelector<HTMLInputElement>(".search-bar__input");
+	scrollRef: Ref<FDiv> = createRef();
 
-			searchInput?.parentElement?.addEventListener("click", (e: MouseEvent) => {
-				e.stopPropagation();
-			});
+	logContainer: Ref<HTMLPreElement> = createRef();
 
-			if (searchInput) {
-				searchInput.placeholder = "Search";
+	// These pointers are used to find out the current index of the logs string being rendered
+
+	lastPointerIdx: number = 0;
+
+	currentIdx: number = 0;
+
+	currentBatchId: string = getUniqueStringId();
+
+	requestIdleId?: number;
+
+	// Processes the current log batch and renders the lines in the terminal
+	processNextBatch(batchSize = DEFAULT_BATCH_SIZE) {
+		let currentBatchSize = 0;
+
+		let fragment = "";
+
+		while (currentBatchSize < batchSize) {
+			if (
+				this.logs &&
+				// If we have reached a new line
+				(this.logs[this.currentIdx] === "\n" ||
+					// Or if we exceed maximum log lines we render and move on
+					this.currentIdx - this.lastPointerIdx > MAXIMUM_LINE_LENGTH)
+			) {
+				fragment = `${fragment}${this.getCurrentLogLine()}`;
+				this.lastPointerIdx = this.currentIdx + 1;
+				currentBatchSize++;
 			}
-		} else {
-			this.searchAddonBar.hidden();
-		}
-	}
 
-	/**
-	 *
-	 * @param logs string value of logs
-	 * @returns line no.'s appended on every line
-	 */
-	addLineNumbers(logs: string) {
-		const termRegex = /"([^"]+)":/g;
-		return `${("\x1b[38;2;123;147;178m" + this.lineNumber++ + "\x1b[0m ").padEnd(4)} ${logs
-			.replace(/\n/g, "\r\n")
-			.replace(/\[INFO\]/g, "\x1b[38;2;26;149;255m[INFO]\x1b[0m")
-			.replace(/\[WARN\]/g, "\x1b[38;2;254;164;1m[WARN]\x1b[0m")
-			.replace(/\[ERROR\]/g, "\x1b[38;2;242;66;66m[ERROR]\x1b[0m")
-			.replace(/\[DEBUG\]/g, "\x1b[38;2;211;153;255m[DEBUG]\x1b[0m")
-			.replace(/\d{4}[-/][01]\d[-/][0-3]\d.[0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?Z?/g, date => {
-				return `\x1b[38;2;123;147;178m${date}\x1b[0m`;
-			})
-			.replace(termRegex, key => {
-				return `\x1b[38;2;242;137;104m${key}\x1b[0m`;
-			})
-			.replace(/(\r\n|\n\r|\n|\r)/g, (_match, p1, _offset, _string) => {
-				return `${p1}${("\x1b[38;2;123;147;178m" + this.lineNumber++ + "\x1b[0m ").padEnd(4)} `;
-			})}`;
-	}
-
-	/**
-	 * custom event on close of search bar
-	 */
-	dispatchCloseSearchEvent() {
-		const event = new CustomEvent("close", {
-			detail: {
-				value: false
-			},
-			bubbles: true,
-			composed: true
-		});
-		this.showSearch = false;
-		this.dispatchEvent(event);
-	}
-
-	/**
-	 * destroy themeobserver
-	 */
-	disconnectedCallback() {
-		if (this.themeobserver) {
-			this.themeobserver.disconnect();
-		}
-		super.disconnectedCallback();
-	}
-
-	/**
-	 * creating the terminal
-	 */
-	init() {
-		// Checking if parent container is present
-		if (this.fterminalRef.value) {
-			this.fterminalRef.value.innerHTML = "";
-
-			// finding theme element from DOM
-			const themeElement = document.querySelector<HTMLElement>("[data-theme]");
-
-			/**
-			 * CSS variables are not working in Canvas , so need to read values through computed style
-			 */
-
-			if (themeElement) {
-				const style = getComputedStyle(themeElement);
-
-				const getTheme = () => {
-					return {
-						foreground: style.getPropertyValue("--color-text-default"),
-						selectionBackground: "#ffff05",
-						selectionForeground: "#000"
-					};
-				};
-
-				/**
-				 * Create Terminal Instance
-				 */
-				this.terminal = new Terminal({
-					fontSize: 14,
-					cursorStyle: "underline",
-					scrollback: 999999,
-					theme: getTheme()
-				});
-
-				/**
-				 * Observe for theme changes
-				 */
-				if (!this.themeobserver) {
-					this.themeobserver = new MutationObserver(() => {
-						this.terminal.options = { theme: getTheme() };
-					});
-
-					this.themeobserver.observe(themeElement, {
-						attributes: true,
-						childList: false,
-						subtree: false
-					});
-				}
-				/**
-				 * Fit according to container width and height
-				 */
-				this.fitAddon = new FitAddon();
-				/**
-				 * Search add-on for searching text inside canvas
-				 */
-				this.searchAddon = new SearchAddon();
-				this.searchAddonBar = new SearchBarAddon({
-					searchAddon: this.searchAddon
-				});
-				this.lineNumber = 1;
-
-				this.terminal.loadAddon(this.fitAddon);
-				this.terminal.loadAddon(this.searchAddon);
-				this.terminal.loadAddon(this.searchAddonBar);
-				this.terminal.loadAddon(new WebLinksAddon());
-
-				this.terminal.open(this.fterminalRef.value);
-
-				// adding line numbers
-				this.write(this.logs);
-
-				this.toggleSearch();
-
-				const closeSearch = this.fterminalRef.value.querySelector(".search-bar__btn.close");
-				const nextSearch = this.fterminalRef.value.querySelector(".search-bar__btn.next");
-				const prevSearch = this.fterminalRef.value.querySelector(".search-bar__btn.prev");
-
-				closeSearch?.addEventListener("click", () => {
-					this.searchAddonBar.hidden();
-					this.dispatchCloseSearchEvent();
-				});
-
-				nextSearch?.addEventListener("click", () => {
-					const searchInputValue =
-						this.fterminalRef.value?.querySelector<HTMLInputElement>(".search-bar__input")?.value;
-					this.searchAddon.findNext(searchInputValue ?? "");
-				});
-
-				prevSearch?.addEventListener("click", () => {
-					const searchInputValue =
-						this.fterminalRef.value?.querySelector<HTMLInputElement>(".search-bar__input")?.value;
-					this.searchAddon.findPrevious(searchInputValue ?? "");
-				});
-
-				this.fitAddon.fit();
-
-				new ResizeObserver(() => {
-					try {
-						this.fitAddon.fit();
-					} catch (e) {
-						//@ts-check
-						console.error(e);
-					}
-				}).observe(this.fterminalRef.value);
+			// Check if we ended up processing beyond the file
+			if (this.logs && this.currentIdx === this.logs.length) {
+				fragment = `${fragment}${this.getCurrentLogLine()}`;
+				break;
 			}
+
+			this.currentIdx++;
 		}
+
+		this.logContainer.value?.append(document.createRange().createContextualFragment(fragment));
 	}
 
-	/**
-	 *
-	 * @returns html remdered
-	 */
+	getCurrentLogLine() {
+		return `<span>${anser.ansiToHtml(
+			formatLogLine(this.logs.substring(this.lastPointerIdx, this.currentIdx + 1))
+		)}</span>`;
+	}
+
+	// Renders log in batches to prevent browser from freezing
+	renderBatchedLogs(batchId: string) {
+		if (this.currentIdx < this.logs.length && this.currentBatchId === batchId) {
+			this.processNextBatch();
+			if (this.scrollRef.value && this.logs.length > 0) {
+				this.scrollRef.value.scrollTop = this.scrollRef.value.scrollHeight;
+			}
+			if (this.requestIdleId) {
+				cancelIdleCallback(this.requestIdleId);
+			}
+			this.requestIdleId = requestIdleCallback(() => this.renderBatchedLogs(batchId));
+		}
+	}
 	render() {
-		/**
-		 * Final html to render
-		 */
-		return html`
-			<div ${ref(this.fterminalRef)} class="f-log" ?data-scrollbar=${this.showScrollbar}></div>
-		`;
+		const cssClasses = {
+			"logs-view": true,
+			"flow-add-scrollbar": Boolean(this.showScrollbar),
+			"wrap-text": Boolean(this.wrapText)
+		};
+		return html` <f-div
+			${ref(this.scrollRef)}
+			class=${classMap(cssClasses)}
+			align="top-left"
+			overflow="scroll"
+			width="100%"
+			height="100%"
+		>
+			<pre ${ref(this.logContainer)}></pre>
+		</f-div>`;
 	}
-
-	/**
-	 * on mount
-	 */
-	protected firstUpdated() {
-		this.init();
-	}
-
-	/**
-	 * works on every updates taking place
-	 * @param changedProperties updated properties
-	 */
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-		changedProperties.forEach((oldValue, propName) => {
-			if (propName === "logs" && oldValue !== this.logs) {
-				this.init();
+		super.updated(changedProperties);
+
+		void this.updateComplete.then(() => {
+			this.lastPointerIdx = 0;
+			this.currentIdx = 0;
+			this.currentBatchId = getUniqueStringId();
+			if (this.logContainer.value) {
+				this.logContainer.value.innerHTML = "";
 			}
-			if (propName === "showSearch" && oldValue !== this.showSearch) {
-				this.toggleSearch();
-			}
+			this.renderBatchedLogs(this.currentBatchId);
 		});
 	}
 }

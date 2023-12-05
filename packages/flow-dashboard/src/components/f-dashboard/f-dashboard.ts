@@ -1,4 +1,4 @@
-import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { property } from "lit/decorators.js";
 import { FRoot, flowElement } from "@cldcvr/flow-core";
 import globalStyle from "./f-dashboard-global.scss?inline";
@@ -14,7 +14,7 @@ export class FDashboard extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(globalStyle)];
+	// static styles = [unsafeCSS(globalStyle)];
 
 	/**
 	 * @attribute comments baout title

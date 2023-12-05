@@ -18,9 +18,6 @@ for (let index = 0; index < 20; index++) {
 		data: Math.random() * 100,
 		dataType: "count",
 		pollingConfig: {
-			callback: async () => {
-				return Math.random() * 100;
-			},
 			frequency: 3000
 		},
 		id: (Math.random() + 1).toString(36).substring(7),
@@ -31,7 +28,7 @@ for (let index = 0; index < 20; index++) {
 	});
 }
 
-const Template = (args: any) => {
+const Template = () => {
 	const dashboardConfig: FDashboardConfig = {
 		widgets
 	};

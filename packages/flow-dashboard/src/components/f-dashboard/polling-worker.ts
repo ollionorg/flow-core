@@ -28,15 +28,8 @@ function schedulePolling(wgt: FDashboardWidget) {
 
 	if (wgt.pollingConfig) {
 		widgetRegistry[wgt.id].timer = setInterval(() => {
-			void (async () => {
-				if (wgt.pollingConfig) {
-					// axios({
-					// 	method:'get',
-					// })
-					wgt.data = await wgt.pollingConfig.callback();
-					self.postMessage(wgt);
-				}
-			})();
+			wgt.data = +Math.random().toFixed(2);
+			self.postMessage(wgt);
 		}, wgt.pollingConfig.frequency); //frequency
 	}
 }

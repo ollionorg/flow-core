@@ -14,7 +14,7 @@ export class FDashboard extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	// static styles = [unsafeCSS(globalStyle)];
+	//static styles: CSSResult[] = [unsafeCSS(globalStyle)];
 
 	/**
 	 * @attribute comments baout title

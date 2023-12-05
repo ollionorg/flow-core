@@ -14,7 +14,6 @@ export type FDashboardWidgetCore<T> = {
 	placement: FDashboardWidgetGridPlacement;
 	data: T;
 	pollingConfig?: {
-		callback: () => Promise<T>;
 		frequency: number; //Frequency in milliseconds
 	};
 };

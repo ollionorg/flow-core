@@ -1,15 +1,26 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { property, query } from "lit/decorators.js";
+import { property, query, queryAll } from "lit/decorators.js";
 import globalStyle from "./f-log-global.scss?inline";
 import eleStyle from "./f-log.scss?inline";
 
-import { FRoot, flowElement, FDiv, FIcon, FText } from "@cldcvr/flow-core";
+import {
+	FRoot,
+	flowElement,
+	FDiv,
+	FIcon,
+	FText,
+	FIconButton,
+	FDivider,
+	FInput
+} from "@cldcvr/flow-core";
 
 import { injectCss } from "@cldcvr/flow-core-config";
 import { createRef, ref, Ref } from "lit/directives/ref.js";
 import { classMap } from "lit/directives/class-map.js";
 // Anser is used to highlight bash color codes
 import anser from "anser";
+import * as Mark from "mark.js";
 
 injectCss("f-log", globalStyle);
 // The number of lines we process in one batch
@@ -81,7 +92,10 @@ export class FLog extends FRoot {
 		unsafeCSS(globalStyle),
 		...FDiv.styles,
 		...FIcon.styles,
-		...FText.styles
+		...FText.styles,
+		...FInput.styles,
+		...FIconButton.styles,
+		...FDivider.styles
 	];
 
 	/**
@@ -110,6 +124,14 @@ export class FLog extends FRoot {
 	@query("#statusText")
 	statusText!: FText;
 
+	@query("#search-input")
+	searchInput!: FInput;
+
+	@queryAll("mark[data-markjs='true']")
+	allMarks!: NodeListOf<HTMLElement>;
+
+	lastSearchValue?: string;
+
 	// These pointers are used to find out the current index of the logs string being rendered
 
 	lastPointerIdx: number = 0;
@@ -121,6 +143,21 @@ export class FLog extends FRoot {
 	requestIdleId?: number;
 
 	range = document.createRange();
+	currentMarkIndex = 0;
+	searchOccurrences = 0;
+
+	disconnectedCallback(): void {
+		super.disconnectedCallback();
+
+		document.removeEventListener("keydown", this.searchShortCutHhandler);
+	}
+
+	searchShortCutHhandler = (event: KeyboardEvent) => {
+		if ((event.metaKey || event.ctrlKey) && event.key === "f") {
+			this.showSearch = true;
+			console.log("showing Search");
+		}
+	};
 	// Processes the current log batch and renders the lines in the terminal
 	processNextBatch(batchSize = DEFAULT_BATCH_SIZE) {
 		let currentBatchSize = 0;
@@ -153,9 +190,33 @@ export class FLog extends FRoot {
 	}
 
 	getCurrentLogLine() {
-		return `<span>${anser.ansiToHtml(
+		return `<span class="log-line">${anser.ansiToHtml(
 			formatLogLine(this.logs.substring(this.lastPointerIdx, this.currentIdx + 1))
 		)}</span>`;
+	}
+
+	highlightText(searchText: string): void {
+		console.log(searchText);
+		const markInstance = new Mark(this.shadowRoot as unknown as HTMLElement);
+		if (this.lastSearchValue && this.lastSearchValue !== "") {
+			markInstance.unmark(this.lastSearchValue as unknown as HTMLElement);
+		}
+		this.lastSearchValue = searchText;
+		if (searchText && searchText !== "") {
+			markInstance.mark(searchText, {
+				done: (occurrences: number) => {
+					this.searchOccurrences = occurrences;
+					const firstMark = this.shadowRoot?.querySelector("mark[data-markjs='true']");
+					firstMark?.scrollIntoView({ block: "start" });
+					firstMark?.classList.add("active");
+					this.currentMarkIndex = 0;
+					this.searchInput.suffix = `1 of ${occurrences}`;
+				}
+			});
+		} else {
+			this.searchInput.suffix = undefined;
+			this.searchOccurrences = 0;
+		}
 	}
 
 	// Renders log in batches to prevent browser from freezing
@@ -183,35 +244,86 @@ export class FLog extends FRoot {
 			}
 		}
 	}
+
+	nextMark() {
+		this.allMarks[this.currentMarkIndex].classList.remove("active");
+		this.currentMarkIndex += 1;
+		if (this.currentMarkIndex === this.allMarks.length) {
+			this.currentMarkIndex = 0;
+		}
+		this.allMarks[this.currentMarkIndex].scrollIntoView();
+		this.allMarks[this.currentMarkIndex].classList.add("active");
+		this.searchInput.suffix = `${this.currentMarkIndex + 1} of ${this.searchOccurrences}`;
+	}
+
+	prevMark() {
+		this.allMarks[this.currentMarkIndex].classList.remove("active");
+		this.currentMarkIndex -= 1;
+		if (this.currentMarkIndex === -1) {
+			this.currentMarkIndex = this.allMarks.length - 1;
+		}
+		this.allMarks[this.currentMarkIndex].scrollIntoView();
+		this.allMarks[this.currentMarkIndex].classList.add("active");
+		this.searchInput.suffix = `${this.currentMarkIndex + 1} of ${this.searchOccurrences}`;
+	}
 	render() {
 		console.log("inside render");
 		const cssClasses = {
 			"logs-view": true,
 			"wrap-text": Boolean(this.wrapText)
 		};
-		return html` <f-div
-			${ref(this.scrollRef)}
-			class=${classMap(cssClasses)}
-			align="top-left"
-			overflow="scroll"
-			width="100%"
-			direction="column"
-			height="100%"
-		>
-			<pre ${ref(this.logContainer)}></pre>
-			<f-div
-				height="36px"
-				padding="none small"
-				state="default"
-				class="loading-logs"
-				gap="small"
-				align="middle-right"
-				${ref(this.renderStatus)}
-			>
-				<f-icon source="i-loading" loading></f-icon>
-				<f-text id="statusText" inline>0%</f-text>
+		return html`<f-div height="hug-content" align="middle-right" class="search-container">
+				<f-div width="320px">
+					<f-input
+						id="search-input"
+						placeholder="Search"
+						@input=${(event: CustomEvent<{ value: string }>) =>
+							this.highlightText(event.detail.value)}
+						variant="block"
+						icon-left="i-search"
+						.clear=${false}
+					></f-input>
+				</f-div>
+				<f-div width="hug-content" align="middle-center">
+					<f-icon-button
+						state="neutral"
+						@click=${this.prevMark}
+						variant="packed"
+						icon="i-arrow-up"
+					></f-icon-button>
+					<f-divider></f-divider>
+					<f-icon-button
+						state="neutral"
+						variant="packed"
+						icon="i-arrow-down"
+						@click=${this.nextMark}
+					></f-icon-button>
+				</f-div>
 			</f-div>
-		</f-div>`;
+			<f-div
+				${ref(this.scrollRef)}
+				class=${classMap(cssClasses)}
+				align="top-left"
+				overflow="scroll"
+				width="100%"
+				direction="column"
+				height="calc(100% - 36px)"
+			>
+				<pre ${ref(this.logContainer)}></pre>
+
+				<f-div
+					height="36px"
+					padding="none small"
+					state="default"
+					class="loading-logs"
+					gap="small"
+					align="middle-right"
+					${ref(this.renderStatus)}
+				>
+					<f-icon source="i-loading" loading></f-icon>
+					<f-text id="statusText" inline>0%</f-text>
+				</f-div>
+			</f-div>`;
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
@@ -226,6 +338,8 @@ export class FLog extends FRoot {
 				this.renderBatchedLogs(this.currentBatchId);
 			});
 		}
+
+		document.addEventListener("keydown", this.searchShortCutHhandler);
 	}
 }
 

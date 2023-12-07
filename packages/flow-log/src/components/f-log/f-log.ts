@@ -146,6 +146,8 @@ export class FLog extends FRoot {
 	currentMarkIndex = 0;
 	searchOccurrences = 0;
 
+	searchDebounceTimeout?: ReturnType<typeof setTimeout>;
+
 	disconnectedCallback(): void {
 		super.disconnectedCallback();
 
@@ -196,27 +198,31 @@ export class FLog extends FRoot {
 	}
 
 	highlightText(searchText: string): void {
-		console.log(searchText);
-		const markInstance = new Mark(this.shadowRoot as unknown as HTMLElement);
-		if (this.lastSearchValue && this.lastSearchValue !== "") {
-			markInstance.unmark(this.lastSearchValue as unknown as HTMLElement);
+		if (this.searchDebounceTimeout) {
+			clearTimeout(this.searchDebounceTimeout);
 		}
-		this.lastSearchValue = searchText;
-		if (searchText && searchText !== "") {
-			markInstance.mark(searchText, {
-				done: (occurrences: number) => {
-					this.searchOccurrences = occurrences;
-					const firstMark = this.shadowRoot?.querySelector("mark[data-markjs='true']");
-					firstMark?.scrollIntoView({ block: "start" });
-					firstMark?.classList.add("active");
-					this.currentMarkIndex = 0;
-					this.searchInput.suffix = `1 of ${occurrences}`;
-				}
-			});
-		} else {
-			this.searchInput.suffix = undefined;
-			this.searchOccurrences = 0;
-		}
+		this.searchDebounceTimeout = setTimeout(() => {
+			const markInstance = new Mark(this.shadowRoot as unknown as HTMLElement);
+			if (this.lastSearchValue && this.lastSearchValue !== "") {
+				markInstance.unmark(this.lastSearchValue as unknown as HTMLElement);
+			}
+			this.lastSearchValue = searchText;
+			if (searchText && searchText !== "") {
+				markInstance.mark(searchText, {
+					done: (occurrences: number) => {
+						this.searchOccurrences = occurrences;
+						const firstMark = this.shadowRoot?.querySelector("mark[data-markjs='true']");
+						firstMark?.scrollIntoView({ block: "start" });
+						firstMark?.classList.add("active");
+						this.currentMarkIndex = 0;
+						this.searchInput.suffix = `1 of ${occurrences}`;
+					}
+				});
+			} else {
+				this.searchInput.suffix = undefined;
+				this.searchOccurrences = 0;
+			}
+		}, 500);
 	}
 
 	// Renders log in batches to prevent browser from freezing

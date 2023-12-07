@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, queryAll } from "lit/decorators.js";
 import globalStyle from "./f-log-global.scss?inline";
 import eleStyle from "./f-log.scss?inline";
@@ -151,13 +151,16 @@ export class FLog extends FRoot {
 	disconnectedCallback(): void {
 		super.disconnectedCallback();
 
-		document.removeEventListener("keydown", this.searchShortCutHhandler);
+		window.removeEventListener("keydown", this.searchShortCutHhandler);
 	}
 
 	searchShortCutHhandler = (event: KeyboardEvent) => {
+		event.stopPropagation();
 		if ((event.metaKey || event.ctrlKey) && event.key === "f") {
 			this.showSearch = true;
-			console.log("showing Search");
+		}
+		if (event.key === "Escape") {
+			this.closeSearchBar();
 		}
 	};
 	// Processes the current log batch and renders the lines in the terminal
@@ -212,10 +215,14 @@ export class FLog extends FRoot {
 					done: (occurrences: number) => {
 						this.searchOccurrences = occurrences;
 						const firstMark = this.shadowRoot?.querySelector("mark[data-markjs='true']");
-						firstMark?.scrollIntoView({ block: "start" });
+						firstMark?.scrollIntoView({ block: "start", behavior: "smooth" });
 						firstMark?.classList.add("active");
 						this.currentMarkIndex = 0;
-						this.searchInput.suffix = `1 of ${occurrences}`;
+						if (occurrences > 0) {
+							this.searchInput.suffix = `1 of ${occurrences}`;
+						} else {
+							this.searchInput.suffix = `No results`;
+						}
 					}
 				});
 			} else {
@@ -251,34 +258,40 @@ export class FLog extends FRoot {
 		}
 	}
 
+	closeSearchBar() {
+		this.showSearch = false;
+		this.highlightText("");
+	}
+
 	nextMark() {
-		this.allMarks[this.currentMarkIndex].classList.remove("active");
-		this.currentMarkIndex += 1;
-		if (this.currentMarkIndex === this.allMarks.length) {
-			this.currentMarkIndex = 0;
+		if (this.searchOccurrences > 0) {
+			this.allMarks[this.currentMarkIndex].classList.remove("active");
+			this.currentMarkIndex += 1;
+			if (this.currentMarkIndex === this.allMarks.length) {
+				this.currentMarkIndex = 0;
+			}
+			this.allMarks[this.currentMarkIndex].scrollIntoView({ block: "start", behavior: "smooth" });
+			this.allMarks[this.currentMarkIndex].classList.add("active");
+			this.searchInput.suffix = `${this.currentMarkIndex + 1} of ${this.searchOccurrences}`;
 		}
-		this.allMarks[this.currentMarkIndex].scrollIntoView();
-		this.allMarks[this.currentMarkIndex].classList.add("active");
-		this.searchInput.suffix = `${this.currentMarkIndex + 1} of ${this.searchOccurrences}`;
 	}
 
 	prevMark() {
-		this.allMarks[this.currentMarkIndex].classList.remove("active");
-		this.currentMarkIndex -= 1;
-		if (this.currentMarkIndex === -1) {
-			this.currentMarkIndex = this.allMarks.length - 1;
+		if (this.searchOccurrences > 0) {
+			this.allMarks[this.currentMarkIndex].classList.remove("active");
+			this.currentMarkIndex -= 1;
+			if (this.currentMarkIndex === -1) {
+				this.currentMarkIndex = this.allMarks.length - 1;
+			}
+			this.allMarks[this.currentMarkIndex].scrollIntoView({ block: "start", behavior: "smooth" });
+			this.allMarks[this.currentMarkIndex].classList.add("active");
+			this.searchInput.suffix = `${this.currentMarkIndex + 1} of ${this.searchOccurrences}`;
 		}
-		this.allMarks[this.currentMarkIndex].scrollIntoView();
-		this.allMarks[this.currentMarkIndex].classList.add("active");
-		this.searchInput.suffix = `${this.currentMarkIndex + 1} of ${this.searchOccurrences}`;
 	}
-	render() {
-		console.log("inside render");
-		const cssClasses = {
-			"logs-view": true,
-			"wrap-text": Boolean(this.wrapText)
-		};
-		return html`<f-div height="hug-content" align="middle-right" class="search-container">
+
+	get searchBarTemplate() {
+		if (this.showSearch) {
+			return html`<f-div height="hug-content" align="middle-right" class="search-container">
 				<f-div width="320px">
 					<f-input
 						id="search-input"
@@ -287,7 +300,6 @@ export class FLog extends FRoot {
 							this.highlightText(event.detail.value)}
 						variant="block"
 						icon-left="i-search"
-						.clear=${false}
 					></f-input>
 				</f-div>
 				<f-div width="hug-content" align="middle-center">
@@ -304,8 +316,24 @@ export class FLog extends FRoot {
 						icon="i-arrow-down"
 						@click=${this.nextMark}
 					></f-icon-button>
+					<f-divider></f-divider>
+					<f-icon-button
+						state="neutral"
+						variant="packed"
+						icon="i-close"
+						@click=${() => this.closeSearchBar()}
+					></f-icon-button>
 				</f-div>
-			</f-div>
+			</f-div>`;
+		}
+		return nothing;
+	}
+	render() {
+		const cssClasses = {
+			"logs-view": true,
+			"wrap-text": Boolean(this.wrapText)
+		};
+		return html` ${this.searchBarTemplate}
 			<f-div
 				${ref(this.scrollRef)}
 				class=${classMap(cssClasses)}
@@ -313,7 +341,7 @@ export class FLog extends FRoot {
 				overflow="scroll"
 				width="100%"
 				direction="column"
-				height="calc(100% - 36px)"
+				.height=${this.showSearch ? "calc(100% - 36px)" : "100%"}
 			>
 				<pre ${ref(this.logContainer)}></pre>
 
@@ -345,7 +373,7 @@ export class FLog extends FRoot {
 			});
 		}
 
-		document.addEventListener("keydown", this.searchShortCutHhandler);
+		window.addEventListener("keydown", this.searchShortCutHhandler, { capture: true });
 	}
 }
 

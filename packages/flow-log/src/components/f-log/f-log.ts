@@ -21,7 +21,18 @@ import { createRef, ref, Ref } from "lit/directives/ref.js";
 import { classMap } from "lit/directives/class-map.js";
 // Anser is used to highlight bash color codes
 import anser from "anser";
-import * as Mark from "mark.js";
+
+import { formatLogLine, getUniqueStringId } from "./f-log-utils";
+import {
+	clearFilter,
+	closeSearchBar,
+	filterLines,
+	handleLogLevelFilter,
+	handleSearch,
+	highlightText,
+	nextMark,
+	prevMark
+} from "./f-log-search-and-filters";
 
 injectCss("f-log", globalStyle);
 // The number of lines we process in one batch
@@ -29,56 +40,6 @@ const DEFAULT_BATCH_SIZE = 1000;
 
 // The maximum character length we process in a line, this is to prevent overflows
 const MAXIMUM_LINE_LENGTH = 10000;
-
-// Adds some general formatting/highlighting to logs
-function formatLogLine(logLine: string): string {
-	// Highlight [xxx] with a greyed out version
-	let newLine = logLine
-		// Highlight quoted strings
-		.replace(/("[^"]*?"|'[^']*?')/g, '<span style="color: var(--color-warning-subtle)">$1</span>')
-
-		// Highlight bracket contents
-		// 100 is an arbitrary limit to prevent catastrophic backtracking in Regex
-		.replace(
-			/(\[[^\]]{0,100}\])/g,
-			'<span style="color:var(--color-text-subtle); font-weight: bold;">$1</span>'
-		)
-
-		// Highlight potential dates (YYYY/MM/DD HH:MM:SS)
-		.replace(
-			/(\d{1,4}\/\d{1,2}\/\d{1,4}(?: \d{1,2}:\d{1,2}:\d{1,2})?)/g,
-			'<span style="color: #68c9f2">$1</span>'
-		)
-
-		// Highlight potential dates (YYYY-MM-DD with timezone)
-		.replace(
-			/(\d{1,4}-\d{1,2}-\d{1,4}(?:\s?T?\d{1,2}:\d{1,2}:[\d.]{1,10})?Z?)/g,
-			'<span style="color: #68c9f2">$1</span>'
-		)
-
-		// Highlight YAML keys
-		// 100 is an arbitrary limit to prevent catastrophic backtracking in Regex
-		.replace(
-			/(^\s*[-\sa-z0-9_]{1,100}:\s)/gi,
-			'<span style="color:var(--color-primary-default)">$1</span>'
-		)
-
-		// Highlight urls
-		.replace(
-			/((https?:\/\/)([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}(:[0-9]+)?(\/[^" ]*)?)/g,
-			'<a style="color: var(--color-primary-default); text-decoration: underline" href="$1" rel="noopener" target="_blank">$1</a>'
-		);
-
-	if (/(ERROR|FAILED)/gi.test(newLine)) {
-		newLine = `<span style="background: var(--color-danger-subtle)">${newLine}</span>`;
-	}
-
-	return newLine;
-}
-
-function getUniqueStringId() {
-	return `${new Date().valueOf()}`;
-}
 
 /**
  * @summary Text component includes Headings, titles, body texts and links.
@@ -150,21 +111,14 @@ export class FLog extends FRoot {
 
 	searchDebounceTimeout?: ReturnType<typeof setTimeout>;
 
-	disconnectedCallback(): void {
-		super.disconnectedCallback();
-
-		window.removeEventListener("keydown", this.searchShortCutHhandler);
-	}
-
-	searchShortCutHhandler = (event: KeyboardEvent) => {
-		event.stopPropagation();
-		if ((event.metaKey || event.ctrlKey) && event.key === "f") {
-			this.showSearch = true;
-		}
-		if (event.key === "Escape") {
-			this.closeSearchBar();
-		}
-	};
+	handleSearch = handleSearch;
+	closeSearchBar = closeSearchBar;
+	prevMark = prevMark;
+	nextMark = nextMark;
+	highlightText = highlightText;
+	clearFilter = clearFilter;
+	filterLines = filterLines;
+	handleLogLevelFilter = handleLogLevelFilter;
 	// Processes the current log batch and renders the lines in the terminal
 	processNextBatch(batchSize = DEFAULT_BATCH_SIZE) {
 		let currentBatchSize = 0;
@@ -202,60 +156,6 @@ export class FLog extends FRoot {
 		)}</span>`;
 	}
 
-	filterLines(filterText: string) {
-		if (filterText.trim() !== "") {
-			const lines = this.shadowRoot?.querySelectorAll(".log-line");
-			if (lines) {
-				lines.forEach(element => {
-					if (!element.textContent?.toLowerCase()?.includes(filterText)) {
-						element.classList.add("hidden");
-					}
-				});
-			}
-		}
-	}
-	clearFilter() {
-		const lines = this.shadowRoot?.querySelectorAll(".log-line.hidden");
-		if (lines) {
-			lines.forEach(element => {
-				element.classList.remove("hidden");
-			});
-		}
-	}
-	highlightText(searchText: string): void {
-		if (this.searchDebounceTimeout) {
-			clearTimeout(this.searchDebounceTimeout);
-		}
-		this.searchDebounceTimeout = setTimeout(() => {
-			const markInstance = new Mark(
-				this.shadowRoot?.querySelectorAll(".log-line:not(.hidden)") as NodeListOf<HTMLSpanElement>
-			);
-			if (this.lastSearchValue && this.lastSearchValue !== "") {
-				markInstance.unmark(this.lastSearchValue as unknown as HTMLElement);
-			}
-			this.lastSearchValue = searchText;
-			if (searchText && searchText !== "") {
-				markInstance.mark(searchText, {
-					done: (occurrences: number) => {
-						this.searchOccurrences = occurrences;
-						const firstMark = this.shadowRoot?.querySelector("mark[data-markjs='true']");
-						firstMark?.scrollIntoView({ block: "start", behavior: "smooth" });
-						firstMark?.classList.add("active");
-						this.currentMarkIndex = 0;
-						if (occurrences > 0) {
-							this.searchInput.suggestElement.suffix = `1 of ${occurrences}`;
-						} else {
-							this.searchInput.suggestElement.suffix = `No results`;
-						}
-					}
-				});
-			} else {
-				this.searchInput.suggestElement.suffix = undefined;
-				this.searchOccurrences = 0;
-			}
-		}, 500);
-	}
-
 	// Renders log in batches to prevent browser from freezing
 	renderBatchedLogs(batchId: string) {
 		if (this.currentIdx < this.logs.length && this.currentBatchId === batchId) {
@@ -282,59 +182,12 @@ export class FLog extends FRoot {
 		}
 	}
 
-	closeSearchBar() {
-		this.showSearch = false;
-		this.highlightText("");
-	}
-
-	nextMark() {
-		if (this.searchOccurrences > 0) {
-			this.allMarks[this.currentMarkIndex].classList.remove("active");
-			this.currentMarkIndex += 1;
-			if (this.currentMarkIndex === this.allMarks.length) {
-				this.currentMarkIndex = 0;
-			}
-			this.allMarks[this.currentMarkIndex].scrollIntoView({ block: "start", behavior: "smooth" });
-			this.allMarks[this.currentMarkIndex].classList.add("active");
-			this.searchInput.suggestElement.suffix = `${this.currentMarkIndex + 1} of ${
-				this.searchOccurrences
-			}`;
-		}
-	}
-
-	prevMark() {
-		if (this.searchOccurrences > 0) {
-			this.allMarks[this.currentMarkIndex].classList.remove("active");
-			this.currentMarkIndex -= 1;
-			if (this.currentMarkIndex === -1) {
-				this.currentMarkIndex = this.allMarks.length - 1;
-			}
-			this.allMarks[this.currentMarkIndex].scrollIntoView({ block: "start", behavior: "smooth" });
-			this.allMarks[this.currentMarkIndex].classList.add("active");
-			this.searchInput.suggestElement.suffix = `${this.currentMarkIndex + 1} of ${
-				this.searchOccurrences
-			}`;
-		}
-	}
-
-	handleLogLevelFilter(event: CustomEvent<{ scope: string }>) {
-		this.clearFilter();
-		const logLevel = event.detail.scope;
-		if (logLevel && logLevel !== "ALL") {
-			this.filterLines(logLevel.toLowerCase());
-		}
-	}
-
 	get topBar() {
 		return html`<f-div height="hug-content" align="middle-right" class="top-bar">
 			${this.searchBarTemplate}
 		</f-div>`;
 	}
 
-	handleSearch(event: CustomEvent<{ value: string; scope: string }>) {
-		this.highlightText(event.detail.value);
-		this.handleLogLevelFilter(event);
-	}
 	get searchBarTemplate() {
 		if (this.showSearch) {
 			return html`<f-div height="hug-content" align="middle-right">
@@ -346,7 +199,7 @@ export class FLog extends FRoot {
 						.selectedScope=${"ALL"}
 						@input=${this.handleSearch}
 						variant="block"
-						.disabledResult=${true}
+						.disableResult=${true}
 					></f-search>
 				</f-div>
 				<f-div width="hug-content" align="middle-center">
@@ -422,6 +275,22 @@ export class FLog extends FRoot {
 
 		window.addEventListener("keydown", this.searchShortCutHhandler, { capture: true });
 	}
+
+	disconnectedCallback(): void {
+		super.disconnectedCallback();
+
+		window.removeEventListener("keydown", this.searchShortCutHhandler);
+	}
+
+	searchShortCutHhandler = (event: KeyboardEvent) => {
+		event.stopPropagation();
+		if ((event.metaKey || event.ctrlKey) && event.key === "f") {
+			this.showSearch = true;
+		}
+		if (event.key === "Escape") {
+			this.closeSearchBar();
+		}
+	};
 }
 
 /**

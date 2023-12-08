@@ -2,7 +2,7 @@ import { FLog } from "./f-log";
 import * as Mark from "mark.js";
 
 export function closeSearchBar(this: FLog) {
-	this.showSearch = false;
+	this.showToolbar = false;
 	this.highlightText("");
 }
 
@@ -47,21 +47,21 @@ export function highlightText(this: FLog, searchText: string): void {
 					firstMark?.classList.add("active");
 					this.currentMarkIndex = 0;
 					if (occurrences > 0) {
-						this.searchInput.suggestElement.suffix = `1 of ${occurrences}`;
+						if (this.searchInput) this.searchInput.suggestElement.suffix = `1 of ${occurrences}`;
 					} else {
-						this.searchInput.suggestElement.suffix = `No results`;
+						if (this.searchInput) this.searchInput.suggestElement.suffix = `No results`;
 					}
 				}
 			});
 		} else {
-			this.searchInput.suggestElement.suffix = undefined;
+			if (this.searchInput) this.searchInput.suggestElement.suffix = undefined;
 			this.searchOccurrences = 0;
 		}
 	}, 500);
 }
 
 export function nextMark(this: FLog) {
-	if (this.searchOccurrences > 0) {
+	if (this.searchOccurrences > 0 && this.allMarks) {
 		this.allMarks[this.currentMarkIndex].classList.remove("active");
 		this.currentMarkIndex += 1;
 		if (this.currentMarkIndex === this.allMarks.length) {
@@ -69,14 +69,16 @@ export function nextMark(this: FLog) {
 		}
 		this.allMarks[this.currentMarkIndex].scrollIntoView({ block: "start", behavior: "smooth" });
 		this.allMarks[this.currentMarkIndex].classList.add("active");
-		this.searchInput.suggestElement.suffix = `${this.currentMarkIndex + 1} of ${
-			this.searchOccurrences
-		}`;
+		if (this.searchInput) {
+			this.searchInput.suggestElement.suffix = `${this.currentMarkIndex + 1} of ${
+				this.searchOccurrences
+			}`;
+		}
 	}
 }
 
 export function prevMark(this: FLog) {
-	if (this.searchOccurrences > 0) {
+	if (this.searchOccurrences > 0 && this.allMarks) {
 		this.allMarks[this.currentMarkIndex].classList.remove("active");
 		this.currentMarkIndex -= 1;
 		if (this.currentMarkIndex === -1) {
@@ -84,9 +86,11 @@ export function prevMark(this: FLog) {
 		}
 		this.allMarks[this.currentMarkIndex].scrollIntoView({ block: "start", behavior: "smooth" });
 		this.allMarks[this.currentMarkIndex].classList.add("active");
-		this.searchInput.suggestElement.suffix = `${this.currentMarkIndex + 1} of ${
-			this.searchOccurrences
-		}`;
+		if (this.searchInput) {
+			this.searchInput.suggestElement.suffix = `${this.currentMarkIndex + 1} of ${
+				this.searchOccurrences
+			}`;
+		}
 	}
 }
 

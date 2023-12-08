@@ -13,7 +13,8 @@ import {
 	FIconButton,
 	FDivider,
 	FSearch,
-	FSelect
+	FSelect,
+	FInput
 } from "@cldcvr/flow-core";
 
 import { injectCss } from "@cldcvr/flow-core-config";
@@ -58,7 +59,8 @@ export class FLog extends FRoot {
 		...FSearch.styles,
 		...FIconButton.styles,
 		...FDivider.styles,
-		...FSelect.styles
+		...FSelect.styles,
+		...FInput.styles
 	];
 
 	/**
@@ -68,10 +70,10 @@ export class FLog extends FRoot {
 	logs!: string;
 
 	/**
-	 * @attribute show search bar
+	 * @attribute show toolbar
 	 */
-	@property({ type: Boolean, reflect: true, attribute: "show-search" })
-	showSearch?: boolean = false;
+	@property({ type: Boolean, reflect: true, attribute: "show-toolbar" })
+	showToolbar?: boolean = false;
 
 	/**
 	 * @attribute show scroll bar to scroll the terminal
@@ -85,13 +87,19 @@ export class FLog extends FRoot {
 	renderStatus: Ref<FDiv> = createRef();
 
 	@query("#statusText")
-	statusText!: FText;
+	statusText?: FText;
 
 	@query("#search-input")
-	searchInput!: FSearch;
+	searchInput?: FSearch;
+
+	@query("#linenumber-input")
+	lineNumberInput?: FInput;
 
 	@queryAll("mark[data-markjs='true']")
-	allMarks!: NodeListOf<HTMLElement>;
+	allMarks?: NodeListOf<HTMLElement>;
+
+	@queryAll(".log-line")
+	allLines?: NodeListOf<HTMLElement>;
 
 	lastSearchValue?: string;
 
@@ -167,8 +175,9 @@ export class FLog extends FRoot {
 				cancelIdleCallback(this.requestIdleId);
 			}
 			const perecentageDone = (this.currentIdx * 100) / this.logs.length;
-
-			this.statusText.innerHTML = `${perecentageDone.toFixed(0)}%`;
+			if (this.statusText) {
+				this.statusText.innerHTML = `${perecentageDone.toFixed(0)}%`;
+			}
 			if (perecentageDone >= 100) {
 				this.renderStatus.value?.style.setProperty("display", "none");
 			} else {
@@ -181,16 +190,57 @@ export class FLog extends FRoot {
 			}
 		}
 	}
+	handleLineNumber(event: KeyboardEvent) {
+		if (event.key === "Enter") {
+			this.goToLine();
+		}
+	}
 
+	goToLine() {
+		const linenumber = this.lineNumberInput?.value as number;
+		if (linenumber > 0 && this.allLines) {
+			const lineToJump = this.allLines[linenumber - 1];
+			lineToJump.scrollIntoView({
+				block: "center",
+				behavior: "smooth"
+			});
+			lineToJump.classList.add("blink");
+			setTimeout(() => {
+				lineToJump.classList.remove("blink");
+			}, 3000);
+		}
+	}
 	get topBar() {
-		return html`<f-div height="hug-content" align="middle-right" class="top-bar">
+		return html`<f-div
+			height="44px"
+			padding="none none small none"
+			align="middle-left"
+			class="top-bar"
+		>
 			${this.searchBarTemplate}
+			<f-div width="150px" height="hug-content">
+				<f-div height="hug-content">
+					<f-input
+						variant="block"
+						id="linenumber-input"
+						type="number"
+						placeholder="Jump to line"
+						@keypress=${this.handleLineNumber}
+					></f-input>
+				</f-div>
+				<f-icon-button
+					@click=${this.goToLine}
+					state="neutral"
+					variant="packed"
+					icon="i-enter"
+				></f-icon-button>
+			</f-div>
 		</f-div>`;
 	}
 
 	get searchBarTemplate() {
-		if (this.showSearch) {
-			return html`<f-div height="hug-content" align="middle-right">
+		if (this.showToolbar) {
+			return html`<f-div height="hug-content" align="middle-left">
 				<f-div width="460px">
 					<f-search
 						id="search-input"
@@ -216,13 +266,6 @@ export class FLog extends FRoot {
 						icon="i-arrow-down"
 						@click=${this.nextMark}
 					></f-icon-button>
-					<f-divider></f-divider>
-					<f-icon-button
-						state="neutral"
-						variant="packed"
-						icon="i-close"
-						@click=${() => this.closeSearchBar()}
-					></f-icon-button>
 				</f-div>
 			</f-div>`;
 		}
@@ -241,7 +284,7 @@ export class FLog extends FRoot {
 				overflow="scroll"
 				width="100%"
 				direction="column"
-				.height=${this.showSearch ? "calc(100% - 36px)" : "100%"}
+				.height=${this.showToolbar ? "calc(100% - 44px)" : "100%"}
 			>
 				<pre ${ref(this.logContainer)}></pre>
 
@@ -285,7 +328,7 @@ export class FLog extends FRoot {
 	searchShortCutHhandler = (event: KeyboardEvent) => {
 		event.stopPropagation();
 		if ((event.metaKey || event.ctrlKey) && event.key === "f") {
-			this.showSearch = true;
+			this.showToolbar = true;
 		}
 		if (event.key === "Escape") {
 			this.closeSearchBar();

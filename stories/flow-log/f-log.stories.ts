@@ -16,7 +16,7 @@ export const Playground = {
 		return html`<f-div direction="column" height="100%"
 			><f-log
 				.logs=${args.logs}
-				?show-search=${args["show-search"]}
+				?show-toolbar=${args["show-toolbar"]}
 				?wrap-text=${args["wrap-text"]}
 			></f-log
 		></f-div>`;
@@ -29,7 +29,7 @@ export const Playground = {
 			control: "text"
 		},
 
-		["show-search"]: {
+		["show-toolbar"]: {
 			control: "boolean"
 		},
 
@@ -40,7 +40,7 @@ export const Playground = {
 
 	args: {
 		logs: samplelogs,
-		["show-search"]: true,
+		["show-toolbar"]: true,
 		["wrap-text"]: false
 	}
 };
@@ -55,14 +55,14 @@ export const Logs = {
 	name: "logs"
 };
 
-export const ShowSearch = {
+export const ShowToolbar = {
 	render: () => {
 		return html`
 			<f-div direction="column" padding="x-large" height="100%"
-				><f-log ?show-search=${true} .logs=${samplelogs}></f-log
+				><f-log ?show-toolbar=${true} .logs=${samplelogs}></f-log
 			></f-div>
 		`;
 	},
 
-	name: "show-search"
+	name: "show-toolbar"
 };

@@ -12,7 +12,8 @@ import {
 	FText,
 	FIconButton,
 	FDivider,
-	FInput
+	FSearch,
+	FSelect
 } from "@cldcvr/flow-core";
 
 import { injectCss } from "@cldcvr/flow-core-config";
@@ -93,9 +94,10 @@ export class FLog extends FRoot {
 		...FDiv.styles,
 		...FIcon.styles,
 		...FText.styles,
-		...FInput.styles,
+		...FSearch.styles,
 		...FIconButton.styles,
-		...FDivider.styles
+		...FDivider.styles,
+		...FSelect.styles
 	];
 
 	/**
@@ -125,7 +127,7 @@ export class FLog extends FRoot {
 	statusText!: FText;
 
 	@query("#search-input")
-	searchInput!: FInput;
+	searchInput!: FSearch;
 
 	@queryAll("mark[data-markjs='true']")
 	allMarks!: NodeListOf<HTMLElement>;
@@ -200,12 +202,34 @@ export class FLog extends FRoot {
 		)}</span>`;
 	}
 
+	filterLines(filterText: string) {
+		if (filterText.trim() !== "") {
+			const lines = this.shadowRoot?.querySelectorAll(".log-line");
+			if (lines) {
+				lines.forEach(element => {
+					if (!element.textContent?.toLowerCase()?.includes(filterText)) {
+						element.classList.add("hidden");
+					}
+				});
+			}
+		}
+	}
+	clearFilter() {
+		const lines = this.shadowRoot?.querySelectorAll(".log-line.hidden");
+		if (lines) {
+			lines.forEach(element => {
+				element.classList.remove("hidden");
+			});
+		}
+	}
 	highlightText(searchText: string): void {
 		if (this.searchDebounceTimeout) {
 			clearTimeout(this.searchDebounceTimeout);
 		}
 		this.searchDebounceTimeout = setTimeout(() => {
-			const markInstance = new Mark(this.shadowRoot as unknown as HTMLElement);
+			const markInstance = new Mark(
+				this.shadowRoot?.querySelectorAll(".log-line:not(.hidden)") as NodeListOf<HTMLSpanElement>
+			);
 			if (this.lastSearchValue && this.lastSearchValue !== "") {
 				markInstance.unmark(this.lastSearchValue as unknown as HTMLElement);
 			}
@@ -219,14 +243,14 @@ export class FLog extends FRoot {
 						firstMark?.classList.add("active");
 						this.currentMarkIndex = 0;
 						if (occurrences > 0) {
-							this.searchInput.suffix = `1 of ${occurrences}`;
+							this.searchInput.suggestElement.suffix = `1 of ${occurrences}`;
 						} else {
-							this.searchInput.suffix = `No results`;
+							this.searchInput.suggestElement.suffix = `No results`;
 						}
 					}
 				});
 			} else {
-				this.searchInput.suffix = undefined;
+				this.searchInput.suggestElement.suffix = undefined;
 				this.searchOccurrences = 0;
 			}
 		}, 500);
@@ -272,7 +296,9 @@ export class FLog extends FRoot {
 			}
 			this.allMarks[this.currentMarkIndex].scrollIntoView({ block: "start", behavior: "smooth" });
 			this.allMarks[this.currentMarkIndex].classList.add("active");
-			this.searchInput.suffix = `${this.currentMarkIndex + 1} of ${this.searchOccurrences}`;
+			this.searchInput.suggestElement.suffix = `${this.currentMarkIndex + 1} of ${
+				this.searchOccurrences
+			}`;
 		}
 	}
 
@@ -285,22 +311,43 @@ export class FLog extends FRoot {
 			}
 			this.allMarks[this.currentMarkIndex].scrollIntoView({ block: "start", behavior: "smooth" });
 			this.allMarks[this.currentMarkIndex].classList.add("active");
-			this.searchInput.suffix = `${this.currentMarkIndex + 1} of ${this.searchOccurrences}`;
+			this.searchInput.suggestElement.suffix = `${this.currentMarkIndex + 1} of ${
+				this.searchOccurrences
+			}`;
 		}
 	}
 
+	handleLogLevelFilter(event: CustomEvent<{ scope: string }>) {
+		this.clearFilter();
+		const logLevel = event.detail.scope;
+		if (logLevel && logLevel !== "ALL") {
+			this.filterLines(logLevel.toLowerCase());
+		}
+	}
+
+	get topBar() {
+		return html`<f-div height="hug-content" align="middle-right" class="top-bar">
+			${this.searchBarTemplate}
+		</f-div>`;
+	}
+
+	handleSearch(event: CustomEvent<{ value: string; scope: string }>) {
+		this.highlightText(event.detail.value);
+		this.handleLogLevelFilter(event);
+	}
 	get searchBarTemplate() {
 		if (this.showSearch) {
-			return html`<f-div height="hug-content" align="middle-right" class="search-container">
-				<f-div width="320px">
-					<f-input
+			return html`<f-div height="hug-content" align="middle-right">
+				<f-div width="460px">
+					<f-search
 						id="search-input"
 						placeholder="Search"
-						@input=${(event: CustomEvent<{ value: string }>) =>
-							this.highlightText(event.detail.value)}
+						.scope=${["ALL", "ERROR", "WARN", "DEBUG", "INFO", "TRACE", "FATAL"]}
+						.selectedScope=${"ALL"}
+						@input=${this.handleSearch}
 						variant="block"
-						icon-left="i-search"
-					></f-input>
+						.disabledResult=${true}
+					></f-search>
 				</f-div>
 				<f-div width="hug-content" align="middle-center">
 					<f-icon-button
@@ -333,7 +380,7 @@ export class FLog extends FRoot {
 			"logs-view": true,
 			"wrap-text": Boolean(this.wrapText)
 		};
-		return html` ${this.searchBarTemplate}
+		return html` ${this.topBar}
 			<f-div
 				${ref(this.scrollRef)}
 				class=${classMap(cssClasses)}

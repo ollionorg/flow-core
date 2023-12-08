@@ -40,7 +40,7 @@ export const Playground = {
 
 	args: {
 		logs: samplelogs,
-		["show-search"]: false,
+		["show-search"]: true,
 		["wrap-text"]: false
 	}
 };

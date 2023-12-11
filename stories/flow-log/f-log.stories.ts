@@ -48,7 +48,12 @@ export const Playground = {
 export const Logs = {
 	render: () => {
 		return html`
-			<f-div direction="column" height="100%"><f-log .logs=${samplelogs}></f-log></f-div>
+			<f-div direction="column" height="100%">
+				<f-div height="hug-content">
+					<f-text>logs are passed using 'logs' attribute</f-text>
+				</f-div>
+				<f-div><f-log .logs=${samplelogs}></f-log></f-div>
+			</f-div>
 		`;
 	},
 
@@ -58,11 +63,74 @@ export const Logs = {
 export const ShowToolbar = {
 	render: () => {
 		return html`
-			<f-div direction="column" padding="x-large" height="100%"
-				><f-log ?show-toolbar=${true} .logs=${samplelogs}></f-log
-			></f-div>
+			<f-div direction="column" gap="medium" height="100%">
+				<f-div height="hug-content">
+					<f-text>if show-toolbar="true" then Search, Filter and Jump to Line is shown</f-text>
+				</f-div>
+				<f-div><f-log ?show-toolbar=${true} .logs=${samplelogs}></f-log></f-div>
+			</f-div>
 		`;
 	},
 
 	name: "show-toolbar"
+};
+
+export const LogLevels = {
+	render: () => {
+		return html`
+			<f-div direction="column" gap="medium" height="100%">
+				<f-div height="hug-content">
+					<f-text>Only "Error", "Warn", "Debug" log level is shown in drodown</f-text>
+				</f-div>
+				<f-div>
+					<f-log
+						?show-toolbar=${true}
+						.logs=${samplelogs}
+						.logLevels=${["Error", "Warn", "Debug"]}
+						.selectedLogLevel=${"Debug"}
+					></f-log>
+				</f-div>
+			</f-div>
+		`;
+	},
+
+	name: "log-levels"
+};
+
+export const SelectedLogLevel = {
+	render: () => {
+		return html`
+			<f-div direction="column" gap="medium" height="100%">
+				<f-div height="hug-content">
+					<f-text>Only "Error" log level is selected</f-text>
+				</f-div>
+				<f-div>
+					<f-log
+						?show-toolbar=${true}
+						.logs=${samplelogs}
+						.logLevels=${["Error", "Warn", "Debug"]}
+						.selectedLogLevel=${"Error"}
+					></f-log>
+				</f-div>
+			</f-div>
+		`;
+	},
+
+	name: "selected-log-level"
+};
+export const WrapText = {
+	render: () => {
+		return html`
+			<f-div direction="column" gap="medium" height="100%">
+				<f-div height="hug-content">
+					<f-text>Set wrap-text="true" if you want to wrap log lines</f-text>
+				</f-div>
+				<f-div>
+					<f-log wrap-text .logs=${samplelogs}></f-log>
+				</f-div>
+			</f-div>
+		`;
+	},
+
+	name: "wrap-text"
 };

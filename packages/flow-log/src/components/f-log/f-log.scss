@@ -29,18 +29,18 @@
 		}
 
 		.log-line.blink {
-			animation: blinkLine 3s infinite;
+			animation: blinkLine 2s infinite;
 		}
 
 		@keyframes blinkLine {
 			0% {
-				background-color: rgba(255, 255, 0, 0.3);
-			}
-			50% {
 				background-color: rgba(255, 255, 0, 0);
 			}
-			100% {
+			50% {
 				background-color: rgba(255, 255, 0, 0.3);
+			}
+			100% {
+				background-color: rgba(255, 255, 0, 0);
 			}
 		}
 
@@ -48,6 +48,9 @@
 			white-space: pre-wrap;
 		}
 
+		&.wrap-text {
+			overflow-x: hidden;
+		}
 		&::-webkit-scrollbar {
 			width: 8px;
 			height: 8px;

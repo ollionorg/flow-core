@@ -4,8 +4,18 @@ f-log {
 	@include base();
 	display: flex;
 	flex: 1 0 auto;
-	width: 100%;
+	max-width: 100%;
 	max-height: 100%;
 	flex-direction: column;
-	overflow: auto;
+}
+f-div[direction="column"] {
+	> f-log {
+		width: 100%;
+	}
+}
+
+f-div[direction="row"] {
+	> f-log {
+		height: 100%;
+	}
 }

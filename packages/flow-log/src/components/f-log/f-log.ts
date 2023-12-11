@@ -81,13 +81,24 @@ export class FLog extends FRoot {
 	@property({ type: Boolean, reflect: true, attribute: "wrap-text" })
 	wrapText?: boolean = false;
 
+	@property({ type: Object, reflect: true, attribute: "log-levels" })
+	logLevels: string[] = ["ALL", "ERROR", "WARN", "DEBUG", "INFO", "TRACE", "FATAL"];
+
+	/**
+	 * for vue2
+	 */
+	set ["log-levels"](val: string[]) {
+		this.logLevels = val;
+	}
+
+	@property({ type: String, reflect: true, attribute: "selectedLogLevel" })
+	selectedLogLevel: string = "ALL";
+
 	scrollRef: Ref<FDiv> = createRef();
 
 	logContainer: Ref<HTMLPreElement> = createRef();
-	renderStatus: Ref<FDiv> = createRef();
 
-	@query("#statusText")
-	statusText?: FText;
+	renderStatus: Ref<FDiv> = createRef();
 
 	@query("#search-input")
 	searchInput?: FSearch;
@@ -159,8 +170,17 @@ export class FLog extends FRoot {
 	}
 
 	getCurrentLogLine() {
-		return `<span class="log-line">${anser.ansiToHtml(
-			formatLogLine(this.logs.substring(this.lastPointerIdx, this.currentIdx + 1))
+		const logLine = this.logs.substring(this.lastPointerIdx, this.currentIdx + 1);
+		let isLineHidden = false;
+		if (
+			this.selectedLogLevel !== "ALL" &&
+			!logLine?.toLowerCase()?.includes(this.selectedLogLevel.toLowerCase())
+		) {
+			isLineHidden = true;
+		}
+
+		return `<span class="log-line${isLineHidden ? " hidden" : ""}">${anser.ansiToHtml(
+			formatLogLine(logLine)
 		)}</span>`;
 	}
 
@@ -175,9 +195,7 @@ export class FLog extends FRoot {
 				cancelIdleCallback(this.requestIdleId);
 			}
 			const perecentageDone = (this.currentIdx * 100) / this.logs.length;
-			if (this.statusText) {
-				this.statusText.innerHTML = `${perecentageDone.toFixed(0)}%`;
-			}
+
 			if (perecentageDone >= 100) {
 				this.renderStatus.value?.style.setProperty("display", "none");
 			} else {
@@ -190,14 +208,20 @@ export class FLog extends FRoot {
 			}
 		}
 	}
+	/**
+	 *
+	 * @param event on Enter press in line number input will go to line
+	 */
 	handleLineNumber(event: KeyboardEvent) {
 		if (event.key === "Enter") {
-			this.goToLine();
+			this.goToLine(this.lineNumberInput?.value as number);
 		}
 	}
-
-	goToLine() {
-		const linenumber = this.lineNumberInput?.value as number;
+	/**
+	 *
+	 * @param linenumber this function can be used externally as well to force to go line number
+	 */
+	goToLine(linenumber: number) {
 		if (linenumber > 0 && this.allLines) {
 			const lineToJump = this.allLines[linenumber - 1];
 			lineToJump.scrollIntoView({
@@ -207,69 +231,70 @@ export class FLog extends FRoot {
 			lineToJump.classList.add("blink");
 			setTimeout(() => {
 				lineToJump.classList.remove("blink");
-			}, 3000);
+			}, 6000);
 		}
 	}
-	get topBar() {
-		return html`<f-div
-			height="44px"
-			padding="none none small none"
-			align="middle-left"
-			class="top-bar"
-		>
-			${this.searchBarTemplate}
-			<f-div width="150px" height="hug-content">
-				<f-div height="hug-content">
-					<f-input
-						variant="block"
-						id="linenumber-input"
-						type="number"
-						placeholder="Jump to line"
-						@keypress=${this.handleLineNumber}
-					></f-input>
-				</f-div>
-				<f-icon-button
-					@click=${this.goToLine}
-					state="neutral"
-					variant="packed"
-					icon="i-enter"
-				></f-icon-button>
-			</f-div>
-		</f-div>`;
-	}
 
-	get searchBarTemplate() {
+	get topBar() {
 		if (this.showToolbar) {
-			return html`<f-div height="hug-content" align="middle-left">
-				<f-div width="460px">
-					<f-search
-						id="search-input"
-						placeholder="Search"
-						.scope=${["ALL", "ERROR", "WARN", "DEBUG", "INFO", "TRACE", "FATAL"]}
-						.selectedScope=${"ALL"}
-						@input=${this.handleSearch}
-						variant="block"
-						.disableResult=${true}
-					></f-search>
-				</f-div>
-				<f-div width="hug-content" align="middle-center">
+			return html`<f-div
+				height="44px"
+				padding="none none small none"
+				align="middle-left"
+				class="top-bar"
+			>
+				${this.searchBarTemplate}
+				<f-div width="150px" height="hug-content">
+					<f-div height="hug-content">
+						<f-input
+							variant="block"
+							id="linenumber-input"
+							type="number"
+							placeholder="Jump to line"
+							@keypress=${this.handleLineNumber}
+						></f-input>
+					</f-div>
 					<f-icon-button
-						state="neutral"
-						@click=${this.prevMark}
-						variant="packed"
-						icon="i-arrow-up"
-					></f-icon-button>
-					<f-divider></f-divider>
-					<f-icon-button
+						@click=${this.goToLine}
 						state="neutral"
 						variant="packed"
-						icon="i-arrow-down"
-						@click=${this.nextMark}
+						icon="i-enter"
 					></f-icon-button>
 				</f-div>
 			</f-div>`;
 		}
 		return nothing;
+	}
+
+	get searchBarTemplate() {
+		return html`<f-div height="hug-content" align="middle-left">
+			<f-div width="460px">
+				<f-search
+					id="search-input"
+					placeholder="Search"
+					.scope=${this.logLevels}
+					.selectedScope=${this.selectedLogLevel}
+					@input=${this.handleSearch}
+					variant="block"
+					.disableResult=${true}
+				></f-search>
+			</f-div>
+			<f-div width="hug-content" align="middle-center">
+				<f-icon-button
+					state="neutral"
+					@click=${this.prevMark}
+					variant="packed"
+					icon="i-arrow-up"
+				></f-icon-button>
+				<f-divider></f-divider>
+				<f-icon-button
+					state="neutral"
+					variant="packed"
+					icon="i-arrow-down"
+					@click=${this.nextMark}
+				></f-icon-button>
+			</f-div>
+		</f-div>`;
 	}
 	render() {
 		const cssClasses = {
@@ -289,21 +314,23 @@ export class FLog extends FRoot {
 				<pre ${ref(this.logContainer)}></pre>
 
 				<f-div
-					height="36px"
+					height="42px"
 					padding="none small"
 					state="default"
 					class="loading-logs"
 					gap="small"
-					align="middle-right"
+					align="middle-center"
 					${ref(this.renderStatus)}
 				>
-					<f-icon source="i-loading" loading></f-icon>
-					<f-text id="statusText" inline>0%</f-text>
+					<f-icon source="i-loading" size="large" loading></f-icon>
 				</f-div>
 			</f-div>`;
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
+		/**
+		 * render whole ogs only when logs property changes
+		 */
 		if (changedProperties.has("logs")) {
 			void this.updateComplete.then(() => {
 				this.lastPointerIdx = 0;
@@ -324,7 +351,10 @@ export class FLog extends FRoot {
 
 		window.removeEventListener("keydown", this.searchShortCutHhandler);
 	}
-
+	/**
+	 *
+	 * @param event shortcut to open toolbar
+	 */
 	searchShortCutHhandler = (event: KeyboardEvent) => {
 		event.stopPropagation();
 		if ((event.metaKey || event.ctrlKey) && event.key === "f") {

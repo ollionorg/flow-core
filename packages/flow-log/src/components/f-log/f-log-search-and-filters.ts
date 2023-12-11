@@ -58,10 +58,10 @@ export function highlightText(this: FLog, searchText: string): void {
 					firstMark?.scrollIntoView({ block: "start", behavior: "smooth" });
 					firstMark?.classList.add("active");
 					this.currentMarkIndex = 0;
-					if (occurrences > 0) {
-						if (this.searchInput) this.searchInput.suggestElement.suffix = `1 of ${occurrences}`;
-					} else {
-						if (this.searchInput) this.searchInput.suggestElement.suffix = `No results`;
+					if (occurrences > 0 && this.searchInput) {
+						this.searchInput.suggestElement.suffix = `1 of ${occurrences}`;
+					} else if (this.searchInput) {
+						this.searchInput.suggestElement.suffix = `No results`;
 					}
 				}
 			});

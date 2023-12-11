@@ -42,6 +42,7 @@ const DEFAULT_BATCH_SIZE = 1000;
 const MAXIMUM_LINE_LENGTH = 10000;
 
 export type FLogHighlightKeywords = HighlightKeywords;
+export type FLogLevels = string[];
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
@@ -82,7 +83,7 @@ export class FLog extends FRoot {
 	wrapText?: boolean = false;
 
 	@property({ type: Array, reflect: true, attribute: "log-levels" })
-	logLevels: string[] = ["ALL", "ERROR", "WARN", "DEBUG", "INFO", "TRACE", "FATAL"];
+	logLevels: FLogLevels = ["ALL", "ERROR", "WARN", "DEBUG", "INFO", "TRACE", "FATAL"];
 
 	/**
 	 * for vue2

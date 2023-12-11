@@ -259,9 +259,7 @@ export const Category = {
 
 export const Value = {
 	render: () => {
-		const value = "";
-		("Suggestion 2");
-
+		const value = "Suggestion 2";
 		const handleValue = (e: CustomEvent) => {
 			console.log(e.detail.value);
 		};

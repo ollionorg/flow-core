@@ -36,18 +36,18 @@ describe("f-coundown", () => {
 	});
 
 	it("should render with label-placement top", async () => {
-		const el = await fixture(
-			html` <f-countdown category="fill" label-placement="top"></f-countdown> `
-		);
+		const el = await fixture(html`
+			<f-countdown category="fill" label-placement="top"></f-countdown>
+		`);
 		const descendant = el.shadowRoot!.querySelector(".f-countdown-wrapper")!;
 		const labelDiv = descendant.children[0];
 		expect(labelDiv).instanceOf(FDiv);
 	});
 
 	it("should render with label-placement bottom", async () => {
-		const el = await fixture(
-			html` <f-countdown category="fill" label-placement="bottom"></f-countdown> `
-		);
+		const el = await fixture(html`
+			<f-countdown category="fill" label-placement="bottom"></f-countdown>
+		`);
 		const descendant = el.shadowRoot!.querySelector(".f-countdown-wrapper")!;
 		const labelDiv = descendant.children[descendant.children.length - 1];
 		expect(labelDiv).instanceOf(FDiv);

@@ -1,7 +1,12 @@
 import { html } from "lit-html";
 import fPictogramAnatomy from "../svg/i-fpictogram-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import { FPictogramVariant, FPictogramCategory, FPictogramSize, FPictogramState } from "@cldcvr/flow-core";
+import {
+	FPictogramVariant,
+	FPictogramCategory,
+	FPictogramSize,
+	FPictogramState
+} from "@cldcvr/flow-core";
 
 export default {
 	title: "@cldcvr/flow-core/f-pictogram",
@@ -13,21 +18,20 @@ export default {
 	}
 };
 
-
 export type PictogramArgs = {
-	source:string,
-	variant: FPictogramVariant,
-	category: FPictogramCategory,
-	size: FPictogramSize,
-	state: FPictogramState,
-	'auto-bg': boolean,
-	disabled:boolean,
-	clickable: boolean,
-	loading:boolean,
-}
+	source: string;
+	variant: FPictogramVariant;
+	category: FPictogramCategory;
+	size: FPictogramSize;
+	state: FPictogramState;
+	"auto-bg": boolean;
+	disabled: boolean;
+	clickable: boolean;
+	loading: boolean;
+};
 
 export const Playground = {
-	render: (args:PictogramArgs) =>
+	render: (args: PictogramArgs) =>
 		html`<f-div direction="column" padding="x-large">
 			<f-pictogram
 				.variant=${args.variant}

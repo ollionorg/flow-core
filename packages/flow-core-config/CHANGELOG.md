@@ -1,6 +1,5 @@
 <h4 class="margin-btm-8">Release Notes</h4>
 
-
 # Change Log
 
 ## [1.1.3] - 2023-10-12

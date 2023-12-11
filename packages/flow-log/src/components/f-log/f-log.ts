@@ -91,7 +91,7 @@ export class FLog extends FRoot {
 		this.logLevels = val;
 	}
 
-	@property({ type: String, reflect: true, attribute: "selectedLogLevel" })
+	@property({ type: String, reflect: true, attribute: "selected-log-level" })
 	selectedLogLevel: string = "ALL";
 
 	scrollRef: Ref<FDiv> = createRef();
@@ -331,7 +331,7 @@ export class FLog extends FRoot {
 		/**
 		 * render whole ogs only when logs property changes
 		 */
-		if (changedProperties.has("logs")) {
+		if (changedProperties.has("logs") || changedProperties.has("selectedLogLevel")) {
 			void this.updateComplete.then(() => {
 				this.lastPointerIdx = 0;
 				this.currentIdx = 0;

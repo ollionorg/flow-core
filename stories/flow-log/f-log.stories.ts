@@ -18,6 +18,8 @@ export const Playground = {
 				.logs=${args.logs}
 				?show-toolbar=${args["show-toolbar"]}
 				?wrap-text=${args["wrap-text"]}
+				.logLevels=${args["log-levels"]}
+				.selectedLogLevel=${args["selected-log-level"]}
 			></f-log
 		></f-div>`;
 	},
@@ -35,13 +37,21 @@ export const Playground = {
 
 		["wrap-text"]: {
 			control: "boolean"
+		},
+		["log-levels"]: {
+			control: "object"
+		},
+		["selected-log-level"]: {
+			control: "text"
 		}
 	},
 
 	args: {
 		logs: samplelogs,
 		["show-toolbar"]: true,
-		["wrap-text"]: false
+		["wrap-text"]: false,
+		["log-levels"]: ["ALL", "ERROR", "WARN", "DEBUG", "INFO", "TRACE", "FATAL"],
+		["selected-log-level"]: "ALL"
 	}
 };
 

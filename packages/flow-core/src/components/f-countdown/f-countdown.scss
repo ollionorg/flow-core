@@ -1,11 +1,13 @@
 // common mixins imported from this file
+@use "sass:map";
+
 @import "./../../mixins/scss/mixins";
 
 $sizes: (
-	"x-large": 48px,
-	"large": 36px,
-	"medium": 24px,
-	"small": 16px
+	"large": 44px,
+	"medium": 36px,
+	"small": 28px,
+	"x-small": 20px
 );
 
 $states: (
@@ -13,7 +15,7 @@ $states: (
 		"background": var(--color-primary-default)
 	),
 	"default": (
-		"background": var(--color-neutral-secondary)
+		"background": var(--color-primary-default)
 	),
 	"success": (
 		"background": var(--color-success-default)
@@ -27,14 +29,15 @@ $states: (
 );
 
 :host {
-	div.f-countdown-wrapper {
+	.f-countdown-wrapper {
 		@include base();
 
-		display: inline-flex;
+		display: flex;
 
-		div.f-countdown-circle {
+		.f-countdown-circle {
+			overflow: hidden;
+
 			position: relative;
-			margin-left: 8px;
 			clip-path: circle(49%);
 			transform: rotate(180deg);
 			transform-origin: center;
@@ -51,12 +54,12 @@ $states: (
 				}
 			}
 
-			.f-countdown-spinner {
-				@each $state, $color in $states {
-					&[state="#{$state}"] {
-						background: map.get($color, "background");
-					}
-				}
+			.outline-countdown {
+				position: absolute;
+				height: 20px;
+				width: 20px;
+				background-color: black;
+				z-index: 10;
 			}
 		}
 		.f-countdown-label {
@@ -141,4 +144,73 @@ $states: (
 	}
 
 	@include timer(5);
+
+	.f-outline-countdown {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+	}
+
+	.f-outline-countdown-label {
+		position: absolute;
+	}
+
+	.timer {
+		overflow: hidden;
+		transform: rotate(360deg);
+		background: -webkit-linear-gradient(
+			left,
+			var(--state-color) 50%,
+			var(--color-input-default) 50%
+		);
+		border-radius: 100%;
+		position: relative;
+		animation: time calc(var(--duration) * 1s) steps(1000, start) infinite;
+		-webkit-animation: time calc(var(--duration) * 1s) steps(1000, start) infinite;
+		-webkit-mask: radial-gradient(transparent 50%, #000 50%);
+		mask: radial-gradient(transparent 50%, #000 50%);
+
+		@each $size, $value in $sizes {
+			&[size="#{$size}"] {
+				height: $value;
+				width: $value;
+			}
+		}
+	}
+	.mask {
+		border-radius: 100% 0 0 100% / 50% 0 0 50%;
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 50%;
+		animation: mask calc(var(--duration) * 1s) steps(500, start) infinite;
+		-webkit-animation: mask calc(var(--duration) * 1s) steps(500, start) infinite;
+		transform-origin: 100% 50%;
+		-webkit-transform-origin: 100% 50%;
+	}
+	@keyframes time {
+		100% {
+			-webkit-transform: rotate(360deg);
+		}
+	}
+	@keyframes mask {
+		0% {
+			background: var(--color-input-default);
+			-webkit-transform: rotate(0deg);
+		}
+		50% {
+			background: var(--color-input-default);
+			-webkit-transform: rotate(-180deg);
+		}
+		50.01% {
+			background: var(--state-color);
+			-webkit-transform: rotate(0deg);
+		}
+		100% {
+			background: var(--state-color);
+			-webkit-transform: rotate(-180deg);
+		}
+	}
 }

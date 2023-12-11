@@ -2,6 +2,13 @@
 
 # Change Log
 
+
+## [2.7.0] - 2023-12-11
+
+### Features
+
+- `f-countdown`: component added
+
 ## [2.6.3] - 2023-12-12
 
 ### Improvements
@@ -9,7 +16,8 @@
 - `disable-result` attribute added on `f-search` to disable showing autocomplete results.
 - `disable-suggestions` attribute added on `f-suggest` to disable showing autocomplete results.
 
-## [2.6.2] - 2023-12-11
+
+## [2.6.2] - 2023-12-12
 
 ### Bug fixes
 
@@ -26,6 +34,7 @@
 ### Minor Changes
 
 - `f-color-picker` element added.
+
 
 ## [2.5.0] - 2023-11-27
 

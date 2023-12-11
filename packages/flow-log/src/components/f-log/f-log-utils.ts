@@ -1,5 +1,7 @@
+export type HexColor = `#${string}`;
+export type HighlightKeywords = Record<string, HexColor>;
 // Adds some general formatting/highlighting to logs
-export function formatLogLine(logLine: string): string {
+export function formatLogLine(logLine: string, highlightKeywords?: HighlightKeywords): string {
 	// Highlight [xxx] with a greyed out version
 	let newLine = logLine
 		// Highlight quoted strings
@@ -37,11 +39,29 @@ export function formatLogLine(logLine: string): string {
 			'<a style="color: var(--color-primary-default); text-decoration: underline" href="$1" rel="noopener" target="_blank">$1</a>'
 		);
 
+	if (highlightKeywords) {
+		Object.entries(highlightKeywords).forEach(([keyword, color]) => {
+			if (isValidHexColor(color)) {
+				newLine = newLine.replace(
+					new RegExp(`(${keyword})`),
+					`<span style="color:${color}">$1</span>`
+				);
+			} else {
+				console.warn(`${color as string} is not valid hex`);
+			}
+		});
+	}
+
 	if (/(ERROR|FAILED)/gi.test(newLine)) {
 		newLine = `<span style="background: var(--color-danger-subtle)">${newLine}</span>`;
 	}
 
 	return newLine;
+}
+
+export function isValidHexColor(value: string): value is HexColor {
+	const hexColorRegex = /^#[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$/;
+	return hexColorRegex.test(value);
 }
 
 export function getUniqueStringId() {

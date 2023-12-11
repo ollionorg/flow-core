@@ -20,6 +20,7 @@ export const Playground = {
 				?wrap-text=${args["wrap-text"]}
 				.logLevels=${args["log-levels"]}
 				.selectedLogLevel=${args["selected-log-level"]}
+				.highlightKeywords=${args["highlight-keywords"]}
 			></f-log
 		></f-div>`;
 	},
@@ -38,6 +39,9 @@ export const Playground = {
 		["wrap-text"]: {
 			control: "boolean"
 		},
+		["highlight-keywords"]: {
+			control: "object"
+		},
 		["log-levels"]: {
 			control: "object"
 		},
@@ -51,7 +55,8 @@ export const Playground = {
 		["show-toolbar"]: true,
 		["wrap-text"]: false,
 		["log-levels"]: ["ALL", "ERROR", "WARN", "DEBUG", "INFO", "TRACE", "FATAL"],
-		["selected-log-level"]: "ALL"
+		["selected-log-level"]: "ALL",
+		["highlight-keywords"]: { terraform: "#BF40BF", ReferenceTransformer: "#00E2B5" }
 	}
 };
 
@@ -60,7 +65,7 @@ export const Logs = {
 		return html`
 			<f-div direction="column" height="100%">
 				<f-div height="hug-content">
-					<f-text>logs are passed using 'logs' attribute</f-text>
+					<f-text state="warning" size="large">logs are passed using 'logs' attribute</f-text>
 				</f-div>
 				<f-div><f-log .logs=${samplelogs}></f-log></f-div>
 			</f-div>
@@ -75,7 +80,9 @@ export const ShowToolbar = {
 		return html`
 			<f-div direction="column" gap="medium" height="100%">
 				<f-div height="hug-content">
-					<f-text>if show-toolbar="true" then Search, Filter and Jump to Line is shown</f-text>
+					<f-text state="warning" size="large"
+						>if show-toolbar="true" then Search, Filter and Jump to Line is shown</f-text
+					>
 				</f-div>
 				<f-div><f-log ?show-toolbar=${true} .logs=${samplelogs}></f-log></f-div>
 			</f-div>
@@ -90,7 +97,9 @@ export const LogLevels = {
 		return html`
 			<f-div direction="column" gap="medium" height="100%">
 				<f-div height="hug-content">
-					<f-text>Only "Error", "Warn", "Debug" log level is shown in drodown</f-text>
+					<f-text state="warning" size="large"
+						>Only "Error", "Warn", "Debug" log level is shown in drodown</f-text
+					>
 				</f-div>
 				<f-div>
 					<f-log
@@ -112,7 +121,7 @@ export const SelectedLogLevel = {
 		return html`
 			<f-div direction="column" gap="medium" height="100%">
 				<f-div height="hug-content">
-					<f-text>Only "Error" log level is selected</f-text>
+					<f-text state="warning" size="large">Only "Error" log level is selected</f-text>
 				</f-div>
 				<f-div>
 					<f-log
@@ -133,7 +142,9 @@ export const WrapText = {
 		return html`
 			<f-div direction="column" gap="medium" height="100%">
 				<f-div height="hug-content">
-					<f-text>Set wrap-text="true" if you want to wrap log lines</f-text>
+					<f-text state="warning" size="large"
+						>Set wrap-text="true" if you want to wrap log lines</f-text
+					>
 				</f-div>
 				<f-div>
 					<f-log wrap-text .logs=${samplelogs}></f-log>
@@ -143,4 +154,27 @@ export const WrapText = {
 	},
 
 	name: "wrap-text"
+};
+
+export const HighlightKeywords = {
+	render: () => {
+		return html`
+			<f-div direction="column" gap="medium" height="100%">
+				<f-div height="hug-content">
+					<f-text state="warning" size="large"
+						>'terraform' and '' are highlighted with "#BF40BF" and "#00E2B5" respectively by using
+						object : '{ terraform: "#BF40BF", ReferenceTransformer: "#00E2B5" }'</f-text
+					>
+				</f-div>
+				<f-div>
+					<f-log
+						.highlightKeywords=${{ terraform: "#BF40BF", ReferenceTransformer: "#00E2B5" }}
+						.logs=${samplelogs}
+					></f-log>
+				</f-div>
+			</f-div>
+		`;
+	},
+
+	name: "highlight-keywords"
 };

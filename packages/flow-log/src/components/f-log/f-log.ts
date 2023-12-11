@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, queryAll } from "lit/decorators.js";
 import globalStyle from "./f-log-global.scss?inline";
@@ -23,7 +22,7 @@ import { classMap } from "lit/directives/class-map.js";
 // Anser is used to highlight bash color codes
 import anser from "anser";
 
-import { formatLogLine, getUniqueStringId } from "./f-log-utils";
+import { formatLogLine, getUniqueStringId, HighlightKeywords } from "./f-log-utils";
 import {
 	clearFilter,
 	closeSearchBar,
@@ -42,6 +41,7 @@ const DEFAULT_BATCH_SIZE = 1000;
 // The maximum character length we process in a line, this is to prevent overflows
 const MAXIMUM_LINE_LENGTH = 10000;
 
+export type FLogHighlightKeywords = HighlightKeywords;
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
@@ -81,7 +81,7 @@ export class FLog extends FRoot {
 	@property({ type: Boolean, reflect: true, attribute: "wrap-text" })
 	wrapText?: boolean = false;
 
-	@property({ type: Object, reflect: true, attribute: "log-levels" })
+	@property({ type: Array, reflect: true, attribute: "log-levels" })
 	logLevels: string[] = ["ALL", "ERROR", "WARN", "DEBUG", "INFO", "TRACE", "FATAL"];
 
 	/**
@@ -93,6 +93,16 @@ export class FLog extends FRoot {
 
 	@property({ type: String, reflect: true, attribute: "selected-log-level" })
 	selectedLogLevel: string = "ALL";
+
+	@property({ type: Object, reflect: true, attribute: "highlight-keywords" })
+	highlightKeywords?: FLogHighlightKeywords;
+
+	/**
+	 * for vue2
+	 */
+	set ["highlight-keywords"](val: FLogHighlightKeywords) {
+		this.highlightKeywords = val;
+	}
 
 	scrollRef: Ref<FDiv> = createRef();
 
@@ -180,7 +190,7 @@ export class FLog extends FRoot {
 		}
 
 		return `<span class="log-line${isLineHidden ? " hidden" : ""}">${anser.ansiToHtml(
-			formatLogLine(logLine)
+			formatLogLine(logLine, this.highlightKeywords)
 		)}</span>`;
 	}
 

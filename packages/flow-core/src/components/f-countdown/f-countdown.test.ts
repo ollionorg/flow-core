@@ -57,7 +57,7 @@ describe("f-coundown", () => {
 			await fixture(html` <f-countdown duration="3700"></f-countdown>`);
 		} catch (e) {
 			expect((e as Error).message).to.equal(
-				"f-countdown : please enter correct value of seconds which should be less than  3600"
+				"f-countdown: Please enter a value for time less than 3600 seconds"
 			);
 		}
 	});
@@ -67,7 +67,7 @@ describe("f-coundown", () => {
 			await fixture(html` <f-countdown duration="61:30"></f-countdown>`);
 		} catch (e) {
 			expect((e as Error).message).to.equal(
-				"f-countdown : please enter correct values of minutes and seconds"
+				"f-countdown: Please enter valid values for minutes (less than 60) and seconds (less than 60)"
 			);
 		}
 	});

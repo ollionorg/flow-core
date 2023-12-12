@@ -4,16 +4,16 @@
 
 ## [2.6.3] - 2023-12-12
 
-### Bug fixes
-
-- `f-color-picker` alignment fix when used in row direction with other inputs.
-
-## [2.6.2] - 2023-12-11
-
 ### Improvements
 
 - `disable-result` attribute added on `f-search` to disable showing autocomplete results.
 - `disable-suggestions` attribute added on `f-suggest` to disable showing autocomplete results.
+
+## [2.6.2] - 2023-12-11
+
+### Bug fixes
+
+- `f-color-picker` alignment fix when used in row direction with other inputs.
 
 ## [2.6.1] - 2023-12-04
 

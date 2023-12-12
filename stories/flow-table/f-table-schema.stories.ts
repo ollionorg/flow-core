@@ -452,6 +452,35 @@ export const HeaderSelected = {
 	name: "@header-selected"
 };
 
+export const HeaderInput = {
+	render: () => {
+		const data = getFakeUsers(10, 5);
+		const fieldRef = createRef();
+
+		const handleEvent = (event: CustomEvent) => {
+			if (fieldRef.value) {
+				fieldRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
+			}
+		};
+
+		return html`<f-div direction="column" state="subtle" padding="small" gap="large">
+				<f-text
+					>'header-input' event emitted whenever checkbox is checked/unchecked in header</f-text
+				>
+				<f-table-schema .data=${data} selectable="multiple" @header-input=${handleEvent}>
+				</f-table-schema>
+				<f-divider></f-divider>
+			</f-div>
+			<br />
+			<f-divider></f-divider>
+			<br />
+			<f-text state="secondary">'event.detail' will display here</f-text>
+			<pre ${ref(fieldRef)}></pre> `;
+	},
+
+	name: "@header-input"
+};
+
 export const Sort = {
 	render: () => {
 		const data = getFakeUsers(50, 5);

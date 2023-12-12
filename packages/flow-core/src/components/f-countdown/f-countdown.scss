@@ -70,80 +70,76 @@ $states: (
 		}
 	}
 
-	@mixin timer($duration, $item: ".f-countdown-circle", $border: none, $hover: running) {
-		#{$item},
-		#{$item} * {
-			box-sizing: border-box;
-		}
+	.f-countdown-circle,
+	.f-countdown-circle * {
+		box-sizing: border-box;
+	}
 
-		#{$item} .f-countdown-pie {
-			width: 50%;
-			height: 100%;
-			transform-origin: 100% 50%;
-			position: absolute;
-			border: #{$border};
-		}
+	.f-countdown-circle .f-countdown-pie {
+		width: 50%;
+		height: 100%;
+		transform-origin: 100% 50%;
+		position: absolute;
+		border: none;
+	}
 
-		#{$item} .f-countdown-spinner {
-			border-radius: 100% 0 0 100% / 50% 0 0 50%;
-			z-index: 2;
-			border-right: none;
-			animation-name: rota;
-			animation-timing-function: linear;
-			animation-iteration-count: infinite;
-		}
+	.f-countdown-circle .f-countdown-spinner {
+		border-radius: 100% 0 0 100% / 50% 0 0 50%;
+		z-index: 2;
+		border-right: none;
+		animation-name: rota;
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
+	}
 
-		#{$item}:hover .f-countdown-spinner,
-		#{$item}:hover .f-countdown-filler,
-		#{$item}:hover .mask {
-			animation-play-state: $hover;
-		}
+	.f-countdown-circle:hover .f-countdown-spinner,
+	.f-countdown-circle:hover .f-countdown-filler,
+	.f-countdown-circle:hover .mask {
+		animation-play-state: running;
+	}
 
-		#{$item} .f-countdown-filler {
-			border-radius: 0 100% 100% 0 / 0 50% 50% 0;
-			left: 50%;
-			opacity: 0;
-			z-index: 1;
-			border-left: none;
-			animation-name: opa;
-			animation-timing-function: steps(1, end);
-			animation-iteration-count: infinite;
-			animation-direction: reverse;
-		}
+	.f-countdown-circle .f-countdown-filler {
+		border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+		left: 50%;
+		opacity: 0;
+		z-index: 1;
+		border-left: none;
+		animation-name: opa;
+		animation-timing-function: steps(1, end);
+		animation-iteration-count: infinite;
+		animation-direction: reverse;
+	}
 
-		#{$item} .mask {
-			width: 50%;
-			height: 100%;
-			position: absolute;
-			background: inherit;
-			opacity: 1;
-			z-index: 3;
-			animation-name: opa;
-			animation-timing-function: steps(1, end);
-			animation-iteration-count: infinite;
-		}
+	.f-countdown-circle .mask {
+		width: 50%;
+		height: 100%;
+		position: absolute;
+		background: inherit;
+		opacity: 1;
+		z-index: 3;
+		animation-name: opa;
+		animation-timing-function: steps(1, end);
+		animation-iteration-count: infinite;
+	}
 
-		@keyframes rota {
-			0% {
-				transform: rotate(360deg);
-			}
-			100% {
-				transform: rotate(0deg);
-			}
+	@keyframes rota {
+		0% {
+			transform: rotate(360deg);
 		}
-
-		@keyframes opa {
-			0% {
-				opacity: 1;
-			}
-			50%,
-			100% {
-				opacity: 0;
-			}
+		100% {
+			transform: rotate(0deg);
 		}
 	}
 
-	@include timer(5);
+	@keyframes opa {
+		0% {
+			opacity: 1;
+		}
+		50%,
+		100% {
+			opacity: 0;
+		}
+	}
 
 	.f-outline-countdown {
 		display: flex;
@@ -156,7 +152,7 @@ $states: (
 		position: absolute;
 	}
 
-	.timer {
+	.f-outline-countdown-timer {
 		overflow: hidden;
 		transform: rotate(360deg);
 		background: -webkit-linear-gradient(
@@ -178,7 +174,7 @@ $states: (
 			}
 		}
 	}
-	.mask {
+	.f-outline-countdown-mask {
 		border-radius: 100% 0 0 100% / 50% 0 0 50%;
 		height: 100%;
 		left: 0;

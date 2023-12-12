@@ -1,33 +1,33 @@
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import eleStyle from "./f-countdown.scss?inline";
-import globalStyle from "./f-countdown-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "../../utils";
-import { injectCss } from "@cldcvr/flow-core-config";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { FText } from "../f-text/f-text";
-
-injectCss("f-countdown", globalStyle);
+import { classMap } from "lit-html/directives/class-map.js";
+import { validateHTMLColor, validateHTMLColorName } from "validate-color";
+import { keyed } from "lit/directives/keyed.js";
 
 const states = ["primary", "danger", "warning", "success", "default"] as const;
 const sizes = ["large", "medium", "small", "x-small"] as const;
 const categories = ["fill", "outline"] as const;
 const placements = ["left", "right", "bottom", "top", "none"] as const;
 
-export type FCountdownStateProp = (typeof states)[number];
-export type FCountdownCategoryProp = (typeof categories)[number];
-export type FCountdownSizesProp = (typeof sizes)[number];
-export type FCountdownLabelProp = (typeof placements)[number];
+export type FCountdownStateProp = typeof states[number];
+export type FCountdownCategoryProp = typeof categories[number];
+export type FCountdownSizesProp = typeof sizes[number];
+export type FCountdownLabelProp = typeof placements[number];
+export type FCountdownDuration = number | string;
 
 @flowElement("f-countdown")
 export class FCountdown extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...FDiv.styles, ...FText.styles];
+	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles];
 
 	/**
 	 * @attribute toggle accordion
@@ -39,7 +39,7 @@ export class FCountdown extends FRoot {
 	 * @attribute toggle accordion
 	 */
 	@property({ reflect: true, type: String })
-	duration?: number | string = 5;
+	duration?: FCountdownDuration = 5;
 
 	/**
 	 * @attribute Each variant has various sizes. By default medium is the default size.
@@ -68,6 +68,10 @@ export class FCountdown extends FRoot {
 	timerRef: Ref<FText> = createRef();
 
 	currentProgress = 0;
+
+	interval = 0;
+
+	countdownId = 0;
 
 	/**
 	 * apply inline styles to shadow-dom for custom fill.
@@ -110,7 +114,20 @@ export class FCountdown extends FRoot {
 		} else return 5;
 	}
 
-	interval!: number;
+	get labelSize() {
+		switch (this.size) {
+			case "large":
+				return "medium";
+			case "medium":
+				return "small";
+			case "small":
+				return "x-small";
+			case "x-small":
+				return "x-small";
+			default:
+				return "x-small";
+		}
+	}
 
 	init() {
 		this.interval = setInterval(() => {
@@ -145,23 +162,36 @@ export class FCountdown extends FRoot {
 		super.disconnectedCallback();
 	}
 
-	get labelSize() {
-		switch (this.size) {
-			case "large":
-				return "medium";
-			case "medium":
-				return "small";
-			case "small":
-				return "x-small";
-			case "x-small":
-				return "x-small";
-			default:
-				return "x-small";
+	validateProperties() {
+		if (this.duration) {
+			const time = this.duration as string;
+			if (time.includes(":")) {
+				const [min, sec] = time.split(":");
+				if (Number(min) >= 60 || Number(sec) > 60) {
+					throw new Error("f-countdown : please enter correct values of minutes and seconds");
+				}
+			} else {
+				if (Number(time) >= 3600) {
+					throw new Error(
+						"f-countdown : please enter correct value of seconds which should be less than  3600"
+					);
+				}
+			}
+		}
+		if (
+			this.state?.includes("custom") &&
+			this.fill &&
+			!validateHTMLColor(this.fill) &&
+			!validateHTMLColorName(this.fill)
+		) {
+			throw new Error("f-countdown : enter correct color-name or hex-color-code");
 		}
 	}
 
 	render() {
+		this.countdownId += 1;
 		this.fill = getCustomFillColor(this.state ?? "");
+		this.validateProperties();
 
 		//top and left label placement
 		const labelTopAndLeft =
@@ -183,73 +213,67 @@ export class FCountdown extends FRoot {
 				: nothing;
 
 		//fill category timer structure
-		const fillTimer = html`<div
-			class="f-countdown-circle"
-			state=${this.state}
-			size=${this.size}
-			style=${this.applyStyles}
-		>
-			<div
-				class="f-countdown-pie f-countdown-spinner"
-				state=${this.state}
-				style=${this.applyPieStyles}
-			></div>
-			<div
-				class="f-countdown-pie f-countdown-filler"
-				state=${this.state}
-				style=${this.applyPieStyles}
-			></div>
-			<div class="mask" style=${this.maskStyles}></div>
-		</div>`;
+		const fillTimer = keyed(
+			this.countdownId,
+			html`<div
+				class="f-countdown-circle"
+				state="${this.state}"
+				size="${this.size}"
+				style=${this.applyStyles}
+			>
+				<div
+					class="f-countdown-pie f-countdown-spinner"
+					state="${this.state}"
+					style=${this.applyPieStyles}
+				></div>
+				<div
+					class="f-countdown-pie f-countdown-filler"
+					state="${this.state}"
+					style=${this.applyPieStyles}
+				></div>
+				<div class="mask" style=${this.maskStyles}></div>
+			</div>`
+		);
 
-		const outlineTimer = html`<div class="timer" size=${this.size} style=${this.outlineTimerStyle}>
-			<div class="mask"></div>
-		</div>`;
+		const outlineTimer = keyed(
+			this.countdownId,
+			html`<div
+				class="f-outline-countdown-timer"
+				size="${this.size}"
+				style=${this.outlineTimerStyle}
+			>
+				<div class="f-outline-countdown-mask"></div>
+			</div>`
+		);
 
-		return this.category === "fill"
-			? html`
-					<f-div
-						class="f-countdown-wrapper"
-						align="middle-center"
-						direction=${this.labelPlacement === "left" || this.labelPlacement === "right"
-							? "row"
-							: "column"}
-						gap="x-small"
-					>
-						${labelTopAndLeft} ${fillTimer} ${labelBottomAndRight}
-					</f-div>
-			  `
-			: html`
-					<f-div
-						align="middle-center"
-						direction=${this.labelPlacement === "left" || this.labelPlacement === "right"
-							? "row"
-							: "column"}
-						gap="x-small"
-						class="f-countdown-outline-wrapper"
-					>
-						${labelTopAndLeft} ${outlineTimer} ${labelBottomAndRight}
-					</f-div>
-			  `;
-	}
+		const classes: Record<string, boolean> = {
+			"f-countdown-wrapper": this.category === "fill" ? true : false,
+			"f-countdown-outline-wrapper": this.category === "outline" ? true : false
+		};
+		this.classList.forEach(cl => {
+			classes[cl] = true;
+		});
 
-	protected firstUpdated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): void {
-		super.updated(changedProperties);
-		this.remaining = this.secondsDuration;
-		this.init();
+		return html`
+			<f-div
+				class=${classMap(classes)}
+				align="middle-center"
+				direction=${this.labelPlacement === "left" || this.labelPlacement === "right"
+					? "row"
+					: "column"}
+				gap="x-small"
+			>
+				${labelTopAndLeft} ${this.category === "fill" ? fillTimer : outlineTimer}
+				${labelBottomAndRight}
+			</f-div>
+		`;
 	}
 
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);
-		changedProperties.forEach((oldValue, propName) => {
-			if (propName === "category" && oldValue !== this.category && oldValue !== undefined) {
-				clearInterval(this.interval);
-				this.remaining = this.secondsDuration;
-				this.init();
-			}
-		});
+		clearInterval(this.interval);
+		this.remaining = this.secondsDuration;
+		this.init();
 	}
 }
 

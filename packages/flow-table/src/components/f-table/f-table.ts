@@ -213,7 +213,6 @@ export class FTable extends FRoot {
 					} else if (selectedRows.length === rowsWithoutHeader.length) {
 						headerRow.selected = true;
 					} else {
-						headerRow.selected = false;
 						firstCell.checkbox.value = "indeterminate";
 					}
 				}

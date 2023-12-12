@@ -452,12 +452,19 @@ export class FTableSchema extends FRoot {
 	}
 
 	handleHeaderInput(event: CustomEvent<boolean>, headerCell: FTableSchemaHeaderCell) {
+		this.toggleAllRows(event.detail);
 		const toggle = new CustomEvent("header-input", {
 			detail: { value: event.detail, header: headerCell },
 			bubbles: true,
 			composed: true
 		});
 		this.dispatchEvent(toggle);
+	}
+
+	toggleAllRows(val: boolean) {
+		this.data.rows.forEach(row => {
+			row.selected = val;
+		});
 	}
 
 	paginate() {

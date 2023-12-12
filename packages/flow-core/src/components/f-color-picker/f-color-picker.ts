@@ -146,7 +146,7 @@ export class FColorPicker extends FRoot {
 	render() {
 		const classes = { focused: this.isOpen, "no-color": this.isValueEmpty };
 		// render empty string, since there no need of any child element
-		return html`<f-div direction="column" gap="x-small" width="hug-content">
+		return html`<f-div direction="column" width="hug-content">
 			<f-form-field>
 				<f-div
 					.width=${this.sizeMap[this.size ?? "medium"]}

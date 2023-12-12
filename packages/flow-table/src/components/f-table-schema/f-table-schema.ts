@@ -191,6 +191,8 @@ export class FTableSchema extends FRoot {
 							?sticky-left=${ifDefined(sticky)}
 							?sticky-top=${ifDefined(this.stickyHeader)}
 							@selected-column=${this.handleColumnSelection}
+							@update-row-selection=${(event: CustomEvent<boolean>) =>
+								this.handleHeaderInput(event, columnHeader[1])}
 						>
 							<f-div gap="small" height="100%" width="fit-content">
 								${this.getHeaderCellTemplate(columnHeader[1])}
@@ -447,6 +449,15 @@ export class FTableSchema extends FRoot {
 		} else if (this.loadMoreButton) {
 			this.loadMoreButton.style.display = "none";
 		}
+	}
+
+	handleHeaderInput(event: CustomEvent<boolean>, headerCell: FTableSchemaHeaderCell) {
+		const toggle = new CustomEvent("header-input", {
+			detail: { value: event.detail, header: headerCell },
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(toggle);
 	}
 
 	paginate() {

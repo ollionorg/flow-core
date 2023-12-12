@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.2.1] - 2023-12-12
+
+### Improvements
+
+- `f-table-schema` : `@header-input` emitted when checkbox from header is clicked.
+
 ## [2.2.0] - 2023-11-28
 
 ### Minor Changes

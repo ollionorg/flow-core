@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.6.2] - 2023-12-12
+
+### Bug fixes
+
+- `f-color-picker` alignment fix when used in row direction with other inputs.
+
 ## [2.6.1] - 2023-12-04
 
 ### Bug fixes

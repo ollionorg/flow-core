@@ -2,6 +2,13 @@
 
 # Change Log
 
+## [2.2.2] - 2023-12-13
+
+### Bug Fixes
+
+- `f-table-schema` : header checkbox not updating state when rows selection updated.
+- `@row-click` emitted when checkbox clicked.
+
 ## [2.2.1] - 2023-12-12
 
 ### Improvements

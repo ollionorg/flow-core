@@ -68,6 +68,12 @@ export class FSuggest extends FRoot {
 	suggestions?: FSuggestSuggestions = [];
 
 	/**
+	 * @attribute disable showing suggestions
+	 */
+	@property({ reflect: true, type: Boolean, attribute: "disable-suggestions" })
+	disableSuggestions = false;
+
+	/**
 	 * @attribute States are used to communicate purpose and connotations.
 	 */
 	@property({ reflect: true, type: String })
@@ -222,14 +228,16 @@ export class FSuggest extends FRoot {
 		this.currentCategoryIndex = 0;
 	}
 	handleFocus() {
-		this.popOverElement.target = this.fInput.inputWrapperElement;
-		this.popOverElement.offset = {
-			mainAxis: 4
-		};
-		this.popOverElement.style.width = this.offsetWidth + "px";
-		this.popOverElement.style.maxHeight = this.optionsMaxHeight ?? "600px";
-		if (!this.loading) {
-			this.popOverElement.open = true;
+		if (!this.disableSuggestions) {
+			this.popOverElement.target = this.fInput.inputWrapperElement;
+			this.popOverElement.offset = {
+				mainAxis: 4
+			};
+			this.popOverElement.style.width = this.offsetWidth + "px";
+			this.popOverElement.style.maxHeight = this.optionsMaxHeight ?? "600px";
+			if (!this.loading) {
+				this.popOverElement.open = true;
+			}
 		}
 	}
 

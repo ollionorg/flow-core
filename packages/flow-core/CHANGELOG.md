@@ -2,7 +2,14 @@
 
 # Change Log
 
-## [2.6.2] - 2023-12-12
+## [2.6.3] - 2023-12-12
+
+### Improvements
+
+- `disable-result` attribute added on `f-search` to disable showing autocomplete results.
+- `disable-suggestions` attribute added on `f-suggest` to disable showing autocomplete results.
+
+## [2.6.2] - 2023-12-11
 
 ### Bug fixes
 

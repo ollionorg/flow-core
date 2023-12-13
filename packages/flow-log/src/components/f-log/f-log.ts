@@ -1,19 +1,48 @@
-import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { property } from "lit/decorators.js";
-import eleStyle from "./f-log.scss?inline";
+import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
+import { property, query, queryAll } from "lit/decorators.js";
 import globalStyle from "./f-log-global.scss?inline";
+import eleStyle from "./f-log.scss?inline";
 
-import { FRoot, flowElement } from "@cldcvr/flow-core";
-import { ref, createRef, Ref } from "lit/directives/ref.js";
-import { Terminal } from "xterm";
-import { FitAddon } from "xterm-addon-fit";
-import { SearchAddon } from "xterm-addon-search";
-import { SearchBarAddon } from "xterm-addon-search-bar";
-import { WebLinksAddon } from "xterm-addon-web-links";
-import xtermCSS from "xterm/css/xterm.css?inline";
+import {
+	FRoot,
+	flowElement,
+	FDiv,
+	FIcon,
+	FText,
+	FIconButton,
+	FDivider,
+	FSearch,
+	FSelect,
+	FInput
+} from "@cldcvr/flow-core";
+
 import { injectCss } from "@cldcvr/flow-core-config";
+import { createRef, ref, Ref } from "lit/directives/ref.js";
+import { classMap } from "lit/directives/class-map.js";
+// Anser is used to highlight bash color codes
+import anser from "anser";
+
+import { formatLogLine, getUniqueStringId, HighlightKeywords } from "./f-log-utils";
+import {
+	clearFilter,
+	closeSearchBar,
+	filterLines,
+	handleLogLevelFilter,
+	handleSearch,
+	highlightText,
+	nextMark,
+	prevMark
+} from "./f-log-search-and-filters";
 
 injectCss("f-log", globalStyle);
+// The number of lines we process in one batch
+const DEFAULT_BATCH_SIZE = 1000;
+
+// The maximum character length we process in a line, this is to prevent overflows
+const MAXIMUM_LINE_LENGTH = 10000;
+
+export type FLogHighlightKeywords = HighlightKeywords;
+export type FLogLevels = string[];
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
@@ -22,264 +51,330 @@ export class FLog extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), unsafeCSS(xtermCSS), unsafeCSS(globalStyle)];
+	static styles = [
+		unsafeCSS(eleStyle),
+		unsafeCSS(globalStyle),
+		...FDiv.styles,
+		...FIcon.styles,
+		...FText.styles,
+		...FSearch.styles,
+		...FIconButton.styles,
+		...FDivider.styles,
+		...FSelect.styles,
+		...FInput.styles
+	];
 
 	/**
 	 * @attribute logs to be displayed on screen
 	 */
 	@property({ type: String, reflect: false })
-	logs?: string;
+	logs!: string;
 
 	/**
-	 * @attribute show search bar
+	 * @attribute show toolbar
 	 */
-	@property({ type: Boolean, reflect: true, attribute: "show-search" })
-	showSearch?: boolean = false;
+	@property({ type: Boolean, reflect: true, attribute: "show-toolbar" })
+	showToolbar?: boolean = false;
 
 	/**
 	 * @attribute show scroll bar to scroll the terminal
 	 */
-	@property({ type: Boolean, reflect: true, attribute: "show-scrollbar" })
-	showScrollbar?: boolean = false;
+	@property({ type: Boolean, reflect: true, attribute: "wrap-text" })
+	wrapText?: boolean = false;
 
-	terminal!: Terminal;
-
-	fitAddon!: FitAddon;
-
-	searchAddon!: SearchAddon;
-
-	searchAddonBar!: SearchBarAddon;
-
-	themeobserver!: MutationObserver;
-
-	lineNumber = 1;
-
-	fterminalRef: Ref<HTMLDivElement> = createRef();
+	@property({ type: Array, reflect: true, attribute: "log-levels" })
+	logLevels: FLogLevels = ["ALL", "ERROR", "WARN", "DEBUG", "INFO", "TRACE", "FATAL"];
 
 	/**
-	 *
-	 * @param logs string value
+	 * for vue2
 	 */
-	write(logs: string | undefined) {
-		if (logs) {
-			this.terminal.write(this.addLineNumbers(logs));
-		}
+	set ["log-levels"](val: string[]) {
+		this.logLevels = val;
 	}
 
+	@property({ type: String, reflect: true, attribute: "selected-log-level" })
+	selectedLogLevel: string = "ALL";
+
+	@property({ type: Object, reflect: true, attribute: "highlight-keywords" })
+	highlightKeywords?: FLogHighlightKeywords;
+
 	/**
-	 * show and hide search
+	 * for vue2
 	 */
-	toggleSearch() {
-		if (this.showSearch && this.fterminalRef.value) {
-			this.searchAddonBar.show();
-			const searchInput =
-				this.fterminalRef.value.querySelector<HTMLInputElement>(".search-bar__input");
+	set ["highlight-keywords"](val: FLogHighlightKeywords) {
+		this.highlightKeywords = val;
+	}
 
-			searchInput?.parentElement?.addEventListener("click", (e: MouseEvent) => {
-				e.stopPropagation();
-			});
+	scrollRef: Ref<FDiv> = createRef();
 
-			if (searchInput) {
-				searchInput.placeholder = "Search";
+	logContainer: Ref<HTMLPreElement> = createRef();
+
+	renderStatus: Ref<FDiv> = createRef();
+
+	@query("#search-input")
+	searchInput?: FSearch;
+
+	@query("#linenumber-input")
+	lineNumberInput?: FInput;
+
+	@queryAll("mark[data-markjs='true']")
+	allMarks?: NodeListOf<HTMLElement>;
+
+	@queryAll(".log-line")
+	allLines?: NodeListOf<HTMLElement>;
+
+	lastSearchValue?: string;
+
+	// These pointers are used to find out the current index of the logs string being rendered
+
+	lastPointerIdx: number = 0;
+
+	currentIdx: number = 0;
+
+	currentBatchId: string = getUniqueStringId();
+
+	requestIdleId?: number;
+
+	range = document.createRange();
+	currentMarkIndex = 0;
+	searchOccurrences = 0;
+
+	searchDebounceTimeout?: ReturnType<typeof setTimeout>;
+
+	handleSearch = handleSearch;
+	closeSearchBar = closeSearchBar;
+	prevMark = prevMark;
+	nextMark = nextMark;
+	highlightText = highlightText;
+	clearFilter = clearFilter;
+	filterLines = filterLines;
+	handleLogLevelFilter = handleLogLevelFilter;
+	// Processes the current log batch and renders the lines in the terminal
+	processNextBatch(batchSize = DEFAULT_BATCH_SIZE) {
+		let currentBatchSize = 0;
+
+		let fragment = "";
+
+		while (currentBatchSize < batchSize) {
+			if (
+				this.logs &&
+				// If we have reached a new line
+				(this.logs[this.currentIdx] === "\n" ||
+					// Or if we exceed maximum log lines we render and move on
+					this.currentIdx - this.lastPointerIdx > MAXIMUM_LINE_LENGTH)
+			) {
+				fragment = `${fragment}${this.getCurrentLogLine()}`;
+				this.lastPointerIdx = this.currentIdx + 1;
+				currentBatchSize++;
 			}
+
+			// Check if we ended up processing beyond the file
+			if (this.logs && this.currentIdx === this.logs.length) {
+				fragment = `${fragment}${this.getCurrentLogLine()}`;
+				break;
+			}
+
+			this.currentIdx++;
+		}
+
+		this.logContainer.value?.append(this.range.createContextualFragment(fragment));
+	}
+
+	getCurrentLogLine() {
+		const logLine = this.logs.substring(this.lastPointerIdx, this.currentIdx + 1);
+		let isLineHidden = false;
+		if (
+			this.selectedLogLevel !== "ALL" &&
+			!logLine?.toLowerCase()?.includes(this.selectedLogLevel.toLowerCase())
+		) {
+			isLineHidden = true;
+		}
+
+		return `<span class="log-line${isLineHidden ? " hidden" : ""}">${anser.ansiToHtml(
+			formatLogLine(logLine, this.highlightKeywords)
+		)}</span>`;
+	}
+
+	// Renders log in batches to prevent browser from freezing
+	renderBatchedLogs(batchId: string) {
+		if (this.currentIdx < this.logs.length && this.currentBatchId === batchId) {
+			this.processNextBatch();
+			if (this.scrollRef.value && this.logs.length > 0) {
+				this.scrollRef.value.scrollTop = this.scrollRef.value.scrollHeight;
+			}
+			if (this.requestIdleId) {
+				cancelIdleCallback(this.requestIdleId);
+			}
+			const perecentageDone = (this.currentIdx * 100) / this.logs.length;
+
+			if (perecentageDone >= 100) {
+				this.renderStatus.value?.style.setProperty("display", "none");
+			} else {
+				this.renderStatus.value?.style.setProperty("display", "flex");
+			}
+			this.requestIdleId = requestIdleCallback(() => this.renderBatchedLogs(batchId));
 		} else {
-			this.searchAddonBar.hidden();
-		}
-	}
-
-	/**
-	 *
-	 * @param logs string value of logs
-	 * @returns line no.'s appended on every line
-	 */
-	addLineNumbers(logs: string) {
-		const termRegex = /"([^"]+)":/g;
-		return `${("\x1b[38;2;123;147;178m" + this.lineNumber++ + "\x1b[0m ").padEnd(4)} ${logs
-			.replace(/\n/g, "\r\n")
-			.replace(/\[INFO\]/g, "\x1b[38;2;26;149;255m[INFO]\x1b[0m")
-			.replace(/\[WARN\]/g, "\x1b[38;2;254;164;1m[WARN]\x1b[0m")
-			.replace(/\[ERROR\]/g, "\x1b[38;2;242;66;66m[ERROR]\x1b[0m")
-			.replace(/\[DEBUG\]/g, "\x1b[38;2;211;153;255m[DEBUG]\x1b[0m")
-			.replace(/\d{4}[-/][01]\d[-/][0-3]\d.[0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?Z?/g, date => {
-				return `\x1b[38;2;123;147;178m${date}\x1b[0m`;
-			})
-			.replace(termRegex, key => {
-				return `\x1b[38;2;242;137;104m${key}\x1b[0m`;
-			})
-			.replace(/(\r\n|\n\r|\n|\r)/g, (_match, p1, _offset, _string) => {
-				return `${p1}${("\x1b[38;2;123;147;178m" + this.lineNumber++ + "\x1b[0m ").padEnd(4)} `;
-			})}`;
-	}
-
-	/**
-	 * custom event on close of search bar
-	 */
-	dispatchCloseSearchEvent() {
-		const event = new CustomEvent("close", {
-			detail: {
-				value: false
-			},
-			bubbles: true,
-			composed: true
-		});
-		this.showSearch = false;
-		this.dispatchEvent(event);
-	}
-
-	/**
-	 * destroy themeobserver
-	 */
-	disconnectedCallback() {
-		if (this.themeobserver) {
-			this.themeobserver.disconnect();
-		}
-		super.disconnectedCallback();
-	}
-
-	/**
-	 * creating the terminal
-	 */
-	init() {
-		// Checking if parent container is present
-		if (this.fterminalRef.value) {
-			this.fterminalRef.value.innerHTML = "";
-
-			// finding theme element from DOM
-			const themeElement = document.querySelector<HTMLElement>("[data-theme]");
-
-			/**
-			 * CSS variables are not working in Canvas , so need to read values through computed style
-			 */
-
-			if (themeElement) {
-				const style = getComputedStyle(themeElement);
-
-				const getTheme = () => {
-					return {
-						foreground: style.getPropertyValue("--color-text-default"),
-						selectionBackground: "#ffff05",
-						selectionForeground: "#000"
-					};
-				};
-
-				/**
-				 * Create Terminal Instance
-				 */
-				this.terminal = new Terminal({
-					fontSize: 14,
-					cursorStyle: "underline",
-					scrollback: 999999,
-					theme: getTheme()
-				});
-
-				/**
-				 * Observe for theme changes
-				 */
-				if (!this.themeobserver) {
-					this.themeobserver = new MutationObserver(() => {
-						this.terminal.options = { theme: getTheme() };
-					});
-
-					this.themeobserver.observe(themeElement, {
-						attributes: true,
-						childList: false,
-						subtree: false
-					});
-				}
-				/**
-				 * Fit according to container width and height
-				 */
-				this.fitAddon = new FitAddon();
-				/**
-				 * Search add-on for searching text inside canvas
-				 */
-				this.searchAddon = new SearchAddon();
-				this.searchAddonBar = new SearchBarAddon({
-					searchAddon: this.searchAddon
-				});
-				this.lineNumber = 1;
-
-				this.terminal.loadAddon(this.fitAddon);
-				this.terminal.loadAddon(this.searchAddon);
-				this.terminal.loadAddon(this.searchAddonBar);
-				this.terminal.loadAddon(new WebLinksAddon());
-
-				this.terminal.open(this.fterminalRef.value);
-
-				// adding line numbers
-				this.write(this.logs);
-
-				this.toggleSearch();
-
-				const closeSearch = this.fterminalRef.value.querySelector(".search-bar__btn.close");
-				const nextSearch = this.fterminalRef.value.querySelector(".search-bar__btn.next");
-				const prevSearch = this.fterminalRef.value.querySelector(".search-bar__btn.prev");
-
-				closeSearch?.addEventListener("click", () => {
-					this.searchAddonBar.hidden();
-					this.dispatchCloseSearchEvent();
-				});
-
-				nextSearch?.addEventListener("click", () => {
-					const searchInputValue =
-						this.fterminalRef.value?.querySelector<HTMLInputElement>(".search-bar__input")?.value;
-					this.searchAddon.findNext(searchInputValue ?? "");
-				});
-
-				prevSearch?.addEventListener("click", () => {
-					const searchInputValue =
-						this.fterminalRef.value?.querySelector<HTMLInputElement>(".search-bar__input")?.value;
-					this.searchAddon.findPrevious(searchInputValue ?? "");
-				});
-
-				this.fitAddon.fit();
-
-				new ResizeObserver(() => {
-					try {
-						this.fitAddon.fit();
-					} catch (e) {
-						//@ts-check
-						console.error(e);
-					}
-				}).observe(this.fterminalRef.value);
+			if (this.requestIdleId) {
+				cancelIdleCallback(this.requestIdleId);
 			}
 		}
 	}
-
 	/**
 	 *
-	 * @returns html remdered
+	 * @param event on Enter press in line number input will go to line
 	 */
+	handleLineNumber(event: KeyboardEvent) {
+		if (event.key === "Enter") {
+			this.goToLine(this.lineNumberInput?.value as number);
+		}
+	}
+	/**
+	 *
+	 * @param linenumber this function can be used externally as well to force to go line number
+	 */
+	goToLine(linenumber: number) {
+		if (linenumber > 0 && this.allLines) {
+			const lineToJump = this.allLines[linenumber - 1];
+			lineToJump.scrollIntoView({
+				block: "center",
+				behavior: "smooth"
+			});
+			lineToJump.classList.add("blink");
+			setTimeout(() => {
+				lineToJump.classList.remove("blink");
+			}, 6000);
+		}
+	}
+
+	get topBar() {
+		if (this.showToolbar) {
+			return html`<f-div
+				height="44px"
+				padding="none none small none"
+				align="middle-left"
+				class="top-bar"
+			>
+				${this.searchBarTemplate}
+				<f-div width="150px" height="hug-content">
+					<f-div height="hug-content">
+						<f-input
+							variant="block"
+							id="linenumber-input"
+							type="number"
+							placeholder="Jump to line"
+							@keypress=${this.handleLineNumber}
+						></f-input>
+					</f-div>
+					<f-icon-button
+						@click=${this.goToLine}
+						state="neutral"
+						variant="packed"
+						icon="i-enter"
+					></f-icon-button>
+				</f-div>
+			</f-div>`;
+		}
+		return nothing;
+	}
+
+	get searchBarTemplate() {
+		return html`<f-div height="hug-content" align="middle-left">
+			<f-div width="460px">
+				<f-search
+					id="search-input"
+					placeholder="Search"
+					.scope=${this.logLevels}
+					.selectedScope=${this.selectedLogLevel}
+					@input=${this.handleSearch}
+					variant="block"
+					.disableResult=${true}
+				></f-search>
+			</f-div>
+			<f-div width="hug-content" align="middle-center">
+				<f-icon-button
+					state="neutral"
+					@click=${this.prevMark}
+					variant="packed"
+					icon="i-arrow-up"
+				></f-icon-button>
+				<f-divider></f-divider>
+				<f-icon-button
+					state="neutral"
+					variant="packed"
+					icon="i-arrow-down"
+					@click=${this.nextMark}
+				></f-icon-button>
+			</f-div>
+		</f-div>`;
+	}
 	render() {
-		/**
-		 * Final html to render
-		 */
-		return html`
-			<div ${ref(this.fterminalRef)} class="f-log" ?data-scrollbar=${this.showScrollbar}></div>
-		`;
-	}
+		const cssClasses = {
+			"logs-view": true,
+			"wrap-text": Boolean(this.wrapText)
+		};
+		return html` ${this.topBar}
+			<f-div
+				${ref(this.scrollRef)}
+				class=${classMap(cssClasses)}
+				align="top-left"
+				overflow="scroll"
+				width="100%"
+				direction="column"
+				.height=${this.showToolbar ? "calc(100% - 44px)" : "100%"}
+			>
+				<pre ${ref(this.logContainer)}></pre>
 
-	/**
-	 * on mount
-	 */
-	protected firstUpdated() {
-		this.init();
+				<f-div
+					height="42px"
+					padding="none small"
+					state="default"
+					class="loading-logs"
+					gap="small"
+					align="middle-center"
+					${ref(this.renderStatus)}
+				>
+					<f-icon source="i-loading" size="large" loading></f-icon>
+				</f-div>
+			</f-div>`;
 	}
-
-	/**
-	 * works on every updates taking place
-	 * @param changedProperties updated properties
-	 */
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-		changedProperties.forEach((oldValue, propName) => {
-			if (propName === "logs" && oldValue !== this.logs) {
-				this.init();
-			}
-			if (propName === "showSearch" && oldValue !== this.showSearch) {
-				this.toggleSearch();
-			}
-		});
+		super.updated(changedProperties);
+		/**
+		 * render whole ogs only when logs property changes
+		 */
+		if (changedProperties.has("logs") || changedProperties.has("selectedLogLevel")) {
+			void this.updateComplete.then(() => {
+				this.lastPointerIdx = 0;
+				this.currentIdx = 0;
+				this.currentBatchId = getUniqueStringId();
+				if (this.logContainer.value) {
+					this.logContainer.value.innerHTML = "";
+				}
+				this.renderBatchedLogs(this.currentBatchId);
+			});
+		}
+
+		window.addEventListener("keydown", this.searchShortCutHhandler, { capture: true });
 	}
+
+	disconnectedCallback(): void {
+		super.disconnectedCallback();
+
+		window.removeEventListener("keydown", this.searchShortCutHhandler);
+	}
+	/**
+	 *
+	 * @param event shortcut to open toolbar
+	 */
+	searchShortCutHhandler = (event: KeyboardEvent) => {
+		event.stopPropagation();
+		if ((event.metaKey || event.ctrlKey) && event.key === "f") {
+			this.showToolbar = true;
+		}
+		if (event.key === "Escape") {
+			this.closeSearchBar();
+		}
+	};
 }
 
 /**

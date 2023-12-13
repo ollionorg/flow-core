@@ -2,6 +2,21 @@
 
 # Change Log
 
+## [2.0.0] - 2023-12-11
+
+### Major/Breaking Changes
+
+- 🚫 Removed show-search and show-scrollbar attributes.
+- 🪓 Dropped the internal dependency on xterm.js. (We're more independent now!)
+
+### Features
+
+- 🎨 Now rocking native HTML for log display. (Goodbye, unnecessary complexity!)
+- 🚀 Handling logs like a champ with batch processing for over 1,000 lines. (Performance boost!)
+- 🧰 Say hello to the show-toolbar attribute, bringing you filter, search, and Jump to Line tools. (Tools at your fingertips!)
+- 🔍 Introducing the highlight-keywords property. Customize word highlighting to your heart's content. (Show off those important terms!)
+- 🔄 Added the wrap-text attribute for toggling line wrapping. (Readability, you're in control!)
+
 ## [1.1.0] - 2023-11-27
 
 ### Minor Changes

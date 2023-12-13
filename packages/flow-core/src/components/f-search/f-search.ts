@@ -71,6 +71,12 @@ export class FSearch extends FRoot {
 	result?: FSearchSuggestions = [];
 
 	/**
+	 * @attribute disable showing result
+	 */
+	@property({ reflect: true, type: Boolean, attribute: "disable-result" })
+	disableResult = false;
+
+	/**
 	 * @attribute States are used to communicate purpose and connotations.
 	 */
 	@property({ reflect: true, type: String })
@@ -176,6 +182,9 @@ export class FSearch extends FRoot {
 	@query("#helper-text-section")
 	helperTextSection!: FDiv;
 
+	@query("f-suggest")
+	suggestElement!: FSuggest;
+
 	/**
 	 * @attribute assigned elements inside slot label
 	 */
@@ -225,6 +234,8 @@ export class FSearch extends FRoot {
 			} else {
 				this.value = String(e.detail.value);
 			}
+		} else {
+			this.value = undefined;
 		}
 		this.dispatchInputEvent(e.detail.value, this.selectedScope);
 	}
@@ -372,6 +383,7 @@ export class FSearch extends FRoot {
 						.category=${this.category}
 						.placeholder=${this.placeholder ?? "Search"}
 						.suggestions=${this.result}
+						.disableSuggestions=${this.disableResult}
 						icon-left=${this["search-button"] ? "" : "i-search"}
 						.state=${this.state}
 						?clear=${this.clear}

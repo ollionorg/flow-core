@@ -1,6 +1,4 @@
 import { html } from "lit-html";
-import { useArgs } from "@storybook/manager-api";
-import { useState } from "@storybook/preview-api";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import { FSearchResultWhen } from "@cldcvr/flow-core";
 
@@ -16,15 +14,8 @@ export default {
 
 export const Playground = {
 	render: (args: Record<string, unknown>) => {
-		const [_, updateArgs] = useArgs();
-
 		const handleInput = (e: CustomEvent) => {
 			console.log(e.detail);
-
-			updateArgs({
-				value: e.detail.value,
-				["selected-scope"]: e.detail.scope
-			});
 		};
 
 		const handleSearch = (event: CustomEvent) => {
@@ -161,10 +152,10 @@ export const Playground = {
 export const Variant = {
 	render: () => {
 		const variants = ["curved", "round", "block"];
-		const [value, setValue] = useState("");
+		const value = "";
 
 		const handleValue = (e: CustomEvent) => {
-			setValue(e.detail.value);
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -215,10 +206,10 @@ export const Variant = {
 export const Category = {
 	render: () => {
 		const categories = ["fill", "outline", "transparent"];
-		const [value, setValue] = useState("");
 
+		const value = "";
 		const handleValue = (e: CustomEvent) => {
-			setValue(e.detail.value);
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -268,10 +259,9 @@ export const Category = {
 
 export const Value = {
 	render: () => {
-		const [value, setValue] = useState("Suggestion 2");
-
+		const value = "Suggestion 2";
 		const handleValue = (e: CustomEvent) => {
-			setValue(e.detail.value);
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -315,10 +305,10 @@ export const Value = {
 
 export const Placeholder = {
 	render: () => {
-		const [value, setValue] = useState("");
+		const value = "";
 
 		const handleValue = (e: CustomEvent) => {
-			setValue(e.detail.value);
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -363,10 +353,10 @@ export const Placeholder = {
 export const Size = {
 	render: () => {
 		const sizes = ["small", "medium"];
-		const [value, setValue] = useState("");
+		const value = "";
 
 		const handleValue = (e: CustomEvent) => {
-			setValue(e.detail.value);
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -416,10 +406,10 @@ export const State = {
 			["default", "primary", "success"],
 			["danger", "warning", "default"]
 		];
-		const [value, setValue] = useState("");
+		const value = "";
 
 		const handleValue = (e: CustomEvent) => {
-			setValue(e.detail.value);
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -473,11 +463,10 @@ export const State = {
 
 export const Result = {
 	render: () => {
-		const [value, setValue] = useState("jane");
+		const value = "jane";
 
 		const handleValue = (e: CustomEvent) => {
 			console.log("in input", e);
-			setValue(e.detail.value);
 		};
 
 		const handleSelected = (e: CustomEvent) => {
@@ -622,10 +611,10 @@ export const Result = {
 
 export const Scope = {
 	render: () => {
-		const [value, setValue] = useState("");
+		const value = "";
 
 		const handleValue = (e: CustomEvent) => {
-			setValue(e.detail.value);
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -671,10 +660,10 @@ export const Scope = {
 
 export const selectedScope = {
 	render: () => {
-		const [value, setValue] = useState("");
+		const value = "";
 
 		const handleValue = (e: CustomEvent) => {
-			setValue(e.detail.value);
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -723,10 +712,10 @@ export const selectedScope = {
 
 export const resultMaxHeight = {
 	render: () => {
-		const [value, setValue] = useState("");
+		const value = "";
 
 		const handleValue = (e: CustomEvent) => {
-			setValue(e.detail.value);
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -776,10 +765,10 @@ export const resultMaxHeight = {
 
 export const resultWhen = {
 	render: () => {
-		const [value, setValue] = useState("");
+		const value = "";
 
 		const handleValue = (e: CustomEvent) => {
-			setValue(e.detail.value);
+			console.log(e.detail.value);
 		};
 
 		const resWhen: FSearchResultWhen = (suggestion, value) => {
@@ -850,10 +839,10 @@ export const resultWhen = {
 
 export const Flags = {
 	render: () => {
-		const [value, setValue] = useState("");
+		const value = "";
 
 		const handleValue = (e: CustomEvent) => {
-			setValue(e.detail.value);
+			console.log(e.detail.value);
 		};
 
 		return html`

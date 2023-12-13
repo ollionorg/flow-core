@@ -125,6 +125,7 @@ export class FTcell extends FRoot {
 				${this.selectable === "multiple"
 					? html`<f-checkbox
 							?disabled=${this.isDisabled}
+							@click=${(event: PointerEvent) => event.stopPropagation()}
 							@input=${this.handleSelection}
 					  ></f-checkbox>`
 					: nothing}
@@ -132,6 +133,7 @@ export class FTcell extends FRoot {
 					? html`<f-radio
 							?disabled=${this.isDisabled}
 							@input=${this.handleSelection}
+							@click=${(event: PointerEvent) => event.stopPropagation()}
 							class="cell-radio"
 					  ></f-radio>`
 					: nothing}

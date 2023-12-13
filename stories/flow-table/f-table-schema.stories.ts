@@ -1,5 +1,4 @@
 import { html } from "lit-html";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import getFakeUsers, { popoverRef } from "../utils/mock-users-data";
 import { createRef, ref } from "lit/directives/ref.js";
 import downloadFile from "./donwload-file";
@@ -456,7 +455,6 @@ export const HeaderInput = {
 	render: () => {
 		const data = getFakeUsers(10, 5);
 		const fieldRef = createRef();
-
 		const handleEvent = (event: CustomEvent) => {
 			if (fieldRef.value) {
 				fieldRef.value.textContent = JSON.stringify(event.detail, undefined, 2);

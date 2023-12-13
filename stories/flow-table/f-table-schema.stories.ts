@@ -1,9 +1,7 @@
 import { html } from "lit-html";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import getFakeUsers, { popoverRef } from "../utils/mock-users-data";
 import { createRef, ref } from "lit/directives/ref.js";
 import downloadFile from "./donwload-file";
-import { FTableSchema } from "@cldcvr/flow-table/src/components/f-table-schema/f-table-schema";
 
 export default {
 	title: "@cldcvr/flow-table/f-table-schema",
@@ -457,17 +455,6 @@ export const HeaderInput = {
 	render: () => {
 		const data = getFakeUsers(10, 5);
 		const fieldRef = createRef();
-		const tableRef = createRef<FTableSchema>();
-
-		const handleToggle = (_event: PointerEvent) => {
-			data.rows.forEach(row => {
-				row.selected = !row.selected;
-			});
-			if (tableRef.value) {
-				tableRef.value.data = { ...data };
-			}
-		};
-
 		const handleEvent = (event: CustomEvent) => {
 			if (fieldRef.value) {
 				fieldRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
@@ -478,13 +465,7 @@ export const HeaderInput = {
 				<f-text
 					>'header-input' event emitted whenever checkbox is checked/unchecked in header</f-text
 				>
-				<f-button label="toggle" @click=${handleToggle}></f-button>
-				<f-table-schema
-					${ref(tableRef)}
-					.data=${data}
-					selectable="multiple"
-					@header-input=${handleEvent}
-				>
+				<f-table-schema .data=${data} selectable="multiple" @header-input=${handleEvent}>
 				</f-table-schema>
 				<f-divider></f-divider>
 			</f-div>

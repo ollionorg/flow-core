@@ -162,6 +162,9 @@ export class FTableSchema extends FRoot {
 	@query("f-div.load-more")
 	loadMoreButton?: FDiv;
 
+	@query("#f-table-element")
+	tableElement?: FTable;
+
 	nextEmitted = false;
 
 	get max() {
@@ -405,6 +408,7 @@ export class FTableSchema extends FRoot {
 						: nothing}
 				</slot>
 				<f-table
+					id="f-table-element"
 					.variant=${this.variant}
 					.size=${this.size}
 					.selectable=${this.selectable}
@@ -419,9 +423,7 @@ export class FTableSchema extends FRoot {
 			</div>
 		`;
 	}
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
 
 		this.onscroll = () => {
@@ -440,15 +442,19 @@ export class FTableSchema extends FRoot {
 				});
 			}
 		};
-		await this.updateComplete;
-		if (
-			this.scrollHeight === this.offsetHeight &&
-			this.filteredRows.length < this.searchedRows.length
-		) {
-			this.loadMoreButton?.style.removeProperty("display");
-		} else if (this.loadMoreButton) {
-			this.loadMoreButton.style.display = "none";
-		}
+		void this.updateComplete.then(async () => {
+			if (
+				this.scrollHeight === this.offsetHeight &&
+				this.filteredRows.length < this.searchedRows.length
+			) {
+				this.loadMoreButton?.style.removeProperty("display");
+			} else if (this.loadMoreButton) {
+				this.loadMoreButton.style.display = "none";
+			}
+			if (this.tableElement) {
+				await this.tableElement.updateHeaderSelectionCheckboxState();
+			}
+		});
 	}
 
 	handleHeaderInput(event: CustomEvent<boolean>, headerCell: FTableSchemaHeaderCell) {

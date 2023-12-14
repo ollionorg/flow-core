@@ -1,0 +1,42 @@
+@import "../../../../flow-core/src/mixins/scss/mixins";
+f-chart {
+	@include base();
+	display: flex;
+	svg {
+		.domain {
+			stroke: var(--color-border-secondary);
+		}
+		.tick {
+			line {
+				stroke: var(--color-border-secondary);
+				&.grid-line {
+					stroke: var(--color-border-subtle);
+				}
+			}
+			text {
+				stroke: var(--color-text-secondary);
+			}
+		}
+		.tooltip-line {
+			stroke: var(--color-border-default);
+			stroke-dasharray: 6;
+		}
+		.tooltip-point {
+			fill: var(--color-primary-default);
+		}
+	}
+	.f-chart-tooltip {
+		position: fixed;
+		&.hide {
+			display: none;
+		}
+		&.show {
+			display: flex;
+		}
+		transition:
+			left 0.2s linear,
+			top 0.2s linear,
+			bottom 0.2s linear,
+			right 0.2s linear;
+	}
+}

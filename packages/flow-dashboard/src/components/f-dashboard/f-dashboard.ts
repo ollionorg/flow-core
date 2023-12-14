@@ -1,4 +1,4 @@
-import { html, PropertyValueMap } from "lit";
+import { CSSResult, html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import { FRoot, flowElement } from "@cldcvr/flow-core";
 import globalStyle from "./f-dashboard-global.scss?inline";
@@ -14,7 +14,7 @@ export class FDashboard extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	//static styles: CSSResult[] = [unsafeCSS(globalStyle)];
+	static styles: CSSResult[] = [unsafeCSS(globalStyle)];
 
 	/**
 	 * @attribute comments baout title
@@ -51,23 +51,27 @@ export class FDashboard extends FRoot {
 
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
-		const gridStack = GridStack.init({ margin: "4px" });
-		let timer: number = 0;
-		pollingWorker.onmessage = (e: MessageEvent<FDashboardWidget>) => {
-			const wgtIdx = this.config.widgets.findIndex(w => w.id === e.data.id);
-			this.config.widgets[wgtIdx] = e.data;
-			if (timer) {
-				clearTimeout(timer);
-			}
-			timer = setTimeout(() => {
-				this.requestUpdate();
-			}, 300);
-		};
+		try {
+			const gridStack = GridStack.init({ margin: "4px" });
+			let timer: number = 0;
+			pollingWorker.onmessage = (e: MessageEvent<FDashboardWidget>) => {
+				const wgtIdx = this.config.widgets.findIndex(w => w.id === e.data.id);
+				this.config.widgets[wgtIdx] = e.data;
+				if (timer) {
+					clearTimeout(timer);
+				}
+				timer = setTimeout(() => {
+					this.requestUpdate();
+				}, 300);
+			};
 
-		this.updateWidgetFontSize();
-		gridStack.on("resizecontent", () => {
 			this.updateWidgetFontSize();
-		});
+			gridStack.on("resizecontent", () => {
+				this.updateWidgetFontSize();
+			});
+		} catch (er) {
+			//ignore girdstack error for now
+		}
 		//console.log(gridStack);
 	}
 

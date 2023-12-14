@@ -55,7 +55,7 @@ export class FChart extends FRoot {
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
 
-		const chartData = generateLineChartData(100);
+		const chartData = generateLineChartData(200);
 		const width = this.offsetWidth;
 		const height = 500;
 		const marginTop = 20;
@@ -176,30 +176,40 @@ export class FChart extends FRoot {
 				const coOrdinates = tooltipPoint.node()?.getBoundingClientRect();
 				this.chartTooltip.value.classList.add("show");
 				this.chartTooltip.value.classList.remove("hide");
-
-				if (coOrdinates && coOrdinates.top > this.chartTooltip.value.offsetHeight) {
+				const tooltipOffset = 32;
+				if (coOrdinates && coOrdinates.top < Math.max(this.chartTooltip.value.offsetHeight, 150)) {
 					this.chartTooltip.value.style.removeProperty("top");
 					this.chartTooltip.value.style.setProperty(
 						"bottom",
-						`${document.body.offsetHeight - (coOrdinates?.top ?? 0)}px`
+						`${
+							document.body.offsetHeight -
+							((coOrdinates?.top ?? 0) + this.chartTooltip.value.offsetHeight)
+						}px`
 					);
 				} else {
 					this.chartTooltip.value.style.removeProperty("bottom");
-					this.chartTooltip.value.style.setProperty("top", `${coOrdinates?.top ?? 0}px`);
+					this.chartTooltip.value.style.setProperty(
+						"top",
+						`${(coOrdinates?.top ?? 0) + tooltipOffset}px`
+					);
 				}
 
 				if (
 					coOrdinates &&
-					coOrdinates.left > document.body.offsetWidth - this.chartTooltip.value.offsetWidth
+					coOrdinates.left >
+						document.body.offsetWidth - Math.max(this.chartTooltip.value.offsetWidth, 320)
 				) {
 					this.chartTooltip.value.style.removeProperty("left");
 					this.chartTooltip.value.style.setProperty(
 						"right",
-						`${document.body.offsetWidth - 16 - coOrdinates?.left}px`
+						`${document.body.offsetWidth + tooltipOffset - coOrdinates?.left}px`
 					);
 				} else {
 					this.chartTooltip.value.style.removeProperty("right");
-					this.chartTooltip.value.style.setProperty("left", `${(coOrdinates?.left ?? 0) + 16}px`);
+					this.chartTooltip.value.style.setProperty(
+						"left",
+						`${(coOrdinates?.left ?? 0) + tooltipOffset}px`
+					);
 				}
 				const xDate = new Date();
 				xDate.setTime(chartData[i].date);
@@ -247,7 +257,7 @@ export class FChart extends FRoot {
 			yAxisG.call(yAxis);
 			yAxisG.call(xGridLines);
 			path.attr("d", line(chartData));
-		}, 1000000000);
+		}, 1000);
 
 		setTimeout(() => {
 			clearInterval(interval);
@@ -272,16 +282,19 @@ export type TimeseriesPoint = {
 function generateLineChartData(
 	numPoints: number,
 	from?: Date,
-	yOffSet?: number
+	_yOffSet?: number
 ): TimeseriesPoint[] {
 	const startDate = from ? from.getTime() : new Date().getTime();
 	const data: TimeseriesPoint[] = [];
 
 	for (let i = 0; i < numPoints; i++) {
 		const currentDate = startDate + i * 60 * 1000; // Incrementing date by one day
-		let fluctuatingValue = Math.random() * (yOffSet ?? 100) + Math.sin(i / 8) * 50; // Adding a sine wave for fluctuation
+		let fluctuatingValue = Math.floor(Math.random() * 10) + 100; //Math.random() * (yOffSet ?? 100) + Math.sin(i / 8) * 50; // Adding a sine wave for fluctuation
 		if (fluctuatingValue < 0) {
 			fluctuatingValue *= -1;
+		}
+		if (fluctuatingValue % 9 === 0) {
+			fluctuatingValue = 150 * getRndInteger(1, 2);
 		}
 		const dataPoint: TimeseriesPoint = {
 			date: currentDate,
@@ -292,4 +305,8 @@ function generateLineChartData(
 	}
 
 	return data;
+}
+
+function getRndInteger(min: number, max: number) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
 }

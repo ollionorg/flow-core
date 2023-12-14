@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.2.3] - 2023-12-14
+
+### Bug Fixes
+
+- `:scope > ` querySelector not working in some browser
+
 ## [2.2.2] - 2023-12-13
 
 ### Bug Fixes

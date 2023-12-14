@@ -84,7 +84,10 @@ export class FTrow extends FRoot {
 	): Promise<void> {
 		super.updated(changedProperties);
 		await this.updateComplete;
-		const allCells = this.querySelectorAll(":scope > f-tcell");
+		const allCells = Array.from(this.children).filter(
+			el => el.tagName.toLocaleLowerCase() === "f-tcell"
+		);
+
 		if (this.expndablePanel) {
 			this.expndablePanel.style.gridColumnEnd = `${allCells.length + 1}`;
 		}
@@ -96,7 +99,10 @@ export class FTrow extends FRoot {
 	 * propogate props related to chevron and checkbox and radio boxes
 	 */
 	propogateProps() {
-		const firstCell = this.querySelector<FTcell>(":scope > f-tcell");
+		const firstCell = Array.from(this.children).filter(
+			el => el.tagName.toLocaleLowerCase() === "f-tcell"
+		)[0] as FTcell;
+
 		firstCell?.setSelection(this.selected, Boolean(this.disableSelection));
 		this.handleDetailsSlot();
 	}
@@ -124,13 +130,15 @@ export class FTrow extends FRoot {
 	}
 	handleDetailsSlot() {
 		if (this.detailsSlotElement.assignedNodes().length > 0) {
-			const allCells = this.querySelectorAll<FTcell>(":scope > f-tcell");
+			const allCells = Array.from(this.children).filter(
+				el => el.tagName.toLocaleLowerCase() === "f-tcell"
+			) as FTcell[];
 
 			let chevronCell;
 			if (this.expandIconPosition === "left") {
-				chevronCell = allCells.item(0);
+				chevronCell = allCells[0];
 			} else {
-				chevronCell = allCells.item(allCells.length - 1);
+				chevronCell = allCells[allCells.length - 1];
 			}
 			chevronCell.expandIcon = true;
 			chevronCell.expandIconPosition = this.expandIconPosition as FTrowChevronPosition;

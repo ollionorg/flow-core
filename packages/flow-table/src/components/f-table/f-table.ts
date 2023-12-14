@@ -75,14 +75,22 @@ export class FTable extends FRoot {
 			await this.updateHeaderSelectionCheckboxState();
 		}
 		if (this.selectable === "single") {
-			const headerRow = this.querySelector<FTrow>(":scope > f-trow[selected][slot='header']");
+			const headerRow = Array.from(this.children).filter(
+				el =>
+					el.tagName.toLocaleLowerCase() === "f-trow" &&
+					el.getAttribute("slot") === "header" &&
+					el.hasAttribute("selected")
+			)[0] as FTrow;
 			if (headerRow) {
 				headerRow.selected = false;
 			}
 
-			const selectedRow = this.querySelector<FTrow>(
-				":scope > f-trow[selected]:not([slot='header'])"
-			);
+			const selectedRow = Array.from(this.children).filter(
+				el =>
+					el.tagName.toLocaleLowerCase() === "f-trow" &&
+					el.getAttribute("slot") !== "header" &&
+					el.hasAttribute("selected")
+			)[0] as FTrow;
 			if (selectedRow) {
 				this.updateRadioChecks(selectedRow);
 			}
@@ -90,7 +98,9 @@ export class FTable extends FRoot {
 	}
 
 	updateGridTemplateColumns() {
-		const firstRow = this.querySelector(":scope > f-trow");
+		const firstRow = Array.from(this.children).filter(
+			el => el.tagName.toLocaleLowerCase() === "f-trow"
+		)[0] as FTrow;
 		if (firstRow !== null) {
 			/**
 			 * following query is not working vue app so replaced with firstRow.children
@@ -116,7 +126,9 @@ export class FTable extends FRoot {
 	 * apply checkbox or radio based on selection property
 	 */
 	applySelectable() {
-		const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
+		const allRows = Array.from(this.children).filter(
+			el => el.tagName.toLocaleLowerCase() === "f-trow"
+		) as FTrow[];
 		allRows.forEach(row => {
 			const firstChild = Array.from(row.children).find(child => {
 				return child.tagName === "F-TCELL";
@@ -134,7 +146,9 @@ export class FTable extends FRoot {
 	async handleHeaderRowSelection(event: CustomEvent) {
 		event.stopPropagation();
 		if (this.selectable === "multiple") {
-			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
+			const allRows = Array.from(this.children).filter(
+				el => el.tagName.toLocaleLowerCase() === "f-trow"
+			) as FTrow[];
 			if (event.detail.value === true) {
 				allRows.forEach(r => {
 					if (!r.disableSelection) {
@@ -167,9 +181,12 @@ export class FTable extends FRoot {
 	}
 
 	dispatchSelectedRowEvent() {
-		const selectedRows = this.querySelectorAll<FTrow>(
-			":scope > f-trow[selected]:not([slot='header'])"
-		);
+		const selectedRows = Array.from(this.children).filter(
+			el =>
+				el.tagName.toLocaleLowerCase() === "f-trow" &&
+				el.getAttribute("slot") !== "header" &&
+				el.hasAttribute("selected")
+		) as FTrow[];
 		const toggle = new CustomEvent("selected-rows", {
 			detail: Array.from(selectedRows),
 			bubbles: true,
@@ -183,7 +200,9 @@ export class FTable extends FRoot {
 	 */
 	updateRadioChecks(element: HTMLElement) {
 		if (this.selectable === "single") {
-			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow:not([slot='header'])");
+			const allRows = Array.from(this.children).filter(
+				el => el.tagName.toLocaleLowerCase() === "f-trow" && el.getAttribute("slot") !== "header"
+			) as FTrow[];
 
 			allRows.forEach(row => {
 				if (row.selected && row !== element) {
@@ -197,15 +216,21 @@ export class FTable extends FRoot {
 	 */
 	async updateHeaderSelectionCheckboxState() {
 		if (this.selectable === "multiple") {
-			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
+			const allRows = Array.from(this.children).filter(
+				el => el.tagName.toLocaleLowerCase() === "f-trow"
+			) as FTrow[];
 			const rowsWithoutHeader = Array.from(allRows).filter(
 				r => r.getAttribute("slot") !== "header"
 			);
 			const selectedRows = rowsWithoutHeader.filter(r => r.selected);
-			const headerRow = this.querySelector<FTrow>(":scope > f-trow[slot='header']");
+			const headerRow = Array.from(this.children).filter(
+				el => el.tagName.toLocaleLowerCase() === "f-trow" && el.getAttribute("slot") === "header"
+			)[0] as FTrow;
 			if (headerRow) {
 				await headerRow.updateComplete;
-				const firstCell = headerRow.querySelector<FTcell>(":scope > f-tcell");
+				const firstCell = Array.from(headerRow.children).filter(
+					el => el.tagName.toLocaleLowerCase() === "f-tcell"
+				)[0] as FTcell;
 				if (firstCell?.checkbox) {
 					if (selectedRows.length === 0) {
 						headerRow.selected = false;
@@ -222,9 +247,13 @@ export class FTable extends FRoot {
 
 	toggleColumnHighlight(event: CustomEvent) {
 		if (event.detail.columnIndex >= 0) {
-			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
+			const allRows = Array.from(this.children).filter(
+				el => el.tagName.toLocaleLowerCase() === "f-trow"
+			) as FTrow[];
 			allRows.forEach(row => {
-				const allCells = row.querySelectorAll<FTrow>(":scope > f-tcell");
+				const allCells = Array.from(row.children).filter(
+					el => el.tagName.toLocaleLowerCase() === "f-tcell"
+				) as FTcell[];
 				if (event.detail.type === "add") {
 					allCells[event.detail.columnIndex]?.classList.add("highlight");
 				} else {
@@ -236,9 +265,13 @@ export class FTable extends FRoot {
 
 	toggleColumnSelected(event: CustomEvent) {
 		if (event.detail.columnIndex >= 0) {
-			const allRows = this.querySelectorAll<FTrow>(":scope > f-trow");
+			const allRows = Array.from(this.children).filter(
+				el => el.tagName.toLocaleLowerCase() === "f-trow"
+			) as FTrow[];
 			allRows.forEach(row => {
-				const allCells = row.querySelectorAll<FTrow>(":scope > f-tcell");
+				const allCells = Array.from(row.children).filter(
+					el => el.tagName.toLocaleLowerCase() === "f-tcell"
+				) as FTcell[];
 				if (allCells[event.detail.columnIndex]) {
 					allCells[event.detail.columnIndex].selected =
 						!allCells[event.detail.columnIndex].selected;

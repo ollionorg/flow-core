@@ -1378,7 +1378,7 @@ export const Loading = {
 					<f-icon source="i-plus"></f-icon>
 					<f-icon-button icon="i-plus"></f-icon-button>
 					<f-button label="TEst"></f-button>
-					<f-counter label="7889"></f-counter>
+					<f-counter tooltip="Test" label="7889"></f-counter>
 				</f-div>
 			</f-div>
 		</f-div>`,

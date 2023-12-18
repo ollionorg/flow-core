@@ -9,7 +9,7 @@ import { validateHTMLColorName } from "validate-color";
 import { flowElement } from "./../../utils";
 import { FIcon } from "../f-icon/f-icon";
 import { injectCss } from "@cldcvr/flow-core-config";
-import * as Mark from "mark.js/dist/mark.es6.min";
+import Mark from "mark.js/dist/mark.es6.min";
 injectCss("f-text", globalStyle);
 
 export type FTextStateProp =

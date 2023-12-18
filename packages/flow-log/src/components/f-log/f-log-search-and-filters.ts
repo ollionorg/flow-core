@@ -1,5 +1,5 @@
 import { FLog } from "./f-log";
-import * as Mark from "mark.js/dist/mark.es6.min";
+import Mark from "mark.js/dist/mark.es6.min";
 
 export function closeSearchBar(this: FLog) {
 	this.showToolbar = false;

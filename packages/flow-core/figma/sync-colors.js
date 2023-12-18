@@ -45,16 +45,18 @@ function generateTokenScss(colorTokens) {
 			theme === "f-ollion-light"
 		) {
 			const tokenEntries = Object.entries(tokens);
-
+			/**
+			 * !important added to have highest css specificity if used with flow1
+			 */
 			scss += `
 	[data-theme="${theme}"]{ `;
 
 			for (let [variable, value] of tokenEntries) {
 				const cssVariable = `color-${variable}`;
 				scss += `$${cssVariable} : ${value} ;\n`;
-				scss += `--${cssVariable} : #{$${cssVariable}} ;\n`;
-				scss += `--${cssVariable}-hover : #{getHover($${cssVariable})};\n`;
-				scss += `--${cssVariable}-selected : #{getSelected($${cssVariable})};\n`;
+				scss += `--${cssVariable} : #{$${cssVariable}} !important;\n`;
+				scss += `--${cssVariable}-hover : #{getHover($${cssVariable})} !important;\n`;
+				scss += `--${cssVariable}-selected : #{getSelected($${cssVariable})} !important;\n`;
 			}
 			scss += `
 };\n`;
@@ -254,7 +256,9 @@ function generateCategoryStyles(variants, theme) {
  * @returns proper font-family string creation
  */
 function createFontFamily(category, fontFamily) {
-	return category === "code" ? `"${fontFamily}", monospace` : `"${fontFamily}", sans-serif`;
+	return category === "code"
+		? `"${fontFamily}", monospace`
+		: `"${fontFamily}", "Montserrat", sans-serif`;
 }
 
 /**

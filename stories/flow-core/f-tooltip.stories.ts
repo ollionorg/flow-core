@@ -1,5 +1,4 @@
 import { html } from "lit-html";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import { useState } from "@storybook/preview-api";
 import { FTooltipObject, FTooltipPlacement } from "@cldcvr/flow-core";
 
@@ -56,8 +55,11 @@ export const PlaygroundRichTooltipComponent = {
 						<f-icon-button icon="i-plus" .tooltip=${args.tooltip}></f-icon-button>
 						<f-button label="Submit" .tooltip=${args.tooltip}></f-button>
 					</f-div>
-					<f-tooltip .placement=${args.placement} id="tooltipTarget" ?closable=${args.closable}
-						>${unsafeHTML(args["Custom Tooltip Template"])}</f-tooltip
+					<f-tooltip .placement=${args.placement} id="tooltipTarget" ?closable=${args.closable}>
+						<f-div direction="column" width="hug-content">
+							<f-text variant="para" size="small"> Hello Everyone </f-text>
+							<f-text variant="para" size="small" state="primary"> Learn More </f-text>
+						</f-div></f-tooltip
 					>`
 			: html`<f-div padding="large" height="200px" align="middle-center" gap="large">
 					<f-icon-button icon="i-plus" .tooltip=${args.tooltip}></f-icon-button>
@@ -87,10 +89,6 @@ export const PlaygroundRichTooltipComponent = {
 			]
 		},
 
-		["Custom Tooltip Template"]: {
-			control: "text"
-		},
-
 		tooltip: {
 			control: "text"
 		},
@@ -103,12 +101,6 @@ export const PlaygroundRichTooltipComponent = {
 	args: {
 		tooltip: "#tooltipTarget",
 		placement: "auto",
-
-		["Custom Tooltip Template"]: `
-          <f-div direction="column" width="hug-content">
-            <f-text variant="para" size="small"> Hello Everyone </f-text>
-            <f-text variant="para" size="small" state="primary"> Learn More </f-text>
-          </f-div>`,
 
 		closable: false
 	}

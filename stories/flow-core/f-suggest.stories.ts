@@ -1,8 +1,6 @@
 import { html } from "lit-html";
 import fInputAnatomy from "../svg/i-finput-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import { useArgs, useEffect, useState } from "@storybook/client-api";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 export default {
 	title: "@cldcvr/flow-core/f-suggest",
@@ -15,16 +13,12 @@ export default {
 };
 
 export const Playground = {
-	render: args => {
-		const [_, updateArgs] = useArgs();
-
-		const handleInput = e => {
-			updateArgs({
-				value: e.detail.value
-			});
+	render: (args: Record<string, unknown>) => {
+		const handleInput = (e: CustomEvent) => {
+			console.log(e.detail.value);
 		};
 
-		const handleKeydown = event => {
+		const handleKeydown = (event: CustomEvent) => {
 			event.stopPropagation();
 			event.stopImmediatePropagation();
 		};
@@ -52,7 +46,12 @@ export const Playground = {
 					.optionsMaxHeight=${args["options-max-height"]}
 					@keydown=${handleKeydown}
 				>
-					${unsafeHTML(args.slot)}
+					<f-div slot="label" padding="none" gap="none">Label</f-div>
+					<f-div width="100%" slot="help"
+						><f-text variant="para" size="small">This is a Subtext</f-text></f-div
+					>
+					<f-text slot="subtitle" state="secondary" variant="para" size="small">Optional</f-text>
+					<f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>
 					<f-div slot="no-data" padding="medium"><f-text>this is no-data slot.</f-text></f-div>
 				</f-suggest>
 			</f-div>
@@ -142,12 +141,6 @@ export const Playground = {
 		category: "fill",
 		state: "default",
 		size: "medium",
-
-		slot: `              <f-div slot="label" padding="none" gap="none">Label</f-div>
-              <f-div width="100%" slot="help"><f-text  variant="para" size="small">This is a Subtext</f-text></f-div>
-        <f-text slot="subtitle" state="secondary" variant="para" size="small">Optional</f-text>
-      <f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>`,
-
 		["icon-left"]: undefined,
 		["icon-right"]: undefined,
 		["prefix"]: undefined,
@@ -157,7 +150,6 @@ export const Playground = {
 		disabled: false,
 		readOnly: false,
 		clear: false,
-
 		suggestions: [
 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam iaculis porta dignissim. Etiam a aliquam elit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam hendrerit quis lorem cursus consectetur. Donec sem ipsum, scelerisque at nulla vel, rutrum efficitur tortor. Praesent eu tincidunt mauris. Nam eu aliquam turpis. Curabitur placerat maximus tempor. Donec non ante in nunc eleifend elementum eu quis lorem",
 			"Suggestion 2",
@@ -176,8 +168,7 @@ export const Playground = {
 			"Suggestion 15",
 			"Suggestion 16",
 			"Suggestion 17",
-			"Suggestion 18",
-			"<f-text state='success'>Using markup</f-text>"
+			"Suggestion 18"
 		]
 	}
 };
@@ -188,12 +179,12 @@ export const Anatomy = {
 };
 
 export const Variant = {
-	render: args => {
+	render: () => {
 		const variants = ["curved", "round", "block"];
-		const [value, setValue] = useState("");
+		const value = "";
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log(e.detail);
 		};
 
 		return html`
@@ -242,12 +233,12 @@ export const Variant = {
 };
 
 export const Category = {
-	render: args => {
+	render: () => {
 		const categories = ["fill", "outline", "transparent"];
-		const [value, setValue] = useState("");
+		const value = "";
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -296,11 +287,10 @@ export const Category = {
 };
 
 export const Value = {
-	render: args => {
-		const [value, setValue] = useState("Value Here");
-
-		const handleValue = e => {
-			setValue(e.detail.value);
+	render: () => {
+		const value = "";
+		const handleValue = (e: CustomEvent) => {
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -344,11 +334,11 @@ export const Value = {
 };
 
 export const Placeholder = {
-	render: args => {
-		const [value, setValue] = useState("");
+	render: () => {
+		const value = "";
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -392,12 +382,12 @@ export const Placeholder = {
 };
 
 export const Size = {
-	render: args => {
+	render: () => {
 		const sizes = ["small", "medium"];
-		const [value, setValue] = useState("");
+		const value = "";
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -444,15 +434,15 @@ export const Size = {
 };
 
 export const State = {
-	render: args => {
+	render: () => {
 		const states = [
 			["default", "primary", "success"],
 			["danger", "warning", "default"]
 		];
-		const [value, setValue] = useState("");
+		const value = "";
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -507,18 +497,18 @@ export const State = {
 };
 
 export const Suggestions = {
-	render: args => {
-		const [value, setValue] = useState("");
+	render: () => {
+		const value = "";
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log(e.detail.value);
 		};
 
 		const template = [
 			{
 				value: "Hello",
 
-				template: function (value) {
+				template: function (value: string) {
 					return html`<f-div gap="medium" direction="column"
 						><f-text inline highlight=${value}>${this.value}</f-text
 						><f-text inline highlight=${value}>subtitle</f-text></f-div
@@ -532,7 +522,7 @@ export const Suggestions = {
 			{
 				value: "Hello123",
 
-				template: function (value) {
+				template: function (value: string) {
 					return html`<f-div gap="medium" direction="column"
 						><f-text inline highlight=${value}>${this.value}</f-text
 						><f-text inline highlight=${value}>subtitle</f-text></f-div
@@ -622,11 +612,11 @@ export const Suggestions = {
 };
 
 export const IconLeft = {
-	render: args => {
-		const [value, setValue] = useState("");
+	render: () => {
+		const value = "";
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -674,11 +664,11 @@ export const IconLeft = {
 };
 
 export const IconRight = {
-	render: args => {
-		const [value, setValue] = useState("");
+	render: () => {
+		const value = "";
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -727,11 +717,11 @@ export const IconRight = {
 };
 
 export const Prefix = {
-	render: args => {
-		const [value, setValue] = useState("");
+	render: () => {
+		const value = "";
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -779,11 +769,11 @@ export const Prefix = {
 };
 
 export const Suffix = {
-	render: args => {
-		const [value, setValue] = useState("");
+	render: () => {
+		const value = "";
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -832,11 +822,11 @@ export const Suffix = {
 };
 
 export const MaxLength = {
-	render: args => {
-		const [value, setValue] = useState("");
+	render: () => {
+		const value = "";
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log(e.detail.value);
 		};
 
 		return html`
@@ -885,11 +875,11 @@ export const MaxLength = {
 };
 
 export const Flags = {
-	render: args => {
-		const [value, setValue] = useState("");
+	render: () => {
+		const value = "";
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log(e.detail.value);
 		};
 
 		return html`

@@ -2,7 +2,6 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fSelectAnatomy from "../svg/i-fselect-anatomy.js";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 export default {
 	title: "@cldcvr/flow-core/f-select",
@@ -73,10 +72,15 @@ export const Playground = {
 						@create-option=${handleCreateOption}
 						@search-input=${handleSearchInput}
 					>
-						${unsafeHTML(args.slot)}
-					</f-select></f-div
-				></f-div
-			>
+						<f-div slot="label" padding="none" gap="none">Label for f-select</f-div>
+						<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+						<f-text slot="subtitle" state="secondary" variant="para" size="small">Optional</f-text>
+						<f-icon
+							slot="icon-tooltip"
+							source="i-question-filled"
+							tooltip="some info"
+						></f-icon> </f-select></f-div
+			></f-div>
 		`;
 	},
 
@@ -110,10 +114,6 @@ export const Playground = {
 		size: {
 			control: "radio",
 			options: ["small", "medium"]
-		},
-
-		slot: {
-			control: "text"
 		},
 
 		["icon-left"]: {
@@ -191,11 +191,6 @@ export const Playground = {
 		state: "default",
 		size: "medium",
 
-		slot: `  <f-div slot="label" padding="none" gap="none">Label for f-select</f-div>
-              <f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
-          <f-text slot="subtitle" state="secondary" variant="para" size="small">Optional</f-text>
-      <f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>`,
-
 		options: [
 			"options 1",
 			"options 2",
@@ -204,7 +199,7 @@ export const Playground = {
 			"options 5",
 			"options 6",
 			"options 7",
-			"options 8"
+			`<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/250px-Google_2015_logo.svg.png" />`
 		],
 
 		value: ["options 1"],

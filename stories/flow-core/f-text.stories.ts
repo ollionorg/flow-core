@@ -1,7 +1,4 @@
 import { html } from "lit-html";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
-import { useArgs, useEffect, useState } from "@storybook/client-api";
 
 export default {
 	title: "@cldcvr/flow-core/f-text",
@@ -14,15 +11,9 @@ export default {
 };
 
 export const Playground = {
-	render: args => {
-		const [_, updateArgs] = useArgs();
-
-		const handleEdit = e => {
+	render: (args: Record<string, unknown>) => {
+		const handleEdit = (e: CustomEvent) => {
 			console.log("story edited", e.detail.value);
-
-			updateArgs({
-				text2: e.detail.value
-			});
 		};
 
 		return html`<f-div direction="column" gap="large">
@@ -36,6 +27,7 @@ export const Playground = {
 				.ellipsis=${args.ellipsis}
 				.highlight=${args.highlight}
 				?inline=${args.inline}
+				.tooltip=${`<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/250px-Google_2015_logo.svg.png" />`}
 				>This is ${args.variant} with ${args.size} and "${args.state}" state. Alignment is
 				${args.align}
 			</f-text>
@@ -52,7 +44,7 @@ export const Playground = {
 					?inline=${args.inline}
 					?editable=${args.editable}
 					@input=${handleEdit}
-					>${unsafeHTML(args.text2)}
+					>${args.text2}
 				</f-text>
 			</f-div>
 			<f-text
@@ -65,7 +57,7 @@ export const Playground = {
 				.ellipsis=${args.ellipsis}
 				.highlight=${args.highlight}
 				?inline=${args.inline}
-				>${unsafeHTML(args.text)}</f-text
+				>${args.text}</f-text
 			>
 		</f-div> `;
 	},
@@ -178,7 +170,7 @@ export const Playground = {
 };
 
 export const Variant = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="x-large" padding="x-large" align="middle-center">
 			<f-text variant="heading">heading</f-text>
 			<f-text variant="para">para</f-text>
@@ -189,7 +181,7 @@ export const Variant = {
 };
 
 export const Size = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="x-large" direction="column">
 			<f-text variant="para" size="large" weight="medium">size of variant="heading"</f-text>
 			<f-divider></f-divider>
@@ -248,7 +240,7 @@ export const Size = {
 };
 
 export const State = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="x-large" direction="column" state="primary">
 			<f-text variant="para" size="large" weight="medium" state="default"
 				>This is a default state. This is a default state.</f-text
@@ -283,7 +275,7 @@ export const State = {
 };
 
 export const Align = {
-	render: args => html`
+	render: () => html`
 		<br />
 		<f-text variant="para" size="large" weight="medium" align="left">This is left aligned.</f-text
 		><br />
@@ -298,7 +290,7 @@ export const Align = {
 };
 
 export const Highlight = {
-	render: args => html`
+	render: () => html`
 		<br />
 		<f-text variant="para" size="large" weight="medium" align="left" highlight="left"
 			>This is left aligned.</f-text
@@ -309,7 +301,7 @@ export const Highlight = {
 };
 
 export const Flags = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="column">
 			<f-div padding="none" direction="row" gap="x-large" overflow="hidden" height="hug-content">
 				<f-text variant="para" weight="regular" ?inline=${false}>Normal Text</f-text>

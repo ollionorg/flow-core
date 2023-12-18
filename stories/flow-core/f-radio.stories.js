@@ -2,7 +2,6 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fRadioAnatomy from "../svg/i-fradio-anatomy.js";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 export default {
 	title: "@cldcvr/flow-core/f-radio",
@@ -34,10 +33,21 @@ export const Playground = {
 						?disabled=${args.disabled}
 						@input=${handleInput}
 					>
-						${unsafeHTML(args.slot)}
-					</f-radio></f-div
-				></f-div
-			>
+						<f-div slot="label" padding="none">
+							<f-text variant="para" size="small">Banana</f-text>
+						</f-div>
+						<f-div slot="help" gap="none" padding="none">
+							<f-text variant="para" size="small" state="secondary">This is a subtext </f-text>
+						</f-div>
+						<f-text slot="subtitle" align="right" state="secondary" variant="para" size="small"
+							>Optional</f-text
+						>
+						<f-icon
+							slot="icon-tooltip"
+							source="i-question-filled"
+							tooltip="some info"
+						></f-icon> </f-radio></f-div
+			></f-div>
 		`;
 	},
 
@@ -59,10 +69,6 @@ export const Playground = {
 			options: ["small", "medium"]
 		},
 
-		slot: {
-			control: "text"
-		},
-
 		disabled: {
 			control: "boolean"
 		}
@@ -72,15 +78,6 @@ export const Playground = {
 		value: "selected",
 		state: "default",
 		size: "medium",
-
-		slot: `<f-div slot="label" padding="none">
-                <f-text variant="para" size="small">Banana</f-text>
-              </f-div>
-              <f-div slot="help" gap="none" padding="none">
-                <f-text variant="para" size="small" state="secondary">This is a subtext </f-text>
-              </f-div>
-      <f-text slot="subtitle" align="right" state="secondary" variant="para" size="small">Optional</f-text>
-      <f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>`,
 
 		disabled: false
 	}

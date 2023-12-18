@@ -1,6 +1,5 @@
 import { FSuggest, FSuggestSuggestionsCategory, FSuggestTemplate } from "./f-suggest";
 import { html } from "lit";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 export function displayOptions(this: FSuggest, suggestions: string[]) {
 	return html`<f-div height="hug-content" direction="column"
@@ -16,7 +15,7 @@ export function displayOptions(this: FSuggest, suggestions: string[]) {
 				<f-div direction="row" gap="medium">
 					${this.isSearchComponent ? html` <f-icon source="i-search"></f-icon>` : ""}
 					<f-text variant="para" size="small" weight="regular" .highlight=${this.value}>
-						${unsafeHTML(sg)}
+						${sg}
 					</f-text>
 				</f-div>
 			</f-div>`;
@@ -82,7 +81,7 @@ export function displayCategories(this: FSuggest, suggestions: FSuggestSuggestio
 					<f-div direction="row" gap="medium">
 						${this.isSearchComponent ? html` <f-icon source="i-search"></f-icon>` : ""}
 						<f-text variant="para" size="small" weight="regular" .highlight=${this.value}>
-							${unsafeHTML(item)}
+							${item}
 						</f-text>
 					</f-div>
 				</f-div>`;

@@ -4,6 +4,7 @@ import { property, query } from "lit/decorators.js";
 import globalStyle from "./f-root-global.scss?inline";
 import { injectCss } from "@cldcvr/flow-core-config";
 import { FTooltipPlacement } from "../../../components/f-tooltip/f-tooltip";
+import type { FText } from "../../../components/f-text/f-text";
 
 // to avoid recursive tye check
 type TooltipElement = HTMLElement & {
@@ -116,9 +117,9 @@ export class FRoot extends LitElement {
 				if (tooltipElement) {
 					tooltipElement.target = this;
 					if (!isExternalTooltip) {
-						const tooltipText = tooltipElement?.querySelector("#tooltip-text");
-						if (tooltipText) {
-							tooltipText.innerHTML = this.tooltipText as string;
+						const tooltipTextElement = tooltipElement?.querySelector<FText>("#tooltip-text");
+						if (tooltipTextElement && this.tooltipText) {
+							tooltipTextElement.innerText = this.tooltipText;
 						}
 					}
 

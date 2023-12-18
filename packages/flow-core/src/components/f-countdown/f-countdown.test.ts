@@ -1,6 +1,5 @@
 import { html, fixture, expect } from "@open-wc/testing";
-// importing flow-core components
-import "@cldcvr/flow-core";
+
 import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 // setting icon pack for testing icon related test cases
 

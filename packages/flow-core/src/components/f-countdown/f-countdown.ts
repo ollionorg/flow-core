@@ -181,13 +181,10 @@ export class FCountdown extends FRoot {
 						"f-countdown: Please enter valid values for minutes (less than 60) and seconds (less than 60)"
 					);
 				}
-			} else {
-				if (!regexNum.test(time)) {
-					throw new Error("f-countdown: Please enter a numeric value for time");
-				}
-				if (Number(time) >= 3600) {
-					throw new Error("f-countdown: Please enter a value for time less than 3600 seconds");
-				}
+			} else if (!regexNum.test(time)) {
+				throw new Error("f-countdown: Please enter a numeric value for time");
+			} else if (Number(time) >= 3600) {
+				throw new Error("f-countdown: Please enter a value for time less than 3600 seconds");
 			}
 		} else if (time >= 3600) {
 			throw new Error("f-countdown: Please enter a value for time less than 3600 seconds");
@@ -202,6 +199,14 @@ export class FCountdown extends FRoot {
 		}
 	}
 
+	get countdownWidth() {
+		return this.labelPlacement === "left" ? "55px" : "";
+	}
+
+	get countdownAlignment() {
+		return this.labelPlacement === "left" ? "middle-right" : "middle-center";
+	}
+
 	render() {
 		this.countdownId += 1;
 		this.fill = getCustomFillColor(this.state ?? "");
@@ -210,10 +215,7 @@ export class FCountdown extends FRoot {
 		//top and left label placement
 		const labelTopAndLeft =
 			this.labelPlacement === "left" || this.labelPlacement === "top"
-				? html`<f-div
-						width=${this.labelPlacement === "left" ? "55px" : ""}
-						align=${this.labelPlacement === "left" ? "middle-right" : "middle-center"}
-				  >
+				? html`<f-div width=${this.countdownWidth} align=${this.countdownAlignment}>
 						<f-text weight="regular" .size=${this.labelSize} ${ref(this.timerRef)} inline></f-text>
 				  </f-div>`
 				: nothing;
@@ -261,8 +263,8 @@ export class FCountdown extends FRoot {
 		);
 
 		const classes: Record<string, boolean> = {
-			"f-countdown-wrapper": this.category === "fill" ? true : false,
-			"f-countdown-outline-wrapper": this.category === "outline" ? true : false
+			"f-countdown-wrapper": this.category === "fill",
+			"f-countdown-outline-wrapper": this.category === "outline"
 		};
 		this.classList.forEach(cl => {
 			classes[cl] = true;

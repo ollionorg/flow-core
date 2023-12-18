@@ -1,0 +1,212 @@
+// common mixins imported from this file
+@use "sass:map";
+
+@import "./../../mixins/scss/mixins";
+
+$sizes: (
+	"large": 44px,
+	"medium": 36px,
+	"small": 28px,
+	"x-small": 20px
+);
+
+$states: (
+	"primary": (
+		"background": var(--color-primary-default)
+	),
+	"default": (
+		"background": var(--color-primary-default)
+	),
+	"success": (
+		"background": var(--color-success-default)
+	),
+	"warning": (
+		"background": var(--color-warning-default)
+	),
+	"danger": (
+		"background": var(--color-danger-default)
+	)
+);
+
+:host {
+	.f-countdown-wrapper {
+		@include base();
+
+		display: flex;
+
+		.f-countdown-circle {
+			overflow: hidden;
+
+			position: relative;
+			clip-path: circle(49%);
+			transform: rotate(180deg);
+			transform-origin: center;
+			@each $size, $value in $sizes {
+				&[size="#{$size}"] {
+					height: $value;
+					width: $value;
+				}
+			}
+
+			@each $state, $color in $states {
+				&[state="#{$state}"] {
+					background: map.get($color, "background");
+				}
+			}
+
+			.outline-countdown {
+				position: absolute;
+				height: 20px;
+				width: 20px;
+				background-color: black;
+				z-index: 10;
+			}
+		}
+		.f-countdown-label {
+			min-width: 32px;
+			display: inline-flex;
+			justify-content: flex-end;
+			align-items: center;
+		}
+	}
+
+	.f-countdown-circle,
+	.f-countdown-circle * {
+		box-sizing: border-box;
+	}
+
+	.f-countdown-circle .f-countdown-pie {
+		width: 50%;
+		height: 100%;
+		transform-origin: 100% 50%;
+		position: absolute;
+		border: none;
+	}
+
+	.f-countdown-circle .f-countdown-spinner {
+		border-radius: 100% 0 0 100% / 50% 0 0 50%;
+		z-index: 2;
+		border-right: none;
+		animation-name: rota;
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
+	}
+
+	.f-countdown-circle:hover .f-countdown-spinner,
+	.f-countdown-circle:hover .f-countdown-filler,
+	.f-countdown-circle:hover .mask {
+		animation-play-state: running;
+	}
+
+	.f-countdown-circle .f-countdown-filler {
+		border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+		left: 50%;
+		opacity: 0;
+		z-index: 1;
+		border-left: none;
+		animation-name: opa;
+		animation-timing-function: steps(1, end);
+		animation-iteration-count: infinite;
+		animation-direction: reverse;
+	}
+
+	.f-countdown-circle .mask {
+		width: 50%;
+		height: 100%;
+		position: absolute;
+		background: inherit;
+		opacity: 1;
+		z-index: 3;
+		animation-name: opa;
+		animation-timing-function: steps(1, end);
+		animation-iteration-count: infinite;
+	}
+
+	@keyframes rota {
+		0% {
+			transform: rotate(360deg);
+		}
+		100% {
+			transform: rotate(0deg);
+		}
+	}
+
+	@keyframes opa {
+		0% {
+			opacity: 1;
+		}
+		50%,
+		100% {
+			opacity: 0;
+		}
+	}
+
+	.f-outline-countdown {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+	}
+
+	.f-outline-countdown-label {
+		position: absolute;
+	}
+
+	.f-outline-countdown-timer {
+		overflow: hidden;
+		transform: rotate(360deg);
+		background: -webkit-linear-gradient(
+			left,
+			var(--state-color) 50%,
+			var(--color-input-default) 50%
+		);
+		border-radius: 100%;
+		position: relative;
+		animation: time calc(var(--duration) * 1s) steps(1000, start) infinite;
+		-webkit-animation: time calc(var(--duration) * 1s) steps(1000, start) infinite;
+		-webkit-mask: radial-gradient(transparent 50%, #000 50%);
+		mask: radial-gradient(transparent 50%, #000 50%);
+
+		@each $size, $value in $sizes {
+			&[size="#{$size}"] {
+				height: $value;
+				width: $value;
+			}
+		}
+	}
+	.f-outline-countdown-mask {
+		border-radius: 100% 0 0 100% / 50% 0 0 50%;
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 50%;
+		animation: mask calc(var(--duration) * 1s) steps(500, start) infinite;
+		-webkit-animation: mask calc(var(--duration) * 1s) steps(500, start) infinite;
+		transform-origin: 100% 50%;
+		-webkit-transform-origin: 100% 50%;
+	}
+	@keyframes time {
+		100% {
+			-webkit-transform: rotate(360deg);
+		}
+	}
+	@keyframes mask {
+		0% {
+			background: var(--color-input-default);
+			-webkit-transform: rotate(0deg);
+		}
+		50% {
+			background: var(--color-input-default);
+			-webkit-transform: rotate(-180deg);
+		}
+		50.01% {
+			background: var(--state-color);
+			-webkit-transform: rotate(0deg);
+		}
+		100% {
+			background: var(--state-color);
+			-webkit-transform: rotate(-180deg);
+		}
+	}
+}

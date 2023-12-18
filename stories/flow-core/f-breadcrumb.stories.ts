@@ -15,15 +15,15 @@ export default {
 };
 
 export type BreadcrumbArgTypes = {
-	crumbs: FBreadcrumbs,
-	size: FBreadCrumbSize,
-	variant: FBreadCrumbVariant,
-	disabled: boolean
-}
+	crumbs: FBreadcrumbs;
+	size: FBreadCrumbSize;
+	variant: FBreadCrumbVariant;
+	disabled: boolean;
+};
 
 export const Playground = {
-	render: (args:BreadcrumbArgTypes) => {
-		const handleClick = (e:CustomEvent) => {
+	render: (args: BreadcrumbArgTypes) => {
+		const handleClick = (e: CustomEvent) => {
 			console.log(e.detail.value);
 		};
 
@@ -97,11 +97,9 @@ export const Playground = {
 
 export const Size = {
 	render: () => {
-
-		type dataString = "medium" | "small"
-		type dataType = dataString[]
+		type dataString = "medium" | "small";
+		type dataType = dataString[];
 		const data = ["medium", "small"] as dataType;
-
 
 		const crumbs = [
 			{
@@ -195,31 +193,29 @@ export const Crumbs = {
 	name: "crumbs"
 };
 
-
-
 export const Variant = {
 	render: () => {
 		const data = [
 			[
 				{
 					tabIndex: 0,
-					title: "Home",
+					title: "Home"
 				},
 				{
 					tabIndex: 1,
-					title: "Label 2",
+					title: "Label 2"
 				},
 				{
 					tabIndex: 2,
-					title: "Label 3",
+					title: "Label 3"
 				},
 				{
 					tabIndex: 3,
-					title: "Label 4",
+					title: "Label 4"
 				},
 				{
 					tabIndex: 4,
-					title: "Current",
+					title: "Current"
 				}
 			],
 			[
@@ -231,12 +227,12 @@ export const Variant = {
 				{
 					tabIndex: 1,
 					title: "Label 2",
-					icon:"i-app"
+					icon: "i-app"
 				},
 				{
 					tabIndex: 2,
 					title: "Label 3",
-					icon:"i-launch"
+					icon: "i-launch"
 				},
 				{
 					tabIndex: 3,
@@ -246,7 +242,7 @@ export const Variant = {
 				{
 					tabIndex: 4,
 					title: "Current",
-					icon:"i-user-double"
+					icon: "i-user-double"
 				}
 			]
 		];
@@ -255,8 +251,8 @@ export const Variant = {
 			${data.map(
 				(item, index) =>
 					html` <f-div direction="column" gap="large"
-						><f-text>${index===0 ? "variant='text'" : "variant='icon'"}</f-text
-						><f-breadcrumb .crumbs=${item} .variant=${index===0?'text':'icon'}></f-breadcrumb
+						><f-text>${index === 0 ? "variant='text'" : "variant='icon'"}</f-text
+						><f-breadcrumb .crumbs=${item} .variant=${index === 0 ? "text" : "icon"}></f-breadcrumb
 					></f-div>`
 			)}
 		</f-div>`;
@@ -264,7 +260,6 @@ export const Variant = {
 
 	name: "variant"
 };
-
 
 export const Flags = {
 	render: () => {

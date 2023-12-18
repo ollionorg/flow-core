@@ -48,6 +48,7 @@ export * from "./mixins/components/f-root/f-root";
 export * from "./components/f-form-field/f-form-field";
 export * from "./components/f-input/f-input-light";
 export * from "./components/f-color-picker/f-color-picker";
+export * from "./components/f-countdown/f-countdown";
 
 export { html } from "lit";
 

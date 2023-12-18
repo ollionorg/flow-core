@@ -9,7 +9,6 @@ import {
 	FormBuilderHiddenField,
 	FormBuilderSeparatorField
 } from "./../types";
-import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import {
 	FDiv,
 	FText,
@@ -130,7 +129,7 @@ export function getSlots(
 		: ""}
 	${field.helperText
 		? html`<f-div slot="help" data-qa-help-for=${field.qaId || field.id}
-				>${typeof field.helperText === "object" ? field.helperText : unsafeHTML(field.helperText)}
+				>${field.helperText}
 		  </f-div>`
 		: ``}
 	${field.label?.iconTooltip

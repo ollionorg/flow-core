@@ -7,9 +7,9 @@ import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
 import { flowElement } from "./../../utils";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import { FIcon } from "../f-icon/f-icon";
 import { injectCss } from "@cldcvr/flow-core-config";
+import * as Mark from "mark.js";
 injectCss("f-text", globalStyle);
 
 export type FTextStateProp =
@@ -117,9 +117,6 @@ export class FText extends FRoot {
 	editTextIcon!: HTMLDivElement;
 
 	@state()
-	highlightedText: string | null = null;
-
-	@state()
 	isTextInput = false;
 
 	get iconSize() {
@@ -176,14 +173,6 @@ export class FText extends FRoot {
 		}
 	}
 
-	protected update(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-		super.update(changedProperties);
-
-		if (changedProperties.has("highlight")) {
-			this.highlightedText = null;
-		}
-	}
-
 	render() {
 		/**
 		 * creating local fill variable out of state prop.
@@ -211,11 +200,6 @@ export class FText extends FRoot {
 			}
 		}
 
-		const highlightSnippet = html`${unsafeHTML(this.highlightedText)}<slot
-				@slotchange=${this.handleSlotChange}
-				style="display:none"
-			></slot>`;
-
 		const textareaSnippet = html` <div class="textarea-wrapper">
 			<span
 				class="textarea"
@@ -241,7 +225,7 @@ export class FText extends FRoot {
 		</div>`;
 
 		const editableSnippet = html`<div class="non-editable-slot">
-			${this.highlightedText ? highlightSnippet : html`<slot></slot>`}
+			<slot></slot>
 		</div>`;
 
 		if (this.editable) {
@@ -257,8 +241,6 @@ export class FText extends FRoot {
 					${this.isTextInput ? textareaSnippet : editableSnippet}
 				</div>
 			`;
-		} else if (this.highlightedText) {
-			return highlightSnippet;
 		}
 
 		/**
@@ -267,33 +249,26 @@ export class FText extends FRoot {
 		return html`<slot></slot>`;
 	}
 
-	protected async updated(
-		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-	): Promise<void> {
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
-		await this.updateComplete;
-		this.showEmptyPlaceholder();
-		if (this.highlight && this.highlight.trim() && !this.highlightedText) {
-			let content = this.textContent;
-			content = this.removeMarkTag(content ?? "");
+		void this.updateComplete.then(() => {
+			this.showEmptyPlaceholder();
+			if (changedProperties.has("highlight")) {
+				const markInstance = new Mark(this);
 
-			const regex = new RegExp(this.highlight.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), "gi");
-			content = content.replace(regex, "<mark>$&</mark>");
-
-			this.highlightedText = content;
-		}
-		if (this.isTextInput) {
-			this.spanEditable?.focus();
-			this.moveCursorToEnd(this.spanEditable);
-		}
-	}
-
-	removeMarkTag(str: string) {
-		return str.replace(/<\/?mark>/g, "");
+				markInstance.unmark();
+				if (this.highlight && this.highlight.trim()) {
+					markInstance.mark(this.highlight);
+				}
+			}
+			if (this.isTextInput) {
+				this.spanEditable?.focus();
+				this.moveCursorToEnd(this.spanEditable);
+			}
+		});
 	}
 
 	handleSlotChange() {
-		this.highlightedText = null;
 		this.requestUpdate();
 	}
 

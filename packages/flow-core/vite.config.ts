@@ -22,7 +22,8 @@ export default defineConfig({
 				/^lit/,
 				"rxjs",
 				"@cldcvr/flow-core-config",
-				"vanilla-colorful"
+				"vanilla-colorful",
+				"mark.js"
 			]
 		}
 	}

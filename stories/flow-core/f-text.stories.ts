@@ -27,7 +27,6 @@ export const Playground = {
 				.ellipsis=${args.ellipsis}
 				.highlight=${args.highlight}
 				?inline=${args.inline}
-				.tooltip=${`<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/250px-Google_2015_logo.svg.png" />`}
 				>This is ${args.variant} with ${args.size} and "${args.state}" state. Alignment is
 				${args.align}
 			</f-text>

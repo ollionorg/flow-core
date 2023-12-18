@@ -16,10 +16,10 @@ const sizes = ["large", "medium", "small", "x-small"] as const;
 const categories = ["fill", "outline"] as const;
 const placements = ["left", "right", "bottom", "top", "none"] as const;
 
-export type FCountdownStateProp = (typeof states)[number];
-export type FCountdownCategoryProp = (typeof categories)[number];
-export type FCountdownSizesProp = (typeof sizes)[number];
-export type FCountdownLabelProp = (typeof placements)[number];
+export type FCountdownStateProp = typeof states[number];
+export type FCountdownCategoryProp = typeof categories[number];
+export type FCountdownSizesProp = typeof sizes[number];
+export type FCountdownLabelProp = typeof placements[number];
 export type FCountdownDuration = number | string;
 
 @flowElement("f-countdown")
@@ -163,15 +163,20 @@ export class FCountdown extends FRoot {
 	}
 
 	validateProperties() {
-		if (this.duration) {
-			const time = this.duration as string;
-			const regexNum = /^\d+$/;
+		if (!this.duration) {
+			throw new Error("f-countdown: Duration is required");
+		}
 
+		const time = this.duration;
+		const regexNum = /^\d+$/;
+
+		if (typeof time === "string") {
 			if (time.includes(":")) {
 				const [min, sec] = time.split(":");
 				if (!regexNum.test(min) || !regexNum.test(sec)) {
 					throw new Error("f-countdown: Please enter numeric values for minutes and seconds");
-				} else if (Number(min) >= 60 || Number(sec) > 60) {
+				}
+				if (Number(min) >= 60 || Number(sec) > 60) {
 					throw new Error(
 						"f-countdown: Please enter valid values for minutes (less than 60) and seconds (less than 60)"
 					);
@@ -179,12 +184,13 @@ export class FCountdown extends FRoot {
 			} else {
 				if (!regexNum.test(time)) {
 					throw new Error("f-countdown: Please enter a numeric value for time");
-				} else if (Number(time) >= 3600) {
+				}
+				if (Number(time) >= 3600) {
 					throw new Error("f-countdown: Please enter a value for time less than 3600 seconds");
 				}
 			}
-		} else {
-			throw new Error("f-countdown: Duration is required");
+		} else if (time >= 3600) {
+			throw new Error("f-countdown: Please enter a value for time less than 3600 seconds");
 		}
 		if (
 			this.state?.includes("custom") &&

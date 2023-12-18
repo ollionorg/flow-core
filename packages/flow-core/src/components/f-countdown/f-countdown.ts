@@ -129,6 +129,14 @@ export class FCountdown extends FRoot {
 		}
 	}
 
+	get countdownWidth() {
+		return this.labelPlacement === "left" ? "55px" : "";
+	}
+
+	get countdownAlignment() {
+		return this.labelPlacement === "left" ? "middle-right" : "middle-center";
+	}
+
 	init() {
 		this.interval = setInterval(() => {
 			this.remaining -= 1;
@@ -162,7 +170,7 @@ export class FCountdown extends FRoot {
 		super.disconnectedCallback();
 	}
 
-	validateProperties() {
+	validateDurationProperties() {
 		if (!this.duration) {
 			throw new Error("f-countdown: Duration is required");
 		}
@@ -189,6 +197,9 @@ export class FCountdown extends FRoot {
 		} else if (time >= 3600) {
 			throw new Error("f-countdown: Please enter a value for time less than 3600 seconds");
 		}
+	}
+
+	validateStateProperties() {
 		if (
 			this.state?.includes("custom") &&
 			this.fill &&
@@ -199,18 +210,11 @@ export class FCountdown extends FRoot {
 		}
 	}
 
-	get countdownWidth() {
-		return this.labelPlacement === "left" ? "55px" : "";
-	}
-
-	get countdownAlignment() {
-		return this.labelPlacement === "left" ? "middle-right" : "middle-center";
-	}
-
 	render() {
 		this.countdownId += 1;
 		this.fill = getCustomFillColor(this.state ?? "");
-		this.validateProperties();
+		this.validateDurationProperties();
+		this.validateStateProperties();
 
 		//top and left label placement
 		const labelTopAndLeft =

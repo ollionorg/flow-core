@@ -11,6 +11,14 @@ import { createRef, ref } from "lit/directives/ref.js";
 
 injectCss("f-chart", globalStyle);
 
+export type AxisLine = {
+	value: number;
+	color: string;
+};
+
+export type YAxisLine = AxisLine;
+export type XAxisLine = AxisLine;
+
 @flowElement("f-chart")
 export class FChart extends FRoot {
 	/**
@@ -54,10 +62,31 @@ export class FChart extends FRoot {
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
-
 		const chartData = generateLineChartData(200);
-		const width = this.offsetWidth;
-		const height = 500;
+		const yLines: YAxisLine[] = [
+			{
+				value: 260,
+				color: "var(--color-danger-default)"
+			},
+			{
+				value: 160,
+				color: "var(--color-warning-default)"
+			}
+		];
+
+		const xLines: XAxisLine[] = [
+			{
+				value: chartData[120].date,
+				color: "var(--color-highlight-default)"
+			},
+			{
+				value: chartData[160].date,
+				color: "var(--color-highlight-default)"
+			}
+		];
+
+		const width = this.offsetWidth ?? 300;
+		const height = this.offsetHeight ?? 300;
 		const marginTop = 20;
 		const marginRight = 30;
 		const marginBottom = 30;
@@ -235,6 +264,30 @@ export class FChart extends FRoot {
 			}
 		};
 
+		const plotCustomLines = () => {
+			svg.call(g => g.selectAll(".custom-lines").remove());
+			yLines.forEach(line => {
+				svg
+					.append("line")
+					.attr("class", "y-lines custom-lines")
+					.attr("x1", `${marginLeft}`)
+					.attr("x2", `${width - marginRight}`)
+					.attr("y1", `${y(line.value)}`)
+					.attr("y2", `${y(line.value)}`)
+					.attr("stroke", `${line.color}`);
+			});
+			xLines.forEach(line => {
+				svg
+					.append("line")
+					.attr("class", "x-lines custom-lines")
+					.attr("x1", `${x(line.value)}`)
+					.attr("x2", `${x(line.value)}`)
+					.attr("y1", `${marginTop}`)
+					.attr("y2", `${height - marginBottom}`)
+					.attr("stroke", `${line.color}`);
+			});
+		};
+		plotCustomLines();
 		svg
 			.on("pointerenter pointermove", pointermoved)
 			.on("pointerleave", pointerleft)
@@ -257,6 +310,7 @@ export class FChart extends FRoot {
 			yAxisG.call(yAxis);
 			yAxisG.call(xGridLines);
 			path.attr("d", line(chartData));
+			plotCustomLines();
 		}, 1000);
 
 		setTimeout(() => {

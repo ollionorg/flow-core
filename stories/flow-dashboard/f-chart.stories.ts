@@ -13,7 +13,7 @@ export default {
 
 export const Basic = {
 	render: () => {
-		return html` <f-chart></f-chart> `;
+		return html`<f-div height="500px"> <f-chart></f-chart> </f-div>`;
 	},
 
 	name: "basic"

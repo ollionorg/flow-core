@@ -613,22 +613,16 @@ export class FLineage extends FRoot {
 			this.progressElement.setAttribute("width", "500px");
 			this.progressElement.innerHTML = "No data to display";
 		}
-
-		// console.timeEnd("Total duration");
-		// console.groupEnd();
 	}
 	isSafari() {
 		return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 	}
 
-	/* eslint-disable @typescript-eslint/no-unused-vars */
-	/* eslint-disable @typescript-eslint/ban-ts-comment */
-	// @ts-ignore
 	doTemplateHotUpdate(
 		node: LineageNodeElement,
 		nodeSVGElement: HTMLElement | null,
 		isChildNode = false
-	) {
+	): void {
 		try {
 			if (isChildNode) {
 				if (node.fNodeTemplate && nodeSVGElement) {
@@ -651,20 +645,27 @@ export class FLineage extends FRoot {
 			}
 		} catch (error: unknown) {
 			console.error(`Error reading node ${node.id}.fData`, error);
-			return `<f-div
-	  state="secondary"
-	  width="100%"
-	  height="100%"
-	  padding="none medium"
-	  align="top-left"
-	  direction="column"
-	  overflow="scroll"
-	  variant="curved"
-	  gap="small"
-	  \${node.fChildren && !node.fHideChildren ? 'border="small solid default bottom"' : ""}
-	> <f-text variant="code" size="large" state="danger">Error reading node ${node.id}.fData</f-text>
-
-	</f-div>`;
+			if (nodeSVGElement) {
+				render(
+					html`<f-div
+						state="secondary"
+						width="100%"
+						height="100%"
+						padding="none medium"
+						align="top-left"
+						direction="column"
+						overflow="scroll"
+						variant="curved"
+						gap="small"
+						${node.fChildren && !node.fHideChildren ? 'border="small solid default bottom"' : ""}
+					>
+						<f-text variant="code" size="large" state="danger"
+							>Error reading node ${node.id}.fData</f-text
+						>
+					</f-div>`,
+					nodeSVGElement
+				);
+			}
 		}
 	}
 

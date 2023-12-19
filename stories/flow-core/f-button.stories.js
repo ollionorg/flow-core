@@ -56,7 +56,7 @@ export const Playground = {
 
 		category: {
 			control: "select",
-			options: ["fill", "outline", "transparent"]
+			options: ["fill", "outline", "transparent", "packed"]
 		},
 
 		size: {
@@ -150,6 +150,7 @@ export const Category = {
 			<f-button label="Fill" category="fill"></f-button>
 			<f-button label="Outline" category="outline"></f-button>
 			<f-button label="Transparent" category="transparent"></f-button>
+			<f-button label="Packed" category="packed"></f-button>
 		</f-div>`,
 
 	name: "category"

@@ -164,8 +164,8 @@ export default function drawNodes(params: DrawLineageParams) {
 				element.reDrawChunk(+pageNo, d.level);
 			}
 		})
-		.html(node => {
-			return element.doTemplateHotUpdate(node);
+		.each(function (d) {
+			element.doTemplateHotUpdate(d, this as unknown as HTMLElement);
 		});
 
 	/**
@@ -355,10 +355,8 @@ export default function drawNodes(params: DrawLineageParams) {
 					d.fRightClick(event, d);
 				}
 			})
-			/* eslint-disable @typescript-eslint/ban-ts-comment */
-			//@ts-ignore
-			.html(node => {
-				return element.doTemplateHotUpdate(node, true);
+			.each(function (d) {
+				element.doTemplateHotUpdate(d, this as unknown as HTMLElement, true);
 			});
 
 		drawLinks({

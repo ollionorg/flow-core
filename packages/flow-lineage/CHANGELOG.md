@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [3.1.1] - 2023-12-19
+
+### Patch Changes
+
+- 🔄 Updated the template rendering logic of d3's `foreignObject` for enhanced security against HTML injection. 🛡️
+
 ## [3.1.0] - 2023-11-27
 
 ### Minor Changes

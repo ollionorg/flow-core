@@ -23,8 +23,12 @@ export default function getProxies(element: FLineage) {
 				if (nodeElement) {
 					d3.select(element.svg)
 						.select(`#${target.__id__}-foreign-object`)
-						.html(() => {
-							return element.doTemplateHotUpdate(nodeElement, nodeElement.isChildren);
+						.call(function (d) {
+							element.doTemplateHotUpdate(
+								nodeElement,
+								d.node() as unknown as HTMLElement,
+								nodeElement.isChildren
+							);
 						});
 				}
 			}
@@ -60,8 +64,12 @@ export default function getProxies(element: FLineage) {
 						nodeElement.fData = target[key];
 						d3.select(element.svg)
 							.select(`#${target.__id__}-foreign-object`)
-							.html(() => {
-								return element.doTemplateHotUpdate(nodeElement, nodeElement.isChildren);
+							.call(function (d) {
+								element.doTemplateHotUpdate(
+									nodeElement,
+									d.node() as unknown as HTMLElement,
+									nodeElement.isChildren
+								);
 							});
 					}
 				}

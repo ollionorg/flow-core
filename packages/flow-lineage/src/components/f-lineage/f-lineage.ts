@@ -1,4 +1,4 @@
-import { html, PropertyValues, unsafeCSS } from "lit";
+import { html, PropertyValues, render, unsafeCSS } from "lit";
 import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-lineage.scss?inline";
 import globalStyle from "./f-lineage-global.scss?inline";
@@ -20,7 +20,7 @@ import lowlightPath from "./highlight/lowlight-path";
 import createHierarchy from "./create/create-hierarchy";
 import { FButton, FDiv, FIcon, FIconButton, FPopover, FText } from "@cldcvr/flow-core";
 import { FRoot } from "@cldcvr/flow-core";
-import { debounce, getComputedHTML } from "../../utils";
+import { debounce } from "../../utils";
 import getProxies from "./draw/hot-reload-proxies";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { injectCss } from "@cldcvr/flow-core-config";
@@ -613,26 +613,22 @@ export class FLineage extends FRoot {
 			this.progressElement.setAttribute("width", "500px");
 			this.progressElement.innerHTML = "No data to display";
 		}
-
-		// console.timeEnd("Total duration");
-		// console.groupEnd();
 	}
 	isSafari() {
 		return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 	}
 
-	/* eslint-disable @typescript-eslint/no-unused-vars */
-	/* eslint-disable @typescript-eslint/ban-ts-comment */
-	// @ts-ignore
-	doTemplateHotUpdate(node: LineageNodeElement, isChildNode = false) {
+	doTemplateHotUpdate(
+		node: LineageNodeElement,
+		nodeSVGElement: HTMLElement | null,
+		isChildNode = false
+	): void {
 		try {
 			if (isChildNode) {
-				if (node.fNodeTemplate) {
-					return getComputedHTML(node.fNodeTemplate(node));
-				} else {
-					return this["children-node-template"]
-						? getComputedHTML(this["children-node-template"](node))
-						: ``;
+				if (node.fNodeTemplate && nodeSVGElement) {
+					render(node.fNodeTemplate(node), nodeSVGElement);
+				} else if (this["children-node-template"] && nodeSVGElement) {
+					render(this["children-node-template"](node), nodeSVGElement);
 				}
 			} else {
 				if (node.fChildren) {
@@ -641,28 +637,35 @@ export class FLineage extends FRoot {
 				} else {
 					node.childrenToggle = html``;
 				}
-				if (node.fNodeTemplate) {
-					return getComputedHTML(node.fNodeTemplate(node));
-				} else {
-					return this["node-template"] ? getComputedHTML(this["node-template"](node)) : ``;
+				if (node.fNodeTemplate && nodeSVGElement) {
+					render(node.fNodeTemplate(node), nodeSVGElement);
+				} else if (this["node-template"] && nodeSVGElement) {
+					render(this["node-template"](node), nodeSVGElement);
 				}
 			}
 		} catch (error: unknown) {
-			console.error(`Error reading node ${node.id}.fData`);
-			return `<f-div
-	  state="secondary"
-	  width="100%"
-	  height="100%"
-	  padding="none medium"
-	  align="top-left"
-	  direction="column"
-	  overflow="scroll"
-	  variant="curved"
-	  gap="small"
-	  \${node.fChildren && !node.fHideChildren ? 'border="small solid default bottom"' : ""}
-	> <f-text variant="code" size="large" state="danger">Error reading node ${node.id}.fData</f-text>
-
-	</f-div>`;
+			console.error(`Error reading node ${node.id}.fData`, error);
+			if (nodeSVGElement) {
+				render(
+					html`<f-div
+						state="secondary"
+						width="100%"
+						height="100%"
+						padding="none medium"
+						align="top-left"
+						direction="column"
+						overflow="scroll"
+						variant="curved"
+						gap="small"
+						${node.fChildren && !node.fHideChildren ? 'border="small solid default bottom"' : ""}
+					>
+						<f-text variant="code" size="large" state="danger"
+							>Error reading node ${node.id}.fData</f-text
+						>
+					</f-div>`,
+					nodeSVGElement
+				);
+			}
 		}
 	}
 

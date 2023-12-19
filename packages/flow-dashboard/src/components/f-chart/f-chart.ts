@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { html, PropertyValueMap, unsafeCSS, TemplateResult, svg, render } from "lit";
+import { html, PropertyValueMap, unsafeCSS, svg, render } from "lit";
 import { property } from "lit/decorators.js";
 import { FRoot, flowElement, FDiv } from "@cldcvr/flow-core";
 import globalStyle from "./f-chart-global.scss?inline";
 import { injectCss } from "@cldcvr/flow-core-config";
 import * as d3 from "d3";
-import { NumberValue, window } from "d3";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import { createRef, ref } from "lit/directives/ref.js";
+import { NumberValue } from "d3";
+import { createRef, Ref, ref } from "lit/directives/ref.js";
 
 injectCss("f-chart", globalStyle);
 
@@ -33,9 +31,9 @@ export class FChart extends FRoot {
 	@property({ type: Object })
 	config!: unknown;
 
-	chartContainer = createRef<FDiv>();
+	chartContainer: Ref<FDiv> = createRef<FDiv>();
 
-	chartTooltip = createRef<FDiv>();
+	chartTooltip: Ref<FDiv> = createRef<FDiv>();
 
 	/**
 	 * mention required fields here for generating vue types
@@ -62,7 +60,9 @@ export class FChart extends FRoot {
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
-		const chartData = generateLineChartData(200);
+		const chartData = generateLineChartData(200, new Date(), 3);
+
+		let chartDataFlat = chartData.map(series => series.points).flat();
 		const yLines: YAxisLine[] = [
 			{
 				value: 260,
@@ -76,11 +76,11 @@ export class FChart extends FRoot {
 
 		const xLines: XAxisLine[] = [
 			{
-				value: chartData[120].date,
+				value: chartData[0].points[120].date,
 				color: "var(--color-highlight-default)"
 			},
 			{
-				value: chartData[160].date,
+				value: chartData[0].points[160].date,
 				color: "var(--color-highlight-default)"
 			}
 		];
@@ -94,12 +94,12 @@ export class FChart extends FRoot {
 
 		// Declare the x (horizontal position) scale.
 		const x = d3.scaleTime(
-			d3.extent<TimeseriesPoint, number>(chartData, d => d.date) as Iterable<NumberValue>,
+			d3.extent<TimeseriesPoint, number>(chartDataFlat, d => d.date) as Iterable<NumberValue>,
 			[marginLeft, width - marginRight]
 		);
 
 		// Declare the y (vertical position) scale.
-		const y = d3.scaleLinear([0, d3.max(chartData, d => d.value)] as Iterable<NumberValue>, [
+		const y = d3.scaleLinear([0, d3.max(chartDataFlat, d => d.value)] as Iterable<NumberValue>, [
 			height - marginBottom,
 			marginTop
 		]);
@@ -125,14 +125,17 @@ export class FChart extends FRoot {
 			.attr("x2", `0`)
 			.attr("y1", `0`)
 			.attr("y2", `0`);
-		const yTooltipLine = svg
-			.append("line")
-			.attr("class", "y-tooltip-line tooltip-line")
-			.attr("x1", `0`)
-			.attr("x2", `0`)
-			.attr("y1", `0`)
-			.attr("y2", `0`);
+		const yTooltipLine: Record<string, d3.Selection<SVGLineElement, unknown, null, undefined>> = {};
 
+		chartData.forEach(series => {
+			yTooltipLine[series.seriesName] = svg
+				.append<SVGLineElement>("line")
+				.attr("class", "y-tooltip-line tooltip-line")
+				.attr("x1", `0`)
+				.attr("x2", `0`)
+				.attr("y1", `0`)
+				.attr("y2", `0`);
+		});
 		const bisect = d3.bisector<TimeseriesPoint, number>(d => d.date).center;
 
 		const xGridLines = (g: d3.Selection<SVGGElement, unknown, null, undefined>) => {
@@ -170,39 +173,56 @@ export class FChart extends FRoot {
 
 		// Append a path for the line.
 		const path = svg
-			.append("path")
+			.selectAll<SVGPathElement, TimeseriesData>("path.chart-line")
+			.data(chartData, d => d.seriesName)
+			.join("path")
 			.attr("fill", "none")
-			.attr("stroke", "var(--color-primary-default)")
+			.attr("class", "chart-line")
+			.attr("stroke", d => d.color)
 			.attr("stroke-width", 1.2)
-			.attr("d", line(chartData));
-		const tooltipPoint = svg
-			.append("circle")
-			.attr("class", "tooltip-point")
-			.attr("cx", `0`)
-			.attr("cy", `0`)
-			.attr("r", `0`);
+			.attr("d", d => line(d.points));
+
+		const tooltipPoint: Record<
+			string,
+			d3.Selection<SVGCircleElement, unknown, null, undefined>
+		> = {};
+
+		chartData.forEach(series => {
+			tooltipPoint[series.seriesName] = svg
+				.append<SVGCircleElement>("circle")
+				.attr("class", "tooltip-point")
+				.attr("cx", `0`)
+				.attr("cy", `0`)
+				.attr("r", `0`);
+		});
 		const pointermoved = (event: PointerEvent) => {
-			const i = bisect(chartData, x.invert(d3.pointer(event)[0]).getTime());
+			const time = x.invert(d3.pointer(event)[0]).getTime();
 
 			xTooltipLine
-				.attr("x1", `${x(chartData[i].date)}`)
-				.attr("x2", `${x(chartData[i].date)}`)
+				.attr("x1", `${x(time)}`)
+				.attr("x2", `${x(time)}`)
 				.attr("y1", `${marginTop}`)
 				.attr("y2", `${height - marginBottom}`);
 
-			yTooltipLine
-				.attr("x1", `${marginLeft}`)
-				.attr("x2", `${width - marginRight}`)
-				.attr("y1", `${y(chartData[i].value)}`)
-				.attr("y2", `${y(chartData[i].value)}`);
+			chartData.forEach(series => {
+				const i = bisect(series.points, x.invert(d3.pointer(event)[0]).getTime());
+				const seriesPoint = series.points[i];
+				if (seriesPoint) {
+					yTooltipLine[series.seriesName]
+						.attr("x1", `${marginLeft}`)
+						.attr("x2", `${width - marginRight}`)
+						.attr("y1", `${y(seriesPoint.value)}`)
+						.attr("y2", `${y(seriesPoint.value)}`);
 
-			tooltipPoint
-				.attr("cx", `${x(chartData[i].date)}`)
-				.attr("cy", `${y(chartData[i].value)}`)
-				.attr("r", `4`);
+					tooltipPoint[series.seriesName]
+						.attr("cx", `${x(seriesPoint.date)}`)
+						.attr("cy", `${y(seriesPoint.value)}`)
+						.attr("r", `4`);
+				}
+			});
 
 			if (this.chartTooltip.value) {
-				const coOrdinates = tooltipPoint.node()?.getBoundingClientRect();
+				const coOrdinates = Object.values(tooltipPoint)[0].node()?.getBoundingClientRect();
 				this.chartTooltip.value.classList.add("show");
 				this.chartTooltip.value.classList.remove("hide");
 				const tooltipOffset = 32;
@@ -241,11 +261,15 @@ export class FChart extends FRoot {
 					);
 				}
 				const xDate = new Date();
-				xDate.setTime(chartData[i].date);
+				xDate.setTime(time);
 				render(
 					html`<f-div width="100%" direction="column" gap="small">
 						<f-text>Date : ${xDate.toLocaleDateString()} ${xDate.toLocaleTimeString()}</f-text>
-						<f-text>Value : ${chartData[i].value}</f-text>
+						${chartData.map(series => {
+							const i = bisect(series.points, x.invert(d3.pointer(event)[0]).getTime());
+							const seriesPoint = series.points[i];
+							return html`<f-text>${series.seriesName} : ${seriesPoint?.value}</f-text>`;
+						})}
 					</f-div>`,
 					this.chartTooltip.value
 				);
@@ -259,8 +283,12 @@ export class FChart extends FRoot {
 					this.chartTooltip.value.classList.remove("show");
 				}
 				xTooltipLine.attr("x1", `0`).attr("x2", `0`).attr("y1", `0`).attr("y2", `0`);
-				yTooltipLine.attr("x1", `0`).attr("x2", `0`).attr("y1", `0`).attr("y2", `0`);
-				tooltipPoint.attr("cx", `0`).attr("cy", `0`).attr("r", `0`);
+				Object.values(yTooltipLine).forEach(lineElement => {
+					lineElement.attr("x1", `0`).attr("x2", `0`).attr("y1", `0`).attr("y2", `0`);
+				});
+				Object.values(tooltipPoint).forEach(circlePoint => {
+					circlePoint.attr("cx", `0`).attr("cy", `0`).attr("r", `0`);
+				});
 			}
 		};
 
@@ -296,20 +324,30 @@ export class FChart extends FRoot {
 		const interval = setInterval(() => {
 			const newPoints = generateLineChartData(
 				1,
-				new Date(chartData[chartData.length - 1].date + 60 * 1000),
-				500
+				new Date(chartDataFlat[chartDataFlat.length - 1].date + 60 * 1000),
+				3
 			);
-			chartData.shift();
-			chartData.push(...newPoints);
+			newPoints.forEach(element => {
+				const series = chartData.find(c => c.seriesName === element.seriesName);
+				series?.points.shift();
+				series?.points.push(...element.points);
+			});
 
-			x.domain(d3.extent<TimeseriesPoint, number>(chartData, d => d.date) as Iterable<NumberValue>);
-			y.domain([0, d3.max(chartData, d => d.value)] as Iterable<NumberValue>);
+			chartDataFlat = chartData.map(series => series.points).flat();
+			x.domain(
+				d3.extent<TimeseriesPoint, number>(chartDataFlat, d => d.date) as Iterable<NumberValue>
+			);
+			y.domain([0, d3.max(chartDataFlat, d => d.value)] as Iterable<NumberValue>);
 			svg.call(g => g.selectAll(".grid-line").remove());
 			xAxisG.call(xAxis);
 			xAxisG.call(yGridLines);
 			yAxisG.call(yAxis);
 			yAxisG.call(xGridLines);
-			path.attr("d", line(chartData));
+
+			path
+				.data(chartData, d => d.seriesName)
+				.join("path")
+				.attr("d", d => line(d.points));
 			plotCustomLines();
 		}, 1000);
 
@@ -333,32 +371,54 @@ export type TimeseriesPoint = {
 	value: number;
 };
 
+export type TimeseriesData = {
+	seriesName: string;
+	points: TimeseriesPoint[];
+	color: string;
+};
+
 function generateLineChartData(
 	numPoints: number,
 	from?: Date,
-	_yOffSet?: number
-): TimeseriesPoint[] {
-	const startDate = from ? from.getTime() : new Date().getTime();
-	const data: TimeseriesPoint[] = [];
+	noOfSeries: number = 1
+): TimeseriesData[] {
+	const startFrom = new Date().getTime();
+	const masterData: TimeseriesData[] = [];
+	const colors = [
+		"#1f77b4",
+		"#ff7f0e",
+		"#2ca02c",
+		"#d62728",
+		"#9467bd",
+		"#8c564b",
+		"#e377c2",
+		"#7f7f7f",
+		"#bcbd22",
+		"#17becf"
+	];
+	for (let j = 0; j < noOfSeries; j++) {
+		const startDate = from ? from.getTime() : startFrom;
+		const points: TimeseriesPoint[] = [];
+		for (let i = 0; i < numPoints; i++) {
+			const currentDate = startDate + i * 60 * 1000; // Incrementing date by one day
+			let fluctuatingValue = Math.floor(Math.random() * 10) + 100; //Math.random() * (yOffSet ?? 100) + Math.sin(i / 8) * 50; // Adding a sine wave for fluctuation
+			if (fluctuatingValue < 0) {
+				fluctuatingValue *= -1;
+			}
+			if (fluctuatingValue % 9 === 0) {
+				fluctuatingValue = 150 * getRndInteger(1, 2);
+			}
+			const dataPoint: TimeseriesPoint = {
+				date: currentDate,
+				value: +fluctuatingValue.toFixed(0)
+			};
 
-	for (let i = 0; i < numPoints; i++) {
-		const currentDate = startDate + i * 60 * 1000; // Incrementing date by one day
-		let fluctuatingValue = Math.floor(Math.random() * 10) + 100; //Math.random() * (yOffSet ?? 100) + Math.sin(i / 8) * 50; // Adding a sine wave for fluctuation
-		if (fluctuatingValue < 0) {
-			fluctuatingValue *= -1;
+			points.push(dataPoint);
 		}
-		if (fluctuatingValue % 9 === 0) {
-			fluctuatingValue = 150 * getRndInteger(1, 2);
-		}
-		const dataPoint: TimeseriesPoint = {
-			date: currentDate,
-			value: +fluctuatingValue.toFixed(0)
-		};
-
-		data.push(dataPoint);
+		masterData.push({ seriesName: `Series-${j + 1}`, points, color: colors[j] });
 	}
 
-	return data;
+	return masterData;
 }
 
 function getRndInteger(min: number, max: number) {

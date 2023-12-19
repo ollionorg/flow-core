@@ -2,7 +2,6 @@ import { html } from "lit-html";
 import FDivAnatomy from "../svg/i-fdiv-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useState } from "@storybook/client-api";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 export default {
 	title: "@cldcvr/flow-core/f-tab-node",
@@ -18,7 +17,12 @@ export const Playground = {
 	render: args => {
 		return html` <f-div>
 			<f-tab-node ?active=${args.active} .width=${args.width} variant=${args.variant}>
-				${unsafeHTML(args.slot)}
+				<f-div width="100%" height="100%" align="middle-center" direction="column"
+					><f-div align="middle-center" height="hug-content" width="hug-content">Tab Item</f-div
+					><f-div align="middle-center" height="hug-content" width="hug-content"
+						>Description</f-div
+					></f-div
+				>
 			</f-tab-node>
 		</f-div>`;
 	},
@@ -44,24 +48,13 @@ export const Playground = {
 		variant: {
 			control: "radio",
 			options: ["transparent", "fill"]
-		},
-
-		slot: {
-			control: "text"
 		}
 	},
 
 	args: {
 		width: "fill",
 		active: true,
-		variant: "fill",
-
-		slot: `<f-div width="100%" height="100%" align="middle-center" direction="column"
-            ><f-div align="middle-center" height="hug-content" width="hug-content">Tab Item</f-div
-            ><f-div align="middle-center" height="hug-content" width="hug-content"
-              >Description</f-div
-            ></f-div
-          >`
+		variant: "fill"
 	}
 };
 

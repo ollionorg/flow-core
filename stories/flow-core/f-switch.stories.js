@@ -2,7 +2,6 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fSwitchAnatomy from "../svg/i-fswitch-anatomy.js";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 export default {
 	title: "@cldcvr/flow-core/f-switch",
@@ -56,10 +55,6 @@ export const Playground = {
 			options: ["small", "medium"]
 		},
 
-		slot: {
-			control: "text"
-		},
-
 		disabled: {
 			control: "boolean"
 		}
@@ -69,14 +64,6 @@ export const Playground = {
 		value: true,
 		state: "default",
 		size: "medium",
-
-		slot: ` <f-div padding="none" align="middle-center" slot="label">
-              <f-text variant="para" size="small">Switch</f-text>
-            </f-div>
-            <f-div padding="none" align="middle-center" slot="help">
-              <f-text variant="para" size="small">This is helper text</f-text>
-            </f-div><f-text slot="subtitle" align="right" state="secondary" variant="para" size="small">Optional</f-text>
-      <f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>`,
 
 		disabled: false
 	}

@@ -5,7 +5,6 @@ import globalStyle from "./f-pictogram-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { ConfigUtil, injectCss } from "@cldcvr/flow-core-config";
 import { getTextContrast, isValidHttpUrl } from "./../../utils";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import { classMap } from "lit-html/directives/class-map.js";
 import { FIcon } from "../f-icon/f-icon";
 import { flowElement } from "./../../utils";
@@ -166,23 +165,30 @@ export class FPictogram extends FRoot {
 	get renderedHtml() {
 		const emojiRegex = /\p{Extended_Pictographic}/u;
 		if (isValidHttpUrl(this.source)) {
-			return `<img src="${this.source}" />`;
+			return html`<img src="${this.source}" />`;
 		} else if (emojiRegex.test(this.source)) {
-			return `<f-icon class="${"f-pictogram-" + this.size + "-emoji"}" source="${
-				this.source
-			}" size="${this.sourceSize()}"></f-icon>`;
+			return html`<f-icon
+				class="${"f-pictogram-" + this.size + "-emoji"}"
+				source="${this.source}"
+				size="${this.sourceSize()}"
+			></f-icon>`;
 		} else {
 			const IconPack = ConfigUtil.getConfig().iconPack;
 			if (IconPack) {
 				const svg = IconPack[this.source];
 				if (svg) {
-					return `<f-icon state=${this.category === "fill" ? this.state : "default"}  class="${
-						"f-pictogram-" + this.size
-					}" source="${this.source}" size="${this.sourceSize()}"></f-icon>`;
+					return html`<f-icon
+						state=${this.category === "fill" ? this.state : "default"}
+						class="${"f-pictogram-" + this.size}"
+						source="${this.source}"
+						size="${this.sourceSize()}"
+					></f-icon>`;
 				}
 			}
 		}
-		return `<p class="text-styling" state=${this.state} style=${this.textColorStyling} >${this.textSource}</p>`;
+		return html`<p class="text-styling" state=${this.state} style=${this.textColorStyling}>
+			${this.textSource}
+		</p>`;
 	}
 
 	// check for if source is a normal text
@@ -277,7 +283,7 @@ export class FPictogram extends FRoot {
 				?auto-bg=${this.autoBg}
 				style=${this.applyStyles()}
 			>
-				${unsafeHTML(this.renderedHtml)}
+				${this.renderedHtml}
 				${this.variant === "squircle"
 					? html`<svg width="0" height="0">
 							<defs>

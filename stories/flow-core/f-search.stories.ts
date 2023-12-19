@@ -1,5 +1,4 @@
 import { html } from "lit-html";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import { FSearchResultWhen } from "@cldcvr/flow-core";
 
 export default {
@@ -41,7 +40,12 @@ export const Playground = {
 					.resultMaxHeight=${args["result-max-height"]}
 					@search=${handleSearch}
 				>
-					${unsafeHTML(args.slot as string)}
+					<f-div slot="label" padding="none" gap="none">Label</f-div>
+					<f-div width="100%" slot="help"
+						><f-text variant="para" size="small">This is a Subtext</f-text></f-div
+					>
+					<f-text slot="subtitle" state="secondary" variant="para" size="small">Optional</f-text>
+					<f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>
 				</f-search>
 			</f-div>
 		`;
@@ -59,10 +63,6 @@ export const Playground = {
 		},
 
 		placeholder: {
-			control: "text"
-		},
-
-		slot: {
 			control: "text"
 		},
 
@@ -111,11 +111,6 @@ export const Playground = {
 		category: "fill",
 		state: "default",
 		size: "medium",
-
-		slot: `<f-div slot="label" padding="none" gap="none">Label</f-div>
-              <f-div width="100%" slot="help"><f-text  variant="para" size="small">This is a Subtext</f-text></f-div>
-        <f-text slot="subtitle" state="secondary" variant="para" size="small">Optional</f-text>
-      <f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>`,
 
 		disabled: false,
 		clear: false,

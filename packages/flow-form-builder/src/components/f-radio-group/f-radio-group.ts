@@ -6,7 +6,6 @@ import eleStyle from "./f-radio-group.scss?inline";
 import globalStyle from "./f-radio-group-global.scss?inline";
 import { FDiv, FRadio, FRoot, FText } from "@cldcvr/flow-core";
 import { isEqual } from "lodash-es";
-import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import { injectCss } from "@cldcvr/flow-core-config";
 
 injectCss("f-checkbox-group", globalStyle);
@@ -128,7 +127,7 @@ export class FRadioGroup extends FRoot {
 												weight="regular"
 												data-qa-label-for=${item.title ?? item.id}
 												size="small"
-												>${unsafeHTML(item.title ?? item.id)}</f-text
+												>${item.title ?? item.id}</f-text
 										  >`}
 								</f-div>
 								${item.description

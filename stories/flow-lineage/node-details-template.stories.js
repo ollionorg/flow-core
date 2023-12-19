@@ -1,7 +1,6 @@
 import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useState, useEffect } from "@storybook/client-api";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import NodeDetailsTemplateAnatomy from "../svg/i-node-details-anatomy.js";
 
 export default {
@@ -115,29 +114,73 @@ export const NodeDetails = {
 				codeSnippet: {
 					type: "code",
 
-					value: `<f-div width="fill-container" padding="small none" state="default" direction="column">
-                        <f-div padding="medium"><f-text variant="para" weight="bold" size="small">Recipe steps(6):</f-text></f-div>
-                        <f-div padding="none medium" direction="column">
-                          <f-div direction="row" gap="x-small">
-                          <f-text variant="para" weight="regular" size="small" inline>1. Delete column</f-text> <f-text inline variant="para" weight="regular" size="small" state="success">dateChecked, hash, negative, positive</f-text>
-                        </f-div>
-                        <f-div direction="row" gap="x-small">
-                          <f-text variant="para" weight="regular" size="small" inline>2. Filter values by</f-text> <f-text inline variant="para" weight="regular" size="small" state="success">state</f-text>
-                        </f-div>
-                        <f-div direction="row" gap="x-small">
-                          <f-text variant="para" weight="regular" size="small" inline>3. Create column</f-text> <f-text inline variant="para" weight="regular" size="small" state="subtle">date_formatted</f-text><f-text variant="para" weight="regular" size="small" inline>using dateTime.</f-text> 
-                        </f-div>
-                        <f-div direction="row" gap="x-small">
-                          <f-text variant="para" weight="regular" size="small" inline>4. Change type of</f-text> <f-text inline variant="para" weight="regular" size="small" state="success">date_formatted</f-text><f-text variant="para" weight="regular" size="small" inline>to Date</f-text> 
-                        </f-div>
-                        <f-div direction="row" gap="x-small">
-                          <f-text variant="para" weight="regular" size="small" inline>5. Delete column</f-text> <f-text inline variant="para" weight="regular" size="small" state="subtle">date</f-text>
-                        </f-div>
-                        <f-div direction="row" gap="x-small">
-                          <f-text variant="para" weight="regular" size="small" inline>6. Create column</f-text> <f-text inline variant="para" weight="regular" size="small" state="subtle">positiveRate</f-text><f-text variant="para" weight="regular" size="small" inline>using Math function</f-text> 
-                          <f-text inline variant="para" weight="regular" size="small" state="subtle">DIVIDE</f-text>
-                        </f-div>
-                      </f-div>`
+					value: html`<f-div
+						width="fill-container"
+						padding="small none"
+						state="default"
+						direction="column"
+					>
+						<f-div padding="medium"
+							><f-text variant="para" weight="bold" size="small">Recipe steps(6):</f-text></f-div
+						>
+						<f-div padding="none medium" direction="column">
+							<f-div direction="row" gap="x-small">
+								<f-text variant="para" weight="regular" size="small" inline
+									>1. Delete column</f-text
+								>
+								<f-text inline variant="para" weight="regular" size="small" state="success"
+									>dateChecked, hash, negative, positive</f-text
+								>
+							</f-div>
+							<f-div direction="row" gap="x-small">
+								<f-text variant="para" weight="regular" size="small" inline
+									>2. Filter values by</f-text
+								>
+								<f-text inline variant="para" weight="regular" size="small" state="success"
+									>state</f-text
+								>
+							</f-div>
+							<f-div direction="row" gap="x-small">
+								<f-text variant="para" weight="regular" size="small" inline
+									>3. Create column</f-text
+								>
+								<f-text inline variant="para" weight="regular" size="small" state="subtle"
+									>date_formatted</f-text
+								><f-text variant="para" weight="regular" size="small" inline
+									>using dateTime.</f-text
+								>
+							</f-div>
+							<f-div direction="row" gap="x-small">
+								<f-text variant="para" weight="regular" size="small" inline
+									>4. Change type of</f-text
+								>
+								<f-text inline variant="para" weight="regular" size="small" state="success"
+									>date_formatted</f-text
+								><f-text variant="para" weight="regular" size="small" inline>to Date</f-text>
+							</f-div>
+							<f-div direction="row" gap="x-small">
+								<f-text variant="para" weight="regular" size="small" inline
+									>5. Delete column</f-text
+								>
+								<f-text inline variant="para" weight="regular" size="small" state="subtle"
+									>date</f-text
+								>
+							</f-div>
+							<f-div direction="row" gap="x-small">
+								<f-text variant="para" weight="regular" size="small" inline
+									>6. Create column</f-text
+								>
+								<f-text inline variant="para" weight="regular" size="small" state="subtle"
+									>positiveRate</f-text
+								><f-text variant="para" weight="regular" size="small" inline
+									>using Math function</f-text
+								>
+								<f-text inline variant="para" weight="regular" size="small" state="subtle"
+									>DIVIDE</f-text
+								>
+							</f-div>
+						</f-div></f-div
+					>`
 				}
 			}
 		});
@@ -270,7 +313,7 @@ export const NodeDetails = {
 																			: configValue?.type === "tag"
 																			? html`<f-tag size="small" label=${configValue?.value} state="primary" icon-left=${configValue?.iconLeft}></f-tab>`
 																			: configValue?.type === "code"
-																			? html`${unsafeHTML(configValue?.value)}`
+																			? html`${configValue.value}`
 																			: html`<f-text variant="para" size="small" weight="regular"
 																					><a>${configValue?.value} +8 more</a></f-text
 																			  >`}</f-div

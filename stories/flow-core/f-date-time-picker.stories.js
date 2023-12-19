@@ -2,7 +2,6 @@ import { html } from "lit-html";
 import fDateTimePickerAnatomy from "../svg/i-fdate-time-picker-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 export default {
 	title: "@cldcvr/flow-core/f-date-time-picker",
@@ -48,7 +47,8 @@ export const Playground = {
 						?disabled=${args.disabled}
 						.clear=${args.clear}
 					>
-						${unsafeHTML(args.slot)}
+						<f-div slot="label" padding="none" gap="none">Label</f-div>
+						<f-text slot="help" variant="para" size="small">This is a Subtext</f-text>
 					</f-date-time-picker>
 				</f-div></f-div
 			>
@@ -59,10 +59,6 @@ export const Playground = {
 
 	argTypes: {
 		value: {
-			control: "text"
-		},
-
-		slot: {
 			control: "text"
 		},
 
@@ -140,9 +136,6 @@ export const Playground = {
 		category: "fill",
 		state: "default",
 		size: "medium",
-
-		slot: `              <f-div slot="label" padding="none" gap="none">Label</f-div>
-              <f-text slot="help" variant="para" size="small">This is a Subtext</f-text>`,
 
 		["min-date"]: undefined,
 		["max-date"]: undefined,

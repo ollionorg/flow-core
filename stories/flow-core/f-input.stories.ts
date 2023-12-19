@@ -2,7 +2,6 @@ import { html } from "lit-html";
 import fInputAnatomy from "../svg/i-finput-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useState } from "@storybook/preview-api";
-import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 export default {
 	title: "@cldcvr/flow-core/f-input",
@@ -45,7 +44,8 @@ export const Playground = {
 						autofocus
 						autocomplete="on"
 					>
-						${unsafeHTML(args.slot as string)}
+						<f-div slot="label" padding="none" gap="none">Label</f-div>
+						<f-text slot="help" variant="para" size="small">This is a Subtext</f-text>
 					</f-input></f-div
 				></f-div
 			>
@@ -56,10 +56,6 @@ export const Playground = {
 
 	argTypes: {
 		value: {
-			control: "text"
-		},
-
-		slot: {
 			control: "text"
 		},
 
@@ -137,9 +133,6 @@ export const Playground = {
 		type: "text",
 		state: "default",
 		size: "medium",
-
-		slot: `              <f-div slot="label" padding="none" gap="none">Label</f-div>
-              <f-text slot="help" variant="para" size="small">This is a Subtext</f-text>`,
 
 		["icon-left"]: undefined,
 		["icon-right"]: undefined,

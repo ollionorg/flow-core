@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.2.1] - 2023-12-18
+
+### Patch Changes
+
+- Markup support for the option title in `f-checkbox-group` and `f-radio-group` has been deprecated and is no longer accepted.
+
 ## [2.2.0] - 2023-12-04
 
 ### Minor Changes

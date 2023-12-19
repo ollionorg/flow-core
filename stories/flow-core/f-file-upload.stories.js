@@ -2,8 +2,6 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fFileUploadAnatomy from "../svg/i-ffile-upload-anatomy.js";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
-
 export default {
 	title: "@cldcvr/flow-core/f-file-upload",
 
@@ -52,7 +50,10 @@ export const Playground = {
 					?loading=${args.loading}
 					@input=${handleInput}
 				>
-					${unsafeHTML(args.slot)}
+					<f-div slot="label" padding="none" gap="none">Label</f-div>
+					<f-text slot="help" variant="para" size="small">This is a Subtext</f-text>
+					<f-text slot="subtitle" state="secondary" variant="para" size="small">Optional</f-text>
+					<f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>
 				</f-file-upload>
 			</f-div>
 		`;
@@ -92,10 +93,6 @@ export const Playground = {
 			control: "text"
 		},
 
-		slot: {
-			control: "text"
-		},
-
 		disabled: {
 			control: "boolean"
 		},
@@ -113,11 +110,6 @@ export const Playground = {
 		size: "medium",
 		["file-type"]: "all",
 		["max-size"]: undefined,
-
-		slot: `              <f-div slot="label" padding="none" gap="none">Label</f-div>
-              <f-text slot="help" variant="para" size="small">This is a Subtext</f-text>
-         <f-text slot="subtitle" state="secondary" variant="para" size="small">Optional</f-text>
-      <f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>`,
 
 		disabled: false,
 		loading: false

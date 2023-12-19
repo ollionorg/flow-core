@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.0.1] - 2023-12-18
+
+### Patch Changes
+
+- Updated ES6 import syntax for `mark.js`
+
 ## [2.0.0] - 2023-12-11
 
 ### Major/Breaking Changes

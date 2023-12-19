@@ -2,7 +2,6 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fTextAreaAnatomy from "../svg/i-ftextarea-anatomy.js";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 export default {
 	title: "@cldcvr/flow-core/f-text-area",
@@ -43,10 +42,15 @@ export const Playground = {
 						rows=${args.rows}
 						mask-value
 					>
-						${unsafeHTML(args.slot)}
-					</f-text-area></f-div
-				></f-div
-			>
+						<f-text slot="label" variant="para" size="small">Label</f-text>
+						<f-text slot="help" variant="para" size="small">This is subtext</f-text>
+						<f-text slot="subtitle" state="secondary" variant="para" size="small">Optional</f-text>
+						<f-icon
+							slot="icon-tooltip"
+							source="i-question-filled"
+							tooltip="some info"
+						></f-icon> </f-text-area></f-div
+			></f-div>
 		`;
 	},
 
@@ -115,11 +119,6 @@ export const Playground = {
 		category: "fill",
 		state: "default",
 		size: "medium",
-
-		slot: `  <f-text slot="label" variant="para" size="small">Label</f-text>
-              <f-text slot="help" variant="para" size="small">This is subtext</f-text>
-        <f-text slot="subtitle" state="secondary" variant="para" size="small">Optional</f-text>
-      <f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>`,
 
 		rows: undefined,
 		["max-length"]: undefined,

@@ -1,8 +1,5 @@
 import { html } from "lit-html";
-import fInputAnatomy from "../svg/i-finput-anatomy.js";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
-import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 
 export default {
 	title: "@cldcvr/flow-core/f-emoji-picker",
@@ -45,7 +42,8 @@ export const Playground = {
 						.close-on-select=${args["close-on-select"]}
 						@input=${handleInput}
 					>
-						${unsafeHTML(args.slot)}
+						<f-text slot="label" variant="para" size="small">Label</f-text>
+						<f-text slot="help" variant="para" size="small">Help!</f-text>
 					</f-emoji-picker>
 				</f-div>
 			</f-div>
@@ -56,10 +54,6 @@ export const Playground = {
 
 	argTypes: {
 		value: {
-			control: "text"
-		},
-
-		slot: {
 			control: "text"
 		},
 
@@ -155,10 +149,7 @@ export const Playground = {
 
 		disabled: false,
 		clear: true,
-		["close-on-select"]: false,
-
-		slot: `             <f-text slot="label" variant="para" size="small">Label</f-text>
-              <f-text slot="help" variant="para" size="small">Help!</f-text>`
+		["close-on-select"]: false
 	}
 };
 

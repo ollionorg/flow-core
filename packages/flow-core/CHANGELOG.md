@@ -2,6 +2,16 @@
 
 # Change Log
 
+## [2.7.1] - 2023-12-18
+
+### Bug fixes
+
+- 🚫 Removed HTML string execution from the `tooltip` attribute.
+- 🔇 Temporarily removed the ability to pass slots as arguments in Storybook stories.We're on the lookout for a better way to document slots.
+- ⛔ f-suggest no longer accepts markup in suggestions.
+- ✨ In `f-text`, keyword highlighting now utilizes mark.js instead of `unsafeHTML`.
+- 🎨 Enhanced CSS specificity for color tokens.
+
 ## [2.7.0] - 2023-12-11
 
 ### Features

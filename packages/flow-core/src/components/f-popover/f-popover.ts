@@ -160,11 +160,7 @@ export class FPopover extends FRoot {
 			return this.target;
 		}
 	}
-	stringToHTML(str: string) {
-		const dom = document.createElement("div");
-		dom.innerHTML = str;
-		return dom;
-	}
+
 	computePlacement() {
 		return this.placement === "auto" ? undefined : this.placement;
 	}

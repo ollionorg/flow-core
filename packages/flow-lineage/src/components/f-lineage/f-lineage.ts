@@ -624,12 +624,16 @@ export class FLineage extends FRoot {
 	/* eslint-disable @typescript-eslint/no-unused-vars */
 	/* eslint-disable @typescript-eslint/ban-ts-comment */
 	// @ts-ignore
-	doTemplateHotUpdate(node: LineageNodeElement, nodeSVGElement: HTMLElement, isChildNode = false) {
+	doTemplateHotUpdate(
+		node: LineageNodeElement,
+		nodeSVGElement: HTMLElement | null,
+		isChildNode = false
+	) {
 		try {
 			if (isChildNode) {
-				if (node.fNodeTemplate) {
+				if (node.fNodeTemplate && nodeSVGElement) {
 					render(node.fNodeTemplate(node), nodeSVGElement);
-				} else if (this["children-node-template"]) {
+				} else if (this["children-node-template"] && nodeSVGElement) {
 					render(this["children-node-template"](node), nodeSVGElement);
 				}
 			} else {
@@ -639,9 +643,9 @@ export class FLineage extends FRoot {
 				} else {
 					node.childrenToggle = html``;
 				}
-				if (node.fNodeTemplate) {
+				if (node.fNodeTemplate && nodeSVGElement) {
 					render(node.fNodeTemplate(node), nodeSVGElement);
-				} else if (this["node-template"]) {
+				} else if (this["node-template"] && nodeSVGElement) {
 					render(this["node-template"](node), nodeSVGElement);
 				}
 			}

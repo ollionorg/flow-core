@@ -1,4 +1,4 @@
-import { html, PropertyValues, unsafeCSS } from "lit";
+import { html, PropertyValues, render, unsafeCSS } from "lit";
 import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-lineage.scss?inline";
 import globalStyle from "./f-lineage-global.scss?inline";
@@ -20,7 +20,7 @@ import lowlightPath from "./highlight/lowlight-path";
 import createHierarchy from "./create/create-hierarchy";
 import { FButton, FDiv, FIcon, FIconButton, FPopover, FText } from "@cldcvr/flow-core";
 import { FRoot } from "@cldcvr/flow-core";
-import { debounce, getComputedHTML } from "../../utils";
+import { debounce } from "../../utils";
 import getProxies from "./draw/hot-reload-proxies";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { injectCss } from "@cldcvr/flow-core-config";
@@ -624,15 +624,13 @@ export class FLineage extends FRoot {
 	/* eslint-disable @typescript-eslint/no-unused-vars */
 	/* eslint-disable @typescript-eslint/ban-ts-comment */
 	// @ts-ignore
-	doTemplateHotUpdate(node: LineageNodeElement, isChildNode = false) {
+	doTemplateHotUpdate(node: LineageNodeElement, nodeSVGElement: HTMLElement, isChildNode = false) {
 		try {
 			if (isChildNode) {
 				if (node.fNodeTemplate) {
-					return getComputedHTML(node.fNodeTemplate(node));
-				} else {
-					return this["children-node-template"]
-						? getComputedHTML(this["children-node-template"](node))
-						: ``;
+					render(node.fNodeTemplate(node), nodeSVGElement);
+				} else if (this["children-node-template"]) {
+					render(this["children-node-template"](node), nodeSVGElement);
 				}
 			} else {
 				if (node.fChildren) {
@@ -642,13 +640,13 @@ export class FLineage extends FRoot {
 					node.childrenToggle = html``;
 				}
 				if (node.fNodeTemplate) {
-					return getComputedHTML(node.fNodeTemplate(node));
-				} else {
-					return this["node-template"] ? getComputedHTML(this["node-template"](node)) : ``;
+					render(node.fNodeTemplate(node), nodeSVGElement);
+				} else if (this["node-template"]) {
+					render(this["node-template"](node), nodeSVGElement);
 				}
 			}
 		} catch (error: unknown) {
-			console.error(`Error reading node ${node.id}.fData`);
+			console.error(`Error reading node ${node.id}.fData`, error);
 			return `<f-div
 	  state="secondary"
 	  width="100%"

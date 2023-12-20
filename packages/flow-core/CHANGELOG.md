@@ -2,6 +2,13 @@
 
 # Change Log
 
+## [2.7.3] - 2023-12-20
+
+### Improvements
+
+- `f-ollion-*` theme font tokens updated.
+- Check `docs` directory for how to apply ollion theme.
+
 ## [2.7.2] - 2023-12-19
 
 ### Improvements

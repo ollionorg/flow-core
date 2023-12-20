@@ -150,22 +150,7 @@ in this case it is `f-button`
 				}
 			}
 			//transparent category with transparent background and border
-			&[state="#{$state}"][category="transparent"] {
-				background-color: transparent;
-				border: 1px solid transparent;
-				color: map.get($color, "background");
-				&:hover {
-					border: 1px solid transparent;
-					color: map.get($color, "hover");
-				}
-				&[loading] {
-					color: transparent;
-					svg path.loader-fill {
-						fill: map.get($color, "background");
-					}
-				}
-			}
-
+			&[state="#{$state}"][category="transparent"],
 			&[state="#{$state}"][category="packed"] {
 				background-color: transparent;
 				border: 1px solid transparent;

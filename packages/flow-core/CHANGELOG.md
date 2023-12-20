@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.7.2] - 2023-12-19
+
+### Improvements
+
+- `f-button`: `packed` category added.
+
 ## [2.7.1] - 2023-12-18
 
 ### Bug fixes

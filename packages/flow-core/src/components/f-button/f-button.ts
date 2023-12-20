@@ -58,7 +58,7 @@ export class FButton extends FRoot {
 	 * @attribute category of button
 	 */
 	@property({ reflect: true, type: String })
-	category?: "fill" | "outline" | "transparent" = "fill";
+	category?: "fill" | "outline" | "transparent" | "packed" = "fill";
 
 	/**
 	 * @attribute The medium size is the default and recommended option.

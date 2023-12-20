@@ -132,7 +132,7 @@ export const Playground = {
 		placeholder: "Enter your text here",
 		variant: "round",
 		mode: "date-time",
-		value: new Date(),
+		value: new Date("2022-03-25"),
 		category: "fill",
 		state: "default",
 		size: "medium",
@@ -535,6 +535,7 @@ export const Flags = {
             value=${value}
             @input=${handleValue}
             size="medium"
+			${item === 0 ? `data-chromatic="ignore"` : ""}
             ?loading=${item === 0}
             ?disabled=${item === 1}
             ?clear=${item === 2}

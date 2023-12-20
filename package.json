@@ -11,6 +11,7 @@
     "storybook": "storybook dev -p 6007",
     "start": "NODE_OPTIONS=--openssl-legacy-provider pnpm run storybook",
     "build-storybook": "export NODE_OPTIONS='--max_old_space_size=8192' && storybook build",
+    "build-storybook:chromatic": "export NODE_OPTIONS='--max_old_space_size=8192' && export NODE_ENV=chromatic && storybook build",
     "build-packages": "make build",
     "lint": "pnpm lint:files .",
     "lint:fix": "env TIMING=1 eslint --ext .js,.ts --fix .",
@@ -21,7 +22,8 @@
     "prettier:lint-all": "prettier --config .prettierrc.cjs --check .",
     "prepare": "husky install",
     "test": "pnpm run loki test",
-    "postinstall": "tsc -b"
+    "postinstall": "tsc -b",
+    "chromatic": "NODE_ENV=chromatic npx chromatic --exit-zero-on-changes --only-changed"
   },
   "engines": {
     "node": "^18.12.0",
@@ -52,6 +54,7 @@
     "@types/prettier": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
+    "chromatic": "^7.4.0",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-storybook": "^0.6.15",
@@ -93,5 +96,7 @@
         "mobile": false
       }
     }
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "flow-core-storybook@1.0.0"
 }

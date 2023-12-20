@@ -24,7 +24,7 @@ export default {
 
 	async viteFinal(config, { configType }) {
 		return mergeConfig(config, {
-			base: configType === "PRODUCTION" ? "/v2/" : "",
+			base: configType === "PRODUCTION" && process.env.NODE_ENV !== "chromatic" ? "/v2/" : "",
 			resolve: {
 				alias
 			}

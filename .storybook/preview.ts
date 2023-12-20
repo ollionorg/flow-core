@@ -23,7 +23,8 @@ const preview: Preview = {
 	parameters: {
 		docs: {
 			theme: themes.dark
-		}
+		},
+		chromatic: { pauseAnimationAtEnd: true }
 	}
 };
 

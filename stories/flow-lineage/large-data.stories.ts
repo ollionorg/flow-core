@@ -4,6 +4,9 @@ import { LineageNodeElement, LineageNodeLinks, LineageNodes } from "@cldcvr/flow
 
 export default {
 	title: "@cldcvr/flow-lineage/Examples/Large Data",
+	parameters: {
+		chromatic: { disableSnapshot: false }
+	},
 	argTypes: {
 		["node-template"]: {
 			control: false

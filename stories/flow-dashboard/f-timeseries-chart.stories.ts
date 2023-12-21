@@ -28,7 +28,7 @@ function generateLineChartData(
 	const colors = [
 		"#7fc97f",
 		"#1f77b4",
-		"#fdc086",
+		"#a703d5",
 		"#ffff99",
 		"#386cb0",
 		"#f0027f",
@@ -88,11 +88,11 @@ export const Basic = {
 		const xLines: XAxisLine[] = [
 			{
 				value: chartData[0].points[120].date,
-				color: "var(--color-highlight-default)"
+				color: "yellow"
 			},
 			{
 				value: chartData[0].points[160].date,
-				color: "var(--color-highlight-default)"
+				color: "yellow"
 			}
 		];
 

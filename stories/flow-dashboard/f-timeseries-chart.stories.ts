@@ -18,7 +18,6 @@ export default {
 		}
 	}
 };
-
 function generateLineChartData(
 	numPoints: number,
 	from?: Date,
@@ -27,28 +26,27 @@ function generateLineChartData(
 	const startFrom = new Date().getTime();
 	const masterData: TimeseriesData[] = [];
 	const colors = [
+		"#7fc97f",
 		"#1f77b4",
-		"#ff7f0e",
-		"#2ca02c",
-		"#d62728",
-		"#9467bd",
-		"#8c564b",
-		"#e377c2",
-		"#7f7f7f",
-		"#bcbd22",
-		"#17becf"
+		"#fdc086",
+		"#ffff99",
+		"#386cb0",
+		"#f0027f",
+		"#bf5b17",
+		"#666666"
 	];
+	const seriesTypes: ("line" | "bar" | "area")[] = ["area", "bar", "line"];
 	for (let j = 0; j < noOfSeries; j++) {
 		const startDate = from ? from.getTime() : startFrom;
 		const points: TimeseriesPoint[] = [];
 		for (let i = 0; i < numPoints; i++) {
 			const currentDate = startDate + i * 60 * 1000; // Incrementing date by one day
-			let fluctuatingValue = Math.floor(Math.random() * 10) + 100; //Math.random() * (yOffSet ?? 100) + Math.sin(i / 8) * 50; // Adding a sine wave for fluctuation
+			let fluctuatingValue = Math.floor(Math.random() * 10) + 50 * (j + 1); //Math.random() * (yOffSet ?? 100) + Math.sin(i / 8) * 50; // Adding a sine wave for fluctuation
 			if (fluctuatingValue < 0) {
 				fluctuatingValue *= -1;
 			}
 			if (fluctuatingValue % 9 === 0) {
-				fluctuatingValue = 150 * getRndInteger(1, 2);
+				fluctuatingValue = 50 * (j + 1) * getRndInteger(1, 2);
 			}
 			const dataPoint: TimeseriesPoint = {
 				date: currentDate,
@@ -57,7 +55,12 @@ function generateLineChartData(
 
 			points.push(dataPoint);
 		}
-		masterData.push({ seriesName: `Series-${j + 1}`, points, color: colors[j] });
+		masterData.push({
+			seriesName: `Series-${j + 1}`,
+			points,
+			color: colors[j],
+			type: seriesTypes[j]
+		});
 	}
 
 	return masterData;
@@ -96,7 +99,6 @@ export const Basic = {
 		const chartRef = createRef<FTimeseriesChart>();
 		const chartConfig: FTimeseriesChartConfig = {
 			data: chartData,
-			type: "area",
 			xAxis: {
 				lines: xLines
 			},

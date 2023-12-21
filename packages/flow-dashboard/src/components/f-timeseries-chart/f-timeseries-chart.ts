@@ -25,11 +25,11 @@ export type TimeseriesData = {
 	seriesName: string;
 	points: TimeseriesPoint[];
 	color: string;
+	type: "line" | "bar" | "area";
 };
 
 export type FTimeseriesChartConfig = {
 	data: TimeseriesData[];
-	type: "line" | "bar" | "area";
 	size?: {
 		width?: number;
 		height?: number;
@@ -72,6 +72,8 @@ export class FTimeseriesChart extends FRoot {
 	xAxisG!: d3.Selection<SVGGElement, unknown, null, undefined>;
 	yAxisG!: d3.Selection<SVGGElement, unknown, null, undefined>;
 	path!: d3.Selection<SVGPathElement, TimeseriesData, SVGSVGElement | null, unknown>;
+	bars!: d3.Selection<SVGGElement, TimeseriesData, SVGSVGElement | null, unknown>;
+	seriesBars!: d3.ValueFn<SVGGElement, TimeseriesData, void>;
 	xGridLines!: (g: d3.Selection<SVGGElement, unknown, null, undefined>) => void;
 	yGridLines!: (g: d3.Selection<SVGGElement, unknown, null, undefined>) => void;
 	line!: d3.Line<TimeseriesPoint>;
@@ -243,17 +245,21 @@ export class FTimeseriesChart extends FRoot {
 			.call(this.xGridLines);
 
 		// Append a path for the line.
+
 		this.path = this.svg
 			.selectAll<SVGPathElement, TimeseriesData>("path.chart-path")
-			.data(chartData, d => d.seriesName)
+			.data(
+				chartData.filter(td => td.type === "line" || td.type === "area"),
+				d => d.seriesName
+			)
 			.join("path")
 			.attr("fill", "none")
-			.attr("class", () => {
+			.attr("class", d => {
 				let pathClass = "chart-path ";
-				if (this.config.type === "line") {
+				if (d.type === "line") {
 					return (pathClass += " line-path");
 				}
-				if (this.config.type === "area") {
+				if (d.type === "area") {
 					return (pathClass += " area-path");
 				}
 				return pathClass;
@@ -261,20 +267,45 @@ export class FTimeseriesChart extends FRoot {
 			.attr("stroke", d => d.color)
 			.attr("stroke-width", 1.2)
 			.attr("fill", d => {
-				if (this.config.type === "area") {
+				if (d.type === "area") {
 					return d.color;
 				}
 				return "none";
 			})
 			.attr("d", d => {
-				if (this.config.type === "line") {
+				if (d.type === "line") {
 					return this.line(d.points);
 				}
-				if (this.config.type === "area") {
+				if (d.type === "area") {
 					return this.area(d.points);
 				}
 				return "none";
 			});
+
+		this.bars = this.svg
+			.selectAll<SVGGElement, TimeseriesData>("g.bar-g")
+			.data(
+				chartData.filter(td => td.type === "bar"),
+				d => d.seriesName
+			)
+			.join("g")
+			.attr("class", "bar-g")
+			.attr("transform", (d, i) => `translate(${i * (width / d.points.length)},0)`);
+		// eslint-disable-next-line @typescript-eslint/no-this-alias
+		const element = this;
+		this.seriesBars = function (d) {
+			d3.select(this)
+				.selectAll<SVGRectElement, TimeseriesPoint>("rect.bars")
+				.data(d.points, d => d.date)
+				.join("rect")
+				.attr("class", "bars")
+				.attr("y", d => element.y(d.value))
+				.attr("x", d => element.x(d.date))
+				.attr("fill", d.color)
+				.attr("width", width / d.points.length - 2)
+				.attr("height", d => height - marginBottom - element.y(d.value));
+		};
+		this.bars.each(this.seriesBars);
 
 		const tooltipPoint: Record<
 			string,
@@ -412,17 +443,29 @@ export class FTimeseriesChart extends FRoot {
 				this.yAxisG.call(this.xGridLines);
 
 				this.path
-					.data(chartData, d => d.seriesName)
+					.data(
+						chartData.filter(td => td.type === "line" || td.type === "area"),
+						d => d.seriesName
+					)
 					.join("path")
 					.attr("d", d => {
-						if (this.config.type === "line") {
+						if (d.type === "line") {
 							return this.line(d.points);
 						}
-						if (this.config.type === "area") {
+						if (d.type === "area") {
 							return this.area(d.points);
 						}
 						return "none";
 					});
+
+				this.bars
+					.data(
+						chartData.filter(td => td.type === "bar"),
+						d => d.seriesName
+					)
+					.join("g")
+					.each(this.seriesBars);
+
 				this.plotCustomLines();
 			} else {
 				this.init();

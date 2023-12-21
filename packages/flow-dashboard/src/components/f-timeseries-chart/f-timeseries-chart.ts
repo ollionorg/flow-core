@@ -77,6 +77,7 @@ export class FTimeseriesChart extends FRoot {
 	line!: d3.Line<TimeseriesPoint>;
 	xAxis!: d3.Axis<d3.NumberValue | Date>;
 	yAxis!: d3.Axis<d3.NumberValue>;
+	area!: d3.Area<TimeseriesPoint>;
 	/**
 	 * mention required fields here for generating vue types
 	 */
@@ -163,6 +164,17 @@ export class FTimeseriesChart extends FRoot {
 			marginTop
 		]);
 
+		this.area = d3
+			.area<TimeseriesPoint>()
+			.curve(d3.curveMonotoneX)
+			.x(d => {
+				return this.x(d.date);
+			})
+			.y0(this.y(0))
+			.y1(d => {
+				return this.y(d.value);
+			});
+
 		// Declare the line generator.
 		this.line = d3
 			.line<TimeseriesPoint>()
@@ -232,14 +244,37 @@ export class FTimeseriesChart extends FRoot {
 
 		// Append a path for the line.
 		this.path = this.svg
-			.selectAll<SVGPathElement, TimeseriesData>("path.chart-line")
+			.selectAll<SVGPathElement, TimeseriesData>("path.chart-path")
 			.data(chartData, d => d.seriesName)
 			.join("path")
 			.attr("fill", "none")
-			.attr("class", "chart-line")
+			.attr("class", () => {
+				let pathClass = "chart-path ";
+				if (this.config.type === "line") {
+					return (pathClass += " line-path");
+				}
+				if (this.config.type === "area") {
+					return (pathClass += " area-path");
+				}
+				return pathClass;
+			})
 			.attr("stroke", d => d.color)
 			.attr("stroke-width", 1.2)
-			.attr("d", d => this.line(d.points));
+			.attr("fill", d => {
+				if (this.config.type === "area") {
+					return d.color;
+				}
+				return "none";
+			})
+			.attr("d", d => {
+				if (this.config.type === "line") {
+					return this.line(d.points);
+				}
+				if (this.config.type === "area") {
+					return this.area(d.points);
+				}
+				return "none";
+			});
 
 		const tooltipPoint: Record<
 			string,
@@ -379,20 +414,20 @@ export class FTimeseriesChart extends FRoot {
 				this.path
 					.data(chartData, d => d.seriesName)
 					.join("path")
-					.attr("d", d => this.line(d.points));
+					.attr("d", d => {
+						if (this.config.type === "line") {
+							return this.line(d.points);
+						}
+						if (this.config.type === "area") {
+							return this.area(d.points);
+						}
+						return "none";
+					});
 				this.plotCustomLines();
 			} else {
 				this.init();
 			}
 		}
-
-		// const interval = setInterval(() => {
-
-		// }, 1000);
-
-		// setTimeout(() => {
-		// 	clearInterval(interval);
-		// }, 15000);
 	}
 }
 

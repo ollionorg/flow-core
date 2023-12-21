@@ -96,7 +96,7 @@ export const Basic = {
 		const chartRef = createRef<FTimeseriesChart>();
 		const chartConfig: FTimeseriesChartConfig = {
 			data: chartData,
-			type: "line",
+			type: "area",
 			xAxis: {
 				lines: xLines
 			},

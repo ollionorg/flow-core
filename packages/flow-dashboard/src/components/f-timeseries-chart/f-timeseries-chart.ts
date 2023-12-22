@@ -315,7 +315,7 @@ export class FTimeseriesChart extends FRoot {
 		chartData.forEach(series => {
 			tooltipPoint[series.seriesName] = this.svg
 				.append<SVGCircleElement>("circle")
-				.attr("class", "tooltip-point")
+				.attr("fill", series.color)
 				.attr("cx", `0`)
 				.attr("cy", `0`)
 				.attr("r", `0`);

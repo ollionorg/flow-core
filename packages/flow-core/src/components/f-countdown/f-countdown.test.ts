@@ -1,6 +1,6 @@
 import { html, fixture, expect } from "@open-wc/testing";
 
-import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
+import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 // setting icon pack for testing icon related test cases
 
 import { FCountdown, ConfigUtil, FDiv } from "@ollion/flow-core";

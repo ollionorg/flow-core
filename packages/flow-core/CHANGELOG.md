@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.7.4] - 2024-01-08
+
+### Bug Fixes
+
+- `f-input` types fixed.
+
 ## [2.7.3] - 2023-12-20
 
 ### Improvements

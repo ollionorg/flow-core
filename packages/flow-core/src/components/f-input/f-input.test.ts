@@ -1,4 +1,4 @@
-import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
+import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 import { expect, fixture, html } from "@open-wc/testing";
 
 // import flow-core elements

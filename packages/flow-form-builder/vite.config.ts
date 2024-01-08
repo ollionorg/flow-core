@@ -13,10 +13,10 @@ export default defineConfig({
 			formats: ["es", "cjs"]
 		},
 		rollupOptions: {
-			external: ["@cldcvr/flow-core-config", "@cldcvr/flow-core", /^lit/, "rxjs", "lodash-es"],
+			external: ["@ollion/flow-core-config", "@ollion/flow-core", /^lit/, "rxjs", "lodash-es"],
 			output: {
 				globals: {
-					"@cldcvr/flow-core": "@cldcvr/flow-core"
+					"@ollion/flow-core": "@ollion/flow-core"
 				}
 			}
 		}

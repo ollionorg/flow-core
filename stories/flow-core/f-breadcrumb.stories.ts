@@ -2,10 +2,10 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs } from "@storybook/manager-api";
 import { useState } from "@storybook/preview-api";
-import { FBreadcrumbs, FBreadCrumbSize, FBreadCrumbVariant } from "@cldcvr/flow-core";
+import { FBreadcrumbs, FBreadCrumbSize, FBreadCrumbVariant } from "@ollion/flow-core";
 
 export default {
-	title: "@cldcvr/flow-core/f-breadcrumb",
+	title: "@ollion/flow-core/f-breadcrumb",
 
 	parameters: {
 		controls: {

@@ -5,10 +5,10 @@ import type {
 	FTableSchemaDataRow,
 	FTableSchemaCell,
 	FTableSchemaHeaderCell
-} from "@cldcvr/flow-table/src/components/f-table-schema/f-table-schema";
+} from "@ollion/flow-table/src/components/f-table-schema/f-table-schema";
 
 import { createRef } from "lit/directives/ref.js";
-import { FPopover } from "@cldcvr/flow-core";
+import { FPopover } from "@ollion/flow-core";
 
 export const popoverRef = createRef<FPopover>();
 export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSchemaData {

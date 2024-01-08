@@ -1,7 +1,7 @@
 import { html, fixture, expect } from "@open-wc/testing";
-import "@cldcvr/flow-core";
+import "@ollion/flow-core";
 
-import { FTab } from "@cldcvr/flow-core";
+import { FTab } from "@ollion/flow-core";
 
 describe("f-tab", () => {
 	it("is defined", () => {

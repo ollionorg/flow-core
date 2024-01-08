@@ -2,9 +2,9 @@ import { html, fixture, expect } from "@open-wc/testing";
 // importing `loadingSVG` to cross check
 import loadingSVG from "./../../mixins/svg/loader";
 // import flow-core elements
-import "@cldcvr/flow-core";
+import "@ollion/flow-core";
 
-import { FCounter } from "@cldcvr/flow-core";
+import { FCounter } from "@ollion/flow-core";
 
 describe("f-counter", () => {
 	// check if component is defined

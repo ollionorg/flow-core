@@ -20,8 +20,8 @@
 
 - Remove sideEffects because the components require registration via import
 - Updated dependencies
-- `@cldcvr/flow-core-config@1.1.3`
-- `@cldcvr/flow-core@2.0.3`
+- `@ollion/flow-core-config@1.1.3`
+- `@ollion/flow-core@2.0.3`
 
 ## [3.0.2] - 2023-10-10
 
@@ -29,8 +29,8 @@
 
 - a2de106: Fix platform types
 - Updated dependencies [a2de106]
-- `@cldcvr/flow-core-config@1.1.1`
-- `@cldcvr/flow-core@2.0.1`
+- `@ollion/flow-core-config@1.1.1`
+- `@ollion/flow-core@2.0.1`
 
 ## [3.0.1-beta.0] - 2023-10-10
 
@@ -38,8 +38,8 @@
 
 - Fix platform types
 - Updated dependencies
-- `@cldcvr/flow-core-config@1.1.1-beta.0`
-- `@cldcvr/flow-core@2.0.1-beta.0`
+- `@ollion/flow-core-config@1.1.1-beta.0`
+- `@ollion/flow-core@2.0.1-beta.0`
 
 ## [3.0.0] - 2023-10-10
 
@@ -50,7 +50,7 @@
 ### Patch Changes
 
 - Updated dependencies
-- `@cldcvr/flow-core@2.0.0`
+- `@ollion/flow-core@2.0.0`
 <hr class="margin-btm-32" />
 <p class="margin-btm-24">All notable changes to this project will be documented in this file. See <a>Conventional Commits</a> for commit guidelines. </p>
 
@@ -66,7 +66,7 @@
 ### BREAKING CHANGES :alert: :alert:
 
 - We have recently addressed a security hotspot that had the potential for Code Injection. In our previous implementation, we were utilizing eval for the node template functionality. As a result, we strongly recommend that you update your existing node template APIs to the latest version.
-- By updating to the latest version, you will benefit from the security improvements we have implemented, mitigating the risk of Code Injection vulnerabilities. Please refer (here)[https://github.com/cldcvr/flow-core#script] to update `node-template`.
+- By updating to the latest version, you will benefit from the security improvements we have implemented, mitigating the risk of Code Injection vulnerabilities. Please refer (here)[https://github.com/ollionorg/flow-core#script] to update `node-template`.
 
 ## [1.4.6] - 2023-07-04
 

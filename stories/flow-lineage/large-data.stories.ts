@@ -1,9 +1,9 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { LineageNodeElement, LineageNodeLinks, LineageNodes } from "@cldcvr/flow-lineage";
+import { LineageNodeElement, LineageNodeLinks, LineageNodes } from "@ollion/flow-lineage";
 
 export default {
-	title: "@cldcvr/flow-lineage/Examples/Large Data",
+	title: "@ollion/flow-lineage/Examples/Large Data",
 	argTypes: {
 		["node-template"]: {
 			control: false

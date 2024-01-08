@@ -2,7 +2,7 @@ import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@cldcvr/flow-table/f-trow",
+	title: "@ollion/flow-table/f-trow",
 
 	parameters: {
 		controls: {

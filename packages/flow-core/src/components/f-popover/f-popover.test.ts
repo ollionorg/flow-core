@@ -1,7 +1,7 @@
 import { expect, fixture, html } from "@open-wc/testing";
 
-import "@cldcvr/flow-core";
-import { FPopover } from "@cldcvr/flow-core";
+import "@ollion/flow-core";
+import { FPopover } from "@ollion/flow-core";
 
 describe("f-popover", () => {
 	it("is defined", () => {

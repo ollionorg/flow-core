@@ -2,9 +2,9 @@ import { expect, fixture, oneEvent } from "@open-wc/testing";
 import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 
 // import flow-core elements
-import "@cldcvr/flow-core";
+import "@ollion/flow-core";
 
-import { ConfigUtil, FDiv, FSearch, FSuggest } from "@cldcvr/flow-core";
+import { ConfigUtil, FDiv, FSearch, FSuggest } from "@ollion/flow-core";
 import { html } from "lit";
 
 // setting icon pack for testing icon related test cases
@@ -22,12 +22,12 @@ describe("f-search", () => {
 			></f-search>
 		`);
 		const suggest = el.shadowRoot?.querySelector("f-suggest");
-		await suggest!.updateComplete;
-		const listner = oneEvent(suggest!.fInput, "focus");
-		suggest!.fInput.dispatchEvent(new FocusEvent("focus"));
+		await suggest.updateComplete;
+		const listner = oneEvent(suggest.fInput, "focus");
+		suggest.fInput.dispatchEvent(new FocusEvent("focus"));
 
 		await listner;
-		expect(suggest!.popOverElement.open).equals(true);
+		expect(suggest.popOverElement.open).equals(true);
 	});
 	it("it should select result on click", async () => {
 		const el = await fixture<FSearch>(html`
@@ -36,23 +36,23 @@ describe("f-search", () => {
 			></f-search>
 		`);
 		const suggest = el.shadowRoot?.querySelector<FSuggest>("f-suggest");
-		await suggest!.updateComplete;
-		const listner = oneEvent(suggest!.fInput, "focus");
-		suggest!.fInput.dispatchEvent(new FocusEvent("focus"));
+		await suggest.updateComplete;
+		const listner = oneEvent(suggest.fInput, "focus");
+		suggest.fInput.dispatchEvent(new FocusEvent("focus"));
 
 		await listner;
-		expect(suggest!.popOverElement.open).equals(true);
+		expect(suggest.popOverElement.open).equals(true);
 
 		const suggestion = Array.from(
-			suggest!.popOverElement.querySelectorAll<FDiv>("f-div.f-select-options-clickable")
+			suggest.popOverElement.querySelectorAll<FDiv>("f-div.f-select-options-clickable")
 		).find(d => d.children[0].children[1].textContent?.trim() === "Suggestion 2");
 		expect(suggestion).instanceOf(FDiv);
 		const suggestionListner = oneEvent(suggestion as FDiv, "click");
 		(suggestion as FDiv).click();
 		await suggestionListner;
 
-		expect(suggest!.value).equals("Suggestion 2");
-		expect(suggest!.popOverElement.open).equals(false);
+		expect(suggest.value).equals("Suggestion 2");
+		expect(suggest.popOverElement.open).equals(false);
 	});
 
 	it("it should filter result based on value", async () => {
@@ -64,15 +64,15 @@ describe("f-search", () => {
 		`);
 		const suggest = el.shadowRoot?.querySelector<FSuggest>("f-suggest");
 
-		await suggest!.updateComplete;
-		const listner = oneEvent(suggest!.fInput, "focus");
-		suggest!.fInput.dispatchEvent(new FocusEvent("focus"));
+		await suggest.updateComplete;
+		const listner = oneEvent(suggest.fInput, "focus");
+		suggest.fInput.dispatchEvent(new FocusEvent("focus"));
 
 		await listner;
-		expect(suggest!.popOverElement.open).equals(true);
+		expect(suggest.popOverElement.open).equals(true);
 
 		const suggestions = Array.from(
-			suggest!.popOverElement.querySelectorAll<FDiv>("f-div.f-select-options-clickable")
+			suggest.popOverElement.querySelectorAll<FDiv>("f-div.f-select-options-clickable")
 		).filter(d => d.children[0].children[1].textContent?.trim().includes("filter"));
 
 		expect(suggestions.length).equals(2);

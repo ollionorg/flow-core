@@ -4,7 +4,7 @@ import { createRef, ref } from "lit/directives/ref.js";
 import downloadFile from "./donwload-file";
 
 export default {
-	title: "@cldcvr/flow-table/f-table-schema",
+	title: "@ollion/flow-table/f-table-schema",
 
 	parameters: {
 		controls: {
@@ -180,7 +180,7 @@ export const Data = {
 					<f-text
 						>Sample data used to display table.
 						<a
-							href="https://github.com/cldcvr/flow-core/blob/main/packages/flow-table/f-table-schema.doc.md"
+							href="https://github.com/ollionorg/flow-core/blob/main/packages/flow-table/f-table-schema.doc.md"
 							>Learn more</a
 						></f-text
 					>
@@ -215,7 +215,7 @@ export const HeaderCellTemplate = {
 					<f-text
 						>Sample data used to display table.
 						<a
-							href="https://github.com/cldcvr/flow-core/blob/main/packages/flow-table/f-table-schema.doc.md"
+							href="https://github.com/ollionorg/flow-core/blob/main/packages/flow-table/f-table-schema.doc.md"
 							>Learn more</a
 						></f-text
 					>

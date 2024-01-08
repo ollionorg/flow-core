@@ -11,7 +11,7 @@ import { getExtensionsFromMimeType, getFormattedBytes } from "../../utils/index"
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@cldcvr/flow-core-config";
+import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-file-upload", globalStyle);
 
 export type FFileUploadState = "primary" | "default" | "success" | "warning" | "danger";

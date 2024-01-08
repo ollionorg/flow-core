@@ -118,12 +118,7 @@ function transformSchemaVue3(schema: Package, options: UserOptions, modulePath?:
 }
 function getComponentCodeFromDeclarationReact(declaration: Declaration) {
 	declaration = declaration as MixinDeclaration;
-	if (
-		!(
-			declaration.superclass &&
-			(declaration.superclass.name === "FRoot" || declaration.superclass.name === "LitElement")
-		)
-	) {
+	if (!isSuperClassDeclaration(declaration)) {
 		return null;
 	}
 
@@ -159,12 +154,7 @@ function getComponentCodeFromDeclarationReact(declaration: Declaration) {
 	return componentDeclaration;
 }
 function getComponentCodeFromDeclarationVue3(declaration: MixinDeclaration) {
-	if (
-		!(
-			declaration.superclass &&
-			(declaration.superclass.name === "FRoot" || declaration.superclass.name === "LitElement")
-		)
-	) {
+	if (!isSuperClassDeclaration(declaration)) {
 		return null;
 	}
 
@@ -202,12 +192,7 @@ function getComponentCodeFromDeclarationVue3(declaration: MixinDeclaration) {
 }
 function getComponentCodeFromDeclarationVue2(declaration: Declaration) {
 	declaration = declaration as MixinDeclaration;
-	if (
-		!(
-			declaration.superclass &&
-			(declaration.superclass.name === "FRoot" || declaration.superclass.name === "LitElement")
-		)
-	) {
+	if (!isSuperClassDeclaration(declaration)) {
 		return null;
 	}
 
@@ -247,7 +232,7 @@ function getComponentCodeFromDeclarationVue2(declaration: Declaration) {
 function isSuperClassDeclaration(declaration: MixinDeclaration) {
 	return (
 		declaration.superclass &&
-		(declaration.superclass.name === "FRoot" || declaration.superclass.name === "LitElement")
+		["FRoot", "LitElement", "FInputBase"].includes(declaration.superclass.name)
 	);
 }
 

@@ -4,7 +4,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useState } from "@storybook/client-api";
 
 export default {
-	title: "@cldcvr/flow-core/f-accordion",
+	title: "@ollion/flow-core/f-accordion",
 
 	parameters: {
 		controls: {
@@ -40,7 +40,7 @@ export const Playground = {
 
 			["ORG ID"]: {
 				type: "text",
-				value: "brendon.compliance@cldcvr.com"
+				value: "brendon.compliance@ollion.com"
 			},
 
 			["CONNECT ON"]: {

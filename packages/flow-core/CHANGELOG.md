@@ -67,7 +67,7 @@
 ### Improvements
 
 - The 1Password manager does not currently support Shadow DOM for autofill, and a timeline for its implementation has not been provided. Consequently, we are introducing `f-input-light` as a light DOM alternative to `f-input`.
-- Login form story added [here](https://flow.ollion.com/v2/index.html?path=/story/cldcvr-flow-form-builder-examples--login-form). It uses `f-input-light` and validation module from `@cldcvr/flow-form-builder`.
+- Login form story added [here](https://flow.ollion.com/v2/index.html?path=/story/ollion-flow-form-builder-examples--login-form). It uses `f-input-light` and validation module from `@ollion/flow-form-builder`.
 - `f-form-field` wrapper elements added to support `lable`, `subtitle`,`help` slots.
 - **Note : `f-input-light` won't support `lable`, `subtitle`,`help` slots**.
 
@@ -198,7 +198,7 @@
 
 - Remove sideEffects because the components require registration via import
 - Updated dependencies
-- `@cldcvr/flow-core-config@1.1.3`
+- `@ollion/flow-core-config@1.1.3`
 
 ## [2.0.2] - 2023-10-10
 
@@ -206,7 +206,7 @@
 
 - a2de106: Fix platform types
 - Updated dependencies [a2de106]
-- `@cldcvr/flow-core-config@1.1.1`
+- `@ollion/flow-core-config@1.1.1`
 
 ## [2.0.1-beta.0] - 2023-10-10
 
@@ -214,7 +214,7 @@
 
 - Fix platform types
 - Updated dependencies
-- `@cldcvr/flow-core-config@1.1.1-beta.0`
+- `@ollion/flow-core-config@1.1.1-beta.0`
 
 ## [2.0.0] - 2023-10-10
 
@@ -225,7 +225,7 @@
 ### Patch Changes
 
 - Updated dependencies
-- `@cldcvr/flow-core-config@1.1.0`
+- `@ollion/flow-core-config@1.1.0`
 <hr className="margin-btm-32" />
 <p className="margin-btm-24">All notable changes to this project will be documented in this file. See <a>Conventional Commits</a> for commit guidelines. </p>
 
@@ -561,7 +561,7 @@
 
 ### Improvements
 
-- Extract shared configuration into `@cldcvr/flow-core-config` package.
+- Extract shared configuration into `@ollion/flow-core-config` package.
 - Allow loading of icon bundles asynchronously
 
 ### Bug Fixes
@@ -1005,7 +1005,7 @@
 
 ### Bug fixes
 
-- `size`, `variant`, `category` removed from `f-form` since it is anti pattern to set it on inner input elements. (This usecase will be covered in `@cldcvr/flow-form-builder`)
+- `size`, `variant`, `category` removed from `f-form` since it is anti pattern to set it on inner input elements. (This usecase will be covered in `@ollion/flow-form-builder`)
 
 ## [1.3.6] - 2023-02-21
 

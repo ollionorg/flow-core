@@ -2,9 +2,9 @@ import { html, fixture, expect } from "@open-wc/testing";
 import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 
 // importing flow-core components
-import "@cldcvr/flow-core";
+import "@ollion/flow-core";
 
-import { FBreadcrumb, ConfigUtil } from "@cldcvr/flow-core";
+import { FBreadcrumb, ConfigUtil } from "@ollion/flow-core";
 
 // setting icon pack for testing icon related test cases
 ConfigUtil.setConfig({ iconPack: IconPack });

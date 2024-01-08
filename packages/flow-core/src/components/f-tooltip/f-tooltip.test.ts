@@ -1,7 +1,7 @@
 import { html, fixture, expect } from "@open-wc/testing";
 
-import "@cldcvr/flow-core";
-import { FTooltip } from "@cldcvr/flow-core";
+import "@ollion/flow-core";
+import { FTooltip } from "@ollion/flow-core";
 
 describe("f-tooltip", () => {
 	it("is defined", () => {

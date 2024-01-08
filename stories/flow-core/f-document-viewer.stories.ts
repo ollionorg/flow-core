@@ -1,10 +1,10 @@
 import { html } from "lit-html";
 import { useState } from "@storybook/preview-api";
-import { FDocViewerContent } from "@cldcvr/flow-core";
+import { FDocViewerContent } from "@ollion/flow-core";
 import getFakeDocContent from "../utils/mock-doc-content";
 
 export default {
-	title: "@cldcvr/flow-core/f-document-viewer",
+	title: "@ollion/flow-core/f-document-viewer",
 
 	parameters: {
 		controls: {

@@ -1,13 +1,13 @@
 # Flow Log
 
-The Flow Log is built on the Flow design framework ([website](https://flow.ollion.com/) / [github](https://github.com/cldcvr/flow-core)) using [Monaco Editor](https://microsoft.github.io/monaco-editor/)
+The Flow Log is built on the Flow design framework ([website](https://flow.ollion.com/) / [github](https://github.com/ollionorg/flow-core)) using [Monaco Editor](https://microsoft.github.io/monaco-editor/)
 
 # Installation
 
 ### 1️⃣ Install flow code editor dependency
 
 ```
-npm i --save @cldcvr/flow-log
+npm i --save @ollion/flow-log
 ```
 
 **Note:** after installation, re-start your application.
@@ -19,8 +19,8 @@ npm i --save @cldcvr/flow-log
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@cldcvr/flow-core";
-import "@cldcvr/flow-log";
+import "@ollion/flow-core";
+import "@ollion/flow-log";
 ```
 
 <br>
@@ -33,7 +33,7 @@ import "@cldcvr/flow-log";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@cldcvr/flow-log/dist/types/vue3";
+import "@ollion/flow-log/dist/types/vue3";
 ```
 
 <details>
@@ -42,7 +42,7 @@ import "@cldcvr/flow-log/dist/types/vue3";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@cldcvr/flow-log/dist/types/vue2";
+import "@ollion/flow-log/dist/types/vue2";
 ```
 
 </details>
@@ -53,7 +53,7 @@ import "@cldcvr/flow-log/dist/types/vue2";
 **React**: Include react type in `tsconfig.json` file like below.
 
 ```json
-"include": ["src", "./node_modules/@cldcvr/flow-log/dist/types/react.ts"]
+"include": ["src", "./node_modules/@ollion/flow-log/dist/types/react.ts"]
 ```
 
 </details>

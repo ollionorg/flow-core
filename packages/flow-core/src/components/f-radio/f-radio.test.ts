@@ -1,9 +1,9 @@
 import { html, fixture, expect } from "@open-wc/testing";
 
 // import flow-core elements
-import "@cldcvr/flow-core";
+import "@ollion/flow-core";
 
-import { FRadio } from "@cldcvr/flow-core";
+import { FRadio } from "@ollion/flow-core";
 
 describe("f-radio", () => {
 	it("is defined", () => {

@@ -1,6 +1,6 @@
 Follow these steps to create flow theme in your project.
 
-1. Download the theme template file with the .scss extension from [here](https://github.com/cldcvr/flow-core/blob/main/packages/flow-core/custom-theme.scss).
+1. Download the theme template file with the .scss extension from [here](https://github.com/ollionorg/flow-core/blob/main/packages/flow-core/custom-theme.scss).
 
 2. Open the downloaded file and replace the `<your-theme-name>` keyword with your desired theme name.
 
@@ -17,7 +17,7 @@ $color-primary-default: #cc8899;
 6. Once you have successfully added the theme file to your project, use the following API to apply the theme to your startup file.In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
 
 ```javascript
-import { ConfigUtil } from "@cldcvr/flow-core";
+import { ConfigUtil } from "@ollion/flow-core";
 
 ConfigUtil.setConfig({ theme: "<your-theme-name>" });
 ```

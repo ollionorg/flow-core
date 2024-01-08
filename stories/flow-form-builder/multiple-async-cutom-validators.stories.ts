@@ -1,11 +1,11 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { FormBuilderField } from "@cldcvr/flow-form-builder";
+import { FormBuilderField } from "@ollion/flow-form-builder";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
-import { FFormBuilder } from "@cldcvr/flow-form-builder/src";
+import { FFormBuilder } from "@ollion/flow-form-builder/src";
 
 export default {
-	title: "@cldcvr/flow-form-builder/Examples/Multiple Async Custom Validator",
+	title: "@ollion/flow-form-builder/Examples/Multiple Async Custom Validator",
 	argTypes: {
 		field: {
 			control: false

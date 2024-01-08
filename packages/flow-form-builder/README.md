@@ -1,8 +1,8 @@
 # Flow Form builder
 
-![npm](https://badgen.net/npm/v/@cldcvr/flow-form-builder) ![license](https://badgen.net/npm/license/@cldcvr/flow-form-builder) ![types](https://badgen.net/npm/types/@cldcvr/flow-form-builder) ![downloads](https://badgen.net//npm/dw/@cldcvr/flow-form-builder)
+![npm](https://badgen.net/npm/v/@ollion/flow-form-builder) ![license](https://badgen.net/npm/license/@ollion/flow-form-builder) ![types](https://badgen.net/npm/types/@ollion/flow-form-builder) ![downloads](https://badgen.net//npm/dw/@ollion/flow-form-builder)
 
-The Flow form builder is built on the Flow design framework ([website](https://flow.ollion.com/) / [github](https://github.com/cldcvr/flow-core))
+The Flow form builder is built on the Flow design framework ([website](https://flow.ollion.com/) / [github](https://github.com/ollionorg/flow-core))
 
 ## Benefits / Features
 
@@ -34,7 +34,7 @@ You can pass custom markup to render custom designs for titles, actions, help te
 
 #### 🍭 Flow components and themes
 
-Built on [flow-core](https://github.com/cldcvr/flow-core) gives you accesss to all themes and components like emoji-picker, datetime-picker , suggestions ,file-upload,multi-select etc.
+Built on [flow-core](https://github.com/ollionorg/flow-core) gives you accesss to all themes and components like emoji-picker, datetime-picker , suggestions ,file-upload,multi-select etc.
 
 #### 🛠️ Structural API co-relation
 
@@ -50,13 +50,13 @@ Head over to [Flow form builder Storybook](https://flow.ollion.com/v2/index.html
 
 # Getting started
 
-Flow form builder is built on [Flow](https://flow.ollion.com/), an open source design framework. To run form builder, please make sure that you have [Flow core](https://github.com/cldcvr/flow-core) as part of your project.
+Flow form builder is built on [Flow](https://flow.ollion.com/), an open source design framework. To run form builder, please make sure that you have [Flow core](https://github.com/ollionorg/flow-core) as part of your project.
 
-<!-- During installation if you run into any issues, head over to our [known issues + solutions document](https://github.com/cldcvr/flow-core/blob/main/packages/flow-form-builder/KNOWN_SOLUTIONS.md) to see if a solution already exists. -->
+<!-- During installation if you run into any issues, head over to our [known issues + solutions document](https://github.com/ollionorg/flow-core/blob/main/packages/flow-form-builder/KNOWN_SOLUTIONS.md) to see if a solution already exists. -->
 
 **Note:** If you already have Flow packages installed, please update to the latest versions
 
-**Note:** If you do not have an existing front-end project, you can quickly create one from a [flow starter kit](https://github.com/cldcvr/flow-core#starter-kits).
+**Note:** If you do not have an existing front-end project, you can quickly create one from a [flow starter kit](https://github.com/ollionorg/flow-core#starter-kits).
 
 <br/>
 
@@ -65,7 +65,7 @@ Flow form builder is built on [Flow](https://flow.ollion.com/), an open source d
 ### 1️⃣ Install flow form builder dependency
 
 ```
-npm i --save @cldcvr/flow-form-builder
+npm i --save @ollion/flow-form-builder
 ```
 
 **Note:** after installation, re-start your application.
@@ -77,8 +77,8 @@ npm i --save @cldcvr/flow-form-builder
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@cldcvr/flow-core";
-import "@cldcvr/flow-form-builder";
+import "@ollion/flow-core";
+import "@ollion/flow-form-builder";
 ```
 
 <br/>
@@ -91,7 +91,7 @@ import "@cldcvr/flow-form-builder";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@cldcvr/flow-form-builder/dist/types/vue3";
+import "@ollion/flow-form-builder/dist/types/vue3";
 ```
 
 <details>
@@ -100,7 +100,7 @@ import "@cldcvr/flow-form-builder/dist/types/vue3";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@cldcvr/flow-form-builder/dist/types/vue2";
+import "@ollion/flow-form-builder/dist/types/vue2";
 ```
 
 </details>
@@ -111,7 +111,7 @@ import "@cldcvr/flow-form-builder/dist/types/vue2";
 **React**: Include react type in `tsconfig.json` file like below.
 
 ```json
-"include": ["src", "./node_modules/@cldcvr/flow-form-builder/dist/types/react.ts"]
+"include": ["src", "./node_modules/@ollion/flow-form-builder/dist/types/react.ts"]
 ```
 
 </details>
@@ -150,7 +150,7 @@ import {
   FormBuilderField,
   FormBuilderState,
   FormBuilderValues,
-} from "@cldcvr/flow-form-builder";
+} from "@ollion/flow-form-builder";
 import { defineComponent } from "vue";
 
 export default defineComponent({

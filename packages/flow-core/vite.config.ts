@@ -21,7 +21,7 @@ export default defineConfig({
 				"emoji-mart",
 				/^lit/,
 				"rxjs",
-				"@cldcvr/flow-core-config",
+				"@ollion/flow-core-config",
 				"vanilla-colorful",
 				"mark.js"
 			]

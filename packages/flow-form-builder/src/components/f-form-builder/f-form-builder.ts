@@ -17,7 +17,7 @@ import {
 import eleStyle from "./f-form-builder.scss?inline";
 import globalStyle from "./f-form-builder-global.scss?inline";
 
-import { FRoot } from "@cldcvr/flow-core";
+import { FRoot } from "@ollion/flow-core";
 import { Ref, createRef } from "lit/directives/ref.js";
 import fieldRenderer from "./fields";
 import { extractValidationState, validateField } from "../../modules/validation/validator";
@@ -25,7 +25,7 @@ import { extractValidationState, validateField } from "../../modules/validation/
 import { Subject } from "rxjs";
 import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/helpers";
 import { cloneDeep, isEqual } from "lodash-es";
-import { injectCss } from "@cldcvr/flow-core-config";
+import { injectCss } from "@ollion/flow-core-config";
 
 injectCss("f-form-builder", globalStyle);
 

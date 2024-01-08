@@ -450,7 +450,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
             variant="para"
             weight="regular"
           >
-            vikas0@cldcvr.com
+            vikas0@ollion.com
           </f-text>
         </f-div>
       </f-tcell>
@@ -639,7 +639,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
             variant="para"
             weight="regular"
           >
-            vikas1@cldcvr.com
+            vikas1@ollion.com
           </f-text>
         </f-div>
       </f-tcell>

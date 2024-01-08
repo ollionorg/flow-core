@@ -1,12 +1,12 @@
 import { html, fixture, expect, elementUpdated } from "@open-wc/testing";
 import loadingSVG from "./../../mixins/svg/loader";
 import notFound from "../../mixins/svg/not-found";
-import { ConfigUtil } from "@cldcvr/flow-core-config";
+import { ConfigUtil } from "@ollion/flow-core-config";
 
 // import all flow -core components
-import "@cldcvr/flow-core";
+import "@ollion/flow-core";
 
-import { FIcon } from "@cldcvr/flow-core";
+import { FIcon } from "@ollion/flow-core";
 
 describe("f-icon", () => {
 	it("is defined", () => {

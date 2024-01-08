@@ -2,7 +2,7 @@ import { html } from "lit-html";
 import samplelogs from "./logs/logs.js";
 
 export default {
-	title: "@cldcvr/flow-log/f-log",
+	title: "@ollion/flow-log/f-log",
 
 	parameters: {
 		controls: {

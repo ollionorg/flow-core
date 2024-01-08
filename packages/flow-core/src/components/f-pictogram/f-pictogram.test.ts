@@ -1,7 +1,7 @@
 import { html, fixture, expect } from "@open-wc/testing";
 import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
-import "@cldcvr/flow-core";
-import { FPictogram, ConfigUtil } from "@cldcvr/flow-core";
+import "@ollion/flow-core";
+import { FPictogram, ConfigUtil } from "@ollion/flow-core";
 
 ConfigUtil.setConfig({ iconPack: IconPack });
 

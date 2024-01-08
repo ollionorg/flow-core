@@ -8,7 +8,7 @@ import { FCarouselContent } from "../f-carousel-content/f-carousel-content";
 import { FIcon } from "../f-icon/f-icon";
 import { flowElement } from "./../../utils";
 
-import { injectCss } from "@cldcvr/flow-core-config";
+import { injectCss } from "@ollion/flow-core-config";
 
 injectCss("f-carousel", globalStyle);
 

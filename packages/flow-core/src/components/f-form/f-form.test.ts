@@ -1,7 +1,7 @@
 import { html, fixture, expect } from "@open-wc/testing";
 
-import "@cldcvr/flow-core";
-import { FForm } from "@cldcvr/flow-core";
+import "@ollion/flow-core";
+import { FForm } from "@ollion/flow-core";
 
 describe("f-form", () => {
 	it("is defined", () => {

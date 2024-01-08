@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FButton, FDiv, flowElement, FRoot, FSearch, FText } from "@cldcvr/flow-core";
+import { FButton, FDiv, flowElement, FRoot, FSearch, FText } from "@ollion/flow-core";
 import { html, HTMLTemplateResult, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { property, query, state } from "lit/decorators.js";
@@ -10,7 +10,7 @@ import { FTrow, FTrowChevronPosition, FTrowState } from "../f-trow/f-trow";
 import eleStyle from "./f-table-schema.scss?inline";
 import globalStyle from "./f-table-schema-global.scss?inline";
 import { repeat } from "lit/directives/repeat.js";
-import { injectCss } from "@cldcvr/flow-core-config";
+import { injectCss } from "@ollion/flow-core-config";
 
 injectCss("f-table-schema", globalStyle);
 

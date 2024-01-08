@@ -14,7 +14,7 @@ import getTextContrast from "../../utils/get-text-contrast";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import LightenDarkenColor from "../../utils/get-lighten-darken-color";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@cldcvr/flow-core-config";
+import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-icon-button", globalStyle);
 
 const variants = ["round", "curved", "block"] as const;

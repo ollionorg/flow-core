@@ -2,7 +2,7 @@ import { html } from "lit-html";
 import { useArgs, useState } from "@storybook/client-api";
 
 export default {
-	title: "@cldcvr/flow-code-editor/f-code-editor",
+	title: "@ollion/flow-code-editor/f-code-editor",
 
 	parameters: {
 		controls: {

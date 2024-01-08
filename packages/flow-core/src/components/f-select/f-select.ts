@@ -25,7 +25,7 @@ import {
 } from "./handlers";
 import { FIconButton } from "../f-icon-button/f-icon-button";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@cldcvr/flow-core-config";
+import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-select", globalStyle);
 
 export type FSelectState = "primary" | "default" | "success" | "warning" | "danger";

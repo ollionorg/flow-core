@@ -1,5 +1,5 @@
 import { expect, fixture, oneEvent } from "@open-wc/testing";
-import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
+import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 import FCarouselExample from "./i-fcarousel-example";
 
 // import flow-core elements

@@ -1,7 +1,7 @@
-import SystemIconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
-import ProductIconPack from "@cldcvr/flow-product-icon/dist/types/icon-pack";
-import GcpIconPack from "@cldcvr/flow-gcp-icon/dist/types/icon-pack";
-import AwsIconPack from "@cldcvr/flow-aws-icon/dist/types/icon-pack";
+import SystemIconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
+import ProductIconPack from "@ollion/flow-product-icon/dist/types/icon-pack";
+import GcpIconPack from "@ollion/flow-gcp-icon/dist/types/icon-pack";
+import AwsIconPack from "@ollion/flow-aws-icon/dist/types/icon-pack";
 
 import { ConfigUtil } from "@ollion/flow-core-config";
 

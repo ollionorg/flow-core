@@ -1,1 +1,1 @@
-module.exports = require("@cldcvr/prettier-config");
+module.exports = require("@ollion/prettier-config");

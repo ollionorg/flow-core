@@ -28,7 +28,7 @@ export default defineNuxtPlugin({
 		await Promise.all([
 			import("@ollion/flow-core"),
 			import("@ollion/flow-form-builder"),
-			import("@cldcvr/flow-system-icon")
+			import("@ollion/flow-system-icon")
 		]).then(() => {
 			console.log("Flow components loaded");
 		});

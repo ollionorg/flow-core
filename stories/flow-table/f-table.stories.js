@@ -3,7 +3,7 @@ import { createRef, ref } from "lit/directives/ref.js";
 import downloadFile from "./donwload-file";
 
 export default {
-	title: "@cldcvr/flow-table/f-table",
+	title: "@ollion/flow-table/f-table",
 
 	parameters: {
 		controls: {

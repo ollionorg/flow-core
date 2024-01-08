@@ -1,7 +1,7 @@
 import { expect } from "@open-wc/testing";
-import "@cldcvr/flow-core";
+import "@ollion/flow-core";
 
-import { FTabNode } from "@cldcvr/flow-core";
+import { FTabNode } from "@ollion/flow-core";
 
 describe("f-tab-node", () => {
 	it("is defined", () => {

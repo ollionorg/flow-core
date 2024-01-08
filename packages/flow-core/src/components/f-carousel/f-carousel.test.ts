@@ -3,9 +3,9 @@ import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 import FCarouselExample from "./i-fcarousel-example";
 
 // import flow-core elements
-import "@cldcvr/flow-core";
+import "@ollion/flow-core";
 
-import { ConfigUtil, FCarousel } from "@cldcvr/flow-core";
+import { ConfigUtil, FCarousel } from "@ollion/flow-core";
 import { html } from "lit";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 

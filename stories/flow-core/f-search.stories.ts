@@ -1,8 +1,8 @@
 import { html } from "lit-html";
-import { FSearchResultWhen } from "@cldcvr/flow-core";
+import { FSearchResultWhen } from "@ollion/flow-core";
 
 export default {
-	title: "@cldcvr/flow-core/f-search",
+	title: "@ollion/flow-core/f-search",
 
 	parameters: {
 		controls: {

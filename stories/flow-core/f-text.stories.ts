@@ -1,7 +1,7 @@
 import { html } from "lit-html";
 
 export default {
-	title: "@cldcvr/flow-core/f-text",
+	title: "@ollion/flow-core/f-text",
 
 	parameters: {
 		controls: {

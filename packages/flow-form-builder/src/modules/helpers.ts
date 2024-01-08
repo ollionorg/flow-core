@@ -28,7 +28,7 @@ import {
 	FSwitch,
 	FTextArea,
 	FColorPicker
-} from "@cldcvr/flow-core";
+} from "@ollion/flow-core";
 
 import checkboxGroupGlobalStyles from "./../components/f-checkbox-group/f-checkbox-group-global.scss?inline";
 import radioGroupGlobalStyles from "./../components/f-radio-group/f-radio-group-global.scss?inline";

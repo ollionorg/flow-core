@@ -14,16 +14,16 @@ import getTextContrast from "../../utils/get-text-contrast";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import LightenDarkenColor from "../../utils/get-lighten-darken-color";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@cldcvr/flow-core-config";
+import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-icon-button", globalStyle);
 
 const variants = ["round", "curved", "block"] as const;
 const categories = ["fill", "outline", "transparent", "packed"] as const;
 const sizes = ["large", "medium", "small", "x-small"] as const;
 
-export type FIconButtonVariant = (typeof variants)[number];
-export type FIconButtonType = (typeof categories)[number];
-export type FIconButtonSize = (typeof sizes)[number];
+export type FIconButtonVariant = typeof variants[number];
+export type FIconButtonType = typeof categories[number];
+export type FIconButtonSize = typeof sizes[number];
 export type FIconButtonState =
 	| "primary"
 	| "danger"

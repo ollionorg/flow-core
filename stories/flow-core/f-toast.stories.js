@@ -4,7 +4,7 @@ import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fToastAnatomy from "../svg/i-ftoast-anatomy.js";
 
 export default {
-	title: "@cldcvr/flow-core/f-toast",
+	title: "@ollion/flow-core/f-toast",
 
 	parameters: {
 		controls: {

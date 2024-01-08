@@ -4,7 +4,7 @@ import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fTextAreaAnatomy from "../svg/i-ftextarea-anatomy.js";
 
 export default {
-	title: "@cldcvr/flow-core/f-text-area",
+	title: "@ollion/flow-core/f-text-area",
 
 	parameters: {
 		controls: {

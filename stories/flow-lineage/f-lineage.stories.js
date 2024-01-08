@@ -3,7 +3,7 @@ import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@cldcvr/flow-lineage/f-lineage",
+	title: "@ollion/flow-lineage/f-lineage",
 
 	parameters: {
 		controls: {
@@ -248,7 +248,7 @@ export const Playground = {
 		nodes: {
 			Calvin: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "Calvin"
 				},
@@ -413,7 +413,7 @@ export const Playground = {
 
 			Hansen: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "Hansen"
 				},
@@ -545,7 +545,7 @@ export const Playground = {
 
 			Alicen: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "Alicen"
 				}
@@ -553,7 +553,7 @@ export const Playground = {
 
 			Jennifer: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "Jennifer"
 				}
@@ -561,7 +561,7 @@ export const Playground = {
 
 			Brooke: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "Brooke"
 				}
@@ -569,7 +569,7 @@ export const Playground = {
 
 			Tamara: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "Tamara"
 				}
@@ -577,7 +577,7 @@ export const Playground = {
 
 			Bradley: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "Bradley"
 				}
@@ -585,7 +585,7 @@ export const Playground = {
 
 			Roger: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "Roger"
 				}
@@ -593,7 +593,7 @@ export const Playground = {
 
 			Max: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "Max"
 				},
@@ -622,7 +622,7 @@ export const Playground = {
 
 			Tony: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "Tony"
 				},
@@ -651,7 +651,7 @@ export const Playground = {
 
 			Charlie: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "Roger"
 				}
@@ -659,7 +659,7 @@ export const Playground = {
 
 			John: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "John"
 				}
@@ -667,7 +667,7 @@ export const Playground = {
 
 			Tim: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "Tim"
 				}
@@ -675,7 +675,7 @@ export const Playground = {
 
 			Sam: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "Sam"
 				}
@@ -683,7 +683,7 @@ export const Playground = {
 
 			Rex: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "Rex"
 				}
@@ -691,7 +691,7 @@ export const Playground = {
 
 			Pat: {
 				fData: {
-					email: "abc@cldcvr.com",
+					email: "abc@ollion.com",
 					mobile: "+91-12345 67890",
 					name: "Pat"
 				}

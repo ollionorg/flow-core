@@ -1,7 +1,7 @@
 import { expect } from "@open-wc/testing";
-import "@cldcvr/flow-core";
+import "@ollion/flow-core";
 
-import { FTabContent } from "@cldcvr/flow-core";
+import { FTabContent } from "@ollion/flow-core";
 
 describe("f-tab-content", () => {
 	it("is defined", () => {

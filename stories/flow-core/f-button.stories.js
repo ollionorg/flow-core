@@ -4,7 +4,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { createRef, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@cldcvr/flow-core/f-button",
+	title: "@ollion/flow-core/f-button",
 
 	parameters: {
 		controls: {

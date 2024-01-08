@@ -2,10 +2,10 @@ import { html, fixture, expect } from "@open-wc/testing";
 import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 
 // import flow-core elements
-import "@cldcvr/flow-core";
+import "@ollion/flow-core";
 
-import { ConfigUtil, FIconButton } from "@cldcvr/flow-core";
-import { FTcell, FTable } from "@cldcvr/flow-table";
+import { ConfigUtil, FIconButton } from "@ollion/flow-core";
+import { FTcell, FTable } from "@ollion/flow-table";
 ConfigUtil.setConfig({ iconPack: IconPack });
 
 describe("f-tcell", () => {

@@ -4,7 +4,7 @@ import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fSelectAnatomy from "../svg/i-fselect-anatomy.js";
 
 export default {
-	title: "@cldcvr/flow-core/f-select",
+	title: "@ollion/flow-core/f-select",
 
 	parameters: {
 		controls: {
@@ -611,7 +611,7 @@ export const OptionTemplate = {
 
 				data: {
 					name: "Cran",
-					email: "alex#cldcvr.com"
+					email: "alex#ollion.com"
 				}
 			},
 			{
@@ -620,7 +620,7 @@ export const OptionTemplate = {
 
 				data: {
 					name: "Tony",
-					email: "alex#cldcvr.com"
+					email: "alex#ollion.com"
 				}
 			},
 			{
@@ -629,7 +629,7 @@ export const OptionTemplate = {
 
 				data: {
 					name: "Stark",
-					email: "alex#cldcvr.com"
+					email: "alex#ollion.com"
 				}
 			}
 		]);
@@ -642,7 +642,7 @@ export const OptionTemplate = {
 
 					data: {
 						name: "Alex",
-						email: "alex#cldcvr.com"
+						email: "alex#ollion.com"
 					}
 				},
 				{
@@ -651,7 +651,7 @@ export const OptionTemplate = {
 
 					data: {
 						name: "Cran",
-						email: "alex#cldcvr.com"
+						email: "alex#ollion.com"
 					}
 				},
 				{
@@ -660,7 +660,7 @@ export const OptionTemplate = {
 
 					data: {
 						name: "Tony",
-						email: "alex#cldcvr.com"
+						email: "alex#ollion.com"
 					}
 				},
 				{
@@ -669,7 +669,7 @@ export const OptionTemplate = {
 
 					data: {
 						name: "Stark",
-						email: "alex#cldcvr.com"
+						email: "alex#ollion.com"
 					}
 				}
 			],
@@ -681,7 +681,7 @@ export const OptionTemplate = {
 
 					data: {
 						name: "Bruce",
-						email: "alex#cldcvr.com"
+						email: "alex#ollion.com"
 					}
 				},
 				{
@@ -690,7 +690,7 @@ export const OptionTemplate = {
 
 					data: {
 						name: "Wayne",
-						email: "alex#cldcvr.com"
+						email: "alex#ollion.com"
 					}
 				},
 				{
@@ -699,7 +699,7 @@ export const OptionTemplate = {
 
 					data: {
 						name: "Mater",
-						email: "alex#cldcvr.com"
+						email: "alex#ollion.com"
 					}
 				},
 				{
@@ -708,7 +708,7 @@ export const OptionTemplate = {
 
 					data: {
 						name: "Thunder",
-						email: "alex#cldcvr.com"
+						email: "alex#ollion.com"
 					}
 				}
 			]

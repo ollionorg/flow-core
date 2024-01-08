@@ -11,7 +11,7 @@ const alias = [
 	"flow-md-editor",
 	"flow-table"
 ].map(pkg => ({
-	find: `@cldcvr/${pkg}`,
+	find: `@ollion/${pkg}`,
 	replacement: path.resolve(__dirname, "../packages", pkg, "src")
 }));
 

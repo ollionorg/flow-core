@@ -6,10 +6,10 @@ import {
 	FPictogramCategory,
 	FPictogramSize,
 	FPictogramState
-} from "@cldcvr/flow-core";
+} from "@ollion/flow-core";
 
 export default {
-	title: "@cldcvr/flow-core/f-pictogram",
+	title: "@ollion/flow-core/f-pictogram",
 
 	parameters: {
 		controls: {

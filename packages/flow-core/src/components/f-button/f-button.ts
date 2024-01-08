@@ -14,7 +14,7 @@ import getTextContrast from "../../utils/get-text-contrast";
 import { FIcon } from "../f-icon/f-icon";
 import { FCounter } from "../f-counter/f-counter";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@cldcvr/flow-core-config";
+import { injectCss } from "@ollion/flow-core-config";
 
 export type FButtonState =
 	| "primary"

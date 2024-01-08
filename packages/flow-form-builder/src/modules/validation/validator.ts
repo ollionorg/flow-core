@@ -24,7 +24,7 @@ import {
 	FInputLight,
 	FSelect,
 	FSuggest
-} from "@cldcvr/flow-core";
+} from "@ollion/flow-core";
 import defaultValidations from "./default-validations";
 import { render } from "lit-html";
 

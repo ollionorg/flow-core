@@ -2,9 +2,9 @@ import { html, fixture, expect } from "@open-wc/testing";
 import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 
 // import flow-core elements
-import "@cldcvr/flow-core";
+import "@ollion/flow-core";
 
-import { FButton, FIcon, ConfigUtil, FCounter } from "@cldcvr/flow-core";
+import { FButton, FIcon, ConfigUtil, FCounter } from "@ollion/flow-core";
 // importing `loadingSVG` to cross check
 import loadingSVG from "./../../mixins/svg/loader";
 

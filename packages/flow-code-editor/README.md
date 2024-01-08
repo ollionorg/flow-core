@@ -1,13 +1,13 @@
 # Flow Code Editor
 
-The Flow code editor is built on the Flow design framework ([website](https://flow.ollion.com/) / [github](https://github.com/cldcvr/flow-core)) using [Monaco Editor](https://microsoft.github.io/monaco-editor/)
+The Flow code editor is built on the Flow design framework ([website](https://flow.ollion.com/) / [github](https://github.com/ollionorg/flow-core)) using [Monaco Editor](https://microsoft.github.io/monaco-editor/)
 
 # Installation
 
 ### 1️⃣ Install flow code editor dependency
 
 ```
-npm i --save @cldcvr/flow-code-editor
+npm i --save @ollion/flow-code-editor
 ```
 
 **Note:** after installation, re-start your application.
@@ -19,8 +19,8 @@ npm i --save @cldcvr/flow-code-editor
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@cldcvr/flow-core";
-import "@cldcvr/flow-code-editor";
+import "@ollion/flow-core";
+import "@ollion/flow-code-editor";
 ```
 
 <br>
@@ -33,7 +33,7 @@ import "@cldcvr/flow-code-editor";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@cldcvr/flow-code-editor/dist/types/vue3";
+import "@ollion/flow-code-editor/dist/types/vue3";
 ```
 
 <details>
@@ -42,7 +42,7 @@ import "@cldcvr/flow-code-editor/dist/types/vue3";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@cldcvr/flow-code-editor/dist/types/vue2";
+import "@ollion/flow-code-editor/dist/types/vue2";
 ```
 
 </details>
@@ -53,7 +53,7 @@ import "@cldcvr/flow-code-editor/dist/types/vue2";
 **React**: Include react type in `tsconfig.json` file like below.
 
 ```json
-"include": ["src", "./node_modules/@cldcvr/flow-code-editor/dist/types/react.ts"]
+"include": ["src", "./node_modules/@ollion/flow-code-editor/dist/types/react.ts"]
 ```
 
 </details>
@@ -103,7 +103,7 @@ const copyDir = (src, dest, callback?: (er: Error) => void) => {
 	});
 };
 
-copyDir("node_modules/@cldcvr/flow-code-editor/dist/assets", "assets");
+copyDir("node_modules/@ollion/flow-code-editor/dist/assets", "assets");
 ```
 
 ### add specify `assets` folder in `assetsInclude` property.

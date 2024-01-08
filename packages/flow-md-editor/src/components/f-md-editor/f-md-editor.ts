@@ -1,11 +1,11 @@
 import { unsafeCSS, html } from "lit";
-import { FRoot, flowElement } from "@cldcvr/flow-core";
+import { FRoot, flowElement } from "@ollion/flow-core";
 import globalStyle from "./f-md-editor-global.scss?inline";
-import { FTextArea } from "@cldcvr/flow-core";
+import { FTextArea } from "@ollion/flow-core";
 import * as showdown from "showdown";
 import { property, query } from "lit/decorators.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
-import { injectCss } from "@cldcvr/flow-core-config";
+import { injectCss } from "@ollion/flow-core-config";
 
 injectCss("f-md-editor", globalStyle);
 @flowElement("f-md-editor")

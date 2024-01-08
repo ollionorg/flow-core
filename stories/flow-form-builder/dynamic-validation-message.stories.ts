@@ -1,10 +1,10 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { FormBuilderField } from "@cldcvr/flow-form-builder/src/types";
+import { FormBuilderField } from "@ollion/flow-form-builder/src/types";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@cldcvr/flow-form-builder/Examples/Dynamic Validation Message",
+	title: "@ollion/flow-form-builder/Examples/Dynamic Validation Message",
 	argTypes: {
 		field: {
 			control: false

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { FPopover } from "@cldcvr/flow-core";
+import { FPopover } from "@ollion/flow-core";
 import { FLineage } from "./f-lineage";
 import { Ref } from "lit-html/directives/ref.js";
 import { HTMLTemplateResult } from "lit";

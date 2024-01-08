@@ -1,4 +1,10 @@
-# @cldcvr/custom-elements-manifest-to-types
+# @ollion/custom-elements-manifest-to-types
+
+## [2.0.3] - 2024-01-05
+
+### Bug fixes
+
+- `f-input` type generation bug fixed.
 
 ## [2.0.3] - 2023-10-18
 

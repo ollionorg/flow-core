@@ -8,7 +8,7 @@ import { flowElement } from "../../utils";
 import { FText } from "../f-text/f-text";
 import { FPopover } from "../f-popover/f-popover";
 
-import { injectCss } from "@cldcvr/flow-core-config";
+import { injectCss } from "@ollion/flow-core-config";
 
 injectCss("f-breadcrumb", globalStyle);
 
@@ -17,8 +17,8 @@ const sizes = ["medium", "small"] as const;
 
 export type FBreadCrumbsProp = { tabIndex: number; title: string; icon?: string };
 export type FBreadcrumbs = FBreadCrumbsProp[];
-export type FBreadcrumbSize = (typeof sizes)[number];
-export type FBreadcrumbVariant = (typeof variants)[number];
+export type FBreadcrumbSize = typeof sizes[number];
+export type FBreadcrumbVariant = typeof variants[number];
 
 @flowElement("f-breadcrumb")
 export class FBreadcrumb extends FRoot {

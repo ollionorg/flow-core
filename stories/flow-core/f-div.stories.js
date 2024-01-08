@@ -4,7 +4,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import FDivAnatomy from "../svg/i-fdiv-anatomy.js";
 
 export default {
-	title: "@cldcvr/flow-core/f-div",
+	title: "@ollion/flow-core/f-div",
 
 	parameters: {
 		controls: {

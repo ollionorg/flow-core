@@ -4,7 +4,7 @@ import { useArgs, useState } from "@storybook/client-api";
 import { createRef, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@cldcvr/flow-form-builder/f-form-builder",
+	title: "@ollion/flow-form-builder/f-form-builder",
 
 	parameters: {
 		controls: {

@@ -3,7 +3,7 @@ import fProgressBarAnatomy from "../svg/i-fprogress-bar-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 export default {
-	title: "@cldcvr/flow-core/f-progress-bar",
+	title: "@ollion/flow-core/f-progress-bar",
 
 	parameters: {
 		controls: {

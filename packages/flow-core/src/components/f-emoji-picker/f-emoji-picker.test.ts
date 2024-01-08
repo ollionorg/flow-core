@@ -2,9 +2,9 @@ import IconPack from "@cldcvr/flow-system-icon/dist/types/icon-pack";
 import { expect, fixture, html } from "@open-wc/testing";
 
 // importing flow-core components
-import "@cldcvr/flow-core";
+import "@ollion/flow-core";
 
-import { ConfigUtil, FEmojiPicker, FIcon } from "@cldcvr/flow-core";
+import { ConfigUtil, FEmojiPicker, FIcon } from "@ollion/flow-core";
 
 // setting icon pack for testing icon related test cases
 ConfigUtil.setConfig({ iconPack: IconPack });

@@ -15,7 +15,7 @@ import { FCounter } from "../f-counter/f-counter";
 import { flowElement } from "./../../utils";
 import { createRef, ref, Ref } from "lit/directives/ref.js";
 import type { FDiv } from "../f-div/f-div";
-import { injectCss } from "@cldcvr/flow-core-config";
+import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-tag", globalStyle);
 
 export type FTagStateProp =

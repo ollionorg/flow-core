@@ -14,8 +14,8 @@
 
 - Remove sideEffects because the components require registration via import
 - Updated dependencies
-- `@cldcvr/flow-core-config@1.1.3`
-- `@cldcvr/flow-core@2.0.3`
+- `@ollion/flow-core-config@1.1.3`
+- `@ollion/flow-core@2.0.3`
 
 ## [1.0.2] - 2023-10-10
 
@@ -23,8 +23,8 @@
 
 - a2de106: Fix platform types
 - Updated dependencies [a2de106]
-- `@cldcvr/flow-core-config@1.1.1`
-- `@cldcvr/flow-core@2.0.1`
+- `@ollion/flow-core-config@1.1.1`
+- `@ollion/flow-core@2.0.1`
 
 ## [1.0.1-beta.0] - 2023-10-10
 
@@ -32,8 +32,8 @@
 
 - Fix platform types
 - Updated dependencies
-- `@cldcvr/flow-core-config@1.1.1-beta.0`
-- `@cldcvr/flow-core@2.0.1-beta.0`
+- `@ollion/flow-core-config@1.1.1-beta.0`
+- `@ollion/flow-core@2.0.1-beta.0`
 
 ## [1.0.0] - 2023-10-10
 
@@ -44,7 +44,7 @@
 ### Patch Changes
 
 - Updated dependencies
-- `@cldcvr/flow-core@2.0.0`
+- `@ollion/flow-core@2.0.0`
 <hr className="margin-btm-32" />
 
 ## [0.2.0] - 2023-08-03
@@ -68,7 +68,7 @@
 
 ### Note
 
-- This package uses `Workers` so please go though installation instruction from [README](https://github.com/cldcvr/flow-core/blob/main/packages/flow-code-editor/README.md)
+- This package uses `Workers` so please go though installation instruction from [README](https://github.com/ollionorg/flow-core/blob/main/packages/flow-code-editor/README.md)
 
 ### Improvements
 

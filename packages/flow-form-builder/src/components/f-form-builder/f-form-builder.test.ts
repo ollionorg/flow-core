@@ -1,11 +1,11 @@
 import { html, fixture, expect, oneEvent } from "@open-wc/testing";
 
 // import flow-core elements
-import "@cldcvr/flow-core";
+import "@ollion/flow-core";
 import "@cldcvr/flow-system-icon";
 
 import { FFormArray, FFormBuilder, FFormObject } from "../../../";
-import { FForm, FFormGroup, FIconButton, FInput } from "@cldcvr/flow-core";
+import { FForm, FFormGroup, FIconButton, FInput } from "@ollion/flow-core";
 import { FormBuilderField } from "../../types";
 
 function getSampleFormBuilder() {

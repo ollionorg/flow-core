@@ -7,7 +7,7 @@ import eleStyle from "./f-form-group.scss?inline";
 import globalStyle from "./f-form-group-global.scss?inline";
 import { flowElement } from "./../../utils";
 
-import { injectCss } from "@cldcvr/flow-core-config";
+import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-form-group", globalStyle);
 
 export type FGroupLabel = {

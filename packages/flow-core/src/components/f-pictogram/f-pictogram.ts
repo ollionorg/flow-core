@@ -3,7 +3,7 @@ import { property } from "lit/decorators.js";
 import eleStyle from "./f-pictogram.scss?inline";
 import globalStyle from "./f-pictogram-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import { ConfigUtil, injectCss } from "@cldcvr/flow-core-config";
+import { ConfigUtil, injectCss } from "@ollion/flow-core-config";
 import { getTextContrast, isValidHttpUrl } from "./../../utils";
 import { classMap } from "lit-html/directives/class-map.js";
 import { FIcon } from "../f-icon/f-icon";
@@ -15,10 +15,10 @@ const category = ["fill", "outline"] as const;
 const sizes = ["x-large", "large", "medium", "small"] as const;
 const states = ["primary", "danger", "warning", "success", "default", "inherit"] as const;
 
-export type FPictogramVariant = (typeof variants)[number];
-export type FPictogramCategory = (typeof category)[number];
-export type FPictogramSize = (typeof sizes)[number];
-export type FPictogramState = (typeof states)[number];
+export type FPictogramVariant = typeof variants[number];
+export type FPictogramCategory = typeof category[number];
+export type FPictogramSize = typeof sizes[number];
+export type FPictogramState = typeof states[number];
 
 let colors = [
 	"#FFB900",

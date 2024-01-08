@@ -1,10 +1,10 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { FormBuilderField } from "@cldcvr/flow-form-builder";
+import { FormBuilderField } from "@ollion/flow-form-builder";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@cldcvr/flow-form-builder/Examples/Auto fill",
+	title: "@ollion/flow-form-builder/Examples/Auto fill",
 	argTypes: {
 		field: {
 			control: false

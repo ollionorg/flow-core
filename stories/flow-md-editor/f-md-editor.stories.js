@@ -2,7 +2,7 @@ import { html } from "lit-html";
 import sampleMd from "./sample-md";
 
 export default {
-	title: "@cldcvr/flow-md-editor/f-md-editor",
+	title: "@ollion/flow-md-editor/f-md-editor",
 
 	parameters: {
 		controls: {

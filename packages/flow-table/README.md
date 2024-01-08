@@ -1,13 +1,13 @@
 # Flow Table
 
-The Flow table is built on the Flow design framework ([website](https://flow.ollion.com/) / [github](https://github.com/cldcvr/flow-core))
+The Flow table is built on the Flow design framework ([website](https://flow.ollion.com/) / [github](https://github.com/ollionorg/flow-core))
 
 # Installation
 
 ### 1️⃣ Install flow table dependency
 
 ```
-npm i --save @cldcvr/flow-table
+npm i --save @ollion/flow-table
 ```
 
 **Note:** after installation, re-start your application.
@@ -19,8 +19,8 @@ npm i --save @cldcvr/flow-table
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@cldcvr/flow-core";
-import "@cldcvr/flow-table";
+import "@ollion/flow-core";
+import "@ollion/flow-table";
 ```
 
 <br>
@@ -33,7 +33,7 @@ import "@cldcvr/flow-table";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@cldcvr/flow-table/dist/types/vue3";
+import "@ollion/flow-table/dist/types/vue3";
 ```
 
 <details>
@@ -42,7 +42,7 @@ import "@cldcvr/flow-table/dist/types/vue3";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@cldcvr/flow-table/dist/types/vue2";
+import "@ollion/flow-table/dist/types/vue2";
 ```
 
 </details>
@@ -53,7 +53,7 @@ import "@cldcvr/flow-table/dist/types/vue2";
 **React**: Include react type in `tsconfig.json` file like below.
 
 ```json
-"include": ["src", "./node_modules/@cldcvr/flow-table/dist/types/react.ts"]
+"include": ["src", "./node_modules/@ollion/flow-table/dist/types/react.ts"]
 ```
 
 </details>

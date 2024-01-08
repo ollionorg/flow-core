@@ -21,7 +21,7 @@ import {
 	DateDisableType,
 	FRootTooltip,
 	FColorPickerState
-} from "@cldcvr/flow-core";
+} from "@ollion/flow-core";
 import { BetweenParams } from "./modules/validation/rules/between";
 import { Subject } from "rxjs";
 import { MaxParams } from "./modules/validation/rules/max";

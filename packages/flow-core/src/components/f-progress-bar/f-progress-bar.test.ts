@@ -1,8 +1,8 @@
 import { html, fixture, expect } from "@open-wc/testing";
 
 // import flow-core elements
-import "@cldcvr/flow-core";
-import { FProgressBar } from "@cldcvr/flow-core";
+import "@ollion/flow-core";
+import { FProgressBar } from "@ollion/flow-core";
 
 describe("f-progress-bar", () => {
 	it("is defined", () => {

@@ -1,9 +1,9 @@
 import { html } from "lit-html";
 import { useState } from "@storybook/preview-api";
-import { FTooltipObject, FTooltipPlacement } from "@cldcvr/flow-core";
+import { FTooltipObject, FTooltipPlacement } from "@ollion/flow-core";
 
 export default {
-	title: "@cldcvr/flow-core/f-tooltip",
+	title: "@ollion/flow-core/f-tooltip",
 
 	parameters: {
 		controls: {

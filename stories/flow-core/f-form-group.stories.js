@@ -3,7 +3,7 @@ import FDivAnatomy from "../svg/i-fdiv-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 export default {
-	title: "@cldcvr/flow-core/f-form-group",
+	title: "@ollion/flow-core/f-form-group",
 
 	parameters: {
 		controls: {

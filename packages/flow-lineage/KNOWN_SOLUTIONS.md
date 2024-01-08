@@ -1,6 +1,6 @@
 # Known Solutions
 
-## Typescript error when you import Flow lineage in an existing project `@cldcvr/flow-lineage`
+## Typescript error when you import Flow lineage in an existing project `@ollion/flow-lineage`
 
 ![Screenshot 2023-01-09 at 9 25 04 PM](https://user-images.githubusercontent.com/67629551/211354086-3c10adb4-cd67-4cf5-8c69-cd79ac5fa095.png)
 
@@ -24,22 +24,22 @@ Solution : copy following snippet in any shims.d.ts file, if you don't have then
 
 <img width="1170" alt="Screenshot 2023-01-05 at 5 13 48 PM" src="https://user-images.githubusercontent.com/67629551/211354190-54d9b575-a106-44c0-b80d-74f4f9d2a874.png">
 
-Solution : You might be using old version of a flow package, you need to cross check your package.json with the latest [this](https://www.npmjs.com/search?q=%40cldcvr%2Fflow)
+Solution : You might be using old version of a flow package, you need to cross check your package.json with the latest [this](https://www.npmjs.com/search?q=%40ollion%2Fflow)
 
 <br>
 
 ## Issue with `.npmrc` (For CloudCover developers only)
 
-1. If you are using `@cldcvr/flow` package with Azure registry then please update your `.npmrc` with following content.
+1. If you are using `@ollion/flow` package with Azure registry then please update your `.npmrc` with following content.
 
 ```
-@cldcvr:registry=https://npm.pkg.github.com/
+@ollion:registry=https://npm.pkg.github.com/
 //npm.pkg.github.com/:_authToken=<YOUR_PERSONAL_ACCESS_TOKEN>
 ```
 
 Generate your PAT (Personal access token) by using this [document](https://npm.pkg.github.com/)
 
-2. If you are consuming any `@cldcvr/` scoped private package from any different registry then publish that to [Github Registry](https://npm.pkg.github.com/), So that all `@cldcvr/` scoped packages consumed from single registry.
+2. If you are consuming any `@ollion/` scoped private package from any different registry then publish that to [Github Registry](https://npm.pkg.github.com/), So that all `@ollion/` scoped packages consumed from single registry.
 
 <br>
 

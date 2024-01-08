@@ -317,7 +317,9 @@ export class FDiv extends FRoot {
 	}
 
 	disconnectedCallback() {
-		this.checkHighlight();
+		if (this.highlight) {
+			this.checkHighlight();
+		}
 		super.disconnectedCallback();
 	}
 

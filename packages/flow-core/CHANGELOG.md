@@ -7,6 +7,7 @@
 ### Bug Fixes
 
 - `f-input` types fixed.
+- `f-div` highlight feature optimized.
 
 ## [2.7.3] - 2023-12-20
 

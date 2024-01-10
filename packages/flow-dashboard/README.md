@@ -1,13 +1,13 @@
 # Flow Table
 
-The Flow table is built on the Flow design framework ([website](https://flow.cldcvr.com/) / [github](https://github.com/cldcvr/flow-core))
+The Flow table is built on the Flow design framework ([website](https://flow.ollion.com/) / [github](https://github.com/ollionorg/flow-core))
 
 # Installation
 
 ### 1️⃣ Install flow table dependency
 
 ```
-npm i --save @cldcvr/flow-dashboard
+npm i --save @ollion/flow-dashboard
 ```
 
 **Note:** after installation, re-start your application.
@@ -19,8 +19,8 @@ npm i --save @cldcvr/flow-dashboard
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@cldcvr/flow-core";
-import "@cldcvr/flow-dashboard";
+import "@ollion/flow-core";
+import "@ollion/flow-dashboard";
 ```
 
 <br>
@@ -33,7 +33,7 @@ import "@cldcvr/flow-dashboard";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@cldcvr/flow-dashboard/dist/types/vue3";
+import "@ollion/flow-dashboard/dist/types/vue3";
 ```
 
 <details>
@@ -42,7 +42,7 @@ import "@cldcvr/flow-dashboard/dist/types/vue3";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@cldcvr/flow-dashboard/dist/types/vue2";
+import "@ollion/flow-dashboard/dist/types/vue2";
 ```
 
 </details>
@@ -53,7 +53,7 @@ import "@cldcvr/flow-dashboard/dist/types/vue2";
 **React**: Include react type in `tsconfig.json` file like below.
 
 ```json
-"include": ["src", "./node_modules/@cldcvr/flow-dashboard/dist/types/react.ts"]
+"include": ["src", "./node_modules/@ollion/flow-dashboard/dist/types/react.ts"]
 ```
 
 </details>

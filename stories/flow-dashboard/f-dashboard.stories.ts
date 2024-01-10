@@ -1,9 +1,9 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { FDashboardConfig, FDashboardWidget } from "@cldcvr/flow-dashboard";
+import { FDashboardConfig, FDashboardWidget } from "@ollion/flow-dashboard";
 
 export default {
-	title: "@cldcvr/flow-dashboard/f-dashboard",
+	title: "@ollion/flow-dashboard/f-dashboard",
 	argTypes: {
 		field: {
 			control: false

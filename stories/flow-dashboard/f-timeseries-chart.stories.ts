@@ -5,12 +5,12 @@ import {
 	FTimeseriesChart,
 	YAxisLine,
 	XAxisLine
-} from "@cldcvr/flow-dashboard";
+} from "@ollion/flow-dashboard";
 import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@cldcvr/flow-dashboard/f-timeseries-chart",
+	title: "@ollion/flow-dashboard/f-timeseries-chart",
 
 	parameters: {
 		controls: {

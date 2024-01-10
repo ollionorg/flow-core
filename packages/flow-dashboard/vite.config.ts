@@ -16,10 +16,10 @@ export default defineConfig({
 			// If we want to publish standalone components we don't externalize lit,
 			// if you are going to use lit in your own project, you can make it a dep instead.
 			// external: /^lit/, <-- comment this line
-			external: ["@cldcvr/flow-core-config", "@cldcvr/flow-core", /^lit/],
+			external: ["@ollion/flow-core-config", "@ollion/flow-core", /^lit/],
 			output: {
 				globals: {
-					"@cldcvr/flow-core": "@cldcvr/flow-core"
+					"@ollion/flow-core": "@ollion/flow-core"
 				}
 			}
 		}

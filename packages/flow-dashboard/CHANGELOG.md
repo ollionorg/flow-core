@@ -6,4 +6,4 @@
 
 ### First Release
 
-- `@cldcvr/flow-dashboard` released.
+- `@ollion/flow-dashboard` released.

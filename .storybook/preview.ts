@@ -13,7 +13,7 @@ import "@ollion/flow-table";
 import "@ollion/flow-md-editor";
 import "@ollion/flow-form-builder";
 import "@ollion/flow-lineage";
-import "@cldcvr/flow-dashboard";
+import "@ollion/flow-dashboard";
 
 import { setCustomElementsManifest, setCustomElements } from "@storybook/web-components";
 import { themes } from "@storybook/theming";

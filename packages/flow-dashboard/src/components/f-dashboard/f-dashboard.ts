@@ -1,8 +1,8 @@
 import { CSSResult, html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
-import { FRoot, flowElement } from "@cldcvr/flow-core";
+import { FRoot, flowElement } from "@ollion/flow-core";
 import globalStyle from "./f-dashboard-global.scss?inline";
-import { injectCss } from "@cldcvr/flow-core-config";
+import { injectCss } from "@ollion/flow-core-config";
 import { GridStack } from "gridstack";
 import { FDashboardConfig, FDashboardWidget } from "../../types";
 

@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.7.5] - 2024-01-11
+
+### Improvements
+
+- `f-text` : `x-large` tokens added for `para` and `code` variant.
+
 ## [2.7.4] - 2024-01-08
 
 ### Bug Fixes

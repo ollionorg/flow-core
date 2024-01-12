@@ -7,6 +7,6 @@ export default {
 
 export const Basic = {
 	render: () => {
-		return html` <f-dag></f-dag> `;
+		return html` <f-div width="100%" height="100%"><f-dag></f-dag> </f-div>`;
 	}
 };

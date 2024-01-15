@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { flowElement, FRoot } from "@ollion/flow-core";
 import { injectCss } from "@ollion/flow-core-config";
 import globalStyle from "./f-dag-global.scss?inline";
@@ -154,7 +155,7 @@ export class FDag extends FRoot {
 		// -------------- //
 
 		// set the layout functions
-		const nodeRadius = 20;
+		const nodeRadius = 40;
 		const nodeSize = [nodeRadius * 2, nodeRadius * 2] as const;
 		// this truncates the edges so we can render arrows nicely
 		const shape = d3dag.tweakShape(nodeSize, d3dag.shapeEllipse);
@@ -165,6 +166,7 @@ export class FDag extends FRoot {
 			.sugiyama()
 			//.grid()
 			//.zherebko()
+			//@ts-ignore
 			.nodeSize(nodeSize)
 			.gap([nodeRadius, nodeRadius])
 			.tweaks([shape]);

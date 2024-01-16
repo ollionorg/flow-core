@@ -1,7 +1,8 @@
-import { useState } from "@storybook/client-api";
 import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import FDivAnatomy from "../svg/i-fdiv-anatomy.js";
+import { createRef, ref } from "lit/directives/ref.js";
+import { FDiv } from "@ollion/flow-core";
 
 export default {
 	title: "@ollion/flow-core/f-div",
@@ -14,8 +15,8 @@ export default {
 };
 
 export const Playground = {
-	render: args => {
-		const handleClick = event => {
+	render: (args: Record<string, unknown>) => {
+		const handleClick = (event: PointerEvent) => {
 			console.log(event);
 		};
 
@@ -312,7 +313,7 @@ export const Anatomy = {
 };
 
 export const Variant = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="none">
 			<f-div
 				state="subtle"
@@ -371,7 +372,7 @@ export const Variant = {
 };
 
 export const Direction = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="none" direction="column">
 			<f-div width="100%" padding="large" direction="row" gap="medium" state="subtle">
 				<f-div width="hug-content" height="hug-content" padding="medium" state="secondary">
@@ -408,7 +409,7 @@ export const Direction = {
 };
 
 export const State = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="none" direction="column">
 			<f-div gap="medium" padding="large" state="transparent" width="100%" height="hug-content">
 				<f-text variant="para" size="large" weight="medium">transparent state</f-text>
@@ -443,7 +444,7 @@ export const State = {
 };
 
 export const Border = {
-	render: args =>
+	render: () =>
 		html` <f-div gap="medium" padding="none" direction="column">
 			<f-div padding="medium" gap="large" width="100%" height="hug-content" state="default">
 				<f-div padding="medium" height="hug-content" border="large" state="secondary">
@@ -536,7 +537,7 @@ export const Border = {
 };
 
 export const Gap = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="none" direction="column">
 			<f-div width="hug-content" height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">gap="auto"</f-text>
@@ -642,7 +643,7 @@ export const Gap = {
 };
 
 export const Padding = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="none" direction="column">
 			<f-div width="hug-content" height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">padding="x-large"</f-text>
@@ -734,7 +735,7 @@ export const Padding = {
 };
 
 export const Width = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="none" direction="column">
 			<f-div
 				width="fill-container"
@@ -780,7 +781,7 @@ export const Width = {
 };
 
 export const Height = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="none" direction="row" height="100%">
 			<f-div
 				height="fill-container"
@@ -817,7 +818,7 @@ export const Height = {
 };
 
 export const MaxWidth = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="none" direction="column">
 			<f-div
 				width="fill-container"
@@ -850,7 +851,7 @@ export const MaxWidth = {
 };
 
 export const MaxHeight = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="none" direction="row" height="100%">
 			<f-div
 				height="fill-container"
@@ -881,7 +882,7 @@ export const MaxHeight = {
 };
 
 export const Tooltip = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="none" direction="column">
 			<f-div width="hug-content" height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">Tooltip as a directive</f-text>
@@ -934,7 +935,7 @@ export const Tooltip = {
 };
 
 export const Overflow = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="none" direction="column">
 			<f-div width="hug-content" height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">overflow="wrap"</f-text>
@@ -1042,7 +1043,7 @@ export const Overflow = {
 };
 
 export const Align = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="none" direction="column">
 			<f-div
 				width="100%"
@@ -1167,7 +1168,7 @@ export const Align = {
 };
 
 export const Sticky = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="large" direction="column">
 			<f-div width="hug-content" height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">sticky="none"</f-text>
@@ -1326,7 +1327,7 @@ export const Sticky = {
 };
 
 export const Selected = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="x-large" direction="row">
 			<f-div padding="x-large" state="subtle" width="hug-content" selected="background"
 				><f-text variant="para" size="medium" weight="regular">selected="background"</f-text>
@@ -1347,8 +1348,84 @@ export const Selected = {
 	name: "selected"
 };
 
+export const HideScrollbar = {
+	render: () =>
+		html` <f-text state="secondary"
+				>default behaviour when content overflows, it shows scrollbar</f-text
+			>
+			<f-div gap="medium" direction="column" padding="medium" height="200px" direction="row">
+				<f-text
+					>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero eros, ultrices eu
+					tortor ut, fermentum vehicula augue. Fusce pellentesque odio interdum eros aliquet
+					pharetra. Morbi venenatis lobortis vehicula. Mauris imperdiet hendrerit dolor ac
+					consequat. Sed venenatis tortor enim, tincidunt tristique justo dictum at. Aliquam
+					dignissim auctor odio et fermentum. Cras vitae nisi magna. Vivamus a sem molestie,
+					venenatis tortor ac, tincidunt nibh. Phasellus mi erat, euismod id pulvinar sit amet,
+					tincidunt quis eros. Pellentesque a metus elementum, posuere tortor nec, pulvinar turpis.
+					Maecenas est risus, bibendum id ornare nec, posuere eget massa. Sed finibus quis felis vel
+					imperdiet. Morbi consequat sapien sem. Integer sed eros efficitur, egestas diam ut,
+					gravida urna. Curabitur tincidunt est et convallis aliquam. Sed consectetur dui ut ligula
+					sollicitudin rhoncus. Donec luctus ut massa non tempus. Sed a euismod tortor. Suspendisse
+					nunc quam, vulputate vel scelerisque non, viverra a enim. Nam leo justo, egestas sit amet
+					metus porttitor, hendrerit dignissim felis. Aliquam et leo mollis, ultricies metus
+					gravida, blandit ipsum. Vivamus lobortis neque id luctus tincidunt. Maecenas neque felis,
+					faucibus id mi non, laoreet lacinia dui. Donec eleifend semper commodo. Aliquam erat
+					volutpat. Nunc non velit nunc. Sed accumsan pretium massa sed dignissim. Ut eu fringilla
+					justo. Quisque rhoncus dictum velit in finibus. Mauris at velit lobortis, condimentum ex
+					ac, scelerisque est. Morbi diam metus, ornare vitae rhoncus vel, maximus sit amet arcu.
+					Aliquam placerat finibus tincidunt. Phasellus sagittis odio eget lorem ullamcorper
+					dapibus. Integer massa turpis, sollicitudin et mattis nec, suscipit et turpis. Lorem ipsum
+					dolor sit amet, consectetur adipiscing elit. Mauris pretium risus eu quam gravida, vitae
+					tempus eros ullamcorper. Maecenas sed odio quis erat facilisis fermentum non ultricies
+					tellus. Sed pellentesque accumsan turpis. Morbi ut orci consequat, sodales nibh quis,
+					ultricies magna.</f-text
+				>
+			</f-div>
+			<br /><br />
+			<f-divider></f-divider>
+			<br /><br />
+			<f-text>hide-scrollbar is set (Note: Users can still scroll through the content.)</f-text>
+			<f-div
+				gap="medium"
+				direction="column"
+				hide-scrollbar
+				padding="medium"
+				height="200px"
+				direction="row"
+			>
+				<f-text
+					>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero eros, ultrices eu
+					tortor ut, fermentum vehicula augue. Fusce pellentesque odio interdum eros aliquet
+					pharetra. Morbi venenatis lobortis vehicula. Mauris imperdiet hendrerit dolor ac
+					consequat. Sed venenatis tortor enim, tincidunt tristique justo dictum at. Aliquam
+					dignissim auctor odio et fermentum. Cras vitae nisi magna. Vivamus a sem molestie,
+					venenatis tortor ac, tincidunt nibh. Phasellus mi erat, euismod id pulvinar sit amet,
+					tincidunt quis eros. Pellentesque a metus elementum, posuere tortor nec, pulvinar turpis.
+					Maecenas est risus, bibendum id ornare nec, posuere eget massa. Sed finibus quis felis vel
+					imperdiet. Morbi consequat sapien sem. Integer sed eros efficitur, egestas diam ut,
+					gravida urna. Curabitur tincidunt est et convallis aliquam. Sed consectetur dui ut ligula
+					sollicitudin rhoncus. Donec luctus ut massa non tempus. Sed a euismod tortor. Suspendisse
+					nunc quam, vulputate vel scelerisque non, viverra a enim. Nam leo justo, egestas sit amet
+					metus porttitor, hendrerit dignissim felis. Aliquam et leo mollis, ultricies metus
+					gravida, blandit ipsum. Vivamus lobortis neque id luctus tincidunt. Maecenas neque felis,
+					faucibus id mi non, laoreet lacinia dui. Donec eleifend semper commodo. Aliquam erat
+					volutpat. Nunc non velit nunc. Sed accumsan pretium massa sed dignissim. Ut eu fringilla
+					justo. Quisque rhoncus dictum velit in finibus. Mauris at velit lobortis, condimentum ex
+					ac, scelerisque est. Morbi diam metus, ornare vitae rhoncus vel, maximus sit amet arcu.
+					Aliquam placerat finibus tincidunt. Phasellus sagittis odio eget lorem ullamcorper
+					dapibus. Integer massa turpis, sollicitudin et mattis nec, suscipit et turpis. Lorem ipsum
+					dolor sit amet, consectetur adipiscing elit. Mauris pretium risus eu quam gravida, vitae
+					tempus eros ullamcorper. Maecenas sed odio quis erat facilisis fermentum non ultricies
+					tellus. Sed pellentesque accumsan turpis. Morbi ut orci consequat, sodales nibh quis,
+					ultricies magna.</f-text
+				>
+			</f-div>`,
+
+	name: "hide-scrollbar"
+};
+
 export const Loading = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="medium" padding="x-large" direction="row">
 			<f-div padding="none" direction="column" align="middle-center" gap="large">
 				<f-div padding="none" width="hug-content" align="middle-center"
@@ -1387,15 +1464,14 @@ export const Loading = {
 };
 
 export const Flags = {
-	render: args => {
-		const [highlight, setHighlight] = useState(false);
+	render: () => {
+		const highlight = false;
 
+		const highlightDiv = createRef<FDiv>();
 		const toggleHighlight = () => {
-			setHighlight(!highlight);
-
-			setTimeout(() => {
-				setHighlight(false);
-			}, 2000);
+			if (highlightDiv.value) {
+				highlightDiv.value.highlight = !highlightDiv.value.highlight;
+			}
 		};
 
 		return html`<f-div gap="medium" padding="x-large" direction="column">
@@ -1509,7 +1585,10 @@ export const Flags = {
 				></f-div>
 			</f-div>
 			<f-div padding="none" width="hug-content" align="middle-center"
-				><f-text variant="para" size="medium" weight="regular" align="center">Higlight</f-text>
+				><f-text variant="para" size="medium" weight="regular" align="center"
+					>Higlight : When the highlight is enabled, the corresponding F-div is emphasized, and the
+					remaining content is obscured by an overlay..</f-text
+				>
 			</f-div>
 			<f-button label="Highlight Toggle" @click=${toggleHighlight}></f-button>
 			<f-div
@@ -1517,8 +1596,9 @@ export const Flags = {
 				padding="large"
 				width="hug-content"
 				height="hug-content"
-				state="subtle"
+				state="secondary"
 				variant="curved"
+				${ref(highlightDiv)}
 				?highlight=${highlight}
 			>
 				<f-div

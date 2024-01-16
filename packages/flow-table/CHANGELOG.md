@@ -2,6 +2,13 @@
 
 # Change Log
 
+## [2.2.4] - 2024-01-16
+
+### Improvements
+
+- `f-table-schema` : Added `sticky-cell-background` property.
+- (Note: Any sticky element requires a background color; therefore, sometimes adjustments to this property may be needed when used with different surface backgrounds.)
+
 ## [2.2.3] - 2023-12-14
 
 ### Bug Fixes

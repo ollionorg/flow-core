@@ -220,6 +220,12 @@ export class FDiv extends FRoot {
 	highlight?: boolean = false;
 
 	/**
+	 * @attribute set true when to hide scrollbar
+	 */
+	@property({ reflect: true, type: Boolean, attribute: "hide-scrollbar" })
+	hideScrollbar?: boolean = false;
+
+	/**
 	 * @attribute Overflow property defines the behavior of the overflowing elements inside a f-div
 	 */
 	@property({ reflect: true, type: String })

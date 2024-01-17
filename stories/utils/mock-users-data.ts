@@ -83,6 +83,7 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 
 		const userRow: FTableSchemaDataRow = {
 			id: faker.random.alpha(10),
+			disableSelection: i % 2 === 0,
 			expandIconPosition: "left",
 			data: { firstName, lastName, age, birthDate, email, mobile, sex, address },
 			details: function () {

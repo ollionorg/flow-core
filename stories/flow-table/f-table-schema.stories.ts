@@ -48,7 +48,12 @@ export const Playground = {
 				</f-div>
 			</f-popover>
 			<f-button style="display:none" label="download" @click=${downloadFile}></f-button>
-			<f-div state="default" id="reportTemplate" overflow="scroll">
+			<f-div state="default" id="reportTemplate" direction="column" overflow="scroll">
+				<f-div state="warning" padding="large" variant="curved">
+					<f-text state="inherit"
+						>'f-table-schema' supports all properties and events of 'f-table'</f-text
+					>
+				</f-div>
 				<f-table-schema
 					.data=${args.data}
 					.highlightSelected=${args["highlight-selected"]}
@@ -63,6 +68,7 @@ export const Playground = {
 					.sortOrder=${args["sort-order"]}
 					.searchTerm=${args["search-term"]}
 					.showSearchBar=${args["show-search-bar"]}
+					.stickyCellBackground=${args["sticky-cell-background"]}
 					@next=${handleNext}
 					@toggle-row-details=${toggleRowDetails}
 					@row-input=${onRowInput}
@@ -131,6 +137,10 @@ export const Playground = {
 			control: "select",
 			options: ["desc", "desc"]
 		},
+		["sticky-cell-background"]: {
+			control: "select",
+			options: ["default", "secondary", "tertiary", "subtle"]
+		},
 
 		["search-term"]: {
 			control: {
@@ -158,7 +168,7 @@ export const Playground = {
 		["sort-order"]: "asc",
 		["search-term"]: "",
 		["show-search-bar"]: true,
-
+		["sticky-cell-background"]: "default",
 		["header-cell-template"]: (val: string) => {
 			return html`<f-div gap="small" align="middle-center">
 				<f-icon source="i-icon"></f-icon>
@@ -251,6 +261,30 @@ export const StickyHeader = {
 	},
 
 	name: "sticky-header"
+};
+
+export const StickyCellBackground = {
+	render: () => {
+		const data = getFakeUsers(30, 10);
+
+		return html`
+			<f-div gap="small" height="100%" overflow="scroll" direction="column" width="100%">
+				<f-text>
+					sticky-cell-background="secondary", this property works when variant!="stripped"</f-text
+				>
+				<f-table-schema
+					.stickyCellBackground=${"secondary"}
+					highlight-hover
+					variant="underlined"
+					.data=${data}
+					.stickyHeader=${true}
+				>
+				</f-table-schema>
+			</f-div>
+		`;
+	},
+
+	name: "sticky-cell-background"
 };
 
 export const RowsPerPage = {
@@ -531,6 +565,33 @@ export const Next = {
 	},
 
 	name: "@next"
+};
+
+export const RowClick = {
+	render: () => {
+		const data = getFakeUsers(50, 5);
+		const fieldRef = createRef();
+
+		const handleEvent = (event: CustomEvent) => {
+			if (fieldRef.value) {
+				fieldRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
+			}
+		};
+
+		return html`<f-div direction="column" state="subtle" padding="small" gap="large" height="50%">
+				<f-text>'row-click' event emitted whenever user click on row</f-text>
+				<f-table-schema .data=${data} rows-per-page="20" @row-click=${handleEvent}>
+				</f-table-schema>
+				<f-divider></f-divider>
+			</f-div>
+			<br />
+			<f-divider></f-divider>
+			<br />
+			<f-text state="secondary">'event.detail' will display here</f-text>
+			<pre ${ref(fieldRef)}></pre> `;
+	},
+
+	name: "@row-click"
 };
 export const NoData = {
 	render: () => {

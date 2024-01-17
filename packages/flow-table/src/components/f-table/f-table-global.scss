@@ -67,6 +67,15 @@ f-table {
 				&[sticky-left],
 				&[sticky-top] {
 					--color-background-row: var(--color-surface-default);
+					&[data-background="secondary"] {
+						--color-background-row: var(--color-surface-secondary);
+					}
+					&[data-background="tertiary"] {
+						--color-background-row: var(--color-surface-tertiary);
+					}
+					&[data-background="subtle"] {
+						--color-background-row: var(--color-surface-subtle);
+					}
 				}
 			}
 			&:hover {
@@ -74,6 +83,15 @@ f-table {
 					&[sticky-left],
 					&[sticky-top] {
 						--color-background-row: var(--color-surface-default-hover);
+						&[data-background="secondary"] {
+							--color-background-row: var(--color-surface-secondary-hover);
+						}
+						&[data-background="tertiary"] {
+							--color-background-row: var(--color-surface-tertiary-hover);
+						}
+						&[data-background="subtle"] {
+							--color-background-row: var(--color-surface-subtle-hover);
+						}
 					}
 				}
 			}

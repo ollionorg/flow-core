@@ -2,6 +2,13 @@
 
 # Change Log
 
+## [2.7.6] - 2024-01-16
+
+### Improvements
+
+- `f-div` : Added `hide-scrollbar` property.
+- (Note: The `hide-scrollbar` property will only hide the scrollbar; users can still scroll through the content.)
+
 ## [2.7.5] - 2024-01-11
 
 ### Improvements

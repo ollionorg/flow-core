@@ -52,6 +52,7 @@ export type FTableSchemaSize = FTableSize;
 export type FTableSchemaSelectable = FTableSelectable;
 
 export type FTableSchemaHeaderCellemplate<T = any> = (value: T) => HTMLTemplateResult;
+export type FTableSchemaStickyBackground = "default" | "secondary" | "tertiary" | "subtle";
 
 @flowElement("f-table-schema")
 export class FTableSchema extends FRoot {
@@ -127,6 +128,12 @@ export class FTableSchema extends FRoot {
 	stickyHeader = false;
 
 	/**
+	 * @attribute is sticky cell background
+	 */
+	@property({ type: String, reflect: true, attribute: "sticky-cell-background" })
+	stickyCellBackground: FTableSchemaStickyBackground = "default";
+
+	/**
 	 * filter rows based on search term
 	 */
 	@property({ type: String, reflect: true, attribute: "search-term" })
@@ -173,7 +180,7 @@ export class FTableSchema extends FRoot {
 
 	get header() {
 		return this.data?.header
-			? html`<f-trow slot="header">
+			? html`<f-trow slot="header" part="header">
 					${Object.entries(this.data.header).map(columnHeader => {
 						let width = undefined;
 						let selected = false;
@@ -191,6 +198,7 @@ export class FTableSchema extends FRoot {
 							.selected=${selected}
 							.width=${width}
 							.align=${columnHeader[1].align}
+							data-background="${this.stickyCellBackground}"
 							?sticky-left=${ifDefined(sticky)}
 							?sticky-top=${ifDefined(this.stickyHeader)}
 							@selected-column=${this.handleColumnSelection}
@@ -220,6 +228,7 @@ export class FTableSchema extends FRoot {
 					}
 				};
 				return html`<f-trow
+					part="row"
 					id=${row.id}
 					.expandIconPosition=${row.expandIconPosition ?? "right"}
 					.open=${row.open ?? false}
@@ -258,6 +267,7 @@ export class FTableSchema extends FRoot {
 							.width=${width}
 							.actions=${actions}
 							.align=${cell.align}
+							data-background="${this.stickyCellBackground}"
 							?sticky-left=${ifDefined(sticky)}
 							>${this.getCellTemplate(row.data[columnHeader[0]], highlightTerm)}
 						</f-tcell>`;

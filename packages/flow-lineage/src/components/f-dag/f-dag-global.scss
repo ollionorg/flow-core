@@ -1,0 +1,34 @@
+f-dag {
+	display: flex;
+	overflow: auto;
+
+	foreignObject {
+		overflow: visible;
+	}
+
+	foreignObject {
+		cursor: pointer;
+		overflow: visible;
+		> * {
+			position: fixed !important;
+		}
+		* {
+			transform-origin: 0% 0%;
+		}
+	}
+}
+
+f-div[direction="column"] {
+	> f-dag {
+		width: 100%;
+		flex: 1 0 auto;
+	}
+}
+
+f-div[direction="row"] {
+	> f-dag {
+		flex: 1 0;
+		max-width: 100%;
+		height: 100%;
+	}
+}

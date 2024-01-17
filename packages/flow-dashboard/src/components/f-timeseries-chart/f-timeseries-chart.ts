@@ -92,6 +92,37 @@ export class FTimeseriesChart extends FRoot {
 	 * mention required fields here for generating vue types
 	 */
 	readonly required = ["config"];
+	/**
+	 * Resize observer to detect if container is resized
+	 */
+	resizeObserver: ResizeObserver | undefined;
+	/**
+	 * activate when this element is connected to DOM
+	 */
+	activateResizeObserver: boolean = false;
+
+	connectedCallback() {
+		super.connectedCallback();
+		/**
+		 * Creating ResizeObserver Instance
+		 */
+		this.resizeObserver = new ResizeObserver(() => {
+			//avoid first call , since it is not required
+			if (this.activateResizeObserver) {
+				this.init();
+			}
+			this.activateResizeObserver = true;
+		});
+
+		this.resizeObserver.observe(this);
+	}
+	disconnectedCallback() {
+		/**
+		 * disconnecting resize observer
+		 */
+		this.resizeObserver?.disconnect();
+		super.disconnectedCallback();
+	}
 
 	plotCustomLines = () => {
 		this.svg.call(g => g.selectAll(".custom-lines").remove());
@@ -170,6 +201,7 @@ export class FTimeseriesChart extends FRoot {
 	}
 
 	init() {
+		this.chartContainer.value!.querySelector<SVGSVGElement>("svg")!.innerHTML = ``;
 		const chartData = this.config.data;
 		const chartDataFlat = chartData.map(series => series.points).flat();
 

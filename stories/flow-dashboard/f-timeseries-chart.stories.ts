@@ -4,7 +4,8 @@ import {
 	FTimeseriesChartConfig,
 	FTimeseriesChart,
 	YAxisLine,
-	XAxisLine
+	XAxisLine,
+	TooltipPoints
 } from "@ollion/flow-dashboard";
 import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
@@ -104,6 +105,21 @@ export const Basic = {
 			},
 			yAxis: {
 				lines: yLines
+			},
+			tooltipTemplate: (tooltipDate: Date, tooltipPoints: TooltipPoints) => {
+				return html`<f-div width="280px" direction="column" gap="small">
+					${tooltipPoints.map(point => {
+						return html`<f-text weight="medium" .state=${"custom," + point.color}
+							>${point.seriesName} : ${point?.value}</f-text
+						>`;
+					})}
+					<f-divider state="subtle"></f-divider>
+					<f-div align="middle-right" gap="x-small">
+						<f-text inline variant="code" size="small">
+							${tooltipDate.toLocaleDateString()} | ${tooltipDate.toLocaleTimeString()}</f-text
+						>
+					</f-div>
+				</f-div>`;
 			}
 		};
 

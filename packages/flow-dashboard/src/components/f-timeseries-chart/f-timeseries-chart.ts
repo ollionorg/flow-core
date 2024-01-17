@@ -1,4 +1,4 @@
-import { html, PropertyValueMap, unsafeCSS, svg, render } from "lit";
+import { html, PropertyValueMap, unsafeCSS, svg, render, HTMLTemplateResult } from "lit";
 import { property } from "lit/decorators.js";
 import { FRoot, flowElement, FDiv } from "@ollion/flow-core";
 import globalStyle from "./f-timeseries-chart-global.scss?inline";
@@ -21,11 +21,12 @@ export type TimeseriesPoint = {
 	value: number;
 };
 
+export type SeriesType = "line" | "bar" | "area";
 export type TimeseriesData = {
 	seriesName: string;
 	points: TimeseriesPoint[];
 	color: string;
-	type: "line" | "bar" | "area";
+	type: SeriesType;
 };
 
 export type FTimeseriesChartConfig = {
@@ -46,8 +47,15 @@ export type FTimeseriesChartConfig = {
 	yAxis?: {
 		lines?: YAxisLine[];
 	};
+	tooltipTemplate?: (tooltipDate: Date, tooltipPoints: TooltipPoints) => HTMLTemplateResult;
 };
 
+export type TooltipPoints = {
+	seriesName: string;
+	value: number;
+	color: string;
+	type: SeriesType;
+}[];
 @flowElement("f-timeseries-chart")
 export class FTimeseriesChart extends FRoot {
 	/**
@@ -113,6 +121,21 @@ export class FTimeseriesChart extends FRoot {
 		return this;
 	}
 
+	defaultTooltipTemplate(tooltipDate: Date, tooltipPoints: TooltipPoints) {
+		return html`<f-div width="100%" direction="column" gap="small">
+			<f-text
+				>Date : ${tooltipDate.toLocaleDateString()} ${tooltipDate.toLocaleTimeString()}</f-text
+			>
+			${tooltipPoints.map(point => {
+				return html`<f-text
+					>${point.seriesName} :
+					<f-text inline weight="bold" .state=${"custom," + point.color}
+						>${point?.value}</f-text
+					></f-text
+				>`;
+			})}
+		</f-div>`;
+	}
 	render() {
 		return html`<f-div ${ref(this.chartContainer)}
 			>${svg`<svg xmlns="http://www.w3.org/2000/svg"></svg>`}
@@ -387,15 +410,20 @@ export class FTimeseriesChart extends FRoot {
 				}
 				const xDate = new Date();
 				xDate.setTime(time);
+				const tooltipPoints: TooltipPoints = chartData.map(series => {
+					const i = bisect(series.points, this.x.invert(d3.pointer(event)[0]).getTime());
+					const seriesPoint = series.points[i];
+					return {
+						seriesName: series.seriesName,
+						value: seriesPoint?.value,
+						color: series.color,
+						type: series.type
+					};
+				});
 				render(
-					html`<f-div width="100%" direction="column" gap="small">
-						<f-text>Date : ${xDate.toLocaleDateString()} ${xDate.toLocaleTimeString()}</f-text>
-						${chartData.map(series => {
-							const i = bisect(series.points, this.x.invert(d3.pointer(event)[0]).getTime());
-							const seriesPoint = series.points[i];
-							return html`<f-text>${series.seriesName} : ${seriesPoint?.value}</f-text>`;
-						})}
-					</f-div>`,
+					this.config.tooltipTemplate
+						? this.config.tooltipTemplate(xDate, tooltipPoints)
+						: this.defaultTooltipTemplate(xDate, tooltipPoints),
 					this.chartTooltip.value
 				);
 			}
@@ -423,6 +451,7 @@ export class FTimeseriesChart extends FRoot {
 			.on("pointerleave", pointerleft)
 			.on("touchstart", (event: Event) => event.preventDefault());
 	}
+
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
 

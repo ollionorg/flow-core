@@ -30,22 +30,31 @@ export type TimeseriesData = {
 };
 
 export type FTimeseriesTickAuto = {
-	type: "Auto";
+	type: "auto";
 };
 
-export type FTimeseriesTickInterval = {
-	type: "Interval";
+export type FTimeseriesXTickInterval = {
+	type: "interval";
 	interval: d3.TimeInterval | null;
 };
 
-export type FTimeseriesTickValues = {
-	type: "Values";
+export type FTimeseriesXTickValues = {
+	type: "values";
 	values: Date[];
 };
 
-export type FTimeseriesTickConfig = {
+export type FTimeseriesYTickValues = {
+	type: "values";
+	values: number[];
+};
+
+export type FTimeseriesXTickConfig = {
 	format?: (tickDate: Date) => string;
-} & (FTimeseriesTickAuto | FTimeseriesTickInterval | FTimeseriesTickValues);
+} & (FTimeseriesTickAuto | FTimeseriesXTickInterval | FTimeseriesXTickValues);
+
+export type FTimeseriesYTickConfig = {
+	format?: (value: number) => string;
+} & (FTimeseriesTickAuto | FTimeseriesYTickValues);
 
 export type FTimeseriesChartConfig = {
 	data: TimeseriesData[];
@@ -61,10 +70,11 @@ export type FTimeseriesChartConfig = {
 	};
 	xAxis?: {
 		lines?: XAxisLine[];
-		tickConfig?: FTimeseriesTickConfig;
+		tickConfig?: FTimeseriesXTickConfig;
 	};
 	yAxis?: {
 		lines?: YAxisLine[];
+		tickConfig?: FTimeseriesYTickConfig;
 	};
 	tooltipTemplate?: (tooltipDate: Date, tooltipPoints: TooltipPoints) => HTMLTemplateResult;
 };
@@ -105,7 +115,7 @@ export class FTimeseriesChart extends FRoot {
 	yGridLines!: (g: d3.Selection<SVGGElement, unknown, null, undefined>) => void;
 	line!: d3.Line<TimeseriesPoint>;
 	xAxis!: d3.Axis<Date>;
-	yAxis!: d3.Axis<d3.NumberValue>;
+	yAxis!: d3.Axis<number>;
 	area!: d3.Area<TimeseriesPoint>;
 	/**
 	 * mention required fields here for generating vue types
@@ -303,13 +313,14 @@ export class FTimeseriesChart extends FRoot {
 			.axisBottom<Date>(this.x)
 			.ticks(width / 80)
 			.tickSizeOuter(0);
+
 		if (this.config.xAxis?.tickConfig) {
 			const tickConfig = this.config.xAxis.tickConfig;
-			if (tickConfig.type === "Auto") {
+			if (tickConfig.type === "auto") {
 				this.xAxis.ticks(Math.max(width / 80, 2));
-			} else if (tickConfig.type === "Interval") {
+			} else if (tickConfig.type === "interval") {
 				this.xAxis.ticks(tickConfig.interval);
-			} else if (tickConfig.type === "Values") {
+			} else if (tickConfig.type === "values") {
 				this.xAxis.tickValues(tickConfig.values);
 			}
 
@@ -324,7 +335,20 @@ export class FTimeseriesChart extends FRoot {
 			.call(this.yGridLines);
 
 		// Add the y-axis, remove the domain line, add grid lines and a label.
-		this.yAxis = d3.axisLeft(this.y).ticks(height / 40); //
+		this.yAxis = d3.axisLeft<number>(this.y).ticks(height / 40); //
+
+		if (this.config.yAxis?.tickConfig) {
+			const tickConfig = this.config.yAxis.tickConfig;
+			if (tickConfig.type === "auto") {
+				this.yAxis.ticks(Math.max(height / 40, 2));
+			} else if (tickConfig.type === "values") {
+				this.yAxis.tickValues(tickConfig.values);
+			}
+
+			if (tickConfig.format) {
+				this.yAxis.tickFormat(tickConfig.format);
+			}
+		}
 
 		this.yAxisG = this.svg
 			.append("g")

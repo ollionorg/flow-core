@@ -114,15 +114,23 @@ export const Basic = {
 					format: (d: Date) => {
 						return `${d.getHours()}h${d.getMinutes()}m`;
 					},
-					type: "Auto"
-					// type: "Interval",
+					type: "auto"
+					// type: "interval",
 					// interval: d3.timeHour.every(1)
-					// type: "Values",
+					// type: "values",
 					// values: customTickValues
 				}
 			},
 			yAxis: {
-				lines: yLines
+				lines: yLines,
+				tickConfig: {
+					format: value => {
+						return `#${value}`;
+					},
+					type: "auto"
+					// type: "values",
+					// values: [50, 100]
+				}
 			},
 			tooltipTemplate: (tooltipDate: Date, tooltipPoints: TooltipPoints) => {
 				return html`<f-div width="280px" direction="column" gap="small">

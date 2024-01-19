@@ -29,6 +29,24 @@ export type TimeseriesData = {
 	type: SeriesType;
 };
 
+export type FTimeseriesTickAuto = {
+	type: "Auto";
+};
+
+export type FTimeseriesTickInterval = {
+	type: "Interval";
+	interval: d3.TimeInterval | null;
+};
+
+export type FTimeseriesTickValues = {
+	type: "Values";
+	values: Date[];
+};
+
+export type FTimeseriesTickConfig = {
+	format?: (tickDate: Date) => string;
+} & (FTimeseriesTickAuto | FTimeseriesTickInterval | FTimeseriesTickValues);
+
 export type FTimeseriesChartConfig = {
 	data: TimeseriesData[];
 	size?: {
@@ -43,6 +61,7 @@ export type FTimeseriesChartConfig = {
 	};
 	xAxis?: {
 		lines?: XAxisLine[];
+		tickConfig?: FTimeseriesTickConfig;
 	};
 	yAxis?: {
 		lines?: YAxisLine[];
@@ -85,7 +104,7 @@ export class FTimeseriesChart extends FRoot {
 	xGridLines!: (g: d3.Selection<SVGGElement, unknown, null, undefined>) => void;
 	yGridLines!: (g: d3.Selection<SVGGElement, unknown, null, undefined>) => void;
 	line!: d3.Line<TimeseriesPoint>;
-	xAxis!: d3.Axis<d3.NumberValue | Date>;
+	xAxis!: d3.Axis<Date>;
 	yAxis!: d3.Axis<d3.NumberValue>;
 	area!: d3.Area<TimeseriesPoint>;
 	/**
@@ -281,9 +300,23 @@ export class FTimeseriesChart extends FRoot {
 
 		// Add the x-axis.
 		this.xAxis = d3
-			.axisBottom(this.x)
+			.axisBottom<Date>(this.x)
 			.ticks(width / 80)
 			.tickSizeOuter(0);
+		if (this.config.xAxis?.tickConfig) {
+			const tickConfig = this.config.xAxis.tickConfig;
+			if (tickConfig.type === "Auto") {
+				this.xAxis.ticks(Math.max(width / 80, 2));
+			} else if (tickConfig.type === "Interval") {
+				this.xAxis.ticks(tickConfig.interval);
+			} else if (tickConfig.type === "Values") {
+				this.xAxis.tickValues(tickConfig.values);
+			}
+
+			if (tickConfig.format) {
+				this.xAxis.tickFormat(tickConfig.format);
+			}
+		}
 		this.xAxisG = this.svg
 			.append("g")
 			.attr("transform", `translate(0,${height - marginBottom})`)

@@ -9,6 +9,7 @@ import {
 } from "@ollion/flow-dashboard";
 import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
+// import * as d3 from "d3";
 
 export default {
 	title: "@ollion/flow-dashboard/f-timeseries-chart",
@@ -98,10 +99,27 @@ export const Basic = {
 		];
 
 		const chartRef = createRef<FTimeseriesChart>();
+
+		const customTickValues = [];
+		for (let d = 0; d < 10; d++) {
+			const date = new Date();
+			date.setMinutes(date.getMinutes() + 15 * (d + 1));
+			customTickValues.push(date);
+		}
 		const chartConfig: FTimeseriesChartConfig = {
 			data: chartData,
 			xAxis: {
-				lines: xLines
+				lines: xLines,
+				tickConfig: {
+					format: (d: Date) => {
+						return `${d.getHours()}h${d.getMinutes()}m`;
+					},
+					type: "Auto"
+					// type: "Interval",
+					// interval: d3.timeHour.every(1)
+					// type: "Values",
+					// values: customTickValues
+				}
 			},
 			yAxis: {
 				lines: yLines

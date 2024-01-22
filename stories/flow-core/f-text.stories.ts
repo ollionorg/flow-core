@@ -205,6 +205,9 @@ export const Size = {
 			<f-divider></f-divider>
 			<f-div gap="medium" padding="medium" align="middle-center">
 				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="para" size="x-large" weight="medium">x-large</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center">
 					<f-text variant="para" size="large" weight="medium">large</f-text>
 				</f-div>
 				<f-div height="hug-content" padding="none" align="middle-center">
@@ -221,6 +224,9 @@ export const Size = {
 			<f-divider></f-divider>
 			<f-div gap="medium" padding="medium" align="middle-center">
 				<f-div height="hug-content" padding="none" align="middle-center">
+					<f-text variant="code" size="x-large" weight="medium">x-large</f-text>
+				</f-div>
+				<f-div height="hug-content" padding="none" align="middle-center">
 					<f-text variant="code" size="large" weight="medium">large</f-text>
 				</f-div>
 				<f-div height="hug-content" padding="none" align="middle-center">
@@ -236,6 +242,78 @@ export const Size = {
 		</f-div>`,
 
 	name: "size"
+};
+
+export const Weight = {
+	render: () =>
+		html`<f-div gap="medium" padding="x-large" direction="column">
+			<f-text variant="para" size="large" weight="medium">weight of variant="heading"</f-text>
+			<f-divider></f-divider>
+			${["regular", "medium", "bold"].map(weight => {
+				return html` <f-div gap="medium" padding="medium" align="middle-center">
+					<f-div height="hug-content" padding="none" align="middle-center">
+						<f-text variant="heading" size="x-large" .weight=${weight}>x-large ${weight}</f-text>
+					</f-div>
+					<f-div height="hug-content" padding="none" align="middle-center">
+						<f-text variant="heading" size="large" .weight=${weight}>large ${weight}</f-text>
+					</f-div>
+					<f-div height="hug-content" padding="none" align="middle-center">
+						<f-text variant="heading" size="medium" .weight=${weight}>medium ${weight}</f-text>
+					</f-div>
+					<f-div height="hug-content" padding="none" align="middle-center">
+						<f-text variant="heading" size="small" .weight=${weight}>small ${weight}</f-text>
+					</f-div>
+					<f-div height="hug-content" padding="none" align="middle-center">
+						<f-text variant="heading" size="x-small" .weight=${weight}>x-small ${weight}</f-text>
+					</f-div>
+				</f-div>`;
+			})}
+
+			<f-text variant="para" size="large" weight="medium">weight of variant="para"</f-text>
+			<f-divider></f-divider>
+			${["regular", "medium", "bold"].map(weight => {
+				return html` <f-div gap="medium" padding="medium" align="middle-center">
+					<f-div height="hug-content" padding="none" align="middle-center">
+						<f-text variant="para" size="x-large" .weight=${weight}>x-large ${weight}</f-text>
+					</f-div>
+					<f-div height="hug-content" padding="none" align="middle-center">
+						<f-text variant="para" size="large" .weight=${weight}>large</f-text>
+					</f-div>
+					<f-div height="hug-content" padding="none" align="middle-center">
+						<f-text variant="para" size="medium" .weight=${weight}>medium</f-text>
+					</f-div>
+					<f-div height="hug-content" padding="none" align="middle-center">
+						<f-text variant="para" size="small" .weight=${weight}>small</f-text>
+					</f-div>
+					<f-div height="hug-content" padding="none" align="middle-center">
+						<f-text variant="para" size="x-small" .weight=${weight}>x-small</f-text>
+					</f-div>
+				</f-div>`;
+			})}
+			<f-text variant="para" size="large" weight="medium">weight of variant="code"</f-text>
+			<f-divider></f-divider>
+			${["regular", "medium", "bold"].map(weight => {
+				return html`<f-div gap="medium" padding="medium" align="middle-center">
+					<f-div height="hug-content" padding="none" align="middle-center">
+						<f-text variant="code" size="x-large" .weight=${weight}>x-large ${weight}</f-text>
+					</f-div>
+					<f-div height="hug-content" padding="none" align="middle-center">
+						<f-text variant="code" size="large" .weight=${weight}>large</f-text>
+					</f-div>
+					<f-div height="hug-content" padding="none" align="middle-center">
+						<f-text variant="code" size="medium" .weight=${weight}>medium</f-text>
+					</f-div>
+					<f-div height="hug-content" padding="none" align="middle-center">
+						<f-text variant="code" size="small" .weight=${weight}>small</f-text>
+					</f-div>
+					<f-div height="hug-content" padding="none" align="middle-center">
+						<f-text variant="code" size="x-small" .weight=${weight}>x-small</f-text>
+					</f-div>
+				</f-div>`;
+			})}
+		</f-div>`,
+
+	name: "weight"
 };
 
 export const State = {

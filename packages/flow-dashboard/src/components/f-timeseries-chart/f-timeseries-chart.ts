@@ -173,6 +173,7 @@ export class FTimeseriesChart extends FRoot {
 			><f-div
 				${ref(this.chartLegends)}
 				height="hug-content"
+				max-height="60px"
 				gap="medium"
 				class="f-timeseries-legends"
 				align="middle-center"
@@ -182,6 +183,7 @@ export class FTimeseriesChart extends FRoot {
 						.id=${"legend-" + series.seriesName}
 						class="timeseries-legend"
 						width="hug-content"
+						height="hug-content"
 						@click=${(event: PointerEvent) => this.handleLegendClick(event, series)}
 						@mouseenter=${() => this.handleMouseEnter(series)}
 						@mouseleave=${() => this.handleMouseLeave()}

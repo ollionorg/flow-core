@@ -19,6 +19,10 @@ export default {
 		}
 	}
 };
+
+function getColor() {
+	return "#" + Math.floor(Math.random() * 16777215).toString(16);
+}
 function generateLineChartData(
 	numPoints: number,
 	from?: Date,
@@ -37,6 +41,7 @@ function generateLineChartData(
 		"#666666"
 	];
 	const seriesTypes: ("line" | "bar" | "area")[] = ["area", "bar", "line"];
+
 	for (let j = 0; j < noOfSeries; j++) {
 		const startDate = from ? from.getTime() : startFrom;
 		const points: TimeseriesPoint[] = [];
@@ -59,8 +64,8 @@ function generateLineChartData(
 		masterData.push({
 			seriesName: `Series-${j + 1}`,
 			points,
-			color: colors[j],
-			type: seriesTypes[j]
+			color: colors[j] ?? getColor(),
+			type: seriesTypes[j] ?? "line"
 		});
 	}
 

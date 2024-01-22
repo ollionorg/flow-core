@@ -33,9 +33,14 @@ export type FTimeseriesTickAuto = {
 	type: "auto";
 };
 
+export type TickInterval = {
+	type: "milliseconds" | "seconds" | "minutes" | "hours" | "days" | "months" | "years";
+	every: number;
+};
+
 export type FTimeseriesXTickInterval = {
 	type: "interval";
-	interval: d3.TimeInterval | null;
+	interval: TickInterval;
 };
 
 export type FTimeseriesXTickValues = {
@@ -229,6 +234,36 @@ export class FTimeseriesChart extends FRoot {
 		return [margin?.top ?? 20, margin?.right ?? 30, margin?.bottom ?? 30, margin?.left ?? 40];
 	}
 
+	getTickInterval({ type, every }: TickInterval) {
+		return d3.timeInterval(
+			(_date: Date) => {},
+			(date: Date, _step: number) => {
+				switch (type) {
+					case "milliseconds":
+						date.setMilliseconds(date.getMilliseconds() + every);
+						break;
+					case "seconds":
+						date.setSeconds(date.getSeconds() + every);
+						break;
+					case "minutes":
+						date.setMinutes(date.getMinutes() + every);
+						break;
+					case "hours":
+						date.setHours(date.getHours() + every);
+						break;
+					case "days":
+						date.setDate(date.getDate() + every);
+						break;
+					case "months":
+						date.setMonth(date.getMonth() + every);
+						break;
+					case "years":
+						date.setFullYear(date.getFullYear() + every);
+				}
+			}
+		);
+	}
+
 	init() {
 		this.chartContainer.value!.querySelector<SVGSVGElement>("svg")!.innerHTML = ``;
 		const chartData = this.config.data;
@@ -319,7 +354,7 @@ export class FTimeseriesChart extends FRoot {
 			if (tickConfig.type === "auto") {
 				this.xAxis.ticks(Math.max(width / 80, 2));
 			} else if (tickConfig.type === "interval") {
-				this.xAxis.ticks(tickConfig.interval);
+				this.xAxis.ticks(this.getTickInterval(tickConfig.interval));
 			} else if (tickConfig.type === "values") {
 				this.xAxis.tickValues(tickConfig.values);
 			}

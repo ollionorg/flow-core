@@ -9,7 +9,6 @@ import {
 } from "@ollion/flow-dashboard";
 import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
-// import * as d3 from "d3";
 
 export default {
 	title: "@ollion/flow-dashboard/f-timeseries-chart",
@@ -114,9 +113,12 @@ export const Basic = {
 					format: (d: Date) => {
 						return `${d.getHours()}h${d.getMinutes()}m`;
 					},
-					type: "auto"
-					// type: "interval",
-					// interval: d3.timeHour.every(1)
+					// type: "auto"
+					type: "interval",
+					interval: {
+						type: "minutes",
+						every: 15
+					}
 					// type: "values",
 					// values: customTickValues
 				}

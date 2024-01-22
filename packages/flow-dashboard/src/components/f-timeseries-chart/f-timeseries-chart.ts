@@ -207,16 +207,18 @@ export class FTimeseriesChart extends FRoot {
 		this.init();
 	}
 	handleMouseEnter(series: TimeseriesData) {
-		this.querySelectorAll<SVGPathElement>(".series-path").forEach(path => {
-			if (!path.classList.contains(`series-${series.seriesName}-path`)) {
-				path.classList.add("disable");
-			} else {
-				path.classList.add("active");
-			}
-		});
+		if (!series.disable) {
+			this.querySelectorAll<SVGPathElement>(".series-path,.custom-lines").forEach(path => {
+				if (!path.classList.contains(`series-${series.seriesName}-path`)) {
+					path.classList.add("disable");
+				} else {
+					path.classList.add("active");
+				}
+			});
+		}
 	}
 	handleMouseLeave() {
-		this.querySelectorAll<SVGPathElement>(".series-path").forEach(path => {
+		this.querySelectorAll<SVGPathElement>(".series-path,.custom-lines").forEach(path => {
 			path.classList.remove("disable");
 			path.classList.remove("active");
 		});

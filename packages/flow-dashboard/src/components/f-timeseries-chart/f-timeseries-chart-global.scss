@@ -53,18 +53,25 @@ f-timeseries-chart {
 		opacity: 0.4;
 	}
 
-	.series-path.disable {
+	.series-path.disable,
+	.custom-lines.disable {
 		opacity: 0.4;
+		stroke-opacity: 0.4;
+		fill-opacity: 0.4;
 		.bars {
 			fill-opacity: 0.3;
 		}
 	}
-	.series-path.active {
+	.series-path.active,
+	.custom-lines.active {
 		opacity: 1;
 		fill-opacity: 1 !important;
 		stroke-opacity: 1;
 		.bars {
 			fill-opacity: 1;
+		}
+		&.line-path {
+			stroke-width: 2px !important;
 		}
 	}
 }

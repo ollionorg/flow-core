@@ -170,7 +170,7 @@ export const Basic = {
 
 		setTimeout(() => {
 			clearInterval(interval);
-		}, 15000);
+		}, 3000);
 		return html`<f-div height="500px">
 			<f-timeseries-chart ${ref(chartRef)} .config=${chartConfig}></f-timeseries-chart>
 		</f-div>`;

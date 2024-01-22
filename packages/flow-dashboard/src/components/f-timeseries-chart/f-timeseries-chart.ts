@@ -1,4 +1,4 @@
-import { html, PropertyValueMap, unsafeCSS, svg, render, HTMLTemplateResult } from "lit";
+import { html, PropertyValueMap, unsafeCSS, svg, render } from "lit";
 import { property } from "lit/decorators.js";
 import { FRoot, flowElement, FDiv } from "@ollion/flow-core";
 import globalStyle from "./f-timeseries-chart-global.scss?inline";
@@ -6,90 +6,16 @@ import { injectCss } from "@ollion/flow-core-config";
 import * as d3 from "d3";
 import { NumberValue } from "d3";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
+import {
+	FTimeseriesChartConfig,
+	TimeseriesData,
+	TimeseriesPoint,
+	TooltipPoints
+} from "./f-timeseries-chart-types";
+import { defaultTooltipTemplate, getTickInterval } from "./f-timeseries-chart-utils";
 
 injectCss("f-timeseries-chart", globalStyle);
 
-export type AxisLine = {
-	value: number;
-	color: string;
-};
-
-export type YAxisLine = AxisLine;
-export type XAxisLine = AxisLine;
-export type TimeseriesPoint = {
-	date: number;
-	value: number;
-};
-
-export type SeriesType = "line" | "bar" | "area";
-export type TimeseriesData = {
-	seriesName: string;
-	points: TimeseriesPoint[];
-	color: string;
-	type: SeriesType;
-};
-
-export type FTimeseriesTickAuto = {
-	type: "auto";
-};
-
-export type TickInterval = {
-	type: "milliseconds" | "seconds" | "minutes" | "hours" | "days" | "months" | "years";
-	every: number;
-};
-
-export type FTimeseriesXTickInterval = {
-	type: "interval";
-	interval: TickInterval;
-};
-
-export type FTimeseriesXTickValues = {
-	type: "values";
-	values: Date[];
-};
-
-export type FTimeseriesYTickValues = {
-	type: "values";
-	values: number[];
-};
-
-export type FTimeseriesXTickConfig = {
-	format?: (tickDate: Date) => string;
-} & (FTimeseriesTickAuto | FTimeseriesXTickInterval | FTimeseriesXTickValues);
-
-export type FTimeseriesYTickConfig = {
-	format?: (value: number) => string;
-} & (FTimeseriesTickAuto | FTimeseriesYTickValues);
-
-export type FTimeseriesChartConfig = {
-	data: TimeseriesData[];
-	size?: {
-		width?: number;
-		height?: number;
-		margin?: {
-			top?: number;
-			right?: number;
-			left?: number;
-			bottom?: number;
-		};
-	};
-	xAxis?: {
-		lines?: XAxisLine[];
-		tickConfig?: FTimeseriesXTickConfig;
-	};
-	yAxis?: {
-		lines?: YAxisLine[];
-		tickConfig?: FTimeseriesYTickConfig;
-	};
-	tooltipTemplate?: (tooltipDate: Date, tooltipPoints: TooltipPoints) => HTMLTemplateResult;
-};
-
-export type TooltipPoints = {
-	seriesName: string;
-	value: number;
-	color: string;
-	type: SeriesType;
-}[];
 @flowElement("f-timeseries-chart")
 export class FTimeseriesChart extends FRoot {
 	/**
@@ -105,6 +31,7 @@ export class FTimeseriesChart extends FRoot {
 	config!: FTimeseriesChartConfig;
 
 	chartContainer: Ref<FDiv> = createRef<FDiv>();
+	chartLegends: Ref<FDiv> = createRef<FDiv>();
 
 	chartTooltip: Ref<FDiv> = createRef<FDiv>();
 
@@ -135,7 +62,25 @@ export class FTimeseriesChart extends FRoot {
 	 */
 	activateResizeObserver: boolean = false;
 
-	correctTickOverlapping = () => {
+	get chartWidth() {
+		if (this.config.size?.width) {
+			return this.config.size?.width;
+		}
+		return this.chartContainer.value?.offsetWidth ?? 300;
+	}
+	get chartHeight() {
+		if (this.config.size?.height) {
+			return this.config.size?.height;
+		}
+		return this.chartContainer.value?.offsetHeight ?? 300;
+	}
+
+	get chartMargin() {
+		const margin = this.config.size?.margin;
+		return [margin?.top ?? 20, margin?.right ?? 30, margin?.bottom ?? 30, margin?.left ?? 40];
+	}
+
+	checkTickOverlapping = () => {
 		const allTicks = this.querySelectorAll<SVGTextElement>(".x-axis .tick text");
 		const allTicksArray = Array.from(allTicks);
 		let lastVisibleTickIdx = 0;
@@ -181,24 +126,30 @@ export class FTimeseriesChart extends FRoot {
 	plotCustomLines = () => {
 		this.svg.call(g => g.selectAll(".custom-lines").remove());
 		this.config.yAxis?.lines?.forEach(line => {
-			this.svg
-				.append("line")
-				.attr("class", "y-lines custom-lines")
-				.attr("x1", `${this.chartMargin[3]}`)
-				.attr("x2", `${this.chartWidth - this.chartMargin[1]}`)
-				.attr("y1", `${this.y(line.value)}`)
-				.attr("y2", `${this.y(line.value)}`)
-				.attr("stroke", `${line.color}`);
+			const y = this.y(line.value);
+			if (!isNaN(y)) {
+				this.svg
+					.append("line")
+					.attr("class", "y-lines custom-lines")
+					.attr("x1", `${this.chartMargin[3]}`)
+					.attr("x2", `${this.chartWidth - this.chartMargin[1]}`)
+					.attr("y1", `${y}`)
+					.attr("y2", `${y}`)
+					.attr("stroke", `${line.color}`);
+			}
 		});
 		this.config.xAxis?.lines?.forEach(line => {
-			this.svg
-				.append("line")
-				.attr("class", "x-lines custom-lines")
-				.attr("x1", `${this.x(line.value)}`)
-				.attr("x2", `${this.x(line.value)}`)
-				.attr("y1", `${this.chartMargin[0]}`)
-				.attr("y2", `${this.chartHeight - this.chartMargin[2]}`)
-				.attr("stroke", `${line.color}`);
+			const x = this.x(line.value);
+			if (!isNaN(x)) {
+				this.svg
+					.append("line")
+					.attr("class", "x-lines custom-lines")
+					.attr("x1", `${x}`)
+					.attr("x2", `${x}`)
+					.attr("y1", `${this.chartMargin[0]}`)
+					.attr("y2", `${this.chartHeight - this.chartMargin[2]}`)
+					.attr("stroke", `${line.color}`);
+			}
 		});
 	};
 
@@ -206,87 +157,74 @@ export class FTimeseriesChart extends FRoot {
 		return this;
 	}
 
-	defaultTooltipTemplate(tooltipDate: Date, tooltipPoints: TooltipPoints) {
-		return html`<f-div width="100%" direction="column" gap="small">
-			<f-text
-				>Date : ${tooltipDate.toLocaleDateString()} ${tooltipDate.toLocaleTimeString()}</f-text
-			>
-			${tooltipPoints.map(point => {
-				return html`<f-text
-					>${point.seriesName} :
-					<f-text inline weight="bold" .state=${"custom," + point.color}
-						>${point?.value}</f-text
-					></f-text
-				>`;
-			})}
-		</f-div>`;
-	}
 	render() {
-		return html`<f-div ${ref(this.chartContainer)}
-			>${svg`<svg xmlns="http://www.w3.org/2000/svg"></svg>`}
-			<f-div
-				state="custom,#000000"
-				variant="curved"
-				padding="medium"
+		return html`<f-div direction="column" height="100%"
+			><f-div class="f-timeseries-container" ${ref(this.chartContainer)}
+				>${svg`<svg xmlns="http://www.w3.org/2000/svg"></svg>`}
+				<f-div
+					state="custom,#000000"
+					variant="curved"
+					padding="medium"
+					height="hug-content"
+					max-width="320px"
+					class="f-chart-tooltip hide"
+					${ref(this.chartTooltip)}
+				></f-div> </f-div
+			><f-div
+				${ref(this.chartLegends)}
 				height="hug-content"
-				max-width="320px"
-				class="f-chart-tooltip hide"
-				${ref(this.chartTooltip)}
-			></f-div>
-		</f-div>`;
+				gap="medium"
+				class="f-timeseries-legends"
+				align="middle-center"
+			>
+				${this.config.data.map(series => {
+					return html`<f-div
+						.id=${"legend-" + series.seriesName}
+						class="timeseries-legend"
+						width="hug-content"
+						@click=${(event: PointerEvent) => this.handleLegendClick(event, series)}
+						@mouseenter=${() => this.handleMouseEnter(series)}
+						@mouseleave=${() => this.handleMouseLeave()}
+						clickable
+						align="middle-left"
+						gap="small"
+						><f-div
+							width="16px"
+							height="16px"
+							variant="round"
+							.state=${"custom," + series.color}
+						></f-div
+						><f-text>${series.seriesName}</f-text></f-div
+					>`;
+				})}
+			</f-div></f-div
+		>`;
 	}
-
-	get chartWidth() {
-		if (this.config.size?.width) {
-			return this.config.size?.width;
-		}
-		return this.offsetWidth ?? 300;
+	handleLegendClick(e: PointerEvent, series: TimeseriesData) {
+		const legend = e.currentTarget as FDiv;
+		legend.classList.toggle("disable-legend");
+		series.disable = !series.disable;
+		this.init();
 	}
-	get chartHeight() {
-		if (this.config.size?.height) {
-			return this.config.size?.height;
-		}
-		return this.offsetHeight ?? 300;
-	}
-
-	get chartMargin() {
-		const margin = this.config.size?.margin;
-		return [margin?.top ?? 20, margin?.right ?? 30, margin?.bottom ?? 30, margin?.left ?? 40];
-	}
-
-	getTickInterval({ type, every }: TickInterval) {
-		return d3.timeInterval(
-			(_date: Date) => {},
-			(date: Date, _step: number) => {
-				switch (type) {
-					case "milliseconds":
-						date.setMilliseconds(date.getMilliseconds() + every);
-						break;
-					case "seconds":
-						date.setSeconds(date.getSeconds() + every);
-						break;
-					case "minutes":
-						date.setMinutes(date.getMinutes() + every);
-						break;
-					case "hours":
-						date.setHours(date.getHours() + every);
-						break;
-					case "days":
-						date.setDate(date.getDate() + every);
-						break;
-					case "months":
-						date.setMonth(date.getMonth() + every);
-						break;
-					case "years":
-						date.setFullYear(date.getFullYear() + every);
-				}
+	handleMouseEnter(series: TimeseriesData) {
+		this.querySelectorAll<SVGPathElement>(".series-path").forEach(path => {
+			if (!path.classList.contains(`series-${series.seriesName}-path`)) {
+				path.classList.add("disable");
+			} else {
+				path.classList.add("active");
 			}
-		);
+		});
+	}
+	handleMouseLeave() {
+		this.querySelectorAll<SVGPathElement>(".series-path").forEach(path => {
+			path.classList.remove("disable");
+			path.classList.remove("active");
+		});
 	}
 
 	init() {
 		this.chartContainer.value!.querySelector<SVGSVGElement>("svg")!.innerHTML = ``;
-		const chartData = this.config.data;
+		const chartData = this.config.data.filter(s => !s.disable);
 		const chartDataFlat = chartData.map(series => series.points).flat();
 
 		const width = this.chartWidth;
@@ -374,7 +312,7 @@ export class FTimeseriesChart extends FRoot {
 			if (tickConfig.type === "auto") {
 				this.xAxis.ticks(Math.max(width / 80, 2));
 			} else if (tickConfig.type === "interval") {
-				this.xAxis.ticks(this.getTickInterval(tickConfig.interval));
+				this.xAxis.ticks(getTickInterval(tickConfig.interval));
 			} else if (tickConfig.type === "values") {
 				this.xAxis.tickValues(tickConfig.values);
 			}
@@ -425,11 +363,12 @@ export class FTimeseriesChart extends FRoot {
 			.attr("class", d => {
 				let pathClass = "chart-path ";
 				if (d.type === "line") {
-					return (pathClass += " line-path");
+					pathClass += " line-path";
+				} else if (d.type === "area") {
+					pathClass += " area-path";
 				}
-				if (d.type === "area") {
-					return (pathClass += " area-path");
-				}
+
+				pathClass += " series-path series-" + d.seriesName + "-path";
 				return pathClass;
 			})
 			.attr("stroke", d => d.color)
@@ -443,8 +382,7 @@ export class FTimeseriesChart extends FRoot {
 			.attr("d", d => {
 				if (d.type === "line") {
 					return this.line(d.points);
-				}
-				if (d.type === "area") {
+				} else if (d.type === "area") {
 					return this.area(d.points);
 				}
 				return "none";
@@ -457,7 +395,9 @@ export class FTimeseriesChart extends FRoot {
 				d => d.seriesName
 			)
 			.join("g")
-			.attr("class", "bar-g")
+			.attr("class", d => {
+				return `bar-g series-path series-${d.seriesName}-path`;
+			})
 			.attr("transform", (d, i) => `translate(${i * (width / d.points.length)},0)`);
 		// eslint-disable-next-line @typescript-eslint/no-this-alias
 		const element = this;
@@ -568,7 +508,7 @@ export class FTimeseriesChart extends FRoot {
 				render(
 					this.config.tooltipTemplate
 						? this.config.tooltipTemplate(xDate, tooltipPoints)
-						: this.defaultTooltipTemplate(xDate, tooltipPoints),
+						: defaultTooltipTemplate(xDate, tooltipPoints),
 					this.chartTooltip.value
 				);
 			}
@@ -595,59 +535,60 @@ export class FTimeseriesChart extends FRoot {
 			.on("pointerenter pointermove", pointermoved)
 			.on("pointerleave", pointerleft)
 			.on("touchstart", (event: Event) => event.preventDefault());
-		this.correctTickOverlapping();
+		this.checkTickOverlapping();
 	}
 
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
+		void this.updateComplete.then(() => {
+			if (changedProperties.has("config")) {
+				const oldConfig = changedProperties.get("config") as FTimeseriesChartConfig | undefined;
+				if (oldConfig && oldConfig.data.length === this.config.data.length) {
+					const chartData = this.config.data.filter(s => !s.disable);
 
-		if (changedProperties.has("config")) {
-			const oldConfig = changedProperties.get("config") as FTimeseriesChartConfig | undefined;
-			if (oldConfig && oldConfig.data.length === this.config.data.length) {
-				const chartData = this.config.data;
+					const chartDataFlat = chartData.map(series => series.points).flat();
+					this.x.domain(
+						d3.extent<TimeseriesPoint, number>(chartDataFlat, d => d.date) as Iterable<NumberValue>
+					);
+					this.y.domain([0, d3.max(chartDataFlat, d => d.value)] as Iterable<NumberValue>);
+					this.svg.call(g => g.selectAll(".grid-line").remove());
+					this.xAxisG.call(this.xAxis);
+					this.xAxisG.call(this.yGridLines);
+					this.yAxisG.call(this.yAxis);
+					this.yAxisG.call(this.xGridLines);
 
-				const chartDataFlat = chartData.map(series => series.points).flat();
-				this.x.domain(
-					d3.extent<TimeseriesPoint, number>(chartDataFlat, d => d.date) as Iterable<NumberValue>
-				);
-				this.y.domain([0, d3.max(chartDataFlat, d => d.value)] as Iterable<NumberValue>);
-				this.svg.call(g => g.selectAll(".grid-line").remove());
-				this.xAxisG.call(this.xAxis);
-				this.xAxisG.call(this.yGridLines);
-				this.yAxisG.call(this.yAxis);
-				this.yAxisG.call(this.xGridLines);
+					this.path
+						.data(
+							chartData.filter(td => td.type === "line" || td.type === "area"),
+							d => d.seriesName
+						)
+						.join("path")
+						.attr("d", d => {
+							if (d.type === "line") {
+								return this.line(d.points);
+							}
+							if (d.type === "area") {
+								return this.area(d.points);
+							}
+							return "none";
+						});
 
-				this.path
-					.data(
-						chartData.filter(td => td.type === "line" || td.type === "area"),
-						d => d.seriesName
-					)
-					.join("path")
-					.attr("d", d => {
-						if (d.type === "line") {
-							return this.line(d.points);
-						}
-						if (d.type === "area") {
-							return this.area(d.points);
-						}
-						return "none";
-					});
+					this.bars
+						.data(
+							chartData.filter(td => td.type === "bar"),
+							d => d.seriesName
+						)
+						.join("g")
+						.each(this.seriesBars);
 
-				this.bars
-					.data(
-						chartData.filter(td => td.type === "bar"),
-						d => d.seriesName
-					)
-					.join("g")
-					.each(this.seriesBars);
+					this.plotCustomLines();
+				} else {
+					this.init();
+				}
 
-				this.plotCustomLines();
-			} else {
-				this.init();
+				this.checkTickOverlapping();
 			}
-
-			void this.updateComplete.then(this.correctTickOverlapping);
-		}
+		});
 	}
 }
 

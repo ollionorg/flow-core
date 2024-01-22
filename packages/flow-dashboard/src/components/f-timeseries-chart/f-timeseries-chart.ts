@@ -135,6 +135,26 @@ export class FTimeseriesChart extends FRoot {
 	 */
 	activateResizeObserver: boolean = false;
 
+	correctTickOverlapping = () => {
+		const allTicks = this.querySelectorAll<SVGTextElement>(".x-axis .tick text");
+		const allTicksArray = Array.from(allTicks);
+		let lastVisibleTickIdx = 0;
+
+		allTicksArray.forEach((tick, idx) => {
+			if (idx > 0 && tick.getBoundingClientRect().x > 0) {
+				const lastTick = allTicksArray[lastVisibleTickIdx];
+				if (
+					tick.getBoundingClientRect().x - lastTick.getBoundingClientRect().x <
+					lastTick.getBoundingClientRect().width + 24
+				) {
+					tick.style.display = "none";
+				} else {
+					lastVisibleTickIdx = idx;
+				}
+			}
+		});
+	};
+
 	connectedCallback() {
 		super.connectedCallback();
 		/**
@@ -365,6 +385,7 @@ export class FTimeseriesChart extends FRoot {
 		}
 		this.xAxisG = this.svg
 			.append("g")
+			.attr("class", "x-axis")
 			.attr("transform", `translate(0,${height - marginBottom})`)
 			.call(this.xAxis)
 			.call(this.yGridLines);
@@ -574,6 +595,7 @@ export class FTimeseriesChart extends FRoot {
 			.on("pointerenter pointermove", pointermoved)
 			.on("pointerleave", pointerleft)
 			.on("touchstart", (event: Event) => event.preventDefault());
+		this.correctTickOverlapping();
 	}
 
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
@@ -623,6 +645,8 @@ export class FTimeseriesChart extends FRoot {
 			} else {
 				this.init();
 			}
+
+			void this.updateComplete.then(this.correctTickOverlapping);
 		}
 	}
 }

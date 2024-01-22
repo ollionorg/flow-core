@@ -117,7 +117,7 @@ export const Basic = {
 					type: "interval",
 					interval: {
 						type: "minutes",
-						every: 15
+						every: 5
 					}
 					// type: "values",
 					// values: customTickValues

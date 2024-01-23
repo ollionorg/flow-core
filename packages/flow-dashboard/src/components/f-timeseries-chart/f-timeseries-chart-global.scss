@@ -55,13 +55,14 @@ f-timeseries-chart {
 
 	.series-path,
 	.custom-lines {
-		transition: opacity 0.3s linear;
+		transition:
+			opacity 0.3s linear,
+			stroke-width 0.3s linear;
 	}
 	.series-path.disable,
 	.custom-lines.disable {
-		opacity: 0.4;
-		stroke-opacity: 0.4;
-		fill-opacity: 0.4;
+		opacity: 0.5;
+		fill-opacity: 0.5;
 		.bars {
 			fill-opacity: 0.3;
 		}
@@ -75,7 +76,19 @@ f-timeseries-chart {
 			fill-opacity: 1;
 		}
 		&.line-path {
-			stroke-width: 2px !important;
+			stroke-width: 2pt !important;
+		}
+	}
+
+	.f-timeseries-wrapper {
+		&[data-legends-position="top"] {
+			flex-direction: column-reverse;
+		}
+		&[data-legends-position="left"] {
+			flex-direction: row-reverse;
+		}
+		&[data-legends-position="right"] {
+			flex-direction: row;
 		}
 	}
 }

@@ -73,6 +73,10 @@ export type FTimeseriesChartConfig = {
 		lines?: YAxisLine[];
 		tickConfig?: FTimeseriesYTickConfig;
 	};
+	legends?: {
+		disabled?: boolean;
+		position?: "bottom" | "left" | "right" | "top";
+	};
 	tooltipTemplate?: (tooltipDate: Date, tooltipPoints: TooltipPoints) => HTMLTemplateResult;
 };
 

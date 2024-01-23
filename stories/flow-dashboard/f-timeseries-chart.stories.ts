@@ -131,7 +131,7 @@ export const Basic = {
 			yAxis: {
 				lines: yLines,
 				tickConfig: {
-					format: value => {
+					format: (value: number) => {
 						return `#${value}`;
 					},
 					type: "auto"
@@ -139,8 +139,18 @@ export const Basic = {
 					// values: [50, 100]
 				}
 			},
+			legends: {
+				disabled: false,
+				position: "left"
+			},
 			tooltipTemplate: (tooltipDate: Date, tooltipPoints: TooltipPoints) => {
-				return html`<f-div width="280px" direction="column" gap="small">
+				return html`<f-div
+					width="280px"
+					max-height="500px"
+					overflow="scroll"
+					direction="column"
+					gap="small"
+				>
 					${tooltipPoints.map(point => {
 						return html`<f-text weight="medium" .state=${"custom," + point.color}
 							>${point.seriesName} : ${point?.value}</f-text

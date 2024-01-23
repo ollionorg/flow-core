@@ -1,4 +1,4 @@
-import { html, PropertyValueMap, unsafeCSS, svg, render } from "lit";
+import { html, PropertyValueMap, unsafeCSS, svg, render, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { FRoot, flowElement, FDiv } from "@ollion/flow-core";
 import globalStyle from "./f-timeseries-chart-global.scss?inline";
@@ -157,25 +157,21 @@ export class FTimeseriesChart extends FRoot {
 		return this;
 	}
 
-	render() {
-		return html`<f-div direction="column" height="100%"
-			><f-div class="f-timeseries-container" ${ref(this.chartContainer)}
-				>${svg`<svg xmlns="http://www.w3.org/2000/svg"></svg>`}
-				<f-div
-					state="custom,#000000"
-					variant="curved"
-					padding="medium"
-					height="hug-content"
-					max-width="320px"
-					class="f-chart-tooltip hide"
-					${ref(this.chartTooltip)}
-				></f-div> </f-div
-			><f-div
+	get isLegendsHorizontal() {
+		return this.config.legends?.position === "left" || this.config.legends?.position == "right";
+	}
+
+	getDefualtLegendTemplate() {
+		if (!this.config.legends?.disabled) {
+			return html`<f-div
 				${ref(this.chartLegends)}
-				height="hug-content"
-				max-height="60px"
+				.height=${this.isLegendsHorizontal ? "100%" : "hug-content"}
+				.maxHeight=${this.isLegendsHorizontal ? "100%" : "60px"}
+				.maxWidth=${this.isLegendsHorizontal ? "120px" : "100%"}
 				gap="medium"
 				class="f-timeseries-legends"
+				.direction=${this.isLegendsHorizontal ? "column" : "row"}
+				.overflow=${this.isLegendsHorizontal ? "scroll" : "wrap"}
 				align="middle-center"
 			>
 				${this.config.data.map(series => {
@@ -199,8 +195,33 @@ export class FTimeseriesChart extends FRoot {
 						><f-text>${series.seriesName}</f-text></f-div
 					>`;
 				})}
-			</f-div></f-div
-		>`;
+			</f-div>`;
+		}
+
+		return nothing;
+	}
+
+	render() {
+		return html`<f-div
+			.direction=${this.isLegendsHorizontal ? "row" : "column"}
+			class="f-timeseries-wrapper"
+			data-legends-position="${this.config.legends?.position ?? "bottom"}"
+			height="100%"
+		>
+			<f-div class="f-timeseries-container" ${ref(this.chartContainer)}
+				>${svg`<svg xmlns="http://www.w3.org/2000/svg"></svg>`}
+				<f-div
+					state="custom,#000000"
+					variant="curved"
+					padding="medium"
+					height="hug-content"
+					max-width="320px"
+					class="f-chart-tooltip hide"
+					${ref(this.chartTooltip)}
+				></f-div>
+			</f-div>
+			${this.getDefualtLegendTemplate()}
+		</f-div>`;
 	}
 	handleLegendClick(e: PointerEvent, series: TimeseriesData) {
 		const legend = e.currentTarget as FDiv;

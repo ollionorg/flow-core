@@ -139,6 +139,11 @@ export class FButton extends FRoot {
 		return this.size;
 	}
 
+	get iconSize() {
+		const sizeMap = { large: "medium", medium: "small", small: "x-small", "x-small": "x-small" };
+		return sizeMap[this.size ?? "medium"];
+	}
+
 	/**
 	 * compute textColor when custom color of tag is defined.
 	 */
@@ -244,7 +249,7 @@ export class FButton extends FRoot {
 					.source=${this.iconLeft}
 					.state=${this.state}
 					class=${classMap({ "left-icon": true, ...iconClasses })}
-					.size=${this.size}
+					.size=${this.iconSize}
 					clickable
 			  ></f-icon>`
 			: "";
@@ -257,7 +262,7 @@ export class FButton extends FRoot {
 					.source=${this.iconRight}
 					.state=${this.state}
 					class=${classMap({ "right-icon": true, ...iconClasses })}
-					.size=${this.size}
+					.size=${this.iconSize}
 					clickable
 			  ></f-icon>`
 			: "";

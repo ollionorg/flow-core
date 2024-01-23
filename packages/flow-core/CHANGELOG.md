@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.7.7] - 2024-01-22
+
+### Improvements
+
+- `f-button` : `icon-left` and `icon-right` sizes updated.
+
 ## [2.7.6] - 2024-01-16
 
 ### Improvements

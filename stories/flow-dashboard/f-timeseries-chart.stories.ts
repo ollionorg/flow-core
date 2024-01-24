@@ -76,7 +76,7 @@ function getRndInteger(min: number, max: number) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export const Basic = {
+export const AllOptions = {
 	render: () => {
 		const chartData = generateLineChartData(200, new Date(), 3);
 
@@ -143,8 +143,9 @@ export const Basic = {
 				disabled: false,
 				position: "bottom",
 				template: ({ click, mouseEnter, mouseLeave }) => {
+					const icons = ["i-area", "i-bar", "i-line"];
 					return html`<f-div height="hug-content" gap="medium" align="middle-center">
-						${chartData.map(series => {
+						${chartData.map((series, idx) => {
 							return html`<f-div
 								.id=${"legend-" + series.seriesName}
 								class="timeseries-legend"
@@ -156,13 +157,14 @@ export const Basic = {
 								clickable
 								align="middle-left"
 								gap="small"
-								><f-div
-									width="16px"
-									height="16px"
-									variant="round"
+							>
+								<f-icon-button
 									.state=${"custom," + series.color}
-								></f-div
-								><f-text>${series.seriesName}</f-text></f-div
+									category="packed"
+									size="medium"
+									.icon=${icons[idx]}
+								></f-icon-button>
+								<f-text>${series.seriesName}</f-text></f-div
 							>`;
 						})}
 					</f-div>`;
@@ -216,7 +218,7 @@ export const Basic = {
 		</f-div>`;
 	},
 
-	name: "basic"
+	name: "all-options"
 };
 
 export const CustomLegendTemplate = {

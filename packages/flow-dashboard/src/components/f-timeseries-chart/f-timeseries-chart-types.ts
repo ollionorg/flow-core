@@ -53,6 +53,15 @@ export type FTimeseriesYTickConfig = {
 	format?: (value: number) => string;
 } & (FTimeseriesTickAuto | FTimeseriesYTickValues);
 
+export type FTimeseriesLegendTemplate = (
+	interactions: FTimeseriesLegendInteraction
+) => HTMLTemplateResult;
+export type FTimeseriesLegendInteraction = {
+	click: (seriesName: string) => void;
+	mouseLeave: () => void;
+	mouseEnter: (seriesName: string) => void;
+};
+
 export type FTimeseriesChartConfig = {
 	data: TimeseriesData[];
 	size?: {
@@ -76,6 +85,7 @@ export type FTimeseriesChartConfig = {
 	legends?: {
 		disabled?: boolean;
 		position?: "bottom" | "left" | "right" | "top";
+		template?: FTimeseriesLegendTemplate;
 	};
 	tooltipTemplate?: (tooltipDate: Date, tooltipPoints: TooltipPoints) => HTMLTemplateResult;
 };

@@ -201,6 +201,31 @@ export class FTimeseriesChart extends FRoot {
 		return nothing;
 	}
 
+	getLegendTemplate() {
+		if (!this.config.legends?.disabled) {
+			if (this.config.legends?.template) {
+				// eslint-disable-next-line @typescript-eslint/no-this-alias
+				const element = this;
+				const click = (seriesName: string) => {
+					element.legendClick(element, seriesName);
+				};
+				const mouseEnter = (seriesName: string) => {
+					element.legendMouseEnter(element, seriesName);
+				};
+				const mouseLeave = () => {
+					element.legendMouseLeave(element);
+				};
+				return this.config.legends?.template({
+					click,
+					mouseEnter,
+					mouseLeave
+				});
+			}
+			return this.getDefualtLegendTemplate();
+		}
+		return nothing;
+	}
+
 	render() {
 		return html`<f-div
 			.direction=${this.isLegendsHorizontal ? "row" : "column"}
@@ -220,18 +245,27 @@ export class FTimeseriesChart extends FRoot {
 					${ref(this.chartTooltip)}
 				></f-div>
 			</f-div>
-			${this.getDefualtLegendTemplate()}
+			${this.getLegendTemplate()}
 		</f-div>`;
 	}
-	handleLegendClick(e: PointerEvent, series: TimeseriesData) {
-		const legend = e.currentTarget as FDiv;
-		legend.classList.toggle("disable-legend");
-		series.disable = !series.disable;
-		this.init();
+
+	legendClick(element: FTimeseriesChart, seriesName: string) {
+		const series = element.config.data.find(s => s.seriesName === seriesName);
+		if (series) {
+			series.disable = !series.disable;
+			element.init();
+		}
 	}
-	handleMouseEnter(series: TimeseriesData) {
-		if (!series.disable) {
-			this.querySelectorAll<SVGPathElement>(".series-path,.custom-lines").forEach(path => {
+	legendMouseLeave(element: FTimeseriesChart) {
+		element.querySelectorAll<SVGPathElement>(".series-path,.custom-lines").forEach(path => {
+			path.classList.remove("disable");
+			path.classList.remove("active");
+		});
+	}
+	legendMouseEnter(element: FTimeseriesChart, seriesName: string) {
+		const series = element.config.data.find(s => s.seriesName === seriesName);
+		if (series && !series.disable) {
+			element.querySelectorAll<SVGPathElement>(".series-path,.custom-lines").forEach(path => {
 				if (!path.classList.contains(`series-${series.seriesName}-path`)) {
 					path.classList.add("disable");
 				} else {
@@ -240,11 +274,16 @@ export class FTimeseriesChart extends FRoot {
 			});
 		}
 	}
+	handleLegendClick(e: PointerEvent, series: TimeseriesData) {
+		const legend = e.currentTarget as FDiv;
+		legend.classList.toggle("disable-legend");
+		this.legendClick(this, series.seriesName);
+	}
+	handleMouseEnter(series: TimeseriesData) {
+		this.legendMouseEnter(this, series.seriesName);
+	}
 	handleMouseLeave() {
-		this.querySelectorAll<SVGPathElement>(".series-path,.custom-lines").forEach(path => {
-			path.classList.remove("disable");
-			path.classList.remove("active");
-		});
+		this.legendMouseLeave(this);
 	}
 
 	init() {

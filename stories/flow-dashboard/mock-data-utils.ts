@@ -5,12 +5,16 @@ export function getColor() {
 	return "#" + Math.floor(faker.number.float({ min: 0, max: 1 }) * 16777215).toString(16);
 }
 
-export function generateTimeseriesChartData(from?: Date): TimeseriesData[] {
+export function generateTimeseriesChartData(
+	from?: Date,
+	seriesCount?: number,
+	pointsCount?: number
+): TimeseriesData[] {
 	const startFrom = new Date().getTime();
 	const masterData: TimeseriesData[] = [];
 
-	const numberOfPoints = faker.number.int({ min: 50, max: 150 });
-	const numberOfSeries = faker.number.int({ min: 1, max: 3 });
+	const numberOfPoints = pointsCount ?? faker.number.int({ min: 50, max: 150 });
+	const numberOfSeries = seriesCount ?? faker.number.int({ min: 1, max: 3 });
 	const colors = [
 		"#66c2ff",
 		"#ff6666",

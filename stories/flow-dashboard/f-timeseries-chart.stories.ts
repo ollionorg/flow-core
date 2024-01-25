@@ -36,11 +36,11 @@ export const AllOptions = {
 
 		const xLines: XAxisLine[] = [
 			{
-				value: chartData[0].points[120].date,
+				value: chartData[0].points[+(chartData[0].points.length / 3).toFixed(0)].date,
 				color: "yellow"
 			},
 			{
-				value: chartData[0].points[160].date,
+				value: chartData[0].points[+(chartData[0].points.length / 2).toFixed(0)].date,
 				color: "yellow"
 			}
 		];
@@ -139,10 +139,12 @@ export const AllOptions = {
 		const interval = setInterval(() => {
 			const chartDataFlat = chartData.map(series => series.points).flat();
 			const newPoints = generateTimeseriesChartData(
-				new Date(chartDataFlat[chartDataFlat.length - 1].date + 60 * 1000)
+				new Date(chartDataFlat[chartDataFlat.length - 1].date + 60 * 1000),
+				chartData.length,
+				1
 			);
-			newPoints.forEach(element => {
-				const series = chartData.find(c => c.seriesName === element.seriesName);
+			newPoints.forEach((element, idx) => {
+				const series = chartData[idx];
 				series?.points.shift();
 				series?.points.push(...element.points);
 			});
@@ -253,11 +255,11 @@ export const Lines = {
 
 		const xLines: XAxisLine[] = [
 			{
-				value: chartData[0].points[120].date,
+				value: chartData[0].points[+(chartData[0].points.length / 3).toFixed(0)].date,
 				color: "yellow"
 			},
 			{
-				value: chartData[0].points[160].date,
+				value: chartData[0].points[+(chartData[0].points.length / 2).toFixed(0)].date,
 				color: "yellow"
 			}
 		];
@@ -373,11 +375,11 @@ export const Realtime = {
 
 		const xLines: XAxisLine[] = [
 			{
-				value: chartData[0].points[120].date,
+				value: chartData[0].points[+(chartData[0].points.length / 3).toFixed(0)].date,
 				color: "yellow"
 			},
 			{
-				value: chartData[0].points[160].date,
+				value: chartData[0].points[+(chartData[0].points.length / 2).toFixed(0)].date,
 				color: "yellow"
 			}
 		];
@@ -397,10 +399,12 @@ export const Realtime = {
 		const interval = setInterval(() => {
 			const chartDataFlat = chartData.map(series => series.points).flat();
 			const newPoints = generateTimeseriesChartData(
-				new Date(chartDataFlat[chartDataFlat.length - 1].date + 60 * 1000)
+				new Date(chartDataFlat[chartDataFlat.length - 1].date + 60 * 1000),
+				chartData.length,
+				1
 			);
-			newPoints.forEach(element => {
-				const series = chartData.find(c => c.seriesName === element.seriesName);
+			newPoints.forEach((element, idx) => {
+				const series = chartData[idx];
 				series?.points.shift();
 				series?.points.push(...element.points);
 			});

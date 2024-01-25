@@ -34,7 +34,7 @@ for (let index = 0; index < 10; index++) {
 			dataType: "count",
 			id: faker.string.alpha(10),
 			placement: {
-				w: faker.number.int({ min: 1, max: 4 }),
+				w: faker.number.int({ min: 1, max: 3 }),
 				h: faker.number.int({ min: 1, max: 2 })
 			}
 		});

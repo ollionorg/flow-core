@@ -81,23 +81,29 @@ export class FTimeseriesChart extends FRoot {
 	}
 
 	checkTickOverlapping = () => {
-		const allTicks = this.querySelectorAll<SVGTextElement>(".x-axis .tick text");
-		const allTicksArray = Array.from(allTicks);
-		let lastVisibleTickIdx = 0;
+		if (
+			this.config.xAxis &&
+			this.config.xAxis.tickConfig &&
+			this.config.xAxis.tickConfig.type !== "auto"
+		) {
+			const allTicks = this.querySelectorAll<SVGTextElement>(".x-axis .tick text");
+			const allTicksArray = Array.from(allTicks);
+			let lastVisibleTickIdx = 0;
 
-		allTicksArray.forEach((tick, idx) => {
-			if (idx > 0 && tick.getBoundingClientRect().x > 0) {
-				const lastTick = allTicksArray[lastVisibleTickIdx];
-				if (
-					tick.getBoundingClientRect().x - lastTick.getBoundingClientRect().x <
-					lastTick.getBoundingClientRect().width + 24
-				) {
-					tick.style.display = "none";
-				} else {
-					lastVisibleTickIdx = idx;
+			allTicksArray.forEach((tick, idx) => {
+				if (idx > 0 && tick.getBoundingClientRect().x > 0) {
+					const lastTick = allTicksArray[lastVisibleTickIdx];
+					if (
+						tick.getBoundingClientRect().x - lastTick.getBoundingClientRect().x <
+						lastTick.getBoundingClientRect().width + 24
+					) {
+						tick.style.display = "none";
+					} else {
+						lastVisibleTickIdx = idx;
+					}
 				}
-			}
-		});
+			});
+		}
 	};
 
 	connectedCallback() {

@@ -19,7 +19,7 @@ for (let index = 0; index < 10; index++) {
 		widgets.push({
 			type: "timeseries",
 			data: {
-				data: generateTimeseriesChartData(200, new Date(), 3)
+				data: generateTimeseriesChartData(new Date())
 			},
 			id: faker.string.alpha(10),
 			placement: {

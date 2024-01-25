@@ -21,7 +21,7 @@ export default {
 
 export const AllOptions = {
 	render: () => {
-		const chartData = generateTimeseriesChartData(200, new Date(), 3);
+		const chartData = generateTimeseriesChartData(new Date());
 
 		const yLines: YAxisLine[] = [
 			{
@@ -139,9 +139,7 @@ export const AllOptions = {
 		const interval = setInterval(() => {
 			const chartDataFlat = chartData.map(series => series.points).flat();
 			const newPoints = generateTimeseriesChartData(
-				1,
-				new Date(chartDataFlat[chartDataFlat.length - 1].date + 60 * 1000),
-				3
+				new Date(chartDataFlat[chartDataFlat.length - 1].date + 60 * 1000)
 			);
 			newPoints.forEach(element => {
 				const series = chartData.find(c => c.seriesName === element.seriesName);
@@ -166,7 +164,7 @@ export const AllOptions = {
 
 export const CustomLegendTemplate = {
 	render: () => {
-		const chartData = generateTimeseriesChartData(200, new Date(), 3);
+		const chartData = generateTimeseriesChartData(new Date());
 
 		const chartRef = createRef<FTimeseriesChart>();
 
@@ -240,7 +238,7 @@ export const CustomLegendTemplate = {
 
 export const Lines = {
 	render: () => {
-		const chartData = generateTimeseriesChartData(200, new Date(), 3);
+		const chartData = generateTimeseriesChartData(new Date());
 
 		const yLines: YAxisLine[] = [
 			{
@@ -286,7 +284,7 @@ export const Lines = {
 
 export const CustomTooltip = {
 	render: () => {
-		const chartData = generateTimeseriesChartData(200, new Date(), 3);
+		const chartData = generateTimeseriesChartData(new Date());
 
 		const chartRef = createRef<FTimeseriesChart>();
 
@@ -326,7 +324,7 @@ export const CustomTooltip = {
 
 export const TickFormat = {
 	render: () => {
-		const chartData = generateTimeseriesChartData(200, new Date(), 3);
+		const chartData = generateTimeseriesChartData(new Date());
 
 		const chartRef = createRef<FTimeseriesChart>();
 
@@ -360,7 +358,7 @@ export const TickFormat = {
 
 export const Realtime = {
 	render: () => {
-		const chartData = generateTimeseriesChartData(200, new Date(), 3);
+		const chartData = generateTimeseriesChartData(new Date());
 
 		const yLines: YAxisLine[] = [
 			{
@@ -399,9 +397,7 @@ export const Realtime = {
 		const interval = setInterval(() => {
 			const chartDataFlat = chartData.map(series => series.points).flat();
 			const newPoints = generateTimeseriesChartData(
-				1,
-				new Date(chartDataFlat[chartDataFlat.length - 1].date + 60 * 1000),
-				3
+				new Date(chartDataFlat[chartDataFlat.length - 1].date + 60 * 1000)
 			);
 			newPoints.forEach(element => {
 				const series = chartData.find(c => c.seriesName === element.seriesName);

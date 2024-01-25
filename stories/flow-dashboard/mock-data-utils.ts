@@ -4,29 +4,30 @@ import { faker } from "@faker-js/faker";
 export function getColor() {
 	return "#" + Math.floor(faker.number.float({ min: 0, max: 1 }) * 16777215).toString(16);
 }
-export function generateTimeseriesChartData(
-	numPoints: number,
-	from?: Date,
-	noOfSeries: number = 1
-): TimeseriesData[] {
+
+export function generateTimeseriesChartData(from?: Date): TimeseriesData[] {
 	const startFrom = new Date().getTime();
 	const masterData: TimeseriesData[] = [];
-	const colors = [
-		"#7fc97f",
-		"#1f77b4",
-		"#a703d5",
-		"#ffff99",
-		"#386cb0",
-		"#f0027f",
-		"#bf5b17",
-		"#666666"
-	];
-	const seriesTypes: ("line" | "bar" | "area")[] = ["area", "bar", "line"];
 
-	for (let j = 0; j < noOfSeries; j++) {
+	const numberOfPoints = faker.number.int({ min: 50, max: 150 });
+	const numberOfSeries = faker.number.int({ min: 1, max: 3 });
+	const colors = [
+		"#66c2ff",
+		"#ff6666",
+		"#99ff99",
+		"#ffb366",
+		"#cc99ff",
+		"#99ccff",
+		"#ffcc99",
+		"#66ff99",
+		"#ff99cc",
+		"#ccccff"
+	];
+
+	for (let j = 0; j < numberOfSeries; j++) {
 		const startDate = from ? from.getTime() : startFrom;
 		const points: TimeseriesPoint[] = [];
-		for (let i = 0; i < numPoints; i++) {
+		for (let i = 0; i < numberOfPoints; i++) {
 			const currentDate = startDate + i * 60 * 1000; // Incrementing date by one day
 			let fluctuatingValue = Math.floor(faker.number.float({ min: 0, max: 1 }) * 10) + 50 * (j + 1); //faker.number.float({ min: 0, max: 1 }) * (yOffSet ?? 100) + Math.sin(i / 8) * 50; // Adding a sine wave for fluctuation
 			if (fluctuatingValue < 0) {
@@ -43,10 +44,10 @@ export function generateTimeseriesChartData(
 			points.push(dataPoint);
 		}
 		masterData.push({
-			seriesName: `Series-${j + 1}`,
+			seriesName: faker.location.country(),
 			points,
-			color: colors[j] ?? getColor(),
-			type: seriesTypes[j] ?? "line"
+			color: faker.helpers.arrayElement(colors),
+			type: faker.helpers.arrayElement(["line", "bar", "area"])
 		});
 	}
 

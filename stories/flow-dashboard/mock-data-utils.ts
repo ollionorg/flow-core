@@ -23,7 +23,7 @@ export function generateTimeseriesChartData(from?: Date): TimeseriesData[] {
 		"#ff99cc",
 		"#ccccff"
 	];
-
+	const seriesColors = faker.helpers.arrayElements(colors, numberOfSeries);
 	for (let j = 0; j < numberOfSeries; j++) {
 		const startDate = from ? from.getTime() : startFrom;
 		const points: TimeseriesPoint[] = [];
@@ -46,7 +46,7 @@ export function generateTimeseriesChartData(from?: Date): TimeseriesData[] {
 		masterData.push({
 			seriesName: faker.location.country(),
 			points,
-			color: faker.helpers.arrayElement(colors),
+			color: seriesColors[j],
 			type: faker.helpers.arrayElement(["line", "bar", "area"])
 		});
 	}

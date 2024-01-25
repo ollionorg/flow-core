@@ -2,6 +2,20 @@
 
 # Change Log
 
+## [2.7.8] - 2024-01-25
+
+### Improvements
+
+- Added `show-scrollbar` property to `f-div`.
+
+### Bug Fixes
+
+- Updated `f-div` to accommodate changes in Chrome v121, which now supports the `scrollbar-width` property. Default behavior adjusted accordingly.
+
+### Note
+
+- Removed `hide-scrollbar` property from `f-div`. Existing usage won't cause any issues.
+
 ## [2.7.7] - 2024-01-22
 
 ### Improvements

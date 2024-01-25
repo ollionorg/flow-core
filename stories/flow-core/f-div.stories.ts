@@ -1348,10 +1348,10 @@ export const Selected = {
 	name: "selected"
 };
 
-export const HideScrollbar = {
+export const ShowScrollbar = {
 	render: () =>
 		html` <f-text state="secondary"
-				>default behaviour when content overflows, it shows scrollbar</f-text
+				>default behaviour when content overflows, scrollbar is hidden</f-text
 			>
 			<f-div gap="medium" direction="column" padding="medium" height="200px" direction="row">
 				<f-text
@@ -1384,11 +1384,11 @@ export const HideScrollbar = {
 			<br /><br />
 			<f-divider></f-divider>
 			<br /><br />
-			<f-text>hide-scrollbar is set (Note: Users can still scroll through the content.)</f-text>
+			<f-text>show-scrollbar is set (Note: Users can still scroll through the content.)</f-text>
 			<f-div
 				gap="medium"
 				direction="column"
-				hide-scrollbar
+				show-scrollbar
 				padding="medium"
 				height="200px"
 				direction="row"
@@ -1421,7 +1421,7 @@ export const HideScrollbar = {
 				>
 			</f-div>`,
 
-	name: "hide-scrollbar"
+	name: "show-scrollbar"
 };
 
 export const Loading = {

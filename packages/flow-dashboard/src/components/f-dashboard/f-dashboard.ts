@@ -1,4 +1,4 @@
-import { CSSResult, html, PropertyValueMap, unsafeCSS } from "lit";
+import { CSSResult, html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import { FRoot, flowElement } from "@ollion/flow-core";
 import globalStyle from "./f-dashboard-global.scss?inline";
@@ -8,7 +8,7 @@ import { FDashboardConfig, FDashboardWidget } from "../../types";
 
 injectCss("f-dashboard", globalStyle);
 
-const pollingWorker = new Worker(new URL("./polling-worker.ts", import.meta.url));
+// const pollingWorker = new Worker(new URL("./polling-worker.ts", import.meta.url));
 @flowElement("f-dashboard")
 export class FDashboard extends FRoot {
 	/**
@@ -32,38 +32,41 @@ export class FDashboard extends FRoot {
 	}
 
 	render() {
-		console.log("rendering");
 		return html`
 			<div class="grid-stack">
 				${this.config.widgets.map(wgt => {
-					pollingWorker.postMessage(wgt);
+					// pollingWorker.postMessage(wgt);
 					return html`<div
 						class="grid-stack-item"
 						gs-w="${wgt.placement.w}"
 						gs-h="${wgt.placement.h}"
 					>
-						<div class="grid-stack-item-content">${wgt.data.toFixed(2)}</div>
+						<div class="grid-stack-item-content">${this.renderWidget(wgt)}</div>
 					</div>`;
 				})}
 			</div>
 		`;
 	}
 
+	renderWidget(widget: FDashboardWidget) {
+		switch (widget.type) {
+			case "big-number":
+				return html`<f-div width="100%" height="100%" class="big-number"
+					>${widget.data.toFixed(2)}</f-div
+				>`;
+
+			case "timeseries":
+				return html`<f-timeseries-chart .config=${widget.data}></f-timeseries-chart>`;
+
+			default:
+				return nothing;
+		}
+	}
+
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
 		try {
 			const gridStack = GridStack.init({ margin: "4px" });
-			let timer: number = 0;
-			pollingWorker.onmessage = (e: MessageEvent<FDashboardWidget>) => {
-				const wgtIdx = this.config.widgets.findIndex(w => w.id === e.data.id);
-				this.config.widgets[wgtIdx] = e.data;
-				if (timer) {
-					clearTimeout(timer);
-				}
-				timer = setTimeout(() => {
-					this.requestUpdate();
-				}, 300);
-			};
 
 			this.updateWidgetFontSize();
 			gridStack.on("resizecontent", () => {
@@ -72,19 +75,20 @@ export class FDashboard extends FRoot {
 		} catch (er) {
 			//ignore girdstack error for now
 		}
-		//console.log(gridStack);
 	}
 
 	updateWidgetFontSize() {
-		this.querySelectorAll<HTMLDivElement>(".grid-stack-item-content").forEach(widgetContainer => {
-			const wHeight = widgetContainer.offsetHeight;
-			const wWidth = widgetContainer.offsetWidth;
-			const fontSize = Math.min(wHeight, wWidth) * 0.3 + "px";
-			widgetContainer.style.fontSize = fontSize;
-			widgetContainer.style.display = "flex";
-			widgetContainer.style.alignItems = "center";
-			widgetContainer.style.justifyContent = "center";
-		});
+		this.querySelectorAll<HTMLDivElement>(".grid-stack-item-content > .big-number").forEach(
+			widgetContainer => {
+				const wHeight = widgetContainer.offsetHeight;
+				const wWidth = widgetContainer.offsetWidth;
+				const fontSize = Math.min(wHeight, wWidth) * 0.3 + "px";
+				widgetContainer.style.fontSize = fontSize;
+				widgetContainer.style.display = "flex";
+				widgetContainer.style.alignItems = "center";
+				widgetContainer.style.justifyContent = "center";
+			}
+		);
 	}
 }
 

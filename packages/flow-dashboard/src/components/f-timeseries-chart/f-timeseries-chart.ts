@@ -466,6 +466,10 @@ export class FTimeseriesChart extends FRoot {
 		// eslint-disable-next-line @typescript-eslint/no-this-alias
 		const element = this;
 		this.seriesBars = function (d) {
+			let rectWidth = width / d.points.length - 2;
+			if (rectWidth < 0) {
+				rectWidth = 1;
+			}
 			d3.select(this)
 				.selectAll<SVGRectElement, TimeseriesPoint>("rect.bars")
 				.data(d.points, d => d.date)
@@ -474,7 +478,7 @@ export class FTimeseriesChart extends FRoot {
 				.attr("y", d => element.y(d.value))
 				.attr("x", d => element.x(d.date))
 				.attr("fill", d.color)
-				.attr("width", width / d.points.length - 2)
+				.attr("width", rectWidth)
 				.attr("height", d => height - marginBottom - element.y(d.value));
 		};
 		this.bars.each(this.seriesBars);

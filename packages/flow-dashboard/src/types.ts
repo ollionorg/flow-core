@@ -1,3 +1,5 @@
+import { FTimeseriesChartConfig } from "./components/f-timeseries-chart/f-timeseries-chart-types";
+
 export type FDashboardConfig = {
 	widgets: FDashboardWidget[];
 };
@@ -13,11 +15,14 @@ export type FDashboardWidgetCore<T> = {
 	id: string;
 	placement: FDashboardWidgetGridPlacement;
 	data: T;
-	pollingConfig?: {
-		frequency: number; //Frequency in milliseconds
-	};
 };
-export type FDashboardWidget = FDashboardWidgetCore<number> & {
+
+export type FDashboardBigNumberWidget = FDashboardWidgetCore<number> & {
 	type: "big-number";
 	dataType?: "storage" | "time" | "count" | "currency" | "percentage";
+};
+export type FDashboardWidget = FDashboardBigNumberWidget | FDashboardTimeseriesWidget;
+
+export type FDashboardTimeseriesWidget = FDashboardWidgetCore<FTimeseriesChartConfig> & {
+	type: "timeseries";
 };

@@ -1,6 +1,9 @@
 import { TickInterval, TooltipPoints } from "./f-timeseries-chart-types";
 import * as d3 from "d3";
 import { html } from "lit";
+import { Subject } from "rxjs";
+
+export const TOOLTIP_SYNC = new Subject<number>();
 
 export function getTickInterval({ type, every }: TickInterval) {
 	return d3.timeInterval(

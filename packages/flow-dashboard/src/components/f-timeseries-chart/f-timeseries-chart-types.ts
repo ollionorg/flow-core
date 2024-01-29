@@ -95,4 +95,5 @@ export type TooltipPoints = {
 	value: number;
 	color: string;
 	type: SeriesType;
+	date: number;
 }[];

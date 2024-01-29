@@ -24,12 +24,13 @@ const iconsNames = [
 	"p-discord"
 ];
 const widgets: FDashboardWidget[] = [];
+const startFrom = new Date();
 for (let index = 0; index < 10; index++) {
 	if (index % 2 === 0) {
 		widgets.push({
 			type: "timeseries",
 			data: {
-				data: generateTimeseriesChartData(new Date())
+				data: generateTimeseriesChartData(startFrom)
 			},
 			id: faker.string.alpha(10),
 			header() {

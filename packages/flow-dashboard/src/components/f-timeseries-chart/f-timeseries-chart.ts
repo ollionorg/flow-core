@@ -15,8 +15,11 @@ import {
 import {
 	defaultTooltipTemplate,
 	escapeSeriesName,
-	getTickInterval
+	getTickInterval,
+	TOOLTIP_SYNC
 } from "./f-timeseries-chart-utils";
+
+import type { Subscription } from "rxjs";
 
 injectCss("f-timeseries-chart", globalStyle);
 
@@ -53,6 +56,7 @@ export class FTimeseriesChart extends FRoot {
 	xAxis!: d3.Axis<Date>;
 	yAxis!: d3.Axis<number>;
 	area!: d3.Area<TimeseriesPoint>;
+	tooltipSub?: Subscription;
 	/**
 	 * mention required fields here for generating vue types
 	 */
@@ -130,6 +134,10 @@ export class FTimeseriesChart extends FRoot {
 		 * disconnecting resize observer
 		 */
 		this.resizeObserver?.disconnect();
+
+		if (this.tooltipSub) {
+			this.tooltipSub.unsubscribe();
+		}
 		super.disconnectedCallback();
 	}
 
@@ -506,8 +514,9 @@ export class FTimeseriesChart extends FRoot {
 				.attr("cy", `0`)
 				.attr("r", `0`);
 		});
-		const pointermoved = (event: PointerEvent) => {
-			const time = this.x.invert(d3.pointer(event)[0]).getTime();
+		const pointermoved = (event: PointerEvent | number) => {
+			const time =
+				event instanceof PointerEvent ? this.x.invert(d3.pointer(event)[0]).getTime() : event;
 
 			xTooltipLine
 				.attr("x1", `${this.x(time)}`)
@@ -516,7 +525,7 @@ export class FTimeseriesChart extends FRoot {
 				.attr("y2", `${height - marginBottom}`);
 
 			chartData.forEach(series => {
-				const i = bisect(series.points, this.x.invert(d3.pointer(event)[0]).getTime());
+				const i = bisect(series.points, time);
 				const seriesPoint = series.points[i];
 				if (seriesPoint) {
 					yTooltipLine[series.seriesName]
@@ -571,18 +580,23 @@ export class FTimeseriesChart extends FRoot {
 						`${(coOrdinates?.left ?? 0) + tooltipOffset}px`
 					);
 				}
-				const xDate = new Date();
-				xDate.setTime(time);
+
 				const tooltipPoints: TooltipPoints = chartData.map(series => {
-					const i = bisect(series.points, this.x.invert(d3.pointer(event)[0]).getTime());
+					const i = bisect(series.points, time);
 					const seriesPoint = series.points[i];
 					return {
 						seriesName: series.seriesName,
 						value: seriesPoint?.value,
 						color: series.color,
-						type: series.type
+						type: series.type,
+						date: seriesPoint.date
 					};
 				});
+				const xDate = new Date();
+				xDate.setTime(tooltipPoints[0].date ?? time);
+				if (event instanceof PointerEvent) {
+					TOOLTIP_SYNC.next(xDate.getTime());
+				}
 				render(
 					this.config.tooltipTemplate
 						? this.config.tooltipTemplate(xDate, tooltipPoints)
@@ -592,11 +606,17 @@ export class FTimeseriesChart extends FRoot {
 			}
 		};
 
-		const pointerleft = (event: PointerEvent) => {
-			if (event.relatedTarget !== this.chartTooltip.value) {
+		const pointerleft = (event: PointerEvent | number) => {
+			if (
+				(event instanceof PointerEvent && event.relatedTarget !== this.chartTooltip.value) ||
+				event === 0
+			) {
 				if (this.chartTooltip.value) {
 					this.chartTooltip.value.classList.add("hide");
 					this.chartTooltip.value.classList.remove("show");
+				}
+				if (event instanceof PointerEvent) {
+					TOOLTIP_SYNC.next(0);
 				}
 				xTooltipLine.attr("x1", `0`).attr("x2", `0`).attr("y1", `0`).attr("y2", `0`);
 				Object.values(yTooltipLine).forEach(lineElement => {
@@ -607,6 +627,19 @@ export class FTimeseriesChart extends FRoot {
 				});
 			}
 		};
+
+		if (this.tooltipSub) {
+			this.tooltipSub.unsubscribe();
+		}
+		this.tooltipSub = TOOLTIP_SYNC.subscribe({
+			next: (date: number) => {
+				if (date === 0) {
+					pointerleft(0);
+				} else {
+					pointermoved(date);
+				}
+			}
+		});
 
 		this.plotCustomLines();
 		this.svg

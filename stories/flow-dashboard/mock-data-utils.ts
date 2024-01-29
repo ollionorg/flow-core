@@ -13,7 +13,7 @@ export function generateTimeseriesChartData(
 	const startFrom = new Date().getTime();
 	const masterData: TimeseriesData[] = [];
 
-	const numberOfPoints = pointsCount ?? faker.number.int({ min: 50, max: 150 });
+	const numberOfPoints = pointsCount ?? 150; //faker.number.int({ min: 50, max: 150 });
 	const numberOfSeries = seriesCount ?? faker.number.int({ min: 1, max: 3 });
 	const colors = [
 		"#66c2ff",
@@ -32,7 +32,7 @@ export function generateTimeseriesChartData(
 		const startDate = from ? from.getTime() : startFrom;
 		const points: TimeseriesPoint[] = [];
 		for (let i = 0; i < numberOfPoints; i++) {
-			const currentDate = startDate + i * 60 * 1000; // Incrementing date by one day
+			const currentDate = startDate + i * 60 * 1000;
 			let fluctuatingValue = Math.floor(faker.number.float({ min: 0, max: 1 }) * 10) + 50 * (j + 1); //faker.number.float({ min: 0, max: 1 }) * (yOffSet ?? 100) + Math.sin(i / 8) * 50; // Adding a sine wave for fluctuation
 			if (fluctuatingValue < 0) {
 				fluctuatingValue *= -1;

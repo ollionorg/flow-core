@@ -1,10 +1,11 @@
-import { CSSResult, html, nothing, PropertyValueMap, unsafeCSS } from "lit";
+import { CSSResult, html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import { FRoot, flowElement } from "@ollion/flow-core";
 import globalStyle from "./f-dashboard-global.scss?inline";
 import { injectCss } from "@ollion/flow-core-config";
 import { GridStack } from "gridstack";
-import { FDashboardConfig, FDashboardWidget } from "../../types";
+import { FDashboardConfig } from "../../types";
+import { getWidgetHeader, renderWidget } from "./f-dashboard-utils";
 
 injectCss("f-dashboard", globalStyle);
 
@@ -41,26 +42,11 @@ export class FDashboard extends FRoot {
 						gs-w="${wgt.placement.w}"
 						gs-h="${wgt.placement.h}"
 					>
-						<div class="grid-stack-item-content">${this.renderWidget(wgt)}</div>
+						<div class="grid-stack-item-content">${getWidgetHeader(wgt)}${renderWidget(wgt)}</div>
 					</div>`;
 				})}
 			</div>
 		`;
-	}
-
-	renderWidget(widget: FDashboardWidget) {
-		switch (widget.type) {
-			case "big-number":
-				return html`<f-div width="100%" height="100%" class="big-number"
-					>${widget.data.toFixed(2)}</f-div
-				>`;
-
-			case "timeseries":
-				return html`<f-timeseries-chart .config=${widget.data}></f-timeseries-chart>`;
-
-			default:
-				return nothing;
-		}
 	}
 
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {

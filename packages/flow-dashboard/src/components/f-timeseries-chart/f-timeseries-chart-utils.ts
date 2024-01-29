@@ -45,3 +45,7 @@ export function defaultTooltipTemplate(tooltipDate: Date, tooltipPoints: Tooltip
 		})}
 	</f-div>`;
 }
+
+export function escapeSeriesName(name: string) {
+	return name.replace(/[^a-zA-Z0-9]/g, "_");
+}

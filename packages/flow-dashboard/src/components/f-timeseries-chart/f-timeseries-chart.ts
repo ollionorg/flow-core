@@ -12,7 +12,11 @@ import {
 	TimeseriesPoint,
 	TooltipPoints
 } from "./f-timeseries-chart-types";
-import { defaultTooltipTemplate, getTickInterval } from "./f-timeseries-chart-utils";
+import {
+	defaultTooltipTemplate,
+	escapeSeriesName,
+	getTickInterval
+} from "./f-timeseries-chart-utils";
 
 injectCss("f-timeseries-chart", globalStyle);
 
@@ -77,7 +81,7 @@ export class FTimeseriesChart extends FRoot {
 
 	get chartMargin() {
 		const margin = this.config.size?.margin;
-		return [margin?.top ?? 20, margin?.right ?? 30, margin?.bottom ?? 30, margin?.left ?? 40];
+		return [margin?.top ?? 16, margin?.right ?? 16, margin?.bottom ?? 30, margin?.left ?? 35];
 	}
 
 	checkTickOverlapping = () => {
@@ -272,7 +276,7 @@ export class FTimeseriesChart extends FRoot {
 		const series = element.config.data.find(s => s.seriesName === seriesName);
 		if (series && !series.disable) {
 			element.querySelectorAll<SVGPathElement>(".series-path,.custom-lines").forEach(path => {
-				if (!path.classList.contains(`series-${series.seriesName}-path`)) {
+				if (!path.classList.contains(`series-${escapeSeriesName(series.seriesName)}-path`)) {
 					path.classList.add("disable");
 				} else {
 					path.classList.add("active");
@@ -438,7 +442,7 @@ export class FTimeseriesChart extends FRoot {
 					pathClass += " area-path";
 				}
 
-				pathClass += " series-path series-" + d.seriesName + "-path";
+				pathClass += " series-path series-" + escapeSeriesName(d.seriesName) + "-path";
 				return pathClass;
 			})
 			.attr("stroke", d => d.color)
@@ -466,7 +470,7 @@ export class FTimeseriesChart extends FRoot {
 			)
 			.join("g")
 			.attr("class", d => {
-				return `bar-g series-path series-${d.seriesName}-path`;
+				return `bar-g series-path series-${escapeSeriesName(d.seriesName)}-path`;
 			})
 			.attr("transform", (d, i) => `translate(${i * (width / d.points.length)},0)`);
 		// eslint-disable-next-line @typescript-eslint/no-this-alias

@@ -14,9 +14,17 @@ f-dashboard {
 		.grid-stack-item {
 			.grid-stack-item-content {
 				background: var(--color-surface-secondary);
-				padding: 8px;
+				display: flex;
+				flex-direction: column;
 				f-timeseries-chart {
-					height: 100%;
+					flex: 1 0 100%;
+				}
+				> f-div[height="fill-container"] {
+					flex: 1 1;
+					max-height: 100%;
+				}
+				> f-div[width="fill-container"] {
+					width: 100%;
 				}
 			}
 		}

@@ -22,6 +22,7 @@ export type FDashboardWidgetCore<T> = {
 				description?: string;
 		  }
 		| (() => HTMLTemplateResult);
+	footer?: string | (() => HTMLTemplateResult);
 };
 
 export type FDashboardBigNumberWidget = FDashboardWidgetCore<number> & {

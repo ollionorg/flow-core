@@ -44,9 +44,27 @@ for (let index = 0; index < 10; index++) {
 				>
 					<f-icon .source=${faker.helpers.arrayElement(iconsNames)} size="large"></f-icon>
 					<f-div direction="column" align="middle-left">
-						<f-text ellipsis .tooltip=${name} variant="heading" weight="bold">${name}</f-text>
+						<f-text ellipsis .tooltip=${name} variant="heading" weight="medium">${name}</f-text>
 						<f-text ellipsis .tooltip=${description} size="small">${description}</f-text>
 					</f-div>
+				</f-div>`;
+			},
+			footer: () => {
+				const date = faker.date.recent({ refDate: new Date() });
+				const state = faker.helpers.arrayElement(["danger", "success", "warning"]);
+				return html`<f-div
+					padding="medium"
+					gap="auto"
+					border="small solid subtle top"
+					height="hug-content"
+				>
+					<f-div gap="small" align="middle-left">
+						<f-icon source="i-clock-outline" size="small" .state=${state}></f-icon>
+						<f-text .state=${state} size="small"
+							>Last updated on ${date.toLocaleDateString()} ${date.toLocaleTimeString()}</f-text
+						>
+					</f-div>
+					<f-button label="view details" size="x-small" icon-right="i-new-tab"></f-button>
 				</f-div>`;
 			},
 			placement: {
@@ -64,6 +82,7 @@ for (let index = 0; index < 10; index++) {
 				title: faker.company.name(),
 				description: faker.lorem.sentences(3)
 			},
+			footer: `Powered by Flow`,
 			placement: {
 				w: faker.number.int({ min: 1.5, max: 3 }),
 				h: faker.number.int({ min: 1.5, max: 2 })

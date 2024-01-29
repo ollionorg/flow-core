@@ -5,7 +5,7 @@ import globalStyle from "./f-dashboard-global.scss?inline";
 import { injectCss } from "@ollion/flow-core-config";
 import { GridStack } from "gridstack";
 import { FDashboardConfig } from "../../types";
-import { getWidgetHeader, renderWidget } from "./f-dashboard-utils";
+import { getWidgetHeader, renderWidget, getWidgetFooter } from "./f-dashboard-utils";
 
 injectCss("f-dashboard", globalStyle);
 
@@ -42,7 +42,9 @@ export class FDashboard extends FRoot {
 						gs-w="${wgt.placement.w}"
 						gs-h="${wgt.placement.h}"
 					>
-						<div class="grid-stack-item-content">${getWidgetHeader(wgt)}${renderWidget(wgt)}</div>
+						<div class="grid-stack-item-content">
+							${getWidgetHeader(wgt)}${renderWidget(wgt)}${getWidgetFooter(wgt)}
+						</div>
 					</div>`;
 				})}
 			</div>

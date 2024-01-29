@@ -202,7 +202,7 @@ export class FTimeseriesChart extends FRoot {
 							variant="round"
 							.state=${"custom," + series.color}
 						></f-div
-						><f-text>${series.seriesName}</f-text></f-div
+						><f-text state="secondary">${series.seriesName}</f-text></f-div
 					>`;
 				})}
 			</f-div>`;

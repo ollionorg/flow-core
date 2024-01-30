@@ -6,6 +6,9 @@ import { injectCss } from "@ollion/flow-core-config";
 import { GridStack } from "gridstack";
 import { FDashboardConfig } from "../../types";
 import { getWidgetHeader, renderWidget, getWidgetFooter } from "./f-dashboard-utils";
+import { createRef, Ref, ref } from "lit/directives/ref.js";
+
+import { keyed } from "lit/directives/keyed.js";
 
 injectCss("f-dashboard", globalStyle);
 
@@ -28,24 +31,39 @@ export class FDashboard extends FRoot {
 	 */
 	readonly required = ["config"];
 
+	gridStack?: GridStack;
+
+	gridStackElement: Ref<HTMLDivElement> = createRef<HTMLDivElement>();
+
 	createRenderRoot() {
 		return this;
+	}
+	protected willUpdate(
+		_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): void {
+		if (this.gridStack) {
+			// destroy existing grid
+			this.gridStack.destroy(false);
+		}
 	}
 
 	render() {
 		return html`
-			<div class="grid-stack">
+			<div class="grid-stack" ${ref(this.gridStackElement)}>
 				${this.config.widgets.map(wgt => {
-					// pollingWorker.postMessage(wgt);
-					return html`<div
-						class="grid-stack-item"
-						gs-w="${wgt.placement.w}"
-						gs-h="${wgt.placement.h}"
-					>
-						<div class="grid-stack-item-content">
-							${getWidgetHeader(wgt)}${renderWidget(wgt)}${getWidgetFooter(wgt)}
-						</div>
-					</div>`;
+					return keyed(
+						wgt.id,
+						html`<div
+							id="${wgt.id}"
+							class="grid-stack-item"
+							gs-w="${wgt.placement.w}"
+							gs-h="${wgt.placement.h}"
+						>
+							<div class="grid-stack-item-content">
+								${getWidgetHeader(wgt)}${renderWidget(wgt)}${getWidgetFooter(wgt)}
+							</div>
+						</div>`
+					);
 				})}
 			</div>
 		`;
@@ -54,10 +72,10 @@ export class FDashboard extends FRoot {
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
 		try {
-			const gridStack = GridStack.init({ margin: "4px" });
+			this.gridStack = GridStack.init({ margin: "4px" });
 
 			this.updateWidgetFontSize();
-			gridStack.on("resizecontent", () => {
+			this.gridStack.on("resizecontent", () => {
 				this.updateWidgetFontSize();
 			});
 		} catch (er) {

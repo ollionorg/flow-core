@@ -1,9 +1,11 @@
+import { faker } from "@faker-js/faker";
 import {
 	FTimeseriesChartConfig,
 	FTimeseriesChart,
 	YAxisLine,
 	XAxisLine,
-	TooltipPoints
+	TooltipPoints,
+	TimeseriesData
 } from "@ollion/flow-dashboard";
 import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
@@ -19,31 +21,39 @@ export default {
 	}
 };
 
+function getXYLines(chartData: TimeseriesData[]) {
+	const yLines: YAxisLine[] = [
+		{
+			value: faker.number.int({ min: 150, max: 200 }),
+			color: "var(--color-danger-default)"
+		},
+		{
+			value: faker.number.int({ min: 50, max: 100 }),
+			color: "var(--color-warning-default)"
+		}
+	];
+
+	const xLines: XAxisLine[] = [
+		{
+			value: chartData[0].points[+(chartData[0].points.length / 3).toFixed(0)].date,
+			color: "yellow"
+		},
+		{
+			value: chartData[0].points[+(chartData[0].points.length / 2).toFixed(0)].date,
+			color: "yellow"
+		}
+	];
+
+	return {
+		xLines,
+		yLines
+	};
+}
+
 export const AllOptions = {
 	render: () => {
 		const chartData = generateTimeseriesChartData(new Date());
-
-		const yLines: YAxisLine[] = [
-			{
-				value: 260,
-				color: "var(--color-danger-default)"
-			},
-			{
-				value: 160,
-				color: "var(--color-warning-default)"
-			}
-		];
-
-		const xLines: XAxisLine[] = [
-			{
-				value: chartData[0].points[+(chartData[0].points.length / 3).toFixed(0)].date,
-				color: "yellow"
-			},
-			{
-				value: chartData[0].points[+(chartData[0].points.length / 2).toFixed(0)].date,
-				color: "yellow"
-			}
-		];
+		const { xLines, yLines } = getXYLines(chartData);
 
 		const chartRef = createRef<FTimeseriesChart>();
 
@@ -242,27 +252,7 @@ export const Lines = {
 	render: () => {
 		const chartData = generateTimeseriesChartData(new Date());
 
-		const yLines: YAxisLine[] = [
-			{
-				value: 260,
-				color: "var(--color-danger-default)"
-			},
-			{
-				value: 160,
-				color: "var(--color-warning-default)"
-			}
-		];
-
-		const xLines: XAxisLine[] = [
-			{
-				value: chartData[0].points[+(chartData[0].points.length / 3).toFixed(0)].date,
-				color: "yellow"
-			},
-			{
-				value: chartData[0].points[+(chartData[0].points.length / 2).toFixed(0)].date,
-				color: "yellow"
-			}
-		];
+		const { xLines, yLines } = getXYLines(chartData);
 
 		const chartRef = createRef<FTimeseriesChart>();
 
@@ -362,27 +352,7 @@ export const Realtime = {
 	render: () => {
 		const chartData = generateTimeseriesChartData(new Date());
 
-		const yLines: YAxisLine[] = [
-			{
-				value: 260,
-				color: "var(--color-danger-default)"
-			},
-			{
-				value: 160,
-				color: "var(--color-warning-default)"
-			}
-		];
-
-		const xLines: XAxisLine[] = [
-			{
-				value: chartData[0].points[+(chartData[0].points.length / 3).toFixed(0)].date,
-				color: "yellow"
-			},
-			{
-				value: chartData[0].points[+(chartData[0].points.length / 2).toFixed(0)].date,
-				color: "yellow"
-			}
-		];
+		const { xLines, yLines } = getXYLines(chartData);
 
 		const chartRef = createRef<FTimeseriesChart>();
 

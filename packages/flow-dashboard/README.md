@@ -1,10 +1,10 @@
-# Flow Table
+# Flow Dashboard
 
-The Flow table is built on the Flow design framework ([website](https://flow.ollion.com/) / [github](https://github.com/ollionorg/flow-core))
+The Flow dashboard is built on the Flow design framework ([website](https://flow.ollion.com/) / [github](https://github.com/ollionorg/flow-core))
 
 # Installation
 
-### 1️⃣ Install flow table dependency
+### 1️⃣ Install flow dashboard dependency
 
 ```
 npm i --save @ollion/flow-dashboard

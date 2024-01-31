@@ -11,16 +11,20 @@ import { createRef } from "lit/directives/ref.js";
 import { FPopover } from "@ollion/flow-core";
 
 export const popoverRef = createRef<FPopover>();
+
+function getId() {
+	return faker.string.alpha(10);
+}
 export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSchemaData {
 	const users = [];
 
 	for (let i = 0; i < rowCount; i++) {
 		const firstName: FTableSchemaCell<string> = {
-			value: faker.name.firstName(),
+			value: faker.person.firstName(),
 			align: "middle-left"
 		};
 		const lastName = {
-			value: faker.name.lastName(),
+			value: faker.person.lastName(),
 			template: function () {
 				return html`<f-div gap="x-small" align="middle-center" width="100%" height="100%"
 					><f-text inline state="success">${this.value}</f-text></f-div
@@ -39,7 +43,7 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 				{
 					icon: "i-chat",
 					tooltip: "This is Tooltip",
-					id: faker.random.alpha(5),
+					id: getId(),
 					onClick(_event, element) {
 						if (popoverRef.value) {
 							popoverRef.value.open = true;
@@ -50,18 +54,18 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 				{
 					icon: "i-mail",
 					tooltip: "This is 2nd Tooltip",
-					id: faker.random.alpha(5)
+					id: getId()
 				},
 				{
 					icon: "i-star",
 					tooltip: "This is 3rd Tooltip",
-					id: faker.random.alpha(5)
+					id: getId()
 				}
 			]
 		};
 		const mobile = { value: faker.phone.number() };
-		const sex = { value: faker.name.sex() };
-		const age = { value: faker.random.numeric(2) };
+		const sex = { value: faker.person.sex() };
+		const age = { value: faker.number.int({ min: 18, max: 60 }) };
 		const birthDate: FTableSchemaCell & { value: Date } = {
 			value: faker.date.birthdate({ min: 18, max: 65, mode: "age" }),
 			template: function () {
@@ -78,11 +82,11 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 		};
 
 		const address = {
-			value: `${faker.address.street()}, ${faker.address.city()}, ${faker.address.stateAbbr()}, ${faker.address.zipCode()} ${faker.address.country()}`
+			value: `${faker.location.street()}, ${faker.location.city()}, ${faker.location.state()}, ${faker.location.zipCode()} ${faker.location.country()}`
 		};
 
 		const userRow: FTableSchemaDataRow = {
-			id: faker.random.alpha(10),
+			id: getId(),
 			disableSelection: i % 2 === 0,
 			expandIconPosition: "left",
 			data: { firstName, lastName, age, birthDate, email, mobile, sex, address },

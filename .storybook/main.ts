@@ -9,7 +9,8 @@ const alias = [
 	"flow-lineage",
 	"flow-log",
 	"flow-md-editor",
-	"flow-table"
+	"flow-table",
+	"flow-dashboard"
 ].map(pkg => ({
 	find: `@ollion/${pkg}`,
 	replacement: path.resolve(__dirname, "../packages", pkg, "src")

@@ -1,0 +1,46 @@
+@import "../../../../flow-core/src/mixins/scss/mixins";
+
+@import "gridstack/dist/gridstack.min.css";
+
+f-dashboard {
+	@include base();
+	height: 100%;
+	width: 100%;
+
+	display: flex;
+	overflow: auto;
+	.grid-stack {
+		width: 100%;
+		.grid-stack-item {
+			.grid-stack-item-content {
+				background: var(--color-surface-secondary);
+				display: flex;
+				flex-direction: column;
+				f-timeseries-chart {
+					flex: 1 0 100%;
+				}
+				> f-div[height="fill-container"] {
+					flex: 1 1;
+					max-height: 100%;
+				}
+				> f-div[width="fill-container"] {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+f-div[direction="column"] {
+	> f-dashboard {
+		flex: 1 1;
+		max-height: 100%;
+	}
+}
+
+f-div[direction="row"] {
+	> f-dashboard {
+		flex: 1 1;
+		max-width: 100%;
+	}
+}

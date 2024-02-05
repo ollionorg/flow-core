@@ -7,7 +7,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import checkedMark from "../../mixins/svg/checked-mark";
 import indeterminateMark from "../../mixins/svg/indeterminate-mark";
 import { FDiv } from "../f-div/f-div";
-import { flowElement } from "./../../utils";
+import { flowElement, generateId } from "./../../utils";
 
 import { injectCss } from "@ollion/flow-core-config";
 
@@ -51,6 +51,15 @@ export class FCheckbox extends FRoot {
 	@query(".slot-wrapper")
 	slotWrapper!: FDiv;
 
+	@query("#f-checkbox")
+	innerCheckbox!: HTMLInputElement;
+
+	constructor() {
+		super();
+		this.role = "checkbox";
+		this.tabIndex = 0;
+	}
+
 	/**
 	 * emit event.
 	 */
@@ -93,12 +102,15 @@ export class FCheckbox extends FRoot {
 						id="f-checkbox"
 						class="f-checkbox"
 						type="checkbox"
+						style="display:none"
+						aria-hidden="true"
 						data-qa-id=${this.getAttribute("data-qa-element-id")}
 						checked=${this.value === "unchecked" ? false : true}
 						state=${this.state}
 						@input=${this.handleInput}
 					/>
 					<label for="f-checkbox" value=${this.value} state=${this.state} size=${this.size}>
+						<span class="f-a11y-hidden-label">${this.value}</span>
 						${this.value === "checked"
 							? html`${unsafeSVG(checkedMark)}`
 							: html`${unsafeSVG(indeterminateMark)}`}
@@ -124,6 +136,15 @@ export class FCheckbox extends FRoot {
 		super.updated(changedProperties);
 
 		this.checkSlots();
+
+		const labelElement = this.querySelector<HTMLElement>("[slot='label']");
+		if (labelElement) {
+			if (!labelElement.id) {
+				labelElement.id = generateId();
+			}
+			this.setAttribute("aria-labelledby", labelElement.id);
+		}
+		this.ariaChecked = this.value === "checked" ? "true" : "false";
 	}
 
 	checkSlots() {

@@ -21,9 +21,9 @@ const variants = ["round", "curved", "block"] as const;
 const categories = ["fill", "outline", "transparent", "packed"] as const;
 const sizes = ["large", "medium", "small", "x-small"] as const;
 
-export type FIconButtonVariant = (typeof variants)[number];
-export type FIconButtonType = (typeof categories)[number];
-export type FIconButtonSize = (typeof sizes)[number];
+export type FIconButtonVariant = typeof variants[number];
+export type FIconButtonType = typeof categories[number];
+export type FIconButtonSize = typeof sizes[number];
 export type FIconButtonState =
 	| "primary"
 	| "danger"
@@ -100,6 +100,12 @@ export class FIconButton extends FRoot {
 	disabled?: boolean = false;
 
 	/**
+	 * @attribute effect to apply
+	 */
+	@property({ reflect: true, type: String })
+	effect?: "pulse" | "wiggle";
+
+	/**
 	 * icon element reference
 	 */
 	@query("f-icon")
@@ -156,14 +162,14 @@ export class FIconButton extends FRoot {
 			} else {
 				if (this.category === "fill") {
 					if (this.variant !== "block") {
-						return `background: ${this.fill}; border: 1px solid ${this.fill};`;
+						return `background: ${this.fill}; border: 1px solid ${this.fill};--custom-state-color:${this.fill}`;
 					} else {
-						return "background: transparent; border: none;";
+						return "background: transparent; border: none;--custom-state-color:${this.fill}";
 					}
 				} else if (this.category === "outline") {
-					return `background: transparent; border: 1px solid ${this.fill};`;
+					return `background: transparent; border: 1px solid ${this.fill};--custom-state-color:${this.fill}`;
 				} else {
-					return "background: transparent; border: none;";
+					return "background: transparent; border: none;--custom-state-color:${this.fill}";
 				}
 			}
 		} else return "";
@@ -259,6 +265,7 @@ export class FIconButton extends FRoot {
 			category=${this.category}
 			size=${this.size}
 			state=${this.state}
+			effect="${this.effect}"
 			?counter=${this.counter}
 			?disabled=${this.disabled}
 			?loading=${this.loading}

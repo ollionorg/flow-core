@@ -13,9 +13,10 @@ export default {
 };
 
 export const Playground = {
-	render: args =>
+	render: (args: Record<string, unknown>) =>
 		html`<f-div direction="column" padding="x-large">
 			<f-icon-button
+				.effect=${args.effect}
 				icon=${args.icon}
 				.variant=${args.variant}
 				.category=${args.category}
@@ -63,6 +64,10 @@ export const Playground = {
 				"custom, #607B9F"
 			]
 		},
+		effect: {
+			control: "radio",
+			options: ["pulse", "wiggle"]
+		},
 
 		loading: {
 			control: {
@@ -94,6 +99,7 @@ export const Playground = {
 		icon: "i-plus",
 		state: "primary",
 		counter: "",
+		effect: undefined,
 		loading: false,
 		disabled: false
 	}
@@ -105,7 +111,7 @@ export const Anatomy = {
 };
 
 export const Variant = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="x-large" padding="x-large" align="middle-center">
 			<f-icon-button icon="i-plus" variant="round"></f-icon-button>
 			<f-icon-button icon="i-plus" variant="curved"></f-icon-button>
@@ -116,7 +122,7 @@ export const Variant = {
 };
 
 export const Category = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="x-large" padding="x-large" align="middle-center">
 			<f-icon-button icon="i-plus" category="fill"></f-icon-button>
 			<f-icon-button icon="i-plus" category="outline"></f-icon-button>
@@ -128,7 +134,7 @@ export const Category = {
 };
 
 export const Size = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="x-large" padding="x-large" align="middle-center">
 			<f-div padding="none" gap="large" direction="column" align="middle-center">
 				<f-text variant="para" weight="regular" size="medium">large</f-text>
@@ -152,7 +158,7 @@ export const Size = {
 };
 
 export const State = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="column">
 			<f-text variant="para" weight="regular" size="medium">state="primary"</f-text>
 			<f-div padding="none" gap="x-large">
@@ -201,8 +207,24 @@ export const State = {
 	name: "state"
 };
 
+export const Effect = {
+	render: () =>
+		html`<f-div gap="x-large" padding="x-large" align="middle-center">
+			<f-div direction="column" gap="medium" overflow="visible" align="middle-center">
+				<f-text>effect="pulse"</f-text>
+				<f-icon-button icon="i-plus" effect="pulse" variant="round"></f-icon-button>
+			</f-div>
+			<f-div direction="column" gap="medium" overflow="visible" align="middle-center">
+				<f-text>effect="wiggle"</f-text>
+				<f-icon-button icon="i-plus" effect="wiggle" variant="curved"></f-icon-button>
+			</f-div>
+		</f-div>`,
+
+	name: "effect"
+};
+
 export const Icon = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="column" align="middle-center">
 			<f-icon-button icon="i-plus"></f-icon-button>
 		</f-div>`,
@@ -211,7 +233,7 @@ export const Icon = {
 };
 
 export const Counter = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="column" align="middle-center">
 			<f-icon-button icon="i-plus" counter="88"></f-icon-button>
 		</f-div>`,
@@ -220,7 +242,7 @@ export const Counter = {
 };
 
 export const Flags = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="column">
 			<f-div height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">Loading</f-text>
@@ -250,7 +272,7 @@ export const Flags = {
 };
 
 export const Tooltip = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" align="middle-center">
 			<f-icon-button icon="i-plus" tooltip="This is a tooltip"></f-icon-button>
 		</f-div>`,

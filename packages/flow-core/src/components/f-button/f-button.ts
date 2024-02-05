@@ -126,6 +126,13 @@ export class FButton extends FRoot {
 	@query("f-counter")
 	counterElement?: FCounter;
 
+	constructor() {
+		super();
+		this.role = "button";
+		this.tabIndex = 0;
+		this.setAttribute("focusable", "");
+	}
+
 	/**
 	 * compute counter size based on button size
 	 */

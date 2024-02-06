@@ -1,8 +1,5 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
-import { html } from "lit-html";
-import fIconButtonAnatomy from "../svg/i-ficon-button-anatomy.js";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import * as FIconButtonStories from "./f-icon-button.stories";
+import * as FIconButtonStories from "./f-icon-button.stories.ts";
 
 <Meta of={FIconButtonStories} />
 
@@ -271,6 +268,45 @@ The states on buttons are to indicate various degrees of emphasis of the action.
       <td />
     </tr>
 
+  </tbody>
+</table>
+
+<br />
+
+## effect
+
+<f-divider />
+
+The animation effect will be applied to the f-icon-button to capture the user's attention.
+
+<Canvas>
+	<Story of={FIconButtonStories.Effect} />
+</Canvas>
+
+<table className="custom-table">
+  <tbody>
+    <tr>
+      <td>Value</td>
+      <td>Description</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>pulse</td>
+      <td>It will add pulse around</td>
+
+      <td />
+    </tr>
+
+    <tr>
+      <td>wiggle</td>
+      <td>
+
+The wiggling effect will be applied to the f-icon-button to attract the user's attention.
+
+</td>
+    </tr>
   </tbody>
 </table>
 

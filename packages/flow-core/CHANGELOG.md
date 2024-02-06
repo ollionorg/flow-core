@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.8.0] - 2024-02-06
+
+### Features
+
+- Implemented the `effect` attribute within the `f-icon-button` component to enhance user engagement and draw attention effectively.
+
 ## [2.7.8] - 2024-01-25
 
 ### Improvements

@@ -200,8 +200,49 @@ in this case it is `f-icon-button`
 					}
 				}
 			}
+			&[state="#{$state}"][effect="pulse"] {
+				box-shadow: 0 0 0 0 #{map.get($color, "background")};
+				animation: pulse-#{$state} 2s infinite;
+
+				@keyframes pulse-#{$state} {
+					0% {
+						box-shadow: 0 0 0 0 #{map.get($color, "background")};
+					}
+
+					70% {
+						box-shadow: 0 0 0 12px transparent;
+					}
+
+					100% {
+						box-shadow: 0 0 0 0 transparent;
+					}
+				}
+			}
 		}
 
+		&[state^="custom"][effect="pulse"] {
+			box-shadow: 0 0 0 0 var(--custom-state-color);
+			animation: pulse-custom 2s infinite;
+
+			@keyframes pulse-custom {
+				0% {
+					box-shadow: 0 0 0 0 var(--custom-state-color);
+				}
+
+				70% {
+					box-shadow: 0 0 0 12px transparent;
+				}
+
+				100% {
+					box-shadow: 0 0 0 0 transparent;
+				}
+			}
+		}
+
+		&[effect="wiggle"] {
+			animation: wiggle-effect 0.4s infinite;
+			transform-origin: center center;
+		}
 		&[disabled] {
 			@include disabled();
 		}
@@ -223,5 +264,20 @@ in this case it is `f-icon-button`
 		@include disabled();
 		pointer-events: none;
 		opacity: 1 !important;
+	}
+
+	@keyframes wiggle-effect {
+		0% {
+			transform: rotate(0deg);
+		}
+		30% {
+			transform: rotate(-3deg);
+		}
+		60% {
+			transform: rotate(3deg);
+		}
+		to {
+			transform: rotate(0deg);
+		}
 	}
 }

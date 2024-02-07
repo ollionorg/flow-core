@@ -7,7 +7,12 @@ import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { FIcon } from "../f-icon/f-icon";
 import { cloneDeep } from "lodash-es";
-import render, { renderSingleSelection, renderMultipleSelectionTag } from "./render";
+import render, {
+	renderSingleSelection,
+	renderMultipleSelectionTag,
+	renderArrayOptions,
+	renderGroupOptions
+} from "./render";
 import {
 	handleDropDownOpen,
 	handleDropDownClose,
@@ -606,8 +611,10 @@ export class FSelect extends FRoot {
 	getOptionQaId(option: FSelectSingleOption) {
 		if (typeof option === "string") {
 			return option;
-		} else {
+		} else if (option) {
 			return option.qaId ?? option.title;
+		} else {
+			return "no-qa-id";
 		}
 	}
 
@@ -627,6 +634,8 @@ export class FSelect extends FRoot {
 	render = render;
 	renderSingleSelection = renderSingleSelection;
 	renderMultipleSelectionTag = renderMultipleSelectionTag;
+	renderArrayOptions = renderArrayOptions;
+	renderGroupOptions = renderGroupOptions;
 }
 
 /**

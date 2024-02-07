@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.8.2] - 2024-02-07
+
+### Improvements
+
+- `f-select`: A virtualizer is utilized to render options, thereby enhancing rendering performance, particularly in scenarios where there are over 3K+ options available.
+
 ## [2.8.1] - 2024-02-07
 
 ### Improvements

@@ -34,4 +34,57 @@ $states: (
 			}
 		}
 	}
+
+	.f-progress-bar-circle {
+		@include base();
+		display: flex;
+		position: relative;
+		border-radius: 50%;
+		overflow: hidden;
+
+		@each $state, $color in $states {
+			&[data-state="#{$state}"] {
+				--f-circle-progress-fill: #{map.get($color, "background")};
+				background-color: var(--f-circle-progress-fill);
+			}
+		}
+
+		&:before {
+			content: "";
+			display: block;
+			height: 100%;
+			width: 100%;
+			background-color: var(--color-neutral-subtle);
+		}
+
+		&:after {
+			content: "";
+			display: block;
+			height: 100%;
+			width: 100%;
+			transition: transform 300ms linear;
+			background-color: var(--color-neutral-subtle);
+		}
+
+		&.less-than-eq-50 {
+			&:after {
+				transform: var(--f-progress-transform);
+				transform-origin: left;
+			}
+		}
+		&.grt-than-50 {
+			background-color: var(--color-neutral-subtle);
+			&:after {
+				transform: var(--f-progress-transform);
+				transform-origin: left;
+				background-color: var(--f-circle-progress-fill);
+			}
+
+			&:before {
+				transform: rotate(180deg);
+				transform-origin: right;
+				background-color: var(--f-circle-progress-fill);
+			}
+		}
+	}
 }

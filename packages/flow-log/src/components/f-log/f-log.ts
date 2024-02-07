@@ -98,6 +98,9 @@ export class FLog extends FRoot {
 	@property({ type: Object, reflect: true, attribute: "highlight-keywords" })
 	highlightKeywords?: FLogHighlightKeywords;
 
+	@property({ type: String, reflect: true, attribute: "search-keyword" })
+	searchKeyword?: string;
+
 	/**
 	 * for vue2
 	 */
@@ -217,6 +220,9 @@ export class FLog extends FRoot {
 			if (this.requestIdleId) {
 				cancelIdleCallback(this.requestIdleId);
 			}
+			if (this.searchKeyword) {
+				this.highlightText(this.searchKeyword, false);
+			}
 		}
 	}
 	/**
@@ -287,6 +293,7 @@ export class FLog extends FRoot {
 					.selectedScope=${this.selectedLogLevel}
 					@input=${this.handleSearch}
 					variant="block"
+					.value=${this.searchKeyword}
 					.disableResult=${true}
 				></f-search>
 			</f-div>
@@ -352,6 +359,9 @@ export class FLog extends FRoot {
 				}
 				this.renderBatchedLogs(this.currentBatchId);
 			});
+		}
+		if (changedProperties.has("searchKeyword") && this.searchKeyword) {
+			this.highlightText(this.searchKeyword, false);
 		}
 
 		window.addEventListener("keydown", this.searchShortCutHhandler, { capture: true });

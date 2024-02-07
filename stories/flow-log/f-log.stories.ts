@@ -1,5 +1,7 @@
 import { html } from "lit-html";
 import samplelogs from "./logs/logs.js";
+import { createRef, ref } from "lit/directives/ref.js";
+import { FLog } from "@ollion/flow-log";
 
 export default {
 	title: "@ollion/flow-log/f-log",
@@ -13,15 +15,27 @@ export default {
 
 export const Playground = {
 	render: (args: Record<string, unknown>) => {
-		return html`<f-div direction="column" height="100%"
-			><f-log
-				.logs=${args.logs}
-				?show-toolbar=${args["show-toolbar"]}
-				?wrap-text=${args["wrap-text"]}
-				.logLevels=${args["log-levels"]}
-				.selectedLogLevel=${args["selected-log-level"]}
-				.highlightKeywords=${args["highlight-keywords"]}
-			></f-log
+		const logElement = createRef<FLog>();
+		const handleExternalSearch = (event: CustomEvent<{ value: string }>) => {
+			if (logElement.value) {
+				logElement.value.searchKeyword = event.detail.value;
+			}
+		};
+		return html`<f-div direction="column" height="100%" overflow="scroll">
+			<f-div height="hug-content" style="display:none"
+				><f-search @input=${handleExternalSearch}></f-search
+			></f-div>
+			<f-div>
+				<f-log
+					${ref(logElement)}
+					.logs=${args.logs}
+					?show-toolbar=${args["show-toolbar"]}
+					?wrap-text=${args["wrap-text"]}
+					.logLevels=${args["log-levels"]}
+					.selectedLogLevel=${args["selected-log-level"]}
+					.highlightKeywords=${args["highlight-keywords"]}
+					.searchKeyword=${args["search-keyword"]}
+				></f-log> </f-div
 		></f-div>`;
 	},
 
@@ -46,6 +60,9 @@ export const Playground = {
 			control: "object"
 		},
 		["selected-log-level"]: {
+			control: "text"
+		},
+		["search-keyword"]: {
 			control: "text"
 		}
 	},

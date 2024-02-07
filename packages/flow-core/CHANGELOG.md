@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.8.1] - 2024-02-07
+
+### Improvements
+
+- `circle` variant added in `f-progress-bar` to show progress in circle.
+
 ## [2.8.0] - 2024-02-06
 
 ### Features

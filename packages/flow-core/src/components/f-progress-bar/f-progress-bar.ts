@@ -9,6 +9,9 @@ import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
 import { flowElement } from "../../utils";
 import { injectCss } from "@ollion/flow-core-config";
+import { classMap } from "lit-html/directives/class-map.js";
+import { keyed } from "lit/directives/keyed.js";
+
 injectCss("f-progress-bar", globalStyle);
 
 export type FProgressBarState =
@@ -41,7 +44,7 @@ export class FProgressBar extends FRoot {
 
 	 */
 	@property({ type: String, reflect: true })
-	variant?: "block" | "curved" = "block";
+	variant?: "block" | "curved" | "circle" = "block";
 
 	/**
 	 * @attribute The medium size is the default and recommended option.
@@ -82,6 +85,18 @@ export class FProgressBar extends FRoot {
 		}
 	}
 
+	get circleDiameter() {
+		if (this.size === "large") {
+			return "28px";
+		} else if (this.size === "medium") {
+			return "20px";
+		} else if (this.size === "small") {
+			return "16px";
+		} else {
+			return "12px";
+		}
+	}
+
 	/**
 	 * compute width of fill in the track
 	 */
@@ -109,6 +124,41 @@ export class FProgressBar extends FRoot {
 
 	fill = "";
 
+	/**
+	 * Calculate angle of pseudo element
+	 */
+	get valueInAngle() {
+		let perValue = 0;
+		if (this.value) {
+			perValue = +this.value.replace(/%/g, "");
+		}
+		if (perValue > 50) {
+			return perValue * 3.6 - 180;
+		}
+		return perValue * 3.6;
+	}
+
+	/**
+	 * Calculate value in number by removing % character
+	 */
+	get valueInNumber() {
+		let perValue = 0;
+		if (this.value) {
+			perValue = +this.value.replace(/%/g, "");
+		}
+
+		return perValue;
+	}
+
+	/**
+	 * Calculate overall style to apply
+	 */
+	get circleProgressStyle() {
+		return `--f-progress-transform: rotate(${this.valueInAngle}deg);width:${
+			this.circleDiameter
+		};height:${this.circleDiameter};${this.fill ? `--f-circle-progress-fill: ${this.fill};` : ""}`;
+	}
+
 	render() {
 		/**
 		 * creating local fill variable out of state prop.
@@ -119,18 +169,32 @@ export class FProgressBar extends FRoot {
 		 * validate
 		 */
 		this.validateProperties();
-
-		return html`
-			<f-div
-				class="f-progress-bar"
-				.width=${this.computedWidth}
-				height=${this.computedHeight}
-				data-variant=${this.variant}
-			>
-				<f-div .width=${this.value} data-state=${this.state} class="f-progress-bar-fill"></f-div>
-				<f-div width="fill-container"></f-div>
-			</f-div>
-		`;
+		if (this.variant !== "circle") {
+			return html`
+				<f-div
+					class="f-progress-bar"
+					.width=${this.computedWidth}
+					height=${this.computedHeight}
+					data-variant=${this.variant}
+				>
+					<f-div .width=${this.value} data-state=${this.state} class="f-progress-bar-fill"></f-div>
+					<f-div width="fill-container"></f-div>
+				</f-div>
+			`;
+		}
+		const classes = {
+			["f-progress-bar-circle"]: true,
+			["less-than-eq-50"]: this.valueInNumber <= 50,
+			["grt-than-50"]: this.valueInNumber > 50
+		};
+		return keyed(
+			this.valueInNumber > 50 ? 1 : 2,
+			html`<div
+				class=${classMap(classes)}
+				data-state=${this.state}
+				style="${this.circleProgressStyle}"
+			></div>`
+		);
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
 		super.updated(changedProperties);

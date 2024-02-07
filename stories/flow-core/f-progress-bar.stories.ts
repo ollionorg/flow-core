@@ -1,6 +1,8 @@
 import { html } from "lit-html";
 import fProgressBarAnatomy from "../svg/i-fprogress-bar-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
+import { createRef, ref } from "lit/directives/ref.js";
+import { FProgressBar } from "@ollion/flow-core";
 
 export default {
 	title: "@ollion/flow-core/f-progress-bar",
@@ -13,16 +15,28 @@ export default {
 };
 
 export const Playground = {
-	render: args =>
-		html`<f-div direction="row" padding="x-large" gap="medium"
+	render: (args: Record<string, unknown>) => {
+		const prgressBar = createRef<FProgressBar>();
+		// let value = 10;
+		// setInterval(() => {
+		// 	if (prgressBar.value && value < 100) {
+		// 		value += 10;
+		// 		prgressBar.value.value = `${value}%`;
+		// 	} else {
+		// 		value = 10;
+		// 	}
+		// }, 1000);
+		return html`<f-div direction="row" padding="x-large" gap="medium"
 			><f-progress-bar
+				${ref(prgressBar)}
 				.value=${args.value}
 				.variant=${args.variant}
 				.size=${args.size}
 				.state=${args.state}
 				.width=${args.width}
 			></f-progress-bar>
-		</f-div>`,
+		</f-div>`;
+	},
 
 	name: "Playground",
 
@@ -33,7 +47,7 @@ export const Playground = {
 
 		variant: {
 			control: "radio",
-			options: ["curved", "block"]
+			options: ["curved", "block", "circle"]
 		},
 
 		size: {
@@ -66,7 +80,7 @@ export const Playground = {
 	},
 
 	args: {
-		value: "30%",
+		value: "60%",
 		variant: "block",
 		size: "medium",
 		state: "default",
@@ -80,7 +94,7 @@ export const Anatomy = {
 };
 
 export const Value = {
-	render: args => {
+	render: () => {
 		return html`<f-div direction="row" padding="x-large" gap="medium"
 			><f-progress-bar value="30%" variant="curved" state="success"></f-progress-bar>
 			<f-div width="hug-content"
@@ -93,8 +107,8 @@ export const Value = {
 };
 
 export const Variant = {
-	render: args => {
-		const variants = ["block", "curved"];
+	render: () => {
+		const variants = ["block", "curved", "circle"];
 
 		return html`<f-div direction="row" gap="medium"
 			>${variants.map(
@@ -102,9 +116,7 @@ export const Variant = {
 					html`<f-div direction="row" padding="x-large" gap="medium"
 						><f-progress-bar value="30%" .variant=${item}></f-progress-bar>
 						<f-div width="hug-content"
-							><f-text variant="para" size="small" .state=${args.state}
-								>variant="${item}"</f-text
-							></f-div
+							><f-text variant="para" size="small">variant="${item}"</f-text></f-div
 						>
 					</f-div>`
 			)}</f-div
@@ -115,7 +127,7 @@ export const Variant = {
 };
 
 export const Size = {
-	render: args => {
+	render: () => {
 		const sizes = ["large", "medium", "small", "x-small"];
 
 		return html`<f-div direction="column" gap="medium"
@@ -128,11 +140,7 @@ export const Size = {
 							variant="curved"
 							state="primary"
 						></f-progress-bar>
-						<f-div width="20%"
-							><f-text variant="para" size="small" .state=${args.state}
-								>size="${item}"</f-text
-							></f-div
-						>
+						<f-div width="20%"><f-text variant="para" size="small">size="${item}"</f-text></f-div>
 					</f-div>`
 			)}</f-div
 		>`;
@@ -142,7 +150,7 @@ export const Size = {
 };
 
 export const State = {
-	render: args => {
+	render: () => {
 		const states = ["default", "primary", "success", "danger", "warning", "custom,#fff"];
 
 		return html`<f-div direction="column" gap="medium"
@@ -150,11 +158,7 @@ export const State = {
 				item =>
 					html`<f-div direction="row" padding="x-large" gap="medium"
 						><f-progress-bar value="30%" .state=${item} variant="curved"></f-progress-bar>
-						<f-div width="20%"
-							><f-text variant="para" size="small" .state=${args.state}
-								>state="${item}"</f-text
-							></f-div
-						>
+						<f-div width="20%"><f-text variant="para" size="small">state="${item}"</f-text></f-div>
 					</f-div>`
 			)}</f-div
 		>`;
@@ -164,7 +168,7 @@ export const State = {
 };
 
 export const Width = {
-	render: args => {
+	render: () => {
 		const widths = ["fill-container", "300px"];
 
 		return html`<f-div direction="column" gap="medium"
@@ -177,11 +181,7 @@ export const Width = {
 							variant="curved"
 							state="primary"
 						></f-progress-bar>
-						<f-div width="20%"
-							><f-text variant="para" size="small" .state=${args.state}
-								>width="${item}"</f-text
-							></f-div
-						>
+						<f-div width="20%"><f-text variant="para" size="small">width="${item}"</f-text></f-div>
 					</f-div>`
 			)}</f-div
 		>`;

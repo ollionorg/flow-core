@@ -10,7 +10,7 @@ import { html, nothing } from "lit";
 import { classMap } from "lit-html/directives/class-map.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
-import { virtualize } from "@lit-labs/virtualizer/virtualize.js";
+import "@lit-labs/virtualizer";
 
 export default function render(this: FSelect) {
 	this.validateProperties();
@@ -364,15 +364,15 @@ export default function render(this: FSelect) {
 }
 
 export function renderArrayOptions(this: FSelect) {
-	return html` ${virtualize({
-		items: this.filteredOptions as FSelectArray,
-		keyFunction: (option, idx) => {
+	return html` <lit-virtualizer
+		.items=${this.filteredOptions as FSelectArray}
+		.keyFunction=${(option: FSelectSingleOption, idx: number) => {
 			if (typeof option === "string") {
 				return `${idx}${option}`;
 			}
 			return idx + this.getOptionQaId(option);
-		},
-		renderItem: option =>
+		}}
+		.renderItem=${(option: FSelectSingleOption) =>
 			html`<f-div
 				class="f-select-options-clickable"
 				padding="medium"
@@ -419,8 +419,8 @@ export function renderArrayOptions(this: FSelect) {
 							><f-icon size="small" source="i-tick"></f-icon
 					  ></f-div>`
 					: nothing}
-			</f-div>`
-	})}`;
+			</f-div>`}
+	></lit-virtualizer>`;
 }
 
 export function renderGroupOptions(this: FSelect) {

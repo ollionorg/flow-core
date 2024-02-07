@@ -362,11 +362,14 @@ export class FSelect extends FRoot {
 	 * check selection for respective option.
 	 */
 	isSelected(option: FSelectOptionObject | string) {
-		return (this.selectedOptions as FSelectArrayOfObjects).find(
-			item => JSON.stringify(item) === JSON.stringify(option)
-		)
-			? true
-			: false;
+		if (Array.isArray(this.selectedOptions)) {
+			return (this.selectedOptions as FSelectArrayOfObjects).find(
+				item => JSON.stringify(item) === JSON.stringify(option)
+			)
+				? true
+				: false;
+		}
+		return false;
 	}
 
 	/**

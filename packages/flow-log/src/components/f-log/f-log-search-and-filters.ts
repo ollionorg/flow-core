@@ -38,7 +38,7 @@ export function clearFilter(this: FLog) {
  * It will highlight text present in logs with mark tag
  * @param searchText
  */
-export function highlightText(this: FLog, searchText: string): void {
+export function highlightText(this: FLog, searchText: string, scroll = true): void {
 	if (this.searchDebounceTimeout) {
 		clearTimeout(this.searchDebounceTimeout);
 	}
@@ -55,8 +55,10 @@ export function highlightText(this: FLog, searchText: string): void {
 				done: (occurrences: number) => {
 					this.searchOccurrences = occurrences;
 					const firstMark = this.shadowRoot?.querySelector("mark[data-markjs='true']");
-					firstMark?.scrollIntoView({ block: "start", behavior: "smooth" });
-					firstMark?.classList.add("active");
+					if (scroll) {
+						firstMark?.scrollIntoView({ block: "start", behavior: "smooth" });
+						firstMark?.classList.add("active");
+					}
 					this.currentMarkIndex = 0;
 					if (occurrences > 0 && this.searchInput) {
 						this.searchInput.suggestElement.suffix = `1 of ${occurrences}`;

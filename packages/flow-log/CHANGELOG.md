@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.0.2] - 2024-02-07
+
+### Improvements
+
+- `search-keyword` added to `f-log` element, to control search externally.
+
 ## [2.0.1] - 2023-12-18
 
 ### Patch Changes

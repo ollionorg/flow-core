@@ -84,6 +84,7 @@ describe("f-select", () => {
 				?checkbox=${true}
 			></f-select>
 		`);
+		await new Promise(resolve => setTimeout(resolve, 500));
 		const descendant = el.shadowRoot!.querySelector(".f-select-options-clickable")!;
 		const checkbox = descendant.children[0];
 		expect(checkbox).instanceOf(FCheckbox);
@@ -98,6 +99,7 @@ describe("f-select", () => {
 				selection-limit=${1}
 			></f-select>
 		`);
+		await new Promise(resolve => setTimeout(resolve, 500));
 		const descendant = el.shadowRoot!.querySelector(".f-select-searchable")!;
 		const text = descendant.children[1].children[0];
 		expect(text).instanceOf(FText);

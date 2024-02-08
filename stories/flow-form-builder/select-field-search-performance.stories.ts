@@ -19,7 +19,7 @@ type SampleFormBuilder = {
 
 const optionsArray = [];
 
-for (let p = 0; p < 3000; p++) {
+for (let p = 0; p < 30000; p++) {
 	optionsArray.push(`${p} - ${faker.location.city()}`);
 }
 

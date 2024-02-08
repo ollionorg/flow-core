@@ -75,7 +75,7 @@ describe("f-select", () => {
 		expect(input.tagName.toLowerCase()).to.equal("input");
 	});
 	/**
-	 * options are rendered using LitVirtualizer, hence it is difficult query option because options are rendred outside DOM tree. (Will re-visit once found a solution)
+	 * options are rendered using LitVirtualizer, So when dropdown opens it will shows options otherwise those were not in DOM ,another thing is when i write dropdown open code in testcase it behaves weird (I suspect because of headless test)
 	 */
 	// it("options menu should render with checkboxes when checkbox is true", async () => {
 	// 	const el = await fixture<FSelect>(html`

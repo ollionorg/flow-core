@@ -21,7 +21,16 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 	for (let i = 0; i < rowCount; i++) {
 		const firstName: FTableSchemaCell<string> = {
 			value: faker.person.firstName(),
-			align: "middle-left"
+			align: "middle-left",
+			template: function () {
+				return html`<f-div gap="small" align="middle-left" width="100%" height="100%">
+					<f-pictogram .source=${faker.internet.emoji()}></f-pictogram>
+					<f-div direction="column" height="hug-content">
+						<f-text>${this.value}</f-text>
+						<f-text size="small" state="secondary">${faker.person.jobTitle()}</f-text>
+					</f-div>
+				</f-div>`;
+			}
 		};
 		const lastName = {
 			value: faker.person.lastName(),
@@ -88,7 +97,7 @@ export default function getFakeUsers(rowCount = 100, columnCount = 8): FTableSch
 		const userRow: FTableSchemaDataRow = {
 			id: getId(),
 			disableSelection: i % 2 === 0,
-			expandIconPosition: "left",
+			expandIconPosition: "right",
 			data: { firstName, lastName, age, birthDate, email, mobile, sex, address },
 			details: function () {
 				return html`<f-div padding="large"

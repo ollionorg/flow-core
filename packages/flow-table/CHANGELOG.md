@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.2.5] - 2024-02-09
+
+### Bug Fixes
+
+- `f-table-schema` : First cell content with checkbox is getting wrapped when content is large ot external template.
+
 ## [2.2.4] - 2024-01-16
 
 ### Improvements

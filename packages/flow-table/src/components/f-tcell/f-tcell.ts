@@ -148,7 +148,8 @@ export class FTcell extends FRoot {
 								icon="i-chevron-down"
 							></f-icon-button>
 					  `
-					: nothing}<slot></slot>
+					: nothing}
+				<f-div><slot></slot></f-div>
 			</f-div>
 			<f-div
 				class="details-toggle"

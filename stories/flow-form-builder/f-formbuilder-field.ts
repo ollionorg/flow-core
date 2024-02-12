@@ -94,8 +94,6 @@ const field: FormBuilderField = {
 			searchable: true,
 			clear: false,
 			createOption: true,
-			width: 150,
-			maxOptionsWidth: "300px",
 			onInput(event) {
 				console.log(event);
 			},

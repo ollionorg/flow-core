@@ -129,21 +129,28 @@ export const Variant = {
 export const Size = {
 	render: () => {
 		const sizes = ["large", "medium", "small", "x-small"];
-
-		return html`<f-div direction="column" gap="medium"
-			>${sizes.map(
-				item =>
-					html`<f-div direction="row" padding="x-large" gap="medium"
-						><f-progress-bar
-							value="30%"
-							.size=${item}
-							variant="curved"
-							state="primary"
-						></f-progress-bar>
-						<f-div width="20%"><f-text variant="para" size="small">size="${item}"</f-text></f-div>
-					</f-div>`
-			)}</f-div
-		>`;
+		const variants = ["block", "curved", "circle"];
+		return html`${variants.map(
+			variant =>
+				html`<f-div direction="column" gap="medium">
+					<f-div padding="medium"><f-text>variant="${variant}"</f-text></f-div>
+					${sizes.map(
+						item =>
+							html`<f-div direction="row" align="middle-left" padding="x-large" gap="medium"
+								><f-progress-bar
+									value="30%"
+									.size=${item}
+									.variant=${variant}
+									state="primary"
+								></f-progress-bar>
+								<f-div width="20%"
+									><f-text variant="para" size="small">size="${item}"</f-text></f-div
+								>
+							</f-div>`
+					)}
+					<f-divider></f-divider>
+				</f-div>`
+		)}`;
 	},
 
 	name: "size"

@@ -1,4 +1,6 @@
+@use "sass:map";
 @import "./../../mixins/scss/mixins";
+@import "./f-progress-bar-variables";
 
 f-progress-bar {
 	@include base();
@@ -7,5 +9,22 @@ f-progress-bar {
 	&[variant="circle"] {
 		display: inline-flex;
 		flex: 0 0 auto;
+		border-radius: 50%;
+		border: 1px solid var(--f-circle-progress-outline);
+
+		@each $state, $color in $states {
+			&[state="#{$state}"] {
+				--f-circle-progress-outline: #{map.get($color, "background")};
+			}
+		}
+
+		&[size="x-small"],
+		&[size="small"] {
+			padding: 1px;
+		}
+		&[size="medium"],
+		&[size="large"] {
+			padding: 2px;
+		}
 	}
 }

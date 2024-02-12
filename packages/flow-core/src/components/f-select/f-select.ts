@@ -66,7 +66,7 @@ export type FSelectCreateOptionEvent = {
 	options?: FSelectOptions;
 };
 
-export type FSelectMaxOptionsWidth = "auto" | `${number}px`;
+export type FSelectMaxOptionsWidth = `${number}px`;
 
 @flowElement("f-select")
 export class FSelect extends FRoot {
@@ -276,7 +276,7 @@ export class FSelect extends FRoot {
 	 * @attribute set max options width
 	 */
 	@property({ reflect: true, type: String, attribute: "max-options-width" })
-	maxOptionsWidth: FSelectMaxOptionsWidth = "auto";
+	maxOptionsWidth?: FSelectMaxOptionsWidth;
 
 	/**
 	 * icon size
@@ -329,9 +329,7 @@ export class FSelect extends FRoot {
 	applyOptionsStyle(width: number) {
 		const commonStyle = `transition: max-height var(--transition-time-rapid) ease-in 0s;`;
 
-		const maxWidth = `max-width:${
-			this.maxOptionsWidth === "auto" ? `${width}px` : this.maxOptionsWidth
-		};`;
+		const maxWidth = `max-width:${this.maxOptionsWidth ?? `${width}px`};`;
 
 		if (this.openDropdown)
 			if (this.classList.contains("f-search-border")) {

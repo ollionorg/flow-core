@@ -25,6 +25,7 @@ export default function (
 			?checkbox=${field.checkbox}
 			.clear=${ifDefined(field.clear)}
 			.width=${field.width}
+			.maxOptionsWidth=${field.maxOptionsWidth}
 			data-qa-element-id=${field.qaId || field.id}
 			height=${ifDefined(field.height)}
 			?disabled=${field.disabled}

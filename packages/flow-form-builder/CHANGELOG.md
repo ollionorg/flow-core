@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.2.2] - 2024-02-12
+
+### Patch Changes
+
+- `maxOptionsWidth` property added to `select` field.
+
 ## [2.2.1] - 2023-12-18
 
 ### Patch Changes

@@ -66,6 +66,8 @@ export type FSelectCreateOptionEvent = {
 	options?: FSelectOptions;
 };
 
+export type FSelectMaxOptionsWidth = "auto" | `${number}px`;
+
 @flowElement("f-select")
 export class FSelect extends FRoot {
 	/**
@@ -271,6 +273,12 @@ export class FSelect extends FRoot {
 	selectionLimit = 2;
 
 	/**
+	 * @attribute set max options width
+	 */
+	@property({ reflect: true, type: String, attribute: "max-options-width" })
+	maxOptionsWidth: FSelectMaxOptionsWidth = "auto";
+
+	/**
 	 * icon size
 	 */
 	get iconSize() {
@@ -319,16 +327,22 @@ export class FSelect extends FRoot {
 	 * apply styling to f-select options wrapper.
 	 */
 	applyOptionsStyle(width: number) {
+		const commonStyle = `transition: max-height var(--transition-time-rapid) ease-in 0s;`;
+
+		const maxWidth = `max-width:${
+			this.maxOptionsWidth === "auto" ? `${width}px` : this.maxOptionsWidth
+		};`;
+
 		if (this.openDropdown)
 			if (this.classList.contains("f-search-border")) {
-				return `max-height:${this.optimizedHeight}px; transition: max-height var(--transition-time-rapid) ease-in 0s;  min-width:240px; max-width:fit-content; top:${this.optionsTop};bottom:${this.optionsBottom}`;
+				return `${commonStyle}max-height:${this.optimizedHeight}px;  min-width:240px; max-width:fit-content; top:${this.optionsTop};bottom:${this.optionsBottom}`;
 			} else {
-				return `max-height:${this.optimizedHeight}px; transition: max-height var(--transition-time-rapid) ease-in 0s;  width:${width}px; top:${this.optionsTop};bottom:${this.optionsBottom}`;
+				return `${commonStyle}max-height:${this.optimizedHeight}px;  min-width:${width}px; ${maxWidth} top:${this.optionsTop};bottom:${this.optionsBottom}`;
 			}
 		else if (this.classList.contains("f-search-border")) {
-			return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s;  min-width:240px; max-width:fit-content; top:${this.optionsTop};bottom:${this.optionsBottom}`;
+			return `${commonStyle}max-height:0px;   min-width:240px; max-width:fit-content; top:${this.optionsTop};bottom:${this.optionsBottom}`;
 		} else {
-			return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s;  width:${width}px; top:${this.optionsTop};bottom:${this.optionsBottom}`;
+			return `${commonStyle}max-height:0px;  min-width:${width}px; ${maxWidth} top:${this.optionsTop};bottom:${this.optionsBottom}`;
 		}
 	}
 

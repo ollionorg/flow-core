@@ -7,6 +7,7 @@
 ### Improvements
 
 - `f-select`: A virtualizer is utilized to render options, thereby enhancing rendering performance, particularly in scenarios where there are over 3K+ options available.
+- `f-select` : `max-options-width` support added to customize options width.
 
 ### Note
 

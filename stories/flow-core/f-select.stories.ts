@@ -1,3 +1,4 @@
+import { faker } from "@faker-js/faker";
 import { FSelectOptionObject, FSelectSingleOption } from "@ollion/flow-core";
 import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
@@ -52,6 +53,7 @@ export const Playground = {
 						?checkbox=${args.checkbox}
 						?clear=${args.clear}
 						.width=${args.width}
+						.maxOptionsWidth=${args["max-options-width"]}
 						.height=${args.height}
 						?disabled=${args.disabled}
 						?loading=${args.loading}
@@ -137,6 +139,9 @@ export const Playground = {
 		},
 
 		width: {
+			control: "text"
+		},
+		["max-options-width"]: {
 			control: "text"
 		},
 
@@ -869,27 +874,54 @@ export const Width = {
 		};
 
 		return html`
-			<f-div width="100%" align="middle-center" padding="large">
-				<f-div width="80%" align="middle-center">
-					<f-select
-						placeholder="Select Option"
-						@input=${handleValue}
-						.options=${options}
-						.value=${value}
-						icon-left=${"i-app"}
-						width="200"
-						type="multiple"
-						?searchable=${true}
-					>
-						<f-div slot="label" padding="none" gap="none">Label for f-select (width="200")</f-div>
-						<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
-					</f-select></f-div
-				></f-div
+			<f-select
+				placeholder="Select Option"
+				@input=${handleValue}
+				.options=${options}
+				.value=${value}
+				icon-left=${"i-app"}
+				width="200"
+				type="multiple"
+				?searchable=${true}
 			>
+				<f-div slot="label" padding="none" gap="none">Label for f-select (width="200")</f-div>
+				<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+			</f-select>
 		`;
 	},
 
 	name: "width"
+};
+
+export const MaxOptionsWidth = {
+	render: () => {
+		const value = "";
+		const options: string[] = [];
+		for (let o = 0; o < 10; o++) {
+			options.push(faker.lorem.sentence(10));
+		}
+
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
+		};
+
+		return html`
+			<f-select
+				placeholder="Select Option"
+				@input=${handleValue}
+				.options=${options}
+				.value=${value}
+				width="180"
+				max-options-width="400px"
+				?searchable=${true}
+			>
+				<f-div slot="label" padding="none" gap="none">max-options-width="400"</f-div>
+				<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+			</f-select>
+		`;
+	},
+
+	name: "max-options-width"
 };
 
 export const Height = {

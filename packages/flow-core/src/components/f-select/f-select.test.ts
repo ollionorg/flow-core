@@ -74,23 +74,7 @@ describe("f-select", () => {
 		const input = descendant.children[1];
 		expect(input.tagName.toLowerCase()).to.equal("input");
 	});
-	/**
-	 * options are rendered using LitVirtualizer, So when dropdown opens it will shows options otherwise those were not in DOM ,another thing is when i write dropdown open code in testcase it behaves weird (I suspect because of headless test)
-	 */
-	// it("options menu should render with checkboxes when checkbox is true", async () => {
-	// 	const el = await fixture<FSelect>(html`
-	// 		<f-select
-	// 			.options=${["option 1"]}
-	// 			.value=${["option 1"]}
-	// 			type="multiple"
-	// 			?checkbox=${true}
-	// 		></f-select>
-	// 	`);
-	// 	await new Promise(resolve => setTimeout(resolve, 500));
-	// 	const descendant = el.querySelector(".f-select-options-clickable")!;
-	// 	const checkbox = descendant.children[0];
-	// 	expect(checkbox).instanceOf(FCheckbox);
-	// });
+
 	it("render with 'view more' button if limit is less than selected-options", async () => {
 		const el = await fixture(html`
 			<f-select

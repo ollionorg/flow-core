@@ -327,6 +327,7 @@ export class FLog extends FRoot {
 				overflow="scroll"
 				width="100%"
 				direction="column"
+				show-scrollbar
 				.height=${this.showToolbar ? "calc(100% - 44px)" : "100%"}
 			>
 				<pre ${ref(this.logContainer)}></pre>

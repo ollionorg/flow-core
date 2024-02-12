@@ -89,7 +89,7 @@ const field: FormBuilderField = {
 			options: ["option 1", "option 2", "option 3"],
 			type: "select",
 			placeholder: "This is a placeholder",
-			iconLeft: "i-app",
+
 			disabled: false,
 			searchable: true,
 			clear: false,

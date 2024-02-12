@@ -19,7 +19,7 @@ type SampleFormBuilder = {
 
 const optionsArray = [];
 
-for (let p = 0; p < 3000; p++) {
+for (let p = 0; p < 30000; p++) {
 	optionsArray.push(`${p} - ${faker.location.city()}`);
 }
 
@@ -44,11 +44,13 @@ const Template: Story<unknown> = (args: any) => {
 	};
 	return html`
 		<f-div padding="medium" dicrection="column" gap="large">
-			<f-form-builder .field=${args.field} @keydown=${handleKeydown} @input=${handleInput}>
-				<f-div>
-					<f-button label="submit" type="submit"></f-button>
-				</f-div>
-			</f-form-builder>
+			<f-div>
+				<f-form-builder .field=${args.field} @keydown=${handleKeydown} @input=${handleInput}>
+					<f-div>
+						<f-button label="submit" type="submit"></f-button>
+					</f-div>
+				</f-form-builder>
+			</f-div>
 			<f-div>
 				<pre ${ref(fieldRef)}>${JSON.stringify(args.values, undefined, 8)}</pre>
 			</f-div>

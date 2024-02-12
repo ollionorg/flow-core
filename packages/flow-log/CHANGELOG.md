@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.0.3] - 2024-02-12
+
+### Improvements
+
+- Scrollbar visibility enabled in F-log element.
+
 ## [2.0.2] - 2024-02-07
 
 ### Improvements

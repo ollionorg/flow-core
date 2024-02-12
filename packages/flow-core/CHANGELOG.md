@@ -2,6 +2,17 @@
 
 # Change Log
 
+## [2.8.2] - 2024-02-12
+
+### Improvements
+
+- `f-select`: A virtualizer is utilized to render options, thereby enhancing rendering performance, particularly in scenarios where there are over 3K+ options available.
+- `f-select` : `max-options-width` support added to customize options width.
+
+### Note
+
+- We previously rendered `f-select` options in the DOM regardless of its visibility. Starting from this release, options will only appear when `f-select` is open. Please update test cases accordingly.
+
 ## [2.8.1] - 2024-02-07
 
 ### Improvements

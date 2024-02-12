@@ -1,4 +1,4 @@
-import { useState } from "@storybook/client-api";
+import { FLineage, LineageNodeElement } from "@ollion/flow-lineage";
 import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
 
@@ -12,55 +12,62 @@ export default {
 	}
 };
 
-export const Playground = {
-	render: args => {
-		const [meta, setMeta] = useState(null);
-		const [tabNodeData, setTabNodeData] = useState([]);
-		const [tabData, setTabData] = useState(null);
-		const [selected, setSelected] = useState("Table Details");
+const divRef = createRef();
 
-		const handleReady = e => {
+const updateTooltip = (tooltip: string) => {
+	const tooltipElement = document.querySelector("#lineage-tooltip");
+	if (tooltipElement) {
+		tooltipElement.innerHTML = tooltip;
+	}
+};
+
+export const Playground = {
+	render: (args: Record<string, unknown>) => {
+		let meta = null;
+		let tabNodeData = [];
+		let tabData = null;
+
+		let selected = "Table Details";
+		const handleReady = (e: CustomEvent) => {
 			console.log("Got ready event", e);
 		};
 
-		const handleNodeMeta = e => {
-			setMeta(e.detail.node.fNodeMeta);
+		const handleNodeMeta = (e: CustomEvent) => {
+			meta = e.detail.node.fNodeMeta;
 			console.log(e?.detail);
 
 			if (e.detail.node.fNodeMeta?.tabSections) {
-				setTabNodeData(Object.keys(e.detail.node.fNodeMeta?.tabSections));
-				setTabData(e.detail.node.fNodeMeta?.tabSections);
+				tabNodeData = Object.keys(e.detail.node.fNodeMeta?.tabSections);
+				tabData = e.detail.node.fNodeMeta?.tabSections;
 			} else {
-				setTabNodeData([]);
-				setTabData(null);
+				tabNodeData = [];
+				tabData = null;
 			}
 		};
 
-		const handleChangeTab = id => {
-			setSelected(id);
+		const handleChangeTab = (id: string) => {
+			selected = id;
 		};
 
-		const divRef = createRef();
-
-		return html`<f-div ${ref(divRef)} height="100%"
-			><f-div
-				><f-lineage
-					.direction=${args.direction}
-					.padding=${args.padding}
-					.gap=${args.gap}
-					.node-size=${args["node-size"]}
-					.children-node-size=${args["children-node-size"]}
-					.max-children=${args["max-children"]}
-					.node-template=${args["node-template"]}
-					.children-node-template=${args["children-node-template"]}
-					.links=${args.links}
-					.nodes=${args.nodes}
-					stagger-load="1"
-					@ready=${handleReady}
-					@node-meta=${handleNodeMeta}
-				>
-				</f-lineage> </f-div
-		></f-div>`;
+		return html`<f-div id="can-fullscreen" ${ref(divRef)} height="100%">
+			<f-tooltip id="lineage-tooltip"></f-tooltip>
+			<f-lineage
+				.direction=${args.direction}
+				.padding=${args.padding}
+				.gap=${args.gap}
+				.node-size=${args["node-size"]}
+				.children-node-size=${args["children-node-size"]}
+				.max-children=${args["max-children"]}
+				.node-template=${args["node-template"]}
+				.children-node-template=${args["children-node-template"]}
+				.links=${args.links}
+				.nodes=${args.nodes}
+				stagger-load="1"
+				@ready=${handleReady}
+				@node-meta=${handleNodeMeta}
+			>
+			</f-lineage>
+		</f-div>`;
 	},
 	name: "Playground",
 	height: "500px",
@@ -112,7 +119,7 @@ export const Playground = {
 
 		["max-children"]: 8,
 
-		["node-template"]: function (node) {
+		["node-template"]: function (node: LineageNodeElement) {
 			return html` <f-div style="position:absolute;top:-20px;z-index:1;" gap="x-small">
 					<f-tag label="Construction" state="primary" size="small"></f-tag>
 					<f-tag label="Cat" size="small" counter="35"></f-tag>
@@ -128,14 +135,20 @@ export const Playground = {
 					${node.fChildren && !node.fHideChildren ? 'border="small solid default bottom"' : ""}
 				>
 					<f-icon-button icon="i-table" state="neutral"></f-icon-button>
-					<f-div direction="column" height="hug-content" align="middle-left">
+					<f-div
+						@mouseenter=${() => updateTooltip(node.id ?? "NA")}
+						direction="column"
+						tooltip="#lineage-tooltip"
+						height="hug-content"
+						align="middle-left"
+					>
 						<f-text variant="code" size="large" ellipsis>${node.id}</f-text>
 					</f-div>
 					${node.childrenToggle}
 				</f-div>`;
 		},
 
-		["children-node-template"]: function (node) {
+		["children-node-template"]: function (node: LineageNodeElement) {
 			return html`<f-div
 				state="secondary"
 				width="100%"
@@ -376,11 +389,11 @@ export const Playground = {
 							subTitle: "datapipes_census.street_2022"
 						},
 
-						fClick: function (event, node) {
+						fClick: function (event: CustomEvent, node: LineageNodeElement) {
 							console.log("Child Node Clicked", event, node);
 						},
 
-						fRightClick: function (event, node) {
+						fRightClick: function (event: CustomEvent, node: LineageNodeElement) {
 							console.log("Child Node Right Clicked", event, node);
 						}
 					},
@@ -402,11 +415,14 @@ export const Playground = {
 					child16: {}
 				},
 
-				fClick: function (event, node) {
+				fClick: function (event: CustomEvent, node: LineageNodeElement) {
+					if (divRef.value) {
+						divRef.value.requestFullscreen();
+					}
 					console.log("Node Clicked", event, node);
 				},
 
-				fRightClick: function (event, node) {
+				fRightClick: function (event: CustomEvent, node: LineageNodeElement) {
 					console.log("Node Right Clicked", event, node);
 				}
 			},
@@ -418,7 +434,7 @@ export const Playground = {
 					name: "Hansen"
 				},
 
-				fRightClick: function (event, node) {
+				fRightClick: function (event: CustomEvent, node: LineageNodeElement) {
 					console.log("Node Right Clicked", event, node);
 				},
 
@@ -627,7 +643,7 @@ export const Playground = {
 					name: "Tony"
 				},
 
-				fNodeTemplate: function (node) {
+				fNodeTemplate: function (node: LineageNodeElement) {
 					return html` <f-div
 						state="custom,#284376"
 						width="100%"

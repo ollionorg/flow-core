@@ -7,7 +7,12 @@ import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { FIcon } from "../f-icon/f-icon";
 import { cloneDeep } from "lodash-es";
-import render, { renderSingleSelection, renderMultipleSelectionTag } from "./render";
+import render, {
+	renderSingleSelection,
+	renderMultipleSelectionTag,
+	renderArrayOptions,
+	renderGroupOptions
+} from "./render";
 import {
 	handleDropDownOpen,
 	handleDropDownClose,
@@ -60,6 +65,8 @@ export type FSelectCreateOptionEvent = {
 	value: string;
 	options?: FSelectOptions;
 };
+
+export type FSelectMaxOptionsWidth = `${number}px`;
 
 @flowElement("f-select")
 export class FSelect extends FRoot {
@@ -266,6 +273,12 @@ export class FSelect extends FRoot {
 	selectionLimit = 2;
 
 	/**
+	 * @attribute set max options width
+	 */
+	@property({ reflect: true, type: String, attribute: "max-options-width" })
+	maxOptionsWidth?: FSelectMaxOptionsWidth;
+
+	/**
 	 * icon size
 	 */
 	get iconSize() {
@@ -314,16 +327,20 @@ export class FSelect extends FRoot {
 	 * apply styling to f-select options wrapper.
 	 */
 	applyOptionsStyle(width: number) {
+		const commonStyle = `transition: max-height var(--transition-time-rapid) ease-in 0s;`;
+
+		const maxWidth = `max-width:${this.maxOptionsWidth ?? `${width}px`};`;
+
 		if (this.openDropdown)
 			if (this.classList.contains("f-search-border")) {
-				return `max-height:${this.optimizedHeight}px; transition: max-height var(--transition-time-rapid) ease-in 0s;  min-width:240px; max-width:fit-content; top:${this.optionsTop};bottom:${this.optionsBottom}`;
+				return `${commonStyle}max-height:${this.optimizedHeight}px;  min-width:240px; max-width:fit-content; top:${this.optionsTop};bottom:${this.optionsBottom}`;
 			} else {
-				return `max-height:${this.optimizedHeight}px; transition: max-height var(--transition-time-rapid) ease-in 0s;  width:${width}px; top:${this.optionsTop};bottom:${this.optionsBottom}`;
+				return `${commonStyle}max-height:${this.optimizedHeight}px;  min-width:${width}px; ${maxWidth} top:${this.optionsTop};bottom:${this.optionsBottom}`;
 			}
 		else if (this.classList.contains("f-search-border")) {
-			return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s;  min-width:240px; max-width:fit-content; top:${this.optionsTop};bottom:${this.optionsBottom}`;
+			return `${commonStyle}max-height:0px;   min-width:240px; max-width:fit-content; top:${this.optionsTop};bottom:${this.optionsBottom}`;
 		} else {
-			return `max-height:0px; transition: max-height var(--transition-time-rapid) ease-in 0s;  width:${width}px; top:${this.optionsTop};bottom:${this.optionsBottom}`;
+			return `${commonStyle}max-height:0px;  min-width:${width}px; ${maxWidth} top:${this.optionsTop};bottom:${this.optionsBottom}`;
 		}
 	}
 
@@ -357,11 +374,14 @@ export class FSelect extends FRoot {
 	 * check selection for respective option.
 	 */
 	isSelected(option: FSelectOptionObject | string) {
-		return (this.selectedOptions as FSelectArrayOfObjects).find(
-			item => JSON.stringify(item) === JSON.stringify(option)
-		)
-			? true
-			: false;
+		if (Array.isArray(this.selectedOptions)) {
+			return (this.selectedOptions as FSelectArrayOfObjects).find(
+				item => JSON.stringify(item) === JSON.stringify(option)
+			)
+				? true
+				: false;
+		}
+		return false;
 	}
 
 	/**
@@ -606,8 +626,10 @@ export class FSelect extends FRoot {
 	getOptionQaId(option: FSelectSingleOption) {
 		if (typeof option === "string") {
 			return option;
-		} else {
+		} else if (option) {
 			return option.qaId ?? option.title;
+		} else {
+			return "no-qa-id";
 		}
 	}
 
@@ -627,6 +649,8 @@ export class FSelect extends FRoot {
 	render = render;
 	renderSingleSelection = renderSingleSelection;
 	renderMultipleSelectionTag = renderMultipleSelectionTag;
+	renderArrayOptions = renderArrayOptions;
+	renderGroupOptions = renderGroupOptions;
 }
 
 /**

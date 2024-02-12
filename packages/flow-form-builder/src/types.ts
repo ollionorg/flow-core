@@ -20,7 +20,8 @@ import {
 	FDateOption,
 	DateDisableType,
 	FRootTooltip,
-	FColorPickerState
+	FColorPickerState,
+	FSelectMaxOptionsWidth
 } from "@ollion/flow-core";
 import { BetweenParams } from "./modules/validation/rules/between";
 import { Subject } from "rxjs";
@@ -193,7 +194,8 @@ export type FormBuilderSelectField = FormBuilderBaseField & {
 	optionTemplate?: FSelectOptionTemplate;
 	iconLeft?: string;
 	height?: number;
-	width?: string;
+	width?: string | number;
+	maxOptionsWidth?: FSelectMaxOptionsWidth;
 	searchable?: boolean;
 	clear?: boolean;
 	checkbox?: boolean;

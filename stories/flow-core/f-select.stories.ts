@@ -1,6 +1,7 @@
+import { faker } from "@faker-js/faker";
+import { FSelectOptionObject, FSelectSingleOption } from "@ollion/flow-core";
 import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fSelectAnatomy from "../svg/i-fselect-anatomy.js";
 
 export default {
@@ -14,26 +15,18 @@ export default {
 };
 
 export const Playground = {
-	render: args => {
-		const [_, updateArgs] = useArgs();
-
-		const handleInput = e => {
-			updateArgs({
-				value: e.detail.value
-			});
+	render: (args: Record<string, unknown>) => {
+		const handleInput = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
-		const handleCreateOption = e => {
-			console.log(e.detail.value);
-			const array = [...args.options];
+		const handleCreateOption = (e: CustomEvent) => {
+			console.log("add-option event", e.detail.value);
+			const array = [...(args.options as Array<any>)];
 			array.push(e.detail.value);
-
-			updateArgs({
-				options: array
-			});
 		};
 
-		const handleSearchInput = e => {
+		const handleSearchInput = (e: CustomEvent) => {
 			console.log("search input : ", e.detail.value);
 		};
 
@@ -60,6 +53,7 @@ export const Playground = {
 						?checkbox=${args.checkbox}
 						?clear=${args.clear}
 						.width=${args.width}
+						.maxOptionsWidth=${args["max-options-width"]}
 						.height=${args.height}
 						?disabled=${args.disabled}
 						?loading=${args.loading}
@@ -69,7 +63,7 @@ export const Playground = {
 						icon-left=${args["icon-left"]}
 						.size=${args.size}
 						?auto-add-option=${args["auto-add-option"]}
-						@create-option=${handleCreateOption}
+						@add-option=${handleCreateOption}
 						@search-input=${handleSearchInput}
 					>
 						<f-div slot="label" padding="none" gap="none">Label for f-select</f-div>
@@ -145,6 +139,9 @@ export const Playground = {
 		},
 
 		width: {
+			control: "text"
+		},
+		["max-options-width"]: {
 			control: "text"
 		},
 
@@ -224,18 +221,13 @@ export const Anatomy = {
 };
 
 export const Type = {
-	render: args => {
+	render: () => {
 		const types = ["single", "multiple"];
-		const [value, setValue] = useState([]);
-		const [options, setOptions] = useState([
-			"thisIsBigOptiontoTest 1",
-			"Hour",
-			"option 3",
-			"option 4"
-		]);
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const options = ["thisIsBigOptiontoTest 1", "Hour", "option 3", "option 4"];
+
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`
@@ -265,13 +257,12 @@ export const Type = {
 };
 
 export const Variant = {
-	render: args => {
+	render: () => {
 		const variants = ["curved", "round", "block"];
-		const [value, setValue] = useState([]);
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const options = ["option 1", "option 2", "option 3", "option 4"];
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`
@@ -301,13 +292,12 @@ export const Variant = {
 };
 
 export const Category = {
-	render: args => {
+	render: () => {
 		const categories = ["fill", "outline", "transparent"];
-		const [value, setValue] = useState([]);
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const options = ["option 1", "option 2", "option 3", "option 4"];
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`
@@ -337,18 +327,17 @@ export const Category = {
 };
 
 export const Value = {
-	render: args => {
+	render: () => {
 		const types = ["single", "multiple"];
-		const [value, setValue] = useState("option 1");
-		const [multiValue, setMultiValue] = useState(["option 1"]);
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
-
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const value = "option 1";
+		const multiValue = ["option 1"];
+		const options = ["option 1", "option 2", "option 3", "option 4"];
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
-		const handleMultiValue = e => {
-			setMultiValue(e.detail.value);
+		const handleMultiValue = (e: CustomEvent) => {
+			console.log("input event - multi value", e);
 		};
 
 		return html`
@@ -391,12 +380,12 @@ export const Value = {
 };
 
 export const Placeholder = {
-	render: args => {
-		const [value, setValue] = useState("");
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+	render: () => {
+		const value = "";
+		const options = ["option 1", "option 2", "option 3", "option 4"];
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`
@@ -420,12 +409,12 @@ export const Placeholder = {
 };
 
 export const Options = {
-	render: args => {
-		const [value, setValue] = useState([]);
-		const [valueObjects, setValueObjects] = useState(null);
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+	render: () => {
+		const value: string[] = [];
+		const valueObjects = null;
+		const options = ["option 1", "option 2", "option 3", "option 4"];
 
-		const [optionsObjects, setOptionsObjects] = useState([
+		const optionsObjects = [
 			{
 				icon: "i-home",
 				title: "option 1",
@@ -444,14 +433,14 @@ export const Options = {
 				icon: "i-app",
 				title: "option 4"
 			}
-		]);
+		];
 
-		const [groupOptions, setGroupOptions] = useState({
+		const groupOptions = {
 			Group1: ["option 1", "option 2", "option 3", "option 4"],
 			Group2: ["option 5", "option 6", "option 7", "option "]
-		});
+		};
 
-		const [groupOtionsObjects, setGroupOptionsObjects] = useState({
+		const groupOtionsObjects = {
 			Group1: [
 				{
 					icon: "i-home",
@@ -489,14 +478,14 @@ export const Options = {
 					title: "option 8"
 				}
 			]
-		});
-
-		const handleValue = e => {
-			setValue(e.detail.value);
 		};
 
-		const handleValueGroup = e => {
-			setValueObjects(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
+		};
+
+		const handleValueGroup = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`
@@ -575,25 +564,23 @@ export const Options = {
 };
 
 export const OptionTemplate = {
-	render: args => {
-		const [value, setValue] = useState(null);
-
-		const optionTemplate = function (option, isSelected) {
+	render: () => {
+		const value = null;
+		const optionTemplate = function (option: FSelectOptionObject, isSelected: boolean) {
 			if (isSelected) {
 				return html`<f-text>${option.title}</f-text>`;
 			} else {
 				return html`<f-div
 					><f-div direction="column" gap="x-small"
 						><f-text>${option.title}</f-text
-						><f-text ellipsis>${option.data.name}, ${option.data.email}</f-text></f-div
+						><f-text ellipsis>${option.data?.name}, ${option.data?.email}</f-text></f-div
 					></f-div
 				>`;
 			}
 		};
 
-		const [valueObjects, setValueObjects] = useState(null);
-
-		const [options, setOptions] = useState([
+		const valueObjects = null;
+		const options = [
 			{
 				icon: "i-home",
 				title: "option 1",
@@ -632,9 +619,8 @@ export const OptionTemplate = {
 					email: "alex#ollion.com"
 				}
 			}
-		]);
-
-		const [groupOtionsObjects, setGroupOptionsObjects] = useState({
+		];
+		const groupOtionsObjects = {
 			Group1: [
 				{
 					icon: "i-home",
@@ -712,14 +698,14 @@ export const OptionTemplate = {
 					}
 				}
 			]
-		});
-
-		const handleValue = e => {
-			setValue(e.detail.value);
 		};
 
-		const handleValueGroup = e => {
-			setValueObjects(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
+		};
+
+		const handleValueGroup = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`
@@ -767,13 +753,13 @@ export const OptionTemplate = {
 };
 
 export const Size = {
-	render: args => {
+	render: () => {
 		const sizes = ["small", "medium"];
-		const [value, setValue] = useState("");
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+		const value = "";
+		const options = ["option 1", "option 2", "option 3", "option 4"];
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`
@@ -803,16 +789,16 @@ export const Size = {
 };
 
 export const State = {
-	render: args => {
+	render: () => {
 		const states = [
 			["default", "primary", "success"],
 			["danger", "warning", "default"]
 		];
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
-		const [value, setValue] = useState("");
+		const options = ["option 1", "option 2", "option 3", "option 4"];
+		const value = "";
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`
@@ -847,12 +833,12 @@ export const State = {
 };
 
 export const IconLeft = {
-	render: args => {
-		const [value, setValue] = useState("");
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+	render: () => {
+		const value = "";
+		const options = ["option 1", "option 2", "option 3", "option 4"];
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`
@@ -879,45 +865,72 @@ export const IconLeft = {
 };
 
 export const Width = {
-	render: args => {
-		const [value, setValue] = useState("");
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+	render: () => {
+		const value = "";
+		const options = ["option 1", "option 2", "option 3", "option 4"];
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`
-			<f-div width="100%" align="middle-center" padding="large">
-				<f-div width="80%" align="middle-center">
-					<f-select
-						placeholder="Select Option"
-						@input=${handleValue}
-						.options=${options}
-						.value=${value}
-						icon-left=${"i-app"}
-						width="200"
-						type="multiple"
-						?searchable=${true}
-					>
-						<f-div slot="label" padding="none" gap="none">Label for f-select (width="200")</f-div>
-						<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
-					</f-select></f-div
-				></f-div
+			<f-select
+				placeholder="Select Option"
+				@input=${handleValue}
+				.options=${options}
+				.value=${value}
+				icon-left=${"i-app"}
+				width="200"
+				type="multiple"
+				?searchable=${true}
 			>
+				<f-div slot="label" padding="none" gap="none">Label for f-select (width="200")</f-div>
+				<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+			</f-select>
 		`;
 	},
 
 	name: "width"
 };
 
-export const Height = {
-	render: args => {
-		const [value, setValue] = useState("");
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+export const MaxOptionsWidth = {
+	render: () => {
+		const value = "";
+		const options: string[] = [];
+		for (let o = 0; o < 10; o++) {
+			options.push(faker.lorem.sentence(10));
+		}
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
+		};
+
+		return html`
+			<f-select
+				placeholder="Select Option"
+				@input=${handleValue}
+				.options=${options}
+				.value=${value}
+				width="180"
+				max-options-width="400px"
+				?searchable=${true}
+			>
+				<f-div slot="label" padding="none" gap="none">max-options-width="400"</f-div>
+				<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
+			</f-select>
+		`;
+	},
+
+	name: "max-options-width"
+};
+
+export const Height = {
+	render: () => {
+		const value = "";
+		const options = ["option 1", "option 2", "option 3", "option 4"];
+
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`
@@ -943,10 +956,10 @@ export const Height = {
 };
 
 export const SelectionLimit = {
-	render: args => {
-		const [value, setValue] = useState("");
+	render: () => {
+		const value = "";
 
-		const [options, setOptions] = useState([
+		const options = [
 			"option 1",
 			"option 2",
 			"option 3",
@@ -954,10 +967,10 @@ export const SelectionLimit = {
 			"option 5",
 			"option 6",
 			"option 7"
-		]);
+		];
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`
@@ -984,12 +997,12 @@ export const SelectionLimit = {
 };
 
 export const Searchable = {
-	render: args => {
-		const [value, setValue] = useState([]);
-		const [valueObjects, setValueObjects] = useState(null);
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+	render: () => {
+		const value: string[] = [];
+		const valueObjects = null;
+		const options = ["option 1", "option 2", "option 3", "option 4"];
 
-		const [optionsObjects, setOptionsObjects] = useState([
+		const optionsObjects = [
 			{
 				icon: "i-home",
 				title: "option 1"
@@ -1006,14 +1019,14 @@ export const Searchable = {
 				icon: "i-app",
 				title: "option 4"
 			}
-		]);
+		];
 
-		const [groupOptions, setGroupOptions] = useState({
+		const groupOptions = {
 			Group1: ["option 1", "option 2", "option 3", "option 4"],
 			Group2: ["option 5", "option 6", "option 7", "option "]
-		});
+		};
 
-		const [groupOtionsObjects, setGroupOptionsObjects] = useState({
+		const groupOtionsObjects = {
 			Group1: [
 				{
 					icon: "i-home",
@@ -1051,18 +1064,18 @@ export const Searchable = {
 					title: "option 8"
 				}
 			]
-		});
-
-		const handleValue = e => {
-			setValue(e.detail.value);
 		};
 
-		const handleBlur = e => {
-			console.log(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
-		const handleValueGroup = e => {
-			setValueObjects(e.detail.value);
+		const handleBlur = (e: CustomEvent) => {
+			console.log("blur event", e);
+		};
+
+		const handleValueGroup = (e: CustomEvent) => {
+			console.log("blur event", e);
 		};
 
 		return html`
@@ -1148,12 +1161,12 @@ export const Checkbox = {
 	//setValue(e.detail.value);
 	render:
 		//setValueObjects(e.detail.value);
-		args => {
-			const [value, setValue] = useState([]);
-			const [valueObjects, setValueObjects] = useState(null);
-			const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+		() => {
+			const value: string[] = [];
+			const valueObjects = null;
+			const options = ["option 1", "option 2", "option 3", "option 4"];
 
-			const [optionsObjects, setOptionsObjects] = useState([
+			const optionsObjects = [
 				{
 					icon: "i-home",
 					title: "option 1"
@@ -1170,14 +1183,14 @@ export const Checkbox = {
 					icon: "i-app",
 					title: "option 4"
 				}
-			]);
+			];
 
-			const [groupOptions, setGroupOptions] = useState({
+			const groupOptions = {
 				Group1: ["option 1", "option 2", "option 3", "option 4"],
 				Group2: ["option 5", "option 6", "option 7", "option "]
-			});
+			};
 
-			const [groupOtionsObjects, setGroupOptionsObjects] = useState({
+			const groupOtionsObjects = {
 				Group1: [
 					{
 						icon: "i-home",
@@ -1215,10 +1228,14 @@ export const Checkbox = {
 						title: "option 8"
 					}
 				]
-			});
+			};
 
-			const handleValue = e => {};
-			const handleValueGroup = e => {};
+			const handleValue = (e: CustomEvent) => {
+				console.log("input event", e);
+			};
+			const handleValueGroup = (e: CustomEvent) => {
+				console.log("input event", e);
+			};
 
 			return html`
 				<f-div width="100%" align="middle-center" padding="large" gap="medium">
@@ -1300,12 +1317,12 @@ export const Checkbox = {
 };
 
 export const Clear = {
-	render: args => {
-		const [value, setValue] = useState("");
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+	render: () => {
+		const value = "";
+		const options = ["option 1", "option 2", "option 3", "option 4"];
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`
@@ -1348,12 +1365,12 @@ export const Clear = {
 };
 
 export const Disabled = {
-	render: args => {
-		const [value, setValue] = useState("");
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+	render: () => {
+		const value = "";
+		const options = ["option 1", "option 2", "option 3", "option 4"];
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`
@@ -1382,12 +1399,12 @@ export const Disabled = {
 };
 
 export const Loading = {
-	render: args => {
-		const [value, setValue] = useState("");
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+	render: () => {
+		const value = "";
+		const options = ["option 1", "option 2", "option 3", "option 4"];
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`
@@ -1416,16 +1433,16 @@ export const Loading = {
 };
 
 export const CreateOption = {
-	render: args => {
-		const [value, setValue] = useState("");
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+	render: () => {
+		const value = "";
+		const options = ["option 1", "option 2", "option 3", "option 4"];
 
-		const handleValue = e => {
-			setValue(e.detail.value);
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
-		const handleCreateOption = e => {
-			console.log(e.detail);
+		const handleCreateOption = (e: CustomEvent) => {
+			console.log("add-option event", e);
 		};
 
 		return html`
@@ -1442,7 +1459,7 @@ export const CreateOption = {
 						width="200"
 						?create-option=${true}
 						@add-option=${handleCreateOption}
-						?auto-add-option=${false}
+						.autoAddOption=${false}
 					>
 						<f-div slot="label" padding="none" gap="none"
 							>Label for f-select (create-option=true)</f-div
@@ -1461,7 +1478,8 @@ export const CreateOption = {
 						type="multiple"
 						?searchable=${true}
 						?create-option=${true}
-						?auto-add-option=${false}
+						@add-option=${handleCreateOption}
+						.autoAddOption=${false}
 					>
 						<f-div slot="label" padding="none" gap="none"
 							>Label for f-select (create-option=true)</f-div
@@ -1478,16 +1496,12 @@ export const CreateOption = {
 };
 
 export const AutoAddOption = {
-	render: args => {
-		const [value, setValue] = useState("");
-		const [options, setOptions] = useState(["option 1", "option 2", "option 3", "option 4"]);
+	render: () => {
+		const value = "";
+		const options = ["option 1", "option 2", "option 3", "option 4"];
 
-		const handleValue = e => {
-			setValue(e.detail.value);
-		};
-
-		const handleCreateOption = e => {
-			console.log(e.detail);
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
 		};
 
 		return html`

@@ -87,9 +87,9 @@ export class FProgressBar extends FRoot {
 
 	get circleDiameter() {
 		if (this.size === "large") {
-			return "28px";
+			return "30px";
 		} else if (this.size === "medium") {
-			return "20px";
+			return "22px";
 		} else if (this.size === "small") {
 			return "16px";
 		} else {
@@ -164,6 +164,10 @@ export class FProgressBar extends FRoot {
 		 * creating local fill variable out of state prop.
 		 */
 		this.fill = getCustomFillColor(this.state ?? "");
+
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		//@ts-ignore
+		this.style.setProperty("--f-circle-progress-outline", this.fill);
 
 		/**
 		 * validate

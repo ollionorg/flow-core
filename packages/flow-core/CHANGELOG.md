@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.8.3] - 2024-02-12
+
+### Improvements
+
+- Updated `f-progress-bar` dimentions of circle variant.
+
 ## [2.8.2] - 2024-02-12
 
 ### Improvements

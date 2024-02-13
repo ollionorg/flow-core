@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.2.4] - 2024-02-13
+
+### Patch Changes
+
+- `layout` property added to field which currently supports `label-left` value.
+
 ## [2.2.3] - 2024-02-13
 
 ### Patch Changes

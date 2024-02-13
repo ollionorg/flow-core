@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.8.5] - 2024-02-13
+
+### Improvements
+
+- `f-ollion-dark` theme colors updated.
+
 ## [2.8.4] - 2024-02-13
 
 ### Bug Fixes

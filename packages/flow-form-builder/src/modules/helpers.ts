@@ -1,7 +1,7 @@
 import { FFormArray } from "../components/f-form-array/f-form-array";
 import { FFormObject } from "../components/f-form-object/f-form-object";
 import { FFormBuilder } from "../components/f-form-builder/f-form-builder";
-import { LitElement, nothing, html, CSSResult, unsafeCSS } from "lit";
+import { LitElement, nothing, html, CSSResult, unsafeCSS, TemplateResult } from "lit";
 
 import {
 	FormBuilderButtonField,
@@ -111,7 +111,7 @@ export function getSlots(
 		FormBuilderSeparatorField | FormBuilderHiddenField | FormBuilderButtonField
 	>
 ) {
-	return html` ${field.label?.title
+	const title = field.label?.title
 		? html` <f-div
 				slot="label"
 				padding="none"
@@ -123,16 +123,12 @@ export function getSlots(
 		? html`<f-div slot="label" padding="none" gap="none" data-qa-label-for=${field.qaId || field.id}
 				>${name}</f-div
 		  >`
-		: ""}
-	${field.label?.description
+		: nothing;
+
+	const description = field.label?.description
 		? html` <f-div slot="description" padding="none" gap="none">${field.label.description}</f-div>`
-		: ""}
-	${field.helperText
-		? html`<f-div slot="help" data-qa-help-for=${field.qaId || field.id}
-				>${field.helperText}
-		  </f-div>`
-		: ``}
-	${field.label?.iconTooltip
+		: nothing;
+	const iconTooltip = field.label?.iconTooltip
 		? html`
 				<f-icon
 					slot="icon-tooltip"
@@ -144,10 +140,58 @@ export function getSlots(
 					clickable
 				></f-icon>
 		  `
-		: ""}
-	${getSubTitle(field)}`;
+		: nothing;
+	const subTitle = getSubTitle(field);
+	let label = html`${title}${description}${iconTooltip}`;
+	if (field.layout === "label-left") {
+		label = html`${nothing}`;
+	}
+	return html` ${label}${subTitle}
+	${field.helperText
+		? html`<f-div slot="help" data-qa-help-for=${field.qaId || field.id}
+				>${field.helperText}
+		  </f-div>`
+		: nothing}`;
 }
 
+export function getLabelLeftLayout(
+	field: Exclude<
+		FormBuilderField,
+		FormBuilderSeparatorField | FormBuilderHiddenField | FormBuilderButtonField
+	>,
+	fieldHtml: TemplateResult<1>
+) {
+	const description = field.label?.description
+		? html`<f-text state="secondary" size="small">${field.label.description}</f-text>`
+		: nothing;
+	const iconTooltip = field.label?.iconTooltip
+		? html`
+				<f-icon
+					source="i-question-filled"
+					size="small"
+					state="subtle"
+					data-qa-info-icon-for=${field.qaId || field.id}
+					.tooltip="${field.label?.iconTooltip}"
+					clickable
+				></f-icon>
+		  `
+		: nothing;
+	const title =
+		typeof field.label?.title === "object"
+			? field.label?.title
+			: html`<f-div gap="large" align="middle-left">
+					<f-text data-qa-label-for=${field.qaId || field.id}>${field.label?.title}</f-text>
+			  </f-div>`;
+
+	const label = html`<f-div width="hug-content" padding="none small none none" direction="column">
+		<f-div width="hug-content" gap="small">${title}${iconTooltip} </f-div>
+		${description}
+	</f-div>`;
+	return html`<f-div gap="auto" align="middle-left" width="100%">
+		${label}
+		<f-div align="middle-left"> ${fieldHtml} </f-div>
+	</f-div>`;
+}
 export function getEssentialFlowCoreStyles(): CSSResult[] {
 	return [
 		...FDiv.styles,

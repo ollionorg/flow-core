@@ -2,7 +2,7 @@ import { html } from "lit";
 import { FFormInputElements, FormBuilderField, FormBuilderRadioField } from "../../../types";
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
-import { getSlots } from "../../../modules/helpers";
+import { getLabelLeftLayout, getSlots } from "../../../modules/helpers";
 export default function (
 	name: string,
 	_field: FormBuilderField,
@@ -11,7 +11,7 @@ export default function (
 ) {
 	const field = _field as FormBuilderRadioField;
 
-	return html`
+	const fieldHtml = html`
 		<f-radio-group
 			id=${ifDefined(field.id)}
 			class=${ifDefined(field.className)}
@@ -35,4 +35,9 @@ export default function (
 			${getSlots(name, field)}
 		</f-radio-group>
 	`;
+
+	if (field.layout === "label-left") {
+		return getLabelLeftLayout(field, fieldHtml);
+	}
+	return fieldHtml;
 }

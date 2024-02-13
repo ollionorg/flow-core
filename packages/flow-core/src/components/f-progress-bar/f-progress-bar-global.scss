@@ -11,20 +11,11 @@ f-progress-bar {
 		flex: 0 0 auto;
 		border-radius: 50%;
 		border: 1px solid var(--f-circle-progress-outline);
-
+		padding: 2px;
 		@each $state, $color in $states {
 			&[state="#{$state}"] {
 				--f-circle-progress-outline: #{map.get($color, "background")};
 			}
-		}
-
-		&[size="x-small"],
-		&[size="small"] {
-			padding: 1px;
-		}
-		&[size="medium"],
-		&[size="large"] {
-			padding: 2px;
 		}
 	}
 }

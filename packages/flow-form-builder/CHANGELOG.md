@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.2.3] - 2024-02-13
+
+### Patch Changes
+
+- `suggestWhen` property support added to `suggest` field.
+
 ## [2.2.2] - 2024-02-12
 
 ### Patch Changes

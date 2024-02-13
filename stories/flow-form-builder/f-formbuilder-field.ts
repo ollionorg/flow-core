@@ -429,6 +429,7 @@ const field: FormBuilderField = {
 				title: "Click inside field to see suggestions",
 				description: "Select suggestion to fill value"
 			},
+			suggestWhen: () => true,
 			suggestions: [
 				"Suggestion 1",
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut mattis vitae turpis sit amet vehicula. Mauris leo nulla, venenatis vel ullamcorper vel, scelerisque at sem. Donec venenatis nisl in eros consequat, vitae condimentum odio gravida.",

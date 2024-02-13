@@ -26,6 +26,7 @@ export default function (
 			data-qa-element-id=${field.qaId || field.id}
 			.suggestions=${field.suggestions}
 			.suffixWhen=${field.suffixWhen}
+			.suggestWhen=${ifDefined(field.suggestWhen)}
 			max-length=${ifDefined(field.maxLength)}
 			?loading=${field.loading ?? false}
 			?disabled=${field.disabled ?? false}

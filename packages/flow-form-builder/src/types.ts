@@ -21,7 +21,8 @@ import {
 	DateDisableType,
 	FRootTooltip,
 	FColorPickerState,
-	FSelectMaxOptionsWidth
+	FSelectMaxOptionsWidth,
+	FSuggestWhen
 } from "@ollion/flow-core";
 import { BetweenParams } from "./modules/validation/rules/between";
 import { Subject } from "rxjs";
@@ -153,6 +154,7 @@ export type FormBuilderSuggestField = FormBuilderBaseField & {
 	clear?: boolean;
 	suggestions?: FSuggestSuggestions;
 	suffixWhen?: FormBuilderSuffixCondition;
+	suggestWhen?: FSuggestWhen;
 };
 
 export type FormBuilderFileField = FormBuilderBaseField & {

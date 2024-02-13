@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.8.4] - 2024-02-13
+
+### Bug Fixes
+
+- The issue with highlighting suggestions in `f-suggest` has been resolved.
+
 ## [2.8.3] - 2024-02-12
 
 ### Improvements

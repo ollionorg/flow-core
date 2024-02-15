@@ -235,7 +235,14 @@ export class FDiv extends FRoot {
 	 * @attribute Sets the f-div to a selected state. Select between border, background, or notch based on your use case.
 	 */
 	@property({ reflect: true, type: String })
-	selected?: "none" | "background" | "border" | "notch-right" | "notch-left" = "none";
+	selected?:
+		| "none"
+		| "background"
+		| "border"
+		| "notch-right"
+		| "notch-left"
+		| "notch-top"
+		| "notch-bottom" = "none";
 
 	/**
 	 * @attribute Sticky property defines a f-div’s position based on the scroll position of the container

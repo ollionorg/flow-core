@@ -1,0 +1,18 @@
+@import "./../../mixins/scss/mixins";
+@import "./f-icon-picker-variables";
+
+f-emoji-picker {
+	display: flex;
+	flex: 1 0 auto;
+	&[disabled] {
+		@include disabled();
+	}
+	&[state="default"] {
+		@include input-color("default");
+	}
+	@each $state, $color in $state-colors {
+		&[state="#{$state}"] {
+			@include input-color($state);
+		}
+	}
+}

@@ -248,7 +248,15 @@ export const Playground = {
 
 		selected: {
 			control: "select",
-			options: ["background", "border", "notch-right", "notch-left", "None"]
+			options: [
+				"background",
+				"border",
+				"notch-right",
+				"notch-left",
+				"notch-top",
+				"notch-bottom",
+				"none"
+			]
 		},
 
 		highlight: {

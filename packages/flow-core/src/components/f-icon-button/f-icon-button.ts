@@ -6,7 +6,7 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { classMap } from "lit-html/directives/class-map.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
-import { FIcon } from "../f-icon/f-icon";
+import { FIcon, FIconSource } from "../f-icon/f-icon";
 import { FCounter } from "../f-counter/f-counter";
 import { validateHTMLColorName } from "validate-color";
 import { validateHTMLColor } from "validate-color";
@@ -21,9 +21,9 @@ const variants = ["round", "curved", "block"] as const;
 const categories = ["fill", "outline", "transparent", "packed"] as const;
 const sizes = ["large", "medium", "small", "x-small"] as const;
 
-export type FIconButtonVariant = (typeof variants)[number];
-export type FIconButtonType = (typeof categories)[number];
-export type FIconButtonSize = (typeof sizes)[number];
+export type FIconButtonVariant = typeof variants[number];
+export type FIconButtonType = typeof categories[number];
+export type FIconButtonSize = typeof sizes[number];
 export type FIconButtonState =
 	| "primary"
 	| "danger"
@@ -55,18 +55,18 @@ export class FIconButton extends FRoot {
 	/**
 	 * @attribute Icon property defines what icon will be displayed on the icon. It can take the icon name from a library , any inline SVG or any URL for the image.
 	 */
-	@property({ type: String })
-	icon!: string;
+	@property({ type: [String, Object], reflect: true })
+	icon!: FIconSource;
 
 	/**
 	 * @attribute Variants are various representations of an icon button. For example an icon button can be round, curved or block.
 	 */
-	@property({ type: String })
+	@property({ type: String, reflect: true })
 	variant?: FIconButtonVariant = "round";
 	/**
 	 * @attribute Type of f-icon-button
 	 */
-	@property({ type: String })
+	@property({ type: String, reflect: true })
 	category?: FIconButtonType = "fill";
 
 	/**
@@ -78,7 +78,7 @@ export class FIconButton extends FRoot {
 	/**
 	 * @attribute Size of f-icon-button
 	 */
-	@property({ type: String })
+	@property({ type: String, reflect: true })
 	state?: FIconButtonState = "primary";
 
 	/**

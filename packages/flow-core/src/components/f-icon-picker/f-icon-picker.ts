@@ -7,25 +7,19 @@ import { FDiv } from "../f-div/f-div";
 import { FPopover } from "../f-popover/f-popover";
 import eleStyle from "./f-icon-picker.scss?inline";
 import { FText } from "../f-text/f-text";
-import { FIcon } from "../f-icon/f-icon";
+import { FIcon, FIconCustomSource } from "../f-icon/f-icon";
 import { FIconButton } from "../f-icon-button/f-icon-button";
+import { FSearch } from "../f-search/f-search";
 injectCss("f-icon-picker", globalStyle);
 
 export type FIconPickerState = "primary" | "default" | "success" | "warning" | "danger";
 
-import SystemIconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
-import ProductIconPack from "@ollion/flow-product-icon/dist/types/icon-pack";
-import GcpIconPack from "@ollion/flow-gcp-icon/dist/types/icon-pack";
-import AwsIconPack from "@ollion/flow-aws-icon/dist/types/icon-pack";
-import { FSearch } from "../f-search/f-search";
-
-const defaultIconPacks = {
-	System: SystemIconPack,
-	Product: ProductIconPack,
-	GCP: GcpIconPack,
-	AWS: AwsIconPack
-};
-
+export type FIconPickerCategories =
+	| {
+			name: string;
+			categoryIcon: string | URL;
+			icons: FIconCustomSource[];
+	  }[];
 @customElement("f-icon-picker")
 export class FIconPicker extends FRoot {
 	/**
@@ -45,8 +39,8 @@ export class FIconPicker extends FRoot {
 	/**
 	 * @attribute Defines the value of f-icon-picker
 	 */
-	@property({ reflect: true, type: String })
-	value?: string;
+	@property({ reflect: true, type: Object })
+	value?: FIconCustomSource;
 
 	/**
 	 * @attribute show/remove clear icon
@@ -89,6 +83,14 @@ export class FIconPicker extends FRoot {
 	 */
 	@property({ reflect: true, type: Boolean })
 	disabled?: boolean = false;
+
+	/**
+	 * @attribute Specify icon set.
+	 */
+	@property({ type: Object })
+	categories!: FIconPickerCategories;
+
+	readonly required = ["categories"];
 
 	/**
 	 * @attribute assigned elements inside slot label
@@ -144,19 +146,16 @@ export class FIconPicker extends FRoot {
 		this.value = undefined;
 		this.dispatchEvent(event);
 	}
-	handleIconSeletion(name: string, value: string) {
+	handleIconSeletion(value: FIconCustomSource) {
 		/**
 		 * @event input
 		 */
 		const event = new CustomEvent("input", {
-			detail: {
-				name,
-				value
-			},
+			detail: value,
 			bubbles: true,
 			composed: true
 		});
-		this.value = name;
+		this.value = value;
 		this.dispatchEvent(event);
 	}
 	render() {
@@ -247,62 +246,41 @@ export class FIconPicker extends FRoot {
 			>
 				<f-div direction="column" overflow="scroll" max-height="500px">
 					<f-div border="small solid default bottom" height="hug-content" overflow="scroll">
-						<f-div padding="medium" selected="notch-bottom" width="hug-content">
-							<f-icon-button
-								size="large"
-								icon="i-home"
-								state="neutral"
-								category="packed"
-							></f-icon-button>
-						</f-div>
-						<f-div padding="medium" width="hug-content">
-							<f-icon-button
-								size="large"
-								icon="i-flag"
-								state="neutral"
-								category="packed"
-							></f-icon-button>
-						</f-div>
-						<f-div padding="medium" width="hug-content">
-							<f-icon-button
-								size="large"
-								icon="p-aws"
-								state="neutral"
-								category="packed"
-							></f-icon-button>
-						</f-div>
-						<f-div padding="medium" width="hug-content">
-							<f-icon-button
-								size="large"
-								icon="p-gcp"
-								state="neutral"
-								category="packed"
-							></f-icon-button>
-						</f-div>
+						${this.categories.map(category => {
+							return html`<f-div padding="medium" selected="notch-bottom" width="hug-content">
+								<f-icon-button
+									.tooltip=${category.name}
+									size="medium"
+									.icon=${{ name: category.name, source: category.categoryIcon }}
+									state="neutral"
+									category="packed"
+								></f-icon-button>
+							</f-div>`;
+						})}
 					</f-div>
 					<f-div padding="medium medium none medium" height="hug-content">
 						<f-search></f-search>
 					</f-div>
 					<f-div direction="column" overflow="scroll">
-						${Object.entries(defaultIconPacks).map(([name, icons]) => {
+						${this.categories.map(category => {
 							return html`<f-div
 									sticky="top"
 									state="tertiary"
 									padding="medium"
 									height="hug-content"
 								>
-									<f-text size="large" weight="medium">${name}</f-text>
+									<f-text size="large" weight="medium">${category.name}</f-text>
 								</f-div>
-								<f-div height="hug-content" padding="none medium">
-									${Object.entries(icons).map(([name, svg]) => {
+								<f-div height="hug-content" padding="none medium medium medium">
+									${category.icons.map(icon => {
 										return html`<f-div
 											width="hug-content"
 											align="middle-center"
 											clickable
-											@click=${() => this.handleIconSeletion(name, svg)}
+											@click=${() => this.handleIconSeletion(icon)}
 											padding="small"
 											height="hug-content"
-											><f-icon size="large" .source=${name}></f-icon
+											><f-icon .tooltip=${icon.name} size="medium" .source=${icon}></f-icon
 										></f-div>`;
 									})}
 								</f-div>`;

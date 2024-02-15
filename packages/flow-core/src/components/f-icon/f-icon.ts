@@ -20,6 +20,7 @@ injectCss("f-icon", globalStyle);
 export type FIconCustomSource = {
 	name: string;
 	source: string | URL;
+	keywords?: string;
 };
 
 export type FIconSource = string | FIconCustomSource;

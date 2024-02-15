@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
+import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { FRoot } from "./../../mixins/components/f-root/f-root";
 import globalStyle from "./f-icon-picker-global.scss?inline";
 import { injectCss } from "@ollion/flow-core-config";
@@ -10,6 +10,8 @@ import { FText } from "../f-text/f-text";
 import { FIcon, FIconCustomSource } from "../f-icon/f-icon";
 import { FIconButton } from "../f-icon-button/f-icon-button";
 import { FSearch } from "../f-search/f-search";
+import Fuse from "fuse.js";
+
 injectCss("f-icon-picker", globalStyle);
 
 export type FIconPickerState = "primary" | "default" | "success" | "warning" | "danger";
@@ -130,6 +132,9 @@ export class FIconPicker extends FRoot {
 	@query(".f-icon-picker-popover")
 	iconPickerPopover!: FPopover;
 
+	@state()
+	searchKeyword?: string;
+
 	clearValue() {
 		/**
 		 * @event input
@@ -156,6 +161,58 @@ export class FIconPicker extends FRoot {
 		});
 		this.value = value;
 		this.dispatchEvent(event);
+	}
+
+	getIconPickerPopover() {
+		return html`<f-popover
+			class="f-icon-picker-popover"
+			data-qa-icon-popover=${this.getAttribute("data-qa-element-id")}
+			.overlay=${false}
+		>
+			<f-div direction="column" overflow="scroll" max-height="500px">
+				<f-div border="small solid default bottom" height="hug-content" overflow="scroll">
+					${this.categories.map(category => {
+						return html`<f-div
+							clickable
+							padding="medium"
+							selected="notch-bottom"
+							width="hug-content"
+						>
+							<f-icon
+								.tooltip=${category.name}
+								size="medium"
+								.source=${{ name: category.name, source: category.categoryIcon }}
+							></f-icon>
+						</f-div>`;
+					})}
+				</f-div>
+				<f-div padding="medium medium none medium" height="hug-content">
+					<f-search @input=${this.handleSearch}></f-search>
+				</f-div>
+				<f-div direction="column" overflow="scroll">
+					${this.filteredCategories.map(category => {
+						return html`<f-div sticky="top" state="tertiary" padding="medium" height="hug-content">
+								<f-text size="large" weight="medium">${category.name}</f-text>
+							</f-div>
+							<f-div height="hug-content" padding="none medium medium medium">
+								${category.icons.map(icon => {
+									return html`<f-div
+										width="hug-content"
+										align="middle-center"
+										clickable
+										@click=${() => this.handleIconSeletion(icon)}
+										padding="small"
+										height="hug-content"
+										gap="x-small"
+										direction="column"
+										><f-icon .tooltip=${icon.name} size="medium" .source=${icon}></f-icon>
+									</f-div>`;
+								})}
+							</f-div>`;
+					})}
+				</f-div>
+			</f-div>
+		</f-popover>`;
 	}
 	render() {
 		/**
@@ -238,56 +295,30 @@ export class FIconPicker extends FRoot {
 				</div>
 				<f-div direction="column" id="f-icon-picker-error"><slot name="help"></slot> </f-div>
 			</f-div>
-			<f-popover
-				class="f-icon-picker-popover"
-				data-qa-icon-popover=${this.getAttribute("data-qa-element-id")}
-				.overlay=${false}
-			>
-				<f-div direction="column" overflow="scroll" max-height="500px">
-					<f-div border="small solid default bottom" height="hug-content" overflow="scroll">
-						${this.categories.map(category => {
-							return html`<f-div padding="medium" selected="notch-bottom" width="hug-content">
-								<f-icon-button
-									.tooltip=${category.name}
-									size="medium"
-									.icon=${{ name: category.name, source: category.categoryIcon }}
-									state="neutral"
-									category="packed"
-								></f-icon-button>
-							</f-div>`;
-						})}
-					</f-div>
-					<f-div padding="medium medium none medium" height="hug-content">
-						<f-search></f-search>
-					</f-div>
-					<f-div direction="column" overflow="scroll">
-						${this.categories.map(category => {
-							return html`<f-div
-									sticky="top"
-									state="tertiary"
-									padding="medium"
-									height="hug-content"
-								>
-									<f-text size="large" weight="medium">${category.name}</f-text>
-								</f-div>
-								<f-div height="hug-content" padding="none medium medium medium">
-									${category.icons.map(icon => {
-										return html`<f-div
-											width="hug-content"
-											align="middle-center"
-											clickable
-											@click=${() => this.handleIconSeletion(icon)}
-											padding="small"
-											height="hug-content"
-											><f-icon .tooltip=${icon.name} size="medium" .source=${icon}></f-icon
-										></f-div>`;
-									})}
-								</f-div>`;
-						})}
-					</f-div>
-				</f-div>
-			</f-popover>
+			${this.getIconPickerPopover()}
 		`;
+	}
+
+	get filteredCategories() {
+		if (this.searchKeyword && this.searchKeyword.length > 0) {
+			const filtered = this.categories.map(category => {
+				const fuse = new Fuse(category.icons, {
+					keys: ["name", "keywords"],
+					findAllMatches: true
+				});
+				return {
+					...category,
+					icons: fuse.search(this.searchKeyword as string).map(r => r.item)
+				};
+			});
+			return filtered.filter(cat => cat.icons.length > 0);
+		}
+
+		return this.categories;
+	}
+
+	handleSearch(e: CustomEvent) {
+		this.searchKeyword = e.detail.value as string;
 	}
 
 	/**
@@ -297,6 +328,7 @@ export class FIconPicker extends FRoot {
 	toggleIconPicker(value: boolean) {
 		this.iconPickerPopover.target = this.iconPicker;
 		this.iconPickerPopover.open = value;
+		this.iconPickerPopover.placement = "bottom";
 	}
 }
 

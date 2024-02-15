@@ -14,12 +14,11 @@ injectCss("f-icon-picker", globalStyle);
 
 export type FIconPickerState = "primary" | "default" | "success" | "warning" | "danger";
 
-export type FIconPickerCategories =
-	| {
-			name: string;
-			categoryIcon: string | URL;
-			icons: FIconCustomSource[];
-	  }[];
+export type FIconPickerCategories = {
+	name: string;
+	categoryIcon: string | URL;
+	icons: FIconCustomSource[];
+}[];
 @customElement("f-icon-picker")
 export class FIconPicker extends FRoot {
 	/**

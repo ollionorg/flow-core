@@ -191,7 +191,7 @@ export class FIcon extends FRoot {
 		} else if (typeof value === "object") {
 			if (typeof value.source === "string") {
 				this._source = value.source;
-			} else if (value instanceof URL) {
+			} else if (value.source instanceof URL) {
 				this._source = `<img src="${value.source.toString()}"/>`;
 			} else {
 				this._source = notFound;

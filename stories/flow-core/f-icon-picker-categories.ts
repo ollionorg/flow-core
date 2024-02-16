@@ -3,6 +3,15 @@ import { FIconCustomSource, FIconPickerCategories } from "@ollion/flow-core";
 
 import * as icons from "simple-icons";
 const categories: FIconPickerCategories = [];
+
+const categoryIconLinks = [
+	"https://cdn3.iconfinder.com/data/icons/logos-brands-3/24/logo_brand_brands_logos_google-1024.png",
+	"https://cdn3.iconfinder.com/data/icons/logos-brands-3/24/logo_brand_brands_logos_linux-1024.png",
+	"https://cdn4.iconfinder.com/data/icons/small-n-flat/24/globe-1024.png",
+	"https://cdn3.iconfinder.com/data/icons/logos-brands-3/24/logo_brand_brands_logos_safari-1024.png",
+	"https://cdn3.iconfinder.com/data/icons/social-media-2169/24/social_media_social_media_logo_google_wallet-1024.png"
+];
+const categoryNames = ["Google", "Linux", "Earth", "Safari", "Media"];
 export default function getCategories() {
 	if (categories.length === 0) {
 		const allIcons = Object.entries(icons);
@@ -18,8 +27,8 @@ export default function getCategories() {
 				});
 			}
 			categories.push({
-				name: faker.company.buzzNoun(),
-				categoryIcon: faker.helpers.arrayElement(allIcons)[1].svg,
+				name: categoryNames[i], //faker.company.buzzNoun(),
+				categoryIcon: new URL(categoryIconLinks[i]), //faker.helpers.arrayElement(allIcons)[1].svg,
 				icons
 			});
 		}

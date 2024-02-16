@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, nothing, unsafeCSS } from "lit";
 import { customElement, property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { FRoot } from "./../../mixins/components/f-root/f-root";
 import globalStyle from "./f-icon-picker-global.scss?inline";
@@ -163,24 +163,31 @@ export class FIconPicker extends FRoot {
 		this.dispatchEvent(event);
 	}
 
-	getIconPickerPopover() {
-		const noIconFound =
-			this.filteredCategories.length === 0
-				? html`<f-div align="middle-center">
-						<f-text align="center" state="secondary"
-							>Sorry, no matching icon found for your search. Please try a different search term or
-							refine your query</f-text
-						>
-				  </f-div>`
-				: html`<f-div height="320px"></f-div>`;
-		return html`<f-popover
-			class="f-icon-picker-popover"
-			data-qa-icon-popover=${this.getAttribute("data-qa-element-id")}
-			.overlay=${false}
-		>
-			<f-div direction="column" overflow="scroll" max-height="500px">
-				<f-div border="small solid default bottom" height="hug-content" overflow="scroll">
-					${this.categories.map((category, i) => {
+	get noIconFound() {
+		return this.filteredCategories?.length === 0
+			? html`<f-div align="middle-center">
+					<f-text align="center" state="secondary"
+						>Sorry, no matching icon found for your search. Please try a different search term or
+						refine your query</f-text
+					>
+			  </f-div>`
+			: this.categories
+			? html`<f-div height="320px"></f-div>`
+			: nothing;
+	}
+
+	get noCategories() {
+		return !this.filteredCategories
+			? html`<f-div align="middle-center">
+					<f-text align="center" state="secondary">No categories and icons configured.</f-text>
+			  </f-div>`
+			: nothing;
+	}
+
+	get categoryTabs() {
+		return this.categories
+			? html`<f-div border="small solid default bottom" height="hug-content" overflow="scroll">
+					${this.categories?.map((category, i) => {
 						return html`<f-div
 							clickable
 							.selected=${i === 0 ? "notch-bottom" : "none"}
@@ -197,10 +204,62 @@ export class FIconPicker extends FRoot {
 							></f-icon>
 						</f-div>`;
 					})}
-				</f-div>
-				<f-div padding="medium medium none medium" height="hug-content">
+			  </f-div>`
+			: nothing;
+	}
+
+	get searchBar() {
+		return this.filteredCategories
+			? html` <f-div padding="medium medium none medium" height="hug-content">
 					<f-search @input=${this.handleSearch}></f-search>
+			  </f-div>`
+			: nothing;
+	}
+
+	get allIcons() {
+		return this.filteredCategories?.map(category => {
+			return html`<f-div
+					class="category-label"
+					data-category="${category.name}"
+					sticky="top"
+					state="tertiary"
+					padding="medium"
+					height="hug-content"
+				>
+					<f-text size="large" weight="medium">${category.name}</f-text>
 				</f-div>
+				<f-div
+					class="category-icons"
+					data-category="${category.name}"
+					height="hug-content"
+					padding="none medium medium medium"
+				>
+					${category.icons.map(icon => {
+						return html`<f-div
+							width="hug-content"
+							align="middle-center"
+							clickable
+							@click=${() => this.handleIconSeletion(icon)}
+							padding="small"
+							height="hug-content"
+							gap="x-small"
+							direction="column"
+							><f-icon .tooltip=${icon.name} size="medium" .source=${icon}></f-icon>
+						</f-div>`;
+					})}
+				</f-div>`;
+		});
+	}
+
+	getIconPickerPopover() {
+		return html`<f-popover
+			class="f-icon-picker-popover"
+			data-qa-icon-popover=${this.getAttribute("data-qa-element-id")}
+			.overlay=${false}
+		>
+			<f-div direction="column" overflow="scroll" max-height="500px">
+				${this.categoryTabs} ${this.searchBar}
+
 				<f-div
 					direction="column"
 					style="min-height:300px"
@@ -208,39 +267,7 @@ export class FIconPicker extends FRoot {
 					class="icon-container"
 					@scroll=${this.handleCategorySelection}
 				>
-					${this.filteredCategories.map(category => {
-						return html`<f-div
-								class="category-label"
-								data-category="${category.name}"
-								sticky="top"
-								state="tertiary"
-								padding="medium"
-								height="hug-content"
-							>
-								<f-text size="large" weight="medium">${category.name}</f-text>
-							</f-div>
-							<f-div
-								class="category-icons"
-								data-category="${category.name}"
-								height="hug-content"
-								padding="none medium medium medium"
-							>
-								${category.icons.map(icon => {
-									return html`<f-div
-										width="hug-content"
-										align="middle-center"
-										clickable
-										@click=${() => this.handleIconSeletion(icon)}
-										padding="small"
-										height="hug-content"
-										gap="x-small"
-										direction="column"
-										><f-icon .tooltip=${icon.name} size="medium" .source=${icon}></f-icon>
-									</f-div>`;
-								})}
-							</f-div>`;
-					})}
-					${noIconFound}
+					${this.noCategories} ${this.allIcons} ${this.noIconFound}
 				</f-div>
 			</f-div>
 		</f-popover>`;

@@ -164,6 +164,15 @@ export class FIconPicker extends FRoot {
 	}
 
 	getIconPickerPopover() {
+		const noIconFound =
+			this.filteredCategories.length === 0
+				? html`<f-div align="middle-center">
+						<f-text align="center" state="secondary"
+							>Sorry, no matching icon found for your search. Please try a different search term or
+							refine your query</f-text
+						>
+				  </f-div>`
+				: html`<f-div height="320px"></f-div>`;
 		return html`<f-popover
 			class="f-icon-picker-popover"
 			data-qa-icon-popover=${this.getAttribute("data-qa-element-id")}
@@ -171,12 +180,15 @@ export class FIconPicker extends FRoot {
 		>
 			<f-div direction="column" overflow="scroll" max-height="500px">
 				<f-div border="small solid default bottom" height="hug-content" overflow="scroll">
-					${this.categories.map(category => {
+					${this.categories.map((category, i) => {
 						return html`<f-div
 							clickable
+							.selected=${i === 0 ? "notch-bottom" : "none"}
 							padding="medium"
-							selected="notch-bottom"
+							data-category="${category.name}"
 							width="hug-content"
+							class="category-tab"
+							@click=${() => this.selectCategory(category.name)}
 						>
 							<f-icon
 								.tooltip=${category.name}
@@ -189,12 +201,30 @@ export class FIconPicker extends FRoot {
 				<f-div padding="medium medium none medium" height="hug-content">
 					<f-search @input=${this.handleSearch}></f-search>
 				</f-div>
-				<f-div direction="column" overflow="scroll">
+				<f-div
+					direction="column"
+					style="min-height:300px"
+					overflow="scroll"
+					class="icon-container"
+					@scroll=${this.handleCategorySelection}
+				>
 					${this.filteredCategories.map(category => {
-						return html`<f-div sticky="top" state="tertiary" padding="medium" height="hug-content">
+						return html`<f-div
+								class="category-label"
+								data-category="${category.name}"
+								sticky="top"
+								state="tertiary"
+								padding="medium"
+								height="hug-content"
+							>
 								<f-text size="large" weight="medium">${category.name}</f-text>
 							</f-div>
-							<f-div height="hug-content" padding="none medium medium medium">
+							<f-div
+								class="category-icons"
+								data-category="${category.name}"
+								height="hug-content"
+								padding="none medium medium medium"
+							>
 								${category.icons.map(icon => {
 									return html`<f-div
 										width="hug-content"
@@ -210,6 +240,7 @@ export class FIconPicker extends FRoot {
 								})}
 							</f-div>`;
 					})}
+					${noIconFound}
 				</f-div>
 			</f-div>
 		</f-popover>`;
@@ -299,12 +330,69 @@ export class FIconPicker extends FRoot {
 		`;
 	}
 
+	selectCategory(category: string) {
+		const iconContainer = this.shadowRoot?.querySelector(".icon-container");
+		const categorylabel = this.shadowRoot?.querySelector<FDiv>(
+			`.category-label[data-category="${category}"]`
+		);
+
+		if (iconContainer?.getBoundingClientRect().y === categorylabel?.getBoundingClientRect().y) {
+			const categoryIcons = this.shadowRoot?.querySelector<FDiv>(
+				`.category-icons[data-category="${category}"]`
+			);
+
+			if (categoryIcons) {
+				categoryIcons.scrollIntoView({
+					block: "start"
+				});
+
+				if (iconContainer) {
+					iconContainer.scrollBy({
+						top: -46,
+						behavior: "smooth"
+					});
+				}
+			}
+		} else {
+			if (categorylabel) {
+				categorylabel.scrollIntoView({
+					block: "start",
+					behavior: "smooth"
+				});
+			}
+		}
+	}
+
+	handleCategorySelection(event: Event) {
+		const container = event.target as HTMLElement;
+		const allLabels = container.querySelectorAll<FDiv>(".category-label");
+		let lastStickylabel: FDiv | undefined = undefined;
+		allLabels.forEach(labelElement => {
+			if (labelElement.getBoundingClientRect().top === container.getBoundingClientRect().top) {
+				lastStickylabel = labelElement;
+			}
+		});
+
+		if (lastStickylabel) {
+			const allCatTabs = this.shadowRoot?.querySelectorAll<FDiv>(".category-tab");
+
+			allCatTabs?.forEach(tab => {
+				if (tab.dataset.category === lastStickylabel?.dataset.category) {
+					tab.selected = "notch-bottom";
+				} else {
+					tab.selected = "none";
+				}
+			});
+		}
+	}
+
 	get filteredCategories() {
 		if (this.searchKeyword && this.searchKeyword.length > 0) {
 			const filtered = this.categories.map(category => {
 				const fuse = new Fuse(category.icons, {
 					keys: ["name", "keywords"],
-					findAllMatches: true
+					findAllMatches: true,
+					distance: 3
 				});
 				return {
 					...category,
@@ -328,7 +416,6 @@ export class FIconPicker extends FRoot {
 	toggleIconPicker(value: boolean) {
 		this.iconPickerPopover.target = this.iconPicker;
 		this.iconPickerPopover.open = value;
-		this.iconPickerPopover.placement = "bottom";
 	}
 }
 

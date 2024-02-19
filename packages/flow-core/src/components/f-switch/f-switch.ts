@@ -16,6 +16,11 @@ export type FSwitchCustomEvent = {
 
 @flowElement("f-switch")
 export class FSwitch extends FRoot {
+	constructor() {
+		super();
+		this.role = "switch";
+	}
+
 	/**
 	 * css loaded from scss file
 	 */

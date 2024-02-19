@@ -17,6 +17,14 @@ import { Subscription } from "rxjs";
 
 injectCss("f-icon", globalStyle);
 
+export type FIconCustomSource = {
+	name: string;
+	source: string | URL;
+	keywords?: string;
+};
+
+export type FIconSource = string | FIconCustomSource;
+
 export type FIconState =
 	| "default"
 	| "secondary"
@@ -43,7 +51,7 @@ export class FIcon extends FRoot {
 	fill = "";
 
 	private _source!: string;
-	private _originalSource?: string;
+	private _originalSource?: FIconSource;
 
 	/**
 	 * @internal
@@ -57,26 +65,27 @@ export class FIcon extends FRoot {
 	/**
 	 * @attribute The small size is the default.
 	 */
-	@property({ type: String })
+	@property({ type: String, reflect: true })
 	size?: "x-large" | "large" | "medium" | "small" | "x-small" = "small";
 
 	/**
 	 * @attribute The state of an Icon helps in indicating the degree of emphasis. The Icon component inherits the state from the parent component. By default it is subtle.
 	 */
-	@property({ type: String })
+	@property({ type: String, reflect: true })
 	state?: FIconState = "default";
 
 	/**
 	 * @attribute Source property defines what will be displayed on the icon. For icon variant It can take the icon name from a library , any inline SVG or any URL for the image. For emoji, it takes emoji as inline text.
 	 */
 	@property({
-		type: String
+		type: [String, Object],
+		reflect: true
 	})
 	get source(): string {
 		return this._source;
 	}
 	// source computed based on value given by user
-	set source(value) {
+	set source(value: FIconSource) {
 		this._originalSource = value;
 		this.computeSource(value);
 	}
@@ -90,13 +99,13 @@ export class FIcon extends FRoot {
 	/**
 	 * @attribute display loader
 	 */
-	@property({ type: Boolean })
+	@property({ type: Boolean, reflect: true })
 	loading?: boolean = false;
 
 	/**
 	 * @attribute is clickable
 	 */
-	@property({ type: Boolean })
+	@property({ type: Boolean, reflect: true })
 	clickable?: boolean = false;
 
 	readonly required = ["source"];
@@ -151,34 +160,43 @@ export class FIcon extends FRoot {
 		return "";
 	}
 
-	computeSource(value: string) {
-		const emojiRegex = /\p{Extended_Pictographic}/u;
-		if (isValidHttpUrl(value)) {
-			this.isURLSource = true;
-			this._source = `<img src="${value}"/>`;
-		} else if (emojiRegex.test(value)) {
-			this._source = value;
-		} else {
-			const IconPack = configSubject.value.iconPack;
-			if (IconPack) {
-				let svg = IconPack[value];
-				const theme = configSubject.value.theme;
-				if (!svg && theme === "f-dark") {
-					svg = IconPack[value + "-dark"];
-				}
-				if (!svg && theme === "f-light") {
-					svg = IconPack[value + "-light"];
-				}
-				if (svg) {
-					this._source = svg;
+	computeSource(value: FIconSource) {
+		if (typeof value === "string") {
+			const emojiRegex = /\p{Extended_Pictographic}/u;
+			if (isValidHttpUrl(value)) {
+				this.isURLSource = true;
+				this._source = `<img src="${value}"/>`;
+			} else if (emojiRegex.test(value)) {
+				this._source = value;
+			} else {
+				const IconPack = configSubject.value.iconPack;
+				if (IconPack) {
+					let svg = IconPack[value];
+					const theme = configSubject.value.theme;
+					if (!svg && theme === "f-dark") {
+						svg = IconPack[value + "-dark"];
+					}
+					if (!svg && theme === "f-light") {
+						svg = IconPack[value + "-light"];
+					}
+					if (svg) {
+						this._source = svg;
+					} else {
+						this._source = notFound;
+					}
 				} else {
 					this._source = notFound;
 				}
+			}
+		} else if (typeof value === "object") {
+			if (typeof value.source === "string") {
+				this._source = value.source;
+			} else if (value.source instanceof URL) {
+				this._source = `<img src="${value.source.toString()}"/>`;
 			} else {
 				this._source = notFound;
 			}
 		}
-		this.requestUpdate();
 	}
 
 	render() {

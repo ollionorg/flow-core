@@ -3,6 +3,7 @@ import SystemIconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 import ProductIconPack from "@ollion/flow-product-icon/dist/types/icon-pack";
 import GcpIconPack from "@ollion/flow-gcp-icon/dist/types/icon-pack";
 import AwsIconPack from "@ollion/flow-aws-icon/dist/types/icon-pack";
+import CUSTOM_ICON_PACK from "./custom-icon-pack";
 
 import { ConfigUtil } from "@ollion/flow-core-config";
 import { changeRoute } from "./utils";
@@ -99,6 +100,8 @@ export const decorators = [
 				...AwsIconPack
 			}
 		});
+
+		ConfigUtil.setConfig({ iconPack: { ...ConfigUtil.getConfig().iconPack, ...CUSTOM_ICON_PACK } });
 		return html`
 			<div
 				style="background-color:var(--color-surface-default);color:var(--color-text-default);font-family:var(--flow-font);height:inherit;padding: 0px;"

@@ -91,6 +91,17 @@ export class FIconPicker extends FRoot {
 	@property({ type: Object })
 	categories!: FIconPickerCategories;
 
+	/**
+	 * @attribute if true close picker popover on value select
+	 */
+	@property({ reflect: true, type: Boolean, attribute: "close-on-select" })
+	closeOnSelect?: boolean = false;
+
+	// fix for vue2
+	set ["close-on-select"](val: boolean) {
+		this.closeOnSelect = val;
+	}
+
 	readonly required = ["categories"];
 
 	/**
@@ -160,6 +171,10 @@ export class FIconPicker extends FRoot {
 			composed: true
 		});
 		this.value = value;
+
+		if (this.closeOnSelect) {
+			this.closePopOver();
+		}
 		this.dispatchEvent(event);
 	}
 
@@ -250,11 +265,15 @@ export class FIconPicker extends FRoot {
 				</f-div>`;
 		});
 	}
+	closePopOver() {
+		this.iconPickerPopover.open = false;
+	}
 
 	getIconPickerPopover() {
 		return html`<f-popover
 			class="f-icon-picker-popover"
 			data-qa-icon-popover=${this.getAttribute("data-qa-element-id")}
+			@overlay-click=${this.closePopOver}
 			.overlay=${false}
 		>
 			<f-div direction="column" overflow="scroll" max-height="500px">

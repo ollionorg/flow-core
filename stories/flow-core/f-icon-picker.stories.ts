@@ -11,12 +11,14 @@ export default {
 	}
 };
 
+const categories = getCategories();
+
 export const Playground = {
 	render: (args: Record<string, unknown>) => {
 		const handleInput = (e: CustomEvent) => {
 			console.log("input event", e);
 		};
-		const categories = getCategories();
+
 		return html`
 			<f-div width="100%" align="top-left" padding="large">
 				<f-div width="hug-content" align="top-left">
@@ -293,7 +295,13 @@ export const Flags = {
 			<f-div direction="column">
 				<f-text>disabled=true</f-text>
 				<f-div width="hug-content" align="middle-center">
-					<f-icon-picker value=${value} @input=${handleValue} size="medium" ?disabled=${true}>
+					<f-icon-picker
+						.categories=${categories}
+						value=${value}
+						@input=${handleValue}
+						size="medium"
+						?disabled=${true}
+					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
 						<f-text slot="help" variant="para" size="small">Help!</f-text>
 					</f-icon-picker></f-div
@@ -302,7 +310,13 @@ export const Flags = {
 			<f-div direction="column">
 				<f-text>clear=false</f-text>
 				<f-div width="hug-content" align="middle-center">
-					<f-icon-picker value=${value} @input=${handleValue} size="medium" .clear=${false}>
+					<f-icon-picker
+						.categories=${categories}
+						value=${value}
+						@input=${handleValue}
+						size="medium"
+						.clear=${false}
+					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
 						<f-text slot="help" variant="para" size="small">Help!</f-text>
 					</f-icon-picker></f-div
@@ -312,6 +326,7 @@ export const Flags = {
 				<f-text>close-on-select=true</f-text>
 				<f-div width="hug-content" align="middle-center">
 					<f-icon-picker
+						.categories=${categories}
 						value=${value}
 						@input=${handleValue}
 						size="medium"

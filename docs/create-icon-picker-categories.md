@@ -34,3 +34,7 @@ import categories from "./icon-picker-categories";
 ```html
 <f-icon-picker :categories.prop="categories"> </f-icon-picker>
 ```
+
+- **Final Output** :
+
+<img width="513" alt="Screenshot 2024-02-19 at 11 56 06 AM" src="https://github.com/ollionorg/flow-core/assets/67629551/6c87e0c8-de3a-4065-ba38-cabc741fbc31">

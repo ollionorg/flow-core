@@ -1,5 +1,6 @@
 import getCategories from "./f-icon-picker-categories";
 import { html } from "lit-html";
+import appleCategories from "./f-icon-picker-apple-categories";
 
 export default {
 	title: "@ollion/flow-core/f-icon-picker",
@@ -115,6 +116,7 @@ export const Variant = {
 				${variants.map(
 					item => html`<f-div width="hug-content">
       <f-icon-picker
+	  .categories=${appleCategories}
       value=${value}
             @input=${handleValue}
             .variant=${item}

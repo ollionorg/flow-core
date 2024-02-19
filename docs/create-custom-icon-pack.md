@@ -30,3 +30,7 @@ ConfigUtil.setConfig({ iconPack: { ...ConfigUtil.getConfig().iconPack, ...CUSTOM
 ```html
 <f-icon source="apple"></f-icon>
 ```
+
+- **Final output**
+
+<img width="108" alt="Screenshot 2024-02-19 at 11 57 27 AM" src="https://github.com/ollionorg/flow-core/assets/67629551/7dfe5abd-c8b4-4b2f-ab19-4c480290500c">

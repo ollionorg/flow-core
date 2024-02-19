@@ -21,9 +21,9 @@ const variants = ["round", "curved", "block"] as const;
 const categories = ["fill", "outline", "transparent", "packed"] as const;
 const sizes = ["large", "medium", "small", "x-small"] as const;
 
-export type FIconButtonVariant = (typeof variants)[number];
-export type FIconButtonType = (typeof categories)[number];
-export type FIconButtonSize = (typeof sizes)[number];
+export type FIconButtonVariant = typeof variants[number];
+export type FIconButtonType = typeof categories[number];
+export type FIconButtonSize = typeof sizes[number];
 export type FIconButtonState =
 	| "primary"
 	| "danger"
@@ -116,6 +116,13 @@ export class FIconButton extends FRoot {
 	 */
 	@query("f-counter")
 	counterElement?: FCounter;
+
+	constructor() {
+		super();
+		this.role = "button";
+		this.tabIndex = 0;
+		this.setAttribute("focusable", "");
+	}
 
 	/**
 	 * compute counter size based on button size
@@ -269,6 +276,8 @@ export class FIconButton extends FRoot {
 			?counter=${this.counter}
 			?disabled=${this.disabled}
 			?loading=${this.loading}
+			label="Icon-${this.icon}"
+			aria-label="Icon-${this.icon}"
 			data-qa-id=${this.getAttribute("data-qa-element-id")}
 		>
 			${this.loading ? unsafeSVG(loader) : ""}
@@ -282,8 +291,8 @@ export class FIconButton extends FRoot {
 					"fill-button-surface-input": this.iconInputClass ? true : false
 				})}
 				?clickable=${this.variant === "block"}
-			></f-icon>
-			${counter}
+			></f-icon
+			>${counter}
 		</button>`;
 	}
 
@@ -294,6 +303,8 @@ export class FIconButton extends FRoot {
 		 */
 		this.iconElement.requestUpdate();
 		this.counterElement?.requestUpdate();
+		if (!this.getAttribute("aria-label")) this.setAttribute("aria-label", this.icon);
+		if (!this.getAttribute("title")) this.setAttribute("title", this.icon);
 	}
 }
 

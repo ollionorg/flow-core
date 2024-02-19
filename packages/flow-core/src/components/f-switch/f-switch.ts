@@ -16,6 +16,11 @@ export type FSwitchCustomEvent = {
 
 @flowElement("f-switch")
 export class FSwitch extends FRoot {
+	constructor() {
+		super();
+		this.role = "switch";
+	}
+
 	/**
 	 * css loaded from scss file
 	 */
@@ -132,6 +137,7 @@ export class FSwitch extends FRoot {
 			>
 				<label class="f-switch" size=${this.size} state=${this.state}>
 					<input
+						style="visibility: hidden;"
 						type="checkbox"
 						data-qa-id=${this.getAttribute("data-qa-element-id")}
 						checked=${this.value}
@@ -153,6 +159,12 @@ export class FSwitch extends FRoot {
 		super.updated(changedProperties);
 		if (!this.hasLabel && !this.hasIconTooltip && !this.hasSubtitle) {
 			this.switchSlots.style.display = "none";
+		}
+
+		if (this.value) {
+			this.setAttribute("aria-checked", "true");
+		} else {
+			this.setAttribute("aria-checked", "false");
 		}
 	}
 }

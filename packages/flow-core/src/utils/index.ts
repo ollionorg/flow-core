@@ -9,7 +9,7 @@ import flowElement from "./flow-element";
 import getExtensionsFromMimeType from "./mime-extension-map";
 
 function generateId(length = 5) {
-	const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	const randomValues = new Uint32Array(length);
 	let randomString = "";
 

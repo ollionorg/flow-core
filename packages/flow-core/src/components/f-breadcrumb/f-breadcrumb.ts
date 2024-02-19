@@ -17,11 +17,17 @@ const sizes = ["medium", "small"] as const;
 
 export type FBreadCrumbsProp = { tabIndex: number; title: string; icon?: string };
 export type FBreadcrumbs = FBreadCrumbsProp[];
-export type FBreadcrumbSize = (typeof sizes)[number];
-export type FBreadcrumbVariant = (typeof variants)[number];
+export type FBreadcrumbSize = typeof sizes[number];
+export type FBreadcrumbVariant = typeof variants[number];
 
 @flowElement("f-breadcrumb")
 export class FBreadcrumb extends FRoot {
+	constructor() {
+		super();
+
+		this.role = "navigation";
+		this.setAttribute("aria-label", "Breadcrumb");
+	}
 	/**
 	 * css loaded from scss file
 	 */
@@ -119,6 +125,7 @@ export class FBreadcrumb extends FRoot {
 				align="middle-left"
 				class="f-breadcrumb-content"
 				?disabled=${this.disabled}
+				role="listitem"
 				@click=${(event: MouseEvent) => this.handleDispatchEvent(event, crumb)}
 			>
 				<f-text
@@ -129,6 +136,8 @@ export class FBreadcrumb extends FRoot {
 					?ellipsis=${true}
 					?disabled=${this.disabled}
 					.tooltip=${crumb?.title}
+					tabindex="0"
+					role="link"
 					>${crumb?.title}</f-text
 				></f-div
 			>
@@ -174,7 +183,7 @@ export class FBreadcrumb extends FRoot {
 	render() {
 		this.createSeperateCrumbs();
 
-		const textBreadcrumb = html` <f-div gap="x-small" align="middle-left">
+		const textBreadcrumb = html` <f-div gap="x-small" role="list" align="middle-left">
 			${this.crumbs?.length <= 4
 				? this.crumbs?.map((crumb, index) => this.crumbLoop(crumb, index, this.crumbs))
 				: html`
@@ -182,10 +191,13 @@ export class FBreadcrumb extends FRoot {
 							width="hug-content"
 							align="middle-left"
 							class="f-breadcrumb-content"
+							role="listitem"
 							?disabled=${this.disabled}
 							@click=${(event: MouseEvent) => this.handleDispatchEvent(event, this.initialCrumbs)}
 						>
 							<f-text
+								tabindex="0"
+								role="link"
 								.size=${this.textSize}
 								variant="para"
 								weight="regular"
@@ -220,7 +232,10 @@ export class FBreadcrumb extends FRoot {
 								${this.middlePopoverCrumbs?.map(
 									(crumb, index) =>
 										html` <f-div
+											tabindex="0"
+											role="link"
 											class="popover-crumb-list"
+											role="listitem"
 											padding="medium"
 											.border=${this.middlePopoverCrumbs.length - 1 === index
 												? "none"

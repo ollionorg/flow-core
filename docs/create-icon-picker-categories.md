@@ -45,4 +45,5 @@ import categories from "./icon-picker-categories";
 
 - **Final Output** :
 
-<img width="513" alt="Screenshot 2024-02-19 at 11 56 06 AM" src="https://github.com/ollionorg/flow-core/assets/67629551/6c87e0c8-de3a-4065-ba38-cabc741fbc31">
+<img width="500" alt="Screenshot 2024-02-19 at 12 07 07 PM" src="https://github.com/ollionorg/flow-core/assets/67629551/641669fa-449a-4b7c-a4bd-e9c541d119c5">
+

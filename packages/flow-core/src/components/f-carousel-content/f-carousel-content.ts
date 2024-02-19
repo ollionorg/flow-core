@@ -10,6 +10,10 @@ import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-carousel-content", globalStyle);
 @flowElement("f-carousel-content")
 export class FCarouselContent extends FRoot {
+	constructor() {
+		super();
+		this.setAttribute("tabindex", "0");
+	}
 	/**
 	 * css loaded from scss file
 	 */

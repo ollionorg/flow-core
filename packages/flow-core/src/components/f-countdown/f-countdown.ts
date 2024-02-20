@@ -16,17 +16,17 @@ const sizes = ["large", "medium", "small", "x-small"] as const;
 const categories = ["fill", "outline"] as const;
 const placements = ["left", "right", "bottom", "top", "none"] as const;
 
-export type FCountdownStateProp = (typeof states)[number];
-export type FCountdownCategoryProp = (typeof categories)[number];
-export type FCountdownSizesProp = (typeof sizes)[number];
-export type FCountdownLabelProp = (typeof placements)[number];
+export type FCountdownStateProp = typeof states[number];
+export type FCountdownCategoryProp = typeof categories[number];
+export type FCountdownSizesProp = typeof sizes[number];
+export type FCountdownLabelProp = typeof placements[number];
 export type FCountdownDuration = number | string;
 
 @flowElement("f-countdown")
 export class FCountdown extends FRoot {
 	constructor() {
 		super();
-		this.role = "progressbar";
+		this.role = "timer";
 	}
 	/**
 	 * css loaded from scss file
@@ -221,8 +221,7 @@ export class FCountdown extends FRoot {
 	}
 
 	updateAriaAttributes() {
-		const valueNow = (this.remaining * 100) / this.secondsDuration;
-		this.setAttribute("aria-valuenow", `${valueNow.toFixed(0)}`);
+		this.setAttribute("aria-live", `polite`);
 		this.setAttribute("aria-label", `Remaining ${this.timerText}`);
 	}
 

@@ -387,6 +387,10 @@ export class FPopover extends FRoot {
 		if (!this.getAttribute("aria-label")) {
 			this.setAttribute("aria-label", "Popover");
 		}
+
+		if (!this.targetElement?.getAttribute("aria-haspopup")) {
+			this.targetElement?.setAttribute("aria-haspopup", "dialog");
+		}
 	}
 
 	render() {

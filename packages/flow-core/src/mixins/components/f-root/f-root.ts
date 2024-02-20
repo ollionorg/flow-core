@@ -75,6 +75,18 @@ export class FRoot extends LitElement {
 			this.isMouseOver = true;
 		});
 	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+
+		if (this.tooltip) {
+			if (typeof this.tooltip === "string" && this.tooltip.startsWith("#")) {
+				this.setAttribute("aria-describedby", this.tooltip.substring(1));
+			} else {
+				this.setAttribute("aria-describedby", "flow-tooltip");
+			}
+		}
+	}
 	protected updated(changedProperties: PropertyValues) {
 		super.updated(changedProperties);
 		/**

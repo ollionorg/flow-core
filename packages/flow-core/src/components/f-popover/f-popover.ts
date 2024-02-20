@@ -71,6 +71,10 @@ export type FPopOverOffset = {
 };
 @flowElement("f-popover")
 export class FPopover extends FRoot {
+	constructor() {
+		super();
+		this.role = "dialog";
+	}
 	/**
 	 * css loaded from scss file
 	 */
@@ -375,6 +379,14 @@ export class FPopover extends FRoot {
 			composed: true
 		});
 		this.dispatchEvent(event);
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+
+		if (!this.getAttribute("aria-label")) {
+			this.setAttribute("aria-label", "Popover");
+		}
 	}
 
 	render() {

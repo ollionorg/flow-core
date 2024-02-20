@@ -28,6 +28,10 @@ export type FProgressBarValueProp = `${number}%`;
 
 @flowElement("f-progress-bar")
 export class FProgressBar extends FRoot {
+	constructor() {
+		super();
+		this.role = "progressbar";
+	}
 	/**
 	 * css loaded from scss file
 	 */
@@ -157,6 +161,14 @@ export class FProgressBar extends FRoot {
 		return `--f-progress-transform: rotate(${this.valueInAngle}deg);width:${
 			this.circleDiameter
 		};height:${this.circleDiameter};${this.fill ? `--f-circle-progress-fill: ${this.fill};` : ""}`;
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.setAttribute("aria-valuenow", `${this.valueInNumber}`);
+		if (!this.getAttribute("aria-label")) {
+			this.setAttribute("aria-label", `Progress bar`);
+		}
 	}
 
 	render() {

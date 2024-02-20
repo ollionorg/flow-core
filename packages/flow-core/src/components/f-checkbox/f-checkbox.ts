@@ -20,6 +20,11 @@ export type FCheckboxCustomEvent = {
 
 @flowElement("f-checkbox")
 export class FCheckbox extends FRoot {
+	constructor() {
+		super();
+		this.role = "checkbox";
+		this.tabIndex = 0;
+	}
 	/**
 	 * css loaded from scss file
 	 */
@@ -53,12 +58,6 @@ export class FCheckbox extends FRoot {
 
 	@query("#f-checkbox")
 	innerCheckbox!: HTMLInputElement;
-
-	constructor() {
-		super();
-		this.role = "checkbox";
-		this.tabIndex = 0;
-	}
 
 	/**
 	 * emit event.
@@ -136,14 +135,16 @@ export class FCheckbox extends FRoot {
 		super.updated(changedProperties);
 
 		this.checkSlots();
-
-		const labelElement = this.querySelector<HTMLElement>("[slot='label']");
-		if (labelElement) {
-			if (!labelElement.id) {
-				labelElement.id = generateId();
+		if (!this.getAttribute("aria-labelledby")) {
+			const labelElement = this.querySelector<HTMLElement>("[slot='label']");
+			if (labelElement) {
+				if (!labelElement.id) {
+					labelElement.id = generateId();
+				}
+				this.setAttribute("aria-labelledby", labelElement.id);
 			}
-			this.setAttribute("aria-labelledby", labelElement.id);
 		}
+
 		this.ariaChecked = this.value === "checked" ? "true" : "false";
 	}
 

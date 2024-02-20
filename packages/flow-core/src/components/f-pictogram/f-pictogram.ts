@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import eleStyle from "./f-pictogram.scss?inline";
 import globalStyle from "./f-pictogram-global.scss?inline";
@@ -15,10 +15,10 @@ const category = ["fill", "outline"] as const;
 const sizes = ["x-large", "large", "medium", "small"] as const;
 const states = ["primary", "danger", "warning", "success", "default", "inherit"] as const;
 
-export type FPictogramVariant = (typeof variants)[number];
-export type FPictogramCategory = (typeof category)[number];
-export type FPictogramSize = (typeof sizes)[number];
-export type FPictogramState = (typeof states)[number];
+export type FPictogramVariant = typeof variants[number];
+export type FPictogramCategory = typeof category[number];
+export type FPictogramSize = typeof sizes[number];
+export type FPictogramState = typeof states[number];
 
 let colors = [
 	"#FFB900",
@@ -48,6 +48,10 @@ colors = generateHslaColors(50, 60, 1.0, 10);
 
 @flowElement("f-pictogram")
 export class FPictogram extends FRoot {
+	constructor() {
+		super();
+		this.role = "img";
+	}
 	/**
 	 * css loaded from scss file
 	 */
@@ -258,6 +262,11 @@ export class FPictogram extends FRoot {
 		if (!this.source) {
 			throw new Error("f-pictogram : source is mandatory field");
 		}
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		if (!this.getAttribute("aria-label")) this.setAttribute("aria-label", "" + this.source);
 	}
 
 	render() {

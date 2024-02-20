@@ -35,6 +35,12 @@ export type FIconButtonState =
 
 @flowElement("f-icon-button")
 export class FIconButton extends FRoot {
+	constructor() {
+		super();
+		this.role = "button";
+		this.tabIndex = 0;
+		this.setAttribute("focusable", "");
+	}
 	/**
 	 * css loaded from scss file
 	 */
@@ -116,13 +122,6 @@ export class FIconButton extends FRoot {
 	 */
 	@query("f-counter")
 	counterElement?: FCounter;
-
-	constructor() {
-		super();
-		this.role = "button";
-		this.tabIndex = 0;
-		this.setAttribute("focusable", "");
-	}
 
 	/**
 	 * compute counter size based on button size

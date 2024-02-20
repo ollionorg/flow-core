@@ -28,6 +28,10 @@ export type FProgressBarValueProp = `${number}%`;
 
 @flowElement("f-progress-bar")
 export class FProgressBar extends FRoot {
+	constructor() {
+		super();
+		this.role = "progressbar";
+	}
 	/**
 	 * css loaded from scss file
 	 */

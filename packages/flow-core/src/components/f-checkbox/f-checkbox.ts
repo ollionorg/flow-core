@@ -20,6 +20,11 @@ export type FCheckboxCustomEvent = {
 
 @flowElement("f-checkbox")
 export class FCheckbox extends FRoot {
+	constructor() {
+		super();
+		this.role = "checkbox";
+		this.tabIndex = 0;
+	}
 	/**
 	 * css loaded from scss file
 	 */

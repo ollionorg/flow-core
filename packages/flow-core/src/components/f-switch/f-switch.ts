@@ -16,11 +16,6 @@ export type FSwitchCustomEvent = {
 
 @flowElement("f-switch")
 export class FSwitch extends FRoot {
-	constructor() {
-		super();
-		this.role = "switch";
-	}
-
 	/**
 	 * css loaded from scss file
 	 */
@@ -108,6 +103,11 @@ export class FSwitch extends FRoot {
 		});
 
 		this.dispatchEvent(event);
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "switch";
 	}
 
 	render() {

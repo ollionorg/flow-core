@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import eleStyle from "./f-counter.scss?inline";
 import globalStyle from "./f-counter-global.scss?inline";
@@ -26,10 +26,6 @@ export type FCounterStateProp =
 
 @flowElement("f-counter")
 export class FCounter extends FRoot {
-	constructor() {
-		super();
-		this.role = "mark";
-	}
 	/**
 	 * css loaded from scss file
 	 */
@@ -165,6 +161,11 @@ export class FCounter extends FRoot {
 			}
 		}
 		return "";
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "mark";
 	}
 
 	render() {

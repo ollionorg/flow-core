@@ -1,4 +1,4 @@
-import { html, PropertyValues, unsafeCSS } from "lit";
+import { html, PropertyValueMap, PropertyValues, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-button.scss?inline";
@@ -126,13 +126,6 @@ export class FButton extends FRoot {
 	@query("f-counter")
 	counterElement?: FCounter;
 
-	constructor() {
-		super();
-		this.role = "button";
-		this.tabIndex = 0;
-		this.setAttribute("focusable", "");
-	}
-
 	/**
 	 * compute counter size based on button size
 	 */
@@ -208,6 +201,13 @@ export class FButton extends FRoot {
 				}
 			}
 		} else return "";
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "button";
+		this.tabIndex = 0;
+		this.setAttribute("focusable", "");
 	}
 
 	render() {

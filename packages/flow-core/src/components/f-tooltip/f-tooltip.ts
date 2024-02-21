@@ -25,10 +25,6 @@ export type FTooltipPlacement =
 
 @flowElement("f-tooltip")
 export class FTooltip extends LitElement {
-	constructor() {
-		super();
-		this.role = "tooltip";
-	}
 	/**
 	 * css loaded from scss file
 	 */
@@ -60,6 +56,7 @@ export class FTooltip extends LitElement {
 
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
+		this.role = "tooltip";
 
 		if (!this.getAttribute("aria-label")) {
 			// default label if no label is provided

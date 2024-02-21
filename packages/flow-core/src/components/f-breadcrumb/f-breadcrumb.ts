@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-breadcrumb.scss?inline";
 import globalStyle from "./f-breadcrumb-global.scss?inline";
@@ -17,17 +17,11 @@ const sizes = ["medium", "small"] as const;
 
 export type FBreadCrumbsProp = { tabIndex: number; title: string; icon?: string };
 export type FBreadcrumbs = FBreadCrumbsProp[];
-export type FBreadcrumbSize = (typeof sizes)[number];
-export type FBreadcrumbVariant = (typeof variants)[number];
+export type FBreadcrumbSize = typeof sizes[number];
+export type FBreadcrumbVariant = typeof variants[number];
 
 @flowElement("f-breadcrumb")
 export class FBreadcrumb extends FRoot {
-	constructor() {
-		super();
-
-		this.role = "navigation";
-		this.setAttribute("aria-label", "Breadcrumb");
-	}
 	/**
 	 * css loaded from scss file
 	 */
@@ -178,6 +172,12 @@ export class FBreadcrumb extends FRoot {
 			this.popOverElement.open = false;
 		}
 		this.dispatchEvent(event);
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "navigation";
+		if (!this.getAttribute("aria-label")) this.setAttribute("aria-label", "Breadcrumb");
 	}
 
 	render() {

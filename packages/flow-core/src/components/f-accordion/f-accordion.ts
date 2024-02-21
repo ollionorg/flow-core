@@ -79,11 +79,6 @@ export class FAccordion extends FRoot {
 	@query(".f-accordion-header")
 	fAccordionHeader?: FDiv;
 
-	constructor() {
-		super();
-		this.headerId = generateId();
-		this.contentId = generateId();
-	}
 	// dynamic ids to assign to header and content
 	headerId!: string;
 	contentId!: string;
@@ -151,6 +146,12 @@ export class FAccordion extends FRoot {
 				}
 			}
 		}
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.headerId = generateId();
+		this.contentId = generateId();
 	}
 
 	render() {

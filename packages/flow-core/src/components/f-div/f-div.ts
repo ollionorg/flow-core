@@ -106,10 +106,6 @@ injectCss("f-div", globalStyle);
  */
 @flowElement("f-div")
 export class FDiv extends FRoot {
-	constructor() {
-		super();
-		this.role = "none";
-	}
 	/**
 	 * css loaded from scss file
 	 */
@@ -331,6 +327,11 @@ export class FDiv extends FRoot {
 			this.checkHighlight();
 		}
 		super.disconnectedCallback();
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "none";
 	}
 
 	render() {

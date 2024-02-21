@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import { FRoot } from "./../../mixins/components/f-root/f-root";
 import globalStyle from "./f-carousel-content-global.scss?inline";
@@ -10,10 +10,6 @@ import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-carousel-content", globalStyle);
 @flowElement("f-carousel-content")
 export class FCarouselContent extends FRoot {
-	constructor() {
-		super();
-		this.setAttribute("tabindex", "0");
-	}
 	/**
 	 * css loaded from scss file
 	 */
@@ -24,6 +20,11 @@ export class FCarouselContent extends FRoot {
 	 */
 	@property({ type: String, attribute: "content-id", reflect: true })
 	contentId!: string;
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		if (!this.getAttribute("tabindex")) this.setAttribute("tabindex", "0");
+	}
 
 	render() {
 		/**

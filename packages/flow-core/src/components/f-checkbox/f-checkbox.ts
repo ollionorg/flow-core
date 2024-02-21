@@ -20,11 +20,6 @@ export type FCheckboxCustomEvent = {
 
 @flowElement("f-checkbox")
 export class FCheckbox extends FRoot {
-	constructor() {
-		super();
-		this.role = "checkbox";
-		this.tabIndex = 0;
-	}
 	/**
 	 * css loaded from scss file
 	 */
@@ -73,6 +68,12 @@ export class FCheckbox extends FRoot {
 		});
 		this.value = this.value === "unchecked" ? "checked" : "unchecked";
 		this.dispatchEvent(event);
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "checkbox";
+		this.tabIndex = 0;
 	}
 
 	render() {

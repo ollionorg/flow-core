@@ -28,10 +28,6 @@ export type FProgressBarValueProp = `${number}%`;
 
 @flowElement("f-progress-bar")
 export class FProgressBar extends FRoot {
-	constructor() {
-		super();
-		this.role = "progressbar";
-	}
 	/**
 	 * css loaded from scss file
 	 */
@@ -165,6 +161,7 @@ export class FProgressBar extends FRoot {
 
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
+		this.role = "progressbar";
 		this.setAttribute("aria-valuenow", `${this.valueInNumber}`);
 		if (!this.getAttribute("aria-label")) {
 			this.setAttribute("aria-label", `Progress bar`);

@@ -106,10 +106,6 @@ injectCss("f-div", globalStyle);
  */
 @flowElement("f-div")
 export class FDiv extends FRoot {
-	constructor() {
-		super();
-		this.role = "none";
-	}
 	/**
 	 * css loaded from scss file
 	 */

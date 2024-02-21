@@ -27,10 +27,6 @@ export type FCounterStateProp =
 
 @flowElement("f-counter")
 export class FCounter extends FRoot {
-	constructor() {
-		super();
-		this.role = "mark";
-	}
 	/**
 	 * css loaded from scss file
 	 */

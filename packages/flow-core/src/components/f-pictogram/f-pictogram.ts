@@ -15,10 +15,10 @@ const category = ["fill", "outline"] as const;
 const sizes = ["x-large", "large", "medium", "small"] as const;
 const states = ["primary", "danger", "warning", "success", "default", "inherit"] as const;
 
-export type FPictogramVariant = (typeof variants)[number];
-export type FPictogramCategory = (typeof category)[number];
-export type FPictogramSize = (typeof sizes)[number];
-export type FPictogramState = (typeof states)[number];
+export type FPictogramVariant = typeof variants[number];
+export type FPictogramCategory = typeof category[number];
+export type FPictogramSize = typeof sizes[number];
+export type FPictogramState = typeof states[number];
 
 let colors = [
 	"#FFB900",
@@ -48,10 +48,6 @@ colors = generateHslaColors(50, 60, 1.0, 10);
 
 @flowElement("f-pictogram")
 export class FPictogram extends FRoot {
-	constructor() {
-		super();
-		this.role = "img";
-	}
 	/**
 	 * css loaded from scss file
 	 */

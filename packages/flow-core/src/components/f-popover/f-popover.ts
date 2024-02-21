@@ -71,10 +71,6 @@ export type FPopOverOffset = {
 };
 @flowElement("f-popover")
 export class FPopover extends FRoot {
-	constructor() {
-		super();
-		this.role = "dialog";
-	}
 	/**
 	 * css loaded from scss file
 	 */

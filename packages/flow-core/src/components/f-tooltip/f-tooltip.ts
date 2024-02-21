@@ -25,10 +25,6 @@ export type FTooltipPlacement =
 
 @flowElement("f-tooltip")
 export class FTooltip extends LitElement {
-	constructor() {
-		super();
-		this.role = "tooltip";
-	}
 	/**
 	 * css loaded from scss file
 	 */

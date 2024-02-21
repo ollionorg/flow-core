@@ -21,9 +21,9 @@ const variants = ["round", "curved", "block"] as const;
 const categories = ["fill", "outline", "transparent", "packed"] as const;
 const sizes = ["large", "medium", "small", "x-small"] as const;
 
-export type FIconButtonVariant = (typeof variants)[number];
-export type FIconButtonType = (typeof categories)[number];
-export type FIconButtonSize = (typeof sizes)[number];
+export type FIconButtonVariant = typeof variants[number];
+export type FIconButtonType = typeof categories[number];
+export type FIconButtonSize = typeof sizes[number];
 export type FIconButtonState =
 	| "primary"
 	| "danger"
@@ -35,12 +35,6 @@ export type FIconButtonState =
 
 @flowElement("f-icon-button")
 export class FIconButton extends FRoot {
-	constructor() {
-		super();
-		this.role = "button";
-		this.tabIndex = 0;
-		this.setAttribute("focusable", "");
-	}
 	/**
 	 * css loaded from scss file
 	 */

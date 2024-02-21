@@ -31,10 +31,6 @@ export type FIconState =
 
 @flowElement("f-icon")
 export class FIcon extends FRoot {
-	constructor() {
-		super();
-		this.role = "img";
-	}
 	/**
 	 * css loaded from scss file
 	 */

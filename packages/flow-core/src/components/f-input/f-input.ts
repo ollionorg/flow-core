@@ -5,7 +5,7 @@ import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { FIcon } from "../f-icon/f-icon";
 import { ifDefined } from "lit-html/directives/if-defined.js";
-import { flowElement, generateId } from "./../../utils";
+import { flowElement } from "./../../utils";
 import { injectCss } from "@ollion/flow-core-config";
 import { FInputBase, FInputCustomEvent } from "./f-input-base";
 import { FInputLight } from "./f-input-light";
@@ -142,6 +142,7 @@ export class FInput extends FInputBase {
 						.loading=${this.loading}
 						.clear=${this.clear}
 						.suffixWhen=${this.suffixWhen}
+						aria-label="${this.getAttribute("aria-label")}"
 						data-qa-element-id=${this.getAttribute("data-qa-element-id")}
 						autofocus=${ifDefined(this.getAttribute("autofocus"))}
 						autocomplete=${ifDefined(this.getAttribute("autocomplete"))}
@@ -161,13 +162,10 @@ export class FInput extends FInputBase {
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
 
-		if (!this.getAttribute("aria-labelledby")) {
+		if (!this.getAttribute("aria-label")) {
 			const labelElement = this.querySelector<HTMLElement>("[slot='label']");
 			if (labelElement) {
-				if (!labelElement.id) {
-					labelElement.id = generateId();
-				}
-				this.setAttribute("aria-labelledby", labelElement.id);
+				this.setAttribute("aria-label", labelElement.textContent as string);
 			}
 		}
 	}

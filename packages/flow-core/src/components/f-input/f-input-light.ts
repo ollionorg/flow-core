@@ -183,6 +183,7 @@ export class FInputLight extends FInputBase {
 					autofocus=${ifDefined(this.getAttribute("autofocus"))}
 					autocomplete=${ifDefined(this.getAttribute("autocomplete"))}
 					maxlength="${ifDefined(this.maxLength)}"
+					aria-label="${this.getAttribute("aria-label")}"
 					@input=${this.handleInput}
 				/>
 				${this.suffixTemplate}

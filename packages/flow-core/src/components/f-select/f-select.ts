@@ -1,4 +1,4 @@
-import { HTMLTemplateResult, PropertyValues, unsafeCSS } from "lit";
+import { HTMLTemplateResult, PropertyValueMap, PropertyValues, unsafeCSS } from "lit";
 import { property, query, queryAll, queryAssignedElements, state } from "lit/decorators.js";
 import eleStyle from "./f-select.scss?inline";
 import globalStyle from "./f-select-global.scss?inline";
@@ -29,7 +29,7 @@ import {
 	handleOptionMouseOver
 } from "./handlers";
 import { FIconButton } from "../f-icon-button/f-icon-button";
-import { flowElement } from "./../../utils";
+import { flowElement, generateId } from "./../../utils";
 import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-select", globalStyle);
 
@@ -333,6 +333,10 @@ export class FSelect extends FRoot {
 		window.removeEventListener("resize", this.updateDimentions);
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "listbox";
+	}
 	/**
 	 * apply styling to f-select options wrapper.
 	 */
@@ -630,6 +634,16 @@ export class FSelect extends FRoot {
 
 		if (changedProperties.has("options")) {
 			this.filteredOptions = this.options;
+		}
+
+		if (!this.getAttribute("aria-labelledby") && !this.getAttribute("aria-label")) {
+			const labelElement = this.querySelector<HTMLElement>("[slot='label']");
+			if (labelElement) {
+				if (!labelElement.id) {
+					labelElement.id = generateId();
+				}
+				this.setAttribute("aria-labelledby", labelElement.id);
+			}
 		}
 	}
 	getOptionQaId(option: FSelectSingleOption) {

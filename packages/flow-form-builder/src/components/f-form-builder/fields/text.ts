@@ -14,6 +14,7 @@ export default function (
 		<f-input
 			id=${ifDefined(field.id)}
 			class=${ifDefined(field.className)}
+			aria-label="${field.label?.title ?? name}"
 			name=${name}
 			.type=${field.type}
 			${ref(fieldRef)}

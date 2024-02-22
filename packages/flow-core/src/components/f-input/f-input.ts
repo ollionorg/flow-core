@@ -1,11 +1,11 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { query, queryAssignedElements, state } from "lit/decorators.js";
 import globalStyle from "./f-input-global.scss?inline";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { FIcon } from "../f-icon/f-icon";
 import { ifDefined } from "lit-html/directives/if-defined.js";
-import { flowElement } from "./../../utils";
+import { flowElement, generateId } from "./../../utils";
 import { injectCss } from "@ollion/flow-core-config";
 import { FInputBase, FInputCustomEvent } from "./f-input-base";
 import { FInputLight } from "./f-input-light";
@@ -67,6 +67,11 @@ export class FInput extends FInputBase {
 		if (e.detail) {
 			this.value = e.detail.value;
 		}
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "textbox";
 	}
 
 	render() {
@@ -151,6 +156,20 @@ export class FInput extends FInputBase {
 				</f-div>
 			</f-div>
 		`;
+	}
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.updated(changedProperties);
+
+		if (!this.getAttribute("aria-labelledby")) {
+			const labelElement = this.querySelector<HTMLElement>("[slot='label']");
+			if (labelElement) {
+				if (!labelElement.id) {
+					labelElement.id = generateId();
+				}
+				this.setAttribute("aria-labelledby", labelElement.id);
+			}
+		}
 	}
 }
 

@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.8.6] - 2024-02-22
+
+### Bug Fixes
+
+- `f-select` create-option api not working in firefox.
+
 ## [2.8.5] - 2024-02-13
 
 ### Improvements

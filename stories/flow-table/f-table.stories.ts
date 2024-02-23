@@ -13,12 +13,12 @@ export default {
 };
 
 export const Playground = {
-	render: args => {
-		const handleSelectedRows = event => {
+	render: (args: Record<string, unknown>) => {
+		const handleSelectedRows = (event: CustomEvent) => {
 			console.log("selected rows", event.detail);
 		};
 
-		const testOverrideClick = event => {
+		const testOverrideClick = (event: CustomEvent) => {
 			console.log("clicked", event);
 		};
 
@@ -28,6 +28,7 @@ export const Playground = {
 				<f-table
 					.highlightSelected=${args["highlight-selected"]}
 					.highlightHover=${args["highlight-hover"]}
+					.highlightColumnHover=${args["highlight-column-hover"]}
 					.selectable=${args.selectable}
 					.variant=${args.variant}
 					.size=${args.size}
@@ -38,7 +39,7 @@ export const Playground = {
 							return html`<f-tcell @click=${testOverrideClick}> Header ${cellNumber} </f-tcell>`;
 						})}
 					</f-trow>
-					${[1, 2, 3, 4, 5].map(rowNumber => {
+					${[1, 2, 3, 4, 5].map(_rowNumber => {
 						return html`<f-trow>
 							<f-div padding="large" slot="details">
 								<f-text variant="heading" size="x-large">This is details slot</f-text>
@@ -83,6 +84,11 @@ export const Playground = {
 			control: {
 				type: "boolean"
 			}
+		},
+		["highlight-column-hover"]: {
+			control: {
+				type: "boolean"
+			}
 		}
 	},
 
@@ -91,7 +97,8 @@ export const Playground = {
 		size: "medium",
 		selectable: "none",
 		["highlight-selected"]: true,
-		["highlight-hover"]: true
+		["highlight-hover"]: true,
+		["highlight-column-hover"]: true
 	}
 };
 
@@ -101,7 +108,7 @@ export const Anatomy = {
 };
 
 export const Variant = {
-	render: args =>
+	render: () =>
 		html`<f-div direction="column" state="subtle" padding="small" gap="large"
 			>${["stripped", "outlined", "underlined", "bordered"].map(
 				variant =>
@@ -112,7 +119,7 @@ export const Variant = {
 									return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
 								})}
 							</f-trow>
-							${[1, 2, 3, 4, 5].map(rowNumber => {
+							${[1, 2, 3, 4, 5].map(() => {
 								return html`<f-trow>
 									${[1, 2, 3, 4, 5].map(cellNumber => {
 										return html`<f-tcell>
@@ -129,7 +136,7 @@ export const Variant = {
 };
 
 export const Size = {
-	render: args =>
+	render: () =>
 		html`<f-div direction="column" state="subtle" padding="small" gap="large"
 			>${["small", "medium"].map(
 				size =>
@@ -140,7 +147,7 @@ export const Size = {
 									return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
 								})}
 							</f-trow>
-							${[1, 2, 3, 4, 5].map(rowNumber => {
+							${[1, 2, 3, 4, 5].map(() => {
 								return html`<f-trow>
 									${[1, 2, 3, 4, 5].map(cellNumber => {
 										return html`<f-tcell>
@@ -157,7 +164,7 @@ export const Size = {
 };
 
 export const Selectable = {
-	render: args =>
+	render: () =>
 		html`<f-div direction="column" state="subtle" padding="small" gap="large"
 			>${["single", "multiple", "none"].map(
 				selectable =>
@@ -168,7 +175,7 @@ export const Selectable = {
 									return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
 								})}
 							</f-trow>
-							${[1, 2, 3, 4, 5].map(rowNumber => {
+							${[1, 2, 3, 4, 5].map(() => {
 								return html`<f-trow>
 									${[1, 2, 3, 4, 5].map(cellNumber => {
 										return html`<f-tcell>
@@ -185,7 +192,7 @@ export const Selectable = {
 };
 
 export const HighlightSelected = {
-	render: args =>
+	render: () =>
 		html`<f-div direction="column" state="subtle" padding="small" gap="large"
 			>${[true, false].map(
 				highlightSelected =>
@@ -213,7 +220,7 @@ export const HighlightSelected = {
 };
 
 export const HighlightHover = {
-	render: args =>
+	render: () =>
 		html`<f-div direction="column" state="subtle" padding="small" gap="large"
 			>${[true, false].map(
 				highlightHover =>
@@ -224,7 +231,7 @@ export const HighlightHover = {
 									return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
 								})}
 							</f-trow>
-							${[1, 2, 3, 4, 5].map(rowNumber => {
+							${[1, 2, 3, 4, 5].map(() => {
 								return html`<f-trow>
 									${[1, 2, 3, 4, 5].map(cellNumber => {
 										return html`<f-tcell>
@@ -240,15 +247,44 @@ export const HighlightHover = {
 	name: "highlight-hover"
 };
 
+export const HighlightColumnHover = {
+	render: () =>
+		html`<f-div direction="column" state="subtle" padding="small" gap="large">
+			<f-text state="warning">Hover on column header to see result</f-text>
+			${[true, false].map(
+				highlightColumnHover =>
+					html`<f-text>${highlightColumnHover ? "highlight-column-hover" : ""}</f-text
+						><f-table .highlightColumnHover=${highlightColumnHover}>
+							<f-trow slot="header">
+								${[1, 2, 3, 4, 5].map(cellNumber => {
+									return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+								})}
+							</f-trow>
+							${[1, 2, 3, 4, 5].map(() => {
+								return html`<f-trow>
+									${[1, 2, 3, 4, 5].map(cellNumber => {
+										return html`<f-tcell>
+											<f-text> Column ${cellNumber} </f-text>
+										</f-tcell>`;
+									})}
+								</f-trow>`;
+							})} </f-table
+						><f-divider></f-divider>`
+			)}</f-div
+		>`,
+
+	name: "highlight-column-hover"
+};
+
 export const SelectedRows = {
-	render: args => {
+	render: () => {
 		const fieldRef = createRef();
 
-		const selectedRowsHandler = event => {
+		const selectedRowsHandler = (event: CustomEvent) => {
 			if (fieldRef.value) {
-				const selectedrows = [];
+				const selectedrows: string[] = [];
 
-				event.detail.forEach(element => {
+				event.detail.forEach((element: HTMLElement) => {
 					selectedrows.push(element.toString());
 				});
 
@@ -266,7 +302,7 @@ export const SelectedRows = {
 							return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
 						})}
 					</f-trow>
-					${[1, 2, 3, 4, 5].map(rowNumber => {
+					${[1, 2, 3, 4, 5].map(() => {
 						return html`<f-trow>
 							${[1, 2, 3, 4, 5].map(cellNumber => {
 								return html`<f-tcell>

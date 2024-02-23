@@ -58,6 +58,7 @@ export const Playground = {
 					.data=${args.data}
 					.highlightSelected=${args["highlight-selected"]}
 					.highlightHover=${args["highlight-hover"]}
+					.highlightColumnHover=${args["highlight-column-hover"]}
 					.selectable=${args.selectable}
 					.variant=${args.variant}
 					.size=${args.size}
@@ -104,6 +105,11 @@ export const Playground = {
 		},
 
 		["highlight-hover"]: {
+			control: {
+				type: "boolean"
+			}
+		},
+		["highlight-column-hover"]: {
 			control: {
 				type: "boolean"
 			}
@@ -161,6 +167,7 @@ export const Playground = {
 		selectable: "none",
 		["highlight-selected"]: true,
 		["highlight-hover"]: true,
+		["highlight-column-hover"]: true,
 		["sticky-header"]: true,
 		["rows-per-page"]: 20,
 		data: getFakeUsers(10),

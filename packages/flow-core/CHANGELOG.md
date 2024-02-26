@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.8.7] - 2024-02-22
+
+### Improvements
+
+- The `f-select` virtualizer has been made optional and can be controlled using the `use-virtualizer` flag. This change will resolve the Cypress test case failure issue.
+
 ## [2.8.6] - 2024-02-22
 
 ### Bug Fixes

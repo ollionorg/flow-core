@@ -205,6 +205,7 @@ export type FormBuilderSelectField = FormBuilderBaseField & {
 	selectionLimit?: number;
 	createOption?: boolean;
 	loading?: boolean;
+	useVirtualizer?: boolean;
 };
 
 // text-area type field

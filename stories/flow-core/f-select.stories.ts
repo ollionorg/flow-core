@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { FSelectOptionObject, FSelectSingleOption } from "@ollion/flow-core";
+import { FSelectOptionObject } from "@ollion/flow-core";
 import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import fSelectAnatomy from "../svg/i-fselect-anatomy.js";
@@ -10,6 +10,12 @@ export default {
 	parameters: {
 		controls: {
 			hideNoControlsWarning: true
+		},
+		docs: {
+			story: {
+				inline: false,
+				height: "300px"
+			}
 		}
 	}
 };
@@ -63,6 +69,7 @@ export const Playground = {
 						icon-left=${args["icon-left"]}
 						.size=${args.size}
 						?auto-add-option=${args["auto-add-option"]}
+						.useVirtualizer=${args["use-virtualizer"]}
 						@add-option=${handleCreateOption}
 						@search-input=${handleSearchInput}
 					>
@@ -177,6 +184,9 @@ export const Playground = {
 				arg: "create-option",
 				eq: true
 			}
+		},
+		["use-virtualizer"]: {
+			control: "boolean"
 		}
 	},
 
@@ -211,7 +221,8 @@ export const Playground = {
 		checkbox: false,
 		["selection-limit"]: 2,
 		["create-option"]: false,
-		["auto-add-option"]: true
+		["auto-add-option"]: true,
+		["use-virtualizer"]: false
 	}
 };
 
@@ -1530,4 +1541,39 @@ export const AutoAddOption = {
 	},
 
 	name: "auto-add-option"
+};
+
+export const UseVirtualizer = {
+	render: () => {
+		const value = "";
+		const options: string[] = [];
+		for (let o = 0; o < 3000; o++) {
+			options.push(
+				`${o + 1} ${faker.location.city()} ${faker.location.country()} ${faker.location.zipCode()}`
+			);
+		}
+
+		const handleValue = (e: CustomEvent) => {
+			console.log("input event", e);
+		};
+
+		return html`
+			<f-select
+				placeholder="Select City"
+				@input=${handleValue}
+				.options=${options}
+				.value=${value}
+				use-virtualizer
+				?searchable=${true}
+			>
+				<f-div slot="label" padding="none" gap="none">3k options</f-div>
+				<f-div slot="help" padding="none" gap="none"
+					>For a large number of options, utilize the 'use-virtualizer' option to ensure smooth
+					searching and selection.</f-div
+				>
+			</f-select>
+		`;
+	},
+
+	name: "use-virtualizer"
 };

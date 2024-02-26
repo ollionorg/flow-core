@@ -279,6 +279,16 @@ export class FSelect extends FRoot {
 	maxOptionsWidth?: FSelectMaxOptionsWidth;
 
 	/**
+	 * @attribute use virtulizer for options (set true if you have 1k+ options)
+	 */
+	@property({ reflect: true, type: Boolean, attribute: "use-virtualizer" })
+	useVirtualizer?: boolean;
+
+	set ["use-virtualizer"](value: boolean | undefined) {
+		this.useVirtualizer = value;
+	}
+
+	/**
 	 * icon size
 	 */
 	get iconSize() {

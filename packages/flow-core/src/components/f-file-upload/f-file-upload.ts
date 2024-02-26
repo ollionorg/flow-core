@@ -412,6 +412,12 @@ export class FFileUpload extends FRoot {
 		}
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "button";
+		this.tabIndex = 0;
+	}
+
 	render() {
 		//max-size removing space
 		const maxSizeTemp = this.maxSize?.split(" ").join("");
@@ -463,7 +469,7 @@ export class FFileUpload extends FRoot {
 				<f-div direction="column" gap="x-small">
 					<div
 						class="f-file-upload"
-						tabindex="1"
+						tabindex="0"
 						state=${this.state}
 						size=${this.size}
 						?loading=${this.loading}

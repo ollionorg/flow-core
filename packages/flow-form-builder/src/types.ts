@@ -47,6 +47,7 @@ export type FormBuilderBaseField = {
 	className?: string; // any additional css class name
 	qaId?: string; // data dq attribute for qa automation
 	label?: FormBuilderLabel; // label of field
+	ariaLabel?: string;
 	layout?: "label-left";
 	validationRules?: FormBuilderValidationRules; // validation rules to validate field
 	disabled?: boolean;

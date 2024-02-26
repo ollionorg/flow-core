@@ -1,5 +1,5 @@
 // import { FRoot } from "@ollion/flow-core";
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { RadioOption, RadioOptions } from "../../types";
 import eleStyle from "./f-radio-group.scss?inline";
@@ -78,6 +78,11 @@ export class FRadioGroup extends FRoot {
 
 	isChecked(option: RadioOption) {
 		return isEqual(option, this.value) ? "selected" : "unselected";
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "radiogroup";
 	}
 
 	render() {

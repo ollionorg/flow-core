@@ -413,7 +413,9 @@ export class FSuggest extends FRoot {
 			this.filteredSuggestions = this.suggestions;
 		}
 		super.willUpdate(changedProperties);
+		this.role = "textbox";
 	}
+
 	render() {
 		// classes to apply on inner element
 		const classes: Record<string, boolean> = {};
@@ -428,6 +430,7 @@ export class FSuggest extends FRoot {
 				.variant=${this.variant}
 				.category=${this.category}
 				.placeholder=${this.placeholder}
+				aria-label="${ifDefined(this.getAttribute("aria-label"))}"
 				@input=${this.handleInput}
 				@focus=${this.handleFocus}
 				@blur=${this.handleBlur}

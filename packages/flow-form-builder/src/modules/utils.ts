@@ -1,3 +1,5 @@
+import { FormBuilderBaseField } from "../types";
+
 export function isEmptyObject(obj: Record<string, unknown>) {
 	return obj && Object.keys(obj).length === 0 && Object.getPrototypeOf(obj) === Object.prototype;
 }
@@ -58,4 +60,16 @@ export function isEmpty(value: unknown): boolean {
 
 export function isAllNullOrUndefined(value: Array<unknown>) {
 	return value.every(v => isNullOrUndefined(v));
+}
+
+export function getAriaLabel(field: FormBuilderBaseField) {
+	if (field.ariaLabel) {
+		return field.ariaLabel;
+	}
+
+	if (field.label && typeof field.label.title === "string") {
+		return field.label.title;
+	}
+
+	return undefined;
 }

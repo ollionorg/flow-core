@@ -3,6 +3,7 @@ import { FFormInputElements, FormBuilderField, FormBuilderTextInputField } from 
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { getLabelLeftLayout, getSlots } from "../../../modules/helpers";
+import { getAriaLabel } from "../../../modules/utils";
 export default function (
 	name: string,
 	_field: FormBuilderField,
@@ -14,7 +15,7 @@ export default function (
 		<f-input
 			id=${ifDefined(field.id)}
 			class=${ifDefined(field.className)}
-			aria-label="${field.label?.title ?? name}"
+			aria-label="${getAriaLabel(field) ?? name}"
 			name=${name}
 			.type=${field.type}
 			${ref(fieldRef)}

@@ -1,4 +1,4 @@
-import { html, nothing, TemplateResult, unsafeCSS } from "lit";
+import { html, nothing, PropertyValueMap, TemplateResult, unsafeCSS } from "lit";
 import { query } from "lit/decorators.js";
 
 import globalStyle from "./f-input-light-global.scss?inline";
@@ -152,6 +152,11 @@ export class FInputLight extends FInputBase {
 			</div>`;
 		}
 		return nothing;
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "textbox";
 	}
 
 	render() {

@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.3.0] - 2024-02-23
+
+### Feature
+
+- `f-table` & `f-table-schema` : `highlight-column-hover` property added to control column header hover behavior.
+
 ## [2.2.5] - 2024-02-09
 
 ### Bug Fixes

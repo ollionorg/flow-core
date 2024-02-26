@@ -1,8 +1,4 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/blocks";
-import { html } from "lit-html";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
-import { createRef, ref } from "lit/directives/ref.js";
-import downloadFile from "./donwload-file.ts";
 import * as FTableStories from "./f-table.stories";
 
 <Meta of={FTableStories} />
@@ -200,6 +196,18 @@ Sets background on row hover
 
 <Canvas>
 	<Story of={FTableStories.HighlightHover} />
+</Canvas>
+
+<br />
+
+## highlight-column-hover
+
+<hr />
+
+Sets background on column hover
+
+<Canvas>
+	<Story of={FTableStories.HighlightColumnHover} />
 </Canvas>
 
 <br />

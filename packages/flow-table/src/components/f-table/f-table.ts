@@ -43,11 +43,32 @@ export class FTable extends FRoot {
 	@property({ type: Boolean, reflect: true, attribute: "highlight-selected" })
 	highlightSelected = false;
 
+	// fix for vue
+	set ["highlight-selected"](val: boolean) {
+		this.highlightSelected = val;
+	}
+
 	/**
 	 * @attribute highlight on hover
 	 */
 	@property({ type: Boolean, reflect: true, attribute: "highlight-hover" })
 	highlightHover = false;
+
+	// fix for vue
+	set ["highlight-hover"](val: boolean) {
+		this.highlightHover = val;
+	}
+
+	/**
+	 * @attribute highlight on column hover
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "highlight-column-hover" })
+	highlightColumnHover = true;
+
+	// fix for vue
+	set ["highlight-column-hover"](val: boolean) {
+		this.highlightColumnHover = val;
+	}
 
 	render() {
 		return html`<slot
@@ -246,7 +267,7 @@ export class FTable extends FRoot {
 	}
 
 	toggleColumnHighlight(event: CustomEvent) {
-		if (event.detail.columnIndex >= 0) {
+		if (event.detail.columnIndex >= 0 && this.highlightColumnHover) {
 			const allRows = Array.from(this.children).filter(
 				el => el.tagName.toLocaleLowerCase() === "f-trow"
 			) as FTrow[];

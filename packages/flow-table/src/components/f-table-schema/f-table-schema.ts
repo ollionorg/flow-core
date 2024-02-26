@@ -115,12 +115,32 @@ export class FTableSchema extends FRoot {
 	@property({ type: Boolean, reflect: true, attribute: "highlight-selected" })
 	highlightSelected = false;
 
+	// fix for vue
+	set ["highlight-selected"](val: boolean) {
+		this.highlightSelected = val;
+	}
+
 	/**
 	 * @attribute highlight on hover
 	 */
 	@property({ type: Boolean, reflect: true, attribute: "highlight-hover" })
 	highlightHover = false;
 
+	// fix for vue
+	set ["highlight-hover"](val: boolean) {
+		this.highlightHover = val;
+	}
+
+	/**
+	 * @attribute highlight on column hover
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "highlight-column-hover" })
+	highlightColumnHover = true;
+
+	// fix for vue
+	set ["highlight-column-hover"](val: boolean) {
+		this.highlightColumnHover = val;
+	}
 	/**
 	 * @attribute is sticky header
 	 */
@@ -424,6 +444,7 @@ export class FTableSchema extends FRoot {
 					.selectable=${this.selectable}
 					.highlightSelected=${this.highlightSelected}
 					.highlightHover=${this.highlightHover}
+					.highlightColumnHover=${this.highlightColumnHover}
 				>
 					${this.header} ${this.rowsHtml} ${this.noDataTemplate}
 				</f-table>

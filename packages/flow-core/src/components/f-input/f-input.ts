@@ -72,6 +72,7 @@ export class FInput extends FInputBase {
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
 		this.role = "textbox";
+		if (this.placeholder) this.setAttribute("aria-placeholder", this.placeholder);
 	}
 
 	render() {

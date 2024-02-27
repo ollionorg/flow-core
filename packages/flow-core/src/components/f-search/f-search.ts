@@ -333,6 +333,7 @@ export class FSearch extends FRoot {
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
 		this.role = "search";
+		if (this.placeholder) this.setAttribute("aria-placeholder", this.placeholder);
 	}
 	render() {
 		return html` <f-div

@@ -395,6 +395,7 @@ export class FEmojiPicker extends FRoot {
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
 		this.role = "textbox";
+		if (this.placeholder) this.setAttribute("aria-placeholder", this.placeholder);
 		if (!changedProperties.has("value") || !this.picker) {
 			/**
 			 * initiate picker component

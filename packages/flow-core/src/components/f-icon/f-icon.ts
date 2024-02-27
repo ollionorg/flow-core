@@ -186,6 +186,7 @@ export class FIcon extends FRoot {
 		this.role = "img";
 		if (!this.getAttribute("aria-label"))
 			this.setAttribute("aria-label", "" + this._originalSource);
+		this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
 	}
 
 	render() {

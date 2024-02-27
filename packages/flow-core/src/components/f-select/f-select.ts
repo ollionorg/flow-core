@@ -336,6 +336,7 @@ export class FSelect extends FRoot {
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
 		this.role = "listbox";
+		if (this.placeholder) this.setAttribute("aria-placeholder", this.placeholder);
 	}
 	/**
 	 * apply styling to f-select options wrapper.

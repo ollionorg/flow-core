@@ -13,6 +13,7 @@ export default {
 export const Playground = {
 	render: (args: Record<string, unknown>) => {
 		return html`<f-color-picker
+			aria-label="Color Picker"
 			.variant=${args.variant}
 			.state=${args.state}
 			.size=${args.size}

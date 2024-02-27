@@ -414,6 +414,7 @@ export class FSuggest extends FRoot {
 		}
 		super.willUpdate(changedProperties);
 		this.role = "textbox";
+		if (this.placeholder) this.setAttribute("aria-placeholder", this.placeholder);
 	}
 
 	render() {

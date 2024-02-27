@@ -177,6 +177,7 @@ export class FTextArea extends FRoot {
 		super.willUpdate(changedProperties);
 		this.role = "textbox";
 		this.ariaMultiLine = "true";
+		if (this.placeholder) this.setAttribute("aria-placeholder", this.placeholder);
 	}
 	render() {
 		const parentDiv = this.parentElement?.tagName === "F-DIV" ? this.parentElement : "";

@@ -86,6 +86,10 @@ export class FRoot extends LitElement {
 				this.setAttribute("aria-describedby", "flow-tooltip");
 			}
 		}
+
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		//@ts-ignore
+		this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
 	}
 	protected updated(changedProperties: PropertyValues) {
 		super.updated(changedProperties);

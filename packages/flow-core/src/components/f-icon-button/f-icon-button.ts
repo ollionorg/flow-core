@@ -194,6 +194,7 @@ export class FIconButton extends FRoot {
 		this.role = "button";
 		this.tabIndex = 0;
 		this.setAttribute("focusable", "");
+		this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
 	}
 
 	render() {
@@ -265,7 +266,7 @@ export class FIconButton extends FRoot {
 			}
 		});
 
-		return html`<button
+		return html`<span
 			class=${classMap(classes)}
 			style=${this.applyStyles()}
 			variant=${this.variant}
@@ -293,7 +294,7 @@ export class FIconButton extends FRoot {
 				?clickable=${this.variant === "block"}
 			></f-icon
 			>${counter}
-		</button>`;
+		</span>`;
 	}
 
 	protected updated(changedProperties: PropertyValues) {

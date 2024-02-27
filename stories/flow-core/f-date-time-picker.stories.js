@@ -29,6 +29,7 @@ export const Playground = {
 			<f-div width="100%" align="middle-center" padding="large">
 				<f-div width="80%" align="middle-center">
 					<f-date-time-picker
+						aria-label="Date time Picker"
 						.mode=${args.mode}
 						.value=${args.value}
 						.size=${args.size}

@@ -329,6 +329,11 @@ export class FSearch extends FRoot {
 			this.labelSlot.style.display = "none";
 		}
 	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "search";
+	}
 	render() {
 		return html` <f-div
 			width="100%"
@@ -361,6 +366,7 @@ export class FSearch extends FRoot {
 				${this.scope !== "none" && (this.scope as string[])?.length > 0
 					? html` <f-div width="hug-content" style="min-width:150px">
 							<f-select
+								aria-label="Scope of ${this.getAttribute("aria-label")}"
 								class="f-search-border"
 								.options=${this.scope ?? []}
 								.variant=${this.variant}
@@ -377,6 +383,7 @@ export class FSearch extends FRoot {
 					<f-suggest
 						class=${this.applyStyling}
 						data-suggest="search"
+						aria-label="Input of ${this.getAttribute("aria-label")}"
 						data-qa-element-id=${this.getAttribute("data-qa-element-id")}
 						.value=${this.value}
 						.variant=${this.variant}

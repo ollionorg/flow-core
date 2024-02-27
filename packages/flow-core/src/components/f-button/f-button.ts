@@ -208,6 +208,7 @@ export class FButton extends FRoot {
 		this.role = "button";
 		this.tabIndex = 0;
 		this.setAttribute("focusable", "");
+		this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
 	}
 
 	render() {
@@ -324,7 +325,7 @@ export class FButton extends FRoot {
 		/**
 		 * Final html to render
 		 */
-		return html`<button
+		return html`<span
 			class=${classMap({
 				"f-button": true,
 				hasShimmer,
@@ -341,7 +342,7 @@ export class FButton extends FRoot {
 			data-qa-id=${this.getAttribute("data-qa-element-id")}
 		>
 			${iconLeft}${this.label}${iconRight}${counter}
-		</button>`;
+		</span>`;
 	}
 
 	protected updated(changedProperties: PropertyValues) {

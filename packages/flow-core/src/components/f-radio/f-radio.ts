@@ -86,6 +86,7 @@ export class FRadio extends FRoot {
 					<input
 						type="radio"
 						class="f-radio"
+						aria-label="${this.getAttribute("aria-label")}"
 						data-qa-id=${this.getAttribute("data-qa-element-id")}
 						checked=${this.value === "selected" ? true : false}
 						size=${this.size}

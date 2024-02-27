@@ -331,7 +331,7 @@ export class FDiv extends FRoot {
 
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
-		this.role = "none";
+		if (!this.role) this.role = "none";
 	}
 
 	render() {

@@ -10,6 +10,7 @@ import { html, nothing } from "lit";
 import { classMap } from "lit-html/directives/class-map.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
+import { map } from "lit/directives/map.js";
 import "@lit-labs/virtualizer";
 
 export default function render(this: FSelect) {
@@ -364,63 +365,68 @@ export default function render(this: FSelect) {
 }
 
 export function renderArrayOptions(this: FSelect) {
-	return html` <lit-virtualizer
-		.items=${this.filteredOptions as FSelectArray}
-		.keyFunction=${(option: FSelectSingleOption, idx: number) => {
-			if (typeof option === "string") {
-				return `${idx}${option}`;
-			}
-			return idx + this.getOptionQaId(option);
-		}}
-		.renderItem=${(option: FSelectSingleOption) =>
-			html`<f-div
-				class="f-select-options-clickable"
-				padding="medium"
-				data-qa-option=${this.getOptionQaId(option)}
-				height="hug-content"
-				width="fill-container"
-				direction="row"
-				align="middle-left"
-				gap="small"
-				.selected=${this.isSelected(option) ? "background" : undefined}
-				@click=${(e: MouseEvent) => {
-					this.handleOptionSelection(option, e);
-				}}
-				@mouseover=${(e: MouseEvent) => {
-					this.handleOptionMouseOver(e);
-				}}
-				.disabled=${typeof option === "object" && option.disabled}
-			>
-				${this.checkbox
-					? html` <f-checkbox
-							state=${this.state}
-							size=${this.size}
-							value=${this.isSelected(option) ? "checked" : "unchecked"}
-							@input=${(e: MouseEvent) => {
-								this.handleCheckboxInput(option, e);
-							}}
-					  ></f-checkbox>`
-					: nothing}
-				${(option as FSelectOptionObject)?.icon && !this.optionTemplate
-					? html` <f-div padding="none" gap="none" height="hug-content" width="hug-content"
-							><f-icon size="medium" source=${(option as FSelectOptionObject)?.icon}></f-icon
-					  ></f-div>`
-					: nothing}
-				${this.optionTemplate ? this.optionTemplate(option) : nothing}
-				${!this.optionTemplate
-					? html` <f-div padding="none" gap="none" height="hug-content" width="fill-container"
-							><f-text variant="para" size="small" weight="regular"
-								>${(option as FSelectOptionObject)?.title ?? option}</f-text
-							></f-div
-					  >`
-					: nothing}
-				${this.isSelected(option) && !this.checkbox
-					? html` <f-div padding="none" gap="none" height="hug-content" width="hug-content"
-							><f-icon size="small" source="i-tick"></f-icon
-					  ></f-div>`
-					: nothing}
-			</f-div>`}
-	></lit-virtualizer>`;
+	const optionHtml = (option: FSelectSingleOption) =>
+		html`<f-div
+			class="f-select-options-clickable"
+			padding="medium"
+			data-qa-option=${this.getOptionQaId(option)}
+			height="hug-content"
+			width="fill-container"
+			direction="row"
+			align="middle-left"
+			gap="small"
+			.selected=${this.isSelected(option) ? "background" : undefined}
+			@click=${(e: MouseEvent) => {
+				this.handleOptionSelection(option, e);
+			}}
+			@mouseover=${(e: MouseEvent) => {
+				this.handleOptionMouseOver(e);
+			}}
+			.disabled=${typeof option === "object" && option.disabled}
+		>
+			${this.checkbox
+				? html` <f-checkbox
+						state=${this.state}
+						size=${this.size}
+						value=${this.isSelected(option) ? "checked" : "unchecked"}
+						@input=${(e: MouseEvent) => {
+							this.handleCheckboxInput(option, e);
+						}}
+				  ></f-checkbox>`
+				: nothing}
+			${(option as FSelectOptionObject)?.icon && !this.optionTemplate
+				? html` <f-div padding="none" gap="none" height="hug-content" width="hug-content"
+						><f-icon size="medium" source=${(option as FSelectOptionObject)?.icon}></f-icon
+				  ></f-div>`
+				: nothing}
+			${this.optionTemplate ? this.optionTemplate(option) : nothing}
+			${!this.optionTemplate
+				? html` <f-div padding="none" gap="none" height="hug-content" width="fill-container"
+						><f-text variant="para" size="small" weight="regular"
+							>${(option as FSelectOptionObject)?.title ?? option}</f-text
+						></f-div
+				  >`
+				: nothing}
+			${this.isSelected(option) && !this.checkbox
+				? html` <f-div padding="none" gap="none" height="hug-content" width="hug-content"
+						><f-icon size="small" source="i-tick"></f-icon
+				  ></f-div>`
+				: nothing}
+		</f-div>`;
+
+	if (this.useVirtualizer) {
+		return html` <lit-virtualizer
+			.items=${this.filteredOptions as FSelectArray}
+			.keyFunction=${(option: FSelectSingleOption, idx: number) => {
+				if (typeof option === "string") {
+					return `${idx}${option}`;
+				}
+				return idx + this.getOptionQaId(option);
+			}}
+			.renderItem=${optionHtml}
+		></lit-virtualizer>`;
+	}
+	return map(this.filteredOptions as FSelectArray, optionHtml);
 }
 
 export function renderGroupOptions(this: FSelect) {

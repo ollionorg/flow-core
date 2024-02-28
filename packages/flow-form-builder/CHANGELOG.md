@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.2.5] - 2024-02-13
+
+### Patch Changes
+
+- The `useVirtualizer` property has been added to the `select` field to enable smooth search and selection for a large number of options.
+
 ## [2.2.4] - 2024-02-13
 
 ### Patch Changes

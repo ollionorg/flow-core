@@ -26,6 +26,7 @@ export default function (
 			.clear=${ifDefined(field.clear)}
 			.width=${field.width}
 			.maxOptionsWidth=${field.maxOptionsWidth}
+			.useVirtualizer=${field.useVirtualizer}
 			data-qa-element-id=${field.qaId || field.id}
 			height=${ifDefined(field.height)}
 			?disabled=${field.disabled}

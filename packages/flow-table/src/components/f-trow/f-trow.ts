@@ -64,6 +64,11 @@ export class FTrow extends FRoot {
 
 	chevron: FIconButton | undefined;
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "row";
+	}
+
 	render() {
 		return html`<slot
 				@slotchange=${this.propogateProps}

@@ -418,7 +418,6 @@ export class FSuggest extends FRoot {
 		this.role = "combobox";
 		this.setAttribute("aria-expanded", "false");
 		this.setAttribute("aria-haspopup", "false");
-		if (this.placeholder) this.setAttribute("aria-placeholder", this.placeholder);
 	}
 
 	render() {
@@ -435,6 +434,7 @@ export class FSuggest extends FRoot {
 				.variant=${this.variant}
 				.category=${this.category}
 				.placeholder=${this.placeholder}
+				aria-placeholder="${this.placeholder}"
 				aria-label="${ifDefined(this.getAttribute("aria-label"))}"
 				@input=${this.handleInput}
 				@focus=${this.handleFocus}

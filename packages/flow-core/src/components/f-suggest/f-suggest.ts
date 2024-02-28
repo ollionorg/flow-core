@@ -226,6 +226,7 @@ export class FSuggest extends FRoot {
 		this.popOverElement.open = false;
 		this.currentIndex = -1;
 		this.currentCategoryIndex = 0;
+		this.setAttribute("aria-expanded", "false");
 	}
 	handleFocus() {
 		if (!this.disableSuggestions) {
@@ -237,6 +238,7 @@ export class FSuggest extends FRoot {
 			this.popOverElement.style.maxHeight = this.optionsMaxHeight ?? "600px";
 			if (!this.loading) {
 				this.popOverElement.open = true;
+				this.setAttribute("aria-expanded", "true");
 			}
 		}
 	}
@@ -413,7 +415,9 @@ export class FSuggest extends FRoot {
 			this.filteredSuggestions = this.suggestions;
 		}
 		super.willUpdate(changedProperties);
-		this.role = "textbox";
+		this.role = "combobox";
+		this.setAttribute("aria-expanded", "false");
+		this.setAttribute("aria-haspopup", "false");
 		if (this.placeholder) this.setAttribute("aria-placeholder", this.placeholder);
 	}
 

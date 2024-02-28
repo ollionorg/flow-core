@@ -416,7 +416,7 @@ export class FFileUpload extends FRoot {
 		super.willUpdate(changedProperties);
 		this.role = "button";
 		this.tabIndex = 0;
-		if (this.placeholder) this.setAttribute("aria-placeholder", this.placeholder);
+		if (this.placeholder) this.setAttribute("aria-label", this.placeholder);
 	}
 
 	render() {

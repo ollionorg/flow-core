@@ -192,12 +192,13 @@ export class FText extends FRoot {
 
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
-
-		if (this.variant === "heading") {
-			this.role = "heading";
-			this.setAttribute("aria-level", this.headerLevel);
-		} else {
-			this.role = "paragraph";
+		if (!this.role) {
+			if (this.variant === "heading") {
+				this.role = "heading";
+				this.setAttribute("aria-level", this.headerLevel);
+			} else {
+				this.role = "paragraph";
+			}
 		}
 	}
 

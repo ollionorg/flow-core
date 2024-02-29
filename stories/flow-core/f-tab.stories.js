@@ -40,6 +40,9 @@ export const Playground = {
 								?active=${selected === item ? true : false}
 								content-id=${`tab-${item}`}
 								@click=${() => handleChange(item)}
+								@keyup=${e => {
+									if (e.key === "Enter") handleChange(item);
+								}}
 								><f-div width="100%" height="100%" align="middle-center" direction="column"
 									><f-div align="middle-center" height="hug-content" width="hug-content"
 										>Tab ${item}</f-div

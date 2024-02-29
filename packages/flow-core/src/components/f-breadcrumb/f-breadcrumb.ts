@@ -216,6 +216,7 @@ export class FBreadcrumb extends FRoot {
 						<f-div
 							clickable
 							?disabled=${this.disabled}
+							tabindex="0"
 							@mouseenter=${() => this.toggleBreadcrumbPopover("open")}
 							id="breadcrumb-popover"
 						>

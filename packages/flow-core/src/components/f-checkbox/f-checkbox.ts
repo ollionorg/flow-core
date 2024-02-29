@@ -57,7 +57,7 @@ export class FCheckbox extends FRoot {
 	/**
 	 * emit event.
 	 */
-	handleInput(e: InputEvent) {
+	handleInput(e: InputEvent | KeyboardEvent) {
 		e.stopPropagation();
 		const event = new CustomEvent<FCheckboxCustomEvent>("input", {
 			detail: {
@@ -74,6 +74,10 @@ export class FCheckbox extends FRoot {
 		super.willUpdate(changedProperties);
 		this.role = "checkbox";
 		this.tabIndex = 0;
+
+		this.onkeyup = e => {
+			if (e.key === "Enter") this.handleInput(e);
+		};
 	}
 
 	render() {

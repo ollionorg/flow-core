@@ -361,6 +361,9 @@ export class FDateTimePicker extends FRoot {
 					this.flatPickerElement?.close();
 					this.dateTimePickerElement.inputElement.focus();
 				}}
+				@keyup=${(e: KeyboardEvent) => {
+					if (e.key === "Enter") this.flatPickerElement?.open();
+				}}
 				@blur=${(e: FocusEvent) => {
 					if (this.flatPickerElement?.isOpen) {
 						e.stopPropagation();

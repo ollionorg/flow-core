@@ -415,7 +415,7 @@ export class FFileUpload extends FRoot {
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
 		this.role = "button";
-		this.tabIndex = 0;
+
 		if (this.placeholder) this.setAttribute("aria-label", this.placeholder);
 	}
 
@@ -476,6 +476,9 @@ export class FFileUpload extends FRoot {
 						?loading=${this.loading}
 						?disabled=${this.disabled}
 						@click=${this.handleClick}
+						@keyup=${(e: KeyboardEvent) => {
+							if (e.key === "Enter") this.handleClick();
+						}}
 						@drop=${this.dropFile}
 						@dragover=${(e: DragEvent) => {
 							e.preventDefault();

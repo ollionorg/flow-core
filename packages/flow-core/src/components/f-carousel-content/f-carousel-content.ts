@@ -1,4 +1,4 @@
-import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { html, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import { FRoot } from "./../../mixins/components/f-root/f-root";
 import globalStyle from "./f-carousel-content-global.scss?inline";
@@ -20,11 +20,6 @@ export class FCarouselContent extends FRoot {
 	 */
 	@property({ type: String, attribute: "content-id", reflect: true })
 	contentId!: string;
-
-	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-		super.willUpdate(changedProperties);
-		if (!this.getAttribute("tabindex")) this.setAttribute("tabindex", "0");
-	}
 
 	render() {
 		/**

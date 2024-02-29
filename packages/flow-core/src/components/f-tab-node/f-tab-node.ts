@@ -51,6 +51,7 @@ export class FTabNode extends FRoot {
 		this.role = "tab";
 		this.setAttribute("aria-selected", String(this.active));
 		this.setAttribute("aria-controls", String(this.contentId));
+		this.setAttribute("tabindex", "0");
 	}
 
 	render() {

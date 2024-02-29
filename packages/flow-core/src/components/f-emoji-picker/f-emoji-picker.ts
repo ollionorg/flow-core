@@ -485,6 +485,9 @@ export class FEmojiPicker extends FRoot {
 					clear=${this.value && this.clear ? true : false}
 					tabindex="0"
 					?disabled=${this.disabled}
+					@keyup=${(e: KeyboardEvent) => {
+						if (e.key === "Enter") this.toggleEmojiPicker(true);
+					}}
 					@click=${(e: MouseEvent) => {
 						e.stopPropagation();
 						this.toggleEmojiPicker(true);

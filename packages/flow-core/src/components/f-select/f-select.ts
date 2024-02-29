@@ -648,6 +648,9 @@ export class FSelect extends FRoot {
 				this.setAttribute("aria-labelledby", labelElement.id);
 			}
 		}
+		this.addEventListener("keyup", (e: KeyboardEvent) => {
+			if (e.key === "Enter") this.handleDropDownOpen(e);
+		});
 	}
 	getOptionQaId(option: FSelectSingleOption) {
 		if (typeof option === "string") {

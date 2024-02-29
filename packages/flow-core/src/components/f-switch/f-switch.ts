@@ -90,7 +90,7 @@ export class FSwitch extends FRoot {
 	/**
 	 * emit event.
 	 */
-	handleInput(e: InputEvent) {
+	handleInput(e: InputEvent | KeyboardEvent) {
 		e.stopPropagation();
 
 		this.value = !this.value;
@@ -108,6 +108,7 @@ export class FSwitch extends FRoot {
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
 		this.role = "switch";
+		this.tabIndex = 0;
 	}
 
 	render() {
@@ -166,6 +167,10 @@ export class FSwitch extends FRoot {
 		} else {
 			this.setAttribute("aria-checked", "false");
 		}
+
+		this.onkeyup = (e: KeyboardEvent) => {
+			if (e.key === "Enter") this.handleInput(e);
+		};
 	}
 }
 

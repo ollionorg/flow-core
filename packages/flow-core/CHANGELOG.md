@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.9.0] - 2024-03-01
+
+### Features
+
+- a11y support added.
+
 ## [2.8.7] - 2024-02-22
 
 ### Improvements

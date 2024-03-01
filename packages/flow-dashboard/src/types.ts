@@ -29,8 +29,16 @@ export type FDashboardBigNumberWidget = FDashboardWidgetCore<number> & {
 	type: "big-number";
 	dataType?: "storage" | "time" | "count" | "currency" | "percentage";
 };
-export type FDashboardWidget = FDashboardBigNumberWidget | FDashboardTimeseriesWidget;
 
 export type FDashboardTimeseriesWidget = FDashboardWidgetCore<FTimeseriesChartConfig> & {
 	type: "timeseries";
 };
+
+export type FDashboardHTMLTemplateWidget = FDashboardWidgetCore<HTMLTemplateResult> & {
+	type: "html-template";
+};
+
+export type FDashboardWidget =
+	| FDashboardBigNumberWidget
+	| FDashboardTimeseriesWidget
+	| FDashboardHTMLTemplateWidget;

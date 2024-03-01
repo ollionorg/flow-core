@@ -56,6 +56,9 @@ export function renderWidget(widget: FDashboardWidget) {
 				><f-timeseries-chart .config=${widget.data}></f-timeseries-chart
 			></f-div>`;
 
+		case "html-template":
+			return widget.data;
+
 		default:
 			return nothing;
 	}

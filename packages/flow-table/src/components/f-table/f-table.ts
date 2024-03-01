@@ -70,6 +70,10 @@ export class FTable extends FRoot {
 		this.highlightColumnHover = val;
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "table";
+	}
 	render() {
 		return html`<slot
 				name="header"

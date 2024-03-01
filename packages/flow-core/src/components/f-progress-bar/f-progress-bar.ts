@@ -159,6 +159,15 @@ export class FProgressBar extends FRoot {
 		};height:${this.circleDiameter};${this.fill ? `--f-circle-progress-fill: ${this.fill};` : ""}`;
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "progressbar";
+		this.setAttribute("aria-valuenow", `${this.valueInNumber}`);
+		if (!this.getAttribute("aria-label")) {
+			this.setAttribute("aria-label", `Progress bar`);
+		}
+	}
+
 	render() {
 		/**
 		 * creating local fill variable out of state prop.

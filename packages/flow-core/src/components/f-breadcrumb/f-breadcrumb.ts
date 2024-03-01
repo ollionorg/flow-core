@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-breadcrumb.scss?inline";
 import globalStyle from "./f-breadcrumb-global.scss?inline";
@@ -119,6 +119,7 @@ export class FBreadcrumb extends FRoot {
 				align="middle-left"
 				class="f-breadcrumb-content"
 				?disabled=${this.disabled}
+				role="listitem"
 				@click=${(event: MouseEvent) => this.handleDispatchEvent(event, crumb)}
 			>
 				<f-text
@@ -129,6 +130,8 @@ export class FBreadcrumb extends FRoot {
 					?ellipsis=${true}
 					?disabled=${this.disabled}
 					.tooltip=${crumb?.title}
+					tabindex="0"
+					role="link"
 					>${crumb?.title}</f-text
 				></f-div
 			>
@@ -171,10 +174,16 @@ export class FBreadcrumb extends FRoot {
 		this.dispatchEvent(event);
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "navigation";
+		if (!this.getAttribute("aria-label")) this.setAttribute("aria-label", "Breadcrumb");
+	}
+
 	render() {
 		this.createSeperateCrumbs();
 
-		const textBreadcrumb = html` <f-div gap="x-small" align="middle-left">
+		const textBreadcrumb = html` <f-div gap="x-small" role="list" align="middle-left">
 			${this.crumbs?.length <= 4
 				? this.crumbs?.map((crumb, index) => this.crumbLoop(crumb, index, this.crumbs))
 				: html`
@@ -182,10 +191,13 @@ export class FBreadcrumb extends FRoot {
 							width="hug-content"
 							align="middle-left"
 							class="f-breadcrumb-content"
+							role="listitem"
 							?disabled=${this.disabled}
 							@click=${(event: MouseEvent) => this.handleDispatchEvent(event, this.initialCrumbs)}
 						>
 							<f-text
+								tabindex="0"
+								role="link"
 								.size=${this.textSize}
 								variant="para"
 								weight="regular"
@@ -204,6 +216,7 @@ export class FBreadcrumb extends FRoot {
 						<f-div
 							clickable
 							?disabled=${this.disabled}
+							tabindex="0"
 							@mouseenter=${() => this.toggleBreadcrumbPopover("open")}
 							id="breadcrumb-popover"
 						>
@@ -220,7 +233,10 @@ export class FBreadcrumb extends FRoot {
 								${this.middlePopoverCrumbs?.map(
 									(crumb, index) =>
 										html` <f-div
+											tabindex="0"
+											role="link"
 											class="popover-crumb-list"
+											role="listitem"
 											padding="medium"
 											.border=${this.middlePopoverCrumbs.length - 1 === index
 												? "none"

@@ -1,4 +1,4 @@
-import { html, PropertyValues, unsafeCSS } from "lit";
+import { html, PropertyValueMap, PropertyValues, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-button.scss?inline";
@@ -203,6 +203,14 @@ export class FButton extends FRoot {
 		} else return "";
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "button";
+		this.tabIndex = 0;
+		this.setAttribute("focusable", "");
+		this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
+	}
+
 	render() {
 		/**
 		 * creating local fill variable out of state prop.
@@ -317,7 +325,7 @@ export class FButton extends FRoot {
 		/**
 		 * Final html to render
 		 */
-		return html`<button
+		return html`<span
 			class=${classMap({
 				"f-button": true,
 				hasShimmer,
@@ -334,7 +342,7 @@ export class FButton extends FRoot {
 			data-qa-id=${this.getAttribute("data-qa-element-id")}
 		>
 			${iconLeft}${this.label}${iconRight}${counter}
-		</button>`;
+		</span>`;
 	}
 
 	protected updated(changedProperties: PropertyValues) {

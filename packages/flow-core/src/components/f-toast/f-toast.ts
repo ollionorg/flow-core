@@ -138,6 +138,14 @@ export class FToast extends FRoot {
 		}
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "alert";
+		if (!this.getAttribute("aria-live")) {
+			this.setAttribute("aria-live", "polite");
+		}
+	}
+
 	/**
 	 * Final render
 	 * @returns html

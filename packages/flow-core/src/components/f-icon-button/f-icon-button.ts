@@ -1,4 +1,4 @@
-import { html, PropertyValues, unsafeCSS } from "lit";
+import { html, PropertyValueMap, PropertyValues, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import eleStyle from "./f-icon-button.scss?inline";
 import globalStyle from "./f-icon-button-global.scss?inline";
@@ -189,6 +189,14 @@ export class FIconButton extends FRoot {
 		}
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "button";
+		this.tabIndex = 0;
+		this.setAttribute("focusable", "");
+		this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
+	}
+
 	render() {
 		/**
 		 * creating local fill variable out of state prop.
@@ -258,7 +266,7 @@ export class FIconButton extends FRoot {
 			}
 		});
 
-		return html`<button
+		return html`<span
 			class=${classMap(classes)}
 			style=${this.applyStyles()}
 			variant=${this.variant}
@@ -269,6 +277,8 @@ export class FIconButton extends FRoot {
 			?counter=${this.counter}
 			?disabled=${this.disabled}
 			?loading=${this.loading}
+			label="Icon-${this.icon}"
+			aria-label="Icon-${this.icon}"
 			data-qa-id=${this.getAttribute("data-qa-element-id")}
 		>
 			${this.loading ? unsafeSVG(loader) : ""}
@@ -282,9 +292,9 @@ export class FIconButton extends FRoot {
 					"fill-button-surface-input": this.iconInputClass ? true : false
 				})}
 				?clickable=${this.variant === "block"}
-			></f-icon>
-			${counter}
-		</button>`;
+			></f-icon
+			>${counter}
+		</span>`;
 	}
 
 	protected updated(changedProperties: PropertyValues) {
@@ -294,6 +304,8 @@ export class FIconButton extends FRoot {
 		 */
 		this.iconElement.requestUpdate();
 		this.counterElement?.requestUpdate();
+		if (!this.getAttribute("aria-label")) this.setAttribute("aria-label", this.icon);
+		if (!this.getAttribute("title")) this.setAttribute("title", this.icon);
 	}
 }
 

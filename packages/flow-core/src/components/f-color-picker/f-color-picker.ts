@@ -143,6 +143,11 @@ export class FColorPicker extends FRoot {
 			</f-div>`;
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "textbox";
+	}
+
 	render() {
 		const classes = { focused: this.isOpen, "no-color": this.isValueEmpty };
 		// render empty string, since there no need of any child element

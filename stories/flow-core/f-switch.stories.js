@@ -33,6 +33,9 @@ export const Playground = {
 					tooltip="This is switch"
 					@input=${handleInput}
 				>
+					<f-div slot="label" padding="none">
+						<f-text variant="para" size="small">Switch Label</f-text>
+					</f-div>
 				</f-switch>
 			</f-div>
 		`;

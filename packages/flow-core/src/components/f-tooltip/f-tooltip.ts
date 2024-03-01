@@ -1,4 +1,4 @@
-import { html, LitElement, unsafeCSS } from "lit";
+import { html, LitElement, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import globalStyle from "./f-tooltip-global.scss?inline";
 import { FDiv } from "../f-div/f-div";
@@ -53,6 +53,16 @@ export class FTooltip extends LitElement {
 	 */
 
 	target!: string | HTMLElement;
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "tooltip";
+
+		if (!this.getAttribute("aria-label")) {
+			// default label if no label is provided
+			this.setAttribute("aria-label", "Tooltip");
+		}
+	}
 
 	render() {
 		this.setAttribute("data-theme", "f-dark");

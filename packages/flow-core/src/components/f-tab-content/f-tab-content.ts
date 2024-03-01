@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import globalStyle from "./f-tab-content-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -24,6 +24,12 @@ export class FTabContent extends FRoot {
 	 */
 	@property({ type: Number, reflect: true })
 	duration?: number = 200;
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "tabpanel";
+		this.setAttribute("tabindex", "0");
+	}
 
 	render() {
 		/**

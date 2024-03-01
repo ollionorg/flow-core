@@ -25,6 +25,7 @@ export const Playground = {
 			<f-div width="100%" align="top-left" padding="large">
 				<f-div width="hug-content" align="top-left">
 					<f-emoji-picker
+						aria-label="Emoji Picker"
 						.value=${args.value}
 						.state=${args.state}
 						.size=${args.size}

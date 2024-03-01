@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import eleStyle from "./f-pictogram.scss?inline";
 import globalStyle from "./f-pictogram-global.scss?inline";
@@ -258,6 +258,12 @@ export class FPictogram extends FRoot {
 		if (!this.source) {
 			throw new Error("f-pictogram : source is mandatory field");
 		}
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "img";
+		if (!this.getAttribute("aria-label")) this.setAttribute("aria-label", "" + this.source);
 	}
 
 	render() {

@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import globalStyle from "./f-grid-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -56,6 +56,11 @@ export class FGrid extends FRoot {
 		this.style.gridTemplateColumns = this.gridTemplateColumns;
 		this.style.gridTemplateRows = this.cellHeight ? `repeat(auto-fill,${this.cellHeight}px)` : "";
 		this.style.gridAutoRows = this.cellHeight ? `${this.cellHeight}px` : `1fr`;
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "grid";
 	}
 
 	render() {

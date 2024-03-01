@@ -120,8 +120,12 @@ export class FCarousel extends FRoot {
 				<f-div class="arrow" width="hug-content" padding="large" height="100%" align="middle-center"
 					><f-icon
 						class="prev"
+						tabindex="0"
 						source="i-chevron-left"
 						clickable
+						@keyup=${(e: KeyboardEvent) => {
+							if (e.key === "Enter") this.handleNavigation("prev");
+						}}
 						@click=${() => this.handleNavigation("prev")}
 					></f-icon
 				></f-div>
@@ -140,7 +144,11 @@ export class FCarousel extends FRoot {
 					<f-icon
 						source="i-chevron-right"
 						class="next"
+						tabindex="0"
 						clickable
+						@keyup=${(e: KeyboardEvent) => {
+							if (e.key === "Enter") this.handleNavigation("next");
+						}}
 						@click=${() => this.handleNavigation("next")}
 					></f-icon>
 				</f-div>
@@ -156,6 +164,11 @@ export class FCarousel extends FRoot {
 		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
 	): Promise<void> {
 		super.updated(changedProperties);
+
+		this.addEventListener("keyup", (e: KeyboardEvent) => {
+			if (e.key === "ArrowRight") this.handleNavigation("next");
+			if (e.key === "ArrowLeft") this.handleNavigation("prev");
+		});
 		await this.updateComplete;
 		/**
 		 * remove clonned elements if any

@@ -2,11 +2,11 @@
 
 # Change Log
 
-## [2.3.0] - 2024-02-23
+## [2.4.0] - 2024-03-01
 
-### Feature
+### Features
 
-- `f-table` & `f-table-schema` : `highlight-column-hover` property added to control column header hover behavior.
+- a11y support added.
 
 ## [2.2.5] - 2024-02-09
 

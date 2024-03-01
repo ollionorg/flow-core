@@ -329,6 +329,11 @@ export class FDiv extends FRoot {
 		super.disconnectedCallback();
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		if (!this.role) this.role = "none";
+	}
+
 	render() {
 		/**
 		 * creating local fill variable out of state prop.

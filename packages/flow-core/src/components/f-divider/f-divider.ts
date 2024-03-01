@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import globalStyle from "./f-divider-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -41,6 +41,11 @@ export class FDivider extends FRoot {
 	 */
 	@property({ reflect: true, type: String })
 	state?: FDividerState = "default";
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "separator";
+	}
 
 	render() {
 		/**

@@ -96,6 +96,7 @@ export default function render(this: FSelect) {
 		<input
 			tabindex="0"
 			class=${classMap({ "f-select": true })}
+			aria-label="Search ${this.getAttribute("aria-label")}"
 			id="f-select"
 			data-qa-input
 			variant=${this.variant}
@@ -373,6 +374,10 @@ export function renderArrayOptions(this: FSelect) {
 			height="hug-content"
 			width="fill-container"
 			direction="row"
+			role="option"
+			aria-selected="${this.isSelected(option)}"
+			aria-disabled="${typeof option === "object" && option.disabled}"
+			aria-label="${(option as FSelectOptionObject)?.title ?? option}"
 			align="middle-left"
 			gap="small"
 			.selected=${this.isSelected(option) ? "background" : undefined}
@@ -471,6 +476,7 @@ export function renderGroupOptions(this: FSelect) {
 		option => html`
 			<f-div
 				class="f-select-options-clickable"
+				role="option"
 				data-qa-option=${this.getOptionQaId(option)}
 				padding="medium x-large"
 				height="hug-content"
@@ -478,6 +484,8 @@ export function renderGroupOptions(this: FSelect) {
 				direction="row"
 				align="middle-left"
 				gap="small"
+				aria-selected="${this.isGroupSelection(option, group)}"
+				aria-disabled="${typeof option === "object" && option.disabled}"
 				.selected=${this.isGroupSelection(option, group) ? "background" : undefined}
 				@click=${(e: MouseEvent) => {
 					this.handleSelectionGroup(option, group, e);

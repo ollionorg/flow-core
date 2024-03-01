@@ -90,7 +90,7 @@ export class FSwitch extends FRoot {
 	/**
 	 * emit event.
 	 */
-	handleInput(e: InputEvent) {
+	handleInput(e: InputEvent | KeyboardEvent) {
 		e.stopPropagation();
 
 		this.value = !this.value;
@@ -103,6 +103,12 @@ export class FSwitch extends FRoot {
 		});
 
 		this.dispatchEvent(event);
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "switch";
+		this.tabIndex = 0;
 	}
 
 	render() {
@@ -132,6 +138,7 @@ export class FSwitch extends FRoot {
 			>
 				<label class="f-switch" size=${this.size} state=${this.state}>
 					<input
+						style="visibility: hidden;"
 						type="checkbox"
 						data-qa-id=${this.getAttribute("data-qa-element-id")}
 						checked=${this.value}
@@ -154,6 +161,16 @@ export class FSwitch extends FRoot {
 		if (!this.hasLabel && !this.hasIconTooltip && !this.hasSubtitle) {
 			this.switchSlots.style.display = "none";
 		}
+
+		if (this.value) {
+			this.setAttribute("aria-checked", "true");
+		} else {
+			this.setAttribute("aria-checked", "false");
+		}
+
+		this.onkeyup = (e: KeyboardEvent) => {
+			if (e.key === "Enter") this.handleInput(e);
+		};
 	}
 }
 

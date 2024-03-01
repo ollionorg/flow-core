@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import globalStyle from "./f-tab-node-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
@@ -44,6 +44,14 @@ export class FTabNode extends FRoot {
 		} else {
 			return `${this.width}px`;
 		}
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "tab";
+		this.setAttribute("aria-selected", String(this.active));
+		this.setAttribute("aria-controls", String(this.contentId));
+		this.setAttribute("tabindex", "0");
 	}
 
 	render() {

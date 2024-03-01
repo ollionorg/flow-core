@@ -198,10 +198,14 @@ export class FTableSchema extends FRoot {
 		return this.rowsPerPage ?? 50;
 	}
 
+	get ariaSortOrder() {
+		return this.sortOrder === "asc" ? "ascending" : "descending";
+	}
+
 	get header() {
 		return this.data?.header
 			? html`<f-trow slot="header" part="header">
-					${Object.entries(this.data.header).map(columnHeader => {
+					${Object.entries(this.data.header).map((columnHeader, idx) => {
 						let width = undefined;
 						let selected = false;
 						let sticky = undefined;
@@ -215,8 +219,11 @@ export class FTableSchema extends FRoot {
 
 						return html`<f-tcell
 							part="cell"
+							role="columnheader"
 							.selected=${selected}
 							.width=${width}
+							aria-colindex="${idx + 1}"
+							aria-sort="${this.sortBy === columnHeader[0] ? this.ariaSortOrder : "none"}"
 							.align=${columnHeader[1].align}
 							data-background="${this.stickyCellBackground}"
 							?sticky-left=${ifDefined(sticky)}
@@ -239,7 +246,7 @@ export class FTableSchema extends FRoot {
 		return repeat(
 			this.filteredRows,
 			row => row.id,
-			row => {
+			(row, idx) => {
 				const getDetailsSlot = () => {
 					if (row.details) {
 						return html` <f-div slot="details" width="100%"> ${row.details()} </f-div>`;
@@ -250,6 +257,7 @@ export class FTableSchema extends FRoot {
 				return html`<f-trow
 					part="row"
 					id=${row.id}
+					aria-rowindex="${idx + 1}"
 					.expandIconPosition=${row.expandIconPosition ?? "right"}
 					.open=${row.open ?? false}
 					.selected=${row.selected ?? false}
@@ -260,7 +268,7 @@ export class FTableSchema extends FRoot {
 					@selected-row=${(e: CustomEvent) => this.handleRowSelection(row, e)}
 				>
 					${getDetailsSlot()}
-					${Object.entries(this.data.header).map(columnHeader => {
+					${Object.entries(this.data.header).map((columnHeader, cdx) => {
 						let width = undefined;
 						let selected = false;
 						let sticky = undefined;
@@ -284,6 +292,7 @@ export class FTableSchema extends FRoot {
 						return html`<f-tcell
 							part="cell"
 							.selected=${selected}
+							aria-colindex="${cdx + 1}"
 							.width=${width}
 							.actions=${actions}
 							.align=${cell.align}
@@ -445,6 +454,8 @@ export class FTableSchema extends FRoot {
 					.highlightSelected=${this.highlightSelected}
 					.highlightHover=${this.highlightHover}
 					.highlightColumnHover=${this.highlightColumnHover}
+					aria-rowcount="${this.data.rows.length}"
+					aria-colcount="${Object.keys(this.data.header).length}"
 				>
 					${this.header} ${this.rowsHtml} ${this.noDataTemplate}
 				</f-table>

@@ -119,6 +119,11 @@ export class FTcell extends FRoot {
 		return nothing;
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		if (!this.role) this.role = "cell";
+	}
+
 	render() {
 		return html`<div class="f-tcell-wrapper">
 			<f-div .align=${this.align} height="100%" class="f-tcell-content">

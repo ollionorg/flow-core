@@ -146,6 +146,7 @@ export class FCountdown extends FRoot {
 				this.remaining = this.secondsDuration;
 				this.timerText = this.convertSecondsToMinutesAndSeconds(this.secondsDuration);
 			}
+			this.updateAriaAttributes();
 			this.updateTimerText();
 		}, 1000);
 	}
@@ -208,6 +209,17 @@ export class FCountdown extends FRoot {
 		) {
 			throw new Error("f-countdown : enter correct color-name or hex-color-code");
 		}
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.updateAriaAttributes();
+		this.role = "timer";
+	}
+
+	updateAriaAttributes() {
+		this.setAttribute("aria-live", `polite`);
+		this.setAttribute("aria-label", `Remaining ${this.timerText}`);
 	}
 
 	render() {

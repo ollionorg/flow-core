@@ -393,6 +393,9 @@ export class FEmojiPicker extends FRoot {
 		window.removeEventListener("mouseup", this.outsideClick);
 	}
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "textbox";
+		if (this.placeholder) this.setAttribute("aria-placeholder", this.placeholder);
 		if (!changedProperties.has("value") || !this.picker) {
 			/**
 			 * initiate picker component
@@ -417,6 +420,7 @@ export class FEmojiPicker extends FRoot {
 			this.picker?.injectStyles(unsafeCSS(eleStyle));
 		}
 	}
+
 	render() {
 		this.validateProperties();
 
@@ -479,8 +483,11 @@ export class FEmojiPicker extends FRoot {
 					category=${this.category}
 					variant=${this.variant}
 					clear=${this.value && this.clear ? true : false}
-					tabindex="1"
+					tabindex="0"
 					?disabled=${this.disabled}
+					@keyup=${(e: KeyboardEvent) => {
+						if (e.key === "Enter") this.toggleEmojiPicker(true);
+					}}
 					@click=${(e: MouseEvent) => {
 						e.stopPropagation();
 						this.toggleEmojiPicker(true);

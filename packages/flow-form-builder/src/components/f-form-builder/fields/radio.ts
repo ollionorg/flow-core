@@ -3,6 +3,7 @@ import { FFormInputElements, FormBuilderField, FormBuilderRadioField } from "../
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { getLabelLeftLayout, getSlots } from "../../../modules/helpers";
+import { getAriaLabel } from "../../../modules/utils";
 export default function (
 	name: string,
 	_field: FormBuilderField,
@@ -15,6 +16,7 @@ export default function (
 		<f-radio-group
 			id=${ifDefined(field.id)}
 			class=${ifDefined(field.className)}
+			aria-label="${getAriaLabel(field) ?? name}"
 			name=${name}
 			data-qa-element-id=${field.qaId || field.id}
 			${ref(fieldRef)}

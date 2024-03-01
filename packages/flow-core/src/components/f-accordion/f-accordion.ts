@@ -1,10 +1,10 @@
-import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 import eleStyle from "./f-accordion.scss?inline";
 import globalStyle from "./f-accordion-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv, FDivPaddingProp } from "../f-div/f-div";
-import { flowElement } from "./../../utils";
+import { flowElement, generateId } from "./../../utils";
 import { injectCss } from "@ollion/flow-core-config";
 
 injectCss("f-accordion", globalStyle);
@@ -79,6 +79,9 @@ export class FAccordion extends FRoot {
 	@query(".f-accordion-header")
 	fAccordionHeader?: FDiv;
 
+	// dynamic ids to assign to header and content
+	headerId!: string;
+	contentId!: string;
 	/**
 	 * identify icon-name from string
 	 */
@@ -145,6 +148,12 @@ export class FAccordion extends FRoot {
 		}
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.headerId = generateId();
+		this.contentId = generateId();
+	}
+
 	render() {
 		// render accordion-icon
 		const accordionIcon = html` <f-div
@@ -167,6 +176,7 @@ export class FAccordion extends FRoot {
 		return html`
 			<f-div direction="column" width="100%">
 				<f-div
+					id="${this.headerId}"
 					height="hug-content"
 					@click=${this.toggleAccordion}
 					align="middle-left"
@@ -176,14 +186,17 @@ export class FAccordion extends FRoot {
 					part="accordion-header"
 					.padding=${this.headerPadding}
 					clickable
+					role="button"
 					@mouseenter=${() => this.stateChange("enter")}
 					@mouseleave=${() => this.stateChange("leave")}
+					aria-expanded="${this.open ? "true" : "false"}"
+					aria-controls="${this.contentId}"
 				>
-					${this.icon !== "none" && this.iconPlacement === "left" ? accordionIcon : ""}
+					${this.icon !== "none" && this.iconPlacement === "left" ? accordionIcon : nothing}
 					<f-div>
 						<slot></slot>
 					</f-div>
-					${this.icon !== "none" && this.iconPlacement === "right" ? accordionIcon : ""}
+					${this.icon !== "none" && this.iconPlacement === "right" ? accordionIcon : nothing}
 				</f-div>
 				<f-div
 					class="f-accordion"
@@ -192,6 +205,10 @@ export class FAccordion extends FRoot {
 					direction="column"
 					.padding=${this.bodyPadding}
 					overflow="hidden"
+					id="${this.contentId}"
+					role="region"
+					aria-labelledby="${this.headerId}"
+					tabindex="0"
 				>
 					<slot name="body"></slot>
 				</f-div>

@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { query, queryAssignedElements, state } from "lit/decorators.js";
 import globalStyle from "./f-input-global.scss?inline";
 import { FText } from "../f-text/f-text";
@@ -69,6 +69,12 @@ export class FInput extends FInputBase {
 		}
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "textbox";
+		if (this.placeholder) this.setAttribute("aria-placeholder", this.placeholder);
+	}
+
 	render() {
 		/**
 		 * Final html to render
@@ -137,6 +143,7 @@ export class FInput extends FInputBase {
 						.loading=${this.loading}
 						.clear=${this.clear}
 						.suffixWhen=${this.suffixWhen}
+						aria-label="${this.getAttribute("aria-label")}"
 						data-qa-element-id=${this.getAttribute("data-qa-element-id")}
 						autofocus=${ifDefined(this.getAttribute("autofocus"))}
 						autocomplete=${ifDefined(this.getAttribute("autocomplete"))}
@@ -151,6 +158,17 @@ export class FInput extends FInputBase {
 				</f-div>
 			</f-div>
 		`;
+	}
+
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.updated(changedProperties);
+
+		if (!this.getAttribute("aria-label")) {
+			const labelElement = this.querySelector<HTMLElement>("[slot='label']");
+			if (labelElement) {
+				this.setAttribute("aria-label", labelElement.textContent as string);
+			}
+		}
 	}
 }
 

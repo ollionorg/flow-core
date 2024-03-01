@@ -12,6 +12,7 @@ import { FText } from "../f-text/f-text";
 import { flowElement } from "./../../utils";
 
 import { injectCss } from "@ollion/flow-core-config";
+import { ifDefined } from "lit-html/directives/if-defined.js";
 
 injectCss("f-date-time-picker", globalStyle);
 
@@ -335,11 +336,18 @@ export class FDateTimePicker extends FRoot {
 		}
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "textbox";
+		if (this.placeholder) this.setAttribute("aria-placeholder", this.placeholder);
+	}
+
 	render() {
 		return html`<f-div direction="column" gap="x-small" width="100%">
 			<f-input
 				icon-left=${this.mode === "time-only" ? "i-clock-fill" : "i-calendar"}
 				placeholder=${this.placeholder ?? this.placeholderText}
+				aria-label="${ifDefined(this.getAttribute("aria-label"))}"
 				.size=${this.size}
 				.state=${this.state}
 				.variant=${this.variant}
@@ -352,6 +360,9 @@ export class FDateTimePicker extends FRoot {
 				@keydown=${() => {
 					this.flatPickerElement?.close();
 					this.dateTimePickerElement.inputElement.focus();
+				}}
+				@keyup=${(e: KeyboardEvent) => {
+					if (e.key === "Enter") this.flatPickerElement?.open();
 				}}
 				@blur=${(e: FocusEvent) => {
 					if (this.flatPickerElement?.isOpen) {

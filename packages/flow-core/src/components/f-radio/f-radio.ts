@@ -47,6 +47,9 @@ export class FRadio extends FRoot {
 	@query(".slot-wrapper")
 	slotWrapper!: FDiv;
 
+	@query(".f-radio")
+	nativeRadio!: HTMLInputElement;
+
 	/**
 	 * emit event on click
 	 */
@@ -83,6 +86,7 @@ export class FRadio extends FRoot {
 					<input
 						type="radio"
 						class="f-radio"
+						aria-label="${this.getAttribute("aria-label")}"
 						data-qa-id=${this.getAttribute("data-qa-element-id")}
 						checked=${this.value === "selected" ? true : false}
 						size=${this.size}
@@ -105,6 +109,13 @@ export class FRadio extends FRoot {
 		super.updated(changedProperties);
 
 		this.checkSlots();
+		if (!this.getAttribute("aria-label")) {
+			const labelElement = this.querySelector<HTMLElement>("[slot='label']");
+			if (labelElement) {
+				if (labelElement.textContent)
+					this.nativeRadio.setAttribute("aria-label", labelElement.textContent);
+			}
+		}
 	}
 
 	checkSlots() {

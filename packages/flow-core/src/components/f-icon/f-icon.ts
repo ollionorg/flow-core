@@ -1,4 +1,4 @@
-import { html, PropertyValues, unsafeCSS } from "lit";
+import { html, PropertyValueMap, PropertyValues, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import eleStyle from "./f-icon.scss?inline";
 import globalStyle from "./f-icon-global.scss?inline";
@@ -179,6 +179,14 @@ export class FIcon extends FRoot {
 			}
 		}
 		this.requestUpdate();
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "img";
+		if (!this.getAttribute("aria-label"))
+			this.setAttribute("aria-label", "" + this._originalSource);
+		this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
 	}
 
 	render() {

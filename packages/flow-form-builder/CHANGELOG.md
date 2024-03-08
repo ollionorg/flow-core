@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.3.0] - 2024-03-01
+
+### Features
+
+- a11y support added.
+
 ## [2.2.5] - 2024-02-13
 
 ### Patch Changes

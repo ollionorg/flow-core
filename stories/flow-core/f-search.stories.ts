@@ -24,6 +24,7 @@ export const Playground = {
 		return html`
 			<f-div padding="large">
 				<f-search
+					aria-label="Search Input"
 					value=${args.value}
 					selected-scope=${args["selected-scope"]}
 					.variant=${args.variant}

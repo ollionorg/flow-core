@@ -412,6 +412,13 @@ export class FFileUpload extends FRoot {
 		}
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "button";
+
+		if (this.placeholder) this.setAttribute("aria-label", this.placeholder);
+	}
+
 	render() {
 		//max-size removing space
 		const maxSizeTemp = this.maxSize?.split(" ").join("");
@@ -463,12 +470,15 @@ export class FFileUpload extends FRoot {
 				<f-div direction="column" gap="x-small">
 					<div
 						class="f-file-upload"
-						tabindex="1"
+						tabindex="0"
 						state=${this.state}
 						size=${this.size}
 						?loading=${this.loading}
 						?disabled=${this.disabled}
 						@click=${this.handleClick}
+						@keyup=${(e: KeyboardEvent) => {
+							if (e.key === "Enter") this.handleClick();
+						}}
 						@drop=${this.dropFile}
 						@dragover=${(e: DragEvent) => {
 							e.preventDefault();

@@ -1,14 +1,11 @@
 import { Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import {
-	FDashboard,
-	FDashboardConfig,
-	FDashboardWidget,
-	FTimeseriesChartConfig
-} from "@ollion/flow-dashboard";
+import type { FDashboard, FDashboardConfig, FDashboardWidget } from "@ollion/flow-dashboard";
 import { generateTimeseriesChartData } from "./mock-data-utils";
 import { faker } from "@faker-js/faker";
 import { createRef, ref } from "lit/directives/ref.js";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 export default {
 	title: "@ollion/flow-dashboard/f-dashboard",
@@ -40,41 +37,11 @@ const getWidgets = () => {
 					data: generateTimeseriesChartData(startFrom)
 				},
 				id: faker.string.alpha(10),
-				header() {
-					const name = faker.company.name();
-					const description = faker.lorem.sentences(3);
-					return html`<f-div
-						align="middle-left"
-						height="hug-content"
-						padding="medium"
-						gap="medium"
-						border="small solid subtle bottom"
-					>
-						<f-icon .source=${faker.helpers.arrayElement(iconsNames)} size="large"></f-icon>
-						<f-div direction="column" align="middle-left">
-							<f-text ellipsis .tooltip=${name} variant="heading" weight="medium">${name}</f-text>
-							<f-text ellipsis .tooltip=${description} size="small">${description}</f-text>
-						</f-div>
-					</f-div>`;
+				header: {
+					title: faker.company.name(),
+					description: faker.lorem.sentences(3)
 				},
-				footer: () => {
-					const date = faker.date.recent({ refDate: new Date() });
-					const state = faker.helpers.arrayElement(["danger", "success", "warning"]);
-					return html`<f-div
-						padding="medium"
-						gap="auto"
-						border="small solid subtle top"
-						height="hug-content"
-					>
-						<f-div gap="small" align="middle-left">
-							<f-icon source="i-clock-outline" size="small" .state=${state}></f-icon>
-							<f-text .state=${state} size="small"
-								>Last updated on ${date.toLocaleDateString()} ${date.toLocaleTimeString()}</f-text
-							>
-						</f-div>
-						<f-button label="view details" size="x-small" icon-right="i-new-tab"></f-button>
-					</f-div>`;
-				},
+				footer: `Powered by Flow`,
 				placement: {
 					w: faker.number.int({ min: 4, max: 8 }),
 					h: faker.number.int({ min: 3, max: 4 })
@@ -103,6 +70,7 @@ const getWidgets = () => {
 };
 const Template = () => {
 	const dashboardRef = createRef<FDashboard>();
+	const imgRef = createRef<HTMLImageElement>();
 	const dashboardConfig: FDashboardConfig = {
 		widgets: getWidgets()
 	};
@@ -114,7 +82,67 @@ const Template = () => {
 		}
 	};
 
-	return html`<f-div height="100%" width="100%" gap="small" direction="column">
+	/**
+	 * Download file as image in pdf
+	 *
+	 *
+	 */
+	// const downloadFile = () => {
+	// 	const element = document.querySelector("#dashboard-to-export") as FDashboard;
+
+	// 	html2canvas(element, { scale: 1 }).then(function (canvas) {
+	// 		// Initialize jsPDF
+	// 		const pdf = new jsPDF({
+	// 			orientation: "p",
+	// 			unit: "px",
+	// 			format: [element.scrollWidth, element.scrollHeight]
+	// 		});
+	// 		pdf.setDisplayMode("original");
+	// 		//const dataURL = canvas.toDataURL("image/png", 1.0);
+	// 		// Add canvas image to PDF
+	// 		//imgRef.value!.src = dataURL;
+
+	// 		pdf.addImage(canvas, "PNG", 0, 0, element.scrollWidth, element.scrollHeight);
+
+	// 		// Save the PDF
+	// 		pdf.save("canvas_to_pdf.pdf");
+	// 	});
+	// };
+
+	const downloadFile = () => {
+		// const allSVGS = document.querySelectorAll("svg");
+		// console.log(allSVGS);
+		// for (let i = 0; i < allSVGS.length; i++) {
+		// 	console.log(allSVGS[i]);
+		// 	html2canvas(allSVGS.item(i) as unknown as HTMLElement, { scale: 1 }).then(function (canvas) {
+		// 		allSVGS[i].outerHTML = `<img src="${canvas.toDataURL()}"/>`;
+		// 	});
+		// }
+
+		const element = document.querySelector("#dashboard-to-export") as FDashboard;
+		const doc = new jsPDF({
+			orientation: "p",
+			unit: "px",
+			format: [element.scrollWidth, element.scrollHeight]
+		});
+
+		doc.html(element, {
+			html2canvas: {
+				scale: 1,
+				async: true,
+				svgRendering: true
+			},
+			callback: function (doc) {
+				doc.save("sample-document.pdf");
+			},
+			width: element.scrollWidth,
+			windowWidth: 2400
+		});
+	};
+
+	return html`<f-div width="100%" gap="small" overflow="scroll" direction="column">
+		<img ${ref(imgRef)} />
+
 		<f-div
 			variant="curved"
 			state="primary"
@@ -123,11 +151,17 @@ const Template = () => {
 			gap="auto"
 			align="middle-left"
 		>
-			<f-text state="inherit">Click on randomize button to generate new data</f-text>
-			<f-button @click=${randomize} label="randomize"></f-button>
+			<f-text state="inherit">Click on export button to generate pdf</f-text>
+			<f-button @click=${downloadFile} label="export"></f-button>
 		</f-div>
 
-		<f-dashboard ${ref(dashboardRef)} .config=${dashboardConfig}> </f-dashboard>
+		<f-dashboard
+			style="background:var(--color-surface-default)"
+			id="dashboard-to-export"
+			${ref(dashboardRef)}
+			.config=${dashboardConfig}
+		>
+		</f-dashboard>
 	</f-div>`;
 };
 

@@ -50,7 +50,7 @@ export class FDashboard extends FRoot {
 	render() {
 		return html`
 			<div class="grid-stack" ${ref(this.gridStackElement)}>
-				${this.config.widgets.map(wgt => {
+				${this.config?.widgets.map(wgt => {
 					return keyed(
 						wgt.id,
 						html`<div

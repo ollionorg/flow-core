@@ -1,6 +1,6 @@
 import { html, PropertyValueMap, TemplateResult, unsafeCSS } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
-import { FRoot } from "@ollion/flow-core";
+import { FDiv, FRoot } from "@ollion/flow-core";
 import eleStyle from "./f-form-object.scss?inline";
 import globalStyle from "./f-form-object-global.scss?inline";
 
@@ -9,6 +9,7 @@ import { createRef, Ref } from "lit/directives/ref.js";
 import {
 	CanValidateFields,
 	FFormInputElements,
+	FormBuilderBaseField,
 	FormBuilderObjectField,
 	FormBuilderValidationPromise,
 	FormBuilderValues
@@ -20,6 +21,7 @@ import { FFormGroup } from "@ollion/flow-core";
 import { FFieldSeparator } from "../f-field-separator/f-field-separator";
 import { radioGroupStyles } from "../f-radio-group/f-radio-group";
 import { checkboxGroupStyles } from "../f-checkbox-group/f-checkbox-group";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export type ObjectValueType = Record<
 	string,
@@ -130,8 +132,8 @@ export class FFormObject extends FRoot {
 				.direction=${this.config.direction ?? "horizontal"}
 				.variant=${this.config.variant}
 				.label=${this.config.label}
-				gap=${this.config.gap ?? this.gap}
-				data-qa-id=${this.config.qaId || this.config.id}
+				gap=${ifDefined(this.config.gap ?? this.gap)}
+				data-qa-id=${ifDefined(this.config.qaId || this.config.id)}
 				.collapse=${this.config.isCollapsible ? "accordion" : "none"}
 			>
 				${fieldTemplates}
@@ -142,7 +144,7 @@ export class FFormObject extends FRoot {
 						variant="para"
 						size="small"
 						weight="regular"
-						data-qa-help-for=${this.config.qaId || this.config.id}
+						data-qa-help-for=${ifDefined(this.config.qaId || this.config.id)}
 						.state=${this.config.state}
 						>${this.config?.helperText}</f-text
 				  >`
@@ -223,6 +225,13 @@ export class FFormObject extends FRoot {
 								if (divider) {
 									divider.dataset.hidden = "true";
 								}
+
+								if ((fieldConfig as FormBuilderBaseField).layout === "label-left") {
+									const wrapper = ref.value.closest<FDiv>(".label-left-layout");
+									if (wrapper) {
+										wrapper.dataset.hidden = "true";
+									}
+								}
 							} else {
 								ref.value.dataset.hidden = "false";
 								const divider = this.shadowRoot?.querySelector<HTMLElement>(
@@ -230,6 +239,13 @@ export class FFormObject extends FRoot {
 								);
 								if (divider) {
 									divider.dataset.hidden = "false";
+								}
+
+								if ((fieldConfig as FormBuilderBaseField).layout === "label-left") {
+									const wrapper = ref.value.closest<FDiv>(".label-left-layout");
+									if (wrapper) {
+										wrapper.dataset.hidden = "false";
+									}
 								}
 							}
 							this.dispatchShowWhenExeEvent();

@@ -12,12 +12,13 @@ import {
 	FormBuilderGap,
 	FormBuilderSize,
 	FormBuilderVariant,
-	CanValidateFields
+	CanValidateFields,
+	FormBuilderBaseField
 } from "../../types";
 import eleStyle from "./f-form-builder.scss?inline";
 import globalStyle from "./f-form-builder-global.scss?inline";
 
-import { FRoot } from "@ollion/flow-core";
+import { FDiv, FRoot } from "@ollion/flow-core";
 import { Ref, createRef } from "lit/directives/ref.js";
 import fieldRenderer from "./fields";
 import { extractValidationState, validateField } from "../../modules/validation/validator";
@@ -26,6 +27,7 @@ import { Subject } from "rxjs";
 import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/helpers";
 import { cloneDeep, isEqual } from "lodash-es";
 import { injectCss } from "@ollion/flow-core-config";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 injectCss("f-form-builder", globalStyle);
 
@@ -120,7 +122,7 @@ export class FFormBuilder extends FRoot {
 				@show-when=${this.onShowWhen}
 				@show-when-exe=${this.onShowWhenExecution}
 				?separator=${this.separator}
-				gap=${this.gap}
+				gap=${ifDefined(this.gap)}
 				@keyup=${this.handleKeyUp}
 			>
 				${this.label
@@ -288,8 +290,20 @@ export class FFormBuilder extends FRoot {
 						const showField = this.field.showWhen(values);
 						if (!showField) {
 							ref.value.dataset.hidden = "true";
+							if ((this.field as FormBuilderBaseField).layout === "label-left") {
+								const wrapper = ref.value.closest<FDiv>(".label-left-layout");
+								if (wrapper) {
+									wrapper.dataset.hidden = "true";
+								}
+							}
 						} else {
 							ref.value.dataset.hidden = "false";
+							if ((this.field as FormBuilderBaseField).layout === "label-left") {
+								const wrapper = ref.value.closest<FDiv>(".label-left-layout");
+								if (wrapper) {
+									wrapper.dataset.hidden = "false";
+								}
+							}
 						}
 						this.onShowWhenExecution();
 					}

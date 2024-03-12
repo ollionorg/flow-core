@@ -34,6 +34,7 @@ import checkboxGroupGlobalStyles from "./../components/f-checkbox-group/f-checkb
 import radioGroupGlobalStyles from "./../components/f-radio-group/f-radio-group-global.scss?inline";
 import fieldSeparatorGlobalStyles from "./../components/f-field-separator/f-field-separator-global.scss?inline";
 import formObjectGlobalStyles from "./../components/f-form-object/f-form-object-global.scss?inline";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export async function propogateProperties(element: FFormArray | FFormObject | FFormBuilder) {
 	const inputElements = element.shadowRoot?.querySelectorAll<LitElement>(
@@ -88,7 +89,7 @@ export function getSubTitle(
 		return html`
 			<f-text
 				size="small"
-				data-qa-subtitle-for=${field.qaId || field.id}
+				data-qa-subtitle-for=${ifDefined(field.qaId || field.id)}
 				slot="subtitle"
 				align="right"
 				state="secondary"
@@ -97,7 +98,9 @@ export function getSubTitle(
 		`;
 	} else if (subTitle && typeof subTitle === "object") {
 		return html`
-			<f-div data-qa-subtitle-for=${field.qaId || field.id} slot="subtitle">${subTitle}</f-div>
+			<f-div data-qa-subtitle-for=${ifDefined(field.qaId || field.id)} slot="subtitle"
+				>${subTitle}</f-div
+			>
 		`;
 	}
 
@@ -116,11 +119,15 @@ export function getSlots(
 				slot="label"
 				padding="none"
 				gap="none"
-				data-qa-label-for=${field.qaId || field.id}
+				data-qa-label-for=${ifDefined(field.qaId || field.id)}
 				>${field.label.title}</f-div
 		  >`
 		: name
-		? html`<f-div slot="label" padding="none" gap="none" data-qa-label-for=${field.qaId || field.id}
+		? html`<f-div
+				slot="label"
+				padding="none"
+				gap="none"
+				data-qa-label-for=${ifDefined(field.qaId || field.id)}
 				>${name}</f-div
 		  >`
 		: nothing;
@@ -135,7 +142,7 @@ export function getSlots(
 					source="i-question-filled"
 					size="small"
 					state="subtle"
-					data-qa-info-icon-for=${field.qaId || field.id}
+					data-qa-info-icon-for=${ifDefined(field.qaId || field.id)}
 					.tooltip="${field.label?.iconTooltip}"
 					clickable
 				></f-icon>
@@ -148,7 +155,7 @@ export function getSlots(
 	}
 	return html` ${label}${subTitle}
 	${field.helperText
-		? html`<f-div slot="help" data-qa-help-for=${field.qaId || field.id}
+		? html`<f-div slot="help" data-qa-help-for=${ifDefined(field.qaId || field.id)}
 				>${field.helperText}
 		  </f-div>`
 		: nothing}`;
@@ -170,7 +177,7 @@ export function getLabelLeftLayout(
 					source="i-question-filled"
 					size="small"
 					state="subtle"
-					data-qa-info-icon-for=${field.qaId || field.id}
+					data-qa-info-icon-for=${ifDefined(field.qaId || field.id)}
 					.tooltip="${field.label?.iconTooltip}"
 					clickable
 				></f-icon>
@@ -180,14 +187,16 @@ export function getLabelLeftLayout(
 		typeof field.label?.title === "object"
 			? field.label?.title
 			: html`<f-div gap="large" align="middle-left">
-					<f-text data-qa-label-for=${field.qaId || field.id}>${field.label?.title}</f-text>
+					<f-text data-qa-label-for=${ifDefined(field.qaId || field.id)}
+						>${field.label?.title}</f-text
+					>
 			  </f-div>`;
 
 	const label = html`<f-div width="hug-content" padding="none small none none" direction="column">
 		<f-div width="hug-content" gap="small">${title}${iconTooltip} </f-div>
 		${description}
 	</f-div>`;
-	return html`<f-div gap="auto" align="middle-left" width="100%">
+	return html`<f-div class="label-left-layout" gap="auto" align="middle-left" width="100%">
 		${label}
 		<f-div align="middle-left"> ${fieldHtml} </f-div>
 	</f-div>`;

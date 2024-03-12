@@ -133,14 +133,6 @@ const Template = () => {
 
 			const allAnchors = element.querySelectorAll("a");
 			allAnchors.forEach(anchorElement => {
-				console.log(
-					anchorElement,
-					anchorElement.getBoundingClientRect().x - element.getBoundingClientRect().x,
-					anchorElement.getBoundingClientRect().y - element.getBoundingClientRect().y,
-					anchorElement.offsetWidth,
-					anchorElement.offsetHeight,
-					{ url: anchorElement.href }
-				);
 				pdf.link(
 					anchorElement.getBoundingClientRect().x - element.getBoundingClientRect().x,
 					anchorElement.getBoundingClientRect().y - element.getBoundingClientRect().y,
@@ -152,13 +144,21 @@ const Template = () => {
 
 			pdf.addImage(canvas, "PNG", 0, 0, element.scrollWidth, element.scrollHeight);
 
+			// allAnchors.forEach(anchorElement => {
+			// 	pdf.text(
+			// 		anchorElement.innerText,
+			// 		anchorElement.getBoundingClientRect().x - element.getBoundingClientRect().x,
+			// 		anchorElement.getBoundingClientRect().y - element.getBoundingClientRect().y
+			// 	);
+			// });
+
 			// Save the PDF
 			pdf.save("canvas_to_pdf.pdf");
 		});
 		// html2canvas(element, { scale: 1 }).then(function (canvas) {
 		// 	const imgData = canvas.toDataURL("image/png");
 		// 	const imgWidth = 210;
-		// 	const pageHeight = 250;
+		// 	const pageHeight = 297;
 		// 	const imgHeight = (canvas.height * imgWidth) / canvas.width;
 		// 	let heightLeft = imgHeight;
 		// 	const doc = new jsPDF({

@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import eleStyle from "./f-text-area.scss?inline";
 import globalStyle from "./f-text-area-global.scss?inline";
@@ -173,6 +173,12 @@ export class FTextArea extends FRoot {
 		}
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "textbox";
+		this.ariaMultiLine = "true";
+		if (this.placeholder) this.setAttribute("aria-placeholder", this.placeholder);
+	}
 	render() {
 		const parentDiv = this.parentElement?.tagName === "F-DIV" ? this.parentElement : "";
 		/**

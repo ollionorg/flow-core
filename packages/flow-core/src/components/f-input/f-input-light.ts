@@ -1,4 +1,4 @@
-import { html, nothing, TemplateResult, unsafeCSS } from "lit";
+import { html, nothing, PropertyValueMap, TemplateResult, unsafeCSS } from "lit";
 import { query } from "lit/decorators.js";
 
 import globalStyle from "./f-input-light-global.scss?inline";
@@ -154,6 +154,12 @@ export class FInputLight extends FInputBase {
 		return nothing;
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		this.role = "textbox";
+		if (this.placeholder) this.setAttribute("aria-placeholder", this.placeholder);
+	}
+
 	render() {
 		/**
 		 * Final html to render
@@ -183,6 +189,7 @@ export class FInputLight extends FInputBase {
 					autofocus=${ifDefined(this.getAttribute("autofocus"))}
 					autocomplete=${ifDefined(this.getAttribute("autocomplete"))}
 					maxlength="${ifDefined(this.maxLength)}"
+					aria-label="${this.getAttribute("aria-label")}"
 					@input=${this.handleInput}
 				/>
 				${this.suffixTemplate}

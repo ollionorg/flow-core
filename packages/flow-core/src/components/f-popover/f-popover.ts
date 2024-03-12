@@ -377,6 +377,20 @@ export class FPopover extends FRoot {
 		this.dispatchEvent(event);
 	}
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+
+		this.role = "dialog";
+
+		if (!this.getAttribute("aria-label")) {
+			this.setAttribute("aria-label", "Popover");
+		}
+
+		if (!this.targetElement?.getAttribute("aria-haspopup")) {
+			this.targetElement?.setAttribute("aria-haspopup", "dialog");
+		}
+	}
+
 	render() {
 		this.classList.forEach(cl => {
 			if (cl === "tooltip") {

@@ -28,9 +28,9 @@ export const Playground = {
 				?is-collapsed=${args["is-collapsed"]}
 				?can-duplicate=${args["can-duplicate"]}
 			>
-				<f-input placeholder="This is an input field"></f-input>
+				<f-input aria-label="Sample Input" placeholder="This is an input field"></f-input>
 				<f-divider></f-divider>
-				<f-button label="submit" variant="curved"></f-button>
+				<f-button aria-label="Submit Button" label="submit" variant="curved"></f-button>
 			</f-form-group>
 			<f-divider></f-divider>
 			<f-form-group
@@ -44,13 +44,14 @@ export const Playground = {
 				?can-duplicate=${args["can-duplicate"]}
 			>
 				<f-select
+					aria-label="Sample Select"
 					.value=${"+91"}
 					.options=${["+91", "+92", "+93"]}
 					width="150"
 					.clear=${false}
 				></f-select>
 				<f-divider></f-divider>
-				<f-input placeholder="This is an input field"></f-input>
+				<f-input aria-label="Another Input" placeholder="This is an input field"></f-input>
 			</f-form-group>
 			<f-divider></f-divider>
 			<f-form-group
@@ -63,9 +64,9 @@ export const Playground = {
 				.collapse=${args.collapse}
 				?is-collapsed=${args["is-collapsed"]}
 			>
-				<f-input placeholder="This is an input field"></f-input>
+				<f-input aria-label="Input 2" placeholder="This is an input field"></f-input>
 				<f-divider></f-divider>
-				<f-input placeholder="This is an input field"></f-input>
+				<f-input aria-label="Input 3" placeholder="This is an input field"></f-input>
 			</f-form-group>
 			<f-divider></f-divider>
 			<f-form-group
@@ -78,13 +79,13 @@ export const Playground = {
 				.collapse=${args.collapse}
 				?is-collapsed=${args["is-collapsed"]}
 			>
-				<f-checkbox>
+				<f-checkbox aria-label="Apple Checkbox">
 					<f-div slot="label">Apple</f-div>
 				</f-checkbox>
-				<f-checkbox>
+				<f-checkbox aria-label="Banana Checkbox">
 					<f-div slot="label">Banana</f-div>
 				</f-checkbox>
-				<f-checkbox>
+				<f-checkbox aria-label="Radio Checkbox">
 					<f-div slot="label">Radio</f-div>
 				</f-checkbox>
 			</f-form-group>
@@ -99,13 +100,13 @@ export const Playground = {
 				.collapse=${args.collapse}
 				?is-collapsed=${args["is-collapsed"]}
 			>
-				<f-radio>
+				<f-radio aria-label="Apple Radio">
 					<f-div slot="label">Apple</f-div>
 				</f-radio>
-				<f-radio>
+				<f-radio aria-label="Banana Radio">
 					<f-div slot="label">Banana</f-div>
 				</f-radio>
-				<f-radio>
+				<f-radio aria-label="Sample Radio">
 					<f-div slot="label">Radio</f-div>
 				</f-radio>
 			</f-form-group>

@@ -19,6 +19,7 @@ export default defineConfig({
 			external: [
 				"axios",
 				"emoji-mart",
+				"lodash-es",
 				/^lit/,
 				"rxjs",
 				"@ollion/flow-core-config",

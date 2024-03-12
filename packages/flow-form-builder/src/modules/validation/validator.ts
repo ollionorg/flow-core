@@ -163,8 +163,10 @@ export async function validateField(
 			if (!silent) {
 				updateMessage(element, message, field, "data-qa-error-for");
 				element.state = "danger";
+				element.setAttribute("aria-invalid", "true");
 			}
 		} else {
+			element.setAttribute("aria-invalid", "false");
 			const helpSlot = element.querySelector("[slot='help']");
 			if (field.helperText) {
 				if (typeof field.helperText === "string") {

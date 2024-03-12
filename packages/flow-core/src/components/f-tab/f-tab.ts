@@ -215,6 +215,8 @@ For vertical f-tab, content can align to top, middle, or bottom.
 				.align=${this.tabsAlignment}
 				overflow="scroll"
 				.gap=${this.variant === "fill" ? "x-small" : "none"}
+				tabindex="0"
+				role="tablist"
 			>
 				<slot></slot>
 			</f-div>

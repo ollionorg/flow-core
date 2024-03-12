@@ -173,6 +173,35 @@ export class FText extends FRoot {
 		}
 	}
 
+	get headerLevel() {
+		switch (this.size) {
+			case "x-large":
+				return "1";
+			case "large":
+				return "2";
+			case "medium":
+				return "3";
+			case "small":
+				return "4";
+			case "x-small":
+				return "4";
+			default:
+				return "3";
+		}
+	}
+
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+		if (!this.role) {
+			if (this.variant === "heading") {
+				this.role = "heading";
+				this.setAttribute("aria-level", this.headerLevel);
+			} else {
+				this.role = "paragraph";
+			}
+		}
+	}
+
 	render() {
 		/**
 		 * creating local fill variable out of state prop.

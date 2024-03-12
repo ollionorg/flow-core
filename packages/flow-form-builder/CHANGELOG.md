@@ -2,6 +2,19 @@
 
 # Change Log
 
+## [2.3.1] - 2024-03-12
+
+### Bug Fixes
+
+- `showWhen` not working for `layout:'label-left'` fields.
+- `layout:'label-left'` fields alignment fixed when used in object in horizontal direction.
+
+## [2.3.0] - 2024-03-01
+
+### Features
+
+- a11y support added.
+
 ## [2.2.5] - 2024-02-13
 
 ### Patch Changes

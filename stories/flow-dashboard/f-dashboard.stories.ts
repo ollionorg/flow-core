@@ -29,7 +29,7 @@ const getWidgets = () => {
 	];
 	const widgets: FDashboardWidget[] = [];
 	const startFrom = new Date();
-	for (let index = 0; index < 10; index++) {
+	for (let index = 0; index < 20; index++) {
 		if (index % 2 === 0) {
 			widgets.push({
 				type: "timeseries",
@@ -37,11 +37,43 @@ const getWidgets = () => {
 					data: generateTimeseriesChartData(startFrom)
 				},
 				id: faker.string.alpha(10),
-				header: {
-					title: faker.company.name(),
-					description: faker.lorem.sentences(3)
+				header() {
+					const name = faker.company.name();
+					const description = faker.lorem.sentences(3);
+					return html`<f-div
+						align="middle-left"
+						height="hug-content"
+						padding="medium"
+						gap="medium"
+						border="small solid subtle bottom"
+					>
+						<f-icon .source=${faker.helpers.arrayElement(iconsNames)} size="large"></f-icon>
+						<f-div direction="column" align="middle-left">
+							<f-text ellipsis .tooltip=${name} variant="heading" weight="medium"
+								><a href="https://ollion.com/">${name}</a></f-text
+							>
+							<f-text ellipsis .tooltip=${description} size="small">${description}</f-text>
+						</f-div>
+					</f-div>`;
 				},
-				footer: `Powered by Flow`,
+				footer: () => {
+					const date = faker.date.recent({ refDate: new Date() });
+					const state = faker.helpers.arrayElement(["danger", "success", "warning"]);
+					return html`<f-div
+						padding="medium"
+						gap="auto"
+						border="small solid subtle top"
+						height="hug-content"
+					>
+						<f-div gap="small" align="middle-left">
+							<f-icon source="i-clock-outline" size="small" .state=${state}></f-icon>
+							<f-text .state=${state} size="small"
+								>Last updated on ${date.toLocaleDateString()} ${date.toLocaleTimeString()}</f-text
+							>
+						</f-div>
+						<f-button label="view details" size="x-small" icon-right="i-new-tab"></f-button>
+					</f-div>`;
+				},
 				placement: {
 					w: faker.number.int({ min: 4, max: 8 }),
 					h: faker.number.int({ min: 3, max: 4 })
@@ -87,61 +119,128 @@ const Template = () => {
 	 *
 	 *
 	 */
+	const downloadFile = () => {
+		const element = document.querySelector("#dashboard-to-export") as FDashboard;
+
+		html2canvas(element, { scale: 1 }).then(function (canvas) {
+			// Initialize jsPDF
+			const pdf = new jsPDF({
+				orientation: "p",
+				unit: "px",
+				format: [element.scrollWidth, element.scrollHeight]
+			});
+			pdf.setDisplayMode("original");
+
+			const allAnchors = element.querySelectorAll("a");
+			allAnchors.forEach(anchorElement => {
+				console.log(
+					anchorElement,
+					anchorElement.getBoundingClientRect().x - element.getBoundingClientRect().x,
+					anchorElement.getBoundingClientRect().y - element.getBoundingClientRect().y,
+					anchorElement.offsetWidth,
+					anchorElement.offsetHeight,
+					{ url: anchorElement.href }
+				);
+				pdf.link(
+					anchorElement.getBoundingClientRect().x - element.getBoundingClientRect().x,
+					anchorElement.getBoundingClientRect().y - element.getBoundingClientRect().y,
+					anchorElement.offsetWidth,
+					anchorElement.offsetHeight,
+					{ url: anchorElement.href }
+				);
+			});
+
+			pdf.addImage(canvas, "PNG", 0, 0, element.scrollWidth, element.scrollHeight);
+
+			// Save the PDF
+			pdf.save("canvas_to_pdf.pdf");
+		});
+		// html2canvas(element, { scale: 1 }).then(function (canvas) {
+		// 	const imgData = canvas.toDataURL("image/png");
+		// 	const imgWidth = 210;
+		// 	const pageHeight = 250;
+		// 	const imgHeight = (canvas.height * imgWidth) / canvas.width;
+		// 	let heightLeft = imgHeight;
+		// 	const doc = new jsPDF({
+		// 		orientation: "p",
+		// 		unit: "mm"
+		// 	});
+		// 	let position = 0; // give some top padding to first page
+		// 	doc.link(0, 0, element.scrollWidth, 5, { url: "http://www.google.com" });
+		// 	doc.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+		// 	heightLeft -= pageHeight;
+
+		// 	while (heightLeft >= 0) {
+		// 		position += heightLeft - imgHeight; // top padding for other pages
+		// 		doc.addPage();
+		// 		doc.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+		// 		heightLeft -= pageHeight;
+		// 	}
+		// 	doc.save("canvas_to_pdf.pdf");
+		// });
+	};
 	// const downloadFile = () => {
 	// 	const element = document.querySelector("#dashboard-to-export") as FDashboard;
 
 	// 	html2canvas(element, { scale: 1 }).then(function (canvas) {
-	// 		// Initialize jsPDF
-	// 		const pdf = new jsPDF({
-	// 			orientation: "p",
-	// 			unit: "px",
-	// 			format: [element.scrollWidth, element.scrollHeight]
-	// 		});
-	// 		pdf.setDisplayMode("original");
-	// 		//const dataURL = canvas.toDataURL("image/png", 1.0);
-	// 		// Add canvas image to PDF
-	// 		//imgRef.value!.src = dataURL;
+	// 		const opt = {
+	// 			enableLinks: true,
+	// 			html2canvas: {
+	// 				scale: 1,
+	// 				allowTaint: true
+	// 			},
+	// 			jsPDF: {
+	// 				orientation: "p",
+	// 				unit: "px",
+	// 				format: [element.scrollWidth, element.scrollHeight]
+	// 			}
+	// 		};
+	// 		html2pdf().set(opt).from(element).save();
+	// 	});
+	// 	// New Promise-based usage:
+	// };
 
-	// 		pdf.addImage(canvas, "PNG", 0, 0, element.scrollWidth, element.scrollHeight);
+	// const downloadFile = () => {
+	// 	// const allSVGS = document.querySelectorAll("svg");
+	// 	// console.log(allSVGS);
+	// 	// for (let i = 0; i < allSVGS.length; i++) {
+	// 	// 	console.log(allSVGS[i]);
+	// 	// 	html2canvas(allSVGS.item(i) as unknown as HTMLElement, { scale: 1 }).then(function (canvas) {
+	// 	// 		allSVGS[i].outerHTML = `<img src="${canvas.toDataURL()}"/>`;
+	// 	// 	});
+	// 	// }
 
-	// 		// Save the PDF
-	// 		pdf.save("canvas_to_pdf.pdf");
+	// 	const element = document.querySelector("#dashboard-to-export") as FDashboard;
+	// 	const doc = new jsPDF({
+	// 		orientation: "p",
+	// 		unit: "px",
+	// 		format: [element.scrollWidth, element.scrollHeight]
+	// 	});
+
+	// 	doc.html(element, {
+	// 		html2canvas: {
+	// 			scale: 1,
+	// 			async: true,
+	// 			svgRendering: true
+	// 		},
+	// 		callback: function (doc) {
+	// 			console.log(doc);
+	// 			doc.save("sample-document.pdf");
+	// 		},
+	// 		width: element.scrollWidth,
+	// 		windowWidth: 2400
 	// 	});
 	// };
 
-	const downloadFile = () => {
-		// const allSVGS = document.querySelectorAll("svg");
-		// console.log(allSVGS);
-		// for (let i = 0; i < allSVGS.length; i++) {
-		// 	console.log(allSVGS[i]);
-		// 	html2canvas(allSVGS.item(i) as unknown as HTMLElement, { scale: 1 }).then(function (canvas) {
-		// 		allSVGS[i].outerHTML = `<img src="${canvas.toDataURL()}"/>`;
-		// 	});
-		// }
-
-		const element = document.querySelector("#dashboard-to-export") as FDashboard;
-		const doc = new jsPDF({
-			orientation: "p",
-			unit: "px",
-			format: [element.scrollWidth, element.scrollHeight]
-		});
-
-		doc.html(element, {
-			html2canvas: {
-				scale: 1,
-				async: true,
-				svgRendering: true
-			},
-			callback: function (doc) {
-				doc.save("sample-document.pdf");
-			},
-			width: element.scrollWidth,
-			windowWidth: 2400
-		});
-	};
-
-	return html`<f-div width="100%" gap="small" overflow="scroll" direction="column">
-		<img ${ref(imgRef)} />
+	return html`<f-div
+		width="100%"
+		id="dashboard-to-export"
+		gap="small"
+		overflow="scroll"
+		state="default"
+		direction="column"
+	>
+		<f-text><a href="https://ollion.com/">Ollion</a></f-text>
 
 		<f-div
 			variant="curved"
@@ -157,7 +256,6 @@ const Template = () => {
 
 		<f-dashboard
 			style="background:var(--color-surface-default)"
-			id="dashboard-to-export"
 			${ref(dashboardRef)}
 			.config=${dashboardConfig}
 		>

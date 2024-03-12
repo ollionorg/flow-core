@@ -100,6 +100,7 @@ const getWidgets = () => {
 
 	return widgets;
 };
+
 const Template = () => {
 	const dashboardRef = createRef<FDashboard>();
 	const imgRef = createRef<HTMLImageElement>();
@@ -123,114 +124,48 @@ const Template = () => {
 		const element = document.querySelector("#dashboard-to-export") as FDashboard;
 
 		html2canvas(element, { scale: 1 }).then(function (canvas) {
+			const imgData = canvas.toDataURL("image/png");
+			const imgWidth = 794;
+			const pageHeight = 1115;
+			const imgHeight = (canvas.height * imgWidth) / canvas.width;
+			let heightLeft = imgHeight;
 			// Initialize jsPDF
 			const pdf = new jsPDF({
 				orientation: "p",
 				unit: "px",
-				format: [element.scrollWidth, element.scrollHeight]
+				format: [794, 1115]
 			});
 			pdf.setDisplayMode("original");
+			let position = 0; // give some top padding to first page
 
 			const allAnchors = element.querySelectorAll("a");
-			allAnchors.forEach(anchorElement => {
-				pdf.link(
-					anchorElement.getBoundingClientRect().x - element.getBoundingClientRect().x,
-					anchorElement.getBoundingClientRect().y - element.getBoundingClientRect().y,
-					anchorElement.offsetWidth,
-					anchorElement.offsetHeight,
-					{ url: anchorElement.href }
-				);
-			});
+			for (let l = 0; l < allAnchors.length; l++) {
+				const anchorElement = allAnchors.item(l);
+				const linkX = anchorElement.getBoundingClientRect().x - element.getBoundingClientRect().x;
+				const linkY = anchorElement.getBoundingClientRect().y - element.getBoundingClientRect().y;
+				const linkWidth = anchorElement.offsetWidth;
+				const linkHeight = anchorElement.offsetHeight;
 
-			pdf.addImage(canvas, "PNG", 0, 0, element.scrollWidth, element.scrollHeight);
+				pdf.link(linkX, linkY, linkWidth, linkHeight, {
+					url: anchorElement.href
+				});
+			}
 
-			// allAnchors.forEach(anchorElement => {
-			// 	pdf.text(
-			// 		anchorElement.innerText,
-			// 		anchorElement.getBoundingClientRect().x - element.getBoundingClientRect().x,
-			// 		anchorElement.getBoundingClientRect().y - element.getBoundingClientRect().y
-			// 	);
-			// });
+			pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+			heightLeft -= pageHeight;
+
+			while (heightLeft >= 0) {
+				position += heightLeft - imgHeight; // top padding for other pages
+				pdf.addPage();
+
+				pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+				heightLeft -= pageHeight;
+			}
 
 			// Save the PDF
 			pdf.save("canvas_to_pdf.pdf");
 		});
-		// html2canvas(element, { scale: 1 }).then(function (canvas) {
-		// 	const imgData = canvas.toDataURL("image/png");
-		// 	const imgWidth = 210;
-		// 	const pageHeight = 297;
-		// 	const imgHeight = (canvas.height * imgWidth) / canvas.width;
-		// 	let heightLeft = imgHeight;
-		// 	const doc = new jsPDF({
-		// 		orientation: "p",
-		// 		unit: "mm"
-		// 	});
-		// 	let position = 0; // give some top padding to first page
-		// 	doc.link(0, 0, element.scrollWidth, 5, { url: "http://www.google.com" });
-		// 	doc.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-		// 	heightLeft -= pageHeight;
-
-		// 	while (heightLeft >= 0) {
-		// 		position += heightLeft - imgHeight; // top padding for other pages
-		// 		doc.addPage();
-		// 		doc.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-		// 		heightLeft -= pageHeight;
-		// 	}
-		// 	doc.save("canvas_to_pdf.pdf");
-		// });
 	};
-	// const downloadFile = () => {
-	// 	const element = document.querySelector("#dashboard-to-export") as FDashboard;
-
-	// 	html2canvas(element, { scale: 1 }).then(function (canvas) {
-	// 		const opt = {
-	// 			enableLinks: true,
-	// 			html2canvas: {
-	// 				scale: 1,
-	// 				allowTaint: true
-	// 			},
-	// 			jsPDF: {
-	// 				orientation: "p",
-	// 				unit: "px",
-	// 				format: [element.scrollWidth, element.scrollHeight]
-	// 			}
-	// 		};
-	// 		html2pdf().set(opt).from(element).save();
-	// 	});
-	// 	// New Promise-based usage:
-	// };
-
-	// const downloadFile = () => {
-	// 	// const allSVGS = document.querySelectorAll("svg");
-	// 	// console.log(allSVGS);
-	// 	// for (let i = 0; i < allSVGS.length; i++) {
-	// 	// 	console.log(allSVGS[i]);
-	// 	// 	html2canvas(allSVGS.item(i) as unknown as HTMLElement, { scale: 1 }).then(function (canvas) {
-	// 	// 		allSVGS[i].outerHTML = `<img src="${canvas.toDataURL()}"/>`;
-	// 	// 	});
-	// 	// }
-
-	// 	const element = document.querySelector("#dashboard-to-export") as FDashboard;
-	// 	const doc = new jsPDF({
-	// 		orientation: "p",
-	// 		unit: "px",
-	// 		format: [element.scrollWidth, element.scrollHeight]
-	// 	});
-
-	// 	doc.html(element, {
-	// 		html2canvas: {
-	// 			scale: 1,
-	// 			async: true,
-	// 			svgRendering: true
-	// 		},
-	// 		callback: function (doc) {
-	// 			console.log(doc);
-	// 			doc.save("sample-document.pdf");
-	// 		},
-	// 		width: element.scrollWidth,
-	// 		windowWidth: 2400
-	// 	});
-	// };
 
 	return html`<f-div
 		width="100%"

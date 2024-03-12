@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property, queryAll } from "lit/decorators.js";
-import { FRoot } from "@ollion/flow-core";
+import { FDiv, FRoot } from "@ollion/flow-core";
 import eleStyle from "./f-form-array.scss?inline";
 import {
 	CanValidateFields,
 	FFormInputElements,
 	FormBuilderArrayField,
+	FormBuilderBaseField,
 	FormBuilderValidationPromise,
 	FormBuilderValues
 } from "../../types";
@@ -18,6 +19,7 @@ import { Subject } from "rxjs";
 import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/helpers";
 import { FFormObject } from "../f-form-object/f-form-object";
 import { FIconButton } from "@ollion/flow-core";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export type ArrayValueType = (
 	| string
@@ -118,7 +120,7 @@ export class FFormArray extends FRoot {
 					${i === 0 && this.isRequired
 						? html` <f-icon-button
 								data-qa-plus
-								data-qa-plus-for=${this.getAttribute("name")}
+								data-qa-plus-for=${ifDefined(this.getAttribute("name") || undefined)}
 								class="f-form-array-action"
 								icon="i-plus"
 								size="x-small"
@@ -127,7 +129,7 @@ export class FFormArray extends FRoot {
 						  />`
 						: html` <f-icon-button
 								data-qa-minus
-								data-qa-minus-for=${this.getAttribute("name")}
+								data-qa-minus-for=${ifDefined(this.getAttribute("name") || undefined)}
 								class="f-form-array-action"
 								icon="i-minus"
 								size="x-small"
@@ -154,7 +156,7 @@ export class FFormArray extends FRoot {
 							<!--label-->
 							<f-div direction="row" width="hug-content" height="hug-content">
 								<f-text
-									data-qa-label-for=${this.config.qaId || this.config.id}
+									data-qa-label-for=${ifDefined(this.config.qaId || this.config.id)}
 									variant="para"
 									size="small"
 									weight="medium"
@@ -167,7 +169,7 @@ export class FFormArray extends FRoot {
 										source="i-question-filled"
 										size="small"
 										state="subtle"
-										data-qa-info-icon-for=${this.config.qaId || this.config.id}
+										data-qa-info-icon-for=${ifDefined(this.config.qaId || this.config.id)}
 										.tooltip="${this.config.label?.iconTooltip}"
 										clickable
 								  ></f-icon>`
@@ -175,7 +177,7 @@ export class FFormArray extends FRoot {
 							${!this.isRequired
 								? html`<f-icon-button
 										data-qa-plus
-										data-qa-plus-for=${this.getAttribute("name")}
+										data-qa-plus-for=${ifDefined(this.getAttribute("name") || undefined)}
 										icon="i-plus"
 										size="x-small"
 										state="neutral"
@@ -197,7 +199,7 @@ export class FFormArray extends FRoot {
 			${this.config.helperText
 				? html`<f-text
 						variant="para"
-						data-qa-help-for=${this.config.qaId || this.config.id}
+						data-qa-help-for=${ifDefined(this.config.qaId || this.config.id)}
 						size="small"
 						weight="regular"
 						.state=${this.config.state}
@@ -302,8 +304,20 @@ export class FFormArray extends FRoot {
 							const showField = fieldConfig.showWhen(values);
 							if (!showField) {
 								ref.value.dataset.hidden = "true";
+								if ((fieldConfig as FormBuilderBaseField).layout === "label-left") {
+									const wrapper = ref.value.closest<FDiv>(".label-left-layout");
+									if (wrapper) {
+										wrapper.dataset.hidden = "true";
+									}
+								}
 							} else {
 								ref.value.dataset.hidden = "false";
+								if ((fieldConfig as FormBuilderBaseField).layout === "label-left") {
+									const wrapper = ref.value.closest<FDiv>(".label-left-layout");
+									if (wrapper) {
+										wrapper.dataset.hidden = "false";
+									}
+								}
 							}
 							this.dispatchShowWhenExeEvent();
 						}

@@ -62,13 +62,19 @@ export default function drawElbow({
 		.x(p => (p as unknown as Point).x)
 		.y(p => (p as unknown as Point).y)
 		//@ts-expect-error @todo vikas to check
-		.curve(curveStep.angle(curveAngle));
+		.curve(curveStep.angle(curveAngle, element.direction));
 
 	// add point on node for connection
 	let startPoint: Point = {
 		x: link.source.x + (link.source.isChildren ? childrenNodeSize.width : nodeSize.width),
 		y: link.source.y + (link.source.isChildren ? childrenNodeSize.height / 2 : nodeSize.height / 2)
 	};
+	if (element.direction === "vertical") {
+		startPoint = {
+			x: link.source.x + (link.source.isChildren ? childrenNodeSize.width / 2 : nodeSize.width / 2),
+			y: link.source.y + (link.source.isChildren ? childrenNodeSize.height : nodeSize.height)
+		};
+	}
 	const points: Point[] = [];
 
 	points.push(startPoint);
@@ -83,12 +89,21 @@ export default function drawElbow({
 
 			let closestGapPoint: LineageGapElement;
 			if (link.target.level === l + 1) {
-				closestGapPoint = {
-					x: link.target.x,
-					y:
-						link.target.y +
-						(link.target.isChildren ? childrenNodeSize.height / 2 : nodeSize.height / 2)
-				};
+				if (element.direction === "vertical") {
+					closestGapPoint = {
+						x:
+							link.target.x +
+							(link.target.isChildren ? childrenNodeSize.width / 2 : nodeSize.width / 2),
+						y: link.target.y
+					};
+				} else {
+					closestGapPoint = {
+						x: link.target.x,
+						y:
+							link.target.y +
+							(link.target.isChildren ? childrenNodeSize.height / 2 : nodeSize.height / 2)
+					};
+				}
 			} else {
 				closestGapPoint = lineage.gaps[l + 1].reduce(
 					(previous, current) => {
@@ -102,26 +117,49 @@ export default function drawElbow({
 					{ x: -1, y: -1 }
 				);
 
-				closestGapPoint = {
-					x: closestGapPoint.x + nodeSize.width,
-					y: closestGapPoint.y + gap / 2
-				};
+				if (element.direction === "vertical") {
+					closestGapPoint = {
+						y: closestGapPoint.y + nodeSize.height,
+						x: closestGapPoint.x + gap / 2
+					};
+				} else {
+					closestGapPoint = {
+						x: closestGapPoint.x + nodeSize.width,
+						y: closestGapPoint.y + gap / 2
+					};
+				}
 			}
 
-			const secondPoint = {
+			let secondPoint = {
 				x: startPoint.x + gapDelta,
 				y: startPoint.y
 			};
+
+			if (element.direction === "vertical") {
+				secondPoint = {
+					x: startPoint.x,
+					y: startPoint.y + gapDelta
+				};
+			}
 			points.push(secondPoint);
 
 			// check if curve is feasible
-			const isCurveFeasible = Math.abs(closestGapPoint.y - startPoint.y) >= curveAngle;
+			let isCurveFeasible = Math.abs(closestGapPoint.y - startPoint.y) >= curveAngle;
 
-			const thirdPoint = {
+			if (element.direction === "vertical") {
+				isCurveFeasible = Math.abs(closestGapPoint.x - startPoint.x) >= curveAngle;
+			}
+			let thirdPoint = {
 				x: startPoint.x + gapDelta,
 				y: isCurveFeasible ? closestGapPoint.y : startPoint.y
 			};
 
+			if (element.direction === "vertical") {
+				thirdPoint = {
+					x: isCurveFeasible ? closestGapPoint.x : startPoint.x,
+					y: startPoint.y + gapDelta
+				};
+			}
 			points.push(thirdPoint);
 
 			points.push(closestGapPoint);

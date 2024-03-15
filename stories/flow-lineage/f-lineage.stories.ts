@@ -139,6 +139,7 @@ export const Playground = {
 					align="middle-left"
 				>
 					<f-text variant="code" size="large" ellipsis>${node.id}</f-text>
+					<f-text variant="code" size="small" ellipsis>x: ${node.x}, y: ${node.y}</f-text>
 				</f-div>
 				${node.childrenToggle}
 			</f-div>`;
@@ -163,10 +164,6 @@ export const Playground = {
 			{
 				from: "Tony",
 				to: "Charlie"
-			},
-			{
-				from: "Charlie",
-				to: "Tony"
 			},
 			{
 				from: "Max",
@@ -251,10 +248,6 @@ export const Playground = {
 			{
 				from: "mchild1",
 				to: "child2"
-			},
-			{
-				from: "Pat",
-				to: "Tony"
 			}
 		],
 

@@ -155,10 +155,22 @@ export default function drawElbow({
 				y: startPoint.y
 			};
 
+			const nextGapPoint = lineage.gaps[l + 1].reduce(
+				(previous, current) => {
+					if (previous.x === -1) {
+						return current;
+					}
+					return Math.abs(current.y - startPoint.y) < Math.abs(previous.y - startPoint.y)
+						? current
+						: previous;
+				},
+				{ x: -1, y: -1 }
+			);
+
 			if (element.direction === "vertical") {
 				secondPoint = {
 					x: startPoint.x,
-					y: startPoint.y + gapDelta
+					y: nextGapPoint.y - gapDelta
 				};
 			}
 			points.push(secondPoint);
@@ -177,7 +189,7 @@ export default function drawElbow({
 			if (element.direction === "vertical") {
 				thirdPoint = {
 					x: isCurveFeasible ? closestGapPoint.x : startPoint.x,
-					y: startPoint.y + gapDelta
+					y: nextGapPoint.y - gapDelta
 				};
 			}
 			points.push(thirdPoint);

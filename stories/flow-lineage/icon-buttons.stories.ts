@@ -95,6 +95,7 @@ export const Playground = {
 		return html`<f-lineage
 			.nodes=${nodes}
 			.links=${links}
+			direction="vertical"
 			gap="250"
 			.node-size=${nodeSize}
 			.node-template=${nodeTemplate}

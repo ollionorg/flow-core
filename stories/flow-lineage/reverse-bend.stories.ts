@@ -62,7 +62,7 @@ const links: LineageNodeLinks = [
 const Template: Story<unknown> = (args: any) => {
 	return html`
 		<f-lineage
-			direction="horizontal"
+			direction="vertical"
 			padding="16"
 			gap="75"
 			.node-size=${{ width: 240, height: 53 }}

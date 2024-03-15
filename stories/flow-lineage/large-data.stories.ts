@@ -53,7 +53,7 @@ for (let l = 0; l < 50; l++) {
 const Template: Story<unknown> = (args: any) => {
 	return html`
 		<f-lineage
-			direction="horizontal"
+			direction="vertical"
 			padding="16"
 			gap="75"
 			.node-size=${{ width: 44, height: 44 }}

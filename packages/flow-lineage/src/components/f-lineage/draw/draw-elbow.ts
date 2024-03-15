@@ -22,6 +22,7 @@ export type DrawElbowParams = {
 	element: FLineage;
 };
 import curveStep from "./curve-steps";
+import { getChildrenArray } from "../../../utils";
 
 type Point = { x: number; y: number };
 
@@ -70,9 +71,28 @@ export default function drawElbow({
 		y: link.source.y + (link.source.isChildren ? childrenNodeSize.height / 2 : nodeSize.height / 2)
 	};
 	if (element.direction === "vertical") {
+		let startY =
+			link.source.y + (link.source.isChildren ? childrenNodeSize.height : nodeSize.height);
+		if (!link.source.fHideChildren && link.source.fChildren) {
+			const maxChildrenHeight = (element.maxChildren ?? 8) * childrenNodeSize.height;
+			const childrens = getChildrenArray(link.source.fChildren);
+			const totalChildNodeHeight = childrenNodeSize.height * childrens.length;
+
+			if (totalChildNodeHeight > maxChildrenHeight) {
+				startY =
+					link.source.y +
+					(link.source.isChildren ? childrenNodeSize.height : nodeSize.height) +
+					maxChildrenHeight;
+			} else {
+				startY =
+					link.source.y +
+					(link.source.isChildren ? childrenNodeSize.height : nodeSize.height) +
+					totalChildNodeHeight;
+			}
+		}
 		startPoint = {
 			x: link.source.x + (link.source.isChildren ? childrenNodeSize.width / 2 : nodeSize.width / 2),
-			y: link.source.y + (link.source.isChildren ? childrenNodeSize.height : nodeSize.height)
+			y: startY
 		};
 	}
 	const points: Point[] = [];
@@ -177,12 +197,21 @@ export default function drawElbow({
 
 			let closestGapPoint: LineageGapElement;
 			if (link.target.level - 1 === l) {
-				closestGapPoint = {
-					x: link.target.x,
-					y:
-						link.target.y +
-						(link.target.isChildren ? childrenNodeSize.height / 2 : nodeSize.height / 2)
-				};
+				if (element.direction === "vertical") {
+					closestGapPoint = {
+						x:
+							link.target.x +
+							(link.target.isChildren ? childrenNodeSize.width / 2 : nodeSize.width / 2),
+						y: link.target.y
+					};
+				} else {
+					closestGapPoint = {
+						x: link.target.x,
+						y:
+							link.target.y +
+							(link.target.isChildren ? childrenNodeSize.height / 2 : nodeSize.height / 2)
+					};
+				}
 			} else {
 				closestGapPoint = lineage.gaps[l].reduce(
 					(previous, current) => {
@@ -195,26 +224,46 @@ export default function drawElbow({
 					},
 					{ x: -1, y: -1 }
 				);
-
-				closestGapPoint = {
-					x: closestGapPoint.x - gapDelta,
-					y: closestGapPoint.y + gap / 2
-				};
+				if (element.direction === "vertical") {
+					closestGapPoint = {
+						y: closestGapPoint.y - gapDelta,
+						x: closestGapPoint.x + gap / 2
+					};
+				} else {
+					closestGapPoint = {
+						x: closestGapPoint.x - gapDelta,
+						y: closestGapPoint.y + gap / 2
+					};
+				}
 			}
 
-			const secondPoint = {
+			let secondPoint = {
 				x: startPoint.x - gapDelta * (link.source.level == l ? -1 : 1),
 				y: startPoint.y
 			};
+
+			if (element.direction === "vertical") {
+				secondPoint = {
+					y: startPoint.y - gapDelta * (link.source.level == l ? -1 : 1),
+					x: startPoint.x
+				};
+			}
 			points.push(secondPoint);
 
 			// check if curve is feasible
 			const isCurveFeasible = Math.abs(closestGapPoint.y - startPoint.y) >= curveAngle;
 
-			const thirdPoint = {
+			let thirdPoint = {
 				x: startPoint.x - gapDelta * (link.source.level == l ? -1 : 1),
 				y: isCurveFeasible ? closestGapPoint.y : startPoint.y
 			};
+
+			if (element.direction === "vertical") {
+				thirdPoint = {
+					y: startPoint.y - gapDelta * (link.source.level == l ? -1 : 1),
+					x: isCurveFeasible ? closestGapPoint.x : startPoint.x
+				};
+			}
 
 			points.push(thirdPoint);
 
@@ -225,7 +274,10 @@ export default function drawElbow({
 	}
 
 	if (element) {
-		if (element.getDrawParams().svg.attr("transform") == null) {
+		if (
+			element.getDrawParams().svg.attr("transform") == null &&
+			element.direction === "horizontal"
+		) {
 			const leftX = element?.padding ?? 0;
 
 			const leftMostPoint = points.find(p => {
@@ -236,6 +288,22 @@ export default function drawElbow({
 				d3.select(element.svg).attr(
 					"viewBox",
 					`${leftMostPoint.x - gap} 0 ${element.getWidth()} ${element.getHeight()}`
+				);
+			}
+		} else if (
+			element.getDrawParams().svg.attr("transform") == null &&
+			element.direction === "vertical"
+		) {
+			const topY = element?.padding ?? 0;
+
+			const topMostPoint = points.find(p => {
+				return p.y < topY;
+			});
+
+			if (topMostPoint) {
+				d3.select(element.svg).attr(
+					"viewBox",
+					`0 ${topMostPoint.y - gap} ${element.getWidth()} ${element.getHeight()}`
 				);
 			}
 		}

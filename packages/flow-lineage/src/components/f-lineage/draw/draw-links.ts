@@ -209,5 +209,17 @@ export default function drawLinks({
 		.attr("fill", "var(--color-border-default)")
 		.text("◀");
 
+	/**
+	 * Remove duplicate link plotted in multiple pages
+	 */
+	const linkIds = Array.from(element.shadowRoot!.querySelectorAll(".link")).map(el => {
+		return el.id;
+	});
+	const duplicates = linkIds.filter((item, index) => linkIds.indexOf(item) !== index);
+	duplicates.forEach(dupLink => {
+		const dupLinkEl = element.shadowRoot!.querySelectorAll(`[id="${dupLink}"]`);
+
+		dupLinkEl[1]?.remove();
+	});
 	//console.timeEnd("Links duration");
 }

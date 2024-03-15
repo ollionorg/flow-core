@@ -251,6 +251,10 @@ export const Playground = {
 			{
 				from: "mchild1",
 				to: "child2"
+			},
+			{
+				from: "Pat",
+				to: "Tony"
 			}
 		],
 
@@ -296,9 +300,6 @@ export const Playground = {
 				},
 
 				fClick: function (event: CustomEvent, node: LineageNodeElement) {
-					if (divRef.value) {
-						divRef.value.requestFullscreen();
-					}
 					console.log("Node Clicked", event, node);
 				},
 

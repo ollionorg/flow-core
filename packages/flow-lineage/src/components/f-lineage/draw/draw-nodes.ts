@@ -116,9 +116,15 @@ export default function drawNodes(params: DrawLineageParams) {
 					let childHeight = d.childrenYMax - (d.y + nodeSize.height);
 
 					// finding all nodes below children
-					const nodesToUpdate = lineage.nodes.filter(
+					let nodesToUpdate = lineage.nodes.filter(
 						n => n.level === d.level && n.y > d.y && !childIds.includes(n.id)
 					);
+
+					if (element.direction === "vertical") {
+						nodesToUpdate = lineage.nodes.filter(
+							n => n.level >= d.level && n.y > d.y && !childIds.includes(n.id)
+						);
+					}
 
 					// compare height and apply max height with  scroll bar if required
 					if (childHeight > maxChildrenHeight) {
@@ -137,22 +143,43 @@ export default function drawNodes(params: DrawLineageParams) {
 							}
 						}
 					});
-					if (!d.fHideChildren) {
-						lineage.levelPointers[d.level].y += childHeight;
-					} else {
-						lineage.levelPointers[d.level].y -= childHeight;
-					}
+					if (element.direction === "vertical") {
+						for (let i = d.level; i <= element.maxAvailableLevels; i++) {
+							if (!d.fHideChildren) {
+								lineage.levelPointers[i].y += childHeight;
+							} else {
+								lineage.levelPointers[i].y -= childHeight;
+							}
 
-					const gapsToUpdate = lineage.gaps[d.level].filter(n => n.y > d.y);
+							const gapsToUpdate = lineage.gaps[i].filter(n => n.y > d.y);
 
-					gapsToUpdate.forEach(n => {
-						if (!d.fHideChildren) {
-							n.y += childHeight;
-						} else {
-							n.y -= childHeight;
+							gapsToUpdate.forEach(n => {
+								if (!d.fHideChildren) {
+									n.y += childHeight;
+								} else {
+									n.y -= childHeight;
+								}
+							});
+							removeLinks(nodesToUpdate, element);
 						}
-					});
-					removeLinks(nodesToUpdate, element);
+					} else {
+						if (!d.fHideChildren) {
+							lineage.levelPointers[d.level].y += childHeight;
+						} else {
+							lineage.levelPointers[d.level].y -= childHeight;
+						}
+
+						const gapsToUpdate = lineage.gaps[d.level].filter(n => n.y > d.y);
+
+						gapsToUpdate.forEach(n => {
+							if (!d.fHideChildren) {
+								n.y += childHeight;
+							} else {
+								n.y -= childHeight;
+							}
+						});
+						removeLinks(nodesToUpdate, element);
+					}
 				}
 
 				allChildNodes.forEach(cn => {
@@ -161,7 +188,13 @@ export default function drawNodes(params: DrawLineageParams) {
 				removeDistantLinks(element);
 				removeLinks(allChildNodes, element);
 				const pageNo = this.parentElement?.parentElement?.dataset.page ?? 0;
-				element.reDrawChunk(+pageNo, d.level);
+				if (element.direction === "vertical") {
+					for (let i = +pageNo; i <= element.page; i++) {
+						element.reDrawChunk(i, d.level);
+					}
+				} else {
+					element.reDrawChunk(+pageNo, d.level);
+				}
 			}
 		})
 		.each(function (d) {

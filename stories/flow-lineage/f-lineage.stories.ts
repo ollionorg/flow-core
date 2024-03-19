@@ -120,29 +120,32 @@ export const Playground = {
 		["max-children"]: 8,
 
 		["node-template"]: function (node: LineageNodeElement) {
-			return html` <f-div
-				state=${node.id === "Max" ? "custom,#006ecc" : "secondary"}
-				width="100%"
-				height="100%"
-				padding="none medium"
-				align="middle-left"
-				variant="curved"
-				gap="small"
-				${node.fChildren && !node.fHideChildren ? 'border="small solid default bottom"' : ""}
-			>
-				<f-icon-button icon="i-table" state="neutral"></f-icon-button>
-				<f-div
-					@mouseenter=${() => updateTooltip(node.id ?? "NA")}
-					direction="column"
-					tooltip="#lineage-tooltip"
-					height="hug-content"
-					align="middle-left"
-				>
-					<f-text variant="code" size="large" ellipsis>${node.id}</f-text>
-					<f-text variant="code" size="small" ellipsis>x: ${node.x}, y: ${node.y}</f-text>
+			return html` <f-div style="position:absolute;top:-20px;z-index:1;" gap="x-small">
+					<f-tag label="Construction" state="primary" size="small"></f-tag>
+					<f-tag label="Cat" size="small" counter="35"></f-tag>
 				</f-div>
-				${node.childrenToggle}
-			</f-div>`;
+				<f-div
+					state=${node.id === "Max" ? "custom,#006ecc" : "secondary"}
+					width="100%"
+					height="100%"
+					padding="none medium"
+					align="middle-left"
+					variant="curved"
+					gap="small"
+					${node.fChildren && !node.fHideChildren ? 'border="small solid default bottom"' : ""}
+				>
+					<f-icon-button icon="i-table" state="neutral"></f-icon-button>
+					<f-div
+						@mouseenter=${() => updateTooltip(node.id ?? "NA")}
+						direction="column"
+						tooltip="#lineage-tooltip"
+						height="hug-content"
+						align="middle-left"
+					>
+						<f-text variant="code" size="large" ellipsis>${node.id}</f-text>
+					</f-div>
+					${node.childrenToggle}
+				</f-div>`;
 		},
 
 		["children-node-template"]: function (node: LineageNodeElement) {
@@ -164,6 +167,10 @@ export const Playground = {
 			{
 				from: "Tony",
 				to: "Charlie"
+			},
+			{
+				from: "Charlie",
+				to: "Tony"
 			},
 			{
 				from: "Max",
@@ -259,6 +266,122 @@ export const Playground = {
 					name: "Calvin"
 				},
 
+				fNodeMeta: {
+					title: "StreetTree_Census.Environment",
+					subTitle: "datapipes_census.street_2022",
+
+					tabSections: {
+						["Table Details"]: {
+							["Created on"]: {
+								type: "text",
+								value: "Today, 09:39 pm"
+							},
+
+							["Updated on"]: {
+								type: "text",
+								value: "Today, 11:39 pm"
+							},
+
+							["Owner"]: {
+								type: "text",
+								value: "name@gmail.com"
+							},
+
+							["Domain"]: {
+								type: "tag",
+								value: "Code Pipes",
+								iconLeft: "💰"
+							},
+
+							["Classification"]: {
+								type: "tag",
+								value: "Code Pipes",
+								iconLeft: "💰"
+							},
+
+							["Description"]: {
+								type: "text",
+								value: "This is a description of the table in"
+							},
+
+							["Tags"]: {
+								type: "text",
+								value: "Code promotion, Catalog, Ingest, Active users"
+							},
+
+							["Columns"]: {
+								type: "text",
+								value: "12"
+							},
+
+							["Rows"]: {
+								type: "text",
+								value: "2.2k"
+							},
+
+							["Visibility"]: {
+								type: "text",
+								value: "Visible to all"
+							},
+
+							["Glossary"]: {
+								type: "link",
+								value: "Glossary 1, Glossary 2, Glossary 3, Glossary 4"
+							}
+						},
+
+						["Transformation Details"]: {
+							["Mode"]: {
+								type: "text",
+								value: "DataBrew"
+							},
+
+							["Timestamp"]: {
+								type: "text",
+								value: "Wed Sept 21 2022 12:06:03 GMT +0530 (IST)"
+							},
+
+							["User"]: {
+								type: "text",
+								value: "name@gmail.com"
+							},
+
+							["Recipe Name"]: {
+								type: "text",
+								value: "testing-recipe"
+							},
+
+							codeSnippet: {
+								type: "code",
+
+								value: `<f-div width="fill-container" padding="small none" state="default" direction="column">
+                        <f-div padding="medium"><f-text variant="para" weight="bold" size="small">Recipe steps(6):</f-text></f-div>
+                        <f-div padding="none medium" direction="column">
+                          <f-div direction="row" gap="x-small">
+                          <f-text variant="para" weight="regular" size="small" inline>1. Delete column</f-text> <f-text inline variant="para" weight="regular" size="small" state="success">dateChecked, hash, negative, positive</f-text>
+                        </f-div>
+                        <f-div direction="row" gap="x-small">
+                          <f-text variant="para" weight="regular" size="small" inline>2. Filter values by</f-text> <f-text inline variant="para" weight="regular" size="small" state="success">state</f-text>
+                        </f-div>
+                        <f-div direction="row" gap="x-small">
+                          <f-text variant="para" weight="regular" size="small" inline>3. Create column</f-text> <f-text inline variant="para" weight="regular" size="small" state="subtle">date_formatted</f-text><f-text variant="para" weight="regular" size="small" inline>using dateTime.</f-text>
+                        </f-div>
+                        <f-div direction="row" gap="x-small">
+                          <f-text variant="para" weight="regular" size="small" inline>4. Change type of</f-text> <f-text inline variant="para" weight="regular" size="small" state="success">date_formatted</f-text><f-text variant="para" weight="regular" size="small" inline>to Date</f-text>
+                        </f-div>
+                        <f-div direction="row" gap="x-small">
+                          <f-text variant="para" weight="regular" size="small" inline>5. Delete column</f-text> <f-text inline variant="para" weight="regular" size="small" state="subtle">date</f-text>
+                        </f-div>
+                        <f-div direction="row" gap="x-small">
+                          <f-text variant="para" weight="regular" size="small" inline>6. Create column</f-text> <f-text inline variant="para" weight="regular" size="small" state="subtle">positiveRate</f-text><f-text variant="para" weight="regular" size="small" inline>using Math function</f-text>
+                          <f-text inline variant="para" weight="regular" size="small" state="subtle">DIVIDE</f-text>
+                        </f-div>
+                      </f-div>`
+							}
+						}
+					}
+				},
+
 				fChildren: {
 					child1: {
 						fNodeMeta: {
@@ -293,6 +416,9 @@ export const Playground = {
 				},
 
 				fClick: function (event: CustomEvent, node: LineageNodeElement) {
+					if (divRef.value) {
+						divRef.value.requestFullscreen();
+					}
 					console.log("Node Clicked", event, node);
 				},
 
@@ -310,6 +436,122 @@ export const Playground = {
 
 				fRightClick: function (event: CustomEvent, node: LineageNodeElement) {
 					console.log("Node Right Clicked", event, node);
+				},
+
+				fNodeMeta: {
+					title: "StreetTree_Census.Environment",
+					subTitle: "datapipes_census.street_2022",
+
+					tabSections: {
+						["Table Details"]: {
+							["Created on"]: {
+								type: "text",
+								value: "Today, 09:39 pm"
+							},
+
+							["Updated on"]: {
+								type: "text",
+								value: "Today, 11:39 pm"
+							},
+
+							["Owner"]: {
+								type: "text",
+								value: "name@gmail.com"
+							},
+
+							["Domain"]: {
+								type: "tag",
+								value: "Code Pipes",
+								iconLeft: "💰"
+							},
+
+							["Classification"]: {
+								type: "tag",
+								value: "Code Pipes",
+								iconLeft: "💰"
+							},
+
+							["Description"]: {
+								type: "text",
+								value: "This is a description of the table in"
+							},
+
+							["Tags"]: {
+								type: "text",
+								value: "Code promotion, Catalog, Ingest, Active users"
+							},
+
+							["Columns"]: {
+								type: "text",
+								value: "12"
+							},
+
+							["Rows"]: {
+								type: "text",
+								value: "2.2k"
+							},
+
+							["Visibility"]: {
+								type: "text",
+								value: "Visible to all"
+							},
+
+							["Glossary"]: {
+								type: "link",
+								value: "Glossary 1, Glossary 2, Glossary 3, Glossary 4"
+							}
+						},
+
+						["Transformation Details"]: {
+							["Mode"]: {
+								type: "text",
+								value: "DataBrew"
+							},
+
+							["Timestamp"]: {
+								type: "text",
+								value: "Wed Sept 21 2022 12:06:03 GMT +0530 (IST)"
+							},
+
+							["User"]: {
+								type: "text",
+								value: "name@gmail.com"
+							},
+
+							["Recipe Name"]: {
+								type: "text",
+								value: "testing-recipe"
+							},
+
+							codeSnippet: {
+								type: "code",
+
+								value: `<f-div width="fill-container" padding="small none" state="default" direction="column">
+                        <f-div padding="medium"><f-text variant="para" weight="bold" size="small">Recipe steps(6):</f-text></f-div>
+                        <f-div padding="none medium" direction="column">
+                          <f-div direction="row" gap="x-small">
+                          <f-text variant="para" weight="regular" size="small" inline>1. Delete column</f-text> <f-text inline variant="para" weight="regular" size="small" state="success">dateChecked, hash, negative, positive</f-text>
+                        </f-div>
+                        <f-div direction="row" gap="x-small">
+                          <f-text variant="para" weight="regular" size="small" inline>2. Filter values by</f-text> <f-text inline variant="para" weight="regular" size="small" state="success">state</f-text>
+                        </f-div>
+                        <f-div direction="row" gap="x-small">
+                          <f-text variant="para" weight="regular" size="small" inline>3. Create column</f-text> <f-text inline variant="para" weight="regular" size="small" state="subtle">date_formatted</f-text><f-text variant="para" weight="regular" size="small" inline>using dateTime.</f-text>
+                        </f-div>
+                        <f-div direction="row" gap="x-small">
+                          <f-text variant="para" weight="regular" size="small" inline>4. Change type of</f-text> <f-text inline variant="para" weight="regular" size="small" state="success">date_formatted</f-text><f-text variant="para" weight="regular" size="small" inline>to Date</f-text>
+                        </f-div>
+                        <f-div direction="row" gap="x-small">
+                          <f-text variant="para" weight="regular" size="small" inline>5. Delete column</f-text> <f-text inline variant="para" weight="regular" size="small" state="subtle">date</f-text>
+                        </f-div>
+                        <f-div direction="row" gap="x-small">
+                          <f-text variant="para" weight="regular" size="small" inline>6. Create column</f-text> <f-text inline variant="para" weight="regular" size="small" state="subtle">positiveRate</f-text><f-text variant="para" weight="regular" size="small" inline>using Math function</f-text>
+                          <f-text inline variant="para" weight="regular" size="small" state="subtle">DIVIDE</f-text>
+                        </f-div>
+                      </f-div>`
+							}
+						}
+					}
 				},
 
 				fChildren: {

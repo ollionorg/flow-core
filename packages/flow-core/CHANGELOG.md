@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.9.2] - 2024-03-19
+
+### Improvements
+
+- `color-tokens` updates.
+
 ## [2.9.1] - 2024-03-10
 
 ### Improvements

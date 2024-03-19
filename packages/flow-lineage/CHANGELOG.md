@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [3.2.0] - 2024-03-19
+
+### Features
+
+- `direction="vertical"` implemented in `f-lineage`.
+
 ## [3.1.1] - 2023-12-19
 
 ### Patch Changes

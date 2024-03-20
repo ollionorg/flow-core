@@ -114,15 +114,16 @@ export default function drawNodes(params: DrawLineageParams) {
 				const childIds = allChildNodes.map(c => c.id);
 				if (d.childrenYMax) {
 					let childHeight = d.childrenYMax - (d.y + nodeSize.height);
-
+					let nodesToUpdate: LineageNodeElement[] = [];
 					// finding all nodes below children
-					let nodesToUpdate = lineage.nodes.filter(
-						n => n.level === d.level && n.y > d.y && !childIds.includes(n.id)
-					);
 
 					if (element.direction === "vertical") {
 						nodesToUpdate = lineage.nodes.filter(
 							n => n.level >= d.level && n.y > d.y && !childIds.includes(n.id)
+						);
+					} else {
+						nodesToUpdate = lineage.nodes.filter(
+							n => n.level === d.level && n.y > d.y && !childIds.includes(n.id)
 						);
 					}
 

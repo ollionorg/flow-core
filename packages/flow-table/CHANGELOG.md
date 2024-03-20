@@ -4,6 +4,12 @@
 
 ## [2.4.0] - 2024-03-01
 
+### Bug Fixes
+
+- `f-tcell` aligment in `f-table-schema` fixed.
+
+## [2.4.0] - 2024-03-01
+
 ### Features
 
 - a11y support added.

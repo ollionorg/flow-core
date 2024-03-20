@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.9.4] - 2024-03-20
+
+### Improvements
+
+- `f-checkbox` label line-height fixed.
+
 ## [2.9.3] - 2024-03-20
 
 ### Improvements

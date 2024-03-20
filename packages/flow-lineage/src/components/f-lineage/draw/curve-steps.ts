@@ -7,11 +7,13 @@ class Step {
 	private _point?: number;
 	private _lastX?: number;
 	private _lastY?: number;
+	private _direction?: CurveDirection;
 
-	constructor(context: CanvasRenderingContext2D, curve: number) {
+	constructor(context: CanvasRenderingContext2D, curve: number, direction?: CurveDirection) {
 		this._context = context;
 		this._curve = curve;
 		this._line = NaN;
+		this._direction = direction;
 	}
 
 	/**
@@ -61,7 +63,11 @@ class Step {
 				this._point = 2;
 				this._lastX = x;
 				this._lastY = y;
-				this._context.lineTo(x - this._curve, y);
+				if (this._direction === "vertical") {
+					this._context.lineTo(x, y - this._curve);
+				} else {
+					this._context.lineTo(x - this._curve, y);
+				}
 				break;
 			default: {
 				if (
@@ -102,14 +108,16 @@ class Step {
 	}
 }
 
+type CurveDirection = "horizontal" | "vertical";
+
 /**
  * A factory function that creates a curved step function.
  * @param angle - The angle for curves.
  * @returns A function to create curved steps.
  */
-function curvedStep(angle: number) {
+function curvedStep(angle: number, direction?: CurveDirection) {
 	function createStep(context: CanvasRenderingContext2D) {
-		return new Step(context, angle);
+		return new Step(context, angle, direction);
 	}
 
 	/**
@@ -117,8 +125,8 @@ function curvedStep(angle: number) {
 	 * @param angle - The new angle for curves.
 	 * @returns A curved step function with the specified angle.
 	 */
-	createStep.angle = function (angle: number) {
-		return curvedStep(+angle);
+	createStep.angle = function (angle: number, direction?: CurveDirection) {
+		return curvedStep(+angle, direction);
 	};
 
 	return createStep;

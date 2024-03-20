@@ -120,12 +120,14 @@ export default function createNodeElements(
 				/**
 				 * checking level max Y
 				 */
-				const maxYWhenScrollBar = nodeElement.y + nodeSize.height + maxChildrenHeight;
-				if (nodeElement.hasScrollbaleChildren && levelPointer.y > maxYWhenScrollBar) {
-					levelPointer.maxY = maxYWhenScrollBar;
-					nodeElement.childrenYMax = maxYWhenScrollBar;
-				} else if (levelPointer.y > (levelPointer.maxY ?? 0)) {
-					levelPointer.maxY = levelPointer.y;
+				if (!nodeElement.fHideChildren) {
+					const maxYWhenScrollBar = nodeElement.y + nodeSize.height + maxChildrenHeight;
+					if (nodeElement.hasScrollbaleChildren && levelPointer.y > maxYWhenScrollBar) {
+						levelPointer.maxY = maxYWhenScrollBar;
+						nodeElement.childrenYMax = maxYWhenScrollBar;
+					} else if (levelPointer.y > (levelPointer.maxY ?? 0)) {
+						levelPointer.maxY = levelPointer.y;
+					}
 				}
 
 				levelPointer.y = nodeElement.y;

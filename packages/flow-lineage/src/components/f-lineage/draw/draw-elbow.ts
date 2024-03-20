@@ -22,6 +22,7 @@ export type DrawElbowParams = {
 	element: FLineage;
 };
 import curveStep from "./curve-steps";
+import { getChildrenArray } from "../../../utils";
 
 type Point = { x: number; y: number };
 
@@ -62,13 +63,38 @@ export default function drawElbow({
 		.x(p => (p as unknown as Point).x)
 		.y(p => (p as unknown as Point).y)
 		//@ts-expect-error @todo vikas to check
-		.curve(curveStep.angle(curveAngle));
+		.curve(curveStep.angle(curveAngle, element.direction));
 
 	// add point on node for connection
 	let startPoint: Point = {
 		x: link.source.x + (link.source.isChildren ? childrenNodeSize.width : nodeSize.width),
 		y: link.source.y + (link.source.isChildren ? childrenNodeSize.height / 2 : nodeSize.height / 2)
 	};
+	if (element.direction === "vertical") {
+		let startY =
+			link.source.y + (link.source.isChildren ? childrenNodeSize.height : nodeSize.height);
+		if (!link.source.fHideChildren && link.source.fChildren) {
+			const maxChildrenHeight = (element.maxChildren ?? 8) * childrenNodeSize.height;
+			const childrens = getChildrenArray(link.source.fChildren);
+			const totalChildNodeHeight = childrenNodeSize.height * childrens.length;
+
+			if (totalChildNodeHeight > maxChildrenHeight) {
+				startY =
+					link.source.y +
+					(link.source.isChildren ? childrenNodeSize.height : nodeSize.height) +
+					maxChildrenHeight;
+			} else {
+				startY =
+					link.source.y +
+					(link.source.isChildren ? childrenNodeSize.height : nodeSize.height) +
+					totalChildNodeHeight;
+			}
+		}
+		startPoint = {
+			x: link.source.x + (link.source.isChildren ? childrenNodeSize.width / 2 : nodeSize.width / 2),
+			y: startY
+		};
+	}
 	const points: Point[] = [];
 
 	points.push(startPoint);
@@ -83,12 +109,21 @@ export default function drawElbow({
 
 			let closestGapPoint: LineageGapElement;
 			if (link.target.level === l + 1) {
-				closestGapPoint = {
-					x: link.target.x,
-					y:
-						link.target.y +
-						(link.target.isChildren ? childrenNodeSize.height / 2 : nodeSize.height / 2)
-				};
+				if (element.direction === "vertical") {
+					closestGapPoint = {
+						x:
+							link.target.x +
+							(link.target.isChildren ? childrenNodeSize.width / 2 : nodeSize.width / 2),
+						y: link.target.y
+					};
+				} else {
+					closestGapPoint = {
+						x: link.target.x,
+						y:
+							link.target.y +
+							(link.target.isChildren ? childrenNodeSize.height / 2 : nodeSize.height / 2)
+					};
+				}
 			} else {
 				closestGapPoint = lineage.gaps[l + 1].reduce(
 					(previous, current) => {
@@ -102,26 +137,61 @@ export default function drawElbow({
 					{ x: -1, y: -1 }
 				);
 
-				closestGapPoint = {
-					x: closestGapPoint.x + nodeSize.width,
-					y: closestGapPoint.y + gap / 2
-				};
+				if (element.direction === "vertical") {
+					closestGapPoint = {
+						y: closestGapPoint.y + nodeSize.height,
+						x: closestGapPoint.x + gap / 2
+					};
+				} else {
+					closestGapPoint = {
+						x: closestGapPoint.x + nodeSize.width,
+						y: closestGapPoint.y + gap / 2
+					};
+				}
 			}
 
-			const secondPoint = {
+			let secondPoint = {
 				x: startPoint.x + gapDelta,
 				y: startPoint.y
 			};
+
+			const nextGapPoint = lineage.gaps[l + 1].reduce(
+				(previous, current) => {
+					if (previous.x === -1) {
+						return current;
+					}
+					return Math.abs(current.y - startPoint.y) < Math.abs(previous.y - startPoint.y)
+						? current
+						: previous;
+				},
+				{ x: -1, y: -1 }
+			);
+
+			if (element.direction === "vertical") {
+				secondPoint = {
+					x: startPoint.x,
+					y: nextGapPoint.y - gapDelta
+				};
+			}
 			points.push(secondPoint);
 
 			// check if curve is feasible
-			const isCurveFeasible = Math.abs(closestGapPoint.y - startPoint.y) >= curveAngle;
+			let isCurveFeasible = Math.abs(closestGapPoint.y - startPoint.y) >= curveAngle;
 
-			const thirdPoint = {
+			if (element.direction === "vertical") {
+				isCurveFeasible = Math.abs(closestGapPoint.x - startPoint.x) >= curveAngle;
+			}
+			let thirdPoint = {
 				x: startPoint.x + gapDelta,
 				y: isCurveFeasible ? closestGapPoint.y : startPoint.y
 			};
 
+			if (element.direction === "vertical") {
+				thirdPoint = {
+					x: isCurveFeasible ? closestGapPoint.x : startPoint.x,
+					y: nextGapPoint.y - gapDelta
+				};
+			}
 			points.push(thirdPoint);
 
 			points.push(closestGapPoint);
@@ -139,12 +209,21 @@ export default function drawElbow({
 
 			let closestGapPoint: LineageGapElement;
 			if (link.target.level - 1 === l) {
-				closestGapPoint = {
-					x: link.target.x,
-					y:
-						link.target.y +
-						(link.target.isChildren ? childrenNodeSize.height / 2 : nodeSize.height / 2)
-				};
+				if (element.direction === "vertical") {
+					closestGapPoint = {
+						x:
+							link.target.x +
+							(link.target.isChildren ? childrenNodeSize.width / 2 : nodeSize.width / 2),
+						y: link.target.y
+					};
+				} else {
+					closestGapPoint = {
+						x: link.target.x,
+						y:
+							link.target.y +
+							(link.target.isChildren ? childrenNodeSize.height / 2 : nodeSize.height / 2)
+					};
+				}
 			} else {
 				closestGapPoint = lineage.gaps[l].reduce(
 					(previous, current) => {
@@ -157,26 +236,46 @@ export default function drawElbow({
 					},
 					{ x: -1, y: -1 }
 				);
-
-				closestGapPoint = {
-					x: closestGapPoint.x - gapDelta,
-					y: closestGapPoint.y + gap / 2
-				};
+				if (element.direction === "vertical") {
+					closestGapPoint = {
+						y: closestGapPoint.y - gapDelta,
+						x: closestGapPoint.x + gap / 2
+					};
+				} else {
+					closestGapPoint = {
+						x: closestGapPoint.x - gapDelta,
+						y: closestGapPoint.y + gap / 2
+					};
+				}
 			}
 
-			const secondPoint = {
+			let secondPoint = {
 				x: startPoint.x - gapDelta * (link.source.level == l ? -1 : 1),
 				y: startPoint.y
 			};
+
+			if (element.direction === "vertical") {
+				secondPoint = {
+					y: startPoint.y - gapDelta * (link.source.level == l ? -1 : 1),
+					x: startPoint.x
+				};
+			}
 			points.push(secondPoint);
 
 			// check if curve is feasible
 			const isCurveFeasible = Math.abs(closestGapPoint.y - startPoint.y) >= curveAngle;
 
-			const thirdPoint = {
+			let thirdPoint = {
 				x: startPoint.x - gapDelta * (link.source.level == l ? -1 : 1),
 				y: isCurveFeasible ? closestGapPoint.y : startPoint.y
 			};
+
+			if (element.direction === "vertical") {
+				thirdPoint = {
+					y: startPoint.y - gapDelta * (link.source.level == l ? -1 : 1),
+					x: isCurveFeasible ? closestGapPoint.x : startPoint.x
+				};
+			}
 
 			points.push(thirdPoint);
 
@@ -187,7 +286,10 @@ export default function drawElbow({
 	}
 
 	if (element) {
-		if (element.getDrawParams().svg.attr("transform") == null) {
+		if (
+			element.getDrawParams().svg.attr("transform") == null &&
+			element.direction === "horizontal"
+		) {
 			const leftX = element?.padding ?? 0;
 
 			const leftMostPoint = points.find(p => {
@@ -198,6 +300,22 @@ export default function drawElbow({
 				d3.select(element.svg).attr(
 					"viewBox",
 					`${leftMostPoint.x - gap} 0 ${element.getWidth()} ${element.getHeight()}`
+				);
+			}
+		} else if (
+			element.getDrawParams().svg.attr("transform") == null &&
+			element.direction === "vertical"
+		) {
+			const topY = element?.padding ?? 0;
+
+			const topMostPoint = points.find(p => {
+				return p.y < topY;
+			});
+
+			if (topMostPoint) {
+				d3.select(element.svg).attr(
+					"viewBox",
+					`0 ${topMostPoint.y - gap} ${element.getWidth()} ${element.getHeight()}`
 				);
 			}
 		}

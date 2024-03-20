@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.4.1] - 2024-03-20
+
+### Bug Fixes
+
+- `f-tcell` aligment in `f-table-schema` fixed.
+
 ## [2.4.0] - 2024-03-01
 
 ### Features

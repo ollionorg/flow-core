@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.9.3] - 2024-03-20
+
+### Improvements
+
+- `f-icon-button` box-sizing updated.
+
 ## [2.9.2] - 2024-03-19
 
 ### Improvements

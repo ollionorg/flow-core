@@ -154,7 +154,7 @@ export class FTcell extends FRoot {
 							></f-icon-button>
 					  `
 					: nothing}
-				<f-div><slot></slot></f-div>
+				<f-div .align=${this.align}><slot></slot></f-div>
 			</f-div>
 			<f-div
 				class="details-toggle"

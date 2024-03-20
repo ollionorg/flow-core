@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FButton, FDiv, flowElement, FRoot, FSearch, FText } from "@ollion/flow-core";
 import { html, HTMLTemplateResult, nothing, PropertyValueMap, unsafeCSS } from "lit";
-import { ifDefined } from "lit-html/directives/if-defined.js";
 import { property, query, state } from "lit/decorators.js";
 import { FTable, FTableSelectable, FTableSize, FTableVariant } from "../f-table/f-table";
 import { FTcell, FTcellActions, FTcellAlign } from "../f-tcell/f-tcell";
@@ -226,13 +225,13 @@ export class FTableSchema extends FRoot {
 							aria-sort="${this.sortBy === columnHeader[0] ? this.ariaSortOrder : "none"}"
 							.align=${columnHeader[1].align}
 							data-background="${this.stickyCellBackground}"
-							?sticky-left=${ifDefined(sticky)}
-							?sticky-top=${ifDefined(this.stickyHeader)}
+							?sticky-left=${sticky}
+							?sticky-top=${this.stickyHeader}
 							@selected-column=${this.handleColumnSelection}
 							@update-row-selection=${(event: CustomEvent<boolean>) =>
 								this.handleHeaderInput(event, columnHeader[1])}
 						>
-							<f-div gap="small" height="100%" width="fit-content">
+							<f-div .align=${columnHeader[1].align} gap="small" height="100%" width="fit-content">
 								${this.getHeaderCellTemplate(columnHeader[1])}
 								${columnHeader[1].disableSort ? nothing : this.getSortIcon(columnHeader[0])}</f-div
 							></f-tcell
@@ -297,7 +296,7 @@ export class FTableSchema extends FRoot {
 							.actions=${actions}
 							.align=${cell.align}
 							data-background="${this.stickyCellBackground}"
-							?sticky-left=${ifDefined(sticky)}
+							?sticky-left=${sticky}
 							>${this.getCellTemplate(row.data[columnHeader[0]], highlightTerm)}
 						</f-tcell>`;
 					})}

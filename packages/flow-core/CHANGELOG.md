@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.9.5] - 2024-03-21
+
+### Bug Fixes
+
+- `f-search` & `f-suggest` overlay got displayed even we don't have results or suggestions.
+
 ## [2.9.4] - 2024-03-20
 
 ### Improvements

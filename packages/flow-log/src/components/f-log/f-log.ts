@@ -221,7 +221,7 @@ export class FLog extends FRoot {
 				cancelIdleCallback(this.requestIdleId);
 			}
 			if (this.searchKeyword) {
-				this.highlightText(this.searchKeyword, false);
+				this.highlightText(this.searchKeyword, true);
 			}
 		}
 	}

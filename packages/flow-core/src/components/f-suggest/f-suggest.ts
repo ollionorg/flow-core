@@ -184,7 +184,7 @@ export class FSuggest extends FRoot {
 	 * popover element reference
 	 */
 	@query("f-popover")
-	popOverElement!: FPopover;
+	popOverElement?: FPopover;
 
 	@query(".f-select-options-clickable")
 	FSelectOptions?: FDiv;
@@ -223,13 +223,13 @@ export class FSuggest extends FRoot {
 		if (wait) {
 			await new Promise(resolve => setTimeout(resolve, 200));
 		}
-		this.popOverElement.open = false;
+		if (this.popOverElement) this.popOverElement.open = false;
 		this.currentIndex = -1;
 		this.currentCategoryIndex = 0;
 		this.setAttribute("aria-expanded", "false");
 	}
 	handleFocus() {
-		if (!this.disableSuggestions) {
+		if (!this.disableSuggestions && this.popOverElement) {
 			this.popOverElement.target = this.fInput.inputWrapperElement;
 			this.popOverElement.offset = {
 				mainAxis: 4
@@ -290,7 +290,7 @@ export class FSuggest extends FRoot {
 				break;
 			case "Escape":
 				event.preventDefault();
-				this.popOverElement.open = false;
+				if (this.popOverElement) this.popOverElement.open = false;
 				break;
 		}
 	}
@@ -434,20 +434,20 @@ export class FSuggest extends FRoot {
 				.variant=${this.variant}
 				.category=${this.category}
 				.placeholder=${this.placeholder}
-				aria-placeholder="${this.placeholder}"
-				aria-label="${ifDefined(this.getAttribute("aria-label"))}"
+				aria-placeholder="${ifDefined(this.placeholder)}"
+				aria-label="${ifDefined(this.getAttribute("aria-label") ?? undefined)}"
 				@input=${this.handleInput}
 				@focus=${this.handleFocus}
 				@blur=${this.handleBlur}
 				@keydown=${this.handleKeyDown}
 				type="text"
-				data-qa-element-id=${this.getAttribute("data-qa-element-id")}
-				icon-left=${this.iconLeft}
-				icon-right=${this.iconRight}
-				prefix=${this.prefix}
-				suffix=${this.suffix}
-				state=${this.state}
-				.maxLength=${ifDefined(this.maxLength)}
+				data-qa-element-id=${ifDefined(this.getAttribute("data-qa-element-id") ?? undefined)}
+				icon-left=${ifDefined(this.iconLeft)}
+				icon-right=${ifDefined(this.iconRight)}
+				prefix=${ifDefined(this.prefix ?? undefined)}
+				suffix=${ifDefined(this.suffix)}
+				state=${ifDefined(this.state)}
+				.maxLength=${this.maxLength}
 				?loading=${this.loading}
 				?disabled=${this.disabled}
 				.clear=${this.clear}
@@ -462,14 +462,25 @@ export class FSuggest extends FRoot {
 							<f-div slot="icon-tooltip"><slot name="icon-tooltip"></slot></f-div
 							><f-div slot="subtitle"><slot name="subtitle"></slot></f-div>`}
 			</f-input>
-			<f-popover .overlay=${false} .placement=${"bottom-start"} class="f-suggest-popover">
-				<f-div direction="column" state="secondary">
-					${this.filteredSuggestions && this.filteredSuggestionsLength > 0
-						? this.getSuggestionHtml(this.filteredSuggestions)
-						: html`<slot name="no-data"></slot>`}
-				</f-div>
-			</f-popover>
+			${!this.isSuggesstionsEmpty()
+				? html` <f-popover .overlay=${false} .placement=${"bottom-start"} class="f-suggest-popover">
+						<f-div direction="column" state="secondary">
+							${this.filteredSuggestions && this.filteredSuggestionsLength > 0
+								? this.getSuggestionHtml(this.filteredSuggestions)
+								: html`<slot name="no-data"></slot>`}
+						</f-div>
+				  </f-popover>`
+				: nothing}
 		</f-div>`;
+	}
+
+	isSuggesstionsEmpty() {
+		if (Array.isArray(this.suggestions)) {
+			return this.suggestions.length === 0;
+		} else if (typeof this.suggestions === "object") {
+			return Object.keys(this.suggestions).length == 0;
+		}
+		return true;
 	}
 
 	getSuggestionHtml(suggestions: FSuggestSuggestions) {

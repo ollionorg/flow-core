@@ -10,6 +10,7 @@ import { FSuggest } from "../f-suggest/f-suggest";
 import { FIconButton } from "../f-icon-button/f-icon-button";
 import { flowElement } from "./../../utils";
 import { injectCss } from "@ollion/flow-core-config";
+import { ifDefined } from "lit-html/directives/if-defined.js";
 injectCss("f-search", globalStyle);
 
 export type FSearchState = "primary" | "default" | "success" | "warning" | "danger";
@@ -385,7 +386,7 @@ export class FSearch extends FRoot {
 						class=${this.applyStyling}
 						data-suggest="search"
 						aria-label="Input of ${this.getAttribute("aria-label")}"
-						data-qa-element-id=${this.getAttribute("data-qa-element-id")}
+						data-qa-element-id=${ifDefined(this.getAttribute("data-qa-element-id") ?? undefined)}
 						.value=${this.value}
 						.variant=${this.variant}
 						.category=${this.category}

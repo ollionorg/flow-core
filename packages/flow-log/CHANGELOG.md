@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.0.4] - 2024-03-21
+
+### Bug Fixes
+
+- Scroll to searchKeyword when available.
+
 ## [2.0.3] - 2024-02-12
 
 ### Improvements

@@ -22,6 +22,7 @@ const sampleFormBuilder: SampleFormBuilder = {
 		direction: "horizontal",
 		isCollapsible: false,
 		isCollapsed: true,
+		helperText: "This is helper text for object",
 		label: {
 			title: "Object field form",
 			description: "showing object field",
@@ -29,17 +30,22 @@ const sampleFormBuilder: SampleFormBuilder = {
 		},
 		fields: {
 			firstname: {
-				type: "text",
-				validationRules: [
-					{
-						name: "required"
-					}
-				]
+				type: "text"
 			},
 			lastname: {
 				type: "text"
 			}
-		}
+		},
+		validationRules: [
+			{
+				name: "custom",
+				message: "Object values are invalid",
+				validate: values => {
+					console.log(values);
+					return false;
+				}
+			}
+		]
 	}
 };
 
@@ -54,6 +60,9 @@ const Template: Story<unknown> = (args: any) => {
 			fieldRef.value.innerHTML = JSON.stringify(event.detail, undefined, 8);
 		}
 	};
+	const handleSubmit = (event: CustomEvent) => {
+		console.log(event.detail);
+	};
 	return html`
 		<f-div padding="medium" gap="large">
 			<f-form-builder
@@ -61,6 +70,7 @@ const Template: Story<unknown> = (args: any) => {
 				.values=${args.values}
 				@keydown=${handleKeydown}
 				@input=${handleInput}
+				@submit=${handleSubmit}
 			>
 				<f-div>
 					<f-button label="submit" type="submit"></f-button>

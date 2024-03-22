@@ -28,6 +28,7 @@ import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/h
 import { cloneDeep, isEqual } from "lodash-es";
 import { injectCss } from "@ollion/flow-core-config";
 import { ifDefined } from "lit/directives/if-defined.js";
+import formArrayGlobalStyles from "./../f-form-array/f-form-array-global.scss?inline";
 
 injectCss("f-form-builder", globalStyle);
 
@@ -36,7 +37,12 @@ export class FFormBuilder extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...getEssentialFlowCoreStyles()];
+	static styles = [
+		unsafeCSS(eleStyle),
+		unsafeCSS(formArrayGlobalStyles),
+		unsafeCSS(globalStyle),
+		...getEssentialFlowCoreStyles()
+	];
 
 	/**
 	 * @attribute formbuilder name
@@ -352,6 +358,9 @@ export class FFormBuilder extends FRoot {
 			this.fieldRef.value
 		) {
 			allValidations.push(this.fieldRef.value.validate(silent));
+			allValidations.push(
+				validateField(this.field as CanValidateFields, this.fieldRef.value, silent)
+			);
 		} else if (this.field) {
 			allValidations.push(
 				validateField(

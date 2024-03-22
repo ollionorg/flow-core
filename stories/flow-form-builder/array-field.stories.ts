@@ -25,7 +25,17 @@ const sampleFormBuilder: SampleFormBuilder = {
 		},
 		field: {
 			type: "text"
-		}
+		},
+		validationRules: [
+			{
+				name: "custom",
+				message: "Array values are invalid",
+				validate: values => {
+					console.log(values);
+					return false;
+				}
+			}
+		]
 	}
 };
 

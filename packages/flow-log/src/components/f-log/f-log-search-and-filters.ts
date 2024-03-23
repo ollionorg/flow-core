@@ -38,7 +38,7 @@ export function clearFilter(this: FLog) {
  * It will highlight text present in logs with mark tag
  * @param searchText
  */
-export function highlightText(this: FLog, searchText: string, scroll = true): void {
+export function highlightText(this: FLog, searchText?: string, scroll = true): void {
 	if (this.searchDebounceTimeout) {
 		clearTimeout(this.searchDebounceTimeout);
 	}

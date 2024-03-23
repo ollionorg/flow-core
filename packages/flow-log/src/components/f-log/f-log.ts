@@ -361,7 +361,7 @@ export class FLog extends FRoot {
 				this.renderBatchedLogs(this.currentBatchId);
 			});
 		}
-		if (changedProperties.has("searchKeyword") && this.searchKeyword) {
+		if (changedProperties.has("searchKeyword")) {
 			this.highlightText(this.searchKeyword, true);
 		}
 

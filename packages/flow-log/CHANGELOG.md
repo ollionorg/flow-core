@@ -2,6 +2,18 @@
 
 # Change Log
 
+## [2.0.6] - 2024-03-23
+
+### Bug Fixes
+
+- Not clearing highlight of last search
+
+## [2.0.5] - 2024-03-23
+
+### Bug Fixes
+
+- Scroll to searchKeyword when available.
+
 ## [2.0.4] - 2024-03-21
 
 ### Bug Fixes

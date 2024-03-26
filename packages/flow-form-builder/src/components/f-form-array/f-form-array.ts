@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property, queryAll } from "lit/decorators.js";
 import { FDiv, FRoot, injectCss } from "@ollion/flow-core";
 import eleStyle from "./f-form-array.scss?inline";
@@ -198,16 +198,18 @@ export class FFormArray extends FRoot {
 			${fieldTemplates.length > 0
 				? html`<f-div .gap=${this.gap} direction="column"> ${fieldTemplates} </f-div>`
 				: ``}
-			${this.config.helperText
-				? html`<f-text
-						variant="para"
-						data-qa-help-for=${ifDefined(this.config.qaId || this.config.id)}
-						size="small"
-						weight="regular"
-						.state=${this.config.state}
-						>${this.config?.helperText}</f-text
-				  >`
-				: html`<slot name="help"></slot>`}
+			<slot name="help">
+				${this.config.helperText
+					? html`<f-text
+							variant="para"
+							data-qa-help-for=${ifDefined(this.config.qaId || this.config.id)}
+							size="small"
+							weight="regular"
+							.state=${this.config.state}
+							>${this.config?.helperText}</f-text
+					  >`
+					: nothing}
+			</slot>
 		</f-div>`;
 	}
 

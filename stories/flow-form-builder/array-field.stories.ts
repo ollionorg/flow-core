@@ -20,6 +20,7 @@ const sampleFormBuilder: SampleFormBuilder = {
 	field: {
 		type: "array",
 		allowEmpty: true,
+		helperText: `Array help`,
 		label: {
 			title: "Text array"
 		},
@@ -29,10 +30,10 @@ const sampleFormBuilder: SampleFormBuilder = {
 		validationRules: [
 			{
 				name: "custom",
-				message: "Array values are invalid",
+				message: "<f-text state='danger'>Injected</f-text>Values must start with `array` prefix",
 				validate: values => {
-					console.log(values);
-					return false;
+					const arrayValues = values as string[];
+					return arrayValues.every(v => v.startsWith("array"));
 				}
 			}
 		]

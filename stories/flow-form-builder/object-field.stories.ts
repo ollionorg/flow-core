@@ -1,6 +1,6 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { FormBuilderField } from "@ollion/flow-form-builder";
+import { FormBuilderField, FormBuilderValidatorFunction } from "@ollion/flow-form-builder";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
 
 export default {
@@ -16,6 +16,9 @@ type SampleFormBuilder = {
 	field: FormBuilderField;
 };
 
+const validateName: FormBuilderValidatorFunction<Record<string, string>> = values => {
+	return values.firstname === "Iron" && values.lastname === "Man";
+};
 const sampleFormBuilder: SampleFormBuilder = {
 	field: {
 		type: "object",
@@ -39,10 +42,10 @@ const sampleFormBuilder: SampleFormBuilder = {
 		validationRules: [
 			{
 				name: "custom",
-				message: "Object values are invalid",
+				message: "Please provide firstname : `Iron` and lastname : `Man`",
 				validate: values => {
-					console.log(values);
-					return false;
+					const records = values as unknown as Record<string, string>;
+					return records.firstname === "Iron" && records.lastname === "Man";
 				}
 			}
 		]

@@ -139,17 +139,18 @@ export class FFormObject extends FRoot {
 				${fieldTemplates}
 			</f-form-group>
 
-			${this.config.helperText
-				? html`<f-text
-						variant="para"
-						size="small"
-						weight="regular"
-						data-qa-help-for=${ifDefined(this.config.qaId || this.config.id)}
-						.state=${this.config.state}
-						>${this.config?.helperText}</f-text
-				  >`
-				: nothing}
-			<slot name="help"></slot>
+			<slot name="help">
+				${this.config.helperText
+					? html`<f-text
+							variant="para"
+							size="small"
+							weight="regular"
+							data-qa-help-for=${ifDefined(this.config.qaId || this.config.id)}
+							.state=${this.config.state ?? "secondary"}
+							>${this.config?.helperText}</f-text
+					  >`
+					: nothing}
+			</slot>
 		</f-div>`;
 	}
 

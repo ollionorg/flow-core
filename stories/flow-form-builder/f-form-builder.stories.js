@@ -51,18 +51,40 @@ export const Playground = {
 			event.stopImmediatePropagation();
 		};
 
-		return html`<f-div direction="column">
-			<f-div padding="medium" direction="row" height="hug-content" gap="medium" overflow="scroll">
-				<f-div width="hug-content" align="middle-center">
-					<f-text variant="para" size="medium" weight="regular" state="default" align="left"
-						>Target environment</f-text
-					>
-				</f-div>
-				<f-div align="middle-center" width="224px">
-					<f-select .options=${["test1", "test2", "test3"]} placeholder="Select Target Environment">
-					</f-select>
-				</f-div> </f-div
-		></f-div>`;
+		return html`<f-div padding="medium" gap="medium" height="100%" overflow="scroll">
+			<f-div>
+				<f-form-builder
+					${ref(formRef)}
+					.field=${args.field}
+					.values=${args.values}
+					.variant=${args.variant}
+					.category=${args.category}
+					.size=${args.size}
+					.gap=${args.gap}
+					.label=${{
+						title: "Form label",
+						description: "Description about form",
+						iconTooltip: "Form more info"
+					}}
+					@submit=${handleSubmit}
+					@input=${handleInput}
+					@keydown=${handleKeydown}
+					@state-change=${handleStateChange}
+				>
+					<f-div>
+						<f-button label="submit" type="submit"></f-button>
+					</f-div>
+				</f-form-builder>
+			</f-div>
+			<f-divider></f-divider>
+			<f-div width="400px" height="hug-content" direction="column" gap="small" overflow="scroll">
+				<f-text>Values</f-text>
+				<pre ${ref(fieldRef)}>${JSON.stringify(args.values, undefined, 8)}</pre>
+				<f-divider></f-divider>
+				<f-text size="large" weight="bold" state="secondary">Form State with silent errors</f-text>
+				<pre ${ref(stateRef)}></pre>
+			</f-div>
+		</f-div>`;
 	},
 
 	name: "Playground",

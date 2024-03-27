@@ -28,6 +28,7 @@ export const Playground = {
 			<f-div>
 				<f-log
 					${ref(logElement)}
+					.label=${args.label}
 					.logs=${args.logs}
 					?show-toolbar=${args["show-toolbar"]}
 					?wrap-text=${args["wrap-text"]}
@@ -35,13 +36,23 @@ export const Playground = {
 					.selectedLogLevel=${args["selected-log-level"]}
 					.highlightKeywords=${args["highlight-keywords"]}
 					.searchKeyword=${args["search-keyword"]}
-				></f-log> </f-div
-		></f-div>`;
+				>
+					<f-div gap="small" padding="none medium" slot="header" width="100%" align="middle-left">
+						<f-text inline>Status:</f-text>
+						<f-icon source="i-tick" loading></f-icon>
+						<f-text>Running since 2 mins...</f-text>
+					</f-div>
+				</f-log>
+			</f-div></f-div
+		>`;
 	},
 
 	name: "Playground",
 
 	argTypes: {
+		label: {
+			control: "text"
+		},
 		logs: {
 			control: "text"
 		},
@@ -68,6 +79,7 @@ export const Playground = {
 	},
 
 	args: {
+		label: "Logs",
 		logs: samplelogs,
 		["show-toolbar"]: true,
 		["wrap-text"]: false,

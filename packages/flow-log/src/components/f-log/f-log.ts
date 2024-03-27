@@ -71,6 +71,11 @@ export class FLog extends FRoot {
 	logs!: string;
 
 	/**
+	 * @attribute label will display on left top corner
+	 */
+	@property({ type: String, reflect: true })
+	label?: string;
+	/**
 	 * @attribute show toolbar
 	 */
 	@property({ type: Boolean, reflect: true, attribute: "show-toolbar" })
@@ -252,6 +257,21 @@ export class FLog extends FRoot {
 		}
 	}
 
+	get labelTemplate() {
+		if (this.label) {
+			return html`<f-div
+				width="hug-content"
+				align="middle-left"
+				gap="medium"
+				padding="none medium none none"
+				><f-text variant="heading" size="medium" weight="medium">${this.label}</f-text
+				><f-divider></f-divider
+			></f-div>`;
+		}
+
+		return nothing;
+	}
+
 	get topBar() {
 		if (this.showToolbar) {
 			return html`<f-div
@@ -260,23 +280,17 @@ export class FLog extends FRoot {
 				align="middle-left"
 				class="top-bar"
 			>
-				${this.searchBarTemplate}
-				<f-div width="150px" height="hug-content">
-					<f-div height="hug-content">
-						<f-input
-							variant="block"
-							id="linenumber-input"
-							type="number"
-							placeholder="Jump to line"
-							@keypress=${this.handleLineNumber}
-						></f-input>
-					</f-div>
-					<f-icon-button
-						@click=${this.goToLine}
-						state="neutral"
-						variant="packed"
-						icon="i-enter"
-					></f-icon-button>
+				${this.labelTemplate} ${this.searchBarTemplate}
+				<slot name="header" class="header-slot"></slot>
+				<f-div width="100px" height="hug-content">
+					<f-input
+						.iconRight=${"i-arrow-circle-right"}
+						id="linenumber-input"
+						type="number"
+						placeholder="line #"
+						@keypress=${this.handleLineNumber}
+					>
+					</f-input>
 				</f-div>
 			</f-div>`;
 		}
@@ -284,31 +298,29 @@ export class FLog extends FRoot {
 	}
 
 	get searchBarTemplate() {
-		return html`<f-div height="hug-content" align="middle-left">
-			<f-div width="460px">
+		return html`<f-div height="hug-content" width="hug-content" gap="medium" align="middle-left">
+			<f-div width="320px" gap="medium">
+				<f-select .options=${this.logLevels} .value=${this.selectedLogLevel}></f-select>
 				<f-search
 					id="search-input"
+					variant="round"
 					placeholder="Search"
-					.scope=${this.logLevels}
-					.selectedScope=${this.selectedLogLevel}
 					@input=${this.handleSearch}
-					variant="block"
 					.value=${this.searchKeyword}
 					.disableResult=${true}
 				></f-search>
 			</f-div>
-			<f-div width="hug-content" align="middle-center">
+			<f-div width="hug-content" gap="small" align="middle-center">
 				<f-icon-button
+					size="small"
 					state="neutral"
 					@click=${this.prevMark}
-					variant="packed"
-					icon="i-arrow-up"
+					icon="i-arrow-sm-up"
 				></f-icon-button>
-				<f-divider></f-divider>
 				<f-icon-button
+					size="small"
 					state="neutral"
-					variant="packed"
-					icon="i-arrow-down"
+					icon="i-arrow-sm-down"
 					@click=${this.nextMark}
 				></f-icon-button>
 			</f-div>

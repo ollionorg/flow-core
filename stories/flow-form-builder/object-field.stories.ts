@@ -1,6 +1,6 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { FormBuilderField } from "@ollion/flow-form-builder";
+import { FormBuilderField, FormBuilderValidatorFunction } from "@ollion/flow-form-builder";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
 
 export default {
@@ -16,12 +16,16 @@ type SampleFormBuilder = {
 	field: FormBuilderField;
 };
 
+const validateName: FormBuilderValidatorFunction<Record<string, string>> = values => {
+	return values.firstname === "Iron" && values.lastname === "Man";
+};
 const sampleFormBuilder: SampleFormBuilder = {
 	field: {
 		type: "object",
 		direction: "horizontal",
 		isCollapsible: false,
 		isCollapsed: true,
+		helperText: "This is helper text for object",
 		label: {
 			title: "Object field form",
 			description: "showing object field",
@@ -29,17 +33,22 @@ const sampleFormBuilder: SampleFormBuilder = {
 		},
 		fields: {
 			firstname: {
-				type: "text",
-				validationRules: [
-					{
-						name: "required"
-					}
-				]
+				type: "text"
 			},
 			lastname: {
 				type: "text"
 			}
-		}
+		},
+		validationRules: [
+			{
+				name: "custom",
+				message: "Please provide either firstname or lastname",
+				validate: values => {
+					const records = values as unknown as Record<string, string>;
+					return records.firstname !== undefined || records.lastname !== undefined;
+				}
+			}
+		]
 	}
 };
 
@@ -54,6 +63,9 @@ const Template: Story<unknown> = (args: any) => {
 			fieldRef.value.innerHTML = JSON.stringify(event.detail, undefined, 8);
 		}
 	};
+	const handleSubmit = (event: CustomEvent) => {
+		console.log(event.detail);
+	};
 	return html`
 		<f-div padding="medium" gap="large">
 			<f-form-builder
@@ -61,6 +73,7 @@ const Template: Story<unknown> = (args: any) => {
 				.values=${args.values}
 				@keydown=${handleKeydown}
 				@input=${handleInput}
+				@submit=${handleSubmit}
 			>
 				<f-div>
 					<f-button label="submit" type="submit"></f-button>
@@ -76,9 +89,5 @@ const Template: Story<unknown> = (args: any) => {
 export const basic = Template.bind({});
 
 basic.args = {
-	field: sampleFormBuilder.field,
-	values: {
-		firstname: "Tony",
-		lastname: "Stark"
-	}
+	field: sampleFormBuilder.field
 };

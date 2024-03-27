@@ -1,4 +1,4 @@
-import { html, unsafeCSS } from "lit";
+import { html, nothing, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
@@ -8,6 +8,7 @@ import globalStyle from "./f-form-group-global.scss?inline";
 import { flowElement } from "./../../utils";
 
 import { injectCss } from "@ollion/flow-core-config";
+import { ifDefined } from "lit-html/directives/if-defined.js";
 injectCss("f-form-group", globalStyle);
 
 export type FGroupLabel = {
@@ -131,7 +132,7 @@ export class FFormGroup extends FRoot {
 											variant="heading"
 											size="small"
 											weight="regular"
-											data-qa-label-for=${this.dataset["qaId"]}
+											data-qa-label-for=${ifDefined(this.dataset["qaId"])}
 											.state=${this.collapse === "text" ? "primary" : "default"}
 										>
 											${this.collapse === "text"
@@ -153,11 +154,11 @@ export class FFormGroup extends FRoot {
 												source="i-question-filled"
 												size="small"
 												state="default"
-												data-qa-info-icon-for=${this.dataset["qaId"]}
+												data-qa-info-icon-for=${ifDefined(this.dataset["qaId"])}
 												.tooltip="${this.label?.iconTooltip}"
 												clickable
 										  ></f-icon>`
-										: ""}
+										: nothing}
 								</f-div>
 								${this.label?.description
 									? html` <f-div height="hug-content" width="hug-content">
@@ -165,7 +166,7 @@ export class FFormGroup extends FRoot {
 												${this.label.description}
 											</f-text>
 									  </f-div>`
-									: ""}
+									: nothing}
 							</f-div>
 							<f-div
 								direction="row"
@@ -182,7 +183,7 @@ export class FFormGroup extends FRoot {
 											clickable
 											@click=${this.duplicationClick}
 									  ></f-icon>`
-									: ""}
+									: nothing}
 								${this.collapse === "accordion"
 									? html` <f-icon
 											.source=${!this.isCollapsed ? "i-chevron-up" : "i-chevron-down"}
@@ -190,11 +191,11 @@ export class FFormGroup extends FRoot {
 											state="default"
 											clickable
 									  ></f-icon>`
-									: ""}
+									: nothing}
 							</f-div>
 						</f-div>
 				  `
-				: ""}
+				: nothing}
 			${!this.isCollapsed || this.collapse === "none"
 				? html`
 						<f-div gap="small">
@@ -210,7 +211,7 @@ export class FFormGroup extends FRoot {
 							<slot name="action"></slot>
 						</f-div>
 				  `
-				: ""}
+				: nothing}
 		</f-div>`;
 	}
 }

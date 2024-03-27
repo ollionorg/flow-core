@@ -20,12 +20,23 @@ const sampleFormBuilder: SampleFormBuilder = {
 	field: {
 		type: "array",
 		allowEmpty: true,
+		helperText: `Array help`,
 		label: {
 			title: "Text array"
 		},
 		field: {
 			type: "text"
-		}
+		},
+		validationRules: [
+			{
+				name: "custom",
+				message: "Values must start with `array` prefix",
+				validate: values => {
+					const arrayValues = values as string[];
+					return arrayValues.every(v => v.startsWith("array"));
+				}
+			}
+		]
 	}
 };
 

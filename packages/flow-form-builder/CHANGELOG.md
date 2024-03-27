@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.4.0] - 2024-03-27
+
+### Features
+
+- validation support for `array` and `object` field
+
 ## [2.3.1] - 2024-03-12
 
 ### Bug Fixes

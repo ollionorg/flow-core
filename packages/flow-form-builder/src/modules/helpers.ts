@@ -34,6 +34,7 @@ import checkboxGroupGlobalStyles from "./../components/f-checkbox-group/f-checkb
 import radioGroupGlobalStyles from "./../components/f-radio-group/f-radio-group-global.scss?inline";
 import fieldSeparatorGlobalStyles from "./../components/f-field-separator/f-field-separator-global.scss?inline";
 import formObjectGlobalStyles from "./../components/f-form-object/f-form-object-global.scss?inline";
+
 import { ifDefined } from "lit/directives/if-defined.js";
 
 export async function propogateProperties(element: FFormArray | FFormObject | FFormBuilder) {

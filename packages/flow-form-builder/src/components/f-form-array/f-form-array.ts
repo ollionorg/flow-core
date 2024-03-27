@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property, queryAll } from "lit/decorators.js";
-import { FDiv, FRoot } from "@ollion/flow-core";
+import { FDiv, FRoot, injectCss } from "@ollion/flow-core";
 import eleStyle from "./f-form-array.scss?inline";
 import {
 	CanValidateFields,
@@ -20,7 +20,9 @@ import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/h
 import { FFormObject } from "../f-form-object/f-form-object";
 import { FIconButton } from "@ollion/flow-core";
 import { ifDefined } from "lit/directives/if-defined.js";
+import globalStyle from "./f-form-array-global.scss?inline";
 
+injectCss("f-form-array", globalStyle);
 export type ArrayValueType = (
 	| string
 	| string[]
@@ -36,7 +38,7 @@ export class FFormArray extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...getEssentialFlowCoreStyles()];
+	static styles = [unsafeCSS(eleStyle), unsafeCSS(globalStyle), ...getEssentialFlowCoreStyles()];
 
 	/**
 	 * @attribute comments baout title
@@ -196,16 +198,18 @@ export class FFormArray extends FRoot {
 			${fieldTemplates.length > 0
 				? html`<f-div .gap=${this.gap} direction="column"> ${fieldTemplates} </f-div>`
 				: ``}
-			${this.config.helperText
-				? html`<f-text
-						variant="para"
-						data-qa-help-for=${ifDefined(this.config.qaId || this.config.id)}
-						size="small"
-						weight="regular"
-						.state=${this.config.state}
-						>${this.config?.helperText}</f-text
-				  >`
-				: html`<slot name="help"></slot>`}
+			<slot name="help">
+				${this.config.helperText
+					? html`<f-text
+							variant="para"
+							data-qa-help-for=${ifDefined(this.config.qaId || this.config.id)}
+							size="small"
+							weight="regular"
+							.state=${this.config.state}
+							>${this.config?.helperText}</f-text
+					  >`
+					: nothing}
+			</slot>
 		</f-div>`;
 	}
 
@@ -217,6 +221,7 @@ export class FFormArray extends FRoot {
 		this.fieldRefs.forEach(fieldRef => {
 			if ((fieldConfig.type === "object" || fieldConfig.type === "array") && fieldRef.value) {
 				allValidations.push(fieldRef.value.validate(silent));
+				allValidations.push(validateField(fieldConfig, fieldRef.value, silent));
 			} else {
 				allValidations.push(
 					validateField(

@@ -207,16 +207,13 @@ function updateMessage(
 	const helpSlot = element.querySelector<HTMLSlotElement>("[slot='help']");
 	if (helpSlot) {
 		helpSlot.remove();
-		element.insertAdjacentHTML(
-			"beforeend",
-			`<f-div slot="help" ${qaAttribute}=${field.qaId || field.id || ""}>${message}</f-div>`
-		);
-	} else {
-		element.insertAdjacentHTML(
-			"beforeend",
-			`<f-div slot="help" ${qaAttribute}=${field.qaId || field.id || ""}>${message}</f-div>`
-		);
 	}
+
+	const newHelpSlot = document.createElement("f-div");
+	newHelpSlot.setAttribute("slot", "help");
+	newHelpSlot.setAttribute(qaAttribute, field.qaId || field.id || "");
+	newHelpSlot.innerText = message;
+	element.appendChild(newHelpSlot);
 }
 
 export function extractValidationState(allResults: ValidationResults) {

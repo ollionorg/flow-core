@@ -51,7 +51,7 @@ export const Playground = {
 			event.stopImmediatePropagation();
 		};
 
-		return html` <f-div padding="medium" gap="medium" height="100%" overflow="scroll">
+		return html`<f-div padding="medium" gap="medium" height="100%" overflow="scroll">
 			<f-div>
 				<f-form-builder
 					${ref(formRef)}

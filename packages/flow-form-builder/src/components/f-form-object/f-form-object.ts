@@ -1,4 +1,4 @@
-import { html, PropertyValueMap, TemplateResult, unsafeCSS } from "lit";
+import { html, nothing, PropertyValueMap, TemplateResult, unsafeCSS } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 import { FDiv, FRoot } from "@ollion/flow-core";
 import eleStyle from "./f-form-object.scss?inline";
@@ -139,16 +139,18 @@ export class FFormObject extends FRoot {
 				${fieldTemplates}
 			</f-form-group>
 
-			${this.config.helperText
-				? html`<f-text
-						variant="para"
-						size="small"
-						weight="regular"
-						data-qa-help-for=${ifDefined(this.config.qaId || this.config.id)}
-						.state=${this.config.state}
-						>${this.config?.helperText}</f-text
-				  >`
-				: ""}
+			<slot name="help">
+				${this.config.helperText
+					? html`<f-text
+							variant="para"
+							size="small"
+							weight="regular"
+							data-qa-help-for=${ifDefined(this.config.qaId || this.config.id)}
+							.state=${this.config.state ?? "secondary"}
+							>${this.config?.helperText}</f-text
+					  >`
+					: nothing}
+			</slot>
 		</f-div>`;
 	}
 
@@ -163,6 +165,7 @@ export class FFormObject extends FRoot {
 				allValidations.push(
 					(this.fieldRefs[fieldname].value as FFormInputElements).validate(silent)
 				);
+				allValidations.push(validateField(fieldConfig, this.fieldRefs[fieldname].value, silent));
 			} else {
 				if (this.fieldRefs[fieldname]) {
 					allValidations.push(

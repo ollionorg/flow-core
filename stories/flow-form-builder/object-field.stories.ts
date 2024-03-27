@@ -42,10 +42,10 @@ const sampleFormBuilder: SampleFormBuilder = {
 		validationRules: [
 			{
 				name: "custom",
-				message: "Please provide firstname : `Iron` and lastname : `Man`",
+				message: "Please provide either firstname or lastname",
 				validate: values => {
 					const records = values as unknown as Record<string, string>;
-					return records.firstname === "Iron" && records.lastname === "Man";
+					return records.firstname !== undefined || records.lastname !== undefined;
 				}
 			}
 		]
@@ -89,9 +89,5 @@ const Template: Story<unknown> = (args: any) => {
 export const basic = Template.bind({});
 
 basic.args = {
-	field: sampleFormBuilder.field,
-	values: {
-		firstname: "Tony",
-		lastname: "Stark"
-	}
+	field: sampleFormBuilder.field
 };

@@ -30,7 +30,7 @@ const sampleFormBuilder: SampleFormBuilder = {
 		validationRules: [
 			{
 				name: "custom",
-				message: "<f-text state='danger'>Injected</f-text>Values must start with `array` prefix",
+				message: "Values must start with `array` prefix",
 				validate: values => {
 					const arrayValues = values as string[];
 					return arrayValues.every(v => v.startsWith("array"));

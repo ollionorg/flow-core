@@ -5,25 +5,28 @@ export function formatLogLine(logLine: string, highlightKeywords?: HighlightKeyw
 	// Highlight [xxx] with a greyed out version
 	let newLine = logLine
 		// Highlight quoted strings
-		.replace(/("[^"]*?"|'[^']*?')/g, '<span style="color: var(--color-warning-subtle)">$1</span>')
+		.replace(
+			/("[^"]*?"|'[^']*?')/g,
+			'<span style="color: var(--color-color-2-secondary)">$1</span>'
+		)
 
 		// Highlight bracket contents
 		// 100 is an arbitrary limit to prevent catastrophic backtracking in Regex
 		.replace(
 			/(\[[^\]]{0,100}\])/g,
-			'<span style="color:var(--color-text-subtle); font-weight: bold;">$1</span>'
+			'<span style="color:var(--color-primary-secondary); font-weight: bold;">$1</span>'
 		)
 
 		// Highlight potential dates (YYYY/MM/DD HH:MM:SS)
 		.replace(
 			/(\d{1,4}\/\d{1,2}\/\d{1,4}(?: \d{1,2}:\d{1,2}:\d{1,2})?)/g,
-			'<span style="color: #68c9f2">$1</span>'
+			'<span style="color: var(--color-color-1-secondary);">$1</span>'
 		)
 
 		// Highlight potential dates (YYYY-MM-DD with timezone)
 		.replace(
 			/(\d{1,4}-\d{1,2}-\d{1,4}(?:\s?T?\d{1,2}:\d{1,2}:[\d.]{1,10})?Z?)/g,
-			'<span style="color: #68c9f2">$1</span>'
+			'<span style="color:var(--color-color-1-secondary);">$1</span>'
 		)
 
 		// Highlight YAML keys

@@ -2,6 +2,7 @@ import { html } from "lit-html";
 import samplelogs from "./logs/logs.js";
 import { createRef, ref } from "lit/directives/ref.js";
 import { FLog } from "@ollion/flow-log";
+import { FPopover } from "@ollion/flow-core";
 
 export default {
 	title: "@ollion/flow-log/f-log",
@@ -16,32 +17,89 @@ export default {
 export const Playground = {
 	render: (args: Record<string, unknown>) => {
 		const logElement = createRef<FLog>();
+		const popoverElement = createRef<FPopover>();
 		const handleExternalSearch = (event: CustomEvent<{ value: string }>) => {
 			if (logElement.value) {
 				logElement.value.searchKeyword = event.detail.value;
+			}
+		};
+		const toggleOptions = () => {
+			if (popoverElement.value) {
+				popoverElement.value.open = !popoverElement.value.open;
 			}
 		};
 		return html`<f-div direction="column" height="100%" overflow="scroll">
 			<f-div height="hug-content" style="display:none"
 				><f-search @input=${handleExternalSearch}></f-search
 			></f-div>
+
+			<f-popover
+				${ref(popoverElement)}
+				target="#log-actions"
+				.overlay=${false}
+				@overlay-click=${toggleOptions}
+				size="hug-content"
+				placement="bottom"
+			>
+				<f-div width="220px" direction="column">
+					${[
+						{ icon: "i-download", text: "Download" },
+						{
+							icon: "i-indent",
+							text: "Indent"
+						},
+						{
+							icon: "i-expand-3",
+							text: "Expand"
+						}
+					].map(op => {
+						return html`<f-div
+							state="secondary"
+							padding="medium"
+							gap="medium"
+							clickable
+							align="middle-left"
+						>
+							<f-icon size="small" .source=${op.icon}></f-icon>
+							<f-text variant="para" size="medium" weight="regular">${op.text}</f-text>
+						</f-div>`;
+					})}
+				</f-div>
+			</f-popover>
 			<f-div>
 				<f-log
 					${ref(logElement)}
+					.label=${args.label}
 					.logs=${args.logs}
 					?show-toolbar=${args["show-toolbar"]}
 					?wrap-text=${args["wrap-text"]}
 					.logLevels=${args["log-levels"]}
 					.selectedLogLevel=${args["selected-log-level"]}
-					.highlightKeywords=${args["highlight-keywords"]}
 					.searchKeyword=${args["search-keyword"]}
-				></f-log> </f-div
+				>
+					<f-div gap="small" slot="header" width="100%" align="middle-left">
+						<f-text inline>Status:</f-text>
+						<f-icon source="i-tick" loading></f-icon>
+						<f-text>Running since 2 mins...</f-text>
+					</f-div>
+					<f-icon-button
+						@click=${toggleOptions}
+						slot="actions"
+						icon="i-more"
+						state="neutral"
+						category="packed"
+						id="log-actions"
+					></f-icon-button>
+				</f-log> </f-div
 		></f-div>`;
 	},
 
 	name: "Playground",
 
 	argTypes: {
+		label: {
+			control: "text"
+		},
 		logs: {
 			control: "text"
 		},
@@ -68,6 +126,7 @@ export const Playground = {
 	},
 
 	args: {
+		label: "Logs",
 		logs: samplelogs,
 		["show-toolbar"]: true,
 		["wrap-text"]: false,

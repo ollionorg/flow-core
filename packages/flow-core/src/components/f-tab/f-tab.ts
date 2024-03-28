@@ -46,7 +46,7 @@ export class FTab extends FRoot {
 	 * @attribute Variants are various representations of f-tab. f-tab can have filled tabs, or transparent tabs.
 	 */
 	@property({ type: String, reflect: true })
-	variant?: "fill" | "transparent" = "transparent";
+	variant?: "fill" | "transparent" | "no-border" = "transparent";
 
 	/**
 	 * @attribute Vertical tabs can be enabled using direction property. By default tabs are horizontal.
@@ -190,6 +190,18 @@ For vertical f-tab, content can align to top, middle, or bottom.
 				  </f-div> `
 				: "";
 
+		const getBorder = () => {
+			if (this.variant === "transparent") {
+				if (this.direction === "horizontal") {
+					return `small solid default bottom`;
+				} else {
+					return `small solid default right`;
+				}
+			}
+
+			return "none";
+		};
+
 		/**
 		 * Final html to render
 		 */
@@ -206,11 +218,7 @@ For vertical f-tab, content can align to top, middle, or bottom.
 				id="f-tab-section"
 				.height=${this.direction === "vertical" ? "100%" : "hug-content"}
 				.width=${this.direction === "vertical" ? "hug-content" : "fill-container"}
-				.border=${this.variant === "transparent"
-					? this.direction === "horizontal"
-						? `small solid default bottom`
-						: `small solid default right`
-					: "none"}
+				.border=${getBorder()}
 				.direction=${this.direction === "vertical" ? "column" : "row"}
 				.align=${this.tabsAlignment}
 				overflow="scroll"

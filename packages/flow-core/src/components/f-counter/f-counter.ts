@@ -12,6 +12,7 @@ import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
 import { flowElement } from "./../../utils";
 import { injectCss } from "@ollion/flow-core-config";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 injectCss("f-counter", globalStyle);
 
@@ -190,9 +191,9 @@ export class FCounter extends FRoot {
 		return html`<div
 			class=${classMap(classes)}
 			style=${this.applyStyles()}
-			size=${this.size}
-			state=${this.state}
-			category=${this.category}
+			size=${ifDefined(this.size)}
+			state=${ifDefined(this.state)}
+			category=${ifDefined(this.category)}
 			?loading=${this.loading}
 			?disabled=${this.disabled}
 		>

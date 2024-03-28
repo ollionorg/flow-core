@@ -111,7 +111,7 @@ in this case it is `f-tag`
 		}
 
 		@each $state, $color in $states {
-			&[state="#{$state}"] {
+			&[state="#{$state}"][category="fill"] {
 				background-color: map.get($color, "background") !important;
 				border: 1px
 					solid
@@ -135,6 +135,34 @@ in this case it is `f-tag`
 					cursor: pointer;
 					&:hover {
 						background-color: map.get($color, "hover") !important;
+					}
+				}
+			}
+			&[state="#{$state}"][category="outline"] {
+				background-color: transparent !important;
+				color: map.get($color, "background");
+				border: 1px
+					solid
+					map.get($color, "background") !important; // added to match width of outline category
+				// hover changes background
+				&[selected] {
+					background-color: transparent !important;
+					border: 1px solid map.get($color, "selected") !important;
+				}
+				// if loading attribute specified then change background, border, color and svg
+				&[loading] {
+					background-color: transparent !important;
+					border: 1px solid map.get($color, "loading") !important;
+					color: transparent !important;
+					svg path.loader-fill {
+						fill: map.get($color, "background") !important;
+					}
+				}
+				// adding clickable behavior
+				&[clickable]:not([selected]) {
+					cursor: pointer;
+					&:hover {
+						border: 1px solid map.get($color, "hover") !important;
 					}
 				}
 			}

@@ -319,14 +319,12 @@ export class FLog extends FRoot {
 					state="neutral"
 					@click=${this.prevMark}
 					icon="i-arrow-sm-up"
-					tooltip="Previous"
 				></f-icon-button>
 				<f-icon-button
 					size="small"
 					state="neutral"
 					icon="i-arrow-sm-down"
 					@click=${this.nextMark}
-					tooltip="Next"
 				></f-icon-button>
 			</f-div>
 		</f-div>`;

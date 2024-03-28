@@ -2,6 +2,16 @@
 
 # Change Log
 
+## [2.1.0] - 2024-03-28
+
+### Features
+
+- f-log : `label` property introduced to display label at top-left.
+- f-log : `header` slot introduced to display meta info after search bar.
+- f-log : `actions` slot introduced to display additional actions menu or icons at top-right.
+- f-log : formatting colors updated.
+- f-log : search bar and log level selection elements style updated.
+
 ## [2.0.6] - 2024-03-23
 
 ### Bug Fixes

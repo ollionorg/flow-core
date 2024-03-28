@@ -2,6 +2,13 @@
 
 # Change Log
 
+## [2.9.6] - 2024-03-28
+
+### Improvements
+
+- `f-tab` : `variant="no-border"` added.
+- color tokens updated.
+
 ## [2.9.5] - 2024-03-21
 
 ### Bug Fixes

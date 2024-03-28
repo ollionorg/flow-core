@@ -259,11 +259,7 @@ export class FLog extends FRoot {
 
 	get labelTemplate() {
 		if (this.label) {
-			return html`<f-div
-				width="hug-content"
-				align="middle-left"
-				gap="medium"
-				padding="none medium none none"
+			return html`<f-div width="hug-content" align="middle-left" gap="medium"
 				><f-text variant="heading" size="medium" weight="medium">${this.label}</f-text
 				><f-divider></f-divider
 			></f-div>`;
@@ -279,6 +275,7 @@ export class FLog extends FRoot {
 				padding="none none small none"
 				align="middle-left"
 				class="top-bar"
+				gap="medium"
 			>
 				${this.labelTemplate} ${this.searchBarTemplate}
 				<slot name="header" class="header-slot"></slot>
@@ -292,6 +289,7 @@ export class FLog extends FRoot {
 					>
 					</f-input>
 				</f-div>
+				<slot name="actions" class="action-slot"></slot>
 			</f-div>`;
 		}
 		return nothing;
@@ -299,8 +297,14 @@ export class FLog extends FRoot {
 
 	get searchBarTemplate() {
 		return html`<f-div height="hug-content" width="hug-content" gap="medium" align="middle-left">
-			<f-div width="320px" gap="medium">
-				<f-select .options=${this.logLevels} .value=${this.selectedLogLevel}></f-select>
+			<f-div width="120px" gap="medium">
+				<f-select
+					@input=${this.handleLogLevelFilter}
+					.options=${this.logLevels}
+					.value=${this.selectedLogLevel}
+				></f-select>
+			</f-div>
+			<f-div width="250px" gap="medium">
 				<f-search
 					id="search-input"
 					variant="round"
@@ -316,12 +320,14 @@ export class FLog extends FRoot {
 					state="neutral"
 					@click=${this.prevMark}
 					icon="i-arrow-sm-up"
+					tooltip="Previous"
 				></f-icon-button>
 				<f-icon-button
 					size="small"
 					state="neutral"
 					icon="i-arrow-sm-down"
 					@click=${this.nextMark}
+					tooltip="Next"
 				></f-icon-button>
 			</f-div>
 		</f-div>`;

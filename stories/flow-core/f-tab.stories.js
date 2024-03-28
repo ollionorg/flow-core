@@ -97,7 +97,7 @@ export const Playground = {
 	argTypes: {
 		variant: {
 			control: "radio",
-			options: ["transparent", "fill"]
+			options: ["transparent", "fill", "no-border"]
 		},
 
 		direction: {

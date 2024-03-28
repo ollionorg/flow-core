@@ -114,9 +114,9 @@ export function prevMark(this: FLog) {
 	}
 }
 
-export function handleLogLevelFilter(this: FLog, event: CustomEvent<{ scope: string }>) {
+export function handleLogLevelFilter(this: FLog, event: CustomEvent<{ value: string }>) {
 	this.clearFilter();
-	const logLevel = event.detail.scope;
+	const logLevel = event.detail.value;
 	if (logLevel && logLevel !== "ALL") {
 		this.filterLines(logLevel.toLowerCase());
 	}
@@ -124,5 +124,4 @@ export function handleLogLevelFilter(this: FLog, event: CustomEvent<{ scope: str
 
 export function handleSearch(this: FLog, event: CustomEvent<{ value: string; scope: string }>) {
 	this.highlightText(event.detail.value);
-	this.handleLogLevelFilter(event);
 }

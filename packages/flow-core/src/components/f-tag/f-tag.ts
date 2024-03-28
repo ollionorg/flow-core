@@ -1,4 +1,4 @@
-import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { property, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-tag.scss?inline";
@@ -16,6 +16,9 @@ import { flowElement } from "./../../utils";
 import { createRef, ref, Ref } from "lit/directives/ref.js";
 import type { FDiv } from "../f-div/f-div";
 import { injectCss } from "@ollion/flow-core-config";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { keyed } from "lit/directives/keyed.js";
+
 injectCss("f-tag", globalStyle);
 
 export type FTagStateProp =
@@ -26,6 +29,8 @@ export type FTagStateProp =
 	| "danger"
 	| "inherit"
 	| `custom, ${string}`;
+
+export type FTagCategory = "fill" | "outline";
 
 /**
  * @summary Tags allow users to categorize the content. They can be used to add metadata to an element such as category, or property or show a status.
@@ -65,6 +70,12 @@ export class FTag extends FRoot {
 	 */
 	@property({ reflect: true, type: String })
 	size?: "large" | "medium" | "small" = "medium";
+
+	/**
+	 * @attribute category defined background and border
+	 */
+	@property({ reflect: true, type: String })
+	category?: FTagCategory = "fill";
 
 	/**
 	 * @attribute The states on tags are to indicate various degrees of emphasis of the action.
@@ -149,18 +160,33 @@ export class FTag extends FRoot {
 	 * apply inline styles to shadow-dom for custom fill.
 	 */
 	applyStyles() {
-		if (this.fill) {
-			if (this.selected) {
-				return `background: ${this.fill}; border: 1px solid ${this.fill}; filter: brightness(60%); color: ${this.textColor}`;
-			} else if (this.loading) {
-				return `background-color: ${LightenDarkenColor(
-					this.fill,
-					-150
-				)}; border: 1px solid ${LightenDarkenColor(this.fill, -150)}; color: transparent; fill: ${
-					this.fill
-				}`;
-			} else {
-				return `background: ${this.fill}; border: 1px solid ${this.fill}; color: ${this.textColor}`;
+		if (this.category === "fill") {
+			if (this.fill) {
+				if (this.selected) {
+					return `background: ${this.fill}; border: 1px solid ${this.fill}; filter: brightness(60%); color: ${this.textColor}`;
+				} else if (this.loading) {
+					return `background-color: ${LightenDarkenColor(
+						this.fill,
+						-150
+					)}; border: 1px solid ${LightenDarkenColor(this.fill, -150)}; color: transparent; fill: ${
+						this.fill
+					}`;
+				} else {
+					return `background: ${this.fill}; border: 1px solid ${this.fill}; color: ${this.textColor}`;
+				}
+			}
+		} else {
+			if (this.fill) {
+				if (this.selected) {
+					return `background: transparent; border: 1px solid ${this.fill}; filter: brightness(60%); color: ${this.fill}`;
+				} else if (this.loading) {
+					return `background-color: transparent; border: 1px solid ${LightenDarkenColor(
+						this.fill,
+						-150
+					)}; color: transparent; fill: ${this.fill}`;
+				} else {
+					return `background: transparent; border: 1px solid ${this.fill}; color: ${this.fill}`;
+				}
 			}
 		}
 		return "";
@@ -182,13 +208,16 @@ export class FTag extends FRoot {
 			throw new Error("f-tag : enter correct color-name or color-code");
 		}
 	}
-
-	render() {
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		/**
 		 * creating local fill variable out of state prop.
 		 */
-		this.fill = getCustomFillColor(this.state ?? "");
 
+		this.fill = getCustomFillColor(this.state ?? "");
+		super.willUpdate(changedProperties);
+	}
+
+	render() {
 		/**
 		 * validate
 		 */
@@ -206,16 +235,19 @@ export class FTag extends FRoot {
 			this.classList.add("hasShimmer");
 		}
 
+		let iconClasses: Record<string, boolean> = {};
 		/**
 		 * classes to apply on icon , based on category
 		 */
-		const iconClasses: Record<string, boolean> = {
-			"fill-button-surface": !this.fill ? true : false,
-			"fill-button-surface-light":
-				this.fill && getTextContrast(this.fill) === "light-text" ? true : false,
-			"fill-button-surface-dark":
-				this.fill && getTextContrast(this.fill) === "dark-text" ? true : false
-		};
+		if (this.category === "fill") {
+			iconClasses = {
+				"fill-button-surface": !this.fill ? true : false,
+				"fill-button-surface-light":
+					this.fill && getTextContrast(this.fill) === "light-text" ? true : false,
+				"fill-button-surface-dark":
+					this.fill && getTextContrast(this.fill) === "dark-text" ? true : false
+			};
+		}
 
 		// merging host classes
 		this.classList.forEach(cl => {
@@ -242,7 +274,7 @@ export class FTag extends FRoot {
 					.size=${this.iconSize}
 					?clickable=${true}
 			  ></f-icon>`
-			: "";
+			: nothing;
 		/**
 		 * create iconRight if available
 		 */
@@ -261,28 +293,32 @@ export class FTag extends FRoot {
 					.size=${this.iconSize}
 					?clickable=${true}
 			  ></f-icon>`
-			: "";
+			: nothing;
 
+		let counterClasses = {};
 		/**
 		 * create counter if available
 		 */
-		const counterClasses = {
-			"fill-button-surface": !this.fill ? true : false,
-			"fill-button-surface-light":
-				this.fill && getTextContrast(this.fill) === "light-text" ? true : false,
-			"fill-button-surface-dark":
-				this.fill && getTextContrast(this.fill) === "dark-text" ? true : false
-		};
+		if (this.category === "fill") {
+			counterClasses = {
+				"fill-button-surface": !this.fill ? true : false,
+				"fill-button-surface-light":
+					this.fill && getTextContrast(this.fill) === "light-text" ? true : false,
+				"fill-button-surface-dark":
+					this.fill && getTextContrast(this.fill) === "dark-text" ? true : false
+			};
+		}
 		const counter =
 			this.counter !== undefined
 				? html`<f-counter
+						.category=${this.category === "outline" ? "transparent" : "fill"}
 						data-qa-counter
 						.state=${this.state}
 						.size=${this.size}
 						.label=${Number(this.counter)}
 						class=${classMap(counterClasses)}
 				  ></f-counter>`
-				: "";
+				: nothing;
 		/**
 		 * render loading if required
 		 */
@@ -296,8 +332,9 @@ export class FTag extends FRoot {
 				})}
 				style=${this.applyStyles()}
 				?label=${this.label ? true : false}
-				size=${this.size}
-				state=${this.state}
+				size=${ifDefined(this.size)}
+				state=${ifDefined(this.state)}
+				category=${ifDefined(this.category)}
 				?loading=${this.loading}
 				?disabled=${this.disabled}
 				?selected=${this.selected}
@@ -309,25 +346,29 @@ export class FTag extends FRoot {
 		/**
 		 * Final html to render
 		 */
-		return html`<div
-			class=${classMap({
-				"f-tag": true,
-				hasShimmer,
-				"custom-loader": this.fill ? true : false
-			})}
-			style=${this.applyStyles()}
-			?label=${this.label ? true : false}
-			size=${this.size}
-			state=${this.state}
-			?loading=${this.loading}
-			?disabled=${this.disabled}
-			?selected=${this.selected}
-			?clickable=${this.clickable}
-		>
-			${iconLeft}
-			<f-div class="text-content" ${ref(this.labelDiv)}>${this.label}</f-div>
-			${counter}${iconRight}
-		</div>`;
+		return keyed(
+			this.category,
+			html`<div
+				class=${classMap({
+					"f-tag": true,
+					hasShimmer,
+					"custom-loader": this.fill ? true : false
+				})}
+				style=${this.applyStyles()}
+				?label=${this.label ? true : false}
+				size=${ifDefined(this.size)}
+				state=${ifDefined(this.state)}
+				category=${ifDefined(this.category)}
+				?loading=${this.loading}
+				?disabled=${this.disabled}
+				?selected=${this.selected}
+				?clickable=${this.clickable}
+			>
+				${iconLeft}
+				<f-div class="text-content" ${ref(this.labelDiv)}>${this.label}</f-div>
+				${counter}${iconRight}
+			</div>`
+		);
 	}
 	protected async updated(
 		changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>

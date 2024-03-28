@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.9.7] - 2024-03-28
+
+### Improvements
+
+- - Added `category` property to `f-tag` to support both `fill` and `outline` values. Default value set to `fill`.
+
 ## [2.9.6] - 2024-03-28
 
 ### Improvements

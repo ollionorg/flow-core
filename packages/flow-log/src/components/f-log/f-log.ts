@@ -281,7 +281,6 @@ export class FLog extends FRoot {
 				<slot name="header" class="header-slot"></slot>
 				<f-div width="100px" height="hug-content">
 					<f-input
-						.iconRight=${"i-arrow-circle-right"}
 						id="linenumber-input"
 						type="number"
 						placeholder="line #"

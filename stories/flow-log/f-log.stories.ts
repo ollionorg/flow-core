@@ -75,7 +75,6 @@ export const Playground = {
 					?wrap-text=${args["wrap-text"]}
 					.logLevels=${args["log-levels"]}
 					.selectedLogLevel=${args["selected-log-level"]}
-					.highlightKeywords=${args["highlight-keywords"]}
 					.searchKeyword=${args["search-keyword"]}
 				>
 					<f-div gap="small" slot="header" width="100%" align="middle-left">

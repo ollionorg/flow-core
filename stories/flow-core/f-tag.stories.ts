@@ -14,21 +14,20 @@ export default {
 
 export const Playground = {
 	render: (args: Record<string, string>) =>
-		html` <f-div padding="large" width="150px">
-			<f-tag
-				.label=${args.label}
-				.category=${args.category}
-				.size=${args.size}
-				.state=${args.state}
-				icon-left=${args["icon-left"]}
-				icon-right=${args["icon-right"]}
-				.counter=${args.counter}
-				.loading=${args.loading}
-				.disabled=${args.disabled}
-				.selected=${args.selected}
-				?clickable=${args.clickable}
-			></f-tag
-		></f-div>`,
+		html` <f-tag
+			.label=${args.label}
+			.category=${args.category}
+			.size=${args.size}
+			.state=${args.state}
+			icon-left=${args["icon-left"]}
+			max-width=${args["max-width"]}
+			icon-right=${args["icon-right"]}
+			.counter=${args.counter}
+			.loading=${args.loading}
+			.disabled=${args.disabled}
+			.selected=${args.selected}
+			?clickable=${args.clickable}
+		></f-tag>`,
 
 	name: "Playground",
 
@@ -68,7 +67,9 @@ export const Playground = {
 		["icon-left"]: {
 			control: "text"
 		},
-
+		["max-width"]: {
+			control: "text"
+		},
 		["icon-right"]: {
 			control: "text"
 		},
@@ -112,10 +113,11 @@ export const Playground = {
 	},
 
 	args: {
-		label: "labelsdjkhfsjhgmndf sdfgjdf sgdfhsd dghgfjhsdgfgjsdfnmsgdfjhgsdjfjsdgfhegfjehwgjfgwegj",
+		label: "Lorem Ipsum is simply dummy text of the printing and typesetting",
 		size: "medium",
 		category: "fill",
 		state: "neutral",
+		["max-width"]: "240px",
 		["icon-left"]: undefined,
 		["icon-right"]: undefined,
 		counter: undefined,
@@ -199,6 +201,23 @@ export const IconRight = {
 		</f-div>`,
 
 	name: "icon-right"
+};
+
+export const MaxWidth = {
+	render: () =>
+		html`<f-div gap="large" padding="x-large" direction="column" align="middle-left">
+			<f-tag label="max-width:100px" max-width="100px" state="neutral"></f-tag>
+			<f-tag
+				label="max-width:200px;Testing lengthy text will get ellipsis"
+				max-width="200px"
+			></f-tag>
+			<f-tag
+				label="max-width:300px;Testing lengthy text will get ellipsis"
+				max-width="300px"
+			></f-tag>
+		</f-div>`,
+
+	name: "max-width"
 };
 
 export const Counter = {

@@ -125,6 +125,12 @@ export class FTag extends FRoot {
 	@property({ type: Boolean })
 	clickable?: boolean = false;
 
+	/**
+	 * @attribute is clickable
+	 */
+	@property({ type: String, reflect: true, attribute: "max-width" })
+	maxWidth: string = "240px";
+
 	labelDiv: Ref<FDiv> = createRef();
 
 	/**
@@ -365,7 +371,9 @@ export class FTag extends FRoot {
 				?clickable=${this.clickable}
 			>
 				${iconLeft}
-				<f-div class="text-content" ${ref(this.labelDiv)}>${this.label}</f-div>
+				<f-div class="text-content" style="max-width:${this.maxWidth}" ${ref(this.labelDiv)}
+					>${this.label}</f-div
+				>
 				${counter}${iconRight}
 			</div>`
 		);

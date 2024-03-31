@@ -13,21 +13,21 @@ export default {
 };
 
 export const Playground = {
-	render: args =>
-		html` <f-div padding="large" width="150px">
-			<f-tag
-				.label=${args.label}
-				.size=${args.size}
-				.state=${args.state}
-				icon-left=${args["icon-left"]}
-				icon-right=${args["icon-right"]}
-				.counter=${args.counter}
-				.loading=${args.loading}
-				.disabled=${args.disabled}
-				.selected=${args.selected}
-				?clickable=${args.clickable}
-			></f-tag
-		></f-div>`,
+	render: (args: Record<string, string>) =>
+		html` <f-tag
+			.label=${args.label}
+			.category=${args.category}
+			.size=${args.size}
+			.state=${args.state}
+			icon-left=${args["icon-left"]}
+			max-width=${args["max-width"]}
+			icon-right=${args["icon-right"]}
+			.counter=${args.counter}
+			.loading=${args.loading}
+			.disabled=${args.disabled}
+			.selected=${args.selected}
+			?clickable=${args.clickable}
+		></f-tag>`,
 
 	name: "Playground",
 
@@ -39,6 +39,10 @@ export const Playground = {
 		size: {
 			control: "select",
 			options: ["large", "medium", "small"]
+		},
+		category: {
+			control: "select",
+			options: ["fill", "outline"]
 		},
 
 		state: {
@@ -63,7 +67,9 @@ export const Playground = {
 		["icon-left"]: {
 			control: "text"
 		},
-
+		["max-width"]: {
+			control: "text"
+		},
 		["icon-right"]: {
 			control: "text"
 		},
@@ -107,9 +113,11 @@ export const Playground = {
 	},
 
 	args: {
-		label: "labelsdjkhfsjhgmndf sdfgjdf sgdfhsd dghgfjhsdgfgjsdfnmsgdfjhgsdjfjsdgfhegfjehwgjfgwegj",
+		label: "Lorem Ipsum is simply dummy text of the printing and typesetting",
 		size: "medium",
+		category: "fill",
 		state: "neutral",
+		["max-width"]: "240px",
 		["icon-left"]: undefined,
 		["icon-right"]: undefined,
 		counter: undefined,
@@ -126,7 +134,7 @@ export const Anatomy = {
 };
 
 export const Size = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="x-large" padding="x-large" align="middle-center">
 			<f-tag size="large" label="Large" state="neutral"></f-tag>
 			<f-tag size="medium" label="Medium" state="neutral"></f-tag>
@@ -137,7 +145,7 @@ export const Size = {
 };
 
 export const State = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="x-large" padding="x-large" align="middle-center" state="primary">
 			<f-tag size="medium" label="Neutral" state="neutral"></f-tag>
 			<f-tag size="medium" label="Primary" state="primary"></f-tag>
@@ -150,9 +158,18 @@ export const State = {
 
 	name: "state"
 };
+export const Category = {
+	render: () =>
+		html`<f-div gap="x-large" padding="x-large" align="middle-center">
+			<f-tag size="medium" category="fill" label="Fill" state="neutral"></f-tag>
+			<f-tag size="medium" category="outline" label="outline" state="neutral"></f-tag>
+		</f-div>`,
+
+	name: "category"
+};
 
 export const Label = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="row" align="middle-center">
 			<f-tag label="Label" state="neutral"></f-tag>
 			<f-tag state="neutral" icon-left="i-star"></f-tag>
@@ -162,7 +179,7 @@ export const Label = {
 };
 
 export const IconLeft = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" align="middle-center" direction="row">
 			<f-tag label="icon left" icon-left="i-star" state="neutral"></f-tag>
 			<f-tag icon-left="i-star" state="neutral"></f-tag>
@@ -172,7 +189,7 @@ export const IconLeft = {
 };
 
 export const IconRight = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="row" align="middle-center">
 			<f-tag label="icon right" icon-right="i-star" state="neutral"></f-tag>
 			<f-tag
@@ -186,8 +203,25 @@ export const IconRight = {
 	name: "icon-right"
 };
 
+export const MaxWidth = {
+	render: () =>
+		html`<f-div gap="large" padding="x-large" direction="column" align="middle-left">
+			<f-tag label="max-width:100px" max-width="100px" state="neutral"></f-tag>
+			<f-tag
+				label="max-width:200px;Testing lengthy text will get ellipsis"
+				max-width="200px"
+			></f-tag>
+			<f-tag
+				label="max-width:300px;Testing lengthy text will get ellipsis"
+				max-width="300px"
+			></f-tag>
+		</f-div>`,
+
+	name: "max-width"
+};
+
 export const Counter = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="row" align="middle-center">
 			<f-tag label="Label" state="neutral" counter="88"></f-tag>
 			<f-tag label="Label" state="neutral" icon-left="i-star" counter="88"></f-tag>
@@ -199,43 +233,43 @@ export const Counter = {
 };
 
 export const Flags = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="column">
 			<f-div height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">Loading</f-text>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large">
 				<f-tag state="neutral" label="label"></f-tag>
-				<f-tag state="neutral" label="label" loading=${true}></f-tag>
+				<f-tag state="neutral" label="label" .loading=${true}></f-tag>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large">
 				<f-tag state="neutral" label="label" icon-left="i-plus"></f-tag>
-				<f-tag state="neutral" label="label" loading=${true} icon-left="i-plus"></f-tag>
+				<f-tag state="neutral" label="label" .loading=${true} icon-left="i-plus"></f-tag>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large">
 				<f-tag state="neutral" label="label" icon-right="i-plus"></f-tag>
-				<f-tag state="neutral" label="label" loading=${true} icon-right="i-plus"></f-tag>
+				<f-tag state="neutral" label="label" .loading=${true} icon-right="i-plus"></f-tag>
 			</f-div>
 			<f-div height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">Disabled</f-text>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large">
 				<f-tag state="neutral" label="label"></f-tag>
-				<f-tag state="neutral" label="label" disabled=${true}></f-tag>
+				<f-tag state="neutral" label="label" .disabled=${true}></f-tag>
 			</f-div>
 			<f-div height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">Clickable</f-text>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large">
 				<f-tag state="neutral" label="label"></f-tag>
-				<f-tag state="neutral" label="label" clickable=${true}></f-tag>
+				<f-tag state="neutral" label="label" .clickable=${true}></f-tag>
 			</f-div>
 			<f-div height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">Selected</f-text>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large">
 				<f-tag state="neutral" label="label"></f-tag>
-				<f-tag state="neutral" label="label" selected=${true}></f-tag>
+				<f-tag state="neutral" label="label" .selected=${true}></f-tag>
 			</f-div>
 		</f-div>`,
 

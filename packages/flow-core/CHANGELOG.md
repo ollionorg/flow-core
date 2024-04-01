@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.9.8] - 2024-04-01
+
+### Bug Fixes
+
+- font tokens updated
+
 ## [2.9.7] - 2024-03-28
 
 ### Improvements

@@ -69,7 +69,7 @@ function generateTokenScss(colorTokens) {
 			prettier.format(scss, {
 				printWidth: 100,
 				singleQuote: false,
-				tabWidth: 4,
+				tabWidth: 2,
 				parser: "css"
 			})
 		);
@@ -103,7 +103,7 @@ function generateTextScss(textTokens) {
 			prettier.format(scss, {
 				printWidth: 100,
 				singleQuote: false,
-				tabWidth: 4,
+				tabWidth: 2,
 				parser: "css"
 			})
 		);
@@ -118,7 +118,7 @@ function generateTextScss(textTokens) {
 			prettier.format(scssContent, {
 				printWidth: 100,
 				singleQuote: false,
-				tabWidth: 4,
+				tabWidth: 2,
 				parser: "css"
 			})
 		);

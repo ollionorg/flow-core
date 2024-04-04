@@ -357,6 +357,9 @@ export class FLineage extends FRoot {
 					></f-icon-button
 					><slot name="node-meta" @slotchange=${this._onPopoverSlotChange}></slot></f-div
 			></f-popover>
+			<f-tooltip placement="auto" id="lineage-tooltip">
+				<f-text variant="para" size="small" id="lineage-tooltip-text"> </f-text>
+			</f-tooltip>
 		`;
 	}
 	connectedCallback() {

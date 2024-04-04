@@ -29,7 +29,11 @@ export default function createLinks(
 					id: sourceNode.id + "->" + targetNode.id,
 					level: sourceNode.level,
 					source: sourceNode,
-					target: nodeElementsObj[targetNode.id as string]
+					target: nodeElementsObj[targetNode.id as string],
+					fClick: link.fClick,
+					label: link.label,
+					tooltip: link.tooltip,
+					showLabelOn: link.showLabelOn
 				});
 			}
 		}

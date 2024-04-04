@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.9.9] - 2024-04-04
+
+### Bug Fixes
+
+- File extension validation logic added when the user drops files
+
 ## [2.9.8] - 2024-04-01
 
 ### Bug Fixes

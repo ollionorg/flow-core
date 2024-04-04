@@ -12,6 +12,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { flowElement } from "./../../utils";
 import { injectCss } from "@ollion/flow-core-config";
+import { ifDefined } from "lit/directives/if-defined.js";
 injectCss("f-file-upload", globalStyle);
 
 export type FFileUploadState = "primary" | "default" | "success" | "warning" | "danger";
@@ -219,10 +220,17 @@ export class FFileUpload extends FRoot {
 			e.preventDefault();
 			const files = e.dataTransfer?.files;
 			const filesArr = files ? Array.from(files) : [];
+
 			if (this.fileType !== "all") {
-				this.acceptedFilesFlag = filesArr.every(
-					item => item.type && this.fileType?.includes(item.type.split("/")[1])
-				);
+				this.acceptedFilesFlag = filesArr.every(item => {
+					// check extention as well
+					const fileExtention = item.name.substring(item.name.lastIndexOf("."));
+					return (
+						item.type &&
+						(this.fileType?.includes(item.type.split("/")[1]) ||
+							this.fileType?.includes(fileExtention))
+					);
+				});
 			}
 			this.sizeLimitFlag =
 				this.maxSize && this.bytes ? filesArr.every(item => item.size < this.bytes) : true;
@@ -471,8 +479,8 @@ export class FFileUpload extends FRoot {
 					<div
 						class="f-file-upload"
 						tabindex="0"
-						state=${this.state}
-						size=${this.size}
+						state=${ifDefined(this.state)}
+						size=${ifDefined(this.size)}
 						?loading=${this.loading}
 						?disabled=${this.disabled}
 						@click=${this.handleClick}
@@ -496,7 +504,7 @@ export class FFileUpload extends FRoot {
 											>${(this.value as File)?.name}</f-text
 										></f-div
 								  >`
-								: html`<div class="f-file-upload-placeholder" size=${this.size}>
+								: html`<div class="f-file-upload-placeholder" size=${ifDefined(this.size)}>
 										<f-text variant="para" size="small" weight="regular"
 											>${this.placeholder}</f-text
 										>
@@ -506,7 +514,7 @@ export class FFileUpload extends FRoot {
 												: `(${getExtensionsFromMimeType(this.fileType)})`}</f-text
 										>
 								  </div>`
-							: html`<div class="f-file-upload-placeholder" size=${this.size}>
+							: html`<div class="f-file-upload-placeholder" size=${ifDefined(this.size)}>
 									<f-text variant="para" size="small" weight="regular">${this.placeholder}</f-text>
 									<f-text variant="para" size="small" weight="regular" state="secondary"
 										>${this.fileType === "all"
@@ -515,7 +523,9 @@ export class FFileUpload extends FRoot {
 									>
 							  </div>`}
 						${this.loading
-							? html`<div class="loader-suffix" state=${this.state}>${unsafeSVG(loader)}</div>`
+							? html`<div class="loader-suffix" state=${ifDefined(this.state)}>
+									${unsafeSVG(loader)}
+							  </div>`
 							: this.type === "single" && this.value
 							? html`<f-icon
 									source="i-close"
@@ -526,8 +536,8 @@ export class FFileUpload extends FRoot {
 							: html`<f-icon source="i-upload" size="medium" clickable></f-icon>`}
 						<input
 							${ref(this.fileInputRef)}
-							data-qa-id=${this.getAttribute("data-qa-element-id")}
-							accept=${this.fileType === "all" ? "*/*" : this.fileType}
+							data-qa-id=${ifDefined(this.getAttribute("data-qa-element-id") ?? undefined)}
+							accept=${ifDefined(this.fileType === "all" ? "*/*" : this.fileType)}
 							type="file"
 							?multiple=${this.type === "multiple" ? true : false}
 							@input=${this.selectFile}

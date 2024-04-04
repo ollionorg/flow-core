@@ -2,6 +2,15 @@
 
 # Change Log
 
+## [3.2.1] - 2024-03-19
+
+### Imrovements
+
+- `fClick` callback added in link.
+- `label` property added to display label on link.
+- `showLabelOn` property added to customize label displaying behavior either on click or hover;
+- `tooltip` property added to display more information about link
+
 ## [3.2.0] - 2024-03-19
 
 ### Features

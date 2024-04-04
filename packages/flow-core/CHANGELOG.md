@@ -6,7 +6,7 @@
 
 ### Bug Fixes
 
-- File extention validation logic added when user drop files
+- File extension validation logic added when the user drops files
 
 ## [2.9.8] - 2024-04-01
 

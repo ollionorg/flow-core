@@ -623,7 +623,9 @@ export class FSelect extends FRoot {
 	protected updated(changedProperties: PropertyValues) {
 		super.updated(changedProperties);
 
-		this.updateDimentions();
+		if (this.openDropdown) {
+			this.updateDimentions();
+		}
 
 		if (changedProperties.has("value")) {
 			if (this.value && this.type === "single") {

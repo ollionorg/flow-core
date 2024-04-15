@@ -72,6 +72,10 @@ export type LineageLinkElement = {
 	source: LineageNodeElement;
 	target: LineageNodeElement;
 	level: number;
+	label?: string;
+	tooltip?: string;
+	showLabelOn?: "click" | "hover";
+	fClick?: (event: Event, node: LineageLinkElement) => void;
 };
 
 export type LineageDirection = "horizontal" | "vertical";
@@ -141,6 +145,10 @@ export type LineageNodes = Record<string, LineageNodePartial>;
 export type LineageNodeLinkSchema = {
 	from: string;
 	to: string;
+	showLabelOn?: "click" | "hover";
+	label?: string;
+	tooltip?: string;
+	fClick?: (event: Event, node: LineageLinkElement) => void;
 	state?: "success" | "danger" | "warning" | "primary" | "default";
 	type?: "solid" | "dotted" | "dashed";
 };

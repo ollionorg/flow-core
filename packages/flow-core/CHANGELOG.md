@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.9.10] - 2024-04-15
+
+### Bug Fixes
+
+- `f-select` : call `updateDimentions` only while opening.
+
 ## [2.9.9] - 2024-04-04
 
 ### Bug Fixes

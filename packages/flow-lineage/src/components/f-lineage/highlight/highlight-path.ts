@@ -41,7 +41,7 @@ export default function highlightPath(node: LineageNodeElement, lineage: FLineag
 						});
 					}
 
-					root.querySelectorAll(`[id^="${id}->"]`).forEach(el => {
+					root.querySelectorAll(`[id^="${id}->"],[id="${id}-link-label"]`).forEach(el => {
 						el.classList.add("highlight");
 						el.classList.remove("lowlight");
 						const fromid = el.getAttribute("id")?.split("->")[1];
@@ -75,7 +75,7 @@ export default function highlightPath(node: LineageNodeElement, lineage: FLineag
 						});
 					}
 
-					root.querySelectorAll(`[id$="->${id}"]`).forEach(el => {
+					root.querySelectorAll(`[id$="->${id}"],[id="${id}-link-label"]`).forEach(el => {
 						el.classList.add("highlight");
 						el.classList.remove("lowlight");
 						const fromid = el.getAttribute("id")?.split("->")[0];
@@ -86,6 +86,10 @@ export default function highlightPath(node: LineageNodeElement, lineage: FLineag
 						el.classList.remove("lowlight");
 					});
 					root.querySelectorAll(`[id$="->${id}~arrow"]`).forEach(el => {
+						el.classList.add("highlight");
+						el.classList.remove("lowlight");
+					});
+					root.querySelectorAll(`[id$="->${id}-link-text"]`).forEach(el => {
 						el.classList.add("highlight");
 						el.classList.remove("lowlight");
 					});

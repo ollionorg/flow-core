@@ -1,4 +1,4 @@
-import { FLineage, LineageNodeElement } from "@ollion/flow-lineage";
+import { FLineage, LineageLinkElement, LineageNodeElement } from "@ollion/flow-lineage";
 import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
 
@@ -166,7 +166,13 @@ export const Playground = {
 		links: [
 			{
 				from: "Tony",
-				to: "Charlie"
+				to: "Charlie",
+				label: "Tony to charlie",
+				tooltip: "Link tooltip",
+				// showLabelOn: "click",
+				fClick(event: Event, d: LineageLinkElement) {
+					console.log("link fClick", event, d);
+				}
 			},
 			{
 				from: "Charlie",

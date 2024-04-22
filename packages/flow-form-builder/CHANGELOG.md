@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.4.1] - 2024-04-22
+
+### Bug Fixes
+
+- Validation rules are triggered multiple times when multiple fields utilize the `showWhen` property.
+
 ## [2.4.0] - 2024-03-27
 
 ### Features

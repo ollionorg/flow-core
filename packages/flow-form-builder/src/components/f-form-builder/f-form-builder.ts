@@ -22,7 +22,7 @@ import { FDiv, FRoot } from "@ollion/flow-core";
 import { Ref, createRef } from "lit/directives/ref.js";
 import fieldRenderer from "./fields";
 import { extractValidationState, validateField } from "../../modules/validation/validator";
-
+import { debounce } from "lodash-es";
 import { Subject } from "rxjs";
 import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/helpers";
 import { cloneDeep, isEqual } from "lodash-es";
@@ -122,11 +122,14 @@ export class FFormBuilder extends FRoot {
 	 */
 	render() {
 		return html`
+			<!--debounce added to reduce multiple calls while multiple showWhen executed
+			It will not affect functionality as such we are just updating silent validation state in single call
+			-->
 			<f-form
 				name=${this.name}
 				@submit=${this.onSubmit}
 				@show-when=${this.onShowWhen}
-				@show-when-exe=${this.onShowWhenExecution}
+				@show-when-exe=${debounce(this.onShowWhenExecution, 1000)}
 				?separator=${this.separator}
 				gap=${ifDefined(this.gap)}
 				@keyup=${this.handleKeyUp}

@@ -2,7 +2,6 @@ import {
 	CanValidateFields,
 	FFormInputElements,
 	FormBuilderAsyncValidatorFunction,
-	FormBuilderCustomValidationRule,
 	FormBuilderField,
 	FormBuilderGenericValidationRule,
 	FormBuilderLabel,
@@ -27,10 +26,13 @@ import {
 } from "@ollion/flow-core";
 import defaultValidations from "./default-validations";
 import { render } from "lit-html";
-
+type FormBuilderValidationRuleWithPrivateFields = {
+	_lastValue?: string;
+	_lastResult?: boolean;
+} & FormBuilderGenericValidationRule;
 export default async function validate(
 	value: string,
-	elementRules: FormBuilderValidationRules,
+	elementRules: FormBuilderValidationRuleWithPrivateFields[],
 	name: string,
 	element: FFormInputElements | FInputLight | undefined
 ) {
@@ -39,23 +41,30 @@ export default async function validate(
 	let rule!: FormBuilderGenericValidationRule["name"];
 	if (elementRules) {
 		for (const r of elementRules) {
-			if (r.name !== "custom") {
-				result = rules[r.name](value, r.params);
+			/**
+			 * This will avoid validation rules called multiple time in silent validation
+			 */
+			if (r._lastValue === value && r._lastResult !== undefined) {
+				result = r._lastResult;
 				if (!result) {
 					rule = r.name;
 					message = getValidationMessage(r, { name, value });
 					break;
 				}
 			} else {
-				if (isAsync(r.validate)) {
-					const asyncR = r as {
-						_lastValue?: string;
-						_lastResult?: boolean;
-					} & FormBuilderCustomValidationRule;
-					// this if statement is added to avoid multiple validation calls
-					if (asyncR._lastValue === value && asyncR._lastResult !== undefined) {
-						result = asyncR._lastResult;
-					} else {
+				r._lastValue = value;
+				if (r.name !== "custom") {
+					result = rules[r.name](value, r.params);
+					r._lastResult = result;
+					if (!result) {
+						rule = r.name;
+						message = getValidationMessage(r, { name, value });
+						break;
+					}
+				} else {
+					if (isAsync(r.validate)) {
+						// this if statement is added to avoid multiple validation calls
+
 						if (
 							element instanceof FInput ||
 							element instanceof FInputLight ||
@@ -67,9 +76,9 @@ export default async function validate(
 							element.loading = true;
 						}
 						// holding last value
-						asyncR._lastValue = value;
-						result = await asyncR.validate(value, { ...asyncR.params, element });
-						asyncR._lastResult = result;
+
+						result = await r.validate(value, { ...r.params, element });
+						r._lastResult = result;
 						if (
 							element instanceof FInput ||
 							element instanceof FInputLight ||
@@ -80,14 +89,15 @@ export default async function validate(
 						) {
 							element.loading = false;
 						}
+					} else {
+						result = r.validate(value, { ...r.params, element }) as boolean;
+						r._lastResult = result;
 					}
-				} else {
-					result = r.validate(value, { ...r.params, element }) as boolean;
-				}
-				if (!result) {
-					rule = r.name;
-					message = getValidationMessage(r, { name, value });
-					break;
+					if (!result) {
+						rule = r.name;
+						message = getValidationMessage(r, { name, value });
+						break;
+					}
 				}
 			}
 		}

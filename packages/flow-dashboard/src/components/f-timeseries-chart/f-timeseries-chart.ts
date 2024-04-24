@@ -35,7 +35,7 @@ export class FTimeseriesChart extends FRoot {
 	 * @attribute comments baout title
 	 */
 	@property({ type: Object })
-	config!: FTimeseriesChartConfig;
+	config: FTimeseriesChartConfig = { data: [] };
 
 	chartContainer: Ref<FDiv> = createRef<FDiv>();
 	chartLegends: Ref<FDiv> = createRef<FDiv>();
@@ -252,7 +252,7 @@ export class FTimeseriesChart extends FRoot {
 			height="100%"
 		>
 			<f-div class="f-timeseries-container" ${ref(this.chartContainer)}
-				>${svg`<svg xmlns="http://www.w3.org/2000/svg"></svg>`}
+				>${svg`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>`}
 				<f-div
 					state="custom,#000000"
 					variant="curved"

@@ -1,11 +1,16 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 
-import { FDiv, FIcon, FRoot, flowElement, FIconButton } from "@ollion/flow-core";
 import { FTcell } from "../f-tcell/f-tcell";
 import eleStyle from "./f-trow.scss?inline";
 import globalStyle from "./f-trow-global.scss?inline";
 import { injectCss } from "@ollion/flow-core-config";
+
+import { FRoot } from "@ollion/flow-core/src/mixins/components/f-root/f-root";
+import { flowElement } from "@ollion/flow-core/src/utils";
+import { FDiv } from "@ollion/flow-core/src/components/f-div/f-div";
+import { FIconButton } from "@ollion/flow-core/src/components/f-icon-button/f-icon-button";
+import { FIcon } from "@ollion/flow-core/src/components/f-icon/f-icon";
 
 injectCss("f-trow", globalStyle);
 

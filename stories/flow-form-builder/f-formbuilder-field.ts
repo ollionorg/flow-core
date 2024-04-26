@@ -1,4 +1,4 @@
-import { FInput, FSelectOptionObject, FSelectSingleOption } from "@ollion/flow-core";
+import type { FInput, FSelectOptionObject, FSelectSingleOption } from "@ollion/flow-core/src/types";
 import { FormBuilderField } from "@ollion/flow-form-builder";
 import { html } from "lit";
 const test = () => alert("test called");

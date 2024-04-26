@@ -1,10 +1,13 @@
 import { html, nothing, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { FRoot, FDivider, FDividerState, FText, FDiv } from "@ollion/flow-core";
 import eleStyle from "./f-field-separator.scss?inline";
 import globalStyle from "./f-field-separator-global.scss?inline";
 import { injectCss } from "@ollion/flow-core-config";
-
+import { FRoot } from "@ollion/flow-core/src/mixins/components/f-root/f-root";
+import { FDiv } from "@ollion/flow-core/src/components/f-div/f-div";
+import { FText } from "@ollion/flow-core/src/components/f-text/f-text";
+import { FDivider } from "@ollion/flow-core/src/components/f-divider/f-divider";
+import type { FDividerState } from "@ollion/flow-core/src/components/f-divider/f-divider";
 injectCss("f-field-separator", globalStyle);
 
 export type FFieldSeparatorState = FDividerState;

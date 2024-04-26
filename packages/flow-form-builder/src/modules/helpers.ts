@@ -1,34 +1,33 @@
 import { FFormArray } from "../components/f-form-array/f-form-array";
 import { FFormObject } from "../components/f-form-object/f-form-object";
-import { FFormBuilder } from "../components/f-form-builder/f-form-builder";
+import type { FFormBuilder } from "../components/f-form-builder/f-form-builder";
 import { LitElement, nothing, html, CSSResult, unsafeCSS, TemplateResult } from "lit";
 
-import {
+import type {
 	FormBuilderButtonField,
 	FormBuilderField,
 	FormBuilderHiddenField,
 	FormBuilderSeparatorField
 } from "./../types";
-import {
-	FDiv,
-	FText,
-	FForm,
-	FInput,
-	FCheckbox,
-	FFormGroup,
-	FRadio,
-	FButton,
-	FDateTimePicker,
-	FEmojiPicker,
-	FDivider,
-	FFileUpload,
-	FIconButton,
-	FSelect,
-	FSuggest,
-	FSwitch,
-	FTextArea,
-	FColorPicker
-} from "@ollion/flow-core";
+
+import { FDiv } from "@ollion/flow-core/src/components/f-div/f-div";
+import { FText } from "@ollion/flow-core/src/components/f-text/f-text";
+import { FForm } from "@ollion/flow-core/src/components/f-form/f-form";
+import { FInput } from "@ollion/flow-core/src/components/f-input/f-input";
+import { FCheckbox } from "@ollion/flow-core/src/components/f-checkbox/f-checkbox";
+import { FFormGroup } from "@ollion/flow-core/src/components/f-form-group/f-form-group";
+import { FRadio } from "@ollion/flow-core/src/components/f-radio/f-radio";
+import { FButton } from "@ollion/flow-core/src/components/f-button/f-button";
+import { FDateTimePicker } from "@ollion/flow-core/src/components/f-date-time-picker/f-date-time-picker";
+import { FEmojiPicker } from "@ollion/flow-core/src/components/f-emoji-picker/f-emoji-picker";
+import { FDivider } from "@ollion/flow-core/src/components/f-divider/f-divider";
+import { FFileUpload } from "@ollion/flow-core/src/components/f-file-upload/f-file-upload";
+import { FIconButton } from "@ollion/flow-core/src/components/f-icon-button/f-icon-button";
+import { FSelect } from "@ollion/flow-core/src/components/f-select/f-select";
+import { FSuggest } from "@ollion/flow-core/src/components/f-suggest/f-suggest";
+import { FSwitch } from "@ollion/flow-core/src/components/f-switch/f-switch";
+import { FTextArea } from "@ollion/flow-core/src/components/f-text-area/f-text-area";
+import { FColorPicker } from "@ollion/flow-core/src/components/f-color-picker/f-color-picker";
 
 import checkboxGroupGlobalStyles from "./../components/f-checkbox-group/f-checkbox-group-global.scss?inline";
 import radioGroupGlobalStyles from "./../components/f-radio-group/f-radio-group-global.scss?inline";

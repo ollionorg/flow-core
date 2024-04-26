@@ -1,5 +1,5 @@
-import { FLineage } from "../f-lineage";
-import { LineageNodeElement } from "../lineage-types";
+import type { FLineage } from "../f-lineage";
+import type { LineageNodeElement } from "../lineage-types";
 
 export default function highlightPath(node: LineageNodeElement, lineage: FLineage) {
 	//   console.time("Lineage : highlight duration");

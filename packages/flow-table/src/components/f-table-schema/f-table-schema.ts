@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FButton, FDiv, flowElement, FRoot, FSearch, FText } from "@ollion/flow-core";
 import { html, HTMLTemplateResult, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { FTable, FTableSelectable, FTableSize, FTableVariant } from "../f-table/f-table";
@@ -10,6 +9,12 @@ import eleStyle from "./f-table-schema.scss?inline";
 import globalStyle from "./f-table-schema-global.scss?inline";
 import { repeat } from "lit/directives/repeat.js";
 import { injectCss } from "@ollion/flow-core-config";
+import { FRoot } from "@ollion/flow-core/src/mixins/components/f-root/f-root";
+import { flowElement } from "@ollion/flow-core/src/utils";
+import { FButton } from "@ollion/flow-core/src/components/f-button/f-button";
+import { FDiv } from "@ollion/flow-core/src/components/f-div/f-div";
+import { FSearch } from "@ollion/flow-core/src/components/f-search/f-search";
+import { FText } from "@ollion/flow-core/src/components/f-text/f-text";
 
 injectCss("f-table-schema", globalStyle);
 

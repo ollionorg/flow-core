@@ -1,4 +1,4 @@
-import { FLineage } from "../f-lineage";
+import type { FLineage } from "../f-lineage";
 
 export default function lowlightPath(lineage: FLineage) {
 	/**

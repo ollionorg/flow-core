@@ -23,7 +23,7 @@ import {
 	FColorPickerState,
 	FSelectMaxOptionsWidth,
 	FSuggestWhen
-} from "@ollion/flow-core";
+} from "@ollion/flow-core/src/types";
 import { BetweenParams } from "./modules/validation/rules/between";
 import { Subject } from "rxjs";
 import { MaxParams } from "./modules/validation/rules/max";

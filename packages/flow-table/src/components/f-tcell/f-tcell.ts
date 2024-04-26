@@ -1,6 +1,5 @@
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
-import { FCheckbox, FDiv, FIconButton, FIcon, FRadio, FRoot, flowElement } from "@ollion/flow-core";
 import { FTableSelectable } from "../f-table/f-table";
 import eleStyle from "./f-tcell.scss?inline";
 import globalStyle from "./f-tcell-global.scss?inline";
@@ -9,6 +8,14 @@ import { createRef, ref } from "lit/directives/ref.js";
 import { injectCss } from "@ollion/flow-core-config";
 
 injectCss("f-tcell", globalStyle);
+
+import { FRoot } from "@ollion/flow-core/src/mixins/components/f-root/f-root";
+import { flowElement } from "@ollion/flow-core/src/utils";
+import { FDiv } from "@ollion/flow-core/src/components/f-div/f-div";
+import { FCheckbox } from "@ollion/flow-core/src/components/f-checkbox/f-checkbox";
+import { FIconButton } from "@ollion/flow-core/src/components/f-icon-button/f-icon-button";
+import { FIcon } from "@ollion/flow-core/src/components/f-icon/f-icon";
+import { FRadio } from "@ollion/flow-core/src/components/f-radio/f-radio";
 
 export type FTcellAction = {
 	icon: string;

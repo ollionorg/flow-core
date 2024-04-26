@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { FLineage } from "../f-lineage";
+import type { FLineage } from "../f-lineage";
 
 export default function getProxies(element: FLineage) {
 	/**

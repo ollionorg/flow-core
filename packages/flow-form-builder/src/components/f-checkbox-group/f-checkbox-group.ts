@@ -1,13 +1,17 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { CheckboxOption, CheckboxOptions } from "../../types";
+import type { CheckboxOption, CheckboxOptions } from "../../types";
 import eleStyle from "./f-checkbox-group.scss?inline";
 import globalStyle from "./f-checkbox-group-global.scss?inline";
-import { FRoot, FDiv, FText, FCheckbox } from "@ollion/flow-core";
 import { isEqual } from "lodash-es";
 export type FCheckboxGroupValue = string[];
 export const checkboxGroupStyles = eleStyle;
 import { injectCss } from "@ollion/flow-core-config";
+import { FRoot } from "@ollion/flow-core/src/mixins/components/f-root/f-root";
+import { FDiv } from "@ollion/flow-core/src/components/f-div/f-div";
+import { FText } from "@ollion/flow-core/src/components/f-text/f-text";
+import { FCheckbox } from "@ollion/flow-core/src/components/f-checkbox/f-checkbox";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 injectCss("f-checkbox-group", globalStyle);
 @customElement("f-checkbox-group")
@@ -122,9 +126,9 @@ export class FCheckboxGroup extends FRoot {
 				</f-div>
 				<div
 					class="f-checkbox-group"
-					gap=${this.gap}
-					direction=${this.direction}
-					state=${this.state}
+					gap=${ifDefined(this.gap)}
+					direction=${ifDefined(this.direction)}
+					state=${ifDefined(this.state)}
 				>
 					${this.options?.map(
 						item => html`
@@ -181,7 +185,7 @@ export class FCheckboxGroup extends FRoot {
 				${this?.helperText
 					? html`<f-text
 							variant="para"
-							data-qa-help-for=${this.getAttribute("data-qa-element-id")}
+							data-qa-help-for=${ifDefined(this.getAttribute("data-qa-element-id") ?? undefined)}
 							size="small"
 							weight="regular"
 							.state=${this.state}

@@ -13,7 +13,7 @@ const alias = [
 	"flow-dashboard"
 ].map(pkg => ({
 	find: `@ollion/${pkg}`,
-	replacement: path.resolve(__dirname, "../packages", pkg, "src")
+	replacement: path.resolve(__dirname, "../packages", pkg, "")
 }));
 
 export default {

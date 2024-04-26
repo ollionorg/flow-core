@@ -1,4 +1,4 @@
-import { FormBuilderBaseField } from "../types";
+import type { FormBuilderBaseField } from "../types";
 
 export function isEmptyObject(obj: Record<string, unknown>) {
 	return obj && Object.keys(obj).length === 0 && Object.getPrototypeOf(obj) === Object.prototype;

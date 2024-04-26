@@ -1,12 +1,15 @@
-// import { FRoot } from "@ollion/flow-core";
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { RadioOption, RadioOptions } from "../../types";
 import eleStyle from "./f-radio-group.scss?inline";
 import globalStyle from "./f-radio-group-global.scss?inline";
-import { FDiv, FRadio, FRoot, FText } from "@ollion/flow-core";
 import { isEqual } from "lodash-es";
 import { injectCss } from "@ollion/flow-core-config";
+import { FRoot } from "@ollion/flow-core/src/mixins/components/f-root/f-root";
+import { FDiv } from "@ollion/flow-core/src/components/f-div/f-div";
+import { FText } from "@ollion/flow-core/src/components/f-text/f-text";
+import { FRadio } from "@ollion/flow-core/src/components/f-radio/f-radio";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 injectCss("f-checkbox-group", globalStyle);
 
@@ -115,7 +118,11 @@ export class FRadioGroup extends FRoot {
 					</f-div>
 					<slot name="description"></slot>
 				</f-div>
-				<div class="f-radio-group" gap=${this.gap} direction=${this.direction}>
+				<div
+					class="f-radio-group"
+					gap=${ifDefined(this.gap)}
+					direction=${ifDefined(this.direction)}
+				>
 					${this.options?.map(
 						item => html`
 							<f-radio
@@ -173,7 +180,7 @@ export class FRadioGroup extends FRoot {
 							variant="para"
 							size="small"
 							weight="regular"
-							data-qa-help-for=${this.getAttribute("data-qa-element-id")}
+							data-qa-help-for=${ifDefined(this.getAttribute("data-qa-element-id") ?? undefined)}
 							.state=${this.state}
 							>${this?.helperText}</f-text
 					  >`

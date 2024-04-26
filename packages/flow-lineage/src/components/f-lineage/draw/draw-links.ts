@@ -1,4 +1,5 @@
-import { FText, FTooltip } from "@ollion/flow-core";
+import type { FText } from "@ollion/flow-core/src/components/f-text/f-text";
+import type { FTooltip } from "@ollion/flow-core/src/components/f-tooltip/f-tooltip";
 import { DrawLineageParams, LevelLinkGap, LineageLinkElement } from "../lineage-types";
 
 import drawElbow, {

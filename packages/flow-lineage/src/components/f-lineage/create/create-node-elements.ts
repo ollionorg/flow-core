@@ -1,4 +1,4 @@
-import {
+import type {
 	LineageNode,
 	LineageNodeSize,
 	LineageNodeElement,

@@ -1,5 +1,5 @@
 import { getSingleParam, isEmpty } from "./../../utils";
-import { FormBuilderValidatorFunction } from "../../../types";
+import type { FormBuilderValidatorFunction } from "../../../types";
 
 export type RegexParams = {
 	regex: RegExp | string;

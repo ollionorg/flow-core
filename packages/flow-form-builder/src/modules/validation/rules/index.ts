@@ -1,4 +1,4 @@
-import { FormBuilderValidatorFunction } from "../../../types";
+import type { FormBuilderValidatorFunction } from "../../../types";
 import required from "./required";
 import email from "./email";
 import between from "./between";

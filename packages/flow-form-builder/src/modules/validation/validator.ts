@@ -1,4 +1,4 @@
-import {
+import type {
 	CanValidateFields,
 	FFormInputElements,
 	FormBuilderAsyncValidatorFunction,
@@ -14,16 +14,16 @@ import {
 
 import rules from "./rules";
 import defaultMessages from "./default-validation-messages";
-import {
-	FButton,
-	FDateTimePicker,
-	FFileUpload,
-	FIconButton,
-	FInput,
-	FInputLight,
-	FSelect,
-	FSuggest
-} from "@ollion/flow-core";
+
+import { FInput } from "@ollion/flow-core/src/components/f-input/f-input";
+import { FInputLight } from "@ollion/flow-core/src/components/f-input/f-input-light";
+import { FButton } from "@ollion/flow-core/src/components/f-button/f-button";
+import { FDateTimePicker } from "@ollion/flow-core/src/components/f-date-time-picker/f-date-time-picker";
+import { FFileUpload } from "@ollion/flow-core/src/components/f-file-upload/f-file-upload";
+import { FIconButton } from "@ollion/flow-core/src/components/f-icon-button/f-icon-button";
+import { FSelect } from "@ollion/flow-core/src/components/f-select/f-select";
+import { FSuggest } from "@ollion/flow-core/src/components/f-suggest/f-suggest";
+
 import defaultValidations from "./default-validations";
 import { render } from "lit-html";
 type FormBuilderValidationRuleWithPrivateFields = {

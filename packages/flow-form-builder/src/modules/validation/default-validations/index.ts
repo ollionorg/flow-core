@@ -1,4 +1,4 @@
-import { FormBuilderValidationRules } from "../../../types";
+import type { FormBuilderValidationRules } from "../../../types";
 import { isEmpty, isValidEmail, isValidUrl } from "../../../modules/utils";
 
 export default function defaultValidations(

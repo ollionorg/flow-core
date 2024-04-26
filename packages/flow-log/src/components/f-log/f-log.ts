@@ -3,18 +3,16 @@ import { property, query, queryAll } from "lit/decorators.js";
 import globalStyle from "./f-log-global.scss?inline";
 import eleStyle from "./f-log.scss?inline";
 
-import {
-	FRoot,
-	flowElement,
-	FDiv,
-	FIcon,
-	FText,
-	FIconButton,
-	FDivider,
-	FSearch,
-	FSelect,
-	FInput
-} from "@ollion/flow-core";
+import { FRoot } from "@ollion/flow-core/src/mixins/components/f-root/f-root";
+import { flowElement } from "@ollion/flow-core/src/utils";
+import { FDiv } from "@ollion/flow-core/src/components/f-div/f-div";
+import { FSearch } from "@ollion/flow-core/src/components/f-search/f-search";
+import { FText } from "@ollion/flow-core/src/components/f-text/f-text";
+import { FIcon } from "@ollion/flow-core/src/components/f-icon/f-icon";
+import { FIconButton } from "@ollion/flow-core/src/components/f-icon-button/f-icon-button";
+import { FDivider } from "@ollion/flow-core/src/components/f-divider/f-divider";
+import { FSelect } from "@ollion/flow-core/src/components/f-select/f-select";
+import { FInput } from "@ollion/flow-core/src/components/f-input/f-input";
 
 import { injectCss } from "@ollion/flow-core-config";
 import { createRef, ref, Ref } from "lit/directives/ref.js";

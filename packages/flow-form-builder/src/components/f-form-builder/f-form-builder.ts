@@ -1,6 +1,6 @@
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import {
+import type {
 	FormBuilderField,
 	FFormInputElements,
 	FormBuilderValues,
@@ -18,7 +18,8 @@ import {
 import eleStyle from "./f-form-builder.scss?inline";
 import globalStyle from "./f-form-builder-global.scss?inline";
 
-import { FDiv, FRoot } from "@ollion/flow-core";
+import { FRoot } from "@ollion/flow-core/src/mixins/components/f-root/f-root";
+import type { FDiv } from "@ollion/flow-core/src/components/f-div/f-div";
 import { Ref, createRef } from "lit/directives/ref.js";
 import fieldRenderer from "./fields";
 import { extractValidationState, validateField } from "../../modules/validation/validator";

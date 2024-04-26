@@ -1,5 +1,5 @@
 import { getChildrenArray, isEmpty } from "./../../../utils";
-import { LineageData, LineageNode, LineageNodeLinks, LineageNodes } from "../lineage-types";
+import type { LineageData, LineageNode, LineageNodeLinks, LineageNodes } from "../lineage-types";
 
 export default function createHierarchy(
 	links: LineageNodeLinks,

@@ -1,8 +1,9 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { FRoot, flowElement, FButton } from "@ollion/flow-core";
+import { flowElement } from "@ollion/flow-core/src/utils";
 import globalStyle from "./f-code-editor-global.scss?inline";
 import * as monaco from "monaco-editor";
-
+import { FRoot } from "@ollion/flow-core/src/mixins/components/f-root/f-root";
+import type { FButton } from "@ollion/flow-core/src/components/f-button/f-button";
 import { property, query } from "lit/decorators.js";
 import { languageCommentsMap } from "../../utils/lang-comments-map";
 import { injectCss } from "@ollion/flow-core-config";

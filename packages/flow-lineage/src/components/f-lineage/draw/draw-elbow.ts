@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FLineage } from "../f-lineage";
-import {
+import type { FLineage } from "../f-lineage";
+import type {
 	LevelLinkGap,
 	Lineage,
 	LineageDirection,

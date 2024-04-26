@@ -1,5 +1,5 @@
 import createNodeElements from "./create-node-elements";
-import { CreateLineageParams, Lineage } from "./../lineage-types";
+import type { CreateLineageParams, Lineage } from "./../lineage-types";
 import createLinks from "./create-links";
 
 export default function createLineage({

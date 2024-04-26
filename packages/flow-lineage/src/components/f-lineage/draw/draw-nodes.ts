@@ -1,5 +1,5 @@
 import { getChildCount, isEmpty } from "../../../utils";
-import { DrawLineageParams, LineageNodeElement } from "../lineage-types";
+import type { DrawLineageParams, LineageNodeElement } from "../lineage-types";
 import highlightPath from "../highlight/highlight-path";
 import removeLinks, { removeDistantLinks } from "./remove-links";
 import drawLinks from "./draw-links";

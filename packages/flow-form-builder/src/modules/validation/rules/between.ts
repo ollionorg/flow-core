@@ -1,4 +1,4 @@
-import { FormBuilderValidatorFunction } from "../../../types";
+import type { FormBuilderValidatorFunction } from "../../../types";
 import { isEmpty } from "../../utils";
 
 export type BetweenParams =

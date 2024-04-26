@@ -1,4 +1,4 @@
-import { LineageLinkElement, LineageNodeElement, LineageNodeLinks } from "../lineage-types";
+import type { LineageLinkElement, LineageNodeElement, LineageNodeLinks } from "../lineage-types";
 
 export default function createLinks(
 	links: LineageNodeLinks,

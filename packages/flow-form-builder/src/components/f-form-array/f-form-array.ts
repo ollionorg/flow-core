@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property, queryAll } from "lit/decorators.js";
-import { FDiv, FRoot, injectCss } from "@ollion/flow-core";
+import { injectCss } from "@ollion/flow-core-config";
 import eleStyle from "./f-form-array.scss?inline";
-import {
+import type {
 	CanValidateFields,
 	FFormInputElements,
 	FormBuilderArrayField,
@@ -18,9 +18,11 @@ import { validateField } from "../../modules/validation/validator";
 import { Subject } from "rxjs";
 import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/helpers";
 import { FFormObject } from "../f-form-object/f-form-object";
-import { FIconButton } from "@ollion/flow-core";
 import { ifDefined } from "lit/directives/if-defined.js";
 import globalStyle from "./f-form-array-global.scss?inline";
+import { FRoot } from "@ollion/flow-core/src/mixins/components/f-root/f-root";
+import { FDiv } from "@ollion/flow-core/src/components/f-div/f-div";
+import { FIconButton } from "@ollion/flow-core/src/components/f-icon-button/f-icon-button";
 
 injectCss("f-form-array", globalStyle);
 export type ArrayValueType = (

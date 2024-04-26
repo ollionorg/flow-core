@@ -1,5 +1,5 @@
-import { FLineage } from "../f-lineage";
-import { LineageNodeElement } from "../lineage-types";
+import type { FLineage } from "../f-lineage";
+import type { LineageNodeElement } from "../lineage-types";
 export default function removeLinks(nodes: LineageNodeElement[], lineage: FLineage) {
 	const root = lineage.shadowRoot;
 	if (root) {

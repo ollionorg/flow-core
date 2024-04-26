@@ -6,6 +6,7 @@ import AwsIconPack from "@ollion/flow-aws-icon/dist/types/icon-pack";
 
 import { ConfigUtil } from "@ollion/flow-core-config";
 import { changeRoute } from "./utils";
+
 import "@ollion/flow-core";
 import "@ollion/flow-log";
 import "@ollion/flow-code-editor";
@@ -13,7 +14,6 @@ import "@ollion/flow-table";
 import "@ollion/flow-md-editor";
 import "@ollion/flow-form-builder";
 import "@ollion/flow-lineage";
-import "@ollion/flow-dashboard";
 
 import { setCustomElementsManifest, setCustomElements } from "@storybook/web-components";
 import { themes } from "@storybook/theming";
@@ -126,9 +126,6 @@ async function run() {
 	const tableCustomElements = await (
 		await fetch(new URL("../packages/flow-table/custom-elements.json", import.meta.url))
 	).json();
-	const dashboardCustomElements = await (
-		await fetch(new URL("../packages/flow-dashboard/custom-elements.json", import.meta.url))
-	).json();
 
 	const mdEditorCustomElements = await (
 		await fetch(new URL("../packages/flow-md-editor/custom-elements.json", import.meta.url))
@@ -146,16 +143,14 @@ async function run() {
 
 	setCustomElementsManifest(mdEditorCustomElements);
 	setCustomElements(mdEditorCustomElements);
-	setCustomElementsManifest(dashboardCustomElements);
-	setCustomElements(dashboardCustomElements);
 }
 
 run();
 
 // 404 error state --start--
-const el = document.body.querySelector(".sb-errordisplay.sb-wrapper");
-const errorMessage = el.querySelector("#error-message.sb-heading");
-const codeMessage = el.querySelector(".sb-errordisplay_code");
+const el = document.body.querySelector<HTMLElement>(".sb-errordisplay.sb-wrapper")!;
+const errorMessage = el.querySelector<HTMLElement>("#error-message.sb-heading")!;
+const codeMessage = el.querySelector<HTMLElement>(".sb-errordisplay_code")!;
 const url = new URL(window.location.href);
 const url_id = url.searchParams.get("id");
 
@@ -184,7 +179,7 @@ if (el) {
 	el?.insertAdjacentHTML("afterbegin", paraDefine);
 	codeMessage.style.display = "none";
 	errorMessage.style.display = "none";
-	const homeButton = el.querySelector("#home-button");
+	const homeButton = el.querySelector<HTMLElement>("#home-button")!;
 	homeButton.addEventListener("click", changePath);
 }
 

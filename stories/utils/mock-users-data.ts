@@ -8,7 +8,7 @@ import type {
 } from "@ollion/flow-table/src/components/f-table-schema/f-table-schema";
 
 import { createRef } from "lit/directives/ref.js";
-import { FPopover } from "@ollion/flow-core";
+import { FPopover } from "@ollion/flow-core/src/types";
 
 export const popoverRef = createRef<FPopover>();
 

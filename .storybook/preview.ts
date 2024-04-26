@@ -4,7 +4,7 @@ import ProductIconPack from "@ollion/flow-product-icon/dist/types/icon-pack";
 import GcpIconPack from "@ollion/flow-gcp-icon/dist/types/icon-pack";
 import AwsIconPack from "@ollion/flow-aws-icon/dist/types/icon-pack";
 
-import { ConfigUtil } from "@ollion/flow-core-config/src";
+import { ConfigUtil } from "@ollion/flow-core-config";
 import { changeRoute } from "./utils";
 
 import "@ollion/flow-core/src";

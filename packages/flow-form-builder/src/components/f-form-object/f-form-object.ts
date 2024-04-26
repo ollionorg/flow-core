@@ -17,13 +17,33 @@ import type {
 } from "../../types";
 import { validateField } from "../../modules/validation/validator";
 import { Subject } from "rxjs";
-import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/helpers";
+import { propogateProperties } from "../../modules/helpers";
 import { FFormGroup } from "@ollion/flow-core/src/components/f-form-group/f-form-group";
 import { FFieldSeparator } from "../f-field-separator/f-field-separator";
 import { radioGroupStyles } from "../f-radio-group/f-radio-group";
 import { checkboxGroupStyles } from "../f-checkbox-group/f-checkbox-group";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { flowElement } from "@ollion/flow-core/src/utils";
+import { FText } from "@ollion/flow-core/src/components/f-text/f-text";
+import { FForm } from "@ollion/flow-core/src/components/f-form/f-form";
+import { FInput } from "@ollion/flow-core/src/components/f-input/f-input";
+import { FCheckbox } from "@ollion/flow-core/src/components/f-checkbox/f-checkbox";
+import { FRadio } from "@ollion/flow-core/src/components/f-radio/f-radio";
+import { FButton } from "@ollion/flow-core/src/components/f-button/f-button";
+import { FDateTimePicker } from "@ollion/flow-core/src/components/f-date-time-picker/f-date-time-picker";
+import { FEmojiPicker } from "@ollion/flow-core/src/components/f-emoji-picker/f-emoji-picker";
+import { FDivider } from "@ollion/flow-core/src/components/f-divider/f-divider";
+import { FFileUpload } from "@ollion/flow-core/src/components/f-file-upload/f-file-upload";
+import { FIconButton } from "@ollion/flow-core/src/components/f-icon-button/f-icon-button";
+import { FSelect } from "@ollion/flow-core/src/components/f-select/f-select";
+import { FSuggest } from "@ollion/flow-core/src/components/f-suggest/f-suggest";
+import { FSwitch } from "@ollion/flow-core/src/components/f-switch/f-switch";
+import { FTextArea } from "@ollion/flow-core/src/components/f-text-area/f-text-area";
+import { FColorPicker } from "@ollion/flow-core/src/components/f-color-picker/f-color-picker";
+
+import checkboxGroupGlobalStyles from "./../../components/f-checkbox-group/f-checkbox-group-global.scss?inline";
+import radioGroupGlobalStyles from "./../../components/f-radio-group/f-radio-group-global.scss?inline";
+import fieldSeparatorGlobalStyles from "./../../components/f-field-separator/f-field-separator-global.scss?inline";
 
 export type ObjectValueType = Record<
 	string,
@@ -40,7 +60,27 @@ export class FFormObject extends FRoot {
 		...FFieldSeparator.styles,
 		unsafeCSS(radioGroupStyles),
 		unsafeCSS(checkboxGroupStyles),
-		...getEssentialFlowCoreStyles(),
+		...FDiv.styles,
+		...FText.styles,
+		...FForm.styles,
+		...FInput.styles,
+		...FCheckbox.styles,
+		...FFormGroup.styles,
+		...FRadio.styles,
+		...FButton.styles,
+		...FDateTimePicker.styles,
+		...FEmojiPicker.styles,
+		...FDivider.styles,
+		...FFileUpload.styles,
+		...FIconButton.styles,
+		...FSelect.styles,
+		...FSuggest.styles,
+		...FSwitch.styles,
+		...FTextArea.styles,
+		...FColorPicker.styles,
+		unsafeCSS(checkboxGroupGlobalStyles),
+		unsafeCSS(radioGroupGlobalStyles),
+		unsafeCSS(fieldSeparatorGlobalStyles),
 		unsafeCSS(globalStyle)
 	];
 

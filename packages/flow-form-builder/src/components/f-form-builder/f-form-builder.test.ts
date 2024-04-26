@@ -4,7 +4,7 @@ import { html, fixture, expect, oneEvent } from "@open-wc/testing";
 import "@ollion/flow-core";
 import "@ollion/flow-system-icon";
 
-import { FFormArray, FFormBuilder, FFormObject } from "../../../";
+import { FFormArray, FFormBuilder, FFormObject } from "@ollion/flow-form-builder";
 import { FForm, FFormGroup, FIconButton, FInput } from "@ollion/flow-core";
 import { FormBuilderField } from "../../types";
 
@@ -72,10 +72,10 @@ describe("f-form-builder", () => {
 			expect(fFormObject).shadowDom.to.equalSnapshot();
 			expect(fFormObject).instanceOf(FFormObject);
 
-			const fFormGroup = fFormObject?.shadowRoot?.querySelector("f-form-group");
+			const fFormGroup = fFormObject!.shadowRoot!.querySelector("f-form-group");
 			expect(fFormGroup).instanceOf(FFormGroup);
 
-			const inputs = fFormGroup?.querySelectorAll("f-input") as NodeListOf<FInput>;
+			const inputs = fFormGroup!.querySelectorAll<FInput>("f-input")!;
 
 			expect(inputs?.item(0).value).equals("Tony");
 			expect(inputs?.item(0).getAttribute("name")).equals("firstname");
@@ -100,9 +100,9 @@ describe("f-form-builder", () => {
 			const fFormObject = fForm?.querySelector("f-form-object");
 
 			expect(fFormObject).shadowDom.to.equalSnapshot();
-			const fFormGroup = fFormObject?.shadowRoot?.querySelector("f-form-group");
+			const fFormGroup = fFormObject!.shadowRoot!.querySelector("f-form-group");
 
-			const inputs = fFormGroup?.querySelectorAll("f-input") as NodeListOf<FInput>;
+			const inputs = fFormGroup!.querySelectorAll<FInput>("f-input")!;
 
 			inputs.item(0).setAttribute("value", "");
 			el.submit();
@@ -122,7 +122,7 @@ describe("f-form-builder", () => {
 
 			const fFormArray = fForm?.querySelector("f-form-array");
 			expect(fFormArray).shadowDom.to.equalSnapshot();
-			const inputs = fFormArray?.shadowRoot?.querySelectorAll("f-input") as NodeListOf<FInput>;
+			const inputs = fFormArray!.shadowRoot!.querySelectorAll<FInput>("f-input");
 
 			expect(inputs?.item(0).value).equals("username1");
 			expect(inputs?.item(1).value).equals("username2");
@@ -146,7 +146,7 @@ describe("f-form-builder", () => {
 
 			plusButton.click();
 			await new Promise(resolve => setTimeout(resolve, 500));
-			const inputs = fFormArray?.shadowRoot?.querySelectorAll("f-input") as NodeListOf<FInput>;
+			const inputs = fFormArray.shadowRoot!.querySelectorAll<FInput>("f-input");
 
 			inputs.item(2).setAttribute("value", "thirdfield");
 			setTimeout(() => {

@@ -6,7 +6,6 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { flowElement } from "./../../utils";
 import { injectCss } from "@ollion/flow-core-config";
 
-import "vanilla-colorful";
 import { FPopover } from "../f-popover/f-popover";
 import { FDiv } from "../f-div/f-div";
 import { FInput } from "../f-input/f-input";
@@ -18,6 +17,12 @@ export type FColorPickerState = "primary" | "default" | "success" | "warning" | 
 export type FColorPickerInputEvent = {
 	value?: string;
 };
+
+if (!customElements.get("hex-color-picker")) {
+	void import("vanilla-colorful").then(() => {
+		console.info("hex-color-picker registered");
+	});
+}
 
 @flowElement("f-color-picker")
 export class FColorPicker extends FRoot {

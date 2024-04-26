@@ -1,6 +1,6 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { LineageNodeElement, LineageNodeLinks, LineageNodes } from "@ollion/flow-lineage";
+import { LineageNodeElement, LineageNodeLinks, LineageNodes } from "@ollion/flow-lineage/src";
 
 export default {
 	title: "@ollion/flow-lineage/Examples/Large Data",

@@ -7,13 +7,13 @@ import AwsIconPack from "@ollion/flow-aws-icon/dist/types/icon-pack";
 import { ConfigUtil } from "@ollion/flow-core-config";
 import { changeRoute } from "./utils";
 
-import "@ollion/flow-core";
-import "@ollion/flow-log";
-import "@ollion/flow-code-editor";
-import "@ollion/flow-table";
-import "@ollion/flow-md-editor";
-import "@ollion/flow-form-builder";
-import "@ollion/flow-lineage";
+import "@ollion/flow-core/src";
+import "@ollion/flow-log/src";
+import "@ollion/flow-code-editor/src";
+import "@ollion/flow-table/src";
+import "@ollion/flow-md-editor/src";
+import "@ollion/flow-form-builder/src";
+import "@ollion/flow-lineage/src";
 
 import { setCustomElementsManifest, setCustomElements } from "@storybook/web-components";
 import { themes } from "@storybook/theming";

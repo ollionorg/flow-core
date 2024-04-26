@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
-import { FormBuilderTextInputField, validateField } from "@ollion/flow-form-builder";
-import { FInputLight } from "@ollion/flow-core";
+import { FormBuilderTextInputField, validateField } from "@ollion/flow-form-builder/src";
+import { FInputLight } from "@ollion/flow-core/src";
 
 export default {
 	title: "@ollion/flow-form-builder/Examples",

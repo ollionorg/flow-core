@@ -3,7 +3,7 @@ import {
 	FormBuilderShowCondition,
 	FormBuilderValidatorFunction,
 	FormBuilderValues
-} from "@ollion/flow-form-builder";
+} from "@ollion/flow-form-builder/src";
 import { html } from "lit-html";
 
 import { createRef, ref } from "lit/directives/ref.js";

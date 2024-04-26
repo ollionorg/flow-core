@@ -11,7 +11,7 @@ import { classMap } from "lit-html/directives/class-map.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { map } from "lit/directives/map.js";
-import "@lit-labs/virtualizer";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export default function render(this: FSelect) {
 	this.validateProperties();
@@ -99,15 +99,17 @@ export default function render(this: FSelect) {
 			aria-label="Search ${this.getAttribute("aria-label")}"
 			id="f-select"
 			data-qa-input
-			variant=${this.variant}
-			category=${this.category}
-			state=${this.state}
-			placeholder=${selectedOptionsLength > 0 || concatinatedSelectedOptions?.length > 0
-				? this.searchable && this.openDropdown
-					? this.placeholder
-					: ""
-				: this.placeholder}
-			size=${this.size}
+			variant=${ifDefined(this.variant)}
+			category=${ifDefined(this.category)}
+			state=${ifDefined(this.state)}
+			placeholder=${ifDefined(
+				selectedOptionsLength > 0 || concatinatedSelectedOptions?.length > 0
+					? this.searchable && this.openDropdown
+						? this.placeholder
+						: ""
+					: this.placeholder
+			)}
+			size=${ifDefined(this.size)}
 			?readonly=${!this.searchable}
 			.value=${this.searchValue}
 			@input=${this.handleInput}
@@ -337,14 +339,14 @@ export default function render(this: FSelect) {
 			<div
 				class="f-select-wrapper"
 				id="f-select-wrapper"
-				variant=${this.variant}
-				category=${this.category}
-				state=${this.state}
+				variant=${ifDefined(this.variant)}
+				category=${ifDefined(this.category)}
+				state=${ifDefined(this.state)}
 				?searchable=${this.searchable}
-				size=${this.size}
-				type=${this.type}
+				size=${ifDefined(this.size)}
+				type=${ifDefined(this.type)}
 				?allow-gap=${this._hasLabel && !this._hasHelperText ? true : false}
-				data-qa-id=${this.getAttribute("data-qa-element-id")}
+				data-qa-id=${ifDefined(this.getAttribute("data-qa-element-id") ?? undefined)}
 				@click=${this.handleDropDownOpen}
 				@keydown=${this.handleKeyDown}
 			>
@@ -353,7 +355,7 @@ export default function render(this: FSelect) {
 					class="f-select-options"
 					id="f-select-options"
 					style="${this.applyOptionsStyle(this.offsetWidth)}"
-					size=${this.size}
+					size=${ifDefined(this.size)}
 				>
 					<f-div padding="none" gap="none" direction="column"> ${getOptionsHtml()} </f-div>
 				</div>
@@ -376,7 +378,7 @@ export function renderArrayOptions(this: FSelect) {
 			direction="row"
 			role="option"
 			aria-selected="${this.isSelected(option)}"
-			aria-disabled="${typeof option === "object" && option.disabled}"
+			aria-disabled="${ifDefined(typeof option === "object" && option.disabled)}"
 			aria-label="${(option as FSelectOptionObject)?.title ?? option}"
 			align="middle-left"
 			gap="small"
@@ -391,8 +393,8 @@ export function renderArrayOptions(this: FSelect) {
 		>
 			${this.checkbox
 				? html` <f-checkbox
-						state=${this.state}
-						size=${this.size}
+						state=${ifDefined(this.state)}
+						size=${ifDefined(this.size)}
 						value=${this.isSelected(option) ? "checked" : "unchecked"}
 						@input=${(e: MouseEvent) => {
 							this.handleCheckboxInput(option, e);
@@ -401,7 +403,10 @@ export function renderArrayOptions(this: FSelect) {
 				: nothing}
 			${(option as FSelectOptionObject)?.icon && !this.optionTemplate
 				? html` <f-div padding="none" gap="none" height="hug-content" width="hug-content"
-						><f-icon size="medium" source=${(option as FSelectOptionObject)?.icon}></f-icon
+						><f-icon
+							size="medium"
+							source=${ifDefined((option as FSelectOptionObject)?.icon)}
+						></f-icon
 				  ></f-div>`
 				: nothing}
 			${this.optionTemplate ? this.optionTemplate(option) : nothing}
@@ -420,6 +425,11 @@ export function renderArrayOptions(this: FSelect) {
 		</f-div>`;
 
 	if (this.useVirtualizer) {
+		if (!customElements.get("lit-virtualizer")) {
+			void import("@lit-labs/virtualizer").then(() => {
+				console.info("lit-virtualizer registered");
+			});
+		}
 		return html` <lit-virtualizer
 			.items=${this.filteredOptions as FSelectArray}
 			.keyFunction=${(option: FSelectSingleOption, idx: number) => {
@@ -461,8 +471,8 @@ export function renderGroupOptions(this: FSelect) {
 	${
 		this.checkbox
 			? html` <f-checkbox
-					state=${this.state}
-					size=${this.size}
+					state=${ifDefined(this.state)}
+					size=${ifDefined(this.size)}
 					.value="${this.getCheckedValue(group)}"
 					@input=${(e: MouseEvent) => this.handleSelectAll(e, group)}
 			  ></f-checkbox>`
@@ -485,7 +495,7 @@ export function renderGroupOptions(this: FSelect) {
 				align="middle-left"
 				gap="small"
 				aria-selected="${this.isGroupSelection(option, group)}"
-				aria-disabled="${typeof option === "object" && option.disabled}"
+				aria-disabled="${ifDefined(typeof option === "object" && option.disabled)}"
 				.selected=${this.isGroupSelection(option, group) ? "background" : undefined}
 				@click=${(e: MouseEvent) => {
 					this.handleSelectionGroup(option, group, e);
@@ -497,8 +507,8 @@ export function renderGroupOptions(this: FSelect) {
 			>
 				${this.checkbox
 					? html` <f-checkbox
-							state=${this.state}
-							size=${this.size}
+							state=${ifDefined(this.state)}
+							size=${ifDefined(this.size)}
 							value=${this.isGroupSelection(option, group) ? "checked" : "unchecked"}
 							@input=${(e: MouseEvent) => {
 								this.handleCheckboxGroup(option, group, e);
@@ -507,7 +517,10 @@ export function renderGroupOptions(this: FSelect) {
 					: nothing}
 				${(option as FSelectOptionObject)?.icon && !this.optionTemplate
 					? html` <f-div padding="none" gap="none" height="hug-content" width="hug-content"
-							><f-icon size="medium" source=${(option as FSelectOptionObject)?.icon}></f-icon
+							><f-icon
+								size="medium"
+								source=${ifDefined((option as FSelectOptionObject)?.icon)}
+							></f-icon
 					  ></f-div>`
 					: nothing}
 				${this.optionTemplate ? this.optionTemplate(option) : ""}

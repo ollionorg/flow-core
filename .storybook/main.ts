@@ -1,20 +1,4 @@
 import { mergeConfig } from "vite";
-import path from "path";
-
-const alias = [
-	"flow-code-editor",
-	"flow-core-config",
-	"flow-core",
-	"flow-form-builder",
-	"flow-lineage",
-	"flow-log",
-	"flow-md-editor",
-	"flow-table",
-	"flow-dashboard"
-].map(pkg => ({
-	find: `@ollion/${pkg}`,
-	replacement: path.resolve(__dirname, "../packages", pkg, "src")
-}));
 
 export default {
 	stories: ["../stories/**/*.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],
@@ -30,10 +14,7 @@ export default {
 
 	async viteFinal(config, { configType }) {
 		return mergeConfig(config, {
-			base: configType === "PRODUCTION" ? "/v2/" : "",
-			resolve: {
-				alias
-			}
+			base: configType === "PRODUCTION" ? "/v2/" : ""
 		});
 	}
 };

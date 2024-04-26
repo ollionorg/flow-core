@@ -1,5 +1,5 @@
 import type { FInput, FSelectOptionObject, FSelectSingleOption } from "@ollion/flow-core/src/types";
-import { FormBuilderField } from "@ollion/flow-form-builder";
+import { FormBuilderField } from "@ollion/flow-form-builder/src";
 import { html } from "lit";
 const test = () => alert("test called");
 const lucky = () => alert("Lucky function called");

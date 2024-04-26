@@ -6,7 +6,7 @@ import {
 	FPictogramCategory,
 	FPictogramSize,
 	FPictogramState
-} from "@ollion/flow-core";
+} from "@ollion/flow-core/src";
 
 export default {
 	title: "@ollion/flow-core/f-pictogram",

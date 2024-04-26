@@ -1,6 +1,6 @@
 import { html } from "lit-html";
 import { useState } from "@storybook/preview-api";
-import { FDocViewerContent } from "@ollion/flow-core";
+import { FDocViewerContent } from "@ollion/flow-core/src";
 import getFakeDocContent from "../utils/mock-doc-content";
 
 export default {

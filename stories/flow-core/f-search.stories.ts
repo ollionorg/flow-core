@@ -1,5 +1,5 @@
 import { html } from "lit-html";
-import { FSearchResultWhen } from "@ollion/flow-core";
+import { FSearchResultWhen } from "@ollion/flow-core/src";
 
 export default {
 	title: "@ollion/flow-core/f-search",

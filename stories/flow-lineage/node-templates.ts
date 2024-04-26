@@ -1,5 +1,5 @@
 import { html } from "lit-html";
-import { LineageNodeElement } from "@ollion/flow-lineage";
+import { LineageNodeElement } from "@ollion/flow-lineage/src";
 
 export function nodeTemplate(node: LineageNodeElement) {
 	return html`<f-div

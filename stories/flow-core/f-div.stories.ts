@@ -2,7 +2,7 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import FDivAnatomy from "../svg/i-fdiv-anatomy.js";
 import { createRef, ref } from "lit/directives/ref.js";
-import { FDiv } from "@ollion/flow-core";
+import { FDiv } from "@ollion/flow-core/src";
 
 export default {
 	title: "@ollion/flow-core/f-div",

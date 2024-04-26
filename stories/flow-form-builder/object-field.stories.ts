@@ -1,6 +1,6 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { FormBuilderField, FormBuilderValidatorFunction } from "@ollion/flow-form-builder";
+import { FormBuilderField, FormBuilderValidatorFunction } from "@ollion/flow-form-builder/src";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
 
 export default {

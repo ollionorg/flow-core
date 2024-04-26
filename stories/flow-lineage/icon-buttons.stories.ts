@@ -4,7 +4,7 @@ import {
 	LineageNodeSize,
 	LineageNodeTemplate,
 	LineageNodes
-} from "@ollion/flow-lineage";
+} from "@ollion/flow-lineage/src";
 import { html } from "lit-html";
 
 export default {

@@ -1,4 +1,4 @@
-import { LineageNodeElement } from "@ollion/flow-lineage";
+import { LineageNodeElement } from "@ollion/flow-lineage/src";
 import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
 

@@ -1,8 +1,8 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { FormBuilderField } from "@ollion/flow-form-builder";
+import { FormBuilderField } from "@ollion/flow-form-builder/src";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
-import { FButton, FSelectOptionObject } from "@ollion/flow-core";
+import { FButton, FSelectOptionObject } from "@ollion/flow-core/src";
 
 export default {
 	title: "@ollion/flow-form-builder/Examples/In PopOver",

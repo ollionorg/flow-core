@@ -1,5 +1,5 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import type { CheckboxOption, CheckboxOptions } from "../../types";
 import eleStyle from "./f-checkbox-group.scss?inline";
 import globalStyle from "./f-checkbox-group-global.scss?inline";
@@ -12,9 +12,10 @@ import { FDiv } from "@ollion/flow-core/src/components/f-div/f-div";
 import { FText } from "@ollion/flow-core/src/components/f-text/f-text";
 import { FCheckbox } from "@ollion/flow-core/src/components/f-checkbox/f-checkbox";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { flowElement } from "@ollion/flow-core/src/utils";
 
 injectCss("f-checkbox-group", globalStyle);
-@customElement("f-checkbox-group")
+@flowElement("f-checkbox-group")
 export class FCheckboxGroup extends FRoot {
 	/**
 	 * css loaded from scss file

@@ -1,5 +1,5 @@
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import type {
 	FormBuilderField,
 	FFormInputElements,
@@ -30,10 +30,11 @@ import { cloneDeep, isEqual } from "lodash-es";
 import { injectCss } from "@ollion/flow-core-config";
 import { ifDefined } from "lit/directives/if-defined.js";
 import formArrayGlobalStyles from "./../f-form-array/f-form-array-global.scss?inline";
+import { flowElement } from "@ollion/flow-core/src/utils";
 
 injectCss("f-form-builder", globalStyle);
 
-@customElement("f-form-builder")
+@flowElement("f-form-builder")
 export class FFormBuilder extends FRoot {
 	/**
 	 * css loaded from scss file

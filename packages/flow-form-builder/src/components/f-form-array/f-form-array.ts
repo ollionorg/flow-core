@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
-import { customElement, property, queryAll } from "lit/decorators.js";
+import { property, queryAll } from "lit/decorators.js";
 import { injectCss } from "@ollion/flow-core-config";
 import eleStyle from "./f-form-array.scss?inline";
 import type {
@@ -23,6 +23,7 @@ import globalStyle from "./f-form-array-global.scss?inline";
 import { FRoot } from "@ollion/flow-core/src/mixins/components/f-root/f-root";
 import { FDiv } from "@ollion/flow-core/src/components/f-div/f-div";
 import { FIconButton } from "@ollion/flow-core/src/components/f-icon-button/f-icon-button";
+import { flowElement } from "@ollion/flow-core/src/utils";
 
 injectCss("f-form-array", globalStyle);
 export type ArrayValueType = (
@@ -35,7 +36,7 @@ export type ArrayValueType = (
 	| unknown[]
 	| undefined
 )[];
-@customElement("f-form-array")
+@flowElement("f-form-array")
 export class FFormArray extends FRoot {
 	/**
 	 * css loaded from scss file

@@ -1,5 +1,5 @@
 import { html, nothing, PropertyValueMap, TemplateResult, unsafeCSS } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { FRoot } from "@ollion/flow-core/src/mixins/components/f-root/f-root";
 import { FDiv } from "@ollion/flow-core/src/components/f-div/f-div";
 import eleStyle from "./f-form-object.scss?inline";
@@ -23,13 +23,14 @@ import { FFieldSeparator } from "../f-field-separator/f-field-separator";
 import { radioGroupStyles } from "../f-radio-group/f-radio-group";
 import { checkboxGroupStyles } from "../f-checkbox-group/f-checkbox-group";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { flowElement } from "@ollion/flow-core/src/utils";
 
 export type ObjectValueType = Record<
 	string,
 	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 	string | string[] | number | number[] | unknown | unknown[] | undefined
 >;
-@customElement("f-form-object")
+@flowElement("f-form-object")
 export class FFormObject extends FRoot {
 	/**
 	 * css loaded from scss file

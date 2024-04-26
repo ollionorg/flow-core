@@ -1,5 +1,5 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { RadioOption, RadioOptions } from "../../types";
 import eleStyle from "./f-radio-group.scss?inline";
 import globalStyle from "./f-radio-group-global.scss?inline";
@@ -10,6 +10,7 @@ import { FDiv } from "@ollion/flow-core/src/components/f-div/f-div";
 import { FText } from "@ollion/flow-core/src/components/f-text/f-text";
 import { FRadio } from "@ollion/flow-core/src/components/f-radio/f-radio";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { flowElement } from "@ollion/flow-core/src/utils";
 
 injectCss("f-checkbox-group", globalStyle);
 
@@ -17,7 +18,7 @@ export const radioGroupStyles = eleStyle;
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
-@customElement("f-radio-group")
+@flowElement("f-radio-group")
 export class FRadioGroup extends FRoot {
 	/**
 	 * css loaded from scss file

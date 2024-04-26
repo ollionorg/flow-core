@@ -1,5 +1,5 @@
 import { html, PropertyValues, render, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
+import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-lineage.scss?inline";
 import globalStyle from "./f-lineage-global.scss?inline";
 import * as d3 from "d3";
@@ -29,11 +29,12 @@ import { FText } from "@ollion/flow-core/src/components/f-text/f-text";
 import { FIcon } from "@ollion/flow-core/src/components/f-icon/f-icon";
 import { FIconButton } from "@ollion/flow-core/src/components/f-icon-button/f-icon-button";
 import type { FPopover } from "@ollion/flow-core/src/components/f-popover/f-popover";
+import { flowElement } from "@ollion/flow-core/src/utils";
 
 injectCss("f-lineage", globalStyle);
 // Renders attribute names of parent element to textContent
 
-@customElement("f-lineage")
+@flowElement("f-lineage")
 export class FLineage extends FRoot {
 	/**
 	 * css loaded from scss file

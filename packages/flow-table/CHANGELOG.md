@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.4.3] - 2024-04-26
+
+### Improvements
+
+- Optimization/Re-structuring for tree shaking.
+
 ## [2.4.2] - 2024-03-20
 
 ### Bug Fixes

@@ -9,7 +9,9 @@ import { validateHTMLColorName } from "validate-color";
 import { flowElement } from "./../../utils";
 import { FIcon } from "../f-icon/f-icon";
 import { injectCss } from "@ollion/flow-core-config";
-import Mark from "mark.js";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
+import Mark from "mark.js/dist/mark.es6.min";
 injectCss("f-text", globalStyle);
 
 export type FTextStateProp =

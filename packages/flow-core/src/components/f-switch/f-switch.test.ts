@@ -1,7 +1,8 @@
 import { html, fixture, expect } from "@open-wc/testing";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+register(flowCoreElements);
 
 import { FSwitch } from "@ollion/flow-core";
 

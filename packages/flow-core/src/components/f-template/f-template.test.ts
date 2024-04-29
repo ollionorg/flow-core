@@ -1,5 +1,6 @@
 import { expect } from "@open-wc/testing";
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+register(flowCoreElements);
 
 import { FTemplate } from "@ollion/flow-core";
 

@@ -19,8 +19,10 @@ npm i --save @ollion/flow-log
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@ollion/flow-core";
-import "@ollion/flow-log";
+import { register, flowCoreElements } from "@ollion/flow-core";
+import { FLog } from "@ollion/flow-log";
+
+register([...flowCoreElements, FLog]);
 ```
 
 <br>

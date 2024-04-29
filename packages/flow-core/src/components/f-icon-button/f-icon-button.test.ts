@@ -3,7 +3,8 @@ import { html, fixture, expect } from "@open-wc/testing";
 // IconPack to test
 import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 // import flow-core elements
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+register(flowCoreElements);
 import { FIconButton, ConfigUtil } from "@ollion/flow-core";
 
 ConfigUtil.setConfig({ iconPack: IconPack });

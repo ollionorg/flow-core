@@ -1,7 +1,9 @@
 import { html, fixture, expect, oneEvent } from "@open-wc/testing";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+import { flowFormBuilderElements } from "@ollion/flow-form-builder";
+register([...flowCoreElements, ...flowFormBuilderElements]);
 import "@ollion/flow-system-icon";
 
 import { FFormArray, FFormBuilder, FFormObject } from "../../../";

@@ -19,8 +19,10 @@ npm i --save @ollion/flow-md-editor
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@ollion/flow-core";
-import "@ollion/flow-md-editor";
+import { register, flowCoreElements } from "@ollion/flow-core";
+import { FMDEditor } from "@ollion/flow-md-editor";
+
+register([...flowCoreElements, FMDEditor]);
 ```
 
 <br>

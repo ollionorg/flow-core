@@ -4,7 +4,8 @@ import notFound from "../../mixins/svg/not-found";
 import { ConfigUtil } from "@ollion/flow-core-config";
 
 // import all flow -core components
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+register(flowCoreElements);
 
 import { FIcon } from "@ollion/flow-core";
 

@@ -4,7 +4,8 @@ export function getCodeSandBoxUrl(story) {
 	const params = getParameters({
 		files: {
 			"index.js": {
-				content: `import "@ollion/flow-core";
+				content: `import { register, flowCoreElements } from "@ollion/flow-core";
+register(flowCoreElements);;
 		  import "@ollion/flow-system-icon";
 		  document.getElementById("app").innerHTML =\`${story}\`
 		  `,

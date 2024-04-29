@@ -45,8 +45,10 @@ npm i --save @ollion/flow-lineage
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@ollion/flow-core";
-import "@ollion/flow-lineage";
+import { register, flowCoreElements } from "@ollion/flow-core";
+import { FLineage } from "@ollion/flow-lineage";
+
+register([...flowCoreElements, FLineage]);
 ```
 
 <details><summary>Example</summary>
@@ -54,10 +56,12 @@ import "@ollion/flow-lineage";
 **VueJS:** In the following example, I imported `@ollion/flow-core` and then imported the rest of the flow packages including `@ollion/flow-lineage` and after that startup code was added for VueJs `createApp(App).use(router).mount(“#app”);`.
 
 ```javascript
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+import { FLineage } from "@ollion/flow-lineage";
+
+register([...flowCoreElements, FLineage]);
 import "@ollion/flow-system-icon";
 import "@ollion/flow-product-icon";
-import "@ollion/flow-lineage";
 
 createApp(App).use(router).mount("#app"); //runtime
 ```

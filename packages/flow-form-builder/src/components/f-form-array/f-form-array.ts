@@ -22,6 +22,8 @@ import { FIconButton } from "@ollion/flow-core";
 import { ifDefined } from "lit/directives/if-defined.js";
 import globalStyle from "./f-form-array-global.scss?inline";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
 injectCss("f-form-array", globalStyle);
 export type ArrayValueType = (
 	| string

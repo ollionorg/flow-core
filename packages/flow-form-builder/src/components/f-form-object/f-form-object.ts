@@ -1,5 +1,5 @@
 import { html, nothing, PropertyValueMap, TemplateResult, unsafeCSS } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { FDiv, FRoot } from "@ollion/flow-core";
 import eleStyle from "./f-form-object.scss?inline";
 import globalStyle from "./f-form-object-global.scss?inline";

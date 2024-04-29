@@ -1,5 +1,5 @@
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import {
 	FormBuilderField,
 	FFormInputElements,

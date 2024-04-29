@@ -1,5 +1,5 @@
 import { html, PropertyValues, render, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
+import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-lineage.scss?inline";
 import globalStyle from "./f-lineage-global.scss?inline";
 import * as d3 from "d3";

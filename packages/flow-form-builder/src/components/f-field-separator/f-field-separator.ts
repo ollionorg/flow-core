@@ -1,5 +1,5 @@
 import { html, nothing, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { FRoot, FDivider, FDividerState, FText, FDiv } from "@ollion/flow-core";
 import eleStyle from "./f-field-separator.scss?inline";
 import globalStyle from "./f-field-separator-global.scss?inline";

@@ -13,7 +13,21 @@ export default defineConfig({
 			formats: ["es", "cjs"]
 		},
 		rollupOptions: {
-			external: ["@ollion/flow-core-config", "@ollion/flow-core", /^lit/],
+			external: [
+				/^@ollion/,
+				"axios",
+				"emoji-mart",
+				"lodash-es",
+				/^lit/,
+				"rxjs",
+				"vanilla-colorful",
+				"mark.js",
+				"@emoji-mart/data",
+				"@lit-labs/virtualizer",
+				"flatpickr",
+				"@floating-ui/dom",
+				"d3"
+			],
 			output: {
 				globals: {
 					"@ollion/flow-core": "@ollion/flow-core"

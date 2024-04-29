@@ -33,7 +33,7 @@ import formArrayGlobalStyles from "./../f-form-array/f-form-array-global.scss?in
 injectCss("f-form-builder", globalStyle);
 
 export class FFormBuilder extends FRoot {
-	static tagName = "f-form-builder";
+	static readonly tagName = "f-form-builder";
 	/**
 	 * css loaded from scss file
 	 */

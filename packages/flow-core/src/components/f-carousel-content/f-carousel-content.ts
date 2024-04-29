@@ -9,7 +9,7 @@ import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-carousel-content", globalStyle);
 
 export class FCarouselContent extends FRoot {
-	static tagName = "f-carousel-content";
+	static readonly tagName = "f-carousel-content";
 	/**
 	 * css loaded from scss file
 	 */

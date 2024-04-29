@@ -6,7 +6,7 @@ import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-template", globalStyle);
 
 export class FTemplate extends FRoot {
-	static tagName = "f-template";
+	static readonly tagName = "f-template";
 	/**
 	 * css loaded from scss file
 	 */

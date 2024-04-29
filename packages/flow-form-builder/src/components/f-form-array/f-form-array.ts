@@ -37,7 +37,7 @@ export type ArrayValueType = (
 )[];
 
 export class FFormArray extends FRoot {
-	static tagName = "f-form-array";
+	static readonly tagName = "f-form-array";
 	/**
 	 * css loaded from scss file
 	 */

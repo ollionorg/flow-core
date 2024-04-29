@@ -26,7 +26,7 @@ export type FCounterStateProp =
 	| `custom, ${string}`;
 
 export class FCounter extends FRoot {
-	static tagName = "f-counter";
+	static readonly tagName = "f-counter";
 	/**
 	 * css loaded from scss file
 	 */

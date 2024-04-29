@@ -12,7 +12,7 @@ import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-checkbox-group", globalStyle);
 
 export class FCheckboxGroup extends FRoot {
-	static tagName = "f-checkbox-group";
+	static readonly tagName = "f-checkbox-group";
 	/**
 	 * css loaded from scss file
 	 */

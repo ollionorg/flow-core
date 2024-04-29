@@ -43,7 +43,7 @@ export type FDocumentStatement = {
 export type FDocViewerContent = Record<string, FDocumentStatement | string>;
 
 export class FDocumentViewer extends FRoot {
-	static tagName = "f-document-viewer";
+	static readonly tagName = "f-document-viewer";
 	/**
 	 * css loaded from scss file
 	 */

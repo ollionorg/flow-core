@@ -24,7 +24,7 @@ export type DateDisableType = DateLimit<DateOption>[];
 export type FDateOption = DateOption;
 
 export class FDateTimePicker extends FRoot {
-	static tagName = "f-date-time-picker";
+	static readonly tagName = "f-date-time-picker";
 	/**
 	 * css loaded from scss file
 	 */

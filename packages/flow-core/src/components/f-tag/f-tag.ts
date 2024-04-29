@@ -37,7 +37,7 @@ export type FTagCategory = "fill" | "outline";
  */
 
 export class FTag extends FRoot {
-	static tagName = "f-tag";
+	static readonly tagName = "f-tag";
 	/**
 	 * css loaded from scss file
 	 */

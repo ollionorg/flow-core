@@ -17,11 +17,11 @@ const sizes = ["medium", "small"] as const;
 
 export type FBreadCrumbsProp = { tabIndex: number; title: string; icon?: string };
 export type FBreadcrumbs = FBreadCrumbsProp[];
-export type FBreadcrumbSize = (typeof sizes)[number];
-export type FBreadcrumbVariant = (typeof variants)[number];
+export type FBreadcrumbSize = typeof sizes[number];
+export type FBreadcrumbVariant = typeof variants[number];
 
 export class FBreadcrumb extends FRoot {
-	static tagName = "f-breadcrumb";
+	static readonly tagName = "f-breadcrumb";
 	/**
 	 * css loaded from scss file
 	 */

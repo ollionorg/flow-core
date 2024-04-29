@@ -71,7 +71,7 @@ export type FPopOverOffset = {
 };
 
 export class FPopover extends FRoot {
-	static tagName = "f-popover";
+	static readonly tagName = "f-popover";
 	/**
 	 * css loaded from scss file
 	 */

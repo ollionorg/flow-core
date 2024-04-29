@@ -30,7 +30,7 @@ export type FIconState =
 	| `custom, ${string}`;
 
 export class FIcon extends FRoot {
-	static tagName = "f-icon";
+	static readonly tagName = "f-icon";
 	/**
 	 * css loaded from scss file
 	 */

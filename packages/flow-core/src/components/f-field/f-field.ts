@@ -15,7 +15,7 @@ export type FFieldStateProp = "default" | "primary" | "success" | "danger" | "wa
  */
 
 export class FField extends FRoot {
-	static tagName = "f-field";
+	static readonly tagName = "f-field";
 	/**
 	 * css loaded from scss file
 	 */

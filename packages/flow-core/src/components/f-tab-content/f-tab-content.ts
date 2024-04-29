@@ -7,7 +7,7 @@ import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-tab-content", globalStyle);
 
 export class FTabContent extends FRoot {
-	static tagName = "f-tab-content";
+	static readonly tagName = "f-tab-content";
 	/**
 	 * css loaded from scss file
 	 */

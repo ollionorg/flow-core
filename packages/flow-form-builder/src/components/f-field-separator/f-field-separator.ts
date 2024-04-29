@@ -10,7 +10,7 @@ injectCss("f-field-separator", globalStyle);
 export type FFieldSeparatorState = FDividerState;
 
 export class FFieldSeparator extends FRoot {
-	static tagName = "f-field-separator";
+	static readonly tagName = "f-field-separator";
 	/**
 	 * css loaded from scss file
 	 */

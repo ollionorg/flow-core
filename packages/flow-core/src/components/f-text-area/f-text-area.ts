@@ -16,7 +16,7 @@ export type FTextAreaCustomEvent = {
 };
 
 export class FTextArea extends FRoot {
-	static tagName = "f-text-area";
+	static readonly tagName = "f-text-area";
 	/**
 	 * css loaded from scss file
 	 */

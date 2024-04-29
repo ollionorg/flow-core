@@ -10,7 +10,7 @@ import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-md-editor", globalStyle);
 
 export class FMDEditor extends FRoot {
-	static tagName = "f-md-editor";
+	static readonly tagName = "f-md-editor";
 	/**
 	 * css loaded from scss file
 	 */

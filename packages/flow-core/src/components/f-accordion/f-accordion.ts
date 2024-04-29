@@ -18,7 +18,7 @@ export type FAccordionCustomEvent = {
 export type FAccordionPadding = FDivPaddingProp;
 
 export class FAccordion extends FRoot {
-	static tagName = "f-accordion";
+	static readonly tagName = "f-accordion";
 	/**
 	 * css loaded from scss file
 	 */

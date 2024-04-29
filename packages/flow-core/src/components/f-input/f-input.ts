@@ -13,7 +13,7 @@ injectCss("f-input", globalStyle);
 export type { FInputState, FInputCustomEvent, FInputSuffixWhen } from "./f-input-base";
 
 export class FInput extends FInputBase {
-	static tagName = "f-input";
+	static readonly tagName = "f-input";
 	/**
 	 * css loaded from scss file
 	 */

@@ -10,7 +10,7 @@ injectCss("f-grid", globalStyle);
 export type FGridBodyHeightProp = `${number}px` | `${number}%` | `${number}vh`;
 
 export class FGrid extends FRoot {
-	static tagName = "f-grid";
+	static readonly tagName = "f-grid";
 	/**
 	 * css loaded from scss file
 	 */

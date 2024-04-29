@@ -17,7 +17,7 @@ injectCss("f-form", globalStyle);
  */
 
 export class FForm extends FRoot {
-	static tagName = "f-form";
+	static readonly tagName = "f-form";
 	/**
 	 * css loaded from scss file
 	 */

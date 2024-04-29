@@ -54,7 +54,7 @@ export type FTableSchemaHeaderCellemplate<T = any> = (value: T) => HTMLTemplateR
 export type FTableSchemaStickyBackground = "default" | "secondary" | "tertiary" | "subtle";
 
 export class FTableSchema extends FRoot {
-	static tagName = "f-table-schema";
+	static readonly tagName = "f-table-schema";
 	/**
 	 * css loaded from scss file
 	 */

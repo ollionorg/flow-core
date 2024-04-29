@@ -19,7 +19,7 @@ export type FCheckboxCustomEvent = {
 };
 
 export class FCheckbox extends FRoot {
-	static tagName = "f-checkbox";
+	static readonly tagName = "f-checkbox";
 	/**
 	 * css loaded from scss file
 	 */

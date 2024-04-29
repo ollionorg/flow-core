@@ -27,7 +27,7 @@ export type FProgressBarWidthProp = "fill-container" | `${number}px`;
 export type FProgressBarValueProp = `${number}%`;
 
 export class FProgressBar extends FRoot {
-	static tagName = "f-progress-bar";
+	static readonly tagName = "f-progress-bar";
 	/**
 	 * css loaded from scss file
 	 */

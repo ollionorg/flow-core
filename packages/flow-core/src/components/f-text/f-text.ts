@@ -28,7 +28,7 @@ export type FTextStateProp =
  */
 
 export class FText extends FRoot {
-	static tagName = "f-text";
+	static readonly tagName = "f-text";
 	/**
 	 * css loaded from scss file
 	 */

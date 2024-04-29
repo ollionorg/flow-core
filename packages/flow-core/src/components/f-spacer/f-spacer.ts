@@ -18,7 +18,7 @@ export type FSpacerSizeProp =
 	| `${number}vw`;
 
 export class FSpacer extends FRoot {
-	static tagName = "f-spacer";
+	static readonly tagName = "f-spacer";
 	/**
 	 * css loaded from scss file
 	 */

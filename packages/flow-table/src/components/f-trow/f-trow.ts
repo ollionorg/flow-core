@@ -20,7 +20,7 @@ export type FTrowState =
 export type FTrowChevronPosition = "left" | "right";
 
 export class FTrow extends FRoot {
-	static tagName = "f-trow";
+	static readonly tagName = "f-trow";
 	/**
 	 * css loaded from scss file
 	 */

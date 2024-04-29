@@ -29,7 +29,7 @@ injectCss("f-lineage", globalStyle);
 // Renders attribute names of parent element to textContent
 
 export class FLineage extends FRoot {
-	static tagName = "f-lineage";
+	static readonly tagName = "f-lineage";
 	/**
 	 * css loaded from scss file
 	 */

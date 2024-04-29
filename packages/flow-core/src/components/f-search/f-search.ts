@@ -39,7 +39,7 @@ export type FSearchSuggestions = string[] | FSearchSuggestionsCategory | FSearch
 export type FSearchScope = string[] | "none";
 
 export class FSearch extends FRoot {
-	static tagName = "f-search";
+	static readonly tagName = "f-search";
 	/**
 	 * css loaded from scss file
 	 */

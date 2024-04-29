@@ -57,7 +57,7 @@ export type RecentEmojis = string[];
 export type ExcludeEmojis = string[];
 
 export class FEmojiPicker extends FRoot {
-	static tagName = "f-emoji-picker";
+	static readonly tagName = "f-emoji-picker";
 	/**
 	 * css loaded from scss file
 	 */

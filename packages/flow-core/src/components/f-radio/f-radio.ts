@@ -14,7 +14,7 @@ export type FRadioCustomEvent = {
 };
 
 export class FRadio extends FRoot {
-	static tagName = "f-radio";
+	static readonly tagName = "f-radio";
 	/**
 	 * css loaded from scss file
 	 */

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
-import { customElement, property, queryAll } from "lit/decorators.js";
+import { property, queryAll } from "lit/decorators.js";
 import { FDiv, FRoot, injectCss } from "@ollion/flow-core";
 import eleStyle from "./f-form-array.scss?inline";
 import {

@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import { visualizer } from "rollup-plugin-visualizer";
+import terser from "@rollup/plugin-terser";
 
 export default defineConfig({
 	plugins: [
@@ -18,7 +19,6 @@ export default defineConfig({
 			fileName: format => `flow-core.${format}.js`,
 			formats: ["es", "cjs"]
 		},
-
 		rollupOptions: {
 			// If we want to publish standalone components we don't externalize lit,
 			// if you are going to use lit in your own project, you can make it a dep instead.
@@ -31,8 +31,13 @@ export default defineConfig({
 				"rxjs",
 				"@ollion/flow-core-config",
 				"vanilla-colorful",
-				"mark.js"
-			]
+				"mark.js",
+				"@emoji-mart/data",
+				"@lit-labs/virtualizer",
+				"flatpickr",
+				"@floating-ui/dom"
+			],
+			plugins: [terser()]
 		}
 	}
 });

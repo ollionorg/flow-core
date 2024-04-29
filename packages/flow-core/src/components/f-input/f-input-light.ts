@@ -12,6 +12,7 @@ import { FInputBase } from "./f-input-base";
 injectCss("f-input-light", globalStyle);
 
 export class FInputLight extends FInputBase {
+	static tagName = "f-input-light";
 	/**
 	 * css loaded from scss file
 	 */

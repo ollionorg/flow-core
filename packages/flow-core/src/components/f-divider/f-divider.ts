@@ -12,6 +12,7 @@ injectCss("f-divider", globalStyle);
 export type FDividerState = "default" | "secondary" | "subtle" | `custom, ${string}`;
 
 export class FDivider extends FRoot {
+	static tagName = "f-divider";
 	/**
 	 * css loaded from scss file
 	 */

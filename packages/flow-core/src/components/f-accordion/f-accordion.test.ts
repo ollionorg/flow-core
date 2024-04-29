@@ -1,11 +1,11 @@
 import { html, fixture, expect } from "@open-wc/testing";
 // importing flow-core components
-import { register, flowCoreElements } from "@ollion/flow-core";
+import { register, flowCoreElements, FAccordion, FIconButton, ConfigUtil } from "@ollion/flow-core";
+
 register(flowCoreElements);
 import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 // setting icon pack for testing icon related test cases
 
-import { FAccordion, FIconButton, ConfigUtil } from "@ollion/flow-core";
 ConfigUtil.setConfig({ iconPack: IconPack });
 
 describe("f-accordion", () => {

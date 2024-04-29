@@ -4,9 +4,11 @@ import samplelogs from "./sample-logs";
 
 // import flow-core elements
 import { register, flowCoreElements } from "@ollion/flow-core";
-register(flowCoreElements);
+
 import { FLog } from "@ollion/flow-log";
 import { FDiv } from "@ollion/flow-core";
+
+register([...flowCoreElements, FLog]);
 
 describe("f-log", () => {
 	it("is defined", () => {

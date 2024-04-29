@@ -34,6 +34,7 @@ export type FTcellAlign =
 	| "bottom-right";
 
 export class FTcell extends FRoot {
+	static tagName = "f-tcell";
 	/**
 	 * css loaded from scss file
 	 */

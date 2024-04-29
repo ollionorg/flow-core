@@ -15,6 +15,7 @@ export type FSwitchCustomEvent = {
 };
 
 export class FSwitch extends FRoot {
+	static tagName = "f-switch";
 	/**
 	 * css loaded from scss file
 	 */

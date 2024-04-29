@@ -106,6 +106,7 @@ injectCss("f-div", globalStyle);
  */
 
 export class FDiv extends FRoot {
+	static tagName = "f-div";
 	/**
 	 * css loaded from scss file
 	 */

@@ -20,6 +20,7 @@ export type FColorPickerInputEvent = {
 };
 
 export class FColorPicker extends FRoot {
+	static tagName = "f-color-picker";
 	/**
 	 * css loaded from scss file
 	 */

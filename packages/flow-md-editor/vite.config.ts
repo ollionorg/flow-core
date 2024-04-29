@@ -29,8 +29,7 @@ export default defineConfig({
 				"@lit-labs/virtualizer",
 				"flatpickr",
 				"@floating-ui/dom",
-				"monaco-editor",
-				"showdown"
+				"monaco-editor"
 			],
 			output: {
 				globals: {

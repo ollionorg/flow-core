@@ -5,7 +5,7 @@ export function getCodeSandBoxUrl(story) {
 		files: {
 			"index.js": {
 				content: `import { register, flowCoreElements } from "@ollion/flow-core";
-register(flowCoreElements);;
+register(flowCoreElements);
 		  import "@ollion/flow-system-icon";
 		  document.getElementById("app").innerHTML =\`${story}\`
 		  `,

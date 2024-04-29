@@ -13,6 +13,7 @@ injectCss("f-tab", globalStyle);
 export type FTabNodeWidthProp = "fill" | "hug-content" | `${number}`;
 
 export class FTab extends FRoot {
+	static tagName = "f-tab";
 	/**
 	 * css loaded from scss file
 	 */

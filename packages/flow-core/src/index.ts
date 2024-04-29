@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /// <reference types="vite/client" />
 
 import { ConfigUtil } from "@ollion/flow-core-config";
@@ -166,17 +168,14 @@ export const flowCoreElements = [
 	FColorPicker,
 	FCountdown
 ];
+
 export function register(elements: (new () => LitElement)[]) {
 	elements.forEach(element => {
-		let tagName = element.name.replace(
-			/[A-Z]/g,
-			(match, offset) => (offset > 0 ? "-" : "") + match.toLowerCase()
-		);
-		if (element.name === "FMDEditor") {
-			tagName = "f-md-editor";
+		//@ts-expect-error
+		if (element.tagName && !customElements.get(element.tagName)) {
+			//@ts-expect-error
+			customElements.define(element.tagName, element);
 		}
-
-		if (!customElements.get(tagName)) customElements.define(tagName, element);
 	});
 }
 

@@ -4,6 +4,7 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 
 export class FFormField extends FRoot {
+	static tagName = "f-form-field";
 	static styles = [...FDiv.styles];
 	render() {
 		/**

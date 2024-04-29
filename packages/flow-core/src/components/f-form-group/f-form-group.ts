@@ -21,6 +21,7 @@ export type FGroupLabel = {
  */
 
 export class FFormGroup extends FRoot {
+	static tagName = "f-form-group";
 	/**
 	 * css loaded from scss file
 	 */

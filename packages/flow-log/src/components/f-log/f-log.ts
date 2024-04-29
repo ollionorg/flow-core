@@ -47,6 +47,7 @@ export type FLogLevels = string[];
  */
 
 export class FLog extends FRoot {
+	static tagName = "f-log";
 	/**
 	 * css loaded from scss file
 	 */

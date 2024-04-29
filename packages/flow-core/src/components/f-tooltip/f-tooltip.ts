@@ -24,6 +24,7 @@ export type FTooltipPlacement =
 	| "auto";
 
 export class FTooltip extends LitElement {
+	static tagName = "f-tooltip";
 	/**
 	 * css loaded from scss file
 	 */

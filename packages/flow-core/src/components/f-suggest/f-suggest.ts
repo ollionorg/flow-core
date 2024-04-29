@@ -36,6 +36,7 @@ export type FSuggestWhen = (suggestion: string | FSuggestTemplate, value?: strin
 export type FSuggestSuggestions = string[] | FSuggestSuggestionsCategory | FSuggestTemplate[];
 
 export class FSuggest extends FRoot {
+	static tagName = "f-suggest";
 	/**
 	 * css loaded from scss file
 	 */

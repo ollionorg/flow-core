@@ -16,13 +16,14 @@ const sizes = ["large", "medium", "small", "x-small"] as const;
 const categories = ["fill", "outline"] as const;
 const placements = ["left", "right", "bottom", "top", "none"] as const;
 
-export type FCountdownStateProp = (typeof states)[number];
-export type FCountdownCategoryProp = (typeof categories)[number];
-export type FCountdownSizesProp = (typeof sizes)[number];
-export type FCountdownLabelProp = (typeof placements)[number];
+export type FCountdownStateProp = typeof states[number];
+export type FCountdownCategoryProp = typeof categories[number];
+export type FCountdownSizesProp = typeof sizes[number];
+export type FCountdownLabelProp = typeof placements[number];
 export type FCountdownDuration = number | string;
 
 export class FCountdown extends FRoot {
+	static tagName = "f-countdown";
 	/**
 	 * css loaded from scss file
 	 */

@@ -32,6 +32,7 @@ injectCss("f-button", globalStyle);
  */
 
 export class FButton extends FRoot {
+	static tagName = "f-button";
 	/**
 	 * css loaded from scss file
 	 */

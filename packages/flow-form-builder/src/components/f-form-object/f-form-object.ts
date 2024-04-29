@@ -30,6 +30,7 @@ export type ObjectValueType = Record<
 >;
 
 export class FFormObject extends FRoot {
+	static tagName = "f-form-object";
 	/**
 	 * css loaded from scss file
 	 */

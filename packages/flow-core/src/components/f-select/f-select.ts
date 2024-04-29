@@ -69,6 +69,7 @@ export type FSelectCreateOptionEvent = {
 export type FSelectMaxOptionsWidth = `${number}px`;
 
 export class FSelect extends FRoot {
+	static tagName = "f-select";
 	/**
 	 * css loaded from scss file
 	 */

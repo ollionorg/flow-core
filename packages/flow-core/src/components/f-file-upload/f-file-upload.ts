@@ -30,6 +30,7 @@ export type FFileUploadSizeProp =
 	| `${number} TB`;
 
 export class FFileUpload extends FRoot {
+	static tagName = "f-file-upload";
 	/**
 	 * css loaded from scss file
 	 */

@@ -9,6 +9,7 @@ import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-tab-node", globalStyle);
 
 export class FTabNode extends FRoot {
+	static tagName = "f-tab-node";
 	/**
 	 * css loaded from scss file
 	 */

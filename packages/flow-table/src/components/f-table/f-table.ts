@@ -13,6 +13,7 @@ export type FTableSize = "medium" | "small";
 export type FTableSelectable = "single" | "multiple" | "none";
 
 export class FTable extends FRoot {
+	static tagName = "f-table";
 	/**
 	 * css loaded from scss file
 	 */

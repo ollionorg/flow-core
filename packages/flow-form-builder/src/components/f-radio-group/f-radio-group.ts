@@ -16,6 +16,7 @@ export const radioGroupStyles = eleStyle;
  */
 
 export class FRadioGroup extends FRoot {
+	static tagName = "f-radio-group";
 	/**
 	 * css loaded from scss file
 	 */

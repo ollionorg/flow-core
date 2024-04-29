@@ -5,6 +5,10 @@ import { html, fixture, expect } from "@open-wc/testing";
 import "../../../";
 import { FLineage } from "../../../";
 
+import { register, flowCoreElements } from "@ollion/flow-core";
+
+register([...flowCoreElements, FLineage]);
+
 describe("f-lineage", () => {
 	it("is defined", () => {
 		const el = document.createElement("f-lineage");

@@ -32,7 +32,6 @@ export default defineConfig({
 				"@ollion/flow-core-config",
 				"vanilla-colorful",
 				"mark.js",
-				"@emoji-mart/data",
 				"@lit-labs/virtualizer",
 				"flatpickr",
 				"@floating-ui/dom"

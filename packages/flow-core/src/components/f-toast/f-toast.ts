@@ -14,6 +14,7 @@ injectCss("f-toast", globalStyle);
 export type FToastState = "default" | "primary" | "success" | "warning" | "danger";
 
 export class FToast extends FRoot {
+	static tagName = "f-toast";
 	/**
 	 * css loaded from scss file
 	 */

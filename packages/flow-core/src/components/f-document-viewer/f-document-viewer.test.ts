@@ -44,6 +44,7 @@ function createDocContentObject(
 			}
 		}
 	}
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 	if (content && Object.keys(content).length > 0) {
 		doc.data = content;
 	}
@@ -101,7 +102,7 @@ describe("f-document-viewer", () => {
 		const el = await fixture<FDocumentViewer>(html`
 			<f-document-viewer .content=${getFakeDocumentContent()}></f-document-viewer>
 		`);
-		const filter = el.shadowRoot!.querySelector<FSelect>(".f-select-level-selector")!;
+		const filter = el.shadowRoot.querySelector<FSelect>(".f-select-level-selector")!;
 
 		const listner = oneEvent(filter, "input");
 
@@ -117,7 +118,7 @@ describe("f-document-viewer", () => {
 		await listner;
 		await el.updateComplete;
 
-		const descendants = el.shadowRoot!.querySelectorAll<FAccordion | FDiv>(`[data-level="2"]`);
+		const descendants = el.shadowRoot.querySelectorAll<FAccordion | FDiv>(`[data-level="2"]`);
 
 		expect(descendants[0].style.display).to.equal("none");
 	});
@@ -126,7 +127,7 @@ describe("f-document-viewer", () => {
 		const el = await fixture<FDocumentViewer>(html`
 			<f-document-viewer .content=${getFakeDocumentContent()}></f-document-viewer>
 		`);
-		const highlight = el.shadowRoot!.querySelector<FSearch>(".f-search-text-highlight")!;
+		const highlight = el.shadowRoot.querySelector<FSearch>(".f-search-text-highlight")!;
 
 		const listner = oneEvent(highlight, "input");
 		highlight.value = "The";
@@ -141,7 +142,7 @@ describe("f-document-viewer", () => {
 		await listner;
 		await el.updateComplete;
 
-		const descendants = el.shadowRoot!.querySelectorAll<FText>("#doc-text");
+		const descendants = el.shadowRoot.querySelectorAll<FText>("#doc-text");
 		expect(descendants[0].highlight).to.equal("The");
 	});
 });

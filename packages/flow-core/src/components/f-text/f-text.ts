@@ -6,7 +6,7 @@ import globalStyle from "./f-text-global.scss?inline";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
-import { flowElement } from "./../../utils";
+
 import { FIcon } from "../f-icon/f-icon";
 import { injectCss } from "@ollion/flow-core-config";
 import Mark from "mark.js/dist/mark.es6.min";
@@ -26,8 +26,9 @@ export type FTextStateProp =
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
-@flowElement("f-text")
+
 export class FText extends FRoot {
+	static readonly tagName = "f-text";
 	/**
 	 * css loaded from scss file
 	 */

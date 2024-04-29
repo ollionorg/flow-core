@@ -2,7 +2,8 @@ import { html, fixture, expect } from "@open-wc/testing";
 import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 
 // importing flow-core components
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+register(flowCoreElements);
 
 import { FBreadcrumb, ConfigUtil } from "@ollion/flow-core";
 

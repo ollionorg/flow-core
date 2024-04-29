@@ -1,5 +1,5 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { FRoot, flowElement, FButton } from "@ollion/flow-core";
+import { FRoot, FButton } from "@ollion/flow-core";
 import globalStyle from "./f-code-editor-global.scss?inline";
 import * as monaco from "monaco-editor";
 
@@ -26,7 +26,6 @@ export type FCodeEditorServices = monaco.editor.IStandaloneEditorConstructionOpt
 
 export type FCodeEditorStateProp = "subtle" | "default" | "secondary";
 
-@flowElement("f-code-editor")
 export class FCodeEditor extends FRoot {
 	/**
 	 * css loaded from scss file

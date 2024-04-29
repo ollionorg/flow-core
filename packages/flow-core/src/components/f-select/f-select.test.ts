@@ -2,7 +2,8 @@ import { html, fixture, expect } from "@open-wc/testing";
 import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+register(flowCoreElements);
 
 import { FIcon, ConfigUtil, FSelect, FText, FTag, FCheckbox } from "@ollion/flow-core";
 // setting icon pack for testing icon related test cases

@@ -1,5 +1,5 @@
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import {
 	FormBuilderField,
 	FFormInputElements,
@@ -32,8 +32,8 @@ import formArrayGlobalStyles from "./../f-form-array/f-form-array-global.scss?in
 
 injectCss("f-form-builder", globalStyle);
 
-@customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
+	static readonly tagName = "f-form-builder";
 	/**
 	 * css loaded from scss file
 	 */

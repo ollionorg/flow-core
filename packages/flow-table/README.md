@@ -19,8 +19,10 @@ npm i --save @ollion/flow-table
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@ollion/flow-core";
-import "@ollion/flow-table";
+import { register, flowCoreElements } from "@ollion/flow-core";
+import { flowTableElements } from "@ollion/flow-table";
+
+register([...flowCoreElements, ...flowTableElements]);
 ```
 
 <br>

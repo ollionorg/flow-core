@@ -1,5 +1,5 @@
 import { html, nothing, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { FRoot, FDivider, FDividerState, FText, FDiv } from "@ollion/flow-core";
 import eleStyle from "./f-field-separator.scss?inline";
 import globalStyle from "./f-field-separator-global.scss?inline";
@@ -9,8 +9,8 @@ injectCss("f-field-separator", globalStyle);
 
 export type FFieldSeparatorState = FDividerState;
 
-@customElement("f-field-separator")
 export class FFieldSeparator extends FRoot {
+	static readonly tagName = "f-field-separator";
 	/**
 	 * css loaded from scss file
 	 */

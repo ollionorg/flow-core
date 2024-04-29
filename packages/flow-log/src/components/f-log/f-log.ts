@@ -5,7 +5,6 @@ import eleStyle from "./f-log.scss?inline";
 
 import {
 	FRoot,
-	flowElement,
 	FDiv,
 	FIcon,
 	FText,
@@ -46,8 +45,9 @@ export type FLogLevels = string[];
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
-@flowElement("f-log")
+
 export class FLog extends FRoot {
+	static readonly tagName = "f-log";
 	/**
 	 * css loaded from scss file
 	 */

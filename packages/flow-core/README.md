@@ -56,7 +56,8 @@ _Note:_ after installation re-start your application.
 Copy and import the below snippet into your startup file. In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
 
 ```JavaScript
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+register(flowCoreElements);
 ```
 
 <br>
@@ -98,7 +99,8 @@ npm i --save @ollion/flow-system-icon
 ### 2️⃣ Import the icon pack
 
 ```javascript
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+register(flowCoreElements);
 import "@ollion/flow-system-icon";
 ```
 

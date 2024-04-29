@@ -2,11 +2,12 @@
 
 # Change Log
 
-## [2.4.1] - 2024-04-22
+## [3.0.0] - 2024-04-29
 
-### Bug Fixes
+### Major/Breaking Changes
 
-- Validation rules are triggered multiple times when multiple fields utilize the `showWhen` property.
+- Auto web component registration was removed to facilitate tree shaking.
+- To register component manually please check [here](https://github.com/ollionorg/flow-core/blob/main/docs/component-registration.md)
 
 ## [2.4.0] - 2024-03-27
 

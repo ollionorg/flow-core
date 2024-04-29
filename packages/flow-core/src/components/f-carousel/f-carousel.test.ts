@@ -3,7 +3,8 @@ import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 import FCarouselExample from "./i-fcarousel-example";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+register(flowCoreElements);
 
 import { ConfigUtil, FCarousel } from "@ollion/flow-core";
 import { html } from "lit";

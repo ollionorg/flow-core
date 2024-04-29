@@ -4,7 +4,7 @@ import eleStyle from "./f-breadcrumb.scss?inline";
 import globalStyle from "./f-breadcrumb-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
-import { flowElement } from "../../utils";
+
 import { FText } from "../f-text/f-text";
 import { FPopover } from "../f-popover/f-popover";
 
@@ -20,8 +20,8 @@ export type FBreadcrumbs = FBreadCrumbsProp[];
 export type FBreadcrumbSize = (typeof sizes)[number];
 export type FBreadcrumbVariant = (typeof variants)[number];
 
-@flowElement("f-breadcrumb")
 export class FBreadcrumb extends FRoot {
+	static readonly tagName = "f-breadcrumb";
 	/**
 	 * css loaded from scss file
 	 */

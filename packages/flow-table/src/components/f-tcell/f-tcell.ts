@@ -1,6 +1,6 @@
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
-import { FCheckbox, FDiv, FIconButton, FIcon, FRadio, FRoot, flowElement } from "@ollion/flow-core";
+import { FCheckbox, FDiv, FIconButton, FIcon, FRadio, FRoot } from "@ollion/flow-core";
 import { FTableSelectable } from "../f-table/f-table";
 import eleStyle from "./f-tcell.scss?inline";
 import globalStyle from "./f-tcell-global.scss?inline";
@@ -33,8 +33,8 @@ export type FTcellAlign =
 	| "bottom-center"
 	| "bottom-right";
 
-@flowElement("f-tcell")
 export class FTcell extends FRoot {
+	static readonly tagName = "f-tcell";
 	/**
 	 * css loaded from scss file
 	 */

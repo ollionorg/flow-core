@@ -1,10 +1,17 @@
 import { defineConfig } from "vite";
+import { visualizer } from "rollup-plugin-visualizer";
+import terser from "@rollup/plugin-terser";
 
 export default defineConfig({
+	plugins: [
+		visualizer({
+			gzipSize: true
+		})
+	],
 	build: {
 		// Disabling minification makes it easy to debug during development
 		// And all modern bundlers will consume the library and minify it anyway
-		minify: false,
+		minify: true,
 		sourcemap: true,
 		lib: {
 			entry: "src/index.ts",
@@ -24,8 +31,12 @@ export default defineConfig({
 				"rxjs",
 				"@ollion/flow-core-config",
 				"vanilla-colorful",
-				"mark.js"
-			]
+				"mark.js",
+				"@lit-labs/virtualizer",
+				"flatpickr",
+				"@floating-ui/dom"
+			],
+			plugins: [terser()]
 		}
 	}
 });

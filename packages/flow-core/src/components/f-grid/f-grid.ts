@@ -3,14 +3,14 @@ import { property } from "lit/decorators.js";
 import globalStyle from "./f-grid-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-grid", globalStyle);
 
 export type FGridBodyHeightProp = `${number}px` | `${number}%` | `${number}vh`;
 
-@flowElement("f-grid")
 export class FGrid extends FRoot {
+	static readonly tagName = "f-grid";
 	/**
 	 * css loaded from scss file
 	 */

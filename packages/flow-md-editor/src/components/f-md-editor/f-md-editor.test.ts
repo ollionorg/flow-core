@@ -1,13 +1,11 @@
-import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 import { expect, fixture, html } from "@open-wc/testing";
 import sampleMd from "./sample-md";
 
 // import flow-core elements
-import "@ollion/flow-core";
-
-import { ConfigUtil } from "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
 import { FMDEditor } from "@ollion/flow-md-editor";
-ConfigUtil.setConfig({ iconPack: IconPack });
+
+register([...flowCoreElements, FMDEditor]);
 
 describe("f-md-editor", () => {
 	it("is defined", () => {

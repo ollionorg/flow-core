@@ -5,14 +5,14 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-divider", globalStyle);
 
 export type FDividerState = "default" | "secondary" | "subtle" | `custom, ${string}`;
 
-@flowElement("f-divider")
 export class FDivider extends FRoot {
+	static readonly tagName = "f-divider";
 	/**
 	 * css loaded from scss file
 	 */

@@ -1,6 +1,7 @@
 import { expect, fixture, html } from "@open-wc/testing";
 
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+register(flowCoreElements);
 import { FPopover } from "@ollion/flow-core";
 
 describe("f-popover", () => {

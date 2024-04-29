@@ -16,7 +16,21 @@ export default defineConfig({
 			// If we want to publish standalone components we don't externalize lit,
 			// if you are going to use lit in your own project, you can make it a dep instead.
 			// external: /^lit/, <-- comment this line
-			external: ["@ollion/flow-core-config", "@ollion/flow-core", /^lit/, "monaco-editor"],
+			external: [
+				/^@ollion/,
+				"axios",
+				"emoji-mart",
+				"lodash-es",
+				/^lit/,
+				"rxjs",
+				"vanilla-colorful",
+				"mark.js",
+				"@emoji-mart/data",
+				"@lit-labs/virtualizer",
+				"flatpickr",
+				"@floating-ui/dom",
+				"monaco-editor"
+			],
 			output: {
 				globals: {
 					"@ollion/flow-core": "@ollion/flow-core"

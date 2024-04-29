@@ -10,7 +10,7 @@ import getTextContrast from "../../utils/get-text-contrast";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 import { ifDefined } from "lit/directives/if-defined.js";
 
@@ -25,8 +25,8 @@ export type FCounterStateProp =
 	| "inherit"
 	| `custom, ${string}`;
 
-@flowElement("f-counter")
 export class FCounter extends FRoot {
+	static readonly tagName = "f-counter";
 	/**
 	 * css loaded from scss file
 	 */

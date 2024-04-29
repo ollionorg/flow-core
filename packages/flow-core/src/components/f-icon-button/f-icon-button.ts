@@ -13,7 +13,7 @@ import { validateHTMLColor } from "validate-color";
 import getTextContrast from "../../utils/get-text-contrast";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import LightenDarkenColor from "../../utils/get-lighten-darken-color";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-icon-button", globalStyle);
 
@@ -33,8 +33,8 @@ export type FIconButtonState =
 	| "inherit"
 	| `custom, ${string}`;
 
-@flowElement("f-icon-button")
 export class FIconButton extends FRoot {
+	static readonly tagName = "f-icon-button";
 	/**
 	 * css loaded from scss file
 	 */
@@ -84,8 +84,8 @@ export class FIconButton extends FRoot {
 	/**
 	 * @attribute Counter property enables a counter on the button.
 	 */
-	@property({ reflect: true, type: Number })
-	counter?: string;
+	@property({ reflect: true, type: [String, Number] })
+	counter?: string | number;
 
 	/**
 	 * @attribute Loader icon replaces the content of the button .
@@ -245,7 +245,7 @@ export class FIconButton extends FRoot {
 				? html`<f-counter
 						.state=${this.state}
 						.size=${this.counterSize}
-						.label=${this.counter}
+						.label=${+this.counter}
 						class=${classMap(counterClasses)}
 				  ></f-counter>`
 				: "";

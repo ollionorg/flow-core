@@ -77,8 +77,9 @@ npm i --save @ollion/flow-form-builder
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@ollion/flow-core";
-import "@ollion/flow-form-builder";
+import { register, flowCoreElements } from "@ollion/flow-core";
+import { flowFormBuilderElements } from "@ollion/flow-form-builder";
+register([...flowCoreElements, ...flowFormBuilderElements]);
 ```
 
 <br/>

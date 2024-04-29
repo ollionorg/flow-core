@@ -1,5 +1,5 @@
 import { html, PropertyValues, render, unsafeCSS } from "lit";
-import { customElement, property, query, queryAssignedElements } from "lit/decorators.js";
+import { property, query, queryAssignedElements } from "lit/decorators.js";
 import eleStyle from "./f-lineage.scss?inline";
 import globalStyle from "./f-lineage-global.scss?inline";
 import * as d3 from "d3";
@@ -28,8 +28,8 @@ import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-lineage", globalStyle);
 // Renders attribute names of parent element to textContent
 
-@customElement("f-lineage")
 export class FLineage extends FRoot {
+	static readonly tagName = "f-lineage";
 	/**
 	 * css loaded from scss file
 	 */

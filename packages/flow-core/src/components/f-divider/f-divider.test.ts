@@ -1,6 +1,7 @@
 import { html, fixture, expect } from "@open-wc/testing";
 // importing flow-core components
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+register(flowCoreElements);
 
 import { FDivider } from "@ollion/flow-core";
 

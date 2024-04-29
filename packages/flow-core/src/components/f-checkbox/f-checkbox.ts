@@ -7,7 +7,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import checkedMark from "../../mixins/svg/checked-mark";
 import indeterminateMark from "../../mixins/svg/indeterminate-mark";
 import { FDiv } from "../f-div/f-div";
-import { flowElement, generateId } from "./../../utils";
+import { generateId } from "./../../utils";
 
 import { injectCss } from "@ollion/flow-core-config";
 
@@ -18,8 +18,8 @@ export type FCheckboxCustomEvent = {
 	value: string;
 };
 
-@flowElement("f-checkbox")
 export class FCheckbox extends FRoot {
+	static readonly tagName = "f-checkbox";
 	/**
 	 * css loaded from scss file
 	 */

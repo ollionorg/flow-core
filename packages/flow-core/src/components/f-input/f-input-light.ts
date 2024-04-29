@@ -7,13 +7,12 @@ import { FIcon } from "../f-icon/f-icon";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import { ifDefined } from "lit-html/directives/if-defined.js";
-import { flowElement } from "./../../utils";
 import { injectCss } from "@ollion/flow-core-config";
 import { FInputBase } from "./f-input-base";
 injectCss("f-input-light", globalStyle);
 
-@flowElement("f-input-light")
 export class FInputLight extends FInputBase {
+	static readonly tagName = "f-input-light";
 	/**
 	 * css loaded from scss file
 	 */

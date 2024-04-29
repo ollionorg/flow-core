@@ -3,13 +3,13 @@ import { property } from "lit/decorators.js";
 import { FRoot } from "./../../mixins/components/f-root/f-root";
 import globalStyle from "./f-carousel-content-global.scss?inline";
 import { FDiv } from "../f-div/f-div";
-import { flowElement } from "./../../utils";
 
 import { injectCss } from "@ollion/flow-core-config";
 
 injectCss("f-carousel-content", globalStyle);
-@flowElement("f-carousel-content")
+
 export class FCarouselContent extends FRoot {
+	static readonly tagName = "f-carousel-content";
 	/**
 	 * css loaded from scss file
 	 */

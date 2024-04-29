@@ -29,7 +29,7 @@ import {
 	handleOptionMouseOver
 } from "./handlers";
 import { FIconButton } from "../f-icon-button/f-icon-button";
-import { flowElement, generateId } from "./../../utils";
+import { generateId } from "./../../utils";
 import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-select", globalStyle);
 
@@ -68,8 +68,8 @@ export type FSelectCreateOptionEvent = {
 
 export type FSelectMaxOptionsWidth = `${number}px`;
 
-@flowElement("f-select")
 export class FSelect extends FRoot {
+	static readonly tagName = "f-select";
 	/**
 	 * css loaded from scss file
 	 */
@@ -215,7 +215,7 @@ export class FSelect extends FRoot {
 	/**
 	 * @attribute height of `f-select`
 	 */
-	@property({ type: String, reflect: true })
+	@property({ type: Number, reflect: true })
 	height: FSelectHeightProp = 180;
 
 	/**

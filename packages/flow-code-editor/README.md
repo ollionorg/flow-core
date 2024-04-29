@@ -19,8 +19,9 @@ npm i --save @ollion/flow-code-editor
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@ollion/flow-core";
-import "@ollion/flow-code-editor";
+import { register, flowCoreElements } from "@ollion/flow-core";
+import { FCodeEditor } from "@ollion/flow-code-editor";
+register([...flowCoreElements, FCodeEditor]);
 ```
 
 <br>

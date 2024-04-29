@@ -2,7 +2,8 @@ import { html, fixture, expect } from "@open-wc/testing";
 // importing `loadingSVG` to cross check
 import loadingSVG from "./../../mixins/svg/loader";
 // import flow-core elements
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+register(flowCoreElements);
 
 import { FCounter } from "@ollion/flow-core";
 

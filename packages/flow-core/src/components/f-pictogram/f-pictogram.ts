@@ -7,7 +7,7 @@ import { ConfigUtil, injectCss } from "@ollion/flow-core-config";
 import { getTextContrast, isValidHttpUrl } from "./../../utils";
 import { classMap } from "lit-html/directives/class-map.js";
 import { FIcon } from "../f-icon/f-icon";
-import { flowElement } from "./../../utils";
+
 injectCss("f-pictogram", globalStyle);
 
 const variants = ["circle", "square", "hexagon", "squircle"] as const;
@@ -46,8 +46,8 @@ function generateHslaColors(saturation: number, lightness: number, alpha: number
 
 colors = generateHslaColors(50, 60, 1.0, 10);
 
-@flowElement("f-pictogram")
 export class FPictogram extends FRoot {
+	static readonly tagName = "f-pictogram";
 	/**
 	 * css loaded from scss file
 	 */

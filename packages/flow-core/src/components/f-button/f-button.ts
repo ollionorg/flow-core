@@ -13,7 +13,7 @@ import getCustomFillColor from "../../utils/get-custom-fill-color";
 import getTextContrast from "../../utils/get-text-contrast";
 import { FIcon } from "../f-icon/f-icon";
 import { FCounter } from "../f-counter/f-counter";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 
 export type FButtonState =
@@ -30,8 +30,9 @@ injectCss("f-button", globalStyle);
 /**
  * @summary Buttons allow users to perform an action or to initiate a new function.
  */
-@flowElement("f-button")
+
 export class FButton extends FRoot {
+	static readonly tagName = "f-button";
 	/**
 	 * css loaded from scss file
 	 */

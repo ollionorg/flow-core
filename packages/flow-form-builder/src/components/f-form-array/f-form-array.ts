@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
-import { customElement, property, queryAll } from "lit/decorators.js";
+import { property, queryAll } from "lit/decorators.js";
 import { FDiv, FRoot, injectCss } from "@ollion/flow-core";
 import eleStyle from "./f-form-array.scss?inline";
 import {
@@ -22,6 +22,8 @@ import { FIconButton } from "@ollion/flow-core";
 import { ifDefined } from "lit/directives/if-defined.js";
 import globalStyle from "./f-form-array-global.scss?inline";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
 injectCss("f-form-array", globalStyle);
 export type ArrayValueType = (
 	| string
@@ -33,8 +35,9 @@ export type ArrayValueType = (
 	| unknown[]
 	| undefined
 )[];
-@customElement("f-form-array")
+
 export class FFormArray extends FRoot {
+	static readonly tagName = "f-form-array";
 	/**
 	 * css loaded from scss file
 	 */

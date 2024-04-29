@@ -10,7 +10,7 @@ import { FInput } from "../f-input/f-input";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { classMap } from "lit-html/directives/class-map.js";
 import { cloneDeep } from "lodash-es";
-import { flowElement } from "./../../utils";
+
 import { displayCustomTemplate, displayOptions, displayCategories } from "./display-options";
 import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-suggest", globalStyle);
@@ -35,8 +35,8 @@ export type FSuggestWhen = (suggestion: string | FSuggestTemplate, value?: strin
 
 export type FSuggestSuggestions = string[] | FSuggestSuggestionsCategory | FSuggestTemplate[];
 
-@flowElement("f-suggest")
 export class FSuggest extends FRoot {
+	static readonly tagName = "f-suggest";
 	/**
 	 * css loaded from scss file
 	 */

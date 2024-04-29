@@ -2,7 +2,7 @@ import { html, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import globalStyle from "./f-spacer-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-spacer", globalStyle);
 
@@ -17,8 +17,8 @@ export type FSpacerSizeProp =
 	| `${number}%`
 	| `${number}vw`;
 
-@flowElement("f-spacer")
 export class FSpacer extends FRoot {
+	static readonly tagName = "f-spacer";
 	/**
 	 * css loaded from scss file
 	 */

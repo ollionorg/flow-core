@@ -6,14 +6,14 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { FTabNode } from "../f-tab-node/f-tab-node";
 import { FIconButton } from "../f-icon-button/f-icon-button";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-tab", globalStyle);
 
 export type FTabNodeWidthProp = "fill" | "hug-content" | `${number}`;
 
-@flowElement("f-tab")
 export class FTab extends FRoot {
+	static readonly tagName = "f-tab";
 	/**
 	 * css loaded from scss file
 	 */

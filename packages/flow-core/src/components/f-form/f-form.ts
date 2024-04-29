@@ -5,8 +5,9 @@ import { FText } from "../f-text/f-text";
 import eleStyle from "./f-form.scss?inline";
 import globalStyle from "./f-form-global.scss?inline";
 import { FDiv } from "../f-div/f-div";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
+import { ifDefined } from "lit/directives/if-defined.js";
 injectCss("f-form", globalStyle);
 
 // import { ref, createRef } from "lit/directives/ref.js";
@@ -14,8 +15,9 @@ injectCss("f-form", globalStyle);
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
-@flowElement("f-form")
+
 export class FForm extends FRoot {
+	static readonly tagName = "f-form";
 	/**
 	 * css loaded from scss file
 	 */
@@ -38,7 +40,7 @@ export class FForm extends FRoot {
 		 * Final html to render
 		 */
 		return html`
-			<form gap=${this.gap}>
+			<form gap=${ifDefined(this.gap)}>
 				<slot></slot>
 			</form>
 		`;

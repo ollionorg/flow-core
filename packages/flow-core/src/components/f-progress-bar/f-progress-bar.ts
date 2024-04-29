@@ -7,7 +7,7 @@ import { FDiv } from "../f-div/f-div";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
-import { flowElement } from "../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 import { classMap } from "lit-html/directives/class-map.js";
 import { keyed } from "lit/directives/keyed.js";
@@ -26,8 +26,8 @@ export type FProgressBarWidthProp = "fill-container" | `${number}px`;
 
 export type FProgressBarValueProp = `${number}%`;
 
-@flowElement("f-progress-bar")
 export class FProgressBar extends FRoot {
+	static readonly tagName = "f-progress-bar";
 	/**
 	 * css loaded from scss file
 	 */

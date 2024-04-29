@@ -3,7 +3,7 @@ import { property, query, state } from "lit/decorators.js";
 import globalStyle from "./f-color-picker-global.scss?inline";
 import eleStyle from "./f-color-picker.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 
 import "vanilla-colorful";
@@ -19,8 +19,8 @@ export type FColorPickerInputEvent = {
 	value?: string;
 };
 
-@flowElement("f-color-picker")
 export class FColorPicker extends FRoot {
+	static readonly tagName = "f-color-picker";
 	/**
 	 * css loaded from scss file
 	 */

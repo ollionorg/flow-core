@@ -3,9 +3,12 @@ import { html, fixture, expect } from "@open-wc/testing";
 import samplelogs from "./sample-logs";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+
 import { FLog } from "@ollion/flow-log";
 import { FDiv } from "@ollion/flow-core";
+
+register([...flowCoreElements, FLog]);
 
 describe("f-log", () => {
 	it("is defined", () => {

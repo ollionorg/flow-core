@@ -8,7 +8,7 @@ import { FDiv } from "../f-div/f-div";
 import { FSelect } from "../f-select/f-select";
 import { FSuggest } from "../f-suggest/f-suggest";
 import { FIconButton } from "../f-icon-button/f-icon-button";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 injectCss("f-search", globalStyle);
@@ -38,8 +38,8 @@ export type FSearchSuggestions = string[] | FSearchSuggestionsCategory | FSearch
 
 export type FSearchScope = string[] | "none";
 
-@flowElement("f-search")
 export class FSearch extends FRoot {
+	static readonly tagName = "f-search";
 	/**
 	 * css loaded from scss file
 	 */

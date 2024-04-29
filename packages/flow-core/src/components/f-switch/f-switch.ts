@@ -4,7 +4,7 @@ import eleStyle from "./f-switch.scss?inline";
 import globalStyle from "./f-switch-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-switch", globalStyle);
 
@@ -14,8 +14,8 @@ export type FSwitchCustomEvent = {
 	value: boolean;
 };
 
-@flowElement("f-switch")
 export class FSwitch extends FRoot {
+	static readonly tagName = "f-switch";
 	/**
 	 * css loaded from scss file
 	 */
@@ -24,7 +24,7 @@ export class FSwitch extends FRoot {
 	/**
 	 * @attribute Value of a switch defines if it is on or off.
 	 */
-	@property({ reflect: true, type: String })
+	@property({ reflect: true, type: Boolean })
 	value?: boolean = false;
 
 	/**

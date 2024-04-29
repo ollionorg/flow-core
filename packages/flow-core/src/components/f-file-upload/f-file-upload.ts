@@ -10,7 +10,7 @@ import { FIcon } from "../f-icon/f-icon";
 import { getExtensionsFromMimeType, getFormattedBytes } from "../../utils/index";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 import { ifDefined } from "lit/directives/if-defined.js";
 injectCss("f-file-upload", globalStyle);
@@ -29,8 +29,8 @@ export type FFileUploadSizeProp =
 	| `${number} GB`
 	| `${number} TB`;
 
-@flowElement("f-file-upload")
 export class FFileUpload extends FRoot {
+	static readonly tagName = "f-file-upload";
 	/**
 	 * css loaded from scss file
 	 */

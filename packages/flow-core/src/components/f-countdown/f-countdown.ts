@@ -3,7 +3,7 @@ import { property } from "lit/decorators.js";
 import eleStyle from "./f-countdown.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
-import { flowElement } from "../../utils";
+
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import { FText } from "../f-text/f-text";
@@ -22,8 +22,8 @@ export type FCountdownSizesProp = (typeof sizes)[number];
 export type FCountdownLabelProp = (typeof placements)[number];
 export type FCountdownDuration = number | string;
 
-@flowElement("f-countdown")
 export class FCountdown extends FRoot {
+	static readonly tagName = "f-countdown";
 	/**
 	 * css loaded from scss file
 	 */

@@ -2,7 +2,8 @@ import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 import { expect, fixture, html } from "@open-wc/testing";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import { register, flowCoreElements } from "@ollion/flow-core";
+register(flowCoreElements);
 
 import { ConfigUtil, FIcon, FInput, FText } from "@ollion/flow-core";
 // importing `loadingSVG` to cross check

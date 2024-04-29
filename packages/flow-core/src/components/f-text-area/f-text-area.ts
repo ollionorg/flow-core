@@ -5,7 +5,7 @@ import globalStyle from "./f-text-area-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-text-area", globalStyle);
 
@@ -15,8 +15,8 @@ export type FTextAreaCustomEvent = {
 	value: string;
 };
 
-@flowElement("f-text-area")
 export class FTextArea extends FRoot {
+	static readonly tagName = "f-text-area";
 	/**
 	 * css loaded from scss file
 	 */
@@ -61,8 +61,8 @@ export class FTextArea extends FRoot {
 	/**
 	 * @attribute This shows the character count while typing and auto limits after reaching the max length.
 	 */
-	@property({ reflect: true, type: String, attribute: "max-length" })
-	maxLength?: string;
+	@property({ reflect: true, type: Number, attribute: "max-length" })
+	maxLength?: number;
 
 	/**
 	 * @attribute Provides a resize handle on the bottom right of text-area which enables a user to resize the text-area within the parents scope.

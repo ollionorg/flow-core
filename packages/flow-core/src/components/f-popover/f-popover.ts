@@ -11,7 +11,7 @@ import {
 	autoUpdate,
 	Placement
 } from "@floating-ui/dom";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-popover", globalStyle);
 
@@ -69,8 +69,9 @@ export type FPopOverOffset = {
 	crossAxis?: number;
 	alignmentAxis?: number;
 };
-@flowElement("f-popover")
+
 export class FPopover extends FRoot {
+	static readonly tagName = "f-popover";
 	/**
 	 * css loaded from scss file
 	 */

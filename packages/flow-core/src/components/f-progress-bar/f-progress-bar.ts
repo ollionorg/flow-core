@@ -11,7 +11,6 @@ import { validateHTMLColorName } from "validate-color";
 import { injectCss } from "@ollion/flow-core-config";
 import { classMap } from "lit-html/directives/class-map.js";
 import { keyed } from "lit/directives/keyed.js";
-import { ifDefined } from "lit/directives/if-defined.js";
 
 injectCss("f-progress-bar", globalStyle);
 
@@ -188,13 +187,9 @@ export class FProgressBar extends FRoot {
 					class="f-progress-bar"
 					.width=${this.computedWidth}
 					height=${this.computedHeight}
-					data-variant=${ifDefined(this.variant)}
+					data-variant=${this.variant}
 				>
-					<f-div
-						.width=${this.value}
-						data-state=${ifDefined(this.state)}
-						class="f-progress-bar-fill"
-					></f-div>
+					<f-div .width=${this.value} data-state=${this.state} class="f-progress-bar-fill"></f-div>
 					<f-div width="fill-container"></f-div>
 				</f-div>
 			`;
@@ -208,7 +203,7 @@ export class FProgressBar extends FRoot {
 			this.valueInNumber > 50 ? 1 : 2,
 			html`<div
 				class=${classMap(classes)}
-				data-state=${ifDefined(this.state)}
+				data-state=${this.state}
 				style="${this.circleProgressStyle}"
 			></div>`
 		);

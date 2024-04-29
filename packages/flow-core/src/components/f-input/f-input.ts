@@ -4,8 +4,7 @@ import globalStyle from "./f-input-global.scss?inline";
 import { FText } from "../f-text/f-text";
 import { FDiv } from "../f-div/f-div";
 import { FIcon } from "../f-icon/f-icon";
-import { ifDefined } from "lit/directives/if-defined.js";
-
+import { ifDefined } from "lit-html/directives/if-defined.js";
 import { injectCss } from "@ollion/flow-core-config";
 import { FInputBase, FInputCustomEvent } from "./f-input-base";
 import { FInputLight } from "./f-input-light";
@@ -142,10 +141,10 @@ export class FInput extends FInputBase {
 						.loading=${this.loading}
 						.clear=${this.clear}
 						.suffixWhen=${this.suffixWhen}
-						aria-label="${ifDefined(this.getAttribute("aria-label") ?? undefined)}"
-						data-qa-element-id=${ifDefined(this.getAttribute("data-qa-element-id") ?? undefined)}
-						.autofocus=${Boolean(this.getAttribute("autofocus"))}
-						autocomplete=${ifDefined(this.getAttribute("autocomplete") ?? undefined)}
+						aria-label="${this.getAttribute("aria-label")}"
+						data-qa-element-id=${this.getAttribute("data-qa-element-id")}
+						autofocus=${ifDefined(this.getAttribute("autofocus"))}
+						autocomplete=${ifDefined(this.getAttribute("autocomplete"))}
 						.maxLength=${this.maxLength}
 						@input=${(e: CustomEvent<FInputCustomEvent>) => this.updateValue(e)}
 					></f-input-light>

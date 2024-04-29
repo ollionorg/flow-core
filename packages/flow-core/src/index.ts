@@ -168,10 +168,14 @@ export const flowCoreElements = [
 ];
 export function register(elements: (new () => LitElement)[]) {
 	elements.forEach(element => {
-		const tagName = element.name.replace(
+		let tagName = element.name.replace(
 			/[A-Z]/g,
 			(match, offset) => (offset > 0 ? "-" : "") + match.toLowerCase()
 		);
+		if (element.name === "FMDEditor") {
+			tagName = "f-md-editor";
+		}
+
 		if (!customElements.get(tagName)) customElements.define(tagName, element);
 	});
 }

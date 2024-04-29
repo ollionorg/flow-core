@@ -7,7 +7,6 @@ import { ConfigUtil, injectCss } from "@ollion/flow-core-config";
 import { getTextContrast, isValidHttpUrl } from "./../../utils";
 import { classMap } from "lit-html/directives/class-map.js";
 import { FIcon } from "../f-icon/f-icon";
-import { ifDefined } from "lit/directives/if-defined.js";
 
 injectCss("f-pictogram", globalStyle);
 
@@ -16,10 +15,10 @@ const category = ["fill", "outline"] as const;
 const sizes = ["x-large", "large", "medium", "small"] as const;
 const states = ["primary", "danger", "warning", "success", "default", "inherit"] as const;
 
-export type FPictogramVariant = (typeof variants)[number];
-export type FPictogramCategory = (typeof category)[number];
-export type FPictogramSize = (typeof sizes)[number];
-export type FPictogramState = (typeof states)[number];
+export type FPictogramVariant = typeof variants[number];
+export type FPictogramCategory = typeof category[number];
+export type FPictogramSize = typeof sizes[number];
+export type FPictogramState = typeof states[number];
 
 let colors = [
 	"#FFB900",
@@ -178,7 +177,7 @@ export class FPictogram extends FRoot {
 				const svg = IconPack[this.source];
 				if (svg) {
 					return html`<f-icon
-						state=${ifDefined(this.category === "fill" ? this.state : "default")}
+						state=${this.category === "fill" ? this.state : "default"}
 						class="${"f-pictogram-" + this.size}"
 						source="${this.source}"
 						size="${this.sourceSize()}"
@@ -186,11 +185,7 @@ export class FPictogram extends FRoot {
 				}
 			}
 		}
-		return html`<p
-			class="text-styling"
-			state=${ifDefined(this.state)}
-			style=${this.textColorStyling}
-		>
+		return html`<p class="text-styling" state=${this.state} style=${this.textColorStyling}>
 			${this.textSource}
 		</p>`;
 	}
@@ -283,10 +278,10 @@ export class FPictogram extends FRoot {
 		return html`
 			<div
 				class=${classMap({ "f-pictogram": true, hasShimmer })}
-				variant=${ifDefined(this.variant)}
-				state=${ifDefined(this.state)}
-				category=${ifDefined(this.category)}
-				size=${ifDefined(this.size)}
+				variant=${this.variant}
+				state=${this.state}
+				category=${this.category}
+				size=${this.size}
 				?disabled=${this.disabled}
 				?loading=${this.loading}
 				?clickable=${this.clickable}

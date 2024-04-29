@@ -14,7 +14,6 @@ import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor, validateHTMLColorName } from "validate-color";
 import { Subscription } from "rxjs";
-import { ifDefined } from "lit/directives/if-defined.js";
 
 injectCss("f-icon", globalStyle);
 
@@ -214,8 +213,8 @@ export class FIcon extends FRoot {
 		return html`<div
 			class=${classMap(classes)}
 			style=${this.applyStyles()}
-			state=${ifDefined(this.state)}
-			size=${ifDefined(this.size)}
+			state=${this.state}
+			size=${this.size}
 			?disabled=${this.disabled}
 			?loading=${this.loading}
 			?clickable=${this.clickable}

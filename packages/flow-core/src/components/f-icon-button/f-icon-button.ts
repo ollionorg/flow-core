@@ -15,16 +15,15 @@ import getCustomFillColor from "../../utils/get-custom-fill-color";
 import LightenDarkenColor from "../../utils/get-lighten-darken-color";
 
 import { injectCss } from "@ollion/flow-core-config";
-import { ifDefined } from "lit/directives/if-defined.js";
 injectCss("f-icon-button", globalStyle);
 
 const variants = ["round", "curved", "block"] as const;
 const categories = ["fill", "outline", "transparent", "packed"] as const;
 const sizes = ["large", "medium", "small", "x-small"] as const;
 
-export type FIconButtonVariant = (typeof variants)[number];
-export type FIconButtonType = (typeof categories)[number];
-export type FIconButtonSize = (typeof sizes)[number];
+export type FIconButtonVariant = typeof variants[number];
+export type FIconButtonType = typeof categories[number];
+export type FIconButtonSize = typeof sizes[number];
 export type FIconButtonState =
 	| "primary"
 	| "danger"
@@ -84,8 +83,8 @@ export class FIconButton extends FRoot {
 	/**
 	 * @attribute Counter property enables a counter on the button.
 	 */
-	@property({ reflect: true, type: String })
-	counter?: string;
+	@property({ reflect: true, type: [String, Number] })
+	counter?: string | number;
 
 	/**
 	 * @attribute Loader icon replaces the content of the button .
@@ -269,17 +268,17 @@ export class FIconButton extends FRoot {
 		return html`<span
 			class=${classMap(classes)}
 			style=${this.applyStyles()}
-			variant=${ifDefined(this.variant)}
-			category=${ifDefined(this.category)}
-			size=${ifDefined(this.size)}
-			state=${ifDefined(this.state)}
-			effect="${ifDefined(this.effect)}"
+			variant=${this.variant}
+			category=${this.category}
+			size=${this.size}
+			state=${this.state}
+			effect="${this.effect}"
 			?counter=${this.counter}
 			?disabled=${this.disabled}
 			?loading=${this.loading}
 			label="Icon-${this.icon}"
 			aria-label="Icon-${this.icon}"
-			data-qa-id=${ifDefined(this.getAttribute("data-qa-element-id") ?? undefined)}
+			data-qa-id=${this.getAttribute("data-qa-element-id")}
 		>
 			${this.loading ? unsafeSVG(loader) : ""}
 			<f-icon

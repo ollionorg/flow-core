@@ -2,6 +2,13 @@
 
 # Change Log
 
+## [4.0.0] - 2024-04-29
+
+### Major/Breaking Changes
+
+- Auto web component registration was removed to facilitate tree shaking.
+- To register component manually please check [here](https://github.com/ollionorg/flow-core/blob/main/docs/component-registration.md)
+
 ## [3.2.1] - 2024-03-19
 
 ### Improvements

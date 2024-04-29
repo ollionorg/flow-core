@@ -2,11 +2,12 @@
 
 # Change Log
 
-## [2.9.10] - 2024-04-15
+## [3.0.0] - 2024-04-29
 
-### Bug Fixes
+### Major/Breaking Changes
 
-- `f-select` : call `updateDimentions` only while opening.
+- Auto web component registration was removed to facilitate tree shaking.
+- To register component manually please check [here](https://github.com/ollionorg/flow-core/blob/main/docs/component-registration.md)
 
 ## [2.9.9] - 2024-04-04
 

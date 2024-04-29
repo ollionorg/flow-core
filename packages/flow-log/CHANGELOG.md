@@ -2,15 +2,12 @@
 
 # Change Log
 
-## [2.1.0] - 2024-03-28
+## [3.0.0] - 2024-04-29
 
-### Features
+### Major/Breaking Changes
 
-- f-log : `label` property introduced to display label at top-left.
-- f-log : `header` slot introduced to display meta info after search bar.
-- f-log : `actions` slot introduced to display additional actions menu or icons at top-right.
-- f-log : formatting colors updated.
-- f-log : search bar and log level selection elements style updated.
+- Auto web component registration was removed to facilitate tree shaking.
+- To register component manually please check [here](https://github.com/ollionorg/flow-core/blob/main/docs/component-registration.md)
 
 ## [2.0.6] - 2024-03-23
 

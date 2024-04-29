@@ -5,7 +5,6 @@ import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import eleStyle from "./f-form-group.scss?inline";
 import globalStyle from "./f-form-group-global.scss?inline";
-import { flowElement } from "./../../utils";
 
 import { injectCss } from "@ollion/flow-core-config";
 import { ifDefined } from "lit-html/directives/if-defined.js";
@@ -20,7 +19,7 @@ export type FGroupLabel = {
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
-@flowElement("f-form-group")
+
 export class FFormGroup extends FRoot {
 	/**
 	 * css loaded from scss file

@@ -2,7 +2,7 @@ import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import { FTcell } from "../f-tcell/f-tcell";
 import { FTrow } from "../f-trow/f-trow";
-import { FRoot, flowElement } from "@ollion/flow-core";
+import { FRoot } from "@ollion/flow-core";
 import globalStyle from "./f-table-global.scss?inline";
 import { injectCss } from "@ollion/flow-core-config";
 
@@ -12,7 +12,6 @@ export type FTableVariant = "stripped" | "outlined" | "underlined" | "bordered";
 export type FTableSize = "medium" | "small";
 export type FTableSelectable = "single" | "multiple" | "none";
 
-@flowElement("f-table")
 export class FTable extends FRoot {
 	/**
 	 * css loaded from scss file

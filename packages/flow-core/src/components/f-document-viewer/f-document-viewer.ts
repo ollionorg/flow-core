@@ -4,7 +4,7 @@ import eleStyle from "./f-document-viewer.scss?inline";
 import globalStyle from "./f-document-viewer-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
-import { flowElement } from "../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 import { FText } from "../f-text/f-text";
 import { FAccordion } from "../f-accordion/f-accordion";
@@ -42,7 +42,6 @@ export type FDocumentStatement = {
 
 export type FDocViewerContent = Record<string, FDocumentStatement | string>;
 
-@flowElement("f-document-viewer")
 export class FDocumentViewer extends FRoot {
 	/**
 	 * css loaded from scss file

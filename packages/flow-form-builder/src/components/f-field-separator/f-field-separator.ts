@@ -9,7 +9,6 @@ injectCss("f-field-separator", globalStyle);
 
 export type FFieldSeparatorState = FDividerState;
 
-@customElement("f-field-separator")
 export class FFieldSeparator extends FRoot {
 	/**
 	 * css loaded from scss file

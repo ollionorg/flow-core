@@ -4,7 +4,7 @@ import eleStyle from "./f-accordion.scss?inline";
 import globalStyle from "./f-accordion-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv, FDivPaddingProp } from "../f-div/f-div";
-import { flowElement, generateId } from "./../../utils";
+import { generateId } from "./../../utils";
 import { injectCss } from "@ollion/flow-core-config";
 
 injectCss("f-accordion", globalStyle);
@@ -16,7 +16,7 @@ export type FAccordionCustomEvent = {
 };
 
 export type FAccordionPadding = FDivPaddingProp;
-@flowElement("f-accordion")
+
 export class FAccordion extends FRoot {
 	/**
 	 * css loaded from scss file

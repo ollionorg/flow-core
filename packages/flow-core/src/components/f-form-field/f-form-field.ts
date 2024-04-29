@@ -2,9 +2,7 @@ import { html } from "lit";
 
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
-import { flowElement } from "./../../utils";
 
-@flowElement("f-form-field")
 export class FFormField extends FRoot {
 	static styles = [...FDiv.styles];
 	render() {

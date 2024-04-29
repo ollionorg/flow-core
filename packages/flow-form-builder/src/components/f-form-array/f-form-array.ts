@@ -33,7 +33,7 @@ export type ArrayValueType = (
 	| unknown[]
 	| undefined
 )[];
-@customElement("f-form-array")
+
 export class FFormArray extends FRoot {
 	/**
 	 * css loaded from scss file

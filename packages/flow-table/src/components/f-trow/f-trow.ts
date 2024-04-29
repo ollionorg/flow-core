@@ -1,7 +1,7 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 
-import { FDiv, FIcon, FRoot, flowElement, FIconButton } from "@ollion/flow-core";
+import { FDiv, FIcon, FRoot, FIconButton } from "@ollion/flow-core";
 import { FTcell } from "../f-tcell/f-tcell";
 import eleStyle from "./f-trow.scss?inline";
 import globalStyle from "./f-trow-global.scss?inline";
@@ -19,7 +19,6 @@ export type FTrowState =
 	| "default";
 export type FTrowChevronPosition = "left" | "right";
 
-@flowElement("f-trow")
 export class FTrow extends FRoot {
 	/**
 	 * css loaded from scss file

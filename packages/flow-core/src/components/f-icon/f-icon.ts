@@ -9,11 +9,12 @@ import { configSubject, themeSubject, injectCss } from "@ollion/flow-core-config
 import { classMap } from "lit-html/directives/class-map.js";
 import loader from "../../mixins/svg/loader";
 import notFound from "../../mixins/svg/not-found";
-import { flowElement, isValidHttpUrl } from "./../../utils";
+import { isValidHttpUrl } from "./../../utils";
 import { unsafeHTML } from "lit-html/directives/unsafe-html.js";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor, validateHTMLColorName } from "validate-color";
 import { Subscription } from "rxjs";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 injectCss("f-icon", globalStyle);
 
@@ -29,7 +30,6 @@ export type FIconState =
 	| "inherit"
 	| `custom, ${string}`;
 
-@flowElement("f-icon")
 export class FIcon extends FRoot {
 	/**
 	 * css loaded from scss file
@@ -214,8 +214,8 @@ export class FIcon extends FRoot {
 		return html`<div
 			class=${classMap(classes)}
 			style=${this.applyStyles()}
-			state=${this.state}
-			size=${this.size}
+			state=${ifDefined(this.state)}
+			size=${ifDefined(this.size)}
 			?disabled=${this.disabled}
 			?loading=${this.loading}
 			?clickable=${this.clickable}

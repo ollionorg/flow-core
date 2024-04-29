@@ -10,7 +10,7 @@ export const checkboxGroupStyles = eleStyle;
 import { injectCss } from "@ollion/flow-core-config";
 
 injectCss("f-checkbox-group", globalStyle);
-@customElement("f-checkbox-group")
+
 export class FCheckboxGroup extends FRoot {
 	/**
 	 * css loaded from scss file

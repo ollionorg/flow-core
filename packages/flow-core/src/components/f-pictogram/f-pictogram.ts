@@ -7,7 +7,8 @@ import { ConfigUtil, injectCss } from "@ollion/flow-core-config";
 import { getTextContrast, isValidHttpUrl } from "./../../utils";
 import { classMap } from "lit-html/directives/class-map.js";
 import { FIcon } from "../f-icon/f-icon";
-import { flowElement } from "./../../utils";
+import { ifDefined } from "lit/directives/if-defined.js";
+
 injectCss("f-pictogram", globalStyle);
 
 const variants = ["circle", "square", "hexagon", "squircle"] as const;
@@ -46,7 +47,6 @@ function generateHslaColors(saturation: number, lightness: number, alpha: number
 
 colors = generateHslaColors(50, 60, 1.0, 10);
 
-@flowElement("f-pictogram")
 export class FPictogram extends FRoot {
 	/**
 	 * css loaded from scss file
@@ -178,7 +178,7 @@ export class FPictogram extends FRoot {
 				const svg = IconPack[this.source];
 				if (svg) {
 					return html`<f-icon
-						state=${this.category === "fill" ? this.state : "default"}
+						state=${ifDefined(this.category === "fill" ? this.state : "default")}
 						class="${"f-pictogram-" + this.size}"
 						source="${this.source}"
 						size="${this.sourceSize()}"
@@ -186,7 +186,11 @@ export class FPictogram extends FRoot {
 				}
 			}
 		}
-		return html`<p class="text-styling" state=${this.state} style=${this.textColorStyling}>
+		return html`<p
+			class="text-styling"
+			state=${ifDefined(this.state)}
+			style=${this.textColorStyling}
+		>
 			${this.textSource}
 		</p>`;
 	}
@@ -279,10 +283,10 @@ export class FPictogram extends FRoot {
 		return html`
 			<div
 				class=${classMap({ "f-pictogram": true, hasShimmer })}
-				variant=${this.variant}
-				state=${this.state}
-				category=${this.category}
-				size=${this.size}
+				variant=${ifDefined(this.variant)}
+				state=${ifDefined(this.state)}
+				category=${ifDefined(this.category)}
+				size=${ifDefined(this.size)}
 				?disabled=${this.disabled}
 				?loading=${this.loading}
 				?clickable=${this.clickable}

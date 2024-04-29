@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FButton, FDiv, flowElement, FRoot, FSearch, FText } from "@ollion/flow-core";
+import { FButton, FDiv, FRoot, FSearch, FText } from "@ollion/flow-core";
 import { html, HTMLTemplateResult, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { FTable, FTableSelectable, FTableSize, FTableVariant } from "../f-table/f-table";
@@ -53,7 +53,6 @@ export type FTableSchemaSelectable = FTableSelectable;
 export type FTableSchemaHeaderCellemplate<T = any> = (value: T) => HTMLTemplateResult;
 export type FTableSchemaStickyBackground = "default" | "secondary" | "tertiary" | "subtle";
 
-@flowElement("f-table-schema")
 export class FTableSchema extends FRoot {
 	/**
 	 * css loaded from scss file

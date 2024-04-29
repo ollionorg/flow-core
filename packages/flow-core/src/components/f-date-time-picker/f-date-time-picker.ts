@@ -9,7 +9,6 @@ import { DateLimit, DateOption } from "flatpickr/dist/types/options";
 import { FInput } from "../f-input/f-input";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
-import { flowElement } from "./../../utils";
 
 import { injectCss } from "@ollion/flow-core-config";
 import { ifDefined } from "lit-html/directives/if-defined.js";
@@ -24,7 +23,6 @@ export type DateDisableType = DateLimit<DateOption>[];
 
 export type FDateOption = DateOption;
 
-@flowElement("f-date-time-picker")
 export class FDateTimePicker extends FRoot {
 	/**
 	 * css loaded from scss file
@@ -88,7 +86,7 @@ export class FDateTimePicker extends FRoot {
 	/**
 	 * @attribute Sets the maximum value of the date allowed in the picker
 	 */
-	@property({ reflect: true, type: Date })
+	@property({ reflect: true, attribute: false })
 	["max-date"]?: FDateOption;
 
 	/**

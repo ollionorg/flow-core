@@ -28,7 +28,7 @@ export type ObjectValueType = Record<
 	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 	string | string[] | number | number[] | unknown | unknown[] | undefined
 >;
-@customElement("f-form-object")
+
 export class FFormObject extends FRoot {
 	/**
 	 * css loaded from scss file

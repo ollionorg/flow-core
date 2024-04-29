@@ -1,5 +1,5 @@
 import { unsafeCSS, html } from "lit";
-import { FRoot, flowElement } from "@ollion/flow-core";
+import { FRoot } from "@ollion/flow-core";
 import globalStyle from "./f-md-editor-global.scss?inline";
 import { FTextArea } from "@ollion/flow-core";
 import * as showdown from "showdown";
@@ -8,7 +8,7 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import { injectCss } from "@ollion/flow-core-config";
 
 injectCss("f-md-editor", globalStyle);
-@flowElement("f-md-editor")
+
 export class FMDEditor extends FRoot {
 	/**
 	 * css loaded from scss file

@@ -4,7 +4,7 @@ import globalStyle from "./f-tooltip-global.scss?inline";
 import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import { FPopover } from "../f-popover/f-popover";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-tooltip", globalStyle);
 
@@ -23,7 +23,6 @@ export type FTooltipPlacement =
 	| "left-end"
 	| "auto";
 
-@flowElement("f-tooltip")
 export class FTooltip extends LitElement {
 	/**
 	 * css loaded from scss file

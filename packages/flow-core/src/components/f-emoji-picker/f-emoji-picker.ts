@@ -9,7 +9,7 @@ import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import { FIcon } from "../f-icon/f-icon";
 import { FPopover } from "../f-popover/f-popover";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-emoji-picker", globalStyle);
 
@@ -56,7 +56,6 @@ export type FEmojiPickerCustomEmojiData = FEmojiPickerCustomEmoji[];
 export type RecentEmojis = string[];
 export type ExcludeEmojis = string[];
 
-@flowElement("f-emoji-picker")
 export class FEmojiPicker extends FRoot {
 	/**
 	 * css loaded from scss file

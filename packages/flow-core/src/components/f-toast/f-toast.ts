@@ -7,13 +7,12 @@ import { ref, createRef, Ref } from "lit/directives/ref.js";
 import toastQueue from "./f-toast-queue";
 import { FDiv } from "../f-div/f-div";
 import { FIcon } from "../f-icon/f-icon";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-toast", globalStyle);
 
 export type FToastState = "default" | "primary" | "success" | "warning" | "danger";
 
-@flowElement("f-toast")
 export class FToast extends FRoot {
 	/**
 	 * css loaded from scss file

@@ -5,15 +5,16 @@ import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import eleStyle from "./f-field.scss?inline";
 import globalStyle from "./f-field-global.scss?inline";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
+import { ifDefined } from "lit/directives/if-defined.js";
 injectCss("f-field", globalStyle);
 
 export type FFieldStateProp = "default" | "primary" | "success" | "danger" | "warning";
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
-@flowElement("f-field")
+
 export class FField extends FRoot {
 	/**
 	 * css loaded from scss file
@@ -77,8 +78,13 @@ export class FField extends FRoot {
 			direction="column"
 			class="f-field-wrapper"
 			gap="small"
-			variant=${this.variant}
-			><div class="f-field" state=${this.state} size=${this.size} variant=${this.variant}>
+			data-variant=${ifDefined(this.variant)}
+			><div
+				class="f-field"
+				state=${ifDefined(this.state)}
+				size=${ifDefined(this.size)}
+				variant=${ifDefined(this.variant)}
+			>
 				<slot></slot>
 			</div>
 			${this.description

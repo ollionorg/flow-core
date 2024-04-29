@@ -28,7 +28,6 @@ import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-lineage", globalStyle);
 // Renders attribute names of parent element to textContent
 
-@customElement("f-lineage")
 export class FLineage extends FRoot {
 	/**
 	 * css loaded from scss file

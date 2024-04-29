@@ -14,7 +14,7 @@ export const radioGroupStyles = eleStyle;
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
-@customElement("f-radio-group")
+
 export class FRadioGroup extends FRoot {
 	/**
 	 * css loaded from scss file

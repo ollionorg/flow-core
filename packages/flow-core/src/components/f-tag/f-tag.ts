@@ -12,7 +12,7 @@ import getCustomFillColor from "../../utils/get-custom-fill-color";
 import LightenDarkenColor from "../../utils/get-lighten-darken-color";
 import { FIcon } from "../f-icon/f-icon";
 import { FCounter } from "../f-counter/f-counter";
-import { flowElement } from "./../../utils";
+
 import { createRef, ref, Ref } from "lit/directives/ref.js";
 import type { FDiv } from "../f-div/f-div";
 import { injectCss } from "@ollion/flow-core-config";
@@ -35,7 +35,7 @@ export type FTagCategory = "fill" | "outline";
 /**
  * @summary Tags allow users to categorize the content. They can be used to add metadata to an element such as category, or property or show a status.
  */
-@flowElement("f-tag")
+
 export class FTag extends FRoot {
 	/**
 	 * css loaded from scss file

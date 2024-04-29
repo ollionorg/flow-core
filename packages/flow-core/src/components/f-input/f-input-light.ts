@@ -6,13 +6,12 @@ import { classMap } from "lit-html/directives/class-map.js";
 import { FIcon } from "../f-icon/f-icon";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
-import { ifDefined } from "lit-html/directives/if-defined.js";
-import { flowElement } from "./../../utils";
+import { ifDefined } from "lit/directives/if-defined.js";
+
 import { injectCss } from "@ollion/flow-core-config";
 import { FInputBase } from "./f-input-base";
 injectCss("f-input-light", globalStyle);
 
-@flowElement("f-input-light")
 export class FInputLight extends FInputBase {
 	/**
 	 * css loaded from scss file
@@ -109,7 +108,9 @@ export class FInputLight extends FInputBase {
 		}
 
 		if (this.loading) {
-			loadingIcon = html`<div class="loader-suffix" state=${this.state}>${unsafeSVG(loader)}</div>`;
+			loadingIcon = html`<div class="loader-suffix" state=${ifDefined(this.state)}>
+				${unsafeSVG(loader)}
+			</div>`;
 		}
 		return html`<div class="f-input-suffix">
 				${this.passwordToggle}${clearIcon}${computedSuffix}
@@ -164,32 +165,35 @@ export class FInputLight extends FInputBase {
 		/**
 		 * Final html to render
 		 */
+
 		return html`
 			<div
 				class="f-input-wrapper"
-				variant=${this.variant}
-				category=${this.category}
-				state=${this.state}
-				size=${this.size}
+				variant=${ifDefined(this.variant)}
+				category=${ifDefined(this.category)}
+				state=${ifDefined(this.state)}
+				size=${ifDefined(this.size)}
 				?disabled=${this.disabled}
 			>
 				${this.prefixTemplate}
 				<input
 					class=${classMap({ "f-input": true })}
-					variant=${this.variant}
-					category=${this.category}
-					type=${this.type}
-					state=${this.state}
-					name=${this.getAttribute("name")}
-					data-qa-id=${this.getAttribute("data-qa-element-id")}
-					placeholder=${this.placeholder}
-					.value=${this.value ?? null}
-					size=${this.size}
+					variant=${ifDefined(this.variant)}
+					category=${ifDefined(this.category)}
+					type=${ifDefined(this.type)}
+					state=${ifDefined(this.state)}
+					name=${ifDefined(this.getAttribute("name") ?? undefined)}
+					data-qa-id=${ifDefined(this.getAttribute("data-qa-element-id") ?? undefined)}
+					placeholder=${ifDefined(this.placeholder)}
+					.value=${(this.value as string) ?? null}
+					size=${this.size as unknown as number}
 					?readonly=${this.readOnly}
-					autofocus=${ifDefined(this.getAttribute("autofocus"))}
-					autocomplete=${ifDefined(this.getAttribute("autocomplete"))}
+					?autofocus=${Boolean(this.getAttribute("autofocus"))}
+					autocomplete=${ifDefined(
+						(this.getAttribute("autocomplete") as "on" | "off") ?? undefined
+					)}
 					maxlength="${ifDefined(this.maxLength)}"
-					aria-label="${this.getAttribute("aria-label")}"
+					aria-label="${ifDefined(this.getAttribute("aria-label") ?? undefined)}"
 					@input=${this.handleInput}
 				/>
 				${this.suffixTemplate}

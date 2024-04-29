@@ -6,7 +6,7 @@ import globalStyle from "./f-div-global.scss?inline";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import loader from "../../mixins/svg/loader";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 
 export type FDivBorderWidth = "small" | "medium" | "large";
@@ -104,7 +104,7 @@ injectCss("f-div", globalStyle);
 /**
  * @summary F-div is used as a container for HTML elements.
  */
-@flowElement("f-div")
+
 export class FDiv extends FRoot {
 	/**
 	 * css loaded from scss file

@@ -2,11 +2,10 @@ import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import globalStyle from "./f-tab-content-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import { flowElement } from "./../../utils";
+
 import { injectCss } from "@ollion/flow-core-config";
 injectCss("f-tab-content", globalStyle);
 
-@flowElement("f-tab-content")
 export class FTabContent extends FRoot {
 	/**
 	 * css loaded from scss file

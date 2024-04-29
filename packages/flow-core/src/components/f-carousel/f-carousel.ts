@@ -6,13 +6,11 @@ import globalStyle from "./f-carousel-global.scss?inline";
 import { FDiv } from "../f-div/f-div";
 import { FCarouselContent } from "../f-carousel-content/f-carousel-content";
 import { FIcon } from "../f-icon/f-icon";
-import { flowElement } from "./../../utils";
 
 import { injectCss } from "@ollion/flow-core-config";
 
 injectCss("f-carousel", globalStyle);
 
-@flowElement("f-carousel")
 export class FCarousel extends FRoot {
 	/**
 	 * css loaded from scss file

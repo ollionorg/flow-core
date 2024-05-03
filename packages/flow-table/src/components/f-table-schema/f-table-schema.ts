@@ -188,6 +188,9 @@ export class FTableSchema extends FRoot {
 	@query("f-div.load-more")
 	loadMoreButton?: FDiv;
 
+	@query("#pagination-loader")
+	paginationLoader!: FDiv;
+
 	@query("#f-table-element")
 	tableElement?: FTable;
 
@@ -458,6 +461,7 @@ export class FTableSchema extends FRoot {
 				>
 					${this.header} ${this.rowsHtml} ${this.noDataTemplate}
 				</f-table>
+				<f-div height="36px" loading="loader" id="pagination-loader" style="display:none"></f-div>
 				<f-div class="load-more" style="display:none" align="middle-left" padding="medium none">
 					<f-button @click=${this.paginate} label="load more" category="outline"></f-button>
 				</f-div>
@@ -468,10 +472,16 @@ export class FTableSchema extends FRoot {
 		super.updated(changedProperties);
 
 		this.onscroll = () => {
-			if (this.scrollTop + this.offsetHeight >= this.scrollHeight) {
+			// offset difference added , instead of exact equal
+			if (this.scrollHeight - (this.scrollTop + this.offsetHeight) < 24) {
+				if (this.filteredRows.length !== this.searchedRows.length) {
+					this.paginationLoader.style.width = this.offsetWidth + "px";
+					this.paginationLoader.style.display = "flex";
+				}
 				this.paginate();
 			}
 			if (this.filteredRows.length === this.searchedRows.length && !this.nextEmitted) {
+				this.paginationLoader.style.display = "none";
 				setTimeout(() => {
 					this.nextEmitted = true;
 					const toggle = new CustomEvent("next", {

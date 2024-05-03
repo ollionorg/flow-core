@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.4.3] - 2024-05-03
+
+### Bug Fixes
+
+- `f-table-schema` infinie scroll issue fixed.
+
 ## [2.4.2] - 2024-03-20
 
 ### Bug Fixes

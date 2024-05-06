@@ -194,6 +194,9 @@ export class FTableSchema extends FRoot {
 	@query("#f-table-element")
 	tableElement?: FTable;
 
+	@query(".f-table-schema-wrapper")
+	fTableWrapper!: HTMLDivElement;
+
 	nextEmitted = false;
 
 	get max() {
@@ -434,24 +437,24 @@ export class FTableSchema extends FRoot {
 			return html`<f-text state="warning"> Warning: The 'data' property is required.</f-text>`;
 		}
 		return html`
+			<slot name="search">
+				${this.showSearchBar
+					? html`<f-div
+							padding="medium none"
+							style="position: sticky;left: 0px;"
+							.width=${this.offsetWidth + "px"}
+					  >
+							<f-search
+								.scope=${["all", ...Object.keys(this.data.header)]}
+								.selected-scope=${this.searchScope}
+								.value=${this.searchTerm}
+								variant="round"
+								@input=${this.search}
+							></f-search>
+					  </f-div>`
+					: nothing}
+			</slot>
 			<div class="f-table-schema-wrapper">
-				<slot name="search">
-					${this.showSearchBar
-						? html`<f-div
-								padding="medium none"
-								style="position: sticky;left: 0px;"
-								.width=${this.offsetWidth + "px"}
-						  >
-								<f-search
-									.scope=${["all", ...Object.keys(this.data.header)]}
-									.selected-scope=${this.searchScope}
-									.value=${this.searchTerm}
-									variant="round"
-									@input=${this.search}
-								></f-search>
-						  </f-div>`
-						: nothing}
-				</slot>
 				<f-table
 					id="f-table-element"
 					.variant=${this.variant}
@@ -477,7 +480,7 @@ export class FTableSchema extends FRoot {
 
 		const handleLoadMoreButton = () => {
 			if (
-				this.scrollHeight === this.offsetHeight &&
+				this.fTableWrapper.scrollHeight === this.fTableWrapper.offsetHeight &&
 				this.filteredRows.length < this.searchedRows.length
 			) {
 				this.loadMoreButton?.style.removeProperty("display");
@@ -486,11 +489,15 @@ export class FTableSchema extends FRoot {
 			}
 		};
 
-		this.onscroll = () => {
+		this.fTableWrapper.onscroll = () => {
 			handleLoadMoreButton();
 
 			// offset difference added , instead of exact equal
-			if (this.scrollHeight - (this.scrollTop + this.offsetHeight) < 24) {
+			if (
+				this.fTableWrapper.scrollHeight -
+					(this.fTableWrapper.scrollTop + this.fTableWrapper.offsetHeight) <
+				24
+			) {
 				if (this.filteredRows.length !== this.searchedRows.length) {
 					this.paginationLoader.style.width = this.offsetWidth + "px";
 					this.paginationLoader.style.display = "flex";

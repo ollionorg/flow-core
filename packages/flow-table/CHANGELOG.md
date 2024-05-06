@@ -4,6 +4,11 @@
 
 ## [2.4.3] - 2024-05-03
 
+### Improvements
+
+- Made the search bar sticky.
+- Implemented a loader for infinite scroll.
+
 ### Bug Fixes
 
 - `f-table-schema` infinie scroll issue fixed.

@@ -437,7 +437,11 @@ export class FTableSchema extends FRoot {
 			<div class="f-table-schema-wrapper">
 				<slot name="search">
 					${this.showSearchBar
-						? html`<f-div padding="medium none">
+						? html`<f-div
+								padding="medium none"
+								style="position: sticky;left: 0px;"
+								.width=${this.offsetWidth + "px"}
+						  >
 								<f-search
 									.scope=${["all", ...Object.keys(this.data.header)]}
 									.selected-scope=${this.searchScope}
@@ -471,14 +475,28 @@ export class FTableSchema extends FRoot {
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
 
+		const handleLoadMoreButton = () => {
+			if (
+				this.scrollHeight === this.offsetHeight &&
+				this.filteredRows.length < this.searchedRows.length
+			) {
+				this.loadMoreButton?.style.removeProperty("display");
+			} else if (this.loadMoreButton) {
+				this.loadMoreButton.style.display = "none";
+			}
+		};
+
 		this.onscroll = () => {
+			handleLoadMoreButton();
+
 			// offset difference added , instead of exact equal
 			if (this.scrollHeight - (this.scrollTop + this.offsetHeight) < 24) {
 				if (this.filteredRows.length !== this.searchedRows.length) {
 					this.paginationLoader.style.width = this.offsetWidth + "px";
 					this.paginationLoader.style.display = "flex";
 				}
-				this.paginate();
+				// settimeout added to display above loader first
+				setTimeout(() => this.paginate());
 			}
 			if (this.filteredRows.length === this.searchedRows.length && !this.nextEmitted) {
 				this.paginationLoader.style.display = "none";
@@ -494,14 +512,7 @@ export class FTableSchema extends FRoot {
 			}
 		};
 		void this.updateComplete.then(async () => {
-			if (
-				this.scrollHeight === this.offsetHeight &&
-				this.filteredRows.length < this.searchedRows.length
-			) {
-				this.loadMoreButton?.style.removeProperty("display");
-			} else if (this.loadMoreButton) {
-				this.loadMoreButton.style.display = "none";
-			}
+			handleLoadMoreButton();
 			if (this.tableElement) {
 				await this.tableElement.updateHeaderSelectionCheckboxState();
 			}

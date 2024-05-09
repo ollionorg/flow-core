@@ -188,8 +188,14 @@ export class FTableSchema extends FRoot {
 	@query("f-div.load-more")
 	loadMoreButton?: FDiv;
 
+	@query("#pagination-loader")
+	paginationLoader!: FDiv;
+
 	@query("#f-table-element")
 	tableElement?: FTable;
+
+	@query(".f-table-schema-wrapper")
+	fTableWrapper!: HTMLDivElement;
 
 	nextEmitted = false;
 
@@ -431,20 +437,24 @@ export class FTableSchema extends FRoot {
 			return html`<f-text state="warning"> Warning: The 'data' property is required.</f-text>`;
 		}
 		return html`
+			<slot name="search">
+				${this.showSearchBar
+					? html`<f-div
+							padding="medium none"
+							style="position: sticky;left: 0px;"
+							.width=${this.offsetWidth + "px"}
+					  >
+							<f-search
+								.scope=${["all", ...Object.keys(this.data.header)]}
+								.selected-scope=${this.searchScope}
+								.value=${this.searchTerm}
+								variant="round"
+								@input=${this.search}
+							></f-search>
+					  </f-div>`
+					: nothing}
+			</slot>
 			<div class="f-table-schema-wrapper">
-				<slot name="search">
-					${this.showSearchBar
-						? html`<f-div padding="medium none">
-								<f-search
-									.scope=${["all", ...Object.keys(this.data.header)]}
-									.selected-scope=${this.searchScope}
-									.value=${this.searchTerm}
-									variant="round"
-									@input=${this.search}
-								></f-search>
-						  </f-div>`
-						: nothing}
-				</slot>
 				<f-table
 					id="f-table-element"
 					.variant=${this.variant}
@@ -458,6 +468,7 @@ export class FTableSchema extends FRoot {
 				>
 					${this.header} ${this.rowsHtml} ${this.noDataTemplate}
 				</f-table>
+				<f-div height="36px" loading="loader" id="pagination-loader" style="display:none"></f-div>
 				<f-div class="load-more" style="display:none" align="middle-left" padding="medium none">
 					<f-button @click=${this.paginate} label="load more" category="outline"></f-button>
 				</f-div>
@@ -467,11 +478,35 @@ export class FTableSchema extends FRoot {
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
 
-		this.onscroll = () => {
-			if (this.scrollTop + this.offsetHeight >= this.scrollHeight) {
-				this.paginate();
+		const handleLoadMoreButton = () => {
+			if (
+				this.fTableWrapper.scrollHeight === this.fTableWrapper.offsetHeight &&
+				this.filteredRows.length < this.searchedRows.length
+			) {
+				this.loadMoreButton?.style.removeProperty("display");
+			} else if (this.loadMoreButton) {
+				this.loadMoreButton.style.display = "none";
+			}
+		};
+
+		this.fTableWrapper.onscroll = () => {
+			handleLoadMoreButton();
+
+			// offset difference added , instead of exact equal
+			if (
+				this.fTableWrapper.scrollHeight -
+					(this.fTableWrapper.scrollTop + this.fTableWrapper.offsetHeight) <
+				24
+			) {
+				if (this.filteredRows.length !== this.searchedRows.length) {
+					this.paginationLoader.style.width = this.offsetWidth + "px";
+					this.paginationLoader.style.display = "flex";
+				}
+				// settimeout added to display above loader first
+				setTimeout(() => this.paginate());
 			}
 			if (this.filteredRows.length === this.searchedRows.length && !this.nextEmitted) {
+				this.paginationLoader.style.display = "none";
 				setTimeout(() => {
 					this.nextEmitted = true;
 					const toggle = new CustomEvent("next", {
@@ -484,14 +519,7 @@ export class FTableSchema extends FRoot {
 			}
 		};
 		void this.updateComplete.then(async () => {
-			if (
-				this.scrollHeight === this.offsetHeight &&
-				this.filteredRows.length < this.searchedRows.length
-			) {
-				this.loadMoreButton?.style.removeProperty("display");
-			} else if (this.loadMoreButton) {
-				this.loadMoreButton.style.display = "none";
-			}
+			handleLoadMoreButton();
 			if (this.tableElement) {
 				await this.tableElement.updateHeaderSelectionCheckboxState();
 			}

@@ -48,7 +48,13 @@ export const Playground = {
 				</f-div>
 			</f-popover>
 			<f-button style="display:none" label="download" @click=${downloadFile}></f-button>
-			<f-div state="default" id="reportTemplate" direction="column" overflow="scroll">
+			<f-div
+				state="default"
+				id="reportTemplate"
+				.maxHeight=${"100%"}
+				direction="column"
+				overflow="scroll"
+			>
 				<f-div state="warning" padding="large" variant="curved">
 					<f-text state="inherit"
 						>'f-table-schema' supports all properties and events of 'f-table'</f-text
@@ -170,7 +176,7 @@ export const Playground = {
 		["highlight-column-hover"]: true,
 		["sticky-header"]: true,
 		["rows-per-page"]: 20,
-		data: getFakeUsers(10),
+		data: getFakeUsers(100),
 		["sort-by"]: "firstName",
 		["sort-order"]: "asc",
 		["search-term"]: "",

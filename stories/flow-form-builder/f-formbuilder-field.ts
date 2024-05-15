@@ -429,6 +429,7 @@ const field: FormBuilderField = {
 				title: "Click inside field to see suggestions",
 				description: "Select suggestion to fill value"
 			},
+			optionsMaxHeight: "100px",
 			suggestWhen: () => true,
 			suggestions: [
 				"Suggestion 1",

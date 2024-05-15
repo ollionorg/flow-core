@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.4.2] - 2024-05-15
+
+### Patch Changes
+
+- `optionsMaxHeight` property added for suggest field.
+
 ## [2.4.1] - 2024-04-22
 
 ### Bug Fixes

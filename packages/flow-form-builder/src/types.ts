@@ -154,6 +154,7 @@ export type FormBuilderSuggestField = FormBuilderBaseField & {
 	loading?: boolean;
 	readonly?: boolean;
 	clear?: boolean;
+	optionsMaxHeight?: string;
 	suggestions?: FSuggestSuggestions;
 	suffixWhen?: FormBuilderSuffixCondition;
 	suggestWhen?: FSuggestWhen;

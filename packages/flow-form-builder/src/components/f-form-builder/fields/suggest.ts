@@ -30,6 +30,7 @@ export default function (
 			.suffixWhen=${field.suffixWhen}
 			.suggestWhen=${ifDefined(field.suggestWhen)}
 			max-length=${ifDefined(field.maxLength)}
+			.optionsMaxHeight=${field.optionsMaxHeight}
 			?loading=${field.loading ?? false}
 			?disabled=${field.disabled ?? false}
 			?clear=${field.clear ?? true}

@@ -441,7 +441,7 @@ export class FTableSchema extends FRoot {
 				${this.showSearchBar
 					? html`<f-div
 							padding="medium none"
-							style="position: sticky;left: 0px;"
+							style="position: sticky;left: 0px;z-index:3;"
 							.width=${this.offsetWidth + "px"}
 					  >
 							<f-search

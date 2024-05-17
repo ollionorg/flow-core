@@ -176,7 +176,7 @@ export const Playground = {
 		["highlight-column-hover"]: true,
 		["sticky-header"]: true,
 		["rows-per-page"]: 20,
-		data: getFakeUsers(100),
+		data: getFakeUsers(60),
 		["sort-by"]: "firstName",
 		["sort-order"]: "asc",
 		["search-term"]: "",

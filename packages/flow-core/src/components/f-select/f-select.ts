@@ -344,7 +344,17 @@ export class FSelect extends FRoot {
 	 * apply styling to f-select options wrapper.
 	 */
 	applyOptionsStyle(width: number) {
-		const commonStyle = `transition: max-height var(--transition-time-rapid) ease-in 0s;`;
+		let right = ``;
+		if (this.wrapperElement) {
+			const spaceOnRight =
+				document.body.offsetWidth - this.wrapperElement.getBoundingClientRect().right;
+
+			if (spaceOnRight < this.wrapperElement.offsetWidth) {
+				right = `right:${spaceOnRight}px;`;
+			}
+		}
+
+		const commonStyle = `transition: max-height var(--transition-time-rapid) ease-in 0s;${right}`;
 
 		const maxWidth = `max-width:${this.maxOptionsWidth ?? `${width}px`};`;
 

@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.9.11] - 2024-05-17
+
+### Bug Fixes
+
+- `f-select` open on left side when rendered on extreme right of the window.
+
 ## [2.9.10] - 2024-04-15
 
 ### Bug Fixes

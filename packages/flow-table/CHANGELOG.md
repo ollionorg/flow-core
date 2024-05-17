@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.4.4] - 2024-05-17
+
+### Bug Fixes
+
+- Searchbar dropdown not opening.
+
 ## [2.4.3] - 2024-05-03
 
 ### Improvements

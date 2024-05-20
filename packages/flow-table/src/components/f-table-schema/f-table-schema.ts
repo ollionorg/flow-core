@@ -393,7 +393,7 @@ export class FTableSchema extends FRoot {
 					}
 					return 0;
 				} else if (typeof columnA === "number" && typeof columnB === "number") {
-					return this.sortOrder === "asc" ? columnB - columnA : columnA - columnB;
+					return this.sortOrder === "asc" ? columnA - columnB : columnB - columnA;
 				} else if (columnA instanceof Date && columnB instanceof Date) {
 					return this.sortOrder === "asc"
 						? (columnA as any) - (columnB as any)
@@ -442,7 +442,7 @@ export class FTableSchema extends FRoot {
 					? html`<f-div
 							padding="medium none"
 							style="position: sticky;left: 0px;z-index:3;"
-							.width=${this.offsetWidth + "px"}
+							.width=${this.offsetWidth ? `${this.offsetWidth}px` : `100%`}
 					  >
 							<f-search
 								.scope=${["all", ...Object.keys(this.data.header)]}

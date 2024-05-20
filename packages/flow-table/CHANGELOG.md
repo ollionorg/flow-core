@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.4.5] - 2024-05-20
+
+### Bug Fixes
+
+- Sorting issue for number column in `f-table-schema`
+
 ## [2.4.4] - 2024-05-17
 
 ### Bug Fixes

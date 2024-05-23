@@ -484,8 +484,11 @@ importers:
         specifier: workspace:*
         version: link:../flow-core-config
       d3:
-        specifier: ^7.6.1
+        specifier: ^7.8.4
         version: 7.8.5
+      d3-dag:
+        specifier: ^1.1.0
+        version: 1.1.0
       lit:
         specifier: ^3.1.0
         version: 3.1.1
@@ -497,7 +500,7 @@ importers:
         specifier: ^3.1.5
         version: 3.2.2
       '@types/d3':
-        specifier: ^7.4.0
+        specifier: ^7.4.3
         version: 7.4.3
       '@types/jest':
         specifier: 29.5.5
@@ -7786,6 +7789,15 @@ packages:
       d3-array: 3.2.4
     dev: false
 
+  /d3-dag@1.1.0:
+    resolution: {integrity: sha512-N8IxsIHcUaIxLrV3cElTC47kVJGFiY3blqSuJubQhyhYBJs0syfFPTnRSj2Cq0LBxxi4mzJmcqCvHIv9sPdILQ==}
+    dependencies:
+      d3-array: 3.2.4
+      javascript-lp-solver: 0.4.24
+      quadprog: 1.6.1
+      stringify-object: 5.0.0
+    dev: false
+
   /d3-delaunay@6.0.4:
     resolution: {integrity: sha512-mdjtIZ1XLAM8bm/hx3WwjfHt6Sggek7qH043O8KEjDXN40xi3vx/6pYSVTwLjEgiXQTbvaouWKynLBiUZ6SK6A==}
     engines: {node: '>=12'}
@@ -9432,6 +9444,11 @@ packages:
     engines: {node: '>=12.17'}
     dev: true
 
+  /get-own-enumerable-keys@1.0.0:
+    resolution: {integrity: sha512-PKsK2FSrQCyxcGHsGrLDcK0lx+0Ke+6e8KFFozA9/fIQLhQzPaRvJFdcz7+Axg3jUH/Mq+NI4xa5u/UT2tQskA==}
+    engines: {node: '>=14.16'}
+    dev: false
+
   /get-package-type@0.1.0:
     resolution: {integrity: sha512-pjzuKtY64GYfWizNAJ0fr9VqttZkNiK2iS430LtIHzjBEr6bX8Am2zm4sW4Ro5wjWW5cAlRL1qAMTcXbjNAO2Q==}
     engines: {node: '>=8.0.0'}
@@ -10150,6 +10167,11 @@ packages:
     engines: {node: '>=0.12.0'}
     dev: true
 
+  /is-obj@3.0.0:
+    resolution: {integrity: sha512-IlsXEHOjtKhpN8r/tRFj2nDyTmHvcfNeu/nrRIcXE17ROeatXchkojffa1SpdqW4cr/Fj6QkEf/Gn4zf6KKvEQ==}
+    engines: {node: '>=12'}
+    dev: false
+
   /is-path-cwd@2.2.0:
     resolution: {integrity: sha512-w942bTcih8fdJPJmQHFzkS76NEP8Kzzvmw92cXsazb8intwLqPibPPdXf4ANdKV3rYMuuQYGIWtvz9JilB3NFQ==}
     engines: {node: '>=6'}
@@ -10184,6 +10206,11 @@ packages:
       call-bind: 1.0.5
       has-tostringtag: 1.0.0
     dev: true
+
+  /is-regexp@3.1.0:
+    resolution: {integrity: sha512-rbku49cWloU5bSMI+zaRaXdQHXnthP6DZ/vLnfdSKyL4zUzuWnomtOEiZZOd+ioQ+avFo/qau3KPTc7Fjy1uPA==}
+    engines: {node: '>=12'}
+    dev: false
 
   /is-shared-array-buffer@1.0.2:
     resolution: {integrity: sha512-sqN2UDu1/0y6uvXyStCOzyhAjCSlHceFoMKJW8W9EU9cvic/QdsZ0kEU93HEy3IUEFZIiH/3w+AH/UQbPHNdhA==}
@@ -10352,6 +10379,10 @@ packages:
       filelist: 1.0.4
       minimatch: 3.1.2
     dev: true
+
+  /javascript-lp-solver@0.4.24:
+    resolution: {integrity: sha512-5edoDKnMrt/u3M6GnZKDDIPxOyFOg+WrwDv8mjNiMC2DePhy2H9/FFQgf4ggywaXT1utvkxusJcjQUER72cZmA==}
+    dev: false
 
   /jest-changed-files@29.7.0:
     resolution: {integrity: sha512-fEArFiwf1BpQ+4bXSprcDc3/x4HSzL4al2tozwVpDFpsxALjLYdyiIK4e5Vz66GQJIbXJ82+35PtysofptNX2w==}
@@ -12630,6 +12661,11 @@ packages:
       side-channel: 1.0.4
     dev: true
 
+  /quadprog@1.6.1:
+    resolution: {integrity: sha512-fN5Jkcjlln/b3pJkseDKREf89JkKIyu6cKIVXisgL6ocKPQ0yTp9n6NZUAq3otEPPw78WZMG9K0o9WsfKyMWJw==}
+    engines: {node: '>=8.x'}
+    dev: false
+
   /querystring@0.2.0:
     resolution: {integrity: sha512-X/xY82scca2tau62i9mDyU9K+I+djTMUsvwf7xnUX5GLvVzgJybOJf4Y6o9Zx3oJK/LSXg5tTZBjwzqVPaPO2g==}
     engines: {node: '>=0.4.x'}
@@ -13617,6 +13653,15 @@ packages:
     dependencies:
       safe-buffer: 5.2.1
     dev: true
+
+  /stringify-object@5.0.0:
+    resolution: {integrity: sha512-zaJYxz2FtcMb4f+g60KsRNFOpVMUyuJgA51Zi5Z1DOTC3S59+OQiVOzE9GZt0x72uBGWKsQIuBKeF9iusmKFsg==}
+    engines: {node: '>=14.16'}
+    dependencies:
+      get-own-enumerable-keys: 1.0.0
+      is-obj: 3.0.0
+      is-regexp: 3.1.0
+    dev: false
 
   /strip-ansi@6.0.1:
     resolution: {integrity: sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==}

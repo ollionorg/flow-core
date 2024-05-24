@@ -5,10 +5,28 @@ import globalStyle from "./f-dag-global.scss?inline";
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import * as d3 from "d3";
-import * as d3dag from "d3-dag";
 
 injectCss("f-dag", globalStyle);
 // Renders attribute names of parent element to textContent
+
+export type DagNode = {
+	type?: "node" | "group";
+	data?: Record<string, any>;
+	width?: number;
+	height?: number;
+};
+
+export type DagLink = {
+	from: string;
+	to: string;
+};
+
+export type ComputedNode = {
+	x?: number;
+	y?: number;
+	id: string;
+	next: ComputedNode[];
+} & DagNode;
 
 @flowElement("f-dag")
 export class FDag extends FRoot {
@@ -34,249 +52,199 @@ export class FDag extends FRoot {
 		</svg>`;
 	}
 	protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-		// ----- //
-		// Setup //
-		// ----- //
-
-		/**
-		 * get transform for arrow rendering
-		 *
-		 * This transform takes anything with points (a graph link) and returns a
-		 * transform that puts an arrow on the last point, aligned based off of the
-		 * second to last.
-		 */
-		function arrowTransform({
-			points
-		}: {
-			points: readonly (readonly [number, number])[];
-		}): string {
-			const [[x1, y1], [x2, y2]] = points.slice(-2);
-			const angle = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI + 90;
-			return `translate(${x2}, ${y2}) rotate(${angle})`;
+		const nodes: Record<string, DagNode> = {};
+		const links: DagLink[] = [];
+		const computedNodes: Record<string, ComputedNode> = {};
+		const widths = [200, 150, 250, 300];
+		const heights = [50, 75, 100, 125, 150, 175];
+		for (let i = 0; i < 20; i++) {
+			nodes[`${i + 1}`] = {
+				width: widths[Math.floor(Math.random() * widths.length)],
+				height: heights[Math.floor(Math.random() * heights.length)]
+			};
 		}
 
-		// our raw data to render
-		const data = [
-			{
-				id: "0",
-				parentIds: ["8"]
-			},
-			{
-				id: "1",
-				parentIds: []
-			},
-			{
-				id: "2",
-				parentIds: []
-			},
-			{
-				id: "3",
-				parentIds: ["11"]
-			},
-			{
-				id: "4",
-				parentIds: ["12"]
-			},
-			{
-				id: "5",
-				parentIds: ["18"]
-			},
-			{
-				id: "6",
-				parentIds: ["9", "15", "17"]
-			},
-			{
-				id: "7",
-				parentIds: ["3", "17", "20", "21"]
-			},
-			{
-				id: "8",
-				parentIds: []
-			},
-			{
-				id: "9",
-				parentIds: ["4"]
-			},
-			{
-				id: "10",
-				parentIds: ["16", "21"]
-			},
-			{
-				id: "11",
-				parentIds: ["2"]
-			},
-			{
-				id: "12",
-				parentIds: ["21"]
-			},
-			{
-				id: "13",
-				parentIds: ["4", "12"]
-			},
-			{
-				id: "14",
-				parentIds: ["1", "8"]
-			},
-			{
-				id: "15",
-				parentIds: []
-			},
-			{
-				id: "16",
-				parentIds: ["0"]
-			},
-			{
-				id: "17",
-				parentIds: ["19"]
-			},
-			{
-				id: "18",
-				parentIds: ["9"]
-			},
-			{
-				id: "19",
-				parentIds: []
-			},
-			{
-				id: "20",
-				parentIds: ["13"]
-			},
-			{
-				id: "21",
-				parentIds: []
+		for (let i = 0; i < 20; i++) {
+			links.push({
+				from: `${1 + Math.floor(Math.random() * 20)}`,
+				to: `${1 + Math.floor(Math.random() * 20)}`
+			});
+		}
+
+		const roots = new Set<string>();
+		const nonroots = new Set<string>();
+		links.forEach(link => {
+			if (link.from !== link.to) {
+				if (!nonroots.has(link.from)) {
+					roots.add(link.from);
+				}
+
+				if (roots.has(link.to)) {
+					roots.delete(link.to);
+				}
+				nonroots.add(link.to);
+
+				let fromNode: ComputedNode = {
+					id: link.from,
+					next: [],
+					...nodes[link.from]
+				};
+				let toNode: ComputedNode = {
+					id: link.to,
+					next: [],
+					...nodes[link.to]
+				};
+				if (computedNodes[link.from]) {
+					fromNode = computedNodes[link.from];
+				}
+				if (computedNodes[link.to]) {
+					toNode = computedNodes[link.to];
+				}
+				computedNodes[link.from] = fromNode;
+				computedNodes[link.to] = toNode;
+				fromNode.next.push(toNode);
 			}
-		];
+		});
 
-		// create our builder and turn the raw data into a graph
-		const builder = d3dag.graphStratify();
-		const graph = builder(data);
-		// -------------- //
-		// Compute Layout //
-		// -------------- //
-
-		// set the layout functions
-		const nodeRadius = 40;
-		const nodeSize = [nodeRadius * 2, nodeRadius * 2] as const;
-		// this truncates the edges so we can render arrows nicely
-		const shape = d3dag.tweakShape(nodeSize, d3dag.shapeEllipse);
-		// use this to render our edges
-		const line = d3.line().curve(d3.curveMonotoneY);
-		// here's the layout operator, uncomment some of the settings
-		const layout = d3dag
-			.sugiyama()
-			//.grid()
-			//.zherebko()
-			//@ts-ignore
-			.nodeSize(nodeSize)
-			.gap([nodeRadius, nodeRadius])
-			.tweaks([shape]);
-
-		// actually perform the layout and get the final size
-		const { width, height } = layout(graph);
-
-		// --------- //
-		// Rendering //
-		// --------- //
-
-		// colors
-		// const steps = graph.nnodes() - 1;
-		// const interp = d3.interpolateRainbow;
-		// const colorMap = new Map(
-		// 	[...graph.nodes()]
-		// 		.sort((a, b) => a.y - b.y)
-		// 		.map((node, i) => [node.data.id, interp(i / steps)])
-		// );
-
-		// global
 		const svg = d3
 			.select(this.svgElement.value as SVGSVGElement)
 			// pad a little for link thickness
-			.style("width", Math.max(width, this.offsetWidth))
-			.style("height", Math.max(height, this.offsetHeight));
+			.style("width", this.offsetWidth)
+			.style("height", this.offsetHeight);
 
-		// nodes
+		let x = 0;
+		let y = 0;
+		let maxX = 0;
+		const [defaultWidth, defaultHeight] = [50, 50];
+		const [spaceX, spaceY] = [200, 200];
+
+		// const nodesG = svg.append("g").attr("class", "dag-nodes");
+
+		const rootNodes = Array.from(roots).map(rid => {
+			return computedNodes[rid];
+		});
+
+		const calculateCords = (ns: ComputedNode[]) => {
+			const nexts: ComputedNode[] = [];
+			let maxHeight = defaultHeight;
+			ns.forEach(n => {
+				if (!n.x && !n.y) {
+					const nx = x;
+					x += (n.width ?? defaultWidth) + spaceX;
+					if (x > maxX) {
+						maxX = x;
+					}
+					n.x = nx;
+					n.y = y;
+					if (n.height && n.height > maxHeight) {
+						maxHeight = n.height;
+					}
+					nexts.push(...n.next);
+				}
+			});
+			y += maxHeight + spaceY;
+			x = 0;
+			if (nexts.length > 0) calculateCords(nexts);
+		};
+		calculateCords(rootNodes);
 		svg
-			.select("#nodes")
-			.selectAll("g")
-			.data(graph.nodes())
-			.join(enter =>
-				enter
-					.append("g")
-					.attr("transform", ({ x, y }) => `translate(${x - nodeRadius}, ${y - nodeRadius})`)
-					.append("foreignObject")
-					.attr("width", nodeRadius * 2)
-					.attr("height", nodeRadius * 2)
-					.html(d => {
-						return `<f-div width="100%" variant="round" align="middle-center" height="100%" state="secondary">${d.data.id}</f-div>`;
-					})
-			);
+			.append("g")
+			.attr("class", "dag-nodes")
+			.selectAll("rect.dag-node")
+			.data(Object.values(computedNodes))
+			.join("rect")
+			.attr("id", d => d.id)
+			.attr("class", "dag-node")
+			.attr("width", d => d.width ?? defaultWidth)
+			.attr("height", d => d.height ?? defaultHeight)
+			.attr("x", d => d.x as number)
+			.attr("rx", 8)
+			.attr("ry", 8)
+			.attr("y", d => d.y as number)
+			.attr("fill", "var(--color-surface-secondary)");
+		const linkG = svg.append("g").attr("class", "dag-links");
+		function createPathBetweenPoints(fromNode: ComputedNode, toNode: ComputedNode): void {
+			// Define the line generator
+			let { x: x1, y: y1 } = fromNode as Required<ComputedNode>;
+			let { x: x2, y: y2 } = toNode as Required<ComputedNode>;
 
-		// // link gradients
-		// svg
-		// 	.select("#defs")
-		// 	.selectAll("linearGradient")
-		// 	.data(graph.links())
-		// 	.join(enter =>
-		// 		enter
-		// 			.append("linearGradient")
-		// 			.attr("id", ({ source, target }) =>
-		// 				encodeURIComponent(`${source.data.id}--${target.data.id}`)
-		// 			)
-		// 			.attr("gradientUnits", "userSpaceOnUse")
-		// 			.attr("x1", ({ points }) => points[0][0])
-		// 			.attr("x2", ({ points }) => points[points.length - 1][0])
-		// 			.attr("y1", ({ points }) => points[0][1])
-		// 			.attr("y2", ({ points }) => points[points.length - 1][1])
-		// 			.call(enter => {
-		// 				enter
-		// 					.append("stop")
-		// 					.attr("class", "grad-start")
-		// 					.attr("offset", "0%")
-		// 					.attr("stop-color", ({ source }) => colorMap.get(source.data.id)!);
-		// 				enter
-		// 					.append("stop")
-		// 					.attr("class", "grad-stop")
-		// 					.attr("offset", "100%")
-		// 					.attr("stop-color", ({ target }) => colorMap.get(target.data.id)!);
-		// 			})
-		// 	);
+			if (x2 > x1 && y1 !== y2) {
+				x1 += fromNode.width ?? defaultWidth;
+				y1 += (fromNode.height ?? defaultHeight) / 2;
+				y2 += (toNode.height ?? defaultHeight) / 2;
+			} else if (x1 > x2 && y1 !== y2) {
+				y1 += (fromNode.height ?? defaultHeight) / 2;
+				y2 += (toNode.height ?? defaultHeight) / 2;
+				x2 += toNode.width ?? defaultWidth;
+			} else if (x1 === x2 && y2 > y1) {
+				y1 += fromNode.height ?? defaultHeight;
+				x1 += (fromNode.width ?? defaultWidth) / 2;
+				x2 += (toNode.width ?? defaultWidth) / 2;
+			} else if (x1 === x2 && y1 > y2) {
+				x1 += (fromNode.width ?? defaultWidth) / 2;
+				y2 += toNode.height ?? defaultHeight;
+				x2 += (toNode.width ?? defaultWidth) / 2;
+			} else if (y1 === y2) {
+				x1 += fromNode.width ?? defaultWidth;
+				y1 += (fromNode.height ?? defaultHeight) / 2;
+				y2 += (toNode.height ?? defaultHeight) / 2;
+			}
 
-		// link paths
+			// if (y2 > y1) {
+			// 	y1 += fromNode.height ?? defaultHeight;
+			// 	x1 += (fromNode.width ?? defaultWidth) / 2;
+			// 	x2 += (toNode.width ?? defaultWidth) / 2;
+			// } else if (y1 > y2) {
+			// 	x1 += (fromNode.width ?? defaultWidth) / 2;
+			// 	y2 += toNode.height ?? defaultHeight;
+			// 	x2 += (toNode.width ?? defaultWidth) / 2;
+			// }
+
+			// Generate the path data
+			const pathData = `M ${x1} ${y1}
+			C ${(x1 + x2) / 2} ${y1},
+			  ${(x1 + x2) / 2} ${y2},
+			  ${x2} ${y2}`;
+
+			// Append the path to the SVG
+			linkG
+				.append("path")
+				.attr("d", pathData || "")
+				.attr("stroke", "var(--color-border-default)")
+				.attr("stroke-width", 2)
+				.attr("fill", "none");
+		}
+
 		svg
-			.select("#links")
-			.selectAll("path")
-			.data(graph.links())
-			.join(
-				enter =>
-					enter
-						.append("path")
-						.attr("d", ({ points }) => line(points))
-						.attr("fill", "none")
-						.attr("stroke-width", 1.5)
-						.attr("stroke", "var(--color-border-default)")
-				// .attr("stroke", ({ source, target }) => `url(#${source.data.id}--${target.data.id})`)
-			);
+			.append("g")
+			.attr("class", "dag-nodes-labels")
+			.selectAll("text.dag-node-label")
+			.data(Object.values(computedNodes))
+			.join("text")
+			.attr("id", d => `${d.id}-label`)
+			.attr("class", "dag-node-label")
+			.attr("x", d => {
+				if (d.x !== undefined) {
+					return d.x + (d.width ?? defaultWidth) / 2;
+				}
+				return 0;
+			})
+			.attr("y", d => {
+				if (d.y !== undefined) {
+					return d.y + (d.height ?? defaultHeight) / 2;
+				}
+				return 0;
+			})
+			.attr("fill", "var(--color-text-default)")
+			.attr("text-anchor", "middle")
+			.attr("dy", `12`)
+			.text(d => d.id);
 
-		// Arrows
-		const arrowSize = 80;
-		// const arrowLen = Math.sqrt((4 * arrowSize) / Math.sqrt(3));
-		const arrow = d3.symbol().type(d3.symbolTriangle).size(arrowSize);
-		svg
-			.select("#arrows")
-			.selectAll("path")
-			.data(graph.links())
-			.join(
-				enter =>
-					enter
-						.append("path")
-						.attr("d", arrow)
-						.attr("fill", "var(--color-border-default)")
-						// .attr("fill", ({ target }) => colorMap.get(target.data.id)!)
-						.attr("transform", arrowTransform)
-				// .attr("stroke", "white")
-				// .attr("stroke-width", 1)
-				// .attr("stroke-dasharray", `${arrowLen},${arrowLen}`)
-			);
+		links.forEach(link => {
+			createPathBetweenPoints(computedNodes[link.from], computedNodes[link.to]);
+		});
+
+		svg.attr("viewBox", `0 0 ${maxX + spaceX} ${y}`);
 	}
 }
 

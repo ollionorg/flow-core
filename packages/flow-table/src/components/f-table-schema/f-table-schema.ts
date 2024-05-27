@@ -596,6 +596,11 @@ export class FTableSchema extends FRoot {
 	}
 
 	handleRowSelection(row: FTableSchemaDataRow, event: CustomEvent) {
+		if (this.selectable === "single") {
+			this.data.rows.forEach(row => {
+				row.selected = false;
+			});
+		}
 		row.selected = event.detail.value;
 		/**
 		 * Whenever row is selected/de-selected this event emitts with header object

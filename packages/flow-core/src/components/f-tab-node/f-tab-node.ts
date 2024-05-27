@@ -34,6 +34,12 @@ export class FTabNode extends FRoot {
 	active?: boolean = false;
 
 	/**
+	 * @attribute to disable f-tab-node
+	 */
+	@property({ type: Boolean, reflect: true })
+	disabled?: boolean = false;
+
+	/**
 	 * tab-width
 	 */
 	get tabWidth() {
@@ -76,7 +82,12 @@ export class FTabNode extends FRoot {
 		/**
 		 * Final html to render
 		 */
-		return html`<f-div data-qa-tab .width=${this.tabWidth} padding="medium" class="f-tab-node"
+		return html`<f-div
+			.disabled=${this.disabled}
+			data-qa-tab
+			.width=${this.tabWidth}
+			padding="medium"
+			class="f-tab-node"
 			><slot></slot
 		></f-div>`;
 	}

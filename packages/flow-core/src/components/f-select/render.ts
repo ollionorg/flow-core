@@ -67,6 +67,7 @@ export default function render(this: FSelect) {
 				data-qa-caret="i-chevron-down"
 				source="i-chevron-down"
 				.size=${"x-small"}
+				class="chevron"
 				clickable
 				@click=${this.handleDropDownOpen}
 		  ></f-icon>`
@@ -74,6 +75,7 @@ export default function render(this: FSelect) {
 				data-qa-caret="i-chevron-up"
 				source="i-chevron-up"
 				.size=${"x-small"}
+				class="chevron"
 				clickable
 				@click=${this.handleDropDownClose}
 		  ></f-icon>`;

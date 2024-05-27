@@ -2,6 +2,13 @@
 
 # Change Log
 
+## [2.9.12] - 2024-05-27
+
+### Improvements
+
+- `disabled` attribute added in `f-tab-node`.
+- `f-select` chevron clikable area increased
+
 ## [2.9.11] - 2024-05-17
 
 ### Bug Fixes

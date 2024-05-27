@@ -5,28 +5,20 @@ import globalStyle from "./f-dag-global.scss?inline";
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import * as d3 from "d3";
+import { SimulationLinkDatum, SimulationNodeDatum } from "d3";
 
 injectCss("f-dag", globalStyle);
 // Renders attribute names of parent element to textContent
 
 export type DagNode = {
-	type?: "node" | "group";
-	data?: Record<string, any>;
-	width?: number;
-	height?: number;
-};
+	id: string;
+	group: number;
+} & SimulationNodeDatum;
 
 export type DagLink = {
-	from: string;
-	to: string;
-};
-
-export type ComputedNode = {
-	x?: number;
-	y?: number;
-	id: string;
-	next: ComputedNode[];
-} & DagNode;
+	source: string;
+	target: string;
+} & SimulationLinkDatum<DagNode>;
 
 @flowElement("f-dag")
 export class FDag extends FRoot {
@@ -42,214 +34,206 @@ export class FDag extends FRoot {
 	svgElement: Ref<SVGSVGElement> = createRef();
 
 	render() {
-		return html` <svg ${ref(this.svgElement)}>
-			<g transform="translate(2, 2)">
-				<defs id="defs" />
-				<g id="links" />
-				<g id="nodes" />
-				<g id="arrows" />
-			</g>
-		</svg>`;
+		return html` <svg ${ref(this.svgElement)}></svg>`;
 	}
-	protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-		const nodes: Record<string, DagNode> = {};
-		const links: DagLink[] = [];
-		const computedNodes: Record<string, ComputedNode> = {};
-		const widths = [200, 150, 250, 300];
-		const heights = [50, 75, 100, 125, 150, 175];
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.updated(changedProperties);
+		let nodes: DagNode[] = [];
+
+		const links: DagLink[] = [
+			{ source: "User1", target: "User2" },
+			{ source: "User3", target: "User4" },
+			{ source: "User4", target: "User5" },
+			{ source: "User4", target: "User1" }
+		];
+
 		for (let i = 0; i < 20; i++) {
-			nodes[`${i + 1}`] = {
-				width: widths[Math.floor(Math.random() * widths.length)],
-				height: heights[Math.floor(Math.random() * heights.length)]
-			};
+			nodes.push({
+				id: `User${i + 1}`,
+				group: 1 + Math.floor(Math.random() * 4)
+			});
 		}
 
 		for (let i = 0; i < 20; i++) {
 			links.push({
-				from: `${1 + Math.floor(Math.random() * 20)}`,
-				to: `${1 + Math.floor(Math.random() * 20)}`
+				source: `User${1 + Math.floor(Math.random() * 20)}`,
+				target: `User${1 + Math.floor(Math.random() * 20)}`
 			});
 		}
 
-		const roots = new Set<string>();
-		const nonroots = new Set<string>();
-		links.forEach(link => {
-			if (link.from !== link.to) {
-				if (!nonroots.has(link.from)) {
-					roots.add(link.from);
-				}
+		const width = this.offsetWidth;
+		const height = this.offsetHeight;
+		const svg = d3.select("svg").attr("width", width).attr("height", height);
 
-				if (roots.has(link.to)) {
-					roots.delete(link.to);
-				}
-				nonroots.add(link.to);
+		function convexHulls(nodes: DagNode[]) {
+			// debugger;
+			const offset = 30;
+			const hulls: Record<number, [number, number][]> = {};
 
-				let fromNode: ComputedNode = {
-					id: link.from,
-					next: [],
-					...nodes[link.from]
-				};
-				let toNode: ComputedNode = {
-					id: link.to,
-					next: [],
-					...nodes[link.to]
-				};
-				if (computedNodes[link.from]) {
-					fromNode = computedNodes[link.from];
-				}
-				if (computedNodes[link.to]) {
-					toNode = computedNodes[link.to];
-				}
-				computedNodes[link.from] = fromNode;
-				computedNodes[link.to] = toNode;
-				fromNode.next.push(toNode);
-			}
-		});
+			// create point sets
+			for (let k = 0; k < nodes.length; ++k) {
+				const n = nodes[k];
 
-		const svg = d3
-			.select(this.svgElement.value as SVGSVGElement)
-			// pad a little for link thickness
-			.style("width", this.offsetWidth)
-			.style("height", this.offsetHeight);
-
-		let x = 0;
-		let y = 0;
-		let maxX = 0;
-		const [defaultWidth, defaultHeight] = [50, 50];
-		const [spaceX, spaceY] = [200, 200];
-
-		// const nodesG = svg.append("g").attr("class", "dag-nodes");
-
-		const rootNodes = Array.from(roots).map(rid => {
-			return computedNodes[rid];
-		});
-
-		const calculateCords = (ns: ComputedNode[]) => {
-			const nexts: ComputedNode[] = [];
-			let maxHeight = defaultHeight;
-			ns.forEach(n => {
-				if (!n.x && !n.y) {
-					const nx = x;
-					x += (n.width ?? defaultWidth) + spaceX;
-					if (x > maxX) {
-						maxX = x;
-					}
-					n.x = nx;
-					n.y = y;
-					if (n.height && n.height > maxHeight) {
-						maxHeight = n.height;
-					}
-					nexts.push(...n.next);
-				}
-			});
-			y += maxHeight + spaceY;
-			x = 0;
-			if (nexts.length > 0) calculateCords(nexts);
-		};
-		calculateCords(rootNodes);
-		svg
-			.append("g")
-			.attr("class", "dag-nodes")
-			.selectAll("rect.dag-node")
-			.data(Object.values(computedNodes))
-			.join("rect")
-			.attr("id", d => d.id)
-			.attr("class", "dag-node")
-			.attr("width", d => d.width ?? defaultWidth)
-			.attr("height", d => d.height ?? defaultHeight)
-			.attr("x", d => d.x as number)
-			.attr("rx", 8)
-			.attr("ry", 8)
-			.attr("y", d => d.y as number)
-			.attr("fill", "var(--color-surface-secondary)");
-		const linkG = svg.append("g").attr("class", "dag-links");
-		function createPathBetweenPoints(fromNode: ComputedNode, toNode: ComputedNode): void {
-			// Define the line generator
-			let { x: x1, y: y1 } = fromNode as Required<ComputedNode>;
-			let { x: x2, y: y2 } = toNode as Required<ComputedNode>;
-
-			if (x2 > x1 && y1 !== y2) {
-				x1 += fromNode.width ?? defaultWidth;
-				y1 += (fromNode.height ?? defaultHeight) / 2;
-				y2 += (toNode.height ?? defaultHeight) / 2;
-			} else if (x1 > x2 && y1 !== y2) {
-				y1 += (fromNode.height ?? defaultHeight) / 2;
-				y2 += (toNode.height ?? defaultHeight) / 2;
-				x2 += toNode.width ?? defaultWidth;
-			} else if (x1 === x2 && y2 > y1) {
-				y1 += fromNode.height ?? defaultHeight;
-				x1 += (fromNode.width ?? defaultWidth) / 2;
-				x2 += (toNode.width ?? defaultWidth) / 2;
-			} else if (x1 === x2 && y1 > y2) {
-				x1 += (fromNode.width ?? defaultWidth) / 2;
-				y2 += toNode.height ?? defaultHeight;
-				x2 += (toNode.width ?? defaultWidth) / 2;
-			} else if (y1 === y2 && x1 > x2) {
-				x2 += toNode.width ?? defaultWidth;
-				y1 += (fromNode.height ?? defaultHeight) / 2;
-				y2 += (toNode.height ?? defaultHeight) / 2;
-			} else if (y1 === y2 && x2 > x1) {
-				x1 += fromNode.width ?? defaultWidth;
-				y1 += (fromNode.height ?? defaultHeight) / 2;
-				y2 += (toNode.height ?? defaultHeight) / 2;
+				const i = n.group,
+					l = hulls[i] || (hulls[i] = []);
+				l.push([n.x! - offset, n.y! - offset]);
+				l.push([n.x! - offset, n.y! + offset]);
+				l.push([n.x! + offset, n.y! - offset]);
+				l.push([n.x! + offset, n.y! + offset]);
 			}
 
-			// if (y2 > y1) {
-			// 	y1 += fromNode.height ?? defaultHeight;
-			// 	x1 += (fromNode.width ?? defaultWidth) / 2;
-			// 	x2 += (toNode.width ?? defaultWidth) / 2;
-			// } else if (y1 > y2) {
-			// 	x1 += (fromNode.width ?? defaultWidth) / 2;
-			// 	y2 += toNode.height ?? defaultHeight;
-			// 	x2 += (toNode.width ?? defaultWidth) / 2;
-			// }
+			// create convex hulls
+			const hullset = [];
+			for (const i in hulls) {
+				hullset.push({ group: +i, path: d3.polygonHull(hulls[i]) });
+			}
 
-			// Generate the path data
-			const pathData = `M ${x1} ${y1}
-			C ${(x1 + x2) / 2} ${y1},
-			  ${(x1 + x2) / 2} ${y2},
-			  ${x2} ${y2}`;
-
-			// Append the path to the SVG
-			linkG
-				.append("path")
-				.attr("d", pathData || "")
-				.attr("id", `link-${fromNode.id}-${toNode.id}`)
-				.attr("stroke", "var(--color-border-default)")
-				.attr("stroke-width", 2)
-				.attr("fill", "none");
+			return hullset;
 		}
 
-		svg
+		function centroid(nodes: DagNode[]) {
+			let x = 0;
+			let y = 0;
+			let z = 0;
+			for (const d of nodes) {
+				const k = 4 ** 2;
+				x += d.x! * k;
+				y += d.y! * k;
+				z += k;
+			}
+			return { x: x / z, y: y / z };
+		}
+
+		function forceCluster() {
+			const strength = 0.9;
+
+			function force(alpha: number) {
+				const centroids = d3.rollup(nodes, centroid, d => d.group);
+				const l = alpha * strength;
+				for (const d of nodes) {
+					const { x: cx, y: cy } = centroids.get(d.group)!;
+					d.vx! -= (d.x! - cx) * l * 3;
+					d.vy! -= (d.y! - cy) * l * 3;
+				}
+			}
+
+			force.initialize = (_: DagNode[]) => (nodes = _);
+
+			return force;
+		}
+		const simulation = d3
+			.forceSimulation<DagNode>(nodes)
+			.force(
+				"link",
+				d3
+					.forceLink<DagNode, DagLink>(links)
+					.id(d => d.id)
+					.distance(l => {
+						if ((l.source as DagNode).group === (l.target as DagNode).group) {
+							return 50;
+						}
+						return 100;
+					})
+					.strength(l => {
+						if ((l.source as DagNode).group === (l.target as DagNode).group) {
+							return 0.01;
+						}
+						return 0.02;
+					})
+			)
+			.force("charge", d3.forceManyBody().strength(-200))
+			.force("center", d3.forceCenter(width / 2, height / 2))
+
+			.force("collision", d3.forceCollide().radius(40))
+			.force("cluster", forceCluster());
+		simulation.alpha(0.5);
+		const link = svg
 			.append("g")
-			.attr("class", "dag-nodes-labels")
-			.selectAll("text.dag-node-label")
-			.data(Object.values(computedNodes))
-			.join("text")
-			.attr("id", d => `${d.id}-label`)
-			.attr("class", "dag-node-label")
-			.attr("x", d => {
-				if (d.x !== undefined) {
-					return d.x + (d.width ?? defaultWidth) / 2;
-				}
-				return 0;
-			})
-			.attr("y", d => {
-				if (d.y !== undefined) {
-					return d.y + (d.height ?? defaultHeight) / 2;
-				}
-				return 0;
-			})
+			.attr("class", "links")
+			.selectAll("line")
+			.data(links)
+			.enter()
+			.append("line")
+			.attr("class", "link")
+			.attr("stroke", "var(--color-border-default)");
+
+		const node = svg
+			.append("g")
+			.attr("class", "nodes")
+			.selectAll("circle")
+			.data(nodes)
+			.enter()
+			.append("circle")
+			.attr("class", "node")
+			.attr("fill", "var(--color-surface-tertiary)")
+			.attr("stroke", "var(--color-border-default)")
+			.attr("r", 20)
+			.call(
+				d3
+					.drag<SVGCircleElement, DagNode>()
+					.on("start", dragstarted)
+					.on("drag", dragged)
+					.on("end", dragended)
+			);
+		const color = d3.scaleOrdinal(d3.range(10), d3.schemeCategory10);
+		const label = svg
+			.append("g")
+			.attr("class", "labels")
+			.selectAll("text")
+			.data(nodes)
+			.enter()
+			.append("text")
+			.attr("class", "label")
 			.attr("fill", "var(--color-text-default)")
-			.attr("text-anchor", "middle")
-			.attr("dy", `12`)
-			.text(d => d.id);
+			.attr("dy", -3)
+			.text(d => `Group${d.group}-${d.id}`);
+		const curve = d3.line().curve(d3.curveCardinalClosed.tension(0.85));
+		function drawCluster(d: any) {
+			return curve(d.path as [number, number][]);
+		}
+		const hulls = svg
+			.append("g")
+			.selectAll("path.hull")
+			.data(convexHulls(nodes))
+			.enter()
+			.append("path")
+			.attr("class", "hull")
+			.attr("d", drawCluster)
+			.attr("stroke", d => color(d.group))
+			.attr("stroke-width", 2)
+			.attr("stroke-opacity", 0.4)
+			.attr("fill-opacity", 0.05)
+			.attr("fill", d => color(d.group));
+		const applyPositions = () => {
+			link
+				.attr("x1", d => (d.source as DagNode).x!)
+				.attr("y1", d => (d.source as DagNode).y!)
+				.attr("x2", d => (d.target as DagNode).x!)
+				.attr("y2", d => (d.target as DagNode).y!);
 
-		links.forEach(link => {
-			createPathBetweenPoints(computedNodes[link.from], computedNodes[link.to]);
-		});
+			node.attr("cx", d => d.x!).attr("cy", d => d.y!);
 
-		svg.attr("viewBox", `0 0 ${maxX + spaceX} ${y}`);
+			label.attr("x", d => d.x!).attr("y", d => d.y!);
+			hulls.data(convexHulls(nodes)).attr("d", drawCluster);
+		};
+		simulation.on("tick", applyPositions).on("end", applyPositions);
+
+		function dragstarted(event: any, d: DagNode) {
+			if (!event.active) simulation.alphaTarget(0.3).restart();
+			d.fx = d.x;
+			d.fy = d.y;
+		}
+
+		function dragged(event: any, d: DagNode) {
+			d.fx = event.x;
+			d.fy = event.y;
+		}
+
+		function dragended(event: any, d: DagNode) {
+			if (!event.active) simulation.alphaTarget(0);
+			d.fx = null;
+			d.fy = null;
+		}
 	}
 }
 

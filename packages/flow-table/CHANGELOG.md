@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.4.6] - 2024-05-27
+
+### Bug Fixes
+
+- `f-table-schema` is not clearing the last selection when `selectable="single"`.
+
 ## [2.4.5] - 2024-05-20
 
 ### Bug Fixes

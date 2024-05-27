@@ -184,7 +184,11 @@ export class FDag extends FRoot {
 				x1 += (fromNode.width ?? defaultWidth) / 2;
 				y2 += toNode.height ?? defaultHeight;
 				x2 += (toNode.width ?? defaultWidth) / 2;
-			} else if (y1 === y2) {
+			} else if (y1 === y2 && x1 > x2) {
+				x2 += toNode.width ?? defaultWidth;
+				y1 += (fromNode.height ?? defaultHeight) / 2;
+				y2 += (toNode.height ?? defaultHeight) / 2;
+			} else if (y1 === y2 && x2 > x1) {
 				x1 += fromNode.width ?? defaultWidth;
 				y1 += (fromNode.height ?? defaultHeight) / 2;
 				y2 += (toNode.height ?? defaultHeight) / 2;
@@ -210,6 +214,7 @@ export class FDag extends FRoot {
 			linkG
 				.append("path")
 				.attr("d", pathData || "")
+				.attr("id", `link-${fromNode.id}-${toNode.id}`)
 				.attr("stroke", "var(--color-border-default)")
 				.attr("stroke-width", 2)
 				.attr("fill", "none");

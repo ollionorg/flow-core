@@ -146,7 +146,8 @@ export class FDag extends FRoot {
 
 			.force("collision", d3.forceCollide().radius(40))
 			.force("cluster", forceCluster());
-		simulation.alpha(0.5);
+		simulation.alpha(0.3);
+		simulation.tick(1);
 		const link = svg
 			.append("g")
 			.attr("class", "links")

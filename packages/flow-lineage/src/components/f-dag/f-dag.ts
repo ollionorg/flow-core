@@ -9,25 +9,16 @@ import * as d3 from "d3";
 injectCss("f-dag", globalStyle);
 // Renders attribute names of parent element to textContent
 
-export type DagNode = {
-	type?: "node" | "group";
-	data?: Record<string, any>;
-	width?: number;
-	height?: number;
-};
+function getTranslateValues(element: HTMLElement) {
+	const style = window.getComputedStyle(element);
+	const matrix = new DOMMatrixReadOnly(style.transform);
 
-export type DagLink = {
-	from: string;
-	to: string;
-};
+	// Extract translateX and translateY values
+	const translateX = matrix.m41;
+	const translateY = matrix.m42;
 
-export type ComputedNode = {
-	x?: number;
-	y?: number;
-	id: string;
-	next: ComputedNode[];
-} & DagNode;
-
+	return { translateX, translateY };
+}
 @flowElement("f-dag")
 export class FDag extends FRoot {
 	/**
@@ -38,218 +29,126 @@ export class FDag extends FRoot {
 	createRenderRoot() {
 		return this;
 	}
+	scale = 1;
 
 	svgElement: Ref<SVGSVGElement> = createRef();
+	currentLine?: d3.Selection<SVGLineElement, unknown, null, undefined>;
+
+	dragNode(event: MouseEvent) {
+		if (event.buttons === 1 && this.currentLine === undefined) {
+			const nodeElement = event.currentTarget as HTMLElement;
+
+			if (nodeElement) {
+				let translateX = nodeElement.dataset.lastTranslateX
+					? +nodeElement.dataset.lastTranslateX
+					: undefined;
+				let translateY = nodeElement.dataset.lastTranslateY
+					? +nodeElement.dataset.lastTranslateY
+					: undefined;
+				if (!translateX || !translateY) {
+					const translate = getTranslateValues(nodeElement);
+					translateX = translate.translateX;
+					translateY = translate.translateY;
+				}
+
+				nodeElement.style.setProperty(
+					"transform",
+					`translate(${translateX + event.movementX}px, ${translateY + event.movementY}px)`
+				);
+				nodeElement.dataset.lastTranslateX = `${translateX + event.movementX}`;
+				nodeElement.dataset.lastTranslateY = `${translateY + event.movementY}`;
+				const dagLine = d3.selectAll(".dag-line");
+
+				dagLine
+					.attr("x2", function () {
+						return +d3.select(this).attr("x2") + event.movementX;
+					})
+					.attr("y2", function () {
+						return +d3.select(this).attr("y2") + event.movementY;
+					});
+			}
+		}
+	}
+
+	plotLine(event: MouseEvent) {
+		event.stopPropagation();
+		const circle = event.currentTarget as HTMLElement;
+		const rect = circle.getBoundingClientRect();
+		const dagRect = this.getBoundingClientRect();
+		const svg = d3.select(this.svgElement.value!);
+		this.currentLine = svg
+			.append("line")
+			.attr("class", "dag-line")
+			.attr("x2", rect.left - dagRect.left + 4)
+			.attr("y2", rect.top - dagRect.top + 4)
+			.attr("x1", event.clientX - dagRect.left)
+			.attr("y1", event.clientY - dagRect.top)
+			.attr("stroke", "var(--color-primary-default)");
+	}
+	checkMouseMove(event: MouseEvent) {
+		if (event.buttons === 1 && this.currentLine) {
+			const dagRect = this.getBoundingClientRect();
+			this.currentLine
+				.attr("x1", event.clientX - dagRect.left)
+				.attr("y1", event.clientY - dagRect.top);
+		} else {
+			this.currentLine = undefined;
+			//this.currentLine?.remove();
+		}
+	}
 
 	render() {
-		return html` <svg ${ref(this.svgElement)}>
-			<g transform="translate(2, 2)">
-				<defs id="defs" />
-				<g id="links" />
-				<g id="nodes" />
-				<g id="arrows" />
-			</g>
-		</svg>`;
+		return html`<f-div width="100%" height="100%" @mousemove=${this.checkMouseMove}
+			><svg class="main-svg" ${ref(this.svgElement)}></svg>
+			<svg style="position: absolute;width: 100%;height: 100%;top: 0px;left: 0px;">
+				<pattern
+					id="pattern-1undefined"
+					x="-1.12163554046424"
+					y="-19.679982038499702"
+					width="24"
+					height="24"
+					patternUnits="userSpaceOnUse"
+					patternTransform="translate(-0.5,-0.5)"
+				>
+					<circle cx="0.5" cy="0.5" r="1" fill="var(--color-border-secondary)"></circle>
+				</pattern>
+				<rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-1undefined)"></rect>
+			</svg>
+			<f-div
+				padding="medium"
+				state="secondary"
+				align="middle-left"
+				variant="curved"
+				height="48px"
+				width="200px"
+				class="dag-node"
+				gap="medium"
+				border="small solid subtle around"
+				clickable
+				@mousemove=${this.dragNode}
+			>
+				<f-icon source="i-user"></f-icon>
+				<f-text size="small" weight="medium">Node</f-text>
+				<span class="circle left" @mousedown=${this.plotLine}></span>
+				<span class="circle right" @mousedown=${this.plotLine}></span>
+				<span class="circle top" @mousedown=${this.plotLine}></span>
+				<span class="circle bottom" @mousedown=${this.plotLine}></span>
+			</f-div>
+		</f-div> `;
 	}
-	protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-		const nodes: Record<string, DagNode> = {};
-		const links: DagLink[] = [];
-		const computedNodes: Record<string, ComputedNode> = {};
-		const widths = [200, 150, 250, 300];
-		const heights = [50, 75, 100, 125, 150, 175];
-		for (let i = 0; i < 20; i++) {
-			nodes[`${i + 1}`] = {
-				width: widths[Math.floor(Math.random() * widths.length)],
-				height: heights[Math.floor(Math.random() * heights.length)]
-			};
-		}
+	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.updated(changedProperties);
 
-		for (let i = 0; i < 20; i++) {
-			links.push({
-				from: `${1 + Math.floor(Math.random() * 20)}`,
-				to: `${1 + Math.floor(Math.random() * 20)}`
-			});
-		}
-
-		const roots = new Set<string>();
-		const nonroots = new Set<string>();
-		links.forEach(link => {
-			if (link.from !== link.to) {
-				if (!nonroots.has(link.from)) {
-					roots.add(link.from);
-				}
-
-				if (roots.has(link.to)) {
-					roots.delete(link.to);
-				}
-				nonroots.add(link.to);
-
-				let fromNode: ComputedNode = {
-					id: link.from,
-					next: [],
-					...nodes[link.from]
-				};
-				let toNode: ComputedNode = {
-					id: link.to,
-					next: [],
-					...nodes[link.to]
-				};
-				if (computedNodes[link.from]) {
-					fromNode = computedNodes[link.from];
-				}
-				if (computedNodes[link.to]) {
-					toNode = computedNodes[link.to];
-				}
-				computedNodes[link.from] = fromNode;
-				computedNodes[link.to] = toNode;
-				fromNode.next.push(toNode);
-			}
-		});
-
-		const svg = d3
-			.select(this.svgElement.value as SVGSVGElement)
-			// pad a little for link thickness
-			.style("width", this.offsetWidth)
-			.style("height", this.offsetHeight);
-
-		let x = 0;
-		let y = 0;
-		let maxX = 0;
-		const [defaultWidth, defaultHeight] = [50, 50];
-		const [spaceX, spaceY] = [200, 200];
-
-		// const nodesG = svg.append("g").attr("class", "dag-nodes");
-
-		const rootNodes = Array.from(roots).map(rid => {
-			return computedNodes[rid];
-		});
-
-		const calculateCords = (ns: ComputedNode[]) => {
-			const nexts: ComputedNode[] = [];
-			let maxHeight = defaultHeight;
-			ns.forEach(n => {
-				if (!n.x && !n.y) {
-					const nx = x;
-					x += (n.width ?? defaultWidth) + spaceX;
-					if (x > maxX) {
-						maxX = x;
-					}
-					n.x = nx;
-					n.y = y;
-					if (n.height && n.height > maxHeight) {
-						maxHeight = n.height;
-					}
-					nexts.push(...n.next);
-				}
-			});
-			y += maxHeight + spaceY;
-			x = 0;
-			if (nexts.length > 0) calculateCords(nexts);
-		};
-		calculateCords(rootNodes);
-		svg
-			.append("g")
-			.attr("class", "dag-nodes")
-			.selectAll("rect.dag-node")
-			.data(Object.values(computedNodes))
-			.join("rect")
-			.attr("id", d => d.id)
-			.attr("class", "dag-node")
-			.attr("width", d => d.width ?? defaultWidth)
-			.attr("height", d => d.height ?? defaultHeight)
-			.attr("x", d => d.x as number)
-			.attr("rx", 8)
-			.attr("ry", 8)
-			.attr("y", d => d.y as number)
-			.attr("fill", "var(--color-surface-secondary)");
-		const linkG = svg.append("g").attr("class", "dag-links");
-		function createPathBetweenPoints(fromNode: ComputedNode, toNode: ComputedNode): void {
-			// Define the line generator
-			let { x: x1, y: y1 } = fromNode as Required<ComputedNode>;
-			let { x: x2, y: y2 } = toNode as Required<ComputedNode>;
-
-			if (x2 > x1 && y1 !== y2) {
-				x1 += fromNode.width ?? defaultWidth;
-				y1 += (fromNode.height ?? defaultHeight) / 2;
-				y2 += (toNode.height ?? defaultHeight) / 2;
-			} else if (x1 > x2 && y1 !== y2) {
-				y1 += (fromNode.height ?? defaultHeight) / 2;
-				y2 += (toNode.height ?? defaultHeight) / 2;
-				x2 += toNode.width ?? defaultWidth;
-			} else if (x1 === x2 && y2 > y1) {
-				y1 += fromNode.height ?? defaultHeight;
-				x1 += (fromNode.width ?? defaultWidth) / 2;
-				x2 += (toNode.width ?? defaultWidth) / 2;
-			} else if (x1 === x2 && y1 > y2) {
-				x1 += (fromNode.width ?? defaultWidth) / 2;
-				y2 += toNode.height ?? defaultHeight;
-				x2 += (toNode.width ?? defaultWidth) / 2;
-			} else if (y1 === y2 && x1 > x2) {
-				x2 += toNode.width ?? defaultWidth;
-				y1 += (fromNode.height ?? defaultHeight) / 2;
-				y2 += (toNode.height ?? defaultHeight) / 2;
-			} else if (y1 === y2 && x2 > x1) {
-				x1 += fromNode.width ?? defaultWidth;
-				y1 += (fromNode.height ?? defaultHeight) / 2;
-				y2 += (toNode.height ?? defaultHeight) / 2;
-			}
-
-			// if (y2 > y1) {
-			// 	y1 += fromNode.height ?? defaultHeight;
-			// 	x1 += (fromNode.width ?? defaultWidth) / 2;
-			// 	x2 += (toNode.width ?? defaultWidth) / 2;
-			// } else if (y1 > y2) {
-			// 	x1 += (fromNode.width ?? defaultWidth) / 2;
-			// 	y2 += toNode.height ?? defaultHeight;
-			// 	x2 += (toNode.width ?? defaultWidth) / 2;
-			// }
-
-			// Generate the path data
-			const pathData = `M ${x1} ${y1}
-			C ${(x1 + x2) / 2} ${y1},
-			  ${(x1 + x2) / 2} ${y2},
-			  ${x2} ${y2}`;
-
-			// Append the path to the SVG
-			linkG
-				.append("path")
-				.attr("d", pathData || "")
-				.attr("id", `link-${fromNode.id}-${toNode.id}`)
-				.attr("stroke", "var(--color-border-default)")
-				.attr("stroke-width", 2)
-				.attr("fill", "none");
-		}
+		const svg = d3.select(this.svgElement.value!);
 
 		svg
-			.append("g")
-			.attr("class", "dag-nodes-labels")
-			.selectAll("text.dag-node-label")
-			.data(Object.values(computedNodes))
-			.join("text")
-			.attr("id", d => `${d.id}-label`)
-			.attr("class", "dag-node-label")
-			.attr("x", d => {
-				if (d.x !== undefined) {
-					return d.x + (d.width ?? defaultWidth) / 2;
-				}
-				return 0;
-			})
-			.attr("y", d => {
-				if (d.y !== undefined) {
-					return d.y + (d.height ?? defaultHeight) / 2;
-				}
-				return 0;
-			})
-			.attr("fill", "var(--color-text-default)")
-			.attr("text-anchor", "middle")
-			.attr("dy", `12`)
-			.text(d => d.id);
-
-		links.forEach(link => {
-			createPathBetweenPoints(computedNodes[link.from], computedNodes[link.to]);
-		});
-
-		svg.attr("viewBox", `0 0 ${maxX + spaceX} ${y}`);
+			.append("line")
+			.attr("class", "dag-line")
+			.attr("x1", this.offsetWidth / 2)
+			.attr("y1", this.offsetHeight / 2)
+			.attr("x2", 100)
+			.attr("y2", 48)
+			.attr("stroke", "var(--color-border-default)");
 	}
 }
 

@@ -57,9 +57,19 @@ export class FDag extends FRoot {
 				);
 				nodeElement.dataset.lastTranslateX = `${translateX + event.movementX}`;
 				nodeElement.dataset.lastTranslateY = `${translateY + event.movementY}`;
-				const dagLine = d3.selectAll(".dag-line");
+				const fromLines = d3.selectAll(`.dag-line[id^="${nodeElement.getAttribute("id")}->"]`);
 
-				dagLine
+				fromLines
+					.attr("x1", function () {
+						return +d3.select(this).attr("x1") + event.movementX;
+					})
+					.attr("y1", function () {
+						return +d3.select(this).attr("y1") + event.movementY;
+					});
+
+				const toLines = d3.selectAll(`.dag-line[id$="->${nodeElement.getAttribute("id")}"]`);
+
+				toLines
 					.attr("x2", function () {
 						return +d3.select(this).attr("x2") + event.movementX;
 					})
@@ -79,21 +89,37 @@ export class FDag extends FRoot {
 		this.currentLine = svg
 			.append("line")
 			.attr("class", "dag-line")
-			.attr("x2", rect.left - dagRect.left + 4)
-			.attr("y2", rect.top - dagRect.top + 4)
-			.attr("x1", event.clientX - dagRect.left)
-			.attr("y1", event.clientY - dagRect.top)
+			.attr("id", `${circle.dataset.nodeId}->`)
+			.attr("x1", rect.left - dagRect.left + 4)
+			.attr("y1", rect.top - dagRect.top + 4)
+			.attr("x2", event.clientX - dagRect.left)
+			.attr("y2", event.clientY - dagRect.top)
 			.attr("stroke", "var(--color-primary-default)");
 	}
 	checkMouseMove(event: MouseEvent) {
 		if (event.buttons === 1 && this.currentLine) {
 			const dagRect = this.getBoundingClientRect();
 			this.currentLine
-				.attr("x1", event.clientX - dagRect.left)
-				.attr("y1", event.clientY - dagRect.top);
+				.attr("x2", event.clientX - dagRect.left)
+				.attr("y2", event.clientY - dagRect.top);
 		} else {
+			this.currentLine?.remove();
+		}
+	}
+	dropLine(event: MouseEvent) {
+		const circle = event.currentTarget as HTMLElement;
+		const rect = circle.getBoundingClientRect();
+		const dagRect = this.getBoundingClientRect();
+
+		if (this.currentLine) {
+			this.currentLine
+				.attr("id", function () {
+					return d3.select(this).attr("id") + circle.dataset.nodeId;
+				})
+				.attr("x2", rect.left - dagRect.left + 4)
+				.attr("y2", rect.top - dagRect.top + 4);
+
 			this.currentLine = undefined;
-			//this.currentLine?.remove();
 		}
 	}
 
@@ -114,41 +140,37 @@ export class FDag extends FRoot {
 				</pattern>
 				<rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-1undefined)"></rect>
 			</svg>
-			<f-div
-				padding="medium"
-				state="secondary"
-				align="middle-left"
-				variant="curved"
-				height="48px"
-				width="200px"
-				class="dag-node"
-				gap="medium"
-				border="small solid subtle around"
-				clickable
-				@mousemove=${this.dragNode}
-			>
-				<f-icon source="i-user"></f-icon>
-				<f-text size="small" weight="medium">Node</f-text>
-				<span class="circle left" @mousedown=${this.plotLine}></span>
-				<span class="circle right" @mousedown=${this.plotLine}></span>
-				<span class="circle top" @mousedown=${this.plotLine}></span>
-				<span class="circle bottom" @mousedown=${this.plotLine}></span>
-			</f-div>
+			${[1, 2, 3, 4].map(n => {
+				return html`<f-div
+					padding="medium"
+					state="secondary"
+					align="middle-left"
+					variant="curved"
+					height="48px"
+					width="200px"
+					class="dag-node"
+					gap="medium"
+					border="small solid subtle around"
+					clickable
+					.id=${`d-node-${n}`}
+					@mousemove=${this.dragNode}
+				>
+					<f-icon source="i-user"></f-icon>
+					<f-text size="small" weight="medium">Node ${n}</f-text>
+					${["left", "right", "top", "bottom"].map(side => {
+						return html`<span
+							data-node-id=${`d-node-${n}`}
+							class="circle ${side}"
+							@mouseup=${this.dropLine}
+							@mousedown=${this.plotLine}
+						></span>`;
+					})}
+				</f-div>`;
+			})}
 		</f-div> `;
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
-
-		const svg = d3.select(this.svgElement.value!);
-
-		svg
-			.append("line")
-			.attr("class", "dag-line")
-			.attr("x1", this.offsetWidth / 2)
-			.attr("y1", this.offsetHeight / 2)
-			.attr("x2", 100)
-			.attr("y2", 48)
-			.attr("stroke", "var(--color-border-default)");
 	}
 }
 

@@ -34,49 +34,61 @@ export class FDag extends FRoot {
 	svgElement: Ref<SVGSVGElement> = createRef();
 	currentLine?: d3.Selection<SVGLineElement, unknown, null, undefined>;
 
+	moveElement(nodeElement: HTMLElement, event: MouseEvent) {
+		let translateX = nodeElement.dataset.lastTranslateX
+			? +nodeElement.dataset.lastTranslateX
+			: undefined;
+		let translateY = nodeElement.dataset.lastTranslateY
+			? +nodeElement.dataset.lastTranslateY
+			: undefined;
+		if (!translateX || !translateY) {
+			const translate = getTranslateValues(nodeElement);
+			translateX = translate.translateX;
+			translateY = translate.translateY;
+		}
+
+		nodeElement.style.setProperty(
+			"transform",
+			`translate(${translateX + event.movementX}px, ${translateY + event.movementY}px)`
+		);
+		nodeElement.dataset.lastTranslateX = `${translateX + event.movementX}`;
+		nodeElement.dataset.lastTranslateY = `${translateY + event.movementY}`;
+		const fromLines = d3.selectAll(`.dag-line[id^="${nodeElement.getAttribute("id")}->"]`);
+
+		fromLines
+			.attr("x1", function () {
+				return +d3.select(this).attr("x1") + event.movementX;
+			})
+			.attr("y1", function () {
+				return +d3.select(this).attr("y1") + event.movementY;
+			});
+
+		const toLines = d3.selectAll(`.dag-line[id$="->${nodeElement.getAttribute("id")}"]`);
+
+		toLines
+			.attr("x2", function () {
+				return +d3.select(this).attr("x2") + event.movementX;
+			})
+			.attr("y2", function () {
+				return +d3.select(this).attr("y2") + event.movementY;
+			});
+	}
 	dragNode(event: MouseEvent) {
 		event.stopPropagation();
 		if (event.buttons === 1 && this.currentLine === undefined) {
 			const nodeElement = event.currentTarget as HTMLElement;
 			nodeElement.style.zIndex = `3`;
 			if (nodeElement) {
-				let translateX = nodeElement.dataset.lastTranslateX
-					? +nodeElement.dataset.lastTranslateX
-					: undefined;
-				let translateY = nodeElement.dataset.lastTranslateY
-					? +nodeElement.dataset.lastTranslateY
-					: undefined;
-				if (!translateX || !translateY) {
-					const translate = getTranslateValues(nodeElement);
-					translateX = translate.translateX;
-					translateY = translate.translateY;
+				this.moveElement(nodeElement, event);
+
+				if (nodeElement.dataset.nodeType === "group") {
+					const groupNodes = this.querySelectorAll<HTMLElement>(
+						`[data-group="${nodeElement.getAttribute("id")}"]`
+					);
+					groupNodes.forEach(gn => {
+						this.moveElement(gn, event);
+					});
 				}
-
-				nodeElement.style.setProperty(
-					"transform",
-					`translate(${translateX + event.movementX}px, ${translateY + event.movementY}px)`
-				);
-				nodeElement.dataset.lastTranslateX = `${translateX + event.movementX}`;
-				nodeElement.dataset.lastTranslateY = `${translateY + event.movementY}`;
-				const fromLines = d3.selectAll(`.dag-line[id^="${nodeElement.getAttribute("id")}->"]`);
-
-				fromLines
-					.attr("x1", function () {
-						return +d3.select(this).attr("x1") + event.movementX;
-					})
-					.attr("y1", function () {
-						return +d3.select(this).attr("y1") + event.movementY;
-					});
-
-				const toLines = d3.selectAll(`.dag-line[id$="->${nodeElement.getAttribute("id")}"]`);
-
-				toLines
-					.attr("x2", function () {
-						return +d3.select(this).attr("x2") + event.movementX;
-					})
-					.attr("y2", function () {
-						return +d3.select(this).attr("y2") + event.movementY;
-					});
 			}
 		}
 	}
@@ -137,10 +149,36 @@ export class FDag extends FRoot {
 
 	nodeMouseUp(event: MouseEvent) {
 		const nodeElement = event.currentTarget as HTMLElement;
+		const {
+			top: nodeTop,
+			height: nodeHeight,
+			left: nodeLeft,
+			width: nodeWidth
+		} = nodeElement.getBoundingClientRect();
 		if (nodeElement.dataset.nodeType === "group") {
 			nodeElement.style.zIndex = `1`;
 		} else {
 			nodeElement.style.zIndex = `2`;
+		}
+
+		const allGroups = this.querySelectorAll<HTMLElement>(`[data-node-type="group"]`);
+		let insideGroup = false;
+		for (let index = 0; index < allGroups.length; index++) {
+			const group = allGroups.item(index);
+			const { top, height, left, width } = group.getBoundingClientRect();
+			if (
+				nodeTop > top &&
+				nodeLeft > left &&
+				nodeTop + nodeHeight < top + height &&
+				nodeLeft + nodeWidth < left + width
+			) {
+				insideGroup = true;
+				nodeElement.dataset.group = group.getAttribute("id")!;
+			}
+		}
+
+		if (!insideGroup) {
+			delete nodeElement.dataset.group;
 		}
 	}
 

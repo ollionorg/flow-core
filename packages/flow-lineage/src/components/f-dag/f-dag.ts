@@ -35,9 +35,10 @@ export class FDag extends FRoot {
 	currentLine?: d3.Selection<SVGLineElement, unknown, null, undefined>;
 
 	dragNode(event: MouseEvent) {
+		event.stopPropagation();
 		if (event.buttons === 1 && this.currentLine === undefined) {
 			const nodeElement = event.currentTarget as HTMLElement;
-
+			nodeElement.style.zIndex = `3`;
 			if (nodeElement) {
 				let translateX = nodeElement.dataset.lastTranslateX
 					? +nodeElement.dataset.lastTranslateX
@@ -99,11 +100,22 @@ export class FDag extends FRoot {
 	checkMouseMove(event: MouseEvent) {
 		if (event.buttons === 1 && this.currentLine) {
 			const dagRect = this.getBoundingClientRect();
+			const allGroups = this.querySelectorAll<HTMLElement>(`[data-node-type="group"]`);
+
+			allGroups.forEach(n => {
+				n.style.pointerEvents = "none";
+			});
 			this.currentLine
 				.attr("x2", event.clientX - dagRect.left)
 				.attr("y2", event.clientY - dagRect.top);
 		} else {
+			const allGroups = this.querySelectorAll<HTMLElement>(`[data-node-type="group"]`);
+
+			allGroups.forEach(n => {
+				n.style.pointerEvents = "all";
+			});
 			this.currentLine?.remove();
+			this.currentLine = undefined;
 		}
 	}
 	dropLine(event: MouseEvent) {
@@ -123,9 +135,17 @@ export class FDag extends FRoot {
 		}
 	}
 
+	nodeMouseUp(event: MouseEvent) {
+		const nodeElement = event.currentTarget as HTMLElement;
+		if (nodeElement.dataset.nodeType === "group") {
+			nodeElement.style.zIndex = `1`;
+		} else {
+			nodeElement.style.zIndex = `2`;
+		}
+	}
+
 	render() {
-		return html`<f-div width="100%" height="100%" @mousemove=${this.checkMouseMove}
-			><svg class="main-svg" ${ref(this.svgElement)}></svg>
+		return html`<f-div width="100%" height="100%" @mousemove=${this.checkMouseMove}>
 			<svg style="position: absolute;width: 100%;height: 100%;top: 0px;left: 0px;">
 				<pattern
 					id="pattern-1undefined"
@@ -152,8 +172,10 @@ export class FDag extends FRoot {
 					gap="medium"
 					border="small solid subtle around"
 					clickable
+					data-node-type="node"
 					.id=${`d-node-${n}`}
 					@mousemove=${this.dragNode}
+					@mouseup=${this.nodeMouseUp}
 				>
 					<f-icon source="i-user"></f-icon>
 					<f-text size="small" weight="medium">Node ${n}</f-text>
@@ -167,6 +189,33 @@ export class FDag extends FRoot {
 					})}
 				</f-div>`;
 			})}
+
+			<f-div
+				align="top-left"
+				variant="curved"
+				height="200px"
+				width="400px"
+				class="dag-node"
+				data-node-type="group"
+				border="small solid subtle around"
+				.id=${`d-group`}
+				@mousemove=${this.dragNode}
+				@mouseup=${this.nodeMouseUp}
+			>
+				<f-div gap="medium" height="hug-content" state="secondary" padding="medium">
+					<f-icon source="i-user"></f-icon>
+					<f-text size="small" weight="medium">Group</f-text>
+				</f-div>
+				${["left", "right", "top", "bottom"].map(side => {
+					return html`<span
+						data-node-id=${`d-group`}
+						class="circle ${side}"
+						@mouseup=${this.dropLine}
+						@mousedown=${this.plotLine}
+					></span>`;
+				})}
+			</f-div>
+			<svg class="main-svg" ${ref(this.svgElement)}></svg>
 		</f-div> `;
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {

@@ -7,9 +7,9 @@ export default {
 
 export const Basic = {
 	render: () => {
-		return html` <f-div height="50px"></f-div
+		return html` <f-div height="20px"></f-div
 			><f-div width="100%" direction="column" height="100%">
-				<f-div height="50px"></f-div>
+				<f-div height="20px"></f-div>
 				<f-dag></f-dag>
 			</f-div>`;
 	}

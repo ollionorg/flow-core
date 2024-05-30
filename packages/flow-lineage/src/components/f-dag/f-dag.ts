@@ -5,10 +5,35 @@ import globalStyle from "./f-dag-global.scss?inline";
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import * as d3 from "d3";
-import { queryAll } from "lit/decorators.js";
+import { property, queryAll } from "lit/decorators.js";
+import { ifDefined } from "lit-html/directives/if-defined.js";
 
 injectCss("f-dag", globalStyle);
 // Renders attribute names of parent element to textContent
+
+export type CoOrdinates = {
+	x: number;
+	y: number;
+};
+export type FDagElement = {
+	id: string;
+	label: string;
+	icon: string;
+	height: string;
+	width: string;
+	group?: string;
+} & CoOrdinates;
+
+export type FDagLink = {
+	from: CoOrdinates & { elementId: string };
+	to: CoOrdinates & { elementId: string };
+};
+
+export type FDagConfig = {
+	nodes: FDagElement[];
+	links: FDagLink[];
+	groups: FDagElement[];
+};
 
 function getTranslateValues(element: HTMLElement) {
 	const style = window.getComputedStyle(element);
@@ -26,6 +51,10 @@ export class FDag extends FRoot {
 	 * css loaded from scss file
 	 */
 	static styles = [unsafeCSS(globalStyle)];
+	readonly required = ["config"];
+
+	@property({ type: Object, reflect: false })
+	config!: FDagConfig;
 
 	@queryAll(`[data-node-type="group"],[data-group]`)
 	allGroups?: HTMLElement[];
@@ -77,6 +106,18 @@ export class FDag extends FRoot {
 				return +d3.select(this).attr("y2") + event.movementY;
 			});
 	}
+
+	dragNestedGroups(groupElement: HTMLElement, event: MouseEvent) {
+		if (groupElement.dataset.nodeType === "group") {
+			const groupNodes = this.querySelectorAll<HTMLElement>(
+				`[data-group="${groupElement.getAttribute("id")}"]`
+			);
+			groupNodes.forEach(gn => {
+				this.moveElement(gn, event);
+				this.dragNestedGroups(gn, event);
+			});
+		}
+	}
 	dragNode(event: MouseEvent) {
 		event.stopPropagation();
 		if (event.buttons === 1 && this.currentLine === undefined) {
@@ -84,15 +125,7 @@ export class FDag extends FRoot {
 			nodeElement.style.zIndex = `3`;
 			if (nodeElement) {
 				this.moveElement(nodeElement, event);
-
-				if (nodeElement.dataset.nodeType === "group") {
-					const groupNodes = this.querySelectorAll<HTMLElement>(
-						`[data-group="${nodeElement.getAttribute("id")}"]`
-					);
-					groupNodes.forEach(gn => {
-						this.moveElement(gn, event);
-					});
-				}
+				this.dragNestedGroups(nodeElement, event);
 			}
 		}
 	}
@@ -135,14 +168,63 @@ export class FDag extends FRoot {
 			n.style.pointerEvents = "all";
 		});
 		if (this.currentLine) {
+			const linkElement = this.currentLine;
+			const fromNodeId = linkElement.attr("id").replace(/(->)$/, "");
+			const toNodeId = circle.dataset.nodeId!;
+			const x2 = rect.left - dagRect.left + 4;
+			const y2 = rect.top - dagRect.top + 4;
+
+			this.updateLink(
+				fromNodeId,
+				toNodeId,
+				+linkElement.attr("x1"),
+				+linkElement.attr("y1"),
+				x2,
+				y2
+			);
+
 			this.currentLine
 				.attr("id", function () {
-					return d3.select(this).attr("id") + circle.dataset.nodeId;
+					return linkElement.attr("id") + circle.dataset.nodeId;
 				})
-				.attr("x2", rect.left - dagRect.left + 4)
-				.attr("y2", rect.top - dagRect.top + 4);
+				.attr("x2", x2)
+				.attr("y2", y2);
 
 			this.currentLine = undefined;
+		}
+	}
+
+	updateLink(fromNodeId: string, toNodeId: string, x1: number, y1: number, x2: number, y2: number) {
+		let linkObject = this.config.links.find(
+			l => l.from.elementId === fromNodeId && l.to.elementId === toNodeId
+		);
+
+		if (!linkObject) {
+			linkObject = {
+				from: {
+					elementId: fromNodeId,
+					x: x1,
+					y: y1
+				},
+				to: {
+					elementId: toNodeId,
+					x: x2,
+					y: y2
+				}
+			};
+
+			this.config.links.push(linkObject);
+		} else {
+			linkObject.from = {
+				elementId: fromNodeId,
+				x: x1,
+				y: y1
+			};
+			linkObject.to = {
+				elementId: toNodeId,
+				x: x2,
+				y: y2
+			};
 		}
 	}
 
@@ -179,6 +261,53 @@ export class FDag extends FRoot {
 		if (!insideGroup) {
 			delete nodeElement.dataset.group;
 		}
+
+		let elementConfig;
+		if (nodeElement.dataset.nodeType === "group") {
+			elementConfig = this.config.groups.find(n => n.id === nodeElement.getAttribute("id"));
+		} else {
+			elementConfig = this.config.nodes.find(n => n.id === nodeElement.getAttribute("id"));
+		}
+
+		if (elementConfig) {
+			elementConfig.group = nodeElement.dataset.group;
+			const { translateX, translateY } = getTranslateValues(nodeElement);
+			elementConfig.x = translateX;
+			elementConfig.y = translateY;
+		}
+
+		const fromLines = d3.selectAll(`.dag-line[id^="${nodeElement.getAttribute("id")}->"]`);
+		const toLines = d3.selectAll(`.dag-line[id$="->${nodeElement.getAttribute("id")}"]`);
+
+		// eslint-disable-next-line @typescript-eslint/no-this-alias
+		const that = this;
+		fromLines.each(function () {
+			const lineElement = d3.select(this as SVGLineElement);
+			const [fromNodeId, toNodeId] = lineElement.attr("id")!.split("->");
+			that.updateLink(
+				fromNodeId,
+				toNodeId,
+				+lineElement.attr("x1"),
+				+lineElement.attr("y1"),
+				+lineElement.attr("x2"),
+				+lineElement.attr("y2")
+			);
+		});
+
+		toLines.each(function () {
+			const lineElement = d3.select(this as SVGLineElement);
+			const [fromNodeId, toNodeId] = lineElement.attr("id")!.split("->");
+			that.updateLink(
+				fromNodeId,
+				toNodeId,
+				+lineElement.attr("x1"),
+				+lineElement.attr("y1"),
+				+lineElement.attr("x2"),
+				+lineElement.attr("y2")
+			);
+		});
+
+		console.log(this.config);
 	}
 
 	render() {
@@ -197,28 +326,30 @@ export class FDag extends FRoot {
 				</pattern>
 				<rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-1undefined)"></rect>
 			</svg>
-			${[1, 2, 3, 4].map(n => {
+			${this.config.nodes.map(n => {
 				return html`<f-div
 					padding="medium"
 					state="secondary"
 					align="middle-left"
 					variant="curved"
-					height="48px"
-					width="200px"
+					.height=${n.height}
+					.width=${n.width}
 					class="dag-node"
 					gap="medium"
 					border="small solid subtle around"
+					data-group=${ifDefined(n.group)}
 					clickable
 					data-node-type="node"
-					.id=${`d-node-${n}`}
+					.id=${`${n.id}`}
+					style="z-index:2;transform:translate(${n.x}px, ${n.y}px)"
 					@mousemove=${this.dragNode}
 					@mouseup=${this.updateNodePosition}
 				>
-					<f-icon source="i-user"></f-icon>
-					<f-text size="small" weight="medium">Node ${n}</f-text>
+					<f-icon .source=${n.icon}></f-icon>
+					<f-text size="small" weight="medium">${n.label}</f-text>
 					${["left", "right", "top", "bottom"].map(side => {
 						return html`<span
-							data-node-id=${`d-node-${n}`}
+							data-node-id=${n.id}
 							class="circle ${side}"
 							@mouseup=${this.dropLine}
 							@mousedown=${this.startPlottingLine}
@@ -226,26 +357,28 @@ export class FDag extends FRoot {
 					})}
 				</f-div>`;
 			})}
-			${[1, 2].map(g => {
+			${this.config.groups.map(g => {
 				return html`<f-div
 					align="top-left"
 					variant="curved"
-					height="200px"
-					width="400px"
+					.height=${g.height}
+					.width=${g.width}
+					data-group=${ifDefined(g.group)}
 					class="dag-node"
 					data-node-type="group"
 					border="small solid subtle around"
-					.id=${`d-group-${g}`}
+					.id=${g.id}
+					style="z-index:1;transform:translate(${g.x}px, ${g.y}px)"
 					@mousemove=${this.dragNode}
 					@mouseup=${this.updateNodePosition}
 				>
 					<f-div gap="medium" height="hug-content" state="secondary" padding="medium">
-						<f-icon source="i-user"></f-icon>
-						<f-text size="small" weight="medium">Group ${g}</f-text>
+						<f-icon .source=${g.icon}></f-icon>
+						<f-text size="small" weight="medium">${g.label}</f-text>
 					</f-div>
 					${["left", "right", "top", "bottom"].map(side => {
 						return html`<span
-							data-node-id=${`d-group-${g}`}
+							data-node-id=${g.id}
 							class="circle ${side}"
 							@mouseup=${this.dropLine}
 							@mousedown=${this.startPlottingLine}
@@ -258,6 +391,29 @@ export class FDag extends FRoot {
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
+
+		const svg = d3.select(this.svgElement.value!);
+		svg
+			.selectAll("line.dag-line")
+			.data<FDagLink>(this.config.links)
+			.join("line")
+			.attr("class", "dag-line")
+			.attr("id", d => {
+				return `${d.from.elementId}->${d.to.elementId}`;
+			})
+			.attr("x1", d => {
+				return d.from.x;
+			})
+			.attr("y1", d => {
+				return d.from.y;
+			})
+			.attr("x2", d => {
+				return d.to.x;
+			})
+			.attr("y2", d => {
+				return d.to.y;
+			})
+			.attr("stroke", "var(--color-primary-default)");
 	}
 }
 

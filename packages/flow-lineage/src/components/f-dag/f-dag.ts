@@ -5,6 +5,7 @@ import globalStyle from "./f-dag-global.scss?inline";
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import * as d3 from "d3";
+import { queryAll } from "lit/decorators.js";
 
 injectCss("f-dag", globalStyle);
 // Renders attribute names of parent element to textContent
@@ -25,6 +26,9 @@ export class FDag extends FRoot {
 	 * css loaded from scss file
 	 */
 	static styles = [unsafeCSS(globalStyle)];
+
+	@queryAll(`[data-node-type="group"],[data-group]`)
+	allGroups?: HTMLElement[];
 
 	createRenderRoot() {
 		return this;
@@ -93,8 +97,11 @@ export class FDag extends FRoot {
 		}
 	}
 
-	plotLine(event: MouseEvent) {
+	startPlottingLine(event: MouseEvent) {
 		event.stopPropagation();
+		this.allGroups?.forEach(n => {
+			n.style.pointerEvents = "none";
+		});
 		const circle = event.currentTarget as HTMLElement;
 		const rect = circle.getBoundingClientRect();
 		const dagRect = this.getBoundingClientRect();
@@ -109,23 +116,13 @@ export class FDag extends FRoot {
 			.attr("y2", event.clientY - dagRect.top)
 			.attr("stroke", "var(--color-primary-default)");
 	}
-	checkMouseMove(event: MouseEvent) {
+	updateLinePath(event: MouseEvent) {
 		if (event.buttons === 1 && this.currentLine) {
 			const dagRect = this.getBoundingClientRect();
-			const allGroups = this.querySelectorAll<HTMLElement>(`[data-node-type="group"]`);
-
-			allGroups.forEach(n => {
-				n.style.pointerEvents = "none";
-			});
 			this.currentLine
 				.attr("x2", event.clientX - dagRect.left)
 				.attr("y2", event.clientY - dagRect.top);
 		} else {
-			const allGroups = this.querySelectorAll<HTMLElement>(`[data-node-type="group"]`);
-
-			allGroups.forEach(n => {
-				n.style.pointerEvents = "all";
-			});
 			this.currentLine?.remove();
 			this.currentLine = undefined;
 		}
@@ -134,7 +131,9 @@ export class FDag extends FRoot {
 		const circle = event.currentTarget as HTMLElement;
 		const rect = circle.getBoundingClientRect();
 		const dagRect = this.getBoundingClientRect();
-
+		this.allGroups?.forEach(n => {
+			n.style.pointerEvents = "all";
+		});
 		if (this.currentLine) {
 			this.currentLine
 				.attr("id", function () {
@@ -147,7 +146,7 @@ export class FDag extends FRoot {
 		}
 	}
 
-	nodeMouseUp(event: MouseEvent) {
+	updateNodePosition(event: MouseEvent) {
 		const nodeElement = event.currentTarget as HTMLElement;
 		const {
 			top: nodeTop,
@@ -183,7 +182,7 @@ export class FDag extends FRoot {
 	}
 
 	render() {
-		return html`<f-div width="100%" height="100%" @mousemove=${this.checkMouseMove}>
+		return html`<f-div width="100%" height="100%" @mousemove=${this.updateLinePath}>
 			<svg style="position: absolute;width: 100%;height: 100%;top: 0px;left: 0px;">
 				<pattern
 					id="pattern-1undefined"
@@ -213,7 +212,7 @@ export class FDag extends FRoot {
 					data-node-type="node"
 					.id=${`d-node-${n}`}
 					@mousemove=${this.dragNode}
-					@mouseup=${this.nodeMouseUp}
+					@mouseup=${this.updateNodePosition}
 				>
 					<f-icon source="i-user"></f-icon>
 					<f-text size="small" weight="medium">Node ${n}</f-text>
@@ -222,37 +221,38 @@ export class FDag extends FRoot {
 							data-node-id=${`d-node-${n}`}
 							class="circle ${side}"
 							@mouseup=${this.dropLine}
-							@mousedown=${this.plotLine}
+							@mousedown=${this.startPlottingLine}
 						></span>`;
 					})}
 				</f-div>`;
 			})}
-
-			<f-div
-				align="top-left"
-				variant="curved"
-				height="200px"
-				width="400px"
-				class="dag-node"
-				data-node-type="group"
-				border="small solid subtle around"
-				.id=${`d-group`}
-				@mousemove=${this.dragNode}
-				@mouseup=${this.nodeMouseUp}
-			>
-				<f-div gap="medium" height="hug-content" state="secondary" padding="medium">
-					<f-icon source="i-user"></f-icon>
-					<f-text size="small" weight="medium">Group</f-text>
-				</f-div>
-				${["left", "right", "top", "bottom"].map(side => {
-					return html`<span
-						data-node-id=${`d-group`}
-						class="circle ${side}"
-						@mouseup=${this.dropLine}
-						@mousedown=${this.plotLine}
-					></span>`;
-				})}
-			</f-div>
+			${[1, 2].map(g => {
+				return html`<f-div
+					align="top-left"
+					variant="curved"
+					height="200px"
+					width="400px"
+					class="dag-node"
+					data-node-type="group"
+					border="small solid subtle around"
+					.id=${`d-group-${g}`}
+					@mousemove=${this.dragNode}
+					@mouseup=${this.updateNodePosition}
+				>
+					<f-div gap="medium" height="hug-content" state="secondary" padding="medium">
+						<f-icon source="i-user"></f-icon>
+						<f-text size="small" weight="medium">Group ${g}</f-text>
+					</f-div>
+					${["left", "right", "top", "bottom"].map(side => {
+						return html`<span
+							data-node-id=${`d-group-${g}`}
+							class="circle ${side}"
+							@mouseup=${this.dropLine}
+							@mousedown=${this.startPlottingLine}
+						></span>`;
+					})}
+				</f-div>`;
+			})}
 			<svg class="main-svg" ${ref(this.svgElement)}></svg>
 		</f-div> `;
 	}

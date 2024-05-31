@@ -54,78 +54,6 @@ const dagConfig: FDagConfig = {
 	links: [
 		{
 			from: {
-				elementId: "node1",
-				x: 253,
-				y: 87
-			},
-			to: {
-				elementId: "group1",
-				x: 498,
-				y: 172
-			}
-		},
-		{
-			from: {
-				elementId: "node2",
-				x: 299,
-				y: 563
-			},
-			to: {
-				elementId: "node4",
-				x: 768,
-				y: 576
-			}
-		},
-		{
-			from: {
-				elementId: "node2",
-				x: 196,
-				y: 534
-			},
-			to: {
-				elementId: "node3",
-				x: 522,
-				y: 276
-			}
-		},
-		{
-			from: {
-				elementId: "node1",
-				x: 253,
-				y: 87
-			},
-			to: {
-				elementId: "group2",
-				x: 479,
-				y: 550
-			}
-		},
-		{
-			from: {
-				elementId: "node1",
-				x: 150,
-				y: 114
-			},
-			to: {
-				elementId: "node2",
-				x: 91,
-				y: 563
-			}
-		},
-		{
-			from: {
-				elementId: "node3",
-				x: 627,
-				y: 247
-			},
-			to: {
-				elementId: "group3",
-				x: 734,
-				y: 159
-			}
-		},
-		{
-			from: {
 				elementId: "node5",
 				x: 908,
 				y: 206
@@ -158,6 +86,78 @@ const dagConfig: FDagConfig = {
 				elementId: "node1",
 				x: 253,
 				y: 87
+			}
+		},
+		{
+			from: {
+				elementId: "node2",
+				x: 299,
+				y: 563
+			},
+			to: {
+				elementId: "group2",
+				x: 479,
+				y: 550
+			}
+		},
+		{
+			from: {
+				elementId: "node2",
+				x: 196,
+				y: 534
+			},
+			to: {
+				elementId: "group1",
+				x: 498,
+				y: 172
+			}
+		},
+		{
+			from: {
+				elementId: "node2",
+				x: 196,
+				y: 534
+			},
+			to: {
+				elementId: "node1",
+				x: 150,
+				y: 114
+			}
+		},
+		{
+			from: {
+				elementId: "node3",
+				x: 627,
+				y: 303
+			},
+			to: {
+				elementId: "node4",
+				x: 761,
+				y: 569
+			}
+		},
+		{
+			from: {
+				elementId: "group1",
+				x: 753,
+				y: 325
+			},
+			to: {
+				elementId: "node4",
+				x: 866,
+				y: 540
+			}
+		},
+		{
+			from: {
+				elementId: "group3",
+				x: 734,
+				y: 159
+			},
+			to: {
+				elementId: "node2",
+				x: 196,
+				y: 534
 			}
 		}
 	],

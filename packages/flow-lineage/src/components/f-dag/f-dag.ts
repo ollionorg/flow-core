@@ -66,6 +66,7 @@ export class FDag extends FRoot {
 
 	svgElement: Ref<SVGSVGElement> = createRef();
 	currentLine?: d3.Selection<SVGPathElement, FDagLink, null, undefined>;
+	currentArrow?: d3.Selection<SVGTextPathElement, FDagLink, null, undefined>;
 
 	moveElement(nodeElement: HTMLElement, event: MouseEvent) {
 		let translateX = nodeElement.dataset.lastTranslateX
@@ -175,24 +176,21 @@ export class FDag extends FRoot {
 		const rect = circle.getBoundingClientRect();
 		const dagRect = this.getBoundingClientRect();
 		const svg = d3.select(this.svgElement.value!);
+		const link: FDagLink = {
+			from: {
+				x: rect.left - dagRect.left + 4,
+				y: rect.top - dagRect.top + 4,
+				elementId: circle.dataset.nodeId!
+			},
+			to: {
+				x: event.clientX - dagRect.left,
+				y: event.clientY - dagRect.top,
+				elementId: ``
+			}
+		};
 		this.currentLine = svg
 			.append("path")
-			.datum(() => {
-				const link: FDagLink = {
-					from: {
-						x: rect.left - dagRect.left + 4,
-						y: rect.top - dagRect.top + 4,
-						elementId: circle.dataset.nodeId!
-					},
-					to: {
-						x: event.clientX - dagRect.left,
-						y: event.clientY - dagRect.top,
-						elementId: ``
-					}
-				};
-
-				return link;
-			})
+			.datum(link)
 			.attr("class", "dag-line")
 			.attr("id", `${circle.dataset.nodeId}->`)
 			.attr("d", d => {
@@ -209,6 +207,27 @@ export class FDag extends FRoot {
 				return this.generatePath(points).toString();
 			})
 			.attr("stroke", "var(--color-primary-default)");
+
+		this.currentArrow = svg
+			.append("text")
+			.datum(link)
+			.attr("class", "link-arrow")
+			.attr("id", function (d) {
+				return `${d.from.elementId}~arrow`;
+			})
+			.attr("stroke", "var(--color-surface-default)")
+			.attr("stroke-width", "1px")
+			.attr("dy", 5.5)
+			.attr("dx", 2)
+			.append("textPath")
+			.attr("text-anchor", "end")
+
+			.attr("xlink:href", function (_d) {
+				return `#${circle.dataset.nodeId}->`;
+			})
+			.attr("startOffset", "100%")
+			.attr("fill", "var(--color-primary-default)")
+			.text("▶");
 	}
 	updateLinePath(event: MouseEvent) {
 		if (event.buttons === 1 && this.currentLine) {
@@ -235,6 +254,8 @@ export class FDag extends FRoot {
 			});
 			this.currentLine?.remove();
 			this.currentLine = undefined;
+			this.currentArrow?.remove();
+			this.currentArrow = undefined;
 		}
 	}
 	dropLine(event: MouseEvent) {
@@ -272,6 +293,14 @@ export class FDag extends FRoot {
 					return this.generatePath(points).toString();
 				})
 				.attr("stroke", "var(--color-border-default)");
+			if (this.currentArrow) {
+				this.currentArrow
+					.attr("xlink:href", function (_d) {
+						return `#${linkElement.attr("id")}`;
+					})
+					.attr("fill", "var(--color-border-default)");
+			}
+
 			this.updateLink(
 				fromNodeId,
 				toNodeId,
@@ -282,6 +311,7 @@ export class FDag extends FRoot {
 			);
 
 			this.currentLine = undefined;
+			this.currentArrow = undefined;
 		}
 	}
 
@@ -492,6 +522,28 @@ export class FDag extends FRoot {
 				return this.generatePath(points).toString();
 			})
 			.attr("stroke", "var(--color-border-default)");
+
+		svg
+			.selectAll("text.link-arrow")
+			.data<FDagLink>(this.config.links)
+			.join("text")
+			.attr("class", "link-arrow")
+			.attr("id", function (d) {
+				return `${d.from.elementId}~arrow`;
+			})
+			.attr("stroke", "var(--color-surface-default)")
+			.attr("stroke-width", "1px")
+			.attr("dy", 5.5)
+			.attr("dx", 2)
+			.append("textPath")
+			.attr("text-anchor", "end")
+
+			.attr("xlink:href", function (d) {
+				return `#${d.from.elementId}->${d.to.elementId}`;
+			})
+			.attr("startOffset", "100%")
+			.attr("fill", "var(--color-border-default)")
+			.text("▶");
 	}
 
 	generatePath(points: CoOrdinates[]) {

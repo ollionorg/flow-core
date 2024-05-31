@@ -56,7 +56,7 @@ export class FDag extends FRoot {
 	@property({ type: Object, reflect: false })
 	config!: FDagConfig;
 
-	@queryAll(`[data-node-type="group"],[data-group]`)
+	@queryAll(`.dag-node`)
 	allGroups?: HTMLElement[];
 
 	createRenderRoot() {
@@ -65,7 +65,7 @@ export class FDag extends FRoot {
 	scale = 1;
 
 	svgElement: Ref<SVGSVGElement> = createRef();
-	currentLine?: d3.Selection<SVGLineElement, unknown, null, undefined>;
+	currentLine?: d3.Selection<SVGPathElement, FDagLink, null, undefined>;
 
 	moveElement(nodeElement: HTMLElement, event: MouseEvent) {
 		let translateX = nodeElement.dataset.lastTranslateX
@@ -86,25 +86,61 @@ export class FDag extends FRoot {
 		);
 		nodeElement.dataset.lastTranslateX = `${translateX + event.movementX}`;
 		nodeElement.dataset.lastTranslateY = `${translateY + event.movementY}`;
-		const fromLines = d3.selectAll(`.dag-line[id^="${nodeElement.getAttribute("id")}->"]`);
+		const fromLines = d3.selectAll<SVGPathElement, FDagLink>(
+			`.dag-line[id^="${nodeElement.getAttribute("id")}->"]`
+		);
 
-		fromLines
-			.attr("x1", function () {
-				return +d3.select(this).attr("x1") + event.movementX;
-			})
-			.attr("y1", function () {
-				return +d3.select(this).attr("y1") + event.movementY;
+		fromLines.datum(d => {
+			return {
+				...d,
+				from: {
+					x: (d.from.x += event.movementX),
+					y: (d.from.y += event.movementY),
+					elementId: d.from.elementId
+				}
+			};
+		});
+
+		fromLines.attr("d", d => {
+			const points: CoOrdinates[] = [];
+			points.push({
+				x: d.from.x,
+				y: d.from.y
 			});
+			points.push({
+				x: d.to.x,
+				y: d.to.y
+			});
+
+			return this.generatePath(points).toString();
+		});
 
 		const toLines = d3.selectAll(`.dag-line[id$="->${nodeElement.getAttribute("id")}"]`);
 
-		toLines
-			.attr("x2", function () {
-				return +d3.select(this).attr("x2") + event.movementX;
-			})
-			.attr("y2", function () {
-				return +d3.select(this).attr("y2") + event.movementY;
+		toLines.datum(d => {
+			return {
+				...(d as FDagLink),
+				to: {
+					x: ((d as FDagLink).to.x += event.movementX),
+					y: ((d as FDagLink).to.y += event.movementY),
+					elementId: (d as FDagLink).to.elementId
+				}
+			};
+		});
+		toLines.attr("d", d => {
+			const points: CoOrdinates[] = [];
+
+			points.push({
+				x: (d as FDagLink).from.x,
+				y: (d as FDagLink).from.y
 			});
+			points.push({
+				x: (d as FDagLink).to.x,
+				y: (d as FDagLink).to.y
+			});
+
+			return this.generatePath(points).toString();
+		});
 	}
 
 	dragNestedGroups(groupElement: HTMLElement, event: MouseEvent) {
@@ -140,22 +176,63 @@ export class FDag extends FRoot {
 		const dagRect = this.getBoundingClientRect();
 		const svg = d3.select(this.svgElement.value!);
 		this.currentLine = svg
-			.append("line")
+			.append("path")
+			.datum(() => {
+				const link: FDagLink = {
+					from: {
+						x: rect.left - dagRect.left + 4,
+						y: rect.top - dagRect.top + 4,
+						elementId: circle.dataset.nodeId!
+					},
+					to: {
+						x: event.clientX - dagRect.left,
+						y: event.clientY - dagRect.top,
+						elementId: ``
+					}
+				};
+
+				return link;
+			})
 			.attr("class", "dag-line")
 			.attr("id", `${circle.dataset.nodeId}->`)
-			.attr("x1", rect.left - dagRect.left + 4)
-			.attr("y1", rect.top - dagRect.top + 4)
-			.attr("x2", event.clientX - dagRect.left)
-			.attr("y2", event.clientY - dagRect.top)
+			.attr("d", d => {
+				const points: CoOrdinates[] = [];
+				points.push({
+					x: d.from.x,
+					y: d.from.y
+				});
+				points.push({
+					x: d.to.x,
+					y: d.to.y
+				});
+
+				return this.generatePath(points).toString();
+			})
 			.attr("stroke", "var(--color-primary-default)");
 	}
 	updateLinePath(event: MouseEvent) {
 		if (event.buttons === 1 && this.currentLine) {
 			const dagRect = this.getBoundingClientRect();
-			this.currentLine
-				.attr("x2", event.clientX - dagRect.left)
-				.attr("y2", event.clientY - dagRect.top);
+			this.currentLine.attr("d", d => {
+				d.to.x = event.clientX - dagRect.left;
+				d.to.y = event.clientY - dagRect.top;
+
+				const points: CoOrdinates[] = [];
+				points.push({
+					x: d.from.x,
+					y: d.from.y
+				});
+				points.push({
+					x: d.to.x,
+					y: d.to.y
+				});
+
+				return this.generatePath(points).toString();
+			});
 		} else {
+			this.allGroups?.forEach(n => {
+				n.style.pointerEvents = "all";
+			});
 			this.currentLine?.remove();
 			this.currentLine = undefined;
 		}
@@ -174,21 +251,35 @@ export class FDag extends FRoot {
 			const x2 = rect.left - dagRect.left + 4;
 			const y2 = rect.top - dagRect.top + 4;
 
-			this.updateLink(
-				fromNodeId,
-				toNodeId,
-				+linkElement.attr("x1"),
-				+linkElement.attr("y1"),
-				x2,
-				y2
-			);
-
 			this.currentLine
 				.attr("id", function () {
 					return linkElement.attr("id") + circle.dataset.nodeId;
 				})
-				.attr("x2", x2)
-				.attr("y2", y2);
+				.attr("d", d => {
+					d.to.x = x2;
+					d.to.y = y2;
+					d.to.elementId = circle.dataset.nodeId!;
+					const points: CoOrdinates[] = [];
+					points.push({
+						x: d.from.x,
+						y: d.from.y
+					});
+					points.push({
+						x: d.to.x,
+						y: d.to.y
+					});
+
+					return this.generatePath(points).toString();
+				})
+				.attr("stroke", "var(--color-border-default)");
+			this.updateLink(
+				fromNodeId,
+				toNodeId,
+				linkElement.datum().from.x,
+				linkElement.datum().from.y,
+				linkElement.datum().to.x,
+				linkElement.datum().to.y
+			);
 
 			this.currentLine = undefined;
 		}
@@ -276,35 +367,21 @@ export class FDag extends FRoot {
 			elementConfig.y = translateY;
 		}
 
-		const fromLines = d3.selectAll(`.dag-line[id^="${nodeElement.getAttribute("id")}->"]`);
-		const toLines = d3.selectAll(`.dag-line[id$="->${nodeElement.getAttribute("id")}"]`);
+		const fromLines = d3.selectAll<SVGPathElement, FDagLink>(
+			`.dag-line[id^="${nodeElement.getAttribute("id")}->"]`
+		);
+		const toLines = d3.selectAll<SVGPathElement, FDagLink>(
+			`.dag-line[id$="->${nodeElement.getAttribute("id")}"]`
+		);
 
 		// eslint-disable-next-line @typescript-eslint/no-this-alias
 		const that = this;
-		fromLines.each(function () {
-			const lineElement = d3.select(this as SVGLineElement);
-			const [fromNodeId, toNodeId] = lineElement.attr("id")!.split("->");
-			that.updateLink(
-				fromNodeId,
-				toNodeId,
-				+lineElement.attr("x1"),
-				+lineElement.attr("y1"),
-				+lineElement.attr("x2"),
-				+lineElement.attr("y2")
-			);
+		fromLines.each(function (d) {
+			that.updateLink(d.from.elementId, d.to.elementId, d.from.x, d.from.y, d.to.x, d.to.y);
 		});
 
-		toLines.each(function () {
-			const lineElement = d3.select(this as SVGLineElement);
-			const [fromNodeId, toNodeId] = lineElement.attr("id")!.split("->");
-			that.updateLink(
-				fromNodeId,
-				toNodeId,
-				+lineElement.attr("x1"),
-				+lineElement.attr("y1"),
-				+lineElement.attr("x2"),
-				+lineElement.attr("y2")
-			);
+		toLines.each(function (d) {
+			that.updateLink(d.from.elementId, d.to.elementId, d.from.x, d.from.y, d.to.x, d.to.y);
 		});
 
 		console.log(this.config);
@@ -372,7 +449,7 @@ export class FDag extends FRoot {
 					@mousemove=${this.dragNode}
 					@mouseup=${this.updateNodePosition}
 				>
-					<f-div gap="medium" height="hug-content" state="secondary" padding="medium">
+					<f-div gap="medium" height="hug-content" clickable state="secondary" padding="medium">
 						<f-icon .source=${g.icon}></f-icon>
 						<f-text size="small" weight="medium">${g.label}</f-text>
 					</f-div>
@@ -394,26 +471,41 @@ export class FDag extends FRoot {
 
 		const svg = d3.select(this.svgElement.value!);
 		svg
-			.selectAll("line.dag-line")
+			.selectAll("path.dag-line")
 			.data<FDagLink>(this.config.links)
-			.join("line")
+			.join("path")
 			.attr("class", "dag-line")
 			.attr("id", d => {
 				return `${d.from.elementId}->${d.to.elementId}`;
 			})
-			.attr("x1", d => {
-				return d.from.x;
+			.attr("d", d => {
+				const points: CoOrdinates[] = [];
+				points.push({
+					x: d.from.x,
+					y: d.from.y
+				});
+				points.push({
+					x: d.to.x,
+					y: d.to.y
+				});
+
+				return this.generatePath(points).toString();
 			})
-			.attr("y1", d => {
-				return d.from.y;
-			})
-			.attr("x2", d => {
-				return d.to.x;
-			})
-			.attr("y2", d => {
-				return d.to.y;
-			})
-			.attr("stroke", "var(--color-primary-default)");
+			.attr("stroke", "var(--color-border-default)");
+	}
+
+	generatePath(points: CoOrdinates[]) {
+		const path = d3.path();
+
+		points.forEach((p, idx) => {
+			if (idx === 0) {
+				path.moveTo(p.x, p.y);
+			} else {
+				path.lineTo(p.x, p.y);
+			}
+		});
+
+		return path;
 	}
 }
 

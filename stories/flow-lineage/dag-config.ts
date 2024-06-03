@@ -134,7 +134,7 @@ const dagConfig: FDagConfig = {
 			from: {
 				elementId: "node3",
 				x: 653,
-				y: 288
+				y: 297
 			},
 			to: {
 				elementId: "node2",

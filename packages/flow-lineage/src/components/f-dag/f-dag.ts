@@ -24,9 +24,11 @@ export type FDagElement = {
 	group?: string;
 } & CoOrdinates;
 
+export type FDagLinkDirection = "horizontal" | "vertical";
 export type FDagLink = {
 	from: CoOrdinates & { elementId: string };
 	to: CoOrdinates & { elementId: string };
+	linkDirection: FDagLinkDirection;
 };
 
 export type FDagConfig = {
@@ -113,18 +115,20 @@ export class FDag extends FRoot {
 				y: d.to.y
 			});
 
-			return this.generatePath(points).toString();
+			return this.generatePath(points, d.linkDirection).toString();
 		});
 
-		const toLines = d3.selectAll(`.dag-line[id$="->${nodeElement.getAttribute("id")}"]`);
+		const toLines = d3.selectAll<SVGPathElement, FDagLink>(
+			`.dag-line[id$="->${nodeElement.getAttribute("id")}"]`
+		);
 
 		toLines.datum(d => {
 			return {
-				...(d as FDagLink),
+				...d,
 				to: {
-					x: ((d as FDagLink).to.x += event.movementX),
-					y: ((d as FDagLink).to.y += event.movementY),
-					elementId: (d as FDagLink).to.elementId
+					x: (d.to.x += event.movementX),
+					y: (d.to.y += event.movementY),
+					elementId: d.to.elementId
 				}
 			};
 		});
@@ -132,15 +136,15 @@ export class FDag extends FRoot {
 			const points: CoOrdinates[] = [];
 
 			points.push({
-				x: (d as FDagLink).from.x,
-				y: (d as FDagLink).from.y
+				x: d.from.x,
+				y: d.from.y
 			});
 			points.push({
-				x: (d as FDagLink).to.x,
-				y: (d as FDagLink).to.y
+				x: d.to.x,
+				y: d.to.y
 			});
 
-			return this.generatePath(points).toString();
+			return this.generatePath(points, d.linkDirection).toString();
 		});
 	}
 
@@ -197,6 +201,11 @@ export class FDag extends FRoot {
 			}
 			y1 = circleY + offset;
 		}
+
+		const linkDirection =
+			circle.classList.contains("right") || circle.classList.contains("left")
+				? "horizontal"
+				: "vertical";
 		const link: FDagLink = {
 			from: {
 				x: x1,
@@ -207,7 +216,8 @@ export class FDag extends FRoot {
 				x: event.clientX - dagRect.left,
 				y: event.clientY - dagRect.top,
 				elementId: ``
-			}
+			},
+			linkDirection
 		};
 
 		this.currentLine = svg
@@ -226,7 +236,7 @@ export class FDag extends FRoot {
 					y: d.to.y
 				});
 
-				return this.generatePath(points).toString();
+				return this.generatePath(points, d.linkDirection).toString();
 			})
 			.attr("stroke", "var(--color-primary-default)");
 
@@ -268,7 +278,7 @@ export class FDag extends FRoot {
 					y: d.to.y
 				});
 
-				return this.generatePath(points).toString();
+				return this.generatePath(points, d.linkDirection).toString();
 			});
 		} else {
 			this.allGroups?.forEach(n => {
@@ -331,7 +341,7 @@ export class FDag extends FRoot {
 						y: d.to.y
 					});
 
-					return this.generatePath(points).toString();
+					return this.generatePath(points, d.linkDirection).toString();
 				})
 				.attr("stroke", "var(--color-border-default)");
 			if (this.currentArrow) {
@@ -348,7 +358,8 @@ export class FDag extends FRoot {
 				linkElement.datum().from.x,
 				linkElement.datum().from.y,
 				linkElement.datum().to.x,
-				linkElement.datum().to.y
+				linkElement.datum().to.y,
+				linkElement.datum().linkDirection
 			);
 
 			this.currentLine = undefined;
@@ -356,7 +367,15 @@ export class FDag extends FRoot {
 		}
 	}
 
-	updateLink(fromNodeId: string, toNodeId: string, x1: number, y1: number, x2: number, y2: number) {
+	updateLink(
+		fromNodeId: string,
+		toNodeId: string,
+		x1: number,
+		y1: number,
+		x2: number,
+		y2: number,
+		linkDirection: FDagLinkDirection
+	) {
 		let linkObject = this.config.links.find(
 			l => l.from.elementId === fromNodeId && l.to.elementId === toNodeId
 		);
@@ -372,7 +391,8 @@ export class FDag extends FRoot {
 					elementId: toNodeId,
 					x: x2,
 					y: y2
-				}
+				},
+				linkDirection
 			};
 
 			this.config.links.push(linkObject);
@@ -448,11 +468,27 @@ export class FDag extends FRoot {
 		// eslint-disable-next-line @typescript-eslint/no-this-alias
 		const that = this;
 		fromLines.each(function (d) {
-			that.updateLink(d.from.elementId, d.to.elementId, d.from.x, d.from.y, d.to.x, d.to.y);
+			that.updateLink(
+				d.from.elementId,
+				d.to.elementId,
+				d.from.x,
+				d.from.y,
+				d.to.x,
+				d.to.y,
+				d.linkDirection
+			);
 		});
 
 		toLines.each(function (d) {
-			that.updateLink(d.from.elementId, d.to.elementId, d.from.x, d.from.y, d.to.x, d.to.y);
+			that.updateLink(
+				d.from.elementId,
+				d.to.elementId,
+				d.from.x,
+				d.from.y,
+				d.to.x,
+				d.to.y,
+				d.linkDirection
+			);
 		});
 
 		console.log(this.config);
@@ -560,7 +596,7 @@ export class FDag extends FRoot {
 					y: d.to.y
 				});
 
-				return this.generatePath(points).toString();
+				return this.generatePath(points, d.linkDirection).toString();
 			})
 			.attr("stroke", "var(--color-border-default)");
 
@@ -587,18 +623,20 @@ export class FDag extends FRoot {
 			.text("▶");
 	}
 
-	generatePath(points: CoOrdinates[]) {
-		const path = d3.path();
-
-		points.forEach((p, idx) => {
-			if (idx === 0) {
-				path.moveTo(p.x, p.y);
-			} else {
-				path.lineTo(p.x, p.y);
-			}
-		});
-
-		return path;
+	generatePath(points: CoOrdinates[], linkDirection: FDagLinkDirection) {
+		const { x: sx, y: sy } = points[0];
+		const { x: dx, y: dy } = points[1];
+		if (linkDirection === "vertical") {
+			return `M ${sx} ${sy}
+		C ${sx} ${(sy + dy) / 2},
+		  ${dx} ${(sy + dy) / 2},
+		  ${dx} ${dy}`;
+		} else {
+			return `M ${sx} ${sy}
+		C ${(sx + dx) / 2} ${sy},
+		  ${(sx + dx) / 2} ${dy},
+		  ${dx} ${dy}`;
+		}
 	}
 }
 

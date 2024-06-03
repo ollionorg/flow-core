@@ -176,10 +176,31 @@ export class FDag extends FRoot {
 		const rect = circle.getBoundingClientRect();
 		const dagRect = this.getBoundingClientRect();
 		const svg = d3.select(this.svgElement.value!);
+		const circleX = rect.left - dagRect.left;
+		const circleY = rect.top - dagRect.top;
+
+		let x1 = event.clientX - dagRect.left;
+		let y1 = event.clientY - dagRect.top;
+
+		if (Math.abs(x1 - circleX) <= 12) {
+			let offset = 8;
+			if (circle.classList.contains("right")) {
+				offset = 0;
+			}
+			x1 = circleX + offset;
+		}
+
+		if (Math.abs(y1 - circleY) <= 12) {
+			let offset = 8;
+			if (circle.classList.contains("bottom")) {
+				offset = 0;
+			}
+			y1 = circleY + offset;
+		}
 		const link: FDagLink = {
 			from: {
-				x: rect.left - dagRect.left + 4,
-				y: rect.top - dagRect.top + 4,
+				x: x1,
+				y: y1,
 				elementId: circle.dataset.nodeId!
 			},
 			to: {
@@ -188,6 +209,7 @@ export class FDag extends FRoot {
 				elementId: ``
 			}
 		};
+
 		this.currentLine = svg
 			.append("path")
 			.datum(link)
@@ -269,8 +291,27 @@ export class FDag extends FRoot {
 			const linkElement = this.currentLine;
 			const fromNodeId = linkElement.attr("id").replace(/(->)$/, "");
 			const toNodeId = circle.dataset.nodeId!;
-			const x2 = rect.left - dagRect.left + 4;
-			const y2 = rect.top - dagRect.top + 4;
+
+			let x2 = event.clientX - dagRect.left;
+			let y2 = event.clientY - dagRect.top;
+
+			const circleX2 = rect.left - dagRect.left;
+			const circleY2 = rect.top - dagRect.top;
+
+			if (Math.abs(y2 - circleY2) <= 12) {
+				let offset = 8;
+				if (circle.classList.contains("bottom")) {
+					offset = 0;
+				}
+				y2 = circleY2 + offset;
+			}
+			if (Math.abs(x2 - circleX2) <= 12) {
+				let offset = 8;
+				if (circle.classList.contains("right")) {
+					offset = 0;
+				}
+				x2 = circleX2 + offset;
+			}
 
 			this.currentLine
 				.attr("id", function () {

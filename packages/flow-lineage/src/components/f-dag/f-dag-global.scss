@@ -36,31 +36,37 @@ f-dag {
 			cursor: grabbing;
 		}
 		.circle {
-			border-radius: 8px;
-			height: 8px;
-			width: 8px;
-			border: 1px solid var(--color-border-secondary);
+			border: 1px solid transparent;
 			position: absolute;
 			cursor: crosshair;
 			pointer-events: all;
 			&:hover {
 				border: 1px solid var(--color-primary-default);
+				background-color: var(--color-primary-surface);
 			}
 			&.left {
 				right: 100%;
-				top: calc(50% - 4px);
+				top: 0px;
+				height: 100%;
+				width: 8px;
 			}
 			&.right {
 				left: 100%;
-				top: calc(50% - 4px);
+				top: 0px;
+				height: 100%;
+				width: 8px;
 			}
 			&.top {
 				bottom: 100%;
-				left: calc(50% - 4px);
+				left: 0px;
+				height: 8px;
+				width: 100%;
 			}
 			&.bottom {
 				top: 100%;
-				left: calc(50% - 4px);
+				left: 0px;
+				height: 8px;
+				width: 100%;
 			}
 		}
 	}

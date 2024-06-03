@@ -8,8 +8,8 @@ const dagConfig: FDagConfig = {
 			icon: "i-box",
 			height: "48px",
 			width: "200px",
-			x: 50,
-			y: 63
+			x: 78,
+			y: 93
 		},
 		{
 			id: "node2",
@@ -17,8 +17,8 @@ const dagConfig: FDagConfig = {
 			icon: "i-box",
 			height: "48px",
 			width: "200px",
-			x: 167,
-			y: 444
+			x: 80,
+			y: 489
 		},
 		{
 			id: "node3",
@@ -26,8 +26,8 @@ const dagConfig: FDagConfig = {
 			icon: "i-box",
 			height: "48px",
 			width: "200px",
-			x: 527,
-			y: 252,
+			x: 549,
+			y: 249,
 			group: "group1"
 		},
 		{
@@ -36,8 +36,8 @@ const dagConfig: FDagConfig = {
 			icon: "i-box",
 			height: "48px",
 			width: "200px",
-			x: 760,
-			y: 623,
+			x: 611,
+			y: 591,
 			group: "group2"
 		},
 		{
@@ -46,8 +46,8 @@ const dagConfig: FDagConfig = {
 			icon: "i-box",
 			height: "48px",
 			width: "100px",
-			x: 858,
-			y: 155,
+			x: 768,
+			y: 129,
 			group: "group3"
 		}
 	],
@@ -55,26 +55,26 @@ const dagConfig: FDagConfig = {
 		{
 			from: {
 				elementId: "node1",
-				x: 249,
-				y: 72
+				x: 277,
+				y: 102
 			},
 			to: {
 				elementId: "node5",
-				x: 857,
-				y: 185
+				x: 767,
+				y: 159
 			},
 			linkDirection: "horizontal"
 		},
 		{
 			from: {
 				elementId: "node1",
-				x: 102,
-				y: 110
+				x: 130,
+				y: 140
 			},
 			to: {
 				elementId: "node3",
-				x: 590,
-				y: 251
+				x: 612,
+				y: 248
 			},
 			linkDirection: "vertical"
 		},
@@ -82,103 +82,103 @@ const dagConfig: FDagConfig = {
 			from: {
 				elementId: "group1",
 				x: 539,
-				y: 321
+				y: 313
 			},
 			to: {
 				elementId: "node2",
-				x: 246,
-				y: 443
+				x: 159,
+				y: 488
 			},
 			linkDirection: "vertical"
 		},
 		{
 			from: {
 				elementId: "node2",
-				x: 223,
-				y: 491
+				x: 136,
+				y: 536
 			},
 			to: {
 				elementId: "node4",
-				x: 838,
-				y: 622
+				x: 689,
+				y: 590
 			},
 			linkDirection: "vertical"
 		},
 		{
 			from: {
 				elementId: "group3",
-				x: 892,
-				y: 239
+				x: 819,
+				y: 211
 			},
 			to: {
 				elementId: "group2",
-				x: 717,
-				y: 399
+				x: 713,
+				y: 432
+			},
+			linkDirection: "vertical"
+		},
+		{
+			from: {
+				elementId: "node3",
+				x: 548,
+				y: 267
+			},
+			to: {
+				elementId: "node1",
+				x: 277,
+				y: 120
+			},
+			linkDirection: "horizontal"
+		},
+		{
+			from: {
+				elementId: "node3",
+				x: 653,
+				y: 288
+			},
+			to: {
+				elementId: "node2",
+				x: 127,
+				y: 488
+			},
+			linkDirection: "vertical"
+		},
+		{
+			from: {
+				elementId: "group3",
+				x: 651,
+				y: 179
+			},
+			to: {
+				elementId: "node2",
+				x: 279,
+				y: 521
+			},
+			linkDirection: "horizontal"
+		},
+		{
+			from: {
+				elementId: "node1",
+				x: 170,
+				y: 140
+			},
+			to: {
+				elementId: "node2",
+				x: 212,
+				y: 488
 			},
 			linkDirection: "vertical"
 		},
 		{
 			from: {
 				elementId: "node5",
-				x: 924,
-				y: 202
+				x: 852,
+				y: 176
 			},
 			to: {
 				elementId: "node4",
-				x: 784,
-				y: 622
-			},
-			linkDirection: "vertical"
-		},
-		{
-			from: {
-				elementId: "node3",
-				x: 526,
-				y: 270
-			},
-			to: {
-				elementId: "node1",
-				x: 249,
-				y: 90
-			},
-			linkDirection: "horizontal"
-		},
-		{
-			from: {
-				elementId: "node3",
-				x: 631,
-				y: 299
-			},
-			to: {
-				elementId: "node2",
-				x: 214,
-				y: 443
-			},
-			linkDirection: "vertical"
-		},
-		{
-			from: {
-				elementId: "group3",
-				x: 724,
-				y: 207
-			},
-			to: {
-				elementId: "node2",
-				x: 366,
-				y: 476
-			},
-			linkDirection: "horizontal"
-		},
-		{
-			from: {
-				elementId: "node1",
-				x: 142,
-				y: 110
-			},
-			to: {
-				elementId: "node2",
-				x: 299,
-				y: 443
+				x: 764,
+				y: 590
 			},
 			linkDirection: "vertical"
 		}
@@ -191,7 +191,7 @@ const dagConfig: FDagConfig = {
 			height: "300px",
 			width: "500px",
 			x: 503,
-			y: 22
+			y: 14
 		},
 		{
 			id: "group2",
@@ -199,8 +199,8 @@ const dagConfig: FDagConfig = {
 			icon: "i-tree",
 			height: "300px",
 			width: "500px",
-			x: 484,
-			y: 400
+			x: 480,
+			y: 433
 		},
 		{
 			id: "group3",
@@ -208,8 +208,8 @@ const dagConfig: FDagConfig = {
 			icon: "i-tree",
 			height: "150px",
 			width: "250px",
-			x: 725,
-			y: 90,
+			x: 652,
+			y: 62,
 			group: "group1"
 		}
 	]

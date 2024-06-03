@@ -626,16 +626,27 @@ export class FDag extends FRoot {
 	generatePath(points: CoOrdinates[], linkDirection: FDagLinkDirection) {
 		const { x: sx, y: sy } = points[0];
 		const { x: dx, y: dy } = points[1];
+		// if (linkDirection === "vertical") {
+		// 	return `M ${sx} ${sy}
+		// C ${sx} ${(sy + dy) / 2},
+		//   ${dx} ${(sy + dy) / 2},
+		//   ${dx} ${dy}`;
+		// } else {
+		// 	return `M ${sx} ${sy}
+		// C ${(sx + dx) / 2} ${sy},
+		//   ${(sx + dx) / 2} ${dy},
+		//   ${dx} ${dy}`;
+		// }
 		if (linkDirection === "vertical") {
 			return `M ${sx} ${sy}
-		C ${sx} ${(sy + dy) / 2},
-		  ${dx} ${(sy + dy) / 2},
-		  ${dx} ${dy}`;
+		L ${sx} ${(sy + dy) / 2}
+		 L ${dx} ${(sy + dy) / 2}
+		 L ${dx} ${dy}`;
 		} else {
 			return `M ${sx} ${sy}
-		C ${(sx + dx) / 2} ${sy},
-		  ${(sx + dx) / 2} ${dy},
-		  ${dx} ${dy}`;
+		L ${(sx + dx) / 2} ${sy}
+		 L ${(sx + dx) / 2} ${dy}
+		 L ${dx} ${dy}`;
 		}
 	}
 }

@@ -12,35 +12,6 @@ import curveStep from "./curve-steps";
 injectCss("f-dag", globalStyle);
 // Renders attribute names of parent element to textContent
 
-// line plotting function on given points
-const vLine = d3
-	.line<CoOrdinates>()
-	.x(p => p.x)
-	.y(p => p.y)
-	//@ts-expect-error @todo vikas to check
-	.curve(curveStep.angle(12, "vertical"));
-
-const hLine = d3
-	.line<CoOrdinates>()
-	.x(p => p.x)
-	.y(p => p.y)
-	//@ts-expect-error @todo vikas to check
-	.curve(curveStep.angle(12, "horizontal"));
-
-const rVLine = d3
-	.line<CoOrdinates>()
-	.x(p => p.x)
-	.y(p => p.y)
-	//@ts-expect-error @todo vikas to check
-	.curve(curveStep.angle(12, "vertical-reverse"));
-
-const rHLine = d3
-	.line<CoOrdinates>()
-	.x(p => p.x)
-	.y(p => p.y)
-	//@ts-expect-error @todo vikas to check
-	.curve(curveStep.angle(12, "horizontal-reverse"));
-
 export type CoOrdinates = {
 	x: number;
 	y: number;
@@ -679,9 +650,22 @@ export class FDag extends FRoot {
 					y: dy
 				}
 			];
+			const angle = Math.abs(dx - sx) >= 24 ? 12 : Math.abs(dx - sx) / 2;
 			if (sy > dy) {
+				const rVLine = d3
+					.line<CoOrdinates>()
+					.x(p => p.x)
+					.y(p => p.y)
+					//@ts-expect-error @todo vikas to check
+					.curve(curveStep.angle(angle, "vertical-reverse"));
 				return rVLine(points)!;
 			}
+			const vLine = d3
+				.line<CoOrdinates>()
+				.x(p => p.x)
+				.y(p => p.y)
+				//@ts-expect-error @todo vikas to check
+				.curve(curveStep.angle(angle, "vertical"));
 			return vLine(points)!;
 		} else {
 			const points = [
@@ -702,9 +686,23 @@ export class FDag extends FRoot {
 					y: dy
 				}
 			];
+			const angle = Math.abs(dy - sy) >= 24 ? 12 : Math.abs(dy - sy) / 2;
+
 			if (sx > dx) {
+				const rHLine = d3
+					.line<CoOrdinates>()
+					.x(p => p.x)
+					.y(p => p.y)
+					//@ts-expect-error @todo vikas to check
+					.curve(curveStep.angle(angle, "horizontal-reverse"));
 				return rHLine(points)!;
 			}
+			const hLine = d3
+				.line<CoOrdinates>()
+				.x(p => p.x)
+				.y(p => p.y)
+				//@ts-expect-error @todo vikas to check
+				.curve(curveStep.angle(angle, "horizontal"));
 			return hLine(points)!;
 		}
 	}

@@ -7,9 +7,39 @@ import { ref, createRef, Ref } from "lit/directives/ref.js";
 import * as d3 from "d3";
 import { property, queryAll } from "lit/decorators.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
+import curveStep from "./curve-steps";
 
 injectCss("f-dag", globalStyle);
 // Renders attribute names of parent element to textContent
+
+// line plotting function on given points
+const vLine = d3
+	.line<CoOrdinates>()
+	.x(p => p.x)
+	.y(p => p.y)
+	//@ts-expect-error @todo vikas to check
+	.curve(curveStep.angle(12, "vertical"));
+
+const hLine = d3
+	.line<CoOrdinates>()
+	.x(p => p.x)
+	.y(p => p.y)
+	//@ts-expect-error @todo vikas to check
+	.curve(curveStep.angle(12, "horizontal"));
+
+const rVLine = d3
+	.line<CoOrdinates>()
+	.x(p => p.x)
+	.y(p => p.y)
+	//@ts-expect-error @todo vikas to check
+	.curve(curveStep.angle(12, "vertical-reverse"));
+
+const rHLine = d3
+	.line<CoOrdinates>()
+	.x(p => p.x)
+	.y(p => p.y)
+	//@ts-expect-error @todo vikas to check
+	.curve(curveStep.angle(12, "horizontal-reverse"));
 
 export type CoOrdinates = {
 	x: number;
@@ -59,7 +89,10 @@ export class FDag extends FRoot {
 	config!: FDagConfig;
 
 	@queryAll(`.dag-node`)
-	allGroups?: HTMLElement[];
+	allGroupsAndNodes?: HTMLElement[];
+
+	@queryAll(`.dag-node[data-node-type="node"]`)
+	allNodes?: HTMLElement[];
 
 	createRenderRoot() {
 		return this;
@@ -173,7 +206,7 @@ export class FDag extends FRoot {
 
 	startPlottingLine(event: MouseEvent) {
 		event.stopPropagation();
-		this.allGroups?.forEach(n => {
+		this.allGroupsAndNodes?.forEach(n => {
 			n.style.pointerEvents = "none";
 		});
 		const circle = event.currentTarget as HTMLElement;
@@ -281,7 +314,7 @@ export class FDag extends FRoot {
 				return this.generatePath(points, d.linkDirection).toString();
 			});
 		} else {
-			this.allGroups?.forEach(n => {
+			this.allGroupsAndNodes?.forEach(n => {
 				n.style.pointerEvents = "all";
 			});
 			this.currentLine?.remove();
@@ -294,7 +327,7 @@ export class FDag extends FRoot {
 		const circle = event.currentTarget as HTMLElement;
 		const rect = circle.getBoundingClientRect();
 		const dagRect = this.getBoundingClientRect();
-		this.allGroups?.forEach(n => {
+		this.allGroupsAndNodes?.forEach(n => {
 			n.style.pointerEvents = "all";
 		});
 		if (this.currentLine) {
@@ -424,10 +457,10 @@ export class FDag extends FRoot {
 			nodeElement.style.zIndex = `2`;
 		}
 
-		const allGroups = this.querySelectorAll<HTMLElement>(`[data-node-type="group"]`);
+		const allGroupsAndNodes = this.querySelectorAll<HTMLElement>(`[data-node-type="group"]`);
 		let insideGroup = false;
-		for (let index = 0; index < allGroups.length; index++) {
-			const group = allGroups.item(index);
+		for (let index = 0; index < allGroupsAndNodes.length; index++) {
+			const group = allGroupsAndNodes.item(index);
 			const { top, height, left, width } = group.getBoundingClientRect();
 			if (
 				nodeTop > top &&
@@ -626,27 +659,53 @@ export class FDag extends FRoot {
 	generatePath(points: CoOrdinates[], linkDirection: FDagLinkDirection) {
 		const { x: sx, y: sy } = points[0];
 		const { x: dx, y: dy } = points[1];
-		// if (linkDirection === "vertical") {
-		// 	return `M ${sx} ${sy}
-		// C ${sx} ${(sy + dy) / 2},
-		//   ${dx} ${(sy + dy) / 2},
-		//   ${dx} ${dy}`;
-		// } else {
-		// 	return `M ${sx} ${sy}
-		// C ${(sx + dx) / 2} ${sy},
-		//   ${(sx + dx) / 2} ${dy},
-		//   ${dx} ${dy}`;
-		// }
+
 		if (linkDirection === "vertical") {
-			return `M ${sx} ${sy}
-		L ${sx} ${(sy + dy) / 2}
-		 L ${dx} ${(sy + dy) / 2}
-		 L ${dx} ${dy}`;
+			const points = [
+				{
+					x: sx,
+					y: sy
+				},
+				{
+					x: sx,
+					y: (sy + dy) / 2
+				},
+				{
+					x: dx,
+					y: (sy + dy) / 2
+				},
+				{
+					x: dx,
+					y: dy
+				}
+			];
+			if (sy > dy) {
+				return rVLine(points)!;
+			}
+			return vLine(points)!;
 		} else {
-			return `M ${sx} ${sy}
-		L ${(sx + dx) / 2} ${sy}
-		 L ${(sx + dx) / 2} ${dy}
-		 L ${dx} ${dy}`;
+			const points = [
+				{
+					x: sx,
+					y: sy
+				},
+				{
+					x: (sx + dx) / 2,
+					y: sy
+				},
+				{
+					x: (sx + dx) / 2,
+					y: dy
+				},
+				{
+					x: dx,
+					y: dy
+				}
+			];
+			if (sx > dx) {
+				return rHLine(points)!;
+			}
+			return hLine(points)!;
 		}
 	}
 }

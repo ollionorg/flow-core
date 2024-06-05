@@ -6,8 +6,8 @@ export type FDagElement = {
 	id: string;
 	label: string;
 	icon: string;
-	height: string;
-	width: string;
+	height: number;
+	width: number;
 	group?: string;
 } & CoOrdinates;
 
@@ -23,3 +23,7 @@ export type FDagConfig = {
 	links: FDagLink[];
 	groups: FDagElement[];
 };
+
+export type FDagComputedNode = {
+	next: FDagComputedNode[];
+} & FDagElement;

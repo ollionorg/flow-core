@@ -8,7 +8,7 @@ import * as d3 from "d3";
 import { property, queryAll } from "lit/decorators.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { dragNestedGroups, dragNode, moveElement, updateNodePosition } from "./node-utils";
-import type { CoOrdinates, FDagConfig, FDagLink } from "./types";
+import type { CoOrdinates, FDagConfig, FDagElement, FDagLink } from "./types";
 import {
 	dropLine,
 	generatePath,
@@ -19,6 +19,77 @@ import {
 
 injectCss("f-dag", globalStyle);
 // Renders attribute names of parent element to textContent
+export type HierarchyNode = {
+	id: string;
+	height: number;
+	width: number;
+	group?: string;
+	type: "group" | "node";
+	children: HierarchyNode[];
+};
+function buildHierarchy(config: FDagConfig) {
+	const nodesMap = new Map<string, HierarchyNode>();
+	const groupMap = new Map<string, FDagElement>();
+
+	config.groups.forEach(group => {
+		groupMap.set(group.id, group);
+	});
+
+	config.nodes.forEach(node => {
+		nodesMap.set(node.id, {
+			id: node.id,
+			group: node.group,
+			width: node.width,
+			type: "node",
+			height: node.height,
+			children: []
+		});
+	});
+
+	const roots: HierarchyNode[] = [];
+
+	nodesMap.forEach(node => {
+		if (!node.group) {
+			roots.push(node);
+		}
+	});
+
+	function addGroupToHierarchy(group: FDagElement, parent?: HierarchyNode): void {
+		const groupNode: HierarchyNode = {
+			id: group.id,
+			type: "group",
+			height: group.height,
+			width: group.width,
+			children: []
+		};
+
+		config.nodes.forEach(node => {
+			if (node.group === group.id) {
+				groupNode.children.push(nodesMap.get(node.id)!);
+			}
+		});
+
+		if (parent) {
+			parent.children.push(groupNode);
+		} else {
+			roots.push(groupNode);
+		}
+
+		config.groups.forEach(subGroup => {
+			if (subGroup.group === group.id) {
+				addGroupToHierarchy(subGroup, groupNode);
+			}
+		});
+	}
+
+	config.groups.forEach(group => {
+		if (!group.group) {
+			addGroupToHierarchy(group);
+		}
+	});
+
+	return roots;
+}
 
 @flowElement("f-dag")
 export class FDag extends FRoot {
@@ -64,6 +135,67 @@ export class FDag extends FRoot {
 	updateLink = updateLink;
 	generatePath = generatePath;
 
+	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.willUpdate(changedProperties);
+
+		const rootNodes = buildHierarchy(this.config);
+
+		const [spaceX, spaceY] = [100, 100];
+
+		const positionNodes = (elements: HierarchyNode[], x: number, y: number) => {
+			let maxX = 0;
+			let maxY = 0;
+			const minX = x;
+			const minY = y;
+			const nodes = elements.filter(e => e.type === "node");
+			const groups = elements.filter(e => e.type === "group");
+			let nodeY = y + 60;
+			nodes.forEach(n => {
+				const nodeObject = this.config.nodes.find(nd => nd.id === n.id)!;
+				nodeObject.x = x;
+				nodeObject.y = nodeY;
+
+				if (x + nodeObject.width > maxX) {
+					maxX = x + nodeObject.width;
+				}
+				if (nodeY + nodeObject.height > maxY) {
+					maxY = nodeY + nodeObject.height;
+				}
+				nodeY += nodeObject.height + spaceY;
+			});
+			x = maxX + spaceX;
+			y += 60;
+			groups.forEach(g => {
+				const groupObject = this.config.groups.find(nd => nd.id === g.id)!;
+
+				groupObject.x = x;
+				groupObject.y = y;
+
+				if (g.children && g.children.length > 0) {
+					const { width, height } = positionNodes(g.children, x + 20, y);
+
+					groupObject.width = width;
+					groupObject.height = height + 20;
+				}
+
+				if (x + groupObject.width > maxX) {
+					maxX = x + groupObject.width;
+				}
+				if (y + groupObject.height > maxY) {
+					maxY = y + groupObject.height;
+				}
+
+				y += groupObject.height + spaceY;
+			});
+
+			return {
+				width: maxX - minX + 40,
+				height: maxY - minY
+			};
+		};
+
+		positionNodes(rootNodes, 0, 0);
+	}
 	render() {
 		return html`<f-div width="100%" height="100%" @mousemove=${this.updateLinePath}>
 			<svg style="position: absolute;width: 100%;height: 100%;top: 0px;left: 0px;">
@@ -86,8 +218,8 @@ export class FDag extends FRoot {
 					state="secondary"
 					align="middle-left"
 					variant="curved"
-					.height=${n.height}
-					.width=${n.width}
+					.height=${n.height + "px"}
+					.width=${n.width + "px"}
 					class="dag-node"
 					gap="medium"
 					border="small solid subtle around"
@@ -115,8 +247,8 @@ export class FDag extends FRoot {
 				return html`<f-div
 					align="top-left"
 					variant="curved"
-					.height=${g.height}
-					.width=${g.width}
+					.height=${g.height + "px"}
+					.width=${g.width + "px"}
 					data-group=${ifDefined(g.group)}
 					class="dag-node"
 					data-node-type="group"

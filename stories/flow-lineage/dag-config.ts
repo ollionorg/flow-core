@@ -160,8 +160,7 @@ const dagConfig: FDagConfig = {
 			label: "Group 1",
 			icon: "i-tree",
 			height: 300,
-			width: 500,
-			group: "group2"
+			width: 500
 		},
 		{
 			id: "group2",

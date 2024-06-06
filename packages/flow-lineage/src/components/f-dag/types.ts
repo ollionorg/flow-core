@@ -30,6 +30,7 @@ export type FDagConfig = {
 		x: number;
 		y: number;
 	};
+	layoutDirection?: "horizontal" | "vertical";
 };
 
 export type FDagComputedNode = {

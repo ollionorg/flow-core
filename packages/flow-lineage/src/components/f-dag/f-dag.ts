@@ -149,7 +149,7 @@ export class FDag extends FRoot {
 
 		const rootNodes = buildHierarchy(this.config);
 
-		const [defaultWidth, _defaultHeight] = [100, 100];
+		const [defaultWidth, defaultHeight] = [100, 100];
 
 		const positionNodes = (
 			elements: HierarchyNode[],
@@ -183,6 +183,7 @@ export class FDag extends FRoot {
 			});
 
 			const initialY = y;
+			const initialX = x;
 			let maxX = 0;
 			let maxY = 0;
 			const minX = x;
@@ -190,6 +191,7 @@ export class FDag extends FRoot {
 			const calculateCords = (ns: HierarchyNode[]) => {
 				const nexts: HierarchyNode[] = [];
 				let maxWidth = defaultWidth;
+				let maxHeight = defaultHeight;
 				ns.forEach(n => {
 					const elementObject = this.getElement(n.id);
 					if (!elementObject.x && !elementObject.y) {
@@ -215,17 +217,29 @@ export class FDag extends FRoot {
 							maxY = y + elementObject.height;
 						}
 
-						y += elementObject.height + spaceY;
+						if (this.config.layoutDirection === "vertical") {
+							x += elementObject.width + spaceX;
+						} else {
+							y += elementObject.height + spaceY;
+						}
 
 						if (elementObject.width > maxWidth) {
 							maxWidth = elementObject.width;
+						}
+						if (elementObject.height > maxHeight) {
+							maxHeight = elementObject.height;
 						}
 
 						if (n.next) nexts.push(...n.next);
 					}
 				});
-				x += maxWidth + spaceX;
-				y = initialY;
+				if (this.config.layoutDirection === "vertical") {
+					y += maxHeight + spaceY;
+					x = initialX;
+				} else {
+					x += maxWidth + spaceX;
+					y = initialY;
+				}
 
 				if (nexts.length > 0) calculateCords(nexts);
 			};
@@ -341,16 +355,28 @@ export class FDag extends FRoot {
 					const toElement = this.getElement(d.to.elementId);
 					d.to.x = toElement.x;
 					d.to.y = toElement.y;
-
-					d.linkDirection = "horizontal";
-					if (d.to.x! > d.from.x!) {
-						d.from.x! += fromElement.width;
-						d.from.y! += fromElement.height / 2;
-						d.to.y! += toElement.height / 2;
+					if (this.config.layoutDirection === "horizontal") {
+						d.linkDirection = "horizontal";
+						if (d.to.x! > d.from.x!) {
+							d.from.x! += fromElement.width;
+							d.from.y! += fromElement.height / 2;
+							d.to.y! += toElement.height / 2;
+						} else {
+							d.from.y! += fromElement.height / 2;
+							d.to.x! += fromElement.width;
+							d.to.y! += toElement.height / 2;
+						}
 					} else {
-						d.from.y! += fromElement.height / 2;
-						d.to.x! += fromElement.width;
-						d.to.y! += toElement.height / 2;
+						d.linkDirection = "vertical";
+						if (d.to.y! > d.from.y!) {
+							d.from.x! += fromElement.width / 2;
+							d.from.y! += fromElement.height;
+							d.to.x! += toElement.width / 2;
+						} else {
+							d.from.x! += fromElement.width / 2;
+							d.to.x! += fromElement.width / 2;
+							d.to.y! += toElement.height;
+						}
 					}
 				}
 				points.push({

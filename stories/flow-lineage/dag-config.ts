@@ -113,7 +113,7 @@ const dagConfig: FDagConfig = {
 				elementId: "node2"
 			},
 			to: {
-				elementId: "node4"
+				elementId: "group3"
 			},
 			linkDirection: "vertical"
 		},
@@ -166,8 +166,6 @@ const dagConfig: FDagConfig = {
 			icon: "i-tree",
 			height: 150,
 			width: 250,
-
-			group: "group1",
 			spacing: {
 				x: 50,
 				y: 50
@@ -186,7 +184,8 @@ const dagConfig: FDagConfig = {
 	spacing: {
 		x: 100,
 		y: 50
-	}
+	},
+	layoutDirection: "vertical"
 };
 
 export default dagConfig;

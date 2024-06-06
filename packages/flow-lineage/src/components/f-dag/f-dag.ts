@@ -335,6 +335,11 @@ export class FDag extends FRoot {
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
 
+		function randomIntFromInterval(min: number, max: number) {
+			// min and max included
+			return Math.floor(Math.random() * (max - min + 1) + min);
+		}
+
 		const svg = d3.select(this.svgElement.value!);
 		svg
 			.selectAll("path.dag-line")
@@ -359,22 +364,34 @@ export class FDag extends FRoot {
 						d.linkDirection = "horizontal";
 						if (d.to.x! > d.from.x!) {
 							d.from.x! += fromElement.width;
-							d.from.y! += fromElement.height / 2;
-							d.to.y! += toElement.height / 2;
+							d.from.y! += randomIntFromInterval(
+								fromElement.height / 3,
+								fromElement.height * (2 / 3)
+							);
+							d.to.y! += randomIntFromInterval(toElement.height / 3, toElement.height * (2 / 3));
 						} else {
-							d.from.y! += fromElement.height / 2;
+							d.from.y! += randomIntFromInterval(
+								fromElement.height / 3,
+								fromElement.height * (2 / 3)
+							);
 							d.to.x! += fromElement.width;
-							d.to.y! += toElement.height / 2;
+							d.to.y! += randomIntFromInterval(toElement.height / 3, toElement.height * (2 / 3));
 						}
 					} else {
 						d.linkDirection = "vertical";
 						if (d.to.y! > d.from.y!) {
-							d.from.x! += fromElement.width / 2;
+							d.from.x! += randomIntFromInterval(
+								fromElement.width / 3,
+								fromElement.width * (2 / 3)
+							);
 							d.from.y! += fromElement.height;
-							d.to.x! += toElement.width / 2;
+							d.to.x! += randomIntFromInterval(toElement.width / 3, toElement.width * (2 / 3));
 						} else {
-							d.from.x! += fromElement.width / 2;
-							d.to.x! += fromElement.width / 2;
+							d.from.x! += randomIntFromInterval(
+								fromElement.width / 3,
+								fromElement.width * (2 / 3)
+							);
+							d.to.x! += randomIntFromInterval(toElement.width / 3, toElement.width * (2 / 3));
 							d.to.y! += toElement.height;
 						}
 					}

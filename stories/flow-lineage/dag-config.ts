@@ -60,6 +60,13 @@ const dagConfig: FDagConfig = {
 			width: 100,
 
 			group: "group4"
+		},
+		{
+			id: "node8",
+			label: "Node 8",
+			icon: "i-box",
+			height: 48,
+			width: 100
 		}
 	],
 	links: [
@@ -68,7 +75,7 @@ const dagConfig: FDagConfig = {
 				elementId: "node1"
 			},
 			to: {
-				elementId: "node5"
+				elementId: "group4"
 			},
 			linkDirection: "horizontal"
 		},
@@ -77,34 +84,16 @@ const dagConfig: FDagConfig = {
 				elementId: "node1"
 			},
 			to: {
-				elementId: "node3"
-			},
-			linkDirection: "vertical"
-		},
-		{
-			from: {
-				elementId: "node1"
-			},
-			to: {
-				elementId: "node3"
-			},
-			linkDirection: "vertical"
-		},
-		{
-			from: {
-				elementId: "node2"
-			},
-			to: {
 				elementId: "group1"
 			},
 			linkDirection: "vertical"
 		},
 		{
 			from: {
-				elementId: "group1"
+				elementId: "node3"
 			},
 			to: {
-				elementId: "group2"
+				elementId: "node4"
 			},
 			linkDirection: "vertical"
 		},
@@ -119,20 +108,19 @@ const dagConfig: FDagConfig = {
 		},
 		{
 			from: {
-				elementId: "group3"
+				elementId: "group1"
 			},
 			to: {
 				elementId: "group2"
 			},
 			linkDirection: "vertical"
 		},
-
 		{
 			from: {
-				elementId: "node5"
-			},
-			to: {
 				elementId: "node6"
+			},
+			to: {
+				elementId: "node8"
 			},
 			linkDirection: "vertical"
 		}
@@ -169,7 +157,8 @@ const dagConfig: FDagConfig = {
 			spacing: {
 				x: 50,
 				y: 50
-			}
+			},
+			group: "group4"
 		},
 		{
 			id: "group4",

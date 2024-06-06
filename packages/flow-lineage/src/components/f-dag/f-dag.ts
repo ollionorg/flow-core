@@ -149,10 +149,15 @@ export class FDag extends FRoot {
 
 		const rootNodes = buildHierarchy(this.config);
 
-		const [spaceX, spaceY] = [100, 100];
 		const [defaultWidth, _defaultHeight] = [100, 100];
 
-		const positionNodes = (elements: HierarchyNode[], x: number, y: number) => {
+		const positionNodes = (
+			elements: HierarchyNode[],
+			x: number,
+			y: number,
+			spaceX = 100,
+			spaceY = 100
+		) => {
 			const elementIds = elements.map(e => e.id);
 
 			const nodeLinks = this.config.links.filter(
@@ -192,7 +197,13 @@ export class FDag extends FRoot {
 						elementObject.y = y;
 
 						if (n.type === "group" && n.children && n.children.length > 0) {
-							const { width, height } = positionNodes(n.children, x + 20, y + 60);
+							const { width, height } = positionNodes(
+								n.children,
+								x + 20,
+								y + 60,
+								elementObject.spacing?.x,
+								elementObject.spacing?.y
+							);
 
 							elementObject.width = width;
 							elementObject.height = height + 20;
@@ -226,7 +237,7 @@ export class FDag extends FRoot {
 			};
 		};
 
-		positionNodes(rootNodes, 0, 0);
+		positionNodes(rootNodes, 0, 0, this.config.spacing?.x, this.config.spacing?.y);
 	}
 	render() {
 		return html`<f-div width="100%" height="100%" @mousemove=${this.updateLinePath}>
@@ -321,6 +332,27 @@ export class FDag extends FRoot {
 			})
 			.attr("d", d => {
 				const points: CoOrdinates[] = [];
+
+				if (!d.to.x && !d.to.y && !d.from.x && !d.from.y) {
+					const fromElement = this.getElement(d.from.elementId);
+					d.from.x = fromElement.x;
+					d.from.y = fromElement.y;
+
+					const toElement = this.getElement(d.to.elementId);
+					d.to.x = toElement.x;
+					d.to.y = toElement.y;
+
+					d.linkDirection = "horizontal";
+					if (d.to.x! > d.from.x!) {
+						d.from.x! += fromElement.width;
+						d.from.y! += fromElement.height / 2;
+						d.to.y! += toElement.height / 2;
+					} else {
+						d.from.y! += fromElement.height / 2;
+						d.to.x! += fromElement.width;
+						d.to.y! += toElement.height / 2;
+					}
+				}
 				points.push({
 					x: d.from.x,
 					y: d.from.y

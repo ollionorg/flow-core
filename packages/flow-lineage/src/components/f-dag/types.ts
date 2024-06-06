@@ -9,6 +9,10 @@ export type FDagElement = {
 	height: number;
 	width: number;
 	group?: string;
+	spacing?: {
+		x: number;
+		y: number;
+	};
 } & CoOrdinates;
 
 export type FDagLinkDirection = "horizontal" | "vertical";
@@ -22,6 +26,10 @@ export type FDagConfig = {
 	nodes: FDagElement[];
 	links: FDagLink[];
 	groups: FDagElement[];
+	spacing?: {
+		x: number;
+		y: number;
+	};
 };
 
 export type FDagComputedNode = {

@@ -83,10 +83,19 @@ const dagConfig: FDagConfig = {
 		},
 		{
 			from: {
+				elementId: "node2"
+			},
+			to: {
+				elementId: "group1"
+			},
+			linkDirection: "vertical"
+		},
+		{
+			from: {
 				elementId: "group1"
 			},
 			to: {
-				elementId: "node2"
+				elementId: "group2"
 			},
 			linkDirection: "vertical"
 		},
@@ -134,15 +143,6 @@ const dagConfig: FDagConfig = {
 				elementId: "node2"
 			},
 			linkDirection: "horizontal"
-		},
-		{
-			from: {
-				elementId: "node1"
-			},
-			to: {
-				elementId: "node2"
-			},
-			linkDirection: "vertical"
 		},
 		{
 			from: {

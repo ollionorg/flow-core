@@ -26,6 +26,7 @@ export type HierarchyNode = {
 	group?: string;
 	type: "group" | "node";
 	children: HierarchyNode[];
+	next?: HierarchyNode[];
 };
 function buildHierarchy(config: FDagConfig) {
 	const nodesMap = new Map<string, HierarchyNode>();
@@ -135,62 +136,93 @@ export class FDag extends FRoot {
 	updateLink = updateLink;
 	generatePath = generatePath;
 
+	getElement(id: string) {
+		let elementObj = this.config.nodes.find(n => n.id === id);
+		if (!elementObj) {
+			elementObj = this.config.groups.find(n => n.id === id);
+		}
+		return elementObj!;
+	}
+
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
 
 		const rootNodes = buildHierarchy(this.config);
 
 		const [spaceX, spaceY] = [100, 100];
+		const [defaultWidth, _defaultHeight] = [100, 100];
 
 		const positionNodes = (elements: HierarchyNode[], x: number, y: number) => {
+			const elementIds = elements.map(e => e.id);
+
+			const nodeLinks = this.config.links.filter(
+				l => elementIds.includes(l.from.elementId) && elementIds.includes(l.to.elementId)
+			);
+			const roots = new Set<HierarchyNode>(elements);
+			const nonroots = new Set<HierarchyNode>();
+			nodeLinks.forEach(link => {
+				const fromElement = elements.find(e => e.id === link.from.elementId)!;
+				if (!nonroots.has(fromElement)) {
+					roots.add(fromElement);
+				}
+				if (!fromElement.next) {
+					fromElement.next = [];
+				}
+
+				const toElement = elements.find(e => e.id === link.to.elementId)!;
+				if (roots.has(toElement)) {
+					roots.delete(toElement);
+				}
+				nonroots.add(toElement);
+				fromElement.next.push(toElement);
+			});
+
+			const initialY = y;
 			let maxX = 0;
 			let maxY = 0;
 			const minX = x;
 			const minY = y;
-			const nodes = elements.filter(e => e.type === "node");
-			const groups = elements.filter(e => e.type === "group");
-			let nodeY = y + 60;
-			nodes.forEach(n => {
-				const nodeObject = this.config.nodes.find(nd => nd.id === n.id)!;
-				nodeObject.x = x;
-				nodeObject.y = nodeY;
+			const calculateCords = (ns: HierarchyNode[]) => {
+				const nexts: HierarchyNode[] = [];
+				let maxWidth = defaultWidth;
+				ns.forEach(n => {
+					const elementObject = this.getElement(n.id);
+					if (!elementObject.x && !elementObject.y) {
+						elementObject.x = x;
+						elementObject.y = y;
 
-				if (x + nodeObject.width > maxX) {
-					maxX = x + nodeObject.width;
-				}
-				if (nodeY + nodeObject.height > maxY) {
-					maxY = nodeY + nodeObject.height;
-				}
-				nodeY += nodeObject.height + spaceY;
-			});
-			x = maxX + spaceX;
-			y += 60;
-			groups.forEach(g => {
-				const groupObject = this.config.groups.find(nd => nd.id === g.id)!;
+						if (n.type === "group" && n.children && n.children.length > 0) {
+							const { width, height } = positionNodes(n.children, x + 20, y + 60);
 
-				groupObject.x = x;
-				groupObject.y = y;
+							elementObject.width = width;
+							elementObject.height = height + 20;
+						}
+						if (x + elementObject.width > maxX) {
+							maxX = x + elementObject.width;
+						}
+						if (y + elementObject.height > maxY) {
+							maxY = y + elementObject.height;
+						}
 
-				if (g.children && g.children.length > 0) {
-					const { width, height } = positionNodes(g.children, x + 20, y);
+						y += elementObject.height + spaceY;
 
-					groupObject.width = width;
-					groupObject.height = height + 20;
-				}
+						if (elementObject.width > maxWidth) {
+							maxWidth = elementObject.width;
+						}
 
-				if (x + groupObject.width > maxX) {
-					maxX = x + groupObject.width;
-				}
-				if (y + groupObject.height > maxY) {
-					maxY = y + groupObject.height;
-				}
+						if (n.next) nexts.push(...n.next);
+					}
+				});
+				x += maxWidth + spaceX;
+				y = initialY;
 
-				y += groupObject.height + spaceY;
-			});
+				if (nexts.length > 0) calculateCords(nexts);
+			};
+			calculateCords(Array.from(roots));
 
 			return {
 				width: maxX - minX + 40,
-				height: maxY - minY
+				height: maxY - minY + 60
 			};
 		};
 

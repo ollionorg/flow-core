@@ -27,6 +27,7 @@ f-dag {
 		height: 100%;
 		z-index: 10;
 		pointer-events: none;
+		overflow: visible;
 	}
 	.dag-line {
 		fill: none;
@@ -72,6 +73,15 @@ f-dag {
 				width: 100%;
 			}
 		}
+	}
+	.d-dag-root {
+		cursor: pointer;
+		&:active {
+			cursor: grabbing;
+		}
+	}
+	.dag-view-port {
+		overflow: visible;
 	}
 }
 

@@ -120,6 +120,18 @@ export function updateLinePath(this: FDag, event: MouseEvent) {
 		this.currentLine = undefined;
 		this.currentArrow?.remove();
 		this.currentArrow = undefined;
+
+		if (event.buttons === 1) {
+			this.viewPortTranslate.x += event.movementX;
+			this.viewPortTranslate.y += event.movementY;
+			this.backgroundPattern.setAttribute(
+				"patternTransform",
+				`translate(${this.viewPortTranslate.x * this.scale},${
+					this.viewPortTranslate.y * this.scale
+				})`
+			);
+			this.dagViewPort.style.transform = `scale(${this.scale}) translate(${this.viewPortTranslate.x}px,${this.viewPortTranslate.y}px)`;
+		}
 	}
 }
 export function dropLine(this: FDag, event: MouseEvent) {

@@ -5,7 +5,7 @@ import globalStyle from "./f-dag-global.scss?inline";
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import * as d3 from "d3";
-import { property, queryAll } from "lit/decorators.js";
+import { property, query, queryAll } from "lit/decorators.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { dragNestedGroups, dragNode, moveElement, updateNodePosition } from "./node-utils";
 import type { CoOrdinates, FDagConfig, FDagElement, FDagLink } from "./types";
@@ -109,10 +109,19 @@ export class FDag extends FRoot {
 	@queryAll(`.dag-node[data-node-type="node"]`)
 	allNodes?: HTMLElement[];
 
+	@query(`.dag-view-port`)
+	dagViewPort!: HTMLElement;
+	@query(`.background-pattern`)
+	backgroundPattern!: HTMLElement;
+
 	createRenderRoot() {
 		return this;
 	}
 	scale = 1;
+	viewPortTranslate = {
+		x: 0,
+		y: 0
+	};
 
 	svgElement: Ref<SVGSVGElement> = createRef();
 	currentLine?: d3.Selection<SVGPathElement, FDagLink, null, undefined>;
@@ -253,83 +262,108 @@ export class FDag extends FRoot {
 
 		positionNodes(rootNodes, 0, 0, this.config.spacing?.x, this.config.spacing?.y);
 	}
+	handleZoom(event: WheelEvent) {
+		// const chartContainer = event.currentTarget as HTMLElement;
+		this.scale += event.deltaY * -0.01;
+
+		// Restrict scale
+		this.scale = Math.min(Math.max(0.4, this.scale), 4);
+
+		// Apply scale transform
+
+		this.dagViewPort.style.transform = `scale(${this.scale}) translate(${this.viewPortTranslate.x}px,${this.viewPortTranslate.y}px)`;
+		this.backgroundPattern.setAttribute("width", `${24 * this.scale}`);
+		this.backgroundPattern.setAttribute("height", `${24 * this.scale}`);
+	}
 	render() {
-		return html`<f-div width="100%" height="100%" @mousemove=${this.updateLinePath}>
-			<svg style="position: absolute;width: 100%;height: 100%;top: 0px;left: 0px;">
+		return html`<f-div
+			class="d-dag-root"
+			width="100%"
+			height="100%"
+			@wheel=${this.handleZoom}
+			@mousemove=${this.updateLinePath}
+		>
+			<svg
+				class="background-svg"
+				style="position: absolute;width: 100%;height: 100%;top: 0px;left: 0px;"
+			>
 				<pattern
+					class="background-pattern"
 					id="pattern-1undefined"
-					x="-1.12163554046424"
-					y="-19.679982038499702"
+					x="0"
+					y="0"
 					width="24"
 					height="24"
 					patternUnits="userSpaceOnUse"
 					patternTransform="translate(-0.5,-0.5)"
 				>
-					<circle cx="0.5" cy="0.5" r="1" fill="var(--color-border-secondary)"></circle>
+					<circle cx="0.5" cy="0.5" r="1" fill="var(--color-border-subtle)"></circle>
 				</pattern>
 				<rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-1undefined)"></rect>
 			</svg>
-			${this.config.nodes.map(n => {
-				return html`<f-div
-					padding="medium"
-					state="secondary"
-					align="middle-left"
-					variant="curved"
-					.height=${n.height + "px"}
-					.width=${n.width + "px"}
-					class="dag-node"
-					gap="medium"
-					border="small solid subtle around"
-					data-group=${ifDefined(n.group)}
-					clickable
-					data-node-type="node"
-					.id=${`${n.id}`}
-					style="z-index:2;transform:translate(${n.x}px, ${n.y}px)"
-					@mousemove=${this.dragNode}
-					@mouseup=${this.updateNodePosition}
-				>
-					<f-icon .source=${n.icon}></f-icon>
-					<f-text size="small" weight="medium">${n.label}</f-text>
-					${["left", "right", "top", "bottom"].map(side => {
-						return html`<span
-							data-node-id=${n.id}
-							class="circle ${side}"
-							@mouseup=${this.dropLine}
-							@mousedown=${this.startPlottingLine}
-						></span>`;
-					})}
-				</f-div>`;
-			})}
-			${this.config.groups.map(g => {
-				return html`<f-div
-					align="top-left"
-					variant="curved"
-					.height=${g.height + "px"}
-					.width=${g.width + "px"}
-					data-group=${ifDefined(g.group)}
-					class="dag-node"
-					data-node-type="group"
-					border="small solid subtle around"
-					.id=${g.id}
-					style="z-index:1;transform:translate(${g.x}px, ${g.y}px)"
-					@mousemove=${this.dragNode}
-					@mouseup=${this.updateNodePosition}
-				>
-					<f-div gap="medium" height="hug-content" clickable state="secondary" padding="medium">
-						<f-icon .source=${g.icon}></f-icon>
-						<f-text size="small" weight="medium">${g.label}</f-text>
-					</f-div>
-					${["left", "right", "top", "bottom"].map(side => {
-						return html`<span
-							data-node-id=${g.id}
-							class="circle ${side}"
-							@mouseup=${this.dropLine}
-							@mousedown=${this.startPlottingLine}
-						></span>`;
-					})}
-				</f-div>`;
-			})}
-			<svg class="main-svg" ${ref(this.svgElement)}></svg>
+			<f-div class="dag-view-port">
+				${this.config.nodes.map(n => {
+					return html`<f-div
+						padding="medium"
+						state="secondary"
+						align="middle-left"
+						variant="curved"
+						.height=${n.height + "px"}
+						.width=${n.width + "px"}
+						class="dag-node"
+						gap="medium"
+						border="small solid subtle around"
+						data-group=${ifDefined(n.group)}
+						clickable
+						data-node-type="node"
+						.id=${`${n.id}`}
+						style="z-index:2;transform:translate(${n.x}px, ${n.y}px)"
+						@mousemove=${this.dragNode}
+						@mouseup=${this.updateNodePosition}
+					>
+						<f-icon .source=${n.icon}></f-icon>
+						<f-text size="small" weight="medium">${n.label}</f-text>
+						${["left", "right", "top", "bottom"].map(side => {
+							return html`<span
+								data-node-id=${n.id}
+								class="circle ${side}"
+								@mouseup=${this.dropLine}
+								@mousedown=${this.startPlottingLine}
+							></span>`;
+						})}
+					</f-div>`;
+				})}
+				${this.config.groups.map(g => {
+					return html`<f-div
+						align="top-left"
+						variant="curved"
+						.height=${g.height + "px"}
+						.width=${g.width + "px"}
+						data-group=${ifDefined(g.group)}
+						class="dag-node"
+						data-node-type="group"
+						border="small solid subtle around"
+						.id=${g.id}
+						style="z-index:1;transform:translate(${g.x}px, ${g.y}px)"
+						@mousemove=${this.dragNode}
+						@mouseup=${this.updateNodePosition}
+					>
+						<f-div gap="medium" height="hug-content" clickable state="secondary" padding="medium">
+							<f-icon .source=${g.icon}></f-icon>
+							<f-text size="small" weight="medium">${g.label}</f-text>
+						</f-div>
+						${["left", "right", "top", "bottom"].map(side => {
+							return html`<span
+								data-node-id=${g.id}
+								class="circle ${side}"
+								@mouseup=${this.dropLine}
+								@mousedown=${this.startPlottingLine}
+							></span>`;
+						})}
+					</f-div>`;
+				})}
+				<svg class="main-svg" ${ref(this.svgElement)}></svg>
+			</f-div>
 		</f-div> `;
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {

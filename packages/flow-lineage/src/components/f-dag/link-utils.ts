@@ -12,11 +12,11 @@ export function startPlottingLine(this: FDag, event: MouseEvent) {
 	const rect = circle.getBoundingClientRect();
 	const dagRect = this.getBoundingClientRect();
 	const svg = d3.select(this.svgElement.value!);
-	const circleX = rect.left - dagRect.left;
-	const circleY = rect.top - dagRect.top;
+	const circleX = rect.left - dagRect.left - this.viewPortTranslate.x;
+	const circleY = rect.top - dagRect.top - this.viewPortTranslate.y;
 
-	let x1 = event.clientX - dagRect.left;
-	let y1 = event.clientY - dagRect.top;
+	let x1 = event.clientX - dagRect.left - this.viewPortTranslate.x;
+	let y1 = event.clientY - dagRect.top - this.viewPortTranslate.y;
 
 	if (Math.abs(x1 - circleX) <= 12) {
 		let offset = 8;
@@ -45,8 +45,8 @@ export function startPlottingLine(this: FDag, event: MouseEvent) {
 			elementId: circle.dataset.nodeId!
 		},
 		to: {
-			x: event.clientX - dagRect.left,
-			y: event.clientY - dagRect.top,
+			x: event.clientX - dagRect.left - this.viewPortTranslate.x,
+			y: event.clientY - dagRect.top - this.viewPortTranslate.y,
 			elementId: ``
 		},
 		linkDirection
@@ -97,8 +97,8 @@ export function updateLinePath(this: FDag, event: MouseEvent) {
 	if (event.buttons === 1 && this.currentLine) {
 		const dagRect = this.getBoundingClientRect();
 		this.currentLine.attr("d", d => {
-			d.to.x = event.clientX - dagRect.left;
-			d.to.y = event.clientY - dagRect.top;
+			d.to.x = event.clientX - dagRect.left - this.viewPortTranslate.x;
+			d.to.y = event.clientY - dagRect.top - this.viewPortTranslate.y;
 
 			const points: CoOrdinates[] = [];
 			points.push({
@@ -146,11 +146,11 @@ export function dropLine(this: FDag, event: MouseEvent) {
 		const fromNodeId = linkElement.attr("id").replace(/(->)$/, "");
 		const toNodeId = circle.dataset.nodeId!;
 
-		let x2 = event.clientX - dagRect.left;
-		let y2 = event.clientY - dagRect.top;
+		let x2 = event.clientX - dagRect.left - this.viewPortTranslate.x;
+		let y2 = event.clientY - dagRect.top - this.viewPortTranslate.y;
 
-		const circleX2 = rect.left - dagRect.left;
-		const circleY2 = rect.top - dagRect.top;
+		const circleX2 = rect.left - dagRect.left - this.viewPortTranslate.x;
+		const circleY2 = rect.top - dagRect.top - this.viewPortTranslate.y;
 
 		if (Math.abs(y2 - circleY2) <= 12) {
 			let offset = 8;

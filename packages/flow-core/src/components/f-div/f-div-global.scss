@@ -520,6 +520,15 @@ f-div {
 
 	&[loading="skeleton"] {
 		@include shimmer-child();
+		> f-pictogram::part(f-pictogram-wrapper) {
+			visibility: hidden;
+		}
+		> f-button::part(f-button-wrapper) {
+			visibility: hidden;
+		}
+		> f-icon-button::part(f-icon-button-wrapper) {
+			visibility: hidden;
+		}
 	}
 	&[loading="loader"] {
 		@include rotate("svg");

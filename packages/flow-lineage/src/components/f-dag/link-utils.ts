@@ -34,7 +34,7 @@ export function startPlottingLine(this: FDag, event: MouseEvent) {
 		y1 = circleY + offset;
 	}
 
-	const linkDirection =
+	const direction =
 		circle.classList.contains("right") || circle.classList.contains("left")
 			? "horizontal"
 			: "vertical";
@@ -49,7 +49,7 @@ export function startPlottingLine(this: FDag, event: MouseEvent) {
 			y: event.clientY - dagRect.top - this.viewPortTranslate.y,
 			elementId: ``
 		},
-		linkDirection
+		direction
 	};
 
 	this.currentLine = svg
@@ -68,7 +68,7 @@ export function startPlottingLine(this: FDag, event: MouseEvent) {
 				y: d.to.y
 			});
 
-			return this.generatePath(points, d.linkDirection);
+			return this.generatePath(points, d.direction);
 		})
 		.attr("stroke", "var(--color-primary-default)");
 
@@ -110,7 +110,7 @@ export function updateLinePath(this: FDag, event: MouseEvent) {
 				y: d.to.y
 			});
 
-			return this.generatePath(points, d.linkDirection);
+			return this.generatePath(points, d.direction);
 		});
 	} else {
 		this.allGroupsAndNodes?.forEach(n => {
@@ -185,7 +185,7 @@ export function dropLine(this: FDag, event: MouseEvent) {
 					y: d.to.y
 				});
 
-				return this.generatePath(points, d.linkDirection);
+				return this.generatePath(points, d.direction);
 			})
 			.attr("stroke", "var(--color-border-default)");
 		if (this.currentArrow) {
@@ -203,7 +203,7 @@ export function dropLine(this: FDag, event: MouseEvent) {
 			linkElement.datum().from.y,
 			linkElement.datum().to.x,
 			linkElement.datum().to.y,
-			linkElement.datum().linkDirection
+			linkElement.datum().direction
 		);
 
 		this.currentLine = undefined;
@@ -219,7 +219,7 @@ export function updateLink(
 	y1: number = 0,
 	x2: number = 0,
 	y2: number = 0,
-	linkDirection: FDagLinkDirection = "horizontal"
+	direction: FDagLinkDirection = "horizontal"
 ) {
 	let linkObject = this.config.links.find(
 		l => l.from.elementId === fromNodeId && l.to.elementId === toNodeId
@@ -237,7 +237,7 @@ export function updateLink(
 				x: x2,
 				y: y2
 			},
-			linkDirection
+			direction
 		};
 
 		this.config.links.push(linkObject);

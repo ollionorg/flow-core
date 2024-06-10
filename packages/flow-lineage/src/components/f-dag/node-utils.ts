@@ -64,7 +64,7 @@ export function moveElement(this: FDag, nodeElement: HTMLElement, event: MouseEv
 			y: d.to.y
 		});
 
-		return this.generatePath(points, d.linkDirection);
+		return this.generatePath(points, d.direction);
 	});
 
 	const toLines = d3.selectAll<SVGPathElement, FDagLink>(
@@ -99,7 +99,7 @@ export function moveElement(this: FDag, nodeElement: HTMLElement, event: MouseEv
 			y: d.to.y
 		});
 
-		return this.generatePath(points, d.linkDirection).toString();
+		return this.generatePath(points, d.direction).toString();
 	});
 }
 
@@ -191,7 +191,7 @@ export function updateNodePosition(this: FDag, event: MouseEvent) {
 			d.from.y,
 			d.to.x,
 			d.to.y,
-			d.linkDirection
+			d.direction
 		);
 	});
 
@@ -203,7 +203,7 @@ export function updateNodePosition(this: FDag, event: MouseEvent) {
 			d.from.y,
 			d.to.x,
 			d.to.y,
-			d.linkDirection
+			d.direction
 		);
 	});
 

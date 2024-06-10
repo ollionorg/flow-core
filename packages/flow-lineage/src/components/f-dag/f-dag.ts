@@ -21,8 +21,8 @@ injectCss("f-dag", globalStyle);
 // Renders attribute names of parent element to textContent
 export type HierarchyNode = {
 	id: string;
-	height: number;
-	width: number;
+	height?: number;
+	width?: number;
 	group?: string;
 	type: "group" | "node";
 	children: HierarchyNode[];
@@ -123,6 +123,13 @@ export class FDag extends FRoot {
 		y: 0
 	};
 
+	get defaultElementWidth(): number {
+		return this.config.defaultNodeSize?.width ?? 50;
+	}
+	get defaultElementHeight(): number {
+		return this.config.defaultNodeSize?.height ?? 50;
+	}
+
 	svgElement: Ref<SVGSVGElement> = createRef();
 	currentLine?: d3.Selection<SVGPathElement, FDagLink, null, undefined>;
 	currentArrow?: d3.Selection<SVGTextPathElement, FDagLink, null, undefined>;
@@ -157,8 +164,6 @@ export class FDag extends FRoot {
 		super.willUpdate(changedProperties);
 
 		const rootNodes = buildHierarchy(this.config);
-
-		const [defaultWidth, defaultHeight] = [100, 100];
 
 		const positionNodes = (
 			elements: HierarchyNode[],
@@ -199,8 +204,8 @@ export class FDag extends FRoot {
 			const minY = y;
 			const calculateCords = (ns: HierarchyNode[]) => {
 				const nexts: HierarchyNode[] = [];
-				let maxWidth = defaultWidth;
-				let maxHeight = defaultHeight;
+				let maxWidth = this.defaultElementWidth;
+				let maxHeight = this.defaultElementHeight;
 				ns.forEach(n => {
 					const elementObject = this.getElement(n.id);
 					if (!elementObject.x && !elementObject.y) {
@@ -218,6 +223,13 @@ export class FDag extends FRoot {
 
 							elementObject.width = width;
 							elementObject.height = height + 20;
+						} else {
+							if (!elementObject.width) {
+								elementObject.width = this.defaultElementWidth;
+							}
+							if (!elementObject.height) {
+								elementObject.height = this.defaultElementHeight;
+							}
 						}
 						if (x + elementObject.width > maxX) {
 							maxX = x + elementObject.width;
@@ -337,8 +349,8 @@ export class FDag extends FRoot {
 					return html`<f-div
 						align="top-left"
 						variant="curved"
-						.height=${g.height + "px"}
-						.width=${g.width + "px"}
+						.height=${((g as FDagElement).height ?? this.defaultElementHeight) + "px"}
+						.width=${((g as FDagElement).width ?? this.defaultElementWidth) + "px"}
 						data-group=${ifDefined(g.group)}
 						class="dag-node"
 						data-node-type="group"
@@ -348,7 +360,14 @@ export class FDag extends FRoot {
 						@mousemove=${this.dragNode}
 						@mouseup=${this.updateNodePosition}
 					>
-						<f-div gap="medium" height="hug-content" clickable state="secondary" padding="medium">
+						<f-div
+							gap="medium"
+							class="group-header"
+							height="hug-content"
+							clickable
+							state="secondary"
+							padding="medium"
+						>
 							<f-icon .source=${g.icon}></f-icon>
 							<f-text size="small" weight="medium">${g.label}</f-text>
 						</f-div>
@@ -395,38 +414,38 @@ export class FDag extends FRoot {
 					d.to.x = toElement.x;
 					d.to.y = toElement.y;
 					if (this.config.layoutDirection === "horizontal") {
-						d.linkDirection = "horizontal";
+						d.direction = "horizontal";
 						if (d.to.x! > d.from.x!) {
-							d.from.x! += fromElement.width;
+							d.from.x! += fromElement.width!;
 							d.from.y! += randomIntFromInterval(
-								fromElement.height / 3,
-								fromElement.height * (2 / 3)
+								fromElement.height! / 3,
+								fromElement.height! * (2 / 3)
 							);
-							d.to.y! += randomIntFromInterval(toElement.height / 3, toElement.height * (2 / 3));
+							d.to.y! += randomIntFromInterval(toElement.height! / 3, toElement.height! * (2 / 3));
 						} else {
 							d.from.y! += randomIntFromInterval(
-								fromElement.height / 3,
-								fromElement.height * (2 / 3)
+								fromElement.height! / 3,
+								fromElement.height! * (2 / 3)
 							);
-							d.to.x! += fromElement.width;
-							d.to.y! += randomIntFromInterval(toElement.height / 3, toElement.height * (2 / 3));
+							d.to.x! += fromElement.width!;
+							d.to.y! += randomIntFromInterval(toElement.height! / 3, toElement.height! * (2 / 3));
 						}
 					} else {
-						d.linkDirection = "vertical";
+						d.direction = "vertical";
 						if (d.to.y! > d.from.y!) {
 							d.from.x! += randomIntFromInterval(
-								fromElement.width / 3,
-								fromElement.width * (2 / 3)
+								fromElement.width! / 3,
+								fromElement.width! * (2 / 3)
 							);
-							d.from.y! += fromElement.height;
-							d.to.x! += randomIntFromInterval(toElement.width / 3, toElement.width * (2 / 3));
+							d.from.y! += fromElement.height!;
+							d.to.x! += randomIntFromInterval(toElement.width! / 3, toElement.width! * (2 / 3));
 						} else {
 							d.from.x! += randomIntFromInterval(
-								fromElement.width / 3,
-								fromElement.width * (2 / 3)
+								fromElement.width! / 3,
+								fromElement.width! * (2 / 3)
 							);
-							d.to.x! += randomIntFromInterval(toElement.width / 3, toElement.width * (2 / 3));
-							d.to.y! += toElement.height;
+							d.to.x! += randomIntFromInterval(toElement.width! / 3, toElement.width! * (2 / 3));
+							d.to.y! += toElement.height!;
 						}
 					}
 				}
@@ -439,7 +458,7 @@ export class FDag extends FRoot {
 					y: d.to.y
 				});
 
-				return this.generatePath(points, d.linkDirection)!.toString();
+				return this.generatePath(points, d.direction)!.toString();
 			})
 			.attr("stroke", "var(--color-border-default)");
 

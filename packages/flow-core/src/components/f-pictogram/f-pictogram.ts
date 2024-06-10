@@ -16,10 +16,10 @@ const category = ["fill", "outline"] as const;
 const sizes = ["x-large", "large", "medium", "small"] as const;
 const states = ["primary", "danger", "warning", "success", "default", "inherit"] as const;
 
-export type FPictogramVariant = typeof variants[number];
-export type FPictogramCategory = typeof category[number];
-export type FPictogramSize = typeof sizes[number];
-export type FPictogramState = typeof states[number];
+export type FPictogramVariant = (typeof variants)[number];
+export type FPictogramCategory = (typeof category)[number];
+export type FPictogramSize = (typeof sizes)[number];
+export type FPictogramState = (typeof states)[number];
 
 let colors = [
 	"#FFB900",

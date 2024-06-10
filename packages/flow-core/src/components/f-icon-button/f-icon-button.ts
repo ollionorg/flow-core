@@ -22,9 +22,9 @@ const variants = ["round", "curved", "block"] as const;
 const categories = ["fill", "outline", "transparent", "packed"] as const;
 const sizes = ["large", "medium", "small", "x-small"] as const;
 
-export type FIconButtonVariant = typeof variants[number];
-export type FIconButtonType = typeof categories[number];
-export type FIconButtonSize = typeof sizes[number];
+export type FIconButtonVariant = (typeof variants)[number];
+export type FIconButtonType = (typeof categories)[number];
+export type FIconButtonSize = (typeof sizes)[number];
 export type FIconButtonState =
 	| "primary"
 	| "danger"
@@ -263,7 +263,7 @@ export class FIconButton extends FRoot {
 		});
 
 		return html`<span
-		part="f-icon-button-wrapper"
+			part="f-icon-button-wrapper"
 			class=${classMap(classes)}
 			style=${this.applyStyles()}
 			variant=${ifDefined(this.variant)}

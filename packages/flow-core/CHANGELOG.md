@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.9.13] - 2024-06-11
+
+### Improvements
+
+- `getComputedStyle` api usage removed, since it might cause render delay.
+
 ## [2.9.12] - 2024-05-27
 
 ### Improvements

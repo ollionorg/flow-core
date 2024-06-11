@@ -194,10 +194,15 @@ export class FTableSchema extends FRoot {
 	@query("#f-table-element")
 	tableElement?: FTable;
 
+	@query("#f-table-search")
+	tableSearchElement!: FSearch;
+
 	@query(".f-table-schema-wrapper")
 	fTableWrapper!: HTMLDivElement;
 
 	nextEmitted = false;
+
+	searchTimeout?: number;
 
 	get max() {
 		return this.rowsPerPage ?? 50;
@@ -411,8 +416,14 @@ export class FTableSchema extends FRoot {
 	}
 
 	search(event: CustomEvent) {
-		this.searchScope = event.detail.scope;
-		this.searchTerm = event.detail.value;
+		this.tableSearchElement.loading = true;
+		if (this.searchTimeout) {
+			clearTimeout(this.searchTimeout);
+		}
+		this.searchTimeout = setTimeout(() => {
+			this.searchScope = event.detail.scope;
+			this.searchTerm = event.detail.value;
+		}, 300);
 	}
 	get noDataTemplate() {
 		if (this.data.rows.length === 0 && this.data.header) {
@@ -445,6 +456,7 @@ export class FTableSchema extends FRoot {
 							.width=${this.offsetWidth ? `${this.offsetWidth}px` : `100%`}
 					  >
 							<f-search
+								id="f-table-search"
 								.scope=${["all", ...Object.keys(this.data.header)]}
 								.selected-scope=${this.searchScope}
 								.value=${this.searchTerm}
@@ -523,6 +535,7 @@ export class FTableSchema extends FRoot {
 			if (this.tableElement) {
 				await this.tableElement.updateHeaderSelectionCheckboxState();
 			}
+			this.tableSearchElement.loading = false;
 		});
 	}
 

@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.4.7] - 2024-06-11
+
+### Improvements
+
+- `f-table-schema` 300ms debounce added in search to avoid browser freeze.
+
 ## [2.4.6] - 2024-05-27
 
 ### Bug Fixes

@@ -8,7 +8,14 @@ import * as d3 from "d3";
 import { property, query, queryAll } from "lit/decorators.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { dragNestedGroups, dragNode, moveElement, updateNodePosition } from "./node-utils";
-import type { CoOrdinates, FDagConfig, FDagElement, FDagLink } from "./types";
+import type {
+	CoOrdinates,
+	CustomPlacement,
+	CustomSectionPlacement,
+	FDagConfig,
+	FDagElement,
+	FDagLink
+} from "./types";
 import {
 	dropLine,
 	generatePath,
@@ -25,11 +32,13 @@ export type HierarchyNode = {
 	width?: number;
 	group?: string;
 	type: "group" | "node";
+	placement?: CustomPlacement;
 	children: HierarchyNode[];
 	next?: HierarchyNode[];
 };
 function buildHierarchy(config: FDagConfig) {
 	const nodesMap = new Map<string, HierarchyNode>();
+	const customPlacementMap = new Map<string, HierarchyNode>();
 	const groupMap = new Map<string, FDagElement>();
 
 	config.groups.forEach(group => {
@@ -43,8 +52,12 @@ function buildHierarchy(config: FDagConfig) {
 			width: node.width,
 			type: "node",
 			height: node.height,
+			placement: node.placement,
 			children: []
 		});
+		if (node.placement) {
+			customPlacementMap.set(node.id, nodesMap.get(node.id)!);
+		}
 	});
 
 	const roots: HierarchyNode[] = [];
@@ -61,8 +74,13 @@ function buildHierarchy(config: FDagConfig) {
 			type: "group",
 			height: group.height,
 			width: group.width,
+			placement: group.placement,
 			children: []
 		};
+
+		if (group.placement) {
+			customPlacementMap.set(group.id, groupNode);
+		}
 
 		config.nodes.forEach(node => {
 			if (node.group === group.id) {
@@ -89,7 +107,7 @@ function buildHierarchy(config: FDagConfig) {
 		}
 	});
 
-	return roots;
+	return { roots, customPlacements: customPlacementMap };
 }
 
 @flowElement("f-dag")
@@ -160,12 +178,24 @@ export class FDag extends FRoot {
 		return elementObj!;
 	}
 
+	getCustomPlacementElements(section: number, customPlacements: Map<string, HierarchyNode>) {
+		const nodes = this.config.nodes
+			.filter(n => n.placement && (n.placement as CustomSectionPlacement).section === section)
+			.map(n => customPlacements.get(n.id));
+		const groups = this.config.groups
+			.filter(n => n.placement && (n.placement as CustomSectionPlacement).section === section)
+			.map(n => customPlacements.get(n.id));
+
+		return [...nodes, ...groups];
+	}
+
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
 
-		const rootNodes = buildHierarchy(this.config);
+		const { roots: rootNodes, customPlacements } = buildHierarchy(this.config);
 
 		const positionNodes = (
+			containerId: string,
 			elements: HierarchyNode[],
 			x: number,
 			y: number,
@@ -202,65 +232,110 @@ export class FDag extends FRoot {
 			let maxY = 0;
 			const minX = x;
 			const minY = y;
+			let section = 0;
 			const calculateCords = (ns: HierarchyNode[]) => {
 				const nexts: HierarchyNode[] = [];
 				let maxWidth = this.defaultElementWidth;
 				let maxHeight = this.defaultElementHeight;
-				ns.forEach(n => {
-					const elementObject = this.getElement(n.id);
-					if (!elementObject.x && !elementObject.y) {
-						elementObject.x = x;
-						elementObject.y = y;
-
-						if (n.type === "group" && n.children && n.children.length > 0) {
-							const { width, height } = positionNodes(
-								n.children,
-								x + 20,
-								y + 60,
-								elementObject.spacing?.x,
-								elementObject.spacing?.y
-							);
-
-							elementObject.width = width;
-							elementObject.height = height + 20;
-						} else {
-							if (!elementObject.width) {
-								elementObject.width = this.defaultElementWidth;
-							}
-							if (!elementObject.height) {
-								elementObject.height = this.defaultElementHeight;
-							}
-						}
-						if (x + elementObject.width > maxX) {
-							maxX = x + elementObject.width;
-						}
-						if (y + elementObject.height > maxY) {
-							maxY = y + elementObject.height;
-						}
-
-						if (this.config.layoutDirection === "vertical") {
-							x += elementObject.width + spaceX;
-						} else {
-							y += elementObject.height + spaceY;
-						}
-
-						if (elementObject.width > maxWidth) {
-							maxWidth = elementObject.width;
-						}
-						if (elementObject.height > maxHeight) {
-							maxHeight = elementObject.height;
-						}
-
-						if (n.next) nexts.push(...n.next);
+				section += 1;
+				const nextSection = () => {
+					if (this.config.layoutDirection === "vertical") {
+						y += maxHeight + spaceY;
+						x = initialX;
+					} else {
+						x += maxWidth + spaceX;
+						y = initialY;
 					}
+				};
+				const placeElement = (n: HierarchyNode) => {
+					const elementObject = this.getElement(n.id);
+					if (
+						!elementObject.placement ||
+						(elementObject.placement &&
+							(elementObject.placement as CustomSectionPlacement).section === section &&
+							containerId === "root")
+					) {
+						if (elementObject.x === undefined && elementObject.y === undefined) {
+							elementObject.x = x;
+							elementObject.y = y;
+
+							if (n.type === "group" && n.children && n.children.length > 0) {
+								const { width, height } = positionNodes(
+									n.id,
+									n.children,
+									x + 20,
+									y + 60,
+									elementObject.spacing?.x,
+									elementObject.spacing?.y
+								);
+
+								elementObject.width = width;
+								elementObject.height = height + 20;
+							} else {
+								if (!elementObject.width) {
+									elementObject.width = this.defaultElementWidth;
+								}
+								if (!elementObject.height) {
+									elementObject.height = this.defaultElementHeight;
+								}
+							}
+							if (x + elementObject.width > maxX) {
+								maxX = x + elementObject.width;
+							}
+							if (y + elementObject.height > maxY) {
+								maxY = y + elementObject.height;
+							}
+
+							if (this.config.layoutDirection === "vertical") {
+								x += elementObject.width + spaceX;
+							} else {
+								y += elementObject.height + spaceY;
+							}
+
+							if (elementObject.width > maxWidth) {
+								maxWidth = elementObject.width;
+							}
+							if (elementObject.height > maxHeight) {
+								maxHeight = elementObject.height;
+							}
+
+							if (n.next) nexts.push(...n.next);
+						}
+					}
+				};
+				const customPlacementsElements =
+					containerId === "root" ? this.getCustomPlacementElements(section, customPlacements) : [];
+
+				const beforeElements =
+					containerId === "root"
+						? customPlacementsElements.filter(c => c?.placement?.position === "before")
+						: [];
+				const afterElements =
+					containerId === "root"
+						? customPlacementsElements.filter(c => c?.placement?.position === "after")
+						: [];
+				beforeElements.forEach(b => {
+					if (b) placeElement(b);
 				});
-				if (this.config.layoutDirection === "vertical") {
-					y += maxHeight + spaceY;
-					x = initialX;
-				} else {
-					x += maxWidth + spaceX;
-					y = initialY;
+
+				if (beforeElements.length > 0) {
+					nextSection();
+					maxHeight = this.defaultElementHeight;
+					maxWidth = this.defaultElementWidth;
 				}
+
+				const skipTheseElements = [...beforeElements, ...afterElements].map(ba => ba?.id);
+				ns.filter(n => !skipTheseElements.includes(n.id)).forEach(placeElement);
+
+				if (afterElements.length > 0) {
+					nextSection();
+					maxHeight = this.defaultElementHeight;
+					maxWidth = this.defaultElementWidth;
+				}
+				afterElements.forEach(b => {
+					if (b) placeElement(b);
+				});
+				nextSection();
 
 				if (nexts.length > 0) calculateCords(nexts);
 			};
@@ -272,7 +347,7 @@ export class FDag extends FRoot {
 			};
 		};
 
-		positionNodes(rootNodes, 0, 0, this.config.spacing?.x, this.config.spacing?.y);
+		positionNodes("root", rootNodes, 0, 0, this.config.spacing?.x, this.config.spacing?.y);
 	}
 	handleZoom(event: WheelEvent) {
 		// const chartContainer = event.currentTarget as HTMLElement;

@@ -2,6 +2,17 @@ export type CoOrdinates = {
 	x?: number;
 	y?: number;
 };
+
+export type CustomSectionPlacement = {
+	section: number;
+	position: "before" | "after";
+};
+export type CustomPlacement =
+	| CustomSectionPlacement
+	| {
+			position: "before" | "after";
+			elementId: string;
+	  };
 export type FDagElement = {
 	id: string;
 	label: string;
@@ -13,11 +24,7 @@ export type FDagElement = {
 		x: number;
 		y: number;
 	};
-	placement?: {
-		section: number;
-		position: "before" | "after";
-		elementId?: string;
-	};
+	placement?: CustomPlacement;
 } & CoOrdinates;
 
 export type FDagLinkDirection = "horizontal" | "vertical";

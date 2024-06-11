@@ -11,7 +11,8 @@ import { dragNestedGroups, dragNode, moveElement, updateNodePosition } from "./n
 import type {
 	CoOrdinates,
 	CustomPlacement,
-	CustomSectionPlacement,
+	CustomPlacementByElement,
+	CustomPlacementBySection,
 	FDagConfig,
 	FDagElement,
 	FDagLink
@@ -180,10 +181,24 @@ export class FDag extends FRoot {
 
 	getCustomPlacementElements(section: number, customPlacements: Map<string, HierarchyNode>) {
 		const nodes = this.config.nodes
-			.filter(n => n.placement && (n.placement as CustomSectionPlacement).section === section)
+			.filter(n => n.placement && (n.placement as CustomPlacementBySection).section === section)
 			.map(n => customPlacements.get(n.id));
 		const groups = this.config.groups
-			.filter(n => n.placement && (n.placement as CustomSectionPlacement).section === section)
+			.filter(n => n.placement && (n.placement as CustomPlacementBySection).section === section)
+			.map(n => customPlacements.get(n.id));
+
+		return [...nodes, ...groups];
+	}
+
+	getCustomPlacementElementsByElementId(
+		elementId: string,
+		customPlacements: Map<string, HierarchyNode>
+	) {
+		const nodes = this.config.nodes
+			.filter(n => n.placement && (n.placement as CustomPlacementByElement).elementId === elementId)
+			.map(n => customPlacements.get(n.id));
+		const groups = this.config.groups
+			.filter(n => n.placement && (n.placement as CustomPlacementByElement).elementId === elementId)
 			.map(n => customPlacements.get(n.id));
 
 		return [...nodes, ...groups];
@@ -247,15 +262,39 @@ export class FDag extends FRoot {
 						y = initialY;
 					}
 				};
+
+				let currentNodeId: string | null;
+				const isElementPlacement = (elementObject: FDagElement) =>
+					elementObject.placement &&
+					(elementObject.placement as CustomPlacementByElement).elementId === currentNodeId;
+				const isSectionPlacement = (elementObject: FDagElement) =>
+					elementObject.placement &&
+					(elementObject.placement as CustomPlacementBySection).section === section &&
+					containerId === "root";
 				const placeElement = (n: HierarchyNode) => {
 					const elementObject = this.getElement(n.id);
 					if (
 						!elementObject.placement ||
-						(elementObject.placement &&
-							(elementObject.placement as CustomSectionPlacement).section === section &&
-							containerId === "root")
+						isSectionPlacement(elementObject) ||
+						isElementPlacement(elementObject)
 					) {
 						if (elementObject.x === undefined && elementObject.y === undefined) {
+							const customPlacementsByElements = this.getCustomPlacementElementsByElementId(
+								elementObject.id,
+								customPlacements
+							);
+							if (customPlacementsByElements.length > 0) {
+								currentNodeId = elementObject.id;
+							}
+							const beforeCustomElements = customPlacementsByElements.filter(
+								c => c?.placement?.position === "before"
+							);
+							const afterCustomElements = customPlacementsByElements.filter(
+								c => c?.placement?.position === "after"
+							);
+							beforeCustomElements.forEach(b => {
+								if (b) placeElement(b);
+							});
 							elementObject.x = x;
 							elementObject.y = y;
 
@@ -298,7 +337,10 @@ export class FDag extends FRoot {
 							if (elementObject.height > maxHeight) {
 								maxHeight = elementObject.height;
 							}
-
+							afterCustomElements.forEach(b => {
+								if (b) placeElement(b);
+							});
+							currentNodeId = null;
 							if (n.next) nexts.push(...n.next);
 						}
 					}

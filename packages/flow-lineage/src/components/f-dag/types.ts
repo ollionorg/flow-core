@@ -3,16 +3,15 @@ export type CoOrdinates = {
 	y?: number;
 };
 
-export type CustomSectionPlacement = {
+export type CustomPlacementBySection = {
 	section: number;
 	position: "before" | "after";
 };
-export type CustomPlacement =
-	| CustomSectionPlacement
-	| {
-			position: "before" | "after";
-			elementId: string;
-	  };
+export type CustomPlacementByElement = {
+	elementId: string;
+	position: "before" | "after";
+};
+export type CustomPlacement = CustomPlacementBySection | CustomPlacementByElement;
 export type FDagElement = {
 	id: string;
 	label: string;

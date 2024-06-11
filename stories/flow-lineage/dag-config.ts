@@ -70,6 +70,14 @@ const dagConfig: FDagConfig = {
 			height: 48,
 			width: 120,
 			group: "group5"
+		},
+		{
+			id: "node11",
+			label: "Node 11",
+			icon: "i-box",
+			height: 48,
+			width: 120,
+			group: "group6"
 		}
 	],
 	links: [
@@ -171,6 +179,19 @@ const dagConfig: FDagConfig = {
 			},
 			placement: {
 				section: 3,
+				position: "after"
+			}
+		},
+		{
+			id: "group6",
+			label: "Group 6",
+			icon: "i-tree",
+			spacing: {
+				x: 20,
+				y: 20
+			},
+			placement: {
+				elementId: "node4",
 				position: "after"
 			}
 		}

@@ -15,6 +15,7 @@ import { FIcon } from "../f-icon/f-icon";
 import { FCounter } from "../f-counter/f-counter";
 import { flowElement } from "./../../utils";
 import { injectCss } from "@ollion/flow-core-config";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export type FButtonState =
 	| "primary"
@@ -216,17 +217,7 @@ export class FButton extends FRoot {
 		 * creating local fill variable out of state prop.
 		 */
 		this.fill = getCustomFillColor(this.state ?? "");
-		/**
-		 * checks if host element's `:before` has shimmer by accessing  computedstyles
-		 */
-		const hasShimmer = (getComputedStyle(this, "::before") as any)["animation-name"] === "shimmer";
 
-		/**
-		 * if hasShimmer true then add class
-		 */
-		if (hasShimmer) {
-			this.classList.add("hasShimmer");
-		}
 		/**
 		 * validate properties before render
 		 */
@@ -303,20 +294,20 @@ export class FButton extends FRoot {
 		 */
 		if (this.loading) {
 			return html`<button
+				part="f-button-wrapper"
 				class=${classMap({
 					"f-button": true,
-					hasShimmer,
 					"custom-loader": this.fill ? true : false,
 					"custom-hover": this.fill && this.category === "fill" ? true : false
 				})}
 				style=${this.applyStyles()}
-				category=${this.category}
-				size=${this.size}
-				state=${this.state}
-				variant=${this.variant}
+				category=${ifDefined(this.category)}
+				size=${ifDefined(this.size)}
+				state=${ifDefined(this.state)}
+				variant=${ifDefined(this.variant)}
 				?loading=${this.loading}
 				?disabled=${this.disabled}
-				data-qa-id=${this.getAttribute("data-qa-element-id")}
+				data-qa-id=${ifDefined(this.getAttribute("data-qa-element-id")) ?? ""}
 			>
 				${unsafeSVG(loader)}${this.label}
 			</button>`;
@@ -326,20 +317,20 @@ export class FButton extends FRoot {
 		 * Final html to render
 		 */
 		return html`<span
+			part="f-button-wrapper"
 			class=${classMap({
 				"f-button": true,
-				hasShimmer,
 				"custom-loader": this.fill ? true : false,
 				"custom-hover": this.fill && this.category === "fill" ? true : false
 			})}
 			style=${this.applyStyles()}
-			category=${this.category}
-			size=${this.size}
-			state=${this.state}
-			variant=${this.variant}
+			category=${ifDefined(this.category)}
+			size=${ifDefined(this.size)}
+			state=${ifDefined(this.state)}
+			variant=${ifDefined(this.variant)}
 			?loading=${this.loading}
 			?disabled=${this.disabled}
-			data-qa-id=${this.getAttribute("data-qa-element-id")}
+			data-qa-id=${ifDefined(this.getAttribute("data-qa-element-id")) ?? ""}
 		>
 			${iconLeft}${this.label}${iconRight}${counter}
 		</span>`;

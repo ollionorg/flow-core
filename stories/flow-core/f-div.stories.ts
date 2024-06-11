@@ -43,8 +43,8 @@ export const Playground = {
 					.disabled=${args.disabled}
 					.clickable=${args.clickable}
 					.loading=${args.loading}
-					max-width=${args["max-width"]}
-					max-height=${args["max-height"]}
+					.maxWidth=${args["max-width"]}
+					.maxHeight=${args["max-height"]}
 					@click=${handleClick}
 				>
 					<f-div
@@ -1456,6 +1456,7 @@ export const Loading = {
 					<f-icon-button icon="i-plus"></f-icon-button>
 					<f-button label="TEst"></f-button>
 					<f-counter tooltip="Test" label="7889"></f-counter>
+					<f-tag label="test" icon-left="i-plus"></f-tag>
 				</f-div>
 			</f-div>
 		</f-div>`,
@@ -1519,7 +1520,7 @@ export const Flags = {
 					height="hug-content"
 					state="subtle"
 					variant="curved"
-					disabled=${true}
+					disabled
 				>
 					<f-div
 						gap="medium"
@@ -1557,7 +1558,7 @@ export const Flags = {
 				height="hug-content"
 				state="subtle"
 				variant="curved"
-				clickable=${true}
+				clickable
 			>
 				<f-div
 					gap="medium"

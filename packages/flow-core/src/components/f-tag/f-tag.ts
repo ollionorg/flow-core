@@ -229,18 +229,6 @@ export class FTag extends FRoot {
 		 */
 		this.validateProperties();
 
-		/**
-		 * checks if host element's `:before` has shimmer by accessing  computedstyles
-		 */
-		const hasShimmer = (getComputedStyle(this, "::before") as any)["animation-name"] === "shimmer";
-
-		/**
-		 * if hasShimmer true then add class
-		 */
-		if (hasShimmer) {
-			this.classList.add("hasShimmer");
-		}
-
 		let iconClasses: Record<string, boolean> = {};
 		/**
 		 * classes to apply on icon , based on category
@@ -333,7 +321,6 @@ export class FTag extends FRoot {
 				data-qa-tag
 				class=${classMap({
 					"f-tag": true,
-					hasShimmer,
 					"custom-loader": this.fill ? true : false
 				})}
 				style=${this.applyStyles()}
@@ -357,7 +344,6 @@ export class FTag extends FRoot {
 			html`<div
 				class=${classMap({
 					"f-tag": true,
-					hasShimmer,
 					"custom-loader": this.fill ? true : false
 				})}
 				style=${this.applyStyles()}

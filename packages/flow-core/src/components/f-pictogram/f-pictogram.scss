@@ -188,10 +188,6 @@ $hexagon-clip-path: polygon(
 			pointer-events: none;
 		}
 
-		&.hasShimmer {
-			@include shimmer-self();
-		}
-
 		img {
 			height: 90%;
 			width: 90%;
@@ -226,7 +222,7 @@ $hexagon-clip-path: polygon(
 		}
 
 		@each $state, $color in $states {
-			&[state="#{$state}"]:not([loading]):not(.hasShimmer) {
+			&[state="#{$state}"]:not([loading]) {
 				&:before {
 					content: "";
 					background: var(--before-background-color, map-get($color, "background"));
@@ -238,7 +234,7 @@ $hexagon-clip-path: polygon(
 		}
 
 		@each $state, $color in $loadingStates {
-			&[state="#{$state}"][loading]:not(.hasShimmer) {
+			&[state="#{$state}"][loading] {
 				&:before {
 					content: "";
 					background: $color;
@@ -277,9 +273,7 @@ $hexagon-clip-path: polygon(
 		}
 
 		&[variant="hexagon"] {
-			&:not(.hasShimmer) {
-				clip-path: $hexagon-clip-path;
-			}
+			clip-path: $hexagon-clip-path;
 			&:after {
 				clip-path: $hexagon-clip-path;
 			}
@@ -288,9 +282,8 @@ $hexagon-clip-path: polygon(
 			}
 		}
 		&[variant="squircle"] {
-			&:not(.hasShimmer) {
-				clip-path: url(#squircle);
-			}
+			clip-path: url(#squircle);
+
 			&:after {
 				clip-path: url(#squircle);
 			}
@@ -299,9 +292,8 @@ $hexagon-clip-path: polygon(
 			}
 		}
 		&[variant="circle"] {
-			&:not(.hasShimmer) {
-				clip-path: circle(50%);
-			}
+			clip-path: circle(50%);
+
 			&:after {
 				clip-path: circle(50%);
 			}
@@ -310,9 +302,8 @@ $hexagon-clip-path: polygon(
 			}
 		}
 		&[variant="square"] {
-			&:not(.hasShimmer) {
-				clip-path: inset(0px 0px 0px round 4px);
-			}
+			clip-path: inset(0px 0px 0px round 4px);
+
 			&:after {
 				clip-path: inset(0px 0px 0px round 4px);
 			}

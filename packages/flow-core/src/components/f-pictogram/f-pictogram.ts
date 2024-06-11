@@ -8,6 +8,7 @@ import { getTextContrast, isValidHttpUrl } from "./../../utils";
 import { classMap } from "lit-html/directives/class-map.js";
 import { FIcon } from "../f-icon/f-icon";
 import { flowElement } from "./../../utils";
+import { ifDefined } from "lit/directives/if-defined.js";
 injectCss("f-pictogram", globalStyle);
 
 const variants = ["circle", "square", "hexagon", "squircle"] as const;
@@ -178,7 +179,7 @@ export class FPictogram extends FRoot {
 				const svg = IconPack[this.source];
 				if (svg) {
 					return html`<f-icon
-						state=${this.category === "fill" ? this.state : "default"}
+						state=${ifDefined(this.category === "fill" ? this.state : "default")}
 						class="${"f-pictogram-" + this.size}"
 						source="${this.source}"
 						size="${this.sourceSize()}"
@@ -186,7 +187,11 @@ export class FPictogram extends FRoot {
 				}
 			}
 		}
-		return html`<p class="text-styling" state=${this.state} style=${this.textColorStyling}>
+		return html`<p
+			class="text-styling"
+			state=${ifDefined(this.state)}
+			style=${this.textColorStyling}
+		>
 			${this.textSource}
 		</p>`;
 	}
@@ -268,21 +273,18 @@ export class FPictogram extends FRoot {
 
 	render() {
 		this.validateProperties();
-		const hasShimmer = (getComputedStyle(this, "::before") as any)["animation-name"] === "shimmer";
-		if (hasShimmer) {
-			this.classList.add("hasShimmer");
-		}
 
 		/**
 		 * Final html to render
 		 */
 		return html`
 			<div
-				class=${classMap({ "f-pictogram": true, hasShimmer })}
-				variant=${this.variant}
-				state=${this.state}
-				category=${this.category}
-				size=${this.size}
+				part="f-pictogram-wrapper"
+				class=${classMap({ "f-pictogram": true })}
+				variant=${ifDefined(this.variant)}
+				state=${ifDefined(this.state)}
+				category=${ifDefined(this.category)}
+				size=${ifDefined(this.size)}
 				?disabled=${this.disabled}
 				?loading=${this.loading}
 				?clickable=${this.clickable}

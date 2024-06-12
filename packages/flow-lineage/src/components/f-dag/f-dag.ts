@@ -10,12 +10,12 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 import { dragNestedGroups, dragNode, moveElement, updateNodePosition } from "./node-utils";
 import type {
 	CoOrdinates,
-	CustomPlacement,
 	CustomPlacementByElement,
 	CustomPlacementBySection,
 	FDagConfig,
 	FDagElement,
-	FDagLink
+	FDagLink,
+	HierarchyNode
 } from "./types";
 import {
 	dropLine,
@@ -24,98 +24,9 @@ import {
 	updateLinePath,
 	updateLink
 } from "./link-utils";
+import buildHierarchy from "./hierarchy-builder";
 
 injectCss("f-dag", globalStyle);
-// Renders attribute names of parent element to textContent
-export type HierarchyNode = {
-	id: string;
-	height?: number;
-	width?: number;
-	group?: string;
-	type: "group" | "node";
-	placement?: CustomPlacement;
-	children: HierarchyNode[];
-	next?: HierarchyNode[];
-};
-function buildHierarchy(config: FDagConfig) {
-	const nodesMap = new Map<string, HierarchyNode>();
-	const customPlacementMap = new Map<string, HierarchyNode>();
-	const groupMap = new Map<string, FDagElement>();
-
-	config.groups.forEach(group => {
-		groupMap.set(group.id, group);
-	});
-
-	config.nodes.forEach(node => {
-		if (node.group && node.placement) {
-			node.placement = undefined;
-		}
-		nodesMap.set(node.id, {
-			id: node.id,
-			group: node.group,
-			width: node.width,
-			type: "node",
-			height: node.height,
-			placement: node.placement,
-			children: []
-		});
-		if (node.placement) {
-			customPlacementMap.set(node.id, nodesMap.get(node.id)!);
-		}
-	});
-
-	const roots: HierarchyNode[] = [];
-
-	nodesMap.forEach(node => {
-		if (!node.group) {
-			roots.push(node);
-		}
-	});
-
-	function addGroupToHierarchy(group: FDagElement, parent?: HierarchyNode): void {
-		if (group.group && group.placement) {
-			group.placement = undefined;
-		}
-		const groupNode: HierarchyNode = {
-			id: group.id,
-			type: "group",
-			height: group.height,
-			width: group.width,
-			placement: group.placement,
-			children: []
-		};
-
-		if (group.placement) {
-			customPlacementMap.set(group.id, groupNode);
-		}
-
-		config.nodes.forEach(node => {
-			if (node.group === group.id) {
-				groupNode.children.push(nodesMap.get(node.id)!);
-			}
-		});
-
-		if (parent) {
-			parent.children.push(groupNode);
-		} else {
-			roots.push(groupNode);
-		}
-
-		config.groups.forEach(subGroup => {
-			if (subGroup.group === group.id) {
-				addGroupToHierarchy(subGroup, groupNode);
-			}
-		});
-	}
-
-	config.groups.forEach(group => {
-		if (!group.group) {
-			addGroupToHierarchy(group);
-		}
-	});
-
-	return { roots, customPlacements: customPlacementMap };
-}
 
 @flowElement("f-dag")
 export class FDag extends FRoot {
@@ -138,6 +49,8 @@ export class FDag extends FRoot {
 	dagViewPort!: HTMLElement;
 	@query(`.background-pattern`)
 	backgroundPattern!: HTMLElement;
+
+	viewPortRect!: DOMRect;
 
 	createRenderRoot() {
 		return this;
@@ -615,6 +528,9 @@ export class FDag extends FRoot {
 			.attr("startOffset", "100%")
 			.attr("fill", "var(--color-border-default)")
 			.text("▶");
+		void this.updateComplete.then(() => {
+			this.viewPortRect = this.dagViewPort.getBoundingClientRect();
+		});
 	}
 }
 

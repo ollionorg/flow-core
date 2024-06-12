@@ -52,3 +52,15 @@ export type FDagConfig = {
 export type FDagComputedNode = {
 	next: FDagComputedNode[];
 } & FDagElement;
+
+// Renders attribute names of parent element to textContent
+export type HierarchyNode = {
+	id: string;
+	height?: number;
+	width?: number;
+	group?: string;
+	type: "group" | "node";
+	placement?: CustomPlacement;
+	children: HierarchyNode[];
+	next?: HierarchyNode[];
+};

@@ -191,7 +191,8 @@ const dagConfig: FDagConfig = {
 				x: 20,
 				y: 20
 			},
-			group: "group1"
+			group: "group1",
+			layoutDirection: "vertical"
 		},
 		{
 			id: "group5",

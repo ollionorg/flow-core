@@ -24,6 +24,7 @@ export type FDagElement = {
 		y: number;
 	};
 	placement?: CustomPlacement;
+	layoutDirection?: "horizontal" | "vertical";
 } & CoOrdinates;
 
 export type FDagLinkDirection = "horizontal" | "vertical";
@@ -34,7 +35,7 @@ export type FDagLink = {
 };
 
 export type FDagConfig = {
-	nodes: FDagElement[];
+	nodes: Omit<FDagElement, "layoutDirection">[];
 	links: FDagLink[];
 	groups: Omit<FDagElement, "height" | "width">[];
 	spacing?: {

@@ -214,6 +214,7 @@ const dagConfig: FDagConfig = {
 				x: 20,
 				y: 20
 			},
+			layoutDirection: "vertical",
 			placement: {
 				section: 3,
 				position: "after"
@@ -230,8 +231,7 @@ const dagConfig: FDagConfig = {
 			placement: {
 				elementId: "group4",
 				position: "after"
-			},
-			group: "group3"
+			}
 		}
 	],
 	spacing: {

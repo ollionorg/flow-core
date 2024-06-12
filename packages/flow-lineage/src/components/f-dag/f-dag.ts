@@ -224,7 +224,16 @@ export class FDag extends FRoot {
 			spaceY = 100
 		) => {
 			const elementIds = elements.map(e => e.id);
-
+			const conatinerElementObject = this.getElement(containerId) as FDagElement;
+			const layoutDirection = (() => {
+				if (containerId === "root") {
+					return this.config.layoutDirection;
+				}
+				if (conatinerElementObject.layoutDirection === "vertical") {
+					return "horizontal";
+				}
+				return "vertical";
+			})();
 			const nodeLinks = this.config.links.filter(
 				l => elementIds.includes(l.from.elementId) && elementIds.includes(l.to.elementId)
 			);
@@ -260,7 +269,7 @@ export class FDag extends FRoot {
 				let maxHeight = this.defaultElementHeight;
 				section += 1;
 				const nextSection = () => {
-					if (this.config.layoutDirection === "vertical") {
+					if (layoutDirection === "vertical") {
 						y += maxHeight + spaceY;
 						x = initialX;
 					} else {
@@ -331,7 +340,7 @@ export class FDag extends FRoot {
 								maxY = y + elementObject.height;
 							}
 
-							if (this.config.layoutDirection === "vertical") {
+							if (layoutDirection === "vertical") {
 								x += elementObject.width + spaceX;
 							} else {
 								y += elementObject.height + spaceY;

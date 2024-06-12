@@ -47,6 +47,9 @@ function buildHierarchy(config: FDagConfig) {
 	});
 
 	config.nodes.forEach(node => {
+		if (node.group && node.placement) {
+			node.placement = undefined;
+		}
 		nodesMap.set(node.id, {
 			id: node.id,
 			group: node.group,
@@ -70,6 +73,9 @@ function buildHierarchy(config: FDagConfig) {
 	});
 
 	function addGroupToHierarchy(group: FDagElement, parent?: HierarchyNode): void {
+		if (group.group && group.placement) {
+			group.placement = undefined;
+		}
 		const groupNode: HierarchyNode = {
 			id: group.id,
 			type: "group",

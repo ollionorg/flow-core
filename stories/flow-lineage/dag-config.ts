@@ -78,6 +78,30 @@ const dagConfig: FDagConfig = {
 			height: 48,
 			width: 120,
 			group: "group6"
+		},
+		{
+			id: "node91",
+			label: "Node 91",
+			icon: "i-box",
+			height: 48,
+			width: 120,
+			group: "group7"
+		},
+		{
+			id: "node101",
+			label: "Node 101",
+			icon: "i-box",
+			height: 48,
+			width: 120,
+			group: "group7"
+		},
+		{
+			id: "node111",
+			label: "Node 111",
+			icon: "i-box",
+			height: 48,
+			width: 120,
+			group: "group7"
 		}
 	],
 	links: [
@@ -178,6 +202,19 @@ const dagConfig: FDagConfig = {
 				y: 20
 			},
 			placement: {
+				section: 1,
+				position: "before"
+			}
+		},
+		{
+			id: "group7",
+			label: "Group 7",
+			icon: "i-tree",
+			spacing: {
+				x: 20,
+				y: 20
+			},
+			placement: {
 				section: 3,
 				position: "after"
 			}
@@ -191,9 +228,10 @@ const dagConfig: FDagConfig = {
 				y: 20
 			},
 			placement: {
-				elementId: "node4",
+				elementId: "group4",
 				position: "after"
-			}
+			},
+			group: "group3"
 		}
 	],
 	spacing: {

@@ -30,14 +30,6 @@ export function startPlottingLine(this: FDag, event: MouseEvent) {
 		x1! += event.offsetX;
 	}
 
-	let x2 = x1;
-	let y2 = y1;
-	if (circle.classList.contains("bottom") || circle.classList.contains("top")) {
-		y2! += 8;
-	}
-	if (circle.classList.contains("left") || circle.classList.contains("right")) {
-		x2! += 8;
-	}
 	const svg = d3.select(this.svgElement.value!);
 
 	const direction =
@@ -51,8 +43,8 @@ export function startPlottingLine(this: FDag, event: MouseEvent) {
 			elementId: circle.dataset.nodeId!
 		},
 		to: {
-			x: x2,
-			y: y2,
+			x: x1,
+			y: y1,
 			elementId: ``
 		},
 		direction
@@ -101,6 +93,7 @@ export function startPlottingLine(this: FDag, event: MouseEvent) {
 }
 export function updateLinePath(this: FDag, event: MouseEvent) {
 	if (event.buttons === 1 && this.currentLine) {
+		event.stopPropagation();
 		this.currentLine.attr("d", d => {
 			d.to.x! += event.movementX * (1 / this.scale);
 			d.to.y! += event.movementY * (1 / this.scale);
@@ -125,18 +118,6 @@ export function updateLinePath(this: FDag, event: MouseEvent) {
 		this.currentLine = undefined;
 		this.currentArrow?.remove();
 		this.currentArrow = undefined;
-
-		if (event.buttons === 1) {
-			this.viewPortTranslate.x += event.movementX * (1 / this.scale);
-			this.viewPortTranslate.y += event.movementY * (1 / this.scale);
-			this.backgroundPattern.setAttribute(
-				"patternTransform",
-				`translate(${this.viewPortTranslate.x * this.scale},${
-					this.viewPortTranslate.y * this.scale
-				})`
-			);
-			this.dagViewPort.style.transform = `scale(${this.scale}) translate(${this.viewPortTranslate.x}px,${this.viewPortTranslate.y}px)`;
-		}
 	}
 }
 export function dropLine(this: FDag, event: MouseEvent) {

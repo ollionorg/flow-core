@@ -5,7 +5,7 @@ import globalStyle from "./f-dag-global.scss?inline";
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import * as d3 from "d3";
-import { property, query, queryAll } from "lit/decorators.js";
+import { eventOptions, property, query, queryAll } from "lit/decorators.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { dragNestedGroups, dragNode, moveElement, updateNodePosition } from "./node-utils";
 import type {
@@ -332,13 +332,19 @@ export class FDag extends FRoot {
 		this.backgroundPattern.setAttribute("width", `${24 * this.scale}`);
 		this.backgroundPattern.setAttribute("height", `${24 * this.scale}`);
 	}
+
+	@eventOptions({ capture: true })
+	dragLine(event: MouseEvent) {
+		this.updateLinePath(event);
+	}
+
 	render() {
 		return html`<f-div
 			class="d-dag-root"
 			width="100%"
 			height="100%"
 			@wheel=${this.handleZoom}
-			@mousemove=${this.updateLinePath}
+			@mousemove=${this.dragLine}
 		>
 			<svg
 				class="background-svg"
@@ -531,6 +537,20 @@ export class FDag extends FRoot {
 		void this.updateComplete.then(() => {
 			this.viewPortRect = this.dagViewPort.getBoundingClientRect();
 		});
+
+		this.onmousemove = (event: MouseEvent) => {
+			if (event.buttons === 1) {
+				this.viewPortTranslate.x += event.movementX * (1 / this.scale);
+				this.viewPortTranslate.y += event.movementY * (1 / this.scale);
+				this.backgroundPattern.setAttribute(
+					"patternTransform",
+					`translate(${this.viewPortTranslate.x * this.scale},${
+						this.viewPortTranslate.y * this.scale
+					})`
+				);
+				this.dagViewPort.style.transform = `scale(${this.scale}) translate(${this.viewPortTranslate.x}px,${this.viewPortTranslate.y}px)`;
+			}
+		};
 	}
 }
 

@@ -28,10 +28,12 @@ export function moveElement(this: FDag, nodeElement: HTMLElement, event: MouseEv
 
 	nodeElement.style.setProperty(
 		"transform",
-		`translate(${translateX + event.movementX}px, ${translateY + event.movementY}px)`
+		`translate(${translateX + event.movementX * (1 / this.scale)}px, ${
+			translateY + event.movementY * (1 / this.scale)
+		}px)`
 	);
-	nodeElement.dataset.lastTranslateX = `${translateX + event.movementX}`;
-	nodeElement.dataset.lastTranslateY = `${translateY + event.movementY}`;
+	nodeElement.dataset.lastTranslateX = `${translateX + event.movementX * (1 / this.scale)}`;
+	nodeElement.dataset.lastTranslateY = `${translateY + event.movementY * (1 / this.scale)}`;
 	const fromLines = d3.selectAll<SVGPathElement, FDagLink>(
 		`.dag-line[id^="${nodeElement.getAttribute("id")}->"]`
 	);
@@ -46,8 +48,8 @@ export function moveElement(this: FDag, nodeElement: HTMLElement, event: MouseEv
 		return {
 			...d,
 			from: {
-				x: (d.from.x += event.movementX),
-				y: (d.from.y += event.movementY),
+				x: (d.from.x += event.movementX * (1 / this.scale)),
+				y: (d.from.y += event.movementY * (1 / this.scale)),
 				elementId: d.from.elementId
 			}
 		};
@@ -81,8 +83,8 @@ export function moveElement(this: FDag, nodeElement: HTMLElement, event: MouseEv
 		return {
 			...d,
 			to: {
-				x: (d.to.x += event.movementX),
-				y: (d.to.y += event.movementY),
+				x: (d.to.x += event.movementX * (1 / this.scale)),
+				y: (d.to.y += event.movementY * (1 / this.scale)),
 				elementId: d.to.elementId
 			}
 		};

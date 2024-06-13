@@ -9,30 +9,36 @@ export function startPlottingLine(this: FDag, event: MouseEvent) {
 		n.style.pointerEvents = "none";
 	});
 	const circle = event.currentTarget as HTMLElement;
-	const rect = circle.getBoundingClientRect();
-	const dagRect = this.getBoundingClientRect();
+	const elementId = circle.dataset.nodeId;
+
+	const elementObject = this.getElement(elementId!);
+	let x1 = elementObject.x;
+	let y1 = elementObject.y;
+
+	if (circle.classList.contains("right")) {
+		x1! += elementObject.width!;
+		y1! += event.offsetY;
+	}
+	if (circle.classList.contains("bottom")) {
+		y1! += elementObject.height!;
+		x1! += event.offsetX;
+	}
+	if (circle.classList.contains("left")) {
+		y1! += event.offsetY;
+	}
+	if (circle.classList.contains("top")) {
+		x1! += event.offsetX;
+	}
+
+	let x2 = x1;
+	let y2 = y1;
+	if (circle.classList.contains("bottom") || circle.classList.contains("top")) {
+		y2! += 8;
+	}
+	if (circle.classList.contains("left") || circle.classList.contains("right")) {
+		x2! += 8;
+	}
 	const svg = d3.select(this.svgElement.value!);
-	const circleX = rect.left - dagRect.left - this.viewPortTranslate.x;
-	const circleY = rect.top - dagRect.top - this.viewPortTranslate.y;
-
-	let x1 = event.clientX - dagRect.left - this.viewPortTranslate.x;
-	let y1 = event.clientY - dagRect.top - this.viewPortTranslate.y;
-
-	if (Math.abs(x1 - circleX) <= 12) {
-		let offset = 8;
-		if (circle.classList.contains("right")) {
-			offset = 0;
-		}
-		x1 = circleX + offset;
-	}
-
-	if (Math.abs(y1 - circleY) <= 12) {
-		let offset = 8;
-		if (circle.classList.contains("bottom")) {
-			offset = 0;
-		}
-		y1 = circleY + offset;
-	}
 
 	const direction =
 		circle.classList.contains("right") || circle.classList.contains("left")
@@ -45,8 +51,8 @@ export function startPlottingLine(this: FDag, event: MouseEvent) {
 			elementId: circle.dataset.nodeId!
 		},
 		to: {
-			x: event.clientX - dagRect.left - this.viewPortTranslate.x,
-			y: event.clientY - dagRect.top - this.viewPortTranslate.y,
+			x: x2,
+			y: y2,
 			elementId: ``
 		},
 		direction
@@ -95,10 +101,9 @@ export function startPlottingLine(this: FDag, event: MouseEvent) {
 }
 export function updateLinePath(this: FDag, event: MouseEvent) {
 	if (event.buttons === 1 && this.currentLine) {
-		const dagRect = this.getBoundingClientRect();
 		this.currentLine.attr("d", d => {
-			d.to.x = event.clientX - dagRect.left - this.viewPortTranslate.x;
-			d.to.y = event.clientY - dagRect.top - this.viewPortTranslate.y;
+			d.to.x! += event.movementX * (1 / this.scale);
+			d.to.y! += event.movementY * (1 / this.scale);
 
 			const points: CoOrdinates[] = [];
 			points.push({
@@ -122,8 +127,8 @@ export function updateLinePath(this: FDag, event: MouseEvent) {
 		this.currentArrow = undefined;
 
 		if (event.buttons === 1) {
-			this.viewPortTranslate.x += event.movementX;
-			this.viewPortTranslate.y += event.movementY;
+			this.viewPortTranslate.x += event.movementX * (1 / this.scale);
+			this.viewPortTranslate.y += event.movementY * (1 / this.scale);
 			this.backgroundPattern.setAttribute(
 				"patternTransform",
 				`translate(${this.viewPortTranslate.x * this.scale},${
@@ -136,8 +141,7 @@ export function updateLinePath(this: FDag, event: MouseEvent) {
 }
 export function dropLine(this: FDag, event: MouseEvent) {
 	const circle = event.currentTarget as HTMLElement;
-	const rect = circle.getBoundingClientRect();
-	const dagRect = this.getBoundingClientRect();
+
 	this.allGroupsAndNodes?.forEach(n => {
 		n.style.pointerEvents = "all";
 	});
@@ -146,25 +150,23 @@ export function dropLine(this: FDag, event: MouseEvent) {
 		const fromNodeId = linkElement.attr("id").replace(/(->)$/, "");
 		const toNodeId = circle.dataset.nodeId!;
 
-		let x2 = event.clientX - dagRect.left - this.viewPortTranslate.x;
-		let y2 = event.clientY - dagRect.top - this.viewPortTranslate.y;
+		const elementObject = this.getElement(toNodeId);
+		let x2 = elementObject.x;
+		let y2 = elementObject.y;
 
-		const circleX2 = rect.left - dagRect.left - this.viewPortTranslate.x;
-		const circleY2 = rect.top - dagRect.top - this.viewPortTranslate.y;
-
-		if (Math.abs(y2 - circleY2) <= 12) {
-			let offset = 8;
-			if (circle.classList.contains("bottom")) {
-				offset = 0;
-			}
-			y2 = circleY2 + offset;
+		if (circle.classList.contains("right")) {
+			x2! += elementObject.width!;
+			y2! += event.offsetY;
 		}
-		if (Math.abs(x2 - circleX2) <= 12) {
-			let offset = 8;
-			if (circle.classList.contains("right")) {
-				offset = 0;
-			}
-			x2 = circleX2 + offset;
+		if (circle.classList.contains("bottom")) {
+			y2! += elementObject.height!;
+			x2! += event.offsetX;
+		}
+		if (circle.classList.contains("left")) {
+			y2! += event.offsetY;
+		}
+		if (circle.classList.contains("top")) {
+			x2! += event.offsetX;
 		}
 
 		this.currentLine

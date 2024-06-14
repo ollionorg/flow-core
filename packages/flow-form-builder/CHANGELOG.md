@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.4.3] - 2024-06-14
+
+### Patch Changes
+
+- `select` with multiple selection empty array validation fixed
+
 ## [2.4.2] - 2024-05-15
 
 ### Patch Changes

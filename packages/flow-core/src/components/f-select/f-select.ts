@@ -297,8 +297,16 @@ export class FSelect extends FRoot {
 		else return undefined;
 	}
 	outsideClick = (e: MouseEvent) => {
-		if (!this.contains(e.target as HTMLInputElement) && this.openDropdown) {
-			this.handleDropDownClose(e, false);
+		const rect = this.getBoundingClientRect();
+		const optionsRect = this.optionElement.getBoundingClientRect();
+		const isInsideClick =
+			e.clientX > rect.left &&
+			e.clientX < rect.left + rect.width &&
+			e.clientY > optionsRect.top &&
+			e.clientY < optionsRect.top + optionsRect.height;
+
+		if (!isInsideClick && this.openDropdown) {
+			this.handleDropDownClose(e, true);
 		}
 	};
 	containerScroll = () => {

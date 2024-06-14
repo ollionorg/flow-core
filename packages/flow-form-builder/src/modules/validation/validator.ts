@@ -44,7 +44,7 @@ export default async function validate(
 			/**
 			 * This will avoid validation rules called multiple time in silent validation
 			 */
-			if (r._lastValue === value && r._lastResult !== undefined) {
+			if (r._lastValue === value && r._lastResult !== undefined && typeof value !== "object") {
 				result = r._lastResult;
 				if (!result) {
 					rule = r.name;

@@ -325,7 +325,7 @@ export function handleKeyDown(this: FSelect, e: KeyboardEvent) {
 				currentHover.click();
 			}
 		} else if (e.code === "Escape") {
-			this.handleDropDownClose(e);
+			this.handleDropDownClose(e, true);
 		}
 	} else if (!this.openDropdown && (e.code === "ArrowDown" || e.code === "ArrowUp")) {
 		this.handleDropDownOpen(e);

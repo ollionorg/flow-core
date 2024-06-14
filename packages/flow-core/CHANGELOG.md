@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.9.14] - 2024-06-14
+
+### Bug Fixes
+
+- `f-select` outside click detection improved
+
 ## [2.9.13] - 2024-06-11
 
 ### Improvements

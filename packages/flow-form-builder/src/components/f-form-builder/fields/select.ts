@@ -25,11 +25,11 @@ export default function (
 			.options=${field.options}
 			.value=${value}
 			?checkbox=${field.checkbox}
-			.clear=${ifDefined(field.clear)}
+			.clear=${field.clear}
 			.width=${field.width}
 			.maxOptionsWidth=${field.maxOptionsWidth}
 			.useVirtualizer=${field.useVirtualizer}
-			data-qa-element-id=${field.qaId || field.id}
+			data-qa-element-id=${ifDefined(field.qaId || field.id)}
 			height=${ifDefined(field.height)}
 			?disabled=${field.disabled}
 			selection-limit=${ifDefined(field.selectionLimit)}
@@ -37,13 +37,13 @@ export default function (
 			?loading=${field.loading ?? false}
 			.optionTemplate=${field.optionTemplate}
 			icon-left=${ifDefined(field.iconLeft)}
-			@click=${ifDefined(field.onClick)}
-			@focus=${ifDefined(field.onFocus)}
-			@input=${ifDefined(field.onInput)}
-			@keypress=${ifDefined(field.onKeyPress)}
-			@keydown=${ifDefined(field.onKeyDown)}
-			@keyup=${ifDefined(field.onKeyUp)}
-			@mouseover=${ifDefined(field.onMouseOver)}
+			@click=${field.onClick}
+			@focus=${field.onFocus}
+			@input=${field.onInput}
+			@keypress=${field.onKeyPress}
+			@keydown=${field.onKeyDown}
+			@keyup=${field.onKeyUp}
+			@mouseover=${field.onMouseOver}
 		>
 			${getSlots(name, field)}
 		</f-select>

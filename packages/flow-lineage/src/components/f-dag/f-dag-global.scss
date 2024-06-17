@@ -36,8 +36,22 @@ f-dag {
 		overflow: visible;
 		user-select: none;
 		position: absolute;
+
+		&.hidden {
+			visibility: hidden;
+			pointer-events: none;
+			* {
+				pointer-events: none;
+			}
+			.circle {
+				pointer-events: none !important;
+			}
+		}
 		&:active {
 			cursor: grabbing;
+		}
+		.group-content {
+			pointer-events: none;
 		}
 		.circle {
 			border: 1px solid transparent;

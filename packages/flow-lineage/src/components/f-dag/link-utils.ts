@@ -30,7 +30,7 @@ export function startPlottingLine(this: FDag, event: MouseEvent) {
 		x1! += event.offsetX;
 	}
 
-	const svg = d3.select(this.svgElement.value!);
+	const svg = d3.select(this.linksSVG);
 
 	const direction =
 		circle.classList.contains("right") || circle.classList.contains("left")

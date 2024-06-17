@@ -16,16 +16,29 @@ export type FDagElement = {
 	id: string;
 	label: string;
 	icon: string;
+	group?: string;
+	placement?: CustomPlacement;
+	hidden?: boolean;
+} & CoOrdinates;
+
+export type FDagNode = {
 	height?: number;
 	width?: number;
-	group?: string;
+} & FDagElement;
+
+export type FDagGroup = {
 	spacing?: {
 		x: number;
 		y: number;
 	};
-	placement?: CustomPlacement;
 	layoutDirection?: "horizontal" | "vertical";
-} & CoOrdinates;
+	collapsed?: boolean;
+} & FDagElement;
+
+export type FDagGroupWithSize = FDagGroup & {
+	height?: number;
+	width?: number;
+};
 
 export type FDagLinkDirection = "horizontal" | "vertical";
 export type FDagLink = {
@@ -35,9 +48,9 @@ export type FDagLink = {
 };
 
 export type FDagConfig = {
-	nodes: Omit<FDagElement, "layoutDirection">[];
+	nodes: FDagNode[];
 	links: FDagLink[];
-	groups: Omit<FDagElement, "height" | "width">[];
+	groups: FDagGroup[];
 	spacing?: {
 		x: number;
 		y: number;

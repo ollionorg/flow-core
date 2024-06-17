@@ -1,4 +1,4 @@
-import { FDagConfig, FDagElement, HierarchyNode } from "./types";
+import { FDagConfig, FDagElement, FDagGroup, HierarchyNode } from "./types";
 
 export default function buildHierarchy(config: FDagConfig) {
 	const nodesMap = new Map<string, HierarchyNode>();
@@ -35,15 +35,13 @@ export default function buildHierarchy(config: FDagConfig) {
 		}
 	});
 
-	function addGroupToHierarchy(group: FDagElement, parent?: HierarchyNode): void {
+	function addGroupToHierarchy(group: FDagGroup, parent?: HierarchyNode): void {
 		if (group.group && group.placement) {
 			group.placement = undefined;
 		}
 		const groupNode: HierarchyNode = {
 			id: group.id,
 			type: "group",
-			height: group.height,
-			width: group.width,
 			placement: group.placement,
 			children: []
 		};

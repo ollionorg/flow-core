@@ -230,14 +230,14 @@ const dagConfig: FDagConfig = {
 				y: 20
 			},
 			placement: {
-				elementId: "group4",
+				elementId: "node8",
 				position: "after"
 			}
 		}
 	],
 	spacing: {
 		x: 100,
-		y: 50
+		y: 60
 	},
 	defaultNodeSize: {
 		width: 200,

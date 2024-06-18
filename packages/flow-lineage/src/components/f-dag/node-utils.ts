@@ -26,14 +26,16 @@ export function moveElement(this: FDag, nodeElement: HTMLElement, event: MouseEv
 		translateY = translate.translateY;
 	}
 
-	nodeElement.style.setProperty(
-		"transform",
-		`translate(${translateX + event.movementX * (1 / this.scale)}px, ${
-			translateY + event.movementY * (1 / this.scale)
-		}px)`
-	);
-	nodeElement.dataset.lastTranslateX = `${translateX + event.movementX * (1 / this.scale)}`;
-	nodeElement.dataset.lastTranslateY = `${translateY + event.movementY * (1 / this.scale)}`;
+	const newTranslateX = translateX + event.movementX * (1 / this.scale);
+	const newTranslateY = translateY + event.movementY * (1 / this.scale);
+	nodeElement.style.setProperty("transform", `translate(${newTranslateX}px, ${newTranslateY}px)`);
+
+	const elementObject = this.getElement(nodeElement.getAttribute("id")!);
+	elementObject.x = newTranslateX;
+	elementObject.y = newTranslateY;
+
+	nodeElement.dataset.lastTranslateX = `${newTranslateX}`;
+	nodeElement.dataset.lastTranslateY = `${newTranslateY}`;
 	const fromLines = d3.selectAll<SVGPathElement, FDagLink>(
 		`.dag-line[id^="${nodeElement.getAttribute("id")}->"]`
 	);

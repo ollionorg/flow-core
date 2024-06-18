@@ -77,7 +77,7 @@ export class FDag extends FRoot {
 	currentArrow?: d3.Selection<SVGTextPathElement, FDagLink, null, undefined>;
 
 	collapsedNodeWidth = 200;
-	collapsedNodeHeight = 100;
+	collapsedNodeHeight = 44;
 	/**
 	 * Node utils
 	 */
@@ -494,8 +494,9 @@ export class FDag extends FRoot {
 									<f-icon-button
 										category="packed"
 										state="neutral"
+										size="small"
 										.tooltip=${g.collapsed && !g.hidden ? "Exapnd" : "Collapse"}
-										.icon=${g.collapsed ? "i-expand" : "i-collapse"}
+										.icon=${g.collapsed ? "i-chevron-down" : "i-chevron-up"}
 									></f-icon-button>
 								</f-div>
 							</f-div>
@@ -592,7 +593,7 @@ export class FDag extends FRoot {
 
 				const toElement = this.getElement(d.to.elementId);
 				if (fromElement.hidden || toElement.hidden) {
-					return "var(--color-border-subtle)";
+					return "var(--color-border-secondary)";
 				}
 				return "var(--color-border-default)";
 			})
@@ -630,7 +631,7 @@ export class FDag extends FRoot {
 
 				const toElement = this.getElement(d.to.elementId);
 				if (fromElement.hidden || toElement.hidden) {
-					return "var(--color-border-subtle)";
+					return "var(--color-border-secondary)";
 				}
 				return "var(--color-border-default)";
 			})

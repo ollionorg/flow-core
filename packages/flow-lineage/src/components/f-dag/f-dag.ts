@@ -81,6 +81,7 @@ export class FDag extends FRoot {
 
 	groupsHTML: DirectiveResult<typeof Keyed>[] = [];
 	nodesHTML: DirectiveResult<typeof Keyed>[] = [];
+
 	/**
 	 * Node utils
 	 */
@@ -549,10 +550,23 @@ export class FDag extends FRoot {
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
 
-		function randomIntFromInterval(min: number, max: number) {
-			// min and max included
-			return Math.floor(Math.random() * (max - min + 1) + min);
-		}
+		const getConnectingPosition = (
+			id: string,
+			side: "left" | "right" | "top" | "bottom",
+			size: number
+		) => {
+			const element = this.querySelector<HTMLElement>(`#${id}`)!;
+			let connectionCount: number = Number(element.dataset[side]);
+			if (!connectionCount) {
+				connectionCount = 0;
+			}
+			const point = size / 6 + connectionCount * 14;
+			element.dataset[side] = `${connectionCount + 1}`;
+			if (point > size) {
+				return size;
+			}
+			return point;
+		};
 
 		// cloning because d3 is not re-drawing links
 		const links = structuredClone(this.config.links);
@@ -587,22 +601,22 @@ export class FDag extends FRoot {
 						d.direction = "horizontal";
 						if (d.to.x! > d.from.x!) {
 							d.from.x! += fromWidth!;
-							d.from.y! += randomIntFromInterval(fromHeight! / 3, fromHeight! * (2 / 3));
-							d.to.y! += randomIntFromInterval(toHeight! / 3, toHeight! * (2 / 3));
+							d.from.y! += getConnectingPosition(d.from.elementId, "right", fromHeight!);
+							d.to.y! += getConnectingPosition(d.to.elementId, "left", toHeight!);
 						} else {
-							d.from.y! += randomIntFromInterval(fromHeight! / 3, fromHeight! * (2 / 3));
-							d.to.x! += fromWidth!;
-							d.to.y! += randomIntFromInterval(toHeight! / 3, toHeight! * (2 / 3));
+							d.from.y! += getConnectingPosition(d.from.elementId, "left", fromHeight!);
+							d.to.x! += toWidth!;
+							d.to.y! += getConnectingPosition(d.to.elementId, "right", fromHeight!);
 						}
 					} else {
 						d.direction = "vertical";
 						if (d.to.y! > d.from.y!) {
-							d.from.x! += randomIntFromInterval(fromWidth! / 3, fromWidth! * (2 / 3));
+							d.from.x! += getConnectingPosition(d.from.elementId, "bottom", fromWidth!);
 							d.from.y! += fromHeight!;
-							d.to.x! += randomIntFromInterval(toWidth! / 3, toWidth! * (2 / 3));
+							d.to.x! += getConnectingPosition(d.to.elementId, "top", toWidth!);
 						} else {
-							d.from.x! += randomIntFromInterval(fromWidth! / 3, fromWidth! * (2 / 3));
-							d.to.x! += randomIntFromInterval(toWidth! / 3, toWidth! * (2 / 3));
+							d.from.x! += getConnectingPosition(d.from.elementId, "top", fromWidth!);
+							d.to.x! += getConnectingPosition(d.to.elementId, "bottom", toWidth!);
 							d.to.y! += toHeight!;
 						}
 					}

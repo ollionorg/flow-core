@@ -27,6 +27,8 @@ export type FDagNode = {
 } & FDagElement;
 
 export type FDagGroup = {
+	height?: number;
+	width?: number;
 	spacing?: {
 		x: number;
 		y: number;
@@ -34,11 +36,6 @@ export type FDagGroup = {
 	layoutDirection?: "horizontal" | "vertical";
 	collapsed?: boolean;
 } & FDagElement;
-
-export type FDagGroupWithSize = FDagGroup & {
-	height?: number;
-	width?: number;
-};
 
 export type FDagLinkDirection = "horizontal" | "vertical";
 export type FDagLink = {

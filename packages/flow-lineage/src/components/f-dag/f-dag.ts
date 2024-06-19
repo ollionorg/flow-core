@@ -14,7 +14,6 @@ import type {
 	FDagConfig,
 	FDagElement,
 	FDagGroup,
-	FDagGroupWithSize,
 	FDagLink,
 	FDagNode,
 	HierarchyNode
@@ -100,7 +99,7 @@ export class FDag extends FRoot {
 	updateLink = updateLink;
 	generatePath = generatePath;
 
-	getElement(id: string): FDagNode | FDagGroupWithSize {
+	getElement(id: string): FDagNode | FDagGroup {
 		let elementObj = this.config.nodes.find(n => n.id === id);
 		if (!elementObj) {
 			elementObj = this.config.groups.find(n => n.id === id);
@@ -395,8 +394,8 @@ export class FDag extends FRoot {
 
 	toggleGroup(g: FDagGroup) {
 		g.collapsed = !g.collapsed;
-		(g as FDagGroupWithSize).width = undefined;
-		(g as FDagGroupWithSize).height = undefined;
+		g.width = undefined;
+		g.height = undefined;
 
 		const subElements = this.getAllSubElements(g);
 
@@ -414,7 +413,7 @@ export class FDag extends FRoot {
 		this.requestUpdate();
 	}
 
-	getNodeHTML(element: FDagNode | FDagGroupWithSize, type: "node" | "group" = "node") {
+	getNodeHTML(element: FDagNode | FDagGroup, type: "node" | "group" = "node") {
 		if (type === "node") {
 			const n = element as FDagNode;
 			// to force re-redner
@@ -456,7 +455,7 @@ export class FDag extends FRoot {
 				</f-div>`
 			);
 		} else {
-			const g = element as FDagGroupWithSize;
+			const g = element as FDagGroup;
 			// to force re-redner
 			const gKey = new Date().getTime();
 			return keyed(
@@ -606,6 +605,13 @@ export class FDag extends FRoot {
 							d.to.x! += randomIntFromInterval(toWidth! / 3, toWidth! * (2 / 3));
 							d.to.y! += toHeight!;
 						}
+					}
+				}
+				if (!d.direction) {
+					if (this.config.layoutDirection === "horizontal") {
+						d.direction = "horizontal";
+					} else {
+						d.direction = "vertical";
 					}
 				}
 				points.push({

@@ -8,10 +8,8 @@ export default {
 
 export const Basic = {
 	render: () => {
-		return html` <f-div height="20px"></f-div
-			><f-div width="100%" direction="column" height="100%">
-				<f-div height="20px"></f-div>
-				<f-dag .config=${dagConfig}></f-dag>
-			</f-div>`;
+		return html`<f-div width="100%" direction="column" height="100%">
+			<f-dag .config=${dagConfig}></f-dag>
+		</f-div>`;
 	}
 };

@@ -265,7 +265,7 @@ export class FDag extends FRoot {
 							} else {
 								elementObject.hidden = false;
 							}
-							elementObject.width = width;
+							elementObject.width = width < 150 ? 150 : width;
 							elementObject.height = height + (isCollapseRequired ? 0 : 20);
 						} else if (isCollapsed) {
 							elementObject.hidden = true;
@@ -424,15 +424,10 @@ export class FDag extends FRoot {
 			return keyed(
 				nKey,
 				html`<f-div
-					padding="medium"
-					state="secondary"
-					align="middle-left"
-					variant="curved"
+					align="middle-center"
 					.height=${height + "px"}
 					.width=${width + "px"}
 					class="dag-node ${n.hidden ? "hidden" : "visible"}"
-					gap="medium"
-					border="small solid subtle around"
 					data-group=${ifDefined(n.group)}
 					clickable
 					data-node-type="node"
@@ -443,8 +438,24 @@ export class FDag extends FRoot {
 					@mousemove=${this.dragNode}
 					@mouseup=${this.updateNodePosition}
 				>
-					<f-icon .source=${n.icon}></f-icon>
-					<f-text size="small" weight="medium">${n.label}</f-text>
+					${(() => {
+						if (n.template) {
+							return n.template(n);
+						}
+						if (this.config.nodeTemplate) {
+							return this.config.nodeTemplate(n);
+						}
+						return html`<f-div
+							border="small solid subtle around"
+							align="middle-left"
+							gap="medium"
+							state="secondary"
+							padding="medium"
+							variant="curved"
+							><f-icon .source=${n.icon}></f-icon>
+							<f-text size="small" weight="medium">${n.label}</f-text></f-div
+						>`;
+					})()}
 					${["left", "right", "top", "bottom"].map(side => {
 						return html`<span
 							data-node-id=${n.id}
@@ -482,10 +493,11 @@ export class FDag extends FRoot {
 						height="hug-content"
 						clickable
 						state="secondary"
-						padding="medium"
+						padding="small"
+						align="middle-left"
 					>
-						<f-icon .source=${g.icon}></f-icon>
-						<f-text size="small" weight="medium">${g.label}</f-text>
+						<f-icon size="small" .source=${g.icon}></f-icon>
+						<f-text size="x-small" weight="medium" ellipsis .tooltip=${g.label}>${g.label}</f-text>
 						<f-div
 							padding="none none none small"
 							width="hug-content"
@@ -495,7 +507,7 @@ export class FDag extends FRoot {
 							<f-icon-button
 								category="packed"
 								state="neutral"
-								size="small"
+								size="x-small"
 								.tooltip=${g.collapsed && !g.hidden ? "Exapnd" : "Collapse"}
 								.icon=${g.collapsed ? "i-chevron-down" : "i-chevron-up"}
 							></f-icon-button>

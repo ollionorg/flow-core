@@ -1,3 +1,5 @@
+import { HTMLTemplateResult } from "lit";
+
 export type CoOrdinates = {
 	x?: number;
 	y?: number;
@@ -24,6 +26,7 @@ export type FDagElement = {
 export type FDagNode = {
 	height?: number;
 	width?: number;
+	template?: (node: FDagNode) => HTMLTemplateResult;
 } & FDagElement;
 
 export type FDagGroup = {
@@ -56,6 +59,7 @@ export type FDagConfig = {
 		width: number;
 		height: number;
 	};
+	nodeTemplate?: (node: FDagNode) => HTMLTemplateResult;
 	layoutDirection?: "horizontal" | "vertical";
 };
 

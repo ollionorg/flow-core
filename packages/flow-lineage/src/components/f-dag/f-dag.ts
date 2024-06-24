@@ -6,7 +6,13 @@ import { html, PropertyValueMap, unsafeCSS } from "lit";
 import * as d3 from "d3";
 import { eventOptions, property, query, queryAll } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
-import { dragNestedGroups, dragNode, moveElement, updateNodePosition } from "./node-utils";
+import {
+	dragNestedGroups,
+	dragNode,
+	getTranslateValues,
+	moveElement,
+	updateNodePosition
+} from "./node-utils";
 import type {
 	CoOrdinates,
 	CustomPlacementByElement,
@@ -50,6 +56,8 @@ export class FDag extends FRoot {
 
 	@query(`.dag-view-port`)
 	dagViewPort!: HTMLElement;
+	@query(`#nodeActions`)
+	nodeActions!: HTMLElement;
 	@query(`.background-pattern`)
 	backgroundPattern!: HTMLElement;
 	@query(`#d-dag-links`)
@@ -76,8 +84,8 @@ export class FDag extends FRoot {
 	currentLine?: d3.Selection<SVGPathElement, FDagLink, null, undefined>;
 	currentArrow?: d3.Selection<SVGTextPathElement, FDagLink, null, undefined>;
 
-	collapsedNodeWidth = 200;
-	collapsedNodeHeight = 44;
+	collapsedNodeWidth = 100;
+	collapsedNodeHeight = 34;
 
 	groupsHTML: DirectiveResult<typeof Keyed>[] = [];
 	nodesHTML: DirectiveResult<typeof Keyed>[] = [];
@@ -414,6 +422,19 @@ export class FDag extends FRoot {
 		this.requestUpdate();
 	}
 
+	handleNodeClick(event: PointerEvent) {
+		event.stopPropagation();
+		const { translateX, translateY } = getTranslateValues(event.currentTarget as HTMLElement);
+
+		this.nodeActions.style.top = `${translateY - 26}px`;
+		this.nodeActions.style.left = `${translateX}px`;
+		this.nodeActions.style.display = "flex";
+	}
+
+	handleViewPortClick() {
+		this.nodeActions.style.display = "none";
+	}
+
 	getNodeHTML(element: FDagNode | FDagGroup, type: "node" | "group" = "node") {
 		if (type === "node") {
 			const n = element as FDagNode;
@@ -437,6 +458,7 @@ export class FDag extends FRoot {
 						: "visible"}"
 					@mousemove=${this.dragNode}
 					@mouseup=${this.updateNodePosition}
+					@click=${this.handleNodeClick}
 				>
 					${(() => {
 						if (n.template) {
@@ -475,6 +497,7 @@ export class FDag extends FRoot {
 				html`<f-div
 					align="top-left"
 					variant="curved"
+					@click=${this.handleNodeClick}
 					.height=${(g.height ?? this.defaultElementHeight) + "px"}
 					.width=${(g.width ?? this.defaultElementWidth) + "px"}
 					data-group=${ifDefined(g.group)}
@@ -534,6 +557,7 @@ export class FDag extends FRoot {
 			height="100%"
 			@wheel=${this.handleZoom}
 			@mousemove=${this.dragLine}
+			@click=${this.handleViewPortClick}
 		>
 			<svg
 				class="background-svg"
@@ -557,6 +581,27 @@ export class FDag extends FRoot {
 				${this.groupsHTML.reverse()}${this.nodesHTML.reverse()}
 				<svg class="main-svg" id="d-dag-links"></svg>
 			</f-div>
+			<f-div
+				id="nodeActions"
+				style="position:absolute;z-index:12;display:none"
+				variant="curved"
+				border="small solid default around"
+				width="hug-content"
+				height="24px"
+				state="default"
+			>
+				<f-div clickable width="hug-content" align="middle-center" padding="x-small small">
+					<f-text size="x-small">Select</f-text>
+				</f-div>
+				<f-divider></f-divider>
+				<f-div clickable width="hug-content" align="middle-center" padding="x-small small">
+					<f-text size="x-small">Group</f-text>
+				</f-div>
+				<f-divider></f-divider>
+				<f-div clickable width="hug-content" align="middle-center" padding="x-small small">
+					<f-text size="x-small">Delete</f-text>
+				</f-div>
+			</f-div>
 		</f-div> `;
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
@@ -572,10 +617,14 @@ export class FDag extends FRoot {
 			if (!connectionCount) {
 				connectionCount = 0;
 			}
-			const point = size / 6 + connectionCount * 14;
+			let point = size / 2;
+			if (connectionCount % 2 !== 0) {
+				point = size / 2 - connectionCount * 12;
+			}
+
 			element.dataset[side] = `${connectionCount + 1}`;
-			if (point > size) {
-				return size;
+			if (point > size || point < 0) {
+				return size / 2;
 			}
 			return point;
 		};

@@ -1,32 +1,22 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import {
-	FButton,
-	FInput,
-	flowElement,
-	FPopover,
-	FRoot,
-	FSelect,
-	FTabNode
-} from "@ollion/flow-core";
+import { FButton, flowElement, FPopover, FRoot, FTabNode } from "@ollion/flow-core";
 import { injectCss } from "@ollion/flow-core-config";
 import globalStyle from "./f-dag-global.scss?inline";
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import * as d3 from "d3";
 import { eventOptions, property, query, queryAll } from "lit/decorators.js";
-import { ifDefined } from "lit/directives/if-defined.js";
+
 import {
 	dragNestedGroups,
 	dragNode,
 	getTranslateValues,
 	moveElement,
 	updateNodePosition
-} from "./node-utils";
+} from "./drag-nodes-and-groups";
 import type {
-	CoOrdinates,
 	CustomPlacementByElement,
 	CustomPlacementBySection,
 	FDagConfig,
-	FDagElement,
 	FDagGroup,
 	FDagLink,
 	FDagNode,
@@ -38,10 +28,22 @@ import {
 	startPlottingLine,
 	updateLinePath,
 	updateLink
-} from "./link-utils";
-import buildHierarchy from "./hierarchy-builder";
-import { Keyed, keyed } from "lit/directives/keyed.js";
+} from "./connect-link";
+import { Keyed } from "lit/directives/keyed.js";
 import { DirectiveResult } from "lit/directive.js";
+import computePlacement from "./compute-placement";
+import {
+	addGroupPopover,
+	addSelectionToGroup,
+	addToGroup,
+	addToNewGroup,
+	handleAddGroup,
+	switchTab
+} from "./add-group";
+import getNodeGroupTemplate from "./get-node-group-template";
+import drawLinks from "./draw-links";
+import backgroundSVG from "./background-svg";
+import getNodeGroupActions from "./node-group-actions";
 
 injectCss("f-dag", globalStyle);
 
@@ -67,11 +69,12 @@ export class FDag extends FRoot {
 	 */
 	@queryAll(`.dag-node[data-node-type="node"]`)
 	allNodes?: HTMLElement[];
+
 	@queryAll(`.gr-selection-tabs`)
 	groupSelectionTabs!: FTabNode[];
 
 	/**
-	 * Holds reference of view port
+	 * Holds reference of view port and required elements
 	 */
 	@query(`.dag-view-port`)
 	dagViewPort!: HTMLElement;
@@ -84,13 +87,12 @@ export class FDag extends FRoot {
 	@query(`#add-group`)
 	addGroupButton!: FButton;
 	@query(`#add-group-popover`)
-	addGroupPopover!: FPopover;
-
-	viewPortRect!: DOMRect;
+	addGroupPopoverRef!: FPopover;
 
 	createRenderRoot() {
 		return this;
 	}
+
 	scale = 1;
 	viewPortTranslate = {
 		x: 0,
@@ -127,6 +129,19 @@ export class FDag extends FRoot {
 	dragNestedGroups = dragNestedGroups;
 	dragNode = dragNode;
 	updateNodePosition = updateNodePosition;
+	computePlacement = computePlacement;
+	getNodeGroupActions = getNodeGroupActions;
+
+	/**
+	 * Add Group utils
+	 */
+	addGroupPopover = addGroupPopover;
+	handleAddGroup = handleAddGroup;
+	addToNewGroup = addToNewGroup;
+	addSelectionToGroup = addSelectionToGroup;
+	addToGroup = addToGroup;
+	switchTab = switchTab;
+	getNodeGroupTemplate = getNodeGroupTemplate;
 
 	/**
 	 * Link utils
@@ -137,13 +152,10 @@ export class FDag extends FRoot {
 	dropLine = dropLine;
 	updateLink = updateLink;
 	generatePath = generatePath;
+	drawLinks = drawLinks;
 
 	getElement(id: string): FDagNode | FDagGroup {
-		let elementObj = this.config.nodes.find(n => n.id === id);
-		if (!elementObj) {
-			elementObj = this.config.groups.find(n => n.id === id);
-		}
-		return elementObj!;
+		return [...this.config.nodes, ...this.config.groups].find(n => n.id === id)!;
 	}
 
 	getCustomPlacementElements(section: number, customPlacements: Map<string, HierarchyNode>) {
@@ -173,236 +185,7 @@ export class FDag extends FRoot {
 
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
-		this.groupsHTML = [];
-		this.nodesHTML = [];
-		const { roots: rootNodes, customPlacements } = buildHierarchy(this.config);
-
-		const positionNodes = (
-			containerId: string,
-			elements: HierarchyNode[],
-			x: number,
-			y: number,
-			isCollapsed: boolean,
-			spaceX = 100,
-			spaceY = 100
-		) => {
-			const elementIds = elements.map(e => e.id);
-			const conatinerElementObject = this.getElement(containerId) as FDagGroup;
-			const layoutDirection = (() => {
-				if (containerId === "root") {
-					return this.config.layoutDirection;
-				}
-				if (conatinerElementObject.layoutDirection === "vertical") {
-					return "horizontal";
-				}
-				return "vertical";
-			})();
-			const nodeLinks = this.config.links.filter(
-				l => elementIds.includes(l.from.elementId) && elementIds.includes(l.to.elementId)
-			);
-			const roots = new Set<HierarchyNode>(elements);
-			const nonroots = new Set<HierarchyNode>();
-			nodeLinks.forEach(link => {
-				const fromElement = elements.find(e => e.id === link.from.elementId)!;
-				if (!nonroots.has(fromElement)) {
-					roots.add(fromElement);
-				}
-				if (!fromElement.next) {
-					fromElement.next = [];
-				}
-
-				const toElement = elements.find(e => e.id === link.to.elementId)!;
-				if (roots.has(toElement)) {
-					roots.delete(toElement);
-				}
-				nonroots.add(toElement);
-				fromElement.next.push(toElement);
-			});
-
-			const initialY = y;
-			const initialX = x;
-			let maxX = 0;
-			let maxY = 0;
-			const minX = x;
-			const minY = y;
-			let section = 0;
-			const calculateCords = (ns: HierarchyNode[]) => {
-				const nexts: HierarchyNode[] = [];
-				let maxWidth = this.defaultElementWidth;
-				let maxHeight = this.defaultElementHeight;
-				section += 1;
-				const nextSection = () => {
-					if (!isCollapsed) {
-						if (layoutDirection === "vertical") {
-							y += maxHeight + spaceY;
-							x = initialX;
-						} else {
-							x += maxWidth + spaceX;
-							y = initialY;
-						}
-					}
-				};
-
-				let currentNodeId: string | null;
-				const isElementPlacement = (elementObject: FDagElement) =>
-					elementObject.placement &&
-					(elementObject.placement as CustomPlacementByElement).elementId === currentNodeId;
-				const isSectionPlacement = (elementObject: FDagElement) =>
-					elementObject.placement &&
-					(elementObject.placement as CustomPlacementBySection).section === section &&
-					containerId === "root";
-				const placeElement = (n: HierarchyNode) => {
-					const elementObject = this.getElement(n.id);
-					if (
-						!elementObject.placement ||
-						isSectionPlacement(elementObject) ||
-						isElementPlacement(elementObject)
-					) {
-						const customPlacementsByElements = this.getCustomPlacementElementsByElementId(
-							elementObject.id,
-							customPlacements
-						);
-						if (customPlacementsByElements.length > 0) {
-							currentNodeId = elementObject.id;
-						}
-						const beforeCustomElements = customPlacementsByElements.filter(
-							c => c?.placement?.position === "before"
-						);
-						const afterCustomElements = customPlacementsByElements.filter(
-							c => c?.placement?.position === "after"
-						);
-						beforeCustomElements.forEach(b => {
-							if (b) placeElement(b);
-						});
-
-						if (elementObject.x === undefined) {
-							elementObject.x = x;
-						} else {
-							x = elementObject.x;
-						}
-						if (elementObject.y === undefined) {
-							elementObject.y = y;
-						} else {
-							y = elementObject.y;
-						}
-
-						if (n.type === "group" && n.children && n.children.length > 0) {
-							const isCollapseRequired =
-								isCollapsed || Boolean((elementObject as FDagGroup).collapsed);
-							const { width, height } = positionNodes(
-								n.id,
-								n.children,
-								isCollapseRequired ? x : x + 20,
-								isCollapseRequired ? y : y + 60,
-								isCollapseRequired,
-								(elementObject as FDagGroup).spacing?.x,
-								(elementObject as FDagGroup).spacing?.y
-							);
-							if (isCollapsed) {
-								elementObject.hidden = true;
-							} else {
-								elementObject.hidden = false;
-							}
-							elementObject.width = width < 150 ? 150 : width;
-							elementObject.height = height + (isCollapseRequired ? 0 : 20);
-						} else if (isCollapsed) {
-							elementObject.hidden = true;
-						} else {
-							elementObject.hidden = false;
-						}
-
-						if (!elementObject.width) {
-							elementObject.width = this.defaultElementWidth;
-						}
-						if (!elementObject.height) {
-							elementObject.height = this.defaultElementHeight;
-						}
-
-						if (n.type === "group") {
-							this.groupsHTML.push(this.getNodeHTML(elementObject, "group"));
-						} else {
-							this.nodesHTML.push(this.getNodeHTML(elementObject));
-						}
-
-						if (x + elementObject.width > maxX) {
-							maxX = x + elementObject.width;
-						}
-						if (y + elementObject.height > maxY) {
-							maxY = y + elementObject.height;
-						}
-
-						if (!isCollapsed) {
-							if (layoutDirection === "vertical") {
-								x += elementObject.width + spaceX;
-							} else {
-								y += elementObject.height + spaceY;
-							}
-						}
-
-						if (elementObject.width > maxWidth) {
-							maxWidth = elementObject.width;
-						}
-						if (elementObject.height > maxHeight) {
-							maxHeight = elementObject.height;
-						}
-						afterCustomElements.forEach(b => {
-							if (b) placeElement(b);
-						});
-						currentNodeId = null;
-						if (n.next) nexts.push(...n.next);
-					}
-				};
-				const customPlacementsElements =
-					containerId === "root" ? this.getCustomPlacementElements(section, customPlacements) : [];
-
-				const beforeElements =
-					containerId === "root"
-						? customPlacementsElements.filter(c => c?.placement?.position === "before")
-						: [];
-				const afterElements =
-					containerId === "root"
-						? customPlacementsElements.filter(c => c?.placement?.position === "after")
-						: [];
-				beforeElements.forEach(b => {
-					if (b) placeElement(b);
-				});
-
-				if (beforeElements.length > 0) {
-					nextSection();
-					maxHeight = this.defaultElementHeight;
-					maxWidth = this.defaultElementWidth;
-				}
-
-				const skipTheseElements = [...beforeElements, ...afterElements].map(ba => ba?.id);
-				ns.filter(n => !skipTheseElements.includes(n.id)).forEach(placeElement);
-
-				if (afterElements.length > 0) {
-					nextSection();
-					maxHeight = this.defaultElementHeight;
-					maxWidth = this.defaultElementWidth;
-				}
-				afterElements.forEach(b => {
-					if (b) placeElement(b);
-				});
-				nextSection();
-
-				if (nexts.length > 0) calculateCords(nexts);
-			};
-			calculateCords(Array.from(roots));
-			if (isCollapsed) {
-				return {
-					width: this.collapsedNodeWidth,
-					height: this.collapsedNodeHeight
-				};
-			}
-
-			return {
-				width: maxX - minX + 40,
-				height: maxY - minY + 60
-			};
-		};
-
-		positionNodes("root", rootNodes, 0, 0, false, this.config.spacing?.x, this.config.spacing?.y);
+		this.computePlacement();
 	}
 	handleZoom(event: WheelEvent) {
 		// const chartContainer = event.currentTarget as HTMLElement;
@@ -487,180 +270,6 @@ export class FDag extends FRoot {
 		this.nodeActions.style.display = "none";
 	}
 
-	getNodeHTML(element: FDagNode | FDagGroup, type: "node" | "group" = "node") {
-		if (type === "node") {
-			const n = element as FDagNode;
-			// to force re-redner
-			const nKey = new Date().getTime();
-			const width = n.hidden ? this.collapsedNodeWidth : n.width;
-			const height = n.hidden ? this.collapsedNodeHeight : n.height;
-			return keyed(
-				nKey,
-				html`<f-div
-					align="middle-center"
-					.height=${height + "px"}
-					.width=${width + "px"}
-					class="dag-node ${n.hidden ? "hidden" : "visible"}"
-					data-group=${ifDefined(n.group)}
-					clickable
-					data-node-type="node"
-					.id=${`${n.id}`}
-					style="z-index:2;transform:translate(${n.x}px, ${n.y}px);visibility:${n.hidden
-						? "hidden"
-						: "visible"}"
-					@mousemove=${this.dragNode}
-					@mouseup=${this.updateNodePosition}
-					@click=${this.handleNodeClick}
-				>
-					${(() => {
-						if (n.template) {
-							return n.template(n);
-						}
-						if (this.config.nodeTemplate) {
-							return this.config.nodeTemplate(n);
-						}
-						return html`<f-div
-							border="small solid subtle around"
-							align="middle-left"
-							gap="medium"
-							state="secondary"
-							padding="medium"
-							variant="curved"
-							><f-icon .source=${n.icon}></f-icon>
-							<f-text size="small" weight="medium">${n.label}</f-text></f-div
-						>`;
-					})()}
-					${["left", "right", "top", "bottom"].map(side => {
-						return html`<span
-							data-node-id=${n.id}
-							class="circle ${side}"
-							@mouseup=${this.dropLine}
-							@mousedown=${this.startPlottingLine}
-						></span>`;
-					})}
-				</f-div>`
-			);
-		} else {
-			const g = element as FDagGroup;
-			// to force re-redner
-			const gKey = new Date().getTime();
-			return keyed(
-				gKey,
-				html`<f-div
-					align="top-left"
-					variant="curved"
-					@click=${this.handleNodeClick}
-					.height=${(g.height ?? this.defaultElementHeight) + "px"}
-					.width=${(g.width ?? this.defaultElementWidth) + "px"}
-					data-group=${ifDefined(g.group)}
-					class="dag-node ${g.hidden ? "hidden" : "visible"}"
-					data-node-type="group"
-					border="small solid subtle around"
-					.id=${g.id}
-					direction="column"
-					style="z-index:1;transform:translate(${g.x}px, ${g.y}px);"
-					@mousemove=${this.dragNode}
-					@mouseup=${this.updateNodePosition}
-				>
-					<f-div
-						gap="medium"
-						class="group-header"
-						height="hug-content"
-						clickable
-						state="secondary"
-						padding="small"
-						align="middle-left"
-					>
-						<f-icon size="small" .source=${g.icon}></f-icon>
-						<f-text size="x-small" weight="medium" ellipsis .tooltip=${g.label}>${g.label}</f-text>
-						<f-div
-							padding="none none none small"
-							width="hug-content"
-							@mouseup=${(e: MouseEvent) => e.stopPropagation()}
-							@click=${() => this.toggleGroup(g)}
-						>
-							<f-icon-button
-								category="packed"
-								state="neutral"
-								size="x-small"
-								.tooltip=${g.collapsed && !g.hidden ? "Exapnd" : "Collapse"}
-								.icon=${g.collapsed ? "i-chevron-down" : "i-chevron-up"}
-							></f-icon-button>
-						</f-div>
-					</f-div>
-					<f-div class="group-content"> </f-div>
-					${["left", "right", "top", "bottom"].map(side => {
-						return html`<span
-							data-node-id=${g.id}
-							class="circle ${side}"
-							@mouseup=${this.dropLine}
-							@mousedown=${this.startPlottingLine}
-						></span>`;
-					})}
-				</f-div>`
-			);
-		}
-	}
-
-	handleAddGroup() {
-		this.addGroupPopover.open = true;
-	}
-	addToNewGroup() {
-		const groupIdInput = this.querySelector<FInput>("#new-group-id")!;
-		const groupLabelInput = this.querySelector<FInput>("#new-group-label")!;
-
-		this.config.groups.push({
-			id: groupIdInput.value as string,
-			label: groupLabelInput.value as string,
-			icon: "i-org"
-		});
-
-		this.addSelectionToGroup(groupIdInput.value as string);
-	}
-
-	addSelectionToGroup(groupid: string) {
-		this.selectedNodes.forEach(sn => {
-			sn.group = groupid;
-		});
-
-		this.addGroupPopover.open = false;
-
-		this.config.nodes.forEach(n => {
-			n.x = undefined;
-			n.y = undefined;
-		});
-		this.config.groups.forEach(n => {
-			n.x = undefined;
-			n.y = undefined;
-		});
-
-		this.config.links.forEach(l => {
-			l.from.x = undefined;
-			l.from.y = undefined;
-			l.to.x = undefined;
-			l.to.y = undefined;
-		});
-
-		this.selectedNodes = [];
-		this.addGroupButton.style.display = "none";
-		this.requestUpdate();
-	}
-
-	addToGroup() {
-		const groupDropdown = this.querySelector<FSelect>(`#f-group-dropdown`)!;
-		const groupid = groupDropdown.value as string;
-
-		this.addSelectionToGroup(groupid);
-	}
-
-	switchTab(event: PointerEvent) {
-		const tabNodeElement = event.currentTarget as FTabNode;
-
-		this.groupSelectionTabs.forEach(tab => {
-			tab.active = false;
-		});
-		tabNodeElement.active = true;
-	}
 	render() {
 		return html`<f-div
 			class="d-dag-root"
@@ -679,249 +288,18 @@ export class FDag extends FRoot {
 				@click=${this.handleAddGroup}
 				style="position:absolute;right:0px;display:none"
 			></f-button>
-			<f-popover size="small" id="add-group-popover" .overlay=${false} target="#add-group">
-				<f-div @wheel=${(e: Event) => e.stopPropagation()}>
-					<f-tab>
-						<f-tab-node
-							@click=${this.switchTab}
-							class="gr-selection-tabs"
-							active
-							content-id=${`existing-group-selection`}
-						>
-							<f-div width="100%" height="100%" align="middle-center" direction="column">
-								Exisiting
-							</f-div>
-						</f-tab-node>
-						<f-tab-node
-							@click=${this.switchTab}
-							class="gr-selection-tabs"
-							content-id=${`new-group`}
-						>
-							<f-div width="100%" height="100%" align="middle-center" direction="column">
-								Create New
-							</f-div>
-						</f-tab-node>
-					</f-tab>
-					<f-tab-content id="existing-group-selection">
-						<f-div padding="medium" gap="medium">
-							<f-select
-								id="f-group-dropdown"
-								placeholder="Select Group"
-								@input=${this.addToGroup}
-								.options=${this.config.groups.map(g => g.id)}
-							></f-select>
-						</f-div>
-					</f-tab-content>
-					<f-tab-content id="new-group">
-						<f-div direction="column">
-							<f-div padding="medium" gap="medium">
-								<f-input id="new-group-id" placeholder="New Group Id"></f-input>
-								<f-input id="new-group-label" placeholder="New Group Label"></f-input>
-							</f-div>
-
-							<f-div>
-								<f-button variant="block" label="Add" @click=${this.addToNewGroup}></f-button>
-							</f-div>
-						</f-div>
-					</f-tab-content>
-				</f-div>
-			</f-popover>
-			<svg
-				class="background-svg"
-				style="position: absolute;width: 100%;height: 100%;top: 0px;left: 0px;"
-			>
-				<pattern
-					class="background-pattern"
-					id="pattern-1undefined"
-					x="0"
-					y="0"
-					width="24"
-					height="24"
-					patternUnits="userSpaceOnUse"
-					patternTransform="translate(-0.5,-0.5)"
-				>
-					<circle cx="0.5" cy="0.5" r="1" fill="var(--color-border-subtle)"></circle>
-				</pattern>
-				<rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-1undefined)"></rect>
-			</svg>
+			${this.addGroupPopover()} ${backgroundSVG()}
 			<f-div class="dag-view-port">
 				${this.groupsHTML.reverse()}${this.nodesHTML.reverse()}
 				<svg class="main-svg" id="d-dag-links"></svg>
-				<f-div
-					id="nodeActions"
-					style="position:absolute;z-index:12;display:none"
-					variant="curved"
-					border="small solid default around"
-					width="hug-content"
-					height="24px"
-					state="default"
-				>
-					<f-div
-						@click=${this.selectNode}
-						clickable
-						width="hug-content"
-						align="middle-center"
-						padding="x-small small"
-					>
-						<f-text size="x-small">Select</f-text>
-					</f-div>
-
-					<f-divider></f-divider>
-					<f-div clickable width="hug-content" align="middle-center" padding="x-small small">
-						<f-text size="x-small">Delete</f-text>
-					</f-div>
-				</f-div>
+				${this.getNodeGroupActions()}
 			</f-div>
 		</f-div> `;
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
 
-		const getConnectingPosition = (
-			id: string,
-			side: "left" | "right" | "top" | "bottom",
-			size: number
-		) => {
-			const element = this.querySelector<HTMLElement>(`#${id}`)!;
-			let connectionCount: number = Number(element.dataset[side]);
-			if (!connectionCount) {
-				connectionCount = 0;
-			}
-			let point = size / 2;
-			if (connectionCount % 2 !== 0) {
-				point = size / 2 - connectionCount * 12;
-			}
-
-			element.dataset[side] = `${connectionCount + 1}`;
-			if (point > size || point < 0) {
-				return size / 2;
-			}
-			return point;
-		};
-
-		// cloning because d3 is not re-drawing links
-		const links = structuredClone(this.config.links);
-		const svg = d3.select(this.linksSVG);
-		svg.html(``);
-		svg
-			.selectAll("path.dag-line")
-			.data<FDagLink>(links)
-			.join("path")
-			.attr("class", "dag-line")
-			.attr("id", d => {
-				return `${d.from.elementId}->${d.to.elementId}`;
-			})
-			.attr("d", d => {
-				const points: CoOrdinates[] = [];
-
-				if (!d.to.x && !d.to.y && !d.from.x && !d.from.y) {
-					const fromElement = this.getElement(d.from.elementId);
-					d.from.x = fromElement.x;
-					d.from.y = fromElement.y;
-
-					const toElement = this.getElement(d.to.elementId);
-					d.to.x = toElement.x;
-					d.to.y = toElement.y;
-
-					const fromWidth = fromElement.hidden ? this.collapsedNodeWidth : fromElement.width;
-					const fromHeight = fromElement.hidden ? this.collapsedNodeHeight : fromElement.height;
-					const toWidth = toElement.hidden ? this.collapsedNodeWidth : toElement.width;
-					const toHeight = toElement.hidden ? this.collapsedNodeHeight : toElement.height;
-
-					if (this.config.layoutDirection === "horizontal") {
-						d.direction = "horizontal";
-						if (d.to.x! > d.from.x!) {
-							d.from.x! += fromWidth!;
-							d.from.y! += getConnectingPosition(d.from.elementId, "right", fromHeight!);
-							d.to.y! += getConnectingPosition(d.to.elementId, "left", toHeight!);
-						} else {
-							d.from.y! += getConnectingPosition(d.from.elementId, "left", fromHeight!);
-							d.to.x! += toWidth!;
-							d.to.y! += getConnectingPosition(d.to.elementId, "right", fromHeight!);
-						}
-					} else {
-						d.direction = "vertical";
-						if (d.to.y! > d.from.y!) {
-							d.from.x! += getConnectingPosition(d.from.elementId, "bottom", fromWidth!);
-							d.from.y! += fromHeight!;
-							d.to.x! += getConnectingPosition(d.to.elementId, "top", toWidth!);
-						} else {
-							d.from.x! += getConnectingPosition(d.from.elementId, "top", fromWidth!);
-							d.to.x! += getConnectingPosition(d.to.elementId, "bottom", toWidth!);
-							d.to.y! += toHeight!;
-						}
-					}
-				}
-				if (!d.direction) {
-					if (this.config.layoutDirection === "horizontal") {
-						d.direction = "horizontal";
-					} else {
-						d.direction = "vertical";
-					}
-				}
-				points.push({
-					x: d.from.x,
-					y: d.from.y
-				});
-				points.push({
-					x: d.to.x,
-					y: d.to.y
-				});
-
-				return this.generatePath(points, d.direction)!.toString();
-			})
-			.attr("stroke", d => {
-				const fromElement = this.getElement(d.from.elementId);
-
-				const toElement = this.getElement(d.to.elementId);
-				if (fromElement.hidden || toElement.hidden) {
-					return "var(--color-border-secondary)";
-				}
-				return "var(--color-border-default)";
-			})
-			.attr("stroke-dasharray", d => {
-				const fromElement = this.getElement(d.from.elementId);
-
-				const toElement = this.getElement(d.to.elementId);
-				if (fromElement.hidden || toElement.hidden) {
-					return "4 4";
-				}
-				return "0";
-			});
-
-		svg
-			.selectAll("text.link-arrow")
-			.data<FDagLink>(links)
-			.join("text")
-			.attr("class", "link-arrow")
-			.attr("id", function (d) {
-				return `${d.from.elementId}~arrow`;
-			})
-			.attr("stroke", "var(--color-surface-default)")
-			.attr("stroke-width", "1px")
-			.attr("dy", 5.5)
-			.attr("dx", 2)
-			.append("textPath")
-			.attr("text-anchor", "end")
-
-			.attr("xlink:href", function (d) {
-				return `#${d.from.elementId}->${d.to.elementId}`;
-			})
-			.attr("startOffset", "100%")
-			.attr("fill", d => {
-				const fromElement = this.getElement(d.from.elementId);
-
-				const toElement = this.getElement(d.to.elementId);
-				if (fromElement.hidden || toElement.hidden) {
-					return "var(--color-border-secondary)";
-				}
-				return "var(--color-border-default)";
-			})
-
-			.text("▶");
-		void this.updateComplete.then(() => {
-			this.viewPortRect = this.dagViewPort.getBoundingClientRect();
-		});
+		this.drawLinks();
 
 		this.onmousemove = (event: MouseEvent) => {
 			if (event.buttons === 1) {

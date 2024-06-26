@@ -1,4 +1,4 @@
-import { FDagConfig, FDagElement, FDagGroup, HierarchyNode } from "./types";
+import type { FDagConfig, FDagElement, FDagGroup, HierarchyNode } from "./types";
 
 export default function buildHierarchy(config: FDagConfig) {
 	const nodesMap = new Map<string, HierarchyNode>();

@@ -1,5 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { FButton, flowElement, FPopover, FRoot, FSelect } from "@ollion/flow-core";
+import {
+	FButton,
+	FInput,
+	flowElement,
+	FPopover,
+	FRoot,
+	FSelect,
+	FTabNode
+} from "@ollion/flow-core";
 import { injectCss } from "@ollion/flow-core-config";
 import globalStyle from "./f-dag-global.scss?inline";
 import { html, PropertyValueMap, unsafeCSS } from "lit";
@@ -48,12 +56,23 @@ export class FDag extends FRoot {
 	@property({ type: Object, reflect: false })
 	config!: FDagConfig;
 
+	/**
+	 * Holds all groups and nodes
+	 */
 	@queryAll(`.dag-node`)
 	allGroupsAndNodes?: HTMLElement[];
 
+	/**
+	 * Holds all nodes
+	 */
 	@queryAll(`.dag-node[data-node-type="node"]`)
 	allNodes?: HTMLElement[];
+	@queryAll(`.gr-selection-tabs`)
+	groupSelectionTabs!: FTabNode[];
 
+	/**
+	 * Holds reference of view port
+	 */
 	@query(`.dag-view-port`)
 	dagViewPort!: HTMLElement;
 	@query(`#nodeActions`)
@@ -586,10 +605,20 @@ export class FDag extends FRoot {
 	handleAddGroup() {
 		this.addGroupPopover.open = true;
 	}
+	addToNewGroup() {
+		const groupIdInput = this.querySelector<FInput>("#new-group-id")!;
+		const groupLabelInput = this.querySelector<FInput>("#new-group-label")!;
 
-	addToGroup() {
-		const groupDropdown = this.querySelector<FSelect>(`#f-group-dropdown`)!;
-		const groupid = groupDropdown.value as string;
+		this.config.groups.push({
+			id: groupIdInput.value as string,
+			label: groupLabelInput.value as string,
+			icon: "i-org"
+		});
+
+		this.addSelectionToGroup(groupIdInput.value as string);
+	}
+
+	addSelectionToGroup(groupid: string) {
 		this.selectedNodes.forEach(sn => {
 			sn.group = groupid;
 		});
@@ -616,6 +645,22 @@ export class FDag extends FRoot {
 		this.addGroupButton.style.display = "none";
 		this.requestUpdate();
 	}
+
+	addToGroup() {
+		const groupDropdown = this.querySelector<FSelect>(`#f-group-dropdown`)!;
+		const groupid = groupDropdown.value as string;
+
+		this.addSelectionToGroup(groupid);
+	}
+
+	switchTab(event: PointerEvent) {
+		const tabNodeElement = event.currentTarget as FTabNode;
+
+		this.groupSelectionTabs.forEach(tab => {
+			tab.active = false;
+		});
+		tabNodeElement.active = true;
+	}
 	render() {
 		return html`<f-div
 			class="d-dag-root"
@@ -628,20 +673,57 @@ export class FDag extends FRoot {
 			<f-button
 				id="add-group"
 				class="f-add-group"
-				label="Add Group"
+				label="Add To Group"
 				size="small"
 				category="outline"
 				@click=${this.handleAddGroup}
 				style="position:absolute;right:0px;display:none"
 			></f-button>
-			<f-popover id="add-group-popover" .overlay=${false} target="#add-group">
-				<f-div @wheel=${(e: Event) => e.stopPropagation()} padding="medium" gap="medium">
-					<f-select
-						id="f-group-dropdown"
-						placeholder="Select Group"
-						.options=${this.config.groups.map(g => g.id)}
-					></f-select>
-					<f-button label="Add" @click=${this.addToGroup}></f-button>
+			<f-popover size="small" id="add-group-popover" .overlay=${false} target="#add-group">
+				<f-div @wheel=${(e: Event) => e.stopPropagation()}>
+					<f-tab>
+						<f-tab-node
+							@click=${this.switchTab}
+							class="gr-selection-tabs"
+							active
+							content-id=${`existing-group-selection`}
+						>
+							<f-div width="100%" height="100%" align="middle-center" direction="column">
+								Exisiting
+							</f-div>
+						</f-tab-node>
+						<f-tab-node
+							@click=${this.switchTab}
+							class="gr-selection-tabs"
+							content-id=${`new-group`}
+						>
+							<f-div width="100%" height="100%" align="middle-center" direction="column">
+								Create New
+							</f-div>
+						</f-tab-node>
+					</f-tab>
+					<f-tab-content id="existing-group-selection">
+						<f-div padding="medium" gap="medium">
+							<f-select
+								id="f-group-dropdown"
+								placeholder="Select Group"
+								@input=${this.addToGroup}
+								.options=${this.config.groups.map(g => g.id)}
+							></f-select>
+						</f-div>
+					</f-tab-content>
+					<f-tab-content id="new-group">
+						<f-div direction="column">
+							<f-div padding="medium" gap="medium">
+								<f-input id="new-group-id" placeholder="New Group Id"></f-input>
+								<f-input id="new-group-label" placeholder="New Group Label"></f-input>
+							</f-div>
+
+							<f-div>
+								<f-button variant="block" label="Add" @click=${this.addToNewGroup}></f-button>
+							</f-div>
+						</f-div>
+					</f-tab-content>
 				</f-div>
 			</f-popover>
 			<svg
@@ -683,10 +765,7 @@ export class FDag extends FRoot {
 					>
 						<f-text size="x-small">Select</f-text>
 					</f-div>
-					<f-divider></f-divider>
-					<f-div clickable width="hug-content" align="middle-center" padding="x-small small">
-						<f-text size="x-small">Group</f-text>
-					</f-div>
+
 					<f-divider></f-divider>
 					<f-div clickable width="hug-content" align="middle-center" padding="x-small small">
 						<f-text size="x-small">Delete</f-text>

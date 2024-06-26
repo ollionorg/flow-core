@@ -216,11 +216,11 @@ const dagConfig: FDagConfig = {
 				x: 20,
 				y: 20
 			},
-			layoutDirection: "vertical",
-			placement: {
-				elementId: "group1",
-				position: "after"
-			}
+			layoutDirection: "vertical"
+			// placement: {
+			// 	elementId: "group1",
+			// 	position: "after"
+			// }
 		},
 		{
 			id: "group6",
@@ -229,11 +229,11 @@ const dagConfig: FDagConfig = {
 			spacing: {
 				x: 20,
 				y: 20
-			},
-			placement: {
-				elementId: "node8",
-				position: "after"
 			}
+			// placement: {
+			// 	elementId: "node8",
+			// 	position: "after"
+			// }
 		}
 	],
 	spacing: {

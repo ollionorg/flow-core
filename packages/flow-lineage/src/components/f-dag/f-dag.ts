@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { flowElement, FRoot } from "@ollion/flow-core";
+import { FButton, flowElement, FPopover, FRoot, FSelect } from "@ollion/flow-core";
 import { injectCss } from "@ollion/flow-core-config";
 import globalStyle from "./f-dag-global.scss?inline";
 import { html, PropertyValueMap, unsafeCSS } from "lit";
@@ -62,6 +62,10 @@ export class FDag extends FRoot {
 	backgroundPattern!: HTMLElement;
 	@query(`#d-dag-links`)
 	linksSVG!: SVGSVGElement;
+	@query(`#add-group`)
+	addGroupButton!: FButton;
+	@query(`#add-group-popover`)
+	addGroupPopover!: FPopover;
 
 	viewPortRect!: DOMRect;
 
@@ -89,6 +93,13 @@ export class FDag extends FRoot {
 
 	groupsHTML: DirectiveResult<typeof Keyed>[] = [];
 	nodesHTML: DirectiveResult<typeof Keyed>[] = [];
+
+	currentClickedNode?: {
+		element: HTMLElement;
+		node: FDagNode | FDagGroup;
+	};
+
+	selectedNodes: (FDagNode | FDagGroup)[] = [];
 
 	/**
 	 * Node utils
@@ -424,11 +435,33 @@ export class FDag extends FRoot {
 
 	handleNodeClick(event: PointerEvent) {
 		event.stopPropagation();
-		const { translateX, translateY } = getTranslateValues(event.currentTarget as HTMLElement);
+
+		const nodeElement = event.currentTarget as HTMLElement;
+		const { translateX, translateY } = getTranslateValues(nodeElement);
+
+		const nodeObject = this.getElement(nodeElement.getAttribute("id")!);
+
+		this.currentClickedNode = {
+			node: nodeObject,
+			element: nodeElement
+		};
 
 		this.nodeActions.style.top = `${translateY - 26}px`;
 		this.nodeActions.style.left = `${translateX}px`;
 		this.nodeActions.style.display = "flex";
+	}
+
+	selectNode(event: PointerEvent) {
+		event.stopPropagation();
+
+		if (this.currentClickedNode) {
+			const nodeElement = this.currentClickedNode.element;
+			nodeElement.classList.add("selected");
+			this.nodeActions.style.display = "none";
+
+			this.selectedNodes.push(this.currentClickedNode.node);
+			this.addGroupButton.style.display = "flex";
+		}
 	}
 
 	handleViewPortClick() {
@@ -550,6 +583,39 @@ export class FDag extends FRoot {
 		}
 	}
 
+	handleAddGroup() {
+		this.addGroupPopover.open = true;
+	}
+
+	addToGroup() {
+		const groupDropdown = this.querySelector<FSelect>(`#f-group-dropdown`)!;
+		const groupid = groupDropdown.value as string;
+		this.selectedNodes.forEach(sn => {
+			sn.group = groupid;
+		});
+
+		this.addGroupPopover.open = false;
+
+		this.config.nodes.forEach(n => {
+			n.x = undefined;
+			n.y = undefined;
+		});
+		this.config.groups.forEach(n => {
+			n.x = undefined;
+			n.y = undefined;
+		});
+
+		this.config.links.forEach(l => {
+			l.from.x = undefined;
+			l.from.y = undefined;
+			l.to.x = undefined;
+			l.to.y = undefined;
+		});
+
+		this.selectedNodes = [];
+		this.addGroupButton.style.display = "none";
+		this.requestUpdate();
+	}
 	render() {
 		return html`<f-div
 			class="d-dag-root"
@@ -559,6 +625,25 @@ export class FDag extends FRoot {
 			@mousemove=${this.dragLine}
 			@click=${this.handleViewPortClick}
 		>
+			<f-button
+				id="add-group"
+				class="f-add-group"
+				label="Add Group"
+				size="small"
+				category="outline"
+				@click=${this.handleAddGroup}
+				style="position:absolute;right:0px;display:none"
+			></f-button>
+			<f-popover id="add-group-popover" .overlay=${false} target="#add-group">
+				<f-div @wheel=${(e: Event) => e.stopPropagation()} padding="medium" gap="medium">
+					<f-select
+						id="f-group-dropdown"
+						placeholder="Select Group"
+						.options=${this.config.groups.map(g => g.id)}
+					></f-select>
+					<f-button label="Add" @click=${this.addToGroup}></f-button>
+				</f-div>
+			</f-popover>
 			<svg
 				class="background-svg"
 				style="position: absolute;width: 100%;height: 100%;top: 0px;left: 0px;"
@@ -580,26 +665,32 @@ export class FDag extends FRoot {
 			<f-div class="dag-view-port">
 				${this.groupsHTML.reverse()}${this.nodesHTML.reverse()}
 				<svg class="main-svg" id="d-dag-links"></svg>
-			</f-div>
-			<f-div
-				id="nodeActions"
-				style="position:absolute;z-index:12;display:none"
-				variant="curved"
-				border="small solid default around"
-				width="hug-content"
-				height="24px"
-				state="default"
-			>
-				<f-div clickable width="hug-content" align="middle-center" padding="x-small small">
-					<f-text size="x-small">Select</f-text>
-				</f-div>
-				<f-divider></f-divider>
-				<f-div clickable width="hug-content" align="middle-center" padding="x-small small">
-					<f-text size="x-small">Group</f-text>
-				</f-div>
-				<f-divider></f-divider>
-				<f-div clickable width="hug-content" align="middle-center" padding="x-small small">
-					<f-text size="x-small">Delete</f-text>
+				<f-div
+					id="nodeActions"
+					style="position:absolute;z-index:12;display:none"
+					variant="curved"
+					border="small solid default around"
+					width="hug-content"
+					height="24px"
+					state="default"
+				>
+					<f-div
+						@click=${this.selectNode}
+						clickable
+						width="hug-content"
+						align="middle-center"
+						padding="x-small small"
+					>
+						<f-text size="x-small">Select</f-text>
+					</f-div>
+					<f-divider></f-divider>
+					<f-div clickable width="hug-content" align="middle-center" padding="x-small small">
+						<f-text size="x-small">Group</f-text>
+					</f-div>
+					<f-divider></f-divider>
+					<f-div clickable width="hug-content" align="middle-center" padding="x-small small">
+						<f-text size="x-small">Delete</f-text>
+					</f-div>
 				</f-div>
 			</f-div>
 		</f-div> `;

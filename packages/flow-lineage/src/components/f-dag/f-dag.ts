@@ -183,6 +183,52 @@ export class FDag extends FRoot {
 		return [...nodes, ...groups];
 	}
 
+	deleteNode(id: string) {
+		const nodeIndex = this.config.nodes.findIndex(e => e.id === id);
+		if (nodeIndex > -1) {
+			this.config.nodes.splice(nodeIndex, 1);
+		}
+
+		this.config.links = this.config.links.filter(
+			l => !(l.from.elementId === id || l.to.elementId === id)
+		);
+	}
+
+	deleteGroup(id: string) {
+		this.config.groups
+			.filter(g => g.group === id)
+			.forEach(g => {
+				this.deleteGroup(g.id);
+			});
+		this.config.nodes
+			.filter(n => n.group === id)
+			.forEach(n => {
+				this.deleteNode(n.id);
+			});
+		const groupIndex = this.config.groups.findIndex(e => e.id === id);
+		if (groupIndex > -1) {
+			this.config.groups.splice(groupIndex, 1);
+		}
+
+		this.config.links = this.config.links.filter(
+			l => !(l.from.elementId === id || l.to.elementId === id)
+		);
+	}
+
+	deleteElement() {
+		const nodeType = this.currentClickedNode?.element.dataset.nodeType;
+		if (nodeType === "node") {
+			this.deleteNode(this.currentClickedNode!.node.id);
+		}
+		if (nodeType === "group") {
+			this.deleteGroup(this.currentClickedNode!.node.id);
+		}
+
+		console.log(this.config.links);
+
+		this.requestUpdate();
+	}
+
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
 		this.computePlacement();

@@ -22,6 +22,13 @@ export default function getNodeGroupActions(this: FDag) {
 		</f-div>
 
 		<f-divider></f-divider>
+		<f-div id="ungroup-action" @click=${this.unGroup}>
+			<f-div clickable width="hug-content" align="middle-center" padding="x-small small">
+				<f-text size="x-small">Ungroup</f-text>
+			</f-div>
+
+			<f-divider></f-divider>
+		</f-div>
 		<f-div
 			@click=${this.deleteElement}
 			clickable

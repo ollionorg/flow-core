@@ -215,6 +215,28 @@ export class FDag extends FRoot {
 		);
 	}
 
+	unGroup() {
+		const id = this.currentClickedNode!.node.id;
+		this.config.groups
+			.filter(g => g.group === id)
+			.forEach(g => {
+				g.group = undefined;
+			});
+		this.config.nodes
+			.filter(n => n.group === id)
+			.forEach(n => {
+				n.group = undefined;
+			});
+		const groupIndex = this.config.groups.findIndex(e => e.id === id);
+		if (groupIndex > -1) {
+			this.config.groups.splice(groupIndex, 1);
+		}
+
+		this.config.links = this.config.links.filter(
+			l => !(l.from.elementId === id || l.to.elementId === id)
+		);
+		this.requestUpdate();
+	}
 	deleteElement() {
 		const nodeType = this.currentClickedNode?.element.dataset.nodeType;
 		if (nodeType === "node") {
@@ -223,8 +245,6 @@ export class FDag extends FRoot {
 		if (nodeType === "group") {
 			this.deleteGroup(this.currentClickedNode!.node.id);
 		}
-
-		console.log(this.config.links);
 
 		this.requestUpdate();
 	}
@@ -297,6 +317,12 @@ export class FDag extends FRoot {
 		this.nodeActions.style.top = `${translateY - 26}px`;
 		this.nodeActions.style.left = `${translateX}px`;
 		this.nodeActions.style.display = "flex";
+
+		if (nodeElement.dataset.nodeType === "node") {
+			this.nodeActions.querySelector<HTMLElement>("#ungroup-action")!.style.display = "none";
+		} else {
+			this.nodeActions.querySelector<HTMLElement>("#ungroup-action")!.style.display = "flex";
+		}
 	}
 
 	selectNode(event: PointerEvent) {

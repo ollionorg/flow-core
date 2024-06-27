@@ -302,6 +302,7 @@ export class FDag extends FRoot {
 	}
 
 	handleNodeClick(event: PointerEvent) {
+		event.preventDefault();
 		event.stopPropagation();
 
 		const nodeElement = event.currentTarget as HTMLElement;

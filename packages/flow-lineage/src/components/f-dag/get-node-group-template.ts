@@ -31,7 +31,7 @@ export default function getNodeGroupTemplate(
 					: "visible"}"
 				@mousemove=${this.dragNode}
 				@mouseup=${this.updateNodePosition}
-				@click=${this.handleNodeClick}
+				@contextmenu=${this.handleNodeClick}
 			>
 				${(() => {
 					if (n.template) {
@@ -70,7 +70,7 @@ export default function getNodeGroupTemplate(
 			html`<f-div
 				align="top-left"
 				variant="curved"
-				@click=${this.handleNodeClick}
+				@contextmenu=${this.handleNodeClick}
 				.height=${(g.height ?? this.defaultElementHeight) + "px"}
 				.width=${(g.width ?? this.defaultElementWidth) + "px"}
 				data-group=${ifDefined(g.group)}

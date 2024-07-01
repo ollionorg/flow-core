@@ -123,6 +123,7 @@ export function dragNode(this: FDag, event: MouseEvent) {
 	if (event.buttons === 1 && this.currentLine === undefined) {
 		const nodeElement = event.currentTarget as HTMLElement;
 		nodeElement.style.zIndex = `3`;
+		nodeElement.classList.add("dragging");
 		if (nodeElement) {
 			this.moveElement(nodeElement, event);
 			this.dragNestedGroups(nodeElement, event);
@@ -143,9 +144,10 @@ export function updateNodePosition(this: FDag, event: MouseEvent) {
 	} else {
 		nodeElement.style.zIndex = `2`;
 	}
-
+	nodeElement.classList.remove("dragging");
 	const allGroupsAndNodes = this.querySelectorAll<HTMLElement>(`[data-node-type="group"]`);
 	let insideGroup = false;
+	let placedIn: HTMLElement | undefined;
 	for (let index = 0; index < allGroupsAndNodes.length; index++) {
 		const group = allGroupsAndNodes.item(index);
 		const { top, height, left, width } = group.getBoundingClientRect();
@@ -157,11 +159,18 @@ export function updateNodePosition(this: FDag, event: MouseEvent) {
 		) {
 			insideGroup = true;
 			nodeElement.dataset.group = group.getAttribute("id")!;
+			placedIn = group;
 		}
 	}
 
 	if (!insideGroup) {
 		delete nodeElement.dataset.group;
+	} else if (placedIn) {
+		placedIn.classList.add("dropped");
+
+		setTimeout(() => {
+			placedIn.classList.remove("dropped");
+		}, 1000);
 	}
 
 	let elementConfig;

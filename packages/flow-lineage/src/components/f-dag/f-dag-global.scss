@@ -36,6 +36,8 @@ f-dag {
 		overflow: visible;
 		user-select: none;
 		position: absolute;
+		box-shadow: 0;
+		transition: box-shadow 1s;
 
 		&.hidden {
 			visibility: hidden;
@@ -99,6 +101,22 @@ f-dag {
 				border: 1px solid var(--color-primary-default);
 				border-radius: 4px;
 			}
+		}
+
+		&.dragging {
+			&::before {
+				content: "";
+				position: absolute;
+				top: -4px;
+				bottom: -4px;
+				left: -4px;
+				right: -4px;
+				border: 1px solid var(--color-primary-default);
+				border-radius: 4px;
+			}
+		}
+		&.dropped {
+			box-shadow: 0 0 15px var(--color-primary-default);
 		}
 	}
 	.d-dag-root {

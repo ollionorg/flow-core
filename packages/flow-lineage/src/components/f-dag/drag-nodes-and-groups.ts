@@ -158,8 +158,8 @@ export function updateNodePosition(this: FDag, event: MouseEvent) {
 			nodeLeft + nodeWidth < left + width
 		) {
 			insideGroup = true;
+			if (nodeElement.dataset.group !== group.getAttribute("id")) placedIn = group;
 			nodeElement.dataset.group = group.getAttribute("id")!;
-			placedIn = group;
 		}
 	}
 

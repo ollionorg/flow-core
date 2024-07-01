@@ -83,11 +83,14 @@ export function addSelectionToGroup(this: FDag, groupid: string) {
 export function addToNewGroup(this: FDag) {
 	const groupIdInput = this.querySelector<FInput>("#new-group-id")!;
 	const groupLabelInput = this.querySelector<FInput>("#new-group-label")!;
+	const parentGroupIfAny = this.selectedNodes[0].group;
 
+	const isAllFromSameGroup = this.selectedNodes.every(sn => sn.group === parentGroupIfAny);
 	this.config.groups.push({
 		id: groupIdInput.value as string,
 		label: groupLabelInput.value as string,
-		icon: "i-org"
+		icon: "i-org",
+		group: isAllFromSameGroup && parentGroupIfAny ? parentGroupIfAny : undefined
 	});
 
 	this.addSelectionToGroup(groupIdInput.value as string);

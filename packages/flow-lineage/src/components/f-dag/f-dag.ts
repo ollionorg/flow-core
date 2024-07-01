@@ -44,6 +44,7 @@ import getNodeGroupTemplate from "./get-node-group-template";
 import drawLinks from "./draw-links";
 import backgroundSVG from "./background-svg";
 import getNodeGroupActions from "./node-group-actions";
+import { linkTo } from "./link-to";
 
 injectCss("f-dag", globalStyle);
 
@@ -153,6 +154,7 @@ export class FDag extends FRoot {
 	updateLink = updateLink;
 	generatePath = generatePath;
 	drawLinks = drawLinks;
+	linkTo = linkTo;
 
 	getElement(id: string): FDagNode | FDagGroup {
 		return [...this.config.nodes, ...this.config.groups].find(n => n.id === id)!;
@@ -343,6 +345,12 @@ export class FDag extends FRoot {
 		this.nodeActions.style.display = "none";
 	}
 
+	openLinkTo() {
+		const linkToPopOver = this.querySelector<FPopover>(`#link-to-popover`)!;
+		linkToPopOver.target = this.currentClickedNode!.element;
+		linkToPopOver.open = true;
+	}
+
 	render() {
 		return html`<f-div
 			class="d-dag-root"
@@ -361,7 +369,7 @@ export class FDag extends FRoot {
 				@click=${this.handleAddGroup}
 				style="position:absolute;right:0px;display:none"
 			></f-button>
-			${this.addGroupPopover()} ${backgroundSVG()}
+			${this.addGroupPopover()} ${this.linkTo()}${backgroundSVG()}
 			<f-div class="dag-view-port">
 				${this.groupsHTML.reverse()}${this.nodesHTML.reverse()}
 				<svg class="main-svg" id="d-dag-links"></svg>

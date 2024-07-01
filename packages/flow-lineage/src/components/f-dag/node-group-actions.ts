@@ -30,6 +30,17 @@ export default function getNodeGroupActions(this: FDag) {
 			<f-divider></f-divider>
 		</f-div>
 		<f-div
+			@click=${this.openLinkTo}
+			clickable
+			width="hug-content"
+			align="middle-center"
+			padding="x-small small"
+		>
+			<f-text size="x-small">Link To</f-text>
+		</f-div>
+
+		<f-divider></f-divider>
+		<f-div
 			@click=${this.deleteElement}
 			clickable
 			width="hug-content"

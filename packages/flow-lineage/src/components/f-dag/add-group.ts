@@ -3,6 +3,9 @@ import type { FDag } from "./f-dag";
 import type { FInput, FSelect, FTabNode } from "@ollion/flow-core";
 
 export function addGroupPopover(this: FDag) {
+	const closeAddPopover = () => {
+		this.addGroupPopoverRef.open = false;
+	};
 	return html` <f-popover size="small" id="add-group-popover" .overlay=${false} target="#add-group">
 		<f-div @wheel=${(e: Event) => e.stopPropagation()}>
 			<f-tab>
@@ -31,6 +34,12 @@ export function addGroupPopover(this: FDag) {
 						.options=${this.config.groups.map(g => g.id)}
 					></f-select>
 				</f-div>
+				<f-button
+					label="cancel"
+					@click=${closeAddPopover}
+					variant="block"
+					state="neutral"
+				></f-button>
 			</f-tab-content>
 			<f-tab-content id="new-group">
 				<f-div direction="column">
@@ -40,7 +49,17 @@ export function addGroupPopover(this: FDag) {
 					</f-div>
 
 					<f-div>
-						<f-button variant="block" label="Add" @click=${this.addToNewGroup}></f-button>
+						<f-div>
+							<f-button
+								label="cancel"
+								@click=${closeAddPopover}
+								variant="block"
+								state="neutral"
+							></f-button>
+						</f-div>
+						<f-div
+							><f-button variant="block" label="Add" @click=${this.addToNewGroup}></f-button
+						></f-div>
 					</f-div>
 				</f-div>
 			</f-tab-content>

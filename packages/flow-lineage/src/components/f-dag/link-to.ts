@@ -46,6 +46,8 @@ export function linkTo(this: FDag) {
 				});
 			}
 			this.selectedNodes = [];
+			this.linkToButton.style.display = "none";
+			this.addGroupButton.style.display = "none";
 		} else {
 			const currentNode = this.currentClickedNode!.node;
 

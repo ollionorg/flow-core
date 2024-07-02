@@ -206,28 +206,6 @@ export class FDag extends FRoot {
 		);
 	}
 
-	unGroup() {
-		const id = this.currentClickedNode!.node.id;
-		this.config.groups
-			.filter(g => g.group === id)
-			.forEach(g => {
-				g.group = undefined;
-			});
-		this.config.nodes
-			.filter(n => n.group === id)
-			.forEach(n => {
-				n.group = undefined;
-			});
-		const groupIndex = this.config.groups.findIndex(e => e.id === id);
-		if (groupIndex > -1) {
-			this.config.groups.splice(groupIndex, 1);
-		}
-
-		this.config.links = this.config.links.filter(
-			l => !(l.from.elementId === id || l.to.elementId === id)
-		);
-		this.requestUpdate();
-	}
 	deleteElement() {
 		const nodeType = this.currentClickedNode?.element.dataset.nodeType;
 		if (nodeType === "node") {
@@ -317,29 +295,10 @@ export class FDag extends FRoot {
 		}
 	}
 
-	selectNode(event: PointerEvent) {
-		event.stopPropagation();
-
-		if (this.currentClickedNode) {
-			const nodeElement = this.currentClickedNode.element;
-			nodeElement.classList.add("selected");
-			this.nodeActions.style.display = "none";
-
-			this.selectedNodes.push(this.currentClickedNode.node);
-			this.addGroupButton.style.display = "flex";
-			this.linkToButton.style.display = "flex";
-		}
-	}
-
 	handleViewPortClick() {
 		this.nodeActions.style.display = "none";
 	}
 
-	openLinkTo() {
-		const linkToPopOver = this.querySelector<FPopover>(`#link-to-popover`)!;
-		linkToPopOver.target = this.currentClickedNode!.element;
-		linkToPopOver.open = true;
-	}
 	openBulkLinkTo() {
 		const linkToPopOver = this.querySelector<FPopover>(`#link-to-popover`)!;
 		linkToPopOver.target = this.linkToButton;

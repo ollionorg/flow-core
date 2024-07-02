@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { FButton, flowElement, FPopover, FRoot, FTabNode } from "@ollion/flow-core";
+import { FButton, flowElement, FPopover, FRoot } from "@ollion/flow-core";
 import { injectCss } from "@ollion/flow-core-config";
 import globalStyle from "./f-dag-global.scss?inline";
 import { html, PropertyValueMap, unsafeCSS } from "lit";
@@ -32,14 +32,7 @@ import {
 import { Keyed } from "lit/directives/keyed.js";
 import { DirectiveResult } from "lit/directive.js";
 import computePlacement from "./compute-placement";
-import {
-	addGroupPopover,
-	addSelectionToGroup,
-	addToGroup,
-	addToNewGroup,
-	handleAddGroup,
-	switchTab
-} from "./add-group";
+import { addGroupPopover, handleAddGroup } from "./add-group";
 import getNodeGroupTemplate from "./get-node-group-template";
 import drawLinks from "./draw-links";
 import backgroundSVG from "./background-svg";
@@ -70,9 +63,6 @@ export class FDag extends FRoot {
 	 */
 	@queryAll(`.dag-node[data-node-type="node"]`)
 	allNodes?: HTMLElement[];
-
-	@queryAll(`.gr-selection-tabs`)
-	groupSelectionTabs!: FTabNode[];
 
 	/**
 	 * Holds reference of view port and required elements
@@ -138,10 +128,7 @@ export class FDag extends FRoot {
 	 */
 	addGroupPopover = addGroupPopover;
 	handleAddGroup = handleAddGroup;
-	addToNewGroup = addToNewGroup;
-	addSelectionToGroup = addSelectionToGroup;
-	addToGroup = addToGroup;
-	switchTab = switchTab;
+
 	getNodeGroupTemplate = getNodeGroupTemplate;
 
 	/**

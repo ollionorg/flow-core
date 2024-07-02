@@ -283,7 +283,7 @@ const dagConfig: FDagConfig = {
 		}
 	],
 	spacing: {
-		x: 100,
+		x: 70,
 		y: 60
 	},
 	defaultNodeSize: {

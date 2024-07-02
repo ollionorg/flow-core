@@ -77,6 +77,8 @@ export class FDag extends FRoot {
 	linksSVG!: SVGSVGElement;
 	@query(`#add-group`)
 	addGroupButton!: FButton;
+	@query(`#link-to`)
+	linkToButton!: FButton;
 	@query(`#add-group-popover`)
 	addGroupPopoverRef!: FPopover;
 
@@ -325,6 +327,7 @@ export class FDag extends FRoot {
 
 			this.selectedNodes.push(this.currentClickedNode.node);
 			this.addGroupButton.style.display = "flex";
+			this.linkToButton.style.display = "flex";
 		}
 	}
 
@@ -337,6 +340,11 @@ export class FDag extends FRoot {
 		linkToPopOver.target = this.currentClickedNode!.element;
 		linkToPopOver.open = true;
 	}
+	openBulkLinkTo() {
+		const linkToPopOver = this.querySelector<FPopover>(`#link-to-popover`)!;
+		linkToPopOver.target = this.linkToButton;
+		linkToPopOver.open = true;
+	}
 
 	render() {
 		return html`<f-div
@@ -347,6 +355,15 @@ export class FDag extends FRoot {
 			@mousemove=${this.dragLine}
 			@click=${this.handleViewPortClick}
 		>
+			<f-button
+				id="link-to"
+				class="f-link-to"
+				label="Link To"
+				size="small"
+				category="outline"
+				@click=${this.openBulkLinkTo}
+				style="position:absolute;right:130px;display:none"
+			></f-button>
 			<f-button
 				id="add-group"
 				class="f-add-group"

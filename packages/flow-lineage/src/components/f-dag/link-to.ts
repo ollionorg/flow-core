@@ -31,19 +31,36 @@ export function linkTo(this: FDag) {
 		values = event.detail;
 	};
 	const handleLinkTo = () => {
-		const currentNode = this.currentClickedNode!.node;
+		if (this.selectedNodes.length > 0) {
+			for (const currentNode of this.selectedNodes) {
+				const { groups, nodes } = values;
+				[...(groups ?? []), ...(nodes ?? [])].forEach(linkTo => {
+					this.config.links.push({
+						from: {
+							elementId: currentNode.id
+						},
+						to: {
+							elementId: linkTo
+						}
+					});
+				});
+			}
+			this.selectedNodes = [];
+		} else {
+			const currentNode = this.currentClickedNode!.node;
 
-		const { groups, nodes } = values;
-		[...(groups ?? []), ...(nodes ?? [])].forEach(linkTo => {
-			this.config.links.push({
-				from: {
-					elementId: currentNode.id
-				},
-				to: {
-					elementId: linkTo
-				}
+			const { groups, nodes } = values;
+			[...(groups ?? []), ...(nodes ?? [])].forEach(linkTo => {
+				this.config.links.push({
+					from: {
+						elementId: currentNode.id
+					},
+					to: {
+						elementId: linkTo
+					}
+				});
 			});
-		});
+		}
 		const linkToPopOver = this.querySelector<FPopover>(`#link-to-popover`)!;
 
 		linkToPopOver.open = false;

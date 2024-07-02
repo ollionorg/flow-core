@@ -38,7 +38,7 @@ export default function computePlacement(this: FDag) {
 		);
 		const roots = new Set<HierarchyNode>(elements);
 		const nonroots = new Set<HierarchyNode>();
-		nodeLinks.forEach(link => {
+		for (const link of nodeLinks) {
 			const fromElement = elements.find(e => e.id === link.from.elementId)!;
 			if (!nonroots.has(fromElement)) {
 				roots.add(fromElement);
@@ -53,7 +53,7 @@ export default function computePlacement(this: FDag) {
 			}
 			nonroots.add(toElement);
 			fromElement.next.push(toElement);
-		});
+		}
 
 		const initialY = y;
 		const initialX = x;
@@ -107,9 +107,9 @@ export default function computePlacement(this: FDag) {
 					const afterCustomElements = customPlacementsByElements.filter(
 						c => c?.placement?.position === "after"
 					);
-					beforeCustomElements.forEach(b => {
+					for (const b of beforeCustomElements) {
 						if (b) placeElement(b);
-					});
+					}
 
 					if (elementObject.x === undefined) {
 						elementObject.x = x;
@@ -181,9 +181,10 @@ export default function computePlacement(this: FDag) {
 					if (elementObject.height > maxHeight) {
 						maxHeight = elementObject.height;
 					}
-					afterCustomElements.forEach(b => {
+
+					for (const b of afterCustomElements) {
 						if (b) placeElement(b);
-					});
+					}
 					currentNodeId = null;
 					if (n.next) nexts.push(...n.next);
 				}
@@ -199,9 +200,9 @@ export default function computePlacement(this: FDag) {
 				containerId === "root"
 					? customPlacementsElements.filter(c => c?.placement?.position === "after")
 					: [];
-			beforeElements.forEach(b => {
+			for (const b of beforeElements) {
 				if (b) placeElement(b);
-			});
+			}
 
 			if (beforeElements.length > 0) {
 				nextSection();
@@ -217,9 +218,9 @@ export default function computePlacement(this: FDag) {
 				maxHeight = this.defaultElementHeight;
 				maxWidth = this.defaultElementWidth;
 			}
-			afterElements.forEach(b => {
+			for (const b of afterElements) {
 				if (b) placeElement(b);
-			});
+			}
 			nextSection();
 
 			if (nexts.length > 0) calculateCords(nexts);

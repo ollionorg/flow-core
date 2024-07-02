@@ -103,6 +103,21 @@ const dagConfig: FDagConfig = {
 			icon: "p-mysql",
 
 			group: "group7"
+		},
+		{
+			id: "node71",
+			label: "Node 71",
+			icon: "p-asana"
+		},
+		{
+			id: "node72",
+			label: "Node 72",
+			icon: "p-prometheus"
+		},
+		{
+			id: "node73",
+			label: "Node 73",
+			icon: "p-opa"
 		}
 	],
 	links: [
@@ -153,6 +168,38 @@ const dagConfig: FDagConfig = {
 			to: {
 				elementId: "node8"
 			}
+		},
+		{
+			from: {
+				elementId: "node7"
+			},
+			to: {
+				elementId: "node10"
+			}
+		},
+		{
+			from: {
+				elementId: "node9"
+			},
+			to: {
+				elementId: "group6"
+			}
+		},
+		{
+			from: {
+				elementId: "node6"
+			},
+			to: {
+				elementId: "node91"
+			}
+		},
+		{
+			from: {
+				elementId: "node11"
+			},
+			to: {
+				elementId: "group7"
+			}
 		}
 	],
 	groups: [
@@ -192,8 +239,7 @@ const dagConfig: FDagConfig = {
 				x: 20,
 				y: 20
 			},
-			group: "group1",
-			layoutDirection: "vertical"
+			group: "group1"
 		},
 		{
 			id: "group5",
@@ -216,11 +262,11 @@ const dagConfig: FDagConfig = {
 				x: 20,
 				y: 20
 			},
-			layoutDirection: "vertical"
-			// placement: {
-			// 	elementId: "group1",
-			// 	position: "after"
-			// }
+			layoutDirection: "vertical",
+			placement: {
+				elementId: "group1",
+				position: "after"
+			}
 		},
 		{
 			id: "group6",
@@ -229,11 +275,11 @@ const dagConfig: FDagConfig = {
 			spacing: {
 				x: 20,
 				y: 20
+			},
+			placement: {
+				elementId: "node8",
+				position: "after"
 			}
-			// placement: {
-			// 	elementId: "node8",
-			// 	position: "after"
-			// }
 		}
 	],
 	spacing: {

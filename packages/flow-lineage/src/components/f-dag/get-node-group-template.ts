@@ -122,6 +122,13 @@ export default function getNodeGroupTemplate(
 						@mousedown=${this.startPlottingLine}
 					></span>`;
 				})}
+				${["right-bottom"].map(side => {
+					return html`<span
+						data-node-id=${g.id}
+						class="expander ${side}"
+						@mousemove=${this.expandGroup}
+					></span>`;
+				})}
 			</f-div>`
 		);
 	}

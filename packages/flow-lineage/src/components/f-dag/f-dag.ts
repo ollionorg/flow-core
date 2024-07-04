@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { FButton, flowElement, FPopover, FRoot } from "@ollion/flow-core";
+import { FButton, FDiv, flowElement, FPopover, FRoot } from "@ollion/flow-core";
 import { injectCss } from "@ollion/flow-core-config";
 import globalStyle from "./f-dag-global.scss?inline";
 import { html, PropertyValueMap, unsafeCSS } from "lit";
@@ -298,6 +298,21 @@ export class FDag extends FRoot {
 				pl.setAttribute("stroke", "var(--color-border-default)");
 				pl.setAttribute("stroke-width", "1px");
 			}
+		}
+	}
+
+	expandGroup(event: MouseEvent) {
+		event.stopPropagation();
+		if (event.buttons === 1) {
+			const groupid = (event.currentTarget as HTMLElement).dataset.nodeId!;
+			const groupObj = this.getElement(groupid);
+
+			groupObj.width! += event.movementX;
+			groupObj.height! += event.movementY;
+
+			const groupElement = (event.currentTarget as HTMLElement).parentElement! as FDiv;
+			groupElement.width = `${groupObj.width!}px`;
+			groupElement.height = `${groupObj.height!}px`;
 		}
 	}
 

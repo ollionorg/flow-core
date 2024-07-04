@@ -11,6 +11,7 @@ import {
 export default function computePlacement(this: FDag) {
 	this.groupsHTML = [];
 	this.nodesHTML = [];
+
 	const { roots: rootNodes, customPlacements } = buildHierarchy(this.config);
 
 	const positionNodes = (

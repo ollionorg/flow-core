@@ -3,7 +3,7 @@ import { html } from "lit";
 
 const nodeTemplate = (node: FDagNode) => {
 	return html`<f-div
-		variant="curved"
+		variant="round"
 		overflow="visible"
 		border="small solid subtle around"
 		align="middle-center"
@@ -112,12 +112,14 @@ const dagConfig: FDagConfig = {
 		{
 			id: "node72",
 			label: "Node 72",
-			icon: "p-prometheus"
+			icon: "p-prometheus",
+			effect: "loading"
 		},
 		{
 			id: "node73",
 			label: "Node 73",
-			icon: "p-opa"
+			icon: "p-opa",
+			effect: "pulse"
 		}
 	],
 	links: [

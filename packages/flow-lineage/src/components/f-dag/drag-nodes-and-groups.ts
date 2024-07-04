@@ -148,6 +148,7 @@ export function updateNodePosition(this: FDag, event: MouseEvent) {
 	const allGroupsAndNodes = this.querySelectorAll<HTMLElement>(`[data-node-type="group"]`);
 	let insideGroup = false;
 	let placedIn: HTMLElement | undefined;
+	const lastGroup = nodeElement.dataset.group;
 	for (let index = 0; index < allGroupsAndNodes.length; index++) {
 		const group = allGroupsAndNodes.item(index);
 		const { top, height, left, width } = group.getBoundingClientRect();
@@ -158,18 +159,18 @@ export function updateNodePosition(this: FDag, event: MouseEvent) {
 			nodeLeft + nodeWidth < left + width
 		) {
 			insideGroup = true;
-			if (nodeElement.dataset.group !== group.getAttribute("id")) placedIn = group;
+			placedIn = group;
 			nodeElement.dataset.group = group.getAttribute("id")!;
 		}
 	}
 
 	if (!insideGroup) {
 		delete nodeElement.dataset.group;
-	} else if (placedIn) {
+	} else if (placedIn && lastGroup !== nodeElement.dataset.group) {
 		placedIn.classList.add("dropped");
 
 		setTimeout(() => {
-			placedIn.classList.remove("dropped");
+			placedIn?.classList.remove("dropped");
 		}, 1000);
 	}
 

@@ -25,10 +25,12 @@ export default function getNodeGroupTemplate(
 				data-group=${ifDefined(n.group)}
 				clickable
 				data-node-type="node"
+				data-effect=${ifDefined(n.effect)}
 				.id=${`${n.id}`}
 				style="z-index:2;transform:translate(${n.x}px, ${n.y}px);visibility:${n.hidden
 					? "hidden"
 					: "visible"}"
+				@click=${this.highlightConnections}
 				@mousemove=${this.dragNode}
 				@mouseup=${this.updateNodePosition}
 				@contextmenu=${this.handleNodeClick}
@@ -74,12 +76,14 @@ export default function getNodeGroupTemplate(
 				.height=${(g.height ?? this.defaultElementHeight) + "px"}
 				.width=${(g.width ?? this.defaultElementWidth) + "px"}
 				data-group=${ifDefined(g.group)}
+				data-effect=${ifDefined(g.effect)}
 				class="dag-node ${g.hidden ? "hidden" : "visible"}"
 				data-node-type="group"
 				border="small solid subtle around"
 				.id=${g.id}
 				direction="column"
 				style="z-index:1;transform:translate(${g.x}px, ${g.y}px);"
+				@click=${this.highlightConnections}
 				@mousemove=${this.dragNode}
 				@mouseup=${this.updateNodePosition}
 			>

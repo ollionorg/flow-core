@@ -21,6 +21,7 @@ export type FDagElement = {
 	group?: string;
 	placement?: CustomPlacement;
 	hidden?: boolean;
+	effect?: "pulse" | "loading";
 } & CoOrdinates;
 
 export type FDagNode = {

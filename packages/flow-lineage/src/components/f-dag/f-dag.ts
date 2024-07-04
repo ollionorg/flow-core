@@ -270,6 +270,37 @@ export class FDag extends FRoot {
 		this.requestUpdate();
 	}
 
+	highlightConnections(event: PointerEvent) {
+		event.stopPropagation();
+		const clickedNodeId = (event.currentTarget as HTMLElement).getAttribute("id");
+		const nodePaths = this.querySelectorAll<SVGPathElement>(
+			`[id^="${clickedNodeId}->"],[id$="->${clickedNodeId}"]`
+		);
+		if (nodePaths.length > 0) {
+			const allPaths = this.querySelectorAll<SVGPathElement>(`.dag-line`);
+			for (const pl of allPaths) {
+				pl.setAttribute("stroke-opacity", "0.4");
+				pl.setAttribute("stroke", "var(--color-border-default)");
+				pl.setAttribute("stroke-width", "1px");
+			}
+
+			// console.log(allPaths);
+
+			nodePaths.forEach(p => {
+				p.setAttribute("stroke", "url(#animate-gradient)");
+				p.setAttribute("stroke-width", "2px");
+				p.setAttribute("stroke-opacity", "1");
+			});
+		} else {
+			const allPaths = this.querySelectorAll<SVGPathElement>(`.dag-line`);
+			for (const pl of allPaths) {
+				pl.setAttribute("stroke-opacity", "1");
+				pl.setAttribute("stroke", "var(--color-border-default)");
+				pl.setAttribute("stroke-width", "1px");
+			}
+		}
+	}
+
 	handleNodeClick(event: PointerEvent) {
 		event.preventDefault();
 		event.stopPropagation();
@@ -297,6 +328,12 @@ export class FDag extends FRoot {
 
 	handleViewPortClick() {
 		this.nodeActions.style.display = "none";
+		const allPaths = this.querySelectorAll<SVGPathElement>(`.dag-line`);
+		for (const pl of allPaths) {
+			pl.setAttribute("stroke-opacity", "1");
+			pl.setAttribute("stroke", "var(--color-border-default)");
+			pl.setAttribute("stroke-width", "1px");
+		}
 	}
 
 	openBulkLinkTo() {

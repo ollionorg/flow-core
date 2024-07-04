@@ -1,3 +1,8 @@
+@keyframes node-bg-spin {
+	to {
+		--border-angle: 1turn;
+	}
+}
 f-dag {
 	display: flex;
 	overflow: auto;
@@ -66,27 +71,27 @@ f-dag {
 			}
 			&.left {
 				right: 100%;
-				top: 0px;
-				height: 100%;
+				top: 10%;
+				height: 80%;
 				width: 8px;
 			}
 			&.right {
 				left: 100%;
-				top: 0px;
-				height: 100%;
+				top: 10%;
+				height: 80%;
 				width: 8px;
 			}
 			&.top {
 				bottom: 100%;
-				left: 0px;
+				left: 10%;
 				height: 8px;
-				width: 100%;
+				width: 80%;
 			}
 			&.bottom {
 				top: 100%;
-				left: 0px;
+				left: 10%;
 				height: 8px;
-				width: 100%;
+				width: 80%;
 			}
 		}
 
@@ -118,6 +123,25 @@ f-dag {
 		&.dropped {
 			box-shadow: 0 0 15px var(--color-primary-default);
 		}
+		&[data-effect="pulse"] > *:not(.circle) {
+			box-shadow: 0 0 0 0 var(--color-danger-default);
+			animation: pulse-danger 2s infinite;
+			background: var(--color-danger-surface);
+
+			@keyframes pulse-danger {
+				0% {
+					box-shadow: 0 0 0 0 var(--color-danger-default);
+				}
+
+				70% {
+					box-shadow: 0 0 0 12px transparent;
+				}
+
+				100% {
+					box-shadow: 0 0 0 0 transparent;
+				}
+			}
+		}
 	}
 	.d-dag-root {
 		cursor: pointer;
@@ -137,6 +161,15 @@ f-dag {
 	.f-link-to {
 		z-index: 12;
 	}
+	// @keyframes dash {
+	// 	to {
+	// 		stroke-dashoffset: 100;
+	// 	}
+	// }
+	// path {
+	// 	stroke-dasharray: 10;
+	// 	animation: dash 5s linear infinite reverse;
+	// }
 }
 
 f-div[direction="column"] {
@@ -152,4 +185,10 @@ f-div[direction="row"] {
 		max-width: 100%;
 		height: 100%;
 	}
+}
+
+@property --border-angle {
+	syntax: "<angle>";
+	inherits: true;
+	initial-value: 0turn;
 }

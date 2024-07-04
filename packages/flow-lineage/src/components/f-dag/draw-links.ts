@@ -145,4 +145,61 @@ export default function drawLinks(this: FDag) {
 		})
 
 		.text("▶");
+
+	const defs = svg.append("defs");
+	const lg = defs
+		.append("linearGradient")
+		.attr("id", "animate-gradient") //unique id for reference
+		.attr("gradientUnits", "userSpaceOnUse")
+		.attr("x1", "0%")
+		.attr("y1", "0%")
+		.attr("x2", "100%")
+		.attr("y2", "100%")
+		.attr("spreadMethod", "reflect");
+
+	const co = [
+		"var(--color-primary-default)",
+		"var(--color-border-default)",
+		"var(--color-border-default)",
+		"var(--color-border-default)",
+		"var(--color-primary-default)",
+		"var(--color-border-default)",
+		"var(--color-border-default)",
+		"var(--color-border-default)",
+		"var(--color-primary-default)",
+		"var(--color-primary-default)",
+		"var(--color-border-default)",
+		"var(--color-border-default)",
+		"var(--color-border-default)",
+		"var(--color-primary-default)",
+		"var(--color-border-default)",
+		"var(--color-border-default)",
+		"var(--color-border-default)",
+		"var(--color-primary-default)"
+	];
+
+	lg.selectAll(".stop")
+		.data(co)
+		.enter()
+		.append("stop")
+		// .attr("offset", function (d, i) { return i / (co.length - 1); })
+		.attr("offset", function (d, i) {
+			return i / (co.length - 1);
+		})
+		.attr("stop-color", function (d) {
+			return d;
+		});
+
+	lg.append("animate")
+		.attr("attributeName", "x1")
+		.attr("values", "0%;200%") //let x1 run to 200% instead of 100%
+		.attr("dur", "4s")
+		.attr("repeatCount", "indefinite");
+	// .attr("begin", '6s');
+
+	lg.append("animate")
+		.attr("attributeName", "x2")
+		.attr("values", "100%;300%") //let x2 run to 300% instead of 200%
+		.attr("dur", "4s")
+		.attr("repeatCount", "indefinite");
 }

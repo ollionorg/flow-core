@@ -8,7 +8,6 @@ const nodeTemplate = (node: FDagNode) => {
 		border="small solid subtle around"
 		align="middle-center"
 		><f-icon .source=${node.icon} size="large"></f-icon>
-		<f-text style="position:absolute;top:calc(100% + 4px);" size="x-small">${node.label}</f-text>
 	</f-div>`;
 };
 

@@ -14,22 +14,7 @@ export function addGroupPopover(this: FDag) {
 
 		this.addGroupPopoverRef.open = false;
 
-		this.config.nodes.forEach(n => {
-			n.x = undefined;
-			n.y = undefined;
-		});
-		this.config.groups.forEach(n => {
-			n.x = undefined;
-			n.y = undefined;
-		});
-
-		this.config.links.forEach(l => {
-			l.from.x = undefined;
-			l.from.y = undefined;
-			l.to.x = undefined;
-			l.to.y = undefined;
-		});
-
+		this.resetPlacements();
 		this.selectedNodes = [];
 		this.addGroupButton.style.display = "none";
 		this.requestUpdate();

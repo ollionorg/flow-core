@@ -68,7 +68,7 @@ export class FDag extends FRoot {
 	 * Holds reference of view port and required elements
 	 */
 	@query(`.dag-view-port`)
-	dagViewPort!: HTMLElement;
+	dagViewPort!: FDiv;
 	@query(`#nodeActions`)
 	nodeActions!: HTMLElement;
 	@query(`.background-pattern`)
@@ -299,6 +299,24 @@ export class FDag extends FRoot {
 				pl.setAttribute("stroke-width", "1px");
 			}
 		}
+	}
+
+	resetPlacements() {
+		this.config.nodes.forEach(n => {
+			n.x = undefined;
+			n.y = undefined;
+		});
+		this.config.groups.forEach(n => {
+			n.x = undefined;
+			n.y = undefined;
+		});
+
+		this.config.links.forEach(l => {
+			l.from.x = undefined;
+			l.from.y = undefined;
+			l.to.x = undefined;
+			l.to.y = undefined;
+		});
 	}
 
 	expandGroup(event: MouseEvent) {

@@ -61,6 +61,13 @@ export default function getNodeGroupTemplate(
 						@mousedown=${this.startPlottingLine}
 					></span>`;
 				})}
+				<f-text
+					class="node-label"
+					style="position:absolute;top:calc(100% + 4px);background:transparent"
+					size="x-small"
+				>
+					${n.label}
+				</f-text>
 			</f-div>`
 		);
 	} else {

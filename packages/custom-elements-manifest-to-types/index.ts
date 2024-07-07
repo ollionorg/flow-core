@@ -103,9 +103,9 @@ function transformSchemaVue3(schema: Package, options: UserOptions, modulePath?:
 	const output = prettier.format(
 		`
         /* eslint-disable */
-        import { DefineComponent } from "@vue/runtime-core";
+        import { DefineComponent } from "vue";
 		${allImports.join("\n")}
-		declare module "@vue/runtime-core" {
+		declare module "vue" {
 			export interface GlobalComponents {
                 ${components.join("\n")}
             }

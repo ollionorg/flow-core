@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.9.15] - 2024-07-08
+
+### Patch Changes
+
+- `vue` component types updated.
+
 ## [2.9.14] - 2024-06-14
 
 ### Bug Fixes

@@ -7,8 +7,12 @@ import {
 import { UserOptions, validateOptions } from "./options";
 import * as prettier from "prettier";
 
-const camelToSnakeCase = (str: string) =>
-	str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
+const camelToSnakeCase = (str: string) => {
+	if (str === "FMDEditor") {
+		return "-f-md-editor";
+	}
+	return str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
+};
 
 export async function transformSchema(
 	schema: Package,
@@ -103,9 +107,9 @@ function transformSchemaVue3(schema: Package, options: UserOptions, modulePath?:
 	const output = prettier.format(
 		`
         /* eslint-disable */
-        import { DefineComponent } from "@vue/runtime-core";
+        import { DefineComponent } from "vue";
 		${allImports.join("\n")}
-		declare module "@vue/runtime-core" {
+		declare module "vue" {
 			export interface GlobalComponents {
                 ${components.join("\n")}
             }

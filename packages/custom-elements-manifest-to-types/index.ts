@@ -7,8 +7,12 @@ import {
 import { UserOptions, validateOptions } from "./options";
 import * as prettier from "prettier";
 
-const camelToSnakeCase = (str: string) =>
-	str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
+const camelToSnakeCase = (str: string) => {
+	if (str === "FMDEditor") {
+		return "-f-md-editor";
+	}
+	return str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
+};
 
 export async function transformSchema(
 	schema: Package,

@@ -1,5 +1,11 @@
 # @ollion/custom-elements-manifest-to-types
 
+## [2.0.5] - 2024-07-08
+
+### Bug fixes
+
+- `vue` type updated.
+
 ## [2.0.3] - 2024-01-05
 
 ### Bug fixes

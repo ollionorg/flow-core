@@ -43,6 +43,7 @@ $sizes: (
 	"x-small": (
 		"height": 20px,
 		"padding": 0px 8px,
+		"options-padding": 0px 4px,
 		"fontSize": 10px,
 		"gap": 4px,
 		"loaderSize": 12px
@@ -50,6 +51,7 @@ $sizes: (
 	"small": (
 		"height": 28px,
 		"padding": 0px 12px,
+		"options-padding": 0px 8px,
 		"fontSize": 12px,
 		"gap": 8px,
 		"loaderSize": 16px
@@ -57,6 +59,7 @@ $sizes: (
 	"medium": (
 		"height": 36px,
 		"padding": 0px 16px,
+		"options-padding": 0px 12px,
 		"fontSize": 14px,
 		"gap": 12px,
 		"loaderSize": 20px
@@ -64,6 +67,7 @@ $sizes: (
 	"large": (
 		"height": 44px,
 		"padding": 0px 20px,
+		"options-padding": 0px 16px,
 		"fontSize": 16px,
 		"gap": 16px,
 		"loaderSize": 24px
@@ -162,7 +166,10 @@ in this case it is `f-button`
 				}
 			}
 		}
-
+		&.has-options {
+			border-top-right-radius: 0px !important;
+			border-bottom-right-radius: 0px !important;
+		}
 		/**
   * Iterating over sizes with padding, fontsize, height
   **/
@@ -178,6 +185,10 @@ in this case it is `f-button`
 				&:not([category="packed"]) {
 					height: map.get($value, "height");
 					padding: map.get($value, "padding");
+				}
+
+				&.has-options {
+					padding-right: map.get($value, "gap") !important;
 				}
 
 				f-counter {
@@ -230,5 +241,66 @@ in this case it is `f-button`
 	button:focus-visible,
 	button:focus {
 		outline: none;
+	}
+
+	.options-wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-sizing: border-box;
+		cursor: pointer;
+		//
+
+		@each $state, $color in $states {
+			&[state="#{$state}"][category="fill"] {
+				background-color: map.get($color, "background");
+				border: 1px solid map.get($color, "background"); // added to match width of outline category
+				border-left: 1px solid var(--color-border-default) !important;
+				// hover changes background
+				&:hover {
+					background-color: map.get($color, "hover");
+					border: 1px solid map.get($color, "hover");
+				}
+			}
+
+			// outline category states styles, where backgrounds are transparent
+			&[state="#{$state}"][category="outline"] {
+				background-color: transparent;
+				border: 1px solid map.get($color, "background");
+				border-left: 1px solid transparent !important;
+				color: map.get($color, "background");
+				&:hover {
+					border: 1px solid map.get($color, "hover");
+					color: map.get($color, "hover");
+				}
+			}
+			//transparent category with transparent background and border
+			&[state="#{$state}"][category="transparent"],
+			&[state="#{$state}"][category="packed"] {
+				background-color: transparent;
+				border: 1px solid transparent;
+				color: map.get($color, "background");
+				&:hover {
+					border: 1px solid transparent;
+					color: map.get($color, "hover");
+				}
+			}
+		}
+
+		@each $size, $value in $sizes {
+			&[size="#{$size}"] {
+				&[variant="round"] {
+					border-top-right-radius: var(--input-border-radius-round);
+					border-bottom-right-radius: var(--input-border-radius-round);
+				}
+				&[category="packed"] {
+					padding: 0px;
+				}
+				&:not([category="packed"]) {
+					height: map.get($value, "height");
+					padding: map.get($value, "options-padding");
+				}
+			}
+		}
 	}
 }

@@ -9,6 +9,7 @@ const alias = [
 	"flow-lineage",
 	"flow-log",
 	"flow-md-editor",
+	"flow-text-editor",
 	"flow-table",
 	"flow-dashboard"
 ].map(pkg => ({

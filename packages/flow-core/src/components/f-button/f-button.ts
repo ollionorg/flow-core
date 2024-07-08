@@ -317,23 +317,38 @@ export class FButton extends FRoot {
 		 * Final html to render
 		 */
 		return html`<span
-			part="f-button-wrapper"
-			class=${classMap({
-				"f-button": true,
-				"custom-loader": this.fill ? true : false,
-				"custom-hover": this.fill && this.category === "fill" ? true : false
-			})}
-			style=${this.applyStyles()}
-			category=${ifDefined(this.category)}
-			size=${ifDefined(this.size)}
-			state=${ifDefined(this.state)}
-			variant=${ifDefined(this.variant)}
-			?loading=${this.loading}
-			?disabled=${this.disabled}
-			data-qa-id=${ifDefined(this.getAttribute("data-qa-element-id")) ?? ""}
-		>
-			${iconLeft}${this.label}${iconRight}${counter}
-		</span>`;
+				part="f-button-wrapper"
+				class=${classMap({
+					"f-button": true,
+					"custom-loader": this.fill ? true : false,
+					"custom-hover": this.fill && this.category === "fill" ? true : false,
+					"has-options": true
+				})}
+				style=${this.applyStyles()}
+				category=${ifDefined(this.category)}
+				size=${ifDefined(this.size)}
+				state=${ifDefined(this.state)}
+				variant=${ifDefined(this.variant)}
+				?loading=${this.loading}
+				?disabled=${this.disabled}
+				data-qa-id=${ifDefined(this.getAttribute("data-qa-element-id")) ?? ""}
+			>
+				${iconLeft}${this.label}${iconRight}${counter}
+			</span>
+			<div
+				class="options-wrapper"
+				category=${ifDefined(this.category)}
+				size=${ifDefined(this.size)}
+				state=${ifDefined(this.state)}
+				variant=${ifDefined(this.variant)}
+			>
+				<f-icon
+					class=${classMap({ ...iconClasses })}
+					.state=${this.state}
+					.size=${this.iconSize}
+					source="i-chevron-down"
+				></f-icon>
+			</div>`;
 	}
 
 	protected updated(changedProperties: PropertyValues) {

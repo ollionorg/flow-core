@@ -2,6 +2,13 @@
 
 # Change Log
 
+## [2.1.1] - 2024-07-08
+
+### Patch Changes
+
+- `f-md-editor` type fixed.
+- `vue` component types updated.
+
 ## [2.1.0] - 2023-11-27
 
 ### Minor Changes

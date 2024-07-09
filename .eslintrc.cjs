@@ -56,7 +56,7 @@ module.exports = {
 			},
 			rules: {
 				"@typescript-eslint/unbound-method": "off",
-
+				"@typescript-eslint/no-unnecessary-type-assertion": "off",
 				//@todo Remove individiual rules and fix them
 				"@typescript-eslint/no-unsafe-member-access": "off",
 				"@typescript-eslint/no-explicit-any": "off",

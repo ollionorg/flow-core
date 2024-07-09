@@ -260,6 +260,7 @@ export class FTimeseriesChart extends FRoot {
 					height="hug-content"
 					max-width="320px"
 					class="f-chart-tooltip hide"
+					data-theme="f-dark"
 					${ref(this.chartTooltip)}
 				></f-div>
 			</f-div>

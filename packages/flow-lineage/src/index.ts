@@ -1,5 +1,8 @@
 export * from "./components/f-lineage/f-lineage";
 export * from "./components/f-lineage/lineage-types";
+export * from "./components/f-dag/f-dag";
+export * from "./components/f-dag/types";
+
 import { version } from "./../package.json";
 
 console.log(

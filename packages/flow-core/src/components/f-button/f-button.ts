@@ -1,4 +1,11 @@
-import { html, PropertyValueMap, PropertyValues, unsafeCSS } from "lit";
+import {
+	html,
+	HTMLTemplateResult,
+	nothing,
+	PropertyValueMap,
+	PropertyValues,
+	unsafeCSS
+} from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import eleStyle from "./f-button.scss?inline";
@@ -16,6 +23,9 @@ import { FCounter } from "../f-counter/f-counter";
 import { flowElement } from "./../../utils";
 import { injectCss } from "@ollion/flow-core-config";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { FPopover } from "../f-popover/f-popover";
+import { FDiv } from "../f-div/f-div";
+import { FText } from "../f-text/f-text";
 
 export type FButtonState =
 	| "primary"
@@ -27,6 +37,8 @@ export type FButtonState =
 	| `custom, ${string}`;
 
 injectCss("f-button", globalStyle);
+
+export type FButtonAction = string | (() => HTMLTemplateResult);
 
 /**
  * @summary Buttons allow users to perform an action or to initiate a new function.
@@ -40,7 +52,10 @@ export class FButton extends FRoot {
 		unsafeCSS(eleStyle),
 		unsafeCSS(globalStyle),
 		...FIcon.styles,
-		...FCounter.styles
+		...FCounter.styles,
+		...FDiv.styles,
+		...FPopover.styles,
+		...FText.styles
 	];
 
 	/**
@@ -110,6 +125,18 @@ export class FButton extends FRoot {
 	disabled?: boolean = false;
 
 	/**
+	 * @attribute actions are used to display if single button can do multiple actions
+	 */
+	@property({ reflect: true, type: Array })
+	actions?: FButtonAction[] = [];
+
+	/**
+	 * @attribute to show which action is currently selected
+	 */
+	@property({ reflect: true, type: String, attribute: "selected-action" })
+	selectedAction?: FButtonAction;
+
+	/**
 	 * @attribute Set true if want to wrap content if there is no space in button
 	 */
 	@property({ reflect: true, type: Boolean, attribute: "label-wrap" })
@@ -120,6 +147,11 @@ export class FButton extends FRoot {
 	 */
 	@query("f-icon")
 	iconElement!: FIcon;
+	/**
+	 * icon element reference
+	 */
+	@query("#f-button-actions")
+	buttonActionsPopover?: FPopover;
 
 	/**
 	 * counter element reference
@@ -212,6 +244,10 @@ export class FButton extends FRoot {
 		this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
 	}
 
+	get hasActions() {
+		return this.actions && this.actions.length > 0;
+	}
+
 	render() {
 		/**
 		 * creating local fill variable out of state prop.
@@ -251,7 +287,7 @@ export class FButton extends FRoot {
 					.size=${this.iconSize}
 					clickable
 			  ></f-icon>`
-			: "";
+			: nothing;
 		/**
 		 * create iconRight if available
 		 */
@@ -288,7 +324,7 @@ export class FButton extends FRoot {
 					.label=${this.counter}
 					class=${classMap(counterClasses)}
 			  ></f-counter>`
-			: "";
+			: nothing;
 		/**
 		 * render loading if required
 		 */
@@ -322,7 +358,7 @@ export class FButton extends FRoot {
 					"f-button": true,
 					"custom-loader": this.fill ? true : false,
 					"custom-hover": this.fill && this.category === "fill" ? true : false,
-					"has-options": true
+					"has-options": this.hasActions ? true : false
 				})}
 				style=${this.applyStyles()}
 				category=${ifDefined(this.category)}
@@ -335,20 +371,88 @@ export class FButton extends FRoot {
 			>
 				${iconLeft}${this.label}${iconRight}${counter}
 			</span>
-			<div
-				class="options-wrapper"
-				category=${ifDefined(this.category)}
-				size=${ifDefined(this.size)}
-				state=${ifDefined(this.state)}
-				variant=${ifDefined(this.variant)}
-			>
-				<f-icon
-					class=${classMap({ ...iconClasses })}
-					.state=${this.state}
-					.size=${this.iconSize}
-					source="i-chevron-down"
-				></f-icon>
-			</div>`;
+			${this.hasActions
+				? html` <div
+							class="options-wrapper"
+							category=${ifDefined(this.category)}
+							size=${ifDefined(this.size)}
+							state=${ifDefined(this.state)}
+							variant=${ifDefined(this.variant)}
+							@click=${this.handleButtonActions}
+						>
+							<f-icon
+								class=${classMap({ ...iconClasses })}
+								.state=${this.state}
+								.size=${this.iconSize}
+								source="i-chevron-down"
+							></f-icon>
+						</div>
+						<f-popover
+							@overlay-click=${this.closeButtonActions}
+							size="small"
+							id="f-button-actions"
+							placement="bottom-start"
+							.overlay=${false}
+						>
+							<f-div direction="column" stat="secondary" overflow="scroll">
+								${this.actions!.map((a, ai) => {
+									const border = (() => {
+										if (ai === this.actions!.length - 1) {
+											return "none";
+										}
+										return "small solid secondary bottom";
+									})();
+									return html`<f-div
+										.border=${border}
+										align="middle-left"
+										gap="auto"
+										clickable
+										@click=${() => this.selectAction(a)}
+									>
+										${typeof a === "function"
+											? a()
+											: html`<f-div padding="medium" align="middle-left"
+													><f-text>${a}</f-text></f-div
+											  >`}
+										${this.selectedAction === a
+											? html`<f-icon source="i-tick" style="margin-right:12px;"></f-icon>`
+											: nothing}
+									</f-div>`;
+								})}
+							</f-div>
+						</f-popover>`
+				: nothing} `;
+	}
+
+	selectAction(action: FButtonAction) {
+		this.selectedAction = action;
+		this.closeButtonActions();
+
+		const event = new CustomEvent<{ action: FButtonAction }>("action", {
+			detail: {
+				action
+			},
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(event);
+	}
+	handleButtonActions() {
+		if (this.buttonActionsPopover) {
+			this.buttonActionsPopover.target = this;
+			this.buttonActionsPopover.offset = {
+				mainAxis: 4,
+				crossAxis: 0,
+				alignmentAxis: 0
+			};
+			this.buttonActionsPopover.open = true;
+		}
+	}
+
+	closeButtonActions() {
+		if (this.buttonActionsPopover) {
+			this.buttonActionsPopover.open = false;
+		}
 	}
 
 	protected updated(changedProperties: PropertyValues) {

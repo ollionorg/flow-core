@@ -10,7 +10,7 @@ export default defineConfig({
 			entry: "src/index.ts",
 			name: "flow-text-editor",
 			fileName: format => `flow-text-editor.${format}.js`,
-			formats: ["es"]
+			formats: ["es", "cjs"]
 		},
 		rollupOptions: {
 			// If we want to publish standalone components we don't externalize lit,

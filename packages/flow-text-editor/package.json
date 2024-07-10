@@ -3,14 +3,14 @@
   "version": "0.0.1",
   "description": "Code editor component for flow library",
   "module": "dist/flow-text-editor.es.js",
-  "main": "dist/flow-text-editor.es.js",
+  "main": "dist/flow-text-editor.cjs.js",
   "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "bash ./compile.sh",
     "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
     "analyze:watch": "cem analyze --litelement --globs \"src/**/*.ts\" --watch",
-    "test": "web-test-runner ./src/**/*.test.ts --node-resolve --port 8094"
+    "test": "web-test-runner ./src/**/*.test.ts --node-resolve --port 8096"
   },
   "keywords": [
     "web-components",

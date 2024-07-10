@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.10.0] - 2024-07-10
+
+### Minor Changes
+
+- `actions` property added in `f-button`, it will be displayed under chevron
+
 ## [2.9.15] - 2024-07-08
 
 ### Patch Changes

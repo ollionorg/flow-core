@@ -11,6 +11,7 @@ import "@ollion/flow-log";
 import "@ollion/flow-code-editor";
 import "@ollion/flow-table";
 import "@ollion/flow-md-editor";
+import "@ollion/flow-text-editor";
 import "@ollion/flow-form-builder";
 import "@ollion/flow-lineage";
 import "@ollion/flow-dashboard";
@@ -64,6 +65,8 @@ export const parameters = {
 					"flow-lineage",
 					["About", "Release Notes", "Properties", "*", "Examples", "Debug"],
 					"flow-code-editor",
+					["About", "Release Notes"],
+					"flow-text-editor",
 					["About", "Release Notes"],
 					"flow-md-editor",
 					["About", "Release Notes"],
@@ -134,6 +137,10 @@ async function run() {
 		await fetch(new URL("../packages/flow-md-editor/custom-elements.json", import.meta.url))
 	).json();
 
+	const textEditorCustomElements = await (
+		await fetch(new URL("../packages/flow-text-editor/custom-elements.json", import.meta.url))
+	).json();
+
 	setCustomElementsManifest(customElements);
 	setCustomElements(customElements);
 	setCustomElementsManifest(loggerCustomElements);
@@ -146,6 +153,8 @@ async function run() {
 
 	setCustomElementsManifest(mdEditorCustomElements);
 	setCustomElements(mdEditorCustomElements);
+	setCustomElementsManifest(textEditorCustomElements);
+	setCustomElements(textEditorCustomElements);
 	setCustomElementsManifest(dashboardCustomElements);
 	setCustomElements(dashboardCustomElements);
 }

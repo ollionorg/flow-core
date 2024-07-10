@@ -2,6 +2,7 @@ import { html } from "lit-html";
 import fButtonAnatomy from "../svg/i-fbutton-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { createRef, ref } from "lit/directives/ref.js";
+import type { FButton } from "@ollion/flow-core";
 
 export default {
 	title: "@ollion/flow-core/f-button",
@@ -14,10 +15,10 @@ export default {
 };
 
 export const Playground = {
-	render: args => {
-		const fieldRef = createRef();
+	render: (args: Record<string, any>) => {
+		const fieldRef = createRef<FButton>();
 
-		const handleClick = event => {
+		const handleClick = (event: Event) => {
 			console.log(event);
 		};
 
@@ -26,6 +27,12 @@ export const Playground = {
 				fieldRef.value.tooltip = undefined;
 			}
 		}, 2000);
+
+		const handleAction = (event: CustomEvent) => {
+			if (fieldRef.value) {
+				fieldRef.value.label = event.detail.action;
+			}
+		};
 
 		return html` <f-div padding="none">
 			<f-button
@@ -40,9 +47,12 @@ export const Playground = {
 				.counter=${args.counter}
 				.loading=${args.loading}
 				.disabled=${args.disabled}
+				.actions=${args.actions}
+				.selectedAction=${args["selected-action"]}
 				tooltip="Tooltip for button"
 				.label-wrap=${args["label-wrap"]}
 				@click=${handleClick}
+				@action=${handleAction}
 			></f-button
 		></f-div>`;
 	},
@@ -99,7 +109,12 @@ export const Playground = {
 		counter: {
 			control: "text"
 		},
-
+		actions: {
+			control: "object"
+		},
+		["selected-action"]: {
+			control: "text"
+		},
 		loading: {
 			control: "boolean"
 		},
@@ -122,6 +137,8 @@ export const Playground = {
 		["icon-left"]: undefined,
 		["icon-right"]: undefined,
 		counter: undefined,
+		actions: ["Merge", "Squash and merge", "Rebase and merge"],
+		["selected-action"]: "Merge",
 		loading: false,
 		disabled: false,
 		["label-wrap"]: false
@@ -134,7 +151,7 @@ export const Anatomy = {
 };
 
 export const Variant = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="x-large" padding="x-large" align="middle-center">
 			<f-button variant="round" label="Round"></f-button>
 			<f-button variant="curved" label="Curved"></f-button>
@@ -145,7 +162,7 @@ export const Variant = {
 };
 
 export const Category = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="x-large" padding="x-large" align="middle-center">
 			<f-button label="Fill" category="fill"></f-button>
 			<f-button label="Outline" category="outline"></f-button>
@@ -157,7 +174,7 @@ export const Category = {
 };
 
 export const Size = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="x-large" padding="x-large" align="middle-center">
 			<f-button size="large" label="Large"></f-button>
 			<f-button size="medium" label="Medium"></f-button>
@@ -169,7 +186,7 @@ export const Size = {
 };
 
 export const State = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="column">
 			<f-div padding="none" gap="x-large">
 				<f-button category="fill" label="Primary" state="primary"></f-button>
@@ -212,7 +229,7 @@ export const State = {
 };
 
 export const Label = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="column" align="middle-center">
 			<f-button label="label"></f-button>
 		</f-div>`,
@@ -221,7 +238,7 @@ export const Label = {
 };
 
 export const IconLeft = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="column" align="middle-center">
 			<f-button label="icon left" icon-left="i-plus"></f-button>
 		</f-div>`,
@@ -230,7 +247,7 @@ export const IconLeft = {
 };
 
 export const IconRight = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="row" align="middle-center">
 			<f-button label="icon right" icon-right="i-plus"></f-button>
 			<f-button label="icon left-right" icon-right="i-plus" icon-left="💰"></f-button>
@@ -240,7 +257,7 @@ export const IconRight = {
 };
 
 export const Counter = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="row" align="middle-center">
 			<f-button label="Label" counter="88"></f-button>
 			<f-button label="Label" icon-left="i-plus" counter="88"></f-button>
@@ -250,30 +267,119 @@ export const Counter = {
 	name: "counter"
 };
 
+export const Actions = {
+	render: () => {
+		const actions = ["Merge", "Squash and merge", "Rebase and merge"];
+
+		const mergeTemplate = () =>
+			html`<f-div direction="column">
+				<f-div padding="medium" gap="small" align="middle-left">
+					<f-icon source="i-enter"></f-icon>
+					<f-text>Merge</f-text>
+				</f-div>
+				<f-div padding="none medium medium medium">
+					<f-text state="secondary" size="x-small"
+						>In hac habitasse platea dictumst. Nunc gravida lacus in nulla euismod, eget varius enim
+						mattis.</f-text
+					>
+				</f-div>
+			</f-div>`;
+		const sqAndMergeTemplate = () =>
+			html`<f-div direction="column">
+				<f-div padding="medium" gap="small" align="middle-left">
+					<f-icon source="i-collapse"></f-icon>
+					<f-text>Squash and merge</f-text>
+				</f-div>
+				<f-div padding="none medium medium medium">
+					<f-text state="secondary" size="x-small"
+						>In hac habitasse platea dictumst. Nunc gravida lacus in nulla euismod, eget varius enim
+						mattis.</f-text
+					>
+				</f-div>
+			</f-div>`;
+		const rbAndMergeTemplate = () =>
+			html`<f-div direction="column">
+				<f-div padding="medium" gap="small" align="middle-left">
+					<f-icon source="i-reload"></f-icon>
+					<f-text>Rebase and merge</f-text>
+				</f-div>
+				<f-div padding="none medium medium medium">
+					<f-text state="secondary" size="x-small"
+						>In hac habitasse platea dictumst. Nunc gravida lacus in nulla euismod, eget varius enim
+						mattis.</f-text
+					>
+				</f-div>
+			</f-div>`;
+		const templateActions = [mergeTemplate, sqAndMergeTemplate, rbAndMergeTemplate];
+		return html`<f-div gap="large" padding="x-large" direction="row" align="middle-center">
+			<f-button label="Array Of String" .actions=${actions}></f-button>
+			<f-button label="Array Of Template" .actions=${templateActions}></f-button>
+		</f-div>`;
+	},
+	name: "actions"
+};
+
+export const SelectedAction = {
+	render: () => {
+		const actions = ["Merge", "Squash and merge", "Rebase and merge"];
+
+		return html`<f-div gap="large" padding="x-large" direction="row" align="middle-center">
+			<f-button label="Merge" .actions=${actions} selected-action="Merge"></f-button>
+		</f-div>`;
+	},
+	name: "selected-action"
+};
+
+export const Action = {
+	render: () => {
+		const actions = ["Merge", "Squash and merge", "Rebase and merge"];
+		const fieldRef = createRef<FButton>();
+		const handleAction = (event: CustomEvent) => {
+			if (fieldRef.value) {
+				fieldRef.value.label = event.detail.action;
+			}
+		};
+		return html`<f-div gap="large" padding="x-large" align="middle-center" direction="column">
+			<f-text state="warning"
+				>'action' event emitted when action is selected, In following example we are updating label
+				when action is selected.</f-text
+			>
+			<f-button
+				${ref(fieldRef)}
+				@action=${handleAction}
+				label="Merge"
+				.actions=${actions}
+				selected-action="Merge"
+			></f-button>
+		</f-div>`;
+	},
+	name: "@action"
+};
+
 export const Flags = {
-	render: args =>
+	render: () =>
 		html`<f-div gap="large" padding="x-large" direction="column">
 			<f-div height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">Loading</f-text>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large">
 				<f-button label="label"></f-button>
-				<f-button label="label" loading=${true}></f-button>
+				<f-button label="label" ?loading=${true}></f-button>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large">
 				<f-button label="label" icon-left="i-plus"></f-button>
-				<f-button label="label" loading=${true} icon-left="i-plus"></f-button>
+				<f-button label="label" ?loading=${true} icon-left="i-plus"></f-button>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large">
 				<f-button label="label" icon-right="i-plus"></f-button>
-				<f-button label="label" loading=${true} icon-right="i-plus"></f-button>
+				<f-button label="label" ?loading=${true} icon-right="i-plus"></f-button>
 			</f-div>
 			<f-div height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium">Disabled</f-text>
 			</f-div>
 			<f-div padding="none" direction="row" gap="x-large">
 				<f-button label="label"></f-button>
-				<f-button label="label" disabled=${true}></f-button>
+				<f-button label="label" ?disabled=${true}></f-button>
 			</f-div>
 			<f-div height="hug-content" padding="none">
 				<f-text variant="para" size="large" weight="medium"

@@ -39,6 +39,7 @@ export type FButtonState =
 injectCss("f-button", globalStyle);
 
 export type FButtonAction = string | (() => HTMLTemplateResult);
+export type FButtonActions = FButtonAction[];
 
 /**
  * @summary Buttons allow users to perform an action or to initiate a new function.
@@ -128,7 +129,7 @@ export class FButton extends FRoot {
 	 * @attribute actions are used to display if single button can do multiple actions
 	 */
 	@property({ reflect: false, type: Array })
-	actions?: FButtonAction[] = [];
+	actions?: FButtonActions = [];
 
 	/**
 	 * @attribute to show which action is currently selected

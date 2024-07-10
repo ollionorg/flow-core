@@ -108,6 +108,7 @@ export class FTextEditor extends FRoot {
 			this.quillInstance = new Quill(this.editorRoot.value, {
 				theme: "snow",
 				placeholder: this.placeholder,
+				readOnly: this.readOnly,
 				modules: {
 					toolbar: this.toolbar
 				}

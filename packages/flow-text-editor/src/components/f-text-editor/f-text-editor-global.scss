@@ -167,6 +167,87 @@ f-text-editor {
 	.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
 		fill: var(--color-primary-default);
 	}
+
+	strong {
+		font-weight: bold;
+	}
+	em {
+		font-style: italic;
+	}
+	u {
+		text-decoration: underline;
+	}
+	s {
+		text-decoration: line-through;
+	}
+	blockquote {
+		border-left: 4px solid var(--color-border-default);
+		margin-bottom: 5px;
+		margin-top: 5px;
+		padding-left: 16px;
+	}
+	.ql-snow .ql-editor {
+		h1 {
+			font-size: 20px;
+			font-weight: bold;
+			line-height: 30px;
+		}
+
+		h2 {
+			font-size: 18px;
+			font-weight: bold;
+			line-height: 27px;
+		}
+
+		h3 {
+			font-size: 16px;
+			font-weight: bold;
+			line-height: 24px;
+		}
+	}
+	ol {
+		list-style-type: decimal;
+		li {
+			counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+			counter-increment: list-0;
+			list-style-type: none;
+			&:before {
+				margin-left: -1.5em;
+				margin-right: 0.3em;
+				text-align: right;
+				content: counter(list-0, decimal) ". ";
+				display: inline-block;
+				white-space: nowrap;
+				width: 1.2em;
+			}
+		}
+	}
+	ul {
+		padding-left: 1.5em;
+		margin: 0;
+		padding: 0;
+		counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+		li {
+			list-style-type: none;
+			&:before {
+				margin-left: -1.5em;
+				margin-right: 0.3em;
+				text-align: right;
+				content: "\2022";
+				display: inline-block;
+				white-space: nowrap;
+				width: 1.2em;
+			}
+		}
+	}
+	.ql-snow .ql-editor pre.ql-syntax,
+	pre.ql-syntax {
+		background-color: var(--color-surface-secondary);
+		white-space: pre-wrap;
+		margin-bottom: 5px;
+		margin-top: 5px;
+		padding: 5px 10px;
+	}
 }
 
 f-div[direction="column"] {

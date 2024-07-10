@@ -2,6 +2,13 @@
 
 # Change Log
 
+## [2.1.2] - 2024-07-08
+
+### Patch Changes
+
+- `f-md-editor` stories added.
+- minor css changes when used inside `f-div`.
+
 ## [2.1.1] - 2024-07-08
 
 ### Patch Changes

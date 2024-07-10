@@ -12,7 +12,7 @@ export default {
 
 export const Playground = {
 	render: (args: Record<string, any>) => {
-		const handleInput = function (ev: Event) {
+		const handleInput = function (ev: CustomEvent) {
 			console.log(ev);
 		};
 
@@ -38,7 +38,7 @@ export const Playground = {
 	},
 
 	args: {
-		value: `Hello World!`,
+		value: `<h1>Hello World!</h1>`,
 		placeholder: `Enter rich text here...`
 	}
 };

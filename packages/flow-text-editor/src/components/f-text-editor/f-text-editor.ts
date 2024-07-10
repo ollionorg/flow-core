@@ -31,6 +31,8 @@ export type FTextEditorToolbarAction =
 	| { color: string[] }
 	| { background: string[] }
 	| { align: ("left" | "center" | "right" | "justify")[] };
+
+export type FTextEditorToolbar = FTextEditorToolbarAction[] | FTextEditorToolbarAction[][];
 @flowElement("f-text-editor")
 export class FTextEditor extends FRoot {
 	/**
@@ -67,13 +69,7 @@ export class FTextEditor extends FRoot {
 	 * @attribute toolbar to be displayed on top
 	 */
 	@property({ reflect: true, type: String })
-	toolbar?: FTextEditorToolbarAction[] | FTextEditorToolbarAction[][] = [
-		"bold",
-		"italic",
-		"underline",
-		"strike",
-		"link"
-	];
+	toolbar?: FTextEditorToolbar = ["bold", "italic", "underline", "strike", "link"];
 
 	editorRoot = createRef<HTMLDivElement>();
 

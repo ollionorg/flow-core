@@ -127,7 +127,7 @@ export class FButton extends FRoot {
 	/**
 	 * @attribute actions are used to display if single button can do multiple actions
 	 */
-	@property({ reflect: true, type: Array })
+	@property({ reflect: false, type: Array })
 	actions?: FButtonAction[] = [];
 
 	/**

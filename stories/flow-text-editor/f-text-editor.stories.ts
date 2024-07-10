@@ -16,8 +16,13 @@ export const Playground = {
 			console.log(ev);
 		};
 
-		return html`<f-div padding="x-large" height="100%">
-			<f-text-editor .value=${args.value} .mode=${args.mode} @input=${handleInput}></f-text-editor>
+		return html`<f-div height="100%">
+			<f-text-editor
+				.placeholder=${args.placeholder}
+				.value=${args.value}
+				.mode=${args.mode}
+				@input=${handleInput}
+			></f-text-editor>
 		</f-div>`;
 	},
 
@@ -26,10 +31,14 @@ export const Playground = {
 	argTypes: {
 		value: {
 			control: "text"
+		},
+		placeholder: {
+			control: "text"
 		}
 	},
 
 	args: {
-		value: `Hello World!`
+		value: `Hello World!`,
+		placeholder: `Enter rich text here...`
 	}
 };

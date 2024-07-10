@@ -1,11 +1,34 @@
-import { unsafeCSS, html } from "lit";
+import { unsafeCSS, html, PropertyValues } from "lit";
 import { FRoot, flowElement } from "@ollion/flow-core";
 import globalStyle from "./f-text-editor-global.scss?inline";
 import { FTextArea } from "@ollion/flow-core";
 import { property } from "lit/decorators.js";
 import { injectCss } from "@ollion/flow-core-config";
+import { createRef, ref } from "lit-html/directives/ref.js";
+import Quill from "quill";
 
 injectCss("f-text-editor", globalStyle);
+
+export type FTextEditorToolbarAction =
+	| "bold"
+	| "italic"
+	| "underline"
+	| "strike"
+	| "blockquote"
+	| "code-block"
+	| "link"
+	| "image"
+	| "video"
+	| "formula"
+	| { header: (1 | 2 | 3 | 4 | 5 | 6 | false)[] | 1 | 2 | 3 | 4 | 5 | 6 }
+	| { list: "ordered" | "bullet" | "check" }
+	| { script: "super" | "sub" }
+	| { indent: "-1" | "+1" }
+	| { direction: "rtl" }
+	| { size: "small" | false | "large" | "huge" }
+	| { color: string[] }
+	| { background: string[] }
+	| { align: ("left" | "center" | "right" | "justify")[] };
 @flowElement("f-text-editor")
 export class FTextEditor extends FRoot {
 	/**
@@ -18,13 +41,79 @@ export class FTextEditor extends FRoot {
 	 */
 	@property({ reflect: false, type: String })
 	value?: string;
+	/**
+	 * @attribute value to be inserted in text-area.
+	 */
+	@property({ reflect: true, type: String })
+	placeholder?: string;
+
+	/**
+	 * @attribute to make read-only
+	 */
+	@property({ reflect: true, type: Boolean, attribute: "read-only" })
+	readOnly?: boolean;
+
+	set ["read-only"](val: boolean) {
+		this.readOnly = val;
+	}
+
+	/**
+	 * @attribute toolbar to be displayed on top
+	 */
+	@property({ reflect: true, type: String })
+	toolbar?: FTextEditorToolbarAction[] | FTextEditorToolbarAction[][] = [
+		"bold",
+		"italic",
+		"underline",
+		"strike",
+		"link"
+	];
+
+	editorRoot = createRef<HTMLDivElement>();
+
+	quillInstance?: Quill;
 
 	createRenderRoot() {
 		return this;
 	}
 
 	render() {
-		return html`<f-text>This is text editor</f-text>`;
+		return html`<div
+			${ref(this.editorRoot)}
+			@input=${(ev: InputEvent) => ev.stopPropagation()}
+			class="f-text-editor-root"
+		>
+			${this.value}
+		</div>`;
+	}
+
+	protected updated(changedProperties: PropertyValues): void {
+		super.updated(changedProperties);
+
+		if (this.editorRoot.value) {
+			this.quillInstance = new Quill(this.editorRoot.value, {
+				theme: "snow",
+				placeholder: this.placeholder,
+				modules: {
+					toolbar: this.toolbar
+				}
+			});
+
+			this.quillInstance.on("editor-change", (eventName, ...args) => {
+				const event = new CustomEvent<{
+					value: string;
+					quillMeta: { eventName: string; args: unknown };
+				}>("input", {
+					detail: {
+						value: this.quillInstance?.root.innerHTML ?? "",
+						quillMeta: { eventName, args }
+					},
+					bubbles: true,
+					composed: true
+				});
+				this.dispatchEvent(event);
+			});
+		}
 	}
 }
 

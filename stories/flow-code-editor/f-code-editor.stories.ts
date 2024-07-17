@@ -1,5 +1,4 @@
 import { html } from "lit-html";
-import { useArgs, useState } from "@storybook/client-api";
 
 export default {
 	title: "@ollion/flow-code-editor/f-code-editor",
@@ -11,13 +10,79 @@ export default {
 	}
 };
 
+const code = `# Variables
+variable "instance_type" {
+  description = "The type of EC2 instance to launch"
+    default = "t2.micro"
+  validation {
+    condition     = var.web_instance_count > 1
+    error_message = "This application requires at least two web instances."
+  }
+}
+
+# Providers
+provider "aws" {
+  region = "us-west-2"
+}
+
+# Resources
+    resource "aws_instance" "example" {
+  ami           = "ami-abc123"
+  instance_type = var.instance_type
+
+  tags = {
+    Name = "ExampleInstance"
+  }
+}
+
+resource "aws_s3_bucket" "example_bucket" {
+  bucket = "example-bucket-name"
+  acl    = "private"
+
+  tags = {
+    Name        = "ExampleBucket"
+    Environment = "Production"
+  }
+}
+
+# Data Sources
+data "aws_ami" "example_ami" {
+  most_recent = true
+  owners      = ["self"]
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+}
+
+# Outputs
+output "instance_public_ip" {
+  value = aws_instance.example.public_ip
+}
+
+output "bucket_name" {
+  value = aws_s3_bucket.example_bucket.bucket
+}
+
+# Locals
+locals {
+  example_local = "This is a local value"
+}
+
+# Modules (Example usage, module content not defined here)
+module "example_module" {
+  source = "./modules/example"
+  var1   = "value1"
+  var2   = "value2"
+}
+`.trim();
+
 export const Playground = {
 	// updateArgs({ code: ev.detail.value });
-	render: args => {
-		const [_, updateArgs] = useArgs();
-
-		const handleInput = function (ev) {
-			console.log(ev);
+	render: (args: Record<string, any>) => {
+		const handleInput = function (ev: Event) {
+			//console.log(ev);
 		};
 
 		return html`<f-div padding="x-large" height="100%">
@@ -86,33 +151,20 @@ export const Playground = {
 	},
 
 	args: {
-		code: `%TAG ! tag:clarkevans.com,2002:
---- !shape
-  # Use the ! handle for presenting
-  # tag:clarkevans.com,2002:circle
-- !circle
-  center: &ORIGIN {x: 73, y: 129}
-  radius: 7
-- !line
-  start: *ORIGIN
-  finish: { x: 89, y: 102 }
-- !label
-  start: *ORIGIN
-  color: 0xFFEEBB
-  text: Pretty vector drawing.`,
+		code: code,
 
 		title: "",
 		comments: false,
 		["copy-button"]: false,
 		["show-line-numbers"]: false,
 		state: "default",
-		language: "scala",
+		language: "hcl",
 		["read-only"]: false
 	}
 };
 
 export const Code = {
-	render: args => {
+	render: (args: Record<string, any>) => {
 		return html`
 			<f-div padding="x-large" height="100%">
 				<f-code-editor .code=${args.code} .language=${args.language}></f-code-editor>
@@ -144,11 +196,11 @@ export const Code = {
 };
 
 export const Title = {
-	render: args => {
-		const [value, setValue] = useState("");
+	render: (args: Record<string, any>) => {
+		const value = "";
 
-		const handleInput = e => {
-			setValue(e.detail.value);
+		const handleInput = (e: CustomEvent) => {
+			console.log("event.detail.value", e.detail.value);
 		};
 
 		return html`
@@ -199,11 +251,11 @@ export const Title = {
 };
 
 export const Comments = {
-	render: args => {
-		const [value, setValue] = useState(true);
+	render: (args: Record<string, any>) => {
+		const value = true;
 
-		const handleInput = e => {
-			setValue(e.detail.value);
+		const handleInput = (e: CustomEvent) => {
+			console.log("e.detail.value", e.detail.value);
 		};
 
 		return html`
@@ -255,11 +307,11 @@ function add(a, b) {
 };
 
 export const CopyButton = {
-	render: args => {
-		const [value, setValue] = useState(true);
+	render: (args: Record<string, any>) => {
+		const value = true;
 
-		const handleInput = e => {
-			setValue(e.detail.value);
+		const handleInput = (e: CustomEvent) => {
+			console.log("e.detail.value", e.detail.value);
 		};
 
 		return html`
@@ -312,11 +364,11 @@ function add(a, b) {
 };
 
 export const ShowLineNumbers = {
-	render: args => {
-		const [value, setValue] = useState(true);
+	render: (args: Record<string, any>) => {
+		const value = true;
 
-		const handleInput = e => {
-			setValue(e.detail.value);
+		const handleInput = (e: CustomEvent) => {
+			console.log("e.detail.value", e.detail.value);
 		};
 
 		return html`
@@ -366,12 +418,12 @@ function add(a, b) {
 };
 
 export const State = {
-	render: args => {
-		const [value, setValue] = useState("default");
+	render: (args: Record<string, any>) => {
+		const value = "default";
 		const options = ["default", "secondary", "subtle"];
 
-		const handleInput = e => {
-			setValue(e.detail.value);
+		const handleInput = (e: CustomEvent) => {
+			console.log("e.detail.value", e.detail.value);
 		};
 
 		return html`
@@ -419,7 +471,7 @@ function add(a, b) {
 };
 
 export const Language = {
-	render: args => {
+	render: (args: Record<string, any>) => {
 		return html`
 			<f-div padding="x-large" height="100%">
 				<f-code-editor .code=${args.code} .language=${args.language}></f-code-editor>
@@ -451,11 +503,11 @@ export const Language = {
 };
 
 export const ReadOnly = {
-	render: args => {
-		const [value, setValue] = useState(false);
+	render: (args: Record<string, any>) => {
+		const value = false;
 
-		const handleInput = e => {
-			setValue(e.detail.value);
+		const handleInput = (e: CustomEvent) => {
+			console.log("e.detail.value", e.detail.value);
 		};
 
 		return html`

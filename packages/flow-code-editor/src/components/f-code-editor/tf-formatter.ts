@@ -1,7 +1,7 @@
 export function format(hclCode: string): string {
 	let formattedCode = "";
 	let indentLevel = 0;
-	hclCode = hclCode.replace(/ /g, " ");
+
 	const lines = hclCode.split("\n");
 	let keyValues: string[] = [];
 
@@ -16,15 +16,18 @@ export function format(hclCode: string): string {
 
 		// Adjust each line to align the equal signs
 		const alignedLines = lines.map(line => {
-			const equalPos = line.indexOf("=");
+			const [beforeEqual, afterEqual] = line.split("=");
+			const equalPos = `${beforeEqual.trim()} = ${afterEqual.trim()}`.indexOf("=");
 			if (equalPos === -1) {
 				return line;
 			}
 			const spacesToAdd = maxEqualPos - equalPos;
-			const [beforeEqual, afterEqual] = line.split("=");
 
 			return `${" ".repeat(indentLevel * 2)}${
-				beforeEqual + " ".repeat(spacesToAdd) + "=" + afterEqual
+				beforeEqual.trim() +
+				" ".repeat(spacesToAdd < 0 ? 0 : spacesToAdd) +
+				" = " +
+				afterEqual.trim()
 			}`;
 		});
 
@@ -52,23 +55,39 @@ export function format(hclCode: string): string {
 			} else {
 				const lineBrIdx = line.indexOf("{");
 				formattedCode += `${" ".repeat(indentLevel * 2)}${line.substring(0, lineBrIdx + 1)}\n`;
-				formattedCode += `${" ".repeat(indentLevel * 2 + 1)}${line.substring(lineBrIdx + 1)}\n`;
+				keyValues.push(line.substring(lineBrIdx + 1));
+				// formattedCode += `${" ".repeat(indentLevel * 2 + 1)}${line.substring(lineBrIdx + 1)}\n`;
 			}
 			indentLevel++;
 		} else if (line.includes("}")) {
-			if (keyValues.length > 0) {
-				formattedCode += `${alignEquals(keyValues.join("\n"))}\n`;
-				keyValues = [];
+			const alignKeyValues = () => {
+				if (keyValues.length > 0) {
+					formattedCode += `${alignEquals(keyValues.join("\n"))}\n`;
+					keyValues = [];
+				}
+			};
+
+			if (line === "}") {
+				alignKeyValues();
+				indentLevel--;
+				formattedCode += `${" ".repeat(indentLevel * 2)}${line}\n`;
+			} else {
+				const [before, after] = line.split("}");
+				if (before?.trim() !== "") keyValues.push(before);
+
+				alignKeyValues();
+				indentLevel--;
+				formattedCode += `${" ".repeat(indentLevel * 2)}${"}"}\n`;
+				if (after?.trim() !== "") keyValues.push(after);
+
+				alignKeyValues();
 			}
-			indentLevel--;
-			formattedCode += `${" ".repeat(indentLevel * 2)}${line}\n`;
 		} else if (line.includes("=")) {
 			keyValues.push(line);
 		} else {
 			formattedCode += `${" ".repeat(indentLevel * 2)}${line}\n`;
 		}
 	}
-	console.log(formattedCode.trim());
 
 	return formattedCode.trim();
 }

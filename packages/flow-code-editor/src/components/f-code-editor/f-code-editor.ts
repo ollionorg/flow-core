@@ -651,9 +651,7 @@ export class FCodeEditor extends FRoot {
 					glyphMargin: true,
 					formatOnPaste: true,
 					formatOnType: false,
-					minimap: { enabled: true },
-					trimAutoWhitespace: false,
-					insertSpaces: false,
+					minimap: { enabled: false },
 					dimension: {
 						width: this.offsetWidth,
 						height: this.offsetHeight

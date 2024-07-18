@@ -2,6 +2,12 @@
 
 # Change Log
 
+## [2.5.0] - 2024-07-08
+
+### Minor Changes
+
+- `show-scrollbar` property added in `f-table-schema`
+
 ## [2.4.8] - 2024-07-08
 
 ### Patch Changes

@@ -9,5 +9,14 @@
 		flex: 1 1;
 		overflow: auto;
 		@include scrollbar();
+		&[show-scrollbar] {
+			scrollbar-width: thin;
+
+			&::-webkit-scrollbar {
+				display: block;
+				width: 6px;
+				height: 6px;
+			}
+		}
 	}
 }

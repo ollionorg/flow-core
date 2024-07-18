@@ -75,6 +75,7 @@ export const Playground = {
 					.sortOrder=${args["sort-order"]}
 					.searchTerm=${args["search-term"]}
 					.showSearchBar=${args["show-search-bar"]}
+					.showScrollbar=${args["show-scrollbar"]}
 					.stickyCellBackground=${args["sticky-cell-background"]}
 					@next=${handleNext}
 					@toggle-row-details=${toggleRowDetails}
@@ -164,6 +165,11 @@ export const Playground = {
 			control: {
 				type: "boolean"
 			}
+		},
+		["show-scrollbar"]: {
+			control: {
+				type: "boolean"
+			}
 		}
 	},
 
@@ -181,6 +187,7 @@ export const Playground = {
 		["sort-order"]: "asc",
 		["search-term"]: "",
 		["show-search-bar"]: true,
+		["show-scrollbar"]: false,
 		["sticky-cell-background"]: "default",
 		["header-cell-template"]: (val: string) => {
 			return html`<f-div gap="small" align="middle-center">
@@ -411,6 +418,28 @@ export const ShowSearchBar = {
 	},
 
 	name: "show-search-bar"
+};
+
+export const ShowScrollBar = {
+	render: () => {
+		const data = getFakeUsers(20, 5);
+
+		return html`
+			<f-div gap="small" height="100%" overflow="scroll" gap="auto" width="100%">
+				<f-div direction="column" gap="medium" overflow="hidden">
+					<f-text> show-scrollbar="true"</f-text>
+					<f-table-schema show-scrollbar .data=${data}> </f-table-schema>
+				</f-div>
+				<f-divider></f-divider>
+				<f-div direction="column" gap="medium" overflow="hidden">
+					<f-text> show-scrollbar="false"</f-text>
+					<f-table-schema .showScrollbar=${false} .data=${data}> </f-table-schema>
+				</f-div>
+			</f-div>
+		`;
+	},
+
+	name: "show-scrollbar"
 };
 
 export const ToggleRowDetails = {

@@ -182,6 +182,16 @@ export class FTableSchema extends FRoot {
 		this.headerCellTemplate = val;
 	}
 
+	/**
+	 * to show scrollbar
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "show-scrollbar" })
+	showScrollbar = false;
+
+	set ["show-scrollbar"](val: boolean) {
+		this.showScrollbar = val;
+	}
+
 	@state()
 	offset = 0;
 
@@ -466,7 +476,7 @@ export class FTableSchema extends FRoot {
 					  </f-div>`
 					: nothing}
 			</slot>
-			<div class="f-table-schema-wrapper">
+			<div class="f-table-schema-wrapper" ?show-scrollbar=${this.showScrollbar}>
 				<f-table
 					id="f-table-element"
 					.variant=${this.variant}

@@ -1,4 +1,6 @@
+import { FCodeEditor } from "@ollion/flow-code-editor";
 import { html } from "lit-html";
+import { createRef, ref } from "lit-html/directives/ref.js";
 
 export default {
 	title: "@ollion/flow-code-editor/f-code-editor",
@@ -81,22 +83,56 @@ module "example_module" {
 export const Playground = {
 	// updateArgs({ code: ev.detail.value });
 	render: (args: Record<string, any>) => {
+		const goToKeyWords = [
+			`"aws_s3_bucket"`,
+			`"./modules/example"`,
+			`"aws"`,
+			`"us-west-2"`,
+			`"t2.micro"`,
+			`"ExampleBucket"`
+		];
 		const handleInput = function (ev: Event) {
 			//console.log(ev);
 		};
+		const editorRef = createRef<FCodeEditor>();
+		const goTo = (value: string) => {
+			if (editorRef.value) {
+				editorRef.value.goTo = value;
+			}
+		};
 
-		return html`<f-div padding="x-large" height="100%">
-			<f-code-editor
-				.code=${args.code}
-				.language=${args.language}
-				.state=${args.state}
-				.comments=${args.comments}
-				?copy-button=${args["copy-button"]}
-				.title=${args.title}
-				?show-line-numbers=${args["show-line-numbers"]}
-				?read-only=${args["read-only"]}
-				@content-change=${handleInput}
-			></f-code-editor>
+		return html`<f-div height="100%">
+			<f-div>
+				<f-code-editor
+					${ref(editorRef)}
+					.code=${args.code}
+					.language=${args.language}
+					.state=${args.state}
+					.comments=${args.comments}
+					?copy-button=${args["copy-button"]}
+					.title=${args.title}
+					?show-line-numbers=${args["show-line-numbers"]}
+					?read-only=${args["read-only"]}
+					@content-change=${handleInput}
+				></f-code-editor>
+			</f-div>
+			<f-divider></f-divider>
+			<f-div direction="column" width="300px">
+				${goToKeyWords.map(
+					kw =>
+						html`<f-div
+							state="secondary"
+							height="hug-content"
+							clickable
+							padding="medium"
+							border="small solid subtle bottom"
+							align="middle-left"
+							@click=${() => goTo(kw)}
+						>
+							<f-text>${kw}</f-text>
+						</f-div>`
+				)}
+			</f-div>
 		</f-div>`;
 	},
 

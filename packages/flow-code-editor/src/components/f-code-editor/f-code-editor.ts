@@ -269,30 +269,32 @@ function createDependencyProposals(range: {
 	];
 }
 
-// function showPopoverAtPosition(
-// 	editor: monaco.editor.IStandaloneCodeEditor,
-// 	content: HTMLElement,
-// 	position: monaco.IPosition
-// ) {
-// 	const overlayWidget: monaco.editor.IContentWidget = {
-// 		getId: function () {
-// 			return "myPopoverWidget";
-// 		},
-// 		getDomNode: function () {
-// 			return content;
-// 		},
-// 		getPosition: function () {
-// 			return {
-// 				position: position,
-// 				preference: [
-// 					monaco.editor.ContentWidgetPositionPreference.BELOW,
-// 					monaco.editor.ContentWidgetPositionPreference.ABOVE
-// 				]
-// 			};
-// 		}
-// 	};
-// 	editor.addContentWidget(overlayWidget);
-// }
+function showPopoverAtPosition(
+	editor: monaco.editor.IStandaloneCodeEditor,
+	content: HTMLElement,
+	position: monaco.IPosition
+) {
+	console.log(position.lineNumber);
+	editor.revealLineInCenter(position.lineNumber);
+	const overlayWidget: monaco.editor.IContentWidget = {
+		getId: function () {
+			return "myPopoverWidget";
+		},
+		getDomNode: function () {
+			return content;
+		},
+		getPosition: function () {
+			return {
+				position: position,
+				preference: [
+					monaco.editor.ContentWidgetPositionPreference.BELOW,
+					monaco.editor.ContentWidgetPositionPreference.ABOVE
+				]
+			};
+		}
+	};
+	editor.addContentWidget(overlayWidget);
+}
 @flowElement("f-code-editor")
 export class FCodeEditor extends FRoot {
 	/**
@@ -371,6 +373,9 @@ export class FCodeEditor extends FRoot {
 	@property({ type: Boolean, reflect: true, attribute: "read-only" })
 	readOnly?: boolean = false;
 
+	@property({ type: String, reflect: true, attribute: "go-to" })
+	goTo?: string;
+
 	@query(".copy-button")
 	copyCodeButton?: FButton;
 
@@ -385,6 +390,10 @@ export class FCodeEditor extends FRoot {
 
 	get fixedLang() {
 		return this.language ?? "javascript";
+	}
+
+	get codeByLines() {
+		return this.code?.split("\n");
 	}
 
 	multiLineStart(startIndex: number, endIndex: number, line: string) {
@@ -609,9 +618,9 @@ export class FCodeEditor extends FRoot {
 
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
-		if (this.editor) {
-			this.editor.dispose();
-		}
+		// if (this.editor) {
+		// 	this.editor.dispose();
+		// }
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
@@ -633,33 +642,41 @@ export class FCodeEditor extends FRoot {
 					};
 				}
 			});
+			if (!this.editor) {
+				this.editor = monaco.editor.create(
+					this,
+					{
+						value: this.code,
+						theme: "vs-dark",
+						language: this.language,
+						automaticLayout: true,
+						autoDetectHighContrast: false,
+						readOnly: this.readOnly,
+						fontSize: 16,
+						padding: {
+							top: 16
+						},
+						detectIndentation: false,
+						glyphMargin: true,
+						formatOnPaste: true,
+						formatOnType: false,
+						minimap: { enabled: false },
+						dimension: {
+							width: this.offsetWidth,
+							height: this.offsetHeight
+						},
+						...this.settings
+					},
+					this.services
+				);
 
-			this.editor = monaco.editor.create(
-				this,
-				{
-					value: this.code,
-					theme: "vs-dark",
-					language: this.language,
-					automaticLayout: true,
-					autoDetectHighContrast: false,
-					readOnly: this.readOnly,
-					fontSize: 16,
-					padding: {
-						top: 16
-					},
-					detectIndentation: false,
-					glyphMargin: true,
-					formatOnPaste: true,
-					formatOnType: false,
-					minimap: { enabled: false },
-					dimension: {
-						width: this.offsetWidth,
-						height: this.offsetHeight
-					},
-					...this.settings
-				},
-				this.services
-			);
+				const formatDoc = this.editor.getAction("editor.action.formatDocument");
+				if (formatDoc !== null) {
+					setTimeout(() => {
+						void formatDoc.run();
+					}, 100);
+				}
+			}
 
 			const hoverMessage = `## Components\nVisit the [Flow components Storybook](https://flow.ollion.com/v2/index.html)
 			
@@ -711,21 +728,22 @@ export class FCodeEditor extends FRoot {
 					}
 				}
 			]);
-			const formatDoc = this.editor.getAction("editor.action.formatDocument");
-			if (formatDoc !== null) {
-				setTimeout(() => {
-					void formatDoc.run();
-				}, 100);
-			}
+
 			if (this.showLineNumbers) {
 				this.editor.updateOptions({ lineNumbers: "on" });
 			} else {
 				this.editor.updateOptions({ lineNumbers: "off" });
 			}
 
-			//const position: monaco.IPosition = { lineNumber: 10, column: 35 };
-
-			//showPopoverAtPosition(this.editor, this.samplePopover, position);
+			if (this.goTo !== undefined) {
+				const lineNumber = this.codeByLines?.findIndex(l => l.includes(this.goTo!));
+				if (lineNumber && lineNumber > -1 && this.codeByLines) {
+					const line = this.codeByLines[lineNumber];
+					const column = line.indexOf(this.goTo);
+					const position: monaco.IPosition = { lineNumber: lineNumber + 1, column: column + 1 };
+					showPopoverAtPosition(this.editor, this.samplePopover, position);
+				}
+			}
 
 			this.editor?.getModel()?.onDidChangeContent(() => {
 				// if (formatDoc !== null) {

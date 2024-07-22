@@ -706,6 +706,81 @@ export class FCodeEditor extends FRoot {
 					},
 					this.services
 				);
+
+				monaco.languages.registerHoverProvider("hcl", {
+					provideHover: function (model, position) {
+						const markers = monaco.editor.getModelMarkers({ owner: "owner" });
+						for (const marker of markers) {
+							if (
+								position.lineNumber === marker.startLineNumber &&
+								position.column >= marker.startColumn &&
+								position.column <= marker.endColumn
+							) {
+								const hoverContent = {
+									value: `**Compliant value is**\n\n\`\`\`"xya-abc-90"\`\`\``
+								};
+								return {
+									range: new monaco.Range(
+										marker.startLineNumber,
+										marker.startColumn,
+										marker.endLineNumber,
+										marker.endColumn
+									),
+									contents: [hoverContent]
+								};
+							}
+						}
+						return null;
+					}
+				});
+
+				monaco.languages.registerCodeActionProvider("hcl", {
+					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+					//@ts-ignore
+					provideCodeActions: function (model, _range, context) {
+						const actions: {
+							title: string;
+							diagnostics: monaco.editor.IMarkerData[];
+							kind: string;
+							edit: {
+								edits: { resource: monaco.Uri; textEdit: { range: monaco.Range; text: string } }[];
+							};
+							isPreferred: boolean;
+						}[] = [];
+						const markers = context.markers;
+
+						markers.forEach(marker => {
+							actions.push({
+								title: "Fix this issue",
+								diagnostics: [marker],
+								kind: "quickfix",
+								edit: {
+									edits: [
+										{
+											resource: model.uri,
+											textEdit: {
+												range: new monaco.Range(
+													marker.startLineNumber,
+													marker.startColumn,
+													marker.endLineNumber,
+													marker.endColumn
+												),
+												text: `"xyz.abc.890"`
+											}
+										}
+									]
+								},
+								isPreferred: true
+							});
+						});
+
+						return {
+							actions: actions,
+							dispose: () => {}
+						};
+					}
+				});
+
 				this.updateMarkers();
 				const formatDoc = this.editor.getAction("editor.action.formatDocument");
 				if (formatDoc !== null) {
@@ -792,80 +867,6 @@ export class FCodeEditor extends FRoot {
 			});
 
 			this.dispatchEvent(inputEvent);
-		});
-
-		monaco.languages.registerHoverProvider("hcl", {
-			provideHover: function (model, position) {
-				const markers = monaco.editor.getModelMarkers({ owner: "owner" });
-				for (const marker of markers) {
-					if (
-						position.lineNumber === marker.startLineNumber &&
-						position.column >= marker.startColumn &&
-						position.column <= marker.endColumn
-					) {
-						const hoverContent = {
-							value: `**Compliant value is**\n\n\`\`\`"xya-abc-90"\`\`\``
-						};
-						return {
-							range: new monaco.Range(
-								marker.startLineNumber,
-								marker.startColumn,
-								marker.endLineNumber,
-								marker.endColumn
-							),
-							contents: [hoverContent]
-						};
-					}
-				}
-				return null;
-			}
-		});
-
-		monaco.languages.registerCodeActionProvider("hcl", {
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			//@ts-ignore
-			provideCodeActions: function (model, _range, context) {
-				const actions: {
-					title: string;
-					diagnostics: monaco.editor.IMarkerData[];
-					kind: string;
-					edit: {
-						edits: { resource: monaco.Uri; textEdit: { range: monaco.Range; text: string } }[];
-					};
-					isPreferred: boolean;
-				}[] = [];
-				const markers = context.markers;
-
-				markers.forEach(marker => {
-					actions.push({
-						title: "Fix this issue",
-						diagnostics: [marker],
-						kind: "quickfix",
-						edit: {
-							edits: [
-								{
-									resource: model.uri,
-									textEdit: {
-										range: new monaco.Range(
-											marker.startLineNumber,
-											marker.startColumn,
-											marker.endLineNumber,
-											marker.endColumn
-										),
-										text: `"xyz.abc.890"`
-									}
-								}
-							]
-						},
-						isPreferred: true
-					});
-				});
-
-				return {
-					actions: actions,
-					dispose: () => {}
-				};
-			}
 		});
 
 		this.querySelector(".monaco-editor")?.setAttribute("state", this.state ?? "default");

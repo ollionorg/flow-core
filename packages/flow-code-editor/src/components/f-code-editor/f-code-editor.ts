@@ -8,6 +8,15 @@ import { languageCommentsMap } from "../../utils/lang-comments-map";
 import { injectCss } from "@ollion/flow-core-config";
 import { format } from "./tf-formatter";
 
+const keywordsTomark = [
+	`"aws_s3_bucket"`,
+	`"./modules/example"`,
+	`"aws"`,
+	`"us-west-2"`,
+	`"t2.micro"`,
+	`"ExampleBucket"`
+];
+
 monaco.languages.register({ id: "hcl" });
 
 monaco.languages.setMonarchTokensProvider("hcl", {
@@ -269,32 +278,6 @@ function createDependencyProposals(range: {
 	];
 }
 
-function showPopoverAtPosition(
-	editor: monaco.editor.IStandaloneCodeEditor,
-	content: HTMLElement,
-	position: monaco.IPosition
-) {
-	console.log(position.lineNumber);
-	editor.revealLineInCenter(position.lineNumber);
-	const overlayWidget: monaco.editor.IContentWidget = {
-		getId: function () {
-			return "myPopoverWidget";
-		},
-		getDomNode: function () {
-			return content;
-		},
-		getPosition: function () {
-			return {
-				position: position,
-				preference: [
-					monaco.editor.ContentWidgetPositionPreference.BELOW,
-					monaco.editor.ContentWidgetPositionPreference.ABOVE
-				]
-			};
-		}
-	};
-	editor.addContentWidget(overlayWidget);
-}
 @flowElement("f-code-editor")
 export class FCodeEditor extends FRoot {
 	/**
@@ -305,7 +288,7 @@ export class FCodeEditor extends FRoot {
 	/**
 	 * editor instance
 	 */
-	editor?: monaco.editor.IStandaloneCodeEditor;
+	editor!: monaco.editor.IStandaloneCodeEditor;
 
 	/**
 	 * actual code to display in editor
@@ -393,8 +376,9 @@ export class FCodeEditor extends FRoot {
 	}
 
 	get codeByLines() {
-		return this.code?.split("\n");
+		return this.editor?.getModel()?.getValue()?.split("\n");
 	}
+	overlayWidget?: monaco.editor.IContentWidget;
 
 	multiLineStart(startIndex: number, endIndex: number, line: string) {
 		if (startIndex >= 0 && endIndex >= 0) {
@@ -553,7 +537,40 @@ export class FCodeEditor extends FRoot {
 	createRenderRoot() {
 		return this;
 	}
+	replaceGoTo() {
+		console.log("replacing");
+		if (this.goTo) {
+			this.samplePopover.style.display = "none";
+			//	if (this.overlayWidget) this.editor.removeContentWidget(this.overlayWidget);
+			this.editor.setValue(this.code!.replace(this.goTo, `"xyz.abc.9890"`));
+		}
+	}
 
+	showPopoverAtPosition(
+		editor: monaco.editor.IStandaloneCodeEditor,
+		content: HTMLElement,
+		position: monaco.IPosition
+	) {
+		editor.revealLineInCenter(position.lineNumber);
+		this.overlayWidget = {
+			getId: function () {
+				return "myPopoverWidget";
+			},
+			getDomNode: function () {
+				return content;
+			},
+			getPosition: function () {
+				return {
+					position: position,
+					preference: [
+						monaco.editor.ContentWidgetPositionPreference.BELOW,
+						monaco.editor.ContentWidgetPositionPreference.ABOVE
+					]
+				};
+			}
+		};
+		editor.addContentWidget(this.overlayWidget);
+	}
 	render() {
 		const titleSection = this.title
 			? html` <f-div gap="medium" align="middle-left">
@@ -595,17 +612,18 @@ export class FCodeEditor extends FRoot {
 			id="sample-popover"
 			width="300px"
 			state="secondary"
-			padding="medium"
 			style="display:none !important;"
 		>
-			<f-text
-				>Suspendisse potenti. Ut sed mi sed tortor placerat eleifend id id libero. Nam eget metus
-				mattis, consequat odio eget, interdum risus. Curabitur ac gravida lorem, ac dignissim mi.
-				Etiam semper tortor nec tincidunt accumsan. Nunc malesuada sit amet purus semper suscipit.
-				Maecenas dapibus eleifend nisi, a euismod urna tristique eu. Cras et odio sed massa
-				vulputate pellentesque et quis lorem. Orci varius natoque penatibus et magnis dis parturient
-				montes, nascetur ridiculus mus.</f-text
-			>
+			<f-div direction="column" padding="small" gap="medium">
+				<f-div padding="small">
+					<f-text>Replace with following</f-text>
+				</f-div>
+				<f-div padding="small" state="tertiary">"xyz.abc.9890"</f-div>
+				<f-divider></f-divider>
+				<f-div padding="small" align="middle-right">
+					<f-button size="small" @click=${this.replaceGoTo} label="Replace"></f-button>
+				</f-div>
+			</f-div>
 		</f-div>`;
 		if (this.comments || this.copyButton || this.title) {
 			return html` <f-div state="secondary" class="f-code-editor-header" padding="medium">
@@ -616,11 +634,28 @@ export class FCodeEditor extends FRoot {
 		}
 	}
 
+	updateMarkers() {
+		monaco.editor.removeAllMarkers("owner");
+		const markers: monaco.editor.IMarkerData[] = [];
+		for (const keyword of keywordsTomark) {
+			const position = this.getKeywordPosition(keyword);
+
+			if (position) {
+				markers.push({
+					message: "Non-compliant",
+					severity: monaco.MarkerSeverity.Error,
+					startLineNumber: position.lineNumber,
+					startColumn: position.column,
+					endLineNumber: position.lineNumber,
+					endColumn: position.column + keyword.length
+				});
+			}
+
+			monaco.editor.setModelMarkers(this.editor.getModel()!, "owner", markers);
+		}
+	}
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.willUpdate(changedProperties);
-		// if (this.editor) {
-		// 	this.editor.dispose();
-		// }
 	}
 	protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
 		super.updated(changedProperties);
@@ -642,11 +677,13 @@ export class FCodeEditor extends FRoot {
 					};
 				}
 			});
+
 			if (!this.editor) {
 				this.editor = monaco.editor.create(
 					this,
 					{
 						value: this.code,
+
 						theme: "vs-dark",
 						language: this.language,
 						automaticLayout: true,
@@ -669,7 +706,7 @@ export class FCodeEditor extends FRoot {
 					},
 					this.services
 				);
-
+				this.updateMarkers();
 				const formatDoc = this.editor.getAction("editor.action.formatDocument");
 				if (formatDoc !== null) {
 					setTimeout(() => {
@@ -730,37 +767,116 @@ export class FCodeEditor extends FRoot {
 			]);
 
 			if (this.showLineNumbers) {
-				this.editor.updateOptions({ lineNumbers: "on" });
+				this.editor!.updateOptions({ lineNumbers: "on" });
 			} else {
-				this.editor.updateOptions({ lineNumbers: "off" });
+				this.editor!.updateOptions({ lineNumbers: "off" });
 			}
 
 			if (this.goTo !== undefined) {
-				const lineNumber = this.codeByLines?.findIndex(l => l.includes(this.goTo!));
-				if (lineNumber && lineNumber > -1 && this.codeByLines) {
-					const line = this.codeByLines[lineNumber];
-					const column = line.indexOf(this.goTo);
-					const position: monaco.IPosition = { lineNumber: lineNumber + 1, column: column + 1 };
-					showPopoverAtPosition(this.editor, this.samplePopover, position);
-				}
+				const position = this.getKeywordPosition(this.goTo);
+				if (position) this.showPopoverAtPosition(this.editor!, this.samplePopover, position);
 			}
+		}
 
-			this.editor?.getModel()?.onDidChangeContent(() => {
-				// if (formatDoc !== null) {
-				// 	void formatDoc.run();
-				// }
-				const inputEvent = new CustomEvent("content-change", {
-					detail: {
-						value: this.editor?.getModel()?.getValue()
-					},
-					bubbles: true,
-					composed: true
-				});
-
-				this.dispatchEvent(inputEvent);
+		this.editor?.getModel()?.onDidChangeContent(() => {
+			// if (formatDoc !== null) {
+			// 	void formatDoc.run();
+			// }
+			this.updateMarkers();
+			const inputEvent = new CustomEvent("content-change", {
+				detail: {
+					value: this.editor?.getModel()?.getValue()
+				},
+				bubbles: true,
+				composed: true
 			});
 
-			this.querySelector(".monaco-editor")?.setAttribute("state", this.state ?? "default");
+			this.dispatchEvent(inputEvent);
+		});
+
+		monaco.languages.registerHoverProvider("hcl", {
+			provideHover: function (model, position) {
+				const markers = monaco.editor.getModelMarkers({ owner: "owner" });
+				for (const marker of markers) {
+					if (
+						position.lineNumber === marker.startLineNumber &&
+						position.column >= marker.startColumn &&
+						position.column <= marker.endColumn
+					) {
+						const hoverContent = {
+							value: `**Compliant value is**\n\n\`\`\`"xya-abc-90"\`\`\``
+						};
+						return {
+							range: new monaco.Range(
+								marker.startLineNumber,
+								marker.startColumn,
+								marker.endLineNumber,
+								marker.endColumn
+							),
+							contents: [hoverContent]
+						};
+					}
+				}
+				return null;
+			}
+		});
+
+		monaco.languages.registerCodeActionProvider("hcl", {
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			//@ts-ignore
+			provideCodeActions: function (model, _range, context) {
+				const actions: {
+					title: string;
+					diagnostics: monaco.editor.IMarkerData[];
+					kind: string;
+					edit: {
+						edits: { resource: monaco.Uri; textEdit: { range: monaco.Range; text: string } }[];
+					};
+					isPreferred: boolean;
+				}[] = [];
+				const markers = context.markers;
+
+				markers.forEach(marker => {
+					actions.push({
+						title: "Fix this issue",
+						diagnostics: [marker],
+						kind: "quickfix",
+						edit: {
+							edits: [
+								{
+									resource: model.uri,
+									textEdit: {
+										range: new monaco.Range(
+											marker.startLineNumber,
+											marker.startColumn,
+											marker.endLineNumber,
+											marker.endColumn
+										),
+										text: `"xyz.abc.890"`
+									}
+								}
+							]
+						},
+						isPreferred: true
+					});
+				});
+
+				return {
+					actions: actions,
+					dispose: () => {}
+				};
+			}
+		});
+
+		this.querySelector(".monaco-editor")?.setAttribute("state", this.state ?? "default");
+	}
+	getKeywordPosition(keyword: string) {
+		const lineNumber = this.codeByLines?.findIndex(l => l.includes(keyword));
+		if (lineNumber && lineNumber > -1 && this.codeByLines) {
+			const line = this.codeByLines[lineNumber];
+			const column = line.indexOf(keyword);
+			const position: monaco.IPosition = { lineNumber: lineNumber + 1, column: column + 1 };
+			return position;
 		}
 	}
 }

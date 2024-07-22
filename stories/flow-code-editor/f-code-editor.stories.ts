@@ -127,9 +127,10 @@ export const Playground = {
 							padding="medium"
 							border="small solid subtle bottom"
 							align="middle-left"
+							gap="medium"
 							@click=${() => goTo(kw)}
 						>
-							<f-text>${kw}</f-text>
+							<f-icon source="i-alert" state="warning"></f-icon><f-text>${kw}</f-text>
 						</f-div>`
 				)}
 			</f-div>

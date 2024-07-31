@@ -6,7 +6,7 @@ import { FText } from "../f-text/f-text";
 import eleStyle from "./f-field.scss?inline";
 import globalStyle from "./f-field-global.scss?inline";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 injectCss("f-field", globalStyle);
 
 export type FFieldStateProp = "default" | "primary" | "success" | "danger" | "warning";

@@ -28,7 +28,7 @@ import {
 	FSwitch,
 	FTextArea,
 	FColorPicker
-} from "@ollion/flow-core";
+} from "@nonfx/flow-core";
 
 import checkboxGroupGlobalStyles from "./../components/f-checkbox-group/f-checkbox-group-global.scss?inline";
 import radioGroupGlobalStyles from "./../components/f-radio-group/f-radio-group-global.scss?inline";
@@ -124,14 +124,14 @@ export function getSlots(
 				>${field.label.title}</f-div
 		  >`
 		: name
-		? html`<f-div
+			? html`<f-div
 				slot="label"
 				padding="none"
 				gap="none"
 				data-qa-label-for=${ifDefined(field.qaId || field.id)}
 				>${name}</f-div
 		  >`
-		: nothing;
+			: nothing;
 
 	const description = field.label?.description
 		? html` <f-div slot="description" padding="none" gap="none">${field.label.description}</f-div>`
@@ -156,10 +156,10 @@ export function getSlots(
 	}
 	return html` ${label}${subTitle}
 	${field.helperText
-		? html`<f-div slot="help" data-qa-help-for=${ifDefined(field.qaId || field.id)}
+			? html`<f-div slot="help" data-qa-help-for=${ifDefined(field.qaId || field.id)}
 				>${field.helperText}
 		  </f-div>`
-		: nothing}`;
+			: nothing}`;
 }
 
 export function getLabelLeftLayout(

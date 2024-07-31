@@ -18,12 +18,12 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import drawLineage from "./draw/draw-lineage";
 import lowlightPath from "./highlight/lowlight-path";
 import createHierarchy from "./create/create-hierarchy";
-import { FButton, FDiv, FIcon, FIconButton, FPopover, FText } from "@ollion/flow-core";
-import { FRoot } from "@ollion/flow-core";
+import { FButton, FDiv, FIcon, FIconButton, FPopover, FText } from "@nonfx/flow-core";
+import { FRoot } from "@nonfx/flow-core";
 import { debounce } from "../../utils";
 import getProxies from "./draw/hot-reload-proxies";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 
 injectCss("f-lineage", globalStyle);
 // Renders attribute names of parent element to textContent

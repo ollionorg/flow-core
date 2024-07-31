@@ -6,13 +6,13 @@ import {
 	XAxisLine,
 	TooltipPoints,
 	TimeseriesData
-} from "@ollion/flow-dashboard";
+} from "@nonfx/flow-dashboard";
 import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
 import { generateTimeseriesChartData } from "./mock-data-utils";
 
 export default {
-	title: "@ollion/flow-dashboard/f-timeseries-chart",
+	title: "@nonfx/flow-dashboard/f-timeseries-chart",
 
 	parameters: {
 		controls: {
@@ -99,7 +99,7 @@ export const AllOptions = {
 					const icons = ["i-area", "i-bar", "i-line"];
 					return html`<f-div height="hug-content" gap="medium" align="middle-center">
 						${chartData.map((series, idx) => {
-							return html`<f-div
+						return html`<f-div
 								.id=${"legend-" + series.seriesName}
 								class="timeseries-legend"
 								width="hug-content"
@@ -119,7 +119,7 @@ export const AllOptions = {
 								></f-icon-button>
 								<f-text>${series.seriesName}</f-text></f-div
 							>`;
-						})}
+					})}
 					</f-div>`;
 				}
 			},
@@ -132,10 +132,10 @@ export const AllOptions = {
 					gap="small"
 				>
 					${tooltipPoints.map(point => {
-						return html`<f-text weight="medium" .state=${"custom," + point.color}
+					return html`<f-text weight="medium" .state=${"custom," + point.color}
 							>${point.seriesName} : ${point?.value}</f-text
 						>`;
-					})}
+				})}
 					<f-divider state="subtle"></f-divider>
 					<f-div align="middle-right" gap="x-small">
 						<f-text inline variant="code" size="small">
@@ -214,7 +214,7 @@ export const CustomLegendTemplate = {
 					const icons = ["i-user", "i-home", "i-computer"];
 					return html`<f-div height="hug-content" align="middle-center">
 						${chartData.map((series, idx) => {
-							return html`<f-div
+						return html`<f-div
 								.id=${"legend-" + series.seriesName}
 								class="timeseries-legend"
 								width="hug-content"
@@ -235,7 +235,7 @@ export const CustomLegendTemplate = {
 								></f-icon-button>
 								<f-text .state=${"custom," + series.color}>${series.seriesName}</f-text></f-div
 							>`;
-						})}
+					})}
 					</f-div>`;
 				}
 			}
@@ -292,10 +292,10 @@ export const CustomTooltip = {
 					gap="small"
 				>
 					${tooltipPoints.map(point => {
-						return html`<f-text weight="medium" .state=${"custom," + point.color}
+					return html`<f-text weight="medium" .state=${"custom," + point.color}
 							>${point.seriesName} : ${point?.value}</f-text
 						>`;
-					})}
+				})}
 					<f-divider state="subtle"></f-divider>
 					<f-div align="middle-right" gap="x-small">
 						<f-text inline variant="code" size="small">

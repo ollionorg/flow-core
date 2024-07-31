@@ -1,9 +1,9 @@
 import { unsafeCSS, html, PropertyValues, PropertyValueMap } from "lit";
-import { FRoot, flowElement } from "@ollion/flow-core";
+import { FRoot, flowElement } from "@nonfx/flow-core";
 import globalStyle from "./f-text-editor-global.scss?inline";
-import { FTextArea } from "@ollion/flow-core";
+import { FTextArea } from "@nonfx/flow-core";
 import { property } from "lit/decorators.js";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { createRef, ref } from "lit-html/directives/ref.js";
 import Quill from "quill";
 import { keyed } from "lit-html/directives/keyed.js";

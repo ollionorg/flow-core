@@ -1,8 +1,8 @@
 import { html, PropertyValueMap, unsafeCSS, svg, render, nothing } from "lit";
 import { property } from "lit/decorators.js";
-import { FRoot, flowElement, FDiv } from "@ollion/flow-core";
+import { FRoot, flowElement, FDiv } from "@nonfx/flow-core";
 import globalStyle from "./f-timeseries-chart-global.scss?inline";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import * as d3 from "d3";
 import { NumberValue } from "d3";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
@@ -193,7 +193,7 @@ export class FTimeseriesChart extends FRoot {
 				align="middle-center"
 			>
 				${this.config.data.map(series => {
-					return html`<f-div
+				return html`<f-div
 						.id=${"legend-" + series.seriesName}
 						class="timeseries-legend"
 						width="hug-content"
@@ -212,7 +212,7 @@ export class FTimeseriesChart extends FRoot {
 						></f-div
 						><f-text state="secondary">${series.seriesName}</f-text></f-div
 					>`;
-				})}
+			})}
 			</f-div>`;
 		}
 
@@ -550,9 +550,8 @@ export class FTimeseriesChart extends FRoot {
 					this.chartTooltip.value.style.removeProperty("top");
 					this.chartTooltip.value.style.setProperty(
 						"bottom",
-						`${
-							document.body.offsetHeight -
-							((coOrdinates?.top ?? 0) + this.chartTooltip.value.offsetHeight)
+						`${document.body.offsetHeight -
+						((coOrdinates?.top ?? 0) + this.chartTooltip.value.offsetHeight)
 						}px`
 					);
 				} else {
@@ -566,7 +565,7 @@ export class FTimeseriesChart extends FRoot {
 				if (
 					coOrdinates &&
 					coOrdinates.left >
-						document.body.offsetWidth - Math.max(this.chartTooltip.value.offsetWidth, 320)
+					document.body.offsetWidth - Math.max(this.chartTooltip.value.offsetWidth, 320)
 				) {
 					this.chartTooltip.value.style.removeProperty("left");
 					this.chartTooltip.value.style.setProperty(

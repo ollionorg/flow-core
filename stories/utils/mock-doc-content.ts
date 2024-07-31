@@ -1,7 +1,7 @@
 import { html } from "lit";
 import { faker } from "@faker-js/faker";
 
-import { FDocumentStatement, FDocViewerContent } from "@ollion/flow-core";
+import { FDocumentStatement, FDocViewerContent } from "@nonfx/flow-core";
 
 export default function getFakeDocContent(
 	items = 2,

@@ -14,9 +14,9 @@ import {
 	FSearch,
 	FSelect,
 	FInput
-} from "@ollion/flow-core";
+} from "@nonfx/flow-core";
 
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { createRef, ref, Ref } from "lit/directives/ref.js";
 import { classMap } from "lit/directives/class-map.js";
 // Anser is used to highlight bash color codes

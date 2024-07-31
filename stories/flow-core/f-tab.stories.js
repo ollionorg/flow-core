@@ -4,7 +4,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useState } from "@storybook/client-api";
 
 export default {
-	title: "@ollion/flow-core/f-tab",
+	title: "@nonfx/flow-core/f-tab",
 
 	parameters: {
 		controls: {
@@ -35,14 +35,14 @@ export const Playground = {
 					node-width=${args["node-width"]}
 				>
 					${array.map(
-						item =>
-							html` <f-tab-node
+			item =>
+				html` <f-tab-node
 								?active=${selected === item ? true : false}
 								content-id=${`tab-${item}`}
 								@click=${() => handleChange(item)}
 								@keyup=${e => {
-									if (e.key === "Enter") handleChange(item);
-								}}
+						if (e.key === "Enter") handleChange(item);
+					}}
 								><f-div width="100%" height="100%" align="middle-center" direction="column"
 									><f-div align="middle-center" height="hug-content" width="hug-content"
 										>Tab ${item}</f-div
@@ -51,10 +51,10 @@ export const Playground = {
 									></f-div
 								></f-tab-node
 							>`
-					)}</f-tab
+		)}</f-tab
 				>
 				${array.map(
-					item => html`
+			item => html`
 						<f-tab-content
 							id=${`tab-${item}`}
 							.transition=${args["tab-content-transition"]}
@@ -80,7 +80,7 @@ export const Playground = {
 							></f-tab-content
 						>
 					`
-				)}
+		)}
 			</f-div>
 		`;
 	},
@@ -147,12 +147,12 @@ export const Variant = {
 
 		return html`<f-div direction="column">
 			${variants.map(
-				variant =>
-					html` <f-div direction="column" height="fill-container" overflow="visible">
+			variant =>
+				html` <f-div direction="column" height="fill-container" overflow="visible">
 						<f-tab .variant=${variant} node-width="fill">
 							${array.map(
-								item =>
-									html` <f-tab-node
+					item =>
+						html` <f-tab-node
 										?active=${selected === item ? true : false}
 										content-id=${`tab-${variant}-${item}`}
 										@click=${() => handleChange(item)}
@@ -164,10 +164,10 @@ export const Variant = {
 											></f-div
 										></f-tab-node
 									>`
-							)}</f-tab
+				)}</f-tab
 						>
 						${array.map(
-							item => html`
+					item => html`
 								<f-tab-content id=${`tab-${variant}-${item}`}
 									><f-div direction="column" width="100%" padding="large"
 										><f-div
@@ -190,9 +190,9 @@ export const Variant = {
 									></f-tab-content
 								>
 							`
-						)}
+				)}
 					</f-div>`
-			)}</f-div
+		)}</f-div
 		> `;
 	},
 
@@ -237,8 +237,8 @@ export const Direction = {
 			>
 				<f-tab .direction=${selectedDirection} node-width="fill">
 					${array.map(
-						item =>
-							html` <f-tab-node
+			item =>
+				html` <f-tab-node
 								?active=${selected === item ? true : false}
 								content-id=${`tab-${selectedDirection}-${item}`}
 								@click=${() => handleChange(item)}
@@ -250,10 +250,10 @@ export const Direction = {
 									></f-div
 								></f-tab-node
 							>`
-					)}</f-tab
+		)}</f-tab
 				>
 				${array.map(
-					item => html`
+			item => html`
                     <f-tab-content id=${`tab-${selectedDirection}-${item}`}
                       ><f-div direction="column" width="100%" padding="large"
                         ><f-div
@@ -277,7 +277,7 @@ export const Direction = {
                       ></f-tab-content
                     >
             </f-div>`
-				)}</f-div
+		)}</f-div
 			>
 		`;
 	},
@@ -323,8 +323,8 @@ export const NodeWidth = {
 			<f-div direction="column" height="fill-container" overflow="visible">
 				<f-tab node-width=${selectedWidth}>
 					${array.map(
-						item =>
-							html` <f-tab-node
+			item =>
+				html` <f-tab-node
 								?active=${selected === item ? true : false}
 								content-id=${`tab-${selectedWidth}-${item}`}
 								@click=${() => handleChange(item)}
@@ -336,10 +336,10 @@ export const NodeWidth = {
 									></f-div
 								></f-tab-node
 							>`
-					)}</f-tab
+		)}</f-tab
 				>
 				${array.map(
-					item => html`
+			item => html`
                     <f-tab-content id=${`tab-${selectedWidth}-${item}`}
                       ><f-div direction="column" width="100%" padding="large"
                         ><f-div
@@ -363,7 +363,7 @@ export const NodeWidth = {
                       ></f-tab-content
                     >
             </f-div>`
-				)}</f-div
+		)}</f-div
 			>
 		`;
 	},
@@ -443,8 +443,8 @@ export const Alignment = {
 			>
 				<f-tab .alignment=${selectedAlignment} .direction=${selectedDirection}>
 					${array.map(
-						item =>
-							html` <f-tab-node
+					item =>
+						html` <f-tab-node
 								?active=${selected === item ? true : false}
 								content-id=${`tab-${selectedAlignment}-${item}`}
 								@click=${() => handleChange(item)}
@@ -456,7 +456,7 @@ export const Alignment = {
 									></f-div
 								></f-tab-node
 							>`
-					)}</f-tab
+				)}</f-tab
 				>
 				${array.map(
 					item => html`

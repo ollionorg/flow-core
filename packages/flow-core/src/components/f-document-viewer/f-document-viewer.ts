@@ -5,7 +5,7 @@ import globalStyle from "./f-document-viewer-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { FText } from "../f-text/f-text";
 import { FAccordion } from "../f-accordion/f-accordion";
 import { FSearch } from "../f-search/f-search";

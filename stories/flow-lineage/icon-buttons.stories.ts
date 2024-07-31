@@ -4,11 +4,11 @@ import {
 	LineageNodeSize,
 	LineageNodeTemplate,
 	LineageNodes
-} from "@ollion/flow-lineage";
+} from "@nonfx/flow-lineage";
 import { html } from "lit-html";
 
 export default {
-	title: "@ollion/flow-lineage/Examples",
+	title: "@nonfx/flow-lineage/Examples",
 
 	parameters: {
 		controls: {

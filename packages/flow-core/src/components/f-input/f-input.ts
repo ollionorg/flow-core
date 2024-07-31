@@ -6,7 +6,7 @@ import { FDiv } from "../f-div/f-div";
 import { FIcon } from "../f-icon/f-icon";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { FInputBase, FInputCustomEvent } from "./f-input-base";
 import { FInputLight } from "./f-input-light";
 injectCss("f-input", globalStyle);
@@ -111,10 +111,10 @@ export class FInput extends FInputBase {
 						width="hug-content"
 					>
 						${this.maxLength
-							? html` <f-text variant="para" size="small" weight="regular" state="secondary"
+				? html` <f-text variant="para" size="small" weight="regular" state="secondary"
 									>${(this.value + "")?.length ?? 0} / ${this.maxLength}</f-text
 							  >`
-							: null}
+				: null}
 					</f-div>
 				</f-div>
 				<f-div

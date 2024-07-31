@@ -3,7 +3,7 @@ import FDivAnatomy from "../svg/i-fdiv-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 export default {
-	title: "@ollion/flow-core/f-form-group",
+	title: "@nonfx/flow-core/f-form-group",
 
 	parameters: {
 		controls: {
@@ -19,9 +19,9 @@ export const Playground = {
 				data-qa-id="testQaId"
 				variant=${args.variant}
 				.label=${{
-					title: "Test for Variant 1",
-					description: "This is a description"
-				}}
+			title: "Test for Variant 1",
+			description: "This is a description"
+		}}
 				direction="horizontal"
 				.gap=${args.gap}
 				.collapse=${args.collapse}
@@ -36,9 +36,9 @@ export const Playground = {
 			<f-form-group
 				variant=${args.variant}
 				.label=${{
-					title: "Test for Variant 2",
-					description: "This is a description"
-				}}
+			title: "Test for Variant 2",
+			description: "This is a description"
+		}}
 				direction="horizontal"
 				.gap=${args.gap}
 				?can-duplicate=${args["can-duplicate"]}
@@ -56,9 +56,9 @@ export const Playground = {
 			<f-divider></f-divider>
 			<f-form-group
 				.label=${{
-					title: "Test for direction (f-input)",
-					description: "This is a description"
-				}}
+			title: "Test for direction (f-input)",
+			description: "This is a description"
+		}}
 				direction=${args.direction}
 				.gap=${args.gap}
 				.collapse=${args.collapse}
@@ -71,9 +71,9 @@ export const Playground = {
 			<f-divider></f-divider>
 			<f-form-group
 				.label=${{
-					title: "Test for direction (f-checkbox)",
-					description: "This is a description"
-				}}
+			title: "Test for direction (f-checkbox)",
+			description: "This is a description"
+		}}
 				direction=${args.direction}
 				.gap=${args.gap}
 				.collapse=${args.collapse}
@@ -92,9 +92,9 @@ export const Playground = {
 			<f-divider></f-divider>
 			<f-form-group
 				.label=${{
-					title: "Test for direction (f-radio)",
-					description: "This is a description"
-				}}
+			title: "Test for direction (f-radio)",
+			description: "This is a description"
+		}}
 				direction=${args.direction}
 				.gap=${args.gap}
 				.collapse=${args.collapse}
@@ -163,9 +163,9 @@ export const Variant = {
 			<f-form-group
 				variant="normal"
 				.label=${{
-					title: "Test for Variant-Normal",
-					description: "This is a description"
-				}}
+				title: "Test for Variant-Normal",
+				description: "This is a description"
+			}}
 				direction="horizontal"
 				gap="small"
 			>
@@ -176,9 +176,9 @@ export const Variant = {
 			<f-form-group
 				variant="compact"
 				.label=${{
-					title: "Test for Variant-Normal",
-					description: "This is a description"
-				}}
+				title: "Test for Variant-Normal",
+				description: "This is a description"
+			}}
 				direction="horizontal"
 				gap="small"
 			>
@@ -194,9 +194,9 @@ export const Direction = {
       <f-form-group
         variant="normal"
         .label=${{
-					title: "Horizontally aligned",
-					description: "This is a description"
-				}}
+			title: "Horizontally aligned",
+			description: "This is a description"
+		}}
         direction="horizontal"
         gap="large"
       >
@@ -214,9 +214,9 @@ export const Direction = {
       <f-form-group
         variant="compact"
         .label=${{
-					title: "Verically aligned",
-					description: "This is a description"
-				}}
+			title: "Verically aligned",
+			description: "This is a description"
+		}}
         direction="vertical"
         gap="large"
       >
@@ -241,12 +241,12 @@ export const Gap = {
 		return html`
 			<f-form>
 				${gaps.map(
-					gap => html`
+			gap => html`
 						<f-form-group
 							variant="normal"
 							.label=${{
-								title: `gap=${gap}`
-							}}
+					title: `gap=${gap}`
+				}}
 							.gap=${gap}
 						>
 							<f-input placeholder="This is an input field"></f-input>
@@ -254,7 +254,7 @@ export const Gap = {
 						</f-form-group>
 						<f-divider></f-divider>
 					`
-				)}
+		)}
 			</f-form>
 		`;
 	},
@@ -269,12 +269,12 @@ export const Collapse = {
 		return html`
 			<f-form>
 				${collapses.map(
-					item => html`
+			item => html`
 						<f-form-group
 							variant="normal"
 							.label=${{
-								title: `collapse=${item}`
-							}}
+					title: `collapse=${item}`
+				}}
 							.collapse=${item}
 						>
 							<f-input placeholder="This is an input field"></f-input>
@@ -282,7 +282,7 @@ export const Collapse = {
 						</f-form-group>
 						<f-divider></f-divider>
 					`
-				)}
+		)}
 			</f-form>
 		`;
 	},
@@ -296,9 +296,9 @@ export const Flags = {
 			<f-form-group
 				variant="normal"
 				.label=${{
-					title: "Group Title (can-duplicate)",
-					description: "This is a description"
-				}}
+				title: "Group Title (can-duplicate)",
+				description: "This is a description"
+			}}
 				?can-duplicate=${true}
 			>
 				<f-input placeholder="This is an input field">
@@ -311,9 +311,9 @@ export const Flags = {
 			<f-form-group
 				variant="normal"
 				.label=${{
-					title: "Group Title (is-collapsed)",
-					description: "This is a description"
-				}}
+				title: "Group Title (is-collapsed)",
+				description: "This is a description"
+			}}
 				?is-collapsed=${false}
 				collapse="accordion"
 			>

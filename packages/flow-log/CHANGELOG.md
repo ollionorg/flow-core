@@ -81,8 +81,8 @@
 
 - Remove sideEffects because the components require registration via import
 - Updated dependencies
-- `@ollion/flow-core-config@1.1.3`
-- `@ollion/flow-core@2.0.3`
+- `@nonfx/flow-core-config@1.1.3`
+- `@nonfx/flow-core@2.0.3`
 
 ## [1.0.2] - 2023-10-10
 
@@ -90,8 +90,8 @@
 
 - a2de106: Fix platform types
 - Updated dependencies [a2de106]
-- `@ollion/flow-core-config@1.1.1`
-- `@ollion/flow-core@2.0.1`
+- `@nonfx/flow-core-config@1.1.1`
+- `@nonfx/flow-core@2.0.1`
 
 ## [1.0.1-beta.0] - 2023-10-10
 
@@ -99,8 +99,8 @@
 
 - Fix platform types
 - Updated dependencies
-- `@ollion/flow-core-config@1.1.1-beta.0`
-- `@ollion/flow-core@2.0.1-beta.0`
+- `@nonfx/flow-core-config@1.1.1-beta.0`
+- `@nonfx/flow-core@2.0.1-beta.0`
 
 ## [1.0.0] - 2023-10-10
 
@@ -111,7 +111,7 @@
 ### Patch Changes
 
 - Updated dependencies
-- `@ollion/flow-core@2.0.0`
+- `@nonfx/flow-core@2.0.0`
 <hr className="margin-btm-32" />
 
 ## [0.0.1] - 2023-05-29

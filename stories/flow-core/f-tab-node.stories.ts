@@ -1,9 +1,9 @@
-import { FTabNode } from "@ollion/flow-core";
+import { FTabNode } from "@nonfx/flow-core";
 import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@ollion/flow-core/f-tab-node",
+	title: "@nonfx/flow-core/f-tab-node",
 
 	parameters: {
 		controls: {

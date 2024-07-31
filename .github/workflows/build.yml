@@ -1,7 +1,7 @@
 name: Build
 
 on:
-  push:
+  pull_request:
     branches:
       - main
 
@@ -10,16 +10,9 @@ defaults:
     shell: bash
     working-directory: .
 
-env:
-  DISTRIBUTION_ID: E2ZI9E4QTG3PZ9
-  BUCKET_NAME: flow.ollion.com
-  AWS_REGION: us-east-1
-  ROLE_NAME: flow.ollion.com-role
-  ACCOUNT_ID: 679519065279
-
 jobs:
   build:
-    name: Build and upload to amazon s3
+    name: Build and Deploy to GitHub Pages
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -28,10 +21,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Setup Node.js 18.x
+      - name: Setup Node.js 20.x
         uses: actions/setup-node@v2
         with:
-          node-version: 18.x
+          node-version: 20.x
 
       - name: Install pnpm
         run: corepack enable && corepack prepare pnpm@8.9.0 --activate
@@ -39,20 +32,12 @@ jobs:
       - name: Install Dependencies and Build
         run: make build
 
-      - name: Configure AWS credentials from Test account
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          role-to-assume: arn:aws:iam::${{env.ACCOUNT_ID}}:role/${{env.ROLE_NAME}}
-          aws-region: ${{env.AWS_REGION}}
-
-      - name: Check Access
-        run: |
-          aws sts get-caller-identity
-
-      - name: Copy files to the website with the AWS CLI
-        run: |
-          aws s3 sync storybook-static/ s3://${{env.BUCKET_NAME}}/v2/
-
-      - name: Invalidate CloudFront
-        run: |
-          aws cloudfront create-invalidation --distribution-id ${{env.DISTRIBUTION_ID}} --paths "/*"
+          path: "storybook-static/"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

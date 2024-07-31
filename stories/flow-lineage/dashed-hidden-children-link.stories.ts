@@ -1,11 +1,11 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { LineageNodeLinks } from "@ollion/flow-lineage";
+import { LineageNodeLinks } from "@nonfx/flow-lineage";
 import { nodeTemplate, childrenNodeTemplate } from "./node-templates";
 import nodes from "./nodes";
 
 export default {
-	title: "@ollion/flow-lineage/Debug/dashed-hidden-children-link",
+	title: "@nonfx/flow-lineage/Debug/dashed-hidden-children-link",
 	argTypes: {
 		["node-template"]: {
 			control: false

@@ -1,55 +1,53 @@
 import { html, fixture, expect, oneEvent } from "@open-wc/testing";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 import "@ollion/flow-system-icon";
 
 import { FFormArray, FFormBuilder, FFormObject } from "../../../";
-import { FForm, FFormGroup, FIconButton, FInput } from "@ollion/flow-core";
+import { FForm, FFormGroup, FIconButton, FInput } from "@nonfx/flow-core";
 import { FormBuilderField } from "../../types";
 
 function getSampleFormBuilder() {
 	return fixture<FFormBuilder>(
-		html` <f-form-builder .field=${
-			{
-				type: "object",
-				direction: "horizontal",
-				isCollapsible: false,
-				isCollapsed: true,
-				label: {
-					title: "Object field form",
-					description: "showing object field"
+		html` <f-form-builder .field=${{
+			type: "object",
+			direction: "horizontal",
+			isCollapsible: false,
+			isCollapsed: true,
+			label: {
+				title: "Object field form",
+				description: "showing object field"
+			},
+			fields: {
+				firstname: {
+					type: "text",
+					validationRules: [
+						{
+							name: "required"
+						}
+					]
 				},
-				fields: {
-					firstname: {
-						type: "text",
-						validationRules: [
-							{
-								name: "required"
-							}
-						]
-					},
-					lastname: {
-						type: "text"
-					}
+				lastname: {
+					type: "text"
 				}
-			} as FormBuilderField
-		} .values=${{
-			firstname: "Tony",
-			lastname: "Stark"
-		}}></f-checkbox> `
+			}
+		} as FormBuilderField
+			} .values=${{
+				firstname: "Tony",
+				lastname: "Stark"
+			}}></f-checkbox> `
 	);
 }
 function getSampleArrayFieldFormBuilder() {
 	return fixture<FFormBuilder>(
-		html` <f-form-builder .field=${
-			{
-				type: "array",
-				field: {
-					type: "text"
-				}
-			} as FormBuilderField
-		} .values=${["username1", "username2"]}></f-checkbox> `
+		html` <f-form-builder .field=${{
+			type: "array",
+			field: {
+				type: "text"
+			}
+		} as FormBuilderField
+			} .values=${["username1", "username2"]}></f-checkbox> `
 	);
 }
 describe("f-form-builder", () => {
@@ -173,188 +171,187 @@ describe("f-form-builder", () => {
 	});
 	it("should test snapshot of all fields", async function () {
 		const el = await fixture<FFormBuilder>(
-			html` <f-form-builder .field=${
-				{
-					type: "object",
-					direction: "vertical",
-					fieldSeparator: true,
-					label: {
-						title: "Object level label",
-						description: "following fields are used for demo purpose only"
+			html` <f-form-builder .field=${{
+				type: "object",
+				direction: "vertical",
+				fieldSeparator: true,
+				label: {
+					title: "Object level label",
+					description: "following fields are used for demo purpose only"
+				},
+				fields: {
+					selectBox: {
+						label: {
+							title: "Select multiple option to test"
+						},
+						selection: "multiple",
+						options: ["option 1", "option 2", "option 3"],
+						type: "select",
+						placeholder: "This is a placeholder",
+						iconLeft: "i-app",
+						disabled: false,
+						clear: true,
+						validationRules: [
+							{
+								name: "required"
+							}
+						]
 					},
-					fields: {
-						selectBox: {
-							label: {
-								title: "Select multiple option to test"
-							},
-							selection: "multiple",
-							options: ["option 1", "option 2", "option 3"],
-							type: "select",
-							placeholder: "This is a placeholder",
-							iconLeft: "i-app",
-							disabled: false,
-							clear: true,
-							validationRules: [
-								{
-									name: "required"
-								}
-							]
+					textField: {
+						qaId: "testFieldQA",
+						type: "text",
+						helperText: "This field is a required field",
+						suffix: "recommended",
+						suffixWhen: (value: string) => {
+							return value === "vikas";
 						},
-						textField: {
-							qaId: "testFieldQA",
-							type: "text",
-							helperText: "This field is a required field",
-							suffix: "recommended",
-							suffixWhen: (value: string) => {
-								return value === "vikas";
-							},
-							validationRules: [
-								{
-									name: "required"
-								}
-							]
-						},
-						eventTestField: {
-							qaId: "eventTestField",
-							type: "text",
-							helperText: "This field is a required field",
-							validationRules: [
-								{
-									name: "required"
-								}
-							],
-							showWhen: values => {
-								return (values as Record<string, string>)?.textField === "vikas";
-							},
-							onClick: (event: PointerEvent) => {
-								console.log("onClick callback triggered", event);
-							},
-							onInput: (event: Event) => {
-								console.log("onInput callback triggered", event);
-							},
-							onFocus: (event: FocusEvent) => {
-								console.log("onFocus callback triggered", event);
-							},
-							onKeyPress: (event: KeyboardEvent) => {
-								console.log("onKeyPress callback triggered", event);
-							},
-							onKeyDown: (event: KeyboardEvent) => {
-								console.log("onKeyDown callback triggered", event);
-							},
-							onKeyUp: (event: KeyboardEvent) => {
-								console.log("onKeyUp callback triggered", event);
-							},
-							onMouseOver: (event: MouseEvent) => {
-								console.log("onMouseOver callback triggered", event);
+						validationRules: [
+							{
+								name: "required"
 							}
-						},
-
-						switchButton: {
-							type: "switchButton",
-							validationRules: [
-								{
-									name: "required"
-								}
-							]
-						},
-						radio: {
-							type: "radio",
-							label: {
-								title: "Radios"
-							},
-							// helperText: "This field is required",
-							options: [
-								{ id: "or", title: "Orange", iconTooltip: "hello" },
-								{
-									id: "banannaId",
-									iconTooltip: "hello",
-									description: "Check if you like Banana"
-								}
-							],
-							validationRules: [
-								{
-									name: "required"
-								}
-							]
-						},
-
-						checkboxField: {
-							type: "checkbox",
-							direction: "horizontal",
-							label: {
-								title: "Check/Uncheck options",
-								description: "this my checkbox"
-							},
-							// helperText: "This field is required",
-							options: [
-								{
-									id: "or",
-									title: "Orange",
-									iconTooltip: "hello",
-									description: "Orange has Vitamin C"
-								},
-								{
-									id: "banannaId",
-									iconTooltip: "hello",
-									description: "Banana is cheap but rich in fiber"
-								}
-							],
-							validationRules: [
-								{
-									name: "required"
-								}
-							]
-						},
-						textAreaField: {
-							type: "textarea",
-							placeholder: "This is a placeholder",
-							maxLength: 100,
-							disabled: false,
-							readonly: false,
-							clear: true,
-							validationRules: [
-								{
-									name: "required"
-								}
-							]
-						},
-						nestedObject: {
-							type: "object",
-							fields: {
-								username: {
-									type: "text",
-									validationRules: [{ name: "required" }]
-								},
-								email: {
-									type: "text",
-									validationRules: [{ name: "required" }, { name: "email" }]
-								}
+						]
+					},
+					eventTestField: {
+						qaId: "eventTestField",
+						type: "text",
+						helperText: "This field is a required field",
+						validationRules: [
+							{
+								name: "required"
 							}
+						],
+						showWhen: values => {
+							return (values as Record<string, string>)?.textField === "vikas";
 						},
-						nestedArray: {
-							type: "array",
-							label: {
-								title: "This is array"
-							},
-							field: {
-								type: "text",
-								validationRules: [
-									{
-										name: "required"
-									}
-								]
-							}
+						onClick: (event: PointerEvent) => {
+							console.log("onClick callback triggered", event);
 						},
-						getButton: {
-							type: "button",
-							label: "get",
-							iconLeft: "i-arrow-rotate"
+						onInput: (event: Event) => {
+							console.log("onInput callback triggered", event);
+						},
+						onFocus: (event: FocusEvent) => {
+							console.log("onFocus callback triggered", event);
+						},
+						onKeyPress: (event: KeyboardEvent) => {
+							console.log("onKeyPress callback triggered", event);
+						},
+						onKeyDown: (event: KeyboardEvent) => {
+							console.log("onKeyDown callback triggered", event);
+						},
+						onKeyUp: (event: KeyboardEvent) => {
+							console.log("onKeyUp callback triggered", event);
+						},
+						onMouseOver: (event: MouseEvent) => {
+							console.log("onMouseOver callback triggered", event);
 						}
+					},
+
+					switchButton: {
+						type: "switchButton",
+						validationRules: [
+							{
+								name: "required"
+							}
+						]
+					},
+					radio: {
+						type: "radio",
+						label: {
+							title: "Radios"
+						},
+						// helperText: "This field is required",
+						options: [
+							{ id: "or", title: "Orange", iconTooltip: "hello" },
+							{
+								id: "banannaId",
+								iconTooltip: "hello",
+								description: "Check if you like Banana"
+							}
+						],
+						validationRules: [
+							{
+								name: "required"
+							}
+						]
+					},
+
+					checkboxField: {
+						type: "checkbox",
+						direction: "horizontal",
+						label: {
+							title: "Check/Uncheck options",
+							description: "this my checkbox"
+						},
+						// helperText: "This field is required",
+						options: [
+							{
+								id: "or",
+								title: "Orange",
+								iconTooltip: "hello",
+								description: "Orange has Vitamin C"
+							},
+							{
+								id: "banannaId",
+								iconTooltip: "hello",
+								description: "Banana is cheap but rich in fiber"
+							}
+						],
+						validationRules: [
+							{
+								name: "required"
+							}
+						]
+					},
+					textAreaField: {
+						type: "textarea",
+						placeholder: "This is a placeholder",
+						maxLength: 100,
+						disabled: false,
+						readonly: false,
+						clear: true,
+						validationRules: [
+							{
+								name: "required"
+							}
+						]
+					},
+					nestedObject: {
+						type: "object",
+						fields: {
+							username: {
+								type: "text",
+								validationRules: [{ name: "required" }]
+							},
+							email: {
+								type: "text",
+								validationRules: [{ name: "required" }, { name: "email" }]
+							}
+						}
+					},
+					nestedArray: {
+						type: "array",
+						label: {
+							title: "This is array"
+						},
+						field: {
+							type: "text",
+							validationRules: [
+								{
+									name: "required"
+								}
+							]
+						}
+					},
+					getButton: {
+						type: "button",
+						label: "get",
+						iconLeft: "i-arrow-rotate"
 					}
-				} as FormBuilderField
-			} .values=${{
-				textField: "vikas"
-			}}></f-checkbox> `
+				}
+			} as FormBuilderField
+				} .values=${{
+					textField: "vikas"
+				}}></f-checkbox> `
 		);
 
 		await el.updateComplete;

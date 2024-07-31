@@ -3,9 +3,9 @@ import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 import FCarouselExample from "./i-fcarousel-example";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 
-import { ConfigUtil, FCarousel } from "@ollion/flow-core";
+import { ConfigUtil, FCarousel } from "@nonfx/flow-core";
 import { html } from "lit";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
@@ -21,12 +21,12 @@ describe("f-suggest", () => {
 		const el = await fixture<FCarousel>(html`
 			<f-carousel active-content-id="slide-3">
 				${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(
-					idx =>
-						html`<f-carousel-content content-id=${"slide-" + idx}>
+			idx =>
+				html`<f-carousel-content content-id=${"slide-" + idx}>
 							<f-div> ${unsafeSVG(FCarouselExample)} </f-div>
 							<f-text>${"slide-" + idx}</f-text>
 						</f-carousel-content>`
-				)}
+		)}
 			</f-carousel>
 		`);
 		await el.updateComplete;
@@ -45,12 +45,12 @@ describe("f-suggest", () => {
 		const el = await fixture<FCarousel>(html`
 			<f-carousel active-content-id="slide-3">
 				${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(
-					idx =>
-						html`<f-carousel-content content-id=${"slide-" + idx}>
+			idx =>
+				html`<f-carousel-content content-id=${"slide-" + idx}>
 							<f-div> ${unsafeSVG(FCarouselExample)} </f-div>
 							<f-text>${"slide-" + idx}</f-text>
 						</f-carousel-content>`
-				)}
+		)}
 			</f-carousel>
 		`);
 

@@ -11,7 +11,7 @@ import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import { flowElement } from "./../../utils";
 
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 
 injectCss("f-date-time-picker", globalStyle);
@@ -185,13 +185,12 @@ export class FDateTimePicker extends FRoot {
 	 * validation message
 	 */
 	get dateValidationMessage() {
-		return `Please Enter a valid date format: ${
-			this.mode === "date-time"
+		return `Please Enter a valid date format: ${this.mode === "date-time"
 				? "DD/MM/YYYY HH:ii"
 				: this.mode === "date-only"
-				? "DD/MM/YYYY"
-				: "HH:ii"
-		}`;
+					? "DD/MM/YYYY"
+					: "HH:ii"
+			}`;
 	}
 
 	/**
@@ -358,17 +357,17 @@ export class FDateTimePicker extends FRoot {
 				class="f-date-input-picker"
 				data-qa-element-id=${this.getAttribute("data-qa-element-id")}
 				@keydown=${() => {
-					this.flatPickerElement?.close();
-					this.dateTimePickerElement.inputElement.focus();
-				}}
+				this.flatPickerElement?.close();
+				this.dateTimePickerElement.inputElement.focus();
+			}}
 				@keyup=${(e: KeyboardEvent) => {
-					if (e.key === "Enter") this.flatPickerElement?.open();
-				}}
+				if (e.key === "Enter") this.flatPickerElement?.open();
+			}}
 				@blur=${(e: FocusEvent) => {
-					if (this.flatPickerElement?.isOpen) {
-						e.stopPropagation();
-					}
-				}}
+				if (this.flatPickerElement?.isOpen) {
+					e.stopPropagation();
+				}
+			}}
 				@input=${this.handleKeyboardInput}
 				?read-only=${this["is-range"]}
 			>

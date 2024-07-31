@@ -1,4 +1,4 @@
-import { TimeseriesData, TimeseriesPoint } from "@ollion/flow-dashboard";
+import { TimeseriesData, TimeseriesPoint } from "@nonfx/flow-dashboard";
 import { faker } from "@faker-js/faker";
 
 export function getColor() {

@@ -2,10 +2,10 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import FDivAnatomy from "../svg/i-fdiv-anatomy.js";
 import { createRef, ref } from "lit/directives/ref.js";
-import { FDiv } from "@ollion/flow-core";
+import { FDiv } from "@nonfx/flow-core";
 
 export default {
-	title: "@ollion/flow-core/f-div",
+	title: "@nonfx/flow-core/f-div",
 
 	parameters: {
 		controls: {
@@ -68,10 +68,10 @@ export const Playground = {
 								>Dynamic state f-div -> ${args.state} state
 							</f-text>
 							${args.state === "inherit"
-								? html` <f-text variant="para" size="large" weight="regular" state="inherit"
+				? html` <f-text variant="para" size="large" weight="regular" state="inherit"
 										>Inherited "success" state from its parent f-div
 								  </f-text>`
-								: null}
+				: null}
 							<f-div
 								padding="large"
 								height="hug-content"

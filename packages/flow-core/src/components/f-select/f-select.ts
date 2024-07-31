@@ -30,7 +30,7 @@ import {
 } from "./handlers";
 import { FIconButton } from "../f-icon-button/f-icon-button";
 import { flowElement, generateId } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 injectCss("f-select", globalStyle);
 
 export type FSelectState = "primary" | "default" | "success" | "warning" | "danger";
@@ -468,8 +468,8 @@ export class FSelect extends FRoot {
 				value: Array.isArray(this.selectedOptions)
 					? []
 					: Object.keys(this.selectedOptions).forEach(group => {
-							(this.selectedOptions as FSelectOptionsGroup)[group] = [];
-					  })
+						(this.selectedOptions as FSelectOptionsGroup)[group] = [];
+					})
 			},
 			bubbles: true,
 			composed: true
@@ -477,8 +477,8 @@ export class FSelect extends FRoot {
 		(this.value as unknown) = Array.isArray(this.selectedOptions)
 			? []
 			: Object.keys(this.selectedOptions).forEach(group => {
-					(this.selectedOptions as FSelectOptionsGroup)[group] = [];
-			  });
+				(this.selectedOptions as FSelectOptionsGroup)[group] = [];
+			});
 		this.clearFilterSearchString();
 		this.dispatchEvent(event);
 		this.requestUpdate();
@@ -515,11 +515,10 @@ export class FSelect extends FRoot {
 	 */
 	applyInputStyle() {
 		return this.searchable
-			? `${
-					this.openDropdown
-						? "width:75%;"
-						: "width:0px; transition: width var(--transition-time-rapid) ease-in 0s;"
-			  }`
+			? `${this.openDropdown
+				? "width:75%;"
+				: "width:0px; transition: width var(--transition-time-rapid) ease-in 0s;"
+			}`
 			: `max-width:0px`;
 	}
 

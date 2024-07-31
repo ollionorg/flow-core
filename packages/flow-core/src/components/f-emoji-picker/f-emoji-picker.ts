@@ -10,7 +10,7 @@ import { FText } from "../f-text/f-text";
 import { FIcon } from "../f-icon/f-icon";
 import { FPopover } from "../f-popover/f-popover";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 injectCss("f-emoji-picker", globalStyle);
 
 export type FEmojiPickerState = "primary" | "default" | "success" | "warning" | "danger";
@@ -259,8 +259,8 @@ export class FEmojiPicker extends FRoot {
 		return this.include && this.include.length > 0
 			? this.include
 			: this.excludeCategories.length > 0
-			? this.excludeCategories
-			: this.categories;
+				? this.excludeCategories
+				: this.categories;
 	}
 
 	/**
@@ -430,7 +430,7 @@ export class FEmojiPicker extends FRoot {
 		const clearIcon = this.clear
 			? html`
 					${this.value
-						? html`<f-div align="middle-center" overflow="hidden">
+					? html`<f-div align="middle-center" overflow="hidden">
 								<f-icon
 									source="i-close"
 									data-qa-remove-emoji=${this.getAttribute("data-qa-element-id")}
@@ -439,7 +439,7 @@ export class FEmojiPicker extends FRoot {
 									@click=${this.clearValue}
 								></f-icon
 						  ></f-div>`
-						: ""}
+					: ""}
 			  `
 			: "";
 
@@ -486,12 +486,12 @@ export class FEmojiPicker extends FRoot {
 					tabindex="0"
 					?disabled=${this.disabled}
 					@keyup=${(e: KeyboardEvent) => {
-						if (e.key === "Enter") this.toggleEmojiPicker(true);
-					}}
+				if (e.key === "Enter") this.toggleEmojiPicker(true);
+			}}
 					@click=${(e: MouseEvent) => {
-						e.stopPropagation();
-						this.toggleEmojiPicker(true);
-					}}
+				e.stopPropagation();
+				this.toggleEmojiPicker(true);
+			}}
 				>
 					<f-div
 						class="emoji-value"

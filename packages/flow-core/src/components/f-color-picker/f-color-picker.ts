@@ -4,7 +4,7 @@ import globalStyle from "./f-color-picker-global.scss?inline";
 import eleStyle from "./f-color-picker.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 
 import "vanilla-colorful";
 import { FPopover } from "../f-popover/f-popover";

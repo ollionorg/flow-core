@@ -4,7 +4,7 @@ import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fCheckboxAnatomy from "../svg/i-fcheckbox-anatomy.js";
 
 export default {
-	title: "@ollion/flow-core/f-checkbox",
+	title: "@nonfx/flow-core/f-checkbox",
 
 	parameters: {
 		controls: {
@@ -100,7 +100,7 @@ export const Value = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${values.map(
-					item => html`<f-div>
+			item => html`<f-div>
            <f-checkbox
               size="medium"
               .value=${item}
@@ -115,7 +115,7 @@ export const Value = {
             </f-checkbox></f-div
         ></f-div
       >`
-				)}
+		)}
 			</f-div>
 		`;
 	},
@@ -135,7 +135,7 @@ export const Size = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${sizes.map(
-					item => html`<f-div>
+			item => html`<f-div>
           <f-checkbox
               .size=${item}
               .value=${value}
@@ -150,7 +150,7 @@ export const Size = {
             </f-checkbox></f-div
         ></f-div
       >`
-				)}
+		)}
 			</f-div>
 		`;
 	},
@@ -173,11 +173,11 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-					item =>
-						html` <f-div align="middle-center" padding="large" gap="medium">
+			item =>
+				html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
-								state =>
-									html`<f-div
+					state =>
+						html`<f-div
 										><f-checkbox
 											size="medium"
 											.value=${value}
@@ -196,9 +196,9 @@ export const State = {
 											</f-div>
 										</f-checkbox></f-div
 									>`
-							)}
-						</f-div>`
 				)}
+						</f-div>`
+		)}
 			</f-div>
 		`;
 	},
@@ -217,7 +217,7 @@ export const Flags = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${[0].map(
-					item => html`<f-div>
+			item => html`<f-div>
           <f-checkbox
               size="medium"
               .value=${value}
@@ -233,7 +233,7 @@ export const Flags = {
             </f-checkbox></f-div
         ></f-div
       >`
-				)}
+		)}
 			</f-div>
 		`;
 	},

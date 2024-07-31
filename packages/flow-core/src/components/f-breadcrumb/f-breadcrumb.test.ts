@@ -2,9 +2,9 @@ import { html, fixture, expect } from "@open-wc/testing";
 import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 
 // importing flow-core components
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 
-import { FBreadcrumb, ConfigUtil } from "@ollion/flow-core";
+import { FBreadcrumb, ConfigUtil } from "@nonfx/flow-core";
 
 // setting icon pack for testing icon related test cases
 ConfigUtil.setConfig({ iconPack: IconPack });
@@ -18,9 +18,9 @@ describe("f-breadcrumb", () => {
 		const el = await fixture(html`
 			<f-breadcrumb
 				.crumbs=${[
-					{ tabIndex: 0, title: "Label 1" },
-					{ tabIndex: 1, title: "Label 2" }
-				]}
+				{ tabIndex: 0, title: "Label 1" },
+				{ tabIndex: 1, title: "Label 2" }
+			]}
 			></f-breadcrumb>
 		`);
 		expect(el.getAttribute("size")).to.equal("medium");
@@ -31,9 +31,9 @@ describe("f-breadcrumb", () => {
 			<f-breadcrumb
 				size="small"
 				.crumbs=${[
-					{ tabIndex: 0, title: "Label 1" },
-					{ tabIndex: 1, title: "Label 2" }
-				]}
+				{ tabIndex: 0, title: "Label 1" },
+				{ tabIndex: 1, title: "Label 2" }
+			]}
 			></f-breadcrumb>
 		`);
 		const descendant = el.shadowRoot!.querySelector(".f-breadcrumb-text-hover")!;
@@ -44,9 +44,9 @@ describe("f-breadcrumb", () => {
 			<f-breadcrumb
 				size="small"
 				.crumbs=${[
-					{ tabIndex: 0, title: "Label 1" },
-					{ tabIndex: 1, title: "Label 2" }
-				]}
+				{ tabIndex: 0, title: "Label 1" },
+				{ tabIndex: 1, title: "Label 2" }
+			]}
 			></f-breadcrumb>
 		`);
 		const descendant = el.shadowRoot!.querySelectorAll(".f-breadcrumb-content")!;
@@ -56,12 +56,12 @@ describe("f-breadcrumb", () => {
 		const el = await fixture(html`
 			<f-breadcrumb
 				.crumbs=${[
-					{ tabIndex: 0, title: "Label 1" },
-					{ tabIndex: 1, title: "Label 2" },
-					{ tabIndex: 2, title: "Label 3" },
-					{ tabIndex: 3, title: "Label 4" },
-					{ tabIndex: 4, title: "Label 5" }
-				]}
+				{ tabIndex: 0, title: "Label 1" },
+				{ tabIndex: 1, title: "Label 2" },
+				{ tabIndex: 2, title: "Label 3" },
+				{ tabIndex: 3, title: "Label 4" },
+				{ tabIndex: 4, title: "Label 5" }
+			]}
 			></f-breadcrumb>
 		`);
 		const descendant = el.shadowRoot!.querySelectorAll(".popover-crumb-list")!;
@@ -73,12 +73,12 @@ describe("f-breadcrumb", () => {
 			<f-breadcrumb
 				.variant=${"icon"}
 				.crumbs=${[
-					{ tabIndex: 0, title: "Label 1", icon: "i-app" },
-					{ tabIndex: 1, title: "Label 2", icon: "i-app" },
-					{ tabIndex: 2, title: "Label 3", icon: "i-home" },
-					{ tabIndex: 3, title: "Label 4", icon: "i-info-fill" },
-					{ tabIndex: 4, title: "Label 5", icon: "i-app" }
-				]}
+				{ tabIndex: 0, title: "Label 1", icon: "i-app" },
+				{ tabIndex: 1, title: "Label 2", icon: "i-app" },
+				{ tabIndex: 2, title: "Label 3", icon: "i-home" },
+				{ tabIndex: 3, title: "Label 4", icon: "i-info-fill" },
+				{ tabIndex: 4, title: "Label 5", icon: "i-app" }
+			]}
 			></f-breadcrumb>
 		`);
 		const descendant = el.shadowRoot!.querySelector(".f-breadcrumbs")!;
@@ -90,12 +90,12 @@ describe("f-breadcrumb", () => {
 			<f-breadcrumb
 				variant="icon"
 				.crumbs=${[
-					{ tabIndex: 0, title: "Home", icon: "i-app" },
-					{ tabIndex: 1, title: "New Label", icon: "i-app" },
-					{ tabIndex: 2, title: "Pipeline", icon: "i-home" },
-					{ tabIndex: 3, title: "Working", icon: "i-info-fill" },
-					{ tabIndex: 4, title: "Active", icon: "i-app" }
-				]}
+				{ tabIndex: 0, title: "Home", icon: "i-app" },
+				{ tabIndex: 1, title: "New Label", icon: "i-app" },
+				{ tabIndex: 2, title: "Pipeline", icon: "i-home" },
+				{ tabIndex: 3, title: "Working", icon: "i-info-fill" },
+				{ tabIndex: 4, title: "Active", icon: "i-app" }
+			]}
 			></f-breadcrumb>
 		`);
 		const descendants = el.shadowRoot!.querySelector(".f-breadcrumbs")!;

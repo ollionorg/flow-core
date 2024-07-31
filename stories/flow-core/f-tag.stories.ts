@@ -3,7 +3,7 @@ import fTagAnatomy from "../svg/i-ftag-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 export default {
-	title: "@ollion/flow-core/f-tag",
+	title: "@nonfx/flow-core/f-tag",
 
 	parameters: {
 		controls: {

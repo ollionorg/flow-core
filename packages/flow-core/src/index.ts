@@ -1,11 +1,11 @@
 /// <reference types="vite/client" />
 
-import { ConfigUtil } from "@ollion/flow-core-config";
+import { ConfigUtil } from "@nonfx/flow-core-config";
 import { version } from "../package.json";
 
 export { flowElement } from "./utils";
 
-export * from "@ollion/flow-core-config";
+export * from "@nonfx/flow-core-config";
 export * from "./components/f-button/f-button";
 export * from "./components/f-icon/f-icon";
 export * from "./components/f-divider/f-divider";
@@ -74,7 +74,7 @@ document.addEventListener("keyup", (event: KeyboardEvent) => {
 });
 
 console.log(
-	`%c@ollion/flow-core%cv${version}`,
+	`%c@nonfx/flow-core%cv${version}`,
 	"background:#161616;color:white;padding:4px 6px 4px 6px;border-radius:4px 0px 0px 4px",
 	"background:#695bf4;color:white;padding:4px 6px 4px 6px;border-radius:0px 4px 4px 0px;"
 );

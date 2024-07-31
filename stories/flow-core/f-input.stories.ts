@@ -4,7 +4,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useState } from "@storybook/preview-api";
 
 export default {
-	title: "@ollion/flow-core/f-input",
+	title: "@nonfx/flow-core/f-input",
 
 	parameters: {
 		controls: {
@@ -163,7 +163,7 @@ export const Variant = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${variants.map(
-					item => html`<f-div>
+			item => html`<f-div>
           <f-input
             value=${value}
             placeholder="Write here"
@@ -178,7 +178,7 @@ export const Variant = {
           </f-input></f-div
         ></f-div
       >`
-				)}
+		)}
 			</f-div>
 		`;
 	},
@@ -198,7 +198,7 @@ export const Category = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${categories.map(
-					item => html`<f-div>
+			item => html`<f-div>
           <f-input
             value=${value}
             placeholder="Write here"
@@ -212,7 +212,7 @@ export const Category = {
           </f-input></f-div
         ></f-div
       >`
-				)}
+		)}
 			</f-div>
 		`;
 	},
@@ -235,11 +235,11 @@ export const Type = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${types.map(
-					item =>
-						html` <f-div align="middle-center" padding="large" gap="medium">
+			item =>
+				html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
-								type =>
-									html`<f-div
+					type =>
+						html`<f-div
 										><f-input
 											value=${value}
 											placeholder="Write here"
@@ -253,9 +253,9 @@ export const Type = {
 											>
 										</f-input></f-div
 									>`
-							)}
-						</f-div>`
 				)}
+						</f-div>`
+		)}
 			</f-div>
 		`;
 	},
@@ -326,7 +326,7 @@ export const Size = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${sizes.map(
-					item => html`<f-div>
+			item => html`<f-div>
           <f-input
             value=${value}
             placeholder="Write here"
@@ -338,7 +338,7 @@ export const Size = {
           </f-input></f-div
         ></f-div
       >`
-				)}
+		)}
 			</f-div>
 		`;
 	},
@@ -361,11 +361,11 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-					item =>
-						html` <f-div align="middle-center" padding="large" gap="medium">
+			item =>
+				html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
-								state =>
-									html`<f-div
+					state =>
+						html`<f-div
 										><f-input
 											value=${value}
 											placeholder="Write here"
@@ -379,9 +379,9 @@ export const State = {
 											>
 										</f-input></f-div
 									>`
-							)}
-						</f-div>`
 				)}
+						</f-div>`
+		)}
 			</f-div>
 		`;
 	},
@@ -569,7 +569,7 @@ export const Flags = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${[0, 1, 2, 3].map(
-					item => html`<f-div>
+			item => html`<f-div>
           <f-input
             value=${value}
             placeholder="Write here"
@@ -585,7 +585,7 @@ export const Flags = {
           </f-input></f-div
         ></f-div
       >`
-				)}
+		)}
 			</f-div>
 		`;
 	},

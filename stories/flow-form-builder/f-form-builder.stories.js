@@ -4,7 +4,7 @@ import { useArgs, useState } from "@storybook/client-api";
 import { createRef, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@ollion/flow-form-builder/f-form-builder",
+	title: "@nonfx/flow-form-builder/f-form-builder",
 
 	parameters: {
 		controls: {
@@ -62,10 +62,10 @@ export const Playground = {
 					.size=${args.size}
 					.gap=${args.gap}
 					.label=${{
-						title: "Form label",
-						description: "Description about form",
-						iconTooltip: "Form more info"
-					}}
+				title: "Form label",
+				description: "Description about form",
+				iconTooltip: "Form more info"
+			}}
 					@submit=${handleSubmit}
 					@input=${handleInput}
 					@keydown=${handleKeydown}

@@ -2,10 +2,10 @@ import { html, fixture, expect } from "@open-wc/testing";
 import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 
-import { ConfigUtil, FCheckbox } from "@ollion/flow-core";
-import { FTable, FTcell } from "@ollion/flow-table";
+import { ConfigUtil, FCheckbox } from "@nonfx/flow-core";
+import { FTable, FTcell } from "@nonfx/flow-table";
 
 ConfigUtil.setConfig({ iconPack: IconPack });
 
@@ -19,18 +19,18 @@ describe("f-table", () => {
 			html`<f-table .selectable=${"multiple"}>
 				<f-trow slot="header">
 					${[1, 2, 3, 4, 5].map(cellNumber => {
-						return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
-					})}
+				return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+			})}
 				</f-trow>
 				${[1, 2].map(_rowNumber => {
-					return html`<f-trow selected>
+				return html`<f-trow selected>
 						${[1, 2, 3, 4, 5].map(cellNumber => {
-							return html`<f-tcell class=${cellNumber === 1 ? "test-checkbox" : ""}>
+					return html`<f-tcell class=${cellNumber === 1 ? "test-checkbox" : ""}>
 								<f-text> Column ${cellNumber} </f-text>
 							</f-tcell>`;
-						})}
-					</f-trow>`;
 				})}
+					</f-trow>`;
+			})}
 			</f-table>`
 		);
 		await el.updateComplete;

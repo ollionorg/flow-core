@@ -3,7 +3,7 @@ import fDividerAnatomy from "../svg/i-fdivider-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 export default {
-	title: "@ollion/flow-core/f-divider",
+	title: "@nonfx/flow-core/f-divider",
 
 	parameters: {
 		controls: {

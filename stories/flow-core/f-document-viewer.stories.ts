@@ -1,10 +1,10 @@
 import { html } from "lit-html";
 import { useState } from "@storybook/preview-api";
-import { FDocViewerContent } from "@ollion/flow-core";
+import { FDocViewerContent } from "@nonfx/flow-core";
 import getFakeDocContent from "../utils/mock-doc-content";
 
 export default {
-	title: "@ollion/flow-core/f-document-viewer",
+	title: "@nonfx/flow-core/f-document-viewer",
 
 	parameters: {
 		controls: {
@@ -127,8 +127,8 @@ export const JumpLinks = {
 					><f-button
 						label=${`jump-links=${jumpLinks}`}
 						@click=${() => {
-							setJumpLinks(!jumpLinks);
-						}}
+				setJumpLinks(!jumpLinks);
+			}}
 					></f-button
 				></f-div>
 				<f-div>
@@ -154,8 +154,8 @@ export const CollapsibleJumpLinks = {
 					><f-button
 						label=${`collpasible-jump-links=${collapsibleJumpLinks}`}
 						@click=${() => {
-							setCollapsibleJumpLinks(!collapsibleJumpLinks);
-						}}
+				setCollapsibleJumpLinks(!collapsibleJumpLinks);
+			}}
 					></f-button
 				></f-div>
 				<f-div>
@@ -180,8 +180,8 @@ export const LevelSelector = {
 					><f-button
 						label=${`level-selector=${levelSelector}`}
 						@click=${() => {
-							setLevelSelector(!levelSelector);
-						}}
+				setLevelSelector(!levelSelector);
+			}}
 					></f-button
 				></f-div>
 				<f-div>

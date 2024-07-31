@@ -12,7 +12,7 @@ import {
 	Placement
 } from "@floating-ui/dom";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 injectCss("f-popover", globalStyle);
 
 export type FPopoverState =
@@ -201,16 +201,16 @@ export class FPopover extends FRoot {
 						this.placement === "auto"
 							? autoPlacement({ boundary: document.body })
 							: flip({
-									fallbackPlacements: [
-										this.placement as Placement,
-										"bottom-start",
-										"bottom-end",
-										"top-start",
-										"top-end"
-									],
-									crossAxis: false,
-									boundary: document.body
-							  }),
+								fallbackPlacements: [
+									this.placement as Placement,
+									"bottom-start",
+									"bottom-end",
+									"top-start",
+									"top-end"
+								],
+								crossAxis: false,
+								boundary: document.body
+							}),
 						shift({ padding: isTooltip ? 0 : 16 })
 					]
 				})
@@ -236,7 +236,7 @@ export class FPopover extends FRoot {
 							(pop as LitElement).requestUpdate();
 						});
 					})
-					.catch(_err => {});
+					.catch(_err => { });
 			});
 		}
 	}

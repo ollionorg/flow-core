@@ -4,7 +4,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useState } from "@storybook/client-api";
 
 export default {
-	title: "@ollion/flow-core/f-grid",
+	title: "@nonfx/flow-core/f-grid",
 
 	parameters: {
 		controls: {
@@ -92,7 +92,7 @@ export const Playground = {
 				.gap=${args.gap}
 			>
 				${data.map(
-					item => html`
+			item => html`
 						<f-div
 							.id=${item.id}
 							state="secondary"
@@ -112,7 +112,7 @@ export const Playground = {
 							</f-div>
 						</f-div>
 					`
-				)}
+		)}
 			</f-grid>
 		</f-div>`;
 	},
@@ -228,7 +228,7 @@ export const MinCellWidth = {
 			</f-div>
 			<f-grid min-cell-width=${150}>
 				${data.map(
-					item => html`
+			item => html`
 						<f-div
 							.id=${item.id}
 							state="secondary"
@@ -248,7 +248,7 @@ export const MinCellWidth = {
 							</f-div>
 						</f-div>
 					`
-				)}
+		)}
 			</f-grid>
 		</f-div>`;
 	},
@@ -333,7 +333,7 @@ export const MaxCellWidth = {
 			</f-div>
 			<f-grid max-cell-width=${350}>
 				${data.map(
-					item => html`
+			item => html`
 						<f-div
 							.id=${item.id}
 							state="secondary"
@@ -353,7 +353,7 @@ export const MaxCellWidth = {
 							</f-div>
 						</f-div>
 					`
-				)}
+		)}
 			</f-grid>
 		</f-div>`;
 	},
@@ -438,7 +438,7 @@ export const CellHeight = {
 			</f-div>
 			<f-grid cell-height="180">
 				${data.map(
-					item => html`
+			item => html`
 						<f-div
 							.id=${item.id}
 							state="secondary"
@@ -458,7 +458,7 @@ export const CellHeight = {
 							</f-div>
 						</f-div>
 					`
-				)}
+		)}
 			</f-grid>
 		</f-div>`;
 	},
@@ -543,17 +543,17 @@ export const Gap = {
 		return html` <f-div width="100%" direction="column" padding="small">
 			<f-div padding="small" gap="small">
 				${gaps.map(
-					item =>
-						html` <f-button
+			item =>
+				html` <f-button
 							.label=${item}
 							@click=${() => setCurrentGap(item)}
 							.disabled=${currentGap === item}
 						></f-button>`
-				)}
+		)}
 			</f-div>
 			<f-grid .gap=${currentGap}>
 				${data.map(
-					item => html`
+			item => html`
 						<f-div
 							.id=${item.id}
 							state="secondary"
@@ -573,7 +573,7 @@ export const Gap = {
 							</f-div>
 						</f-div>
 					`
-				)}
+		)}
 			</f-grid>
 		</f-div>`;
 	},

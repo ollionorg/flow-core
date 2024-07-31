@@ -22,7 +22,7 @@ export default defineConfig({
 				"lodash-es",
 				/^lit/,
 				"rxjs",
-				"@ollion/flow-core-config",
+				"@nonfx/flow-core-config",
 				"vanilla-colorful",
 				"mark.js"
 			]

@@ -4,7 +4,7 @@ import { useState, useEffect } from "@storybook/client-api";
 import NodeDetailsTemplateAnatomy from "../svg/i-node-details-anatomy.js";
 
 export default {
-	title: "@ollion/flow-lineage/Templates/node-details popover",
+	title: "@nonfx/flow-lineage/Templates/node-details popover",
 
 	parameters: {
 		controls: {
@@ -243,10 +243,10 @@ export const NodeDetails = {
 						<!--End : node-details header section  -->
 						<!--Start : node-details tab-bar section  -->
 						${array?.length > 0
-							? html` <f-tab data-f-id="Tab bar - regular">
+				? html` <f-tab data-f-id="Tab bar - regular">
 									${array.map(
-										item =>
-											html` <f-tab-node
+					item =>
+						html` <f-tab-node
 												?active=${selected === item ? true : false}
 												content-id=${`tab-${item}`}
 												@click=${() => handleChangeTab(item)}
@@ -254,20 +254,20 @@ export const NodeDetails = {
 													<f-text>${item}</f-text>
 												</f-div></f-tab-node
 											>`
-									)}</f-tab
+				)}</f-tab
 							  >`
-							: ""}
+				: ""}
 						<!--End : node-details tab-bar section  -->
 						<!--Start : node-details content section  -->
 						<f-div data-f-id="content-section" direction="column" overflow="scroll">
 							${tabData &&
-							Object.entries(tabData).map(
-								([name, config], idx) =>
-									html` <f-tab-content id=${`tab-${name}`}>
+			Object.entries(tabData).map(
+				([name, config], idx) =>
+					html` <f-tab-content id=${`tab-${name}`}>
 										${name === "Table Details"
-											? html` <f-div padding="medium" direction="column">
+							? html` <f-div padding="medium" direction="column">
 													${Object.entries(config).map(
-														([configName, configValue], idx) => html`
+								([configName, configValue], idx) => html`
 															<f-div width="fill-container" direction="row" padding="medium none">
 																<f-div width="30%"
 																	><f-text variant="para" size="small" weight="bold"
@@ -276,54 +276,54 @@ export const NodeDetails = {
 																>
 																<f-div width="fill-container">
 																	${configValue?.type === "text"
-																		? html` <f-text variant="para" size="small" weight="regular"
+										? html` <f-text variant="para" size="small" weight="regular"
 																				>${configValue?.value}</f-text
 																		  >`
-																		: configValue?.type === "tag"
-																		? html`<f-tag size="small" label=${configValue?.value} state="primary" icon-left=${configValue?.iconLeft}></f-tab>`
-																		: html`<f-text variant="para" size="small" weight="regular"
+										: configValue?.type === "tag"
+											? html`<f-tag size="small" label=${configValue?.value} state="primary" icon-left=${configValue?.iconLeft}></f-tab>`
+											: html`<f-text variant="para" size="small" weight="regular"
 																				><a>${configValue?.value} +8 more</a></f-text
 																		  >`}</f-div
 																>
 															</f-div>
 														`
-													)}</f-div
+							)}</f-div
 											  >`
-											: html`
+							: html`
 													<f-div padding="medium" direction="column">
 														${Object.entries(config).map(
-															([configName, configValue], idx) =>
-																html` <f-div
+								([configName, configValue], idx) =>
+									html` <f-div
 																	width="fill-container"
 																	direction="row"
 																	padding="medium none"
 																>
 																	${configName !== "codeSnippet"
-																		? html` <f-div width="30%"
+											? html` <f-div width="30%"
 																				><f-text variant="para" size="small" weight="bold"
 																					>${configName}</f-text
 																				></f-div
 																		  >`
-																		: ""}
+											: ""}
 																	<f-div width="fill-container">
 																		${configValue?.type === "text"
-																			? html` <f-text variant="para" size="small" weight="regular"
+											? html` <f-text variant="para" size="small" weight="regular"
 																					>${configValue?.value}</f-text
 																			  >`
-																			: configValue?.type === "tag"
-																			? html`<f-tag size="small" label=${configValue?.value} state="primary" icon-left=${configValue?.iconLeft}></f-tab>`
-																			: configValue?.type === "code"
-																			? html`${configValue.value}`
-																			: html`<f-text variant="para" size="small" weight="regular"
+											: configValue?.type === "tag"
+												? html`<f-tag size="small" label=${configValue?.value} state="primary" icon-left=${configValue?.iconLeft}></f-tab>`
+												: configValue?.type === "code"
+													? html`${configValue.value}`
+													: html`<f-text variant="para" size="small" weight="regular"
 																					><a>${configValue?.value} +8 more</a></f-text
 																			  >`}</f-div
 																	>
 																</f-div>`
-														)}
+							)}
 													</f-div>
 											  `}
 									</f-tab-content>`
-							)}
+			)}
 						</f-div>
 						<!--End : node-details content section  -->
 					</f-div>

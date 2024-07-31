@@ -7,7 +7,7 @@ import eleStyle from "./f-form-group.scss?inline";
 import globalStyle from "./f-form-group-global.scss?inline";
 import { flowElement } from "./../../utils";
 
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 injectCss("f-form-group", globalStyle);
 
@@ -112,8 +112,8 @@ export class FFormGroup extends FRoot {
 		 */
 		return html` <f-div direction="column" height="hug-content" width="100%" .gap=${this.gap}>
 			${this.label &&
-			Object.keys(this.label)?.length > 0 &&
-			Object.values(this.label)?.every(item => item !== undefined)
+				Object.keys(this.label)?.length > 0 &&
+				Object.values(this.label)?.every(item => item !== undefined)
 				? html`
 						<f-div
 							direction="row"
@@ -121,8 +121,8 @@ export class FFormGroup extends FRoot {
 							align="middle-left"
 							class="f-form-group-label-wrapper"
 							@click=${() => {
-								if (this.collapse !== "none") this.isCollapsed = !this.isCollapsed;
-							}}
+						if (this.collapse !== "none") this.isCollapsed = !this.isCollapsed;
+					}}
 							.style="${this.applyCursorStyles()}"
 						>
 							<f-div gap="x-small" direction="column" width="fill-container">
@@ -136,21 +136,21 @@ export class FFormGroup extends FRoot {
 											.state=${this.collapse === "text" ? "primary" : "default"}
 										>
 											${this.collapse === "text"
-												? html`<a
+						? html`<a
 														href=""
 														@click=${(e: MouseEvent) => {
-															e.preventDefault();
-															if (this.collapse === "text") {
-																this.isCollapsed = !this.isCollapsed;
-															}
-														}}
+								e.preventDefault();
+								if (this.collapse === "text") {
+									this.isCollapsed = !this.isCollapsed;
+								}
+							}}
 														>${this.label.title}</a
 												  >`
-												: html`${this.label.title}`}
+						: html`${this.label.title}`}
 										</f-text>
 									</f-div>
 									${this.label?.iconTooltip
-										? html` <f-icon
+						? html` <f-icon
 												source="i-question-filled"
 												size="small"
 												state="default"
@@ -158,15 +158,15 @@ export class FFormGroup extends FRoot {
 												.tooltip="${this.label?.iconTooltip}"
 												clickable
 										  ></f-icon>`
-										: nothing}
+						: nothing}
 								</f-div>
 								${this.label?.description
-									? html` <f-div height="hug-content" width="hug-content">
+						? html` <f-div height="hug-content" width="hug-content">
 											<f-text variant="para" size="small" weight="regular">
 												${this.label.description}
 											</f-text>
 									  </f-div>`
-									: nothing}
+						: nothing}
 							</f-div>
 							<f-div
 								direction="row"
@@ -176,22 +176,22 @@ export class FFormGroup extends FRoot {
 								align="middle-center"
 							>
 								${this.canDuplicate
-									? html` <f-icon
+						? html` <f-icon
 											source="i-plus-fill"
 											size="medium"
 											state="default"
 											clickable
 											@click=${this.duplicationClick}
 									  ></f-icon>`
-									: nothing}
+						: nothing}
 								${this.collapse === "accordion"
-									? html` <f-icon
+						? html` <f-icon
 											.source=${!this.isCollapsed ? "i-chevron-up" : "i-chevron-down"}
 											size="small"
 											state="default"
 											clickable
 									  ></f-icon>`
-									: nothing}
+						: nothing}
 							</f-div>
 						</f-div>
 				  `
@@ -202,8 +202,8 @@ export class FFormGroup extends FRoot {
 							<f-div
 								direction=${this.direction === "vertical" ? "column" : "row"}
 								.gap=${this.variant === "compact" && this.direction === "horizontal"
-									? "none"
-									: this.gap}
+						? "none"
+						: this.gap}
 								overflow="scroll"
 							>
 								<slot></slot>

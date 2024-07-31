@@ -23,7 +23,7 @@ import {
 	FColorPickerState,
 	FSelectMaxOptionsWidth,
 	FSuggestWhen
-} from "@ollion/flow-core";
+} from "@nonfx/flow-core";
 import { BetweenParams } from "./modules/validation/rules/between";
 import { Subject } from "rxjs";
 import { MaxParams } from "./modules/validation/rules/max";
@@ -405,11 +405,11 @@ export type FormBuilderValues =
 
 export type ValidationResults = (
 	| {
-			result: boolean;
-			message: string | null;
-			name: string;
-			rule: FormBuilderGenericValidationRule["name"];
-	  }
+		result: boolean;
+		message: string | null;
+		name: string;
+		rule: FormBuilderGenericValidationRule["name"];
+	}
 	| ValidationResults
 )[];
 

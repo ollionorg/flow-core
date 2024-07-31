@@ -3,10 +3,10 @@ import { expect, fixture, html } from "@open-wc/testing";
 import sampleMd from "./sample-md";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 
-import { ConfigUtil } from "@ollion/flow-core";
-import { FMDEditor } from "@ollion/flow-md-editor";
+import { ConfigUtil } from "@nonfx/flow-core";
+import { FMDEditor } from "@nonfx/flow-md-editor";
 ConfigUtil.setConfig({ iconPack: IconPack });
 
 describe("f-md-editor", () => {

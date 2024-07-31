@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property, queryAll } from "lit/decorators.js";
-import { FDiv, FRoot, injectCss } from "@ollion/flow-core";
+import { FDiv, FRoot, injectCss } from "@nonfx/flow-core";
 import eleStyle from "./f-form-array.scss?inline";
 import {
 	CanValidateFields,
@@ -18,7 +18,7 @@ import { validateField } from "../../modules/validation/validator";
 import { Subject } from "rxjs";
 import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/helpers";
 import { FFormObject } from "../f-form-object/f-form-object";
-import { FIconButton } from "@ollion/flow-core";
+import { FIconButton } from "@nonfx/flow-core";
 import { ifDefined } from "lit/directives/if-defined.js";
 import globalStyle from "./f-form-array-global.scss?inline";
 
@@ -114,11 +114,11 @@ export class FFormArray extends FRoot {
 			fieldTemplates.push(
 				html` <f-div gap="small" align="top-left" overflow="scroll"
 					>${fieldRenderer[this.config.field.type](
-						``,
-						this.config.field,
-						fieldRef,
-						this.getFieldValue(i)
-					)}
+					``,
+					this.config.field,
+					fieldRef,
+					this.getFieldValue(i)
+				)}
 					${i === 0 && this.isRequired
 						? html` <f-icon-button
 								data-qa-plus
@@ -137,8 +137,8 @@ export class FFormArray extends FRoot {
 								size="x-small"
 								state="neutral"
 								@click=${() => {
-									this.removeField(i);
-								}}
+								this.removeField(i);
+							}}
 						  />`}
 				</f-div>`
 			);
@@ -167,7 +167,7 @@ export class FFormArray extends FRoot {
 							</f-div>
 							<!--info icon-->
 							${this.config.label?.iconTooltip
-								? html` <f-icon
+						? html` <f-icon
 										source="i-question-filled"
 										size="small"
 										state="subtle"
@@ -175,9 +175,9 @@ export class FFormArray extends FRoot {
 										.tooltip="${this.config.label?.iconTooltip}"
 										clickable
 								  ></f-icon>`
-								: ""}
+						: ""}
 							${!this.isRequired
-								? html`<f-icon-button
+						? html`<f-icon-button
 										data-qa-plus
 										data-qa-plus-for=${ifDefined(this.getAttribute("name") || undefined)}
 										icon="i-plus"
@@ -185,14 +185,14 @@ export class FFormArray extends FRoot {
 										state="neutral"
 										@click=${this.addField}
 								  />`
-								: ``}
+						: ``}
 						</f-div>
 						<!--field description-->
 						${this.config.label?.description
-							? html` <f-text variant="para" state="secondary" size="small" weight="regular"
+						? html` <f-text variant="para" state="secondary" size="small" weight="regular"
 									>${this.config.label?.description}</f-text
 							  >`
-							: ""}
+						: ""}
 				  </f-div>`
 				: ``}
 			${fieldTemplates.length > 0
@@ -200,7 +200,7 @@ export class FFormArray extends FRoot {
 				: ``}
 			<slot name="help">
 				${this.config.helperText
-					? html`<f-text
+				? html`<f-text
 							variant="para"
 							data-qa-help-for=${ifDefined(this.config.qaId || this.config.id)}
 							size="small"
@@ -208,7 +208,7 @@ export class FFormArray extends FRoot {
 							.state=${this.config.state}
 							>${this.config?.helperText}</f-text
 					  >`
-					: nothing}
+				: nothing}
 			</slot>
 		</f-div>`;
 	}

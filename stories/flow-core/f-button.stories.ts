@@ -2,10 +2,10 @@ import { html } from "lit-html";
 import fButtonAnatomy from "../svg/i-fbutton-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { createRef, ref } from "lit/directives/ref.js";
-import type { FButton } from "@ollion/flow-core";
+import type { FButton } from "@nonfx/flow-core";
 
 export default {
-	title: "@ollion/flow-core/f-button",
+	title: "@nonfx/flow-core/f-button",
 
 	parameters: {
 		controls: {

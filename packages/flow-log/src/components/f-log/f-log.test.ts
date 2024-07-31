@@ -3,9 +3,9 @@ import { html, fixture, expect } from "@open-wc/testing";
 import samplelogs from "./sample-logs";
 
 // import flow-core elements
-import "@ollion/flow-core";
-import { FLog } from "@ollion/flow-log";
-import { FDiv } from "@ollion/flow-core";
+import "@nonfx/flow-core";
+import { FLog } from "@nonfx/flow-log";
+import { FDiv } from "@nonfx/flow-core";
 
 describe("f-log", () => {
 	it("is defined", () => {

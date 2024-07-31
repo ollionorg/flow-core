@@ -1,12 +1,12 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { FormBuilderField } from "@ollion/flow-form-builder";
+import { FormBuilderField } from "@nonfx/flow-form-builder";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
 import { useArgs } from "@storybook/manager-api";
-import { FFormBuilder } from "@ollion/flow-form-builder/src";
+import { FFormBuilder } from "@nonfx/flow-form-builder/src";
 
 export default {
-	title: "@ollion/flow-form-builder/Examples/Deep Reactivity",
+	title: "@nonfx/flow-form-builder/Examples/Deep Reactivity",
 	argTypes: {
 		field: {
 			control: false

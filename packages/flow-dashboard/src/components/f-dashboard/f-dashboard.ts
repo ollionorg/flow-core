@@ -1,8 +1,8 @@
 import { CSSResult, html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
-import { FRoot, flowElement } from "@ollion/flow-core";
+import { FRoot, flowElement } from "@nonfx/flow-core";
 import globalStyle from "./f-dashboard-global.scss?inline";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { GridStack } from "gridstack";
 import { FDashboardConfig } from "../../types";
 import { getWidgetHeader, renderWidget, getWidgetFooter } from "./f-dashboard-utils";
@@ -51,9 +51,9 @@ export class FDashboard extends FRoot {
 		return html`
 			<div class="grid-stack" ${ref(this.gridStackElement)}>
 				${this.config.widgets.map(wgt => {
-					return keyed(
-						wgt.id,
-						html`<div
+			return keyed(
+				wgt.id,
+				html`<div
 							id="${wgt.id}"
 							class="grid-stack-item"
 							gs-w="${wgt.placement.w}"
@@ -63,8 +63,8 @@ export class FDashboard extends FRoot {
 								${getWidgetHeader(wgt)}${renderWidget(wgt)}${getWidgetFooter(wgt)}
 							</div>
 						</div>`
-					);
-				})}
+			);
+		})}
 			</div>
 		`;
 	}

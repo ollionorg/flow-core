@@ -5,7 +5,7 @@ import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { FTabNodeWidthProp } from "../f-tab/f-tab";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 injectCss("f-tab-node", globalStyle);
 
 @flowElement("f-tab-node")

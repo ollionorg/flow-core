@@ -4,7 +4,7 @@ import globalStyle from "./f-grid-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 injectCss("f-grid", globalStyle);
 
 export type FGridBodyHeightProp = `${number}px` | `${number}%` | `${number}vh`;
@@ -44,9 +44,8 @@ export class FGrid extends FRoot {
 	 * grid-template-columns to assign cell-width
 	 */
 	get gridTemplateColumns() {
-		return `repeat(auto-fill,minmax(${
-			this.minCellWidth && this.minCellWidth > 0 ? this.minCellWidth : 180
-		}px, ${this.maxCellWidth ? `${this.maxCellWidth}px` : "1fr"}))`;
+		return `repeat(auto-fill,minmax(${this.minCellWidth && this.minCellWidth > 0 ? this.minCellWidth : 180
+			}px, ${this.maxCellWidth ? `${this.maxCellWidth}px` : "1fr"}))`;
 	}
 
 	/**

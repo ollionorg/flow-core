@@ -3,7 +3,7 @@ import fInputAnatomy from "../svg/i-finput-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 export default {
-	title: "@ollion/flow-core/f-suggest",
+	title: "@nonfx/flow-core/f-suggest",
 
 	parameters: {
 		controls: {
@@ -190,7 +190,7 @@ export const Variant = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${variants.map(
-					item => html`<f-div>
+			item => html`<f-div>
           <f-suggest
             value=${value}
             placeholder="Write here"
@@ -198,25 +198,25 @@ export const Variant = {
             .variant=${item}
             size="medium"
       .suggestions=${[
-				"Suggestion 1",
-				"Suggestion 2",
-				"Suggestion 3",
-				"Suggestion 4",
-				"Suggestion 5",
-				"Suggestion 6",
-				"Suggestion 7",
-				"Suggestion 8",
-				"Suggestion 9",
-				"Suggestion 10",
-				"Suggestion 11",
-				"Suggestion 12",
-				"Suggestion 13",
-				"Suggestion 14",
-				"Suggestion 15",
-				"Suggestion 16",
-				"Suggestion 17",
-				"Suggestion 18"
-			]}
+					"Suggestion 1",
+					"Suggestion 2",
+					"Suggestion 3",
+					"Suggestion 4",
+					"Suggestion 5",
+					"Suggestion 6",
+					"Suggestion 7",
+					"Suggestion 8",
+					"Suggestion 9",
+					"Suggestion 10",
+					"Suggestion 11",
+					"Suggestion 12",
+					"Suggestion 13",
+					"Suggestion 14",
+					"Suggestion 15",
+					"Suggestion 16",
+					"Suggestion 17",
+					"Suggestion 18"
+				]}
           >
              <f-div slot="label" padding="none" gap="none">Label (variant="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
@@ -224,7 +224,7 @@ export const Variant = {
           </f-suggest></f-div
         ></f-div
       >`
-				)}
+		)}
 			</f-div>
 		`;
 	},
@@ -244,7 +244,7 @@ export const Category = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${categories.map(
-					item => html`<f-div>
+			item => html`<f-div>
           <f-suggest
             value=${value}
             placeholder="Write here"
@@ -253,32 +253,32 @@ export const Category = {
             size="medium"
             .variant=${item === "transparent" ? "block" : "curved"}
       .suggestions=${[
-				"Suggestion 1",
-				"Suggestion 2",
-				"Suggestion 3",
-				"Suggestion 4",
-				"Suggestion 5",
-				"Suggestion 6",
-				"Suggestion 7",
-				"Suggestion 8",
-				"Suggestion 9",
-				"Suggestion 10",
-				"Suggestion 11",
-				"Suggestion 12",
-				"Suggestion 13",
-				"Suggestion 14",
-				"Suggestion 15",
-				"Suggestion 16",
-				"Suggestion 17",
-				"Suggestion 18"
-			]}
+					"Suggestion 1",
+					"Suggestion 2",
+					"Suggestion 3",
+					"Suggestion 4",
+					"Suggestion 5",
+					"Suggestion 6",
+					"Suggestion 7",
+					"Suggestion 8",
+					"Suggestion 9",
+					"Suggestion 10",
+					"Suggestion 11",
+					"Suggestion 12",
+					"Suggestion 13",
+					"Suggestion 14",
+					"Suggestion 15",
+					"Suggestion 16",
+					"Suggestion 17",
+					"Suggestion 18"
+				]}
           >
             <f-div slot="label" padding="none" gap="none">Label (category="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-suggest></f-div
         ></f-div
       >`
-				)}
+		)}
 			</f-div>
 		`;
 	},
@@ -302,25 +302,25 @@ export const Value = {
 						@input=${handleValue}
 						size="medium"
 						.suggestions=${[
-							"Suggestion 1",
-							"Suggestion 2",
-							"Suggestion 3",
-							"Suggestion 4",
-							"Suggestion 5",
-							"Suggestion 6",
-							"Suggestion 7",
-							"Suggestion 8",
-							"Suggestion 9",
-							"Suggestion 10",
-							"Suggestion 11",
-							"Suggestion 12",
-							"Suggestion 13",
-							"Suggestion 14",
-							"Suggestion 15",
-							"Suggestion 16",
-							"Suggestion 17",
-							"Suggestion 18"
-						]}
+				"Suggestion 1",
+				"Suggestion 2",
+				"Suggestion 3",
+				"Suggestion 4",
+				"Suggestion 5",
+				"Suggestion 6",
+				"Suggestion 7",
+				"Suggestion 8",
+				"Suggestion 9",
+				"Suggestion 10",
+				"Suggestion 11",
+				"Suggestion 12",
+				"Suggestion 13",
+				"Suggestion 14",
+				"Suggestion 15",
+				"Suggestion 16",
+				"Suggestion 17",
+				"Suggestion 18"
+			]}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
 						<f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
@@ -350,25 +350,25 @@ export const Placeholder = {
 						@input=${handleValue}
 						size="medium"
 						.suggestions=${[
-							"Suggestion 1",
-							"Suggestion 2",
-							"Suggestion 3",
-							"Suggestion 4",
-							"Suggestion 5",
-							"Suggestion 6",
-							"Suggestion 7",
-							"Suggestion 8",
-							"Suggestion 9",
-							"Suggestion 10",
-							"Suggestion 11",
-							"Suggestion 12",
-							"Suggestion 13",
-							"Suggestion 14",
-							"Suggestion 15",
-							"Suggestion 16",
-							"Suggestion 17",
-							"Suggestion 18"
-						]}
+				"Suggestion 1",
+				"Suggestion 2",
+				"Suggestion 3",
+				"Suggestion 4",
+				"Suggestion 5",
+				"Suggestion 6",
+				"Suggestion 7",
+				"Suggestion 8",
+				"Suggestion 9",
+				"Suggestion 10",
+				"Suggestion 11",
+				"Suggestion 12",
+				"Suggestion 13",
+				"Suggestion 14",
+				"Suggestion 15",
+				"Suggestion 16",
+				"Suggestion 17",
+				"Suggestion 18"
+			]}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
 						<f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
@@ -393,39 +393,39 @@ export const Size = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${sizes.map(
-					item => html`<f-div>
+			item => html`<f-div>
           <f-suggest
             value=${value}
             placeholder="Write here"
             @input=${handleValue}
             size=${item}
       .suggestions=${[
-				"Suggestion 1",
-				"Suggestion 2",
-				"Suggestion 3",
-				"Suggestion 4",
-				"Suggestion 5",
-				"Suggestion 6",
-				"Suggestion 7",
-				"Suggestion 8",
-				"Suggestion 9",
-				"Suggestion 10",
-				"Suggestion 11",
-				"Suggestion 12",
-				"Suggestion 13",
-				"Suggestion 14",
-				"Suggestion 15",
-				"Suggestion 16",
-				"Suggestion 17",
-				"Suggestion 18"
-			]}
+					"Suggestion 1",
+					"Suggestion 2",
+					"Suggestion 3",
+					"Suggestion 4",
+					"Suggestion 5",
+					"Suggestion 6",
+					"Suggestion 7",
+					"Suggestion 8",
+					"Suggestion 9",
+					"Suggestion 10",
+					"Suggestion 11",
+					"Suggestion 12",
+					"Suggestion 13",
+					"Suggestion 14",
+					"Suggestion 15",
+					"Suggestion 16",
+					"Suggestion 17",
+					"Suggestion 18"
+				]}
           >
             <f-div slot="label" padding="none" gap="none">Label (size="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-suggest></f-div
         ></f-div
       >`
-				)}
+		)}
 			</f-div>
 		`;
 	},
@@ -448,11 +448,11 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-					item =>
-						html` <f-div align="middle-center" padding="large" gap="medium">
+			item =>
+				html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
-								state =>
-									html`<f-div
+					state =>
+						html`<f-div
 										><f-suggest
 											value=${value}
 											placeholder="Write here"
@@ -460,25 +460,25 @@ export const State = {
 											size="medium"
 											state=${state}
 											.suggestions=${[
-												"Suggestion 1",
-												"Suggestion 2",
-												"Suggestion 3",
-												"Suggestion 4",
-												"Suggestion 5",
-												"Suggestion 6",
-												"Suggestion 7",
-												"Suggestion 8",
-												"Suggestion 9",
-												"Suggestion 10",
-												"Suggestion 11",
-												"Suggestion 12",
-												"Suggestion 13",
-												"Suggestion 14",
-												"Suggestion 15",
-												"Suggestion 16",
-												"Suggestion 17",
-												"Suggestion 18"
-											]}
+								"Suggestion 1",
+								"Suggestion 2",
+								"Suggestion 3",
+								"Suggestion 4",
+								"Suggestion 5",
+								"Suggestion 6",
+								"Suggestion 7",
+								"Suggestion 8",
+								"Suggestion 9",
+								"Suggestion 10",
+								"Suggestion 11",
+								"Suggestion 12",
+								"Suggestion 13",
+								"Suggestion 14",
+								"Suggestion 15",
+								"Suggestion 16",
+								"Suggestion 17",
+								"Suggestion 18"
+							]}
 										>
 											<f-div slot="label" padding="none" gap="none">Label (state="${state}")</f-div>
 											<f-text slot="help" variant="para" size="small"
@@ -486,9 +486,9 @@ export const State = {
 											>
 										</f-suggest></f-div
 									>`
-							)}
-						</f-div>`
 				)}
+						</f-div>`
+		)}
 			</f-div>
 		`;
 	},
@@ -544,24 +544,24 @@ export const Suggestions = {
 						@input=${handleValue}
 						size="medium"
 						.suggestions=${[
-							"Suggestion 2",
-							"Suggestion 3",
-							"Suggestion 4",
-							"Suggestion 5",
-							"Suggestion 6",
-							"Suggestion 7",
-							"Suggestion 8",
-							"Suggestion 9",
-							"Suggestion 10",
-							"Suggestion 11",
-							"Suggestion 12",
-							"Suggestion 13",
-							"Suggestion 14",
-							"Suggestion 15",
-							"Suggestion 16",
-							"Suggestion 17",
-							"Suggestion 18"
-						]}
+				"Suggestion 2",
+				"Suggestion 3",
+				"Suggestion 4",
+				"Suggestion 5",
+				"Suggestion 6",
+				"Suggestion 7",
+				"Suggestion 8",
+				"Suggestion 9",
+				"Suggestion 10",
+				"Suggestion 11",
+				"Suggestion 12",
+				"Suggestion 13",
+				"Suggestion 14",
+				"Suggestion 15",
+				"Suggestion 16",
+				"Suggestion 17",
+				"Suggestion 18"
+			]}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
 						<f-div slot="description" padding="none" gap="none"
@@ -577,10 +577,10 @@ export const Suggestions = {
 						@input=${handleValue}
 						size="medium"
 						.suggestions=${{
-							Category1: ["option 1", "option2"],
-							Category2: ["option3", "option 4"],
-							Category3: ["option5", "option6"]
-						}}
+				Category1: ["option 1", "option2"],
+				Category2: ["option3", "option 4"],
+				Category3: ["option5", "option6"]
+			}}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
 						<f-div slot="description" padding="none" gap="none"
@@ -629,25 +629,25 @@ export const IconLeft = {
 						size="medium"
 						icon-left="i-app"
 						.suggestions=${[
-							"Suggestion 1",
-							"Suggestion 2",
-							"Suggestion 3",
-							"Suggestion 4",
-							"Suggestion 5",
-							"Suggestion 6",
-							"Suggestion 7",
-							"Suggestion 8",
-							"Suggestion 9",
-							"Suggestion 10",
-							"Suggestion 11",
-							"Suggestion 12",
-							"Suggestion 13",
-							"Suggestion 14",
-							"Suggestion 15",
-							"Suggestion 16",
-							"Suggestion 17",
-							"Suggestion 18"
-						]}
+				"Suggestion 1",
+				"Suggestion 2",
+				"Suggestion 3",
+				"Suggestion 4",
+				"Suggestion 5",
+				"Suggestion 6",
+				"Suggestion 7",
+				"Suggestion 8",
+				"Suggestion 9",
+				"Suggestion 10",
+				"Suggestion 11",
+				"Suggestion 12",
+				"Suggestion 13",
+				"Suggestion 14",
+				"Suggestion 15",
+				"Suggestion 16",
+				"Suggestion 17",
+				"Suggestion 18"
+			]}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
 						<f-div slot="description" padding="none" gap="none"
@@ -682,25 +682,25 @@ export const IconRight = {
 						icon-left="i-app"
 						icon-right="i-delete"
 						.suggestions=${[
-							"Suggestion 1",
-							"Suggestion 2",
-							"Suggestion 3",
-							"Suggestion 4",
-							"Suggestion 5",
-							"Suggestion 6",
-							"Suggestion 7",
-							"Suggestion 8",
-							"Suggestion 9",
-							"Suggestion 10",
-							"Suggestion 11",
-							"Suggestion 12",
-							"Suggestion 13",
-							"Suggestion 14",
-							"Suggestion 15",
-							"Suggestion 16",
-							"Suggestion 17",
-							"Suggestion 18"
-						]}
+				"Suggestion 1",
+				"Suggestion 2",
+				"Suggestion 3",
+				"Suggestion 4",
+				"Suggestion 5",
+				"Suggestion 6",
+				"Suggestion 7",
+				"Suggestion 8",
+				"Suggestion 9",
+				"Suggestion 10",
+				"Suggestion 11",
+				"Suggestion 12",
+				"Suggestion 13",
+				"Suggestion 14",
+				"Suggestion 15",
+				"Suggestion 16",
+				"Suggestion 17",
+				"Suggestion 18"
+			]}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
 						<f-div slot="description" padding="none" gap="none"
@@ -736,25 +736,25 @@ export const Prefix = {
 						icon-right="i-delete"
 						prefix="+91"
 						.suggestions=${[
-							"Suggestion 1",
-							"Suggestion 2",
-							"Suggestion 3",
-							"Suggestion 4",
-							"Suggestion 5",
-							"Suggestion 6",
-							"Suggestion 7",
-							"Suggestion 8",
-							"Suggestion 9",
-							"Suggestion 10",
-							"Suggestion 11",
-							"Suggestion 12",
-							"Suggestion 13",
-							"Suggestion 14",
-							"Suggestion 15",
-							"Suggestion 16",
-							"Suggestion 17",
-							"Suggestion 18"
-						]}
+				"Suggestion 1",
+				"Suggestion 2",
+				"Suggestion 3",
+				"Suggestion 4",
+				"Suggestion 5",
+				"Suggestion 6",
+				"Suggestion 7",
+				"Suggestion 8",
+				"Suggestion 9",
+				"Suggestion 10",
+				"Suggestion 11",
+				"Suggestion 12",
+				"Suggestion 13",
+				"Suggestion 14",
+				"Suggestion 15",
+				"Suggestion 16",
+				"Suggestion 17",
+				"Suggestion 18"
+			]}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
 						<f-div slot="description" padding="none" gap="none">This is a demo for prefix</f-div>
@@ -789,25 +789,25 @@ export const Suffix = {
 						prefix="+91"
 						suffix="Delete"
 						.suggestions=${[
-							"Suggestion 1",
-							"Suggestion 2",
-							"Suggestion 3",
-							"Suggestion 4",
-							"Suggestion 5",
-							"Suggestion 6",
-							"Suggestion 7",
-							"Suggestion 8",
-							"Suggestion 9",
-							"Suggestion 10",
-							"Suggestion 11",
-							"Suggestion 12",
-							"Suggestion 13",
-							"Suggestion 14",
-							"Suggestion 15",
-							"Suggestion 16",
-							"Suggestion 17",
-							"Suggestion 18"
-						]}
+				"Suggestion 1",
+				"Suggestion 2",
+				"Suggestion 3",
+				"Suggestion 4",
+				"Suggestion 5",
+				"Suggestion 6",
+				"Suggestion 7",
+				"Suggestion 8",
+				"Suggestion 9",
+				"Suggestion 10",
+				"Suggestion 11",
+				"Suggestion 12",
+				"Suggestion 13",
+				"Suggestion 14",
+				"Suggestion 15",
+				"Suggestion 16",
+				"Suggestion 17",
+				"Suggestion 18"
+			]}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
 						<f-div slot="description" padding="none" gap="none">This is a demo for suffix</f-div>
@@ -843,25 +843,25 @@ export const MaxLength = {
 						suffix="Delete"
 						max-length="10"
 						.suggestions=${[
-							"Suggestion 1",
-							"Suggestion 2",
-							"Suggestion 3",
-							"Suggestion 4",
-							"Suggestion 5",
-							"Suggestion 6",
-							"Suggestion 7",
-							"Suggestion 8",
-							"Suggestion 9",
-							"Suggestion 10",
-							"Suggestion 11",
-							"Suggestion 12",
-							"Suggestion 13",
-							"Suggestion 14",
-							"Suggestion 15",
-							"Suggestion 16",
-							"Suggestion 17",
-							"Suggestion 18"
-						]}
+				"Suggestion 1",
+				"Suggestion 2",
+				"Suggestion 3",
+				"Suggestion 4",
+				"Suggestion 5",
+				"Suggestion 6",
+				"Suggestion 7",
+				"Suggestion 8",
+				"Suggestion 9",
+				"Suggestion 10",
+				"Suggestion 11",
+				"Suggestion 12",
+				"Suggestion 13",
+				"Suggestion 14",
+				"Suggestion 15",
+				"Suggestion 16",
+				"Suggestion 17",
+				"Suggestion 18"
+			]}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
 						<f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
@@ -885,7 +885,7 @@ export const Flags = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${[0, 1, 2, 3].map(
-					item => html`<f-div>
+			item => html`<f-div>
           <f-suggest
             value=${value}
             placeholder="Write here"
@@ -896,40 +896,39 @@ export const Flags = {
             ?clear=${item === 2 ? true : false}
             ?read-only=${item === 3 ? true : false}
       .suggestions=${[
-				"Suggestion 1",
-				"Suggestion 2",
-				"Suggestion 3",
-				"Suggestion 4",
-				"Suggestion 5",
-				"Suggestion 6",
-				"Suggestion 7",
-				"Suggestion 8",
-				"Suggestion 9",
-				"Suggestion 10",
-				"Suggestion 11",
-				"Suggestion 12",
-				"Suggestion 13",
-				"Suggestion 14",
-				"Suggestion 15",
-				"Suggestion 16",
-				"Suggestion 17",
-				"Suggestion 18"
-			]}
+					"Suggestion 1",
+					"Suggestion 2",
+					"Suggestion 3",
+					"Suggestion 4",
+					"Suggestion 5",
+					"Suggestion 6",
+					"Suggestion 7",
+					"Suggestion 8",
+					"Suggestion 9",
+					"Suggestion 10",
+					"Suggestion 11",
+					"Suggestion 12",
+					"Suggestion 13",
+					"Suggestion 14",
+					"Suggestion 15",
+					"Suggestion 16",
+					"Suggestion 17",
+					"Suggestion 18"
+				]}
           >
-            <f-div slot="label" padding="none" gap="none">${
-							item === 0
-								? "Loader"
-								: item === 1
-								? "Disabled"
-								: item === 2
-								? "Clear Icon on Type"
-								: "Readonly"
-						}</f-div>
+            <f-div slot="label" padding="none" gap="none">${item === 0
+					? "Loader"
+					: item === 1
+						? "Disabled"
+						: item === 2
+							? "Clear Icon on Type"
+							: "Readonly"
+				}</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-suggest></f-div
         ></f-div
       >`
-				)}
+		)}
 			</f-div>
 		`;
 	},

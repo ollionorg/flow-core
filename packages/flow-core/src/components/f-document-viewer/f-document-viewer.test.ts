@@ -8,7 +8,7 @@ import {
 	FDiv,
 	FText,
 	FSearch
-} from "@ollion/flow-core";
+} from "@nonfx/flow-core";
 import { faker } from "@faker-js/faker";
 
 export default function getFakeDocumentContent(items = 2, levels = 2): FDocViewerContent {

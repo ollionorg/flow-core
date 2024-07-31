@@ -12,7 +12,7 @@ import { classMap } from "lit-html/directives/class-map.js";
 import { cloneDeep } from "lodash-es";
 import { flowElement } from "./../../utils";
 import { displayCustomTemplate, displayOptions, displayCategories } from "./display-options";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 injectCss("f-suggest", globalStyle);
 
 export type FSuggestState = "primary" | "default" | "success" | "warning" | "danger";
@@ -455,8 +455,8 @@ export class FSuggest extends FRoot {
 				.size=${this.size}
 			>
 				${this.isSearchComponent
-					? ""
-					: html` <f-div slot="label"><slot name="label"></slot></f-div>
+				? ""
+				: html` <f-div slot="label"><slot name="label"></slot></f-div>
 							<f-div slot="description"><slot name="description"></slot></f-div>
 							<f-div slot="help"><slot name="help"></slot></f-div>
 							<f-div slot="icon-tooltip"><slot name="icon-tooltip"></slot></f-div
@@ -466,8 +466,8 @@ export class FSuggest extends FRoot {
 				? html` <f-popover .overlay=${false} .placement=${"bottom-start"} class="f-suggest-popover">
 						<f-div direction="column" state="secondary">
 							${this.filteredSuggestions && this.filteredSuggestionsLength > 0
-								? this.getSuggestionHtml(this.filteredSuggestions)
-								: html`<slot name="no-data"></slot>`}
+						? this.getSuggestionHtml(this.filteredSuggestions)
+						: html`<slot name="no-data"></slot>`}
 						</f-div>
 				  </f-popover>`
 				: nothing}

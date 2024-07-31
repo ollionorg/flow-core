@@ -4,7 +4,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useState } from "@storybook/client-api";
 
 export default {
-	title: "@ollion/flow-core/f-form",
+	title: "@nonfx/flow-core/f-form",
 
 	parameters: {
 		controls: {
@@ -38,9 +38,9 @@ export const Playground = {
 				direction="vertical"
 				collapse="accordion"
 				.label=${{
-					title: "Group Label",
-					description: "This is a description"
-				}}
+				title: "Group Label",
+				description: "This is a description"
+			}}
 			>
 				<f-select
 					placeholder="Select Option"
@@ -59,8 +59,8 @@ export const Playground = {
 			<f-form-group
 				direction="vertical"
 				.label=${{
-					title: "Checkbox Label"
-				}}
+				title: "Checkbox Label"
+			}}
 			>
 				<f-checkbox>
 					<f-div slot="label" padding="none" gap="none">Apple</f-div>
@@ -111,8 +111,8 @@ export const Gap = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${gaps.map(
-					item =>
-						html`<f-form gap=${item}>
+			item =>
+				html`<f-form gap=${item}>
 							<f-input value=${value} placeholder="Write here" @input=${handleValue}>
 								<f-div slot="label" padding="none" gap="none">Label (gap="${item}")</f-div>
 								<f-text slot="help" variant="para" size="small"
@@ -126,7 +126,7 @@ export const Gap = {
 								>
 							</f-input>
 						</f-form>`
-				)}
+		)}
 			</f-div>
 		`;
 	},

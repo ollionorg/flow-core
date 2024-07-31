@@ -6,7 +6,7 @@
 
 ### First Release
 
-- `@ollion/flow-dashboard` released.
+- `@nonfx/flow-dashboard` released.
 
 ### Note
 

@@ -2,7 +2,7 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 export default {
-	title: "@ollion/flow-lineage/Examples/Organizational Structure ",
+	title: "@nonfx/flow-lineage/Examples/Organizational Structure ",
 
 	parameters: {
 		controls: {

@@ -1,9 +1,9 @@
 import { html, fixture, expect } from "@open-wc/testing";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 
-import { FCheckbox } from "@ollion/flow-core";
+import { FCheckbox } from "@nonfx/flow-core";
 
 describe("f-checkbox", () => {
 	it("is defined", () => {

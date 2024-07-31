@@ -1,11 +1,11 @@
 import { html } from "lit-html";
 import samplelogs from "./logs/logs.js";
 import { createRef, ref } from "lit/directives/ref.js";
-import { FLog } from "@ollion/flow-log";
-import { FPopover } from "@ollion/flow-core";
+import { FLog } from "@nonfx/flow-log";
+import { FPopover } from "@nonfx/flow-core";
 
 export default {
-	title: "@ollion/flow-log/f-log",
+	title: "@nonfx/flow-log/f-log",
 
 	parameters: {
 		controls: {
@@ -43,17 +43,17 @@ export const Playground = {
 			>
 				<f-div width="220px" direction="column">
 					${[
-						{ icon: "i-download", text: "Download" },
-						{
-							icon: "i-indent",
-							text: "Indent"
-						},
-						{
-							icon: "i-expand-3",
-							text: "Expand"
-						}
-					].map(op => {
-						return html`<f-div
+				{ icon: "i-download", text: "Download" },
+				{
+					icon: "i-indent",
+					text: "Indent"
+				},
+				{
+					icon: "i-expand-3",
+					text: "Expand"
+				}
+			].map(op => {
+				return html`<f-div
 							state="secondary"
 							padding="medium"
 							gap="medium"
@@ -63,7 +63,7 @@ export const Playground = {
 							<f-icon size="small" .source=${op.icon}></f-icon>
 							<f-text variant="para" size="medium" weight="regular">${op.text}</f-text>
 						</f-div>`;
-					})}
+			})}
 				</f-div>
 			</f-popover>
 			<f-div>

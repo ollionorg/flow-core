@@ -5,7 +5,7 @@ import globalStyle from "./f-carousel-content-global.scss?inline";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
 
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 
 injectCss("f-carousel-content", globalStyle);
 @flowElement("f-carousel-content")

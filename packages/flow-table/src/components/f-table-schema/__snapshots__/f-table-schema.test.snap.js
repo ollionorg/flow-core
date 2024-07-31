@@ -1,8 +1,8 @@
 /* @web/test-runner snapshot v1 */
 export const snapshots = {};
 
-snapshots["f-table-schema should display rows and column based on data"] = 
-`<div class="f-table-schema-wrapper">
+snapshots["f-table-schema should display rows and column based on data"] =
+  `<div class="f-table-schema-wrapper">
   <slot name="search">
     <f-div
       align="top-left"
@@ -450,7 +450,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
             variant="para"
             weight="regular"
           >
-            vikas0@ollion.com
+            vikas0@nonfx.com
           </f-text>
         </f-div>
       </f-tcell>
@@ -639,7 +639,7 @@ snapshots["f-table-schema should display rows and column based on data"] =
             variant="para"
             weight="regular"
           >
-            vikas1@ollion.com
+            vikas1@nonfx.com
           </f-text>
         </f-div>
       </f-tcell>

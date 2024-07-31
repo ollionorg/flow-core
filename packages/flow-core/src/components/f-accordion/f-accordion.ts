@@ -5,7 +5,7 @@ import globalStyle from "./f-accordion-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv, FDivPaddingProp } from "../f-div/f-div";
 import { flowElement, generateId } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 
 injectCss("f-accordion", globalStyle);
 
@@ -89,10 +89,10 @@ export class FAccordion extends FRoot {
 		return this.icon === "caret"
 			? "i-caret-down"
 			: this.icon === "chevron"
-			? "i-chevron-down"
-			: this.open
-			? "i-minus"
-			: "i-plus";
+				? "i-chevron-down"
+				: this.open
+					? "i-minus"
+					: "i-plus";
 	}
 
 	/**

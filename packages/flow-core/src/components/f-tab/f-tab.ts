@@ -7,7 +7,7 @@ import { FDiv } from "../f-div/f-div";
 import { FTabNode } from "../f-tab-node/f-tab-node";
 import { FIconButton } from "../f-icon-button/f-icon-button";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 injectCss("f-tab", globalStyle);
 
 export type FTabNodeWidthProp = "fill" | "hug-content" | `${number}`;
@@ -138,21 +138,21 @@ For vertical f-tab, content can align to top, middle, or bottom.
 			this.showScrollIcons && this.isOverflowing
 				? html`<f-div
 						class=${this.direction === "horizontal"
-							? "f-tab-scroll-icons icon-left"
-							: "f-tab-scroll-icons icon-top"}
+						? "f-tab-scroll-icons icon-left"
+						: "f-tab-scroll-icons icon-top"}
 						.width=${this.direction === "horizontal" ? "hug-content" : "100%"}
 						.height=${this.direction === "horizontal" ? "100%" : "hug-content"}
 						align="middle-center"
 				  >
 						${this.direction === "horizontal"
-							? html` <f-icon-button
+						? html` <f-icon-button
 									data-qa-chevron-left
 									icon="i-chevron-left"
 									state="neutral"
 									size="x-small"
 									@click=${(e: MouseEvent) => this.handleScroll(e, "left", -150)}
 							  ></f-icon-button>`
-							: html` <f-icon-button
+						: html` <f-icon-button
 									data-qa-chevron-up
 									icon="i-chevron-up"
 									state="neutral"
@@ -166,21 +166,21 @@ For vertical f-tab, content can align to top, middle, or bottom.
 			this.showScrollIcons && this.isOverflowing
 				? html`<f-div
 						class=${this.direction === "horizontal"
-							? "f-tab-scroll-icons icon-right"
-							: "f-tab-scroll-icons icon-bottom"}
+						? "f-tab-scroll-icons icon-right"
+						: "f-tab-scroll-icons icon-bottom"}
 						.width=${this.direction === "horizontal" ? "hug-content" : "100%"}
 						.height=${this.direction === "horizontal" ? "100%" : "hug-content"}
 						align="middle-center"
 				  >
 						${this.direction === "horizontal"
-							? html` <f-icon-button
+						? html` <f-icon-button
 									data-qa-chevron-right
 									icon="i-chevron-right"
 									state="neutral"
 									size="x-small"
 									@click=${(e: MouseEvent) => this.handleScroll(e, "left", 150)}
 							  ></f-icon-button>`
-							: html` <f-icon-button
+						: html` <f-icon-button
 									data-qa-chevron-down
 									icon="i-chevron-down"
 									state="neutral"

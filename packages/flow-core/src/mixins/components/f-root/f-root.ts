@@ -2,7 +2,7 @@ import { LitElement, PropertyValueMap, PropertyValues, unsafeCSS } from "lit";
 import { property, query } from "lit/decorators.js";
 
 import globalStyle from "./f-root-global.scss?inline";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { FTooltipPlacement } from "../../../components/f-tooltip/f-tooltip";
 import type { FText } from "../../../components/f-text/f-text";
 

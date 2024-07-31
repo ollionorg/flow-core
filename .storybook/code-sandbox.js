@@ -4,7 +4,7 @@ export function getCodeSandBoxUrl(story) {
 	const params = getParameters({
 		files: {
 			"index.js": {
-				content: `import "@ollion/flow-core";
+				content: `import "@nonfx/flow-core";
 		  import "@ollion/flow-system-icon";
 		  document.getElementById("app").innerHTML =\`${story}\`
 		  `,
@@ -33,7 +33,7 @@ export function getCodeSandBoxUrl(story) {
 				content: {
 					dependencies: {
 						"@ollion/flow-system-icon": "latest",
-						"@ollion/flow-core": "latest"
+						"@nonfx/flow-core": "latest"
 					}
 				}
 			}

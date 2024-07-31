@@ -10,10 +10,10 @@ export default defineConfig({
 		},
 		outDir: "umd",
 		rollupOptions: {
-			external: ["@ollion/flow-core-config", "@ollion/flow-core"],
+			external: ["@nonfx/flow-core-config", "@nonfx/flow-core"],
 			output: {
 				globals: {
-					"@ollion/flow-core": "flowCore"
+					"@nonfx/flow-core": "flowCore"
 				}
 			}
 		}

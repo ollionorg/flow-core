@@ -2,10 +2,10 @@ import { html, fixture, expect } from "@open-wc/testing";
 import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 
-import { ConfigUtil, FIconButton } from "@ollion/flow-core";
-import { FTcell, FTable } from "@ollion/flow-table";
+import { ConfigUtil, FIconButton } from "@nonfx/flow-core";
+import { FTcell, FTable } from "@nonfx/flow-table";
 ConfigUtil.setConfig({ iconPack: IconPack });
 
 describe("f-tcell", () => {
@@ -21,10 +21,10 @@ describe("f-tcell", () => {
 					<f-tcell
 						id="cell-to-test"
 						.actions=${[
-							{ icon: "i-copy", onClick: () => console.log("i-launch clicked") },
-							{ icon: "i-git-branch", onClick: () => console.log("i-launch clicked") },
-							{ icon: "i-launch", onClick: () => console.log("i-launch clicked") }
-						]}
+					{ icon: "i-copy", onClick: () => console.log("i-launch clicked") },
+					{ icon: "i-git-branch", onClick: () => console.log("i-launch clicked") },
+					{ icon: "i-launch", onClick: () => console.log("i-launch clicked") }
+				]}
 					>
 						<f-text> Column </f-text>
 					</f-tcell> </f-trow

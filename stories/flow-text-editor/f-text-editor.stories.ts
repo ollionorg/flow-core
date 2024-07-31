@@ -2,7 +2,7 @@ import { html } from "lit-html";
 import { createRef, ref } from "lit-html/directives/ref.js";
 
 export default {
-	title: "@ollion/flow-text-editor/f-text-editor",
+	title: "@nonfx/flow-text-editor/f-text-editor",
 
 	parameters: {
 		controls: {

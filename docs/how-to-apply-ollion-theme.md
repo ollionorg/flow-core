@@ -5,7 +5,7 @@
 Run the following magic spell to transform your existing theme into the enchanting `f-ollion-dark`.
 
 ```Javascript
-import { ConfigUtil } from "@ollion/flow-core";
+import { ConfigUtil } from "@nonfx/flow-core";
 ConfigUtil.setConfig({ theme: "f-ollion-dark" });
 ```
 

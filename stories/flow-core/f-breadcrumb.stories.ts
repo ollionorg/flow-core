@@ -2,10 +2,10 @@ import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs } from "@storybook/manager-api";
 import { useState } from "@storybook/preview-api";
-import { FBreadcrumbs, FBreadCrumbSize, FBreadCrumbVariant } from "@ollion/flow-core";
+import { FBreadcrumbs, FBreadCrumbSize, FBreadCrumbVariant } from "@nonfx/flow-core";
 
 export default {
-	title: "@ollion/flow-core/f-breadcrumb",
+	title: "@nonfx/flow-core/f-breadcrumb",
 
 	parameters: {
 		controls: {
@@ -122,12 +122,12 @@ export const Size = {
 
 		return html`<f-div padding="small" gap="x-large">
 			${data.map(
-				item =>
-					html` <f-div direction="column" gap="large"
+			item =>
+				html` <f-div direction="column" gap="large"
 						><f-text>size=${item}</f-text
 						><f-breadcrumb .crumbs=${crumbs} .size=${item}></f-breadcrumb
 					></f-div>`
-			)}
+		)}
 		</f-div>`;
 	},
 
@@ -181,12 +181,12 @@ export const Crumbs = {
 
 		return html`<f-div padding="small" gap="x-large">
 			${data.map(
-				item =>
-					html` <f-div direction="column" gap="large"
+			item =>
+				html` <f-div direction="column" gap="large"
 						><f-text>${item.length > 4 ? "Crumbs length > 4" : "Crumbs length < 4"}</f-text
 						><f-breadcrumb .crumbs=${item}></f-breadcrumb
 					></f-div>`
-			)}
+		)}
 		</f-div>`;
 	},
 
@@ -249,12 +249,12 @@ export const Variant = {
 
 		return html`<f-div padding="small" gap="x-large">
 			${data.map(
-				(item, index) =>
-					html` <f-div direction="column" gap="large"
+			(item, index) =>
+				html` <f-div direction="column" gap="large"
 						><f-text>${index === 0 ? "variant='text'" : "variant='icon'"}</f-text
 						><f-breadcrumb .crumbs=${item} .variant=${index === 0 ? "text" : "icon"}></f-breadcrumb
 					></f-div>`
-			)}
+		)}
 		</f-div>`;
 	},
 

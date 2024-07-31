@@ -4,7 +4,7 @@ import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fSwitchAnatomy from "../svg/i-fswitch-anatomy.js";
 
 export default {
-	title: "@ollion/flow-core/f-switch",
+	title: "@nonfx/flow-core/f-switch",
 
 	parameters: {
 		controls: {
@@ -89,7 +89,7 @@ export const Value = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${values.map(
-					item => html`<f-div padding="medium">
+			item => html`<f-div padding="medium">
            <f-switch
               size="medium"
               .value=${item}
@@ -104,7 +104,7 @@ export const Value = {
             </f-switch></f-div
         ></f-div
       >`
-				)}
+		)}
 			</f-div>
 		`;
 	},
@@ -124,7 +124,7 @@ export const Size = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${sizes.map(
-					item => html`<f-div padding="small">
+			item => html`<f-div padding="small">
          <f-switch
               .size=${item}
               .value=${value}
@@ -139,7 +139,7 @@ export const Size = {
             </f-switch></f-div
         ></f-div
       >`
-				)}
+		)}
 			</f-div>
 		`;
 	},
@@ -162,11 +162,11 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-					item =>
-						html` <f-div align="middle-center" padding="large" gap="medium">
+			item =>
+				html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
-								state =>
-									html`<f-div padding="small"
+					state =>
+						html`<f-div padding="small"
 										><f-switch size="medium" .value=${value} .state=${state} @input=${handleValue}>
 											<f-div padding="none" align="middle-center" slot="label">
 												<f-text variant="para" size="small">Switch (state="${state}")</f-text>
@@ -176,9 +176,9 @@ export const State = {
 											</f-div>
 										</f-switch></f-div
 									>`
-							)}
-						</f-div>`
 				)}
+						</f-div>`
+		)}
 			</f-div>
 		`;
 	},
@@ -197,7 +197,7 @@ export const Flags = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${[0].map(
-					item => html`<f-div>
+			item => html`<f-div>
          <f-switch
               size="medium"
               .value=${value}
@@ -213,7 +213,7 @@ export const Flags = {
             </f-switch></f-div
         ></f-div
       >`
-				)}
+		)}
 			</f-div>
 		`;
 	},

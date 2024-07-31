@@ -293,7 +293,7 @@ export class FPictogram extends FRoot {
 			>
 				${this.renderedHtml}
 				${this.variant === "squircle"
-				? html`<svg width="0" height="0">
+					? html`<svg width="0" height="0">
 							<defs>
 								<clipPath id="squircle" clipPathUnits="objectBoundingBox">
 									<path
@@ -302,7 +302,7 @@ export class FPictogram extends FRoot {
 								</clipPath>
 							</defs>
 					  </svg>`
-				: null}
+					: null}
 			</div>
 		`;
 	}

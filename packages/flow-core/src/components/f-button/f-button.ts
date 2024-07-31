@@ -217,8 +217,9 @@ export class FButton extends FRoot {
 					return `background-color: ${LightenDarkenColor(
 						this.fill,
 						-150
-					)}; border: 1px solid ${LightenDarkenColor(this.fill, -150)}; color: transparent; fill: ${this.fill
-						}`;
+					)}; border: 1px solid ${LightenDarkenColor(this.fill, -150)}; color: transparent; fill: ${
+						this.fill
+					}`;
 				} else if (this.category === "outline") {
 					return `background: transparent; border: 1px solid ${this.fill}; fill: ${this.fill};`;
 				} else {
@@ -332,10 +333,10 @@ export class FButton extends FRoot {
 			return html`<button
 				part="f-button-wrapper"
 				class=${classMap({
-				"f-button": true,
-				"custom-loader": this.fill ? true : false,
-				"custom-hover": this.fill && this.category === "fill" ? true : false
-			})}
+					"f-button": true,
+					"custom-loader": this.fill ? true : false,
+					"custom-hover": this.fill && this.category === "fill" ? true : false
+				})}
 				style=${this.applyStyles()}
 				category=${ifDefined(this.category)}
 				size=${ifDefined(this.size)}
@@ -355,11 +356,11 @@ export class FButton extends FRoot {
 		return html`<span
 				part="f-button-wrapper"
 				class=${classMap({
-			"f-button": true,
-			"custom-loader": this.fill ? true : false,
-			"custom-hover": this.fill && this.category === "fill" ? true : false,
-			"has-options": this.hasActions ? true : false
-		})}
+					"f-button": true,
+					"custom-loader": this.fill ? true : false,
+					"custom-hover": this.fill && this.category === "fill" ? true : false,
+					"has-options": this.hasActions ? true : false
+				})}
 				style=${this.applyStyles()}
 				category=${ifDefined(this.category)}
 				size=${ifDefined(this.size)}
@@ -396,13 +397,13 @@ export class FButton extends FRoot {
 						>
 							<f-div direction="column" stat="secondary" overflow="scroll">
 								${this.actions!.map((a, ai) => {
-					const border = (() => {
-						if (ai === this.actions!.length - 1) {
-							return "none";
-						}
-						return "small solid secondary bottom";
-					})();
-					return html`<f-div
+									const border = (() => {
+										if (ai === this.actions!.length - 1) {
+											return "none";
+										}
+										return "small solid secondary bottom";
+									})();
+									return html`<f-div
 										.border=${border}
 										align="middle-left"
 										gap="auto"
@@ -410,15 +411,15 @@ export class FButton extends FRoot {
 										@click=${() => this.selectAction(a)}
 									>
 										${typeof a === "function"
-							? a()
-							: html`<f-div padding="medium" align="middle-left"
+											? a()
+											: html`<f-div padding="medium" align="middle-left"
 													><f-text>${a}</f-text></f-div
 											  >`}
 										${this.selectedAction === a
-							? html`<f-icon source="i-tick" style="margin-right:12px;"></f-icon>`
-							: nothing}
+											? html`<f-icon source="i-tick" style="margin-right:12px;"></f-icon>`
+											: nothing}
 									</f-div>`;
-				})}
+								})}
 							</f-div>
 						</f-popover>`
 				: nothing} `;

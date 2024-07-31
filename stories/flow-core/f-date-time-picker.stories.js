@@ -167,7 +167,7 @@ export const Variant = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${variants.map(
-			item => html`<f-div>
+					item => html`<f-div>
           <f-date-time-picker
             value=${value}
             @input=${handleValue}
@@ -179,7 +179,7 @@ export const Variant = {
           </f-date-time-picker></f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -199,7 +199,7 @@ export const Category = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${categories.map(
-			item => html`<f-div>
+					item => html`<f-div>
           <f-date-time-picker
             value=${value}
             @input=${handleValue}
@@ -212,7 +212,7 @@ export const Category = {
           </f-date-time-picker></f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -232,11 +232,11 @@ export const Mode = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${types.map(
-			item =>
-				html` <f-div align="middle-center" padding="large" gap="medium">
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
-					type =>
-						html`<f-div
+								type =>
+									html`<f-div
 										><f-date-time-picker
 											value=${value}
 											@input=${handleValue}
@@ -249,9 +249,9 @@ export const Mode = {
 											>
 										</f-date-time-picker></f-div
 									>`
-				)}
+							)}
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -322,7 +322,7 @@ export const Size = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${sizes.map(
-			item => html`<f-div>
+					item => html`<f-div>
           <f-date-time-picker
             value=${value}
             @input=${handleValue}
@@ -333,7 +333,7 @@ export const Size = {
           </f-date-time-picker></f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -356,11 +356,11 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-			item =>
-				html` <f-div align="middle-center" padding="large" gap="medium">
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
-					state =>
-						html`<f-div
+								state =>
+									html`<f-div
 										><f-date-time-picker
 											value=${value}
 											@input=${handleValue}
@@ -373,9 +373,9 @@ export const State = {
 											>
 										</f-date-time-picker></f-div
 									>`
-				)}
+							)}
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -471,11 +471,11 @@ export const DisableDate = {
 						@input=${handleValue}
 						size="medium"
 						.disable-date=${[
-				{
-					from: new Date(),
-					to: new Date().fp_incr(8)
-				}
-			]}
+							{
+								from: new Date(),
+								to: new Date().fp_incr(8)
+							}
+						]}
 					>
 						<f-div slot="label" padding="none" gap="none">Label (Disable dates range)</f-div>
 						<f-div slot="description" padding="none" gap="none"
@@ -490,10 +490,10 @@ export const DisableDate = {
 						@input=${handleValue}
 						size="medium"
 						.disable-date=${[
-				function (date) {
-					return date.getDay() === 0 || date.getDay() === 6;
-				}
-			]}
+							function (date) {
+								return date.getDay() === 0 || date.getDay() === 6;
+							}
+						]}
 					>
 						<f-div slot="label" padding="none" gap="none"
 							>Label (Disable dates from function)</f-div
@@ -528,10 +528,10 @@ export const Flags = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="large" direction="column">
 				${array.map(
-			row =>
-				html`<f-div gap="medium"
+					row =>
+						html`<f-div gap="medium"
 							>${row.map(item => {
-					return html`<f-div>
+								return html`<f-div>
           <f-date-time-picker
             value=${value}
             @input=${handleValue}
@@ -543,25 +543,26 @@ export const Flags = {
       ?week-number=${item === 4}
       ?inline=${item === 5}
           >
-            <f-div slot="label" padding="none" gap="none">${item === 0
-							? "Loader"
-							: item === 1
+            <f-div slot="label" padding="none" gap="none">${
+							item === 0
+								? "Loader"
+								: item === 1
 								? "Disabled"
 								: item === 2
-									? "Clear Icon on Type"
-									: item === 3
-										? "Range Calendar"
-										: item === 4
-											? "Week Numbers Display"
-											: "Inline"
+								? "Clear Icon on Type"
+								: item === 3
+								? "Range Calendar"
+								: item === 4
+								? "Week Numbers Display"
+								: "Inline"
 						}</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-date-time-picker></f-div
         ></f-div
       >`;
-				})}</f-div
+							})}</f-div
 						>`
-		)}
+				)}
 			</f-div>
 		`;
 	},

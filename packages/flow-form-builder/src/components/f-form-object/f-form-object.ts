@@ -116,11 +116,11 @@ export class FFormObject extends FRoot {
 			this.fieldRefs[fieldname] = fieldRef;
 			fieldTemplates.push(html`
 				${fieldRenderer[fieldConfig.type](
-				fieldname,
-				fieldConfig,
-				fieldRef,
-				this.getFieldValue(fieldname)
-			)}
+					fieldname,
+					fieldConfig,
+					fieldRef,
+					this.getFieldValue(fieldname)
+				)}
 				${this.config.fieldSeparator && idx < fieldArray.length - 1
 					? html`<f-divider id="${fieldname}-divider"></f-divider>`
 					: ""}
@@ -141,7 +141,7 @@ export class FFormObject extends FRoot {
 
 			<slot name="help">
 				${this.config.helperText
-				? html`<f-text
+					? html`<f-text
 							variant="para"
 							size="small"
 							weight="regular"
@@ -149,7 +149,7 @@ export class FFormObject extends FRoot {
 							.state=${this.config.state ?? "secondary"}
 							>${this.config?.helperText}</f-text
 					  >`
-				: nothing}
+					: nothing}
 			</slot>
 		</f-div>`;
 	}

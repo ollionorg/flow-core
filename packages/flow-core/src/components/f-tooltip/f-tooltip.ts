@@ -80,7 +80,7 @@ export class FTooltip extends LitElement {
 				<f-div gap="small" state="custom, black">
 					<f-div overflow="scroll" padding="small medium"> <slot></slot> </f-div>
 					${this.closable
-					? html` <f-div width="hug-content" padding="small"
+						? html` <f-div width="hug-content" padding="small"
 								><f-icon
 									source="i-close"
 									size="x-small"
@@ -88,7 +88,7 @@ export class FTooltip extends LitElement {
 									@click=${() => (this.open = false)}
 								></f-icon
 						  ></f-div>`
-					: ""}
+						: ""}
 				</f-div>
 			</f-popover>`;
 		}

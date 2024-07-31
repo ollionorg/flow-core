@@ -157,7 +157,7 @@ export const Variant = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${variants.map(
-			item => html`<f-div>
+					item => html`<f-div>
           <f-search
             value=${value}
             placeholder="Search"
@@ -165,33 +165,33 @@ export const Variant = {
             .variant=${item}
             size="medium"
       .result=${[
-					"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam iaculis porta dignissim. Etiam a aliquam elit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam hendrerit quis lorem cursus consectetur. Donec sem ipsum, scelerisque at nulla vel, rutrum efficitur tortor. Praesent eu tincidunt mauris. Nam eu aliquam turpis. Curabitur placerat maximus tempor. Donec non ante in nunc eleifend elementum eu quis lorem",
-					"Suggestion 2",
-					"Suggestion 3",
-					"Suggestion 4",
-					"Suggestion 5",
-					"Suggestion 6",
-					"Suggestion 7",
-					"Suggestion 8",
-					"Suggestion 9",
-					"Suggestion 10",
-					"Suggestion 11",
-					"Suggestion 12",
-					"Suggestion 13",
-					"Suggestion 14",
-					"Suggestion 15",
-					"Suggestion 16",
-					"Suggestion 17",
-					"Suggestion 18",
-					"<f-text state='success'>Using markup</f-text>"
-				]}
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam iaculis porta dignissim. Etiam a aliquam elit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam hendrerit quis lorem cursus consectetur. Donec sem ipsum, scelerisque at nulla vel, rutrum efficitur tortor. Praesent eu tincidunt mauris. Nam eu aliquam turpis. Curabitur placerat maximus tempor. Donec non ante in nunc eleifend elementum eu quis lorem",
+				"Suggestion 2",
+				"Suggestion 3",
+				"Suggestion 4",
+				"Suggestion 5",
+				"Suggestion 6",
+				"Suggestion 7",
+				"Suggestion 8",
+				"Suggestion 9",
+				"Suggestion 10",
+				"Suggestion 11",
+				"Suggestion 12",
+				"Suggestion 13",
+				"Suggestion 14",
+				"Suggestion 15",
+				"Suggestion 16",
+				"Suggestion 17",
+				"Suggestion 18",
+				"<f-text state='success'>Using markup</f-text>"
+			]}
           >
              <f-div slot="label" padding="none" gap="none">Label (variant="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-search></f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -211,7 +211,7 @@ export const Category = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${categories.map(
-			item => html`<f-div>
+					item => html`<f-div>
           <f-search
             value=${value}
             placeholder="Search"
@@ -220,32 +220,32 @@ export const Category = {
             size="medium"
             .variant=${item === "transparent" ? "block" : "curved"}
       .result=${[
-					"Suggestion 2",
-					"Suggestion 3",
-					"Suggestion 4",
-					"Suggestion 5",
-					"Suggestion 6",
-					"Suggestion 7",
-					"Suggestion 8",
-					"Suggestion 9",
-					"Suggestion 10",
-					"Suggestion 11",
-					"Suggestion 12",
-					"Suggestion 13",
-					"Suggestion 14",
-					"Suggestion 15",
-					"Suggestion 16",
-					"Suggestion 17",
-					"Suggestion 18",
-					"<f-text state='success'>Using markup</f-text>"
-				]}
+				"Suggestion 2",
+				"Suggestion 3",
+				"Suggestion 4",
+				"Suggestion 5",
+				"Suggestion 6",
+				"Suggestion 7",
+				"Suggestion 8",
+				"Suggestion 9",
+				"Suggestion 10",
+				"Suggestion 11",
+				"Suggestion 12",
+				"Suggestion 13",
+				"Suggestion 14",
+				"Suggestion 15",
+				"Suggestion 16",
+				"Suggestion 17",
+				"Suggestion 18",
+				"<f-text state='success'>Using markup</f-text>"
+			]}
           >
             <f-div slot="label" padding="none" gap="none">Label (category="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-search></f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -269,24 +269,24 @@ export const Value = {
 						@input=${handleValue}
 						size="medium"
 						.result=${[
-				"Suggestion 2",
-				"Suggestion 3",
-				"Suggestion 4",
-				"Suggestion 5",
-				"Suggestion 6",
-				"Suggestion 7",
-				"Suggestion 8",
-				"Suggestion 9",
-				"Suggestion 10",
-				"Suggestion 11",
-				"Suggestion 12",
-				"Suggestion 13",
-				"Suggestion 14",
-				"Suggestion 15",
-				"Suggestion 16",
-				"Suggestion 17",
-				"Suggestion 18"
-			]}
+							"Suggestion 2",
+							"Suggestion 3",
+							"Suggestion 4",
+							"Suggestion 5",
+							"Suggestion 6",
+							"Suggestion 7",
+							"Suggestion 8",
+							"Suggestion 9",
+							"Suggestion 10",
+							"Suggestion 11",
+							"Suggestion 12",
+							"Suggestion 13",
+							"Suggestion 14",
+							"Suggestion 15",
+							"Suggestion 16",
+							"Suggestion 17",
+							"Suggestion 18"
+						]}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
 						<f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
@@ -316,24 +316,24 @@ export const Placeholder = {
 						placeholder="Search Here"
 						size="medium"
 						.result=${[
-				"Suggestion 2",
-				"Suggestion 3",
-				"Suggestion 4",
-				"Suggestion 5",
-				"Suggestion 6",
-				"Suggestion 7",
-				"Suggestion 8",
-				"Suggestion 9",
-				"Suggestion 10",
-				"Suggestion 11",
-				"Suggestion 12",
-				"Suggestion 13",
-				"Suggestion 14",
-				"Suggestion 15",
-				"Suggestion 16",
-				"Suggestion 17",
-				"Suggestion 18"
-			]}
+							"Suggestion 2",
+							"Suggestion 3",
+							"Suggestion 4",
+							"Suggestion 5",
+							"Suggestion 6",
+							"Suggestion 7",
+							"Suggestion 8",
+							"Suggestion 9",
+							"Suggestion 10",
+							"Suggestion 11",
+							"Suggestion 12",
+							"Suggestion 13",
+							"Suggestion 14",
+							"Suggestion 15",
+							"Suggestion 16",
+							"Suggestion 17",
+							"Suggestion 18"
+						]}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
 						<f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
@@ -358,37 +358,37 @@ export const Size = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${sizes.map(
-			item => html`<f-div>
+					item => html`<f-div>
           <f-search
             value=${value}
             @input=${handleValue}
             size=${item}
       .result=${[
-					"Suggestion 2",
-					"Suggestion 3",
-					"Suggestion 4",
-					"Suggestion 5",
-					"Suggestion 6",
-					"Suggestion 7",
-					"Suggestion 8",
-					"Suggestion 9",
-					"Suggestion 10",
-					"Suggestion 11",
-					"Suggestion 12",
-					"Suggestion 13",
-					"Suggestion 14",
-					"Suggestion 15",
-					"Suggestion 16",
-					"Suggestion 17",
-					"Suggestion 18"
-				]}
+				"Suggestion 2",
+				"Suggestion 3",
+				"Suggestion 4",
+				"Suggestion 5",
+				"Suggestion 6",
+				"Suggestion 7",
+				"Suggestion 8",
+				"Suggestion 9",
+				"Suggestion 10",
+				"Suggestion 11",
+				"Suggestion 12",
+				"Suggestion 13",
+				"Suggestion 14",
+				"Suggestion 15",
+				"Suggestion 16",
+				"Suggestion 17",
+				"Suggestion 18"
+			]}
           >
             <f-div slot="label" padding="none" gap="none">Label (size="${item}")</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-search></f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -411,35 +411,35 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-			item =>
-				html` <f-div align="middle-center" padding="large" gap="medium">
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
-					state =>
-						html`<f-div
+								state =>
+									html`<f-div
 										><f-search
 											value=${value}
 											@input=${handleValue}
 											size="medium"
 											state=${state}
 											.result=${[
-								"Suggestion 2",
-								"Suggestion 3",
-								"Suggestion 4",
-								"Suggestion 5",
-								"Suggestion 6",
-								"Suggestion 7",
-								"Suggestion 8",
-								"Suggestion 9",
-								"Suggestion 10",
-								"Suggestion 11",
-								"Suggestion 12",
-								"Suggestion 13",
-								"Suggestion 14",
-								"Suggestion 15",
-								"Suggestion 16",
-								"Suggestion 17",
-								"Suggestion 18"
-							]}
+												"Suggestion 2",
+												"Suggestion 3",
+												"Suggestion 4",
+												"Suggestion 5",
+												"Suggestion 6",
+												"Suggestion 7",
+												"Suggestion 8",
+												"Suggestion 9",
+												"Suggestion 10",
+												"Suggestion 11",
+												"Suggestion 12",
+												"Suggestion 13",
+												"Suggestion 14",
+												"Suggestion 15",
+												"Suggestion 16",
+												"Suggestion 17",
+												"Suggestion 18"
+											]}
 										>
 											<f-div slot="label" padding="none" gap="none">Label (state="${state}")</f-div>
 											<f-text slot="help" variant="para" size="small"
@@ -447,9 +447,9 @@ export const State = {
 											>
 										</f-search></f-div
 									>`
-				)}
+							)}
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -532,24 +532,24 @@ export const Result = {
 						@input=${handleValue}
 						size="medium"
 						.result=${[
-				"Suggestion 2",
-				"Suggestion 3",
-				"Suggestion 4",
-				"Suggestion 5",
-				"Suggestion 6",
-				"Suggestion 7",
-				"Suggestion 8",
-				"Suggestion 9",
-				"Suggestion 10",
-				"Suggestion 11",
-				"Suggestion 12",
-				"Suggestion 13",
-				"Suggestion 14",
-				"Suggestion 15",
-				"Suggestion 16",
-				"Suggestion 17",
-				"Suggestion 18"
-			]}
+							"Suggestion 2",
+							"Suggestion 3",
+							"Suggestion 4",
+							"Suggestion 5",
+							"Suggestion 6",
+							"Suggestion 7",
+							"Suggestion 8",
+							"Suggestion 9",
+							"Suggestion 10",
+							"Suggestion 11",
+							"Suggestion 12",
+							"Suggestion 13",
+							"Suggestion 14",
+							"Suggestion 15",
+							"Suggestion 16",
+							"Suggestion 17",
+							"Suggestion 18"
+						]}
 						.resultMaxHeight=${"150px"}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
@@ -569,10 +569,10 @@ export const Result = {
 						@input=${handleValue}
 						size="medium"
 						.result=${{
-				Category1: ["option 1", "option2"],
-				Category2: ["option3", "option 4"],
-				Category3: ["option5", "option6"]
-			}}
+							Category1: ["option 1", "option2"],
+							Category2: ["option3", "option 4"],
+							Category3: ["option5", "option6"]
+						}}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
 						<f-div slot="description" padding="none" gap="none"
@@ -622,24 +622,24 @@ export const Scope = {
 						@input=${handleValue}
 						size="medium"
 						.result=${[
-				"Suggestion 2",
-				"Suggestion 3",
-				"Suggestion 4",
-				"Suggestion 5",
-				"Suggestion 6",
-				"Suggestion 7",
-				"Suggestion 8",
-				"Suggestion 9",
-				"Suggestion 10",
-				"Suggestion 11",
-				"Suggestion 12",
-				"Suggestion 13",
-				"Suggestion 14",
-				"Suggestion 15",
-				"Suggestion 16",
-				"Suggestion 17",
-				"Suggestion 18"
-			]}
+							"Suggestion 2",
+							"Suggestion 3",
+							"Suggestion 4",
+							"Suggestion 5",
+							"Suggestion 6",
+							"Suggestion 7",
+							"Suggestion 8",
+							"Suggestion 9",
+							"Suggestion 10",
+							"Suggestion 11",
+							"Suggestion 12",
+							"Suggestion 13",
+							"Suggestion 14",
+							"Suggestion 15",
+							"Suggestion 16",
+							"Suggestion 17",
+							"Suggestion 18"
+						]}
 						.scope=${["scope 1", "scope 2", "scope 3"]}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
@@ -671,24 +671,24 @@ export const selectedScope = {
 						@input=${handleValue}
 						size="medium"
 						.result=${[
-				"Suggestion 2",
-				"Suggestion 3",
-				"Suggestion 4",
-				"Suggestion 5",
-				"Suggestion 6",
-				"Suggestion 7",
-				"Suggestion 8",
-				"Suggestion 9",
-				"Suggestion 10",
-				"Suggestion 11",
-				"Suggestion 12",
-				"Suggestion 13",
-				"Suggestion 14",
-				"Suggestion 15",
-				"Suggestion 16",
-				"Suggestion 17",
-				"Suggestion 18"
-			]}
+							"Suggestion 2",
+							"Suggestion 3",
+							"Suggestion 4",
+							"Suggestion 5",
+							"Suggestion 6",
+							"Suggestion 7",
+							"Suggestion 8",
+							"Suggestion 9",
+							"Suggestion 10",
+							"Suggestion 11",
+							"Suggestion 12",
+							"Suggestion 13",
+							"Suggestion 14",
+							"Suggestion 15",
+							"Suggestion 16",
+							"Suggestion 17",
+							"Suggestion 18"
+						]}
 						.scope=${["scope 1", "scope 2", "scope 3"]}
 						.selectedScope=${"scope 2"}
 					>
@@ -723,24 +723,24 @@ export const resultMaxHeight = {
 						@input=${handleValue}
 						size="medium"
 						.result=${[
-				"Suggestion 2",
-				"Suggestion 3",
-				"Suggestion 4",
-				"Suggestion 5",
-				"Suggestion 6",
-				"Suggestion 7",
-				"Suggestion 8",
-				"Suggestion 9",
-				"Suggestion 10",
-				"Suggestion 11",
-				"Suggestion 12",
-				"Suggestion 13",
-				"Suggestion 14",
-				"Suggestion 15",
-				"Suggestion 16",
-				"Suggestion 17",
-				"Suggestion 18"
-			]}
+							"Suggestion 2",
+							"Suggestion 3",
+							"Suggestion 4",
+							"Suggestion 5",
+							"Suggestion 6",
+							"Suggestion 7",
+							"Suggestion 8",
+							"Suggestion 9",
+							"Suggestion 10",
+							"Suggestion 11",
+							"Suggestion 12",
+							"Suggestion 13",
+							"Suggestion 14",
+							"Suggestion 15",
+							"Suggestion 16",
+							"Suggestion 17",
+							"Suggestion 18"
+						]}
 						.resultMaxHeight=${"150px"}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
@@ -783,24 +783,24 @@ export const resultWhen = {
 						@input=${handleValue}
 						size="medium"
 						.result=${[
-				"Suggestion 2",
-				"Suggestion 3",
-				"Suggestion 4",
-				"Suggestion 5",
-				"Suggestion 6",
-				"Suggestion 7",
-				"Suggestion 8",
-				"Suggestion 9",
-				"Suggestion 10",
-				"Suggestion 11",
-				"Suggestion 12",
-				"Suggestion 13",
-				"Suggestion 14",
-				"Suggestion 15",
-				"Suggestion 16",
-				"Suggestion 17",
-				"Suggestion 18"
-			]}
+							"Suggestion 2",
+							"Suggestion 3",
+							"Suggestion 4",
+							"Suggestion 5",
+							"Suggestion 6",
+							"Suggestion 7",
+							"Suggestion 8",
+							"Suggestion 9",
+							"Suggestion 10",
+							"Suggestion 11",
+							"Suggestion 12",
+							"Suggestion 13",
+							"Suggestion 14",
+							"Suggestion 15",
+							"Suggestion 16",
+							"Suggestion 17",
+							"Suggestion 18"
+						]}
 						.resultWhen=${resWhen}
 					>
 						<f-div slot="label" padding="none" gap="none">Label</f-div>
@@ -844,7 +844,7 @@ export const Flags = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${[0, 1, 2, 3].map(
-			item => html`<f-div>
+					item => html`<f-div>
           <f-search
             value=${value}
             placeholder="Write here"
@@ -855,13 +855,14 @@ export const Flags = {
             ?clear=${item === 2 ? true : false}
       ?loading=${item === 3 ? true : false}
           >
-            <f-div slot="label" padding="none" gap="none">${item === 0 ? "search-button" : item === 1 ? "Disabled" : "Clear Icon on Type"
-				}</f-div>
+            <f-div slot="label" padding="none" gap="none">${
+							item === 0 ? "search-button" : item === 1 ? "Disabled" : "Clear Icon on Type"
+						}</f-div>
             <f-text slot="help" variant="para" size="small">This is a Subtext (Helper Text)</f-text>
           </f-search></f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},

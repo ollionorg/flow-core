@@ -174,8 +174,9 @@ export class FTag extends FRoot {
 					return `background-color: ${LightenDarkenColor(
 						this.fill,
 						-150
-					)}; border: 1px solid ${LightenDarkenColor(this.fill, -150)}; color: transparent; fill: ${this.fill
-						}`;
+					)}; border: 1px solid ${LightenDarkenColor(this.fill, -150)}; color: transparent; fill: ${
+						this.fill
+					}`;
 				} else {
 					return `background: ${this.fill}; border: 1px solid ${this.fill}; color: ${this.textColor}`;
 				}
@@ -258,12 +259,12 @@ export class FTag extends FRoot {
 					.source=${this.iconLeft}
 					.state=${this.state}
 					class=${classMap({
-				"left-icon": true,
-				...iconClasses,
-				"f-tag-system-icon": this.tagSystemIcon ? true : false,
-				"system-icon-size": this.size === "small" ? true : false,
-				"f-tag-small-emoji": this.size === "small" ? true : false
-			})}
+						"left-icon": true,
+						...iconClasses,
+						"f-tag-system-icon": this.tagSystemIcon ? true : false,
+						"system-icon-size": this.size === "small" ? true : false,
+						"f-tag-small-emoji": this.size === "small" ? true : false
+					})}
 					.size=${this.iconSize}
 					?clickable=${true}
 			  ></f-icon>`
@@ -277,12 +278,12 @@ export class FTag extends FRoot {
 					.source=${this.iconRight}
 					.state=${this.state}
 					class=${classMap({
-				"right-icon": true,
-				...iconClasses,
-				"f-tag-system-icon": this.tagSystemIcon ? true : false,
-				"system-icon-size": this.size === "small" ? true : false,
-				"f-tag-small-emoji": this.size === "small" ? true : false
-			})}
+						"right-icon": true,
+						...iconClasses,
+						"f-tag-system-icon": this.tagSystemIcon ? true : false,
+						"system-icon-size": this.size === "small" ? true : false,
+						"f-tag-small-emoji": this.size === "small" ? true : false
+					})}
 					.size=${this.iconSize}
 					?clickable=${true}
 			  ></f-icon>`
@@ -319,9 +320,9 @@ export class FTag extends FRoot {
 			return html`<div
 				data-qa-tag
 				class=${classMap({
-				"f-tag": true,
-				"custom-loader": this.fill ? true : false
-			})}
+					"f-tag": true,
+					"custom-loader": this.fill ? true : false
+				})}
 				style=${this.applyStyles()}
 				?label=${this.label ? true : false}
 				size=${ifDefined(this.size)}
@@ -342,9 +343,9 @@ export class FTag extends FRoot {
 			this.category,
 			html`<div
 				class=${classMap({
-				"f-tag": true,
-				"custom-loader": this.fill ? true : false
-			})}
+					"f-tag": true,
+					"custom-loader": this.fill ? true : false
+				})}
 				style=${this.applyStyles()}
 				?label=${this.label ? true : false}
 				size=${ifDefined(this.size)}

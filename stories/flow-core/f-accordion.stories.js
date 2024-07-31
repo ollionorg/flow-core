@@ -81,7 +81,7 @@ export const Playground = {
 				<f-div><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div>
 				<f-div slot="body" direction="column">
 					${Object.entries(metaData).map(
-			([name, value]) => html`
+						([name, value]) => html`
 							<f-div direction="row" padding="small none" height="hug-content">
 								<f-div width="33%"
 									><f-text variant="para" size="small" weight="regular" state="secondary"
@@ -89,7 +89,7 @@ export const Playground = {
 									></f-div
 								>
 								${value.type === "label-text"
-					? html` <f-div align="middle-left" gap="x-small">
+									? html` <f-div align="middle-left" gap="x-small">
 											<f-pictogram
 												variant="circle"
 												size="small"
@@ -100,26 +100,26 @@ export const Playground = {
 												>${value.value}</f-text
 											></f-div
 									  >`
-					: value.type === "text"
-						? html` <f-div
+									: value.type === "text"
+									? html` <f-div
 											><f-text variant="para" size="small" weight="regular"
 												>${value.value}</f-text
 											></f-div
 									  >`
-						: html` <f-div direction="column" gap="small" align="middle-center">
+									: html` <f-div direction="column" gap="small" align="middle-center">
 											${value.value.map(
-							item =>
-								html` <f-div gap="x-small">
+												item =>
+													html` <f-div gap="x-small">
 														<f-icon .source=${item.icon} size="small" clickable></f-icon>
 														<f-text ?inline=${true} variant="para" size="small" weight="medium"
 															>${item.name}</f-text
 														>
 													</f-div>`
-						)}
+											)}
 									  </f-div>`}
 							</f-div>
 						`
-		)}
+					)}
 				</f-div>
 			</f-accordion>
 		</f-div>`;
@@ -182,8 +182,8 @@ export const Icon = {
 
 		return html`<f-div direction="column"
 			>${icons.map(
-			item =>
-				html`<f-accordion .open=${true} .icon=${item}>
+				item =>
+					html`<f-accordion .open=${true} .icon=${item}>
 							<f-div
 								><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
 							>
@@ -198,7 +198,7 @@ export const Icon = {
 							</f-div>
 						</f-accordion>
 						<f-divider></f-divider> `
-		)}</f-div
+			)}</f-div
 		>`;
 	},
 
@@ -211,8 +211,8 @@ export const IconSize = {
 
 		return html`<f-div
 			>${icons.map(
-			item =>
-				html`<f-div direction="column" padding="x-large"
+				item =>
+					html`<f-div direction="column" padding="x-large"
 						><f-accordion .open=${true} icon-size=${item}>
 							<f-div
 								><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
@@ -225,7 +225,7 @@ export const IconSize = {
 							</f-div>
 						</f-accordion></f-div
 					>`
-		)}</f-div
+			)}</f-div
 		>`;
 	},
 
@@ -238,8 +238,8 @@ export const IconPlacement = {
 
 		return html`<f-div
 			>${icons.map(
-			item =>
-				html`<f-div direction="column" padding="x-large"
+				item =>
+					html`<f-div direction="column" padding="x-large"
 						><f-accordion .open=${true} icon-placement=${item}>
 							<f-div
 								><f-text variant="para" size="small" weight="bold">Requester details</f-text></f-div
@@ -252,7 +252,7 @@ export const IconPlacement = {
 							</f-div>
 						</f-accordion></f-div
 					>`
-		)}</f-div
+			)}</f-div
 		>`;
 	},
 
@@ -287,8 +287,8 @@ export const Flags = {
 
 		return html`<f-div
 			>${icons.map(
-			item =>
-				html`<f-div direction="column" padding="x-large"
+				item =>
+					html`<f-div direction="column" padding="x-large"
 						><f-accordion .open=${item}>
 							<f-div
 								><f-text variant="para" size="small" weight="bold"
@@ -303,7 +303,7 @@ export const Flags = {
 							</f-div>
 						</f-accordion></f-div
 					>`
-		)}</f-div
+			)}</f-div
 		>`;
 	},
 

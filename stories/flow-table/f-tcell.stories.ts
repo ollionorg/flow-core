@@ -18,18 +18,18 @@ export const Playground = {
 			<f-table>
 				<f-trow slot="header">
 					${[1, 2, 3].map(cellNumber => {
-			return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
-		})}
+						return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+					})}
 				</f-trow>
 				${[1, 2, 3].map(() => {
-			return html`<f-trow>
+					return html`<f-trow>
 						${[1, 2, 3].map(cellNumber => {
-				return html`<f-tcell .actions=${args.actions}>
+							return html`<f-tcell .actions=${args.actions}>
 								<f-text> Column ${cellNumber} </f-text>
 							</f-tcell>`;
-			})}
+						})}
 					</f-trow>`;
-		})}
+				})}
 			</f-table>
 		`;
 	},
@@ -80,35 +80,35 @@ export const Actions = {
 			<f-table>
 				<f-trow slot="header">
 					${[1, 2, 3].map(cellNumber => {
-			return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
-		})}
+						return html`<f-tcell> Header ${cellNumber} </f-tcell>`;
+					})}
 				</f-trow>
 				${[1, 2, 3].map(() => {
-			return html`<f-trow>
+					return html`<f-trow>
 						${[1, 2, 3].map(cellNumber => {
-				return html`<f-tcell
+							return html`<f-tcell
 								.actions=${cellNumber === 3
-						? [
-							{
-								icon: "i-copy",
-								onClick: () => console.log("i-launch clicked")
-							},
-							{
-								icon: "i-git-branch",
-								onClick: () => console.log("i-launch clicked")
-							},
-							{
-								icon: "i-launch",
-								onClick: () => console.log("i-launch clicked")
-							}
-						]
-						: []}
+									? [
+											{
+												icon: "i-copy",
+												onClick: () => console.log("i-launch clicked")
+											},
+											{
+												icon: "i-git-branch",
+												onClick: () => console.log("i-launch clicked")
+											},
+											{
+												icon: "i-launch",
+												onClick: () => console.log("i-launch clicked")
+											}
+									  ]
+									: []}
 							>
 								<f-text> Column ${cellNumber} </f-text>
 							</f-tcell>`;
-			})}
+						})}
 					</f-trow>`;
-		})}
+				})}
 			</f-table>
 		</f-div>`,
 
@@ -119,27 +119,27 @@ export const Selected = {
 	render: () =>
 		html`<f-div direction="column" state="subtle" padding="small" gap="large"
 			>${[true].map(
-			() =>
-				html`<f-text>2nd column is selected</f-text
+				() =>
+					html`<f-text>2nd column is selected</f-text
 						><f-table>
 							<f-trow slot="header">
 								${[1, 2, 3].map(cellNumber => {
-					return html`<f-tcell .selected=${cellNumber === 2}>
+									return html`<f-tcell .selected=${cellNumber === 2}>
 										Header ${cellNumber}
 									</f-tcell>`;
-				})}
+								})}
 							</f-trow>
 							${[1, 2, 3].map(() => {
-					return html`<f-trow>
+								return html`<f-trow>
 									${[1, 2, 3].map(cellNumber => {
-						return html`<f-tcell .selected=${cellNumber === 2}>
+										return html`<f-tcell .selected=${cellNumber === 2}>
 											<f-text> Column ${cellNumber} </f-text>
 										</f-tcell>`;
-					})}
+									})}
 								</f-trow>`;
-				})}
+							})}
 						</f-table>`
-		)}</f-div
+			)}</f-div
 		>`,
 
 	name: "selected"
@@ -162,22 +162,22 @@ export const Align = {
 			><f-table variant="bordered">
 				<f-trow slot="header">
 					${alignValues.map(align => {
-			return html`<f-tcell width="300px" .align=${align}> ${align} </f-tcell>`;
-		})}
+						return html`<f-tcell width="300px" .align=${align}> ${align} </f-tcell>`;
+					})}
 					<f-tcell> Cell with height </f-tcell>
 				</f-trow>
 				${[1, 2, 3].map(() => {
-			return html`<f-trow>
+					return html`<f-trow>
 						${alignValues.map(align => {
-				return html`<f-tcell .align=${align}>
+							return html`<f-tcell .align=${align}>
 								<f-text inline> align="${align}" </f-text>
 							</f-tcell>`;
-			})}
+						})}
 						<f-tcell>
 							<f-div height="200px"></f-div>
 						</f-tcell>
 					</f-trow>`;
-		})}
+				})}
 			</f-table></f-div
 		>`;
 	},
@@ -197,30 +197,30 @@ export const HighlightColumn = {
 
 		return html`<f-div direction="column" state="subtle" padding="small" gap="large"
 				>${[true].map(
-			() =>
-				html`<f-text>Hover on header cell, it will trigger 'highlight-column' event </f-text>
+					() =>
+						html`<f-text>Hover on header cell, it will trigger 'highlight-column' event </f-text>
 							<f-table>
 								<f-trow slot="header">
 									${[1, 2, 3].map(cellNumber => {
-					return html`<f-tcell
+										return html`<f-tcell
 											@highlight-column=${highlightColumnHandler}
 											.selected=${cellNumber === 2}
 										>
 											Hover to Highlight ${cellNumber}
 										</f-tcell>`;
-				})}
+									})}
 								</f-trow>
 								${[1, 2, 3].map(() => {
-					return html`<f-trow>
+									return html`<f-trow>
 										${[1, 2, 3].map(cellNumber => {
-						return html`<f-tcell .selected=${cellNumber === 2}>
+											return html`<f-tcell .selected=${cellNumber === 2}>
 												<f-text> Column ${cellNumber} </f-text>
 											</f-tcell>`;
-					})}
+										})}
 									</f-trow>`;
-				})}
+								})}
 							</f-table> `
-		)}
+				)}
 			</f-div>
 			<br />
 			<f-divider></f-divider>
@@ -244,30 +244,30 @@ export const SelectedColumn = {
 
 		return html`<f-div direction="column" state="subtle" padding="small" gap="large"
 				>${[true].map(
-			() =>
-				html`<f-text>Click on header cell, it will trigger 'selected-column' event </f-text>
+					() =>
+						html`<f-text>Click on header cell, it will trigger 'selected-column' event </f-text>
 							<f-table>
 								<f-trow slot="header">
 									${[1, 2, 3].map(cellNumber => {
-					return html`<f-tcell
+										return html`<f-tcell
 											@selected-column=${selectedColumnHandler}
 											.selected=${cellNumber === 2}
 										>
 											Click to select ${cellNumber}
 										</f-tcell>`;
-				})}
+									})}
 								</f-trow>
 								${[1, 2, 3].map(() => {
-					return html`<f-trow>
+									return html`<f-trow>
 										${[1, 2, 3].map(cellNumber => {
-						return html`<f-tcell .selected=${cellNumber === 2}>
+											return html`<f-tcell .selected=${cellNumber === 2}>
 												<f-text> Column ${cellNumber} </f-text>
 											</f-tcell>`;
-					})}
+										})}
 									</f-trow>`;
-				})}
+								})}
 							</f-table> `
-		)}
+				)}
 			</f-div>
 			<br />
 			<f-divider></f-divider>

@@ -216,18 +216,18 @@ export class FTableSchema extends FRoot {
 		return this.data?.header
 			? html`<f-trow slot="header" part="header">
 					${Object.entries(this.data.header).map((columnHeader, idx) => {
-				let width = undefined;
-				let selected = false;
-				let sticky = undefined;
-				if (typeof columnHeader[1] === "object") {
-					if (columnHeader[1].width) {
-						width = columnHeader[1].width;
-					}
-					selected = columnHeader[1].selected ?? false;
-					sticky = columnHeader[1].sticky;
-				}
+						let width = undefined;
+						let selected = false;
+						let sticky = undefined;
+						if (typeof columnHeader[1] === "object") {
+							if (columnHeader[1].width) {
+								width = columnHeader[1].width;
+							}
+							selected = columnHeader[1].selected ?? false;
+							sticky = columnHeader[1].sticky;
+						}
 
-				return html`<f-tcell
+						return html`<f-tcell
 							part="cell"
 							role="columnheader"
 							.selected=${selected}
@@ -240,14 +240,14 @@ export class FTableSchema extends FRoot {
 							?sticky-top=${this.stickyHeader}
 							@selected-column=${this.handleColumnSelection}
 							@update-row-selection=${(event: CustomEvent<boolean>) =>
-						this.handleHeaderInput(event, columnHeader[1])}
+								this.handleHeaderInput(event, columnHeader[1])}
 						>
 							<f-div .align=${columnHeader[1].align} gap="small" height="100%" width="fit-content">
 								${this.getHeaderCellTemplate(columnHeader[1])}
 								${columnHeader[1].disableSort ? nothing : this.getSortIcon(columnHeader[0])}</f-div
 							></f-tcell
 						>`;
-			})}
+					})}
 			  </f-trow>`
 			: nothing;
 	}
@@ -279,27 +279,27 @@ export class FTableSchema extends FRoot {
 				>
 					${getDetailsSlot()}
 					${Object.entries(this.data.header).map((columnHeader, cdx) => {
-					let width = undefined;
-					let selected = false;
-					let sticky = undefined;
-					let actions = undefined;
-					if (typeof columnHeader[1] === "object") {
-						if (columnHeader[1].width) {
-							width = columnHeader[1].width;
+						let width = undefined;
+						let selected = false;
+						let sticky = undefined;
+						let actions = undefined;
+						if (typeof columnHeader[1] === "object") {
+							if (columnHeader[1].width) {
+								width = columnHeader[1].width;
+							}
+							selected = columnHeader[1].selected ?? false;
+							sticky = columnHeader[1].sticky;
 						}
-						selected = columnHeader[1].selected ?? false;
-						sticky = columnHeader[1].sticky;
-					}
-					const cell = row.data[columnHeader[0]];
+						const cell = row.data[columnHeader[0]];
 
-					actions = cell.actions;
+						actions = cell.actions;
 
-					let highlightTerm = columnHeader[0] === this.searchScope ? this.searchTerm : null;
-					if (this.searchScope === "all") {
-						highlightTerm = this.searchTerm;
-					}
+						let highlightTerm = columnHeader[0] === this.searchScope ? this.searchTerm : null;
+						if (this.searchScope === "all") {
+							highlightTerm = this.searchTerm;
+						}
 
-					return html`<f-tcell
+						return html`<f-tcell
 							part="cell"
 							.selected=${selected}
 							aria-colindex="${cdx + 1}"
@@ -310,7 +310,7 @@ export class FTableSchema extends FRoot {
 							?sticky-left=${sticky}
 							>${this.getCellTemplate(row.data[columnHeader[0]], highlightTerm)}
 						</f-tcell>`;
-				})}
+					})}
 				</f-trow>`;
 			}
 		);
@@ -450,7 +450,7 @@ export class FTableSchema extends FRoot {
 		return html`
 			<slot name="search">
 				${this.showSearchBar
-				? html`<f-div
+					? html`<f-div
 							padding="medium none"
 							style="position: sticky;left: 0px;z-index:3;"
 							.width=${this.offsetWidth ? `${this.offsetWidth}px` : `100%`}
@@ -464,7 +464,7 @@ export class FTableSchema extends FRoot {
 								@input=${this.search}
 							></f-search>
 					  </f-div>`
-				: nothing}
+					: nothing}
 			</slot>
 			<div class="f-table-schema-wrapper">
 				<f-table
@@ -507,7 +507,7 @@ export class FTableSchema extends FRoot {
 			// offset difference added , instead of exact equal
 			if (
 				this.fTableWrapper.scrollHeight -
-				(this.fTableWrapper.scrollTop + this.fTableWrapper.offsetHeight) <
+					(this.fTableWrapper.scrollTop + this.fTableWrapper.offsetHeight) <
 				24
 			) {
 				if (this.filteredRows.length !== this.searchedRows.length) {

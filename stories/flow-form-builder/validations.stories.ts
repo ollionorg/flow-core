@@ -200,8 +200,8 @@ export const Playground = {
 				.size=${args.size}
 				.gap=${args.gap}
 				.label=${{
-				title: "Main form label"
-			}}
+					title: "Main form label"
+				}}
 				@submit=${handleSubmit}
 				@input=${handleInput}
 				@keydown=${handleKeydown}

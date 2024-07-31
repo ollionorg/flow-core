@@ -405,11 +405,11 @@ export type FormBuilderValues =
 
 export type ValidationResults = (
 	| {
-		result: boolean;
-		message: string | null;
-		name: string;
-		rule: FormBuilderGenericValidationRule["name"];
-	}
+			result: boolean;
+			message: string | null;
+			name: string;
+			rule: FormBuilderGenericValidationRule["name"];
+	  }
 	| ValidationResults
 )[];
 

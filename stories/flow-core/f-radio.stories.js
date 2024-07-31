@@ -100,7 +100,7 @@ export const Value = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${values.map(
-			item => html`<f-div>
+					item => html`<f-div>
            <f-radio
               size="medium"
               .value=${item}
@@ -115,7 +115,7 @@ export const Value = {
             </f-radio></f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -135,7 +135,7 @@ export const Size = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${sizes.map(
-			item => html`<f-div>
+					item => html`<f-div>
           <f-radio
               .size=${item}
               .value=${value}
@@ -150,7 +150,7 @@ export const Size = {
             </f-radio></f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -173,11 +173,11 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-			item =>
-				html` <f-div align="middle-center" padding="large" gap="medium">
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
-					state =>
-						html`<f-div
+								state =>
+									html`<f-div
 										><f-radio size="medium" .value=${value} .state=${state} @input=${handleValue}>
 											<f-div slot="label" padding="none">
 												<f-text variant="para" size="small"
@@ -198,9 +198,9 @@ export const State = {
 											</f-div>
 										</f-radio></f-div
 									>`
-				)}
+							)}
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -219,7 +219,7 @@ export const Flags = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${[0].map(
-			item => html`<f-div>
+					item => html`<f-div>
           <f-radio
               size="medium"
               .value=${value}
@@ -235,7 +235,7 @@ export const Flags = {
             </f-radio></f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},

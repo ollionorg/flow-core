@@ -244,8 +244,8 @@ export const Type = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${types.map(
-			item =>
-				html`<f-div>
+					item =>
+						html`<f-div>
 							<f-select
 								placeholder="Select Option"
 								.type=${item}
@@ -259,7 +259,7 @@ export const Type = {
 								<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
 							</f-select></f-div
 						>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -279,8 +279,8 @@ export const Variant = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${variants.map(
-			item =>
-				html`<f-div>
+					item =>
+						html`<f-div>
 							<f-select
 								placeholder="Select Option"
 								@input=${handleValue}
@@ -294,7 +294,7 @@ export const Variant = {
 								<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
 							</f-select></f-div
 						>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -314,8 +314,8 @@ export const Category = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${categories.map(
-			item =>
-				html`<f-div>
+					item =>
+						html`<f-div>
 							<f-select
 								placeholder="Select Option"
 								@input=${handleValue}
@@ -329,7 +329,7 @@ export const Category = {
 								<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
 							</f-select></f-div
 						>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -776,8 +776,8 @@ export const Size = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${sizes.map(
-			item =>
-				html`<f-div>
+					item =>
+						html`<f-div>
 							<f-select
 								placeholder="Select Option"
 								@input=${handleValue}
@@ -791,7 +791,7 @@ export const Size = {
 								<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
 							</f-select></f-div
 						>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -815,11 +815,11 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-			item =>
-				html` <f-div align="middle-center" padding="large" gap="medium">
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
-					state =>
-						html`<f-div
+								state =>
+									html`<f-div
 										><f-select
 											placeholder="Select Option"
 											@input=${handleValue}
@@ -833,9 +833,9 @@ export const State = {
 											<f-div slot="help" padding="none" gap="none">This is a helper text</f-div>
 										</f-select></f-div
 									>`
-				)}
+							)}
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},

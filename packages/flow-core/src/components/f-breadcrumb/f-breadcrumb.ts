@@ -231,16 +231,16 @@ export class FBreadcrumb extends FRoot {
 								@mouseleave=${() => this.toggleBreadcrumbPopover("close")}
 							>
 								${this.middlePopoverCrumbs?.map(
-					(crumb, index) =>
-						html` <f-div
+									(crumb, index) =>
+										html` <f-div
 											tabindex="0"
 											role="link"
 											class="popover-crumb-list"
 											role="listitem"
 											padding="medium"
 											.border=${this.middlePopoverCrumbs.length - 1 === index
-								? "none"
-								: "small solid secondary bottom"}
+												? "none"
+												: "small solid secondary bottom"}
 											clickable
 											@click=${(event: MouseEvent) => this.handleDispatchEvent(event, crumb)}
 											><f-text
@@ -251,7 +251,7 @@ export class FBreadcrumb extends FRoot {
 												>${crumb?.title}</f-text
 											></f-div
 										>`
-				)}
+								)}
 							</f-div>
 						</f-popover>
 						<f-icon
@@ -261,15 +261,15 @@ export class FBreadcrumb extends FRoot {
 							class="system-icon-size"
 						></f-icon>
 						${this.endingCrumbs?.map((crumb, index) =>
-					this.crumbLoop(crumb, index, this.endingCrumbs)
-				)}
+							this.crumbLoop(crumb, index, this.endingCrumbs)
+						)}
 				  `}
 		</f-div>`;
 
 		const iconBreadcrumb = html`<f-div class="f-breadcrumbs" overflow="visible">
 			${this.crumbs.map((item, index) =>
-			index !== this.crumbs.length - 1
-				? html`<f-div
+				index !== this.crumbs.length - 1
+					? html`<f-div
 							class="f-breadcrumb"
 							state="secondary"
 							width=${this.crumbSize}
@@ -283,7 +283,7 @@ export class FBreadcrumb extends FRoot {
 					  >
 							<f-icon source=${item.icon} .size=${this.iconSize}></f-icon>
 					  </f-div>`
-				: html`
+					: html`
 							<f-div gap="large" align="middle-center">
 								<div
 									class="f-breadcrumb-primary"
@@ -301,7 +301,7 @@ export class FBreadcrumb extends FRoot {
 								>
 							</f-div>
 					  `
-		)}
+			)}
 		</f-div>`;
 		return this.variant === "text" ? textBreadcrumb : iconBreadcrumb;
 	}

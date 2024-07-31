@@ -250,7 +250,7 @@ export const Weight = {
 			<f-text variant="para" size="large" weight="medium">weight of variant="heading"</f-text>
 			<f-divider></f-divider>
 			${["regular", "medium", "bold"].map(weight => {
-			return html` <f-div gap="medium" padding="medium" align="middle-center">
+				return html` <f-div gap="medium" padding="medium" align="middle-center">
 					<f-div height="hug-content" padding="none" align="middle-center">
 						<f-text variant="heading" size="x-large" .weight=${weight}>x-large ${weight}</f-text>
 					</f-div>
@@ -267,12 +267,12 @@ export const Weight = {
 						<f-text variant="heading" size="x-small" .weight=${weight}>x-small ${weight}</f-text>
 					</f-div>
 				</f-div>`;
-		})}
+			})}
 
 			<f-text variant="para" size="large" weight="medium">weight of variant="para"</f-text>
 			<f-divider></f-divider>
 			${["regular", "medium", "bold"].map(weight => {
-			return html` <f-div gap="medium" padding="medium" align="middle-center">
+				return html` <f-div gap="medium" padding="medium" align="middle-center">
 					<f-div height="hug-content" padding="none" align="middle-center">
 						<f-text variant="para" size="x-large" .weight=${weight}>x-large ${weight}</f-text>
 					</f-div>
@@ -289,11 +289,11 @@ export const Weight = {
 						<f-text variant="para" size="x-small" .weight=${weight}>x-small</f-text>
 					</f-div>
 				</f-div>`;
-		})}
+			})}
 			<f-text variant="para" size="large" weight="medium">weight of variant="code"</f-text>
 			<f-divider></f-divider>
 			${["regular", "medium", "bold"].map(weight => {
-			return html`<f-div gap="medium" padding="medium" align="middle-center">
+				return html`<f-div gap="medium" padding="medium" align="middle-center">
 					<f-div height="hug-content" padding="none" align="middle-center">
 						<f-text variant="code" size="x-large" .weight=${weight}>x-large ${weight}</f-text>
 					</f-div>
@@ -310,7 +310,7 @@ export const Weight = {
 						<f-text variant="code" size="x-small" .weight=${weight}>x-small</f-text>
 					</f-div>
 				</f-div>`;
-		})}
+			})}
 		</f-div>`,
 
 	name: "weight"

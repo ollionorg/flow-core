@@ -24,8 +24,8 @@ export const Playground = {
 					updateArgs({
 						value: e.detail.value
 							? {
-								name: e.detail.value.name
-							}
+									name: e.detail.value.name
+							  }
 							: e.detail.value
 					});
 				} else {
@@ -136,8 +136,8 @@ export const Type = {
 		return html`
 			<f-div width="100%" align="top-left" padding="large" gap="medium">
 				${types.map(
-			item =>
-				html`<f-div>
+					item =>
+						html`<f-div>
 							<f-file-upload
 								.type=${item}
 								.value=${item === "single" ? value : multipleValue}
@@ -148,7 +148,7 @@ export const Type = {
 								<f-text slot="help" variant="para" size="small">This is a Subtext</f-text>
 							</f-file-upload></f-div
 						>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -178,8 +178,8 @@ export const Value = {
 		return html`
 			<f-div width="100%" align="top-left" padding="large" gap="medium">
 				${types.map(
-			item =>
-				html`<f-div>
+					item =>
+						html`<f-div>
 							<f-file-upload
 								.type=${item}
 								.value=${item === "single" ? value : multipleValue}
@@ -189,13 +189,13 @@ export const Value = {
 								<f-div slot="label" padding="none" gap="none"
 									>${item} File Selection -
 									${item === "single"
-						? "value as a file object"
-						: "value as an array of file objects"}</f-div
+										? "value as a file object"
+										: "value as an array of file objects"}</f-div
 								>
 								<f-text slot="help" variant="para" size="small">This is a Subtext</f-text>
 							</f-file-upload></f-div
 						>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -225,8 +225,8 @@ export const Placeholder = {
 		return html`
 			<f-div width="100%" align="top-left" padding="large" gap="medium">
 				${types.map(
-			item =>
-				html`<f-div>
+					item =>
+						html`<f-div>
 							<f-file-upload
 								.type=${item}
 								.value=${item === "single" ? value : multipleValue}
@@ -239,7 +239,7 @@ export const Placeholder = {
 								<f-text slot="help" variant="para" size="small">This is a Subtext</f-text>
 							</f-file-upload></f-div
 						>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -266,8 +266,8 @@ export const FileType = {
 		return html`
 			<f-div width="100%" align="top-left" padding="large" gap="medium">
 				${fileTypes.map(
-			item =>
-				html`<f-div>
+					item =>
+						html`<f-div>
 							<f-file-upload
 								type="single"
 								.value=${value}
@@ -281,7 +281,7 @@ export const FileType = {
 								<f-text slot="help" variant="para" size="small">This is a Subtext</f-text>
 							</f-file-upload></f-div
 						>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -308,8 +308,8 @@ export const Size = {
 		return html`
 			<f-div width="100%" align="top-left" padding="large" gap="medium">
 				${sizes.map(
-			item =>
-				html`<f-div>
+					item =>
+						html`<f-div>
 							<f-file-upload
 								type="single"
 								.value=${value}
@@ -321,7 +321,7 @@ export const Size = {
 								<f-text slot="help" variant="para" size="small">This is a Subtext</f-text>
 							</f-file-upload></f-div
 						>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -344,11 +344,11 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-			item =>
-				html` <f-div align="middle-center" padding="large" gap="medium">
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
-					state =>
-						html`<f-div>
+								state =>
+									html`<f-div>
 										<f-file-upload
 											type="single"
 											.value=${value}
@@ -360,9 +360,9 @@ export const State = {
 											<f-text slot="help" variant="para" size="small">This is a Subtext</f-text>
 										</f-file-upload></f-div
 									>`
-				)}
+							)}
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},

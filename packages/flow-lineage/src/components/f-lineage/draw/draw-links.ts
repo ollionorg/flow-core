@@ -60,9 +60,11 @@ export default function drawLinks({
 				d.source.level - d.target.level > 1 || d.target.level - d.source.level > 1;
 
 			const isBackwardLink = d.target.level <= d.source.level;
-			return `link lineage-element ${d.source.isChildren || d.target.isChildren || isDashedLink(d) ? "child-link" : ""
-				} ${isDistantLink ? "distant-link" : ""} ${isBackwardLink ? "backward-link" : "forward-link"
-				}`;
+			return `link lineage-element ${
+				d.source.isChildren || d.target.isChildren || isDashedLink(d) ? "child-link" : ""
+			} ${isDistantLink ? "distant-link" : ""} ${
+				isBackwardLink ? "backward-link" : "forward-link"
+			}`;
 		})
 		.attr("d", d => {
 			return drawElbow({
@@ -230,8 +232,9 @@ export default function drawLinks({
 	links
 		.append("text")
 		.attr("class", d => {
-			return `link-arrow lineage-element ${d.source.isChildren || d.target.isChildren ? "child-link" : ""
-				}`;
+			return `link-arrow lineage-element ${
+				d.source.isChildren || d.target.isChildren ? "child-link" : ""
+			}`;
 		})
 		.attr("id", function (d) {
 			return `${d.id}~arrow`;

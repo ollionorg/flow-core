@@ -328,13 +328,13 @@ export const Playground = {
 					.padding=${28}
 					.gap=${100}
 					.node-size=${{
-				width: 200,
-				height: 52
-			}}
+						width: 200,
+						height: 52
+					}}
 					.children-node-size=${{
-				width: 200,
-				height: 32
-			}}
+						width: 200,
+						height: 32
+					}}
 					.max-children=${8}
 					.node-template=${nodeTemplate}
 					.children-node-template=${childNodeTemplate}

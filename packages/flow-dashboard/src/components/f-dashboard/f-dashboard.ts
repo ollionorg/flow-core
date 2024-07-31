@@ -51,9 +51,9 @@ export class FDashboard extends FRoot {
 		return html`
 			<div class="grid-stack" ${ref(this.gridStackElement)}>
 				${this.config.widgets.map(wgt => {
-			return keyed(
-				wgt.id,
-				html`<div
+					return keyed(
+						wgt.id,
+						html`<div
 							id="${wgt.id}"
 							class="grid-stack-item"
 							gs-w="${wgt.placement.w}"
@@ -63,8 +63,8 @@ export class FDashboard extends FRoot {
 								${getWidgetHeader(wgt)}${renderWidget(wgt)}${getWidgetFooter(wgt)}
 							</div>
 						</div>`
-			);
-		})}
+					);
+				})}
 			</div>
 		`;
 	}

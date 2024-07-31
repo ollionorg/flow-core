@@ -215,10 +215,10 @@ export const Placement = {
 		return html`
 			<f-div height="hug-content" gap="large" direction="column">
 				${dummyPlacementArray.map(item => {
-			return html`
+					return html`
 						<f-div height="hug-content" gap="auto" direction="row">
 							${item.map(main => {
-				return html`
+								return html`
 									<f-tooltip placement=${main.placement} id=${main.placement}>
 										<f-text variant="para" size="small" id="tooltip-text">
 											This is a tooltip
@@ -226,10 +226,10 @@ export const Placement = {
 									>
 									<f-button tooltip=${`#${main.placement}`} label=${main.title}> </f-button>
 								`;
-			})}
+							})}
 						</f-div>
 					`;
-		})}
+				})}
 			</f-div>
 		`;
 	},

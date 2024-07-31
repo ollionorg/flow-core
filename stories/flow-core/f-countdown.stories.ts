@@ -107,8 +107,8 @@ export const Size = {
 		return html`
 			<f-div gap="large">
 				${sizes.map(
-			item =>
-				html` <f-div direction="column" gap="medium" align="middle-center">
+					item =>
+						html` <f-div direction="column" gap="medium" align="middle-center">
 							<f-text inline>size="${item}"</f-text>
 							<f-countdown
 								label-placement="top"
@@ -117,7 +117,7 @@ export const Size = {
 								.size=${item}
 							></f-countdown>
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -131,8 +131,8 @@ export const State = {
 		return html`
 			<f-div gap="large">
 				${states.map(
-			item =>
-				html` <f-div direction="column" gap="medium" align="middle-center">
+					item =>
+						html` <f-div direction="column" gap="medium" align="middle-center">
 							<f-text inline>state="${item}"</f-text>
 							<f-countdown
 								label-placement="top"
@@ -141,7 +141,7 @@ export const State = {
 								.state=${item}
 							></f-countdown>
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -155,8 +155,8 @@ export const Label = {
 		return html`
 			<f-div gap="large">
 				${states.map(
-			item =>
-				html` <f-div direction="column" gap="medium" align="middle-center">
+					item =>
+						html` <f-div direction="column" gap="medium" align="middle-center">
 							<f-text inline>label-placement="${item}"</f-text>
 							<f-countdown
 								label-placement="top"
@@ -166,7 +166,7 @@ export const Label = {
 								label-placement=${item}
 							></f-countdown>
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},

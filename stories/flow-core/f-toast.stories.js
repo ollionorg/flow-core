@@ -41,8 +41,8 @@ export const Playground = {
 					<f-button label="add toast" icon-right="i-plus" @click=${() => add()}></f-button>
 				</f-div>
 				${toastList?.length > 0
-				? toastList?.map((item, index) => {
-					return html`<f-toast
+					? toastList?.map((item, index) => {
+							return html`<f-toast
 								.state=${args.state}
 								.duration=${args.duration}
 								.type=${args.type}
@@ -64,7 +64,7 @@ export const Playground = {
 										>
 									</f-div>
 									${item % 2 === 0
-							? html` <f-div direction="row" gap="medium">
+										? html` <f-div direction="row" gap="medium">
 												<f-button
 													label="button 1"
 													state="neutral"
@@ -78,11 +78,11 @@ export const Playground = {
 													variant="round"
 												></f-button>
 										  </f-div>`
-							: ""}
+										: ""}
 								</f-div>
 							</f-toast>`;
-				})
-				: ""}
+					  })
+					: ""}
 			</f-div>
 		`;
 	},
@@ -145,8 +145,8 @@ export const Type = {
 					<f-button label="add toast" icon-right="i-plus" @click=${() => add()}></f-button>
 				</f-div>
 				${values.map(
-			item =>
-				html`<f-div>
+					item =>
+						html`<f-div>
 							<f-toast .type=${item} .close-button=${true}
 								><f-div direction="column" gap="medium">
 									<f-div direction="column" gap="x-small">
@@ -163,7 +163,7 @@ export const Type = {
 								</f-div></f-toast
 							>
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -198,8 +198,8 @@ export const Duration = {
 					></f-button>
 				</f-div>
 				${values.map(
-			item =>
-				html`<f-div>
+					item =>
+						html`<f-div>
 							<f-toast .type=${item} .close-button=${true} .duration=${2000}
 								><f-div direction="column" gap="medium">
 									<f-div direction="column" gap="x-small">
@@ -216,7 +216,7 @@ export const Duration = {
 								</f-div></f-toast
 							>
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -251,8 +251,8 @@ export const State = {
 					></f-button>
 				</f-div>
 				${values.map(
-			item =>
-				html`<f-div>
+					item =>
+						html`<f-div>
 							<f-toast .type=${item} .close-button=${true} .duration=${5000} .state=${item}
 								><f-div direction="column" gap="medium">
 									<f-div direction="column" gap="x-small">
@@ -269,7 +269,7 @@ export const State = {
 								</f-div></f-toast
 							>
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -304,8 +304,8 @@ export const Flags = {
 					></f-button>
 				</f-div>
 				${values.map(
-			item =>
-				html`<f-div>
+					item =>
+						html`<f-div>
 							<f-toast .close-button=${item} .duration=${5000} state="primary" type="persists"
 								><f-div direction="column" gap="medium">
 									<f-div direction="column" gap="x-small">
@@ -322,7 +322,7 @@ export const Flags = {
 								</f-div></f-toast
 							>
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},

@@ -135,7 +135,7 @@ export class FFormBuilder extends FRoot {
 				@keyup=${this.handleKeyUp}
 			>
 				${this.label
-				? html`<f-div gap="x-small" direction="column" width="fill-container">
+					? html`<f-div gap="x-small" direction="column" width="fill-container">
 							<f-div gap="small" direction="row">
 								<f-div height="hug-content" width="hug-content">
 									<f-text variant="heading" size="medium" weight="medium" state="default">
@@ -143,27 +143,27 @@ export class FFormBuilder extends FRoot {
 									</f-text>
 								</f-div>
 								${this.label?.iconTooltip
-						? html` <f-icon
+									? html` <f-icon
 											source="i-question-filled"
 											size="small"
 											state="subtle"
 											.tooltip="${this.label?.iconTooltip}"
 											clickable
 									  ></f-icon>`
-						: ""}
+									: ""}
 							</f-div>
 							${this.label?.description
-						? html` <f-div height="hug-content" width="hug-content">
+								? html` <f-div height="hug-content" width="hug-content">
 										<f-text variant="para" size="small" weight="regular">
 											${this.label.description}
 										</f-text>
 								  </f-div>`
-						: ""}
+								: ""}
 					  </f-div>`
-				: ``}
+					: ``}
 				${this.field
-				? fieldRenderer[this.field.type](this.name, this.field, this.fieldRef, this.values)
-				: nothing}
+					? fieldRenderer[this.field.type](this.name, this.field, this.fieldRef, this.values)
+					: nothing}
 				<slot @click=${this.checkSubmit}></slot>
 			</f-form>
 		`;

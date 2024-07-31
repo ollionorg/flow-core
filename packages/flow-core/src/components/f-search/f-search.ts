@@ -302,8 +302,8 @@ export class FSearch extends FRoot {
 				? "f-search-border-button"
 				: "f-search-border"
 			: this["search-button"]
-				? "f-search-suggest-button"
-				: "f-search-suggest";
+			? "f-search-suggest-button"
+			: "f-search-suggest";
 	}
 
 	/**
@@ -366,7 +366,7 @@ export class FSearch extends FRoot {
 			</f-div>
 			<f-div direction="row" height="hug-content">
 				${this.scope !== "none" && (this.scope as string[])?.length > 0
-				? html` <f-div width="hug-content" style="min-width:150px">
+					? html` <f-div width="hug-content" style="min-width:150px">
 							<f-select
 								aria-label="Scope of ${this.getAttribute("aria-label")}"
 								class="f-search-border"
@@ -380,7 +380,7 @@ export class FSearch extends FRoot {
 								@input=${this.handleScopeSelection}
 							></f-select
 					  ></f-div>`
-				: ""}
+					: ""}
 				<f-div>
 					<f-suggest
 						class=${this.applyStyling}
@@ -406,7 +406,7 @@ export class FSearch extends FRoot {
 					</f-suggest>
 				</f-div>
 				${this["search-button"]
-				? html` <f-icon-button
+					? html` <f-icon-button
 							class="f-search-border"
 							icon="i-search"
 							.variant=${this.variant}
@@ -414,7 +414,7 @@ export class FSearch extends FRoot {
 							.state=${this.state === "default" ? "primary" : this.state}
 							@click=${this.handleSearchClick}
 					  ></f-icon-button>`
-				: ""}
+					: ""}
 			</f-div>
 			<f-div direction="column" id="helper-text-section"><slot name="help"></slot> </f-div>
 		</f-div>`;

@@ -147,7 +147,7 @@ export const Category = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${categories.map(
-			item => html`<f-div>
+					item => html`<f-div>
            <f-text-area
               category=${item}
               placeholder="This is a textarea"
@@ -160,7 +160,7 @@ export const Category = {
             </f-text-area></f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -236,7 +236,7 @@ export const Size = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${sizes.map(
-			item => html`<f-div>
+					item => html`<f-div>
           <f-text-area
               placeholder="This is a textarea"
               size=${item}
@@ -248,7 +248,7 @@ export const Size = {
             </f-text-area></f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -271,11 +271,11 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-			item =>
-				html` <f-div align="middle-center" padding="large" gap="medium">
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
-					state =>
-						html`<f-div>
+								state =>
+									html`<f-div>
 										<f-text-area
 											placeholder="This is a textarea"
 											size="medium"
@@ -289,9 +289,9 @@ export const State = {
 											<f-text slot="help" variant="para" size="small">This is subtext</f-text>
 										</f-text-area></f-div
 									>`
-				)}
+							)}
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -368,7 +368,7 @@ export const Flags = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${["Resizable", "Disabled", "Clear Icon on Type", "Readonly", "Mask Value"].map(
-			item => html`<f-div>
+					item => html`<f-div>
           <f-text-area
             value=${value}
             placeholder="Write here"
@@ -386,7 +386,7 @@ export const Flags = {
           </f-text-area></f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},

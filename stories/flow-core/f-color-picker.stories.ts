@@ -73,8 +73,8 @@ export const Variant = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${variants.map(
-			item =>
-				html` <f-color-picker .variant=${item} size="medium">
+					item =>
+						html` <f-color-picker .variant=${item} size="medium">
 							<f-div slot="label" padding="none" gap="none">Label (variant="${item}")</f-div>
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
@@ -84,7 +84,7 @@ export const Variant = {
 							>
 							<f-icon slot="icon-tooltip" source="i-question-filled" tooltip="some info"></f-icon>
 						</f-color-picker>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -99,14 +99,14 @@ export const Size = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${sizes.map(
-			item =>
-				html` <f-color-picker size=${item}>
+					item =>
+						html` <f-color-picker size=${item}>
 							<f-div slot="label" padding="none" gap="none">Label (size="${item}")</f-div>
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
 						</f-color-picker>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -124,19 +124,19 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-			item =>
-				html` <f-div padding="large" gap="medium">
+					item =>
+						html` <f-div padding="large" gap="medium">
 							${item.map(
-					state =>
-						html`<f-color-picker size="medium" state=${state}>
+								state =>
+									html`<f-color-picker size="medium" state=${state}>
 										<f-div slot="label" padding="none" gap="none">Label (state="${state}")</f-div>
 										<f-text slot="help" variant="para" size="small"
 											>This is a Subtext (Helper Text)</f-text
 										>
 									</f-color-picker>`
-				)}
+							)}
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -154,14 +154,14 @@ export const Flags = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${[0, 1].map(
-			item =>
-				html` <f-color-picker size="medium" ?disabled=${item === 0} ?read-only=${item === 1}>
+					item =>
+						html` <f-color-picker size="medium" ?disabled=${item === 0} ?read-only=${item === 1}>
 							<f-div slot="label" padding="none" gap="none">${flagNames[item]}</f-div>
 							<f-text slot="help" variant="para" size="small"
 								>This is a Subtext (Helper Text)</f-text
 							>
 						</f-color-picker>`
-		)}
+				)}
 			</f-div>
 		`;
 	},

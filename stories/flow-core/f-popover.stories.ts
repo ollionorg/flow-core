@@ -290,10 +290,10 @@ export const Placement = {
 		return html`
 			<f-div height="hug-content" gap="large" direction="column">
 				${dummyPlacementArray.map((item, index) => {
-			return html`
+					return html`
 						<f-div height="hug-content" gap="auto" direction="row">
 							${item.map((main, main_index) => {
-				return html` <f-popover
+								return html` <f-popover
 										?open=${main.open}
 										?overlay=${true}
 										placement=${main.placement}
@@ -314,10 +314,10 @@ export const Placement = {
 										@click=${() => handlePopover(main_index, index)}
 									>
 									</f-button>`;
-			})}
+							})}
 						</f-div>
 					`;
-		})}
+				})}
 			</f-div>
 		`;
 	},
@@ -388,7 +388,7 @@ export const Size = {
 
 		return html` <f-div height="hug-content" direction="column" gap="large">
 			${dummySizeArray.map((item, index) => {
-			return html`
+				return html`
 					<f-popover
 						?open=${item.open}
 						.overlay=${false}
@@ -429,7 +429,7 @@ export const Size = {
 						<f-text size="large">${item.title}</f-text>
 					</f-div>
 				`;
-		})}
+			})}
 		</f-div>`;
 	},
 
@@ -520,7 +520,7 @@ export const State = {
 
 		return html` <f-div height="hug-content" direction="column" gap="large">
 			${dummySizeArray.map((item, index) => {
-			return html`
+				return html`
 					<f-popover
 						?open=${item.open}
 						.overlay=${true}
@@ -555,7 +555,7 @@ export const State = {
 						<f-text size="large">${item.title}</f-text>
 					</f-div>
 				`;
-		})}
+			})}
 		</f-div>`;
 	},
 

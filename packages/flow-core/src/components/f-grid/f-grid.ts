@@ -44,8 +44,9 @@ export class FGrid extends FRoot {
 	 * grid-template-columns to assign cell-width
 	 */
 	get gridTemplateColumns() {
-		return `repeat(auto-fill,minmax(${this.minCellWidth && this.minCellWidth > 0 ? this.minCellWidth : 180
-			}px, ${this.maxCellWidth ? `${this.maxCellWidth}px` : "1fr"}))`;
+		return `repeat(auto-fill,minmax(${
+			this.minCellWidth && this.minCellWidth > 0 ? this.minCellWidth : 180
+		}px, ${this.maxCellWidth ? `${this.maxCellWidth}px` : "1fr"}))`;
 	}
 
 	/**

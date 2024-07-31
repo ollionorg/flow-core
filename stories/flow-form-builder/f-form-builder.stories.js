@@ -62,10 +62,10 @@ export const Playground = {
 					.size=${args.size}
 					.gap=${args.gap}
 					.label=${{
-				title: "Form label",
-				description: "Description about form",
-				iconTooltip: "Form more info"
-			}}
+						title: "Form label",
+						description: "Description about form",
+						iconTooltip: "Form more info"
+					}}
 					@submit=${handleSubmit}
 					@input=${handleInput}
 					@keydown=${handleKeydown}

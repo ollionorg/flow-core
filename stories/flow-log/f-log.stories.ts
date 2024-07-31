@@ -43,17 +43,17 @@ export const Playground = {
 			>
 				<f-div width="220px" direction="column">
 					${[
-				{ icon: "i-download", text: "Download" },
-				{
-					icon: "i-indent",
-					text: "Indent"
-				},
-				{
-					icon: "i-expand-3",
-					text: "Expand"
-				}
-			].map(op => {
-				return html`<f-div
+						{ icon: "i-download", text: "Download" },
+						{
+							icon: "i-indent",
+							text: "Indent"
+						},
+						{
+							icon: "i-expand-3",
+							text: "Expand"
+						}
+					].map(op => {
+						return html`<f-div
 							state="secondary"
 							padding="medium"
 							gap="medium"
@@ -63,7 +63,7 @@ export const Playground = {
 							<f-icon size="small" .source=${op.icon}></f-icon>
 							<f-text variant="para" size="medium" weight="regular">${op.text}</f-text>
 						</f-div>`;
-			})}
+					})}
 				</f-div>
 			</f-popover>
 			<f-div>

@@ -31,8 +31,8 @@ export const Playground = {
 				@prev=${handlePrev}
 			>
 				${["primary", "secondary", "tertiary", "warning", "danger"].map(
-			(state, idx) =>
-				html`<f-carousel-content content-id=${"slide-" + (idx + 1)}>
+					(state, idx) =>
+						html`<f-carousel-content content-id=${"slide-" + (idx + 1)}>
 							<f-div
 								height="300px"
 								width="100%"
@@ -47,7 +47,7 @@ export const Playground = {
 								>
 							</f-div>
 						</f-carousel-content>`
-		)}
+				)}
 			</f-carousel>
 		</f-div>`;
 	},
@@ -87,8 +87,8 @@ export const ActiveContentId = {
 		return html`<f-div width="100%" padding="large">
 			<f-carousel active-content-id="slide-3">
 				${["primary", "secondary", "tertiary", "warning", "danger"].map(
-			(state, idx) =>
-				html`<f-carousel-content content-id=${"slide-" + (idx + 1)}>
+					(state, idx) =>
+						html`<f-carousel-content content-id=${"slide-" + (idx + 1)}>
 							<f-div
 								height="300px"
 								width="100%"
@@ -104,7 +104,7 @@ export const ActiveContentId = {
 								<f-text size="small">active-content-id set to ${"slide-" + (idx + 1)}</f-text>
 							</f-div>
 						</f-carousel-content>`
-		)}
+				)}
 			</f-carousel>
 		</f-div>`;
 	},
@@ -117,8 +117,8 @@ export const AutoPlay = {
 		return html`<f-div width="100%" padding="large">
 			<f-carousel auto-play>
 				${["primary", "secondary", "tertiary", "warning", "danger"].map(
-			(state, idx) =>
-				html`<f-carousel-content content-id=${"slide-" + (idx + 1)}>
+					(state, idx) =>
+						html`<f-carousel-content content-id=${"slide-" + (idx + 1)}>
 							<f-div
 								height="300px"
 								width="100%"
@@ -134,7 +134,7 @@ export const AutoPlay = {
 								<f-text size="small">auto-play set to true</f-text>
 							</f-div>
 						</f-carousel-content>`
-		)}
+				)}
 			</f-carousel>
 		</f-div>`;
 	},
@@ -147,8 +147,8 @@ export const AutoPlayInterval = {
 		return html`<f-div width="100%" padding="large">
 			<f-carousel auto-play auto-play-interval="7000">
 				${["primary", "secondary", "tertiary", "warning", "danger"].map(
-			(state, idx) =>
-				html`<f-carousel-content content-id=${"slide-" + (idx + 1)}>
+					(state, idx) =>
+						html`<f-carousel-content content-id=${"slide-" + (idx + 1)}>
 							<f-div
 								height="300px"
 								width="100%"
@@ -165,7 +165,7 @@ export const AutoPlayInterval = {
 								<f-text size="small">auto-play-interval is 7000ms</f-text>
 							</f-div>
 						</f-carousel-content>`
-		)}
+				)}
 			</f-carousel>
 		</f-div>`;
 	},

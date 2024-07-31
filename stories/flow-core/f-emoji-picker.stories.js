@@ -166,7 +166,7 @@ export const Variant = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${variants.map(
-			item => html`<f-div width="hug-content">
+					item => html`<f-div width="hug-content">
       <f-emoji-picker
       value=${value}
             @input=${handleValue}
@@ -178,7 +178,7 @@ export const Variant = {
       </f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -198,7 +198,7 @@ export const Category = {
 		return html`
 			<f-div width="100%" align="middle-center" padding="large" gap="medium">
 				${categories.map(
-			item => html`<f-div width="hug-content">
+					item => html`<f-div width="hug-content">
           <f-emoji-picker
             value=${value}
             @input=${handleValue}
@@ -211,7 +211,7 @@ export const Category = {
           </f-emoji-picker></f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -277,7 +277,7 @@ export const Size = {
 		return html`
 			<f-div width="100%" align="top-center" padding="large" gap="medium">
 				${sizes.map(
-			item => html`<f-div width="hug-content">
+					item => html`<f-div width="hug-content">
           <f-emoji-picker
             value=${value}
             @input=${handleValue}
@@ -288,7 +288,7 @@ export const Size = {
           </f-emoji-picker></f-div
         ></f-div
       >`
-		)}
+				)}
 			</f-div>
 		`;
 	},
@@ -311,11 +311,11 @@ export const State = {
 		return html`
 			<f-div direction="column" gap="medium">
 				${states.map(
-			item =>
-				html` <f-div align="middle-center" padding="large" gap="medium">
+					item =>
+						html` <f-div align="middle-center" padding="large" gap="medium">
 							${item.map(
-					state =>
-						html`<f-div width="hug-content"
+								state =>
+									html`<f-div width="hug-content"
 										><f-emoji-picker
 											value=${value}
 											@input=${handleValue}
@@ -326,9 +326,9 @@ export const State = {
 											<f-text slot="help" variant="para" size="small">Help!</f-text>
 										</f-emoji-picker></f-div
 									>`
-				)}
+							)}
 						</f-div>`
-		)}
+				)}
 			</f-div>
 		`;
 	},

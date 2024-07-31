@@ -116,8 +116,8 @@ export class FCheckbox extends FRoot {
 					<label for="f-checkbox" value=${this.value} state=${this.state} size=${this.size}>
 						<span class="f-a11y-hidden-label">${this.value}</span>
 						${this.value === "checked"
-				? html`${unsafeSVG(checkedMark)}`
-				: html`${unsafeSVG(indeterminateMark)}`}
+							? html`${unsafeSVG(checkedMark)}`
+							: html`${unsafeSVG(indeterminateMark)}`}
 					</label>
 					<f-div
 						padding="none"

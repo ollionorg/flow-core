@@ -14,4 +14,4 @@ ConfigUtil.setConfig({
 	}
 });
 
-export { };
+export {};

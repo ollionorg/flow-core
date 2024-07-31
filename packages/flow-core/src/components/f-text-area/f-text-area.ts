@@ -215,10 +215,10 @@ export class FTextArea extends FRoot {
 					</f-div>
 					<f-div padding="none" gap="none" width="hug-content">
 						${this.maxLength
-				? html` <f-text variant="para" size="small" weight="regular" state="secondary"
+							? html` <f-text variant="para" size="small" weight="regular" state="secondary"
 									>${this.value?.length ?? 0} / ${this.maxLength}</f-text
 							  >`
-				: null}
+							: null}
 					</f-div>
 				</f-div>
 				<div class="f-text-area-wrapper">
@@ -240,14 +240,14 @@ export class FTextArea extends FRoot {
 						.value=${this.maskValue ? this.getDots() : this.value ?? ""}
 					></textarea>
 					${this.clear && this.value
-				? html` <f-icon
+						? html` <f-icon
 								class="f-text-area-clear-icon"
 								source="i-close"
 								clickable
 								size="x-small"
 								@click=${this.clearValue}
 						  ></f-icon>`
-				: null}
+						: null}
 				</div>
 				<slot name="help"></slot>
 			</f-div>

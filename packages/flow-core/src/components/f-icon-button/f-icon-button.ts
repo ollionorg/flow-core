@@ -214,16 +214,16 @@ export class FIconButton extends FRoot {
 				this.category === "fill" && this.variant !== "block" && !this.fill ? true : false,
 			"fill-button-surface-light":
 				this.fill &&
-					this.category === "fill" &&
-					this.variant !== "block" &&
-					getTextContrast(this.fill) === "light-text"
+				this.category === "fill" &&
+				this.variant !== "block" &&
+				getTextContrast(this.fill) === "light-text"
 					? true
 					: false,
 			"fill-button-surface-dark":
 				this.fill &&
-					this.category === "fill" &&
-					this.variant !== "block" &&
-					getTextContrast(this.fill) === "dark-text"
+				this.category === "fill" &&
+				this.variant !== "block" &&
+				getTextContrast(this.fill) === "dark-text"
 					? true
 					: false
 		};
@@ -285,9 +285,9 @@ export class FIconButton extends FRoot {
 				.state=${this.state}
 				.size=${this.size}
 				class=${classMap({
-			...iconClasses,
-			"fill-button-surface-input": this.iconInputClass ? true : false
-		})}
+					...iconClasses,
+					"fill-button-surface-input": this.iconInputClass ? true : false
+				})}
 				?clickable=${this.variant === "block"}
 			></f-icon
 			>${counter}

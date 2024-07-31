@@ -117,7 +117,7 @@ export class FRadioGroup extends FRoot {
 				</f-div>
 				<div class="f-radio-group" gap=${this.gap} direction=${this.direction}>
 					${this.options?.map(
-			item => html`
+						item => html`
 							<f-radio
 								data-qa-element-id=${item.qaId ?? item.id}
 								.value=${this.isChecked(item)}
@@ -127,8 +127,8 @@ export class FRadioGroup extends FRoot {
 							>
 								<f-div slot="label" padding="none" gap="none">
 									${typeof item.title === "object"
-					? item.title
-					: html`<f-text
+										? item.title
+										: html`<f-text
 												weight="regular"
 												data-qa-label-for=${item.title ?? item.id}
 												size="small"
@@ -136,16 +136,16 @@ export class FRadioGroup extends FRoot {
 										  >`}
 								</f-div>
 								${item.description
-					? html` <f-div
+									? html` <f-div
 											slot="description"
 											data-qa-description-for=${item.title ?? item.id}
 											padding="none"
 											gap="none"
 											>${item.description}</f-div
 									  >`
-					: ""}
+									: ""}
 								${item.iconTooltip
-					? html`
+									? html`
 											<f-icon
 												data-qa-info-icon-for=${item.title ?? item.id}
 												slot="icon-tooltip"
@@ -156,20 +156,20 @@ export class FRadioGroup extends FRoot {
 												clickable
 											></f-icon>
 									  `
-					: ""}
+									: ""}
 								${item?.subTitle
-					? html`
+									? html`
 											<f-text size="small" slot="subtitle" align="right" state="secondary"
 												>${item?.subTitle}</f-text
 											>
 									  `
-					: ""}
+									: ""}
 							</f-radio>
 						`
-		)}
+					)}
 				</div>
 				${this?.helperText
-				? html`<f-text
+					? html`<f-text
 							variant="para"
 							size="small"
 							weight="regular"
@@ -177,7 +177,7 @@ export class FRadioGroup extends FRoot {
 							.state=${this.state}
 							>${this?.helperText}</f-text
 					  >`
-				: html`<slot name="help"></slot>`}
+					: html`<slot name="help"></slot>`}
 			</f-div>
 		`;
 	}

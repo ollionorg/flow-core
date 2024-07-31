@@ -21,10 +21,10 @@ describe("f-tcell", () => {
 					<f-tcell
 						id="cell-to-test"
 						.actions=${[
-					{ icon: "i-copy", onClick: () => console.log("i-launch clicked") },
-					{ icon: "i-git-branch", onClick: () => console.log("i-launch clicked") },
-					{ icon: "i-launch", onClick: () => console.log("i-launch clicked") }
-				]}
+							{ icon: "i-copy", onClick: () => console.log("i-launch clicked") },
+							{ icon: "i-git-branch", onClick: () => console.log("i-launch clicked") },
+							{ icon: "i-launch", onClick: () => console.log("i-launch clicked") }
+						]}
 					>
 						<f-text> Column </f-text>
 					</f-tcell> </f-trow

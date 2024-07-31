@@ -21,12 +21,12 @@ describe("f-suggest", () => {
 		const el = await fixture<FCarousel>(html`
 			<f-carousel active-content-id="slide-3">
 				${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(
-			idx =>
-				html`<f-carousel-content content-id=${"slide-" + idx}>
+					idx =>
+						html`<f-carousel-content content-id=${"slide-" + idx}>
 							<f-div> ${unsafeSVG(FCarouselExample)} </f-div>
 							<f-text>${"slide-" + idx}</f-text>
 						</f-carousel-content>`
-		)}
+				)}
 			</f-carousel>
 		`);
 		await el.updateComplete;
@@ -45,12 +45,12 @@ describe("f-suggest", () => {
 		const el = await fixture<FCarousel>(html`
 			<f-carousel active-content-id="slide-3">
 				${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(
-			idx =>
-				html`<f-carousel-content content-id=${"slide-" + idx}>
+					idx =>
+						html`<f-carousel-content content-id=${"slide-" + idx}>
 							<f-div> ${unsafeSVG(FCarouselExample)} </f-div>
 							<f-text>${"slide-" + idx}</f-text>
 						</f-carousel-content>`
-		)}
+				)}
 			</f-carousel>
 		`);
 

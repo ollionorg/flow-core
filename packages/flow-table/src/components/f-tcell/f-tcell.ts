@@ -128,22 +128,22 @@ export class FTcell extends FRoot {
 		return html`<div class="f-tcell-wrapper">
 			<f-div .align=${this.align} height="100%" class="f-tcell-content">
 				${this.selectable === "multiple"
-				? html`<f-checkbox
+					? html`<f-checkbox
 							?disabled=${this.isDisabled}
 							@click=${(event: PointerEvent) => event.stopPropagation()}
 							@input=${this.handleSelection}
 					  ></f-checkbox>`
-				: nothing}
+					: nothing}
 				${this.selectable === "single"
-				? html`<f-radio
+					? html`<f-radio
 							?disabled=${this.isDisabled}
 							@input=${this.handleSelection}
 							@click=${(event: PointerEvent) => event.stopPropagation()}
 							class="cell-radio"
 					  ></f-radio>`
-				: nothing}
+					: nothing}
 				${this.expandIcon && this.expandIconPosition === "left"
-				? html`
+					? html`
 							<f-icon-button
 								size="medium"
 								category="packed"
@@ -153,7 +153,7 @@ export class FTcell extends FRoot {
 								icon="i-chevron-down"
 							></f-icon-button>
 					  `
-				: nothing}
+					: nothing}
 				<f-div .align=${this.align}><slot></slot></f-div>
 			</f-div>
 			<f-div
@@ -165,7 +165,7 @@ export class FTcell extends FRoot {
 			>
 				${this.renderActions()}
 				${this.expandIcon && this.expandIconPosition === "right"
-				? html`
+					? html`
 							<f-icon-button
 								size="medium"
 								category="packed"
@@ -175,7 +175,7 @@ export class FTcell extends FRoot {
 								icon="i-chevron-down"
 							></f-icon-button>
 					  `
-				: nothing}
+					: nothing}
 			</f-div>
 		</div>`;
 	}

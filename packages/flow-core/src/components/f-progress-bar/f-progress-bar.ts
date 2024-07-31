@@ -154,8 +154,9 @@ export class FProgressBar extends FRoot {
 	 * Calculate overall style to apply
 	 */
 	get circleProgressStyle() {
-		return `--f-progress-transform: rotate(${this.valueInAngle}deg);width:${this.circleDiameter
-			};height:${this.circleDiameter};${this.fill ? `--f-circle-progress-fill: ${this.fill};` : ""}`;
+		return `--f-progress-transform: rotate(${this.valueInAngle}deg);width:${
+			this.circleDiameter
+		};height:${this.circleDiameter};${this.fill ? `--f-circle-progress-fill: ${this.fill};` : ""}`;
 	}
 
 	protected willUpdate(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {

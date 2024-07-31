@@ -111,10 +111,10 @@ export class FInput extends FInputBase {
 						width="hug-content"
 					>
 						${this.maxLength
-				? html` <f-text variant="para" size="small" weight="regular" state="secondary"
+							? html` <f-text variant="para" size="small" weight="regular" state="secondary"
 									>${(this.value + "")?.length ?? 0} / ${this.maxLength}</f-text
 							  >`
-				: null}
+							: null}
 					</f-div>
 				</f-div>
 				<f-div

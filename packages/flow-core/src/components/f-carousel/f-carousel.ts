@@ -124,8 +124,8 @@ export class FCarousel extends FRoot {
 						source="i-chevron-left"
 						clickable
 						@keyup=${(e: KeyboardEvent) => {
-				if (e.key === "Enter") this.handleNavigation("prev");
-			}}
+							if (e.key === "Enter") this.handleNavigation("prev");
+						}}
 						@click=${() => this.handleNavigation("prev")}
 					></f-icon
 				></f-div>
@@ -147,8 +147,8 @@ export class FCarousel extends FRoot {
 						tabindex="0"
 						clickable
 						@keyup=${(e: KeyboardEvent) => {
-				if (e.key === "Enter") this.handleNavigation("next");
-			}}
+							if (e.key === "Enter") this.handleNavigation("next");
+						}}
 						@click=${() => this.handleNavigation("next")}
 					></f-icon>
 				</f-div>

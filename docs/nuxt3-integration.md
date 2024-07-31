@@ -11,7 +11,7 @@ Before we dive into the integration process, make sure you have a basic understa
 To get started, install the Flow Web Component library in your Nuxt project using your preferred package manager:
 
 ```bash
-npm i --save @ollion/flow-core
+npm i --save @nonfx/flow-core
 ```
 
 ### Step 2: Register Flow components through a Nuxt plugin
@@ -26,8 +26,8 @@ export default defineNuxtPlugin({
 	enforce: "pre",
 	async setup(_nuxtApp) {
 		await Promise.all([
-			import("@ollion/flow-core"),
-			import("@ollion/flow-form-builder"),
+			import("@nonfx/flow-core"),
+			import("@nonfx/flow-form-builder"),
 			import("@ollion/flow-system-icon")
 		]).then(() => {
 			console.log("Flow components loaded");

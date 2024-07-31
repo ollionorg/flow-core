@@ -1,7 +1,7 @@
 import { html } from "lit-html";
 
 export default {
-	title: "@ollion/flow-core/f-color-picker",
+	title: "@nonfx/flow-core/f-color-picker",
 
 	parameters: {
 		controls: {

@@ -2,10 +2,10 @@ import { html } from "lit-html";
 import fProgressBarAnatomy from "../svg/i-fprogress-bar-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { createRef, ref } from "lit/directives/ref.js";
-import { FProgressBar } from "@ollion/flow-core";
+import { FProgressBar } from "@nonfx/flow-core";
 
 export default {
-	title: "@ollion/flow-core/f-progress-bar",
+	title: "@nonfx/flow-core/f-progress-bar",
 
 	parameters: {
 		controls: {

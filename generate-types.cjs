@@ -2,7 +2,7 @@
 
 const fs = require("fs-extra");
 const path = require("path");
-const { transformSchema } = require("@ollion/custom-elements-manifest-to-types");
+const { transformSchema } = require("@nonfx/custom-elements-manifest-to-types");
 const { execSync } = require("child_process");
 
 const dirPaths = execSync('find ./packages -name "custom-elements.json"', {

@@ -4,7 +4,7 @@ import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fRadioAnatomy from "../svg/i-fradio-anatomy.js";
 
 export default {
-	title: "@ollion/flow-core/f-radio",
+	title: "@nonfx/flow-core/f-radio",
 
 	parameters: {
 		controls: {

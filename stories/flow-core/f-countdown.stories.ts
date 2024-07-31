@@ -1,7 +1,7 @@
 import { html } from "lit-html";
 
 export default {
-	title: "@ollion/flow-core/f-countdown",
+	title: "@nonfx/flow-core/f-countdown",
 
 	parameters: {
 		controls: {

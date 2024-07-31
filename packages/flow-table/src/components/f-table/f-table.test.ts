@@ -2,10 +2,10 @@ import { html, fixture, expect } from "@open-wc/testing";
 import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 
-import { ConfigUtil, FCheckbox } from "@ollion/flow-core";
-import { FTable, FTcell } from "@ollion/flow-table";
+import { ConfigUtil, FCheckbox } from "@nonfx/flow-core";
+import { FTable, FTcell } from "@nonfx/flow-table";
 
 ConfigUtil.setConfig({ iconPack: IconPack });
 

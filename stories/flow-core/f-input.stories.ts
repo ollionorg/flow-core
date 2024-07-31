@@ -4,7 +4,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useState } from "@storybook/preview-api";
 
 export default {
-	title: "@ollion/flow-core/f-input",
+	title: "@nonfx/flow-core/f-input",
 
 	parameters: {
 		controls: {

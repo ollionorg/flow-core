@@ -1,8 +1,8 @@
 import { html, PropertyValueMap, unsafeCSS, svg, render, nothing } from "lit";
 import { property } from "lit/decorators.js";
-import { FRoot, flowElement, FDiv } from "@ollion/flow-core";
+import { FRoot, flowElement, FDiv } from "@nonfx/flow-core";
 import globalStyle from "./f-timeseries-chart-global.scss?inline";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import * as d3 from "d3";
 import { NumberValue } from "d3";
 import { createRef, Ref, ref } from "lit/directives/ref.js";

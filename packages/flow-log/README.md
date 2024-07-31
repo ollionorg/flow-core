@@ -7,7 +7,7 @@ The Flow Log is built on the Flow design framework ([website](https://flow.ollio
 ### 1️⃣ Install flow code editor dependency
 
 ```
-npm i --save @ollion/flow-log
+npm i --save @nonfx/flow-log
 ```
 
 **Note:** after installation, re-start your application.
@@ -19,8 +19,8 @@ npm i --save @ollion/flow-log
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@ollion/flow-core";
-import "@ollion/flow-log";
+import "@nonfx/flow-core";
+import "@nonfx/flow-log";
 ```
 
 <br>
@@ -33,7 +33,7 @@ import "@ollion/flow-log";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@ollion/flow-log/dist/types/vue3";
+import "@nonfx/flow-log/dist/types/vue3";
 ```
 
 <details>
@@ -42,7 +42,7 @@ import "@ollion/flow-log/dist/types/vue3";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@ollion/flow-log/dist/types/vue2";
+import "@nonfx/flow-log/dist/types/vue2";
 ```
 
 </details>
@@ -53,7 +53,7 @@ import "@ollion/flow-log/dist/types/vue2";
 **React**: Include react type in `tsconfig.json` file like below.
 
 ```json
-"include": ["src", "./node_modules/@ollion/flow-log/dist/types/react.ts"]
+"include": ["src", "./node_modules/@nonfx/flow-log/dist/types/react.ts"]
 ```
 
 </details>

@@ -1,12 +1,12 @@
-// import { FRoot } from "@ollion/flow-core";
+// import { FRoot } from "@nonfx/flow-core";
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { RadioOption, RadioOptions } from "../../types";
 import eleStyle from "./f-radio-group.scss?inline";
 import globalStyle from "./f-radio-group-global.scss?inline";
-import { FDiv, FRadio, FRoot, FText } from "@ollion/flow-core";
+import { FDiv, FRadio, FRoot, FText } from "@nonfx/flow-core";
 import { isEqual } from "lodash-es";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 
 injectCss("f-checkbox-group", globalStyle);
 

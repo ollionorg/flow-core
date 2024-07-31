@@ -2,10 +2,10 @@ import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 import { expect } from "@open-wc/testing";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 
-import { ConfigUtil } from "@ollion/flow-core";
-import { FTextEditor } from "@ollion/flow-text-editor";
+import { ConfigUtil } from "@nonfx/flow-core";
+import { FTextEditor } from "@nonfx/flow-text-editor";
 ConfigUtil.setConfig({ iconPack: IconPack });
 
 /**

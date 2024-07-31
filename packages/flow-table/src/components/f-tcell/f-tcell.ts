@@ -1,12 +1,12 @@
 import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { property, query, state } from "lit/decorators.js";
-import { FCheckbox, FDiv, FIconButton, FIcon, FRadio, FRoot, flowElement } from "@ollion/flow-core";
+import { FCheckbox, FDiv, FIconButton, FIcon, FRadio, FRoot, flowElement } from "@nonfx/flow-core";
 import { FTableSelectable } from "../f-table/f-table";
 import eleStyle from "./f-tcell.scss?inline";
 import globalStyle from "./f-tcell-global.scss?inline";
 import { FTrowChevronPosition } from "../f-trow/f-trow";
 import { createRef, ref } from "lit/directives/ref.js";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 
 injectCss("f-tcell", globalStyle);
 

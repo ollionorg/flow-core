@@ -12,7 +12,7 @@ import { classMap } from "lit-html/directives/class-map.js";
 import { cloneDeep } from "lodash-es";
 import { flowElement } from "./../../utils";
 import { displayCustomTemplate, displayOptions, displayCategories } from "./display-options";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 injectCss("f-suggest", globalStyle);
 
 export type FSuggestState = "primary" | "default" | "success" | "warning" | "danger";

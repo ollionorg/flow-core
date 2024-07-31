@@ -7,7 +7,7 @@ The Flow table is built on the Flow design framework ([website](https://flow.oll
 ### 1️⃣ Install flow table dependency
 
 ```
-npm i --save @ollion/flow-table
+npm i --save @nonfx/flow-table
 ```
 
 **Note:** after installation, re-start your application.
@@ -19,8 +19,8 @@ npm i --save @ollion/flow-table
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@ollion/flow-core";
-import "@ollion/flow-table";
+import "@nonfx/flow-core";
+import "@nonfx/flow-table";
 ```
 
 <br>
@@ -33,7 +33,7 @@ import "@ollion/flow-table";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@ollion/flow-table/dist/types/vue3";
+import "@nonfx/flow-table/dist/types/vue3";
 ```
 
 <details>
@@ -42,7 +42,7 @@ import "@ollion/flow-table/dist/types/vue3";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@ollion/flow-table/dist/types/vue2";
+import "@nonfx/flow-table/dist/types/vue2";
 ```
 
 </details>
@@ -53,7 +53,7 @@ import "@ollion/flow-table/dist/types/vue2";
 **React**: Include react type in `tsconfig.json` file like below.
 
 ```json
-"include": ["src", "./node_modules/@ollion/flow-table/dist/types/react.ts"]
+"include": ["src", "./node_modules/@nonfx/flow-table/dist/types/react.ts"]
 ```
 
 </details>

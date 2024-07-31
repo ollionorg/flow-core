@@ -1,8 +1,8 @@
 import { html, fixture, expect } from "@open-wc/testing";
 // importing flow-core components
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 
-import { FDivider } from "@ollion/flow-core";
+import { FDivider } from "@nonfx/flow-core";
 
 describe("f-divider", () => {
 	it("is defined", () => {

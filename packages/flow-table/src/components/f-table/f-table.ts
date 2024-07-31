@@ -2,9 +2,9 @@ import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { property } from "lit/decorators.js";
 import { FTcell } from "../f-tcell/f-tcell";
 import { FTrow } from "../f-trow/f-trow";
-import { FRoot, flowElement } from "@ollion/flow-core";
+import { FRoot, flowElement } from "@nonfx/flow-core";
 import globalStyle from "./f-table-global.scss?inline";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 
 injectCss("f-table", globalStyle);
 

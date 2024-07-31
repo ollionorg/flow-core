@@ -1,11 +1,11 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { FRoot, flowElement, FButton } from "@ollion/flow-core";
+import { FRoot, flowElement, FButton } from "@nonfx/flow-core";
 import globalStyle from "./f-code-editor-global.scss?inline";
 import * as monaco from "monaco-editor";
 
 import { property, query } from "lit/decorators.js";
 import { languageCommentsMap } from "../../utils/lang-comments-map";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 
 injectCss("f-code-editor", globalStyle);
 

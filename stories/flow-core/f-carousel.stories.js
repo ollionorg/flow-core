@@ -3,7 +3,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import FCarouselAnatomy from "../svg/i-fcarousel-anatomy.js";
 
 export default {
-	title: "@ollion/flow-core/f-carousel",
+	title: "@nonfx/flow-core/f-carousel",
 
 	parameters: {
 		controls: {

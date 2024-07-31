@@ -5,10 +5,10 @@ import type {
 	FTableSchemaDataRow,
 	FTableSchemaCell,
 	FTableSchemaHeaderCell
-} from "@ollion/flow-table/src/components/f-table-schema/f-table-schema";
+} from "@nonfx/flow-table/src/components/f-table-schema/f-table-schema";
 
 import { createRef } from "lit/directives/ref.js";
-import { FPopover } from "@ollion/flow-core";
+import { FPopover } from "@nonfx/flow-core";
 
 export const popoverRef = createRef<FPopover>();
 

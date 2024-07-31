@@ -6,13 +6,13 @@ import {
 	XAxisLine,
 	TooltipPoints,
 	TimeseriesData
-} from "@ollion/flow-dashboard";
+} from "@nonfx/flow-dashboard";
 import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
 import { generateTimeseriesChartData } from "./mock-data-utils";
 
 export default {
-	title: "@ollion/flow-dashboard/f-timeseries-chart",
+	title: "@nonfx/flow-dashboard/f-timeseries-chart",
 
 	parameters: {
 		controls: {

@@ -1,4 +1,4 @@
-import { FText, FTooltip } from "@ollion/flow-core";
+import { FText, FTooltip } from "@nonfx/flow-core";
 import { DrawLineageParams, LevelLinkGap, LineageLinkElement } from "../lineage-types";
 
 import drawElbow, {

@@ -3,11 +3,11 @@ import { customElement, property } from "lit/decorators.js";
 import { CheckboxOption, CheckboxOptions } from "../../types";
 import eleStyle from "./f-checkbox-group.scss?inline";
 import globalStyle from "./f-checkbox-group-global.scss?inline";
-import { FRoot, FDiv, FText, FCheckbox } from "@ollion/flow-core";
+import { FRoot, FDiv, FText, FCheckbox } from "@nonfx/flow-core";
 import { isEqual } from "lodash-es";
 export type FCheckboxGroupValue = string[];
 export const checkboxGroupStyles = eleStyle;
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 
 injectCss("f-checkbox-group", globalStyle);
 @customElement("f-checkbox-group")

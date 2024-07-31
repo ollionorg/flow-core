@@ -14,7 +14,7 @@ import getTextContrast from "../../utils/get-text-contrast";
 import getCustomFillColor from "../../utils/get-custom-fill-color";
 import LightenDarkenColor from "../../utils/get-lighten-darken-color";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { ifDefined } from "lit/directives/if-defined.js";
 injectCss("f-icon-button", globalStyle);
 

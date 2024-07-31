@@ -6,7 +6,7 @@ import eleStyle from "./f-form.scss?inline";
 import globalStyle from "./f-form-global.scss?inline";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 injectCss("f-form", globalStyle);
 
 // import { ref, createRef } from "lit/directives/ref.js";

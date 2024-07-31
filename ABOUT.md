@@ -33,7 +33,7 @@ When it comes to property values, Flow works with a list of default property val
 
 Everything for front-end implementation that is available in Flow is required to exist as a Figma document as well. The Figma component properties will be the same properties for the front-end developer. This allows for better design handover + developer experience.
 
-If you are a developer thas a new contribution to Flow and do not have Figma experience/skills, you can write to flow@ollion.com and someone from CloudCover’s design team will get in touch with you. Keep in mind that the designers are actively engaged in other products and a response/implementation might take a little time.
+If you are a developer thas a new contribution to Flow and do not have Figma experience/skills, you can write to flow@nonfx.com and someone from CloudCover’s design team will get in touch with you. Keep in mind that the designers are actively engaged in other products and a response/implementation might take a little time.
 
 ## Everything as dependencies
 

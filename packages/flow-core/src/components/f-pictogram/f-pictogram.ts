@@ -3,7 +3,7 @@ import { property } from "lit/decorators.js";
 import eleStyle from "./f-pictogram.scss?inline";
 import globalStyle from "./f-pictogram-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
-import { ConfigUtil, injectCss } from "@ollion/flow-core-config";
+import { ConfigUtil, injectCss } from "@nonfx/flow-core-config";
 import { getTextContrast, isValidHttpUrl } from "./../../utils";
 import { classMap } from "lit-html/directives/class-map.js";
 import { FIcon } from "../f-icon/f-icon";

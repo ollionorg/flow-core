@@ -1,10 +1,10 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { FormBuilderField } from "@ollion/flow-form-builder";
+import { FormBuilderField } from "@nonfx/flow-form-builder";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@ollion/flow-form-builder/Examples/Array with Object fields",
+	title: "@nonfx/flow-form-builder/Examples/Array with Object fields",
 	argTypes: {
 		field: {
 			control: false

@@ -23,7 +23,7 @@ import {
 	FInputLight,
 	FSelect,
 	FSuggest
-} from "@ollion/flow-core";
+} from "@nonfx/flow-core";
 import defaultValidations from "./default-validations";
 import { render } from "lit-html";
 type FormBuilderValidationRuleWithPrivateFields = {

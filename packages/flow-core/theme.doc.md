@@ -17,7 +17,7 @@ $color-primary-default: #cc8899;
 6. Once you have successfully added the theme file to your project, use the following API to apply the theme to your startup file.In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
 
 ```javascript
-import { ConfigUtil } from "@ollion/flow-core";
+import { ConfigUtil } from "@nonfx/flow-core";
 
 ConfigUtil.setConfig({ theme: "<your-theme-name>" });
 ```

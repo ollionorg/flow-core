@@ -1,15 +1,15 @@
 import { html, fixture, expect } from "@open-wc/testing";
 import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 // import flow-core elements
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 
-import { ConfigUtil, FDiv } from "@ollion/flow-core";
+import { ConfigUtil, FDiv } from "@nonfx/flow-core";
 import {
 	FTableSchema,
 	FTableSchemaData,
 	FTableSchemaDataRow,
 	FTableSchemaCell
-} from "@ollion/flow-table";
+} from "@nonfx/flow-table";
 
 ConfigUtil.setConfig({ iconPack: IconPack });
 
@@ -22,7 +22,7 @@ export default function getFakeUsers(count = 100): FTableSchemaData {
 		const firstName = { value: `Vikas ${i}` };
 		const lastName = { value: `Last name ${i}` };
 		const email: FTableSchemaCell & { value: string } = {
-			value: `vikas${i}@ollion.com`,
+			value: `vikas${i}@nonfx.com`,
 			template: function () {
 				return html`<f-div gap="x-small"
 					><f-icon state="warning" source="i-hashtag"></f-icon

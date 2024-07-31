@@ -7,7 +7,7 @@ The Flow code editor is built on the Flow design framework ([website](https://fl
 ### 1️⃣ Install flow code editor dependency
 
 ```
-npm i --save @ollion/flow-code-editor
+npm i --save @nonfx/flow-code-editor
 ```
 
 **Note:** after installation, re-start your application.
@@ -19,8 +19,8 @@ npm i --save @ollion/flow-code-editor
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@ollion/flow-core";
-import "@ollion/flow-code-editor";
+import "@nonfx/flow-core";
+import "@nonfx/flow-code-editor";
 ```
 
 <br>
@@ -33,7 +33,7 @@ import "@ollion/flow-code-editor";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@ollion/flow-code-editor/dist/types/vue3";
+import "@nonfx/flow-code-editor/dist/types/vue3";
 ```
 
 <details>
@@ -42,7 +42,7 @@ import "@ollion/flow-code-editor/dist/types/vue3";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@ollion/flow-code-editor/dist/types/vue2";
+import "@nonfx/flow-code-editor/dist/types/vue2";
 ```
 
 </details>
@@ -53,7 +53,7 @@ import "@ollion/flow-code-editor/dist/types/vue2";
 **React**: Include react type in `tsconfig.json` file like below.
 
 ```json
-"include": ["src", "./node_modules/@ollion/flow-code-editor/dist/types/react.ts"]
+"include": ["src", "./node_modules/@nonfx/flow-code-editor/dist/types/react.ts"]
 ```
 
 </details>
@@ -103,7 +103,7 @@ const copyDir = (src, dest, callback?: (er: Error) => void) => {
 	});
 };
 
-copyDir("node_modules/@ollion/flow-code-editor/dist/assets", "assets");
+copyDir("node_modules/@nonfx/flow-code-editor/dist/assets", "assets");
 ```
 
 ### add specify `assets` folder in `assetsInclude` property.

@@ -2,9 +2,9 @@ import { expect, fixture, oneEvent } from "@open-wc/testing";
 import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 
-import { ConfigUtil, FDiv, FSuggest } from "@ollion/flow-core";
+import { ConfigUtil, FDiv, FSuggest } from "@nonfx/flow-core";
 import { html } from "lit";
 
 // setting icon pack for testing icon related test cases

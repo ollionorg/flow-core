@@ -2,9 +2,9 @@ import { html, fixture, expect } from "@open-wc/testing";
 import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 
-import { FIcon, ConfigUtil, FTextArea } from "@ollion/flow-core";
+import { FIcon, ConfigUtil, FTextArea } from "@nonfx/flow-core";
 
 // setting icon pack for testing icon related test cases
 ConfigUtil.setConfig({ iconPack: IconPack });

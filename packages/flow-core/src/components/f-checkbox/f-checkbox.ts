@@ -9,7 +9,7 @@ import indeterminateMark from "../../mixins/svg/indeterminate-mark";
 import { FDiv } from "../f-div/f-div";
 import { flowElement, generateId } from "./../../utils";
 
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 
 injectCss("f-checkbox", globalStyle);
 

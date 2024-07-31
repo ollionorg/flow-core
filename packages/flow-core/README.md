@@ -31,7 +31,7 @@ For a new project, Flow has put together starter kits with basic dependencies to
 - [Aungular](https://github.com/ollionorg/flow-starterkit-angular)
 - [React](https://github.com/ollionorg/flow-starterkit-react)
 
-If you would like to contribute to an existing starter kit or write a new one for a different framework, write to <flow@ollion.com> or ping on our slack channel.
+If you would like to contribute to an existing starter kit or write a new one for a different framework, write to <flow@nonfx.com> or ping on our slack channel.
 
 **VScode Plugin**: [Install Flow's Plugin](https://marketplace.visualstudio.com/items?itemName=dev-vikas.flow-intellisense-vscode) to access components, icons, values, etc, and documentation inside of VScode.
 
@@ -45,7 +45,7 @@ If you would like to contribute to an existing starter kit or write a new one fo
 
 #### 1️⃣ Install flow core
 
-`npm i --save @ollion/flow-core`
+`npm i --save @nonfx/flow-core`
 
 _Note:_ after installation re-start your application.
 
@@ -56,7 +56,7 @@ _Note:_ after installation re-start your application.
 Copy and import the below snippet into your startup file. In **VueJS:** (src/main.ts or main.js), **Angular:** (src/main.ts), **React:** (src/index.tsx or index.jsx)
 
 ```JavaScript
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 ```
 
 <br>
@@ -67,20 +67,20 @@ import "@ollion/flow-core";
 Copy paste below line in your `main.ts` file.
 
 ```JavaScript
-import "@ollion/flow-core/dist/types/vue2";
+import "@nonfx/flow-core/dist/types/vue2";
 ```
 
 or
 
 ```JavaScript
-import "@ollion/flow-core/dist/types/vue3";
+import "@nonfx/flow-core/dist/types/vue3";
 ```
 
 **React**
 Include react type in `tsconfig.json` like below
 
 ```JSON
-"include": ["src", "./node_modules/@ollion/flow-core/dist/types/react.ts"]
+"include": ["src", "./node_modules/@nonfx/flow-core/dist/types/react.ts"]
 ```
 
 **Note:** after adding the snippets, re-start your application.
@@ -98,7 +98,7 @@ npm i --save @ollion/flow-system-icon
 ### 2️⃣ Import the icon pack
 
 ```javascript
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 import "@ollion/flow-system-icon";
 ```
 
@@ -136,4 +136,4 @@ Visit the [Flow templates Storybook](https://flow.ollion.com/templates/index.htm
 
 ## Get in touch
 
-If you would like to get in touch or contribute, please write to <flow@ollion.com>.
+If you would like to get in touch or contribute, please write to <flow@nonfx.com>.

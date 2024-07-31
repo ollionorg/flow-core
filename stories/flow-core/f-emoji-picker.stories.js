@@ -2,7 +2,7 @@ import { html } from "lit-html";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 
 export default {
-	title: "@ollion/flow-core/f-emoji-picker",
+	title: "@nonfx/flow-core/f-emoji-picker",
 
 	parameters: {
 		controls: {

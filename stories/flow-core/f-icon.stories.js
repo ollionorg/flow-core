@@ -3,7 +3,7 @@ import fIconAnatomy from "../svg/i-ficon-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 export default {
-	title: "@ollion/flow-core/f-icon",
+	title: "@nonfx/flow-core/f-icon",
 
 	parameters: {
 		controls: {

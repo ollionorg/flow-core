@@ -4,7 +4,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useState } from "@storybook/client-api";
 
 export default {
-	title: "@ollion/flow-core/f-tab",
+	title: "@nonfx/flow-core/f-tab",
 
 	parameters: {
 		controls: {

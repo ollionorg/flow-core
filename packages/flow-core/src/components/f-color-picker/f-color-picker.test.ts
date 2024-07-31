@@ -1,9 +1,9 @@
 import { html, fixture, expect } from "@open-wc/testing";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 
-import { FColorPicker, FInput } from "@ollion/flow-core";
+import { FColorPicker, FInput } from "@nonfx/flow-core";
 
 describe("f-color-picker", () => {
 	// check if component is defined

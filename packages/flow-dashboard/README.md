@@ -7,7 +7,7 @@ The Flow dashboard is built on the Flow design framework ([website](https://flow
 ### 1️⃣ Install flow dashboard dependency
 
 ```
-npm i --save @ollion/flow-dashboard
+npm i --save @nonfx/flow-dashboard
 ```
 
 **Note:** after installation, re-start your application.
@@ -19,8 +19,8 @@ npm i --save @ollion/flow-dashboard
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@ollion/flow-core";
-import "@ollion/flow-dashboard";
+import "@nonfx/flow-core";
+import "@nonfx/flow-dashboard";
 ```
 
 <br>
@@ -33,7 +33,7 @@ import "@ollion/flow-dashboard";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@ollion/flow-dashboard/dist/types/vue3";
+import "@nonfx/flow-dashboard/dist/types/vue3";
 ```
 
 <details>
@@ -42,7 +42,7 @@ import "@ollion/flow-dashboard/dist/types/vue3";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@ollion/flow-dashboard/dist/types/vue2";
+import "@nonfx/flow-dashboard/dist/types/vue2";
 ```
 
 </details>
@@ -53,7 +53,7 @@ import "@ollion/flow-dashboard/dist/types/vue2";
 **React**: Include react type in `tsconfig.json` file like below.
 
 ```json
-"include": ["src", "./node_modules/@ollion/flow-dashboard/dist/types/react.ts"]
+"include": ["src", "./node_modules/@nonfx/flow-dashboard/dist/types/react.ts"]
 ```
 
 </details>

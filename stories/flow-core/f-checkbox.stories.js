@@ -4,7 +4,7 @@ import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fCheckboxAnatomy from "../svg/i-fcheckbox-anatomy.js";
 
 export default {
-	title: "@ollion/flow-core/f-checkbox",
+	title: "@nonfx/flow-core/f-checkbox",
 
 	parameters: {
 		controls: {

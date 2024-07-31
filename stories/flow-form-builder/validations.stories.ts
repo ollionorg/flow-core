@@ -3,13 +3,13 @@ import {
 	FormBuilderShowCondition,
 	FormBuilderValidatorFunction,
 	FormBuilderValues
-} from "@ollion/flow-form-builder";
+} from "@nonfx/flow-form-builder";
 import { html } from "lit-html";
 
 import { createRef, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@ollion/flow-form-builder/Examples/Validations",
+	title: "@nonfx/flow-form-builder/Examples/Validations",
 
 	parameters: {
 		controls: {
@@ -20,12 +20,12 @@ export default {
 
 const showWhen: FormBuilderShowCondition<FormBuilderValues> = values => {
 	// console.log(values);
-	return (values as Record<string, any>).emailField === "vikas@ollion.com";
+	return (values as Record<string, any>).emailField === "vikas@nonfx.com";
 };
 
 const customValidate: FormBuilderValidatorFunction<string | unknown[]> = val => {
 	console.log("in custom validate", val);
-	return val === "vikas@ollion.com";
+	return val === "vikas@nonfx.com";
 };
 
 const field: FormBuilderField = {

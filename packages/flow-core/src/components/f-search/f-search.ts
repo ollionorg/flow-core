@@ -9,7 +9,7 @@ import { FSelect } from "../f-select/f-select";
 import { FSuggest } from "../f-suggest/f-suggest";
 import { FIconButton } from "../f-icon-button/f-icon-button";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 injectCss("f-search", globalStyle);
 

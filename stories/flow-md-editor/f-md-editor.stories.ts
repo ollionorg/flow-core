@@ -1,10 +1,10 @@
 import { html } from "lit-html";
 import sampleMd from "./sample-md";
 import { createRef, ref } from "lit-html/directives/ref.js";
-import { FMDEditor } from "@ollion/flow-md-editor";
+import { FMDEditor } from "@nonfx/flow-md-editor";
 
 export default {
-	title: "@ollion/flow-md-editor/f-md-editor",
+	title: "@nonfx/flow-md-editor/f-md-editor",
 
 	parameters: {
 		controls: {

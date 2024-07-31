@@ -8,7 +8,7 @@ There are several avenues available to you for obtaining support for Flow Lineag
 
 **Documentation:** Flow Lineage comes with comprehensive documentation that includes installation instructions, usage guidelines, and troubleshooting information, know issues file, etc. Please refer to the documentation first as it may have the answers to your questions.
 
-**Email:** If you prefer to contact us directly, you can send an email to flow@ollion.com . Please provide a detailed description of your issue or question, along with any relevant information, and we will get back to you as soon as possible.
+**Email:** If you prefer to contact us directly, you can send an email to flow@nonfx.com . Please provide a detailed description of your issue or question, along with any relevant information, and we will get back to you as soon as possible.
 
 ## How to Request Support
 

@@ -7,7 +7,7 @@ import eleStyle from "./f-form-group.scss?inline";
 import globalStyle from "./f-form-group-global.scss?inline";
 import { flowElement } from "./../../utils";
 
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 injectCss("f-form-group", globalStyle);
 

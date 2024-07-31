@@ -1,11 +1,11 @@
 import { faker } from "@faker-js/faker";
-import { FSelectOptionObject } from "@ollion/flow-core";
+import { FSelectOptionObject } from "@nonfx/flow-core";
 import { html } from "lit-html";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import fSelectAnatomy from "../svg/i-fselect-anatomy.js";
 
 export default {
-	title: "@ollion/flow-core/f-select",
+	title: "@nonfx/flow-core/f-select",
 
 	parameters: {
 		controls: {

@@ -13,7 +13,7 @@ const alias = [
 	"flow-table",
 	"flow-dashboard"
 ].map(pkg => ({
-	find: `@ollion/${pkg}`,
+	find: `@nonfx/${pkg}`,
 	replacement: path.resolve(__dirname, "../packages", pkg, "src")
 }));
 

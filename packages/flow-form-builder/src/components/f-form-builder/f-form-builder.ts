@@ -18,7 +18,7 @@ import {
 import eleStyle from "./f-form-builder.scss?inline";
 import globalStyle from "./f-form-builder-global.scss?inline";
 
-import { FDiv, FRoot } from "@ollion/flow-core";
+import { FDiv, FRoot } from "@nonfx/flow-core";
 import { Ref, createRef } from "lit/directives/ref.js";
 import fieldRenderer from "./fields";
 import { extractValidationState, validateField } from "../../modules/validation/validator";
@@ -26,7 +26,7 @@ import { debounce } from "lodash-es";
 import { Subject } from "rxjs";
 import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/helpers";
 import { cloneDeep, isEqual } from "lodash-es";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { ifDefined } from "lit/directives/if-defined.js";
 import formArrayGlobalStyles from "./../f-form-array/f-form-array-global.scss?inline";
 

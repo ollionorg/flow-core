@@ -15,7 +15,7 @@ import { FCounter } from "../f-counter/f-counter";
 import { flowElement } from "./../../utils";
 import { createRef, ref, Ref } from "lit/directives/ref.js";
 import type { FDiv } from "../f-div/f-div";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { keyed } from "lit/directives/keyed.js";
 

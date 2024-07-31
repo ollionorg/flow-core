@@ -3,7 +3,7 @@ import fInputAnatomy from "../svg/i-finput-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 export default {
-	title: "@ollion/flow-core/f-suggest",
+	title: "@nonfx/flow-core/f-suggest",
 
 	parameters: {
 		controls: {

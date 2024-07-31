@@ -1,11 +1,11 @@
 import { Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 import { createRef, ref } from "lit/directives/ref.js";
-import { FormBuilderTextInputField, validateField } from "@ollion/flow-form-builder";
-import { FInputLight } from "@ollion/flow-core";
+import { FormBuilderTextInputField, validateField } from "@nonfx/flow-form-builder";
+import { FInputLight } from "@nonfx/flow-core";
 
 export default {
-	title: "@ollion/flow-form-builder/Examples",
+	title: "@nonfx/flow-form-builder/Examples",
 	argTypes: {
 		field: {
 			control: false

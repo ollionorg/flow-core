@@ -4,7 +4,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 
 export default {
-	title: "@ollion/flow-core/f-date-time-picker",
+	title: "@nonfx/flow-core/f-date-time-picker",
 
 	parameters: {
 		controls: {

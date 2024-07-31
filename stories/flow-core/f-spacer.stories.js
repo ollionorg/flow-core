@@ -3,7 +3,7 @@ import fSpacerAnatomy from "../svg/i-fspacer-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 export default {
-	title: "@ollion/flow-core/f-spacer",
+	title: "@nonfx/flow-core/f-spacer",
 
 	parameters: {
 		controls: {

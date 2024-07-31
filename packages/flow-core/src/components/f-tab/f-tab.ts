@@ -7,7 +7,7 @@ import { FDiv } from "../f-div/f-div";
 import { FTabNode } from "../f-tab-node/f-tab-node";
 import { FIconButton } from "../f-icon-button/f-icon-button";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 injectCss("f-tab", globalStyle);
 
 export type FTabNodeWidthProp = "fill" | "hug-content" | `${number}`;

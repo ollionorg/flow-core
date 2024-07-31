@@ -4,7 +4,7 @@ import { useState, useEffect } from "@storybook/client-api";
 import NodeDetailsTemplateAnatomy from "../svg/i-node-details-anatomy.js";
 
 export default {
-	title: "@ollion/flow-lineage/Templates/node-details popover",
+	title: "@nonfx/flow-lineage/Templates/node-details popover",
 
 	parameters: {
 		controls: {

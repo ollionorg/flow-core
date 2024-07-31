@@ -3,7 +3,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fFileUploadAnatomy from "../svg/i-ffile-upload-anatomy.js";
 export default {
-	title: "@ollion/flow-core/f-file-upload",
+	title: "@nonfx/flow-core/f-file-upload",
 
 	parameters: {
 		controls: {

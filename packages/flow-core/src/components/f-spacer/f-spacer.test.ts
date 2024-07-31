@@ -1,7 +1,7 @@
 import { html, fixture, expect } from "@open-wc/testing";
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 
-import { FSpacer } from "@ollion/flow-core";
+import { FSpacer } from "@nonfx/flow-core";
 
 describe("f-spacer", () => {
 	it("is defined", () => {

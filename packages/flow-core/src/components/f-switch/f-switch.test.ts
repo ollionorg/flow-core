@@ -1,9 +1,9 @@
 import { html, fixture, expect } from "@open-wc/testing";
 
 // import flow-core elements
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 
-import { FSwitch } from "@ollion/flow-core";
+import { FSwitch } from "@nonfx/flow-core";
 
 describe("f-switch", () => {
 	it("is defined", () => {

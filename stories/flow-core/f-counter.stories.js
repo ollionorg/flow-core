@@ -3,7 +3,7 @@ import fCounterAnatomy from "../svg/i-fcounter-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 
 export default {
-	title: "@ollion/flow-core/f-counter",
+	title: "@nonfx/flow-core/f-counter",
 
 	parameters: {
 		controls: {

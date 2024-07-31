@@ -8,7 +8,7 @@ import getCustomFillColor from "../../utils/get-custom-fill-color";
 import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
 import { flowElement } from "../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { classMap } from "lit-html/directives/class-map.js";
 import { keyed } from "lit/directives/keyed.js";
 

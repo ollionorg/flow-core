@@ -8,7 +8,7 @@ import { validateHTMLColor } from "validate-color";
 import { validateHTMLColorName } from "validate-color";
 import { flowElement } from "./../../utils";
 import { FIcon } from "../f-icon/f-icon";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import Mark from "mark.js/dist/mark.es6.min";
 injectCss("f-text", globalStyle);
 

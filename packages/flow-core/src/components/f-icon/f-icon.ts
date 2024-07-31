@@ -5,7 +5,7 @@ import globalStyle from "./f-icon-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 // themeSubject will used to listen theme update
-import { configSubject, themeSubject, injectCss } from "@ollion/flow-core-config";
+import { configSubject, themeSubject, injectCss } from "@nonfx/flow-core-config";
 import { classMap } from "lit-html/directives/class-map.js";
 import loader from "../../mixins/svg/loader";
 import notFound from "../../mixins/svg/not-found";

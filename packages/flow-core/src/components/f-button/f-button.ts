@@ -21,7 +21,7 @@ import getTextContrast from "../../utils/get-text-contrast";
 import { FIcon } from "../f-icon/f-icon";
 import { FCounter } from "../f-counter/f-counter";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { FPopover } from "../f-popover/f-popover";
 import { FDiv } from "../f-div/f-div";

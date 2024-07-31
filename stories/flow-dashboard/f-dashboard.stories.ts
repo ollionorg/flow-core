@@ -5,13 +5,13 @@ import {
 	FDashboardConfig,
 	FDashboardWidget,
 	FTimeseriesChartConfig
-} from "@ollion/flow-dashboard";
+} from "@nonfx/flow-dashboard";
 import { generateTimeseriesChartData } from "./mock-data-utils";
 import { faker } from "@faker-js/faker";
 import { createRef, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@ollion/flow-dashboard/f-dashboard",
+	title: "@nonfx/flow-dashboard/f-dashboard",
 	argTypes: {
 		field: {
 			control: false

@@ -1,6 +1,6 @@
 import { html, nothing, PropertyValueMap, TemplateResult, unsafeCSS } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
-import { FDiv, FRoot } from "@ollion/flow-core";
+import { FDiv, FRoot } from "@nonfx/flow-core";
 import eleStyle from "./f-form-object.scss?inline";
 import globalStyle from "./f-form-object-global.scss?inline";
 
@@ -17,7 +17,7 @@ import {
 import { validateField } from "../../modules/validation/validator";
 import { Subject } from "rxjs";
 import { getEssentialFlowCoreStyles, propogateProperties } from "../../modules/helpers";
-import { FFormGroup } from "@ollion/flow-core";
+import { FFormGroup } from "@nonfx/flow-core";
 import { FFieldSeparator } from "../f-field-separator/f-field-separator";
 import { radioGroupStyles } from "../f-radio-group/f-radio-group";
 import { checkboxGroupStyles } from "../f-checkbox-group/f-checkbox-group";

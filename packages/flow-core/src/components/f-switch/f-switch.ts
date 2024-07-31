@@ -5,7 +5,7 @@ import globalStyle from "./f-switch-global.scss?inline";
 import { FRoot } from "../../mixins/components/f-root/f-root";
 import { FDiv } from "../f-div/f-div";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 injectCss("f-switch", globalStyle);
 
 export type FSwitchState = "primary" | "default" | "success" | "warning" | "danger";

@@ -4,7 +4,7 @@ import { useArgs, useEffect, useState } from "@storybook/client-api";
 import fSwitchAnatomy from "../svg/i-fswitch-anatomy.js";
 
 export default {
-	title: "@ollion/flow-core/f-switch",
+	title: "@nonfx/flow-core/f-switch",
 
 	parameters: {
 		controls: {

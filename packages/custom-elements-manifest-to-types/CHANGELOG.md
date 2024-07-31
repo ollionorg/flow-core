@@ -1,4 +1,4 @@
-# @ollion/custom-elements-manifest-to-types
+# @nonfx/custom-elements-manifest-to-types
 
 ## [2.0.5] - 2024-07-08
 

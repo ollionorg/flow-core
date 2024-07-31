@@ -3,10 +3,10 @@ import fPopoverAnatomy from "../svg/i-fpopover-anatomy.js";
 import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { useState } from "@storybook/preview-api";
 import { createRef, ref } from "lit/directives/ref.js";
-import { FPopover, FPopoverPlacement, FPopoverSize, FPopoverState } from "@ollion/flow-core";
+import { FPopover, FPopoverPlacement, FPopoverSize, FPopoverState } from "@nonfx/flow-core";
 
 export default {
-	title: "@ollion/flow-core/f-popover",
+	title: "@nonfx/flow-core/f-popover",
 
 	parameters: {
 		controls: {

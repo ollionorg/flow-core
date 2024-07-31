@@ -1,11 +1,11 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { LineageNodeLinks } from "@ollion/flow-lineage";
+import { LineageNodeLinks } from "@nonfx/flow-lineage";
 import nodes from "./nodes";
 import { nodeTemplate, childrenNodeTemplate } from "./node-templates";
 
 export default {
-	title: "@ollion/flow-lineage/Debug/Reverse-bend",
+	title: "@nonfx/flow-lineage/Debug/Reverse-bend",
 	argTypes: {
 		["node-template"]: {
 			control: false

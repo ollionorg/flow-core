@@ -1,6 +1,6 @@
 # Flow Lineage
 
-![npm](https://badgen.net/npm/v/@ollion/flow-lineage) ![license](https://badgen.net/npm/license/@ollion/flow-lineage) ![types](https://badgen.net/npm/types/@ollion/flow-lineage) ![downloads](https://badgen.net//npm/dw/@ollion/flow-lineage)
+![npm](https://badgen.net/npm/v/@nonfx/flow-lineage) ![license](https://badgen.net/npm/license/@nonfx/flow-lineage) ![types](https://badgen.net/npm/types/@nonfx/flow-lineage) ![downloads](https://badgen.net//npm/dw/@nonfx/flow-lineage)
 
 A lineage chart is a graphical representation of a node's ancestors, showing the relationships among nodes. It is often used in analytics to show the relations and to trace their ancestry. Lineage charts can be in the form of a hierarchy data, showing the relationships between parents and children, or they can be more complex and show the relationships between more distant nodes.
 
@@ -33,7 +33,7 @@ While installation if you run into any issues, head over to our [known issues + 
 ### 1️⃣ Install flow lineage dependency
 
 ```
-npm i --save @ollion/flow-lineage
+npm i --save @nonfx/flow-lineage
 ```
 
 **Note:** after installation, re-start your application.
@@ -45,19 +45,19 @@ npm i --save @ollion/flow-lineage
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@ollion/flow-core";
-import "@ollion/flow-lineage";
+import "@nonfx/flow-core";
+import "@nonfx/flow-lineage";
 ```
 
 <details><summary>Example</summary>
 
-**VueJS:** In the following example, I imported `@ollion/flow-core` and then imported the rest of the flow packages including `@ollion/flow-lineage` and after that startup code was added for VueJs `createApp(App).use(router).mount(“#app”);`.
+**VueJS:** In the following example, I imported `@nonfx/flow-core` and then imported the rest of the flow packages including `@nonfx/flow-lineage` and after that startup code was added for VueJs `createApp(App).use(router).mount(“#app”);`.
 
 ```javascript
-import "@ollion/flow-core";
+import "@nonfx/flow-core";
 import "@ollion/flow-system-icon";
 import "@ollion/flow-product-icon";
-import "@ollion/flow-lineage";
+import "@nonfx/flow-lineage";
 
 createApp(App).use(router).mount("#app"); //runtime
 ```
@@ -74,7 +74,7 @@ createApp(App).use(router).mount("#app"); //runtime
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@ollion/flow-lineage/dist/types/vue3";
+import "@nonfx/flow-lineage/dist/types/vue3";
 ```
 
 <details>
@@ -83,7 +83,7 @@ import "@ollion/flow-lineage/dist/types/vue3";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@ollion/flow-lineage/dist/types/vue2";
+import "@nonfx/flow-lineage/dist/types/vue2";
 ```
 
 </details>
@@ -94,7 +94,7 @@ import "@ollion/flow-lineage/dist/types/vue2";
 **React**: Include react type in `tsconfig.json` file like below.
 
 ```json
-"include": ["src", "./node_modules/@ollion/flow-lineage/dist/types/react.ts"]
+"include": ["src", "./node_modules/@nonfx/flow-lineage/dist/types/react.ts"]
 ```
 
 </details>

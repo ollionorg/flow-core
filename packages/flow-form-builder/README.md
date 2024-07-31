@@ -1,6 +1,6 @@
 # Flow Form builder
 
-![npm](https://badgen.net/npm/v/@ollion/flow-form-builder) ![license](https://badgen.net/npm/license/@ollion/flow-form-builder) ![types](https://badgen.net/npm/types/@ollion/flow-form-builder) ![downloads](https://badgen.net//npm/dw/@ollion/flow-form-builder)
+![npm](https://badgen.net/npm/v/@nonfx/flow-form-builder) ![license](https://badgen.net/npm/license/@nonfx/flow-form-builder) ![types](https://badgen.net/npm/types/@nonfx/flow-form-builder) ![downloads](https://badgen.net//npm/dw/@nonfx/flow-form-builder)
 
 The Flow form builder is built on the Flow design framework ([website](https://flow.ollion.com/) / [github](https://github.com/ollionorg/flow-core))
 
@@ -65,7 +65,7 @@ Flow form builder is built on [Flow](https://flow.ollion.com/), an open source d
 ### 1️⃣ Install flow form builder dependency
 
 ```
-npm i --save @ollion/flow-form-builder
+npm i --save @nonfx/flow-form-builder
 ```
 
 **Note:** after installation, re-start your application.
@@ -77,8 +77,8 @@ npm i --save @ollion/flow-form-builder
 Paste the below snippet in your project and add your application startup/runtime code to it.
 
 ```javascript
-import "@ollion/flow-core";
-import "@ollion/flow-form-builder";
+import "@nonfx/flow-core";
+import "@nonfx/flow-form-builder";
 ```
 
 <br/>
@@ -91,7 +91,7 @@ import "@ollion/flow-form-builder";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@ollion/flow-form-builder/dist/types/vue3";
+import "@nonfx/flow-form-builder/dist/types/vue3";
 ```
 
 <details>
@@ -100,7 +100,7 @@ import "@ollion/flow-form-builder/dist/types/vue3";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@ollion/flow-form-builder/dist/types/vue2";
+import "@nonfx/flow-form-builder/dist/types/vue2";
 ```
 
 </details>
@@ -111,7 +111,7 @@ import "@ollion/flow-form-builder/dist/types/vue2";
 **React**: Include react type in `tsconfig.json` file like below.
 
 ```json
-"include": ["src", "./node_modules/@ollion/flow-form-builder/dist/types/react.ts"]
+"include": ["src", "./node_modules/@nonfx/flow-form-builder/dist/types/react.ts"]
 ```
 
 </details>
@@ -150,7 +150,7 @@ import {
   FormBuilderField,
   FormBuilderState,
   FormBuilderValues,
-} from "@ollion/flow-form-builder";
+} from "@nonfx/flow-form-builder";
 import { defineComponent } from "vue";
 
 export default defineComponent({

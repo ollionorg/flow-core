@@ -4,7 +4,7 @@ Thank you for your interest in contributing! 🎉👍
 
 Flow is a framework that is made up of multiple dependencies / templates. Visit the [about.md](https://github.com/ollionorg/flow-core/blob/main/ABOUT.md) on the [flow-core repo](https://github.com/ollionorg/flow-core/) to learn more.
 
-When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the [owners](https://github.com/ollionorg/flow-core/blob/main/CODEOWNERS) of this repository before making a change. You can expect a response from a maintainer within a week. If you haven’t heard anything by then, write to flow@ollion.com.
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the [owners](https://github.com/ollionorg/flow-core/blob/main/CODEOWNERS) of this repository before making a change. You can expect a response from a maintainer within a week. If you haven’t heard anything by then, write to flow@nonfx.com.
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
@@ -39,7 +39,7 @@ All issues as tracked here. Once you have resolved an issue,
 - Flow color tokens have been consumed and no custom tokens have been created.
 - Create a pull request in this repository by uploading your dependency package.
 - In the PR description link to the respective figma page/file
-- Include screenshots, animated GIFs or videos of the feature, you can also send it to flow@ollion.com with a reference to the PR.
+- Include screenshots, animated GIFs or videos of the feature, you can also send it to flow@nonfx.com with a reference to the PR.
 
 ### Design and define new components
 
@@ -49,7 +49,7 @@ All issues as tracked here. Once you have resolved an issue,
 ### Flow Documentation
 
 - Guidlines coming soon
-- If you would like to contribute to this document and guidlines, write into flow@ollion.com
+- If you would like to contribute to this document and guidlines, write into flow@nonfx.com
 
 ## Pull Request Process
 
@@ -115,7 +115,7 @@ further defined and clarified by project maintainers.
 ### Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the project team at [gcf-team](mailto:gcf-team@ollion.com). All
+reported by contacting the project team at [gcf-team](mailto:gcf-team@nonfx.com). All
 complaints will be reviewed and investigated and will result in a response that
 is deemed necessary and appropriate to the circumstances. The project team is
 obligated to maintain confidentiality with regard to the reporter of an incident.

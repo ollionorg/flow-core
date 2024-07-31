@@ -3,7 +3,7 @@ import ProductIconPack from "@ollion/flow-product-icon/dist/types/icon-pack";
 import GcpIconPack from "@ollion/flow-gcp-icon/dist/types/icon-pack";
 import AwsIconPack from "@ollion/flow-aws-icon/dist/types/icon-pack";
 
-import { ConfigUtil } from "@ollion/flow-core-config";
+import { ConfigUtil } from "@nonfx/flow-core-config";
 
 ConfigUtil.setConfig({
 	iconPack: {

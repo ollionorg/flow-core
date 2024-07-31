@@ -3,10 +3,10 @@ import { expect } from "@open-wc/testing";
 // IconPack to test
 import IconPack from "@ollion/flow-system-icon/dist/types/icon-pack";
 // import flow-core elements
-import "@ollion/flow-core";
-import "@ollion/flow-dashboard";
-import { ConfigUtil } from "@ollion/flow-core";
-import { FTimeseriesChart } from "@ollion/flow-dashboard";
+import "@nonfx/flow-core";
+import "@nonfx/flow-dashboard";
+import { ConfigUtil } from "@nonfx/flow-core";
+import { FTimeseriesChart } from "@nonfx/flow-dashboard";
 
 ConfigUtil.setConfig({ iconPack: IconPack });
 

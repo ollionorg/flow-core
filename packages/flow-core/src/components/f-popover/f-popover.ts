@@ -12,7 +12,7 @@ import {
 	Placement
 } from "@floating-ui/dom";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 injectCss("f-popover", globalStyle);
 
 export type FPopoverState =

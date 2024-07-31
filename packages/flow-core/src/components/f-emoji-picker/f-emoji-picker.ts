@@ -10,7 +10,7 @@ import { FText } from "../f-text/f-text";
 import { FIcon } from "../f-icon/f-icon";
 import { FPopover } from "../f-popover/f-popover";
 import { flowElement } from "./../../utils";
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 injectCss("f-emoji-picker", globalStyle);
 
 export type FEmojiPickerState = "primary" | "default" | "success" | "warning" | "danger";

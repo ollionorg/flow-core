@@ -3,7 +3,7 @@ import { unsafeSVG } from "lit-html/directives/unsafe-svg.js";
 import { createRef, ref } from "lit/directives/ref.js";
 
 export default {
-	title: "@ollion/flow-table/f-tcell",
+	title: "@nonfx/flow-table/f-tcell",
 
 	parameters: {
 		controls: {

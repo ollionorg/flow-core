@@ -11,7 +11,7 @@ import { FDiv } from "../f-div/f-div";
 import { FText } from "../f-text/f-text";
 import { flowElement } from "./../../utils";
 
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 
 injectCss("f-date-time-picker", globalStyle);

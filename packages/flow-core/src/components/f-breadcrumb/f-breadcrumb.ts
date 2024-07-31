@@ -8,7 +8,7 @@ import { flowElement } from "../../utils";
 import { FText } from "../f-text/f-text";
 import { FPopover } from "../f-popover/f-popover";
 
-import { injectCss } from "@ollion/flow-core-config";
+import { injectCss } from "@nonfx/flow-core-config";
 
 injectCss("f-breadcrumb", globalStyle);
 

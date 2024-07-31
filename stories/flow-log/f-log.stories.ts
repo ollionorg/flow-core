@@ -1,11 +1,11 @@
 import { html } from "lit-html";
 import samplelogs from "./logs/logs.js";
 import { createRef, ref } from "lit/directives/ref.js";
-import { FLog } from "@ollion/flow-log";
-import { FPopover } from "@ollion/flow-core";
+import { FLog } from "@nonfx/flow-log";
+import { FPopover } from "@nonfx/flow-core";
 
 export default {
-	title: "@ollion/flow-log/f-log",
+	title: "@nonfx/flow-log/f-log",
 
 	parameters: {
 		controls: {

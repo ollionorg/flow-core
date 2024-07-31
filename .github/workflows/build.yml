@@ -2,7 +2,7 @@ name: Build and Deploy
 
 on:
   workflow_dispatch:
-  push:
+  pull_request:
     branches:
       - vikas-NFX-132
 
@@ -38,7 +38,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./storybook-static/"
+          path: "storybook-static/"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
